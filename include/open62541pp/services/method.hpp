@@ -100,7 +100,7 @@ auto callAsync(
         connection,
         request,
         [](UA_CallResponse& response) {
-            return CallMethodResult(detail::moveSingleResultWithStatus(response));
+            return detail::wrapSingleResultWithStatus<CallMethodResult>(response);
         },
         std::forward<CompletionToken>(token)
     );

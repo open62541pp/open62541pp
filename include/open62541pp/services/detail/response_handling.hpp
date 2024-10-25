@@ -55,20 +55,17 @@ auto getSingleResult(Response& response) noexcept -> Result<decltype(std::ref(*r
     return std::ref(*response.results);
 }
 
-template <typename Response>
-[[nodiscard]] auto moveSingleResultWithStatus(Response& response) noexcept {
-    using ResultType = std::remove_pointer_t<decltype(response.results)>;
-    if (const StatusCode serviceResult = getServiceResult(response); serviceResult.isBad()) {
-        ResultType result{};
-        result.statusCode = serviceResult;
-        return result;
-    }
-    if (response.results == nullptr || response.resultsSize != 1) {
-        ResultType result{};
-        result.statusCode = UA_STATUSCODE_BADUNEXPECTEDERROR;
-        return result;
-    }
-    return std::exchange(*response.results, {});
+// Get single result from response and save response status code in result type's statusCode member.
+template <typename WrapperType, typename Response>
+[[nodiscard]] auto wrapSingleResultWithStatus(Response& response) noexcept {
+    return getSingleResult(response)
+        .transform(Wrap<WrapperType>{})
+        .orElse([](UA_StatusCode& code) {
+            Result<WrapperType> result;
+            result->handle()->statusCode = code;
+            return result;
+        })
+        .value();
 }
 
 inline Result<void> toResult(UA_StatusCode code) noexcept {
