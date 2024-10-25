@@ -19,6 +19,7 @@ ALIASES                = completiontoken{1}="@parblock ^^ \
 ALIASES               += asyncresult{1}="@parblock ^^ \
                          - `void` if `token` is a callback function (object) ^^ \
                          - `std::future<\1>` if `token` is of type UseFutureToken ^^ \
+                         - `auto(auto&& token)` callable for deferred execution if `token` is of type UseDeferredToken ^^ \
                          - `void` if `token` is of type UseDetachedToken ^^ \
                          @endparblock"
 ALIASES               += wrapper{1}="@copybrief \1 ^^ @see \1"
