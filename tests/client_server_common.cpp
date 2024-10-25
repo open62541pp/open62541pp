@@ -102,19 +102,6 @@ TEST_CASE_TEMPLATE("Connection", T, Client, Server) {
         CHECK(connection.config()->customDataTypes->types != nullptr);
         CHECK(connection.config()->customDataTypes->types[0] == UA_TYPES[UA_TYPES_STRING]);
         CHECK(connection.config()->customDataTypes->types[1] == UA_TYPES[UA_TYPES_INT32]);
-        
-    }
-
-    SUBCASE("Helper functions") {
-        NativeType* nativeNull{nullptr};
-
-        CHECK(detail::getConfig(nativeNull) == nullptr);
-        CHECK(detail::getConfig(connection.handle()) != nullptr);
-        CHECK(detail::getConfig(connection.handle()) == connection.config().handle());
-
-        CHECK(detail::getContext(nativeNull) == nullptr);
-        CHECK(detail::getContext(connection.handle()) != nullptr);
-        CHECK(detail::getContext(connection.handle()) == &detail::getContext(connection));
     }
 
     SUBCASE("Equality operators") {
@@ -122,6 +109,27 @@ TEST_CASE_TEMPLATE("Connection", T, Client, Server) {
         CHECK(connection == connection);
         CHECK(connection != other);
         CHECK(other == other);
+    }
+
+    SUBCASE("Utility functions") {
+        NativeType* native = connection.handle();
+        NativeType* nativeNull{nullptr};
+
+        CHECK(detail::getConfig(nativeNull) == nullptr);
+        CHECK(detail::getConfig(native) != nullptr);
+        CHECK(detail::getConfig(native) == connection.config().handle());
+
+        CHECK(detail::getLogger(detail::getConfig(native)) != nullptr);
+
+        CHECK(detail::getContext(nativeNull) == nullptr);
+        CHECK(detail::getContext(native) != nullptr);
+        CHECK(detail::getContext(native) == &detail::getContext(connection));
+
+        CHECK(detail::getExceptionCatcher(nativeNull) == nullptr);
+        CHECK(detail::getExceptionCatcher(native) != nullptr);
+        CHECK(detail::getExceptionCatcher(native) == &detail::getExceptionCatcher(connection));
+
+        CHECK(detail::getHandle(connection) == connection.handle());
     }
 }
 
