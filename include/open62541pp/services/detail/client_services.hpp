@@ -7,7 +7,7 @@
 #include <utility>  // forward
 
 #include "open62541pp/async.hpp"
-#include "open62541pp/client.hpp"
+#include "open62541pp/detail/client_utils.hpp"
 #include "open62541pp/detail/exceptioncatcher.hpp"
 #include "open62541pp/detail/open62541/client.h"
 #include "open62541pp/detail/scope.hpp"
@@ -32,11 +32,10 @@ struct AsyncServiceAdapter {
 
     template <typename CompletionHandler, typename TransformResponse>
     static auto createCallbackAndContext(
-        ExceptionCatcher* exceptionCatcher,
+        ExceptionCatcher& exceptionCatcher,
         TransformResponse&& transformResponse,
         CompletionHandler&& completionHandler
     ) {
-        assert(exceptionCatcher != nullptr);
         static_assert(std::is_invocable_v<TransformResponse, Response&>);
         using TransformResult = std::invoke_result_t<TransformResponse, Response&>;
         static_assert(std::is_invocable_v<CompletionHandler, TransformResult&>);
@@ -64,7 +63,7 @@ struct AsyncServiceAdapter {
         return CallbackAndContext<Context>{
             callback,
             std::make_unique<Context>(Context{
-                exceptionCatcher,
+                &exceptionCatcher,
                 std::forward<TransformResponse>(transformResponse),
                 std::forward<CompletionHandler>(completionHandler)
             })
@@ -93,7 +92,7 @@ struct AsyncServiceAdapter {
             [&](auto&& completionHandler, auto&& transform) {
                 // NOLINTNEXTLINE(clang-analyzer-cplusplus.NewDeleteLeaks), false positive?
                 auto callbackAndContext = createCallbackAndContext(
-                    opcua::detail::getExceptionCatcher(client.handle()),
+                    opcua::detail::getExceptionCatcher(client),
                     std::forward<decltype(transform)>(transform),
                     std::forward<decltype(completionHandler)>(completionHandler)
                 );
@@ -121,7 +120,7 @@ auto sendRequest(
         client,
         [&](UA_ClientAsyncServiceCallback callback, void* userdata) {
             const auto status = __UA_Client_AsyncService(
-                client.handle(),
+                opcua::detail::getHandle(client),
                 &request,
                 &getDataType<Request>(),
                 callback,
@@ -132,7 +131,7 @@ auto sendRequest(
             if (opcua::detail::isBad(status)) {
                 Response response{};
                 response.responseHeader.serviceResult = status;
-                callback(client.handle(), userdata, {}, &response);
+                callback(opcua::detail::getHandle(client), userdata, {}, &response);
             }
         },
         std::forward<TransformResponse>(transformResponse),
@@ -157,7 +156,11 @@ static auto sendRequest(
     });
 
     __UA_Client_Service(
-        client.handle(), &request, &getDataType<Request>(), &response, &getDataType<Response>()
+        opcua::detail::getHandle(client),
+        &request,
+        &getDataType<Request>(),
+        &response,
+        &getDataType<Response>()
     );
 
     return std::invoke(std::forward<TransformResponse>(transformResponse), response);
