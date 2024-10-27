@@ -300,6 +300,7 @@ public:
     /// @exception BadStatus (BadNoMatch) If path not found
     Node browseChild(Span<const QualifiedName> path) {
         auto result = services::browseSimplifiedBrowsePath(connection(), id(), path);
+        result.getStatusCode().throwIfBad();
         for (auto&& target : result.getTargets()) {
             if (target.getTargetId().isLocal()) {
                 return {connection(), std::move(target.getTargetId().getNodeId())};
