@@ -299,7 +299,7 @@ public:
     /// The relative path is specified using browse names.
     /// @exception BadStatus (BadNoMatch) If path not found
     Node browseChild(Span<const QualifiedName> path) {
-        auto result = services::browseSimplifiedBrowsePath(connection(), id(), path).value();
+        auto result = services::browseSimplifiedBrowsePath(connection(), id(), path);
         for (auto&& target : result.getTargets()) {
             if (target.getTargetId().isLocal()) {
                 return {connection(), std::move(target.getTargetId().getNodeId())};
@@ -627,11 +627,10 @@ public:
 
 private:
     Node browseObjectProperty(const QualifiedName& propertyName) {
-        auto result =
-            services::translateBrowsePathToNodeIds(
-                connection(),
-                BrowsePath(id(), {{ReferenceTypeId::HasProperty, false, true, propertyName}})
-            ).value();
+        auto result = services::translateBrowsePathToNodeIds(
+            connection(),
+            BrowsePath(id(), {{ReferenceTypeId::HasProperty, false, true, propertyName}})
+        );
         result.getStatusCode().throwIfBad();
         for (auto&& target : result.getTargets()) {
             if (target.getTargetId().isLocal()) {

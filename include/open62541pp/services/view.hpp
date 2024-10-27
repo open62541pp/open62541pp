@@ -217,15 +217,15 @@ auto translateBrowsePathsToNodeIdsAsync(
  * @param browsePath Browse path (starting node & relative path)
  */
 template <typename T>
-Result<BrowsePathResult> translateBrowsePathToNodeIds(
+BrowsePathResult translateBrowsePathToNodeIds(
     T& connection, const BrowsePath& browsePath
 ) noexcept;
 
 /**
  * Asynchronously translate a browse path to NodeIds.
  * @copydetails translateBrowsePathToNodeIds
- * @param token @completiontoken{void(Result<BrowsePathResult>&)}
- * @return @asyncresult{Result<BrowsePathResult>}
+ * @param token @completiontoken{void(BrowsePathResult&)}
+ * @return @asyncresult{BrowsePathResult}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto translateBrowsePathToNodeIdsAsync(
@@ -239,7 +239,7 @@ auto translateBrowsePathToNodeIdsAsync(
         connection,
         detail::createTranslateBrowsePathsToNodeIdsRequest(browsePath),
         [](UA_TranslateBrowsePathsToNodeIdsResponse& response) {
-            return detail::getSingleResult(response).transform(detail::Wrap<BrowsePathResult>{});
+            return detail::wrapSingleResultWithStatus<BrowsePathResult>(response);
         },
         std::forward<CompletionToken>(token)
     );
@@ -257,7 +257,7 @@ auto translateBrowsePathToNodeIdsAsync(
  * @param browsePath Browse path as a list of browse names
  */
 template <typename T>
-inline Result<BrowsePathResult> browseSimplifiedBrowsePath(
+inline BrowsePathResult browseSimplifiedBrowsePath(
     T& connection, const NodeId& origin, Span<const QualifiedName> browsePath
 ) {
     return translateBrowsePathToNodeIds(connection, detail::createBrowsePath(origin, browsePath));
@@ -266,8 +266,8 @@ inline Result<BrowsePathResult> browseSimplifiedBrowsePath(
 /**
  * A simplified version of @ref translateBrowsePathToNodeIdsAsync.
  * @copydetails browseSimplifiedBrowsePath
- * @param token @completiontoken{void(Result<BrowsePathResult>&)}
- * @return @asyncresult{Result<BrowsePathResult>}
+ * @param token @completiontoken{void(BrowsePathResult&)}
+ * @return @asyncresult{BrowsePathResult}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto browseSimplifiedBrowsePathAsync(
