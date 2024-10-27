@@ -206,7 +206,7 @@ ModifyMonitoredItemsResponse modifyMonitoredItems(
  * @param monitoredItemId Identifier of the monitored item
  * @param parameters Monitoring parameters
  */
-Result<void> modifyMonitoredItem(
+MonitoredItemModifyResult modifyMonitoredItem(
     Client& connection,
     uint32_t subscriptionId,
     uint32_t monitoredItemId,
