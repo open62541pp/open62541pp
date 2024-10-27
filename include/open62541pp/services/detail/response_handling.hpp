@@ -1,5 +1,6 @@
 #pragma once
 
+#include <functional>  // ref
 #include <type_traits>
 #include <utility>  // exchange
 
@@ -31,21 +32,21 @@ struct Wrap {
 };
 
 template <typename Response>
-inline const UA_ResponseHeader& getResponseHeader(const Response& response) noexcept {
+const UA_ResponseHeader& getResponseHeader(const Response& response) noexcept {
     if constexpr (opcua::detail::isWrapper<Response>) {
-        return response->responseHeader;
+        return asNative(response).responseHeader;
     } else {
         return response.responseHeader;
     }
 }
 
 template <typename Response>
-inline StatusCode getServiceResult(const Response& response) noexcept {
+StatusCode getServiceResult(const Response& response) noexcept {
     return getResponseHeader(response).serviceResult;
 }
 
 template <typename Response>
-auto getSingleResult(Response& response) noexcept -> Result<decltype(std::ref(*response.results))> {
+auto getSingleResultRef(Response& response) noexcept -> Result<decltype(std::ref(*response.results))> {
     if (const StatusCode serviceResult = getServiceResult(response); serviceResult.isBad()) {
         return BadResult(serviceResult);
     }
@@ -55,31 +56,33 @@ auto getSingleResult(Response& response) noexcept -> Result<decltype(std::ref(*r
     return std::ref(*response.results);
 }
 
+template <typename Response>
+StatusCode getSingleStatus(const Response& response) noexcept {
+    auto result = getSingleResultRef(response);
+    return result ? asWrapper<StatusCode>(result->get()) : result.code();
+}
+
+template <typename WrapperType, typename Response>
+Result<WrapperType> wrapSingleResult(Response& response) noexcept {
+    return getSingleResultRef(response).transform(Wrap<WrapperType>{});
+}
+
 // Get single result from response and save response status code in result type's statusCode member.
 template <typename WrapperType, typename Response>
-[[nodiscard]] auto wrapSingleResultWithStatus(Response& response) noexcept {
-    return getSingleResult(response)
-        .transform(Wrap<WrapperType>{})
-        .orElse([](UA_StatusCode& code) {
+WrapperType wrapSingleResultWithStatus(Response& response) noexcept {
+    return *wrapSingleResult<WrapperType>(response)
+        .orElse([](StatusCode code) {
             Result<WrapperType> result;
             result->handle()->statusCode = code;
             return result;
-        })
-        .value();
-}
-
-inline Result<void> toResult(UA_StatusCode code) noexcept {
-    if (opcua::detail::isBad(code)) {
-        return BadResult(code);
-    }
-    return {code};
+        });
 }
 
 inline Result<NodeId> getAddedNodeId(UA_AddNodesResult& result) noexcept {
     if (const StatusCode code = result.statusCode; code.isBad()) {
         return BadResult(code);
     }
-    return {std::exchange(result.addedNodeId, {})};
+    return Wrap<NodeId>{}(result.addedNodeId);
 }
 
 }  // namespace opcua::services::detail

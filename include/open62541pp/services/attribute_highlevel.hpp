@@ -97,7 +97,7 @@ inline auto readBrowseNameAsync(
  * @ingroup Write
  */
 template <typename T>
-inline Result<void> writeBrowseName(
+inline StatusCode writeBrowseName(
     T& connection, const NodeId& id, const QualifiedName& browseName
 ) noexcept {
     return detail::writeAttributeImpl<AttributeId::BrowseName>(connection, id, browseName);
@@ -106,8 +106,8 @@ inline Result<void> writeBrowseName(
 /**
  * Asynchronously write the AttributeId::BrowseName attribute of a node.
  * @copydetails writeBrowseName
- * @param token @completiontoken{void(Result<void>)}
- * @return @asyncresult{Result<void>}
+ * @param token @completiontoken{void(StatusCode)}
+ * @return @asyncresult{StatusCode}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -157,7 +157,7 @@ inline auto readDisplayNameAsync(
  * @ingroup Write
  */
 template <typename T>
-inline Result<void> writeDisplayName(
+inline StatusCode writeDisplayName(
     T& connection, const NodeId& id, const LocalizedText& displayName
 ) noexcept {
     return detail::writeAttributeImpl<AttributeId::DisplayName>(connection, id, displayName);
@@ -166,8 +166,8 @@ inline Result<void> writeDisplayName(
 /**
  * Asynchronously write the AttributeId::DisplayName attribute of a node.
  * @copydetails writeDisplayName
- * @param token @completiontoken{void(Result<void>)}
- * @return @asyncresult{Result<void>}
+ * @param token @completiontoken{void(StatusCode)}
+ * @return @asyncresult{StatusCode}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -217,7 +217,7 @@ inline auto readDescriptionAsync(
  * @ingroup Write
  */
 template <typename T>
-inline Result<void> writeDescription(
+inline StatusCode writeDescription(
     T& connection, const NodeId& id, const LocalizedText& description
 ) noexcept {
     return detail::writeAttributeImpl<AttributeId::Description>(connection, id, description);
@@ -226,8 +226,8 @@ inline Result<void> writeDescription(
 /**
  * Asynchronously write the AttributeId::Description attribute of a node.
  * @copydetails writeDescription
- * @param token @completiontoken{void(Result<void>)}
- * @return @asyncresult{Result<void>}
+ * @param token @completiontoken{void(StatusCode)}
+ * @return @asyncresult{StatusCode}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -277,7 +277,7 @@ inline auto readWriteMaskAsync(
  * @ingroup Write
  */
 template <typename T>
-inline Result<void> writeWriteMask(
+inline StatusCode writeWriteMask(
     T& connection, const NodeId& id, Bitmask<WriteMask> writeMask
 ) noexcept {
     return detail::writeAttributeImpl<AttributeId::WriteMask>(connection, id, writeMask);
@@ -286,8 +286,8 @@ inline Result<void> writeWriteMask(
 /**
  * Asynchronously write the AttributeId::WriteMask attribute of a node.
  * @copydetails writeWriteMask
- * @param token @completiontoken{void(Result<void>)}
- * @return @asyncresult{Result<void>}
+ * @param token @completiontoken{void(StatusCode)}
+ * @return @asyncresult{StatusCode}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -337,7 +337,7 @@ inline auto readUserWriteMaskAsync(
  * @ingroup Write
  */
 template <typename T>
-inline Result<void> writeUserWriteMask(
+inline StatusCode writeUserWriteMask(
     T& connection, const NodeId& id, Bitmask<WriteMask> userWriteMask
 ) noexcept {
     return detail::writeAttributeImpl<AttributeId::UserWriteMask>(connection, id, userWriteMask);
@@ -346,8 +346,8 @@ inline Result<void> writeUserWriteMask(
 /**
  * Asynchronously write the AttributeId::UserWriteMask attribute of a node.
  * @copydetails writeUserWriteMask
- * @param token @completiontoken{void(Result<void>)}
- * @return @asyncresult{Result<void>}
+ * @param token @completiontoken{void(StatusCode)}
+ * @return @asyncresult{StatusCode}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -397,15 +397,15 @@ inline auto readIsAbstractAsync(
  * @ingroup Write
  */
 template <typename T>
-inline Result<void> writeIsAbstract(T& connection, const NodeId& id, bool isAbstract) noexcept {
+inline StatusCode writeIsAbstract(T& connection, const NodeId& id, bool isAbstract) noexcept {
     return detail::writeAttributeImpl<AttributeId::IsAbstract>(connection, id, isAbstract);
 }
 
 /**
  * Asynchronously write the AttributeId::IsAbstract attribute of a node.
  * @copydetails writeIsAbstract
- * @param token @completiontoken{void(Result<void>)}
- * @return @asyncresult{Result<void>}
+ * @param token @completiontoken{void(StatusCode)}
+ * @return @asyncresult{StatusCode}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -455,15 +455,15 @@ inline auto readSymmetricAsync(
  * @ingroup Write
  */
 template <typename T>
-inline Result<void> writeSymmetric(T& connection, const NodeId& id, bool symmetric) noexcept {
+inline StatusCode writeSymmetric(T& connection, const NodeId& id, bool symmetric) noexcept {
     return detail::writeAttributeImpl<AttributeId::Symmetric>(connection, id, symmetric);
 }
 
 /**
  * Asynchronously write the AttributeId::Symmetric attribute of a node.
  * @copydetails writeSymmetric
- * @param token @completiontoken{void(Result<void>)}
- * @return @asyncresult{Result<void>}
+ * @param token @completiontoken{void(StatusCode)}
+ * @return @asyncresult{StatusCode}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -513,7 +513,7 @@ inline auto readInverseNameAsync(
  * @ingroup Write
  */
 template <typename T>
-inline Result<void> writeInverseName(
+inline StatusCode writeInverseName(
     T& connection, const NodeId& id, const LocalizedText& inverseName
 ) noexcept {
     return detail::writeAttributeImpl<AttributeId::InverseName>(connection, id, inverseName);
@@ -522,8 +522,8 @@ inline Result<void> writeInverseName(
 /**
  * Asynchronously write the AttributeId::InverseName attribute of a node.
  * @copydetails writeInverseName
- * @param token @completiontoken{void(Result<void>)}
- * @return @asyncresult{Result<void>}
+ * @param token @completiontoken{void(StatusCode)}
+ * @return @asyncresult{StatusCode}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -573,7 +573,7 @@ inline auto readContainsNoLoopsAsync(
  * @ingroup Write
  */
 template <typename T>
-inline Result<void> writeContainsNoLoops(
+inline StatusCode writeContainsNoLoops(
     T& connection, const NodeId& id, const bool& containsNoLoops
 ) noexcept {
     return detail::writeAttributeImpl<AttributeId::ContainsNoLoops>(
@@ -584,8 +584,8 @@ inline Result<void> writeContainsNoLoops(
 /**
  * Asynchronously write the AttributeId::ContainsNoLoops attribute of a node.
  * @copydetails writeContainsNoLoops
- * @param token @completiontoken{void(Result<void>)}
- * @return @asyncresult{Result<void>}
+ * @param token @completiontoken{void(StatusCode)}
+ * @return @asyncresult{StatusCode}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -635,7 +635,7 @@ inline auto readEventNotifierAsync(
  * @ingroup Write
  */
 template <typename T>
-inline Result<void> writeEventNotifier(
+inline StatusCode writeEventNotifier(
     T& connection, const NodeId& id, Bitmask<EventNotifier> eventNotifier
 ) noexcept {
     return detail::writeAttributeImpl<AttributeId::EventNotifier>(connection, id, eventNotifier);
@@ -644,8 +644,8 @@ inline Result<void> writeEventNotifier(
 /**
  * Asynchronously write the AttributeId::EventNotifier attribute of a node.
  * @copydetails writeEventNotifier
- * @param token @completiontoken{void(Result<void>)}
- * @return @asyncresult{Result<void>}
+ * @param token @completiontoken{void(StatusCode)}
+ * @return @asyncresult{StatusCode}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -695,15 +695,15 @@ inline auto readValueAsync(
  * @ingroup Write
  */
 template <typename T>
-inline Result<void> writeValue(T& connection, const NodeId& id, const Variant& value) noexcept {
+inline StatusCode writeValue(T& connection, const NodeId& id, const Variant& value) noexcept {
     return detail::writeAttributeImpl<AttributeId::Value>(connection, id, value);
 }
 
 /**
  * Asynchronously write the AttributeId::Value attribute of a node.
  * @copydetails writeValue
- * @param token @completiontoken{void(Result<void>)}
- * @return @asyncresult{Result<void>}
+ * @param token @completiontoken{void(StatusCode)}
+ * @return @asyncresult{StatusCode}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -753,17 +753,15 @@ inline auto readDataTypeAsync(
  * @ingroup Write
  */
 template <typename T>
-inline Result<void> writeDataType(
-    T& connection, const NodeId& id, const NodeId& dataType
-) noexcept {
+inline StatusCode writeDataType(T& connection, const NodeId& id, const NodeId& dataType) noexcept {
     return detail::writeAttributeImpl<AttributeId::DataType>(connection, id, dataType);
 }
 
 /**
  * Asynchronously write the AttributeId::DataType attribute of a node.
  * @copydetails writeDataType
- * @param token @completiontoken{void(Result<void>)}
- * @return @asyncresult{Result<void>}
+ * @param token @completiontoken{void(StatusCode)}
+ * @return @asyncresult{StatusCode}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -813,15 +811,15 @@ inline auto readValueRankAsync(
  * @ingroup Write
  */
 template <typename T>
-inline Result<void> writeValueRank(T& connection, const NodeId& id, ValueRank valueRank) noexcept {
+inline StatusCode writeValueRank(T& connection, const NodeId& id, ValueRank valueRank) noexcept {
     return detail::writeAttributeImpl<AttributeId::ValueRank>(connection, id, valueRank);
 }
 
 /**
  * Asynchronously write the AttributeId::ValueRank attribute of a node.
  * @copydetails writeValueRank
- * @param token @completiontoken{void(Result<void>)}
- * @return @asyncresult{Result<void>}
+ * @param token @completiontoken{void(StatusCode)}
+ * @return @asyncresult{StatusCode}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -871,7 +869,7 @@ inline auto readArrayDimensionsAsync(
  * @ingroup Write
  */
 template <typename T>
-inline Result<void> writeArrayDimensions(
+inline StatusCode writeArrayDimensions(
     T& connection, const NodeId& id, Span<const uint32_t> arrayDimensions
 ) noexcept {
     return detail::writeAttributeImpl<AttributeId::ArrayDimensions>(
@@ -882,8 +880,8 @@ inline Result<void> writeArrayDimensions(
 /**
  * Asynchronously write the AttributeId::ArrayDimensions attribute of a node.
  * @copydetails writeArrayDimensions
- * @param token @completiontoken{void(Result<void>)}
- * @return @asyncresult{Result<void>}
+ * @param token @completiontoken{void(StatusCode)}
+ * @return @asyncresult{StatusCode}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -933,7 +931,7 @@ inline auto readAccessLevelAsync(
  * @ingroup Write
  */
 template <typename T>
-inline Result<void> writeAccessLevel(
+inline StatusCode writeAccessLevel(
     T& connection, const NodeId& id, Bitmask<AccessLevel> accessLevel
 ) noexcept {
     return detail::writeAttributeImpl<AttributeId::AccessLevel>(connection, id, accessLevel);
@@ -942,8 +940,8 @@ inline Result<void> writeAccessLevel(
 /**
  * Asynchronously write the AttributeId::AccessLevel attribute of a node.
  * @copydetails writeAccessLevel
- * @param token @completiontoken{void(Result<void>)}
- * @return @asyncresult{Result<void>}
+ * @param token @completiontoken{void(StatusCode)}
+ * @return @asyncresult{StatusCode}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -993,7 +991,7 @@ inline auto readUserAccessLevelAsync(
  * @ingroup Write
  */
 template <typename T>
-inline Result<void> writeUserAccessLevel(
+inline StatusCode writeUserAccessLevel(
     T& connection, const NodeId& id, Bitmask<AccessLevel> userAccessLevel
 ) noexcept {
     return detail::writeAttributeImpl<AttributeId::UserAccessLevel>(
@@ -1004,8 +1002,8 @@ inline Result<void> writeUserAccessLevel(
 /**
  * Asynchronously write the AttributeId::UserAccessLevel attribute of a node.
  * @copydetails writeUserAccessLevel
- * @param token @completiontoken{void(Result<void>)}
- * @return @asyncresult{Result<void>}
+ * @param token @completiontoken{void(StatusCode)}
+ * @return @asyncresult{StatusCode}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -1055,7 +1053,7 @@ inline auto readMinimumSamplingIntervalAsync(
  * @ingroup Write
  */
 template <typename T>
-inline Result<void> writeMinimumSamplingInterval(
+inline StatusCode writeMinimumSamplingInterval(
     T& connection, const NodeId& id, double minimumSamplingInterval
 ) noexcept {
     return detail::writeAttributeImpl<AttributeId::MinimumSamplingInterval>(
@@ -1066,8 +1064,8 @@ inline Result<void> writeMinimumSamplingInterval(
 /**
  * Asynchronously write the AttributeId::MinimumSamplingInterval attribute of a node.
  * @copydetails writeMinimumSamplingInterval
- * @param token @completiontoken{void(Result<void>)}
- * @return @asyncresult{Result<void>}
+ * @param token @completiontoken{void(StatusCode)}
+ * @return @asyncresult{StatusCode}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -1117,15 +1115,15 @@ inline auto readHistorizingAsync(
  * @ingroup Write
  */
 template <typename T>
-inline Result<void> writeHistorizing(T& connection, const NodeId& id, bool historizing) noexcept {
+inline StatusCode writeHistorizing(T& connection, const NodeId& id, bool historizing) noexcept {
     return detail::writeAttributeImpl<AttributeId::Historizing>(connection, id, historizing);
 }
 
 /**
  * Asynchronously write the AttributeId::Historizing attribute of a node.
  * @copydetails writeHistorizing
- * @param token @completiontoken{void(Result<void>)}
- * @return @asyncresult{Result<void>}
+ * @param token @completiontoken{void(StatusCode)}
+ * @return @asyncresult{StatusCode}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -1175,15 +1173,15 @@ inline auto readExecutableAsync(
  * @ingroup Write
  */
 template <typename T>
-inline Result<void> writeExecutable(T& connection, const NodeId& id, bool executable) noexcept {
+inline StatusCode writeExecutable(T& connection, const NodeId& id, bool executable) noexcept {
     return detail::writeAttributeImpl<AttributeId::Executable>(connection, id, executable);
 }
 
 /**
  * Asynchronously write the AttributeId::Executable attribute of a node.
  * @copydetails writeExecutable
- * @param token @completiontoken{void(Result<void>)}
- * @return @asyncresult{Result<void>}
+ * @param token @completiontoken{void(StatusCode)}
+ * @return @asyncresult{StatusCode}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -1233,7 +1231,7 @@ inline auto readUserExecutableAsync(
  * @ingroup Write
  */
 template <typename T>
-inline Result<void> writeUserExecutable(
+inline StatusCode writeUserExecutable(
     T& connection, const NodeId& id, bool userExecutable
 ) noexcept {
     return detail::writeAttributeImpl<AttributeId::UserExecutable>(connection, id, userExecutable);
@@ -1242,8 +1240,8 @@ inline Result<void> writeUserExecutable(
 /**
  * Asynchronously write the AttributeId::UserExecutable attribute of a node.
  * @copydetails writeUserExecutable
- * @param token @completiontoken{void(Result<void>)}
- * @return @asyncresult{Result<void>}
+ * @param token @completiontoken{void(StatusCode)}
+ * @return @asyncresult{StatusCode}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>

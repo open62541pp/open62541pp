@@ -67,10 +67,9 @@ public:
     /// @note Not implemented for Server.
     /// @see services::modifyMonitoredItem
     void setMonitoringParameters(const MonitoringParametersEx& parameters) {
-        const auto result = services::modifyMonitoredItem(
-            connection(), subscriptionId(), monitoredItemId(), parameters
-        );
-        result.getStatusCode().throwIfBad();
+        services::modifyMonitoredItem(connection(), subscriptionId(), monitoredItemId(), parameters)
+            .getStatusCode()
+            .throwIfBad();
     }
 
     /// Set the monitoring mode of this monitored item.
@@ -80,13 +79,14 @@ public:
         services::setMonitoringMode(
             connection(), subscriptionId(), monitoredItemId(), monitoringMode
         )
-            .value();
+            .throwIfBad();
     }
 
     /// Delete this monitored item.
     /// @see services::deleteMonitoredItem
     void deleteMonitoredItem() {
-        services::deleteMonitoredItem(connection(), subscriptionId(), monitoredItemId()).value();
+        services::deleteMonitoredItem(connection(), subscriptionId(), monitoredItemId())
+            .throwIfBad();
     }
 
 private:

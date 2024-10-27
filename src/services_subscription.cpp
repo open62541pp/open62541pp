@@ -91,7 +91,7 @@ SetPublishingModeResponse setPublishingMode(
     );
 }
 
-Result<void> setPublishingMode(
+StatusCode setPublishingMode(
     Client& connection, uint32_t subscriptionId, bool publishing
 ) noexcept {
     UA_SetPublishingModeRequest request{};
@@ -101,9 +101,7 @@ Result<void> setPublishingMode(
     return detail::sendRequest<UA_SetPublishingModeRequest, UA_SetPublishingModeResponse>(
         connection,
         request,
-        [](UA_SetPublishingModeResponse& response) {
-            return detail::getSingleResult(response).andThen(detail::toResult);
-        },
+        [](UA_SetPublishingModeResponse& response) { return detail::getSingleStatus(response); },
         detail::SyncOperation{}
     );
 }
@@ -114,14 +112,14 @@ DeleteSubscriptionsResponse deleteSubscriptions(
     return UA_Client_Subscriptions_delete(connection.handle(), request);
 }
 
-Result<void> deleteSubscription(Client& connection, uint32_t subscriptionId) noexcept {
+StatusCode deleteSubscription(Client& connection, uint32_t subscriptionId) noexcept {
     UA_DeleteSubscriptionsRequest request{};
     request.subscriptionIdsSize = 1;
     request.subscriptionIds = &subscriptionId;
     const DeleteSubscriptionsResponse response = UA_Client_Subscriptions_delete(
         connection.handle(), request
     );
-    return detail::getSingleResult(asNative(response)).andThen(detail::toResult);
+    return detail::getSingleStatus(asNative(response));
 }
 
 }  // namespace opcua::services

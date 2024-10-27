@@ -5,7 +5,6 @@
 
 #include "open62541pp/common.hpp"  // TimestampsToReturn, MonitoringMode
 #include "open62541pp/config.hpp"
-#include "open62541pp/result.hpp"
 #include "open62541pp/span.hpp"
 #include "open62541pp/types.hpp"
 #include "open62541pp/types_composed.hpp"
@@ -239,7 +238,7 @@ SetMonitoringModeResponse setMonitoringMode(
  * @param monitoredItemId Identifier of the monitored item
  * @param monitoringMode Monitoring mode
  */
-Result<void> setMonitoringMode(
+StatusCode setMonitoringMode(
     Client& connection,
     uint32_t subscriptionId,
     uint32_t monitoredItemId,
@@ -294,7 +293,7 @@ DeleteMonitoredItemsResponse deleteMonitoredItems(
  * @param monitoredItemId Identifier of the monitored item
  */
 template <typename T>
-Result<void> deleteMonitoredItem(T& connection, uint32_t subscriptionId, uint32_t monitoredItemId);
+StatusCode deleteMonitoredItem(T& connection, uint32_t subscriptionId, uint32_t monitoredItemId);
 
 /**
  * @}
