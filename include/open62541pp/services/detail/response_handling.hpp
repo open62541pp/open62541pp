@@ -58,9 +58,8 @@ auto getSingleResultRef(Response& response) noexcept -> Result<decltype(std::ref
 
 template <typename Response>
 StatusCode getSingleStatus(const Response& response) noexcept {
-    return getSingleResultRef(response)
-        .andThen([](UA_StatusCode code) -> Result<void> { return {code}; })
-        .code();
+    auto result = getSingleResultRef(response);
+    return result ? asWrapper<StatusCode>(result->get()) : result.code();
 }
 
 template <typename WrapperType, typename Response>
