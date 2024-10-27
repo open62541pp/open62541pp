@@ -1,6 +1,7 @@
 #include <doctest/doctest.h>
 
 #include "open62541pp/nodeids.hpp"
+#include "open62541pp/services/nodemanagement.hpp"
 #include "open62541pp/services/view.hpp"
 
 #include "helper/server_client_setup.hpp"
@@ -20,7 +21,7 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
 
     SUBCASE("browse") {
         const BrowseDescription bd(id, BrowseDirection::Both);
-        Result<BrowseResult> result;
+        BrowseResult result;
 
         if constexpr (isAsync<T>) {
             auto future = services::browseAsync(connection, bd);
@@ -30,10 +31,10 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
             result = services::browse(connection, bd);
         }
 
-        CHECK(result.value().getStatusCode().isGood());
-        CHECK(result.value().getContinuationPoint().empty());
+        CHECK(result.getStatusCode().isGood());
+        CHECK(result.getContinuationPoint().empty());
 
-        const auto refs = result.value().getReferences();
+        const auto refs = result.getReferences();
         CHECK(refs.size() == 2);
         // 1. ComponentOf Objects
         CHECK(refs[0].getReferenceTypeId() == NodeId(0, UA_NS0ID_HASCOMPONENT));
@@ -50,39 +51,39 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
     SUBCASE("browseNext") {
         // https://github.com/open62541/open62541/blob/v1.3.5/tests/client/check_client_highlevel.c#L252-L318
         const BrowseDescription bd({0, UA_NS0ID_SERVER}, BrowseDirection::Both);
-        Result<BrowseResult> result;
+        BrowseResult result;
 
         // restrict browse result to max 1 reference, more with browseNext
         result = services::browse(connection, bd, 1);
-        CHECK(result.value().getStatusCode().isGood());
-        CHECK(result.value().getContinuationPoint().empty() == false);
-        CHECK(result.value().getReferences().size() == 1);
+        CHECK(result.getStatusCode().isGood());
+        CHECK(result.getContinuationPoint().empty() == false);
+        CHECK(result.getReferences().size() == 1);
 
         auto browseNext = [&](bool releaseContinuationPoint) {
             if constexpr (isAsync<T>) {
                 auto future = services::browseNextAsync(
-                    connection, releaseContinuationPoint, result.value().getContinuationPoint()
+                    connection, releaseContinuationPoint, result.getContinuationPoint()
                 );
                 client.runIterate();
                 result = future.get();
             } else {
                 result = services::browseNext(
-                    connection, releaseContinuationPoint, result.value().getContinuationPoint()
+                    connection, releaseContinuationPoint, result.getContinuationPoint()
                 );
             }
         };
 
         // get next result
         browseNext(false);
-        CHECK(result.value().getStatusCode().isGood());
-        CHECK(result.value().getContinuationPoint().empty() == false);
-        CHECK(result.value().getReferences().size() == 1);
+        CHECK(result.getStatusCode().isGood());
+        CHECK(result.getContinuationPoint().empty() == false);
+        CHECK(result.getReferences().size() == 1);
 
         // release continuation point, result should be empty
         browseNext(true);
-        CHECK(result.value().getStatusCode().isGood());
-        CHECK(result.value().getContinuationPoint().empty());
-        CHECK(result.value().getReferences().size() == 0);
+        CHECK(result.getStatusCode().isGood());
+        CHECK(result.getContinuationPoint().empty());
+        CHECK(result.getReferences().size() == 0);
     }
 
     if constexpr (isServer<T>) {

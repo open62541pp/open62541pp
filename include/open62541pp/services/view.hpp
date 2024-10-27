@@ -70,15 +70,15 @@ auto browseAsync(
  * @param maxReferences The maximum number of references to return (0 if no limit)
  */
 template <typename T>
-Result<BrowseResult> browse(
+BrowseResult browse(
     T& connection, const BrowseDescription& bd, uint32_t maxReferences = 0
 ) noexcept;
 
 /**
  * Asynchronously discover the references of a specified node.
  * @copydetails browse(T&, const BrowseDescription&, uint32_t)
- * @param token @completiontoken{void(Result<BrowseResult>&)}
- * @return @asyncresult{Result<BrowseResult>}
+ * @param token @completiontoken{void(BrowseResult&)}
+ * @return @asyncresult{BrowseResult}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto browseAsync(
@@ -91,7 +91,7 @@ auto browseAsync(
         connection,
         detail::createBrowseRequest(bd, maxReferences),
         [](UA_BrowseResponse& response) {
-            return detail::getSingleResult(response).transform(detail::Wrap<BrowseResult>{});
+            return detail::wrapSingleResultWithStatus<BrowseResult>(response);
         },
         std::forward<CompletionToken>(token)
     );
@@ -143,15 +143,15 @@ auto browseNextAsync(
  * @param continuationPoint Continuation point from a preview browse/browseNext request
  */
 template <typename T>
-Result<BrowseResult> browseNext(
+BrowseResult browseNext(
     T& connection, bool releaseContinuationPoint, const ByteString& continuationPoint
 ) noexcept;
 
 /**
  * Asynchronously request the next set of a @ref browse or @ref browseNext response.
  * @copydetails browseNext(T&, bool, const ByteString&)
- * @param token @completiontoken{void(Result<BrowseResult>&)}
- * @return @asyncresult{Result<BrowseResult>}
+ * @param token @completiontoken{void(BrowseResult&)}
+ * @return @asyncresult{BrowseResult}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto browseNextAsync(
@@ -164,7 +164,7 @@ auto browseNextAsync(
         connection,
         detail::createBrowseNextRequest(releaseContinuationPoint, continuationPoint),
         [](UA_BrowseNextResponse& response) {
-            return detail::getSingleResult(response).transform(detail::Wrap<BrowseResult>{});
+            return detail::wrapSingleResultWithStatus<BrowseResult>(response);
         },
         std::forward<CompletionToken>(token)
     );
