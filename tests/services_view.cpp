@@ -116,7 +116,7 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
     }
 
     SUBCASE("browseSimplifiedBrowsePath") {
-        Result<BrowsePathResult> result;
+        BrowsePathResult result;
         if constexpr (isAsync<T>) {
             auto future = services::browseSimplifiedBrowsePathAsync(
                 connection, {0, UA_NS0ID_ROOTFOLDER}, {{0, "Objects"}, {1, "Variable"}}
@@ -128,13 +128,12 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
                 connection, {0, UA_NS0ID_ROOTFOLDER}, {{0, "Objects"}, {1, "Variable"}}
             );
         }
-        CHECK(result.value().getStatusCode().isGood());
-        const auto targets = result.value().getTargets();
-        CHECK(targets.size() == 1);
+        CHECK(result.getStatusCode().isGood());
+        CHECK(result.getTargets().size() == 1);
         // https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8
         // value shall be equal to the maximum value of uint32 if all elements processed
-        CHECK(targets[0].getRemainingPathIndex() == 0xffffffff);
-        CHECK(targets[0].getTargetId().getNodeId() == id);
+        CHECK(result.getTargets()[0].getRemainingPathIndex() == 0xffffffff);
+        CHECK(result.getTargets()[0].getTargetId().getNodeId() == id);
     }
 
     SUBCASE("Register/unregister nodes") {

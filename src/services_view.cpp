@@ -57,14 +57,14 @@ TranslateBrowsePathsToNodeIdsResponse translateBrowsePathsToNodeIds(
 }
 
 template <>
-Result<BrowsePathResult> translateBrowsePathToNodeIds<Server>(
+BrowsePathResult translateBrowsePathToNodeIds<Server>(
     Server& connection, const BrowsePath& browsePath
 ) noexcept {
-    return {UA_Server_translateBrowsePathToNodeIds(connection.handle(), browsePath.handle())};
+    return UA_Server_translateBrowsePathToNodeIds(connection.handle(), browsePath.handle());
 }
 
 template <>
-Result<BrowsePathResult> translateBrowsePathToNodeIds<Client>(
+BrowsePathResult translateBrowsePathToNodeIds<Client>(
     Client& connection, const BrowsePath& browsePath
 ) noexcept {
     return translateBrowsePathToNodeIdsAsync(connection, browsePath, detail::SyncOperation{});
