@@ -184,8 +184,8 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
                 );
             }
         };
-        CHECK(addReference());
-        CHECK(addReference().code() == UA_STATUSCODE_BADDUPLICATEREFERENCENOTALLOWED);
+        CHECK(addReference().isGood());
+        CHECK(addReference() == UA_STATUSCODE_BADDUPLICATEREFERENCENOTALLOWED);
 
         auto deleteReference = [&] {
             if constexpr (isAsync<T>) {
@@ -200,7 +200,7 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
                 );
             }
         };
-        CHECK(deleteReference());
+        CHECK(deleteReference().isGood());
     }
 
     SUBCASE("Delete node") {
@@ -215,8 +215,8 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
                 return services::deleteNode(connection, {1, 1000});
             }
         };
-        CHECK(deleteNode());
-        CHECK(deleteNode().code() == UA_STATUSCODE_BADNODEIDUNKNOWN);
+        CHECK(deleteNode().isGood());
+        CHECK(deleteNode() == UA_STATUSCODE_BADNODEIDUNKNOWN);
     }
 
     SUBCASE("Random node id") {

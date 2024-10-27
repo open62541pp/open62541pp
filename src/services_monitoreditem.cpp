@@ -245,7 +245,7 @@ SetMonitoringModeResponse setMonitoringMode(
     );
 }
 
-Result<void> setMonitoringMode(
+StatusCode setMonitoringMode(
     Client& connection,
     uint32_t subscriptionId,
     uint32_t monitoredItemId,
@@ -256,9 +256,7 @@ Result<void> setMonitoringMode(
         detail::createSetMonitoringModeRequest(
             subscriptionId, {&monitoredItemId, 1}, monitoringMode
         ),
-        [](UA_SetMonitoringModeResponse& response) -> Result<void> {
-            return detail::getSingleResult(response).andThen(detail::toResult);
-        },
+        [](UA_SetMonitoringModeResponse& response) { return detail::getSingleStatus(response); },
         detail::SyncOperation{}
     );
 }
@@ -271,38 +269,6 @@ SetTriggeringResponse setTriggering(
     );
 }
 
-Result<void> setTriggering(
-    Client& connection,
-    uint32_t subscriptionId,
-    uint32_t triggeringItemId,
-    Span<const uint32_t> linksToAdd,
-    Span<const uint32_t> linksToRemove
-) noexcept {
-    return detail::sendRequest<UA_SetTriggeringRequest, UA_SetTriggeringResponse>(
-        connection,
-        detail::createSetTriggeringRequest(
-            subscriptionId, triggeringItemId, linksToAdd, linksToRemove
-        ),
-        [](UA_SetTriggeringResponse& response) -> Result<void> {
-            if (const StatusCode code = response.responseHeader.serviceResult; code.isBad()) {
-                return BadResult(code);
-            }
-            for (const StatusCode code : Span(response.addResults, response.addResultsSize)) {
-                if (code.isBad()) {
-                    return BadResult(code);
-                }
-            }
-            for (const StatusCode code : Span(response.removeResults, response.removeResultsSize)) {
-                if (code.isBad()) {
-                    return BadResult(code);
-                }
-            }
-            return {};
-        },
-        detail::SyncOperation{}
-    );
-}
-
 DeleteMonitoredItemsResponse deleteMonitoredItems(
     Client& connection, const DeleteMonitoredItemsRequest& request
 ) noexcept {
@@ -310,23 +276,21 @@ DeleteMonitoredItemsResponse deleteMonitoredItems(
 }
 
 template <>
-Result<void> deleteMonitoredItem<Client>(
+StatusCode deleteMonitoredItem<Client>(
     Client& connection, uint32_t subscriptionId, uint32_t monitoredItemId
 ) {
-    return detail::toResult(
-        UA_Client_MonitoredItems_deleteSingle(connection.handle(), subscriptionId, monitoredItemId)
+    return UA_Client_MonitoredItems_deleteSingle(
+        connection.handle(), subscriptionId, monitoredItemId
     );
 }
 
 template <>
-Result<void> deleteMonitoredItem<Server>(
+StatusCode deleteMonitoredItem<Server>(
     Server& connection, [[maybe_unused]] uint32_t subscriptionId, uint32_t monitoredItemId
 ) {
-    const auto result = detail::toResult(
-        UA_Server_deleteMonitoredItem(connection.handle(), monitoredItemId)
-    );
+    const auto status = UA_Server_deleteMonitoredItem(connection.handle(), monitoredItemId);
     opcua::detail::getContext(connection).monitoredItems.erase({0U, monitoredItemId});
-    return result;
+    return status;
 }
 
 }  // namespace opcua::services

@@ -80,7 +80,7 @@ public:
     /// @note Not implemented for Server.
     /// @see services::setPublishingMode
     void setPublishingMode(bool publishing) {
-        services::setPublishingMode(connection(), subscriptionId(), publishing).value();
+        services::setPublishingMode(connection(), subscriptionId(), publishing).throwIfBad();
     }
 
     /// Create a monitored item for data change notifications.
@@ -150,7 +150,7 @@ public:
     /// Delete this subscription.
     /// @note Not implemented for Server.
     void deleteSubscription() {
-        services::deleteSubscription(connection(), subscriptionId()).value();
+        services::deleteSubscription(connection(), subscriptionId()).throwIfBad();
     }
 
 private:

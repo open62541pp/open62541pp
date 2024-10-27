@@ -132,7 +132,7 @@ Result<NodeId> addMethod(
         auto* nodeContext = opcua::detail::getContext(connection).nodeContexts[id];
         nodeContext->methodCallback = std::move(callback);
         NodeId outputNodeId;
-        const auto status = UA_Server_addMethodNode(
+        throwIfBad(UA_Server_addMethodNode(
             connection.handle(),
             id,
             parentId,
@@ -146,8 +146,7 @@ Result<NodeId> addMethod(
             asNative(outputArguments.data()),
             nodeContext,
             outputNodeId.handle()  // outNewNodeId
-        );
-        throwIfBad(status);
+        ));
         return outputNodeId;
     });
 }
@@ -180,24 +179,24 @@ Result<NodeId> addMethod(
 #endif
 
 template <>
-Result<void> addReference<Server>(
+StatusCode addReference<Server>(
     Server& connection,
     const NodeId& sourceId,
     const NodeId& targetId,
     const NodeId& referenceType,
     bool forward
 ) noexcept {
-    return detail::toResult(UA_Server_addReference(
+    return UA_Server_addReference(
         connection.handle(),
         sourceId,
         referenceType,
         {targetId, {}, 0},
         forward  // isForward
-    ));
+    );
 }
 
 template <>
-Result<void> addReference<Client>(
+StatusCode addReference<Client>(
     Client& connection,
     const NodeId& sourceId,
     const NodeId& targetId,
@@ -210,21 +209,21 @@ Result<void> addReference<Client>(
 }
 
 template <>
-Result<void> deleteNode<Server>(
+StatusCode deleteNode<Server>(
     Server& connection, const NodeId& id, bool deleteReferences
 ) noexcept {
-    return detail::toResult(UA_Server_deleteNode(connection.handle(), id, deleteReferences));
+    return UA_Server_deleteNode(connection.handle(), id, deleteReferences);
 }
 
 template <>
-Result<void> deleteNode<Client>(
+StatusCode deleteNode<Client>(
     Client& connection, const NodeId& id, bool deleteReferences
 ) noexcept {
     return deleteNodeAsync(connection, id, deleteReferences, detail::SyncOperation{});
 }
 
 template <>
-Result<void> deleteReference<Server>(
+StatusCode deleteReference<Server>(
     Server& connection,
     const NodeId& sourceId,
     const NodeId& targetId,
@@ -232,18 +231,18 @@ Result<void> deleteReference<Server>(
     bool isForward,
     bool deleteBidirectional
 ) noexcept {
-    return detail::toResult(UA_Server_deleteReference(
+    return UA_Server_deleteReference(
         connection.handle(),
         sourceId,
         referenceType,
         isForward,
         {targetId, {}, 0},
         deleteBidirectional
-    ));
+    );
 }
 
 template <>
-Result<void> deleteReference<Client>(
+StatusCode deleteReference<Client>(
     Client& connection,
     const NodeId& sourceId,
     const NodeId& targetId,

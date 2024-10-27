@@ -124,7 +124,7 @@ auto readAttributeAsync(
         connection,
         request,
         [](UA_ReadResponse& response) {
-            return detail::getSingleResult(response).transform(detail::Wrap<DataValue>{});
+            return detail::wrapSingleResult<DataValue>(response);
         },
         std::forward<CompletionToken>(token)
     );
@@ -204,15 +204,15 @@ inline auto writeAsync(
  * @param value Value to write
  */
 template <typename T>
-Result<void> writeAttribute(
+StatusCode writeAttribute(
     T& connection, const NodeId& id, AttributeId attributeId, const DataValue& value
 ) noexcept;
 
 /**
  * Asynchronously write node attribute.
  * @copydetails writeAttribute
- * @param token @completiontoken{void(Result<void>)}
- * @return @asyncresult{Result<void>}
+ * @param token @completiontoken{void(StatusCode)}
+ * @return @asyncresult{StatusCode}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto writeAttributeAsync(
@@ -227,9 +227,7 @@ auto writeAttributeAsync(
     return detail::sendRequest<UA_WriteRequest, UA_WriteResponse>(
         connection,
         request,
-        [](UA_WriteResponse& response) {
-            return detail::getSingleResult(response).andThen(detail::toResult);
-        },
+        [](UA_WriteResponse& response) { return detail::getSingleStatus(response); },
         std::forward<CompletionToken>(token)
     );
 }
@@ -257,16 +255,14 @@ inline auto readAttributeAsyncImpl(Client& connection, const NodeId& id, Complet
         request,
         [](UA_ReadResponse& response) {
             using Handler = typename detail::AttributeHandler<Attribute>;
-            return detail::getSingleResult(response)
-                .transform(detail::Wrap<DataValue>{})
-                .andThen(Handler::fromDataValue);
+            return detail::wrapSingleResult<DataValue>(response).andThen(Handler::fromDataValue);
         },
         std::forward<CompletionToken>(token)
     );
 }
 
 template <AttributeId Attribute, typename T, typename U>
-inline Result<void> writeAttributeImpl(T& connection, const NodeId& id, U&& value) noexcept {
+inline StatusCode writeAttributeImpl(T& connection, const NodeId& id, U&& value) noexcept {
     using Handler = detail::AttributeHandler<Attribute>;
     return writeAttribute(connection, id, Attribute, Handler::toDataValue(std::forward<U>(value)));
 }
@@ -324,17 +320,15 @@ inline auto readDataValueAsync(Client& connection, const NodeId& id, CompletionT
  * @ingroup Write
  */
 template <typename T>
-inline Result<void> writeDataValue(
-    T& connection, const NodeId& id, const DataValue& value
-) noexcept {
+inline StatusCode writeDataValue(T& connection, const NodeId& id, const DataValue& value) noexcept {
     return writeAttribute(connection, id, AttributeId::Value, value);
 }
 
 /**
  * Asynchronously write the AttributeId::Value attribute of a node as a DataValue object.
  * @copydetails writeDataValue
- * @param token @completiontoken{void(Result<void>)}
- * @return @asyncresult{Result<void>}
+ * @param token @completiontoken{void(StatusCode)}
+ * @return @asyncresult{StatusCode}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>

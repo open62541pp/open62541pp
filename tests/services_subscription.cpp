@@ -40,14 +40,14 @@ TEST_CASE("Subscription service set (client)") {
 
     SUBCASE("setPublishingMode") {
         const auto subId = services::createSubscription(client, parameters).getSubscriptionId();
-        CHECK(services::setPublishingMode(client, subId, false));
+        CHECK(services::setPublishingMode(client, subId, false).isGood());
     }
 
     SUBCASE("deleteSubscription") {
         const auto subId = services::createSubscription(client, parameters).getSubscriptionId();
-        CHECK(services::deleteSubscription(client, subId));
+        CHECK(services::deleteSubscription(client, subId).isGood());
         CHECK(
-            services::deleteSubscription(client, subId + 1).code() ==
+            services::deleteSubscription(client, subId + 1) ==
             UA_STATUSCODE_BADSUBSCRIPTIONIDINVALID
         );
     }
@@ -59,7 +59,7 @@ TEST_CASE("Subscription service set (client)") {
             services::createSubscription(client, parameters, true, {}, deleteCallback)
                 .getSubscriptionId();
 
-        CHECK(services::deleteSubscription(client, subId));
+        CHECK(services::deleteSubscription(client, subId).isGood());
         CHECK(deleted == true);
     }
 }

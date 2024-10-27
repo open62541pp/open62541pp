@@ -101,15 +101,15 @@ TEMPLATE_WRITE = """
  * @ingroup Write
  */
 template <typename T>
-inline Result<void> write{attr}(T& connection, const NodeId& id, {param_type} {param_name}) noexcept {{
+inline StatusCode write{attr}(T& connection, const NodeId& id, {param_type} {param_name}) noexcept {{
     return detail::writeAttributeImpl<AttributeId::{attr}>(connection, id, {param_name});
 }}
 
 /**
  * Asynchronously write the AttributeId::{attr} attribute of a node.
  * @copydetails write{attr}
- * @param token @completiontoken{{void(Result<void>)}}
- * @return @asyncresult{{Result<void>}}
+ * @param token @completiontoken{{void(StatusCode)}}
+ * @return @asyncresult{{StatusCode}}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>

@@ -382,18 +382,18 @@ Result<std::vector<ReferenceDescription>> browseAll(
             std::make_move_iterator(refsNew.end())
         );
     };
-    BrowseResult result = browse(connection, bd, maxReferences);
-    if (result.getStatusCode().isBad()) {
-        return BadResult(result.getStatusCode());
+    Result<BrowseResult> result = browse(connection, bd, maxReferences);
+    if (!result) {
+        return BadResult(result.code());
     }
-    append(result.getReferences());
-    while (!result.getContinuationPoint().empty()) {
+    append(result->getReferences());
+    while (!result.value().getContinuationPoint().empty()) {
         const bool release = (refs.size() >= maxReferences);
-        result = browseNext(connection, release, result.getContinuationPoint());
-        if (result.getStatusCode().isBad()) {
-            return BadResult(result.getStatusCode());
+        result = browseNext(connection, release, result->getContinuationPoint());
+        if (!result) {
+            return BadResult(result.code());
         }
-        append(result.getReferences());
+        append(result->getReferences());
     }
     if ((maxReferences > 0) && (refs.size() > maxReferences)) {
         refs.resize(maxReferences);

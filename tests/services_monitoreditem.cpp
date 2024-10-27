@@ -82,7 +82,7 @@ TEST_CASE("MonitoredItem service set (client)") {
             CAPTURE(result.getMonitoredItemId());
         }
 
-        services::writeValue(server, id, Variant::fromScalar(11.11)).value();
+        services::writeValue(server, id, Variant::fromScalar(11.11)).throwIfBad();
         client.runIterate();
         CHECK(notificationCount > 0);
         CHECK(changedValue.getValue().getScalar<double>() == 11.11);
@@ -178,7 +178,7 @@ TEST_CASE("MonitoredItem service set (client)") {
             )
                 .getMonitoredItemId();
         CAPTURE(monId);
-        CHECK(services::setMonitoringMode(client, subId, monId, MonitoringMode::Disabled));
+        CHECK(services::setMonitoringMode(client, subId, monId, MonitoringMode::Disabled).isGood());
     }
 
 #if UAPP_OPEN62541_VER_GE(1, 2)
@@ -238,7 +238,7 @@ TEST_CASE("MonitoredItem service set (client)") {
 
     SUBCASE("deleteMonitoredItem") {
         CHECK(
-            services::deleteMonitoredItem(client, subId, 11U).code() ==
+            services::deleteMonitoredItem(client, subId, 11U) ==
             UA_STATUSCODE_BADMONITOREDITEMIDINVALID
         );
 
@@ -254,7 +254,7 @@ TEST_CASE("MonitoredItem service set (client)") {
                 [&](uint32_t, uint32_t) { deleted = true; }
             ).getMonitoredItemId();
 
-        CHECK(services::deleteMonitoredItem(client, subId, monId));
+        CHECK(services::deleteMonitoredItem(client, subId, monId).isGood());
         client.runIterate();
         CHECK(deleted == true);
     }
@@ -281,14 +281,14 @@ TEST_CASE("MonitoredItem service set (server)") {
             ).getMonitoredItemId();
         CAPTURE(monId);
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
-        services::writeValue(server, id, Variant::fromScalar(11.11)).value();
+        services::writeValue(server, id, Variant::fromScalar(11.11)).throwIfBad();
         server.runIterate();
         CHECK(notificationCount > 0);
     }
 
     SUBCASE("deleteMonitoredItem") {
         CHECK(
-            services::deleteMonitoredItem(server, 0U, 11U).code() ==
+            services::deleteMonitoredItem(server, 0U, 11U) ==
             UA_STATUSCODE_BADMONITOREDITEMIDINVALID
         );
 
@@ -303,7 +303,7 @@ TEST_CASE("MonitoredItem service set (server)") {
             )
                 .getMonitoredItemId();
         CAPTURE(monId);
-        CHECK(services::deleteMonitoredItem(server, 0U, monId));
+        CHECK(services::deleteMonitoredItem(server, 0U, monId).isGood());
     }
 }
 #endif

@@ -62,7 +62,7 @@ TEST_CASE("Attribute service set (highlevel)") {
 
         // write new attributes
         const auto eventNotifier = EventNotifier::HistoryRead | EventNotifier::HistoryWrite;
-        CHECK(services::writeEventNotifier(server, id, eventNotifier));
+        CHECK(services::writeEventNotifier(server, id, eventNotifier).isGood());
 
         // read new attributes
         CHECK(services::readEventNotifier(server, id).value().allOf(eventNotifier));
@@ -73,16 +73,16 @@ TEST_CASE("Attribute service set (highlevel)") {
         services::addVariable(server, objectsId, id, "TestAttributes").value();
 
         // write new attributes
-        CHECK(services::writeDisplayName(server, id, {{}, "NewDisplayName"}));
-        CHECK(services::writeDescription(server, id, {{}, "NewDescription"}));
-        CHECK(services::writeWriteMask(server, id, WriteMask::Executable));
-        CHECK(services::writeDataType(server, id, NodeId{0, 2}));
-        CHECK(services::writeValueRank(server, id, ValueRank::TwoDimensions));
-        CHECK(services::writeArrayDimensions(server, id, {3, 2}));
+        CHECK(services::writeDisplayName(server, id, {{}, "NewDisplayName"}).isGood());
+        CHECK(services::writeDescription(server, id, {{}, "NewDescription"}).isGood());
+        CHECK(services::writeWriteMask(server, id, WriteMask::Executable).isGood());
+        CHECK(services::writeDataType(server, id, NodeId{0, 2}).isGood());
+        CHECK(services::writeValueRank(server, id, ValueRank::TwoDimensions).isGood());
+        CHECK(services::writeArrayDimensions(server, id, {3, 2}).isGood());
         const auto newAccessLevel = AccessLevel::CurrentRead | AccessLevel::CurrentWrite;
-        CHECK(services::writeAccessLevel(server, id, newAccessLevel));
-        CHECK(services::writeMinimumSamplingInterval(server, id, 10.0));
-        CHECK(services::writeHistorizing(server, id, true));
+        CHECK(services::writeAccessLevel(server, id, newAccessLevel).isGood());
+        CHECK(services::writeMinimumSamplingInterval(server, id, 10.0).isGood());
+        CHECK(services::writeHistorizing(server, id, true).isGood());
 
         // read new attributes
         // https://github.com/open62541/open62541/issues/6723
@@ -105,7 +105,7 @@ TEST_CASE("Attribute service set (highlevel)") {
         services::addMethod(server, objectsId, id, "TestMethod", nullptr, {}, {}).value();
 
         // write new attributes
-        CHECK(services::writeExecutable(server, id, true));
+        CHECK(services::writeExecutable(server, id, true).isGood());
 
         // read new attributes
         CHECK(services::readExecutable(server, id));
@@ -124,9 +124,9 @@ TEST_CASE("Attribute service set (highlevel)") {
         CHECK(services::readInverseName(server, id).value() == LocalizedText({}, {}));
 
         // write new attributes
-        CHECK(services::writeIsAbstract(server, id, true));
-        CHECK(services::writeSymmetric(server, id, false));
-        CHECK(services::writeInverseName(server, id, LocalizedText({}, "InverseName")));
+        CHECK(services::writeIsAbstract(server, id, true).isGood());
+        CHECK(services::writeSymmetric(server, id, false).isGood());
+        CHECK(services::writeInverseName(server, id, LocalizedText({}, "InverseName")).isGood());
 
         // read new attributes
         CHECK(services::readIsAbstract(server, id).value() == true);
@@ -147,36 +147,36 @@ TEST_CASE("Attribute service set (highlevel)") {
             };
             for (auto valueRank : valueRanks) {
                 CAPTURE(valueRank);
-                CHECK(services::writeValueRank(server, id, valueRank));
-                CHECK(services::writeArrayDimensions(server, id, {}));
-                CHECK_FALSE(services::writeArrayDimensions(server, id, {1}));
-                CHECK_FALSE(services::writeArrayDimensions(server, id, {1, 2}));
-                CHECK_FALSE(services::writeArrayDimensions(server, id, {1, 2, 3}));
+                CHECK(services::writeValueRank(server, id, valueRank).isGood());
+                CHECK(services::writeArrayDimensions(server, id, {}).isGood());
+                CHECK_FALSE(services::writeArrayDimensions(server, id, {1}).isGood());
+                CHECK_FALSE(services::writeArrayDimensions(server, id, {1, 2}).isGood());
+                CHECK_FALSE(services::writeArrayDimensions(server, id, {1, 2, 3}).isGood());
             }
         }
 
         SUBCASE("OneDimension") {
-            CHECK(services::writeValueRank(server, id, ValueRank::OneDimension));
-            CHECK(services::writeArrayDimensions(server, id, {1}));
-            CHECK_FALSE(services::writeArrayDimensions(server, id, {}));
-            CHECK_FALSE(services::writeArrayDimensions(server, id, {1, 2}));
-            CHECK_FALSE(services::writeArrayDimensions(server, id, {1, 2, 3}));
+            CHECK(services::writeValueRank(server, id, ValueRank::OneDimension).isGood());
+            CHECK(services::writeArrayDimensions(server, id, {1}).isGood());
+            CHECK_FALSE(services::writeArrayDimensions(server, id, {}).isGood());
+            CHECK_FALSE(services::writeArrayDimensions(server, id, {1, 2}).isGood());
+            CHECK_FALSE(services::writeArrayDimensions(server, id, {1, 2, 3}).isGood());
         }
 
         SUBCASE("TwoDimensions") {
-            CHECK(services::writeValueRank(server, id, ValueRank::TwoDimensions));
-            CHECK(services::writeArrayDimensions(server, id, {1, 2}));
-            CHECK_FALSE(services::writeArrayDimensions(server, id, {}));
-            CHECK_FALSE(services::writeArrayDimensions(server, id, {1}));
-            CHECK_FALSE(services::writeArrayDimensions(server, id, {1, 2, 3}));
+            CHECK(services::writeValueRank(server, id, ValueRank::TwoDimensions).isGood());
+            CHECK(services::writeArrayDimensions(server, id, {1, 2}).isGood());
+            CHECK_FALSE(services::writeArrayDimensions(server, id, {}).isGood());
+            CHECK_FALSE(services::writeArrayDimensions(server, id, {1}).isGood());
+            CHECK_FALSE(services::writeArrayDimensions(server, id, {1, 2, 3}).isGood());
         }
 
         SUBCASE("ThreeDimensions") {
-            CHECK(services::writeValueRank(server, id, ValueRank::ThreeDimensions));
-            CHECK(services::writeArrayDimensions(server, id, {1, 2, 3}));
-            CHECK_FALSE(services::writeArrayDimensions(server, id, {}));
-            CHECK_FALSE(services::writeArrayDimensions(server, id, {1}));
-            CHECK_FALSE(services::writeArrayDimensions(server, id, {1, 2}));
+            CHECK(services::writeValueRank(server, id, ValueRank::ThreeDimensions).isGood());
+            CHECK(services::writeArrayDimensions(server, id, {1, 2, 3}).isGood());
+            CHECK_FALSE(services::writeArrayDimensions(server, id, {}).isGood());
+            CHECK_FALSE(services::writeArrayDimensions(server, id, {1}).isGood());
+            CHECK_FALSE(services::writeArrayDimensions(server, id, {1, 2}).isGood());
         }
     }
 
@@ -186,7 +186,7 @@ TEST_CASE("Attribute service set (highlevel)") {
 
         Variant variantWrite;
         variantWrite.setScalarCopy(11.11);
-        services::writeValue(server, id, variantWrite).value();
+        services::writeValue(server, id, variantWrite).throwIfBad();
 
         Variant variantRead = services::readValue(server, id).value();
         CHECK(variantRead.getScalar<double>() == 11.11);
@@ -199,7 +199,7 @@ TEST_CASE("Attribute service set (highlevel)") {
         Variant variant;
         variant.setScalarCopy<int>(11);
         DataValue valueWrite(variant, {}, DateTime::now(), {}, uint16_t{1}, UA_STATUSCODE_GOOD);
-        services::writeDataValue(server, id, valueWrite).value();
+        services::writeDataValue(server, id, valueWrite).throwIfBad();
 
         DataValue valueRead = services::readDataValue(server, id).value();
 
@@ -270,7 +270,7 @@ TEST_CASE("Attribute service set (highlevel, async)") {
             auto variant = Variant::fromScalar(11.11);
             auto future = services::writeValueAsync(client, id, variant);
             client.runIterate();
-            future.get().value();
+            future.get().throwIfBad();
         }
 
         // read
@@ -310,10 +310,10 @@ TEST_CASE_TEMPLATE("Attribute service set write/read", T, Server, Client, Async<
             connection, id, AttributeId::Value, DataValue::fromScalar(value)
         );
         client.runIterate();
-        future.get().value();
+        future.get().throwIfBad();
     } else {
         services::writeAttribute(connection, id, AttributeId::Value, DataValue::fromScalar(value))
-            .value();
+            .throwIfBad();
     }
 
     // read

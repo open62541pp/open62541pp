@@ -32,15 +32,15 @@ WriteResponse write(Client& connection, const WriteRequest& request) noexcept {
 }
 
 template <>
-Result<void> writeAttribute<Server>(
+StatusCode writeAttribute<Server>(
     Server& connection, const NodeId& id, AttributeId attributeId, const DataValue& value
 ) noexcept {
     const auto item = detail::createWriteValue(id, attributeId, value);
-    return detail::toResult(UA_Server_write(connection.handle(), &item));
+    return UA_Server_write(connection.handle(), &item);
 }
 
 template <>
-Result<void> writeAttribute<Client>(
+StatusCode writeAttribute<Client>(
     Client& connection, const NodeId& id, AttributeId attributeId, const DataValue& value
 ) noexcept {
     return writeAttributeAsync(connection, id, attributeId, value, detail::SyncOperation{});

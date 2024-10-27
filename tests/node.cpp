@@ -17,8 +17,8 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client) {
     const NodeId varId{1, 1};
     services::addVariable(setup.server, {0, UA_NS0ID_OBJECTSFOLDER}, varId, "variable").value();
     // set all bits to 1 -> allow all
-    services::writeAccessLevel(setup.server, varId, 0xFF).value();
-    services::writeWriteMask(setup.server, varId, 0xFFFFFFFF).value();
+    services::writeAccessLevel(setup.server, varId, 0xFF).throwIfBad();
+    services::writeWriteMask(setup.server, varId, 0xFFFFFFFF).throwIfBad();
 
     Node rootNode(connection, ObjectId::RootFolder);
     Node objNode(connection, ObjectId::ObjectsFolder);

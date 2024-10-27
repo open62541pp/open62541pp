@@ -4,7 +4,6 @@
 #include <functional>
 
 #include "open62541pp/config.hpp"
-#include "open62541pp/result.hpp"
 #include "open62541pp/types_composed.hpp"  // StatusChangeNotification
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
@@ -141,9 +140,7 @@ SetPublishingModeResponse setPublishingMode(
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @param publishing Enable/disable publishing
  */
-Result<void> setPublishingMode(
-    Client& connection, uint32_t subscriptionId, bool publishing
-) noexcept;
+StatusCode setPublishingMode(Client& connection, uint32_t subscriptionId, bool publishing) noexcept;
 
 /**
  * @}
@@ -167,7 +164,7 @@ DeleteSubscriptionsResponse deleteSubscriptions(
  * @param connection Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  */
-Result<void> deleteSubscription(Client& connection, uint32_t subscriptionId) noexcept;
+StatusCode deleteSubscription(Client& connection, uint32_t subscriptionId) noexcept;
 
 /**
  * @}

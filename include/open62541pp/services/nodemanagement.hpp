@@ -123,7 +123,7 @@ auto addNodeAsync(
         connection,
         request,
         [](UA_AddNodesResponse& response) {
-            return detail::getSingleResult(response).andThen(detail::getAddedNodeId);
+            return detail::getSingleResultRef(response).andThen(detail::getAddedNodeId);
         },
         std::forward<CompletionToken>(token)
     );
@@ -175,7 +175,7 @@ auto addReferencesAsync(
  * @param forward Create a forward reference if `true` or a inverse reference if `false`
  */
 template <typename T>
-Result<void> addReference(
+StatusCode addReference(
     T& connection,
     const NodeId& sourceId,
     const NodeId& targetId,
@@ -186,8 +186,8 @@ Result<void> addReference(
 /**
  * Asynchronously add reference.
  * @copydetails addReference
- * @param token @completiontoken{void(Result<void>)}
- * @return @asyncresult{Result<void>}
+ * @param token @completiontoken{void(StatusCode)}
+ * @return @asyncresult{StatusCode}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto addReferenceAsync(
@@ -210,9 +210,7 @@ auto addReferenceAsync(
     return detail::sendRequest<UA_AddReferencesRequest, UA_AddReferencesResponse>(
         connection,
         request,
-        [](UA_AddReferencesResponse& response) {
-            return detail::getSingleResult(response).andThen(detail::toResult);
-        },
+        [](UA_AddReferencesResponse& response) { return detail::getSingleStatus(response); },
         std::forward<CompletionToken>(token)
     );
 }
@@ -259,13 +257,13 @@ auto deleteNodesAsync(
  * @param deleteReferences Delete references in target nodes that reference the node to delete
  */
 template <typename T>
-Result<void> deleteNode(T& connection, const NodeId& id, bool deleteReferences = true) noexcept;
+StatusCode deleteNode(T& connection, const NodeId& id, bool deleteReferences = true) noexcept;
 
 /**
  * Asynchronously delete node.
  * @copydetails deleteNode
- * @param token @completiontoken{void(Result<void>)}
- * @return @asyncresult{Result<void>}
+ * @param token @completiontoken{void(StatusCode)}
+ * @return @asyncresult{StatusCode}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto deleteNodeAsync(
@@ -283,9 +281,7 @@ auto deleteNodeAsync(
     return detail::sendRequest<UA_DeleteNodesRequest, UA_DeleteNodesResponse>(
         connection,
         request,
-        [](UA_DeleteNodesResponse& response) {
-            return detail::getSingleResult(response).andThen(detail::toResult);
-        },
+        [](UA_DeleteNodesResponse& response) { return detail::getSingleStatus(response); },
         std::forward<CompletionToken>(token)
     );
 }
@@ -337,7 +333,7 @@ auto deleteReferencesAsync(
  * @param deleteBidirectional Delete the specified and opposite reference from the target node
  */
 template <typename T>
-Result<void> deleteReference(
+StatusCode deleteReference(
     T& connection,
     const NodeId& sourceId,
     const NodeId& targetId,
@@ -349,8 +345,8 @@ Result<void> deleteReference(
 /**
  * Asynchronously delete reference.
  * @copydetails deleteReference
- * @param token @completiontoken{void(Result<void>)}
- * @return @asyncresult{Result<void>}
+ * @param token @completiontoken{void(StatusCode)}
+ * @return @asyncresult{StatusCode}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto deleteReferenceAsync(
@@ -374,9 +370,7 @@ auto deleteReferenceAsync(
     return detail::sendRequest<UA_DeleteReferencesRequest, UA_DeleteReferencesResponse>(
         connection,
         request,
-        [](UA_DeleteReferencesResponse& response) {
-            return detail::getSingleResult(response).andThen(detail::toResult);
-        },
+        [](UA_DeleteReferencesResponse& response) { return detail::getSingleStatus(response); },
         std::forward<CompletionToken>(token)
     );
 }
@@ -1010,7 +1004,7 @@ inline auto addViewAsync(
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/6.4.4
  */
 template <typename T>
-inline Result<void> addModellingRule(T& connection, const NodeId& id, ModellingRule rule) noexcept {
+inline StatusCode addModellingRule(T& connection, const NodeId& id, ModellingRule rule) noexcept {
     return addReference(
         connection, id, {0, static_cast<uint32_t>(rule)}, ReferenceTypeId::HasModellingRule, true
     );
@@ -1019,8 +1013,8 @@ inline Result<void> addModellingRule(T& connection, const NodeId& id, ModellingR
 /**
  * Asynchronously add modelling rule.
  * @copydetails addModellingRule
- * @param token @completiontoken{void(Result<void>)}
- * @return @asyncresult{Result<void>}
+ * @param token @completiontoken{void(StatusCode)}
+ * @return @asyncresult{StatusCode}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addModellingRuleAsync(
