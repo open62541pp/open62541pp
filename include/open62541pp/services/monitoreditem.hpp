@@ -268,25 +268,6 @@ SetTriggeringResponse setTriggering(
 ) noexcept;
 
 /**
- * Add and delete triggering links of a monitored item.
- * The triggering item and the items to report shall belong to the same subscription.
- * @note Supported since open62541 v1.2
- *
- * @param connection Instance of type Client
- * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
- * @param triggeringItemId Identifier of the triggering monitored item
- * @param linksToAdd List of monitoring item identifiers to be added as triggering links
- * @param linksToRemove List of monitoring item identifiers to be removed as triggering links
- */
-Result<void> setTriggering(
-    Client& connection,
-    uint32_t subscriptionId,
-    uint32_t triggeringItemId,
-    Span<const uint32_t> linksToAdd,
-    Span<const uint32_t> linksToRemove
-) noexcept;
-
-/**
  * @}
  * @defgroup DeleteMonitoredItems DeleteMonitoredItems service
  * Delete a monitored items from subscriptions.

@@ -213,14 +213,19 @@ TEST_CASE("MonitoredItem service set (client)") {
         CHECK(notificationCountTriggering > 0);
         CHECK(notificationCount == 0);  // no triggering links yet
 
-        auto result = services::setTriggering(
+        const auto response = services::setTriggering(
             client,
-            subId,
-            monIdTriggering,
-            {monId},  // links to add
-            {}  // links to remove
+            SetTriggeringRequest(
+                {},
+                subId,
+                monIdTriggering,
+                {monId},  // links to add
+                {}  // links to remove
+            )
         );
-        CHECK(result);
+        CHECK(response.getResponseHeader().getServiceResult().isGood());
+        CHECK(response.getAddResults().size() == 1);
+        CHECK(response.getAddResults()[0].isGood());
 
         client.runIterate();
 #if UAPP_OPEN62541_VER_LE(1, 3)
