@@ -417,6 +417,7 @@ Result<std::vector<ReferenceDescription>> browseAll(
  * @see UA_Server_browseRecursive
  * @ingroup Browse
  */
+[[deprecated("will be removed in the future, use UA_Server_browseRecursive instead")]]
 Result<std::vector<ExpandedNodeId>> browseRecursive(
     Server& connection, const BrowseDescription& bd
 );

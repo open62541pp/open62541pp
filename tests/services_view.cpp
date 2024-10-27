@@ -86,29 +86,6 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
         CHECK(result.getReferences().size() == 0);
     }
 
-    if constexpr (isServer<T>) {
-        SUBCASE("browseRecursive") {
-            const BrowseDescription bd(
-                ObjectId::Server,
-                BrowseDirection::Forward,
-                ReferenceTypeId::References,
-                true,
-                UA_NODECLASS_VARIABLE
-            );
-
-            const auto ids = services::browseRecursive(connection, bd).value();
-            CHECK(!ids.empty());
-
-            auto contains = [&](const NodeId& element) {
-                return std::find(ids.begin(), ids.end(), ExpandedNodeId(element)) != ids.end();
-            };
-
-            CHECK(contains(VariableId::Server_ServerStatus));
-            CHECK(contains(VariableId::Server_ServerStatus_BuildInfo));
-            CHECK(contains(VariableId::Server_ServerStatus_BuildInfo_SoftwareVersion));
-        }
-    }
-
     SUBCASE("browseAll") {
         const BrowseDescription bd(id, BrowseDirection::Both);
         CHECK(services::browseAll(connection, bd, 0).value().size() == 2);
