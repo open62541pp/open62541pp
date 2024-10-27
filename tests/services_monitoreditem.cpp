@@ -162,7 +162,8 @@ TEST_CASE("MonitoredItem service set (client)") {
 
         services::MonitoringParametersEx modifiedParameters{};
         modifiedParameters.samplingInterval = 1000.0;
-        CHECK(services::modifyMonitoredItem(client, subId, monId, modifiedParameters));
+        const auto result = services::modifyMonitoredItem(client, subId, monId, modifiedParameters);
+        CHECK(result.getStatusCode().isGood());
     }
 
     SUBCASE("setMonitoringMode") {

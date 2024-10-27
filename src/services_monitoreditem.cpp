@@ -223,7 +223,7 @@ ModifyMonitoredItemsResponse modifyMonitoredItems(
     return UA_Client_MonitoredItems_modify(connection.handle(), request);
 }
 
-Result<void> modifyMonitoredItem(
+MonitoredItemModifyResult modifyMonitoredItem(
     Client& connection,
     uint32_t subscriptionId,
     uint32_t monitoredItemId,
@@ -231,13 +231,10 @@ Result<void> modifyMonitoredItem(
 ) noexcept {
     auto item = detail::createMonitoredItemModifyRequest(monitoredItemId, parameters);
     auto request = detail::createModifyMonitoredItemsRequest(subscriptionId, parameters, item);
-    const ModifyMonitoredItemsResponse response = UA_Client_MonitoredItems_modify(
-        connection.handle(), request
+    auto response = modifyMonitoredItems(
+        connection, asWrapper<ModifyMonitoredItemsRequest>(request)
     );
-    return detail::getSingleResult(asNative(response))
-        .andThen([&](UA_MonitoredItemModifyResult& result) {
-            return detail::toResult(result.statusCode);
-        });
+    return detail::wrapSingleResultWithStatus<MonitoredItemModifyResult>(asNative(response));
 }
 
 SetMonitoringModeResponse setMonitoringMode(

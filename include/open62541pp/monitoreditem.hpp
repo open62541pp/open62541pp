@@ -67,15 +67,19 @@ public:
     /// @note Not implemented for Server.
     /// @see services::modifyMonitoredItem
     void setMonitoringParameters(const MonitoringParametersEx& parameters) {
-        services::modifyMonitoredItem(connection(), subscriptionId(), monitoredItemId(), parameters)
-            .value();
+        const auto result = services::modifyMonitoredItem(
+            connection(), subscriptionId(), monitoredItemId(), parameters
+        );
+        result.getStatusCode().throwIfBad();
     }
 
     /// Set the monitoring mode of this monitored item.
     /// @note Not implemented for Server.
     /// @see services::setMonitoringMode
     void setMonitoringMode(MonitoringMode monitoringMode) {
-        services::setMonitoringMode(connection(), subscriptionId(), monitoredItemId(), monitoringMode)
+        services::setMonitoringMode(
+            connection(), subscriptionId(), monitoredItemId(), monitoringMode
+        )
             .value();
     }
 
