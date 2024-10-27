@@ -25,6 +25,7 @@ add_executable(
     services_monitoreditem.cpp
     services_nodemanagement.cpp
     services_subscription.cpp
+    services_view.cpp
     session.cpp
     span.cpp
     string_utils.cpp

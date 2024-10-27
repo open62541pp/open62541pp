@@ -15,14 +15,14 @@ BrowseResponse browse(Client& connection, const BrowseRequest& request) noexcept
 }
 
 template <>
-Result<BrowseResult> browse<Server>(
+BrowseResult browse<Server>(
     Server& connection, const BrowseDescription& bd, uint32_t maxReferences
 ) noexcept {
-    return {UA_Server_browse(connection.handle(), maxReferences, bd.handle())};
+    return UA_Server_browse(connection.handle(), maxReferences, bd.handle());
 }
 
 template <>
-Result<BrowseResult> browse<Client>(
+BrowseResult browse<Client>(
     Client& connection, const BrowseDescription& bd, uint32_t maxReferences
 ) noexcept {
     return browseAsync(connection, bd, maxReferences, detail::SyncOperation{});
@@ -33,16 +33,16 @@ BrowseNextResponse browseNext(Client& connection, const BrowseNextRequest& reque
 }
 
 template <>
-Result<BrowseResult> browseNext<Server>(
+BrowseResult browseNext<Server>(
     Server& connection, bool releaseContinuationPoint, const ByteString& continuationPoint
 ) noexcept {
-    return {UA_Server_browseNext(
+    return UA_Server_browseNext(
         connection.handle(), releaseContinuationPoint, continuationPoint.handle()
-    )};
+    );
 }
 
 template <>
-Result<BrowseResult> browseNext<Client>(
+BrowseResult browseNext<Client>(
     Client& connection, bool releaseContinuationPoint, const ByteString& continuationPoint
 ) noexcept {
     return browseNextAsync(
