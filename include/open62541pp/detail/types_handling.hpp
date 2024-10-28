@@ -144,3 +144,4 @@ template <typename T>
 }
 
 }  // namespace opcua::detail
+ 

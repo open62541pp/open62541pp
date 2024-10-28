@@ -1,7 +1,6 @@
 #pragma once
 
 #include <cstdint>
-#include <iterator>  // make_move_iterator
 #include <utility>
 #include <vector>
 
@@ -371,33 +370,7 @@ auto unregisterNodesAsync(
 template <typename T>
 Result<std::vector<ReferenceDescription>> browseAll(
     T& connection, const BrowseDescription& bd, uint32_t maxReferences = 0
-) {
-    std::vector<ReferenceDescription> refs;
-    auto append = [&](Span<ReferenceDescription> refsNew) {
-        refs.insert(
-            refs.end(),
-            std::make_move_iterator(refsNew.begin()),
-            std::make_move_iterator(refsNew.end())
-        );
-    };
-    Result<BrowseResult> result = browse(connection, bd, maxReferences);
-    if (!result) {
-        return BadResult(result.code());
-    }
-    append(result->getReferences());
-    while (!result.value().getContinuationPoint().empty()) {
-        const bool release = (refs.size() >= maxReferences);
-        result = browseNext(connection, release, result->getContinuationPoint());
-        if (!result) {
-            return BadResult(result.code());
-        }
-        append(result->getReferences());
-    }
-    if ((maxReferences > 0) && (refs.size() > maxReferences)) {
-        refs.resize(maxReferences);
-    }
-    return refs;
-}
+);
 
 /**
  * Discover child nodes recursively (non-standard).
