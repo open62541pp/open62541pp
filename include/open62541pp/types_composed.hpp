@@ -70,6 +70,7 @@ UA_EXPORT extern const UA_ViewAttributes UA_ViewAttributes_default;
     Span<Type> getterName() noexcept {                                                             \
         return {asWrapper<Type>(handle()->memberArray), handle()->memberSize};                     \
     }
+
 // NOLINTEND(cppcoreguidelines-macro-usage)
 
 namespace opcua {
@@ -337,6 +338,7 @@ struct IsBitmaskEnum<NodeAttributesMask> : std::true_type {};
     UAPP_NODEATTR_BITMASK(                                                                         \
         Bitmask<WriteMask>, UserWriteMask, userWriteMask, UA_NODEATTRIBUTESMASK_USERWRITEMASK      \
     )
+
 // NOLINTEND(cppcoreguidelines-macro-usage)
 
 /**

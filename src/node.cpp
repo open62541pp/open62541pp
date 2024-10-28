@@ -1,9 +1,9 @@
 #include "open62541pp/node.hpp"
 
 #include "open62541pp/client.hpp"
-#include "open62541pp/server.hpp"
 #include "open62541pp/detail/open62541/client.h"
 #include "open62541pp/detail/open62541/server.h"
+#include "open62541pp/server.hpp"
 
 namespace opcua {
 
