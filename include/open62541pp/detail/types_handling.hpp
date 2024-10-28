@@ -32,6 +32,23 @@ constexpr bool isPointerFree = IsOneOf<  // NOLINT(modernize-type-traits)
     UA_StatusCode>::value;
 
 template <typename T>
+constexpr bool isBorrowed(const T& /* unused */) noexcept {
+    return false;
+}
+
+constexpr bool isBorrowed(const UA_Variant& native) noexcept {
+    return native.storageType == UA_VARIANT_DATA_NODELETE;
+}
+
+constexpr bool isBorrowed(const UA_DataValue& native) noexcept {
+    return native.value.storageType == UA_VARIANT_DATA_NODELETE;
+}
+
+constexpr bool isBorrowed(const UA_ExtensionObject& native) noexcept {
+    return native.encoding == UA_EXTENSIONOBJECT_DECODED_NODELETE;
+}
+
+template <typename T>
 constexpr bool isValidTypeCombination(const UA_DataType& type) {
     if constexpr (std::is_void_v<T>) {
         return true;  // allow type-erasure
@@ -43,30 +60,12 @@ constexpr bool isValidTypeCombination(const UA_DataType& type) {
 template <typename T>
 constexpr void clear(T& native, const UA_DataType& type) noexcept {
     assert(isValidTypeCombination<T>(type));
-    if constexpr (!isPointerFree<T>) {
-        UA_clear(&native, &type);
-    }
-}
-
-// Overloads for types that allow borrowing
-
-constexpr void clear(UA_Variant& native, const UA_DataType& type) noexcept {
-    assert(isValidTypeCombination<UA_Variant>(type));
-    if (native.storageType != UA_VARIANT_DATA_NODELETE) {
-        UA_clear(&native, &type);
-    }
-}
-
-constexpr void clear(UA_DataValue& native, const UA_DataType& type) noexcept {
-    assert(isValidTypeCombination<UA_DataValue>(type));
-    if (native.value.storageType != UA_VARIANT_DATA_NODELETE) {
-        UA_clear(&native, &type);
-    }
-}
-
-constexpr void clear(UA_ExtensionObject& native, const UA_DataType& type) noexcept {
-    assert(isValidTypeCombination<UA_ExtensionObject>(type));
-    if (native.encoding != UA_EXTENSIONOBJECT_DECODED_NODELETE) {
+    // NOLINTNEXTLINE(bugprone-branch-clone)
+    if constexpr (isPointerFree<T>) {
+        native = {};
+    } else if (isBorrowed(native)) {
+        native = {};
+    } else {
         UA_clear(&native, &type);
     }
 }
