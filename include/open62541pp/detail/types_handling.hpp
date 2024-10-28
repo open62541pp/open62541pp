@@ -130,17 +130,14 @@ template <typename T>
 
 template <typename T>
 [[nodiscard]] T* copyArray(const T* src, size_t size, const UA_DataType& type) {
-    assert(isValidTypeCombination<T>(type));
+    T* dst = allocateArray<T>(size, type);
     if constexpr (!isPointerFree<T>) {
-        T* dst{};
-        throwIfBad(UA_Array_copy(src, size, (void**)&dst, &type));  // NOLINT
-        return dst;
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
+        std::transform(src, src + size, dst, [&](const T& item) { return copy(item, type); });
     } else {
-        T* dst = allocateArray<T>(size, type);
         std::copy_n(src, size, dst);
-        return dst;
     }
+    return dst;
 }
 
 }  // namespace opcua::detail
- 
