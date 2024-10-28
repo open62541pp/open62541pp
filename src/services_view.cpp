@@ -96,17 +96,13 @@ Result<std::vector<ReferenceDescription>> browseAll(
         );
     };
     BrowseResult result = browse(connection, bd, maxReferences);
-    if (result.getStatusCode().isBad()) {
-        return BadResult(result.getStatusCode());
-    }
     append(result.getReferences());
     while (!result.getContinuationPoint().empty()) {
-        const bool release = (refs.size() >= maxReferences);
-        result = browseNext(connection, release, result.getContinuationPoint());
-        if (result.getStatusCode().isBad()) {
-            return BadResult(result.getStatusCode());
-        }
+        result = browseNext(connection, false, result.getContinuationPoint());
         append(result.getReferences());
+    }
+    if (result.getStatusCode().isBad()) {
+        return BadResult(result.getStatusCode());
     }
     if ((maxReferences > 0) && (refs.size() > maxReferences)) {
         refs.resize(maxReferences);
