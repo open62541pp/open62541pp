@@ -1,6 +1,7 @@
 #include "open62541pp/services/view.hpp"
 
 #include <cstddef>  // size_t
+#include <iterator>  // make_move_iterator
 
 #include "open62541pp/client.hpp"
 #include "open62541pp/detail/open62541/server.h"
@@ -81,6 +82,40 @@ UnregisterNodesResponse unregisterNodes(
 ) noexcept {
     return unregisterNodesAsync(connection, request, detail::SyncOperation{});
 }
+
+template <typename T>
+Result<std::vector<ReferenceDescription>> browseAll(
+    T& connection, const BrowseDescription& bd, uint32_t maxReferences
+) {
+    std::vector<ReferenceDescription> refs;
+    auto append = [&](Span<ReferenceDescription> refsNew) {
+        refs.insert(
+            refs.end(),
+            std::make_move_iterator(refsNew.begin()),
+            std::make_move_iterator(refsNew.end())
+        );
+    };
+    BrowseResult result = browse(connection, bd, maxReferences);
+    append(result.getReferences());
+    while (!result.getContinuationPoint().empty()) {
+        result = browseNext(connection, false, result.getContinuationPoint());
+        append(result.getReferences());
+    }
+    if (result.getStatusCode().isBad()) {
+        return BadResult(result.getStatusCode());
+    }
+    if ((maxReferences > 0) && (refs.size() > maxReferences)) {
+        refs.resize(maxReferences);
+    }
+    return refs;
+}
+
+template Result<std::vector<ReferenceDescription>> browseAll<Client>(
+    Client&, const BrowseDescription&, uint32_t
+);
+template Result<std::vector<ReferenceDescription>> browseAll<Server>(
+    Server&, const BrowseDescription&, uint32_t
+);
 
 Result<std::vector<ExpandedNodeId>> browseRecursive(
     Server& connection, const BrowseDescription& bd
