@@ -13,21 +13,19 @@
 
 namespace opcua {
 
-inline static AccessControlBase& getAdapter(UA_AccessControl* ac) {
+static AccessControlBase& getAdapter(UA_AccessControl* ac) {
     assert(ac != nullptr);
     assert(ac->context != nullptr);
     return *static_cast<AccessControlBase*>(ac->context);
 }
 
 template <typename WrapperType, typename NativeType = typename WrapperType::NativeType>
-inline static const WrapperType& asWrapperRef(const NativeType* nativePtr) {
+static const WrapperType& asWrapperRef(const NativeType* nativePtr) {
     static const WrapperType empty;
     return nativePtr == nullptr ? empty : asWrapper<WrapperType>(*nativePtr);
 }
 
-inline static std::optional<Session> getSession(
-    UA_Server* server, const UA_NodeId* sessionId
-) noexcept {
+static std::optional<Session> getSession(UA_Server* server, const UA_NodeId* sessionId) noexcept {
     auto* wrapper = asWrapper(server);
     if (wrapper == nullptr) {
         return std::nullopt;
@@ -51,7 +49,7 @@ static void logException(
 }
 
 template <typename F, typename ReturnType = std::invoke_result_t<F>>
-inline static auto invokeAccessCallback(
+static auto invokeAccessCallback(
     UA_Server* server, std::string_view callbackName, ReturnType returnOnException, F&& fn
 ) noexcept {
     try {

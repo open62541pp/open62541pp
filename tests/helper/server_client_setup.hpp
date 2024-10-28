@@ -11,9 +11,9 @@
 #include "server_runner.hpp"
 
 template <typename T>
-inline constexpr bool isServer = std::is_same_v<std::remove_reference_t<T>, opcua::Server>;
+constexpr bool isServer = std::is_same_v<std::remove_reference_t<T>, opcua::Server>;
 template <typename T>
-inline constexpr bool isClient = std::is_same_v<std::remove_reference_t<T>, opcua::Client>;
+constexpr bool isClient = std::is_same_v<std::remove_reference_t<T>, opcua::Client>;
 
 struct ServerClientSetup {
     Client client;

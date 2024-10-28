@@ -91,12 +91,12 @@ void ServerConfig::setBuildInfo(BuildInfo buildInfo) {
     asWrapper<BuildInfo>(native().buildInfo) = std::move(buildInfo);
 }
 
-inline static ApplicationDescription& getApplicationDescription(UA_ServerConfig& config) noexcept {
+static ApplicationDescription& getApplicationDescription(UA_ServerConfig& config) noexcept {
     return asWrapper<ApplicationDescription>(config.applicationDescription);
 }
 
 // copy to endpoints needed, see: https://github.com/open62541/open62541/issues/1175
-inline static void copyApplicationDescriptionToEndpoints(UA_ServerConfig& config) {
+static void copyApplicationDescriptionToEndpoints(UA_ServerConfig& config) {
     auto endpoints = Span(asWrapper<EndpointDescription>(config.endpoints), config.endpointsSize);
     for (auto& endpoint : endpoints) {
         endpoint.getServer() = getApplicationDescription(config);
@@ -370,7 +370,7 @@ void Server::setVariableNodeValueCallback(const NodeId& id, ValueCallback callba
     throwIfBad(UA_Server_setVariableNode_valueCallback(handle(), id, callbackNative));
 }
 
-inline static NumericRange asRange(const UA_NumericRange* range) noexcept {
+static NumericRange asRange(const UA_NumericRange* range) noexcept {
     return range == nullptr ? NumericRange() : NumericRange(*range);
 }
 
@@ -555,7 +555,7 @@ UA_Logger* getLogger(UA_ServerConfig* config) noexcept {
 #if UAPP_OPEN62541_VER_GE(1, 4)
     return config == nullptr ? nullptr : config->logging;
 #else
-    return config == nullptr ? nullptr: &config->logger;
+    return config == nullptr ? nullptr : &config->logger;
 #endif
 }
 

@@ -398,7 +398,7 @@ auto deleteReferenceAsync(
  * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
-inline Result<NodeId> addObject(
+Result<NodeId> addObject(
     T& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -426,7 +426,7 @@ inline Result<NodeId> addObject(
  * @return @asyncresult{Result<NodeId>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto addObjectAsync(
+auto addObjectAsync(
     Client& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -460,7 +460,7 @@ inline auto addObjectAsync(
  * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
-inline Result<NodeId> addFolder(
+Result<NodeId> addFolder(
     T& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -480,7 +480,7 @@ inline Result<NodeId> addFolder(
  * @return @asyncresult{Result<NodeId>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto addFolderAsync(
+auto addFolderAsync(
     Client& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -513,7 +513,7 @@ inline auto addFolderAsync(
  * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
-inline Result<NodeId> addVariable(
+Result<NodeId> addVariable(
     T& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -541,7 +541,7 @@ inline Result<NodeId> addVariable(
  * @return @asyncresult{Result<NodeId>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto addVariableAsync(
+auto addVariableAsync(
     Client& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -574,7 +574,7 @@ inline auto addVariableAsync(
  * @param attributes Property attributes
  */
 template <typename T>
-inline Result<NodeId> addProperty(
+Result<NodeId> addProperty(
     T& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -599,7 +599,7 @@ inline Result<NodeId> addProperty(
  * @return @asyncresult{Result<NodeId>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto addPropertyAsync(
+auto addPropertyAsync(
     Client& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -661,7 +661,7 @@ Result<NodeId> addMethod(
  * @return @asyncresult{Result<NodeId>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto addMethodAsync(
+auto addMethodAsync(
     Client& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -698,7 +698,7 @@ inline auto addMethodAsync(
  * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
-inline Result<NodeId> addObjectType(
+Result<NodeId> addObjectType(
     T& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -725,7 +725,7 @@ inline Result<NodeId> addObjectType(
  * @return @asyncresult{Result<NodeId>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto addObjectTypeAsync(
+auto addObjectTypeAsync(
     Client& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -759,7 +759,7 @@ inline auto addObjectTypeAsync(
  * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
-inline Result<NodeId> addVariableType(
+Result<NodeId> addVariableType(
     T& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -787,7 +787,7 @@ inline Result<NodeId> addVariableType(
  * @return @asyncresult{Result<NodeId>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto addVariableTypeAsync(
+auto addVariableTypeAsync(
     Client& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -821,7 +821,7 @@ inline auto addVariableTypeAsync(
  * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
-inline Result<NodeId> addReferenceType(
+Result<NodeId> addReferenceType(
     T& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -848,7 +848,7 @@ inline Result<NodeId> addReferenceType(
  * @return @asyncresult{Result<NodeId>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto addReferenceTypeAsync(
+auto addReferenceTypeAsync(
     Client& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -881,7 +881,7 @@ inline auto addReferenceTypeAsync(
  * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
-inline Result<NodeId> addDataType(
+Result<NodeId> addDataType(
     T& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -908,7 +908,7 @@ inline Result<NodeId> addDataType(
  * @return @asyncresult{Result<NodeId>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto addDataTypeAsync(
+auto addDataTypeAsync(
     Client& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -941,7 +941,7 @@ inline auto addDataTypeAsync(
  * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
-inline Result<NodeId> addView(
+Result<NodeId> addView(
     T& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -968,7 +968,7 @@ inline Result<NodeId> addView(
  * @return @asyncresult{Result<NodeId>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto addViewAsync(
+auto addViewAsync(
     Client& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -1004,7 +1004,7 @@ inline auto addViewAsync(
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/6.4.4
  */
 template <typename T>
-inline StatusCode addModellingRule(T& connection, const NodeId& id, ModellingRule rule) noexcept {
+StatusCode addModellingRule(T& connection, const NodeId& id, ModellingRule rule) noexcept {
     return addReference(
         connection, id, {0, static_cast<uint32_t>(rule)}, ReferenceTypeId::HasModellingRule, true
     );
@@ -1017,7 +1017,7 @@ inline StatusCode addModellingRule(T& connection, const NodeId& id, ModellingRul
  * @return @asyncresult{StatusCode}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto addModellingRuleAsync(
+auto addModellingRuleAsync(
     Client& connection,
     const NodeId& id,
     ModellingRule rule,

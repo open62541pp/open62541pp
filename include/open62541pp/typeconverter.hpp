@@ -42,7 +42,7 @@ template <typename T>
 struct IsConvertibleType<T, std::void_t<decltype(TypeConverter<T>{})>> : std::true_type {};
 
 template <typename T>
-inline constexpr bool isConvertibleType = IsConvertibleType<T>::value;
+constexpr bool isConvertibleType = IsConvertibleType<T>::value;
 
 }  // namespace detail
 

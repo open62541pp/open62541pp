@@ -14,30 +14,30 @@
 namespace opcua::services::detail {
 
 template <typename T>
-inline ExtensionObject wrapNodeAttributes(const T& attributes) noexcept {
+ExtensionObject wrapNodeAttributes(const T& attributes) noexcept {
     // NOLINTNEXTLINE(*-const-cast), won't be modified
     return ExtensionObject::fromDecoded(const_cast<T&>(attributes));
 }
 
 template <typename T>
-inline auto* getPointer(T& value) noexcept {
+auto* getPointer(T& value) noexcept {
     // NOLINTNEXTLINE(*-const-cast), request object won't be modified
     return const_cast<std::remove_const_t<T>*>(&value);
 }
 
 template <typename T>
-inline auto* getPointer(Span<T> array) noexcept {
+auto* getPointer(Span<T> array) noexcept {
     // NOLINTNEXTLINE(*-const-cast), request object won't be modified
     return const_cast<std::remove_const_t<T>*>(array.data());
 }
 
 template <typename T>
-inline auto* getNativePointer(T& wrapper) noexcept {
+auto* getNativePointer(T& wrapper) noexcept {
     return asNative(getPointer(wrapper));
 }
 
 template <typename T>
-inline auto* getNativePointer(Span<T> array) noexcept {
+auto* getNativePointer(Span<T> array) noexcept {
     return asNative(getPointer(array));
 }
 
@@ -157,7 +157,7 @@ inline void copyMonitoringParametersToNative(
 }
 
 template <typename MonitoringParameters>
-inline UA_MonitoredItemCreateRequest createMonitoredItemCreateRequest(
+UA_MonitoredItemCreateRequest createMonitoredItemCreateRequest(
     const ReadValueId& itemToMonitor,
     MonitoringMode monitoringMode,
     MonitoringParameters& parameters
@@ -170,7 +170,7 @@ inline UA_MonitoredItemCreateRequest createMonitoredItemCreateRequest(
 }
 
 template <typename MonitoringParameters>
-inline UA_MonitoredItemModifyRequest createMonitoredItemModifyRequest(
+UA_MonitoredItemModifyRequest createMonitoredItemModifyRequest(
     uint32_t monitoredItemId, MonitoringParameters& parameters
 ) noexcept {
     UA_MonitoredItemModifyRequest item{};
@@ -180,7 +180,7 @@ inline UA_MonitoredItemModifyRequest createMonitoredItemModifyRequest(
 }
 
 template <typename MonitoringParameters>
-inline UA_ModifyMonitoredItemsRequest createModifyMonitoredItemsRequest(
+UA_ModifyMonitoredItemsRequest createModifyMonitoredItemsRequest(
     uint32_t subscriptionId, MonitoringParameters& parameters, UA_MonitoredItemModifyRequest& item
 ) noexcept {
     UA_ModifyMonitoredItemsRequest request{};

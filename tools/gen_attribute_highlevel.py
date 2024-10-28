@@ -70,7 +70,7 @@ TEMPLATE_READ = """
  * @ingroup Read
  */
 template <typename T>
-inline Result<{type}> read{attr}(T& connection, const NodeId& id) noexcept {{
+Result<{type}> read{attr}(T& connection, const NodeId& id) noexcept {{
     return detail::readAttributeImpl<AttributeId::{attr}>(connection, id);
 }}
 
@@ -82,7 +82,7 @@ inline Result<{type}> read{attr}(T& connection, const NodeId& id) noexcept {{
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto read{attr}Async(
+auto read{attr}Async(
     Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {{
     return detail::readAttributeAsyncImpl<AttributeId::{attr}>(
@@ -101,7 +101,7 @@ TEMPLATE_WRITE = """
  * @ingroup Write
  */
 template <typename T>
-inline StatusCode write{attr}(T& connection, const NodeId& id, {param_type} {param_name}) noexcept {{
+StatusCode write{attr}(T& connection, const NodeId& id, {param_type} {param_name}) noexcept {{
     return detail::writeAttributeImpl<AttributeId::{attr}>(connection, id, {param_name});
 }}
 
@@ -113,7 +113,7 @@ inline StatusCode write{attr}(T& connection, const NodeId& id, {param_type} {par
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto write{attr}Async(
+auto write{attr}Async(
     Client& connection,
     const NodeId& id,
     {param_type} {param_name},

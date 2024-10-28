@@ -39,12 +39,12 @@ template <typename T>
 struct IsRegisteredType<T, std::void_t<decltype(TypeRegistry<T>{})>> : std::true_type {};
 
 template <typename T>
-inline constexpr bool isRegisteredType = IsRegisteredType<T>::value;
+constexpr bool isRegisteredType = IsRegisteredType<T>::value;
 
 }  // namespace detail
 
 template <typename T>
-inline const UA_DataType& getDataType() noexcept {
+const UA_DataType& getDataType() noexcept {
     using ValueType = typename std::remove_cv_t<T>;
     static_assert(
         detail::isRegisteredType<ValueType>,

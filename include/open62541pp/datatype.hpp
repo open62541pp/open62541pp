@@ -175,14 +175,14 @@ namespace detail {
 namespace detail {
 
 template <auto memberPtr>
-inline const UA_DataType& getMemberDataType() {
+const UA_DataType& getMemberDataType() {
     using TMember = detail::MemberTypeT<decltype(memberPtr)>;
     return getDataType<std::remove_pointer_t<TMember>>();
 }
 
 // https://gist.github.com/graphitemaster/494f21190bb2c63c5516
 template <typename T, typename TMember>
-inline size_t offsetOfMember(TMember T::*member) {
+size_t offsetOfMember(TMember T::*member) {
     static T object{};
     return size_t(&(object.*member)) - size_t(&object);
 }
