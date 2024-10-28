@@ -173,7 +173,7 @@ void ClientConfig::setSecurityMode(MessageSecurityMode mode) noexcept {
 // |             | UA_SECURECHANNELSTATE_FRESH        | UA_SESSIONSTATE_CREATED            | 2158821376    |
 // clang-format on
 
-inline static void invokeStateCallback(
+static void invokeStateCallback(
     detail::ClientContext& context, detail::ClientState state
 ) noexcept {
     const auto& callback = context.stateCallbacks.at(static_cast<size_t>(state));

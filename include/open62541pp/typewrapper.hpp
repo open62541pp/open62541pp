@@ -122,7 +122,7 @@ struct IsTypeWrapper {
 };
 
 template <typename T>
-inline constexpr bool isTypeWrapper = IsTypeWrapper<T>::value;
+constexpr bool isTypeWrapper = IsTypeWrapper<T>::value;
 
 }  // namespace detail
 

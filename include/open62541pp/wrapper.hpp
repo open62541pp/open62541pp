@@ -100,7 +100,7 @@ struct IsWrapper {
 };
 
 template <typename T>
-inline constexpr bool isWrapper = IsWrapper<T>::value;
+constexpr bool isWrapper = IsWrapper<T>::value;
 
 }  // namespace detail
 
@@ -147,6 +147,7 @@ struct WrapperConversion {
     static constexpr const NativeType& asNative(const WrapperType& wrapper) noexcept {
         return *asNative(&wrapper);
     }
+
     // NOLINTEND(bugprone-casting-through-void)
 };
 

@@ -14,7 +14,7 @@ namespace opcua::detail {
 /* ------------------------------------ Generic type handling ----------------------------------- */
 
 template <typename T>
-inline constexpr bool isPointerFree = IsOneOf<  // NOLINT(modernize-type-traits)
+constexpr bool isPointerFree = IsOneOf<  // NOLINT(modernize-type-traits)
     T,
     UA_Boolean,
     UA_SByte,
@@ -72,13 +72,13 @@ constexpr void clear(UA_ExtensionObject& native, const UA_DataType& type) noexce
 }
 
 template <typename T>
-inline void deallocate(T* native, const UA_DataType& type) noexcept {
+void deallocate(T* native, const UA_DataType& type) noexcept {
     assert(isValidTypeCombination<T>(type));
     UA_delete(native, &type);
 }
 
 template <typename T>
-[[nodiscard]] inline T* allocate(const UA_DataType& type) {
+[[nodiscard]] T* allocate(const UA_DataType& type) {
     assert(isValidTypeCombination<T>(type));
     auto* result = static_cast<T*>(UA_new(&type));
     if (result == nullptr) {
@@ -88,7 +88,7 @@ template <typename T>
 }
 
 template <typename T>
-[[nodiscard]] inline auto allocateUniquePtr(const UA_DataType& type) {
+[[nodiscard]] auto allocateUniquePtr(const UA_DataType& type) {
     auto deleter = [&type](T* native) { deallocate(native, type); };
     return std::unique_ptr<T, decltype(deleter)>(allocate<T>(type), deleter);
 }
@@ -108,13 +108,13 @@ template <typename T>
 /* ----------------------------------- Generic array handling ----------------------------------- */
 
 template <typename T>
-inline void deallocateArray(T* array, size_t size, const UA_DataType& type) noexcept {
+void deallocateArray(T* array, size_t size, const UA_DataType& type) noexcept {
     assert(isValidTypeCombination<T>(type));
     UA_Array_delete(array, size, &type);
 }
 
 template <typename T>
-[[nodiscard]] inline T* allocateArray(size_t size, const UA_DataType& type) {
+[[nodiscard]] T* allocateArray(size_t size, const UA_DataType& type) {
     assert(isValidTypeCombination<T>(type));
     auto* result = static_cast<T*>(UA_Array_new(size, &type));
     if (result == nullptr) {
@@ -124,13 +124,13 @@ template <typename T>
 }
 
 template <typename T>
-[[nodiscard]] inline auto allocateArrayUniquePtr(size_t size, const UA_DataType& type) {
+[[nodiscard]] auto allocateArrayUniquePtr(size_t size, const UA_DataType& type) {
     auto deleter = [&type, size](T* native) { deallocateArray(native, size, type); };
     return std::unique_ptr<T, decltype(deleter)>(allocateArray<T>(size, type), deleter);
 }
 
 template <typename T>
-[[nodiscard]] inline T* copyArray(const T* src, size_t size, const UA_DataType& type) {
+[[nodiscard]] T* copyArray(const T* src, size_t size, const UA_DataType& type) {
     assert(isValidTypeCombination<T>(type));
     if constexpr (!isPointerFree<T>) {
         T* dst{};

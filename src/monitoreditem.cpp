@@ -12,7 +12,7 @@
 namespace opcua {
 
 template <typename T>
-inline static auto& getMonitoredItemContext(
+static auto& getMonitoredItemContext(
     T& connection, uint32_t subscriptionId, uint32_t monitoredItemId
 ) {
     const auto* context =

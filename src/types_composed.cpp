@@ -76,7 +76,7 @@ static ContentFilter concatFilterElements(
     return result;
 }
 
-inline static ContentFilter applyUnaryOperator(
+static ContentFilter applyUnaryOperator(
     FilterOperator unaryOperator, Span<const ContentFilterElement> elements
 ) {
     return concatFilterElements({
@@ -85,7 +85,7 @@ inline static ContentFilter applyUnaryOperator(
     });
 }
 
-inline static ContentFilter applyBinaryOperator(
+static ContentFilter applyBinaryOperator(
     FilterOperator binaryOperator,
     Span<const ContentFilterElement> lhs,
     Span<const ContentFilterElement> rhs

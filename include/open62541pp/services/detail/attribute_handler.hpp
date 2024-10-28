@@ -25,12 +25,12 @@ inline Result<Variant> getVariant(DataValue&& dv) noexcept {
 }
 
 template <typename T>
-inline Result<T> tryGetScalar(Variant&& var) noexcept {
+Result<T> tryGetScalar(Variant&& var) noexcept {
     return opcua::detail::tryInvoke([&] { return std::move(var).getScalar<T>(); });
 }
 
 template <typename T>
-inline Result<std::vector<T>> tryGetArray(Variant&& var) noexcept {
+Result<std::vector<T>> tryGetArray(Variant&& var) noexcept {
     return opcua::detail::tryInvoke([&] { return std::move(var).getArrayCopy<T>(); });
 }
 

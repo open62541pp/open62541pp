@@ -15,7 +15,7 @@ namespace opcua::services {
  * @ingroup Read
  */
 template <typename T>
-inline Result<NodeId> readNodeId(T& connection, const NodeId& id) noexcept {
+Result<NodeId> readNodeId(T& connection, const NodeId& id) noexcept {
     return detail::readAttributeImpl<AttributeId::NodeId>(connection, id);
 }
 
@@ -27,7 +27,7 @@ inline Result<NodeId> readNodeId(T& connection, const NodeId& id) noexcept {
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto readNodeIdAsync(
+auto readNodeIdAsync(
     Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::NodeId>(
@@ -42,7 +42,7 @@ inline auto readNodeIdAsync(
  * @ingroup Read
  */
 template <typename T>
-inline Result<NodeClass> readNodeClass(T& connection, const NodeId& id) noexcept {
+Result<NodeClass> readNodeClass(T& connection, const NodeId& id) noexcept {
     return detail::readAttributeImpl<AttributeId::NodeClass>(connection, id);
 }
 
@@ -54,7 +54,7 @@ inline Result<NodeClass> readNodeClass(T& connection, const NodeId& id) noexcept
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto readNodeClassAsync(
+auto readNodeClassAsync(
     Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::NodeClass>(
@@ -69,7 +69,7 @@ inline auto readNodeClassAsync(
  * @ingroup Read
  */
 template <typename T>
-inline Result<QualifiedName> readBrowseName(T& connection, const NodeId& id) noexcept {
+Result<QualifiedName> readBrowseName(T& connection, const NodeId& id) noexcept {
     return detail::readAttributeImpl<AttributeId::BrowseName>(connection, id);
 }
 
@@ -81,7 +81,7 @@ inline Result<QualifiedName> readBrowseName(T& connection, const NodeId& id) noe
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto readBrowseNameAsync(
+auto readBrowseNameAsync(
     Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::BrowseName>(
@@ -97,7 +97,7 @@ inline auto readBrowseNameAsync(
  * @ingroup Write
  */
 template <typename T>
-inline StatusCode writeBrowseName(
+StatusCode writeBrowseName(
     T& connection, const NodeId& id, const QualifiedName& browseName
 ) noexcept {
     return detail::writeAttributeImpl<AttributeId::BrowseName>(connection, id, browseName);
@@ -111,7 +111,7 @@ inline StatusCode writeBrowseName(
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto writeBrowseNameAsync(
+auto writeBrowseNameAsync(
     Client& connection,
     const NodeId& id,
     const QualifiedName& browseName,
@@ -129,7 +129,7 @@ inline auto writeBrowseNameAsync(
  * @ingroup Read
  */
 template <typename T>
-inline Result<LocalizedText> readDisplayName(T& connection, const NodeId& id) noexcept {
+Result<LocalizedText> readDisplayName(T& connection, const NodeId& id) noexcept {
     return detail::readAttributeImpl<AttributeId::DisplayName>(connection, id);
 }
 
@@ -141,7 +141,7 @@ inline Result<LocalizedText> readDisplayName(T& connection, const NodeId& id) no
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto readDisplayNameAsync(
+auto readDisplayNameAsync(
     Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::DisplayName>(
@@ -157,7 +157,7 @@ inline auto readDisplayNameAsync(
  * @ingroup Write
  */
 template <typename T>
-inline StatusCode writeDisplayName(
+StatusCode writeDisplayName(
     T& connection, const NodeId& id, const LocalizedText& displayName
 ) noexcept {
     return detail::writeAttributeImpl<AttributeId::DisplayName>(connection, id, displayName);
@@ -171,7 +171,7 @@ inline StatusCode writeDisplayName(
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto writeDisplayNameAsync(
+auto writeDisplayNameAsync(
     Client& connection,
     const NodeId& id,
     const LocalizedText& displayName,
@@ -189,7 +189,7 @@ inline auto writeDisplayNameAsync(
  * @ingroup Read
  */
 template <typename T>
-inline Result<LocalizedText> readDescription(T& connection, const NodeId& id) noexcept {
+Result<LocalizedText> readDescription(T& connection, const NodeId& id) noexcept {
     return detail::readAttributeImpl<AttributeId::Description>(connection, id);
 }
 
@@ -201,7 +201,7 @@ inline Result<LocalizedText> readDescription(T& connection, const NodeId& id) no
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto readDescriptionAsync(
+auto readDescriptionAsync(
     Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::Description>(
@@ -217,7 +217,7 @@ inline auto readDescriptionAsync(
  * @ingroup Write
  */
 template <typename T>
-inline StatusCode writeDescription(
+StatusCode writeDescription(
     T& connection, const NodeId& id, const LocalizedText& description
 ) noexcept {
     return detail::writeAttributeImpl<AttributeId::Description>(connection, id, description);
@@ -231,7 +231,7 @@ inline StatusCode writeDescription(
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto writeDescriptionAsync(
+auto writeDescriptionAsync(
     Client& connection,
     const NodeId& id,
     const LocalizedText& description,
@@ -249,7 +249,7 @@ inline auto writeDescriptionAsync(
  * @ingroup Read
  */
 template <typename T>
-inline Result<Bitmask<WriteMask>> readWriteMask(T& connection, const NodeId& id) noexcept {
+Result<Bitmask<WriteMask>> readWriteMask(T& connection, const NodeId& id) noexcept {
     return detail::readAttributeImpl<AttributeId::WriteMask>(connection, id);
 }
 
@@ -261,7 +261,7 @@ inline Result<Bitmask<WriteMask>> readWriteMask(T& connection, const NodeId& id)
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto readWriteMaskAsync(
+auto readWriteMaskAsync(
     Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::WriteMask>(
@@ -277,9 +277,7 @@ inline auto readWriteMaskAsync(
  * @ingroup Write
  */
 template <typename T>
-inline StatusCode writeWriteMask(
-    T& connection, const NodeId& id, Bitmask<WriteMask> writeMask
-) noexcept {
+StatusCode writeWriteMask(T& connection, const NodeId& id, Bitmask<WriteMask> writeMask) noexcept {
     return detail::writeAttributeImpl<AttributeId::WriteMask>(connection, id, writeMask);
 }
 
@@ -291,7 +289,7 @@ inline StatusCode writeWriteMask(
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto writeWriteMaskAsync(
+auto writeWriteMaskAsync(
     Client& connection,
     const NodeId& id,
     Bitmask<WriteMask> writeMask,
@@ -309,7 +307,7 @@ inline auto writeWriteMaskAsync(
  * @ingroup Read
  */
 template <typename T>
-inline Result<Bitmask<WriteMask>> readUserWriteMask(T& connection, const NodeId& id) noexcept {
+Result<Bitmask<WriteMask>> readUserWriteMask(T& connection, const NodeId& id) noexcept {
     return detail::readAttributeImpl<AttributeId::UserWriteMask>(connection, id);
 }
 
@@ -321,7 +319,7 @@ inline Result<Bitmask<WriteMask>> readUserWriteMask(T& connection, const NodeId&
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto readUserWriteMaskAsync(
+auto readUserWriteMaskAsync(
     Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::UserWriteMask>(
@@ -337,7 +335,7 @@ inline auto readUserWriteMaskAsync(
  * @ingroup Write
  */
 template <typename T>
-inline StatusCode writeUserWriteMask(
+StatusCode writeUserWriteMask(
     T& connection, const NodeId& id, Bitmask<WriteMask> userWriteMask
 ) noexcept {
     return detail::writeAttributeImpl<AttributeId::UserWriteMask>(connection, id, userWriteMask);
@@ -351,7 +349,7 @@ inline StatusCode writeUserWriteMask(
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto writeUserWriteMaskAsync(
+auto writeUserWriteMaskAsync(
     Client& connection,
     const NodeId& id,
     Bitmask<WriteMask> userWriteMask,
@@ -369,7 +367,7 @@ inline auto writeUserWriteMaskAsync(
  * @ingroup Read
  */
 template <typename T>
-inline Result<bool> readIsAbstract(T& connection, const NodeId& id) noexcept {
+Result<bool> readIsAbstract(T& connection, const NodeId& id) noexcept {
     return detail::readAttributeImpl<AttributeId::IsAbstract>(connection, id);
 }
 
@@ -381,7 +379,7 @@ inline Result<bool> readIsAbstract(T& connection, const NodeId& id) noexcept {
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto readIsAbstractAsync(
+auto readIsAbstractAsync(
     Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::IsAbstract>(
@@ -397,7 +395,7 @@ inline auto readIsAbstractAsync(
  * @ingroup Write
  */
 template <typename T>
-inline StatusCode writeIsAbstract(T& connection, const NodeId& id, bool isAbstract) noexcept {
+StatusCode writeIsAbstract(T& connection, const NodeId& id, bool isAbstract) noexcept {
     return detail::writeAttributeImpl<AttributeId::IsAbstract>(connection, id, isAbstract);
 }
 
@@ -409,7 +407,7 @@ inline StatusCode writeIsAbstract(T& connection, const NodeId& id, bool isAbstra
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto writeIsAbstractAsync(
+auto writeIsAbstractAsync(
     Client& connection,
     const NodeId& id,
     bool isAbstract,
@@ -427,7 +425,7 @@ inline auto writeIsAbstractAsync(
  * @ingroup Read
  */
 template <typename T>
-inline Result<bool> readSymmetric(T& connection, const NodeId& id) noexcept {
+Result<bool> readSymmetric(T& connection, const NodeId& id) noexcept {
     return detail::readAttributeImpl<AttributeId::Symmetric>(connection, id);
 }
 
@@ -439,7 +437,7 @@ inline Result<bool> readSymmetric(T& connection, const NodeId& id) noexcept {
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto readSymmetricAsync(
+auto readSymmetricAsync(
     Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::Symmetric>(
@@ -455,7 +453,7 @@ inline auto readSymmetricAsync(
  * @ingroup Write
  */
 template <typename T>
-inline StatusCode writeSymmetric(T& connection, const NodeId& id, bool symmetric) noexcept {
+StatusCode writeSymmetric(T& connection, const NodeId& id, bool symmetric) noexcept {
     return detail::writeAttributeImpl<AttributeId::Symmetric>(connection, id, symmetric);
 }
 
@@ -467,7 +465,7 @@ inline StatusCode writeSymmetric(T& connection, const NodeId& id, bool symmetric
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto writeSymmetricAsync(
+auto writeSymmetricAsync(
     Client& connection,
     const NodeId& id,
     bool symmetric,
@@ -485,7 +483,7 @@ inline auto writeSymmetricAsync(
  * @ingroup Read
  */
 template <typename T>
-inline Result<LocalizedText> readInverseName(T& connection, const NodeId& id) noexcept {
+Result<LocalizedText> readInverseName(T& connection, const NodeId& id) noexcept {
     return detail::readAttributeImpl<AttributeId::InverseName>(connection, id);
 }
 
@@ -497,7 +495,7 @@ inline Result<LocalizedText> readInverseName(T& connection, const NodeId& id) no
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto readInverseNameAsync(
+auto readInverseNameAsync(
     Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::InverseName>(
@@ -513,7 +511,7 @@ inline auto readInverseNameAsync(
  * @ingroup Write
  */
 template <typename T>
-inline StatusCode writeInverseName(
+StatusCode writeInverseName(
     T& connection, const NodeId& id, const LocalizedText& inverseName
 ) noexcept {
     return detail::writeAttributeImpl<AttributeId::InverseName>(connection, id, inverseName);
@@ -527,7 +525,7 @@ inline StatusCode writeInverseName(
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto writeInverseNameAsync(
+auto writeInverseNameAsync(
     Client& connection,
     const NodeId& id,
     const LocalizedText& inverseName,
@@ -545,7 +543,7 @@ inline auto writeInverseNameAsync(
  * @ingroup Read
  */
 template <typename T>
-inline Result<bool> readContainsNoLoops(T& connection, const NodeId& id) noexcept {
+Result<bool> readContainsNoLoops(T& connection, const NodeId& id) noexcept {
     return detail::readAttributeImpl<AttributeId::ContainsNoLoops>(connection, id);
 }
 
@@ -557,7 +555,7 @@ inline Result<bool> readContainsNoLoops(T& connection, const NodeId& id) noexcep
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto readContainsNoLoopsAsync(
+auto readContainsNoLoopsAsync(
     Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::ContainsNoLoops>(
@@ -573,7 +571,7 @@ inline auto readContainsNoLoopsAsync(
  * @ingroup Write
  */
 template <typename T>
-inline StatusCode writeContainsNoLoops(
+StatusCode writeContainsNoLoops(
     T& connection, const NodeId& id, const bool& containsNoLoops
 ) noexcept {
     return detail::writeAttributeImpl<AttributeId::ContainsNoLoops>(
@@ -589,7 +587,7 @@ inline StatusCode writeContainsNoLoops(
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto writeContainsNoLoopsAsync(
+auto writeContainsNoLoopsAsync(
     Client& connection,
     const NodeId& id,
     const bool& containsNoLoops,
@@ -607,7 +605,7 @@ inline auto writeContainsNoLoopsAsync(
  * @ingroup Read
  */
 template <typename T>
-inline Result<Bitmask<EventNotifier>> readEventNotifier(T& connection, const NodeId& id) noexcept {
+Result<Bitmask<EventNotifier>> readEventNotifier(T& connection, const NodeId& id) noexcept {
     return detail::readAttributeImpl<AttributeId::EventNotifier>(connection, id);
 }
 
@@ -619,7 +617,7 @@ inline Result<Bitmask<EventNotifier>> readEventNotifier(T& connection, const Nod
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto readEventNotifierAsync(
+auto readEventNotifierAsync(
     Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::EventNotifier>(
@@ -635,7 +633,7 @@ inline auto readEventNotifierAsync(
  * @ingroup Write
  */
 template <typename T>
-inline StatusCode writeEventNotifier(
+StatusCode writeEventNotifier(
     T& connection, const NodeId& id, Bitmask<EventNotifier> eventNotifier
 ) noexcept {
     return detail::writeAttributeImpl<AttributeId::EventNotifier>(connection, id, eventNotifier);
@@ -649,7 +647,7 @@ inline StatusCode writeEventNotifier(
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto writeEventNotifierAsync(
+auto writeEventNotifierAsync(
     Client& connection,
     const NodeId& id,
     Bitmask<EventNotifier> eventNotifier,
@@ -667,7 +665,7 @@ inline auto writeEventNotifierAsync(
  * @ingroup Read
  */
 template <typename T>
-inline Result<Variant> readValue(T& connection, const NodeId& id) noexcept {
+Result<Variant> readValue(T& connection, const NodeId& id) noexcept {
     return detail::readAttributeImpl<AttributeId::Value>(connection, id);
 }
 
@@ -679,7 +677,7 @@ inline Result<Variant> readValue(T& connection, const NodeId& id) noexcept {
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto readValueAsync(
+auto readValueAsync(
     Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::Value>(
@@ -695,7 +693,7 @@ inline auto readValueAsync(
  * @ingroup Write
  */
 template <typename T>
-inline StatusCode writeValue(T& connection, const NodeId& id, const Variant& value) noexcept {
+StatusCode writeValue(T& connection, const NodeId& id, const Variant& value) noexcept {
     return detail::writeAttributeImpl<AttributeId::Value>(connection, id, value);
 }
 
@@ -707,7 +705,7 @@ inline StatusCode writeValue(T& connection, const NodeId& id, const Variant& val
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto writeValueAsync(
+auto writeValueAsync(
     Client& connection,
     const NodeId& id,
     const Variant& value,
@@ -725,7 +723,7 @@ inline auto writeValueAsync(
  * @ingroup Read
  */
 template <typename T>
-inline Result<NodeId> readDataType(T& connection, const NodeId& id) noexcept {
+Result<NodeId> readDataType(T& connection, const NodeId& id) noexcept {
     return detail::readAttributeImpl<AttributeId::DataType>(connection, id);
 }
 
@@ -737,7 +735,7 @@ inline Result<NodeId> readDataType(T& connection, const NodeId& id) noexcept {
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto readDataTypeAsync(
+auto readDataTypeAsync(
     Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::DataType>(
@@ -753,7 +751,7 @@ inline auto readDataTypeAsync(
  * @ingroup Write
  */
 template <typename T>
-inline StatusCode writeDataType(T& connection, const NodeId& id, const NodeId& dataType) noexcept {
+StatusCode writeDataType(T& connection, const NodeId& id, const NodeId& dataType) noexcept {
     return detail::writeAttributeImpl<AttributeId::DataType>(connection, id, dataType);
 }
 
@@ -765,7 +763,7 @@ inline StatusCode writeDataType(T& connection, const NodeId& id, const NodeId& d
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto writeDataTypeAsync(
+auto writeDataTypeAsync(
     Client& connection,
     const NodeId& id,
     const NodeId& dataType,
@@ -783,7 +781,7 @@ inline auto writeDataTypeAsync(
  * @ingroup Read
  */
 template <typename T>
-inline Result<ValueRank> readValueRank(T& connection, const NodeId& id) noexcept {
+Result<ValueRank> readValueRank(T& connection, const NodeId& id) noexcept {
     return detail::readAttributeImpl<AttributeId::ValueRank>(connection, id);
 }
 
@@ -795,7 +793,7 @@ inline Result<ValueRank> readValueRank(T& connection, const NodeId& id) noexcept
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto readValueRankAsync(
+auto readValueRankAsync(
     Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::ValueRank>(
@@ -811,7 +809,7 @@ inline auto readValueRankAsync(
  * @ingroup Write
  */
 template <typename T>
-inline StatusCode writeValueRank(T& connection, const NodeId& id, ValueRank valueRank) noexcept {
+StatusCode writeValueRank(T& connection, const NodeId& id, ValueRank valueRank) noexcept {
     return detail::writeAttributeImpl<AttributeId::ValueRank>(connection, id, valueRank);
 }
 
@@ -823,7 +821,7 @@ inline StatusCode writeValueRank(T& connection, const NodeId& id, ValueRank valu
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto writeValueRankAsync(
+auto writeValueRankAsync(
     Client& connection,
     const NodeId& id,
     ValueRank valueRank,
@@ -841,7 +839,7 @@ inline auto writeValueRankAsync(
  * @ingroup Read
  */
 template <typename T>
-inline Result<std::vector<uint32_t>> readArrayDimensions(T& connection, const NodeId& id) noexcept {
+Result<std::vector<uint32_t>> readArrayDimensions(T& connection, const NodeId& id) noexcept {
     return detail::readAttributeImpl<AttributeId::ArrayDimensions>(connection, id);
 }
 
@@ -853,7 +851,7 @@ inline Result<std::vector<uint32_t>> readArrayDimensions(T& connection, const No
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto readArrayDimensionsAsync(
+auto readArrayDimensionsAsync(
     Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::ArrayDimensions>(
@@ -869,7 +867,7 @@ inline auto readArrayDimensionsAsync(
  * @ingroup Write
  */
 template <typename T>
-inline StatusCode writeArrayDimensions(
+StatusCode writeArrayDimensions(
     T& connection, const NodeId& id, Span<const uint32_t> arrayDimensions
 ) noexcept {
     return detail::writeAttributeImpl<AttributeId::ArrayDimensions>(
@@ -885,7 +883,7 @@ inline StatusCode writeArrayDimensions(
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto writeArrayDimensionsAsync(
+auto writeArrayDimensionsAsync(
     Client& connection,
     const NodeId& id,
     Span<const uint32_t> arrayDimensions,
@@ -903,7 +901,7 @@ inline auto writeArrayDimensionsAsync(
  * @ingroup Read
  */
 template <typename T>
-inline Result<Bitmask<AccessLevel>> readAccessLevel(T& connection, const NodeId& id) noexcept {
+Result<Bitmask<AccessLevel>> readAccessLevel(T& connection, const NodeId& id) noexcept {
     return detail::readAttributeImpl<AttributeId::AccessLevel>(connection, id);
 }
 
@@ -915,7 +913,7 @@ inline Result<Bitmask<AccessLevel>> readAccessLevel(T& connection, const NodeId&
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto readAccessLevelAsync(
+auto readAccessLevelAsync(
     Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::AccessLevel>(
@@ -931,7 +929,7 @@ inline auto readAccessLevelAsync(
  * @ingroup Write
  */
 template <typename T>
-inline StatusCode writeAccessLevel(
+StatusCode writeAccessLevel(
     T& connection, const NodeId& id, Bitmask<AccessLevel> accessLevel
 ) noexcept {
     return detail::writeAttributeImpl<AttributeId::AccessLevel>(connection, id, accessLevel);
@@ -945,7 +943,7 @@ inline StatusCode writeAccessLevel(
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto writeAccessLevelAsync(
+auto writeAccessLevelAsync(
     Client& connection,
     const NodeId& id,
     Bitmask<AccessLevel> accessLevel,
@@ -963,7 +961,7 @@ inline auto writeAccessLevelAsync(
  * @ingroup Read
  */
 template <typename T>
-inline Result<Bitmask<AccessLevel>> readUserAccessLevel(T& connection, const NodeId& id) noexcept {
+Result<Bitmask<AccessLevel>> readUserAccessLevel(T& connection, const NodeId& id) noexcept {
     return detail::readAttributeImpl<AttributeId::UserAccessLevel>(connection, id);
 }
 
@@ -975,7 +973,7 @@ inline Result<Bitmask<AccessLevel>> readUserAccessLevel(T& connection, const Nod
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto readUserAccessLevelAsync(
+auto readUserAccessLevelAsync(
     Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::UserAccessLevel>(
@@ -991,7 +989,7 @@ inline auto readUserAccessLevelAsync(
  * @ingroup Write
  */
 template <typename T>
-inline StatusCode writeUserAccessLevel(
+StatusCode writeUserAccessLevel(
     T& connection, const NodeId& id, Bitmask<AccessLevel> userAccessLevel
 ) noexcept {
     return detail::writeAttributeImpl<AttributeId::UserAccessLevel>(
@@ -1007,7 +1005,7 @@ inline StatusCode writeUserAccessLevel(
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto writeUserAccessLevelAsync(
+auto writeUserAccessLevelAsync(
     Client& connection,
     const NodeId& id,
     Bitmask<AccessLevel> userAccessLevel,
@@ -1025,7 +1023,7 @@ inline auto writeUserAccessLevelAsync(
  * @ingroup Read
  */
 template <typename T>
-inline Result<double> readMinimumSamplingInterval(T& connection, const NodeId& id) noexcept {
+Result<double> readMinimumSamplingInterval(T& connection, const NodeId& id) noexcept {
     return detail::readAttributeImpl<AttributeId::MinimumSamplingInterval>(connection, id);
 }
 
@@ -1037,7 +1035,7 @@ inline Result<double> readMinimumSamplingInterval(T& connection, const NodeId& i
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto readMinimumSamplingIntervalAsync(
+auto readMinimumSamplingIntervalAsync(
     Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::MinimumSamplingInterval>(
@@ -1053,7 +1051,7 @@ inline auto readMinimumSamplingIntervalAsync(
  * @ingroup Write
  */
 template <typename T>
-inline StatusCode writeMinimumSamplingInterval(
+StatusCode writeMinimumSamplingInterval(
     T& connection, const NodeId& id, double minimumSamplingInterval
 ) noexcept {
     return detail::writeAttributeImpl<AttributeId::MinimumSamplingInterval>(
@@ -1069,7 +1067,7 @@ inline StatusCode writeMinimumSamplingInterval(
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto writeMinimumSamplingIntervalAsync(
+auto writeMinimumSamplingIntervalAsync(
     Client& connection,
     const NodeId& id,
     double minimumSamplingInterval,
@@ -1087,7 +1085,7 @@ inline auto writeMinimumSamplingIntervalAsync(
  * @ingroup Read
  */
 template <typename T>
-inline Result<bool> readHistorizing(T& connection, const NodeId& id) noexcept {
+Result<bool> readHistorizing(T& connection, const NodeId& id) noexcept {
     return detail::readAttributeImpl<AttributeId::Historizing>(connection, id);
 }
 
@@ -1099,7 +1097,7 @@ inline Result<bool> readHistorizing(T& connection, const NodeId& id) noexcept {
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto readHistorizingAsync(
+auto readHistorizingAsync(
     Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::Historizing>(
@@ -1115,7 +1113,7 @@ inline auto readHistorizingAsync(
  * @ingroup Write
  */
 template <typename T>
-inline StatusCode writeHistorizing(T& connection, const NodeId& id, bool historizing) noexcept {
+StatusCode writeHistorizing(T& connection, const NodeId& id, bool historizing) noexcept {
     return detail::writeAttributeImpl<AttributeId::Historizing>(connection, id, historizing);
 }
 
@@ -1127,7 +1125,7 @@ inline StatusCode writeHistorizing(T& connection, const NodeId& id, bool histori
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto writeHistorizingAsync(
+auto writeHistorizingAsync(
     Client& connection,
     const NodeId& id,
     bool historizing,
@@ -1145,7 +1143,7 @@ inline auto writeHistorizingAsync(
  * @ingroup Read
  */
 template <typename T>
-inline Result<bool> readExecutable(T& connection, const NodeId& id) noexcept {
+Result<bool> readExecutable(T& connection, const NodeId& id) noexcept {
     return detail::readAttributeImpl<AttributeId::Executable>(connection, id);
 }
 
@@ -1157,7 +1155,7 @@ inline Result<bool> readExecutable(T& connection, const NodeId& id) noexcept {
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto readExecutableAsync(
+auto readExecutableAsync(
     Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::Executable>(
@@ -1173,7 +1171,7 @@ inline auto readExecutableAsync(
  * @ingroup Write
  */
 template <typename T>
-inline StatusCode writeExecutable(T& connection, const NodeId& id, bool executable) noexcept {
+StatusCode writeExecutable(T& connection, const NodeId& id, bool executable) noexcept {
     return detail::writeAttributeImpl<AttributeId::Executable>(connection, id, executable);
 }
 
@@ -1185,7 +1183,7 @@ inline StatusCode writeExecutable(T& connection, const NodeId& id, bool executab
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto writeExecutableAsync(
+auto writeExecutableAsync(
     Client& connection,
     const NodeId& id,
     bool executable,
@@ -1203,7 +1201,7 @@ inline auto writeExecutableAsync(
  * @ingroup Read
  */
 template <typename T>
-inline Result<bool> readUserExecutable(T& connection, const NodeId& id) noexcept {
+Result<bool> readUserExecutable(T& connection, const NodeId& id) noexcept {
     return detail::readAttributeImpl<AttributeId::UserExecutable>(connection, id);
 }
 
@@ -1215,7 +1213,7 @@ inline Result<bool> readUserExecutable(T& connection, const NodeId& id) noexcept
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto readUserExecutableAsync(
+auto readUserExecutableAsync(
     Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::UserExecutable>(
@@ -1231,9 +1229,7 @@ inline auto readUserExecutableAsync(
  * @ingroup Write
  */
 template <typename T>
-inline StatusCode writeUserExecutable(
-    T& connection, const NodeId& id, bool userExecutable
-) noexcept {
+StatusCode writeUserExecutable(T& connection, const NodeId& id, bool userExecutable) noexcept {
     return detail::writeAttributeImpl<AttributeId::UserExecutable>(connection, id, userExecutable);
 }
 
@@ -1245,7 +1241,7 @@ inline StatusCode writeUserExecutable(
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto writeUserExecutableAsync(
+auto writeUserExecutableAsync(
     Client& connection,
     const NodeId& id,
     bool userExecutable,
@@ -1264,7 +1260,7 @@ inline auto writeUserExecutableAsync(
  * @ingroup Read
  */
 template <typename T>
-inline Result<Variant> readDataTypeDefinition(T& connection, const NodeId& id) noexcept {
+Result<Variant> readDataTypeDefinition(T& connection, const NodeId& id) noexcept {
     return detail::readAttributeImpl<AttributeId::DataTypeDefinition>(connection, id);
 }
 
@@ -1276,7 +1272,7 @@ inline Result<Variant> readDataTypeDefinition(T& connection, const NodeId& id) n
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto readDataTypeDefinitionAsync(
+auto readDataTypeDefinitionAsync(
     Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::DataTypeDefinition>(

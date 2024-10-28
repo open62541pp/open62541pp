@@ -21,7 +21,7 @@
 namespace opcua::services {
 
 template <typename T>
-inline static auto createMonitoredItemContext(
+static auto createMonitoredItemContext(
     T& connection,
     const ReadValueId& itemToMonitor,
     DataChangeNotificationCallback dataChangeCallback,
@@ -38,7 +38,7 @@ inline static auto createMonitoredItemContext(
 }
 
 template <typename T>
-inline static auto createMonitoredItemContexts(
+static auto createMonitoredItemContexts(
     T& connection,
     const CreateMonitoredItemsRequest& request,
     const DataChangeNotificationCallback& dataChangeCallback,
@@ -55,7 +55,7 @@ inline static auto createMonitoredItemContexts(
 }
 
 template <typename T>
-inline static void storeMonitoredItemContext(
+static void storeMonitoredItemContext(
     T& connection,
     uint32_t subscriptionId,
     const MonitoredItemCreateResult& result,
@@ -72,7 +72,7 @@ inline static void storeMonitoredItemContext(
 }
 
 template <typename T>
-inline static void storeMonitoredItemContexts(
+static void storeMonitoredItemContexts(
     T& connection,
     uint32_t subscriptionId,
     const CreateMonitoredItemsResponse& response,

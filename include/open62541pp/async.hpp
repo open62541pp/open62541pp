@@ -37,7 +37,7 @@ struct AsyncResult {
 };
 
 template <typename T, typename Initiation, typename CompletionToken, typename... Args>
-inline auto asyncInitiate(Initiation&& initiation, CompletionToken&& token, Args&&... args) {
+auto asyncInitiate(Initiation&& initiation, CompletionToken&& token, Args&&... args) {
     return AsyncResult<std::decay_t<CompletionToken>, T>::initiate(
         std::forward<Initiation>(initiation),
         std::forward<CompletionToken>(token),

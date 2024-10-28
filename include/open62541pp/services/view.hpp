@@ -217,9 +217,7 @@ auto translateBrowsePathsToNodeIdsAsync(
  * @param browsePath Browse path (starting node & relative path)
  */
 template <typename T>
-BrowsePathResult translateBrowsePathToNodeIds(
-    T& connection, const BrowsePath& browsePath
-) noexcept;
+BrowsePathResult translateBrowsePathToNodeIds(T& connection, const BrowsePath& browsePath) noexcept;
 
 /**
  * Asynchronously translate a browse path to NodeIds.
@@ -257,7 +255,7 @@ auto translateBrowsePathToNodeIdsAsync(
  * @param browsePath Browse path as a list of browse names
  */
 template <typename T>
-inline BrowsePathResult browseSimplifiedBrowsePath(
+BrowsePathResult browseSimplifiedBrowsePath(
     T& connection, const NodeId& origin, Span<const QualifiedName> browsePath
 ) {
     return translateBrowsePathToNodeIds(connection, detail::createBrowsePath(origin, browsePath));
@@ -270,7 +268,7 @@ inline BrowsePathResult browseSimplifiedBrowsePath(
  * @return @asyncresult{BrowsePathResult}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline auto browseSimplifiedBrowsePathAsync(
+auto browseSimplifiedBrowsePathAsync(
     Client& connection,
     const NodeId& origin,
     Span<const QualifiedName> browsePath,
