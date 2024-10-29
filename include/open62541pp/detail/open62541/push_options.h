@@ -1,6 +1,6 @@
 // no include guard
 
-#if defined(__GNUC__)
+#ifdef __GNUC__
 // ignore compile warnings of open62541:
 // - missing initializer for member ‘UA_NodeId::identifier’
 // - missing initializer for member ‘UA_ExpandedNodeId::namespaceUri’
@@ -11,4 +11,9 @@
 #pragma GCC diagnostic ignored "-Wmissing-field-initializers"
 #pragma GCC diagnostic ignored "-Wmissing-braces"
 #pragma GCC diagnostic ignored "-Wunused-parameter"
+#endif
+
+#ifdef _WIN32
+// don't define min/max macros, that break the STL
+#define NOMINMAX
 #endif
