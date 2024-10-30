@@ -101,8 +101,11 @@ struct AsyncServiceAdapter {
                     std::invoke(
                         std::forward<Initiation>(initiation),
                         callbackAndContext.callback,
-                        callbackAndContext.context.release()  // transfer ownership to callback
+                        callbackAndContext.context.get()
                     );
+                    // initiation call might raise an exception
+                    // transfer ownership to the callback afterwards
+                    callbackAndContext.context.release();
                 });
             },
             std::forward<CompletionToken>(token),
