@@ -9,7 +9,7 @@
 namespace opcua::services::detail {
 
 template <typename CompletionHandler, typename Transform>
-constexpr auto asyncTransform(CompletionHandler&& handler, Transform&& transform) {
+auto asyncTransform(CompletionHandler&& handler, Transform&& transform) {
     return [innerHandler = std::forward<CompletionHandler>(handler),
             innerTransform = std::forward<Transform>(transform)](auto&& result) mutable {
         auto transformed = std::invoke(innerTransform, std::forward<decltype(result)>(result));
@@ -23,9 +23,9 @@ constexpr auto asyncTransform(CompletionHandler&& handler, Transform&& transform
  */
 template <typename TransformFunction, typename CompletionToken>
 struct TransformToken {
-    constexpr TransformToken(TransformFunction&& transform, CompletionToken&& token)
-        : transform(std::move(transform)),
-          token(std::move(token)) {}
+    TransformToken(TransformFunction&& transformFunction, CompletionToken&& completionToken)
+        : transform(std::move(transformFunction)),
+          token(std::move(completionToken)) {}
 
     std::decay_t<TransformFunction> transform;
     std::decay_t<CompletionToken> token;
