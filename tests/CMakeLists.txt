@@ -21,6 +21,7 @@ add_executable(
     scope.cpp
     server.cpp
     services_attribute.cpp
+    services_helper.cpp
     services_method.cpp
     services_monitoreditem.cpp
     services_nodemanagement.cpp
