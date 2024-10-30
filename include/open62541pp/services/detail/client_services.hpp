@@ -42,8 +42,8 @@ struct AsyncServiceAdapter {
 
         struct Context {
             ExceptionCatcher* catcher;
-            TransformResponse transform;
-            CompletionHandler handler;
+            std::decay_t<TransformResponse> transform;
+            std::decay_t<CompletionHandler> handler;
         };
 
         auto callback = [](UA_Client*, void* userdata, uint32_t /* reqId */, void* responsePtr) {
