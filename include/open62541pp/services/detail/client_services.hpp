@@ -89,19 +89,21 @@ struct AsyncServiceAdapter {
         using TransformResult = std::invoke_result_t<TransformResponse, Response&>;
 
         return asyncInitiate<TransformResult>(
-            [&](auto&& completionHandler, auto&& transform) {
-                // NOLINTNEXTLINE(clang-analyzer-cplusplus.NewDeleteLeaks), false positive?
-                auto callbackAndContext = createCallbackAndContext(
-                    opcua::detail::getExceptionCatcher(client),
-                    std::forward<decltype(transform)>(transform),
-                    std::forward<decltype(completionHandler)>(completionHandler)
-                );
-
-                std::invoke(
-                    std::forward<Initiation>(initiation),
-                    callbackAndContext.callback,
-                    callbackAndContext.context.release()  // transfer ownership to callback
-                );
+            [&](auto&& completionHandler, auto&& transform) noexcept {
+                auto& catcher = opcua::detail::getExceptionCatcher(client);
+                catcher.invoke([&] {
+                    // NOLINTNEXTLINE(clang-analyzer-cplusplus.NewDeleteLeaks), false positive?
+                    auto callbackAndContext = createCallbackAndContext(
+                        catcher,
+                        std::forward<decltype(transform)>(transform),
+                        std::forward<decltype(completionHandler)>(completionHandler)
+                    );
+                    std::invoke(
+                        std::forward<Initiation>(initiation),
+                        callbackAndContext.callback,
+                        callbackAndContext.context.release()  // transfer ownership to callback
+                    );
+                });
             },
             std::forward<CompletionToken>(token),
             std::forward<TransformResponse>(transformResponse)
@@ -119,7 +121,7 @@ auto sendRequest(
     return AsyncServiceAdapter<Response>::initiate(
         client,
         [&](UA_ClientAsyncServiceCallback callback, void* userdata) {
-            const auto status = __UA_Client_AsyncService(
+            throwIfBad(__UA_Client_AsyncService(
                 opcua::detail::getHandle(client),
                 &request,
                 &getDataType<Request>(),
@@ -127,12 +129,7 @@ auto sendRequest(
                 &getDataType<Response>(),
                 userdata,
                 nullptr
-            );
-            if (opcua::detail::isBad(status)) {
-                Response response{};
-                response.responseHeader.serviceResult = status;
-                callback(opcua::detail::getHandle(client), userdata, {}, &response);
-            }
+            ));
         },
         std::forward<TransformResponse>(transformResponse),
         std::forward<CompletionToken>(token)
