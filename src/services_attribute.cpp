@@ -1,13 +1,12 @@
 #include "open62541pp/services/attribute.hpp"
 
 #include "open62541pp/client.hpp"
-#include "open62541pp/detail/open62541/server.h"
 #include "open62541pp/server.hpp"
 
 namespace opcua::services {
 
 ReadResponse read(Client& connection, const ReadRequest& request) noexcept {
-    return readAsync(connection, request, detail::SyncOperation{});
+    return UA_Client_Service_read(connection.handle(), request);
 }
 
 template <>
@@ -24,11 +23,14 @@ template <>
 Result<DataValue> readAttribute<Client>(
     Client& connection, const NodeId& id, AttributeId attributeId, TimestampsToReturn timestamps
 ) noexcept {
-    return readAttributeAsync(connection, id, attributeId, timestamps, detail::SyncOperation{});
+    auto item = detail::createReadValueId(id, attributeId);
+    const auto request = detail::createReadRequest(timestamps, item);
+    auto response = read(connection, asWrapper<ReadRequest>(request));
+    return detail::wrapSingleResult<DataValue>(response);
 }
 
 WriteResponse write(Client& connection, const WriteRequest& request) noexcept {
-    return writeAsync(connection, request, detail::SyncOperation{});
+    return UA_Client_Service_write(connection.handle(), request);
 }
 
 template <>
@@ -43,7 +45,9 @@ template <>
 StatusCode writeAttribute<Client>(
     Client& connection, const NodeId& id, AttributeId attributeId, const DataValue& value
 ) noexcept {
-    return writeAttributeAsync(connection, id, attributeId, value, detail::SyncOperation{});
+    auto item = detail::createWriteValue(id, attributeId, value);
+    const auto request = detail::createWriteRequest(item);
+    return detail::getSingleStatus(write(connection, asWrapper<WriteRequest>(request)));
 }
 
 }  // namespace opcua::services

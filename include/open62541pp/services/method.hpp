@@ -4,7 +4,7 @@
 
 #include "open62541pp/async.hpp"
 #include "open62541pp/config.hpp"
-#include "open62541pp/result.hpp"
+#include "open62541pp/services/detail/async_transform.hpp"
 #include "open62541pp/services/detail/client_services.hpp"
 #include "open62541pp/services/detail/request_handling.hpp"
 #include "open62541pp/services/detail/response_handling.hpp"
@@ -92,17 +92,15 @@ auto callAsync(
     Span<const Variant> inputArguments,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
-    UA_CallMethodRequest item = detail::createCallMethodRequest(objectId, methodId, inputArguments);
-    UA_CallRequest request{};
-    request.methodsToCall = &item;
-    request.methodsToCallSize = 1;
-    return detail::sendRequest<UA_CallRequest, UA_CallResponse>(
+    auto item = detail::createCallMethodRequest(objectId, methodId, inputArguments);
+    const auto request = detail::createCallRequest(item);
+    return callAsync(
         connection,
-        request,
-        [](UA_CallResponse& response) {
-            return detail::wrapSingleResultWithStatus<CallMethodResult>(response);
-        },
-        std::forward<CompletionToken>(token)
+        asWrapper<CallRequest>(request),
+        detail::TransformToken{
+            detail::wrapSingleResultWithStatus<CallMethodResult, UA_CallResponse>,
+            std::forward<CompletionToken>(token)
+        }
     );
 }
 
