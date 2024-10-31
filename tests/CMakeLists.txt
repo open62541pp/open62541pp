@@ -6,8 +6,8 @@ add_executable(
     async.cpp
     bitmask.cpp
     client_server_common.cpp
+    client_service.cpp
     client.cpp
-    clientservice.cpp
     datatype.cpp
     event.cpp
     exception.cpp

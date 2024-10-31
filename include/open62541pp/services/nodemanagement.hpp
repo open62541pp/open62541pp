@@ -12,7 +12,7 @@
 #include "open62541pp/nodeids.hpp"  // *TypeId
 #include "open62541pp/result.hpp"
 #include "open62541pp/services/detail/async_transform.hpp"
-#include "open62541pp/services/detail/client_services.hpp"
+#include "open62541pp/services/detail/client_service.hpp"
 #include "open62541pp/services/detail/request_handling.hpp"
 #include "open62541pp/services/detail/response_handling.hpp"
 #include "open62541pp/span.hpp"

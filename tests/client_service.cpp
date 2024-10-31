@@ -3,7 +3,7 @@
 #include "open62541pp/client.hpp"
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/server.hpp"
-#include "open62541pp/services/detail/client_services.hpp"
+#include "open62541pp/services/detail/client_service.hpp"
 #include "open62541pp/types_composed.hpp"  // ReadResponse
 
 #include "helper/server_runner.hpp"

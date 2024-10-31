@@ -9,7 +9,6 @@
 #include "open62541pp/detail/client_context.hpp"
 #include "open62541pp/detail/open62541/client.h"
 #include "open62541pp/detail/open62541/common.h"
-#include "open62541pp/services/detail/client_services.hpp"
 #include "open62541pp/services/detail/response_handling.hpp"
 #include "open62541pp/services/detail/subscription_context.hpp"
 #include "open62541pp/types_composed.hpp"
