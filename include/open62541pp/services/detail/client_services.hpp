@@ -50,7 +50,7 @@ struct AsyncServiceAdapter {
             std::unique_ptr<Context> context{static_cast<Context*>(userdata)};
             assert(context != nullptr);
             assert(context->catcher != nullptr);
-            context->catcher->invoke([&] {
+            context->catcher->invoke([context = context.get(), responsePtr] {
                 if (responsePtr == nullptr) {
                     throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
                 }
@@ -89,9 +89,9 @@ struct AsyncServiceAdapter {
         using TransformResult = std::invoke_result_t<TransformResponse, Response&>;
 
         return asyncInitiate<TransformResult>(
-            [&](auto&& completionHandler, auto&& transform) noexcept {
+            [&](auto&& completionHandler, auto&& transform) {
                 auto& catcher = opcua::detail::getExceptionCatcher(client);
-                catcher.invoke([&] {
+                try {
                     // NOLINTNEXTLINE(clang-analyzer-cplusplus.NewDeleteLeaks), false positive?
                     auto callbackAndContext = createCallbackAndContext(
                         catcher,
@@ -106,7 +106,9 @@ struct AsyncServiceAdapter {
                     // initiation call might raise an exception
                     // transfer ownership to the callback afterwards
                     callbackAndContext.context.release();
-                });
+                } catch (...) {
+                    catcher.setException(std::current_exception());
+                }
             },
             std::forward<CompletionToken>(token),
             std::forward<TransformResponse>(transformResponse)
