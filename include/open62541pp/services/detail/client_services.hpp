@@ -50,7 +50,7 @@ struct AsyncServiceAdapter {
             std::unique_ptr<Context> context{static_cast<Context*>(userdata)};
             assert(context != nullptr);
             assert(context->catcher != nullptr);
-            context->catcher->invoke([&] {
+            context->catcher->invoke([context = context.get(), responsePtr] {
                 if (responsePtr == nullptr) {
                     throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
                 }
@@ -90,18 +90,25 @@ struct AsyncServiceAdapter {
 
         return asyncInitiate<TransformResult>(
             [&](auto&& completionHandler, auto&& transform) {
-                // NOLINTNEXTLINE(clang-analyzer-cplusplus.NewDeleteLeaks), false positive?
-                auto callbackAndContext = createCallbackAndContext(
-                    opcua::detail::getExceptionCatcher(client),
-                    std::forward<decltype(transform)>(transform),
-                    std::forward<decltype(completionHandler)>(completionHandler)
-                );
-
-                std::invoke(
-                    std::forward<Initiation>(initiation),
-                    callbackAndContext.callback,
-                    callbackAndContext.context.release()  // transfer ownership to callback
-                );
+                auto& catcher = opcua::detail::getExceptionCatcher(client);
+                try {
+                    // NOLINTNEXTLINE(clang-analyzer-cplusplus.NewDeleteLeaks), false positive?
+                    auto callbackAndContext = createCallbackAndContext(
+                        catcher,
+                        std::forward<decltype(transform)>(transform),
+                        std::forward<decltype(completionHandler)>(completionHandler)
+                    );
+                    std::invoke(
+                        std::forward<Initiation>(initiation),
+                        callbackAndContext.callback,
+                        callbackAndContext.context.get()
+                    );
+                    // initiation call might raise an exception
+                    // transfer ownership to the callback afterwards
+                    callbackAndContext.context.release();
+                } catch (...) {
+                    catcher.setException(std::current_exception());
+                }
             },
             std::forward<CompletionToken>(token),
             std::forward<TransformResponse>(transformResponse)
@@ -119,7 +126,7 @@ auto sendRequest(
     return AsyncServiceAdapter<Response>::initiate(
         client,
         [&](UA_ClientAsyncServiceCallback callback, void* userdata) {
-            const auto status = __UA_Client_AsyncService(
+            throwIfBad(__UA_Client_AsyncService(
                 opcua::detail::getHandle(client),
                 &request,
                 &getDataType<Request>(),
@@ -127,12 +134,7 @@ auto sendRequest(
                 &getDataType<Response>(),
                 userdata,
                 nullptr
-            );
-            if (opcua::detail::isBad(status)) {
-                Response response{};
-                response.responseHeader.serviceResult = status;
-                callback(opcua::detail::getHandle(client), userdata, {}, &response);
-            }
+            ));
         },
         std::forward<TransformResponse>(transformResponse),
         std::forward<CompletionToken>(token)

@@ -9,9 +9,9 @@
 #include "open62541pp/common.hpp"  // ModellingRule
 #include "open62541pp/config.hpp"
 #include "open62541pp/detail/open62541/common.h"
-#include "open62541pp/detail/string_utils.hpp"  // toNativeString
 #include "open62541pp/nodeids.hpp"  // *TypeId
 #include "open62541pp/result.hpp"
+#include "open62541pp/services/detail/async_transform.hpp"
 #include "open62541pp/services/detail/client_services.hpp"
 #include "open62541pp/services/detail/request_handling.hpp"
 #include "open62541pp/services/detail/response_handling.hpp"
@@ -107,25 +107,19 @@ auto addNodeAsync(
     const NodeId& referenceType,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
-    UA_AddNodesItem item{};
-    item.parentNodeId.nodeId = parentId;
-    item.referenceTypeId = referenceType;
-    item.requestedNewNodeId.nodeId = id;
-    item.browseName.namespaceIndex = id.getNamespaceIndex();
-    item.browseName.name = opcua::detail::toNativeString(browseName);
-    item.nodeClass = static_cast<UA_NodeClass>(nodeClass);
-    item.nodeAttributes = nodeAttributes;
-    item.typeDefinition.nodeId = typeDefinition;
-    UA_AddNodesRequest request{};
-    request.nodesToAddSize = 1;
-    request.nodesToAdd = &item;
-    return detail::sendRequest<UA_AddNodesRequest, UA_AddNodesResponse>(
+    auto item = detail::createAddNodesItem(
+        parentId, referenceType, id, browseName, nodeClass, nodeAttributes, typeDefinition
+    );
+    const auto request = detail::createAddNodesRequest(item);
+    return addNodesAsync(
         connection,
-        request,
-        [](UA_AddNodesResponse& response) {
-            return detail::getSingleResultRef(response).andThen(detail::getAddedNodeId);
-        },
-        std::forward<CompletionToken>(token)
+        asWrapper<AddNodesRequest>(request),
+        detail::TransformToken(
+            [](UA_AddNodesResponse& response) {
+                return detail::getSingleResultRef(response).andThen(detail::getAddedNodeId);
+            },
+            std::forward<CompletionToken>(token)
+        )
     );
 }
 
@@ -198,19 +192,11 @@ auto addReferenceAsync(
     bool forward = true,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
-    UA_AddReferencesItem item{};
-    item.sourceNodeId = sourceId;
-    item.referenceTypeId = referenceType;
-    item.isForward = forward;
-    item.targetServerUri = UA_STRING_NULL;
-    item.targetNodeId.nodeId = targetId;
-    UA_AddReferencesRequest request{};
-    request.referencesToAddSize = 1;
-    request.referencesToAdd = &item;
+    auto item = detail::createAddReferencesItem(sourceId, referenceType, forward, targetId);
     return detail::sendRequest<UA_AddReferencesRequest, UA_AddReferencesResponse>(
         connection,
-        request,
-        [](UA_AddReferencesResponse& response) { return detail::getSingleStatus(response); },
+        detail::createAddReferencesRequest(item),
+        detail::getSingleStatus<UA_AddReferencesResponse>,
         std::forward<CompletionToken>(token)
     );
 }
@@ -272,16 +258,11 @@ auto deleteNodeAsync(
     bool deleteReferences = true,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
-    UA_DeleteNodesItem item{};
-    item.nodeId = id;
-    item.deleteTargetReferences = deleteReferences;
-    UA_DeleteNodesRequest request{};
-    request.nodesToDeleteSize = 1;
-    request.nodesToDelete = &item;
+    auto item = detail::createDeleteNodesItem(id, deleteReferences);
     return detail::sendRequest<UA_DeleteNodesRequest, UA_DeleteNodesResponse>(
         connection,
-        request,
-        [](UA_DeleteNodesResponse& response) { return detail::getSingleStatus(response); },
+        detail::createDeleteNodesRequest(item),
+        detail::getSingleStatus<UA_DeleteNodesResponse>,
         std::forward<CompletionToken>(token)
     );
 }
@@ -358,19 +339,13 @@ auto deleteReferenceAsync(
     bool deleteBidirectional,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
-    UA_DeleteReferencesItem item{};
-    item.sourceNodeId = sourceId;
-    item.referenceTypeId = referenceType;
-    item.isForward = isForward;
-    item.targetNodeId.nodeId = targetId;
-    item.deleteBidirectional = deleteBidirectional;
-    UA_DeleteReferencesRequest request{};
-    request.referencesToDeleteSize = 1;
-    request.referencesToDelete = &item;
+    auto item = detail::createDeleteReferencesItem(
+        sourceId, referenceType, isForward, targetId, deleteBidirectional
+    );
     return detail::sendRequest<UA_DeleteReferencesRequest, UA_DeleteReferencesResponse>(
         connection,
-        request,
-        [](UA_DeleteReferencesResponse& response) { return detail::getSingleStatus(response); },
+        detail::createDeleteReferencesRequest(item),
+        detail::getSingleStatus<UA_DeleteReferencesResponse>,
         std::forward<CompletionToken>(token)
     );
 }

@@ -13,23 +13,23 @@
 namespace opcua::services {
 
 AddNodesResponse addNodes(Client& connection, const AddNodesRequest& request) noexcept {
-    return addNodesAsync(connection, request, detail::SyncOperation{});
+    return UA_Client_Service_addNodes(connection.handle(), request);
 }
 
 AddReferencesResponse addReferences(
     Client& connection, const AddReferencesRequest& request
 ) noexcept {
-    return addReferencesAsync(connection, request, detail::SyncOperation{});
+    return UA_Client_Service_addReferences(connection.handle(), request);
 }
 
 DeleteNodesResponse deleteNodes(Client& connection, const DeleteNodesRequest& request) noexcept {
-    return deleteNodesAsync(connection, request, detail::SyncOperation{});
+    return UA_Client_Service_deleteNodes(connection.handle(), request);
 }
 
 DeleteReferencesResponse deleteReferences(
     Client& connection, const DeleteReferencesRequest& request
 ) noexcept {
-    return deleteReferencesAsync(connection, request, detail::SyncOperation{});
+    return UA_Client_Service_deleteReferences(connection.handle(), request);
 }
 
 template <>
@@ -74,17 +74,12 @@ Result<NodeId> addNode<Client>(
     const NodeId& typeDefinition,
     const NodeId& referenceType
 ) noexcept {
-    return addNodeAsync(
-        connection,
-        nodeClass,
-        parentId,
-        id,
-        browseName,
-        nodeAttributes,
-        typeDefinition,
-        referenceType,
-        detail::SyncOperation{}
+    auto item = detail::createAddNodesItem(
+        parentId, referenceType, id, browseName, nodeClass, nodeAttributes, typeDefinition
     );
+    const auto request = detail::createAddNodesRequest(item);
+    auto response = addNodes(connection, asWrapper<AddNodesRequest>(request));
+    return detail::getSingleResultRef(response).andThen(detail::getAddedNodeId);
 }
 
 #ifdef UA_ENABLE_METHODCALLS
@@ -157,23 +152,21 @@ Result<NodeId> addMethod(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    MethodCallback callback,
-    Span<const Argument> inputArguments,
-    Span<const Argument> outputArguments,
+    [[maybe_unused]] MethodCallback callback,  // NOLINT(performance-unnecessary-value-param)
+    [[maybe_unused]] Span<const Argument> inputArguments,
+    [[maybe_unused]] Span<const Argument> outputArguments,
     const MethodAttributes& attributes,
     const NodeId& referenceType
 ) noexcept {
-    return addMethodAsync(
+    return addNode(
         connection,
+        NodeClass::Method,
         parentId,
         id,
         browseName,
-        std::move(callback),
-        inputArguments,
-        outputArguments,
-        attributes,
-        referenceType,
-        detail::SyncOperation{}
+        detail::wrapNodeAttributes(attributes),
+        {},
+        referenceType
     );
 }
 #endif
@@ -203,8 +196,10 @@ StatusCode addReference<Client>(
     const NodeId& referenceType,
     bool forward
 ) noexcept {
-    return addReferenceAsync(
-        connection, sourceId, targetId, referenceType, forward, detail::SyncOperation{}
+    auto item = detail::createAddReferencesItem(sourceId, referenceType, forward, targetId);
+    const auto request = detail::createAddReferencesRequest(item);
+    return detail::getSingleStatus(
+        addReferences(connection, asWrapper<AddReferencesRequest>(request))
     );
 }
 
@@ -219,7 +214,9 @@ template <>
 StatusCode deleteNode<Client>(
     Client& connection, const NodeId& id, bool deleteReferences
 ) noexcept {
-    return deleteNodeAsync(connection, id, deleteReferences, detail::SyncOperation{});
+    auto item = detail::createDeleteNodesItem(id, deleteReferences);
+    const auto request = detail::createDeleteNodesRequest(item);
+    return detail::getSingleStatus(deleteNodes(connection, asWrapper<DeleteNodesRequest>(request)));
 }
 
 template <>
@@ -250,14 +247,12 @@ StatusCode deleteReference<Client>(
     bool isForward,
     bool deleteBidirectional
 ) noexcept {
-    return deleteReferenceAsync(
-        connection,
-        sourceId,
-        targetId,
-        referenceType,
-        isForward,
-        deleteBidirectional,
-        detail::SyncOperation{}
+    auto item = detail::createDeleteReferencesItem(
+        sourceId, referenceType, isForward, targetId, deleteBidirectional
+    );
+    const auto request = detail::createDeleteReferencesRequest(item);
+    return detail::getSingleStatus(
+        deleteReferences(connection, asWrapper<DeleteReferencesRequest>(request))
     );
 }
 

@@ -4,7 +4,6 @@
 #include <iterator>  // make_move_iterator
 
 #include "open62541pp/client.hpp"
-#include "open62541pp/detail/open62541/server.h"
 #include "open62541pp/server.hpp"
 #include "open62541pp/services/detail/client_services.hpp"
 #include "open62541pp/types.hpp"
@@ -12,7 +11,7 @@
 namespace opcua::services {
 
 BrowseResponse browse(Client& connection, const BrowseRequest& request) noexcept {
-    return browseAsync(connection, request, detail::SyncOperation{});
+    return UA_Client_Service_browse(connection.handle(), request);
 }
 
 template <>
@@ -26,11 +25,13 @@ template <>
 BrowseResult browse<Client>(
     Client& connection, const BrowseDescription& bd, uint32_t maxReferences
 ) noexcept {
-    return browseAsync(connection, bd, maxReferences, detail::SyncOperation{});
+    const auto request = detail::createBrowseRequest(bd, maxReferences);
+    auto response = browse(connection, asWrapper<BrowseRequest>(request));
+    return detail::wrapSingleResultWithStatus<BrowseResult>(response);
 }
 
 BrowseNextResponse browseNext(Client& connection, const BrowseNextRequest& request) noexcept {
-    return browseNextAsync(connection, request, detail::SyncOperation{});
+    return UA_Client_Service_browseNext(connection.handle(), request);
 }
 
 template <>
@@ -46,15 +47,17 @@ template <>
 BrowseResult browseNext<Client>(
     Client& connection, bool releaseContinuationPoint, const ByteString& continuationPoint
 ) noexcept {
-    return browseNextAsync(
-        connection, releaseContinuationPoint, continuationPoint, detail::SyncOperation{}
+    const auto request = detail::createBrowseNextRequest(
+        releaseContinuationPoint, continuationPoint
     );
+    auto response = browseNext(connection, asWrapper<BrowseNextRequest>(request));
+    return detail::wrapSingleResultWithStatus<BrowseResult>(response);
 }
 
 TranslateBrowsePathsToNodeIdsResponse translateBrowsePathsToNodeIds(
     Client& connection, const TranslateBrowsePathsToNodeIdsRequest& request
 ) noexcept {
-    return translateBrowsePathsToNodeIdsAsync(connection, request, detail::SyncOperation{});
+    return UA_Client_Service_translateBrowsePathsToNodeIds(connection.handle(), request);
 }
 
 template <>
@@ -68,19 +71,23 @@ template <>
 BrowsePathResult translateBrowsePathToNodeIds<Client>(
     Client& connection, const BrowsePath& browsePath
 ) noexcept {
-    return translateBrowsePathToNodeIdsAsync(connection, browsePath, detail::SyncOperation{});
+    const auto request = detail::createTranslateBrowsePathsToNodeIdsRequest(browsePath);
+    auto response = translateBrowsePathsToNodeIds(
+        connection, asWrapper<TranslateBrowsePathsToNodeIdsRequest>(request)
+    );
+    return detail::wrapSingleResultWithStatus<BrowsePathResult>(response);
 }
 
 RegisterNodesResponse registerNodes(
     Client& connection, const RegisterNodesRequest& request
 ) noexcept {
-    return registerNodesAsync(connection, request, detail::SyncOperation{});
+    return UA_Client_Service_registerNodes(connection.handle(), request);
 }
 
 UnregisterNodesResponse unregisterNodes(
     Client& connection, const UnregisterNodesRequest& request
 ) noexcept {
-    return unregisterNodesAsync(connection, request, detail::SyncOperation{});
+    return UA_Client_Service_unregisterNodes(connection.handle(), request);
 }
 
 template <typename T>

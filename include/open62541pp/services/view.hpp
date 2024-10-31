@@ -7,6 +7,7 @@
 #include "open62541pp/async.hpp"
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/result.hpp"
+#include "open62541pp/services/detail/async_transform.hpp"
 #include "open62541pp/services/detail/client_services.hpp"
 #include "open62541pp/services/detail/request_handling.hpp"
 #include "open62541pp/services/detail/response_handling.hpp"
@@ -86,13 +87,14 @@ auto browseAsync(
     uint32_t maxReferences = 0,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
-    return detail::sendRequest<UA_BrowseRequest, UA_BrowseResponse>(
+    const auto request = detail::createBrowseRequest(bd, maxReferences);
+    return browseAsync(
         connection,
-        detail::createBrowseRequest(bd, maxReferences),
-        [](UA_BrowseResponse& response) {
-            return detail::wrapSingleResultWithStatus<BrowseResult>(response);
-        },
-        std::forward<CompletionToken>(token)
+        asWrapper<BrowseRequest>(request),
+        detail::TransformToken(
+            detail::wrapSingleResultWithStatus<BrowseResult, UA_BrowseResponse>,
+            std::forward<CompletionToken>(token)
+        )
     );
 }
 
@@ -159,13 +161,16 @@ auto browseNextAsync(
     const ByteString& continuationPoint,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
-    return detail::sendRequest<UA_BrowseNextRequest, UA_BrowseNextResponse>(
+    const auto request = detail::createBrowseNextRequest(
+        releaseContinuationPoint, continuationPoint
+    );
+    return browseNextAsync(
         connection,
-        detail::createBrowseNextRequest(releaseContinuationPoint, continuationPoint),
-        [](UA_BrowseNextResponse& response) {
-            return detail::wrapSingleResultWithStatus<BrowseResult>(response);
-        },
-        std::forward<CompletionToken>(token)
+        asWrapper<BrowseNextRequest>(request),
+        detail::TransformToken(
+            detail::wrapSingleResultWithStatus<BrowseResult, UA_BrowseNextResponse>,
+            std::forward<CompletionToken>(token)
+        )
     );
 }
 
@@ -230,15 +235,16 @@ auto translateBrowsePathToNodeIdsAsync(
     const BrowsePath& browsePath,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
-    return detail::sendRequest<
-        UA_TranslateBrowsePathsToNodeIdsRequest,
-        UA_TranslateBrowsePathsToNodeIdsResponse>(
+    const auto request = detail::createTranslateBrowsePathsToNodeIdsRequest(browsePath);
+    return translateBrowsePathsToNodeIdsAsync(
         connection,
-        detail::createTranslateBrowsePathsToNodeIdsRequest(browsePath),
-        [](UA_TranslateBrowsePathsToNodeIdsResponse& response) {
-            return detail::wrapSingleResultWithStatus<BrowsePathResult>(response);
-        },
-        std::forward<CompletionToken>(token)
+        asWrapper<TranslateBrowsePathsToNodeIdsRequest>(request),
+        detail::TransformToken(
+            detail::wrapSingleResultWithStatus<
+                BrowsePathResult,
+                UA_TranslateBrowsePathsToNodeIdsResponse>,
+            std::forward<CompletionToken>(token)
+        )
     );
 }
 

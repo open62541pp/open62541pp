@@ -6,6 +6,7 @@
 #include "open62541pp/common.hpp"  // TimestampsToReturn
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/result.hpp"
+#include "open62541pp/services/detail/async_transform.hpp"
 #include "open62541pp/services/detail/attribute_handler.hpp"
 #include "open62541pp/services/detail/client_services.hpp"
 #include "open62541pp/services/detail/request_handling.hpp"
@@ -119,12 +120,14 @@ auto readAttributeAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     auto item = detail::createReadValueId(id, attributeId);
-    auto request = detail::createReadRequest(timestamps, item);
-    return detail::sendRequest<UA_ReadRequest, UA_ReadResponse>(
+    const auto request = detail::createReadRequest(timestamps, item);
+    return readAsync(
         connection,
-        request,
-        [](UA_ReadResponse& response) { return detail::wrapSingleResult<DataValue>(response); },
-        std::forward<CompletionToken>(token)
+        asWrapper<ReadRequest>(request),
+        detail::TransformToken(
+            detail::wrapSingleResult<DataValue, UA_ReadResponse>,
+            std::forward<CompletionToken>(token)
+        )
     );
 }
 
@@ -221,12 +224,13 @@ auto writeAttributeAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     auto item = detail::createWriteValue(id, attributeId, value);
-    auto request = detail::createWriteRequest(item);
-    return detail::sendRequest<UA_WriteRequest, UA_WriteResponse>(
+    const auto request = detail::createWriteRequest(item);
+    return writeAsync(
         connection,
-        request,
-        [](UA_WriteResponse& response) { return detail::getSingleStatus(response); },
-        std::forward<CompletionToken>(token)
+        asWrapper<WriteRequest>(request),
+        detail::TransformToken(
+            detail::getSingleStatus<UA_WriteResponse>, std::forward<CompletionToken>(token)
+        )
     );
 }
 
@@ -246,16 +250,18 @@ auto readAttributeImpl(T& connection, const NodeId& id) noexcept {
 
 template <AttributeId Attribute, typename CompletionToken>
 auto readAttributeAsyncImpl(Client& connection, const NodeId& id, CompletionToken&& token) {
-    auto item = detail::createReadValueId(id, Attribute);
-    auto request = detail::createReadRequest(TimestampsToReturn::Neither, item);
-    return detail::sendRequest<UA_ReadRequest, UA_ReadResponse>(
+    using Handler = typename detail::AttributeHandler<Attribute>;
+    return readAttributeAsync(
         connection,
-        request,
-        [](UA_ReadResponse& response) {
-            using Handler = typename detail::AttributeHandler<Attribute>;
-            return detail::wrapSingleResult<DataValue>(response).andThen(Handler::fromDataValue);
-        },
-        std::forward<CompletionToken>(token)
+        id,
+        Attribute,
+        TimestampsToReturn::Neither,
+        detail::TransformToken(
+            [](Result<DataValue>& result) {
+                return std::move(result).andThen(Handler::fromDataValue);
+            },
+            std::forward<CompletionToken>(token)
+        )
     );
 }
 

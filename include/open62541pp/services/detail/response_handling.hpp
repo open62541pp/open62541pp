@@ -9,7 +9,7 @@
 #include "open62541pp/result.hpp"
 #include "open62541pp/span.hpp"
 #include "open62541pp/types.hpp"  // StatusCode
-#include "open62541pp/wrapper.hpp"  // asWrapper, isWrapper
+#include "open62541pp/wrapper.hpp"  // asNative, asWrapper, isWrapper
 
 namespace opcua::services::detail {
 
@@ -46,14 +46,22 @@ StatusCode getServiceResult(const Response& response) noexcept {
 }
 
 template <typename Response>
-auto getSingleResultRef(Response& response) noexcept -> Result<decltype(std::ref(*response.results))> {
+auto getSingleResultRef(Response& response) noexcept {
+    auto* native = [&] {
+        if constexpr (opcua::detail::isWrapper<Response>) {
+            return asNative(&response);
+        } else {
+            return &response;
+        }
+    }();
+    using ResultType = Result<decltype(std::ref(*native->results))>;
     if (const StatusCode serviceResult = getServiceResult(response); serviceResult.isBad()) {
-        return BadResult(serviceResult);
+        return ResultType(BadResult(serviceResult));
     }
-    if (response.results == nullptr || response.resultsSize != 1) {
-        return BadResult(UA_STATUSCODE_BADUNEXPECTEDERROR);
+    if (native->results == nullptr || native->resultsSize != 1) {
+        return ResultType(BadResult(UA_STATUSCODE_BADUNEXPECTEDERROR));
     }
-    return std::ref(*response.results);
+    return ResultType(std::ref(*native->results));
 }
 
 template <typename Response>

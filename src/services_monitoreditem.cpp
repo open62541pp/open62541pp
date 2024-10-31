@@ -9,8 +9,6 @@
 
 #include "open62541pp/client.hpp"
 #include "open62541pp/detail/client_context.hpp"
-#include "open62541pp/detail/open62541/client.h"
-#include "open62541pp/detail/open62541/server.h"
 #include "open62541pp/detail/server_context.hpp"
 #include "open62541pp/server.hpp"
 #include "open62541pp/services/detail/client_services.hpp"
@@ -234,15 +232,13 @@ MonitoredItemModifyResult modifyMonitoredItem(
     auto response = modifyMonitoredItems(
         connection, asWrapper<ModifyMonitoredItemsRequest>(request)
     );
-    return detail::wrapSingleResultWithStatus<MonitoredItemModifyResult>(asNative(response));
+    return detail::wrapSingleResultWithStatus<MonitoredItemModifyResult>(response);
 }
 
 SetMonitoringModeResponse setMonitoringMode(
     Client& connection, const SetMonitoringModeRequest& request
 ) noexcept {
-    return detail::sendRequest<UA_SetMonitoringModeRequest, UA_SetMonitoringModeResponse>(
-        connection, request, detail::Wrap<SetMonitoringModeResponse>{}, detail::SyncOperation{}
-    );
+    return UA_Client_MonitoredItems_setMonitoringMode(connection.handle(), request);
 }
 
 StatusCode setMonitoringMode(
@@ -251,22 +247,18 @@ StatusCode setMonitoringMode(
     uint32_t monitoredItemId,
     MonitoringMode monitoringMode
 ) noexcept {
-    return detail::sendRequest<UA_SetMonitoringModeRequest, UA_SetMonitoringModeResponse>(
-        connection,
-        detail::createSetMonitoringModeRequest(
-            subscriptionId, {&monitoredItemId, 1}, monitoringMode
-        ),
-        [](UA_SetMonitoringModeResponse& response) { return detail::getSingleStatus(response); },
-        detail::SyncOperation{}
+    const auto request = detail::createSetMonitoringModeRequest(
+        subscriptionId, {&monitoredItemId, 1}, monitoringMode
+    );
+    return detail::getSingleStatus(
+        setMonitoringMode(connection, asWrapper<SetMonitoringModeRequest>(request))
     );
 }
 
 SetTriggeringResponse setTriggering(
     Client& connection, const SetTriggeringRequest& request
 ) noexcept {
-    return detail::sendRequest<UA_SetTriggeringRequest, UA_SetTriggeringResponse>(
-        connection, request, detail::Wrap<SetTriggeringResponse>{}, detail::SyncOperation{}
-    );
+    return UA_Client_MonitoredItems_setTriggering(connection.handle(), request);
 }
 
 DeleteMonitoredItemsResponse deleteMonitoredItems(

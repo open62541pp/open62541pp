@@ -6,18 +6,13 @@
 
 #include "open62541pp/common.hpp"  // AttributeId, TimestampsToReturn, MonitoringMode
 #include "open62541pp/detail/open62541/common.h"
+#include "open62541pp/detail/string_utils.hpp"  // toNativeString
 #include "open62541pp/span.hpp"
 #include "open62541pp/types.hpp"
 #include "open62541pp/types_composed.hpp"
 #include "open62541pp/wrapper.hpp"  // asNative
 
 namespace opcua::services::detail {
-
-template <typename T>
-ExtensionObject wrapNodeAttributes(const T& attributes) noexcept {
-    // NOLINTNEXTLINE(*-const-cast), won't be modified
-    return ExtensionObject::fromDecoded(const_cast<T&>(attributes));
-}
 
 template <typename T>
 auto* getPointer(T& value) noexcept {
@@ -39,6 +34,96 @@ auto* getNativePointer(T& wrapper) noexcept {
 template <typename T>
 auto* getNativePointer(Span<T> array) noexcept {
     return asNative(getPointer(array));
+}
+
+template <typename T>
+ExtensionObject wrapNodeAttributes(const T& attributes) noexcept {
+    // NOLINTNEXTLINE(*-const-cast), won't be modified
+    return ExtensionObject::fromDecoded(const_cast<T&>(attributes));
+}
+
+inline UA_AddNodesItem createAddNodesItem(
+    const NodeId& parentId,
+    const NodeId& referenceType,
+    const NodeId& id,
+    std::string_view browseName,
+    NodeClass nodeClass,
+    const ExtensionObject& nodeAttributes,
+    const NodeId& typeDefinition
+) noexcept {
+    UA_AddNodesItem item{};
+    item.parentNodeId.nodeId = parentId;
+    item.referenceTypeId = referenceType;
+    item.requestedNewNodeId.nodeId = id;
+    item.browseName.namespaceIndex = id.getNamespaceIndex();
+    item.browseName.name = opcua::detail::toNativeString(browseName);
+    item.nodeClass = static_cast<UA_NodeClass>(nodeClass);
+    item.nodeAttributes = nodeAttributes;
+    item.typeDefinition.nodeId = typeDefinition;
+    return item;
+}
+
+inline UA_AddNodesRequest createAddNodesRequest(UA_AddNodesItem& item) noexcept {
+    UA_AddNodesRequest request{};
+    request.nodesToAddSize = 1;
+    request.nodesToAdd = &item;
+    return request;
+}
+
+inline UA_AddReferencesItem createAddReferencesItem(
+    const NodeId& sourceId, const NodeId& referenceType, bool forward, const NodeId& targetId
+) noexcept {
+    UA_AddReferencesItem item{};
+    item.sourceNodeId = sourceId;
+    item.referenceTypeId = referenceType;
+    item.isForward = forward;
+    item.targetNodeId.nodeId = targetId;
+    return item;
+}
+
+inline UA_AddReferencesRequest createAddReferencesRequest(UA_AddReferencesItem& item) noexcept {
+    UA_AddReferencesRequest request{};
+    request.referencesToAddSize = 1;
+    request.referencesToAdd = &item;
+    return request;
+}
+
+inline UA_DeleteNodesItem createDeleteNodesItem(const NodeId& id, bool deleteReferences) noexcept {
+    UA_DeleteNodesItem item{};
+    item.nodeId = id;
+    item.deleteTargetReferences = deleteReferences;
+    return item;
+}
+
+inline UA_DeleteNodesRequest createDeleteNodesRequest(UA_DeleteNodesItem& item) noexcept {
+    UA_DeleteNodesRequest request{};
+    request.nodesToDeleteSize = 1;
+    request.nodesToDelete = &item;
+    return request;
+}
+
+inline UA_DeleteReferencesItem createDeleteReferencesItem(
+    const NodeId& sourceId,
+    const NodeId& referenceType,
+    bool isForward,
+    const NodeId& targetId,
+    bool deleteBidirectional
+) noexcept {
+    UA_DeleteReferencesItem item{};
+    item.sourceNodeId = sourceId;
+    item.referenceTypeId = referenceType;
+    item.isForward = isForward;
+    item.targetNodeId.nodeId = targetId;
+    item.deleteBidirectional = deleteBidirectional;
+    return item;
+}
+
+inline UA_DeleteReferencesRequest createDeleteReferencesRequest(UA_DeleteReferencesItem& item
+) noexcept {
+    UA_DeleteReferencesRequest request{};
+    request.referencesToDeleteSize = 1;
+    request.referencesToDelete = &item;
+    return request;
 }
 
 inline UA_ReadValueId createReadValueId(const NodeId& id, AttributeId attributeId) noexcept {
@@ -104,6 +189,13 @@ inline UA_CallMethodRequest createCallMethodRequest(
     return request;
 }
 
+inline UA_CallRequest createCallRequest(UA_CallMethodRequest& item) noexcept {
+    UA_CallRequest request{};
+    request.methodsToCall = &item;
+    request.methodsToCallSize = 1;
+    return request;
+}
+
 inline UA_BrowseRequest createBrowseRequest(
     const BrowseDescription& bd, uint32_t maxReferences
 ) noexcept {
@@ -144,6 +236,16 @@ inline BrowsePath createBrowsePath(const NodeId& origin, Span<const QualifiedNam
         }
     );
     return {origin, RelativePath(relativePathElements)};
+}
+
+inline UA_SetPublishingModeRequest createSetPublishingModeRequest(
+    bool publishing, Span<const uint32_t> subscriptionIds
+) noexcept {
+    UA_SetPublishingModeRequest request{};
+    request.publishingEnabled = publishing;
+    request.subscriptionIdsSize = subscriptionIds.size();
+    request.subscriptionIds = getPointer(subscriptionIds);
+    return request;
 }
 
 template <typename MonitoringParameters>
@@ -215,6 +317,14 @@ inline UA_SetTriggeringRequest createSetTriggeringRequest(
     request.linksToAdd = getPointer(linksToAdd);
     request.linksToRemoveSize = linksToRemove.size();
     request.linksToRemove = getPointer(linksToRemove);
+    return request;
+}
+
+inline UA_DeleteSubscriptionsRequest createDeleteSubscriptionsRequest(uint32_t& subscriptionId
+) noexcept {
+    UA_DeleteSubscriptionsRequest request{};
+    request.subscriptionIdsSize = 1;
+    request.subscriptionIds = &subscriptionId;
     return request;
 }
 

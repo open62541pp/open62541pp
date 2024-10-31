@@ -3,14 +3,13 @@
 #ifdef UA_ENABLE_METHODCALLS
 
 #include "open62541pp/client.hpp"
-#include "open62541pp/detail/open62541/server.h"
 #include "open62541pp/server.hpp"
 #include "open62541pp/types_composed.hpp"
 
 namespace opcua::services {
 
 CallResponse call(Client& connection, const CallRequest& request) noexcept {
-    return callAsync(connection, request, detail::SyncOperation{});
+    return UA_Client_Service_call(connection.handle(), request);
 }
 
 template <>
@@ -31,7 +30,10 @@ CallMethodResult call(
     const NodeId& methodId,
     Span<const Variant> inputArguments
 ) noexcept {
-    return callAsync(connection, objectId, methodId, inputArguments, detail::SyncOperation{});
+    auto item = detail::createCallMethodRequest(objectId, methodId, inputArguments);
+    const auto request = detail::createCallRequest(item);
+    auto response = call(connection, asWrapper<CallRequest>(request));
+    return detail::wrapSingleResultWithStatus<CallMethodResult>(response);
 }
 
 }  // namespace opcua::services
