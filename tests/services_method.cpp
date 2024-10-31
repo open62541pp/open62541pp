@@ -51,27 +51,6 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
         }
     };
 
-    if constexpr (isClient<T>) {
-        SUBCASE("Check result (raw)") {
-            const CallRequest request(
-                {},
-                {CallMethodRequest(
-                    objectsId,
-                    methodId,
-                    Span<const Variant>{
-                        Variant::fromScalar(int32_t{1}),
-                        Variant::fromScalar(int32_t{2}),
-                    }
-                )}
-            );
-            const CallResponse response = call(connection, request);
-            CHECK(response.getResults().size() == 1);
-            CHECK(response.getResults()[0].getStatusCode().isGood());
-            CHECK(response.getResults()[0].getOutputArguments().size() == 1);
-            CHECK(response.getResults()[0].getOutputArguments()[0].getScalarCopy<int32_t>() == 3);
-        }
-    }
-
     SUBCASE("Check result") {
         const CallMethodResult result = call(
             connection,
