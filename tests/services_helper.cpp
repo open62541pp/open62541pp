@@ -6,13 +6,13 @@
 
 using namespace opcua;
 
-template <typename T, typename CompletionHandler>
-static auto asyncTest(T result, CompletionHandler&& completionHandler) {
+template <typename T, typename CompletionToken>
+static auto asyncTest(T result, CompletionToken&& token) {
     return asyncInitiate<T>(
-        [result](auto&& handler) {
+        [result](auto&& handler) mutable {
             std::invoke(std::forward<decltype(handler)>(handler), result);
         },
-        std::forward<CompletionHandler>(completionHandler)
+        std::forward<CompletionToken>(token)
     );
 }
 
@@ -37,5 +37,17 @@ TEST_CASE("TransformToken") {
             )
         );
         CHECK(future.get() == "5");
+    }
+
+    SUBCASE("Rvalue handler arg") {
+        int result;
+        asyncTest(
+            5,
+            services::detail::TransformToken(
+                [](int value) { return value * value; },
+                [&](int&& value) { result = value; }
+            )
+        );
+        CHECK(result == 10);
     }
 }
