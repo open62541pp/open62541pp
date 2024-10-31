@@ -11,7 +11,7 @@
 #include "open62541pp/detail/client_context.hpp"
 #include "open62541pp/detail/server_context.hpp"
 #include "open62541pp/server.hpp"
-#include "open62541pp/services/detail/client_services.hpp"
+#include "open62541pp/services/detail/client_service.hpp"
 #include "open62541pp/services/detail/request_handling.hpp"
 #include "open62541pp/services/detail/response_handling.hpp"
 #include "open62541pp/types.hpp"  // StatusCode

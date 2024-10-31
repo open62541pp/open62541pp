@@ -8,7 +8,7 @@
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/result.hpp"
 #include "open62541pp/services/detail/async_transform.hpp"
-#include "open62541pp/services/detail/client_services.hpp"
+#include "open62541pp/services/detail/client_service.hpp"
 #include "open62541pp/services/detail/request_handling.hpp"
 #include "open62541pp/services/detail/response_handling.hpp"
 #include "open62541pp/span.hpp"
@@ -57,8 +57,8 @@ auto browseAsync(
     const BrowseRequest& request,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
-    return detail::sendRequest<UA_BrowseRequest, UA_BrowseResponse>(
-        connection, request, detail::Wrap<BrowseResponse>{}, std::forward<CompletionToken>(token)
+    return detail::sendRequestAsync<BrowseRequest, BrowseResponse>(
+        connection, request, std::forward<CompletionToken>(token)
     );
 }
 
@@ -127,11 +127,8 @@ auto browseNextAsync(
     const BrowseNextRequest& request,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
-    return detail::sendRequest<UA_BrowseNextRequest, UA_BrowseNextResponse>(
-        connection,
-        request,
-        detail::Wrap<BrowseNextResponse>{},
-        std::forward<CompletionToken>(token)
+    return detail::sendRequestAsync<BrowseNextRequest, BrowseNextResponse>(
+        connection, request, std::forward<CompletionToken>(token)
     );
 }
 
@@ -204,13 +201,10 @@ auto translateBrowsePathsToNodeIdsAsync(
     const TranslateBrowsePathsToNodeIdsRequest& request,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
-    return detail::sendRequest<
-        UA_TranslateBrowsePathsToNodeIdsRequest,
-        UA_TranslateBrowsePathsToNodeIdsResponse>(
-        connection,
-        request,
-        detail::Wrap<TranslateBrowsePathsToNodeIdsResponse>{},
-        std::forward<CompletionToken>(token)
+    return detail::sendRequestAsync<
+        TranslateBrowsePathsToNodeIdsRequest,
+        TranslateBrowsePathsToNodeIdsResponse>(
+        connection, request, std::forward<CompletionToken>(token)
     );
 }
 
@@ -316,11 +310,8 @@ auto registerNodesAsync(
     const RegisterNodesRequest& request,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
-    return detail::sendRequest<UA_RegisterNodesRequest, UA_RegisterNodesResponse>(
-        connection,
-        request,
-        detail::Wrap<RegisterNodesResponse>{},
-        std::forward<CompletionToken>(token)
+    return detail::sendRequestAsync<RegisterNodesRequest, RegisterNodesResponse>(
+        connection, request, std::forward<CompletionToken>(token)
     );
 }
 
@@ -354,11 +345,8 @@ auto unregisterNodesAsync(
     const UnregisterNodesRequest& request,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
-    return detail::sendRequest<UA_UnregisterNodesRequest, UA_UnregisterNodesResponse>(
-        connection,
-        request,
-        detail::Wrap<UnregisterNodesResponse>{},
-        std::forward<CompletionToken>(token)
+    return detail::sendRequestAsync<UnregisterNodesRequest, UnregisterNodesResponse>(
+        connection, request, std::forward<CompletionToken>(token)
     );
 }
 

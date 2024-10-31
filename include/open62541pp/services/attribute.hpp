@@ -8,7 +8,7 @@
 #include "open62541pp/result.hpp"
 #include "open62541pp/services/detail/async_transform.hpp"
 #include "open62541pp/services/detail/attribute_handler.hpp"
-#include "open62541pp/services/detail/client_services.hpp"
+#include "open62541pp/services/detail/client_service.hpp"
 #include "open62541pp/services/detail/request_handling.hpp"
 #include "open62541pp/services/detail/response_handling.hpp"
 #include "open62541pp/span.hpp"
@@ -68,8 +68,8 @@ auto readAsync(
     const ReadRequest& request,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
-    return detail::sendRequest<UA_ReadRequest, UA_ReadResponse>(
-        connection, request, detail::Wrap<ReadResponse>{}, std::forward<CompletionToken>(token)
+    return detail::sendRequestAsync<ReadRequest, ReadResponse>(
+        connection, request, std::forward<CompletionToken>(token)
     );
 }
 
@@ -178,8 +178,8 @@ auto writeAsync(
     const WriteRequest& request,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
-    return detail::sendRequest<UA_WriteRequest, UA_WriteResponse>(
-        connection, request, detail::Wrap<WriteResponse>{}, std::forward<CompletionToken>(token)
+    return detail::sendRequestAsync<WriteRequest, WriteResponse>(
+        connection, request, std::forward<CompletionToken>(token)
     );
 }
 

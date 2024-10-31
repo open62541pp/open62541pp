@@ -5,7 +5,7 @@
 #include "open62541pp/async.hpp"
 #include "open62541pp/config.hpp"
 #include "open62541pp/services/detail/async_transform.hpp"
-#include "open62541pp/services/detail/client_services.hpp"
+#include "open62541pp/services/detail/client_service.hpp"
 #include "open62541pp/services/detail/request_handling.hpp"
 #include "open62541pp/services/detail/response_handling.hpp"
 #include "open62541pp/span.hpp"
@@ -52,8 +52,8 @@ auto callAsync(
     const CallRequest& request,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
-    return detail::sendRequest<UA_CallRequest, UA_CallResponse>(
-        connection, request, detail::Wrap<CallResponse>{}, std::forward<CompletionToken>(token)
+    return detail::sendRequestAsync<CallRequest, CallResponse>(
+        connection, request, std::forward<CompletionToken>(token)
     );
 }
 
