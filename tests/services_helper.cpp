@@ -40,14 +40,14 @@ TEST_CASE("TransformToken") {
     }
 
     SUBCASE("Rvalue handler arg") {
-        int result;
+        std::string result;
         asyncTest(
             5,
             services::detail::TransformToken(
-                [](int value) { return value * value; },
-                [&](int&& value) { result = value; }
+                [](int value) { return std::to_string(value); },
+                [&](std::string&& str) { result = std::move(str); }
             )
         );
-        CHECK(result == 10);
+        CHECK(result == "5");
     }
 }

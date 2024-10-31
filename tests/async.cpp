@@ -1,97 +1,40 @@
 #include <functional>  // invoke
 #include <future>
-#include <optional>
 #include <utility>  // forward
 
 #include <doctest/doctest.h>
 
 #include "open62541pp/async.hpp"
-#include "open62541pp/result.hpp"
 
 using namespace opcua;
 
-template <typename T, typename CompletionHandler>
-static auto asyncTest(T result, CompletionHandler&& completionHandler) {
+template <typename T, typename CompletionToken>
+static auto asyncTest(T result, CompletionToken&& token) {
     return asyncInitiate<T>(
-        [](auto... args) { std::invoke(args...); },
-        std::forward<CompletionHandler>(completionHandler),
-        result
+        [result](auto&& handler) mutable {
+            std::invoke(std::forward<decltype(handler)>(handler), result);
+        },
+        std::forward<CompletionToken>(token)
     );
 }
 
 TEST_CASE("Async (callback completion token)") {
-    SUBCASE("Void") {
-        Result<void> result{UA_STATUSCODE_BADUNEXPECTEDERROR};
-        std::optional<Result<void>> retrievedResult;
-        asyncTest(result, [&](Result<void> res) { retrievedResult = res; });
-        CHECK(retrievedResult.has_value());
-        CHECK_EQ(retrievedResult->code(), result.code());
-    }
-
-    SUBCASE("Value") {
-        Result<int> result{11};
-        std::optional<Result<int>> retrievedResult;
-        asyncTest(result, [&](Result<int> res) { retrievedResult = res; });
-        CHECK(retrievedResult.has_value());
-        CHECK_EQ(retrievedResult->code(), result.code());
-        CHECK_EQ(retrievedResult->value(), result.value());
-    }
-
-    SUBCASE("Error") {
-        Result<int> result{BadResult{UA_STATUSCODE_BADUNEXPECTEDERROR}};
-        std::optional<Result<int>> retrievedResult;
-        asyncTest(result, [&](Result<int> res) { retrievedResult = res; });
-        CHECK(retrievedResult.has_value());
-        CHECK_EQ(retrievedResult->code(), result.code());
-    }
+    int result{};
+    asyncTest(5, [&](int value) { result = value; });
+    CHECK(result == 5);
 }
 
 TEST_CASE("Async (future completion token)") {
-    SUBCASE("Void") {
-        Result<void> result{};
-        auto future = asyncTest(result, useFuture);
-        CHECK(future.get().code().isGood());
-    }
-
-    SUBCASE("Result") {
-        Result<double> result{11.11};
-        *result;
-        auto future = asyncTest(result, useFuture);
-        CHECK_EQ(future.get().value(), 11.11);
-    }
-
-    SUBCASE("Error") {
-        Result<int> result{BadResult{UA_STATUSCODE_BADUNEXPECTEDERROR}};
-        auto future = asyncTest(result, useFuture);
-        CHECK_THROWS_WITH_AS(future.get().value(), "BadUnexpectedError", BadStatus);
-    }
+    std::future<int> future = asyncTest(5, useFuture);
+    CHECK(future.get() == 5);
 }
 
 TEST_CASE("Async (deferred completion token)") {
-    SUBCASE("Result") {
-        Result<int> result{11};
-        auto func = asyncTest(result, useDeferred);
-        auto future = func(useFuture);
-        CHECK_EQ(future.get().value(), 11);
-        CHECK_EQ(func(useFuture).get().value(), 11);  // execute again
-    }
-
-    SUBCASE("Error") {
-        Result<int> result{BadResult{UA_STATUSCODE_BADUNEXPECTEDERROR}};
-        auto func = asyncTest(result, useDeferred);
-        auto future = func(useFuture);
-        CHECK_THROWS_WITH_AS(future.get().value(), "BadUnexpectedError", BadStatus);
-    }
+    auto func = asyncTest(5, useDeferred);
+    auto future = func(useFuture);
+    CHECK(future.get() == 5);
 }
 
 TEST_CASE("Async (detached completion token)") {
-    SUBCASE("Result") {
-        Result<int> result{11};
-        CHECK_NOTHROW(asyncTest(result, useDetached));
-    }
-
-    SUBCASE("Error") {
-        Result<int> result{BadResult{UA_STATUSCODE_BADUNEXPECTEDERROR}};
-        CHECK_NOTHROW(asyncTest(result, useDetached));
-    }
+    CHECK_NOTHROW(asyncTest(5, useDetached));
 }
