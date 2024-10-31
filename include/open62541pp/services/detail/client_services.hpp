@@ -10,8 +10,6 @@
 #include "open62541pp/detail/client_utils.hpp"
 #include "open62541pp/detail/exceptioncatcher.hpp"
 #include "open62541pp/detail/open62541/client.h"
-#include "open62541pp/detail/scope.hpp"
-#include "open62541pp/detail/types_handling.hpp"  // clear
 #include "open62541pp/exception.hpp"
 #include "open62541pp/typeregistry.hpp"  // getDataType
 
@@ -30,43 +28,35 @@ struct AsyncServiceAdapter {
         std::unique_ptr<Context> context;
     };
 
-    template <typename CompletionHandler, typename TransformResponse>
+    template <typename CompletionHandler>
     static auto createCallbackAndContext(
-        ExceptionCatcher& exceptionCatcher,
-        TransformResponse&& transformResponse,
-        CompletionHandler&& completionHandler
+        ExceptionCatcher& exceptionCatcher, CompletionHandler&& handler
     ) {
-        static_assert(std::is_invocable_v<TransformResponse, Response&>);
-        using TransformResult = std::invoke_result_t<TransformResponse, Response&>;
-        static_assert(std::is_invocable_v<CompletionHandler, TransformResult&>);
+        static_assert(std::is_invocable_v<CompletionHandler, Response&>);
 
         struct Context {
             ExceptionCatcher* catcher;
-            TransformResponse transform;
-            CompletionHandler handler;
+            std::decay_t<CompletionHandler> handler;
         };
 
-        auto callback = [](UA_Client*, void* userdata, uint32_t /* reqId */, void* responsePtr) {
-            std::unique_ptr<Context> context{static_cast<Context*>(userdata)};
-            assert(context != nullptr);
-            assert(context->catcher != nullptr);
-            context->catcher->invoke([context = context.get(), responsePtr] {
-                if (responsePtr == nullptr) {
-                    throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
-                }
-                Response& response = *static_cast<Response*>(responsePtr);
-                auto result = std::invoke(context->transform, response);
-                std::invoke(context->handler, result);
-            });
-        };
+        const auto callback =
+            [](UA_Client*, void* userdata, uint32_t /* reqId */, void* responsePtr) {
+                std::unique_ptr<Context> context{static_cast<Context*>(userdata)};
+                assert(context != nullptr);
+                assert(context->catcher != nullptr);
+                context->catcher->invoke([context = context.get(), responsePtr] {
+                    if (responsePtr == nullptr) {
+                        throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
+                    }
+                    std::invoke(context->handler, *static_cast<Response*>(responsePtr));
+                });
+            };
 
         return CallbackAndContext<Context>{
             callback,
-            std::make_unique<Context>(Context{
-                &exceptionCatcher,
-                std::forward<TransformResponse>(transformResponse),
-                std::forward<CompletionHandler>(completionHandler)
-            })
+            std::make_unique<Context>(
+                Context{&exceptionCatcher, std::forward<CompletionHandler>(handler)}
+            )
         };
     }
 
@@ -75,28 +65,19 @@ struct AsyncServiceAdapter {
      * @param client Instance of type Client
      * @param initiation Callable to initiate the async operation. Following signature is expected:
      *                   `void(UA_ClientAsyncServiceCallback callback, void* userdata)`
-     * @param transformResponse Callable to transform the `Response` type to the desired output
      * @param token Completion token
      */
-    template <typename Initiation, typename TransformResponse, typename CompletionToken>
-    static auto initiate(
-        Client& client,
-        Initiation&& initiation,
-        TransformResponse&& transformResponse,
-        CompletionToken&& token
-    ) {
+    template <typename Initiation, typename CompletionToken>
+    static auto initiate(Client& client, Initiation&& initiation, CompletionToken&& token) {
         static_assert(std::is_invocable_v<Initiation, UA_ClientAsyncServiceCallback, void*>);
-        using TransformResult = std::invoke_result_t<TransformResponse, Response&>;
 
-        return asyncInitiate<TransformResult>(
-            [&](auto&& completionHandler, auto&& transform) {
+        return asyncInitiate<Response>(
+            [&](auto&& handler) {
                 auto& catcher = opcua::detail::getExceptionCatcher(client);
                 try {
                     // NOLINTNEXTLINE(clang-analyzer-cplusplus.NewDeleteLeaks), false positive?
                     auto callbackAndContext = createCallbackAndContext(
-                        catcher,
-                        std::forward<decltype(transform)>(transform),
-                        std::forward<decltype(completionHandler)>(completionHandler)
+                        catcher, std::forward<decltype(handler)>(handler)
                     );
                     std::invoke(
                         std::forward<Initiation>(initiation),
@@ -110,19 +91,14 @@ struct AsyncServiceAdapter {
                     catcher.setException(std::current_exception());
                 }
             },
-            std::forward<CompletionToken>(token),
-            std::forward<TransformResponse>(transformResponse)
+            std::forward<CompletionToken>(token)
         );
     }
 };
 
-template <typename Request, typename Response, typename TransformResponse, typename CompletionToken>
-auto sendRequest(
-    Client& client,
-    const Request& request,
-    TransformResponse&& transformResponse,
-    CompletionToken&& token
-) {
+/// Async client service requests.
+template <typename Request, typename Response, typename CompletionToken>
+auto sendRequestAsync(Client& client, const Request& request, CompletionToken&& token) {
     return AsyncServiceAdapter<Response>::initiate(
         client,
         [&](UA_ClientAsyncServiceCallback callback, void* userdata) {
@@ -136,27 +112,14 @@ auto sendRequest(
                 nullptr
             ));
         },
-        std::forward<TransformResponse>(transformResponse),
         std::forward<CompletionToken>(token)
     );
 }
 
-/// Completion token for sync client operations.
-struct SyncOperation {};
-
-/// Overload for sync client requests.
-template <typename Request, typename Response, typename TransformResponse>
-static auto sendRequest(
-    Client& client,
-    const Request& request,
-    TransformResponse&& transformResponse,
-    SyncOperation /*unused*/
-) noexcept(std::is_nothrow_invocable_v<TransformResponse, Response&>) {
+/// Sync client service requests.
+template <typename Request, typename Response>
+Response sendRequest(Client& client, const Request& request) noexcept {
     Response response{};
-    const auto responseDeleter = opcua::detail::ScopeExit([&] {
-        opcua::detail::clear(response, getDataType<Response>());
-    });
-
     __UA_Client_Service(
         opcua::detail::getHandle(client),
         &request,
@@ -164,8 +127,7 @@ static auto sendRequest(
         &response,
         &getDataType<Response>()
     );
-
-    return std::invoke(std::forward<TransformResponse>(transformResponse), response);
+    return response;
 }
 
 }  // namespace opcua::services::detail

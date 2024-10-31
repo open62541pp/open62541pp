@@ -60,8 +60,8 @@ auto addNodesAsync(
     const AddNodesRequest& request,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
-    return detail::sendRequest<UA_AddNodesRequest, UA_AddNodesResponse>(
-        connection, request, detail::Wrap<AddNodesResponse>{}, std::forward<CompletionToken>(token)
+    return detail::sendRequestAsync<AddNodesRequest, AddNodesResponse>(
+        connection, request, std::forward<CompletionToken>(token)
     );
 }
 
@@ -152,11 +152,8 @@ auto addReferencesAsync(
     const AddReferencesRequest& request,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
-    return detail::sendRequest<UA_AddReferencesRequest, UA_AddReferencesResponse>(
-        connection,
-        request,
-        detail::Wrap<AddReferencesResponse>{},
-        std::forward<CompletionToken>(token)
+    return detail::sendRequestAsync<AddReferencesRequest, AddReferencesResponse>(
+        connection, request, std::forward<CompletionToken>(token)
     );
 }
 
@@ -193,11 +190,13 @@ auto addReferenceAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     auto item = detail::createAddReferencesItem(sourceId, referenceType, forward, targetId);
-    return detail::sendRequest<UA_AddReferencesRequest, UA_AddReferencesResponse>(
+    const auto request = detail::createAddReferencesRequest(item);
+    return addReferencesAsync(
         connection,
-        detail::createAddReferencesRequest(item),
-        detail::getSingleStatus<UA_AddReferencesResponse>,
-        std::forward<CompletionToken>(token)
+        asWrapper<AddReferencesRequest>(request),
+        detail::TransformToken(
+            detail::getSingleStatus<AddReferencesResponse>, std::forward<CompletionToken>(token)
+        )
     );
 }
 
@@ -228,11 +227,8 @@ auto deleteNodesAsync(
     const DeleteNodesRequest& request,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
-    return detail::sendRequest<UA_DeleteNodesRequest, UA_DeleteNodesResponse>(
-        connection,
-        request,
-        detail::Wrap<DeleteNodesResponse>{},
-        std::forward<CompletionToken>(token)
+    return detail::sendRequestAsync<DeleteNodesRequest, DeleteNodesResponse>(
+        connection, request, std::forward<CompletionToken>(token)
     );
 }
 
@@ -259,11 +255,13 @@ auto deleteNodeAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     auto item = detail::createDeleteNodesItem(id, deleteReferences);
-    return detail::sendRequest<UA_DeleteNodesRequest, UA_DeleteNodesResponse>(
+    const auto request = detail::createDeleteNodesRequest(item);
+    return deleteNodesAsync(
         connection,
-        detail::createDeleteNodesRequest(item),
-        detail::getSingleStatus<UA_DeleteNodesResponse>,
-        std::forward<CompletionToken>(token)
+        asWrapper<DeleteNodesRequest>(request),
+        detail::TransformToken(
+            detail::getSingleStatus<DeleteNodesResponse>, std::forward<CompletionToken>(token)
+        )
     );
 }
 
@@ -296,11 +294,8 @@ auto deleteReferencesAsync(
     const DeleteReferencesRequest& request,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
-    return detail::sendRequest<UA_DeleteReferencesRequest, UA_DeleteReferencesResponse>(
-        connection,
-        request,
-        detail::Wrap<DeleteReferencesResponse>{},
-        std::forward<CompletionToken>(token)
+    return detail::sendRequestAsync<DeleteReferencesRequest, DeleteReferencesResponse>(
+        connection, request, std::forward<CompletionToken>(token)
     );
 }
 
@@ -342,11 +337,13 @@ auto deleteReferenceAsync(
     auto item = detail::createDeleteReferencesItem(
         sourceId, referenceType, isForward, targetId, deleteBidirectional
     );
-    return detail::sendRequest<UA_DeleteReferencesRequest, UA_DeleteReferencesResponse>(
+    const auto request = detail::createDeleteReferencesRequest(item);
+    return deleteReferencesAsync(
         connection,
-        detail::createDeleteReferencesRequest(item),
-        detail::getSingleStatus<UA_DeleteReferencesResponse>,
-        std::forward<CompletionToken>(token)
+        asWrapper<DeleteReferencesRequest>(request),
+        detail::TransformToken(
+            detail::getSingleStatus<DeleteReferencesResponse>, std::forward<CompletionToken>(token)
+        )
     );
 }
 

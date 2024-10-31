@@ -52,8 +52,8 @@ auto callAsync(
     const CallRequest& request,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
-    return detail::sendRequest<UA_CallRequest, UA_CallResponse>(
-        connection, request, detail::Wrap<CallResponse>{}, std::forward<CompletionToken>(token)
+    return detail::sendRequestAsync<CallRequest, CallResponse>(
+        connection, request, std::forward<CompletionToken>(token)
     );
 }
 

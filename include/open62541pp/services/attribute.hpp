@@ -68,8 +68,8 @@ auto readAsync(
     const ReadRequest& request,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
-    return detail::sendRequest<UA_ReadRequest, UA_ReadResponse>(
-        connection, request, detail::Wrap<ReadResponse>{}, std::forward<CompletionToken>(token)
+    return detail::sendRequestAsync<ReadRequest, ReadResponse>(
+        connection, request, std::forward<CompletionToken>(token)
     );
 }
 
@@ -178,8 +178,8 @@ auto writeAsync(
     const WriteRequest& request,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
-    return detail::sendRequest<UA_WriteRequest, UA_WriteResponse>(
-        connection, request, detail::Wrap<WriteResponse>{}, std::forward<CompletionToken>(token)
+    return detail::sendRequestAsync<WriteRequest, WriteResponse>(
+        connection, request, std::forward<CompletionToken>(token)
     );
 }
 

@@ -86,9 +86,7 @@ ModifySubscriptionResponse modifySubscription(
 SetPublishingModeResponse setPublishingMode(
     Client& connection, const SetPublishingModeRequest& request
 ) noexcept {
-    return detail::sendRequest<UA_SetPublishingModeRequest, UA_SetPublishingModeResponse>(
-        connection, request, detail::Wrap<SetPublishingModeResponse>{}, detail::SyncOperation{}
-    );
+    return UA_Client_Subscriptions_setPublishingMode(connection.handle(), request);
 }
 
 StatusCode setPublishingMode(
@@ -98,12 +96,10 @@ StatusCode setPublishingMode(
     request.publishingEnabled = publishing;
     request.subscriptionIdsSize = 1;
     request.subscriptionIds = &subscriptionId;
-    return detail::sendRequest<UA_SetPublishingModeRequest, UA_SetPublishingModeResponse>(
-        connection,
-        request,
-        [](UA_SetPublishingModeResponse& response) { return detail::getSingleStatus(response); },
-        detail::SyncOperation{}
+    const auto response = setPublishingMode(
+        connection, asWrapper<SetPublishingModeRequest>(request)
     );
+    return detail::getSingleStatus(response);
 }
 
 DeleteSubscriptionsResponse deleteSubscriptions(
@@ -116,8 +112,8 @@ StatusCode deleteSubscription(Client& connection, uint32_t subscriptionId) noexc
     UA_DeleteSubscriptionsRequest request{};
     request.subscriptionIdsSize = 1;
     request.subscriptionIds = &subscriptionId;
-    const DeleteSubscriptionsResponse response = UA_Client_Subscriptions_delete(
-        connection.handle(), request
+    const auto response = deleteSubscriptions(
+        connection, asWrapper<DeleteSubscriptionsRequest>(request)
     );
     return detail::getSingleStatus(asNative(response));
 }

@@ -4,7 +4,6 @@
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/server.hpp"
 #include "open62541pp/services/detail/client_services.hpp"
-#include "open62541pp/services/detail/response_handling.hpp"
 #include "open62541pp/types_composed.hpp"  // ReadResponse
 
 #include "helper/server_runner.hpp"
@@ -17,18 +16,11 @@ TEST_CASE("AsyncServiceAdapter") {
         using Adapter = services::detail::AsyncServiceAdapter<Response>;
 
         std::optional<Response> result;
-        bool throwInTransform = false;
         bool throwInCompletionHandler = false;
         detail::ExceptionCatcher catcher;
 
         auto callbackAndContext = Adapter::createCallbackAndContext(
             catcher,
-            [&](int val) {
-                if (throwInTransform) {
-                    throw std::runtime_error("Transform");
-                }
-                return val;
-            },
             [&](Response res) {
                 result = res;
                 if (throwInCompletionHandler) {
@@ -37,7 +29,7 @@ TEST_CASE("AsyncServiceAdapter") {
             }
         );
 
-        auto invokeCallback = [&](int* response) {
+        const auto invokeCallback = [&](int* response) {
             callbackAndContext.callback(
                 nullptr,  // client
                 callbackAndContext.context.release(),
@@ -59,13 +51,6 @@ TEST_CASE("AsyncServiceAdapter") {
             CHECK(catcher.hasException());
             CHECK_THROWS_AS_MESSAGE(catcher.rethrow(), BadStatus, "BadUnexpectedError");
         }
-        SUBCASE("Exception in transform function") {
-            throwInTransform = true;
-            invokeCallback(&response);
-            CHECK_FALSE(result.has_value());
-            CHECK(catcher.hasException());
-            CHECK_THROWS_AS_MESSAGE(catcher.rethrow(), std::runtime_error, "Transform");
-        }
         SUBCASE("Exception in completion handler") {
             throwInCompletionHandler = true;
             invokeCallback(&response);
@@ -80,7 +65,7 @@ TEST_CASE("AsyncServiceAdapter") {
 TEST_CASE("sendRequest") {
     Client client;
 
-    auto sendReadRequest = [&](auto&& transform, auto&& token) {
+    auto sendReadRequest = [&] {
         UA_ReadValueId item{};
         item.nodeId = UA_NODEID_NUMERIC(0, UA_NS0ID_OBJECTSFOLDER);
         item.attributeId = UA_ATTRIBUTEID_BROWSENAME;
@@ -88,26 +73,11 @@ TEST_CASE("sendRequest") {
         request.timestampsToReturn = UA_TIMESTAMPSTORETURN_BOTH;
         request.nodesToReadSize = 1;
         request.nodesToRead = &item;
-
-        return services::detail::sendRequest<UA_ReadRequest, UA_ReadResponse>(
-            client,
-            request,
-            std::forward<decltype(transform)>(transform),
-            std::forward<decltype(token)>(token)
-        );
+        return services::detail::sendRequest<UA_ReadRequest, ReadResponse>(client, request);
     };
 
-    SUBCASE("Async disconnected") {
-        sendReadRequest(services::detail::Wrap<ReadResponse>{}, [&](ReadResponse& response) {
-            // UA_STATUSCODE_BADSERVERNOTCONNECTED since v1.1
-            CHECK(response.getResponseHeader().getServiceResult().isBad());
-        });
-    }
-
-    SUBCASE("Sync disconnected") {
-        const auto response = sendReadRequest(
-            services::detail::Wrap<ReadResponse>{}, services::detail::SyncOperation{}
-        );
+    SUBCASE("Disconnected") {
+        const auto response = sendReadRequest();
         // UA_STATUSCODE_BADCONNECTIONCLOSED or UA_STATUSCODE_BADINTERNALERROR (v1.0)
         CHECK(response.getResponseHeader().getServiceResult().isBad());
     }
@@ -116,54 +86,61 @@ TEST_CASE("sendRequest") {
     ServerRunner serverRunner(server);
     client.connect("opc.tcp://localhost:4840");
 
-    auto checkReadResponse = [](const ReadResponse& response) {
+    SUBCASE("Success") {
+        const auto response = sendReadRequest();
         CHECK(response.getResponseHeader().getServiceResult().isGood());
         CHECK_EQ(
             response.getResults()[0].getValue().getScalar<QualifiedName>(),
             QualifiedName(0, "Objects")
         );
+    }
+}
+
+TEST_CASE("sendRequestAsync") {
+    Client client;
+
+    auto sendReadRequest = [&](auto&& token) {
+        UA_ReadValueId item{};
+        item.nodeId = UA_NODEID_NUMERIC(0, UA_NS0ID_OBJECTSFOLDER);
+        item.attributeId = UA_ATTRIBUTEID_BROWSENAME;
+        UA_ReadRequest request{};
+        request.timestampsToReturn = UA_TIMESTAMPSTORETURN_BOTH;
+        request.nodesToReadSize = 1;
+        request.nodesToRead = &item;
+        return services::detail::sendRequestAsync<UA_ReadRequest, ReadResponse>(
+            client,
+            request,
+            std::forward<decltype(token)>(token)
+        );
     };
 
-    SUBCASE("Async") {
-        SUBCASE("Success") {
-            sendReadRequest(services::detail::Wrap<ReadResponse>{}, [&](ReadResponse& response) {
-                checkReadResponse(response);
-            });
-            CHECK_NOTHROW(client.runIterate());
-        }
-
-        SUBCASE("Exception in transform function") {
-            sendReadRequest(
-                [](UA_ReadResponse&) -> bool { throw std::runtime_error("Error"); }, [](bool) {}
-            );
-            CHECK_THROWS_AS_MESSAGE(client.runIterate(), std::runtime_error, "Error");
-        }
-
-        SUBCASE("Exception in user callback") {
-            sendReadRequest(services::detail::Wrap<ReadResponse>{}, [](ReadResponse&) {
-                throw std::runtime_error("Error");
-            });
-            CHECK_THROWS_AS_MESSAGE(client.runIterate(), std::runtime_error, "Error");
-        }
+    SUBCASE("Disconnected") {
+        sendReadRequest([&](ReadResponse& response) {
+            // UA_STATUSCODE_BADSERVERNOTCONNECTED since v1.1
+            CHECK(response.getResponseHeader().getServiceResult().isBad());
+        });
     }
 
-    SUBCASE("Sync") {
-        SUBCASE("Success") {
-            const auto response = sendReadRequest(
-                services::detail::Wrap<ReadResponse>{}, services::detail::SyncOperation{}
-            );
-            checkReadResponse(response);
-        }
+    Server server;
+    ServerRunner serverRunner(server);
+    client.connect("opc.tcp://localhost:4840");
 
-        SUBCASE("Exception in transform function") {
-            CHECK_THROWS_AS_MESSAGE(
-                sendReadRequest(
-                    [](UA_ReadResponse&) -> int { throw std::runtime_error("Error"); },
-                    services::detail::SyncOperation{}
-                ),
-                std::runtime_error,
-                "Error"
+    SUBCASE("Success") {
+        bool executed = false;
+        sendReadRequest([&](ReadResponse& response) {
+            CHECK(response.getResponseHeader().getServiceResult().isGood());
+            CHECK_EQ(
+                response.getResults()[0].getValue().getScalar<QualifiedName>(),
+                QualifiedName(0, "Objects")
             );
-        }
+            executed = true;
+        });
+        CHECK_NOTHROW(client.runIterate());
+        CHECK(executed);
+    }
+
+    SUBCASE("Exception in user callback") {
+        sendReadRequest([](ReadResponse&) { throw std::runtime_error("Error"); });
+        CHECK_THROWS_AS_MESSAGE(client.runIterate(), std::runtime_error, "Error");
     }
 }
