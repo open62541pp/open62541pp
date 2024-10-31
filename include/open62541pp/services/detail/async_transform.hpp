@@ -13,11 +13,7 @@ auto asyncTransform(CompletionHandler&& handler, Transform&& transform) {
     return [innerHandler = std::forward<CompletionHandler>(handler),
             innerTransform = std::forward<Transform>(transform)](auto&& result) mutable {
         auto transformed = std::invoke(innerTransform, std::forward<decltype(result)>(result));
-        if constexpr (std::is_invocable_v<CompletionHandler, decltype(std::move(transformed))>) {
-            std::invoke(innerHandler, std::move(transformed));
-        } else {
-            std::invoke(innerHandler, transformed);
-        }
+        std::invoke(innerHandler, transformed);
     };
 }
 
@@ -53,7 +49,7 @@ struct AsyncResult<services::detail::TransformToken<TransformFunction, Completio
         Token&& token,  // NOLINT(cppcoreguidelines-rvalue-reference-param-not-moved)
         Args&&... args
     ) {
-        using TransformResult = std::invoke_result_t<TransformFunction, T>;
+        using TransformResult = std::invoke_result_t<TransformFunction, T&>;
         return asyncInitiate<TransformResult>(
             [innerInitiation = std::forward<Initiation>(initiation),
              innerTransform = std::forward<Token>(token).transform](
