@@ -9,11 +9,10 @@ using namespace opcua;
 template <typename T, typename CompletionHandler>
 static auto asyncTest(T result, CompletionHandler&& completionHandler) {
     return asyncInitiate<T>(
-        [](auto&& handler, T result) {
+        [result](auto&& handler) {
             std::invoke(std::forward<decltype(handler)>(handler), result);
         },
-        std::forward<CompletionHandler>(completionHandler),
-        result
+        std::forward<CompletionHandler>(completionHandler)
     );
 }
 

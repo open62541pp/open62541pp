@@ -51,19 +51,19 @@ struct AsyncResult<services::detail::TransformToken<TransformFunction, Completio
     ) {
         using TransformResult = std::invoke_result_t<TransformFunction, T>;
         return asyncInitiate<TransformResult>(
-            [](auto&& handler, auto&& initiation, auto&& transform, auto&&... args) {
+            [innerInitiation = std::forward<Initiation>(initiation),
+             innerTransform = std::forward<Token>(token).transform](
+                auto&& handler, auto&&... innerArgs
+            ) {
                 std::invoke(
-                    std::forward<decltype(initiation)>(initiation),
+                    innerInitiation,
                     services::detail::asyncTransform(
-                        std::forward<decltype(handler)>(handler),
-                        std::forward<decltype(transform)>(transform)
+                        std::forward<decltype(handler)>(handler), innerTransform
                     ),
-                    std::forward<decltype(args)>(args)...
+                    std::forward<decltype(innerArgs)>(innerArgs)...
                 );
             },
             std::forward<Token>(token).token,
-            std::forward<Initiation>(initiation),
-            std::forward<Token>(token).transform,
             std::forward<Args>(args)...
         );
     }
