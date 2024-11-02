@@ -224,20 +224,6 @@ SetMonitoringModeResponse setMonitoringMode(
     return UA_Client_MonitoredItems_setMonitoringMode(connection.handle(), request);
 }
 
-StatusCode setMonitoringMode(
-    Client& connection,
-    uint32_t subscriptionId,
-    uint32_t monitoredItemId,
-    MonitoringMode monitoringMode
-) noexcept {
-    const auto request = detail::createSetMonitoringModeRequest(
-        subscriptionId, {&monitoredItemId, 1}, monitoringMode
-    );
-    return detail::getSingleStatus(
-        setMonitoringMode(connection, asWrapper<SetMonitoringModeRequest>(request))
-    );
-}
-
 SetTriggeringResponse setTriggering(
     Client& connection, const SetTriggeringRequest& request
 ) noexcept {

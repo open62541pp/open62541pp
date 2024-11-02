@@ -191,9 +191,17 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
             )
                 .getMonitoredItemId();
         CAPTURE(monId);
-        CHECK(
-            services::setMonitoringMode(connection, subId, monId, MonitoringMode::Disabled).isGood()
-        );
+
+        if constexpr (isAsync<T>) {
+            auto future = services::setMonitoringModeAsync(
+                connection, subId, monId, MonitoringMode::Disabled
+            );
+            setup.client.runIterate();
+            CHECK(future.get().isGood());
+        } else {
+            CHECK(services::setMonitoringMode(connection, subId, monId, MonitoringMode::Disabled)
+                      .isGood());
+        }
     }
 
 #if UAPP_OPEN62541_VER_GE(1, 2)

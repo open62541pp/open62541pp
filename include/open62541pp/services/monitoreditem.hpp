@@ -300,6 +300,24 @@ SetMonitoringModeResponse setMonitoringMode(
 ) noexcept;
 
 /**
+ * Asynchronously set the monitoring mode of monitored items.
+ *
+ * @copydetails setMonitoringMode(Client&, const SetMonitoringModeRequest&)
+ * @param token @completiontoken{void(SetMonitoringModeResponse&)}
+ * @return @asyncresult{SetMonitoringModeResponse}
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+auto setMonitoringModeAsync(
+    Client& connection,
+    const SetMonitoringModeRequest& request,
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    return detail::sendRequestAsync<SetMonitoringModeRequest, SetMonitoringModeResponse>(
+        connection, request, std::forward<CompletionToken>(token)
+    );
+}
+
+/**
  * Set the monitoring mode of a monitored item.
  *
  * @param connection Instance of type Client
@@ -307,12 +325,46 @@ SetMonitoringModeResponse setMonitoringMode(
  * @param monitoredItemId Identifier of the monitored item
  * @param monitoringMode Monitoring mode
  */
-StatusCode setMonitoringMode(
+inline StatusCode setMonitoringMode(
     Client& connection,
     uint32_t subscriptionId,
     uint32_t monitoredItemId,
     MonitoringMode monitoringMode
-) noexcept;
+) noexcept {
+    const auto request = detail::createSetMonitoringModeRequest(
+        subscriptionId, {&monitoredItemId, 1}, monitoringMode
+    );
+    return detail::getSingleStatus(
+        setMonitoringMode(connection, asWrapper<SetMonitoringModeRequest>(request))
+    );
+}
+
+/**
+ * Asynchronously set the monitoring mode of a monitored item.
+ *
+ * @copydetails setMonitoringMode(Client&, uint32_t, uint32_t, MonitoringMode)
+ * @param token @completiontoken{void(StatusCode)}
+ * @return @asyncresult{StatusCode}
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+auto setMonitoringModeAsync(
+    Client& connection,
+    uint32_t subscriptionId,
+    uint32_t monitoredItemId,
+    MonitoringMode monitoringMode,
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    const auto request = detail::createSetMonitoringModeRequest(
+        subscriptionId, {&monitoredItemId, 1}, monitoringMode
+    );
+    return setMonitoringModeAsync(
+        connection,
+        asWrapper<SetMonitoringModeRequest>(request),
+        detail::TransformToken(
+            detail::getSingleStatus<SetMonitoringModeResponse>, std::forward<CompletionToken>(token)
+        )
+    );
+}
 
 /**
  * @}
