@@ -238,6 +238,36 @@ inline BrowsePath createBrowsePath(const NodeId& origin, Span<const QualifiedNam
     return {origin, RelativePath(relativePathElements)};
 }
 
+#ifdef UA_ENABLE_SUBSCRIPTIONS
+
+template <typename SubscriptionParameters>
+UA_CreateSubscriptionRequest createCreateSubscriptionRequest(
+    const SubscriptionParameters& parameters, bool publishingEnabled
+) noexcept {
+    UA_CreateSubscriptionRequest request{};
+    request.requestedPublishingInterval = parameters.publishingInterval;
+    request.requestedLifetimeCount = parameters.lifetimeCount;
+    request.requestedMaxKeepAliveCount = parameters.maxKeepAliveCount;
+    request.maxNotificationsPerPublish = parameters.maxNotificationsPerPublish;
+    request.publishingEnabled = publishingEnabled;
+    request.priority = parameters.priority;
+    return request;
+}
+
+template <typename SubscriptionParameters>
+UA_ModifySubscriptionRequest createModifySubscriptionRequest(
+    uint32_t subscriptionId, const SubscriptionParameters& parameters
+) noexcept {
+    UA_ModifySubscriptionRequest request{};
+    request.subscriptionId = subscriptionId;
+    request.requestedPublishingInterval = parameters.publishingInterval;
+    request.requestedLifetimeCount = parameters.lifetimeCount;
+    request.requestedMaxKeepAliveCount = parameters.maxKeepAliveCount;
+    request.maxNotificationsPerPublish = parameters.maxNotificationsPerPublish;
+    request.priority = parameters.priority;
+    return request;
+}
+
 inline UA_SetPublishingModeRequest createSetPublishingModeRequest(
     bool publishing, Span<const uint32_t> subscriptionIds
 ) noexcept {
@@ -327,5 +357,7 @@ inline UA_DeleteSubscriptionsRequest createDeleteSubscriptionsRequest(uint32_t& 
     request.subscriptionIds = &subscriptionId;
     return request;
 }
+
+#endif  // UA_ENABLE_SUBSCRIPTIONS
 
 }  // namespace opcua::services::detail

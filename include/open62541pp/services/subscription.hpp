@@ -2,8 +2,20 @@
 
 #include <cstdint>
 #include <functional>
+#include <memory>
+#include <utility>  // forward
 
+#include "open62541pp/async.hpp"
 #include "open62541pp/config.hpp"
+#include "open62541pp/detail/client_utils.hpp"  // getHandle
+#include "open62541pp/detail/open62541/client.h"
+#include "open62541pp/exception.hpp"
+#include "open62541pp/services/detail/async_hook.hpp"
+#include "open62541pp/services/detail/async_transform.hpp"
+#include "open62541pp/services/detail/client_service.hpp"
+#include "open62541pp/services/detail/request_handling.hpp"
+#include "open62541pp/services/detail/response_handling.hpp"
+#include "open62541pp/services/detail/subscription_context.hpp"
 #include "open62541pp/types_composed.hpp"  // StatusChangeNotification
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
@@ -58,13 +70,25 @@ struct SubscriptionParameters {
  */
 using DeleteSubscriptionCallback = std::function<void(uint32_t subId)>;
 
-/**s
+/**
  * Subscription status change notification callback.
  * @param subId Subscription identifier
  * @param notification Status change notification
  */
 using StatusChangeNotificationCallback =
     std::function<void(uint32_t subId, StatusChangeNotification& notification)>;
+
+namespace detail {
+std::unique_ptr<SubscriptionContext> createSubscriptionContext(
+    Client& connection,
+    StatusChangeNotificationCallback&& statusChangeCallback,
+    DeleteSubscriptionCallback&& deleteCallback
+);
+
+void insertSubscriptionContext(
+    Client& connection, uint32_t subscriptionId, std::unique_ptr<SubscriptionContext>&& context
+);
+}  // namespace detail
 
 /**
  * Create a subscription.
@@ -80,9 +104,7 @@ using StatusChangeNotificationCallback =
     DeleteSubscriptionCallback deleteCallback = {}
 );
 
-/**
- * @overload
- */
+/// @overload
 [[nodiscard]] CreateSubscriptionResponse createSubscription(
     Client& connection,
     const SubscriptionParameters& parameters,
@@ -90,6 +112,73 @@ using StatusChangeNotificationCallback =
     StatusChangeNotificationCallback statusChangeCallback = {},
     DeleteSubscriptionCallback deleteCallback = {}
 ) noexcept;
+
+#if UAPP_OPEN62541_VER_GE(1, 1)
+/**
+ * Asynchronously create a subscription.
+ * @copydetails createSubscription(Client&, const CreateSubscriptionRequest&,
+ *                                 StatusChangeNotificationCallback, DeleteSubscriptionCallback)
+ * @param token @completiontoken{void(CreateSubscriptionResponse&)}
+ * @return @asyncresult{CreateSubscriptionResponse}
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+auto createSubscriptionAsync(
+    Client& connection,
+    const CreateSubscriptionRequest& request,
+    StatusChangeNotificationCallback statusChangeCallback = {},
+    DeleteSubscriptionCallback deleteCallback = {},
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    auto context = detail::createSubscriptionContext(
+        connection, std::move(statusChangeCallback), std::move(deleteCallback)
+    );
+    return detail::AsyncServiceAdapter<CreateSubscriptionResponse>::initiate(
+        connection,
+        [&](UA_ClientAsyncServiceCallback callback, void* userdata) {
+            throwIfBad(UA_Client_Subscriptions_create_async(
+                opcua::detail::getHandle(connection),
+                asNative(request),
+                context.get(),
+                detail::SubscriptionContext::statusChangeCallbackNative,
+                detail::SubscriptionContext::deleteCallbackNative,
+                callback,
+                userdata,
+                nullptr
+            ));
+        },
+        detail::HookToken(
+            [&, context = std::move(context)](const CreateSubscriptionResponse& response) mutable {
+                if (detail::getServiceResult(response).isGood()) {
+                    detail::insertSubscriptionContext(
+                        connection, response.getSubscriptionId(), std::move(context)
+                    );
+                }
+            },
+            std::forward<CompletionToken>(token)
+        )
+    );
+}
+
+/// @overload
+template <typename CompletionToken = DefaultCompletionToken>
+auto createSubscriptionAsync(
+    Client& connection,
+    const SubscriptionParameters& parameters,
+    bool publishingEnabled = true,
+    StatusChangeNotificationCallback statusChangeCallback = {},
+    DeleteSubscriptionCallback deleteCallback = {},
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    const auto request = detail::createCreateSubscriptionRequest(parameters, publishingEnabled);
+    return createSubscriptionAsync(
+        connection,
+        asWrapper<CreateSubscriptionRequest>(request),
+        std::move(statusChangeCallback),
+        std::move(deleteCallback),
+        std::forward<CompletionToken>(token)
+    );
+}
+#endif
 
 /**
  * @}
@@ -108,12 +197,54 @@ ModifySubscriptionResponse modifySubscription(
     Client& connection, const ModifySubscriptionRequest& request
 ) noexcept;
 
-/**
- * @overload
- */
-ModifySubscriptionResponse modifySubscription(
+/// @overload
+inline ModifySubscriptionResponse modifySubscription(
     Client& connection, uint32_t subscriptionId, const SubscriptionParameters& parameters
-) noexcept;
+) noexcept {
+    const auto request = detail::createModifySubscriptionRequest(subscriptionId, parameters);
+    return modifySubscription(connection, asWrapper<ModifySubscriptionRequest>(request));
+}
+
+#if UAPP_OPEN62541_VER_GE(1, 1)
+/**
+ * Asynchronously modify a subscription.
+ * @copydetails modifySubscription(Client&, const ModifySubscriptionRequest&)
+ * @param token @completiontoken{void(ModifySubscriptionResponse&)}
+ * @return @asyncresult{ModifySubscriptionResponse}
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+auto modifySubscriptionAsync(
+    Client& connection,
+    const ModifySubscriptionRequest& request,
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    return detail::AsyncServiceAdapter<ModifySubscriptionResponse>::initiate(
+        connection,
+        [&](UA_ClientAsyncServiceCallback callback, void* userdata) {
+            throwIfBad(UA_Client_Subscriptions_modify_async(
+                opcua::detail::getHandle(connection), asNative(request), callback, userdata, nullptr
+            ));
+        },
+        std::forward<CompletionToken>(token)
+    );
+}
+
+/// @overload
+template <typename CompletionToken = DefaultCompletionToken>
+auto modifySubscriptionAsync(
+    Client& connection,
+    uint32_t subscriptionId,
+    const SubscriptionParameters& parameters,
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    const auto request = detail::createModifySubscriptionRequest(subscriptionId, parameters);
+    return modifySubscriptionAsync(
+        connection,
+        asWrapper<ModifySubscriptionRequest>(request),
+        std::forward<CompletionToken>(token)
+    );
+}
+#endif
 
 /**
  * @}
@@ -126,7 +257,7 @@ ModifySubscriptionResponse modifySubscription(
  */
 
 /**
- * Enable/disable publishing of notification messages.
+ * Enable/disable publishing of notification messages of subscriptions.
  * @param connection Instance of type Client
  * @param request Set publishing mode request
  */
@@ -135,12 +266,60 @@ SetPublishingModeResponse setPublishingMode(
 ) noexcept;
 
 /**
- * Enable/disable publishing of notification messages.
+ * Asynchronously enable/disable publishing of notification messages of subscriptions.
+ * @copydetails setPublishingMode(Client&, const SetPublishingRequest&)
+ * @param token @completiontoken{void(SetPublishingModeResponse&)}
+ * @return @asyncresult{SetPublishingModeResponse}
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+auto setPublishingModeAsync(
+    Client& connection,
+    const SetPublishingModeRequest& request,
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    return detail::sendRequestAsync<SetPublishingModeRequest, SetPublishingModeResponse>(
+        connection, request, std::forward<CompletionToken>(token)
+    );
+}
+
+/**
+ * Enable/disable publishing of notification messages of a single subscription.
  * @param connection Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @param publishing Enable/disable publishing
  */
-StatusCode setPublishingMode(Client& connection, uint32_t subscriptionId, bool publishing) noexcept;
+inline StatusCode setPublishingMode(
+    Client& connection, uint32_t subscriptionId, bool publishing
+) noexcept {
+    const auto request = detail::createSetPublishingModeRequest(publishing, {&subscriptionId, 1});
+    return detail::getSingleStatus(
+        setPublishingMode(connection, asWrapper<SetPublishingModeRequest>(request))
+    );
+}
+
+/**
+ * Asynchronously enable/disable publishing of notification messages of a single subscription.
+ * @copydetails setPublishingMode(Client&, uint32_t, bool)
+ * @param token @completiontoken{void(StatusCode)}
+ * @return @asyncresult{StatusCode}
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+auto setPublishingModeAsync(
+    Client& connection,
+    uint32_t subscriptionId,
+    bool publishing,
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    const auto request = detail::createSetPublishingModeRequest(publishing, {&subscriptionId, 1});
+    return setPublishingModeAsync(
+        connection,
+        asWrapper<SetPublishingModeRequest>(request),
+        detail::TransformToken(
+            detail::getSingleStatus<UA_SetPublishingModeResponse>,
+            std::forward<CompletionToken>(token)
+        )
+    );
+}
 
 /**
  * @}
@@ -159,12 +338,65 @@ DeleteSubscriptionsResponse deleteSubscriptions(
     Client& connection, const DeleteSubscriptionsRequest& request
 ) noexcept;
 
+#if UAPP_OPEN62541_VER_GE(1, 1)
+/**
+ * Asynchronously delete subscriptions.
+ * @copydetails deleteSubscriptions(Client&, const DeleteSubscriptionsRequest&)
+ * @param token @completiontoken{void(DeleteSubscriptionsResponse&)}
+ * @return @asyncresult{DeleteSubscriptionsResponse}
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+auto deleteSubscriptionsAsync(
+    Client& connection,
+    const DeleteSubscriptionsRequest& request,
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    return detail::AsyncServiceAdapter<DeleteSubscriptionsResponse>::initiate(
+        connection,
+        [&](UA_ClientAsyncServiceCallback callback, void* userdata) {
+            throwIfBad(UA_Client_Subscriptions_delete_async(
+                opcua::detail::getHandle(connection), asNative(request), callback, userdata, nullptr
+            ));
+        },
+        std::forward<CompletionToken>(token)
+    );
+}
+#endif
+
 /**
  * Delete a single subscription.
  * @param connection Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  */
-StatusCode deleteSubscription(Client& connection, uint32_t subscriptionId) noexcept;
+inline StatusCode deleteSubscription(Client& connection, uint32_t subscriptionId) noexcept {
+    const auto request = detail::createDeleteSubscriptionsRequest(subscriptionId);
+    return detail::getSingleStatus(
+        deleteSubscriptions(connection, asWrapper<DeleteSubscriptionsRequest>(request))
+    );
+}
+
+#if UAPP_OPEN62541_VER_GE(1, 1)
+/**
+ * Asynchronously delete a single subscription.
+ * @copydetails deleteSubscription(Client&, uint32_t)
+ * @param token @completiontoken{void(StatusCode)}
+ * @return @asyncresult{StatusCode}
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+auto deleteSubscriptionAsync(
+    Client& connection, uint32_t subscriptionId, CompletionToken&& token = DefaultCompletionToken()
+) {
+    const auto request = detail::createDeleteSubscriptionsRequest(subscriptionId);
+    return deleteSubscriptionsAsync(
+        connection,
+        asWrapper<DeleteSubscriptionsRequest>(request),
+        detail::TransformToken{
+            detail::getSingleStatus<UA_DeleteSubscriptionsResponse>,
+            std::forward<CompletionToken>(token)
+        }
+    );
+}
+#endif
 
 /**
  * @}

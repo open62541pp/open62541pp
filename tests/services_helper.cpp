@@ -2,6 +2,7 @@
 
 #include <doctest/doctest.h>
 
+#include "open62541pp/services/detail/async_hook.hpp"
 #include "open62541pp/services/detail/async_transform.hpp"
 
 using namespace opcua;
@@ -38,4 +39,23 @@ TEST_CASE("TransformToken") {
         );
         CHECK(future.get() == "5");
     }
+}
+
+TEST_CASE("HookToken") {
+    bool hookExecuted = false;
+    int hookResult = 0;
+    int result = 0;
+    asyncTest(
+        5,
+        services::detail::HookToken(
+            [&](const int& value) {
+                hookExecuted = true;
+                hookResult = value;
+            },
+            [&](int& value) { result = value; }
+        )
+    );
+    CHECK(hookExecuted);
+    CHECK(hookResult == 5);
+    CHECK(result == 5);
 }
