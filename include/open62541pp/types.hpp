@@ -963,84 +963,97 @@ public:
 
     // Universal constructors with default copy policy
 
-    template <typename ConstructorTag, typename T>
-    Variant(ConstructorTag /*unused*/, T&& value) {
-        constexpr auto policy = detail::VariantPolicySelector<ConstructorTag>::policy;
-        setValue<policy>(std::forward<T>(value));
-    }
-
+    // TODO:
+    // Allow implicit constructor?
     template <typename T, typename X = std::enable_if_t<!std::is_same_v<T, Variant>, void>>
-    explicit Variant(T&& value)
-        : Variant(copyTag, std::forward<T>(value)) {}
-
-    template <typename ConstructorTag, typename T>
-    Variant(ConstructorTag /*unused*/, T&& value, const UA_DataType& dataType) {
-        constexpr auto policy = detail::VariantPolicySelector<ConstructorTag>::policy;
-        setValue<policy>(std::forward<T>(value), dataType);
+    explicit Variant(T&& value) {
+        setValueCopy(std::forward<T>(value));
     }
 
     template <typename T>
-    Variant(T&& value, const UA_DataType& dataType)
-        : Variant(copyTag, std::forward<T>(value), dataType) {}
+    Variant(ReferenceTag /*unused*/, T&& value) {
+        setValue(std::forward<T>(value));
+    }
 
-    template <typename ConstructorTag, typename InputIt>
-    Variant(ConstructorTag /*unused*/, InputIt first, InputIt last) {
-        constexpr auto policy = detail::VariantPolicySelector<ConstructorTag>::policy;
-        setValue<policy>(first, last);
+    template <typename T>
+    Variant(T&& value, const UA_DataType& dataType) {
+        setValueCopy(std::forward<T>(value), dataType);
+    }
+
+    template <typename T>
+    Variant(ReferenceTag /*unused*/, T&& value, const UA_DataType& dataType) {
+        setValue(std::forward<T>(value), dataType);
     }
 
     template <typename InputIt>
-    Variant(InputIt first, InputIt last)
-        : Variant(copyTag, first, last) {}
-
-    template <typename ConstructorTag, typename InputIt>
-    Variant(ConstructorTag /*unused*/, InputIt first, InputIt last, const UA_DataType& dataType) {
-        constexpr auto policy = detail::VariantPolicySelector<ConstructorTag>::policy;
-        setValue<policy>(first, last, dataType);
+    Variant(InputIt first, InputIt last) {
+        setValueCopy(first, last);
     }
 
     template <typename InputIt>
-    Variant(InputIt first, InputIt last, const UA_DataType& dataType)
-        : Variant(copyTag, first, last, dataType) {}
+    Variant(ReferenceTag /*unused*/, InputIt first, InputIt last) {
+        setValue(first, last);
+    }
+
+    template <typename InputIt>
+    Variant(InputIt first, InputIt last, const UA_DataType& dataType) {
+        setValueCopy(first, last, dataType);
+    }
+
+    template <typename InputIt>
+    Variant(ReferenceTag /*unused*/, InputIt first, InputIt last, const UA_DataType& dataType) {
+        setValue(first, last, dataType);
+    }
 
     /// Create Variant from scalar value.
     /// @tparam Policy Policy (@ref VariantPolicy) how to store the scalar inside the variant
     template <VariantPolicy Policy = VariantPolicy::Copy, typename T>
     [[nodiscard]] static Variant fromScalar(T&& value) {
-        constexpr auto tag = detail::ConstructorTagSelector<Policy>::tag;
-        return Variant{tag, std::forward<T>(value)};
+        if constexpr (Policy == VariantPolicy::Copy) {
+            return Variant{std::forward<T>(value)};
+        } else {
+            return Variant{reference, std::forward<T>(value)};
+        }
     }
 
     /// Create Variant from scalar value with custom data type.
     /// @tparam Policy Policy (@ref VariantPolicy) how to store the scalar inside the variant
     template <VariantPolicy Policy = VariantPolicy::Copy, typename T>
     [[nodiscard]] static Variant fromScalar(T&& value, const UA_DataType& dataType) {
-        constexpr auto tag = detail::ConstructorTagSelector<Policy>::tag;
-        return Variant{tag, std::forward<T>(value), dataType};
+        if constexpr (Policy == VariantPolicy::Copy) {
+            return Variant{std::forward<T>(value), dataType};
+        } else {
+            return Variant{reference, std::forward<T>(value), dataType};
+        }
     }
 
     /// Create Variant from array.
     /// @tparam Policy Policy (@ref VariantPolicy) how to store the array inside the variant
     template <VariantPolicy Policy = VariantPolicy::Copy, typename ArrayLike>
     [[nodiscard]] static Variant fromArray(ArrayLike&& array) {
-        constexpr auto tag = detail::ConstructorTagSelector<Policy>::tag;
-        return Variant{tag, std::forward<ArrayLike>(array)};
+        if constexpr (Policy == VariantPolicy::Copy) {
+            return Variant{std::forward<ArrayLike>(array)};
+        } else {
+            return Variant{reference, std::forward<ArrayLike>(array)};
+        }
     }
 
     /// Create Variant from array with custom data type.
     /// @tparam Policy Policy (@ref VariantPolicy) how to store the array inside the variant
     template <VariantPolicy Policy = VariantPolicy::Copy, typename ArrayLike>
     [[nodiscard]] static Variant fromArray(ArrayLike&& array, const UA_DataType& dataType) {
-        constexpr auto tag = detail::ConstructorTagSelector<Policy>::tag;
-        return Variant{tag, std::forward<ArrayLike>(array), dataType};
+        if constexpr (Policy == VariantPolicy::Copy) {
+            return Variant{std::forward<ArrayLike>(array), dataType};
+        } else {
+            return Variant{reference, std::forward<ArrayLike>(array), dataType};
+        }
     }
 
     /// Create Variant from range of elements (copy required).
     /// @tparam Policy Policy (@ref VariantPolicy) how to store the array inside the variant
     template <VariantPolicy Policy = VariantPolicy::Copy, typename InputIt>
     [[nodiscard]] static Variant fromArray(InputIt first, InputIt last) {
-        constexpr auto tag = detail::ConstructorTagSelector<Policy>::tag;
-        return Variant{tag, first, last};
+        return Variant{first, last};
     }
 
     /// Create Variant from range of elements with custom data type (copy required).
@@ -1049,8 +1062,7 @@ public:
     [[nodiscard]] static Variant fromArray(
         InputIt first, InputIt last, const UA_DataType& dataType
     ) {
-        constexpr auto tag = detail::ConstructorTagSelector<Policy>::tag;
-        return Variant{tag, first, last, dataType};
+        return Variant{first, last, dataType};
     }
 
     /// Check if the variant is empty.
@@ -1195,23 +1207,43 @@ public:
     // Default policy is Copy for more robust behavior (avoid potential dangling references and
     // opt-in for memory optimization).
 
-    template <VariantPolicy Policy = VariantPolicy::Copy, typename T>
+    template <typename T, VariantPolicy Policy = VariantPolicy::Reference>
     void setValue(T&& value) {
         detail::VariantHandler<Policy>::setValue(*this, std::forward<T>(value));
     }
 
-    template <VariantPolicy Policy = VariantPolicy::Copy, typename T>
+    template <typename T, VariantPolicy Policy = VariantPolicy::Reference>
     void setValue(T&& value, const UA_DataType& dataType) {
         detail::VariantHandler<Policy>::setValue(*this, std::forward<T>(value), dataType);
     }
 
-    template <VariantPolicy Policy = VariantPolicy::Copy, typename InputIt>
+    template <typename InputIt, VariantPolicy Policy = VariantPolicy::Reference>
     void setValue(InputIt first, InputIt last) {
         detail::VariantHandler<Policy>::setArray(*this, first, last);
     }
 
-    template <VariantPolicy Policy = VariantPolicy::Copy, typename InputIt>
+    template <typename InputIt, VariantPolicy Policy = VariantPolicy::Reference>
     void setValue(InputIt first, InputIt last, const UA_DataType& dataType) {
+        detail::VariantHandler<Policy>::setArray(*this, first, last, dataType);
+    }
+
+    template <typename T, VariantPolicy Policy = VariantPolicy::Copy>
+    void setValueCopy(T&& value) {
+        detail::VariantHandler<Policy>::setValue(*this, std::forward<T>(value));
+    }
+
+    template <typename T, VariantPolicy Policy = VariantPolicy::Copy>
+    void setValueCopy(T&& value, const UA_DataType& dataType) {
+        detail::VariantHandler<Policy>::setValue(*this, std::forward<T>(value), dataType);
+    }
+
+    template <typename InputIt, VariantPolicy Policy = VariantPolicy::Copy>
+    void setValueCopy(InputIt first, InputIt last) {
+        detail::VariantHandler<Policy>::setArray(*this, first, last);
+    }
+
+    template <typename InputIt, VariantPolicy Policy = VariantPolicy::Copy>
+    void setValueCopy(InputIt first, InputIt last, const UA_DataType& dataType) {
         detail::VariantHandler<Policy>::setArray(*this, first, last, dataType);
     }
 
