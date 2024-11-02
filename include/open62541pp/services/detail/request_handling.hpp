@@ -309,6 +309,19 @@ UA_MonitoredItemCreateRequest createMonitoredItemCreateRequest(
     return request;
 }
 
+inline UA_CreateMonitoredItemsRequest createCreateMonitoredItemsRequest(
+    uint32_t subscriptionId,
+    TimestampsToReturn timestampsToReturn,
+    Span<const UA_MonitoredItemCreateRequest> itemsToCreate
+) noexcept {
+    UA_CreateMonitoredItemsRequest request{};
+    request.subscriptionId = subscriptionId;
+    request.timestampsToReturn = static_cast<UA_TimestampsToReturn>(timestampsToReturn);
+    request.itemsToCreateSize = itemsToCreate.size();
+    request.itemsToCreate = getPointer(itemsToCreate);
+    return request;
+}
+
 template <typename MonitoringParameters>
 UA_MonitoredItemModifyRequest createMonitoredItemModifyRequest(
     uint32_t monitoredItemId, MonitoringParameters& parameters

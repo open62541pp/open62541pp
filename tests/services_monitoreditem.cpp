@@ -55,32 +55,16 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
             changedValue = value;
         };
 
-        SUBCASE("Raw") {
-            const CreateMonitoredItemsRequest request(
-                {},
-                subId,
-                TimestampsToReturn::Both,
-                {
-                    MonitoredItemCreateRequest({id, AttributeId::Value}, MonitoringMode::Reporting),
-                }
-            );
-            const auto response = services::createMonitoredItemsDataChange(
-                connection, request, callback
-            );
-            CHECK(response.getResponseHeader().getServiceResult().isGood());
-        }
-        SUBCASE("Single") {
-            const auto result = services::createMonitoredItemDataChange(
-                connection,
-                subId,
-                {id, AttributeId::Value},
-                MonitoringMode::Reporting,
-                monitoringParameters,
-                callback
-            );
-            CHECK(result.getStatusCode().isGood());
-            CAPTURE(result.getMonitoredItemId());
-        }
+        const auto result = services::createMonitoredItemDataChange(
+            connection,
+            subId,
+            {id, AttributeId::Value},
+            MonitoringMode::Reporting,
+            monitoringParameters,
+            callback
+        );
+        CHECK(result.getStatusCode().isGood());
+        CAPTURE(result.getMonitoredItemId());
 
         services::writeValue(server, id, Variant::fromScalar(11.11)).throwIfBad();
         setup.client.runIterate();
@@ -109,36 +93,16 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
             eventFieldsSize = eventFields.size();
         };
 
-        SUBCASE("Raw") {
-            const CreateMonitoredItemsRequest request(
-                {},
-                subId,
-                TimestampsToReturn::Both,
-                {
-                    MonitoredItemCreateRequest(
-                        {ObjectId::Server, AttributeId::EventNotifier},
-                        MonitoringMode::Reporting,
-                        MonitoringParameters(250, ExtensionObject::fromDecodedCopy(eventFilter))
-                    ),
-                }
-            );
-            const auto response = services::createMonitoredItemsEvent(
-                connection, request, callback
-            );
-            CHECK(response.getResponseHeader().getServiceResult().isGood());
-        }
-        SUBCASE("Single") {
-            const auto result = services::createMonitoredItemEvent(
-                connection,
-                subId,
-                {ObjectId::Server, AttributeId::EventNotifier},
-                MonitoringMode::Reporting,
-                monitoringParameters,
-                callback
-            );
-            CHECK(result.getStatusCode().isGood());
-            CAPTURE(result.getMonitoredItemId());
-        }
+        const auto result = services::createMonitoredItemEvent(
+            connection,
+            subId,
+            {ObjectId::Server, AttributeId::EventNotifier},
+            MonitoringMode::Reporting,
+            monitoringParameters,
+            callback
+        );
+        CHECK(result.getStatusCode().isGood());
+        CAPTURE(result.getMonitoredItemId());
 
         Event event(server);
         event.writeTime(DateTime::now());
