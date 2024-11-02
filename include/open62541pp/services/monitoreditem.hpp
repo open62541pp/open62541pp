@@ -202,6 +202,7 @@ ModifyMonitoredItemsResponse modifyMonitoredItems(
     Client& connection, const ModifyMonitoredItemsRequest& request
 ) noexcept;
 
+#if UAPP_OPEN62541_VER_GE(1, 1)
 /**
  * Asynchronously modify monitored items of a subscription.
  *
@@ -225,6 +226,7 @@ auto modifyMonitoredItemsAsync(
         std::forward<CompletionToken>(token)
     );
 }
+#endif
 
 /**
  * Modify a monitored item of a subscription.
@@ -248,6 +250,7 @@ inline MonitoredItemModifyResult modifyMonitoredItem(
     return detail::wrapSingleResultWithStatus<MonitoredItemModifyResult>(response);
 }
 
+#if UAPP_OPEN62541_VER_GE(1, 1)
 /**
  * Asynchronously a monitored item of a subscription.
  *
@@ -276,6 +279,7 @@ auto modifyMonitoredItemAsync(
         )
     );
 }
+#endif
 
 /**
  * @}

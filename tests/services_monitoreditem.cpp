@@ -166,11 +166,13 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
         modifiedParameters.samplingInterval = 1000.0;
         MonitoredItemModifyResult result;
         if constexpr (isAsync<T>) {
+#if UAPP_OPEN62541_VER_GE(1, 1)
             auto future = services::modifyMonitoredItemAsync(
                 connection, subId, monId, modifiedParameters
             );
             setup.client.runIterate();
             result = future.get();
+#endif
         } else {
             result = services::modifyMonitoredItem(connection, subId, monId, modifiedParameters);
         }
