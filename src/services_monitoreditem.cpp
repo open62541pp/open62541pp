@@ -2,6 +2,7 @@
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 
+#include <algorithm>
 #include <cstddef>
 #include <memory>
 #include <utility>  // move
@@ -40,13 +41,54 @@ static auto createMonitoredItemContexts(
     const EventNotificationCallback& eventCallback,
     const DeleteMonitoredItemCallback& deleteCallback
 ) {
-    std::vector<std::unique_ptr<detail::MonitoredItemContext>> contexts;
-    for (const auto& item : request.getItemsToCreate()) {
-        contexts.push_back(createMonitoredItemContext(
+    const auto items = request.getItemsToCreate();
+    std::vector<std::unique_ptr<detail::MonitoredItemContext>> contexts(items.size());
+    std::transform(items.begin(), items.end(), contexts.begin(), [&](const auto& item) {
+        return createMonitoredItemContext(
             connection, item.getItemToMonitor(), dataChangeCallback, eventCallback, deleteCallback
-        ));
-    }
+        );
+    });
     return contexts;
+}
+
+static void convertMonitoredItemContexts(
+    Span<const std::unique_ptr<detail::MonitoredItemContext>> contexts,
+    Span<detail::MonitoredItemContext*> contextsPtr,
+    Span<UA_Client_DataChangeNotificationCallback> dataChangeCallbacksNative,
+    Span<UA_Client_EventNotificationCallback> eventCallbacksNative,
+    Span<UA_Client_DeleteMonitoredItemCallback> deleteCallbacksNative
+) noexcept {
+    assert(contextsPtr.size() == contexts.size());
+    std::transform(
+        contexts.begin(),
+        contexts.end(),
+        contextsPtr.begin(),
+        [](const auto& context) noexcept { return context.get(); }
+    );
+    if (!dataChangeCallbacksNative.empty()) {
+        assert(dataChangeCallbacksNative.size() == contexts.size());
+        std::fill(
+            dataChangeCallbacksNative.begin(),
+            dataChangeCallbacksNative.end(),
+            detail::MonitoredItemContext::dataChangeCallbackNativeClient
+        );
+    }
+    if (!eventCallbacksNative.empty()) {
+        assert(eventCallbacksNative.size() == contexts.size());
+        std::fill(
+            eventCallbacksNative.begin(),
+            eventCallbacksNative.end(),
+            detail::MonitoredItemContext::eventCallbackNative
+        );
+    }
+    if (!deleteCallbacksNative.empty()) {
+        assert(deleteCallbacksNative.size() == contexts.size());
+        std::fill(
+            deleteCallbacksNative.begin(),
+            deleteCallbacksNative.end(),
+            detail::MonitoredItemContext::deleteCallbackNative
+        );
+    }
 }
 
 template <typename T>
@@ -74,7 +116,7 @@ static void storeMonitoredItemContexts(
     Span<std::unique_ptr<detail::MonitoredItemContext>> contexts
 ) {
     if (detail::getServiceResult(response).isGood()) {
-        const auto& results = response.getResults();
+        const auto results = response.getResults();
         for (size_t i = 0; i < results.size(); ++i) {
             storeMonitoredItemContext(connection, subscriptionId, results[i], contexts[i]);
         }
@@ -90,18 +132,14 @@ CreateMonitoredItemsResponse createMonitoredItemsDataChange(
     auto contexts = createMonitoredItemContexts(
         connection, request, dataChangeCallback, {}, deleteCallback
     );
-    std::vector<void*> contextsRaw;
-    std::vector<UA_Client_DataChangeNotificationCallback> dataChangeCallbacks;
-    std::vector<UA_Client_DeleteMonitoredItemCallback> deleteCallbacks;
-    for (const auto& context : contexts) {
-        contextsRaw.push_back(context.get());
-        dataChangeCallbacks.push_back(context->dataChangeCallbackNativeClient);
-        deleteCallbacks.push_back(context->deleteCallbackNative);
-    }
+    std::vector<detail::MonitoredItemContext*> contextsPtr(contexts.size());
+    std::vector<UA_Client_DataChangeNotificationCallback> dataChangeCallbacks(contexts.size());
+    std::vector<UA_Client_DeleteMonitoredItemCallback> deleteCallbacks(contexts.size());
+    convertMonitoredItemContexts(contexts, contextsPtr, dataChangeCallbacks, {}, deleteCallbacks);
     CreateMonitoredItemsResponse response = UA_Client_MonitoredItems_createDataChanges(
         connection.handle(),
         request,
-        contextsRaw.data(),
+        reinterpret_cast<void**>(contextsPtr.data()),  // NOLINT
         dataChangeCallbacks.data(),
         deleteCallbacks.data()
     );
@@ -168,18 +206,14 @@ CreateMonitoredItemsResponse createMonitoredItemsEvent(
     auto contexts = createMonitoredItemContexts(
         connection, request, {}, eventCallback, deleteCallback
     );
-    std::vector<void*> contextsRaw;
-    std::vector<UA_Client_EventNotificationCallback> eventCallbacks;
-    std::vector<UA_Client_DeleteMonitoredItemCallback> deleteCallbacks;
-    for (const auto& context : contexts) {
-        contextsRaw.push_back(context.get());
-        eventCallbacks.push_back(context->eventCallbackNative);
-        deleteCallbacks.push_back(context->deleteCallbackNative);
-    }
+    std::vector<detail::MonitoredItemContext*> contextsPtr(contexts.size());
+    std::vector<UA_Client_EventNotificationCallback> eventCallbacks(contexts.size());
+    std::vector<UA_Client_DeleteMonitoredItemCallback> deleteCallbacks(contexts.size());
+    convertMonitoredItemContexts(contexts, contextsPtr, {}, eventCallbacks, deleteCallbacks);
     CreateMonitoredItemsResponse response = UA_Client_MonitoredItems_createEvents(
         connection.handle(),
         request,
-        contextsRaw.data(),
+        reinterpret_cast<void**>(contextsPtr.data()),  // NOLINT
         eventCallbacks.data(),
         deleteCallbacks.data()
     );
