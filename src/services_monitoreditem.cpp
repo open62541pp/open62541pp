@@ -240,8 +240,11 @@ template <>
 StatusCode deleteMonitoredItem<Client>(
     Client& connection, uint32_t subscriptionId, uint32_t monitoredItemId
 ) {
-    return UA_Client_MonitoredItems_deleteSingle(
-        connection.handle(), subscriptionId, monitoredItemId
+    const auto request = detail::createDeleteMonitoredItemsRequest(
+        subscriptionId, {&monitoredItemId, 1}
+    );
+    return detail::getSingleStatus(
+        deleteMonitoredItems(connection, asWrapper<DeleteMonitoredItemsRequest>(request))
     );
 }
 

@@ -278,6 +278,14 @@ inline UA_SetPublishingModeRequest createSetPublishingModeRequest(
     return request;
 }
 
+inline UA_DeleteSubscriptionsRequest createDeleteSubscriptionsRequest(uint32_t& subscriptionId
+) noexcept {
+    UA_DeleteSubscriptionsRequest request{};
+    request.subscriptionIdsSize = 1;
+    request.subscriptionIds = &subscriptionId;
+    return request;
+}
+
 template <typename MonitoringParameters>
 inline void copyMonitoringParametersToNative(
     const MonitoringParameters& parameters, UA_MonitoringParameters& native
@@ -350,11 +358,13 @@ inline UA_SetTriggeringRequest createSetTriggeringRequest(
     return request;
 }
 
-inline UA_DeleteSubscriptionsRequest createDeleteSubscriptionsRequest(uint32_t& subscriptionId
+inline UA_DeleteMonitoredItemsRequest createDeleteMonitoredItemsRequest(
+    uint32_t subscriptionId, Span<const uint32_t> monitoredItemIds
 ) noexcept {
-    UA_DeleteSubscriptionsRequest request{};
-    request.subscriptionIdsSize = 1;
-    request.subscriptionIds = &subscriptionId;
+    UA_DeleteMonitoredItemsRequest request{};
+    request.subscriptionId = subscriptionId;
+    request.monitoredItemIdsSize = monitoredItemIds.size();
+    request.monitoredItemIds = getPointer(monitoredItemIds);
     return request;
 }
 

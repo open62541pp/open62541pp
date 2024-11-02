@@ -390,7 +390,7 @@ SetTriggeringResponse setTriggering(
 /**
  * Asynchronously add and delete triggering links of monitored items.
  *
- * @copydetails setTriggering(Client&, const SetTriggeringRequest&)
+ * @copydetails setTriggering
  * @param token @completiontoken{void(SetTriggeringResponse&)}
  * @return @asyncresult{SetTriggeringResponse}
  */
@@ -414,7 +414,7 @@ auto setTriggeringAsync(
  */
 
 /**
- * Delete monitored items from subscriptions.
+ * Delete monitored items from a subscription.
  *
  * @param connection Instance of type Client
  * @param request Delete monitored items request
@@ -422,6 +422,32 @@ auto setTriggeringAsync(
 DeleteMonitoredItemsResponse deleteMonitoredItems(
     Client& connection, const DeleteMonitoredItemsRequest& request
 ) noexcept;
+
+#if UAPP_OPEN62541_VER_GE(1, 1)
+/**
+ * Asynchronously delete monitored items from a subscription.
+ *
+ * @copydetails deleteMonitoredItems
+ * @param token @completiontoken{void(DeleteMonitoredItemsResponse&)}
+ * @return @asyncresult{DeleteMonitoredItemsResponse}
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+auto deleteMonitoredItemsAsync(
+    Client& connection,
+    const DeleteMonitoredItemsRequest& request,
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    return detail::AsyncServiceAdapter<DeleteMonitoredItemsResponse>::initiate(
+        connection,
+        [&](UA_ClientAsyncServiceCallback callback, void* userdata) {
+            throwIfBad(UA_Client_MonitoredItems_delete_async(
+                opcua::detail::getHandle(connection), asNative(request), callback, userdata, nullptr
+            ));
+        },
+        std::forward<CompletionToken>(token)
+    );
+}
+#endif
 
 /**
  * Delete a monitored item from a subscription.
@@ -433,6 +459,35 @@ DeleteMonitoredItemsResponse deleteMonitoredItems(
  */
 template <typename T>
 StatusCode deleteMonitoredItem(T& connection, uint32_t subscriptionId, uint32_t monitoredItemId);
+
+#if UAPP_OPEN62541_VER_GE(1, 1)
+/**
+ * Asynchronously delete monitored items from a subscription.
+ *
+ * @copydetails deleteMonitoredItem
+ * @param token @completiontoken{void(StatusCode)}
+ * @return @asyncresult{StatusCode}
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+auto deleteMonitoredItemAsync(
+    Client& connection,
+    uint32_t subscriptionId,
+    uint32_t monitoredItemId,
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    const auto request = detail::createDeleteMonitoredItemsRequest(
+        subscriptionId, {&monitoredItemId, 1}
+    );
+    return deleteMonitoredItemsAsync(
+        connection,
+        asWrapper<DeleteMonitoredItemsRequest>(request),
+        detail::TransformToken(
+            detail::getSingleStatus<DeleteMonitoredItemsResponse>,
+            std::forward<CompletionToken>(token)
+        )
+    );
+}
+#endif
 
 /**
  * @}

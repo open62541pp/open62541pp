@@ -282,7 +282,17 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
                 [&](uint32_t, uint32_t) { deleted = true; }
             ).getMonitoredItemId();
 
-        CHECK(services::deleteMonitoredItem(connection, subId, monId).isGood());
+        if constexpr (isAsync<T>) {
+#if UAPP_OPEN62541_VER_GE(1, 1)
+            auto future = services::deleteMonitoredItemAsync(connection, subId, monId);
+            setup.client.runIterate();
+            CHECK(future.get().isGood());
+#else
+            CHECK(services::deleteMonitoredItem(connection, subId, monId).isGood());
+#endif
+        } else {
+            CHECK(services::deleteMonitoredItem(connection, subId, monId).isGood());
+        }
         setup.client.runIterate();
         CHECK(deleted == true);
     }
