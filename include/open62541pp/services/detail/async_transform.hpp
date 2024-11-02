@@ -58,7 +58,7 @@ struct AsyncResult<services::detail::TransformToken<TransformFunction, Completio
                 std::invoke(
                     innerInitiation,
                     services::detail::asyncTransform(
-                        std::forward<decltype(handler)>(handler), innerTransform
+                        std::forward<decltype(handler)>(handler), std::move(innerTransform)
                     ),
                     std::forward<decltype(innerArgs)>(innerArgs)...
                 );
