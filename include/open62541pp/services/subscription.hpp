@@ -113,6 +113,7 @@ void insertSubscriptionContext(
     DeleteSubscriptionCallback deleteCallback = {}
 ) noexcept;
 
+#if UAPP_OPEN62541_VER_GE(1, 1)
 /**
  * Asynchronously create a subscription.
  * @copydetails createSubscription(Client&, const CreateSubscriptionRequest&,
@@ -177,6 +178,7 @@ auto createSubscriptionAsync(
         std::forward<CompletionToken>(token)
     );
 }
+#endif
 
 /**
  * @}
@@ -203,6 +205,7 @@ inline ModifySubscriptionResponse modifySubscription(
     return modifySubscription(connection, asWrapper<ModifySubscriptionRequest>(request));
 }
 
+#if UAPP_OPEN62541_VER_GE(1, 1)
 /**
  * Asynchronously modify a subscription.
  * @copydetails modifySubscription(Client&, const ModifySubscriptionRequest&)
@@ -241,6 +244,7 @@ auto modifySubscriptionAsync(
         std::forward<CompletionToken>(token)
     );
 }
+#endif
 
 /**
  * @}
@@ -334,6 +338,7 @@ DeleteSubscriptionsResponse deleteSubscriptions(
     Client& connection, const DeleteSubscriptionsRequest& request
 ) noexcept;
 
+#if UAPP_OPEN62541_VER_GE(1, 1)
 /**
  * Asynchronously delete subscriptions.
  * @copydetails deleteSubscriptions(Client&, const DeleteSubscriptionsRequest&)
@@ -356,6 +361,7 @@ auto deleteSubscriptionsAsync(
         std::forward<CompletionToken>(token)
     );
 }
+#endif
 
 /**
  * Delete a single subscription.
@@ -369,6 +375,7 @@ inline StatusCode deleteSubscription(Client& connection, uint32_t subscriptionId
     );
 }
 
+#if UAPP_OPEN62541_VER_GE(1, 1)
 /**
  * Asynchronously delete a single subscription.
  * @copydetails deleteSubscription(Client&, uint32_t)
@@ -389,6 +396,7 @@ auto deleteSubscriptionAsync(
         }
     );
 }
+#endif
 
 /**
  * @}

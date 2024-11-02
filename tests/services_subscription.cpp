@@ -19,9 +19,13 @@ TEST_CASE_TEMPLATE("Subscription service set", T, Client, Async<Client>) {
     SUBCASE("createSubscription") {
         CreateSubscriptionResponse response;
         if constexpr (isAsync<T>) {
+#if UAPP_OPEN62541_VER_GE(1, 1)
             auto future = services::createSubscriptionAsync(connection, parameters);
             setup.client.runIterate();
             response = future.get();
+#else
+            response = services::createSubscription(connection, parameters);
+#endif
         } else {
             response = services::createSubscription(connection, parameters);
         }
@@ -36,9 +40,13 @@ TEST_CASE_TEMPLATE("Subscription service set", T, Client, Async<Client>) {
         parameters.priority = 1;
         ModifySubscriptionResponse response;
         if constexpr (isAsync<T>) {
+#if UAPP_OPEN62541_VER_GE(1, 1)
             auto future = services::modifySubscriptionAsync(connection, subId, parameters);
             setup.client.runIterate();
             response = future.get();
+#else
+            response = services::modifySubscription(connection, subId, parameters);
+#endif
         } else {
             response = services::modifySubscription(connection, subId, parameters);
         }
@@ -69,9 +77,11 @@ TEST_CASE_TEMPLATE("Subscription service set", T, Client, Async<Client>) {
         const auto subId = services::createSubscription(connection, parameters).getSubscriptionId();
 
         if constexpr (isAsync<T>) {
+#if UAPP_OPEN62541_VER_GE(1, 1)
             auto future = services::deleteSubscriptionAsync(connection, subId);
             setup.client.runIterate();
             CHECK(future.get().isGood());
+#endif
         } else {
             CHECK(services::deleteSubscription(connection, subId).isGood());
         }
