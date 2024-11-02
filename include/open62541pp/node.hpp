@@ -536,23 +536,22 @@ public:
     template <typename T>
     Node& writeValueScalar(const T& value) {
         // NOLINTNEXTLINE(*-const-cast), variant isn't modified, try to avoid copy
-        writeValue(Variant::fromScalar<VariantPolicy::ReferenceIfPossible>(const_cast<T&>(value)));
+        writeValue(Variant::fromScalar<VariantPolicy::Reference>(const_cast<T&>(value)));
         return *this;
     }
 
     /// Write array value to variable node.
     template <typename ArrayLike>
-    Node& writeValueArray(ArrayLike&& array) {
-        writeValue(
-            Variant::fromArray<VariantPolicy::ReferenceIfPossible>(std::forward<ArrayLike>(array))
-        );
+    Node& writeValueArray(const ArrayLike& array) {
+        // NOLINTNEXTLINE(*-const-cast), variant isn't modified, try to avoid copy
+        writeValue(Variant::fromArray<VariantPolicy::Reference>(const_cast<ArrayLike&>(array)));
         return *this;
     }
 
     /// Write range of elements as array value to variable node.
     template <typename InputIt>
     Node& writeValueArray(InputIt first, InputIt last) {
-        writeValue(Variant::fromArray<VariantPolicy::ReferenceIfPossible>(first, last));
+        writeValue(Variant::fromArray<VariantPolicy::Copy>(first, last));
         return *this;
     }
 

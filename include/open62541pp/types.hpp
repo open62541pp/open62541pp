@@ -881,7 +881,6 @@ enum class VariantPolicy {
     Reference,            ///< Store reference to scalar/array inside the variant.
                           ///< Both scalars and arrays must be mutable native/wrapper types.
                           ///< Arrays must store the elements contiguously in memory.
-    ReferenceIfPossible,  ///< Favor referencing but fall back to copying if necessary.
     // clang-format on
 };
 
@@ -922,10 +921,6 @@ struct ReferenceTag {};
 
 static constexpr ReferenceTag reference{};
 
-struct ReferenceIfPossibleTag {};
-
-static constexpr ReferenceIfPossibleTag referenceIfPossible{};
-
 namespace detail {
 
 template <typename T>
@@ -941,11 +936,6 @@ struct VariantPolicySelector<ReferenceTag> {
     static constexpr VariantPolicy policy = VariantPolicy::Reference;
 };
 
-template <>
-struct VariantPolicySelector<ReferenceIfPossibleTag> {
-    static constexpr VariantPolicy policy = VariantPolicy::ReferenceIfPossible;
-};
-
 template <VariantPolicy Policy>
 struct ConstructorTagSelector;
 
@@ -959,12 +949,6 @@ template <>
 struct ConstructorTagSelector<VariantPolicy::Reference> {
     using Tag = ReferenceTag;
     static constexpr Tag tag = reference;
-};
-
-template <>
-struct ConstructorTagSelector<VariantPolicy::ReferenceIfPossible> {
-    using Tag = ReferenceIfPossibleTag;
-    static constexpr Tag tag = referenceIfPossible;
 };
 
 }  // namespace detail
@@ -1584,69 +1568,6 @@ struct VariantHandlerBase<VariantPolicy::Reference> {
     template <typename T>
     static void setArray(Variant& var, Span<T> array, const UA_DataType& dtype) noexcept {
         var.setArray(array, dtype);
-    }
-};
-
-template <>
-struct VariantHandlerBase<VariantPolicy::ReferenceIfPossible>
-    : VariantHandlerBase<VariantPolicy::Copy> {
-    using VariantHandlerBase<VariantPolicy::Copy>::setScalar;
-    using VariantHandlerBase<VariantPolicy::Copy>::setArray;
-
-    template <typename T, typename Variant>
-    static decltype(auto) getScalar(Variant&& var) {
-        if constexpr (detail::isRegisteredType<T>) {
-            return std::forward<Variant>(var).template getScalar<T>();
-        } else {
-            return std::forward<Variant>(var).template getScalarCopy<T>();
-        }
-    }
-
-    template <typename T, typename Variant>
-    static decltype(auto) getArray(Variant&& var) {
-        if constexpr (detail::IsSpan<T>::value) {
-            return std::forward<Variant>(var).template getArray<typename T::value_type>();
-        } else {
-            return std::forward<Variant>(var).template getArrayCopy<typename T::value_type>();
-        }
-    }
-
-    template <typename T>
-    static void setScalar(Variant& var, T& value) noexcept(detail::isRegisteredType<T>) {
-        if constexpr (detail::isRegisteredType<T>) {
-            var.setScalar(value);
-        } else {
-            var.setScalarCopy(value);
-        }
-    }
-
-    template <typename T>
-    static void setScalar(Variant& var, T& value, const UA_DataType& dtype) noexcept {
-        var.setScalar(value, dtype);
-    }
-
-    template <typename T>
-    static void setArray(Variant& var, Span<T> array) noexcept(detail::isRegisteredType<T>) {
-        if constexpr (detail::isRegisteredType<T>) {
-            var.setArray(array);
-        } else {
-            var.setArrayCopy(array);
-        }
-    }
-
-    template <typename T>
-    static void setArray(Variant& var, Span<T> array, const UA_DataType& dtype) noexcept {
-        var.setArray(array, dtype);
-    }
-
-    template <typename T>
-    static void setArray(Variant& var, Span<const T> array) {
-        var.setArrayCopy(array.begin(), array.end());
-    }
-
-    template <typename T>
-    static void setArray(Variant& var, Span<const T> array, const UA_DataType& dtype) {
-        var.setArrayCopy(array.begin(), array.end(), dtype);
     }
 };
 
