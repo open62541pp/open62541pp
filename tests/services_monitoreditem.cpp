@@ -237,16 +237,21 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
         CHECK(notificationCountTriggering > 0);
         CHECK(notificationCount == 0);  // no triggering links yet
 
-        const auto response = services::setTriggering(
-            connection,
-            SetTriggeringRequest(
-                {},
-                subId,
-                monIdTriggering,
-                {monId},  // links to add
-                {}  // links to remove
-            )
+        const SetTriggeringRequest request(
+            {},
+            subId,
+            monIdTriggering,
+            {monId},  // links to add
+            {}  // links to remove
         );
+        SetTriggeringResponse response;
+        if constexpr (isAsync<T>) {
+            auto future = services::setTriggeringAsync(connection, request);
+            setup.client.runIterate();
+            response = future.get();
+        } else {
+            response = services::setTriggering(connection, request);
+        }
         CHECK(response.getResponseHeader().getServiceResult().isGood());
         CHECK(response.getAddResults().size() == 1);
         CHECK(response.getAddResults()[0].isGood());

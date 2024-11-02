@@ -388,6 +388,24 @@ SetTriggeringResponse setTriggering(
 ) noexcept;
 
 /**
+ * Asynchronously add and delete triggering links of monitored items.
+ *
+ * @copydetails setTriggering(Client&, const SetTriggeringRequest&)
+ * @param token @completiontoken{void(SetTriggeringResponse&)}
+ * @return @asyncresult{SetTriggeringResponse}
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+auto setTriggeringAsync(
+    Client& connection,
+    const SetTriggeringRequest& request,
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    return detail::sendRequestAsync<SetTriggeringRequest, SetTriggeringResponse>(
+        connection, request, std::forward<CompletionToken>(token)
+    );
+}
+
+/**
  * @}
  * @defgroup DeleteMonitoredItems DeleteMonitoredItems service
  * Delete a monitored items from subscriptions.
