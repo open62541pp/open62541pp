@@ -17,11 +17,11 @@
 using namespace opcua;
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
-TEST_CASE("MonitoredItem service set (client)") {
+TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
     ServerClientSetup setup;
     setup.client.connect(setup.endpointUrl);
     auto& server = setup.server;
-    auto& client = setup.client;
+    auto& connection = setup.getInstance<T>();
 
     // add variable node to test data change notifications
     const NodeId id{1, 1000};
@@ -33,7 +33,7 @@ TEST_CASE("MonitoredItem service set (client)") {
 
     SUBCASE("createMonitoredItemDataChange without subscription") {
         const auto result = services::createMonitoredItemDataChange(
-            client,
+            connection,
             11U,  // random subId
             {id, AttributeId::Value},
             MonitoringMode::Reporting,
@@ -44,7 +44,7 @@ TEST_CASE("MonitoredItem service set (client)") {
     }
 
     const auto subId =
-        services::createSubscription(client, subscriptionParameters).getSubscriptionId();
+        services::createSubscription(connection, subscriptionParameters).getSubscriptionId();
     CAPTURE(subId);
 
     SUBCASE("createMonitoredItemDataChange") {
@@ -65,13 +65,13 @@ TEST_CASE("MonitoredItem service set (client)") {
                 }
             );
             const auto response = services::createMonitoredItemsDataChange(
-                client, request, callback
+                connection, request, callback
             );
             CHECK(response.getResponseHeader().getServiceResult().isGood());
         }
         SUBCASE("Single") {
             const auto result = services::createMonitoredItemDataChange(
-                client,
+                connection,
                 subId,
                 {id, AttributeId::Value},
                 MonitoringMode::Reporting,
@@ -83,7 +83,7 @@ TEST_CASE("MonitoredItem service set (client)") {
         }
 
         services::writeValue(server, id, Variant::fromScalar(11.11)).throwIfBad();
-        client.runIterate();
+        setup.client.runIterate();
         CHECK(notificationCount > 0);
         CHECK(changedValue.getValue().getScalar<double>() == 11.11);
     }
@@ -122,12 +122,14 @@ TEST_CASE("MonitoredItem service set (client)") {
                     ),
                 }
             );
-            const auto response = services::createMonitoredItemsEvent(client, request, callback);
+            const auto response = services::createMonitoredItemsEvent(
+                connection, request, callback
+            );
             CHECK(response.getResponseHeader().getServiceResult().isGood());
         }
         SUBCASE("Single") {
             const auto result = services::createMonitoredItemEvent(
-                client,
+                connection,
                 subId,
                 {ObjectId::Server, AttributeId::EventNotifier},
                 MonitoringMode::Reporting,
@@ -141,7 +143,7 @@ TEST_CASE("MonitoredItem service set (client)") {
         Event event(server);
         event.writeTime(DateTime::now());
         event.trigger();
-        client.runIterate();
+        setup.client.runIterate();
         CHECK(notificationCount == 1);
         CHECK(eventFieldsSize == 3);
     }
@@ -150,7 +152,7 @@ TEST_CASE("MonitoredItem service set (client)") {
     SUBCASE("modifyMonitoredItem") {
         const auto monId =
             services::createMonitoredItemDataChange(
-                client,
+                connection,
                 subId,
                 {id, AttributeId::Value},
                 MonitoringMode::Reporting,
@@ -162,14 +164,23 @@ TEST_CASE("MonitoredItem service set (client)") {
 
         services::MonitoringParametersEx modifiedParameters{};
         modifiedParameters.samplingInterval = 1000.0;
-        const auto result = services::modifyMonitoredItem(client, subId, monId, modifiedParameters);
+        MonitoredItemModifyResult result;
+        if constexpr (isAsync<T>) {
+            auto future = services::modifyMonitoredItemAsync(
+                connection, subId, monId, modifiedParameters
+            );
+            setup.client.runIterate();
+            result = future.get();
+        } else {
+            result = services::modifyMonitoredItem(connection, subId, monId, modifiedParameters);
+        }
         CHECK(result.getStatusCode().isGood());
     }
 
     SUBCASE("setMonitoringMode") {
         const auto monId =
             services::createMonitoredItemDataChange(
-                client,
+                connection,
                 subId,
                 {id, AttributeId::Value},
                 MonitoringMode::Reporting,
@@ -178,7 +189,9 @@ TEST_CASE("MonitoredItem service set (client)") {
             )
                 .getMonitoredItemId();
         CAPTURE(monId);
-        CHECK(services::setMonitoringMode(client, subId, monId, MonitoringMode::Disabled).isGood());
+        CHECK(
+            services::setMonitoringMode(connection, subId, monId, MonitoringMode::Disabled).isGood()
+        );
     }
 
 #if UAPP_OPEN62541_VER_GE(1, 2)
@@ -188,7 +201,7 @@ TEST_CASE("MonitoredItem service set (client)") {
         size_t notificationCount = 0;
         const auto monIdTriggering =
             services::createMonitoredItemDataChange(
-                client,
+                connection,
                 subId,
                 {VariableId::Server_ServerStatus_CurrentTime, AttributeId::Value},
                 MonitoringMode::Reporting,
@@ -201,7 +214,7 @@ TEST_CASE("MonitoredItem service set (client)") {
         // https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.1.6
         const auto monId =
             services::createMonitoredItemDataChange(
-                client,
+                connection,
                 subId,
                 {id, AttributeId::Value},
                 MonitoringMode::Sampling,
@@ -210,12 +223,12 @@ TEST_CASE("MonitoredItem service set (client)") {
             ).getMonitoredItemId();
         CAPTURE(monId);
 
-        client.runIterate();
+        setup.client.runIterate();
         CHECK(notificationCountTriggering > 0);
         CHECK(notificationCount == 0);  // no triggering links yet
 
         const auto response = services::setTriggering(
-            client,
+            connection,
             SetTriggeringRequest(
                 {},
                 subId,
@@ -228,7 +241,7 @@ TEST_CASE("MonitoredItem service set (client)") {
         CHECK(response.getAddResults().size() == 1);
         CHECK(response.getAddResults()[0].isGood());
 
-        client.runIterate();
+        setup.client.runIterate();
 #if UAPP_OPEN62541_VER_LE(1, 3)
         // TODO: fails with v1.4, why?
         CHECK(notificationCount > 0);
@@ -238,14 +251,14 @@ TEST_CASE("MonitoredItem service set (client)") {
 
     SUBCASE("deleteMonitoredItem") {
         CHECK(
-            services::deleteMonitoredItem(client, subId, 11U) ==
+            services::deleteMonitoredItem(connection, subId, 11U) ==
             UA_STATUSCODE_BADMONITOREDITEMIDINVALID
         );
 
         bool deleted = false;
         const auto monId =
             services::createMonitoredItemDataChange(
-                client,
+                connection,
                 subId,
                 {id, AttributeId::Value},
                 MonitoringMode::Reporting,
@@ -254,8 +267,8 @@ TEST_CASE("MonitoredItem service set (client)") {
                 [&](uint32_t, uint32_t) { deleted = true; }
             ).getMonitoredItemId();
 
-        CHECK(services::deleteMonitoredItem(client, subId, monId).isGood());
-        client.runIterate();
+        CHECK(services::deleteMonitoredItem(connection, subId, monId).isGood());
+        setup.client.runIterate();
         CHECK(deleted == true);
     }
 }

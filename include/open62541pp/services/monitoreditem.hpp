@@ -3,8 +3,13 @@
 #include <cstdint>
 #include <functional>
 
+#include "open62541pp/async.hpp"
 #include "open62541pp/common.hpp"  // TimestampsToReturn, MonitoringMode
 #include "open62541pp/config.hpp"
+#include "open62541pp/services/detail/async_transform.hpp"
+#include "open62541pp/services/detail/client_service.hpp"
+#include "open62541pp/services/detail/request_handling.hpp"
+#include "open62541pp/services/detail/response_handling.hpp"
 #include "open62541pp/span.hpp"
 #include "open62541pp/types.hpp"
 #include "open62541pp/types_composed.hpp"
@@ -198,6 +203,30 @@ ModifyMonitoredItemsResponse modifyMonitoredItems(
 ) noexcept;
 
 /**
+ * Asynchronously modify monitored items of a subscription.
+ *
+ * @copydetails modifyMonitoredItems(Client&, const ModifyMonitoredItemsRequest&)
+ * @param token @completiontoken{void(ModifyMonitoredItemsResponse&)}
+ * @return @asyncresult{ModifyMonitoredItemsResponse}
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+auto modifyMonitoredItemsAsync(
+    Client& connection,
+    const ModifyMonitoredItemsRequest& request,
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    return detail::AsyncServiceAdapter<ModifyMonitoredItemsResponse>::initiate(
+        connection,
+        [&](UA_ClientAsyncServiceCallback callback, void* userdata) {
+            throwIfBad(UA_Client_MonitoredItems_modify_async(
+                opcua::detail::getHandle(connection), asNative(request), callback, userdata, nullptr
+            ));
+        },
+        std::forward<CompletionToken>(token)
+    );
+}
+
+/**
  * Modify a monitored item of a subscription.
  *
  * @param connection Instance of type Client
@@ -205,12 +234,48 @@ ModifyMonitoredItemsResponse modifyMonitoredItems(
  * @param monitoredItemId Identifier of the monitored item
  * @param parameters Monitoring parameters
  */
-MonitoredItemModifyResult modifyMonitoredItem(
+inline MonitoredItemModifyResult modifyMonitoredItem(
     Client& connection,
     uint32_t subscriptionId,
     uint32_t monitoredItemId,
     const MonitoringParametersEx& parameters
-) noexcept;
+) noexcept {
+    auto item = detail::createMonitoredItemModifyRequest(monitoredItemId, parameters);
+    auto request = detail::createModifyMonitoredItemsRequest(subscriptionId, parameters, item);
+    auto response = modifyMonitoredItems(
+        connection, asWrapper<ModifyMonitoredItemsRequest>(request)
+    );
+    return detail::wrapSingleResultWithStatus<MonitoredItemModifyResult>(response);
+}
+
+/**
+ * Asynchronously a monitored item of a subscription.
+ *
+ * @copydetails modifyMonitoredItems(Client&, uint32_t, uint32_t, const MonitoringParametersEx&)
+ * @param token @completiontoken{void(MonitoredItemModifyResult&)}
+ * @return @asyncresult{MonitoredItemModifyResult}
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+auto modifyMonitoredItemAsync(
+    Client& connection,
+    uint32_t subscriptionId,
+    uint32_t monitoredItemId,
+    const MonitoringParametersEx& parameters,
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    auto item = detail::createMonitoredItemModifyRequest(monitoredItemId, parameters);
+    auto request = detail::createModifyMonitoredItemsRequest(subscriptionId, parameters, item);
+    return modifyMonitoredItemsAsync(
+        connection,
+        asWrapper<ModifyMonitoredItemsRequest>(request),
+        detail::TransformToken(
+            detail::wrapSingleResultWithStatus<
+                MonitoredItemModifyResult,
+                UA_ModifyMonitoredItemsResponse>,
+            std::forward<CompletionToken>(token)
+        )
+    );
+}
 
 /**
  * @}

@@ -11,9 +11,6 @@
 #include "open62541pp/detail/client_context.hpp"
 #include "open62541pp/detail/server_context.hpp"
 #include "open62541pp/server.hpp"
-#include "open62541pp/services/detail/client_service.hpp"
-#include "open62541pp/services/detail/request_handling.hpp"
-#include "open62541pp/services/detail/response_handling.hpp"
 #include "open62541pp/types.hpp"  // StatusCode
 
 namespace opcua::services {
@@ -219,20 +216,6 @@ ModifyMonitoredItemsResponse modifyMonitoredItems(
     Client& connection, const ModifyMonitoredItemsRequest& request
 ) noexcept {
     return UA_Client_MonitoredItems_modify(connection.handle(), request);
-}
-
-MonitoredItemModifyResult modifyMonitoredItem(
-    Client& connection,
-    uint32_t subscriptionId,
-    uint32_t monitoredItemId,
-    const MonitoringParametersEx& parameters
-) noexcept {
-    auto item = detail::createMonitoredItemModifyRequest(monitoredItemId, parameters);
-    auto request = detail::createModifyMonitoredItemsRequest(subscriptionId, parameters, item);
-    auto response = modifyMonitoredItems(
-        connection, asWrapper<ModifyMonitoredItemsRequest>(request)
-    );
-    return detail::wrapSingleResultWithStatus<MonitoredItemModifyResult>(response);
 }
 
 SetMonitoringModeResponse setMonitoringMode(
