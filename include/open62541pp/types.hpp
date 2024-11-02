@@ -905,17 +905,10 @@ template <typename T>
 static constexpr bool isCopyableOrConvertible = detail::isRegisteredType<T> ||
     detail::isConvertibleType<T>;
 
-template <VariantPolicy>
-struct VariantHandler;
 }  // namespace detail
 
 // TODO:
 // Preparations for constructor tags.
-
-struct CopyTag {};
-
-// TODO conflict if we want to use copy with opcua::copy(const UA_)
-static constexpr CopyTag copyTag{};
 
 struct ReferenceTag {};
 
@@ -927,23 +920,12 @@ template <typename T>
 struct VariantPolicySelector;
 
 template <>
-struct VariantPolicySelector<CopyTag> {
-    static constexpr VariantPolicy policy = VariantPolicy::Copy;
-};
-
-template <>
 struct VariantPolicySelector<ReferenceTag> {
     static constexpr VariantPolicy policy = VariantPolicy::Reference;
 };
 
 template <VariantPolicy Policy>
 struct ConstructorTagSelector;
-
-template <>
-struct ConstructorTagSelector<VariantPolicy::Copy> {
-    using Tag = CopyTag;
-    static constexpr Tag tag = opcua::copyTag;
-};
 
 template <>
 struct ConstructorTagSelector<VariantPolicy::Reference> {
@@ -1202,49 +1184,35 @@ public:
     }
 
     // Unified API for setting a value.
-    // A template parameter is used to select the variant
-    // policy instead of using additional functions with "Copy" suffix.
-    // Default policy is Copy for more robust behavior (avoid potential dangling references and
-    // opt-in for memory optimization).
 
-    template <typename T, VariantPolicy Policy = VariantPolicy::Reference>
+    template <typename T>
     void setValue(T&& value) {
-        detail::VariantHandler<Policy>::setValue(*this, std::forward<T>(value));
+        setValueImpl(std::forward<T>(value));
     }
 
-    template <typename T, VariantPolicy Policy = VariantPolicy::Reference>
+    template <typename T>
     void setValue(T&& value, const UA_DataType& dataType) {
-        detail::VariantHandler<Policy>::setValue(*this, std::forward<T>(value), dataType);
+        setValueImpl(std::forward<T>(value), dataType);
     }
 
-    template <typename InputIt, VariantPolicy Policy = VariantPolicy::Reference>
-    void setValue(InputIt first, InputIt last) {
-        detail::VariantHandler<Policy>::setArray(*this, first, last);
-    }
-
-    template <typename InputIt, VariantPolicy Policy = VariantPolicy::Reference>
-    void setValue(InputIt first, InputIt last, const UA_DataType& dataType) {
-        detail::VariantHandler<Policy>::setArray(*this, first, last, dataType);
-    }
-
-    template <typename T, VariantPolicy Policy = VariantPolicy::Copy>
+    template <typename T>
     void setValueCopy(T&& value) {
-        detail::VariantHandler<Policy>::setValue(*this, std::forward<T>(value));
+        setValueCopyImpl(std::forward<T>(value));
     }
 
-    template <typename T, VariantPolicy Policy = VariantPolicy::Copy>
+    template <typename T>
     void setValueCopy(T&& value, const UA_DataType& dataType) {
-        detail::VariantHandler<Policy>::setValue(*this, std::forward<T>(value), dataType);
+        setValueCopyImpl(std::forward<T>(value), dataType);
     }
 
-    template <typename InputIt, VariantPolicy Policy = VariantPolicy::Copy>
+    template <typename InputIt>
     void setValueCopy(InputIt first, InputIt last) {
-        detail::VariantHandler<Policy>::setArray(*this, first, last);
+        setArrayCopy(first, last);
     }
 
-    template <typename InputIt, VariantPolicy Policy = VariantPolicy::Copy>
+    template <typename InputIt>
     void setValueCopy(InputIt first, InputIt last, const UA_DataType& dataType) {
-        detail::VariantHandler<Policy>::setArray(*this, first, last, dataType);
+        setArrayCopy(first, last, dataType);
     }
 
     /// Assign scalar value to variant (no copy).
@@ -1409,6 +1377,36 @@ private:
     template <typename T>
     inline std::vector<T> getArrayCopyImpl() const;
 
+    template <typename T, typename... Args>
+    void setValueImpl(T&& value, Args&&... args) {
+        using Decayed = std::decay_t<T>;
+
+        if constexpr (detail::isContainer<Decayed> && !detail::isCopyableOrConvertible<Decayed>) {
+            if constexpr (detail::IsContiguousContainer<Decayed>::value) {
+                setArray(Span{std::forward<T>(value)}, std::forward<Args>(args)...);
+            } else {
+                setArray(value.begin(), value.end(), std::forward<Args>(args)...);
+            }
+        } else {
+            setScalar(std::forward<T>(value), std::forward<Args>(args)...);
+        }
+    }
+
+    template <typename T, typename... Args>
+    void setValueCopyImpl(T&& value, Args&&... args) {
+        using Decayed = std::decay_t<T>;
+
+        if constexpr (detail::isContainer<Decayed> && !detail::isCopyableOrConvertible<Decayed>) {
+            if constexpr (detail::IsContiguousContainer<Decayed>::value) {
+                setArrayCopy(Span{std::forward<T>(value)}, std::forward<Args>(args)...);
+            } else {
+                setArrayCopy(value.begin(), value.end(), std::forward<Args>(args)...);
+            }
+        } else {
+            setScalarCopy(std::forward<T>(value), std::forward<Args>(args)...);
+        }
+    }
+
     template <typename T>
     inline void setScalarImpl(
         T* data, const UA_DataType& dataType, UA_VariantStorageType storageType
@@ -1521,118 +1519,6 @@ void Variant::setArrayCopyConvertImpl(InputIt first, InputIt last) {
     }
     setArrayImpl(native.release(), size, dataType, UA_VARIANT_DATA);  // move ownership
 }
-
-namespace detail {
-
-template <VariantPolicy Policy>
-struct VariantHandlerBase;
-
-template <>
-struct VariantHandlerBase<VariantPolicy::Copy> {
-    template <typename T, typename Variant>
-    static decltype(auto) getScalar(Variant&& var) {
-        return std::forward<Variant>(var).template getScalarCopy<T>();
-    }
-
-    template <typename T, typename Variant>
-    static decltype(auto) getArray(Variant&& var) {
-        return std::forward<Variant>(var).template getArrayCopy<typename T::value_type>();
-    }
-
-    template <typename T>
-    static void setScalar(Variant& var, const T& value) {
-        var.setScalarCopy(value);
-    }
-
-    template <typename T>
-    static void setScalar(Variant& var, const T& value, const UA_DataType& dtype) {
-        var.setScalarCopy(value, dtype);
-    }
-
-    template <typename T>
-    static void setArray(Variant& var, Span<T> array) {
-        var.setArrayCopy(array.begin(), array.end());
-    }
-
-    template <typename T>
-    static void setArray(Variant& var, Span<T> array, const UA_DataType& dtype) {
-        var.setArrayCopy(array.begin(), array.end(), dtype);
-    }
-
-    template <typename InputIt>
-    static void setArray(Variant& var, InputIt first, InputIt last) {
-        var.setArrayCopy(first, last);
-    }
-
-    template <typename InputIt>
-    static void setArray(Variant& var, InputIt first, InputIt last, const UA_DataType& dtype) {
-        var.setArrayCopy(first, last, dtype);
-    }
-};
-
-template <>
-struct VariantHandlerBase<VariantPolicy::Reference> {
-    template <typename T, typename Variant>
-    static decltype(auto) getScalar(Variant&& var) {
-        return std::forward<Variant>(var).template getScalar<T>();
-    }
-
-    template <typename T, typename Variant>
-    static decltype(auto) getArray(Variant&& var) {
-        return std::forward<Variant>(var).template getArray<typename T::value_type>();
-    }
-
-    template <typename T>
-    static void setScalar(Variant& var, T& value) noexcept {
-        var.setScalar(value);
-    }
-
-    template <typename T>
-    static void setScalar(Variant& var, T& value, const UA_DataType& dtype) noexcept {
-        var.setScalar(value, dtype);
-    }
-
-    template <typename T>
-    static void setArray(Variant& var, Span<T> array) noexcept {
-        var.setArray(array);
-    }
-
-    template <typename T>
-    static void setArray(Variant& var, Span<T> array, const UA_DataType& dtype) noexcept {
-        var.setArray(array, dtype);
-    }
-};
-
-template <VariantPolicy Policy>
-struct VariantHandler : public VariantHandlerBase<Policy> {
-    using Base = VariantHandlerBase<Policy>;
-
-    template <typename T, typename Variant>
-    static decltype(auto) getValue(Variant&& var) {
-        if constexpr (detail::isContainer<T> && !detail::isCopyableOrConvertible<T>) {
-            return Base::template getArray<T>(std::forward<Variant>(var));
-        } else {
-            return Base::template getScalar<T>(std::forward<Variant>(var));
-        }
-    }
-
-    template <typename T, typename... Args>
-    static void setValue(Variant& var, T&& value, Args&&... args) {
-        using Decayed = std::decay_t<T>;
-
-        if constexpr (isContainer<Decayed> && !isCopyableOrConvertible<Decayed>) {
-            if constexpr (detail::IsContiguousContainer<Decayed>::value) {
-                Base::setArray(var, Span{std::forward<T>(value)}, std::forward<Args>(args)...);
-            } else {
-                Base::setArray(var, value.begin(), value.end(), std::forward<Args>(args)...);
-            }
-        } else {
-            Base::setScalar(var, std::forward<T>(value), std::forward<Args>(args)...);
-        }
-    }
-};
-
-}  // namespace detail
 
 /* ------------------------------------------ DataValue ----------------------------------------- */
 
