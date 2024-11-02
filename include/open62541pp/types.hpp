@@ -1128,44 +1128,6 @@ public:
         return handle()->data;
     }
 
-    // Unified API for getting a value.
-    // A template parameter is used to select the variant
-    // policy instead of using additional functions with "Copy" suffix.
-    // Default policy is ReferenceIfPossible, which should work fine for most reference as well as
-    // copy scenarios. In most cases whether to copy or reference is decided by the variable
-    // data type that is assigned to.
-
-    template <typename T, VariantPolicy Policy = VariantPolicy::ReferenceIfPossible>
-    decltype(auto) getValue() & {
-        return detail::VariantHandler<Policy>::template getValue<T>(*this);
-    }
-
-    template <typename T, VariantPolicy Policy = VariantPolicy::ReferenceIfPossible>
-    decltype(auto) getValue() const& {
-        return detail::VariantHandler<Policy>::template getValue<T>(*this);
-    }
-
-    template <typename T, VariantPolicy Policy = VariantPolicy::ReferenceIfPossible>
-    decltype(auto) getValue() && {
-        return detail::VariantHandler<Policy>::template getValue<T>(std::move(*this));
-    }
-
-    // Additional API option with output param, to remove the need for specifying T.
-    template <typename T, VariantPolicy Policy = VariantPolicy::ReferenceIfPossible>
-    void getValue(T& value) & {
-        value = detail::VariantHandler<Policy>::template getValue<T>(*this);
-    }
-
-    template <typename T, VariantPolicy Policy = VariantPolicy::ReferenceIfPossible>
-    void getValue(T& value) const& {
-        value = detail::VariantHandler<Policy>::template getValue<T>(*this);
-    }
-
-    template <typename T, VariantPolicy Policy = VariantPolicy::ReferenceIfPossible>
-    void getValue(T& value) && {
-        value = std::move(detail::VariantHandler<Policy>::template getValue<T>(std::move(*this)));
-    }
-
     /// Get reference to scalar value with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not a scalar or not of type `T`.
     template <typename T>
