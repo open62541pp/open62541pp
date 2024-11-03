@@ -278,6 +278,14 @@ inline UA_SetPublishingModeRequest createSetPublishingModeRequest(
     return request;
 }
 
+inline UA_DeleteSubscriptionsRequest createDeleteSubscriptionsRequest(uint32_t& subscriptionId
+) noexcept {
+    UA_DeleteSubscriptionsRequest request{};
+    request.subscriptionIdsSize = 1;
+    request.subscriptionIds = &subscriptionId;
+    return request;
+}
+
 template <typename MonitoringParameters>
 inline void copyMonitoringParametersToNative(
     const MonitoringParameters& parameters, UA_MonitoringParameters& native
@@ -298,6 +306,19 @@ UA_MonitoredItemCreateRequest createMonitoredItemCreateRequest(
     request.itemToMonitor = itemToMonitor;
     request.monitoringMode = static_cast<UA_MonitoringMode>(monitoringMode);
     copyMonitoringParametersToNative(parameters, request.requestedParameters);
+    return request;
+}
+
+inline UA_CreateMonitoredItemsRequest createCreateMonitoredItemsRequest(
+    uint32_t subscriptionId,
+    TimestampsToReturn timestampsToReturn,
+    Span<const UA_MonitoredItemCreateRequest> itemsToCreate
+) noexcept {
+    UA_CreateMonitoredItemsRequest request{};
+    request.subscriptionId = subscriptionId;
+    request.timestampsToReturn = static_cast<UA_TimestampsToReturn>(timestampsToReturn);
+    request.itemsToCreateSize = itemsToCreate.size();
+    request.itemsToCreate = getPointer(itemsToCreate);
     return request;
 }
 
@@ -350,11 +371,13 @@ inline UA_SetTriggeringRequest createSetTriggeringRequest(
     return request;
 }
 
-inline UA_DeleteSubscriptionsRequest createDeleteSubscriptionsRequest(uint32_t& subscriptionId
+inline UA_DeleteMonitoredItemsRequest createDeleteMonitoredItemsRequest(
+    uint32_t subscriptionId, Span<const uint32_t> monitoredItemIds
 ) noexcept {
-    UA_DeleteSubscriptionsRequest request{};
-    request.subscriptionIdsSize = 1;
-    request.subscriptionIds = &subscriptionId;
+    UA_DeleteMonitoredItemsRequest request{};
+    request.subscriptionId = subscriptionId;
+    request.monitoredItemIdsSize = monitoredItemIds.size();
+    request.monitoredItemIds = getPointer(monitoredItemIds);
     return request;
 }
 

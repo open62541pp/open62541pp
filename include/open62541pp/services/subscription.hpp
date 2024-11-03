@@ -85,7 +85,7 @@ std::unique_ptr<SubscriptionContext> createSubscriptionContext(
     DeleteSubscriptionCallback&& deleteCallback
 );
 
-void insertSubscriptionContext(
+void storeSubscriptionContext(
     Client& connection, uint32_t subscriptionId, std::unique_ptr<SubscriptionContext>&& context
 );
 }  // namespace detail
@@ -117,7 +117,7 @@ void insertSubscriptionContext(
 /**
  * Asynchronously create a subscription.
  * @copydetails createSubscription(Client&, const CreateSubscriptionRequest&,
- *                                 StatusChangeNotificationCallback, DeleteSubscriptionCallback)
+ *              StatusChangeNotificationCallback, DeleteSubscriptionCallback)
  * @param token @completiontoken{void(CreateSubscriptionResponse&)}
  * @return @asyncresult{CreateSubscriptionResponse}
  */
@@ -149,7 +149,7 @@ auto createSubscriptionAsync(
         detail::HookToken(
             [&, context = std::move(context)](const CreateSubscriptionResponse& response) mutable {
                 if (detail::getServiceResult(response).isGood()) {
-                    detail::insertSubscriptionContext(
+                    detail::storeSubscriptionContext(
                         connection, response.getSubscriptionId(), std::move(context)
                     );
                 }
