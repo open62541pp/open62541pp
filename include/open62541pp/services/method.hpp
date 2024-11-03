@@ -45,12 +45,8 @@ CallResponse call(Client& connection, const CallRequest& request) noexcept;
  * @param token @completiontoken{void(CallResponse&)}
  * @return @asyncresult{CallResponse}
  */
-template <typename CompletionToken = DefaultCompletionToken>
-auto callAsync(
-    Client& connection,
-    const CallRequest& request,
-    CompletionToken&& token = DefaultCompletionToken()
-) {
+template <typename CompletionToken>
+auto callAsync(Client& connection, const CallRequest& request, CompletionToken&& token) {
     return detail::sendRequestAsync<CallRequest, CallResponse>(
         connection, request, std::forward<CompletionToken>(token)
     );
@@ -78,13 +74,13 @@ CallMethodResult call(
  * @param token @completiontoken{void(CallMethodResult&)}
  * @return @asyncresult{CallMethodResult}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto callAsync(
     Client& connection,
     const NodeId& objectId,
     const NodeId& methodId,
     Span<const Variant> inputArguments,
-    CompletionToken&& token = DefaultCompletionToken()
+    CompletionToken&& token
 ) {
     auto item = detail::createCallMethodRequest(objectId, methodId, inputArguments);
     const auto request = detail::createCallRequest(item);

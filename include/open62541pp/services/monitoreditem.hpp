@@ -147,7 +147,7 @@ void storeMonitoredItemContexts(
     Client& connection,
     const CreateMonitoredItemsRequest& request,
     DataChangeNotificationCallback dataChangeCallback,
-    DeleteMonitoredItemCallback deleteCallback = {}
+    DeleteMonitoredItemCallback deleteCallback
 );
 
 #if UAPP_OPEN62541_VER_GE(1, 1)
@@ -157,13 +157,13 @@ void storeMonitoredItemContexts(
  * @param token @completiontoken{void(CreateMonitoredItemsResponse&)}
  * @return @asyncresult{CreateMonitoredItemsResponse}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto createMonitoredItemsDataChangeAsync(
     Client& connection,
     const CreateMonitoredItemsRequest& request,
     DataChangeNotificationCallback dataChangeCallback,
-    DeleteMonitoredItemCallback deleteCallback = {},
-    CompletionToken&& token = DefaultCompletionToken()
+    DeleteMonitoredItemCallback deleteCallback,
+    CompletionToken&& token
 ) {
     auto contexts = detail::createMonitoredItemContexts(
         connection, request, std::move(dataChangeCallback), {}, std::move(deleteCallback)
@@ -222,7 +222,7 @@ template <typename T>
     MonitoringMode monitoringMode,
     const MonitoringParametersEx& parameters,
     DataChangeNotificationCallback dataChangeCallback,
-    DeleteMonitoredItemCallback deleteCallback = {}
+    DeleteMonitoredItemCallback deleteCallback
 );
 
 #if UAPP_OPEN62541_VER_GE(1, 1)
@@ -233,7 +233,7 @@ template <typename T>
  * @param token @completiontoken{void(MonitoredItemCreateResult&)}
  * @return @asyncresult{MonitoredItemCreateResult}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto createMonitoredItemDataChangeAsync(
     Client& connection,
     uint32_t subscriptionId,
@@ -241,8 +241,8 @@ auto createMonitoredItemDataChangeAsync(
     MonitoringMode monitoringMode,
     const MonitoringParametersEx& parameters,
     DataChangeNotificationCallback dataChangeCallback,
-    DeleteMonitoredItemCallback deleteCallback = {},
-    CompletionToken&& token = DefaultCompletionToken()
+    DeleteMonitoredItemCallback deleteCallback,
+    CompletionToken&& token
 ) {
     auto item = detail::createMonitoredItemCreateRequest(itemToMonitor, monitoringMode, parameters);
     const auto request = detail::createCreateMonitoredItemsRequest(
@@ -275,7 +275,7 @@ auto createMonitoredItemDataChangeAsync(
     Client& connection,
     const CreateMonitoredItemsRequest& request,
     EventNotificationCallback eventCallback,
-    DeleteMonitoredItemCallback deleteCallback = {}
+    DeleteMonitoredItemCallback deleteCallback
 );
 
 #if UAPP_OPEN62541_VER_GE(1, 1)
@@ -285,13 +285,13 @@ auto createMonitoredItemDataChangeAsync(
  * @param token @completiontoken{void(CreateMonitoredItemsResponse&)}
  * @return @asyncresult{CreateMonitoredItemsResponse}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto createMonitoredItemsEventAsync(
     Client& connection,
     const CreateMonitoredItemsRequest& request,
     EventNotificationCallback eventCallback,
-    DeleteMonitoredItemCallback deleteCallback = {},
-    CompletionToken&& token = DefaultCompletionToken()
+    DeleteMonitoredItemCallback deleteCallback,
+    CompletionToken&& token
 ) {
     auto contexts = detail::createMonitoredItemContexts(
         connection, request, {}, std::move(eventCallback), std::move(deleteCallback)
@@ -357,7 +357,7 @@ auto createMonitoredItemsEventAsync(
  * @param token @completiontoken{void(MonitoredItemCreateResult&)}
  * @return @asyncresult{MonitoredItemCreateResult}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto createMonitoredItemEventAsync(
     Client& connection,
     uint32_t subscriptionId,
@@ -365,8 +365,8 @@ auto createMonitoredItemEventAsync(
     MonitoringMode monitoringMode,
     const MonitoringParametersEx& parameters,
     EventNotificationCallback eventCallback,
-    DeleteMonitoredItemCallback deleteCallback = {},
-    CompletionToken&& token = DefaultCompletionToken()
+    DeleteMonitoredItemCallback deleteCallback,
+    CompletionToken&& token
 ) {
     auto item = detail::createMonitoredItemCreateRequest(itemToMonitor, monitoringMode, parameters);
     const auto request = detail::createCreateMonitoredItemsRequest(
@@ -410,11 +410,9 @@ ModifyMonitoredItemsResponse modifyMonitoredItems(
  * @param token @completiontoken{void(ModifyMonitoredItemsResponse&)}
  * @return @asyncresult{ModifyMonitoredItemsResponse}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto modifyMonitoredItemsAsync(
-    Client& connection,
-    const ModifyMonitoredItemsRequest& request,
-    CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const ModifyMonitoredItemsRequest& request, CompletionToken&& token
 ) {
     return detail::AsyncServiceAdapter<ModifyMonitoredItemsResponse>::initiate(
         connection,
@@ -456,13 +454,13 @@ inline MonitoredItemModifyResult modifyMonitoredItem(
  * @param token @completiontoken{void(MonitoredItemModifyResult&)}
  * @return @asyncresult{MonitoredItemModifyResult}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto modifyMonitoredItemAsync(
     Client& connection,
     uint32_t subscriptionId,
     uint32_t monitoredItemId,
     const MonitoringParametersEx& parameters,
-    CompletionToken&& token = DefaultCompletionToken()
+    CompletionToken&& token
 ) {
     auto item = detail::createMonitoredItemModifyRequest(monitoredItemId, parameters);
     auto request = detail::createModifyMonitoredItemsRequest(subscriptionId, parameters, item);
@@ -502,11 +500,9 @@ SetMonitoringModeResponse setMonitoringMode(
  * @param token @completiontoken{void(SetMonitoringModeResponse&)}
  * @return @asyncresult{SetMonitoringModeResponse}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto setMonitoringModeAsync(
-    Client& connection,
-    const SetMonitoringModeRequest& request,
-    CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const SetMonitoringModeRequest& request, CompletionToken&& token
 ) {
     return detail::sendRequestAsync<SetMonitoringModeRequest, SetMonitoringModeResponse>(
         connection, request, std::forward<CompletionToken>(token)
@@ -540,13 +536,13 @@ inline StatusCode setMonitoringMode(
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto setMonitoringModeAsync(
     Client& connection,
     uint32_t subscriptionId,
     uint32_t monitoredItemId,
     MonitoringMode monitoringMode,
-    CompletionToken&& token = DefaultCompletionToken()
+    CompletionToken&& token
 ) {
     const auto request = detail::createSetMonitoringModeRequest(
         subscriptionId, {&monitoredItemId, 1}, monitoringMode
@@ -586,11 +582,9 @@ SetTriggeringResponse setTriggering(
  * @param token @completiontoken{void(SetTriggeringResponse&)}
  * @return @asyncresult{SetTriggeringResponse}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto setTriggeringAsync(
-    Client& connection,
-    const SetTriggeringRequest& request,
-    CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const SetTriggeringRequest& request, CompletionToken&& token
 ) {
     return detail::sendRequestAsync<SetTriggeringRequest, SetTriggeringResponse>(
         connection, request, std::forward<CompletionToken>(token)
@@ -621,11 +615,9 @@ DeleteMonitoredItemsResponse deleteMonitoredItems(
  * @param token @completiontoken{void(DeleteMonitoredItemsResponse&)}
  * @return @asyncresult{DeleteMonitoredItemsResponse}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto deleteMonitoredItemsAsync(
-    Client& connection,
-    const DeleteMonitoredItemsRequest& request,
-    CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const DeleteMonitoredItemsRequest& request, CompletionToken&& token
 ) {
     return detail::AsyncServiceAdapter<DeleteMonitoredItemsResponse>::initiate(
         connection,
@@ -656,12 +648,9 @@ StatusCode deleteMonitoredItem(T& connection, uint32_t subscriptionId, uint32_t 
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto deleteMonitoredItemAsync(
-    Client& connection,
-    uint32_t subscriptionId,
-    uint32_t monitoredItemId,
-    CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, uint32_t subscriptionId, uint32_t monitoredItemId, CompletionToken&& token
 ) {
     const auto request = detail::createDeleteMonitoredItemsRequest(
         subscriptionId, {&monitoredItemId, 1}

@@ -97,7 +97,8 @@ public:
             {id, attribute},
             monitoringMode,
             parameters,
-            std::move(onDataChange)
+            std::move(onDataChange),
+            {}
         );
         result.getStatusCode().throwIfBad();
         return {connection(), subscriptionId(), result.getMonitoredItemId()};

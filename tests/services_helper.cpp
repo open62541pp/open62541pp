@@ -74,13 +74,17 @@ TEST_CASE("Response handling") {
 
     SUBCASE("wrapSingleResultWithStatus") {
         CHECK_EQ(
-            services::detail::wrapSingleResultWithStatus<AddNodesResult>(response).getStatusCode().get(),
+            services::detail::wrapSingleResultWithStatus<AddNodesResult>(response)
+                .getStatusCode()
+                .get(),
             UA_STATUSCODE_GOOD
         );
 
         response.responseHeader.serviceResult = UA_STATUSCODE_BADINTERNALERROR;
         CHECK_EQ(
-            services::detail::wrapSingleResultWithStatus<AddNodesResult>(response).getStatusCode().get(),
+            services::detail::wrapSingleResultWithStatus<AddNodesResult>(response)
+                .getStatusCode()
+                .get(),
             UA_STATUSCODE_BADINTERNALERROR
         );
     }

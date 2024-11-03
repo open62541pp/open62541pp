@@ -25,7 +25,16 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
 
     // add variable node to test data change notifications
     const NodeId id{1, 1000};
-    services::addVariable(server, {0, UA_NS0ID_OBJECTSFOLDER}, id, "Variable").value();
+    services::addVariable(
+        server,
+        {0, UA_NS0ID_OBJECTSFOLDER},
+        id,
+        "Variable",
+        {},
+        VariableTypeId::BaseDataVariableType,
+        ReferenceTypeId::HasComponent
+    )
+        .value();
 
     const services::SubscriptionParameters subscriptionParameters{};
     services::MonitoringParametersEx monitoringParameters{};
@@ -38,13 +47,15 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
             {id, AttributeId::Value},
             MonitoringMode::Reporting,
             monitoringParameters,
+            {},
             {}
         );
         CHECK(result.getStatusCode().isBad());
     }
 
     const auto subId =
-        services::createSubscription(connection, subscriptionParameters).getSubscriptionId();
+        services::createSubscription(connection, subscriptionParameters, true, {}, {})
+            .getSubscriptionId();
     CAPTURE(subId);
 
     SUBCASE("createMonitoredItemDataChange") {
@@ -64,7 +75,9 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
                 {id, AttributeId::Value},
                 MonitoringMode::Reporting,
                 monitoringParameters,
-                callback
+                callback,
+                {},
+                useFuture
             );
             setup.client.runIterate();
             result = future.get();
@@ -76,7 +89,8 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
                 {id, AttributeId::Value},
                 MonitoringMode::Reporting,
                 monitoringParameters,
-                callback
+                callback,
+                {}
             );
         }
         CHECK(result.getStatusCode().isGood());
@@ -118,7 +132,9 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
                 {ObjectId::Server, AttributeId::EventNotifier},
                 MonitoringMode::Reporting,
                 monitoringParameters,
-                callback
+                callback,
+                {},
+                useFuture
             );
             setup.client.runIterate();
             result = future.get();
@@ -130,7 +146,8 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
                 {ObjectId::Server, AttributeId::EventNotifier},
                 MonitoringMode::Reporting,
                 monitoringParameters,
-                callback
+                callback,
+                {}
             );
         }
         CHECK(result.getStatusCode().isGood());
@@ -153,6 +170,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
                 {id, AttributeId::Value},
                 MonitoringMode::Reporting,
                 monitoringParameters,
+                {},
                 {}
             )
                 .getMonitoredItemId();
@@ -164,7 +182,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
         if constexpr (isAsync<T>) {
 #if UAPP_OPEN62541_VER_GE(1, 1)
             auto future = services::modifyMonitoredItemAsync(
-                connection, subId, monId, modifiedParameters
+                connection, subId, monId, modifiedParameters, useFuture
             );
             setup.client.runIterate();
             result = future.get();
@@ -183,6 +201,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
                 {id, AttributeId::Value},
                 MonitoringMode::Reporting,
                 monitoringParameters,
+                {},
                 {}
             )
                 .getMonitoredItemId();
@@ -190,7 +209,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
 
         if constexpr (isAsync<T>) {
             auto future = services::setMonitoringModeAsync(
-                connection, subId, monId, MonitoringMode::Disabled
+                connection, subId, monId, MonitoringMode::Disabled, useFuture
             );
             setup.client.runIterate();
             CHECK(future.get().isGood());
@@ -212,8 +231,10 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
                 {VariableId::Server_ServerStatus_CurrentTime, AttributeId::Value},
                 MonitoringMode::Reporting,
                 monitoringParameters,
-                [&](uint32_t, uint32_t, const DataValue&) { notificationCountTriggering++; }
-            ).getMonitoredItemId();
+                [&](uint32_t, uint32_t, const DataValue&) { notificationCountTriggering++; },
+                {}
+            )
+                .getMonitoredItemId();
         CAPTURE(monIdTriggering);
         // set triggered item's monitoring mode to sampling
         // -> will only report if triggered by triggering item
@@ -225,8 +246,10 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
                 {id, AttributeId::Value},
                 MonitoringMode::Sampling,
                 monitoringParameters,
-                [&](uint32_t, uint32_t, const DataValue&) { notificationCount++; }
-            ).getMonitoredItemId();
+                [&](uint32_t, uint32_t, const DataValue&) { notificationCount++; },
+                {}
+            )
+                .getMonitoredItemId();
         CAPTURE(monId);
 
         setup.client.runIterate();
@@ -242,7 +265,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
         );
         SetTriggeringResponse response;
         if constexpr (isAsync<T>) {
-            auto future = services::setTriggeringAsync(connection, request);
+            auto future = services::setTriggeringAsync(connection, request, useFuture);
             setup.client.runIterate();
             response = future.get();
         } else {
@@ -278,13 +301,11 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
                 [&](uint32_t, uint32_t) { deleted = true; }
             ).getMonitoredItemId();
 
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<T> && UAPP_OPEN62541_VER_GE(1, 1)) {
 #if UAPP_OPEN62541_VER_GE(1, 1)
-            auto future = services::deleteMonitoredItemAsync(connection, subId, monId);
+            auto future = services::deleteMonitoredItemAsync(connection, subId, monId, useFuture);
             setup.client.runIterate();
             CHECK(future.get().isGood());
-#else
-            CHECK(services::deleteMonitoredItem(connection, subId, monId).isGood());
 #endif
         } else {
             CHECK(services::deleteMonitoredItem(connection, subId, monId).isGood());
@@ -297,7 +318,16 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
 TEST_CASE("MonitoredItem service set (server)") {
     Server server;
     const NodeId id{1, 1000};
-    services::addVariable(server, {0, UA_NS0ID_OBJECTSFOLDER}, id, "Variable").value();
+    services::addVariable(
+        server,
+        {0, UA_NS0ID_OBJECTSFOLDER},
+        id,
+        "Variable",
+        {},
+        VariableTypeId::BaseDataVariableType,
+        ReferenceTypeId::HasComponent
+    )
+        .value();
 
     services::MonitoringParametersEx monitoringParameters{};
     monitoringParameters.samplingInterval = 0.0;  // fastest
@@ -311,8 +341,10 @@ TEST_CASE("MonitoredItem service set (server)") {
                 {id, AttributeId::Value},
                 MonitoringMode::Reporting,
                 monitoringParameters,
-                [&](uint32_t, uint32_t, const DataValue&) { notificationCount++; }
-            ).getMonitoredItemId();
+                [&](uint32_t, uint32_t, const DataValue&) { notificationCount++; },
+                {}
+            )
+                .getMonitoredItemId();
         CAPTURE(monId);
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
         services::writeValue(server, id, Variant::fromScalar(11.11)).throwIfBad();
@@ -333,6 +365,7 @@ TEST_CASE("MonitoredItem service set (server)") {
                 {id, AttributeId::Value},
                 MonitoringMode::Reporting,
                 monitoringParameters,
+                {},
                 {}
             )
                 .getMonitoredItemId();

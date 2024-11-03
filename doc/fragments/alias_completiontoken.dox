@@ -1,3 +1,3 @@
 The @ref async_model "completion token" that will be used to produce a completion handler, which will be called when the operation completes.
-Potential completion tokens include @ref useFuture (default), @ref useDeferred, @ref useDetached, or a function (object) with the correct completion signature.
+Potential completion tokens include @ref useFuture, @ref useDeferred, @ref useDetached, or a function (object) with the correct completion signature.
 The function signature of the completion handler must be:

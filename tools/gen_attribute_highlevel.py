@@ -80,10 +80,8 @@ Result<{type}> read{attr}(T& connection, const NodeId& id) noexcept {{
  * @return @asyncresult{{Result<{type}>}}
  * @ingroup Read
  */
-template <typename CompletionToken = DefaultCompletionToken>
-auto read{attr}Async(
-    Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
-) {{
+template <typename CompletionToken>
+auto read{attr}Async(Client& connection, const NodeId& id, CompletionToken&& token) {{
     return detail::readAttributeAsyncImpl<AttributeId::{attr}>(
         connection, id, std::forward<CompletionToken>(token)
     );
@@ -110,13 +108,8 @@ StatusCode write{attr}(T& connection, const NodeId& id, {param_type} {param_name
  * @return @asyncresult{{StatusCode}}
  * @ingroup Write
  */
-template <typename CompletionToken = DefaultCompletionToken>
-auto write{attr}Async(
-    Client& connection,
-    const NodeId& id,
-    {param_type} {param_name},
-    CompletionToken&& token = DefaultCompletionToken()
-) {{
+template <typename CompletionToken>
+auto write{attr}Async(Client& connection, const NodeId& id, {param_type} {param_name}, CompletionToken&& token) {{
     return detail::writeAttributeAsyncImpl<AttributeId::{attr}>(
         connection, id, {param_name}, std::forward<CompletionToken>(token)
     );

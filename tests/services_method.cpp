@@ -37,13 +37,15 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
         },
         {
             Argument("sum", {"en-US", "sum of both numbers"}, DataTypeId::Int32, ValueRank::Scalar),
-        }
+        },
+        MethodAttributes{},
+        ReferenceTypeId::HasComponent
     )
         .value();
 
     auto call = [&](auto&&... args) {
         if constexpr (isAsync<T>) {
-            auto future = services::callAsync(std::forward<decltype(args)>(args)...);
+            auto future = services::callAsync(std::forward<decltype(args)>(args)..., useFuture);
             setup.client.runIterate();
             return future.get();
         } else {

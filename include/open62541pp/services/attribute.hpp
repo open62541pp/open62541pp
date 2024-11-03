@@ -47,9 +47,7 @@ ReadResponse read(Client& connection, const ReadRequest& request) noexcept;
 
 /// @overload
 inline ReadResponse read(
-    Client& connection,
-    Span<const ReadValueId> nodesToRead,
-    TimestampsToReturn timestamps = TimestampsToReturn::Neither
+    Client& connection, Span<const ReadValueId> nodesToRead, TimestampsToReturn timestamps
 ) noexcept {
     return read(connection, detail::createReadRequest(timestamps, nodesToRead));
 }
@@ -59,24 +57,20 @@ inline ReadResponse read(
  * @param token @completiontoken{void(ReadResponse&)}
  * @return @asyncresult{ReadResponse}
  */
-template <typename CompletionToken = DefaultCompletionToken>
-auto readAsync(
-    Client& connection,
-    const ReadRequest& request,
-    CompletionToken&& token = DefaultCompletionToken()
-) {
+template <typename CompletionToken>
+auto readAsync(Client& connection, const ReadRequest& request, CompletionToken&& token) {
     return detail::sendRequestAsync<ReadRequest, ReadResponse>(
         connection, request, std::forward<CompletionToken>(token)
     );
 }
 
 /// @overload
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto readAsync(
     Client& connection,
     Span<const ReadValueId> nodesToRead,
-    TimestampsToReturn timestamps = TimestampsToReturn::Neither,
-    CompletionToken&& token = DefaultCompletionToken()
+    TimestampsToReturn timestamps,
+    CompletionToken&& token
 ) {
     return readAsync(
         connection,
@@ -90,14 +84,11 @@ auto readAsync(
  * @param connection Instance of type Client (or Server)
  * @param id Node to read
  * @param attributeId Attribute to read
- * @param timestamps Timestamps to return
+ * @param timestamps Timestamps to return, e.g. TimestampsToReturn::Neither
  */
 template <typename T>
 Result<DataValue> readAttribute(
-    T& connection,
-    const NodeId& id,
-    AttributeId attributeId,
-    TimestampsToReturn timestamps = TimestampsToReturn::Neither
+    T& connection, const NodeId& id, AttributeId attributeId, TimestampsToReturn timestamps
 ) noexcept;
 
 /**
@@ -105,13 +96,13 @@ Result<DataValue> readAttribute(
  * @param token @completiontoken{void(Result<DataValue>&)}
  * @return @asyncresult{Result<DataValue>}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto readAttributeAsync(
     Client& connection,
     const NodeId& id,
     AttributeId attributeId,
-    TimestampsToReturn timestamps = TimestampsToReturn::Neither,
-    CompletionToken&& token = DefaultCompletionToken()
+    TimestampsToReturn timestamps,
+    CompletionToken&& token
 ) {
     auto item = detail::createReadValueId(id, attributeId);
     const auto request = detail::createReadRequest(timestamps, item);
@@ -163,24 +154,16 @@ inline WriteResponse write(Client& connection, Span<const WriteValue> nodesToWri
  * @param token @completiontoken{void(WriteResponse&)}
  * @return @asyncresult{WriteResponse}
  */
-template <typename CompletionToken = DefaultCompletionToken>
-auto writeAsync(
-    Client& connection,
-    const WriteRequest& request,
-    CompletionToken&& token = DefaultCompletionToken()
-) {
+template <typename CompletionToken>
+auto writeAsync(Client& connection, const WriteRequest& request, CompletionToken&& token) {
     return detail::sendRequestAsync<WriteRequest, WriteResponse>(
         connection, request, std::forward<CompletionToken>(token)
     );
 }
 
 /// @overload
-template <typename CompletionToken = DefaultCompletionToken>
-auto writeAsync(
-    Client& connection,
-    Span<const WriteValue> nodesToWrite,
-    CompletionToken&& token = DefaultCompletionToken()
-) {
+template <typename CompletionToken>
+auto writeAsync(Client& connection, Span<const WriteValue> nodesToWrite, CompletionToken&& token) {
     return writeAsync(
         connection, detail::createWriteRequest(nodesToWrite), std::forward<CompletionToken>(token)
     );
@@ -203,13 +186,13 @@ StatusCode writeAttribute(
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto writeAttributeAsync(
     Client& connection,
     const NodeId& id,
     AttributeId attributeId,
     const DataValue& value,
-    CompletionToken&& token = DefaultCompletionToken()
+    CompletionToken&& token
 ) {
     auto item = detail::createWriteValue(id, attributeId, value);
     const auto request = detail::createWriteRequest(item);
@@ -233,7 +216,8 @@ namespace detail {
 template <AttributeId Attribute, typename T>
 auto readAttributeImpl(T& connection, const NodeId& id) noexcept {
     using Handler = typename detail::AttributeHandler<Attribute>;
-    return readAttribute(connection, id, Attribute).andThen(Handler::fromDataValue);
+    return readAttribute(connection, id, Attribute, TimestampsToReturn::Neither)
+        .andThen(Handler::fromDataValue);
 }
 
 template <AttributeId Attribute, typename CompletionToken>
@@ -290,7 +274,7 @@ Result<DataValue> readDataValue(T& connection, const NodeId& id) noexcept {
  * @return @asyncresult{Result<DataValue>}
  * @ingroup Read
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto readDataValueAsync(Client& connection, const NodeId& id, CompletionToken&& token) {
     return readAttributeAsync(
         connection,
@@ -319,12 +303,9 @@ StatusCode writeDataValue(T& connection, const NodeId& id, const DataValue& valu
  * @return @asyncresult{StatusCode}
  * @ingroup Write
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto writeDataValueAsync(
-    Client& connection,
-    const NodeId& id,
-    const DataValue& value,
-    CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const NodeId& id, const DataValue& value, CompletionToken&& token
 ) {
     return writeAttributeAsync(
         connection, id, AttributeId::Value, value, std::forward<CompletionToken>(token)
