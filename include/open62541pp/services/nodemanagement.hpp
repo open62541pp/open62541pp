@@ -67,7 +67,6 @@ auto addNodesAsync(
 
 /**
  * Add a node.
- * @return Server-assigned NodeId of the added node
  * @param connection Instance of type Client (or Server)
  * @param nodeClass Node class
  * @param parentId Parent node
@@ -360,7 +359,6 @@ auto deleteReferenceAsync(
 
 /**
  * Add object.
- * @return Server-assigned NodeId of the added object node
  * @param connection Instance of type Client (or Server)
  * @param parentId Parent node
  * @param id Requested NodeId of the object node to add
@@ -423,7 +421,6 @@ auto addObjectAsync(
 
 /**
  * Add folder.
- * @return Server-assigned NodeId of the added folder node
  * @param connection Instance of type Client (or Server)
  * @param parentId Parent node
  * @param id Requested NodeId of the node to add
@@ -475,7 +472,6 @@ auto addFolderAsync(
 
 /**
  * Add variable.
- * @return Server-assigned NodeId of the added variable node
  * @param connection Instance of type Client (or Server)
  * @param parentId Parent node
  * @param id Requested NodeId of the node to add
@@ -538,7 +534,6 @@ auto addVariableAsync(
 
 /**
  * Add property.
- * @return Server-assigned NodeId of the added property node
  * @param connection Instance of type Client (or Server)
  * @param parentId Parent node
  * @param id Requested NodeId of the node to add
@@ -602,7 +597,6 @@ using MethodCallback = std::function<void(Span<const Variant> input, Span<Varian
 /**
  * Add method.
  * Callbacks can not be set by clients. Servers can assign callbacks to method nodes afterwards.
- * @return Server-assigned NodeId of the added method node
  * @param connection Instance of type Client (or Server)
  * @param parentId Parent node
  * @param id Requested NodeId of the node to add
@@ -661,7 +655,6 @@ auto addMethodAsync(
 
 /**
  * Add object type.
- * @return Server-assigned NodeId of the added object type node
  * @param connection Instance of type Client (or Server)
  * @param parentId Parent node
  * @param id Requested NodeId of the node to add
@@ -721,7 +714,6 @@ auto addObjectTypeAsync(
 
 /**
  * Add variable type.
- * @return Server-assigned NodeId of the added variable type node
  * @param connection Instance of type Client (or Server)
  * @param parentId Parent node
  * @param id Requested NodeId of the node to add
@@ -784,7 +776,6 @@ auto addVariableTypeAsync(
 
 /**
  * Add reference type.
- * @return Server-assigned NodeId of the added reference type node
  * @param connection Instance of type Client (or Server)
  * @param parentId Parent node
  * @param id Requested NodeId of the node to add
@@ -844,7 +835,6 @@ auto addReferenceTypeAsync(
 
 /**
  * Add data type.
- * @return Server-assigned NodeId of the added data type node
  * @param connection Instance of type Client (or Server)
  * @param parentId Parent node
  * @param id Requested NodeId of the node to add
@@ -904,7 +894,6 @@ auto addDataTypeAsync(
 
 /**
  * Add view.
- * @return Server-assigned NodeId of the added view node
  * @param connection Instance of type Client (or Server)
  * @param parentId Parent node
  * @param id Requested NodeId of the node to add

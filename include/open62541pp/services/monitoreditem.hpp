@@ -206,7 +206,6 @@ auto createMonitoredItemsDataChangeAsync(
  * Don't use this function to monitor the `EventNotifier` attribute.
  * Create a monitored item with @ref createMonitoredItemEvent instead.
  *
- * @return Server-assigned identifier of the monitored item
  * @param connection Instance of type Server or Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription.
  *                       Use `0U` for a local server-side monitored item.
@@ -336,7 +335,6 @@ auto createMonitoredItemsEventAsync(
  * Create and add a monitored item to a subscription for event notifications.
  * The `attributeId` of ReadValueId must be set to AttributeId::EventNotifier.
  *
- * @return Server-assigned identifier of the monitored item
  * @param connection Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @param itemToMonitor Item to monitor
