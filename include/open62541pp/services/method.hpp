@@ -41,8 +41,7 @@ namespace opcua::services {
 CallResponse call(Client& connection, const CallRequest& request) noexcept;
 
 /**
- * Asynchronously call server methods.
- * @copydetails call
+ * @copydoc call
  * @param token @completiontoken{void(CallResponse&)}
  * @return @asyncresult{CallResponse}
  */
@@ -75,12 +74,7 @@ CallMethodResult call(
 ) noexcept;
 
 /**
- * Asynchronously call a server method.
- *
- * @param connection Instance of type Client
- * @param objectId NodeId of the object on which the method is invoked
- * @param methodId NodeId of the method to invoke
- * @param inputArguments Input argument values
+ * @copydoc call(T&, const NodeId&, const NodeId&, Span<const Variant>)
  * @param token @completiontoken{void(CallMethodResult&)}
  * @return @asyncresult{CallMethodResult}
  */

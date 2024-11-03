@@ -115,9 +115,8 @@ void storeSubscriptionContext(
 
 #if UAPP_OPEN62541_VER_GE(1, 1)
 /**
- * Asynchronously create a subscription.
- * @copydetails createSubscription(Client&, const CreateSubscriptionRequest&,
- *              StatusChangeNotificationCallback, DeleteSubscriptionCallback)
+ * @copydoc createSubscription(Client&, const CreateSubscriptionRequest&,
+ *          StatusChangeNotificationCallback, DeleteSubscriptionCallback)
  * @param token @completiontoken{void(CreateSubscriptionResponse&)}
  * @return @asyncresult{CreateSubscriptionResponse}
  */
@@ -207,8 +206,7 @@ inline ModifySubscriptionResponse modifySubscription(
 
 #if UAPP_OPEN62541_VER_GE(1, 1)
 /**
- * Asynchronously modify a subscription.
- * @copydetails modifySubscription(Client&, const ModifySubscriptionRequest&)
+ * @copydoc modifySubscription(Client&, const ModifySubscriptionRequest&)
  * @param token @completiontoken{void(ModifySubscriptionResponse&)}
  * @return @asyncresult{ModifySubscriptionResponse}
  */
@@ -266,8 +264,7 @@ SetPublishingModeResponse setPublishingMode(
 ) noexcept;
 
 /**
- * Asynchronously enable/disable publishing of notification messages of subscriptions.
- * @copydetails setPublishingMode(Client&, const SetPublishingRequest&)
+ * @copydoc setPublishingMode(Client&, const SetPublishingRequest&)
  * @param token @completiontoken{void(SetPublishingModeResponse&)}
  * @return @asyncresult{SetPublishingModeResponse}
  */
@@ -298,8 +295,7 @@ inline StatusCode setPublishingMode(
 }
 
 /**
- * Asynchronously enable/disable publishing of notification messages of a single subscription.
- * @copydetails setPublishingMode(Client&, uint32_t, bool)
+ * @copydoc setPublishingMode(Client&, uint32_t, bool)
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  */
@@ -340,8 +336,7 @@ DeleteSubscriptionsResponse deleteSubscriptions(
 
 #if UAPP_OPEN62541_VER_GE(1, 1)
 /**
- * Asynchronously delete subscriptions.
- * @copydetails deleteSubscriptions(Client&, const DeleteSubscriptionsRequest&)
+ * @copydoc deleteSubscriptions
  * @param token @completiontoken{void(DeleteSubscriptionsResponse&)}
  * @return @asyncresult{DeleteSubscriptionsResponse}
  */
@@ -377,8 +372,7 @@ inline StatusCode deleteSubscription(Client& connection, uint32_t subscriptionId
 
 #if UAPP_OPEN62541_VER_GE(1, 1)
 /**
- * Asynchronously delete a single subscription.
- * @copydetails deleteSubscription(Client&, uint32_t)
+ * @copydoc deleteSubscription
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  */

@@ -152,9 +152,8 @@ void storeMonitoredItemContexts(
 
 #if UAPP_OPEN62541_VER_GE(1, 1)
 /**
- * Asynchronously create and add monitored items to a subscription for data change notifications.
- * @copydetails createMonitoredItemsDataChange(Client&, const CreateMonitoredItemsRequest&,
- *              DataChangeNotificationCallback, DeleteMonitoredItemCallback)
+ * @copydoc createMonitoredItemsDataChange(Client&, const CreateMonitoredItemsRequest&,
+ *          DataChangeNotificationCallback, DeleteMonitoredItemCallback)
  * @param token @completiontoken{void(CreateMonitoredItemsResponse&)}
  * @return @asyncresult{CreateMonitoredItemsResponse}
  */
@@ -228,10 +227,9 @@ template <typename T>
 
 #if UAPP_OPEN62541_VER_GE(1, 1)
 /**
- * Asynchronously create and add a monitored item to a subscription for data change notifications.
- * @copydetails createMonitoredItemDataChange(Client&, uint32_t, const ReadValueId&, MonitoringMode,
- *              const MonitoringParametersEx&, DataChangeNotificationCallback,
- *              DeleteMonitoredItemCallback)
+ * @copydoc createMonitoredItemDataChange(Client&, uint32_t, const ReadValueId&, MonitoringMode,
+ *          const MonitoringParametersEx&, DataChangeNotificationCallback,
+ *          DeleteMonitoredItemCallback)
  * @param token @completiontoken{void(MonitoredItemCreateResult&)}
  * @return @asyncresult{MonitoredItemCreateResult}
  */
@@ -282,9 +280,8 @@ auto createMonitoredItemDataChangeAsync(
 
 #if UAPP_OPEN62541_VER_GE(1, 1)
 /**
- * Asynchronously create and add monitored items to a subscription for event notifications.
- * @copydetails createMonitoredItemsEvent(Client&, const CreateMonitoredItemsRequest&,
- *              EventNotificationCallback, DeleteMonitoredItemCallback)
+ * @copydoc createMonitoredItemsEvent(Client&, const CreateMonitoredItemsRequest&,
+ *          EventNotificationCallback, DeleteMonitoredItemCallback)
  * @param token @completiontoken{void(CreateMonitoredItemsResponse&)}
  * @return @asyncresult{CreateMonitoredItemsResponse}
  */
@@ -355,10 +352,8 @@ auto createMonitoredItemsEventAsync(
 
 #if UAPP_OPEN62541_VER_GE(1, 1)
 /**
- * Asynchronously create and add a monitored item to a subscription for event notifications.
- * @copydetails createMonitoredItemEvent(Client&, uint32_t, const ReadValueId&, MonitoringMode,
- *              const MonitoringParametersEx&, EventNotificationCallback,
- *              DeleteMonitoredItemCallback)
+ * @copydoc createMonitoredItemEvent(Client&, uint32_t, const ReadValueId&, MonitoringMode,
+ *          const MonitoringParametersEx&, EventNotificationCallback, DeleteMonitoredItemCallback)
  * @param token @completiontoken{void(MonitoredItemCreateResult&)}
  * @return @asyncresult{MonitoredItemCreateResult}
  */
@@ -411,9 +406,7 @@ ModifyMonitoredItemsResponse modifyMonitoredItems(
 
 #if UAPP_OPEN62541_VER_GE(1, 1)
 /**
- * Asynchronously modify monitored items of a subscription.
- *
- * @copydetails modifyMonitoredItems(Client&, const ModifyMonitoredItemsRequest&)
+ * @copydoc modifyMonitoredItems(Client&, const ModifyMonitoredItemsRequest&)
  * @param token @completiontoken{void(ModifyMonitoredItemsResponse&)}
  * @return @asyncresult{ModifyMonitoredItemsResponse}
  */
@@ -459,9 +452,7 @@ inline MonitoredItemModifyResult modifyMonitoredItem(
 
 #if UAPP_OPEN62541_VER_GE(1, 1)
 /**
- * Asynchronously a monitored item of a subscription.
- *
- * @copydetails modifyMonitoredItems(Client&, uint32_t, uint32_t, const MonitoringParametersEx&)
+ * @copydoc modifyMonitoredItems(Client&, uint32_t, uint32_t, const MonitoringParametersEx&)
  * @param token @completiontoken{void(MonitoredItemModifyResult&)}
  * @return @asyncresult{MonitoredItemModifyResult}
  */
@@ -507,9 +498,7 @@ SetMonitoringModeResponse setMonitoringMode(
 ) noexcept;
 
 /**
- * Asynchronously set the monitoring mode of monitored items.
- *
- * @copydetails setMonitoringMode(Client&, const SetMonitoringModeRequest&)
+ * @copydoc setMonitoringMode(Client&, const SetMonitoringModeRequest&)
  * @param token @completiontoken{void(SetMonitoringModeResponse&)}
  * @return @asyncresult{SetMonitoringModeResponse}
  */
@@ -547,9 +536,7 @@ inline StatusCode setMonitoringMode(
 }
 
 /**
- * Asynchronously set the monitoring mode of a monitored item.
- *
- * @copydetails setMonitoringMode(Client&, uint32_t, uint32_t, MonitoringMode)
+ * @copydoc setMonitoringMode(Client&, uint32_t, uint32_t, MonitoringMode)
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  */
@@ -595,9 +582,7 @@ SetTriggeringResponse setTriggering(
 ) noexcept;
 
 /**
- * Asynchronously add and delete triggering links of monitored items.
- *
- * @copydetails setTriggering
+ * @copydoc setTriggering
  * @param token @completiontoken{void(SetTriggeringResponse&)}
  * @return @asyncresult{SetTriggeringResponse}
  */
@@ -632,9 +617,7 @@ DeleteMonitoredItemsResponse deleteMonitoredItems(
 
 #if UAPP_OPEN62541_VER_GE(1, 1)
 /**
- * Asynchronously delete monitored items from a subscription.
- *
- * @copydetails deleteMonitoredItems
+ * @copydoc deleteMonitoredItems
  * @param token @completiontoken{void(DeleteMonitoredItemsResponse&)}
  * @return @asyncresult{DeleteMonitoredItemsResponse}
  */
@@ -669,9 +652,7 @@ StatusCode deleteMonitoredItem(T& connection, uint32_t subscriptionId, uint32_t 
 
 #if UAPP_OPEN62541_VER_GE(1, 1)
 /**
- * Asynchronously delete monitored items from a subscription.
- *
- * @copydetails deleteMonitoredItem
+ * @copydoc deleteMonitoredItem
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  */

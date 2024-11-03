@@ -57,8 +57,7 @@ inline ReadResponse read(
 }
 
 /**
- * Asynchronously read one or more attributes of one or more nodes (client only).
- * @copydetails read
+ * @copydoc read
  * @param token @completiontoken{void(ReadResponse&)}
  * @return @asyncresult{ReadResponse}
  */
@@ -106,8 +105,7 @@ Result<DataValue> readAttribute(
 ) noexcept;
 
 /**
- * Asynchronously read node attribute.
- * @copydetails readAttribute
+ * @copydoc readAttribute
  * @param token @completiontoken{void(Result<DataValue>&)}
  * @return @asyncresult{Result<DataValue>}
  */
@@ -167,8 +165,7 @@ inline WriteResponse write(Client& connection, Span<const WriteValue> nodesToWri
 }
 
 /**
- * Asynchronously write one or more attributes of one or more nodes (client only).
- * @copydetails write
+ * @copydoc write
  * @param token @completiontoken{void(WriteResponse&)}
  * @return @asyncresult{WriteResponse}
  */
@@ -210,8 +207,7 @@ StatusCode writeAttribute(
 ) noexcept;
 
 /**
- * Asynchronously write node attribute.
- * @copydetails writeAttribute
+ * @copydoc writeAttribute
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  */
@@ -297,8 +293,7 @@ Result<DataValue> readDataValue(T& connection, const NodeId& id) noexcept {
 }
 
 /**
- * Asynchronously read the `AttributeId::Value` of a node as a DataValue object.
- * @copydetails readDataValue
+ * @copydoc readDataValue
  * @param token @completiontoken{void(Result<DataValue>&)}
  * @return @asyncresult{Result<DataValue>}
  * @ingroup Read
@@ -327,8 +322,7 @@ StatusCode writeDataValue(T& connection, const NodeId& id, const DataValue& valu
 }
 
 /**
- * Asynchronously write the AttributeId::Value attribute of a node as a DataValue object.
- * @copydetails writeDataValue
+ * @copydoc writeDataValue
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  * @ingroup Write
