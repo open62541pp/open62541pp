@@ -28,7 +28,7 @@ std::unique_ptr<SubscriptionContext> createSubscriptionContext(
     return context;
 }
 
-void insertSubscriptionContext(
+void storeSubscriptionContext(
     Client& connection, uint32_t subscriptionId, std::unique_ptr<SubscriptionContext>&& context
 ) {
     opcua::detail::getContext(connection).subscriptions.insert(subscriptionId, std::move(context));
@@ -53,7 +53,7 @@ CreateSubscriptionResponse createSubscription(
         detail::SubscriptionContext::deleteCallbackNative
     );
     if (detail::getServiceResult(response).isGood()) {
-        detail::insertSubscriptionContext(
+        detail::storeSubscriptionContext(
             connection, response.getSubscriptionId(), std::move(context)
         );
     }
