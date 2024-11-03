@@ -92,7 +92,7 @@ jobs:
           - name: Linux TSan
             os: ubuntu-24.04
             compiler: clang++-18
-            flags: "-DUAPP_ENABLE_SANITIZER_THREAD=ON"
+            flags: "-DUA_MULTITHREADING=100 -DUAPP_ENABLE_SANITIZER_THREAD=ON"
 
           - name: Linux UBSan
             os: ubuntu-24.04
