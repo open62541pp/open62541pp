@@ -49,8 +49,7 @@ namespace opcua::services {
 AddNodesResponse addNodes(Client& connection, const AddNodesRequest& request) noexcept;
 
 /**
- * Asynchronously add one or more nodes (client only).
- * @copydetails addNodes
+ * @copydoc addNodes
  * @param token @completiontoken{void(AddNodesResponse&)}
  * @return @asyncresult{AddNodesResponse}
  */
@@ -89,8 +88,7 @@ Result<NodeId> addNode(
 ) noexcept;
 
 /**
- * Asynchronously add a node.
- * @copydetails addNode
+ * @copydoc addNode
  * @param token @completiontoken{void(Result<NodeId>&)}
  * @return @asyncresult{Result<NodeId>}
  */
@@ -140,8 +138,7 @@ AddReferencesResponse addReferences(
 ) noexcept;
 
 /**
- * Asynchronously add one or more references (client only).
- * @copydetails addReferences
+ * @copydoc addReferences
  * @param token @completiontoken{void(AddReferencesResponse&)}
  * @return @asyncresult{AddReferencesReponse}
  */
@@ -174,8 +171,7 @@ StatusCode addReference(
 ) noexcept;
 
 /**
- * Asynchronously add reference.
- * @copydetails addReference
+ * @copydoc addReference
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  */
@@ -215,8 +211,7 @@ auto addReferenceAsync(
 DeleteNodesResponse deleteNodes(Client& connection, const DeleteNodesRequest& request) noexcept;
 
 /**
- * Asynchronously delete one or more nodes (client only).
- * @copydetails deleteNodes
+ * @copydoc deleteNodes
  * @param token @completiontoken{void(DeleteNodesResponse&)}
  * @return @asyncresult{DeleteNodesResponse}
  */
@@ -241,8 +236,7 @@ template <typename T>
 StatusCode deleteNode(T& connection, const NodeId& id, bool deleteReferences = true) noexcept;
 
 /**
- * Asynchronously delete node.
- * @copydetails deleteNode
+ * @copydoc deleteNode
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  */
@@ -282,8 +276,7 @@ DeleteReferencesResponse deleteReferences(
 ) noexcept;
 
 /**
- * Asynchronously delete one or more references (client only).
- * @copydetails deleteReferences
+ * @copydoc deleteReferences
  * @param token @completiontoken{void(DeleteReferencesResponse&)}
  * @return @asyncresult{DeleteReferencesResponse}
  */
@@ -318,8 +311,7 @@ StatusCode deleteReference(
 ) noexcept;
 
 /**
- * Asynchronously delete reference.
- * @copydetails deleteReference
+ * @copydoc deleteReference
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  */
@@ -390,8 +382,7 @@ Result<NodeId> addObject(
 }
 
 /**
- * Asynchronously add object.
- * @copydetails addObject
+ * @copydoc addObject
  * @param token @completiontoken{void(Result<NodeId>&)}
  * @return @asyncresult{Result<NodeId>}
  */
@@ -443,8 +434,7 @@ Result<NodeId> addFolder(
 }
 
 /**
- * Asynchronously add folder.
- * @copydetails addFolder
+ * @copydoc addFolder
  * @param token @completiontoken{void(Result<NodeId>&)}
  * @return @asyncresult{Result<NodeId>}
  */
@@ -503,8 +493,7 @@ Result<NodeId> addVariable(
 }
 
 /**
- * Asynchronously add variable.
- * @copydetails addVariable
+ * @copydoc addVariable
  * @param token @completiontoken{void(Result<NodeId>&)}
  * @return @asyncresult{Result<NodeId>}
  */
@@ -560,8 +549,7 @@ Result<NodeId> addProperty(
 }
 
 /**
- * Asynchronously add property.
- * @copydetails addProperty
+ * @copydoc addProperty
  * @param token @completiontoken{void(Result<NodeId>&)}
  * @return @asyncresult{Result<NodeId>}
  */
@@ -621,8 +609,7 @@ Result<NodeId> addMethod(
 ) noexcept;
 
 /**
- * Asynchronously add method.
- * @copydetails addMethod
+ * @copydoc addMethod
  * @param token @completiontoken{void(Result<NodeId>&)}
  * @return @asyncresult{Result<NodeId>}
  */
@@ -684,8 +671,7 @@ Result<NodeId> addObjectType(
 }
 
 /**
- * Asynchronously add object type.
- * @copydetails addObjectType
+ * @copydoc addObjectType
  * @param token @completiontoken{void(Result<NodeId>&)}
  * @return @asyncresult{Result<NodeId>}
  */
@@ -745,8 +731,7 @@ Result<NodeId> addVariableType(
 }
 
 /**
- * Asynchronously add variable type.
- * @copydetails addVariableType
+ * @copydoc addVariableType
  * @param token @completiontoken{void(Result<NodeId>&)}
  * @return @asyncresult{Result<NodeId>}
  */
@@ -805,8 +790,7 @@ Result<NodeId> addReferenceType(
 }
 
 /**
- * Asynchronously add reference type.
- * @copydetails addReferenceType
+ * @copydoc addReferenceType
  * @param token @completiontoken{void(Result<NodeId>&)}
  * @return @asyncresult{Result<NodeId>}
  */
@@ -864,8 +848,7 @@ Result<NodeId> addDataType(
 }
 
 /**
- * Asynchronously add data type.
- * @copydetails addDataType
+ * @copydoc addDataType
  * @param token @completiontoken{void(Result<NodeId>&)}
  * @return @asyncresult{Result<NodeId>}
  */
@@ -923,8 +906,7 @@ Result<NodeId> addView(
 }
 
 /**
- * Asynchronously add view.
- * @copydetails addView
+ * @copydoc addView
  * @param token @completiontoken{void(Result<NodeId>&)}
  * @return @asyncresult{Result<NodeId>}
  */
@@ -972,8 +954,7 @@ StatusCode addModellingRule(T& connection, const NodeId& id, ModellingRule rule)
 }
 
 /**
- * Asynchronously add modelling rule.
- * @copydetails addModellingRule
+ * @copydoc addModellingRule
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  */

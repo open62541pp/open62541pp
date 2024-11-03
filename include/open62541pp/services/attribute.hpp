@@ -45,9 +45,7 @@ namespace opcua::services {
  */
 ReadResponse read(Client& connection, const ReadRequest& request) noexcept;
 
-/**
- * @overload
- */
+/// @overload
 inline ReadResponse read(
     Client& connection,
     Span<const ReadValueId> nodesToRead,
@@ -57,8 +55,7 @@ inline ReadResponse read(
 }
 
 /**
- * Asynchronously read one or more attributes of one or more nodes (client only).
- * @copydetails read
+ * @copydoc read
  * @param token @completiontoken{void(ReadResponse&)}
  * @return @asyncresult{ReadResponse}
  */
@@ -73,9 +70,7 @@ auto readAsync(
     );
 }
 
-/**
- * @overload
- */
+/// @overload
 template <typename CompletionToken = DefaultCompletionToken>
 auto readAsync(
     Client& connection,
@@ -106,8 +101,7 @@ Result<DataValue> readAttribute(
 ) noexcept;
 
 /**
- * Asynchronously read node attribute.
- * @copydetails readAttribute
+ * @copydoc readAttribute
  * @param token @completiontoken{void(Result<DataValue>&)}
  * @return @asyncresult{Result<DataValue>}
  */
@@ -159,16 +153,13 @@ auto readAttributeAsync(
  */
 WriteResponse write(Client& connection, const WriteRequest& request) noexcept;
 
-/**
- * @overload
- */
+/// @overload
 inline WriteResponse write(Client& connection, Span<const WriteValue> nodesToWrite) noexcept {
     return write(connection, detail::createWriteRequest(nodesToWrite));
 }
 
 /**
- * Asynchronously write one or more attributes of one or more nodes (client only).
- * @copydetails write
+ * @copydoc write
  * @param token @completiontoken{void(WriteResponse&)}
  * @return @asyncresult{WriteResponse}
  */
@@ -183,9 +174,7 @@ auto writeAsync(
     );
 }
 
-/**
- * @overload
- */
+/// @overload
 template <typename CompletionToken = DefaultCompletionToken>
 auto writeAsync(
     Client& connection,
@@ -210,8 +199,7 @@ StatusCode writeAttribute(
 ) noexcept;
 
 /**
- * Asynchronously write node attribute.
- * @copydetails writeAttribute
+ * @copydoc writeAttribute
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  */
@@ -297,8 +285,7 @@ Result<DataValue> readDataValue(T& connection, const NodeId& id) noexcept {
 }
 
 /**
- * Asynchronously read the `AttributeId::Value` of a node as a DataValue object.
- * @copydetails readDataValue
+ * @copydoc readDataValue
  * @param token @completiontoken{void(Result<DataValue>&)}
  * @return @asyncresult{Result<DataValue>}
  * @ingroup Read
@@ -327,8 +314,7 @@ StatusCode writeDataValue(T& connection, const NodeId& id, const DataValue& valu
 }
 
 /**
- * Asynchronously write the AttributeId::Value attribute of a node as a DataValue object.
- * @copydetails writeDataValue
+ * @copydoc writeDataValue
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  * @ingroup Write

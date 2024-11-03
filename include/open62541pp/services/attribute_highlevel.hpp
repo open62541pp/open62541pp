@@ -20,8 +20,7 @@ Result<NodeId> readNodeId(T& connection, const NodeId& id) noexcept {
 }
 
 /**
- * Asynchronously read the AttributeId::NodeId attribute of a node.
- * @copydetails readNodeId
+ * @copydoc readNodeId
  * @param token @completiontoken{void(Result<NodeId>&)}
  * @return @asyncresult{Result<NodeId>}
  * @ingroup Read
@@ -47,8 +46,7 @@ Result<NodeClass> readNodeClass(T& connection, const NodeId& id) noexcept {
 }
 
 /**
- * Asynchronously read the AttributeId::NodeClass attribute of a node.
- * @copydetails readNodeClass
+ * @copydoc readNodeClass
  * @param token @completiontoken{void(Result<NodeClass>)}
  * @return @asyncresult{Result<NodeClass>}
  * @ingroup Read
@@ -74,8 +72,7 @@ Result<QualifiedName> readBrowseName(T& connection, const NodeId& id) noexcept {
 }
 
 /**
- * Asynchronously read the AttributeId::BrowseName attribute of a node.
- * @copydetails readBrowseName
+ * @copydoc readBrowseName
  * @param token @completiontoken{void(Result<QualifiedName>&)}
  * @return @asyncresult{Result<QualifiedName>}
  * @ingroup Read
@@ -104,8 +101,7 @@ StatusCode writeBrowseName(
 }
 
 /**
- * Asynchronously write the AttributeId::BrowseName attribute of a node.
- * @copydetails writeBrowseName
+ * @copydoc writeBrowseName
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  * @ingroup Write
@@ -134,8 +130,7 @@ Result<LocalizedText> readDisplayName(T& connection, const NodeId& id) noexcept 
 }
 
 /**
- * Asynchronously read the AttributeId::DisplayName attribute of a node.
- * @copydetails readDisplayName
+ * @copydoc readDisplayName
  * @param token @completiontoken{void(Result<LocalizedText>&)}
  * @return @asyncresult{Result<LocalizedText>}
  * @ingroup Read
@@ -164,8 +159,7 @@ StatusCode writeDisplayName(
 }
 
 /**
- * Asynchronously write the AttributeId::DisplayName attribute of a node.
- * @copydetails writeDisplayName
+ * @copydoc writeDisplayName
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  * @ingroup Write
@@ -194,8 +188,7 @@ Result<LocalizedText> readDescription(T& connection, const NodeId& id) noexcept 
 }
 
 /**
- * Asynchronously read the AttributeId::Description attribute of a node.
- * @copydetails readDescription
+ * @copydoc readDescription
  * @param token @completiontoken{void(Result<LocalizedText>&)}
  * @return @asyncresult{Result<LocalizedText>}
  * @ingroup Read
@@ -224,8 +217,7 @@ StatusCode writeDescription(
 }
 
 /**
- * Asynchronously write the AttributeId::Description attribute of a node.
- * @copydetails writeDescription
+ * @copydoc writeDescription
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  * @ingroup Write
@@ -254,8 +246,7 @@ Result<Bitmask<WriteMask>> readWriteMask(T& connection, const NodeId& id) noexce
 }
 
 /**
- * Asynchronously read the AttributeId::WriteMask attribute of a node.
- * @copydetails readWriteMask
+ * @copydoc readWriteMask
  * @param token @completiontoken{void(Result<Bitmask<WriteMask>>)}
  * @return @asyncresult{Result<Bitmask<WriteMask>>}
  * @ingroup Read
@@ -282,8 +273,7 @@ StatusCode writeWriteMask(T& connection, const NodeId& id, Bitmask<WriteMask> wr
 }
 
 /**
- * Asynchronously write the AttributeId::WriteMask attribute of a node.
- * @copydetails writeWriteMask
+ * @copydoc writeWriteMask
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  * @ingroup Write
@@ -312,8 +302,7 @@ Result<Bitmask<WriteMask>> readUserWriteMask(T& connection, const NodeId& id) no
 }
 
 /**
- * Asynchronously read the AttributeId::UserWriteMask attribute of a node.
- * @copydetails readUserWriteMask
+ * @copydoc readUserWriteMask
  * @param token @completiontoken{void(Result<Bitmask<WriteMask>>)}
  * @return @asyncresult{Result<Bitmask<WriteMask>>}
  * @ingroup Read
@@ -342,8 +331,7 @@ StatusCode writeUserWriteMask(
 }
 
 /**
- * Asynchronously write the AttributeId::UserWriteMask attribute of a node.
- * @copydetails writeUserWriteMask
+ * @copydoc writeUserWriteMask
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  * @ingroup Write
@@ -372,8 +360,7 @@ Result<bool> readIsAbstract(T& connection, const NodeId& id) noexcept {
 }
 
 /**
- * Asynchronously read the AttributeId::IsAbstract attribute of a node.
- * @copydetails readIsAbstract
+ * @copydoc readIsAbstract
  * @param token @completiontoken{void(Result<bool>)}
  * @return @asyncresult{Result<bool>}
  * @ingroup Read
@@ -400,8 +387,7 @@ StatusCode writeIsAbstract(T& connection, const NodeId& id, bool isAbstract) noe
 }
 
 /**
- * Asynchronously write the AttributeId::IsAbstract attribute of a node.
- * @copydetails writeIsAbstract
+ * @copydoc writeIsAbstract
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  * @ingroup Write
@@ -430,8 +416,7 @@ Result<bool> readSymmetric(T& connection, const NodeId& id) noexcept {
 }
 
 /**
- * Asynchronously read the AttributeId::Symmetric attribute of a node.
- * @copydetails readSymmetric
+ * @copydoc readSymmetric
  * @param token @completiontoken{void(Result<bool>)}
  * @return @asyncresult{Result<bool>}
  * @ingroup Read
@@ -458,8 +443,7 @@ StatusCode writeSymmetric(T& connection, const NodeId& id, bool symmetric) noexc
 }
 
 /**
- * Asynchronously write the AttributeId::Symmetric attribute of a node.
- * @copydetails writeSymmetric
+ * @copydoc writeSymmetric
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  * @ingroup Write
@@ -488,8 +472,7 @@ Result<LocalizedText> readInverseName(T& connection, const NodeId& id) noexcept 
 }
 
 /**
- * Asynchronously read the AttributeId::InverseName attribute of a node.
- * @copydetails readInverseName
+ * @copydoc readInverseName
  * @param token @completiontoken{void(Result<LocalizedText>&)}
  * @return @asyncresult{Result<LocalizedText>}
  * @ingroup Read
@@ -518,8 +501,7 @@ StatusCode writeInverseName(
 }
 
 /**
- * Asynchronously write the AttributeId::InverseName attribute of a node.
- * @copydetails writeInverseName
+ * @copydoc writeInverseName
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  * @ingroup Write
@@ -548,8 +530,7 @@ Result<bool> readContainsNoLoops(T& connection, const NodeId& id) noexcept {
 }
 
 /**
- * Asynchronously read the AttributeId::ContainsNoLoops attribute of a node.
- * @copydetails readContainsNoLoops
+ * @copydoc readContainsNoLoops
  * @param token @completiontoken{void(Result<bool>&)}
  * @return @asyncresult{Result<bool>}
  * @ingroup Read
@@ -580,8 +561,7 @@ StatusCode writeContainsNoLoops(
 }
 
 /**
- * Asynchronously write the AttributeId::ContainsNoLoops attribute of a node.
- * @copydetails writeContainsNoLoops
+ * @copydoc writeContainsNoLoops
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  * @ingroup Write
@@ -610,8 +590,7 @@ Result<Bitmask<EventNotifier>> readEventNotifier(T& connection, const NodeId& id
 }
 
 /**
- * Asynchronously read the AttributeId::EventNotifier attribute of a node.
- * @copydetails readEventNotifier
+ * @copydoc readEventNotifier
  * @param token @completiontoken{void(Result<Bitmask<EventNotifier>>)}
  * @return @asyncresult{Result<Bitmask<EventNotifier>>}
  * @ingroup Read
@@ -640,8 +619,7 @@ StatusCode writeEventNotifier(
 }
 
 /**
- * Asynchronously write the AttributeId::EventNotifier attribute of a node.
- * @copydetails writeEventNotifier
+ * @copydoc writeEventNotifier
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  * @ingroup Write
@@ -670,8 +648,7 @@ Result<Variant> readValue(T& connection, const NodeId& id) noexcept {
 }
 
 /**
- * Asynchronously read the AttributeId::Value attribute of a node.
- * @copydetails readValue
+ * @copydoc readValue
  * @param token @completiontoken{void(Result<Variant>&)}
  * @return @asyncresult{Result<Variant>}
  * @ingroup Read
@@ -698,8 +675,7 @@ StatusCode writeValue(T& connection, const NodeId& id, const Variant& value) noe
 }
 
 /**
- * Asynchronously write the AttributeId::Value attribute of a node.
- * @copydetails writeValue
+ * @copydoc writeValue
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  * @ingroup Write
@@ -728,8 +704,7 @@ Result<NodeId> readDataType(T& connection, const NodeId& id) noexcept {
 }
 
 /**
- * Asynchronously read the AttributeId::DataType attribute of a node.
- * @copydetails readDataType
+ * @copydoc readDataType
  * @param token @completiontoken{void(Result<NodeId>&)}
  * @return @asyncresult{Result<NodeId>}
  * @ingroup Read
@@ -756,8 +731,7 @@ StatusCode writeDataType(T& connection, const NodeId& id, const NodeId& dataType
 }
 
 /**
- * Asynchronously write the AttributeId::DataType attribute of a node.
- * @copydetails writeDataType
+ * @copydoc writeDataType
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  * @ingroup Write
@@ -786,8 +760,7 @@ Result<ValueRank> readValueRank(T& connection, const NodeId& id) noexcept {
 }
 
 /**
- * Asynchronously read the AttributeId::ValueRank attribute of a node.
- * @copydetails readValueRank
+ * @copydoc readValueRank
  * @param token @completiontoken{void(Result<ValueRank>)}
  * @return @asyncresult{Result<ValueRank>}
  * @ingroup Read
@@ -814,8 +787,7 @@ StatusCode writeValueRank(T& connection, const NodeId& id, ValueRank valueRank) 
 }
 
 /**
- * Asynchronously write the AttributeId::ValueRank attribute of a node.
- * @copydetails writeValueRank
+ * @copydoc writeValueRank
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  * @ingroup Write
@@ -844,8 +816,7 @@ Result<std::vector<uint32_t>> readArrayDimensions(T& connection, const NodeId& i
 }
 
 /**
- * Asynchronously read the AttributeId::ArrayDimensions attribute of a node.
- * @copydetails readArrayDimensions
+ * @copydoc readArrayDimensions
  * @param token @completiontoken{void(Result<std::vector<uint32_t>>&)}
  * @return @asyncresult{Result<std::vector<uint32_t>>}
  * @ingroup Read
@@ -876,8 +847,7 @@ StatusCode writeArrayDimensions(
 }
 
 /**
- * Asynchronously write the AttributeId::ArrayDimensions attribute of a node.
- * @copydetails writeArrayDimensions
+ * @copydoc writeArrayDimensions
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  * @ingroup Write
@@ -906,8 +876,7 @@ Result<Bitmask<AccessLevel>> readAccessLevel(T& connection, const NodeId& id) no
 }
 
 /**
- * Asynchronously read the AttributeId::AccessLevel attribute of a node.
- * @copydetails readAccessLevel
+ * @copydoc readAccessLevel
  * @param token @completiontoken{void(Result<Bitmask<AccessLevel>>)}
  * @return @asyncresult{Result<Bitmask<AccessLevel>>}
  * @ingroup Read
@@ -936,8 +905,7 @@ StatusCode writeAccessLevel(
 }
 
 /**
- * Asynchronously write the AttributeId::AccessLevel attribute of a node.
- * @copydetails writeAccessLevel
+ * @copydoc writeAccessLevel
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  * @ingroup Write
@@ -966,8 +934,7 @@ Result<Bitmask<AccessLevel>> readUserAccessLevel(T& connection, const NodeId& id
 }
 
 /**
- * Asynchronously read the AttributeId::UserAccessLevel attribute of a node.
- * @copydetails readUserAccessLevel
+ * @copydoc readUserAccessLevel
  * @param token @completiontoken{void(Result<Bitmask<AccessLevel>>)}
  * @return @asyncresult{Result<Bitmask<AccessLevel>>}
  * @ingroup Read
@@ -998,8 +965,7 @@ StatusCode writeUserAccessLevel(
 }
 
 /**
- * Asynchronously write the AttributeId::UserAccessLevel attribute of a node.
- * @copydetails writeUserAccessLevel
+ * @copydoc writeUserAccessLevel
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  * @ingroup Write
@@ -1028,8 +994,7 @@ Result<double> readMinimumSamplingInterval(T& connection, const NodeId& id) noex
 }
 
 /**
- * Asynchronously read the AttributeId::MinimumSamplingInterval attribute of a node.
- * @copydetails readMinimumSamplingInterval
+ * @copydoc readMinimumSamplingInterval
  * @param token @completiontoken{void(Result<double>)}
  * @return @asyncresult{Result<double>}
  * @ingroup Read
@@ -1060,8 +1025,7 @@ StatusCode writeMinimumSamplingInterval(
 }
 
 /**
- * Asynchronously write the AttributeId::MinimumSamplingInterval attribute of a node.
- * @copydetails writeMinimumSamplingInterval
+ * @copydoc writeMinimumSamplingInterval
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  * @ingroup Write
@@ -1090,8 +1054,7 @@ Result<bool> readHistorizing(T& connection, const NodeId& id) noexcept {
 }
 
 /**
- * Asynchronously read the AttributeId::Historizing attribute of a node.
- * @copydetails readHistorizing
+ * @copydoc readHistorizing
  * @param token @completiontoken{void(Result<bool>)}
  * @return @asyncresult{Result<bool>}
  * @ingroup Read
@@ -1118,8 +1081,7 @@ StatusCode writeHistorizing(T& connection, const NodeId& id, bool historizing) n
 }
 
 /**
- * Asynchronously write the AttributeId::Historizing attribute of a node.
- * @copydetails writeHistorizing
+ * @copydoc writeHistorizing
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  * @ingroup Write
@@ -1148,8 +1110,7 @@ Result<bool> readExecutable(T& connection, const NodeId& id) noexcept {
 }
 
 /**
- * Asynchronously read the AttributeId::Executable attribute of a node.
- * @copydetails readExecutable
+ * @copydoc readExecutable
  * @param token @completiontoken{void(Result<bool>)}
  * @return @asyncresult{Result<bool>}
  * @ingroup Read
@@ -1176,8 +1137,7 @@ StatusCode writeExecutable(T& connection, const NodeId& id, bool executable) noe
 }
 
 /**
- * Asynchronously write the AttributeId::Executable attribute of a node.
- * @copydetails writeExecutable
+ * @copydoc writeExecutable
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  * @ingroup Write
@@ -1206,8 +1166,7 @@ Result<bool> readUserExecutable(T& connection, const NodeId& id) noexcept {
 }
 
 /**
- * Asynchronously read the AttributeId::UserExecutable attribute of a node.
- * @copydetails readUserExecutable
+ * @copydoc readUserExecutable
  * @param token @completiontoken{void(Result<bool>)}
  * @return @asyncresult{Result<bool>}
  * @ingroup Read
@@ -1234,8 +1193,7 @@ StatusCode writeUserExecutable(T& connection, const NodeId& id, bool userExecuta
 }
 
 /**
- * Asynchronously write the AttributeId::UserExecutable attribute of a node.
- * @copydetails writeUserExecutable
+ * @copydoc writeUserExecutable
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  * @ingroup Write
@@ -1265,8 +1223,7 @@ Result<Variant> readDataTypeDefinition(T& connection, const NodeId& id) noexcept
 }
 
 /**
- * Asynchronously read the AttributeId::DataTypeDefinition attribute of a node.
- * @copydetails readDataTypeDefinition
+ * @copydoc readDataTypeDefinition
  * @param token @completiontoken{void(Result<Variant>&)}
  * @return @asyncresult{Result<Variant>}
  * @ingroup Read

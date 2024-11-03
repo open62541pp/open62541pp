@@ -75,8 +75,7 @@ Result<{type}> read{attr}(T& connection, const NodeId& id) noexcept {{
 }}
 
 /**
- * Asynchronously read the AttributeId::{attr} attribute of a node.
- * @copydetails read{attr}
+ * @copydoc read{attr}
  * @param token @completiontoken{{void({param_type_callback})}}
  * @return @asyncresult{{Result<{type}>}}
  * @ingroup Read
@@ -106,8 +105,7 @@ StatusCode write{attr}(T& connection, const NodeId& id, {param_type} {param_name
 }}
 
 /**
- * Asynchronously write the AttributeId::{attr} attribute of a node.
- * @copydetails write{attr}
+ * @copydoc write{attr}
  * @param token @completiontoken{{void(StatusCode)}}
  * @return @asyncresult{{StatusCode}}
  * @ingroup Write

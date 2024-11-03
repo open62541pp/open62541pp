@@ -46,8 +46,7 @@ namespace opcua::services {
 BrowseResponse browse(Client& connection, const BrowseRequest& request) noexcept;
 
 /**
- * Asynchronously discover the references of one or more nodes (client only).
- * @copydetails browse
+ * @copydoc browse
  * @param token @completiontoken{void(BrowseResponse&)}
  * @return @asyncresult{BrowseResponse}
  */
@@ -75,8 +74,7 @@ BrowseResult browse(
 ) noexcept;
 
 /**
- * Asynchronously discover the references of a specified node.
- * @copydetails browse(T&, const BrowseDescription&, uint32_t)
+ * @copydoc browse(T&, const BrowseDescription&, uint32_t)
  * @param token @completiontoken{void(BrowseResult&)}
  * @return @asyncresult{BrowseResult}
  */
@@ -116,8 +114,7 @@ auto browseAsync(
 BrowseNextResponse browseNext(Client& connection, const BrowseNextRequest& request) noexcept;
 
 /**
- * Asynchronously request the next sets of @ref browse / @ref browseNext responses (client only).
- * @copydetails browseNext
+ * @copydoc browseNext
  * @param token @completiontoken{void(BrowseNextResponse&)}
  * @return @asyncresult{BrowseNextResponse}
  */
@@ -146,8 +143,7 @@ BrowseResult browseNext(
 ) noexcept;
 
 /**
- * Asynchronously request the next set of a @ref browse or @ref browseNext response.
- * @copydetails browseNext(T&, bool, const ByteString&)
+ * @copydoc browseNext(T&, bool, const ByteString&)
  * @param token @completiontoken{void(BrowseResult&)}
  * @return @asyncresult{BrowseResult}
  */
@@ -190,8 +186,7 @@ TranslateBrowsePathsToNodeIdsResponse translateBrowsePathsToNodeIds(
 ) noexcept;
 
 /**
- * Asynchronously translate browse paths to NodeIds (client only).
- * @copydetails translateBrowsePathsToNodeIds
+ * @copydoc translateBrowsePathsToNodeIds
  * @param token @completiontoken{void(TranslateBrowsePathsToNodeIdsResponse&)}
  * @return @asyncresult{TranslateBrowsePathsToNodeIdsResponse}
  */
@@ -218,8 +213,7 @@ template <typename T>
 BrowsePathResult translateBrowsePathToNodeIds(T& connection, const BrowsePath& browsePath) noexcept;
 
 /**
- * Asynchronously translate a browse path to NodeIds.
- * @copydetails translateBrowsePathToNodeIds
+ * @copydoc translateBrowsePathToNodeIds
  * @param token @completiontoken{void(BrowsePathResult&)}
  * @return @asyncresult{BrowsePathResult}
  */
@@ -261,8 +255,7 @@ BrowsePathResult browseSimplifiedBrowsePath(
 }
 
 /**
- * A simplified version of @ref translateBrowsePathToNodeIdsAsync.
- * @copydetails browseSimplifiedBrowsePath
+ * @copydoc browseSimplifiedBrowsePath
  * @param token @completiontoken{void(BrowsePathResult&)}
  * @return @asyncresult{BrowsePathResult}
  */
@@ -299,8 +292,7 @@ RegisterNodesResponse registerNodes(
 ) noexcept;
 
 /**
- * Asynchronously register nodes for efficient access operations (client only).
- * @copydetails registerNodes
+ * @copydoc registerNodes
  * @param token @completiontoken{void(RegisterNodesResponse&)}
  * @return @asyncresult{RegisterNodesResponse}
  */
@@ -334,8 +326,7 @@ UnregisterNodesResponse unregisterNodes(
 ) noexcept;
 
 /**
- * Asynchronously unregister nodes (client only).
- * @copydetails unregisterNodes
+ * @copydoc unregisterNodes
  * @param token @completiontoken{void(UnregisterNodesResponse&)}
  * @return @asyncresult{UnregisterNodesResponse}
  */
