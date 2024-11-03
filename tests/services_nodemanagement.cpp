@@ -18,271 +18,224 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
     const NodeId newId{1, 1000};
 
     SUBCASE("addObject") {
-        Result<NodeId> result;
-        if constexpr (isAsync<T>) {
-            auto future = services::addObjectAsync(
-                connection,
-                objectsId,
-                newId,
-                "Object",
-                ObjectAttributes{},
-                ObjectTypeId::BaseObjectType,
-                ReferenceTypeId::HasComponent,
-                useFuture
-            );
-            setup.client.runIterate();
-            result = future.get();
-        } else {
-            result = services::addObject(
-                connection,
-                objectsId,
-                newId,
-                "Object",
-                ObjectAttributes{},
-                ObjectTypeId::BaseObjectType,
-                ReferenceTypeId::HasComponent
-            );
-        }
+        const auto addObject = [&](auto&&... args) {
+            if constexpr (isAsync<T>) {
+                auto future = services::addObjectAsync(args..., useFuture);
+                setup.client.runIterate();
+                return future.get();
+            } else {
+                return services::addObject(args...);
+            }
+        };
+        const Result<NodeId> result = addObject(
+            connection,
+            objectsId,
+            newId,
+            "Object",
+            ObjectAttributes{},
+            ObjectTypeId::BaseObjectType,
+            ReferenceTypeId::HasComponent
+        );
         CHECK_EQ(result.value(), newId);
         CHECK_EQ(services::readNodeClass(server, newId).value(), NodeClass::Object);
     }
 
     SUBCASE("addFolder") {
-        Result<NodeId> result;
-        if constexpr (isAsync<T>) {
-            auto future = services::addFolderAsync(
-                connection, objectsId, newId, "Folder", {}, ReferenceTypeId::HasComponent, useFuture
-            );
-            setup.client.runIterate();
-            result = future.get();
-        } else {
-            result = services::addFolder(
-                connection, objectsId, newId, "Folder", {}, ReferenceTypeId::HasComponent
-            );
-        }
+        const auto addFolder = [&](auto&&... args) {
+            if constexpr (isAsync<T>) {
+                auto future = services::addFolderAsync(args..., useFuture);
+                setup.client.runIterate();
+                return future.get();
+            } else {
+                return services::addFolder(args...);
+            }
+        };
+        const Result<NodeId> result = addFolder(
+            connection,
+            objectsId,
+            newId,
+            "Folder",
+            ObjectAttributes{},
+            ReferenceTypeId::HasComponent
+        );
         CHECK_EQ(result.value(), newId);
         CHECK_EQ(services::readNodeClass(server, newId).value(), NodeClass::Object);
     }
 
     SUBCASE("addVariable") {
-        Result<NodeId> result;
-        if constexpr (isAsync<T>) {
-            auto future = services::addVariableAsync(
-                connection,
-                objectsId,
-                newId,
-                "Variable",
-                VariableAttributes{},
-                VariableTypeId::BaseDataVariableType,
-                ReferenceTypeId::HasComponent,
-                useFuture
-            );
-            setup.client.runIterate();
-            result = future.get();
-        } else {
-            result = services::addVariable(
-                connection,
-                objectsId,
-                newId,
-                "Variable",
-                VariableAttributes{},
-                VariableTypeId::BaseDataVariableType,
-                ReferenceTypeId::HasComponent
-            );
-        }
+        const auto addVariable = [&](auto&&... args) {
+            if constexpr (isAsync<T>) {
+                auto future = services::addVariableAsync(args..., useFuture);
+                setup.client.runIterate();
+                return future.get();
+            } else {
+                return services::addVariable(args...);
+            }
+        };
+        const Result<NodeId> result = addVariable(
+            connection,
+            objectsId,
+            newId,
+            "Variable",
+            VariableAttributes{},
+            VariableTypeId::BaseDataVariableType,
+            ReferenceTypeId::HasComponent
+        );
         CHECK_EQ(result.value(), newId);
         CHECK_EQ(services::readNodeClass(server, newId).value(), NodeClass::Variable);
     }
 
     SUBCASE("addProperty") {
-        Result<NodeId> result;
-        if constexpr (isAsync<T>) {
-            auto future = services::addPropertyAsync(
-                connection, objectsId, newId, "Property", {}, useFuture
-            );
-            setup.client.runIterate();
-            result = future.get();
-        } else {
-            result = services::addProperty(connection, objectsId, newId, "Property", {});
-        }
+        const auto addProperty = [&](auto&&... args) {
+            if constexpr (isAsync<T>) {
+                auto future = services::addPropertyAsync(args..., useFuture);
+                setup.client.runIterate();
+                return future.get();
+            } else {
+                return services::addProperty(args...);
+            }
+        };
+        const Result<NodeId> result = addProperty(
+            connection, objectsId, newId, "Property", VariableAttributes{}
+        );
         CHECK_EQ(result.value(), newId);
         CHECK_EQ(services::readNodeClass(server, newId).value(), NodeClass::Variable);
     }
 
 #ifdef UA_ENABLE_METHODCALLS
     SUBCASE("addMethod") {
-        Result<NodeId> result;
-        if constexpr (isAsync<T>) {
-            auto future = services::addMethodAsync(
-                connection,
-                objectsId,
-                newId,
-                "Method",
-                {},  // callback
-                {},  // input arguments
-                {},  // output arguments
-                MethodAttributes{},
-                ReferenceTypeId::HasComponent,
-                useFuture
-            );
-            setup.client.runIterate();
-            result = future.get();
-        } else {
-            result = services::addMethod(
-                connection,
-                objectsId,
-                newId,
-                "Method",
-                {},  // callback
-                {},  // input arguments
-                {},  // output arguments
-                MethodAttributes{},
-                ReferenceTypeId::HasComponent
-            );
-        }
+        const auto addMethod = [&](auto&&... args) {
+            if constexpr (isAsync<T>) {
+                auto future = services::addMethodAsync(args..., useFuture);
+                setup.client.runIterate();
+                return future.get();
+            } else {
+                return services::addMethod(args...);
+            }
+        };
+        const Result<NodeId> result = addMethod(
+            connection,
+            objectsId,
+            newId,
+            "Method",
+            nullptr,  // callback
+            opcua::Span<const opcua::Argument>{},  // input
+            opcua::Span<const opcua::Argument>{},  // output
+            MethodAttributes{},
+            ReferenceTypeId::HasComponent
+        );
         CHECK_EQ(result.value(), newId);
         CHECK_EQ(services::readNodeClass(server, newId).value(), NodeClass::Method);
     }
 #endif
 
     SUBCASE("addObjectType") {
-        Result<NodeId> result;
-        if constexpr (isAsync<T>) {
-            auto future = services::addObjectTypeAsync(
-                connection,
-                {0, UA_NS0ID_BASEOBJECTTYPE},
-                newId,
-                "ObjectType",
-                ObjectTypeAttributes{},
-                ReferenceTypeId::HasSubtype,
-                useFuture
-            );
-            setup.client.runIterate();
-            result = future.get();
-        } else {
-            result = services::addObjectType(
-                connection,
-                {0, UA_NS0ID_BASEOBJECTTYPE},
-                newId,
-                "ObjectType",
-                ObjectTypeAttributes{},
-                ReferenceTypeId::HasSubtype
-            );
-        }
+        const auto addObjectType = [&](auto&&... args) {
+            if constexpr (isAsync<T>) {
+                auto future = services::addObjectTypeAsync(args..., useFuture);
+                setup.client.runIterate();
+                return future.get();
+            } else {
+                return services::addObjectType(args...);
+            }
+        };
+        const Result<NodeId> result = addObjectType(
+            connection,
+            opcua::ObjectTypeId::BaseObjectType,
+            newId,
+            "ObjectType",
+            ObjectTypeAttributes{},
+            ReferenceTypeId::HasSubtype
+        );
         CHECK_EQ(result.value(), newId);
         CHECK_EQ(services::readNodeClass(server, newId).value(), NodeClass::ObjectType);
     }
 
     SUBCASE("addVariableType") {
-        Result<NodeId> result;
-        if constexpr (isAsync<T>) {
-            auto future = services::addVariableTypeAsync(
-                connection,
-                {0, UA_NS0ID_BASEVARIABLETYPE},
-                newId,
-                "VariableType",
-                VariableTypeAttributes{},
-                VariableTypeId::BaseDataVariableType,
-                ReferenceTypeId::HasSubtype,
-                useFuture
-            );
-            setup.client.runIterate();
-            result = future.get();
-        } else {
-            result = services::addVariableType(
-                connection,
-                {0, UA_NS0ID_BASEVARIABLETYPE},
-                newId,
-                "VariableType",
-                VariableTypeAttributes{},
-                VariableTypeId::BaseDataVariableType,
-                ReferenceTypeId::HasSubtype
-            );
-        }
+        const auto addVariableType = [&](auto&&... args) {
+            if constexpr (isAsync<T>) {
+                auto future = services::addVariableTypeAsync(args..., useFuture);
+                setup.client.runIterate();
+                return future.get();
+            } else {
+                return services::addVariableType(args...);
+            }
+        };
+        const Result<NodeId> result = addVariableType(
+            connection,
+            VariableTypeId::BaseVariableType,
+            newId,
+            "VariableType",
+            VariableTypeAttributes{},
+            VariableTypeId::BaseDataVariableType,
+            ReferenceTypeId::HasSubtype
+        );
         CHECK_EQ(result.value(), newId);
         CHECK_EQ(services::readNodeClass(server, newId).value(), NodeClass::VariableType);
     }
 
     SUBCASE("addReferenceType") {
-        Result<NodeId> result;
-        if constexpr (isAsync<T>) {
-            auto future = services::addReferenceTypeAsync(
-                connection,
-                {0, UA_NS0ID_ORGANIZES},
-                newId,
-                "ReferenceType",
-                ReferenceTypeAttributes{},
-                ReferenceTypeId::HasSubtype,
-                useFuture
-            );
-            setup.client.runIterate();
-            result = future.get();
-        } else {
-            result = services::addReferenceType(
-                connection,
-                {0, UA_NS0ID_ORGANIZES},
-                newId,
-                "ReferenceType",
-                ReferenceTypeAttributes{},
-                ReferenceTypeId::HasSubtype
-            );
-        }
+        const auto addReferenceType = [&](auto&&... args) {
+            if constexpr (isAsync<T>) {
+                auto future = services::addReferenceTypeAsync(args..., useFuture);
+                setup.client.runIterate();
+                return future.get();
+            } else {
+                return services::addReferenceType(args...);
+            }
+        };
+        const Result<NodeId> result = addReferenceType(
+            connection,
+            ReferenceTypeId::Organizes,
+            newId,
+            "ReferenceType",
+            ReferenceTypeAttributes{},
+            ReferenceTypeId::HasSubtype
+        );
         CHECK_EQ(result.value(), newId);
         CHECK_EQ(services::readNodeClass(server, newId).value(), NodeClass::ReferenceType);
     }
 
     SUBCASE("addDataType") {
-        Result<NodeId> result;
-        if constexpr (isAsync<T>) {
-            auto future = services::addDataTypeAsync(
-                connection,
-                {0, UA_NS0ID_STRUCTURE},
-                newId,
-                "DataType",
-                DataTypeAttributes{},
-                ReferenceTypeId::HasSubtype,
-                useFuture
-            );
-            setup.client.runIterate();
-            result = future.get();
-        } else {
-            result = services::addDataType(
-                connection,
-                {0, UA_NS0ID_STRUCTURE},
-                newId,
-                "DataType",
-                DataTypeAttributes{},
-                ReferenceTypeId::HasSubtype
-            );
-        }
+        const auto addDataType = [&](auto&&... args) {
+            if constexpr (isAsync<T>) {
+                auto future = services::addDataTypeAsync(args..., useFuture);
+                setup.client.runIterate();
+                return future.get();
+            } else {
+                return services::addDataType(args...);
+            }
+        };
+        const Result<NodeId> result = addDataType(
+            connection,
+            DataTypeId::Structure,
+            newId,
+            "DataType",
+            DataTypeAttributes{},
+            ReferenceTypeId::HasSubtype
+        );
         CHECK_EQ(result.value(), newId);
         CHECK_EQ(services::readNodeClass(server, newId).value(), NodeClass::DataType);
     }
 
     SUBCASE("addView") {
-        Result<NodeId> result;
-        if constexpr (isAsync<T>) {
-            auto future = services::addViewAsync(
-                connection,
-                {0, UA_NS0ID_VIEWSFOLDER},
-                newId,
-                "View",
-                ViewAttributes{},
-                ReferenceTypeId::Organizes,
-                useFuture
-            );
-            setup.client.runIterate();
-            result = future.get();
-        } else {
-            result = services::addView(
-                connection,
-                {0, UA_NS0ID_VIEWSFOLDER},
-                newId,
-                "View",
-                ViewAttributes{},
-                ReferenceTypeId::Organizes
-            );
-        }
+        const auto addView = [&](auto&&... args) {
+            if constexpr (isAsync<T>) {
+                auto future = services::addViewAsync(args..., useFuture);
+                setup.client.runIterate();
+                return future.get();
+            } else {
+                return services::addView(args...);
+            }
+        };
+        const Result<NodeId> result = addView(
+            connection,
+            ObjectId::ViewsFolder,
+            newId,
+            "View",
+            ViewAttributes{},
+            ReferenceTypeId::Organizes
+        );
         CHECK_EQ(result.value(), newId);
         CHECK_EQ(services::readNodeClass(server, newId).value(), NodeClass::View);
     }
@@ -290,8 +243,7 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
     SUBCASE("Add/delete reference") {
         services::addFolder(
             connection, objectsId, {1, 1000}, "Folder", {}, ReferenceTypeId::HasComponent
-        )
-            .value();
+        );
         services::addObject(
             connection,
             objectsId,
@@ -300,45 +252,45 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
             {},
             ObjectTypeId::BaseObjectType,
             ReferenceTypeId::HasComponent
-        )
-            .value();
+        );
 
-        auto addReference = [&] {
+        const auto addReference = [&](auto&&... args) {
             if constexpr (isAsync<T>) {
-                auto future = services::addReferenceAsync(
-                    connection, {1, 1000}, {1, 1001}, ReferenceTypeId::Organizes, true, useFuture
-                );
+                auto future = services::addReferenceAsync(args..., useFuture);
                 setup.client.runIterate();
                 return future.get();
             } else {
-                return services::addReference(
-                    connection, {1, 1000}, {1, 1001}, ReferenceTypeId::Organizes, true
-                );
+                return services::addReference(args...);
             }
         };
-        CHECK(addReference().isGood());
-        CHECK(addReference() == UA_STATUSCODE_BADDUPLICATEREFERENCENOTALLOWED);
+        CHECK_EQ(
+            addReference(
+                connection, NodeId(1, 1000), NodeId(1, 1001), ReferenceTypeId::Organizes, true
+            ),
+            UA_STATUSCODE_GOOD
+        );
+        CHECK_EQ(
+            addReference(
+                connection, NodeId(1, 1000), NodeId(1, 1001), ReferenceTypeId::Organizes, true
+            ),
+            UA_STATUSCODE_BADDUPLICATEREFERENCENOTALLOWED
+        );
 
-        auto deleteReference = [&] {
+        const auto deleteReference = [&](auto&&... args) {
             if constexpr (isAsync<T>) {
-                auto future = services::deleteReferenceAsync(
-                    connection,
-                    {1, 1000},
-                    {1, 1001},
-                    ReferenceTypeId::Organizes,
-                    true,
-                    true,
-                    useFuture
-                );
+                auto future = services::deleteReferenceAsync(args..., useFuture);
                 setup.client.runIterate();
                 return future.get();
             } else {
-                return services::deleteReference(
-                    connection, {1, 1000}, {1, 1001}, ReferenceTypeId::Organizes, true, true
-                );
+                return services::deleteReference(args...);
             }
         };
-        CHECK(deleteReference().isGood());
+        CHECK_EQ(
+            deleteReference(
+                connection, NodeId(1, 1000), NodeId(1, 1001), ReferenceTypeId::Organizes, true, true
+            ),
+            UA_STATUSCODE_GOOD
+        );
     }
 
     SUBCASE("Delete node") {
@@ -350,20 +302,19 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
             {},
             ObjectTypeId::BaseObjectType,
             ReferenceTypeId::HasComponent
-        )
-            .value();
+        );
 
-        auto deleteNode = [&] {
+        const auto deleteNode = [&](auto&&... args) {
             if constexpr (isAsync<T>) {
-                auto future = services::deleteNodeAsync(connection, {1, 1000}, true, useFuture);
+                auto future = services::deleteNodeAsync(args..., useFuture);
                 setup.client.runIterate();
                 return future.get();
             } else {
-                return services::deleteNode(connection, {1, 1000}, true);
+                return services::deleteNode(args...);
             }
         };
-        CHECK(deleteNode().isGood());
-        CHECK(deleteNode() == UA_STATUSCODE_BADNODEIDUNKNOWN);
+        CHECK(deleteNode(connection, NodeId(1, 1000), true) == UA_STATUSCODE_GOOD);
+        CHECK(deleteNode(connection, NodeId(1, 1000), true) == UA_STATUSCODE_BADNODEIDUNKNOWN);
     }
 
     SUBCASE("Random node id") {

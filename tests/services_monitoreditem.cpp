@@ -66,33 +66,26 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
             changedValue = value;
         };
 
-        MonitoredItemCreateResult result;
-        if constexpr (isAsync<T> && UAPP_OPEN62541_VER_GE(1, 1)) {
+        const auto createMonitoredItemDataChange = [&](auto&&... args) {
+            if constexpr (isAsync<T> && UAPP_OPEN62541_VER_GE(1, 1)) {
 #if UAPP_OPEN62541_VER_GE(1, 1)
-            auto future = services::createMonitoredItemDataChangeAsync(
-                connection,
-                subId,
-                {id, AttributeId::Value},
-                MonitoringMode::Reporting,
-                monitoringParameters,
-                callback,
-                {},
-                useFuture
-            );
-            setup.client.runIterate();
-            result = future.get();
+                auto future = services::createMonitoredItemDataChangeAsync(args..., useFuture);
+                setup.client.runIterate();
+                return future.get();
 #endif
-        } else {
-            result = services::createMonitoredItemDataChange(
-                connection,
-                subId,
-                {id, AttributeId::Value},
-                MonitoringMode::Reporting,
-                monitoringParameters,
-                callback,
-                {}
-            );
-        }
+            } else {
+                return services::createMonitoredItemDataChange(args...);
+            }
+        };
+        const MonitoredItemCreateResult result = createMonitoredItemDataChange(
+            connection,
+            subId,
+            ReadValueId(id, AttributeId::Value),
+            MonitoringMode::Reporting,
+            monitoringParameters,
+            callback,
+            nullptr
+        );
         CHECK(result.getStatusCode().isGood());
         CAPTURE(result.getMonitoredItemId());
 
@@ -123,33 +116,26 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
             eventFieldsSize = eventFields.size();
         };
 
-        MonitoredItemCreateResult result;
-        if constexpr (isAsync<T> && UAPP_OPEN62541_VER_GE(1, 1)) {
+        const auto createMonitoredItemEvent = [&](auto&&... args) {
+            if constexpr (isAsync<T> && UAPP_OPEN62541_VER_GE(1, 1)) {
 #if UAPP_OPEN62541_VER_GE(1, 1)
-            auto future = services::createMonitoredItemEventAsync(
-                connection,
-                subId,
-                {ObjectId::Server, AttributeId::EventNotifier},
-                MonitoringMode::Reporting,
-                monitoringParameters,
-                callback,
-                {},
-                useFuture
-            );
-            setup.client.runIterate();
-            result = future.get();
+                auto future = services::createMonitoredItemEventAsync(args..., useFuture);
+                setup.client.runIterate();
+                return future.get();
 #endif
-        } else {
-            result = services::createMonitoredItemEvent(
-                connection,
-                subId,
-                {ObjectId::Server, AttributeId::EventNotifier},
-                MonitoringMode::Reporting,
-                monitoringParameters,
-                callback,
-                {}
-            );
-        }
+            } else {
+                return services::createMonitoredItemEvent(args...);
+            }
+        };
+        const MonitoredItemCreateResult result = createMonitoredItemEvent(
+            connection,
+            subId,
+            ReadValueId(ObjectId::Server, AttributeId::EventNotifier),
+            MonitoringMode::Reporting,
+            monitoringParameters,
+            callback,
+            nullptr
+        );
         CHECK(result.getStatusCode().isGood());
         CAPTURE(result.getMonitoredItemId());
 
@@ -176,20 +162,23 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
                 .getMonitoredItemId();
         CAPTURE(monId);
 
+        const auto modifyMonitoredItem = [&](auto&&... args) {
+            if constexpr (isAsync<T> && UAPP_OPEN62541_VER_GE(1, 1)) {
+#if UAPP_OPEN62541_VER_GE(1, 1)
+                auto future = services::modifyMonitoredItemAsync(args..., useFuture);
+                setup.client.runIterate();
+                return future.get();
+#endif
+            } else {
+                return services::modifyMonitoredItem(args...);
+            }
+        };
+
         services::MonitoringParametersEx modifiedParameters{};
         modifiedParameters.samplingInterval = 1000.0;
-        MonitoredItemModifyResult result;
-        if constexpr (isAsync<T>) {
-#if UAPP_OPEN62541_VER_GE(1, 1)
-            auto future = services::modifyMonitoredItemAsync(
-                connection, subId, monId, modifiedParameters, useFuture
-            );
-            setup.client.runIterate();
-            result = future.get();
-#endif
-        } else {
-            result = services::modifyMonitoredItem(connection, subId, monId, modifiedParameters);
-        }
+        const MonitoredItemModifyResult result = modifyMonitoredItem(
+            connection, subId, monId, modifiedParameters
+        );
         CHECK(result.getStatusCode().isGood());
     }
 
@@ -207,16 +196,19 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
                 .getMonitoredItemId();
         CAPTURE(monId);
 
-        if constexpr (isAsync<T>) {
-            auto future = services::setMonitoringModeAsync(
-                connection, subId, monId, MonitoringMode::Disabled, useFuture
-            );
-            setup.client.runIterate();
-            CHECK(future.get().isGood());
-        } else {
-            CHECK(services::setMonitoringMode(connection, subId, monId, MonitoringMode::Disabled)
-                      .isGood());
-        }
+        const auto setMonitoringMode = [&](auto&&... args) {
+            if constexpr (isAsync<T>) {
+                auto future = services::setMonitoringModeAsync(args..., useFuture);
+                setup.client.runIterate();
+                return future.get();
+            } else {
+                return services::setMonitoringMode(args...);
+            }
+        };
+        const StatusCode result = setMonitoringMode(
+            connection, subId, monId, MonitoringMode::Disabled
+        );
+        CHECK(result.isGood());
     }
 
 #if UAPP_OPEN62541_VER_GE(1, 2)
@@ -256,21 +248,25 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
         CHECK(notificationCountTriggering > 0);
         CHECK(notificationCount == 0);  // no triggering links yet
 
-        const SetTriggeringRequest request(
-            {},
-            subId,
-            monIdTriggering,
-            {monId},  // links to add
-            {}  // links to remove
+        const auto setTriggering = [&](auto&&... args) {
+            if constexpr (isAsync<T>) {
+                auto future = services::setTriggeringAsync(args..., useFuture);
+                setup.client.runIterate();
+                return future.get();
+            } else {
+                return services::setTriggering(args...);
+            }
+        };
+        const SetTriggeringResponse response = setTriggering(
+            connection,
+            SetTriggeringRequest(
+                {},
+                subId,
+                monIdTriggering,
+                {monId},  // links to add
+                {}  // links to remove
+            )
         );
-        SetTriggeringResponse response;
-        if constexpr (isAsync<T>) {
-            auto future = services::setTriggeringAsync(connection, request, useFuture);
-            setup.client.runIterate();
-            response = future.get();
-        } else {
-            response = services::setTriggering(connection, request);
-        }
         CHECK(response.getResponseHeader().getServiceResult().isGood());
         CHECK(response.getAddResults().size() == 1);
         CHECK(response.getAddResults()[0].isGood());
@@ -301,15 +297,19 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
                 [&](uint32_t, uint32_t) { deleted = true; }
             ).getMonitoredItemId();
 
-        if constexpr (isAsync<T> && UAPP_OPEN62541_VER_GE(1, 1)) {
+        const auto deleteMonitoredItem = [&](auto&&... args) {
+            if constexpr (isAsync<T> && UAPP_OPEN62541_VER_GE(1, 1)) {
 #if UAPP_OPEN62541_VER_GE(1, 1)
-            auto future = services::deleteMonitoredItemAsync(connection, subId, monId, useFuture);
-            setup.client.runIterate();
-            CHECK(future.get().isGood());
+                auto future = services::deleteMonitoredItemAsync(args..., useFuture);
+                setup.client.runIterate();
+                return future.get();
 #endif
-        } else {
-            CHECK(services::deleteMonitoredItem(connection, subId, monId).isGood());
-        }
+            } else {
+                return services::deleteMonitoredItem(args...);
+            }
+        };
+        const StatusCode result = deleteMonitoredItem(connection, subId, monId);
+        CHECK(result.isGood());
         setup.client.runIterate();
         CHECK(deleted == true);
     }

@@ -45,11 +45,11 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
 
     auto call = [&](auto&&... args) {
         if constexpr (isAsync<T>) {
-            auto future = services::callAsync(std::forward<decltype(args)>(args)..., useFuture);
+            auto future = services::callAsync(args..., useFuture);
             setup.client.runIterate();
             return future.get();
         } else {
-            return services::call(std::forward<decltype(args)>(args)...);
+            return services::call(args...);
         }
     };
 
