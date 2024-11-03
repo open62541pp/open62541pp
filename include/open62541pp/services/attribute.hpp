@@ -45,9 +45,7 @@ namespace opcua::services {
  */
 ReadResponse read(Client& connection, const ReadRequest& request) noexcept;
 
-/**
- * @overload
- */
+/// @overload
 inline ReadResponse read(
     Client& connection,
     Span<const ReadValueId> nodesToRead,
@@ -72,9 +70,7 @@ auto readAsync(
     );
 }
 
-/**
- * @overload
- */
+/// @overload
 template <typename CompletionToken = DefaultCompletionToken>
 auto readAsync(
     Client& connection,
@@ -157,9 +153,7 @@ auto readAttributeAsync(
  */
 WriteResponse write(Client& connection, const WriteRequest& request) noexcept;
 
-/**
- * @overload
- */
+/// @overload
 inline WriteResponse write(Client& connection, Span<const WriteValue> nodesToWrite) noexcept {
     return write(connection, detail::createWriteRequest(nodesToWrite));
 }
@@ -180,9 +174,7 @@ auto writeAsync(
     );
 }
 
-/**
- * @overload
- */
+/// @overload
 template <typename CompletionToken = DefaultCompletionToken>
 auto writeAsync(
     Client& connection,
