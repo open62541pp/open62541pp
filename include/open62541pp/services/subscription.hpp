@@ -264,7 +264,7 @@ SetPublishingModeResponse setPublishingMode(
 ) noexcept;
 
 /**
- * @copydoc setPublishingMode(Client&, const SetPublishingRequest&)
+ * @copydoc setPublishingMode(Client&, const SetPublishingModeRequest&)
  * @param token @completiontoken{void(SetPublishingModeResponse&)}
  * @return @asyncresult{SetPublishingModeResponse}
  */
