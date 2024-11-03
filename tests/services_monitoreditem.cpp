@@ -55,14 +55,30 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
             changedValue = value;
         };
 
-        const auto result = services::createMonitoredItemDataChange(
-            connection,
-            subId,
-            {id, AttributeId::Value},
-            MonitoringMode::Reporting,
-            monitoringParameters,
-            callback
-        );
+        MonitoredItemCreateResult result;
+        if constexpr (isAsync<T> && UAPP_OPEN62541_VER_GE(1, 1)) {
+#if UAPP_OPEN62541_VER_GE(1, 1)
+            auto future = services::createMonitoredItemDataChangeAsync(
+                connection,
+                subId,
+                {id, AttributeId::Value},
+                MonitoringMode::Reporting,
+                monitoringParameters,
+                callback
+            );
+            setup.client.runIterate();
+            result = future.get();
+#endif
+        } else {
+            result = services::createMonitoredItemDataChange(
+                connection,
+                subId,
+                {id, AttributeId::Value},
+                MonitoringMode::Reporting,
+                monitoringParameters,
+                callback
+            );
+        }
         CHECK(result.getStatusCode().isGood());
         CAPTURE(result.getMonitoredItemId());
 

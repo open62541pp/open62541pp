@@ -117,7 +117,7 @@ void storeSubscriptionContext(
 /**
  * Asynchronously create a subscription.
  * @copydetails createSubscription(Client&, const CreateSubscriptionRequest&,
- *                                 StatusChangeNotificationCallback, DeleteSubscriptionCallback)
+ *              StatusChangeNotificationCallback, DeleteSubscriptionCallback)
  * @param token @completiontoken{void(CreateSubscriptionResponse&)}
  * @return @asyncresult{CreateSubscriptionResponse}
  */

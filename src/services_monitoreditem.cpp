@@ -135,7 +135,9 @@ CreateMonitoredItemsResponse createMonitoredItemsDataChange(
     std::vector<detail::MonitoredItemContext*> contextsPtr(contexts.size());
     std::vector<UA_Client_DataChangeNotificationCallback> dataChangeCallbacks(contexts.size());
     std::vector<UA_Client_DeleteMonitoredItemCallback> deleteCallbacks(contexts.size());
-    detail::convertMonitoredItemContexts(contexts, contextsPtr, dataChangeCallbacks, {}, deleteCallbacks);
+    detail::convertMonitoredItemContexts(
+        contexts, contextsPtr, dataChangeCallbacks, {}, deleteCallbacks
+    );
     CreateMonitoredItemsResponse response = UA_Client_MonitoredItems_createDataChanges(
         connection.handle(),
         request,
@@ -207,7 +209,9 @@ CreateMonitoredItemsResponse createMonitoredItemsEvent(
     std::vector<detail::MonitoredItemContext*> contextsPtr(contexts.size());
     std::vector<UA_Client_EventNotificationCallback> eventCallbacks(contexts.size());
     std::vector<UA_Client_DeleteMonitoredItemCallback> deleteCallbacks(contexts.size());
-    detail::convertMonitoredItemContexts(contexts, contextsPtr, {}, eventCallbacks, deleteCallbacks);
+    detail::convertMonitoredItemContexts(
+        contexts, contextsPtr, {}, eventCallbacks, deleteCallbacks
+    );
     CreateMonitoredItemsResponse response = UA_Client_MonitoredItems_createEvents(
         connection.handle(),
         request,

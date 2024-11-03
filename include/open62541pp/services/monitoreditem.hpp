@@ -9,6 +9,7 @@
 #include "open62541pp/async.hpp"
 #include "open62541pp/common.hpp"  // TimestampsToReturn, MonitoringMode
 #include "open62541pp/config.hpp"
+#include "open62541pp/services/detail/async_hook.hpp"
 #include "open62541pp/services/detail/async_transform.hpp"
 #include "open62541pp/services/detail/client_service.hpp"
 #include "open62541pp/services/detail/monitoreditem_context.hpp"
@@ -123,7 +124,6 @@ void convertMonitoredItemContexts(
     Span<UA_Client_DeleteMonitoredItemCallback> deleteCallbacksNative
 ) noexcept;
 
-template <typename T>
 void storeMonitoredItemContexts(
     Client& connection,
     uint32_t subscriptionId,
@@ -148,6 +148,57 @@ void storeMonitoredItemContexts(
     DataChangeNotificationCallback dataChangeCallback,
     DeleteMonitoredItemCallback deleteCallback = {}
 );
+
+#if UAPP_OPEN62541_VER_GE(1, 1)
+/**
+ * Asynchronously create and add monitored items to a subscription for data change notifications.
+ * @copydetails createMonitoredItemsDataChange(Client&, const CreateMonitoredItemsRequest&,
+ *              DataChangeNotificationCallback, DeleteMonitoredItemCallback)
+ * @param token @completiontoken{void(CreateMonitoredItemsResponse&)}
+ * @return @asyncresult{CreateMonitoredItemsResponse}
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+auto createMonitoredItemsDataChangeAsync(
+    Client& connection,
+    const CreateMonitoredItemsRequest& request,
+    DataChangeNotificationCallback dataChangeCallback,
+    DeleteMonitoredItemCallback deleteCallback = {},
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    auto contexts = detail::createMonitoredItemContexts(
+        connection, request, dataChangeCallback, {}, deleteCallback
+    );
+    std::vector<detail::MonitoredItemContext*> contextsPtr(contexts.size());
+    std::vector<UA_Client_DataChangeNotificationCallback> dataChangeCallbacks(contexts.size());
+    std::vector<UA_Client_DeleteMonitoredItemCallback> deleteCallbacks(contexts.size());
+    detail::convertMonitoredItemContexts(
+        contexts, contextsPtr, dataChangeCallbacks, {}, deleteCallbacks
+    );
+    return detail::AsyncServiceAdapter<CreateMonitoredItemsResponse>::initiate(
+        connection,
+        [&](UA_ClientAsyncServiceCallback callback, void* userdata) {
+            throwIfBad(UA_Client_MonitoredItems_createDataChanges_async(
+                opcua::detail::getHandle(connection),
+                asNative(request),
+                reinterpret_cast<void**>(contextsPtr.data()),  // NOLINT
+                dataChangeCallbacks.data(),
+                deleteCallbacks.data(),
+                callback,
+                userdata,
+                nullptr
+            ));
+        },
+        detail::HookToken(
+            [&connection,
+             subscriptionId = request.getSubscriptionId(),
+             contexts = std::move(contexts)](const auto& response) mutable {
+                detail::storeMonitoredItemContexts(connection, subscriptionId, response, contexts);
+            },
+            std::forward<CompletionToken>(token)
+        )
+    );
+}
+#endif
 
 /**
  * Create and add a monitored item to a subscription for data change notifications.
@@ -174,6 +225,44 @@ template <typename T>
     DataChangeNotificationCallback dataChangeCallback,
     DeleteMonitoredItemCallback deleteCallback = {}
 );
+
+#if UAPP_OPEN62541_VER_GE(1, 1)
+/**
+ * Asynchronously create and add a monitored item to a subscription for data change notifications.
+ * @copydetails createMonitoredItemDataChange(Client&, uint32_t, const ReadValueId&, MonitoringMode,
+ *              const MonitoringParametersEx&, DataChangeNotificationCallback,
+ *              DeleteMonitoredItemCallback)
+ * @param token @completiontoken{void(MonitoredItemCreateResult&)}
+ * @return @asyncresult{MonitoredItemCreateResult}
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+auto createMonitoredItemDataChangeAsync(
+    Client& connection,
+    uint32_t subscriptionId,
+    const ReadValueId& itemToMonitor,
+    MonitoringMode monitoringMode,
+    const MonitoringParametersEx& parameters,
+    DataChangeNotificationCallback dataChangeCallback,
+    DeleteMonitoredItemCallback deleteCallback = {},
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    auto item = detail::createMonitoredItemCreateRequest(itemToMonitor, monitoringMode, parameters);
+    const auto request = detail::createCreateMonitoredItemsRequest(
+        subscriptionId, parameters.timestamps, {&item, 1}
+    );
+    return createMonitoredItemsDataChangeAsync(
+        connection,
+        asWrapper<CreateMonitoredItemsRequest>(request),
+        std::move(dataChangeCallback),
+        std::move(deleteCallback),
+        detail::TransformToken(
+            detail::
+                wrapSingleResultWithStatus<MonitoredItemCreateResult, CreateMonitoredItemsResponse>,
+            std::forward<CompletionToken>(token)
+        )
+    );
+}
+#endif
 
 /**
  * Create and add monitored items to a subscription for event notifications.
