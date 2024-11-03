@@ -16,15 +16,16 @@
 
 namespace opcua::services {
 
+template <typename T>
 static auto createMonitoredItemContext(
-    opcua::detail::ExceptionCatcher& catcher,
+    T& connection,
     const ReadValueId& itemToMonitor,
     DataChangeNotificationCallback dataChangeCallback,
     EventNotificationCallback eventCallback,
     DeleteMonitoredItemCallback deleteCallback
 ) {
     auto context = std::make_unique<detail::MonitoredItemContext>();
-    context->catcher = &catcher;
+    context->catcher = &opcua::detail::getExceptionCatcher(connection);
     context->itemToMonitor = itemToMonitor;
     context->dataChangeCallback = std::move(dataChangeCallback);
     context->eventCallback = std::move(eventCallback);
@@ -32,8 +33,9 @@ static auto createMonitoredItemContext(
     return context;
 }
 
+template <typename T>
 static auto createMonitoredItemContexts(
-    opcua::detail::ExceptionCatcher& catcher,
+    T& connection,
     const CreateMonitoredItemsRequest& request,
     const DataChangeNotificationCallback& dataChangeCallback,
     const EventNotificationCallback& eventCallback,
@@ -43,7 +45,7 @@ static auto createMonitoredItemContexts(
     std::vector<std::unique_ptr<detail::MonitoredItemContext>> contexts(items.size());
     std::transform(items.begin(), items.end(), contexts.begin(), [&](const auto& item) {
         return createMonitoredItemContext(
-            catcher, item.getItemToMonitor(), dataChangeCallback, eventCallback, deleteCallback
+            connection, item.getItemToMonitor(), dataChangeCallback, eventCallback, deleteCallback
         );
     });
     return contexts;
@@ -129,11 +131,7 @@ CreateMonitoredItemsResponse createMonitoredItemsDataChange(
 ) {
     // TODO: avoid heap allocations for single item?
     auto contexts = createMonitoredItemContexts(
-        opcua::detail::getExceptionCatcher(connection),
-        request,
-        dataChangeCallback,
-        {},
-        deleteCallback
+        connection, request, dataChangeCallback, {}, deleteCallback
     );
     std::vector<detail::MonitoredItemContext*> contextsPtr(contexts.size());
     std::vector<UA_Client_DataChangeNotificationCallback> dataChangeCallbacks(contexts.size());
@@ -184,11 +182,7 @@ MonitoredItemCreateResult createMonitoredItemDataChange<Server>(
     DeleteMonitoredItemCallback deleteCallback
 ) {
     auto context = createMonitoredItemContext(
-        opcua::detail::getExceptionCatcher(connection),
-        itemToMonitor,
-        std::move(dataChangeCallback),
-        {},
-        std::move(deleteCallback)
+        connection, itemToMonitor, std::move(dataChangeCallback), {}, std::move(deleteCallback)
     );
     MonitoredItemCreateResult result = UA_Server_createDataChangeMonitoredItem(
         connection.handle(),
@@ -209,7 +203,7 @@ CreateMonitoredItemsResponse createMonitoredItemsEvent(
 ) {
     // TODO: avoid heap allocations for single item?
     auto contexts = createMonitoredItemContexts(
-        opcua::detail::getExceptionCatcher(connection), request, {}, eventCallback, deleteCallback
+        connection, request, {}, eventCallback, deleteCallback
     );
     std::vector<detail::MonitoredItemContext*> contextsPtr(contexts.size());
     std::vector<UA_Client_EventNotificationCallback> eventCallbacks(contexts.size());
