@@ -4,9 +4,6 @@
 
 #include <algorithm>
 #include <cstddef>
-#include <memory>
-#include <utility>  // move
-#include <vector>
 
 #include "open62541pp/client.hpp"
 #include "open62541pp/detail/client_context.hpp"
@@ -16,6 +13,8 @@
 
 namespace opcua::services {
 
+namespace detail {
+
 template <typename T>
 static auto createMonitoredItemContext(
     T& connection,
@@ -24,7 +23,7 @@ static auto createMonitoredItemContext(
     EventNotificationCallback eventCallback,
     DeleteMonitoredItemCallback deleteCallback
 ) {
-    auto context = std::make_unique<detail::MonitoredItemContext>();
+    auto context = std::make_unique<MonitoredItemContext>();
     context->catcher = &opcua::detail::getExceptionCatcher(connection);
     context->itemToMonitor = itemToMonitor;
     context->dataChangeCallback = std::move(dataChangeCallback);
@@ -33,16 +32,15 @@ static auto createMonitoredItemContext(
     return context;
 }
 
-template <typename T>
-static auto createMonitoredItemContexts(
-    T& connection,
+std::vector<std::unique_ptr<MonitoredItemContext>> createMonitoredItemContexts(
+    Client& connection,
     const CreateMonitoredItemsRequest& request,
     const DataChangeNotificationCallback& dataChangeCallback,
     const EventNotificationCallback& eventCallback,
     const DeleteMonitoredItemCallback& deleteCallback
 ) {
     const auto items = request.getItemsToCreate();
-    std::vector<std::unique_ptr<detail::MonitoredItemContext>> contexts(items.size());
+    std::vector<std::unique_ptr<MonitoredItemContext>> contexts(items.size());
     std::transform(items.begin(), items.end(), contexts.begin(), [&](const auto& item) {
         return createMonitoredItemContext(
             connection, item.getItemToMonitor(), dataChangeCallback, eventCallback, deleteCallback
@@ -51,9 +49,9 @@ static auto createMonitoredItemContexts(
     return contexts;
 }
 
-static void convertMonitoredItemContexts(
-    Span<const std::unique_ptr<detail::MonitoredItemContext>> contexts,
-    Span<detail::MonitoredItemContext*> contextsPtr,
+void convertMonitoredItemContexts(
+    Span<const std::unique_ptr<MonitoredItemContext>> contexts,
+    Span<MonitoredItemContext*> contextsPtr,
     Span<UA_Client_DataChangeNotificationCallback> dataChangeCallbacksNative,
     Span<UA_Client_EventNotificationCallback> eventCallbacksNative,
     Span<UA_Client_DeleteMonitoredItemCallback> deleteCallbacksNative
@@ -70,7 +68,7 @@ static void convertMonitoredItemContexts(
         std::fill(
             dataChangeCallbacksNative.begin(),
             dataChangeCallbacksNative.end(),
-            detail::MonitoredItemContext::dataChangeCallbackNativeClient
+            MonitoredItemContext::dataChangeCallbackNativeClient
         );
     }
     if (!eventCallbacksNative.empty()) {
@@ -78,7 +76,7 @@ static void convertMonitoredItemContexts(
         std::fill(
             eventCallbacksNative.begin(),
             eventCallbacksNative.end(),
-            detail::MonitoredItemContext::eventCallbackNative
+            MonitoredItemContext::eventCallbackNative
         );
     }
     if (!deleteCallbacksNative.empty()) {
@@ -86,7 +84,7 @@ static void convertMonitoredItemContexts(
         std::fill(
             deleteCallbacksNative.begin(),
             deleteCallbacksNative.end(),
-            detail::MonitoredItemContext::deleteCallbackNative
+            MonitoredItemContext::deleteCallbackNative
         );
     }
 }
@@ -96,7 +94,7 @@ static void storeMonitoredItemContext(
     T& connection,
     uint32_t subscriptionId,
     const MonitoredItemCreateResult& result,
-    std::unique_ptr<detail::MonitoredItemContext>& context
+    std::unique_ptr<MonitoredItemContext>& context
 ) {
     if (result.getStatusCode().isGood()) {
         auto* contextPtr = context.get();
@@ -108,20 +106,21 @@ static void storeMonitoredItemContext(
     }
 }
 
-template <typename T>
-static void storeMonitoredItemContexts(
-    T& connection,
+void storeMonitoredItemContexts(
+    Client& connection,
     uint32_t subscriptionId,
     const CreateMonitoredItemsResponse& response,
-    Span<std::unique_ptr<detail::MonitoredItemContext>> contexts
+    Span<std::unique_ptr<MonitoredItemContext>> contexts
 ) {
-    if (detail::getServiceResult(response).isGood()) {
+    if (getServiceResult(response).isGood()) {
         const auto results = response.getResults();
         for (size_t i = 0; i < results.size(); ++i) {
             storeMonitoredItemContext(connection, subscriptionId, results[i], contexts[i]);
         }
     }
 }
+
+}  // namespace detail
 
 CreateMonitoredItemsResponse createMonitoredItemsDataChange(
     Client& connection,
@@ -130,13 +129,13 @@ CreateMonitoredItemsResponse createMonitoredItemsDataChange(
     DeleteMonitoredItemCallback deleteCallback  // NOLINT
 ) {
     // TODO: avoid heap allocations for single item?
-    auto contexts = createMonitoredItemContexts(
+    auto contexts = detail::createMonitoredItemContexts(
         connection, request, dataChangeCallback, {}, deleteCallback
     );
     std::vector<detail::MonitoredItemContext*> contextsPtr(contexts.size());
     std::vector<UA_Client_DataChangeNotificationCallback> dataChangeCallbacks(contexts.size());
     std::vector<UA_Client_DeleteMonitoredItemCallback> deleteCallbacks(contexts.size());
-    convertMonitoredItemContexts(contexts, contextsPtr, dataChangeCallbacks, {}, deleteCallbacks);
+    detail::convertMonitoredItemContexts(contexts, contextsPtr, dataChangeCallbacks, {}, deleteCallbacks);
     CreateMonitoredItemsResponse response = UA_Client_MonitoredItems_createDataChanges(
         connection.handle(),
         request,
@@ -144,7 +143,7 @@ CreateMonitoredItemsResponse createMonitoredItemsDataChange(
         dataChangeCallbacks.data(),
         deleteCallbacks.data()
     );
-    storeMonitoredItemContexts(connection, request.getSubscriptionId(), response, contexts);
+    detail::storeMonitoredItemContexts(connection, request.getSubscriptionId(), response, contexts);
     return response;
 }
 
@@ -181,7 +180,7 @@ MonitoredItemCreateResult createMonitoredItemDataChange<Server>(
     DataChangeNotificationCallback dataChangeCallback,
     DeleteMonitoredItemCallback deleteCallback
 ) {
-    auto context = createMonitoredItemContext(
+    auto context = detail::createMonitoredItemContext(
         connection, itemToMonitor, std::move(dataChangeCallback), {}, std::move(deleteCallback)
     );
     MonitoredItemCreateResult result = UA_Server_createDataChangeMonitoredItem(
@@ -191,7 +190,7 @@ MonitoredItemCreateResult createMonitoredItemDataChange<Server>(
         context.get(),
         detail::MonitoredItemContext::dataChangeCallbackNativeServer
     );
-    storeMonitoredItemContext(connection, 0U, result, context);
+    detail::storeMonitoredItemContext(connection, 0U, result, context);
     return result;
 }
 
@@ -202,13 +201,13 @@ CreateMonitoredItemsResponse createMonitoredItemsEvent(
     DeleteMonitoredItemCallback deleteCallback  // NOLINT
 ) {
     // TODO: avoid heap allocations for single item?
-    auto contexts = createMonitoredItemContexts(
+    auto contexts = detail::createMonitoredItemContexts(
         connection, request, {}, eventCallback, deleteCallback
     );
     std::vector<detail::MonitoredItemContext*> contextsPtr(contexts.size());
     std::vector<UA_Client_EventNotificationCallback> eventCallbacks(contexts.size());
     std::vector<UA_Client_DeleteMonitoredItemCallback> deleteCallbacks(contexts.size());
-    convertMonitoredItemContexts(contexts, contextsPtr, {}, eventCallbacks, deleteCallbacks);
+    detail::convertMonitoredItemContexts(contexts, contextsPtr, {}, eventCallbacks, deleteCallbacks);
     CreateMonitoredItemsResponse response = UA_Client_MonitoredItems_createEvents(
         connection.handle(),
         request,
@@ -216,7 +215,7 @@ CreateMonitoredItemsResponse createMonitoredItemsEvent(
         eventCallbacks.data(),
         deleteCallbacks.data()
     );
-    storeMonitoredItemContexts(connection, request.getSubscriptionId(), response, contexts);
+    detail::storeMonitoredItemContexts(connection, request.getSubscriptionId(), response, contexts);
     return response;
 }
 

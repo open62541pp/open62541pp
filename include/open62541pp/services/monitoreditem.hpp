@@ -2,12 +2,16 @@
 
 #include <cstdint>
 #include <functional>
+#include <memory>
+#include <utility>  // forward
+#include <vector>
 
 #include "open62541pp/async.hpp"
 #include "open62541pp/common.hpp"  // TimestampsToReturn, MonitoringMode
 #include "open62541pp/config.hpp"
 #include "open62541pp/services/detail/async_transform.hpp"
 #include "open62541pp/services/detail/client_service.hpp"
+#include "open62541pp/services/detail/monitoreditem_context.hpp"
 #include "open62541pp/services/detail/request_handling.hpp"
 #include "open62541pp/services/detail/response_handling.hpp"
 #include "open62541pp/span.hpp"
@@ -101,6 +105,32 @@ using DataChangeNotificationCallback =
  */
 using EventNotificationCallback =
     std::function<void(uint32_t subId, uint32_t monId, Span<const Variant> eventFields)>;
+
+namespace detail {
+std::vector<std::unique_ptr<MonitoredItemContext>> createMonitoredItemContexts(
+    Client& connection,
+    const CreateMonitoredItemsRequest& request,
+    const DataChangeNotificationCallback& dataChangeCallback,
+    const EventNotificationCallback& eventCallback,
+    const DeleteMonitoredItemCallback& deleteCallback
+);
+
+void convertMonitoredItemContexts(
+    Span<const std::unique_ptr<MonitoredItemContext>> contexts,
+    Span<MonitoredItemContext*> contextsPtr,
+    Span<UA_Client_DataChangeNotificationCallback> dataChangeCallbacksNative,
+    Span<UA_Client_EventNotificationCallback> eventCallbacksNative,
+    Span<UA_Client_DeleteMonitoredItemCallback> deleteCallbacksNative
+) noexcept;
+
+template <typename T>
+void storeMonitoredItemContexts(
+    Client& connection,
+    uint32_t subscriptionId,
+    const CreateMonitoredItemsResponse& response,
+    Span<std::unique_ptr<MonitoredItemContext>> contexts
+);
+}  // namespace detail
 
 /**
  * Create and add monitored items to a subscription for data change notifications.
