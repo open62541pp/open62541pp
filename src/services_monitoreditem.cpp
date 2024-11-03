@@ -35,10 +35,13 @@ static auto createMonitoredItemContext(
 std::vector<std::unique_ptr<MonitoredItemContext>> createMonitoredItemContexts(
     Client& connection,
     const CreateMonitoredItemsRequest& request,
-    const DataChangeNotificationCallback& dataChangeCallback,
-    const EventNotificationCallback& eventCallback,
-    const DeleteMonitoredItemCallback& deleteCallback
+    // NOLINTBEGIN(performance-unnecessary-value-param)
+    DataChangeNotificationCallback dataChangeCallback,
+    EventNotificationCallback eventCallback,
+    DeleteMonitoredItemCallback deleteCallback
+    // NOLINTEND(performance-unnecessary-value-param)
 ) {
+    // TODO: move first callback, then copy
     const auto items = request.getItemsToCreate();
     std::vector<std::unique_ptr<MonitoredItemContext>> contexts(items.size());
     std::transform(items.begin(), items.end(), contexts.begin(), [&](const auto& item) {
@@ -125,12 +128,12 @@ void storeMonitoredItemContexts(
 CreateMonitoredItemsResponse createMonitoredItemsDataChange(
     Client& connection,
     const CreateMonitoredItemsRequest& request,
-    DataChangeNotificationCallback dataChangeCallback,  // NOLINT
-    DeleteMonitoredItemCallback deleteCallback  // NOLINT
+    DataChangeNotificationCallback dataChangeCallback,
+    DeleteMonitoredItemCallback deleteCallback
 ) {
     // TODO: avoid heap allocations for single item?
     auto contexts = detail::createMonitoredItemContexts(
-        connection, request, dataChangeCallback, {}, deleteCallback
+        connection, request, std::move(dataChangeCallback), {}, std::move(deleteCallback)
     );
     std::vector<detail::MonitoredItemContext*> contextsPtr(contexts.size());
     std::vector<UA_Client_DataChangeNotificationCallback> dataChangeCallbacks(contexts.size());
@@ -199,12 +202,12 @@ MonitoredItemCreateResult createMonitoredItemDataChange<Server>(
 CreateMonitoredItemsResponse createMonitoredItemsEvent(
     Client& connection,
     const CreateMonitoredItemsRequest& request,
-    EventNotificationCallback eventCallback,  // NOLINT
-    DeleteMonitoredItemCallback deleteCallback  // NOLINT
+    EventNotificationCallback eventCallback,
+    DeleteMonitoredItemCallback deleteCallback
 ) {
     // TODO: avoid heap allocations for single item?
     auto contexts = detail::createMonitoredItemContexts(
-        connection, request, {}, eventCallback, deleteCallback
+        connection, request, {}, std::move(eventCallback), std::move(deleteCallback)
     );
     std::vector<detail::MonitoredItemContext*> contextsPtr(contexts.size());
     std::vector<UA_Client_EventNotificationCallback> eventCallbacks(contexts.size());

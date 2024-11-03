@@ -9,6 +9,7 @@
 #include "open62541pp/async.hpp"
 #include "open62541pp/common.hpp"  // TimestampsToReturn, MonitoringMode
 #include "open62541pp/config.hpp"
+#include "open62541pp/detail/client_utils.hpp"  // getHandle
 #include "open62541pp/services/detail/async_hook.hpp"
 #include "open62541pp/services/detail/async_transform.hpp"
 #include "open62541pp/services/detail/client_service.hpp"
@@ -111,9 +112,9 @@ namespace detail {
 std::vector<std::unique_ptr<MonitoredItemContext>> createMonitoredItemContexts(
     Client& connection,
     const CreateMonitoredItemsRequest& request,
-    const DataChangeNotificationCallback& dataChangeCallback,
-    const EventNotificationCallback& eventCallback,
-    const DeleteMonitoredItemCallback& deleteCallback
+    DataChangeNotificationCallback dataChangeCallback,
+    EventNotificationCallback eventCallback,
+    DeleteMonitoredItemCallback deleteCallback
 );
 
 void convertMonitoredItemContexts(
@@ -166,7 +167,7 @@ auto createMonitoredItemsDataChangeAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     auto contexts = detail::createMonitoredItemContexts(
-        connection, request, dataChangeCallback, {}, deleteCallback
+        connection, request, std::move(dataChangeCallback), {}, std::move(deleteCallback)
     );
     std::vector<detail::MonitoredItemContext*> contextsPtr(contexts.size());
     std::vector<UA_Client_DataChangeNotificationCallback> dataChangeCallbacks(contexts.size());
