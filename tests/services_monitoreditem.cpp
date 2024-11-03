@@ -109,14 +109,30 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
             eventFieldsSize = eventFields.size();
         };
 
-        const auto result = services::createMonitoredItemEvent(
-            connection,
-            subId,
-            {ObjectId::Server, AttributeId::EventNotifier},
-            MonitoringMode::Reporting,
-            monitoringParameters,
-            callback
-        );
+        MonitoredItemCreateResult result;
+        if constexpr (isAsync<T> && UAPP_OPEN62541_VER_GE(1, 1)) {
+#if UAPP_OPEN62541_VER_GE(1, 1)
+            auto future = services::createMonitoredItemEventAsync(
+                connection,
+                subId,
+                {ObjectId::Server, AttributeId::EventNotifier},
+                MonitoringMode::Reporting,
+                monitoringParameters,
+                callback
+            );
+            setup.client.runIterate();
+            result = future.get();
+#endif
+        } else {
+            result = services::createMonitoredItemEvent(
+                connection,
+                subId,
+                {ObjectId::Server, AttributeId::EventNotifier},
+                MonitoringMode::Reporting,
+                monitoringParameters,
+                callback
+            );
+        }
         CHECK(result.getStatusCode().isGood());
         CAPTURE(result.getMonitoredItemId());
 

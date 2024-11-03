@@ -281,6 +281,57 @@ auto createMonitoredItemDataChangeAsync(
     DeleteMonitoredItemCallback deleteCallback = {}
 );
 
+#if UAPP_OPEN62541_VER_GE(1, 1)
+/**
+ * Asynchronously create and add monitored items to a subscription for event notifications.
+ * @copydetails createMonitoredItemsEvent(Client&, const CreateMonitoredItemsRequest&,
+ *              EventNotificationCallback, DeleteMonitoredItemCallback)
+ * @param token @completiontoken{void(CreateMonitoredItemsResponse&)}
+ * @return @asyncresult{CreateMonitoredItemsResponse}
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+auto createMonitoredItemsEventAsync(
+    Client& connection,
+    const CreateMonitoredItemsRequest& request,
+    EventNotificationCallback eventCallback,
+    DeleteMonitoredItemCallback deleteCallback = {},
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    auto contexts = detail::createMonitoredItemContexts(
+        connection, request, {}, std::move(eventCallback), std::move(deleteCallback)
+    );
+    std::vector<detail::MonitoredItemContext*> contextsPtr(contexts.size());
+    std::vector<UA_Client_EventNotificationCallback> eventCallbacks(contexts.size());
+    std::vector<UA_Client_DeleteMonitoredItemCallback> deleteCallbacks(contexts.size());
+    detail::convertMonitoredItemContexts(
+        contexts, contextsPtr, {}, eventCallbacks, deleteCallbacks
+    );
+    return detail::AsyncServiceAdapter<CreateMonitoredItemsResponse>::initiate(
+        connection,
+        [&](UA_ClientAsyncServiceCallback callback, void* userdata) {
+            throwIfBad(UA_Client_MonitoredItems_createEvents_async(
+                opcua::detail::getHandle(connection),
+                asNative(request),
+                reinterpret_cast<void**>(contextsPtr.data()),  // NOLINT
+                eventCallbacks.data(),
+                deleteCallbacks.data(),
+                callback,
+                userdata,
+                nullptr
+            ));
+        },
+        detail::HookToken(
+            [&connection,
+             subscriptionId = request.getSubscriptionId(),
+             contexts = std::move(contexts)](const auto& response) mutable {
+                detail::storeMonitoredItemContexts(connection, subscriptionId, response, contexts);
+            },
+            std::forward<CompletionToken>(token)
+        )
+    );
+}
+#endif
+
 /**
  * Create and add a monitored item to a subscription for event notifications.
  * The `attributeId` of ReadValueId must be set to AttributeId::EventNotifier.
@@ -303,6 +354,44 @@ auto createMonitoredItemDataChangeAsync(
     EventNotificationCallback eventCallback,
     DeleteMonitoredItemCallback deleteCallback = {}
 );
+
+#if UAPP_OPEN62541_VER_GE(1, 1)
+/**
+ * Asynchronously create and add a monitored item to a subscription for event notifications.
+ * @copydetails createMonitoredItemEvent(Client&, uint32_t, const ReadValueId&, MonitoringMode,
+ *              const MonitoringParametersEx&, EventNotificationCallback,
+ *              DeleteMonitoredItemCallback)
+ * @param token @completiontoken{void(MonitoredItemCreateResult&)}
+ * @return @asyncresult{MonitoredItemCreateResult}
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+auto createMonitoredItemEventAsync(
+    Client& connection,
+    uint32_t subscriptionId,
+    const ReadValueId& itemToMonitor,
+    MonitoringMode monitoringMode,
+    const MonitoringParametersEx& parameters,
+    EventNotificationCallback eventCallback,
+    DeleteMonitoredItemCallback deleteCallback = {},
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    auto item = detail::createMonitoredItemCreateRequest(itemToMonitor, monitoringMode, parameters);
+    const auto request = detail::createCreateMonitoredItemsRequest(
+        subscriptionId, parameters.timestamps, {&item, 1}
+    );
+    return createMonitoredItemsEventAsync(
+        connection,
+        asWrapper<CreateMonitoredItemsRequest>(request),
+        std::move(eventCallback),
+        std::move(deleteCallback),
+        detail::TransformToken(
+            detail::
+                wrapSingleResultWithStatus<MonitoredItemCreateResult, CreateMonitoredItemsResponse>,
+            std::forward<CompletionToken>(token)
+        )
+    );
+}
+#endif
 
 /**
  * @}
