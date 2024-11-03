@@ -78,13 +78,11 @@ Result<WrapperType> wrapSingleResult(Response& response) noexcept {
 // Get single result from response and save response status code in result type's statusCode member.
 template <typename WrapperType, typename Response>
 WrapperType wrapSingleResultWithStatus(Response& response) noexcept {
-    auto result = wrapSingleResult<WrapperType>(response);
-    if (result) {
-        return *result;
-    }
-    WrapperType resultWithBadStatus;
-    resultWithBadStatus->statusCode = result.code();
-    return resultWithBadStatus;
+    return *wrapSingleResult<WrapperType>(response).orElse([](UA_StatusCode code) {
+        WrapperType result;
+        result->statusCode = code;
+        return result;
+    });
 }
 
 inline Result<NodeId> getAddedNodeId(UA_AddNodesResult& result) noexcept {

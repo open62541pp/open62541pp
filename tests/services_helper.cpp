@@ -4,6 +4,8 @@
 
 #include "open62541pp/services/detail/async_hook.hpp"
 #include "open62541pp/services/detail/async_transform.hpp"
+#include "open62541pp/services/detail/response_handling.hpp"
+#include "open62541pp/types_composed.hpp"
 
 using namespace opcua;
 
@@ -58,4 +60,28 @@ TEST_CASE("HookToken") {
     CHECK(hookExecuted);
     CHECK(hookResult == 5);
     CHECK(result == 5);
+}
+
+TEST_CASE("Response handling") {
+    UA_AddNodesResult result{};
+    result.statusCode = UA_STATUSCODE_GOOD;
+    result.addedNodeId = UA_NODEID_NUMERIC(1, 1000);
+
+    UA_AddNodesResponse response{};
+    response.responseHeader.serviceResult = UA_STATUSCODE_GOOD;
+    response.resultsSize = 1;
+    response.results = &result;
+
+    SUBCASE("wrapSingleResultWithStatus") {
+        CHECK_EQ(
+            services::detail::wrapSingleResultWithStatus<AddNodesResult>(response).getStatusCode().get(),
+            UA_STATUSCODE_GOOD
+        );
+
+        response.responseHeader.serviceResult = UA_STATUSCODE_BADINTERNALERROR;
+        CHECK_EQ(
+            services::detail::wrapSingleResultWithStatus<AddNodesResult>(response).getStatusCode().get(),
+            UA_STATUSCODE_BADINTERNALERROR
+        );
+    }
 }
