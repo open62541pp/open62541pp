@@ -185,7 +185,7 @@ public:
 
     /// Set custom data types.
     /// All data types provided are automatically considered for decoding of received messages.
-    void setCustomDataTypes(std::vector<DataType> dataTypes);
+    void setCustomDataTypes(Span<const DataType> dataTypes);
 
     /// Set a state callback that will be called after the client is connected.
     void onConnected(StateCallback callback);
