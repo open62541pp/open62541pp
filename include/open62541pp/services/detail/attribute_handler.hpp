@@ -23,12 +23,6 @@ inline Result<Variant> getVariant(DataValue&& dv) noexcept {
     return std::move(dv).getValue();
 }
 
-inline DataValue createDataValue(StatusCode code) noexcept {
-    DataValue dv;
-    dv.setStatus(code);
-    return dv;
-}
-
 /**
  * Attribute handler to convert DataValue objects to/from the attribute specific types.
  * Template specializations must be provided for all AttributeIds.
