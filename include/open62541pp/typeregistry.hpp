@@ -4,7 +4,6 @@
 
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/detail/traits.hpp"  // AlwaysFalse
-#include "open62541pp/typewrapper.hpp"
 
 namespace opcua {
 
@@ -55,13 +54,6 @@ const UA_DataType& getDataType() noexcept {
 }
 
 /* ---------------------------------- Template specializations ---------------------------------- */
-
-template <typename T>
-struct TypeRegistry<T, std::enable_if_t<detail::isTypeWrapper<T>>> {
-    static const UA_DataType& getDataType() noexcept {
-        return UA_TYPES[T::getTypeIndex()];
-    }
-};
 
 // NOLINTNEXTLINE
 #define UAPP_TYPEREGISTRY_NATIVE(NativeType, typeIndex)                                            \
