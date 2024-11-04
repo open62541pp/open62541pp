@@ -17,7 +17,7 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
 
     // add node to query references
     const NodeId id{1, 1000};
-    services::addVariable(
+    REQUIRE(services::addVariable(
         server,
         {0, UA_NS0ID_OBJECTSFOLDER},
         id,
@@ -25,8 +25,7 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
         {},
         VariableTypeId::BaseDataVariableType,
         ReferenceTypeId::HasComponent
-    )
-        .value();
+    ));
 
     SUBCASE("browse") {
         const BrowseDescription bd(id, BrowseDirection::Both);

@@ -18,7 +18,7 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
     const NodeId methodId{1, 1000};
 
     bool throwException = false;
-    services::addMethod(
+    REQUIRE(services::addMethod(
         setup.server,
         objectsId,
         methodId,
@@ -40,8 +40,7 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
         },
         MethodAttributes{},
         ReferenceTypeId::HasComponent
-    )
-        .value();
+    ));
 
     auto call = [&](auto&&... args) {
         if constexpr (isAsync<T>) {

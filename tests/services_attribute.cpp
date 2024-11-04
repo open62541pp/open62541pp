@@ -29,7 +29,7 @@ TEST_CASE("Attribute service set (highlevel)") {
         attr.setMinimumSamplingInterval(11.11);
 
         const NodeId id{1, "TestAttributes"};
-        services::addVariable(
+        REQUIRE(services::addVariable(
             server,
             objectsId,
             id,
@@ -37,8 +37,7 @@ TEST_CASE("Attribute service set (highlevel)") {
             attr,
             VariableTypeId::BaseDataVariableType,
             ReferenceTypeId::HasComponent
-        )
-            .value();
+        ));
 
         CHECK(services::readDisplayName(server, id).value() == attr.getDisplayName());
         CHECK(services::readDescription(server, id).value() == attr.getDescription());
@@ -58,7 +57,7 @@ TEST_CASE("Attribute service set (highlevel)") {
 
     SUBCASE("Read/write object node attributes") {
         const NodeId id{1, "TestAttributes"};
-        services::addObject(
+        REQUIRE(services::addObject(
             server,
             objectsId,
             id,
@@ -66,8 +65,7 @@ TEST_CASE("Attribute service set (highlevel)") {
             {},
             ObjectTypeId::BaseObjectType,
             ReferenceTypeId::HasComponent
-        )
-            .value();
+        ));
 
         // write new attributes
         const auto eventNotifier = EventNotifier::HistoryRead | EventNotifier::HistoryWrite;
@@ -79,7 +77,7 @@ TEST_CASE("Attribute service set (highlevel)") {
 
     SUBCASE("Read/write variable node attributes") {
         const NodeId id{1, "TestAttributes"};
-        services::addVariable(
+        REQUIRE(services::addVariable(
             server,
             objectsId,
             id,
@@ -87,8 +85,7 @@ TEST_CASE("Attribute service set (highlevel)") {
             {},
             VariableTypeId::BaseDataVariableType,
             ReferenceTypeId::HasComponent
-        )
-            .value();
+        ));
 
         // write new attributes
         CHECK(services::writeDisplayName(server, id, {{}, "NewDisplayName"}).isGood());
@@ -120,10 +117,9 @@ TEST_CASE("Attribute service set (highlevel)") {
 #ifdef UA_ENABLE_METHODCALLS
     SUBCASE("Read/write method node attributes") {
         const NodeId id{1, "TestMethod"};
-        services::addMethod(
+        REQUIRE(services::addMethod(
             server, objectsId, id, "TestMethod", nullptr, {}, {}, {}, ReferenceTypeId::HasComponent
-        )
-            .value();
+        ));
 
         // write new attributes
         CHECK(services::writeExecutable(server, id, true).isGood());
@@ -136,15 +132,14 @@ TEST_CASE("Attribute service set (highlevel)") {
 
     SUBCASE("Read/write reference type node attributes") {
         const NodeId id{1, "TestReferenceType"};
-        services::addReferenceType(
+        REQUIRE(services::addReferenceType(
             server,
             {0, UA_NS0ID_ORGANIZES},
             id,
             "TestReferenceType",
             {},
             ReferenceTypeId::HasSubtype
-        )
-            .value();
+        ));
 
         // read default attributes
         CHECK(services::readIsAbstract(server, id).value() == false);
@@ -164,7 +159,7 @@ TEST_CASE("Attribute service set (highlevel)") {
 
     SUBCASE("Value rank and array dimension combinations") {
         const NodeId id{1, "TestDimensions"};
-        services::addVariable(
+        REQUIRE(services::addVariable(
             server,
             objectsId,
             id,
@@ -172,8 +167,7 @@ TEST_CASE("Attribute service set (highlevel)") {
             {},
             VariableTypeId::BaseDataVariableType,
             ReferenceTypeId::HasComponent
-        )
-            .value();
+        ));
 
         SUBCASE("Unspecified dimension (ValueRank <= 0)") {
             const std::vector<ValueRank> valueRanks = {
@@ -219,7 +213,7 @@ TEST_CASE("Attribute service set (highlevel)") {
 
     SUBCASE("Read/write value") {
         const NodeId id{1, "TestValue"};
-        services::addVariable(
+        REQUIRE(services::addVariable(
             server,
             objectsId,
             id,
@@ -227,8 +221,7 @@ TEST_CASE("Attribute service set (highlevel)") {
             {},
             VariableTypeId::BaseDataVariableType,
             ReferenceTypeId::HasComponent
-        )
-            .value();
+        ));
 
         Variant variantWrite;
         variantWrite.setScalarCopy(11.11);
@@ -240,7 +233,7 @@ TEST_CASE("Attribute service set (highlevel)") {
 
     SUBCASE("Read/write data value") {
         const NodeId id{1, "TestDataValue"};
-        services::addVariable(
+        REQUIRE(services::addVariable(
             server,
             objectsId,
             id,
@@ -248,8 +241,7 @@ TEST_CASE("Attribute service set (highlevel)") {
             {},
             VariableTypeId::BaseDataVariableType,
             ReferenceTypeId::HasComponent
-        )
-            .value();
+        ));
 
         Variant variant;
         variant.setScalarCopy<int>(11);
@@ -309,7 +301,7 @@ TEST_CASE("Attribute service set (highlevel, async)") {
     SUBCASE("Read/write value") {
         // create variable node
         const NodeId id{1, 1000};
-        services::addVariable(
+        REQUIRE(services::addVariable(
             server,
             objectsId,
             id,
@@ -319,8 +311,7 @@ TEST_CASE("Attribute service set (highlevel, async)") {
             ),
             VariableTypeId::BaseDataVariableType,
             ReferenceTypeId::HasComponent
-        )
-            .value();
+        ));
 
         // write
         {
@@ -349,7 +340,7 @@ TEST_CASE_TEMPLATE("Attribute service set write/read", T, Server, Client, Async<
 
     // create variable node
     const NodeId id{1, 1000};
-    services::addVariable(
+    REQUIRE(services::addVariable(
         setup.server,
         {0, UA_NS0ID_OBJECTSFOLDER},
         id,
@@ -357,8 +348,7 @@ TEST_CASE_TEMPLATE("Attribute service set write/read", T, Server, Client, Async<
         VariableAttributes{}.setAccessLevel(AccessLevel::CurrentRead | AccessLevel::CurrentWrite),
         VariableTypeId::BaseDataVariableType,
         ReferenceTypeId::HasComponent
-    )
-        .value();
+    ));
 
     const double value = 11.11;
     Result<DataValue> result;

@@ -241,10 +241,10 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
     }
 
     SUBCASE("Add/delete reference") {
-        services::addFolder(
+        REQUIRE(services::addFolder(
             connection, objectsId, {1, 1000}, "Folder", {}, ReferenceTypeId::HasComponent
-        );
-        services::addObject(
+        ));
+        REQUIRE(services::addObject(
             connection,
             objectsId,
             {1, 1001},
@@ -252,7 +252,7 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
             {},
             ObjectTypeId::BaseObjectType,
             ReferenceTypeId::HasComponent
-        );
+        ));
 
         const auto addReference = [&](auto&&... args) {
             if constexpr (isAsync<T>) {
@@ -294,7 +294,7 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
     }
 
     SUBCASE("Delete node") {
-        services::addObject(
+        REQUIRE(services::addObject(
             connection,
             objectsId,
             {1, 1000},
@@ -302,7 +302,7 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
             {},
             ObjectTypeId::BaseObjectType,
             ReferenceTypeId::HasComponent
-        );
+        ));
 
         const auto deleteNode = [&](auto&&... args) {
             if constexpr (isAsync<T>) {
@@ -325,11 +325,12 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
                 objectsId,
                 {1, 0},
                 "Random",
-                {},
+                ObjectAttributes{},
                 ObjectTypeId::BaseObjectType,
                 ReferenceTypeId::HasComponent
             )
                 .value();
+
         CHECK(id != NodeId(1, 0));
         CHECK(id.getNamespaceIndex() == 1);
     }

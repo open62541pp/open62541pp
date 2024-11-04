@@ -25,7 +25,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
 
     // add variable node to test data change notifications
     const NodeId id{1, 1000};
-    services::addVariable(
+    REQUIRE(services::addVariable(
         server,
         {0, UA_NS0ID_OBJECTSFOLDER},
         id,
@@ -33,8 +33,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
         {},
         VariableTypeId::BaseDataVariableType,
         ReferenceTypeId::HasComponent
-    )
-        .value();
+    ));
 
     const services::SubscriptionParameters subscriptionParameters{};
     services::MonitoringParametersEx monitoringParameters{};
@@ -318,7 +317,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
 TEST_CASE("MonitoredItem service set (server)") {
     Server server;
     const NodeId id{1, 1000};
-    services::addVariable(
+    REQUIRE(services::addVariable(
         server,
         {0, UA_NS0ID_OBJECTSFOLDER},
         id,
@@ -326,8 +325,7 @@ TEST_CASE("MonitoredItem service set (server)") {
         {},
         VariableTypeId::BaseDataVariableType,
         ReferenceTypeId::HasComponent
-    )
-        .value();
+    ));
 
     services::MonitoringParametersEx monitoringParameters{};
     monitoringParameters.samplingInterval = 0.0;  // fastest
