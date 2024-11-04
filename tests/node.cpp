@@ -25,8 +25,8 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client) {
         ReferenceTypeId::HasComponent
     ));
     // set all bits to 1 -> allow all
-    REQUIRE(services::writeAccessLevel(setup.server, varId, 0xFF));
-    REQUIRE(services::writeWriteMask(setup.server, varId, 0xFFFFFFFF));
+    REQUIRE(services::writeAccessLevel(setup.server, varId, 0xFF).isGood());
+    REQUIRE(services::writeWriteMask(setup.server, varId, 0xFFFFFFFF).isGood());
 
     Node rootNode(connection, ObjectId::RootFolder);
     Node objNode(connection, ObjectId::ObjectsFolder);
