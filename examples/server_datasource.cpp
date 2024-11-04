@@ -18,7 +18,9 @@ int main() {
         opcua::VariableAttributes{}
             .setAccessLevel(UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE)
             .setDataType<int>()
-            .setValueScalar(counter)
+            .setValueScalar(counter),
+        opcua::VariableTypeId::BaseDataVariableType,
+        opcua::ReferenceTypeId::HasComponent
     ).value();
 
     // Define data source with its read and write callbacks

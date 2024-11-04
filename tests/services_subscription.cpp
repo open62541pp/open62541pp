@@ -1,8 +1,8 @@
 #include <doctest/doctest.h>
 
 #include "open62541pp/config.hpp"
-#include "open62541pp/services/subscription.hpp"
 #include "open62541pp/detail/client_context.hpp"
+#include "open62541pp/services/subscription.hpp"
 
 #include "helper/server_client_setup.hpp"
 
@@ -18,16 +18,16 @@ TEST_CASE_TEMPLATE("Subscription service set", T, Client, Async<Client>) {
 
     SUBCASE("createSubscription") {
         CreateSubscriptionResponse response;
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<T> && UAPP_OPEN62541_VER_GE(1, 1)) {
 #if UAPP_OPEN62541_VER_GE(1, 1)
-            auto future = services::createSubscriptionAsync(connection, parameters);
+            auto future = services::createSubscriptionAsync(
+                connection, parameters, true, {}, {}, useFuture
+            );
             setup.client.runIterate();
             response = future.get();
-#else
-            response = services::createSubscription(connection, parameters);
 #endif
         } else {
-            response = services::createSubscription(connection, parameters);
+            response = services::createSubscription(connection, parameters, true, {}, {});
         }
         CHECK(response.getResponseHeader().getServiceResult().isGood());
         CAPTURE(response.getSubscriptionId());
@@ -35,17 +35,18 @@ TEST_CASE_TEMPLATE("Subscription service set", T, Client, Async<Client>) {
     }
 
     SUBCASE("modifySubscription") {
-        const auto subId = services::createSubscription(connection, parameters).getSubscriptionId();
+        const auto subId =
+            services::createSubscription(connection, parameters, true, {}, {}).getSubscriptionId();
 
         parameters.priority = 1;
         ModifySubscriptionResponse response;
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<T> && UAPP_OPEN62541_VER_GE(1, 1)) {
 #if UAPP_OPEN62541_VER_GE(1, 1)
-            auto future = services::modifySubscriptionAsync(connection, subId, parameters);
+            auto future = services::modifySubscriptionAsync(
+                connection, subId, parameters, useFuture
+            );
             setup.client.runIterate();
             response = future.get();
-#else
-            response = services::modifySubscription(connection, subId, parameters);
 #endif
         } else {
             response = services::modifySubscription(connection, subId, parameters);
@@ -62,10 +63,11 @@ TEST_CASE_TEMPLATE("Subscription service set", T, Client, Async<Client>) {
     }
 
     SUBCASE("setPublishingMode") {
-        const auto subId = services::createSubscription(connection, parameters).getSubscriptionId();
+        const auto subId =
+            services::createSubscription(connection, parameters, true, {}, {}).getSubscriptionId();
 
         if constexpr (isAsync<T>) {
-            auto future = services::setPublishingModeAsync(connection, subId, false);
+            auto future = services::setPublishingModeAsync(connection, subId, false, useFuture);
             setup.client.runIterate();
             CHECK(future.get().isGood());
         } else {
@@ -74,11 +76,12 @@ TEST_CASE_TEMPLATE("Subscription service set", T, Client, Async<Client>) {
     }
 
     SUBCASE("deleteSubscription") {
-        const auto subId = services::createSubscription(connection, parameters).getSubscriptionId();
+        const auto subId =
+            services::createSubscription(connection, parameters, true, {}, {}).getSubscriptionId();
 
         if constexpr (isAsync<T>) {
 #if UAPP_OPEN62541_VER_GE(1, 1) && UAPP_OPEN62541_VER_LE(1, 3)
-            auto future = services::deleteSubscriptionAsync(connection, subId);
+            auto future = services::deleteSubscriptionAsync(connection, subId, useFuture);
             setup.client.runIterate();
             // TODO: multiple calls required by v1.4
             CHECK(future.get().isGood());

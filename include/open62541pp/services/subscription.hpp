@@ -100,17 +100,17 @@ void storeSubscriptionContext(
 [[nodiscard]] CreateSubscriptionResponse createSubscription(
     Client& connection,
     const CreateSubscriptionRequest& request,
-    StatusChangeNotificationCallback statusChangeCallback = {},
-    DeleteSubscriptionCallback deleteCallback = {}
+    StatusChangeNotificationCallback statusChangeCallback,
+    DeleteSubscriptionCallback deleteCallback
 );
 
 /// @overload
 [[nodiscard]] CreateSubscriptionResponse createSubscription(
     Client& connection,
     const SubscriptionParameters& parameters,
-    bool publishingEnabled = true,
-    StatusChangeNotificationCallback statusChangeCallback = {},
-    DeleteSubscriptionCallback deleteCallback = {}
+    bool publishingEnabled,
+    StatusChangeNotificationCallback statusChangeCallback,
+    DeleteSubscriptionCallback deleteCallback
 ) noexcept;
 
 #if UAPP_OPEN62541_VER_GE(1, 1)
@@ -120,13 +120,13 @@ void storeSubscriptionContext(
  * @param token @completiontoken{void(CreateSubscriptionResponse&)}
  * @return @asyncresult{CreateSubscriptionResponse}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto createSubscriptionAsync(
     Client& connection,
     const CreateSubscriptionRequest& request,
-    StatusChangeNotificationCallback statusChangeCallback = {},
-    DeleteSubscriptionCallback deleteCallback = {},
-    CompletionToken&& token = DefaultCompletionToken()
+    StatusChangeNotificationCallback statusChangeCallback,
+    DeleteSubscriptionCallback deleteCallback,
+    CompletionToken&& token
 ) {
     auto context = detail::createSubscriptionContext(
         connection, std::move(statusChangeCallback), std::move(deleteCallback)
@@ -159,14 +159,14 @@ auto createSubscriptionAsync(
 }
 
 /// @overload
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto createSubscriptionAsync(
     Client& connection,
     const SubscriptionParameters& parameters,
-    bool publishingEnabled = true,
-    StatusChangeNotificationCallback statusChangeCallback = {},
-    DeleteSubscriptionCallback deleteCallback = {},
-    CompletionToken&& token = DefaultCompletionToken()
+    bool publishingEnabled,
+    StatusChangeNotificationCallback statusChangeCallback,
+    DeleteSubscriptionCallback deleteCallback,
+    CompletionToken&& token
 ) {
     const auto request = detail::createCreateSubscriptionRequest(parameters, publishingEnabled);
     return createSubscriptionAsync(
@@ -210,11 +210,9 @@ inline ModifySubscriptionResponse modifySubscription(
  * @param token @completiontoken{void(ModifySubscriptionResponse&)}
  * @return @asyncresult{ModifySubscriptionResponse}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto modifySubscriptionAsync(
-    Client& connection,
-    const ModifySubscriptionRequest& request,
-    CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const ModifySubscriptionRequest& request, CompletionToken&& token
 ) {
     return detail::AsyncServiceAdapter<ModifySubscriptionResponse>::initiate(
         connection,
@@ -228,12 +226,12 @@ auto modifySubscriptionAsync(
 }
 
 /// @overload
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto modifySubscriptionAsync(
     Client& connection,
     uint32_t subscriptionId,
     const SubscriptionParameters& parameters,
-    CompletionToken&& token = DefaultCompletionToken()
+    CompletionToken&& token
 ) {
     const auto request = detail::createModifySubscriptionRequest(subscriptionId, parameters);
     return modifySubscriptionAsync(
@@ -268,11 +266,9 @@ SetPublishingModeResponse setPublishingMode(
  * @param token @completiontoken{void(SetPublishingModeResponse&)}
  * @return @asyncresult{SetPublishingModeResponse}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto setPublishingModeAsync(
-    Client& connection,
-    const SetPublishingModeRequest& request,
-    CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const SetPublishingModeRequest& request, CompletionToken&& token
 ) {
     return detail::sendRequestAsync<SetPublishingModeRequest, SetPublishingModeResponse>(
         connection, request, std::forward<CompletionToken>(token)
@@ -299,12 +295,9 @@ inline StatusCode setPublishingMode(
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto setPublishingModeAsync(
-    Client& connection,
-    uint32_t subscriptionId,
-    bool publishing,
-    CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, uint32_t subscriptionId, bool publishing, CompletionToken&& token
 ) {
     const auto request = detail::createSetPublishingModeRequest(publishing, {&subscriptionId, 1});
     return setPublishingModeAsync(
@@ -340,11 +333,9 @@ DeleteSubscriptionsResponse deleteSubscriptions(
  * @param token @completiontoken{void(DeleteSubscriptionsResponse&)}
  * @return @asyncresult{DeleteSubscriptionsResponse}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto deleteSubscriptionsAsync(
-    Client& connection,
-    const DeleteSubscriptionsRequest& request,
-    CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const DeleteSubscriptionsRequest& request, CompletionToken&& token
 ) {
     return detail::AsyncServiceAdapter<DeleteSubscriptionsResponse>::initiate(
         connection,
@@ -376,10 +367,8 @@ inline StatusCode deleteSubscription(Client& connection, uint32_t subscriptionId
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  */
-template <typename CompletionToken = DefaultCompletionToken>
-auto deleteSubscriptionAsync(
-    Client& connection, uint32_t subscriptionId, CompletionToken&& token = DefaultCompletionToken()
-) {
+template <typename CompletionToken>
+auto deleteSubscriptionAsync(Client& connection, uint32_t subscriptionId, CompletionToken&& token) {
     const auto request = detail::createDeleteSubscriptionsRequest(subscriptionId);
     return deleteSubscriptionsAsync(
         connection,

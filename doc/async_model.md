@@ -10,11 +10,11 @@ Open62541pp accepts completion tokens as the final argument of asynchronous oper
 
 ```cpp
 // Function signature of the completion handler: void(opcua::ReadResponse&)
-template <typename CompletionToken = opcua::DefaultCompletionToken>
+template <typename CompletionToken>
 auto opcua::services::readAsync(
     opcua::Client& connection,
     const opcua::ReadRequest& request,
-    CompletionToken&& token = DefaultCompletionToken()
+    CompletionToken&& token
 );
 ```
 
@@ -36,7 +36,7 @@ void(T&);  // for non-trivially copyable types
 ```
 
 ```cpp
-auto opcua::services::readAsync(
+opcua::services::readAsync(
     client,
     request,
     [](opcua::ReadResponse& response) {

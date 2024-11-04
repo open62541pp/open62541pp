@@ -24,7 +24,7 @@ int main() {
             objectsNode.id(),
             greetMethodNode.id(),
             {opcua::Variant::fromScalar("Future World")},
-            opcua::useFuture  // default, can be omitted
+            opcua::useFuture
         );
 
         std::cout << "Waiting for asynchronous operation to complete\n";

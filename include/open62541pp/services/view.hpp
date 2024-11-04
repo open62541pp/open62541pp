@@ -50,12 +50,8 @@ BrowseResponse browse(Client& connection, const BrowseRequest& request) noexcept
  * @param token @completiontoken{void(BrowseResponse&)}
  * @return @asyncresult{BrowseResponse}
  */
-template <typename CompletionToken = DefaultCompletionToken>
-auto browseAsync(
-    Client& connection,
-    const BrowseRequest& request,
-    CompletionToken&& token = DefaultCompletionToken()
-) {
+template <typename CompletionToken>
+auto browseAsync(Client& connection, const BrowseRequest& request, CompletionToken&& token) {
     return detail::sendRequestAsync<BrowseRequest, BrowseResponse>(
         connection, request, std::forward<CompletionToken>(token)
     );
@@ -69,21 +65,16 @@ auto browseAsync(
  * @param maxReferences The maximum number of references to return (0 if no limit)
  */
 template <typename T>
-BrowseResult browse(
-    T& connection, const BrowseDescription& bd, uint32_t maxReferences = 0
-) noexcept;
+BrowseResult browse(T& connection, const BrowseDescription& bd, uint32_t maxReferences) noexcept;
 
 /**
  * @copydoc browse(T&, const BrowseDescription&, uint32_t)
  * @param token @completiontoken{void(BrowseResult&)}
  * @return @asyncresult{BrowseResult}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto browseAsync(
-    Client& connection,
-    const BrowseDescription& bd,
-    uint32_t maxReferences = 0,
-    CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const BrowseDescription& bd, uint32_t maxReferences, CompletionToken&& token
 ) {
     const auto request = detail::createBrowseRequest(bd, maxReferences);
     return browseAsync(
@@ -118,11 +109,9 @@ BrowseNextResponse browseNext(Client& connection, const BrowseNextRequest& reque
  * @param token @completiontoken{void(BrowseNextResponse&)}
  * @return @asyncresult{BrowseNextResponse}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto browseNextAsync(
-    Client& connection,
-    const BrowseNextRequest& request,
-    CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const BrowseNextRequest& request, CompletionToken&& token
 ) {
     return detail::sendRequestAsync<BrowseNextRequest, BrowseNextResponse>(
         connection, request, std::forward<CompletionToken>(token)
@@ -147,12 +136,12 @@ BrowseResult browseNext(
  * @param token @completiontoken{void(BrowseResult&)}
  * @return @asyncresult{BrowseResult}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto browseNextAsync(
     Client& connection,
     bool releaseContinuationPoint,
     const ByteString& continuationPoint,
-    CompletionToken&& token = DefaultCompletionToken()
+    CompletionToken&& token
 ) {
     const auto request = detail::createBrowseNextRequest(
         releaseContinuationPoint, continuationPoint
@@ -190,11 +179,9 @@ TranslateBrowsePathsToNodeIdsResponse translateBrowsePathsToNodeIds(
  * @param token @completiontoken{void(TranslateBrowsePathsToNodeIdsResponse&)}
  * @return @asyncresult{TranslateBrowsePathsToNodeIdsResponse}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto translateBrowsePathsToNodeIdsAsync(
-    Client& connection,
-    const TranslateBrowsePathsToNodeIdsRequest& request,
-    CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const TranslateBrowsePathsToNodeIdsRequest& request, CompletionToken&& token
 ) {
     return detail::sendRequestAsync<
         TranslateBrowsePathsToNodeIdsRequest,
@@ -217,11 +204,9 @@ BrowsePathResult translateBrowsePathToNodeIds(T& connection, const BrowsePath& b
  * @param token @completiontoken{void(BrowsePathResult&)}
  * @return @asyncresult{BrowsePathResult}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto translateBrowsePathToNodeIdsAsync(
-    Client& connection,
-    const BrowsePath& browsePath,
-    CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const BrowsePath& browsePath, CompletionToken&& token
 ) {
     const auto request = detail::createTranslateBrowsePathsToNodeIdsRequest(browsePath);
     return translateBrowsePathsToNodeIdsAsync(
@@ -259,12 +244,12 @@ BrowsePathResult browseSimplifiedBrowsePath(
  * @param token @completiontoken{void(BrowsePathResult&)}
  * @return @asyncresult{BrowsePathResult}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto browseSimplifiedBrowsePathAsync(
     Client& connection,
     const NodeId& origin,
     Span<const QualifiedName> browsePath,
-    CompletionToken&& token = DefaultCompletionToken()
+    CompletionToken&& token
 ) {
     return translateBrowsePathToNodeIdsAsync(
         connection,
@@ -296,11 +281,9 @@ RegisterNodesResponse registerNodes(
  * @param token @completiontoken{void(RegisterNodesResponse&)}
  * @return @asyncresult{RegisterNodesResponse}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto registerNodesAsync(
-    Client& connection,
-    const RegisterNodesRequest& request,
-    CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const RegisterNodesRequest& request, CompletionToken&& token
 ) {
     return detail::sendRequestAsync<RegisterNodesRequest, RegisterNodesResponse>(
         connection, request, std::forward<CompletionToken>(token)
@@ -330,11 +313,9 @@ UnregisterNodesResponse unregisterNodes(
  * @param token @completiontoken{void(UnregisterNodesResponse&)}
  * @return @asyncresult{UnregisterNodesResponse}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto unregisterNodesAsync(
-    Client& connection,
-    const UnregisterNodesRequest& request,
-    CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const UnregisterNodesRequest& request, CompletionToken&& token
 ) {
     return detail::sendRequestAsync<UnregisterNodesRequest, UnregisterNodesResponse>(
         connection, request, std::forward<CompletionToken>(token)

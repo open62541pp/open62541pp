@@ -15,7 +15,16 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client) {
     auto& connection = setup.getInstance<T>();
 
     const NodeId varId{1, 1};
-    services::addVariable(setup.server, {0, UA_NS0ID_OBJECTSFOLDER}, varId, "variable").value();
+    services::addVariable(
+        setup.server,
+        {0, UA_NS0ID_OBJECTSFOLDER},
+        varId,
+        "variable",
+        {},
+        VariableTypeId::BaseDataVariableType,
+        ReferenceTypeId::HasComponent
+    )
+        .value();
     // set all bits to 1 -> allow all
     services::writeAccessLevel(setup.server, varId, 0xFF).throwIfBad();
     services::writeWriteMask(setup.server, varId, 0xFFFFFFFF).throwIfBad();

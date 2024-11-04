@@ -19,15 +19,12 @@ TEST_CASE("AsyncServiceAdapter") {
         bool throwInCompletionHandler = false;
         detail::ExceptionCatcher catcher;
 
-        auto callbackAndContext = Adapter::createCallbackAndContext(
-            catcher,
-            [&](Response res) {
-                result = res;
-                if (throwInCompletionHandler) {
-                    throw std::runtime_error("CompletionHandler");
-                }
+        auto callbackAndContext = Adapter::createCallbackAndContext(catcher, [&](Response res) {
+            result = res;
+            if (throwInCompletionHandler) {
+                throw std::runtime_error("CompletionHandler");
             }
-        );
+        });
 
         const auto invokeCallback = [&](int* response) {
             callbackAndContext.callback(
@@ -108,9 +105,7 @@ TEST_CASE("sendRequestAsync") {
         request.nodesToReadSize = 1;
         request.nodesToRead = &item;
         return services::detail::sendRequestAsync<UA_ReadRequest, ReadResponse>(
-            client,
-            request,
-            std::forward<decltype(token)>(token)
+            client, request, std::forward<decltype(token)>(token)
         );
     };
 

@@ -17,18 +17,27 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
 
     // add node to query references
     const NodeId id{1, 1000};
-    services::addVariable(server, {0, UA_NS0ID_OBJECTSFOLDER}, id, "Variable").value();
+    services::addVariable(
+        server,
+        {0, UA_NS0ID_OBJECTSFOLDER},
+        id,
+        "Variable",
+        {},
+        VariableTypeId::BaseDataVariableType,
+        ReferenceTypeId::HasComponent
+    )
+        .value();
 
     SUBCASE("browse") {
         const BrowseDescription bd(id, BrowseDirection::Both);
         BrowseResult result;
 
         if constexpr (isAsync<T>) {
-            auto future = services::browseAsync(connection, bd);
+            auto future = services::browseAsync(connection, bd, 0, useFuture);
             client.runIterate();
             result = future.get();
         } else {
-            result = services::browse(connection, bd);
+            result = services::browse(connection, bd, 0);
         }
 
         CHECK(result.getStatusCode().isGood());
@@ -62,7 +71,7 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
         auto browseNext = [&](bool releaseContinuationPoint) {
             if constexpr (isAsync<T>) {
                 auto future = services::browseNextAsync(
-                    connection, releaseContinuationPoint, result.getContinuationPoint()
+                    connection, releaseContinuationPoint, result.getContinuationPoint(), useFuture
                 );
                 client.runIterate();
                 result = future.get();
@@ -96,7 +105,7 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
         BrowsePathResult result;
         if constexpr (isAsync<T>) {
             auto future = services::browseSimplifiedBrowsePathAsync(
-                connection, {0, UA_NS0ID_ROOTFOLDER}, {{0, "Objects"}, {1, "Variable"}}
+                connection, {0, UA_NS0ID_ROOTFOLDER}, {{0, "Objects"}, {1, "Variable"}}, useFuture
             );
             client.runIterate();
             result = future.get();
@@ -118,7 +127,7 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
             RegisterNodesResponse response;
             RegisterNodesRequest request({}, {{1, 1000}});
             if constexpr (isAsync<T>) {
-                auto future = services::registerNodesAsync(client, request);
+                auto future = services::registerNodesAsync(client, request, useFuture);
                 client.runIterate();
                 response = future.get();
             } else {
@@ -131,7 +140,7 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
             UnregisterNodesResponse response;
             UnregisterNodesRequest request({}, {{1, 1000}});
             if constexpr (isAsync<T>) {
-                auto future = services::unregisterNodesAsync(client, request);
+                auto future = services::unregisterNodesAsync(client, request, useFuture);
                 client.runIterate();
                 response = future.get();
             } else {

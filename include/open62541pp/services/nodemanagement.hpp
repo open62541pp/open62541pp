@@ -53,12 +53,8 @@ AddNodesResponse addNodes(Client& connection, const AddNodesRequest& request) no
  * @param token @completiontoken{void(AddNodesResponse&)}
  * @return @asyncresult{AddNodesResponse}
  */
-template <typename CompletionToken = DefaultCompletionToken>
-auto addNodesAsync(
-    Client& connection,
-    const AddNodesRequest& request,
-    CompletionToken&& token = DefaultCompletionToken()
-) {
+template <typename CompletionToken>
+auto addNodesAsync(Client& connection, const AddNodesRequest& request, CompletionToken&& token) {
     return detail::sendRequestAsync<AddNodesRequest, AddNodesResponse>(
         connection, request, std::forward<CompletionToken>(token)
     );
@@ -92,7 +88,7 @@ Result<NodeId> addNode(
  * @param token @completiontoken{void(Result<NodeId>&)}
  * @return @asyncresult{Result<NodeId>}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto addNodeAsync(
     Client& connection,
     NodeClass nodeClass,
@@ -102,7 +98,7 @@ auto addNodeAsync(
     const ExtensionObject& nodeAttributes,
     const NodeId& typeDefinition,
     const NodeId& referenceType,
-    CompletionToken&& token = DefaultCompletionToken()
+    CompletionToken&& token
 ) {
     auto item = detail::createAddNodesItem(
         parentId, referenceType, id, browseName, nodeClass, nodeAttributes, typeDefinition
@@ -142,11 +138,9 @@ AddReferencesResponse addReferences(
  * @param token @completiontoken{void(AddReferencesResponse&)}
  * @return @asyncresult{AddReferencesReponse}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto addReferencesAsync(
-    Client& connection,
-    const AddReferencesRequest& request,
-    CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const AddReferencesRequest& request, CompletionToken&& token
 ) {
     return detail::sendRequestAsync<AddReferencesRequest, AddReferencesResponse>(
         connection, request, std::forward<CompletionToken>(token)
@@ -167,7 +161,7 @@ StatusCode addReference(
     const NodeId& sourceId,
     const NodeId& targetId,
     const NodeId& referenceType,
-    bool forward = true
+    bool forward
 ) noexcept;
 
 /**
@@ -175,14 +169,14 @@ StatusCode addReference(
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto addReferenceAsync(
     Client& connection,
     const NodeId& sourceId,
     const NodeId& targetId,
     const NodeId& referenceType,
-    bool forward = true,
-    CompletionToken&& token = DefaultCompletionToken()
+    bool forward,
+    CompletionToken&& token
 ) {
     auto item = detail::createAddReferencesItem(sourceId, referenceType, forward, targetId);
     const auto request = detail::createAddReferencesRequest(item);
@@ -215,11 +209,9 @@ DeleteNodesResponse deleteNodes(Client& connection, const DeleteNodesRequest& re
  * @param token @completiontoken{void(DeleteNodesResponse&)}
  * @return @asyncresult{DeleteNodesResponse}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto deleteNodesAsync(
-    Client& connection,
-    const DeleteNodesRequest& request,
-    CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const DeleteNodesRequest& request, CompletionToken&& token
 ) {
     return detail::sendRequestAsync<DeleteNodesRequest, DeleteNodesResponse>(
         connection, request, std::forward<CompletionToken>(token)
@@ -233,19 +225,16 @@ auto deleteNodesAsync(
  * @param deleteReferences Delete references in target nodes that reference the node to delete
  */
 template <typename T>
-StatusCode deleteNode(T& connection, const NodeId& id, bool deleteReferences = true) noexcept;
+StatusCode deleteNode(T& connection, const NodeId& id, bool deleteReferences) noexcept;
 
 /**
  * @copydoc deleteNode
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto deleteNodeAsync(
-    Client& connection,
-    const NodeId& id,
-    bool deleteReferences = true,
-    CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const NodeId& id, bool deleteReferences, CompletionToken&& token
 ) {
     auto item = detail::createDeleteNodesItem(id, deleteReferences);
     const auto request = detail::createDeleteNodesRequest(item);
@@ -280,11 +269,9 @@ DeleteReferencesResponse deleteReferences(
  * @param token @completiontoken{void(DeleteReferencesResponse&)}
  * @return @asyncresult{DeleteReferencesResponse}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto deleteReferencesAsync(
-    Client& connection,
-    const DeleteReferencesRequest& request,
-    CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const DeleteReferencesRequest& request, CompletionToken&& token
 ) {
     return detail::sendRequestAsync<DeleteReferencesRequest, DeleteReferencesResponse>(
         connection, request, std::forward<CompletionToken>(token)
@@ -315,7 +302,7 @@ StatusCode deleteReference(
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto deleteReferenceAsync(
     Client& connection,
     const NodeId& sourceId,
@@ -323,7 +310,7 @@ auto deleteReferenceAsync(
     const NodeId& referenceType,
     bool isForward,
     bool deleteBidirectional,
-    CompletionToken&& token = DefaultCompletionToken()
+    CompletionToken&& token
 ) {
     auto item = detail::createDeleteReferencesItem(
         sourceId, referenceType, isForward, targetId, deleteBidirectional
@@ -356,8 +343,9 @@ auto deleteReferenceAsync(
  * @param id Requested NodeId of the object node to add
  * @param browseName Browse name
  * @param attributes Object attributes
- * @param objectType NodeId of the object type
- * @param referenceType Hierarchical reference type from the parent node to the new node
+ * @param objectType NodeId of the object type, e.g. ObjectTypeId::BaseObjectType
+ * @param referenceType Hierarchical reference type from the parent node to the new node, e.g.
+ *                      ReferenceTypeId::HasComponent
  */
 template <typename T>
 Result<NodeId> addObject(
@@ -365,9 +353,9 @@ Result<NodeId> addObject(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    const ObjectAttributes& attributes = {},
-    const NodeId& objectType = ObjectTypeId::BaseObjectType,
-    const NodeId& referenceType = ReferenceTypeId::HasComponent
+    const ObjectAttributes& attributes,
+    const NodeId& objectType,
+    const NodeId& referenceType
 ) noexcept {
     return addNode(
         connection,
@@ -386,16 +374,16 @@ Result<NodeId> addObject(
  * @param token @completiontoken{void(Result<NodeId>&)}
  * @return @asyncresult{Result<NodeId>}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto addObjectAsync(
     Client& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    const ObjectAttributes& attributes = {},
-    const NodeId& objectType = ObjectTypeId::BaseObjectType,
-    const NodeId& referenceType = ReferenceTypeId::HasComponent,
-    CompletionToken&& token = DefaultCompletionToken()
+    const ObjectAttributes& attributes,
+    const NodeId& objectType,
+    const NodeId& referenceType,
+    CompletionToken&& token
 ) {
     return addNodeAsync(
         connection,
@@ -417,7 +405,8 @@ auto addObjectAsync(
  * @param id Requested NodeId of the node to add
  * @param browseName Browse name
  * @param attributes Object attributes
- * @param referenceType Hierarchical reference type from the parent node to the new node
+ * @param referenceType Hierarchical reference type from the parent node to the new node, e.g.
+ *                      ReferenceTypeId::HasComponent
  */
 template <typename T>
 Result<NodeId> addFolder(
@@ -425,8 +414,8 @@ Result<NodeId> addFolder(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    const ObjectAttributes& attributes = {},
-    const NodeId& referenceType = ReferenceTypeId::HasComponent
+    const ObjectAttributes& attributes,
+    const NodeId& referenceType
 ) noexcept {
     return addObject(
         connection, parentId, id, browseName, attributes, ObjectTypeId::FolderType, referenceType
@@ -438,15 +427,15 @@ Result<NodeId> addFolder(
  * @param token @completiontoken{void(Result<NodeId>&)}
  * @return @asyncresult{Result<NodeId>}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto addFolderAsync(
     Client& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    const ObjectAttributes& attributes = {},
-    const NodeId& referenceType = ReferenceTypeId::HasComponent,
-    CompletionToken&& token = DefaultCompletionToken()
+    const ObjectAttributes& attributes,
+    const NodeId& referenceType,
+    CompletionToken&& token
 ) {
     return addObjectAsync(
         connection,
@@ -467,8 +456,9 @@ auto addFolderAsync(
  * @param id Requested NodeId of the node to add
  * @param browseName Browse name
  * @param attributes Variable attributes
- * @param variableType NodeId of the variable type
- * @param referenceType Hierarchical reference type from the parent node to the new node
+ * @param variableType NodeId of the variable type, e.g. VariableTypeId::BaseDataVariableType
+ * @param referenceType Hierarchical reference type from the parent node to the new node, e.g.
+ *                      ReferenceTypeId::HasComponent
  */
 template <typename T>
 Result<NodeId> addVariable(
@@ -476,9 +466,9 @@ Result<NodeId> addVariable(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    const VariableAttributes& attributes = {},
-    const NodeId& variableType = VariableTypeId::BaseDataVariableType,
-    const NodeId& referenceType = ReferenceTypeId::HasComponent
+    const VariableAttributes& attributes,
+    const NodeId& variableType,
+    const NodeId& referenceType
 ) noexcept {
     return addNode(
         connection,
@@ -497,16 +487,16 @@ Result<NodeId> addVariable(
  * @param token @completiontoken{void(Result<NodeId>&)}
  * @return @asyncresult{Result<NodeId>}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto addVariableAsync(
     Client& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    const VariableAttributes& attributes = {},
-    const NodeId& variableType = VariableTypeId::BaseDataVariableType,
-    const NodeId& referenceType = ReferenceTypeId::HasComponent,
-    CompletionToken&& token = DefaultCompletionToken()
+    const VariableAttributes& attributes,
+    const NodeId& variableType,
+    const NodeId& referenceType,
+    CompletionToken&& token
 ) {
     return addNodeAsync(
         connection,
@@ -535,7 +525,7 @@ Result<NodeId> addProperty(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    const VariableAttributes& attributes = {}
+    const VariableAttributes& attributes
 ) noexcept {
     return addVariable(
         connection,
@@ -553,14 +543,14 @@ Result<NodeId> addProperty(
  * @param token @completiontoken{void(Result<NodeId>&)}
  * @return @asyncresult{Result<NodeId>}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto addPropertyAsync(
     Client& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    const VariableAttributes& attributes = {},
-    CompletionToken&& token = DefaultCompletionToken()
+    const VariableAttributes& attributes,
+    CompletionToken&& token
 ) {
     return addVariableAsync(
         connection,
@@ -593,7 +583,8 @@ using MethodCallback = std::function<void(Span<const Variant> input, Span<Varian
  * @param inputArguments Input arguments
  * @param outputArguments Output arguments
  * @param attributes Method attributes
- * @param referenceType Hierarchical reference type from the parent node to the new node
+ * @param referenceType Hierarchical reference type from the parent node to the new node, e.g.
+ *                      ReferenceTypeId::HasComponent
  */
 template <typename T>
 Result<NodeId> addMethod(
@@ -604,8 +595,8 @@ Result<NodeId> addMethod(
     MethodCallback callback,
     Span<const Argument> inputArguments,
     Span<const Argument> outputArguments,
-    const MethodAttributes& attributes = {},
-    const NodeId& referenceType = ReferenceTypeId::HasComponent
+    const MethodAttributes& attributes,
+    const NodeId& referenceType
 ) noexcept;
 
 /**
@@ -613,7 +604,7 @@ Result<NodeId> addMethod(
  * @param token @completiontoken{void(Result<NodeId>&)}
  * @return @asyncresult{Result<NodeId>}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto addMethodAsync(
     Client& connection,
     const NodeId& parentId,
@@ -622,9 +613,9 @@ auto addMethodAsync(
     [[maybe_unused]] MethodCallback callback,  // NOLINT
     [[maybe_unused]] Span<const Argument> inputArguments,
     [[maybe_unused]] Span<const Argument> outputArguments,
-    const MethodAttributes& attributes = {},
-    const NodeId& referenceType = ReferenceTypeId::HasComponent,
-    CompletionToken&& token = DefaultCompletionToken()
+    const MethodAttributes& attributes,
+    const NodeId& referenceType,
+    CompletionToken&& token
 ) {
     return addNodeAsync(
         connection,
@@ -647,7 +638,8 @@ auto addMethodAsync(
  * @param id Requested NodeId of the node to add
  * @param browseName Browse name
  * @param attributes Object type attributes
- * @param referenceType Hierarchical reference type from the parent node to the new node
+ * @param referenceType Hierarchical reference type from the parent node to the new node, e.g.
+ *                      ReferenceTypeId::HasSubtype
  */
 template <typename T>
 Result<NodeId> addObjectType(
@@ -655,8 +647,8 @@ Result<NodeId> addObjectType(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    const ObjectTypeAttributes& attributes = {},
-    const NodeId& referenceType = ReferenceTypeId::HasSubtype
+    const ObjectTypeAttributes& attributes,
+    const NodeId& referenceType
 ) noexcept {
     return addNode(
         connection,
@@ -675,15 +667,15 @@ Result<NodeId> addObjectType(
  * @param token @completiontoken{void(Result<NodeId>&)}
  * @return @asyncresult{Result<NodeId>}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto addObjectTypeAsync(
     Client& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    const ObjectTypeAttributes& attributes = {},
-    const NodeId& referenceType = ReferenceTypeId::HasSubtype,
-    CompletionToken&& token = DefaultCompletionToken()
+    const ObjectTypeAttributes& attributes,
+    const NodeId& referenceType,
+    CompletionToken&& token
 ) {
     return addNodeAsync(
         connection,
@@ -705,8 +697,9 @@ auto addObjectTypeAsync(
  * @param id Requested NodeId of the node to add
  * @param browseName Browse name
  * @param attributes Variable type attributes
- * @param variableType NodeId of the variable type
- * @param referenceType Hierarchical reference type from the parent node to the new node
+ * @param variableType NodeId of the variable type, e.g. VariableTypeId::BaseDataVariableType
+ * @param referenceType Hierarchical reference type from the parent node to the new node, e.g.
+ *                      ReferenceTypeId::HasSubtype
  */
 template <typename T>
 Result<NodeId> addVariableType(
@@ -714,9 +707,9 @@ Result<NodeId> addVariableType(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    const VariableTypeAttributes& attributes = {},
-    const NodeId& variableType = VariableTypeId::BaseDataVariableType,
-    const NodeId& referenceType = ReferenceTypeId::HasSubtype
+    const VariableTypeAttributes& attributes,
+    const NodeId& variableType,
+    const NodeId& referenceType
 ) noexcept {
     return addNode(
         connection,
@@ -735,16 +728,16 @@ Result<NodeId> addVariableType(
  * @param token @completiontoken{void(Result<NodeId>&)}
  * @return @asyncresult{Result<NodeId>}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto addVariableTypeAsync(
     Client& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    const VariableTypeAttributes& attributes = {},
-    const NodeId& variableType = VariableTypeId::BaseDataVariableType,
-    const NodeId& referenceType = ReferenceTypeId::HasSubtype,
-    CompletionToken&& token = DefaultCompletionToken()
+    const VariableTypeAttributes& attributes,
+    const NodeId& variableType,
+    const NodeId& referenceType,
+    CompletionToken&& token
 ) {
     return addNodeAsync(
         connection,
@@ -766,7 +759,8 @@ auto addVariableTypeAsync(
  * @param id Requested NodeId of the node to add
  * @param browseName Browse name
  * @param attributes Reference type attributes
- * @param referenceType Hierarchical reference type from the parent node to the new node
+ * @param referenceType Hierarchical reference type from the parent node to the new node, e.g.
+ *                      ReferenceTypeId::HasSubtype
  */
 template <typename T>
 Result<NodeId> addReferenceType(
@@ -774,8 +768,8 @@ Result<NodeId> addReferenceType(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    const ReferenceTypeAttributes& attributes = {},
-    const NodeId& referenceType = ReferenceTypeId::HasSubtype
+    const ReferenceTypeAttributes& attributes,
+    const NodeId& referenceType
 ) noexcept {
     return addNode(
         connection,
@@ -794,15 +788,15 @@ Result<NodeId> addReferenceType(
  * @param token @completiontoken{void(Result<NodeId>&)}
  * @return @asyncresult{Result<NodeId>}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto addReferenceTypeAsync(
     Client& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    const ReferenceTypeAttributes& attributes = {},
-    const NodeId& referenceType = ReferenceTypeId::HasSubtype,
-    CompletionToken&& token = DefaultCompletionToken()
+    const ReferenceTypeAttributes& attributes,
+    const NodeId& referenceType,
+    CompletionToken&& token
 ) {
     return addNodeAsync(
         connection,
@@ -824,7 +818,8 @@ auto addReferenceTypeAsync(
  * @param id Requested NodeId of the node to add
  * @param browseName Browse name
  * @param attributes Data type attributes
- * @param referenceType Hierarchical reference type from the parent node to the new node
+ * @param referenceType Hierarchical reference type from the parent node to the new node, e.g.
+ *                      ReferenceTypeId::HasSubtype
  */
 template <typename T>
 Result<NodeId> addDataType(
@@ -832,8 +827,8 @@ Result<NodeId> addDataType(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    const DataTypeAttributes& attributes = {},
-    const NodeId& referenceType = ReferenceTypeId::HasSubtype
+    const DataTypeAttributes& attributes,
+    const NodeId& referenceType
 ) noexcept {
     return addNode(
         connection,
@@ -852,15 +847,15 @@ Result<NodeId> addDataType(
  * @param token @completiontoken{void(Result<NodeId>&)}
  * @return @asyncresult{Result<NodeId>}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto addDataTypeAsync(
     Client& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    const DataTypeAttributes& attributes = {},
-    const NodeId& referenceType = ReferenceTypeId::HasSubtype,
-    CompletionToken&& token = DefaultCompletionToken()
+    const DataTypeAttributes& attributes,
+    const NodeId& referenceType,
+    CompletionToken&& token
 ) {
     return addNodeAsync(
         connection,
@@ -882,7 +877,8 @@ auto addDataTypeAsync(
  * @param id Requested NodeId of the node to add
  * @param browseName Browse name
  * @param attributes View attributes
- * @param referenceType Hierarchical reference type from the parent node to the new node
+ * @param referenceType Hierarchical reference type from the parent node to the new node, e.g.
+ *                      ReferenceTypeId::Organizes
  */
 template <typename T>
 Result<NodeId> addView(
@@ -890,8 +886,8 @@ Result<NodeId> addView(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    const ViewAttributes& attributes = {},
-    const NodeId& referenceType = ReferenceTypeId::Organizes
+    const ViewAttributes& attributes,
+    const NodeId& referenceType
 ) noexcept {
     return addNode(
         connection,
@@ -910,15 +906,15 @@ Result<NodeId> addView(
  * @param token @completiontoken{void(Result<NodeId>&)}
  * @return @asyncresult{Result<NodeId>}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto addViewAsync(
     Client& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    const ViewAttributes& attributes = {},
-    const NodeId& referenceType = ReferenceTypeId::Organizes,
-    CompletionToken&& token = DefaultCompletionToken()
+    const ViewAttributes& attributes,
+    const NodeId& referenceType,
+    CompletionToken&& token
 ) {
     return addNodeAsync(
         connection,
@@ -958,12 +954,9 @@ StatusCode addModellingRule(T& connection, const NodeId& id, ModellingRule rule)
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  */
-template <typename CompletionToken = DefaultCompletionToken>
+template <typename CompletionToken>
 auto addModellingRuleAsync(
-    Client& connection,
-    const NodeId& id,
-    ModellingRule rule,
-    CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const NodeId& id, ModellingRule rule, CompletionToken&& token
 ) {
     return addReferenceAsync(
         connection,

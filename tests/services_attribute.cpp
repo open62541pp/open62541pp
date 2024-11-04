@@ -58,7 +58,16 @@ TEST_CASE("Attribute service set (highlevel)") {
 
     SUBCASE("Read/write object node attributes") {
         const NodeId id{1, "TestAttributes"};
-        services::addObject(server, objectsId, id, "TestAttributes").value();
+        services::addObject(
+            server,
+            objectsId,
+            id,
+            "TestAttributes",
+            {},
+            ObjectTypeId::BaseObjectType,
+            ReferenceTypeId::HasComponent
+        )
+            .value();
 
         // write new attributes
         const auto eventNotifier = EventNotifier::HistoryRead | EventNotifier::HistoryWrite;
@@ -70,7 +79,16 @@ TEST_CASE("Attribute service set (highlevel)") {
 
     SUBCASE("Read/write variable node attributes") {
         const NodeId id{1, "TestAttributes"};
-        services::addVariable(server, objectsId, id, "TestAttributes").value();
+        services::addVariable(
+            server,
+            objectsId,
+            id,
+            "TestAttributes",
+            {},
+            VariableTypeId::BaseDataVariableType,
+            ReferenceTypeId::HasComponent
+        )
+            .value();
 
         // write new attributes
         CHECK(services::writeDisplayName(server, id, {{}, "NewDisplayName"}).isGood());
@@ -102,7 +120,10 @@ TEST_CASE("Attribute service set (highlevel)") {
 #ifdef UA_ENABLE_METHODCALLS
     SUBCASE("Read/write method node attributes") {
         const NodeId id{1, "TestMethod"};
-        services::addMethod(server, objectsId, id, "TestMethod", nullptr, {}, {}).value();
+        services::addMethod(
+            server, objectsId, id, "TestMethod", nullptr, {}, {}, {}, ReferenceTypeId::HasComponent
+        )
+            .value();
 
         // write new attributes
         CHECK(services::writeExecutable(server, id, true).isGood());
@@ -115,7 +136,14 @@ TEST_CASE("Attribute service set (highlevel)") {
 
     SUBCASE("Read/write reference type node attributes") {
         const NodeId id{1, "TestReferenceType"};
-        services::addReferenceType(server, {0, UA_NS0ID_ORGANIZES}, id, "TestReferenceType")
+        services::addReferenceType(
+            server,
+            {0, UA_NS0ID_ORGANIZES},
+            id,
+            "TestReferenceType",
+            {},
+            ReferenceTypeId::HasSubtype
+        )
             .value();
 
         // read default attributes
@@ -136,7 +164,16 @@ TEST_CASE("Attribute service set (highlevel)") {
 
     SUBCASE("Value rank and array dimension combinations") {
         const NodeId id{1, "TestDimensions"};
-        services::addVariable(server, objectsId, id, "TestDimensions").value();
+        services::addVariable(
+            server,
+            objectsId,
+            id,
+            "TestDimensions",
+            {},
+            VariableTypeId::BaseDataVariableType,
+            ReferenceTypeId::HasComponent
+        )
+            .value();
 
         SUBCASE("Unspecified dimension (ValueRank <= 0)") {
             const std::vector<ValueRank> valueRanks = {
@@ -182,7 +219,16 @@ TEST_CASE("Attribute service set (highlevel)") {
 
     SUBCASE("Read/write value") {
         const NodeId id{1, "TestValue"};
-        services::addVariable(server, objectsId, id, "TestValue").value();
+        services::addVariable(
+            server,
+            objectsId,
+            id,
+            "TestValue",
+            {},
+            VariableTypeId::BaseDataVariableType,
+            ReferenceTypeId::HasComponent
+        )
+            .value();
 
         Variant variantWrite;
         variantWrite.setScalarCopy(11.11);
@@ -194,7 +240,16 @@ TEST_CASE("Attribute service set (highlevel)") {
 
     SUBCASE("Read/write data value") {
         const NodeId id{1, "TestDataValue"};
-        services::addVariable(server, objectsId, id, "TestDataValue").value();
+        services::addVariable(
+            server,
+            objectsId,
+            id,
+            "TestDataValue",
+            {},
+            VariableTypeId::BaseDataVariableType,
+            ReferenceTypeId::HasComponent
+        )
+            .value();
 
         Variant variant;
         variant.setScalarCopy<int>(11);
@@ -261,21 +316,23 @@ TEST_CASE("Attribute service set (highlevel, async)") {
             "Variable",
             VariableAttributes{}.setAccessLevel(
                 AccessLevel::CurrentRead | AccessLevel::CurrentWrite
-            )
+            ),
+            VariableTypeId::BaseDataVariableType,
+            ReferenceTypeId::HasComponent
         )
             .value();
 
         // write
         {
             auto variant = Variant::fromScalar(11.11);
-            auto future = services::writeValueAsync(client, id, variant);
+            auto future = services::writeValueAsync(client, id, variant, useFuture);
             client.runIterate();
             future.get().throwIfBad();
         }
 
         // read
         {
-            auto future = services::readValueAsync(client, id);
+            auto future = services::readValueAsync(client, id, useFuture);
             client.runIterate();
             CHECK(future.get().value().getScalar<double>() == 11.11);
         }
@@ -297,7 +354,9 @@ TEST_CASE_TEMPLATE("Attribute service set write/read", T, Server, Client, Async<
         {0, UA_NS0ID_OBJECTSFOLDER},
         id,
         "Variable",
-        VariableAttributes{}.setAccessLevel(AccessLevel::CurrentRead | AccessLevel::CurrentWrite)
+        VariableAttributes{}.setAccessLevel(AccessLevel::CurrentRead | AccessLevel::CurrentWrite),
+        VariableTypeId::BaseDataVariableType,
+        ReferenceTypeId::HasComponent
     )
         .value();
 
@@ -307,7 +366,7 @@ TEST_CASE_TEMPLATE("Attribute service set write/read", T, Server, Client, Async<
     // write
     if constexpr (isAsync<T>) {
         auto future = services::writeAttributeAsync(
-            connection, id, AttributeId::Value, DataValue::fromScalar(value)
+            connection, id, AttributeId::Value, DataValue::fromScalar(value), useFuture
         );
         client.runIterate();
         future.get().throwIfBad();
@@ -318,11 +377,15 @@ TEST_CASE_TEMPLATE("Attribute service set write/read", T, Server, Client, Async<
 
     // read
     if constexpr (isAsync<T>) {
-        auto future = services::readAttributeAsync(connection, id, AttributeId::Value);
+        auto future = services::readAttributeAsync(
+            connection, id, AttributeId::Value, TimestampsToReturn::Neither, useFuture
+        );
         client.runIterate();
         result = future.get();
     } else {
-        result = services::readAttribute(connection, id, AttributeId::Value);
+        result = services::readAttribute(
+            connection, id, AttributeId::Value, TimestampsToReturn::Neither
+        );
     }
 
     CHECK(result.value().getValue().getScalar<double>() == value);
