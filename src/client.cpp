@@ -354,8 +354,8 @@ std::vector<EndpointDescription> Client::getEndpoints(std::string_view serverUrl
     return result;
 }
 
-void Client::setCustomDataTypes(std::vector<DataType> dataTypes) {
-    context().dataTypes = std::move(dataTypes);
+void Client::setCustomDataTypes(Span<const DataType> dataTypes) {
+    context().dataTypes = {dataTypes.begin(), dataTypes.end()};
     context().dataTypeArray = std::make_unique<UA_DataTypeArray>(
         detail::createDataTypeArray(context().dataTypes)
     );

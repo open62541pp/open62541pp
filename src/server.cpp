@@ -301,8 +301,8 @@ void Server::setCustomHostname([[maybe_unused]] std::string_view hostname) {
 #endif
 }
 
-void Server::setCustomDataTypes(std::vector<DataType> dataTypes) {
-    context().dataTypes = std::move(dataTypes);
+void Server::setCustomDataTypes(Span<const DataType> dataTypes) {
+    context().dataTypes = {dataTypes.begin(), dataTypes.end()};
     context().dataTypeArray = std::make_unique<UA_DataTypeArray>(
         detail::createDataTypeArray(context().dataTypes)
     );
