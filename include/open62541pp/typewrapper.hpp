@@ -7,6 +7,7 @@
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/detail/types_handling.hpp"
 #include "open62541pp/wrapper.hpp"
+#include "open62541pp/typeregistry.hpp"
 
 namespace opcua {
 
@@ -125,5 +126,14 @@ template <typename T>
 constexpr bool isTypeWrapper = IsTypeWrapper<T>::value;
 
 }  // namespace detail
+
+/* --------------------------------- TypeRegistry specialization -------------------------------- */
+
+template <typename T>
+struct TypeRegistry<T, std::enable_if_t<detail::isTypeWrapper<T>>> {
+    static const UA_DataType& getDataType() noexcept {
+        return UA_TYPES[T::getTypeIndex()];
+    }
+};
 
 }  // namespace opcua
