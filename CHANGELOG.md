@@ -7,6 +7,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Update open62541 to v1.3.14 (#375)
+- `ClientConfig` and `ServerConfig` wrapper classes that can be passed to `Client`/`Server` constructor (#377)
+- `asWrapper` overloads for `UA_Client*` and `UA_Server*` (#379)
+- `ServerConfig::setBuildInfo` (#386)
+- Async support for Subscription service set (#419)
+- Async support for MonitoredItem service set (#421)
+
+### Changed
+
+- Deprecate config setters in `Client` and `Server` class, use member function `config()` instead (#377)
+- Don't revise subscription parameters (#392)
+- Don't revise monitoring parameters (#393)
+- Return raw responses or results from functions in the `services` namespace to further diagnostics:
+  - Return `CreateSubscriptionResponse` from `services::createSubscription` overloads (#394)
+  - Return `ModifySubscriptionResponse` from `services::modifySubscription` overloads (#394)
+  - Return `CallMethodResult` from `services::call`/`Node::call` (#395)
+  - Return `MonitoredItemCreateResult` from `services::createMonitoredItemDataChange`/`*Event` (#401)
+  - Return `MonitoredItemModifyResult` from `services::modifyMonitoredItem` (#404)
+  - Return `BrowseResult` from `services::browse`/`services::browseNext` overloads (#406)
+  - Return `BrowsePathResult` from `services::translateBrowsePathToNodeIds`/`services::browseSimplifiedBrowsePath` (#407)
+- Return `StatusCode` instead of `Result<void>` (#410)
+- Remove default arguments of functions in `services` namespace (#424)
+
+### Fixed
+
+- Move constructor and move assignment of `Client` and `Server` (#373)
+
 ## [0.15.0] - 2024-10-01
 
 ### Added
@@ -273,7 +302,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Compare `DataType` only by `typeId` (#217)
 - `Variant::isArray` check (#274)
 
-
 ## [0.12.0] - 2024-02-10
 
 ### Added
@@ -348,7 +376,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Return *true* output `NodeId` from `Node::add*` methods to allow random node ids with e.g. `NodeId(1, 0)` (#118)
+- Return _true_ output `NodeId` from `Node::add*` methods to allow random node ids with e.g. `NodeId(1, 0)` (#118)
 
 ## [0.10.0] - 2023-10-28
 
