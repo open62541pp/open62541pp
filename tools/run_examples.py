@@ -110,6 +110,7 @@ def main():
     run(path / exe("server_minimal"), path / exe("client_find_servers"))
     run(path / exe("server_minimal"), path / exe("client_browse"))
     run(path / exe("server_minimal"), path / exe("client_subscription"))
+    run(path / exe("server_minimal"), path / exe("client_async"))
 
     run(path / exe("server_method"), path / exe("client_method"))
     run(path / exe("server_method"), path / exe("client_method_async"))

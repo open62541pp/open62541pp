@@ -12,6 +12,7 @@
 @example client_find_servers.cpp
 @example client_browse.cpp
 @example client_subscription.cpp
+@example client_async.cpp
 
 @example method/server_method.cpp
 @example method/client_method.cpp
