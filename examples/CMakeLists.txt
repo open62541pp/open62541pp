@@ -44,6 +44,7 @@ function(add_example source)
     endif()
 endfunction()
 
+add_example(client_async.cpp)
 add_example(client_browse.cpp)
 add_example(client_connect.cpp)
 add_example(client_find_servers.cpp)
