@@ -133,11 +133,11 @@ auto createSubscriptionAsync(
     );
     return detail::AsyncServiceAdapter<CreateSubscriptionResponse>::initiate(
         connection,
-        [&](UA_ClientAsyncServiceCallback callback, void* userdata) {
+        [&, context = context.get()](UA_ClientAsyncServiceCallback callback, void* userdata) {
             throwIfBad(UA_Client_Subscriptions_create_async(
                 opcua::detail::getHandle(connection),
                 asNative(request),
-                context.get(),
+                context,
                 detail::SubscriptionContext::statusChangeCallbackNative,
                 detail::SubscriptionContext::deleteCallbackNative,
                 callback,
