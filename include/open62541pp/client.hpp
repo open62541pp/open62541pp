@@ -209,6 +209,13 @@ public:
     void connect(std::string_view endpointUrl);
 
     /**
+     * Asynchronously connect to the selected server.
+     * Set a state callback, e.g. onConnected, to be notified when the connection status changes.
+     * @copydetails connect
+     */
+    void connectAsync(std::string_view endpointUrl);
+
+    /**
      * Connect to the selected server with the given username and password.
      * @param endpointUrl Endpoint URL (for example `opc.tcp://localhost:4840/open62541/server/`)
      * @param login       Login credentials with username and password
@@ -216,8 +223,16 @@ public:
     [[deprecated("use Client::setUserIdentityToken(UserNameIdentityToken) instead")]]
     void connect(std::string_view endpointUrl, const Login& login);
 
-    /// Disconnect and close a connection to the server (async, without blocking).
-    void disconnect() noexcept;
+    /**
+     * Disconnect and close the connection to the server.
+     */
+    void disconnect();
+
+    /**
+     * Asynchronously disconnect and close the connection to the server.
+     * Set a state callback, e.g. onDisconnected, to be notified when the connection status changes.
+     */
+    void disconnectAsync();
 
     /// Check if client is connected (secure channel open).
     bool isConnected() noexcept;

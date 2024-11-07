@@ -396,13 +396,30 @@ void Client::connect(std::string_view endpointUrl) {
     throwIfBad(UA_Client_connect(handle(), std::string(endpointUrl).c_str()));
 }
 
+void Client::connectAsync(std::string_view endpointUrl) {
+#if UAPP_OPEN62541_VER_GE(1, 1)
+    throwIfBad(UA_Client_connectAsync(handle(), std::string(endpointUrl).c_str()));
+#else
+    throwIfBad(UA_Client_connect_async(handle(), std::string(endpointUrl).c_str(), nullptr, nullptr)
+    );
+#endif
+}
+
 void Client::connect(std::string_view endpointUrl, const Login& login) {
     config().setUserIdentityToken(UserNameIdentityToken(login.username, login.password));
     connect(endpointUrl);
 }
 
-void Client::disconnect() noexcept {
-    UA_Client_disconnect(handle());
+void Client::disconnect() {
+    throwIfBad(UA_Client_disconnect(handle()));
+}
+
+void Client::disconnectAsync() {
+#if UAPP_OPEN62541_VER_GE(1, 1)
+    throwIfBad(UA_Client_disconnectAsync(handle()));
+#else
+    throwIfBad(UA_Client_disconnect_async(handle(), nullptr));
+#endif
 }
 
 bool Client::isConnected() noexcept {
