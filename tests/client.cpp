@@ -121,6 +121,35 @@ TEST_CASE("Client connect with UserNameIdentityToken") {
 }
 #endif
 
+// v1.0 throws BadConnectionClosed for runIterate, bug?
+#if UAPP_OPEN62541_VER_GE(1, 1)
+TEST_CASE("Client connectAsync/disconnectAsync") {
+    Server server;
+    ServerRunner serverRunner(server);
+    Client client;
+
+    bool connected = false;
+    client.onConnected([&] { connected = true; });
+    client.onDisconnected([&] { connected = false; });
+
+    const size_t maxIterations = 10;
+    CHECK_NOTHROW(client.connectAsync(localServerUrl));
+    for (size_t i = 0; i < maxIterations && !connected; ++i) {
+        CHECK_NOTHROW(client.runIterate());
+    }
+    CHECK(connected);
+
+    CHECK_NOTHROW(client.disconnectAsync());
+    // disconnectAsync might disconnect immediately (v1.4)
+    if (client.isConnected()) {
+        for (size_t i = 0; i < maxIterations && connected; ++i) {
+            CHECK_NOTHROW(client.runIterate());
+        }
+        CHECK_FALSE(connected);
+    }
+}
+#endif
+
 #ifdef UA_ENABLE_ENCRYPTION
 TEST_CASE("Client encryption") {
     SUBCASE("Connect to unencrypted server") {

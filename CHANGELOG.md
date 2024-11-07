@@ -21,16 +21,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Deprecate config setters in `Client` and `Server` class, use member function `config()` instead (#377)
 - Don't revise subscription parameters (#392)
 - Don't revise monitoring parameters (#393)
-- Return raw responses or results from functions in the `services` namespace to further diagnostics:
+- Return raw responses or results from functions in the `services` namespace for further diagnostics:
   - Return `CreateSubscriptionResponse` from `services::createSubscription` overloads (#394)
   - Return `ModifySubscriptionResponse` from `services::modifySubscription` overloads (#394)
-  - Return `CallMethodResult` from `services::call`/`Node::call` (#395)
+  - Return `CallMethodResult` from `services::call(Async)`/`Node::call(Async)` (#395)
   - Return `MonitoredItemCreateResult` from `services::createMonitoredItemDataChange`/`*Event` (#401)
   - Return `MonitoredItemModifyResult` from `services::modifyMonitoredItem` (#404)
-  - Return `BrowseResult` from `services::browse`/`services::browseNext` overloads (#406)
-  - Return `BrowsePathResult` from `services::translateBrowsePathToNodeIds`/`services::browseSimplifiedBrowsePath` (#407)
+  - Return `BrowseResult` from `services::browse(Async)`/`services::browseNext(Async)` overloads (#406)
+  - Return `BrowsePathResult` from `services::translateBrowsePathToNodeIds(Async)`/`services::browseSimplifiedBrowsePath(Async)` (#407)
 - Return `StatusCode` instead of `Result<void>` (#410)
-- Remove default arguments of functions in `services` namespace (#424)
+- Remove default function arguments in `services` namespace because it doesn't work well with the async functions (completion token as last argument) (#424)
 
 ### Fixed
 
