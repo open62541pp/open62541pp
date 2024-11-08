@@ -884,21 +884,6 @@ enum class VariantPolicy {
     // clang-format on
 };
 
-/**
- * Token used for selecting the policy when constructing variants.
- *
- * TODO:
- * Consider alternatives:
- * - A: If the VariantPolicy is changed from enum to a struct (or namespace) with sub-structs, then
- *   these could be directly used as tokens. Could be seen as unconvential, though.
- * - B: Use explicit names for tokens, e.g. "ConstructWithCopy, ConstructWithReference,
- *   ConstructWithReferenceIfPossible". Could be seen as verbose, though.
- */
-template <VariantPolicy Policy>
-struct ConstructorTag {
-    static constexpr VariantPolicy policy = Policy;
-};
-
 namespace detail {
 
 template <typename T>
@@ -913,27 +898,6 @@ static constexpr bool isCopyableOrConvertible = detail::isRegisteredType<T> ||
 struct ReferenceTag {};
 
 static constexpr ReferenceTag reference{};
-
-namespace detail {
-
-template <typename T>
-struct VariantPolicySelector;
-
-template <>
-struct VariantPolicySelector<ReferenceTag> {
-    static constexpr VariantPolicy policy = VariantPolicy::Reference;
-};
-
-template <VariantPolicy Policy>
-struct ConstructorTagSelector;
-
-template <>
-struct ConstructorTagSelector<VariantPolicy::Reference> {
-    using Tag = ReferenceTag;
-    static constexpr Tag tag = reference;
-};
-
-}  // namespace detail
 
 /**
  * UA_Variant wrapper class.
@@ -1377,36 +1341,6 @@ private:
     template <typename T>
     inline std::vector<T> getArrayCopyImpl() const;
 
-    template <typename T, typename... Args>
-    void setValueImpl(T&& value, Args&&... args) {
-        using Decayed = std::decay_t<T>;
-
-        if constexpr (detail::isContainer<Decayed> && !detail::isCopyableOrConvertible<Decayed>) {
-            if constexpr (detail::IsContiguousContainer<Decayed>::value) {
-                setArray(Span{std::forward<T>(value)}, std::forward<Args>(args)...);
-            } else {
-                setArray(value.begin(), value.end(), std::forward<Args>(args)...);
-            }
-        } else {
-            setScalar(std::forward<T>(value), std::forward<Args>(args)...);
-        }
-    }
-
-    template <typename T, typename... Args>
-    void setValueCopyImpl(T&& value, Args&&... args) {
-        using Decayed = std::decay_t<T>;
-
-        if constexpr (detail::isContainer<Decayed> && !detail::isCopyableOrConvertible<Decayed>) {
-            if constexpr (detail::IsContiguousContainer<Decayed>::value) {
-                setArrayCopy(Span{std::forward<T>(value)}, std::forward<Args>(args)...);
-            } else {
-                setArrayCopy(value.begin(), value.end(), std::forward<Args>(args)...);
-            }
-        } else {
-            setScalarCopy(std::forward<T>(value), std::forward<Args>(args)...);
-        }
-    }
-
     template <typename T>
     inline void setScalarImpl(
         T* data, const UA_DataType& dataType, UA_VariantStorageType storageType
@@ -1423,6 +1357,11 @@ private:
     inline void setArrayCopyImpl(InputIt first, InputIt last, const UA_DataType& dataType);
     template <typename InputIt>
     inline void setArrayCopyConvertImpl(InputIt first, InputIt last);
+
+    template <typename T, typename... Args>
+    void setValueImpl(T&& value, Args&&... args);
+    template <typename T, typename... Args>
+    void setValueCopyImpl(T&& value, Args&&... args);
 };
 
 template <typename T>
@@ -1518,6 +1457,32 @@ void Variant::setArrayCopyConvertImpl(InputIt first, InputIt last) {
         TypeConverter<ValueType>::toNative(*first++, native.get()[i]);  // NOLINT
     }
     setArrayImpl(native.release(), size, dataType, UA_VARIANT_DATA);  // move ownership
+}
+
+template <typename T, typename... Args>
+void Variant::setValueImpl(T&& value, Args&&... args) {
+    using Decayed = std::decay_t<T>;
+
+    if constexpr (detail::isContainer<Decayed> && !detail::isCopyableOrConvertible<Decayed>) {
+        setArray(Span{std::forward<T>(value)}, std::forward<Args>(args)...);
+    } else {
+        setScalar(std::forward<T>(value), std::forward<Args>(args)...);
+    }
+}
+
+template <typename T, typename... Args>
+void Variant::setValueCopyImpl(T&& value, Args&&... args) {
+    using Decayed = std::decay_t<T>;
+
+    if constexpr (detail::isContainer<Decayed> && !detail::isCopyableOrConvertible<Decayed>) {
+        if constexpr (detail::IsContiguousContainer<Decayed>::value) {
+            setArrayCopy(Span{std::forward<T>(value)}, std::forward<Args>(args)...);
+        } else {
+            setArrayCopy(value.begin(), value.end(), std::forward<Args>(args)...);
+        }
+    } else {
+        setScalarCopy(std::forward<T>(value), std::forward<Args>(args)...);
+    }
 }
 
 /* ------------------------------------------ DataValue ----------------------------------------- */
