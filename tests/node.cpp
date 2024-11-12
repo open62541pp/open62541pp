@@ -330,6 +330,7 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
             CHECK(await(refNode.writeIsAbstractAsync(isAbstract)).isGood());
             CHECK(await(refNode.readIsAbstractAsync()).value() == isAbstract);
         } else {
+            CHECK_NOTHROW(refNode.writeIsAbstract(isAbstract));
             CHECK_NOTHROW(refNode.readIsAbstract());
         }
     }
