@@ -519,6 +519,7 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         }
     }
 
+#if UAPP_OPEN62541_VER_GE(1, 1)
     SUBCASE("readDataTypeDefinition") {
         Node node(connection, DataTypeId::BuildInfo);
         if constexpr (isAsync<T>) {
@@ -527,6 +528,7 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
             CHECK_NOTHROW(node.readDataTypeDefinition());
         }
     }
+#endif
 
     SUBCASE("writeObjectProperty/readObjectProperty") {
         objNode.addProperty(
