@@ -490,7 +490,7 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
     }
 
     SUBCASE("writeHistorizing/readHistorizing") {
-        const double historizing = true;
+        const bool historizing = true;
         if constexpr (isAsync<T>) {
             CHECK(await(varNode.writeHistorizingAsync(historizing)).isGood());
             CHECK(await(varNode.readHistorizingAsync()).value() == historizing);
@@ -501,7 +501,7 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
     }
 
     SUBCASE("writeExecutable/readExecutable") {
-        const double executable = true;
+        const bool executable = true;
         if constexpr (isAsync<T>) {
             CHECK(await(methodNode.writeExecutableAsync(executable)).isGood());
             CHECK(await(methodNode.readExecutableAsync()).value() == executable);
