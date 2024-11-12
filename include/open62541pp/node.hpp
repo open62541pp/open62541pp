@@ -11,6 +11,7 @@
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/exception.hpp"
 #include "open62541pp/nodeids.hpp"
+#include "open62541pp/services/detail/async_transform.hpp"
 #include "open62541pp/span.hpp"
 #include "open62541pp/typeregistry.hpp"  // getDataType
 #include "open62541pp/types.hpp"
@@ -34,6 +35,8 @@ namespace opcua {
  * Node objects are useful as-is but they do not expose the entire OPC UA protocol. You can get
  * access to the associated NodeId instance with the Node::id() method and apply the native
  * open62541 functions or the free functions in the opcua::services namespace.
+ * 
+ * @note The async functions are available for Client only.
  *
  * @tparam Connection Server or Client
  * @see Services
@@ -84,6 +87,28 @@ public:
         );
     }
 
+    /// @wrapper{services::addFolder}
+    /// @param token @completiontoken{void(Result<Node>&)}
+    /// @return @asyncresult{Result<Node>}
+    template <typename CompletionToken = DefaultCompletionToken>
+    auto addFolderAsync(
+        const NodeId& id,
+        std::string_view browseName,
+        const ObjectAttributes& attributes = {},
+        const NodeId& referenceType = ReferenceTypeId::HasComponent,
+        CompletionToken&& token = DefaultCompletionToken()
+    ) {
+        return services::addFolderAsync(
+            connection(),
+            this->id(),
+            id,
+            browseName,
+            attributes,
+            referenceType,
+            fromIdAsync(connection(), std::forward<CompletionToken>(token))
+        );
+    }
+
     /// @wrapper{services::addObject}
     Node addObject(
         const NodeId& id,
@@ -97,6 +122,30 @@ public:
             services::addObject(
                 connection(), this->id(), id, browseName, attributes, objectType, referenceType
             )
+        );
+    }
+
+    /// @wrapper{services::addObjectAsync}
+    /// @param token @completiontoken{void(Result<Node>&)}
+    /// @return @asyncresult{Result<Node>}
+    template <typename CompletionToken = DefaultCompletionToken>
+    auto addObjectAsync(
+        const NodeId& id,
+        std::string_view browseName,
+        const ObjectAttributes& attributes = {},
+        const NodeId& objectType = ObjectTypeId::BaseObjectType,
+        const NodeId& referenceType = ReferenceTypeId::HasComponent,
+        CompletionToken&& token = DefaultCompletionToken()
+    ) {
+        return services::addObjectAsync(
+            connection(),
+            this->id(),
+            id,
+            browseName,
+            attributes,
+            objectType,
+            referenceType,
+            fromIdAsync(connection(), std::forward<CompletionToken>(token))
         );
     }
 
@@ -116,6 +165,30 @@ public:
         );
     }
 
+    /// @wrapper{services::addVariableAsync}
+    /// @param token @completiontoken{void(Result<Node>&)}
+    /// @return @asyncresult{Result<Node>}
+    template <typename CompletionToken = DefaultCompletionToken>
+    auto addVariableAsync(
+        const NodeId& id,
+        std::string_view browseName,
+        const VariableAttributes& attributes = {},
+        const NodeId& variableType = VariableTypeId::BaseDataVariableType,
+        const NodeId& referenceType = ReferenceTypeId::HasComponent,
+        CompletionToken&& token = DefaultCompletionToken()
+    ) {
+        return services::addVariableAsync(
+            connection(),
+            this->id(),
+            id,
+            browseName,
+            attributes,
+            variableType,
+            referenceType,
+            fromIdAsync(connection(), std::forward<CompletionToken>(token))
+        );
+    }
+
     /// @wrapper{services::addProperty}
     Node addProperty(
         const NodeId& id, std::string_view browseName, const VariableAttributes& attributes = {}
@@ -123,6 +196,26 @@ public:
         return fromId(
             connection(),
             services::addProperty(connection(), this->id(), id, browseName, attributes)
+        );
+    }
+
+    /// @wrapper{services::addPropertyAsync}
+    /// @param token @completiontoken{void(Result<Node>&)}
+    /// @return @asyncresult{Result<Node>}
+    template <typename CompletionToken = DefaultCompletionToken>
+    auto addPropertyAsync(
+        const NodeId& id,
+        std::string_view browseName,
+        const VariableAttributes& attributes = {},
+        CompletionToken&& token = DefaultCompletionToken()
+    ) {
+        return services::addPropertyAsync(
+            connection(),
+            this->id(),
+            id,
+            browseName,
+            attributes,
+            fromIdAsync(connection(), std::forward<CompletionToken>(token))
         );
     }
 
@@ -152,6 +245,34 @@ public:
             )
         );
     }
+
+    /// @wrapper{services::addMethodAsync}
+    /// @param token @completiontoken{void(Result<Node>&)}
+    /// @return @asyncresult{Result<Node>}
+    template <typename CompletionToken = DefaultCompletionToken>
+    auto addMethodAsync(
+        const NodeId& id,
+        std::string_view browseName,
+        services::MethodCallback callback,
+        Span<const Argument> inputArguments,
+        Span<const Argument> outputArguments,
+        const MethodAttributes& attributes = {},
+        const NodeId& referenceType = ReferenceTypeId::HasComponent,
+        CompletionToken&& token = DefaultCompletionToken()
+    ) {
+        return services::addMethodAsync(
+            connection(),
+            this->id(),
+            id,
+            browseName,
+            std::move(callback),
+            inputArguments,
+            outputArguments,
+            attributes,
+            referenceType,
+            fromIdAsync(connection(), std::forward<CompletionToken>(token))
+        );
+    }
 #endif
 
     /// @wrapper{services::addObjectType}
@@ -166,6 +287,28 @@ public:
             services::addObjectType(
                 connection(), this->id(), id, browseName, attributes, referenceType
             )
+        );
+    }
+
+    /// @wrapper{services::addObjectTypeAsync}
+    /// @param token @completiontoken{void(Result<Node>&)}
+    /// @return @asyncresult{Result<Node>}
+    template <typename CompletionToken = DefaultCompletionToken>
+    auto addObjectTypeAsync(
+        const NodeId& id,
+        std::string_view browseName,
+        const ObjectTypeAttributes& attributes = {},
+        const NodeId& referenceType = ReferenceTypeId::HasSubtype,
+        CompletionToken&& token = DefaultCompletionToken()
+    ) {
+        return services::addObjectTypeAsync(
+            connection(),
+            this->id(),
+            id,
+            browseName,
+            attributes,
+            referenceType,
+            fromIdAsync(connection(), std::forward<CompletionToken>(token))
         );
     }
 
@@ -185,6 +328,30 @@ public:
         );
     }
 
+    /// @wrapper{services::addVariableTypeAsync}
+    /// @param token @completiontoken{void(Result<Node>&)}
+    /// @return @asyncresult{Result<Node>}
+    template <typename CompletionToken = DefaultCompletionToken>
+    auto addVariableTypeAsync(
+        const NodeId& id,
+        std::string_view browseName,
+        const VariableTypeAttributes& attributes = {},
+        const NodeId& variableType = VariableTypeId::BaseDataVariableType,
+        const NodeId& referenceType = ReferenceTypeId::HasSubtype,
+        CompletionToken&& token = DefaultCompletionToken()
+    ) {
+        return services::addVariableTypeAsync(
+            connection(),
+            this->id(),
+            id,
+            browseName,
+            attributes,
+            variableType,
+            referenceType,
+            fromIdAsync(connection(), std::forward<CompletionToken>(token))
+        );
+    }
+
     /// @wrapper{services::addReferenceType}
     Node addReferenceType(
         const NodeId& id,
@@ -197,6 +364,28 @@ public:
             services::addReferenceType(
                 connection(), this->id(), id, browseName, attributes, referenceType
             )
+        );
+    }
+
+    /// @wrapper{services::addReferenceTypeAsync}
+    /// @param token @completiontoken{void(Result<Node>&)}
+    /// @return @asyncresult{Result<Node>}
+    template <typename CompletionToken = DefaultCompletionToken>
+    auto addReferenceTypeAsync(
+        const NodeId& id,
+        std::string_view browseName,
+        const ReferenceTypeAttributes& attributes = {},
+        const NodeId& referenceType = ReferenceTypeId::HasSubtype,
+        CompletionToken&& token = DefaultCompletionToken()
+    ) {
+        return services::addReferenceTypeAsync(
+            connection(),
+            this->id(),
+            id,
+            browseName,
+            attributes,
+            referenceType,
+            fromIdAsync(connection(), std::forward<CompletionToken>(token))
         );
     }
 
@@ -215,6 +404,28 @@ public:
         );
     }
 
+    /// @wrapper{services::addDataTypeAsync}
+    /// @param token @completiontoken{void(Result<Node>&)}
+    /// @return @asyncresult{Result<Node>}
+    template <typename CompletionToken = DefaultCompletionToken>
+    auto addDataTypeAsync(
+        const NodeId& id,
+        std::string_view browseName,
+        const DataTypeAttributes& attributes = {},
+        const NodeId& referenceType = ReferenceTypeId::HasSubtype,
+        CompletionToken&& token = DefaultCompletionToken()
+    ) {
+        return services::addDataTypeAsync(
+            connection(),
+            this->id(),
+            id,
+            browseName,
+            attributes,
+            referenceType,
+            fromIdAsync(connection(), std::forward<CompletionToken>(token))
+        );
+    }
+
     /// @wrapper{services::addView}
     Node addView(
         const NodeId& id,
@@ -228,10 +439,52 @@ public:
         );
     }
 
+    /// @wrapper{services::addViewAsync}
+    /// @param token @completiontoken{void(Result<Node>&)}
+    /// @return @asyncresult{Result<Node>}
+    template <typename CompletionToken = DefaultCompletionToken>
+    auto addViewAsync(
+        const NodeId& id,
+        std::string_view browseName,
+        const ViewAttributes& attributes = {},
+        const NodeId& referenceType = ReferenceTypeId::Organizes,
+        CompletionToken&& token = DefaultCompletionToken()
+    ) {
+        return services::addViewAsync(
+            connection(),
+            this->id(),
+            id,
+            browseName,
+            attributes,
+            referenceType,
+            fromIdAsync(connection(), std::forward<CompletionToken>(token))
+        );
+    }
+
     /// @wrapper{services::addReference}
     Node& addReference(const NodeId& targetId, const NodeId& referenceType, bool forward = true) {
         services::addReference(connection(), id(), targetId, referenceType, forward).throwIfBad();
         return *this;
+    }
+
+    /// @wrapper{services::addReferenceAsync}
+    /// @param token @completiontoken{void(StatusCode)}
+    /// @return @asyncresult{StatusCode}
+    template <typename CompletionToken = DefaultCompletionToken>
+    auto addReferenceAsync(
+        const NodeId& targetId,
+        const NodeId& referenceType,
+        bool forward = true,
+        CompletionToken&& token = DefaultCompletionToken()
+    ) {
+        return services::addReferenceAsync(
+            connection(),
+            id(),
+            targetId,
+            referenceType,
+            forward,
+            std::forward<CompletionToken>(token)
+        );
     }
 
     /// @wrapper{services::addModellingRule}
@@ -240,9 +493,33 @@ public:
         return *this;
     }
 
+    /// @wrapper{services::addModellingRuleAsync}
+    /// @param token @completiontoken{void(StatusCode)}
+    /// @return @asyncresult{StatusCode}
+    template <typename CompletionToken = DefaultCompletionToken>
+    auto addModellingRuleAsync(
+        ModellingRule rule, CompletionToken&& token = DefaultCompletionToken()
+    ) {
+        return services::addModellingRuleAsync(
+            connection(), id(), rule, std::forward<CompletionToken>(token)
+        );
+    }
+
     /// @wrapper{services::deleteNode}
     void deleteNode(bool deleteReferences = true) {
         services::deleteNode(connection(), id(), deleteReferences).throwIfBad();
+    }
+
+    /// @wrapper{services::deleteNodeAsync}
+    /// @param token @completiontoken{void(StatusCode)}
+    /// @return @asyncresult{StatusCode}
+    template <typename CompletionToken = DefaultCompletionToken>
+    auto deleteNodeAsync(
+        bool deleteReferences = true, CompletionToken&& token = DefaultCompletionToken()
+    ) {
+        return services::deleteNodeAsync(
+            connection(), id(), deleteReferences, std::forward<CompletionToken>(token)
+        );
     }
 
     /// @wrapper{services::deleteReference}
@@ -257,6 +534,28 @@ public:
         )
             .throwIfBad();
         return *this;
+    }
+
+    /// @wrapper{services::deleteReferenceAsync}
+    /// @param token @completiontoken{void(StatusCode)}
+    /// @return @asyncresult{StatusCode}
+    template <typename CompletionToken = DefaultCompletionToken>
+    auto deleteReferenceAsync(
+        const NodeId& targetId,
+        const NodeId& referenceType,
+        bool isForward,
+        bool deleteBidirectional,
+        CompletionToken&& token = DefaultCompletionToken()
+    ) {
+        return services::deleteReferenceAsync(
+            connection(),
+            id(),
+            targetId,
+            referenceType,
+            isForward,
+            deleteBidirectional,
+            std::forward<CompletionToken>(token)
+        );
     }
 
     /// Browse references.
@@ -645,6 +944,18 @@ public:
 private:
     static Node fromId(Connection& connection, Result<NodeId>&& result) {
         return {connection, std::move(result).value()};
+    }
+
+    template <typename CompletionToken>
+    static auto fromIdAsync(Connection& connection, CompletionToken&& token) {
+        return services::detail::TransformToken(
+            [&](Result<NodeId>& result) {
+                return result.transform([&](NodeId& id) -> Node {
+                    return {connection, std::move(id)};
+                });
+            },
+            std::forward<CompletionToken>(token)
+        );
     }
 
     Node browseObjectProperty(const QualifiedName& propertyName) {

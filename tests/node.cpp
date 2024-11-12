@@ -9,7 +9,7 @@
 
 using namespace opcua;
 
-TEST_CASE_TEMPLATE("Node", T, Server, Client) {
+TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
     ServerClientSetup setup;
     setup.client.connect(setup.endpointUrl);
     auto& connection = setup.getInstance<T>();
@@ -47,41 +47,170 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client) {
         CHECK_FALSE(Node(connection, NodeId(0, "DoesNotExist")).exists());
     }
 
-    SUBCASE("Add non-type nodes") {
-        CHECK(objNode.addObject({1, 1000}, "object").readNodeClass() == NodeClass::Object);
-        CHECK(objNode.addFolder({1, 1001}, "folder").readNodeClass() == NodeClass::Object);
-        CHECK(objNode.addVariable({1, 1002}, "variable").readNodeClass() == NodeClass::Variable);
-        CHECK(objNode.addProperty({1, 1003}, "property").readNodeClass() == NodeClass::Variable);
+    SUBCASE("addFolder") {
+        const NodeId id{1, 1000};
+        if constexpr (isAsync<T>) {
+            auto future = objNode.addFolderAsync(id, "Folder");
+            setup.client.runIterate();
+            CHECK_NOTHROW(future.get().value());
+        } else {
+            CHECK_NOTHROW(objNode.addFolder(id, "Folder"));
+        }
+        CHECK(Node(connection, id).readNodeClass() == NodeClass::Object);
+    }
+
+    SUBCASE("addObject") {
+        const NodeId id{1, 1000};
+        if constexpr (isAsync<T>) {
+            auto future = objNode.addObjectAsync(id, "Object");
+            setup.client.runIterate();
+            CHECK_NOTHROW(future.get().value());
+        } else {
+            CHECK_NOTHROW(objNode.addObject(id, "Object"));
+        }
+        CHECK(Node(connection, id).readNodeClass() == NodeClass::Object);
+    }
+
+    SUBCASE("addVariable") {
+        const NodeId id{1, 1000};
+        if constexpr (isAsync<T>) {
+            auto future = objNode.addVariableAsync(id, "Variable");
+            setup.client.runIterate();
+            CHECK_NOTHROW(future.get().value());
+        } else {
+            CHECK_NOTHROW(objNode.addVariable(id, "Variable"));
+        }
+        CHECK(Node(connection, id).readNodeClass() == NodeClass::Variable);
+    }
+
+    SUBCASE("addProperty") {
+        const NodeId id{1, 1000};
+        if constexpr (isAsync<T>) {
+            auto future = objNode.addPropertyAsync(id, "Property");
+            setup.client.runIterate();
+            CHECK_NOTHROW(future.get().value());
+        } else {
+            CHECK_NOTHROW(objNode.addProperty(id, "Property"));
+        }
+        CHECK(Node(connection, id).readNodeClass() == NodeClass::Variable);
+    }
+
 #ifdef UA_ENABLE_METHODCALLS
-        CHECK(
-            objNode.addMethod({1, 1004}, "method", {}, {}, {}).readNodeClass() == NodeClass::Method
-        );
+    SUBCASE("addMethod") {
+        const NodeId id{1, 1000};
+        if constexpr (isAsync<T>) {
+            auto future = objNode.addMethodAsync(id, "Method", {}, {}, {});
+            setup.client.runIterate();
+            CHECK_NOTHROW(future.get().value());
+        } else {
+            CHECK_NOTHROW(objNode.addMethod(id, "Method", {}, {}, {}));
+        }
+        CHECK(Node(connection, id).readNodeClass() == NodeClass::Method);
+    }
 #endif
+
+    SUBCASE("addObjectType") {
+        Node parent(connection, ObjectTypeId::BaseObjectType);
+        const NodeId id{1, 1000};
+        if constexpr (isAsync<T>) {
+            auto future = parent.addObjectTypeAsync(id, "ObjectType");
+            setup.client.runIterate();
+            CHECK_NOTHROW(future.get().value());
+        } else {
+            CHECK_NOTHROW(parent.addObjectType(id, "ObjectType"));
+        }
+        CHECK(Node(connection, id).readNodeClass() == NodeClass::ObjectType);
     }
 
-    SUBCASE("Add type nodes") {
-        CHECK(
-            Node(connection, ObjectTypeId::BaseObjectType)
-                .addObjectType({1, 1000}, "objecttype")
-                .readNodeClass() == NodeClass::ObjectType
-        );
-        CHECK(
-            Node(connection, VariableTypeId::BaseVariableType)
-                .addVariableType({1, 1001}, "variabletype")
-                .readNodeClass() == NodeClass::VariableType
-        );
+    SUBCASE("addVariableType") {
+        Node parent(connection, VariableTypeId::BaseVariableType);
+        const NodeId id{1, 1000};
+        if constexpr (isAsync<T>) {
+            auto future = parent.addVariableTypeAsync(id, "VariableType");
+            setup.client.runIterate();
+            CHECK_NOTHROW(future.get().value());
+        } else {
+            CHECK_NOTHROW(parent.addVariableType(id, "VariableType"));
+        }
+        CHECK(Node(connection, id).readNodeClass() == NodeClass::VariableType);
     }
 
-    SUBCASE("Add/delete reference") {
-        auto folder = objNode.addFolder({1, 1000}, "folder");
-        auto object = objNode.addObject({1, 1001}, "object");
-        CHECK_NOTHROW(folder.addReference({1, 1001}, ReferenceTypeId::Organizes, true));
-        CHECK_NOTHROW(folder.deleteReference({1, 1001}, ReferenceTypeId::Organizes, true, true));
+    SUBCASE("addReferenceType") {
+        Node parent(connection, ReferenceTypeId::References);
+        const NodeId id{1, 1000};
+        if constexpr (isAsync<T>) {
+            auto future = parent.addReferenceTypeAsync(id, "ReferenceType");
+            setup.client.runIterate();
+            CHECK_NOTHROW(future.get().value());
+        } else {
+            CHECK_NOTHROW(parent.addReferenceType(id, "ReferenceType"));
+        }
+        CHECK(Node(connection, id).readNodeClass() == NodeClass::ReferenceType);
     }
 
-    SUBCASE("Delete node") {
-        auto node = objNode.addObject({1, 1000}, "object");
-        CHECK_NOTHROW(node.deleteNode());
+    SUBCASE("addDataType") {
+        Node parent(connection, DataTypeId::BaseDataType);
+        const NodeId id{1, 1000};
+        if constexpr (isAsync<T>) {
+            auto future = parent.addDataTypeAsync(id, "DataType");
+            setup.client.runIterate();
+            CHECK_NOTHROW(future.get().value());
+        } else {
+            CHECK_NOTHROW(parent.addDataType(id, "DataType"));
+        }
+        CHECK(Node(connection, id).readNodeClass() == NodeClass::DataType);
+    }
+
+    SUBCASE("addView") {
+        Node parent(connection, ObjectId::ViewsFolder);
+        const NodeId id{1, 1000};
+        if constexpr (isAsync<T>) {
+            auto future = parent.addViewAsync(id, "View");
+            setup.client.runIterate();
+            CHECK_NOTHROW(future.get().value());
+        } else {
+            CHECK_NOTHROW(parent.addView(id, "View"));
+        }
+        CHECK(Node(connection, id).readNodeClass() == NodeClass::View);
+    }
+
+    SUBCASE("addReference/deleteReference") {
+        auto folder = objNode.addFolder({1, 1000}, "Folder");
+        auto object = objNode.addObject({1, 1001}, "Object");
+
+        // add
+        if constexpr (isAsync<T>) {
+            auto future = folder.addReferenceAsync(object.id(), ReferenceTypeId::Organizes);
+            setup.client.runIterate();
+            CHECK(future.get().isGood());
+        } else {
+            CHECK_NOTHROW(folder.addReference(object.id(), ReferenceTypeId::Organizes));
+        }
+
+        // delete
+        if constexpr (isAsync<T>) {
+            auto future = folder.deleteReferenceAsync(
+                object.id(), ReferenceTypeId::Organizes, true, true
+            );
+            setup.client.runIterate();
+            CHECK(future.get().isGood());
+        } else {
+            CHECK_NOTHROW(
+                folder.deleteReference(object.id(), ReferenceTypeId::Organizes, true, true)
+            );
+        }
+    }
+
+    SUBCASE("deleteNode") {
+        auto node = objNode.addObject({1, 1000}, "Object");
+
+        if constexpr (isAsync<T>) {
+            auto future = node.deleteNodeAsync();
+            setup.client.runIterate();
+            CHECK(future.get().isGood());
+        } else {
+            CHECK_NOTHROW(node.deleteNode());
+        }
     }
 
     SUBCASE("Browse references") {
