@@ -38,7 +38,6 @@ int main() {
             }
         });
 
-#if UAPP_OPEN62541_VER_GE(1, 1)
         // 3. Subscription
         opcua::services::createSubscriptionAsync(
             client,
@@ -79,7 +78,6 @@ int main() {
                 );
             }
         );
-#endif
     });
     client.onSessionClosed([] { std::cout << "Session closed\n"; });
     client.onDisconnected([] { std::cout << "Client disconnected\n"; });
