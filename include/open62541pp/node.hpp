@@ -78,10 +78,10 @@ public:
         const ObjectAttributes& attributes = {},
         const NodeId& referenceType = ReferenceTypeId::HasComponent
     ) {
-        auto result = services::addFolder(
-            connection(), this->id(), id, browseName, attributes, referenceType
+        return fromId(
+            connection(),
+            services::addFolder(connection(), this->id(), id, browseName, attributes, referenceType)
         );
-        return {connection(), result.value()};
     }
 
     /// @wrapper{services::addObject}
@@ -92,10 +92,12 @@ public:
         const NodeId& objectType = ObjectTypeId::BaseObjectType,
         const NodeId& referenceType = ReferenceTypeId::HasComponent
     ) {
-        auto result = services::addObject(
-            connection(), this->id(), id, browseName, attributes, objectType, referenceType
+        return fromId(
+            connection(),
+            services::addObject(
+                connection(), this->id(), id, browseName, attributes, objectType, referenceType
+            )
         );
-        return {connection(), result.value()};
     }
 
     /// @wrapper{services::addVariable}
@@ -106,18 +108,22 @@ public:
         const NodeId& variableType = VariableTypeId::BaseDataVariableType,
         const NodeId& referenceType = ReferenceTypeId::HasComponent
     ) {
-        auto result = services::addVariable(
-            connection(), this->id(), id, browseName, attributes, variableType, referenceType
+        return fromId(
+            connection(),
+            services::addVariable(
+                connection(), this->id(), id, browseName, attributes, variableType, referenceType
+            )
         );
-        return {connection(), result.value()};
     }
 
     /// @wrapper{services::addProperty}
     Node addProperty(
         const NodeId& id, std::string_view browseName, const VariableAttributes& attributes = {}
     ) {
-        auto result = services::addProperty(connection(), this->id(), id, browseName, attributes);
-        return {connection(), result.value()};
+        return fromId(
+            connection(),
+            services::addProperty(connection(), this->id(), id, browseName, attributes)
+        );
     }
 
 #ifdef UA_ENABLE_METHODCALLS
@@ -131,18 +137,20 @@ public:
         const MethodAttributes& attributes = {},
         const NodeId& referenceType = ReferenceTypeId::HasComponent
     ) {
-        auto result = services::addMethod(
+        return fromId(
             connection(),
-            this->id(),
-            id,
-            browseName,
-            std::move(callback),
-            inputArguments,
-            outputArguments,
-            attributes,
-            referenceType
+            services::addMethod(
+                connection(),
+                this->id(),
+                id,
+                browseName,
+                std::move(callback),
+                inputArguments,
+                outputArguments,
+                attributes,
+                referenceType
+            )
         );
-        return {connection(), result.value()};
     }
 #endif
 
@@ -153,10 +161,12 @@ public:
         const ObjectTypeAttributes& attributes = {},
         const NodeId& referenceType = ReferenceTypeId::HasSubtype
     ) {
-        auto result = services::addObjectType(
-            connection(), this->id(), id, browseName, attributes, referenceType
+        return fromId(
+            connection(),
+            services::addObjectType(
+                connection(), this->id(), id, browseName, attributes, referenceType
+            )
         );
-        return {connection(), result.value()};
     }
 
     /// @wrapper{services::addVariableType}
@@ -167,10 +177,12 @@ public:
         const NodeId& variableType = VariableTypeId::BaseDataVariableType,
         const NodeId& referenceType = ReferenceTypeId::HasSubtype
     ) {
-        auto result = services::addVariableType(
-            connection(), this->id(), id, browseName, attributes, variableType, referenceType
+        return fromId(
+            connection(),
+            services::addVariableType(
+                connection(), this->id(), id, browseName, attributes, variableType, referenceType
+            )
         );
-        return {connection(), result.value()};
     }
 
     /// @wrapper{services::addReferenceType}
@@ -180,10 +192,12 @@ public:
         const ReferenceTypeAttributes& attributes = {},
         const NodeId& referenceType = ReferenceTypeId::HasSubtype
     ) {
-        auto result = services::addReferenceType(
-            connection(), this->id(), id, browseName, attributes, referenceType
+        return fromId(
+            connection(),
+            services::addReferenceType(
+                connection(), this->id(), id, browseName, attributes, referenceType
+            )
         );
-        return {connection(), result.value()};
     }
 
     /// @wrapper{services::addDataType}
@@ -193,10 +207,12 @@ public:
         const DataTypeAttributes& attributes = {},
         const NodeId& referenceType = ReferenceTypeId::HasSubtype
     ) {
-        auto result = services::addDataType(
-            connection(), this->id(), id, browseName, attributes, referenceType
+        return fromId(
+            connection(),
+            services::addDataType(
+                connection(), this->id(), id, browseName, attributes, referenceType
+            )
         );
-        return {connection(), result.value()};
     }
 
     /// @wrapper{services::addView}
@@ -206,10 +222,10 @@ public:
         const ViewAttributes& attributes = {},
         const NodeId& referenceType = ReferenceTypeId::Organizes
     ) {
-        auto result = services::addView(
-            connection(), this->id(), id, browseName, attributes, referenceType
+        return fromId(
+            connection(),
+            services::addView(connection(), this->id(), id, browseName, attributes, referenceType)
         );
-        return {connection(), result.value()};
     }
 
     /// @wrapper{services::addReference}
@@ -627,6 +643,10 @@ public:
     }
 
 private:
+    static Node fromId(Connection& connection, Result<NodeId>&& result) {
+        return {connection, std::move(result).value()};
+    }
+
     Node browseObjectProperty(const QualifiedName& propertyName) {
         auto result = services::translateBrowsePathToNodeIds(
             connection(),
