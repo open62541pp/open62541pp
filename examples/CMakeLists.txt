@@ -44,7 +44,12 @@ function(add_example source)
     endif()
 endfunction()
 
-add_example(client_async.cpp)
+get_target_property(open62541_version open62541 VERSION)
+
+# async subscription & monitored item functions require v1.1
+if(open62541_version VERSION_GREATER_EQUAL "1.1")
+    add_example(client_async.cpp)
+endif()
 add_example(client_browse.cpp)
 add_example(client_connect.cpp)
 add_example(client_find_servers.cpp)
