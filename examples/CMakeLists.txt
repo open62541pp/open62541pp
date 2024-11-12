@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.12)
 
 project(open62541pp_examples)
 
+if(NOT TARGET open62541)
+    find_package(open62541 REQUIRED)
+endif()
 if(NOT TARGET open62541pp)
     # stand-alone build
     find_package(open62541pp REQUIRED)
