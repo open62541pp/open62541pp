@@ -35,7 +35,7 @@ namespace opcua {
  * Node objects are useful as-is but they do not expose the entire OPC UA protocol. You can get
  * access to the associated NodeId instance with the Node::id() method and apply the native
  * open62541 functions or the free functions in the opcua::services namespace.
- * 
+ *
  * @note The async functions are available for Client only.
  *
  * @tparam Connection Server or Client
@@ -646,6 +646,20 @@ public:
     /// @param inputArguments Input argument values
     CallMethodResult callMethod(const NodeId& methodId, Span<const Variant> inputArguments) {
         return services::call(connection(), id(), methodId, inputArguments);
+    }
+
+    /// @copydoc callMethod
+    /// @param token @completiontoken{void(CallMethodResult&)}
+    /// @return @asyncresult{CallMethodResult}
+    template <typename CompletionToken = DefaultCompletionToken>
+    auto callMethodAsync(
+        const NodeId& methodId,
+        Span<const Variant> inputArguments,
+        CompletionToken&& token = DefaultCompletionToken()
+    ) {
+        return services::callAsync(
+            connection(), id(), methodId, inputArguments, std::forward<CompletionToken>(token)
+        );
     }
 #endif
 
