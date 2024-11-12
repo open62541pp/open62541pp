@@ -2,9 +2,6 @@ cmake_minimum_required(VERSION 3.12)
 
 project(open62541pp_examples)
 
-if(NOT TARGET open62541)
-    find_package(open62541 REQUIRED)
-endif()
 if(NOT TARGET open62541pp)
     # stand-alone build
     find_package(open62541pp REQUIRED)
@@ -47,8 +44,13 @@ function(add_example source)
     endif()
 endfunction()
 
+if(NOT TARGET open62541::open62541)
+    find_package(open62541 REQUIRED)
+endif()
+get_target_property(open62541_version open62541::open62541 VERSION)
+
 # async subscription & monitored item functions require v1.1
-if(open62541_VERSION VERSION_GREATER_EQUAL "1.1")
+if(UA_ENABLE_SUBSCRIPTIONS AND open62541_version VERSION_GREATER_EQUAL "1.1")
     add_example(client_async.cpp)
 endif()
 add_example(client_browse.cpp)

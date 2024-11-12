@@ -178,6 +178,8 @@ inline UA_WriteRequest createWriteRequest(Span<const WriteValue> nodesToWrite) n
     return request;
 }
 
+#ifdef UA_ENABLE_METHODCALLS
+
 inline UA_CallMethodRequest createCallMethodRequest(
     const NodeId& objectId, const NodeId& methodId, Span<const Variant> inputArguments
 ) noexcept {
@@ -195,6 +197,8 @@ inline UA_CallRequest createCallRequest(UA_CallMethodRequest& item) noexcept {
     request.methodsToCallSize = 1;
     return request;
 }
+
+#endif  // UA_ENABLE_METHODCALLS
 
 inline UA_BrowseRequest createBrowseRequest(
     const BrowseDescription& bd, uint32_t maxReferences

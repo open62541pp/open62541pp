@@ -1561,7 +1561,7 @@ public:
     )
 };
 
-#endif
+#endif  // UA_ENABLE_METHODCALLS
 
 /* ---------------------------------------- Subscriptions --------------------------------------- */
 
@@ -2378,7 +2378,7 @@ public:
     )
 };
 
-#endif
+#endif  // UA_ENABLE_SUBSCRIPTIONS
 
 /* ----------------------------------------- Historizing ---------------------------------------- */
 
@@ -2489,7 +2489,7 @@ public:
     UAPP_GETTER_SPAN_WRAPPER(EnumField, getFields, fields, fieldsSize)
 };
 
-#endif
+#endif  // UA_ENABLE_TYPEDESCRIPTION
 
 /**
  * @}

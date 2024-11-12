@@ -3,9 +3,12 @@
 #include <cstdint>
 #include <functional>
 
+#include "open62541pp/config.hpp"
 #include "open62541pp/services/detail/callbackadapter.hpp"
 #include "open62541pp/types_composed.hpp"  // StatusChangeNotification
 #include "open62541pp/wrapper.hpp"  // asWrapper
+
+#ifdef UA_ENABLE_SUBSCRIPTIONS
 
 struct UA_Client;
 
@@ -44,3 +47,5 @@ struct SubscriptionContext : CallbackAdapter {
 };
 
 }  // namespace opcua::services::detail
+
+#endif

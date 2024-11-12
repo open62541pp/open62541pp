@@ -50,7 +50,9 @@ static void clearConfig(UA_ClientConfig& config) noexcept {
     // reset callbacks to avoid notifications
     config.stateCallback = nullptr;
     config.inactivityCallback = nullptr;
+#ifdef UA_ENABLE_SUBSCRIPTIONS
     config.subscriptionInactivityCallback = nullptr;
+#endif
     deleteClient(allocateClient(config));
 #endif
 }
