@@ -47,10 +47,8 @@ function(add_example source)
     endif()
 endfunction()
 
-get_target_property(open62541_version open62541 VERSION)
-
 # async subscription & monitored item functions require v1.1
-if(open62541_version VERSION_GREATER_EQUAL "1.1")
+if(open62541_VERSION VERSION_GREATER_EQUAL "1.1")
     add_example(client_async.cpp)
 endif()
 add_example(client_browse.cpp)
