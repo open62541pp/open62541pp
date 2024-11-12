@@ -93,10 +93,7 @@ PREDEFINED             = UA_ENABLE_DA \
 
 # Dot diagrams
 HAVE_DOT               = YES
-DOT_FONTNAME           = Helvetica
-DOT_FONTSIZE           = 10
 DOT_IMAGE_FORMAT       = svg
-DOT_TRANSPARENT        = YES
 CALL_GRAPH             = NO
 CALLER_GRAPH           = NO
 CLASS_GRAPH            = YES
