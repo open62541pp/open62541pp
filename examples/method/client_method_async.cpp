@@ -19,14 +19,9 @@ int main() {
 
     // Asynchronously call method (future variant - default)
     {
-        auto future = opcua::services::callAsync(
-            client,
-            objectsNode.id(),
-            greetMethodNode.id(),
-            {opcua::Variant::fromScalar("Future World")},
-            opcua::useFuture
+        auto future = objectsNode.callMethodAsync(
+            greetMethodNode.id(), {opcua::Variant::fromScalar("Future World")}, opcua::useFuture
         );
-
         std::cout << "Waiting for asynchronous operation to complete\n";
         future.wait();
 
@@ -38,9 +33,7 @@ int main() {
 
     // Asynchronously call method (callback variant)
     {
-        opcua::services::callAsync(
-            client,
-            objectsNode.id(),
+        objectsNode.callMethodAsync(
             greetMethodNode.id(),
             {opcua::Variant::fromScalar("Callback World")},
             [](opcua::CallMethodResult& result) {
