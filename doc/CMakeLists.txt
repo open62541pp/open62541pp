@@ -55,6 +55,7 @@ add_custom_command(
     DEPENDS
         Doxyfile_open62541.in
         DoxygenLayout_open62541.xml
+        custom.css
         open62541-generator-ids-ns0
         open62541-generator-namespace
         open62541-generator-statuscode
@@ -91,6 +92,7 @@ add_custom_command(
     DEPENDS
         Doxyfile.in
         DoxygenLayout.xml
+        custom.css
         ${PROJECT_SOURCE_DIR}/README.md
         ${open62541pp_doc_files}
         ${open62541pp_headers}
