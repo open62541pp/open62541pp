@@ -14,7 +14,7 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
     setup.client.connect(setup.endpointUrl);
     auto& connection = setup.getInstance<T>();
 
-    const auto await = [&](auto future) {
+    [[maybe_unused]] const auto await = [&](auto future) {
         setup.client.runIterate();
         return future.get();
     };
