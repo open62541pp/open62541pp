@@ -9,9 +9,9 @@
 int main() {
     opcua::Client client;
 
-    client.onConnected([] { std::cout << "Client connected\n"; });
+    client.onConnected([] { std::cout << "Client connected" << std::endl; });
     client.onSessionActivated([&] {
-        std::cout << "Session activated\n";
+        std::cout << "Session activated" << std::endl;
 
         // Schedule async operations once the client session is activated
         // 1. Read request
@@ -19,9 +19,9 @@ int main() {
             client,
             opcua::VariableId::Server_ServerStatus_CurrentTime,
             [](opcua::Result<opcua::Variant>& result) {
-                std::cout << "Read result with status code: " << result.code() << "\n";
+                std::cout << "Read result with status code: " << result.code() << std::endl;
                 const auto dt = result.value().getScalar<opcua::DateTime>();
-                std::cout << "Server date (UTC): " << dt.format("%Y-%m-%d %H:%M:%S") << "\n";
+                std::cout << "Server date (UTC): " << dt.format("%Y-%m-%d %H:%M:%S") << std::endl;
             }
         );
 
@@ -34,7 +34,7 @@ int main() {
         opcua::services::browseAsync(client, bd, 0, [](opcua::BrowseResult& result) {
             std::cout << "Browse result with " << result.getReferences().size() << " references:\n";
             for (const auto& reference : result.getReferences()) {
-                std::cout << reference.getBrowseName().getName() << "\n";
+                std::cout << "- " << reference.getBrowseName().getName() << std::endl;
             }
         });
 
@@ -44,12 +44,12 @@ int main() {
             opcua::SubscriptionParameters{},  // default subscription parameters
             true,  // publishingEnabled
             {},  // statusChangeCallback
-            [](uint32_t subId) { std::cout << "Subscription deleted: " << subId << "\n"; },
+            [](uint32_t subId) { std::cout << "Subscription deleted: " << subId << std::endl; },
             [&](opcua::CreateSubscriptionResponse& response) {
                 std::cout
-                    << "Subscription created\n"
+                    << "Subscription created:\n"
                     << "- status code: " << response.getResponseHeader().getServiceResult() << "\n"
-                    << "- subscription id: " << response.getSubscriptionId() << "\n";
+                    << "- subscription id: " << response.getSubscriptionId() << std::endl;
 
                 // Create MonitoredItem
                 opcua::services::createMonitoredItemDataChangeAsync(
@@ -66,21 +66,21 @@ int main() {
                             << "Data change notification:\n"
                             << "- subscription id: " << subId << "\n"
                             << "- monitored item id: " << monId << "\n"
-                            << "- timestamp: " << dv.getSourceTimestamp() << "\n";
+                            << "- timestamp: " << dv.getSourceTimestamp() << std::endl;
                     },
                     {},  // delete callback
                     [](opcua::MonitoredItemCreateResult& result) {
                         std::cout
-                            << "MonitoredItem created\n"
+                            << "MonitoredItem created:\n"
                             << "- status code: " << result.getStatusCode() << "\n"
-                            << "- monitored item id: " << result.getMonitoredItemId() << "\n";
+                            << "- monitored item id: " << result.getMonitoredItemId() << std::endl;
                     }
                 );
             }
         );
     });
-    client.onSessionClosed([] { std::cout << "Session closed\n"; });
-    client.onDisconnected([] { std::cout << "Client disconnected\n"; });
+    client.onSessionClosed([] { std::cout << "Session closed" << std::endl; });
+    client.onDisconnected([] { std::cout << "Client disconnected" << std::endl; });
 
     client.connectAsync("opc.tcp://localhost:4840");
     client.run();
