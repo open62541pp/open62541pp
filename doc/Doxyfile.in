@@ -12,16 +12,14 @@ MARKDOWN_SUPPORT       = YES
 AUTOLINK_SUPPORT       = YES
 BUILTIN_STL_SUPPORT    = YES
 USE_MDFILE_AS_MAINPAGE = "${PROJECT_SOURCE_DIR}/README.md"
-ALIASES                = completiontoken{1}="@parblock ^^ \
+ALIASES                = completiontoken{1}="^^ \
                          @include{doc} alias_completiontoken.dox ^^ \
-                         @code ^^ \1 ^^ @endcode ^^ \
-                         @endparblock"
-ALIASES               += asyncresult{1}="@parblock ^^ \
+                         @code ^^ \1 ^^ @endcode"
+ALIASES               += asyncresult{1}="^^ \
                          - `void` if `token` is a callback function (object) ^^ \
                          - `std::future<\1>` if `token` is of type UseFutureToken ^^ \
                          - `auto(auto&& token)` callable for deferred execution if `token` is of type UseDeferredToken ^^ \
-                         - `void` if `token` is of type UseDetachedToken ^^ \
-                         @endparblock"
+                         - `void` if `token` is of type UseDetachedToken"
 ALIASES               += wrapper{1}="@copybrief \1 ^^ @see \1"
 
 # Build-related options
