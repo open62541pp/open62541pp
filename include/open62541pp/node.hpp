@@ -635,16 +635,20 @@ public:
     /// A Node may have several parents, the first found is returned.
     /// @exception BadStatus (BadNotFound) If no parent node found
     Node browseParent() {
-        const auto nodes = browseReferencedNodes(
+        const BrowseDescription bd(
+            id(),
             BrowseDirection::Inverse,
             ReferenceTypeId::HierarchicalReferences,
             true,
-            UA_NODECLASS_UNSPECIFIED
+            NodeClass::Unspecified,
+            BrowseResultMask::TargetInfo
         );
-        if (nodes.empty()) {
+        auto result = services::browse(connection(), bd, 1);
+        result.getStatusCode().throwIfBad();
+        if (result.getReferences().empty()) {
             throw BadStatus(UA_STATUSCODE_BADNOTFOUND);
         }
-        return nodes[0];
+        return fromId(connection(), result.getReferences().front().getNodeId());
     }
 
 #ifdef UA_ENABLE_METHODCALLS
@@ -1310,9 +1314,7 @@ public:
 
     /// @wrapper{services::writeExecutableAsync}
     template <typename CompletionToken = DefaultCompletionToken>
-    auto writeExecutableAsync(
-        bool executable, CompletionToken&& token = DefaultCompletionToken()
-    ) {
+    auto writeExecutableAsync(bool executable, CompletionToken&& token = DefaultCompletionToken()) {
         return services::writeExecutableAsync(
             connection(), id(), executable, std::forward<CompletionToken>(token)
         );
@@ -1347,6 +1349,13 @@ public:
 private:
     static Node fromId(Connection& connection, Result<NodeId>&& result) {
         return {connection, std::move(result).value()};
+    }
+
+    static Node fromId(Connection& connection, ExpandedNodeId& id) {
+        if (!id.isLocal()) {
+            throw BadStatus(UA_STATUSCODE_BADNODEIDUNKNOWN);
+        }
+        return {connection, std::move(id.getNodeId())};
     }
 
     template <typename CompletionToken>
