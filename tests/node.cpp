@@ -79,7 +79,7 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
     }
 
     SUBCASE("id") {
-        const NodeId id(0, UA_NS0ID_OBJECTSFOLDER);
+        const NodeId id{1, 1000};
         CHECK(Node(connection, id).id() == id);
     }
 
@@ -223,7 +223,7 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         }
     }
 
-    SUBCASE("Browse references") {
+    SUBCASE("browseReferences") {
         Node root(connection, ObjectId::RootFolder);
         const auto refs = root.browseReferences();
         CHECK(refs.size() > 0);
@@ -232,7 +232,7 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         }));
     }
 
-    SUBCASE("Browse referenced nodes") {
+    SUBCASE("browseReferencedNodes") {
         Node root(connection, ObjectId::RootFolder);
         Node child(connection, ObjectId::ObjectsFolder);
         const auto nodes = child.browseReferencedNodes();
@@ -240,7 +240,7 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         CHECK(std::any_of(nodes.begin(), nodes.end(), [&](auto& node) { return node == root; }));
     }
 
-    SUBCASE("Browse children") {
+    SUBCASE("browseChildren") {
         Node root(connection, ObjectId::RootFolder);
         Node child(connection, ObjectId::ObjectsFolder);
         CHECK(root.browseChildren(ReferenceTypeId::HasChild).empty());
@@ -249,16 +249,14 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         CHECK(std::any_of(nodes.begin(), nodes.end(), [&](auto& node) { return node == child; }));
     }
 
-    SUBCASE("Browse child") {
+    SUBCASE("browseChild") {
         Node root(connection, ObjectId::RootFolder);
         CHECK_THROWS_WITH(root.browseChild({{0, "Invalid"}}), "BadNoMatch");
-        CHECK_EQ(root.browseChild({{0, "Objects"}}).id(), NodeId(0, UA_NS0ID_OBJECTSFOLDER));
-        CHECK_EQ(
-            root.browseChild({{0, "Objects"}, {0, "Server"}}).id(), NodeId(0, UA_NS0ID_SERVER)
-        );
+        CHECK_EQ(root.browseChild({{0, "Objects"}}).id(), NodeId(ObjectId::ObjectsFolder));
+        CHECK_EQ(root.browseChild({{0, "Objects"}, {0, "Server"}}).id(), NodeId(ObjectId::Server));
     }
 
-    SUBCASE("Browse parent") {
+    SUBCASE("browseParent") {
         Node root(connection, ObjectId::RootFolder);
         Node child(connection, ObjectId::ObjectsFolder);
         CHECK_THROWS_WITH(root.browseParent(), "BadNotFound");
