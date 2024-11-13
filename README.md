@@ -120,16 +120,16 @@ Compile-time checks are used where possible:
 ```cpp
 opcua::Variant var;
 
-// will compile
+// ✅ will compile
 int number = 5;
 var.setScalar(number);
 var.setArrayCopy<double>({1.1, 2.2, 3.3});
 
-// won't compile, because the std::string can't be assigned without copy (conversion needed)
+// ❌ won't compile, because std::string can't be assigned without copy (conversion needed)
 std::string str{"test"};
 var.setScalar(str);
 
-// will compile
+// ✅ will compile
 var.setScalarCopy(str);
 ```
 
