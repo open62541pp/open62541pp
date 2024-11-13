@@ -170,16 +170,16 @@ Client</h3>
 <p>Compile-time checks are used where possible:</p>
 <div class="fragment"><div class="line"><a class="code hl_class" href="classopcua_1_1Variant.html">opcua::Variant</a> var;</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// will compile</span></div>
+<div class="line"><span class="comment">// ✅ will compile</span></div>
 <div class="line"><span class="keywordtype">int</span> number = 5;</div>
 <div class="line">var.<a class="code hl_function" href="classopcua_1_1Variant.html#a7e3a2d65d098b7ef39d775044ca80a0b">setScalar</a>(number);</div>
 <div class="line">var.<a class="code hl_function" href="classopcua_1_1Variant.html#a3715e61166916a10146ea6a704e1dc49">setArrayCopy</a>&lt;<span class="keywordtype">double</span>&gt;({1.1, 2.2, 3.3});</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// won&#39;t compile, because the std::string can&#39;t be assigned without copy (conversion needed)</span></div>
+<div class="line"><span class="comment">// ❌ won&#39;t compile, because std::string can&#39;t be assigned without copy (conversion needed)</span></div>
 <div class="line">std::string str{<span class="stringliteral">&quot;test&quot;</span>};</div>
 <div class="line">var.<a class="code hl_function" href="classopcua_1_1Variant.html#a7e3a2d65d098b7ef39d775044ca80a0b">setScalar</a>(str);</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// will compile</span></div>
+<div class="line"><span class="comment">// ✅ will compile</span></div>
 <div class="line">var.<a class="code hl_function" href="classopcua_1_1Variant.html#a787f981c8cbd8048b090b64e7aea9ee2">setScalarCopy</a>(str);</div>
 <div class="ttc" id="aclassopcua_1_1Variant_html"><div class="ttname"><a href="classopcua_1_1Variant.html">opcua::Variant</a></div><div class="ttdoc">UA_Variant wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00887">types.hpp:887</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Variant_html_a3715e61166916a10146ea6a704e1dc49"><div class="ttname"><a href="classopcua_1_1Variant.html#a3715e61166916a10146ea6a704e1dc49">opcua::Variant::setArrayCopy</a></div><div class="ttdeci">void setArrayCopy(const ArrayLike &amp;array)</div><div class="ttdoc">Copy array to variant.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l01158">types.hpp:1158</a></div></div>
