@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: /home/runner/work/open62541pp/open62541pp/include/open62541pp/detail/contextmap.hpp Source File</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -97,7 +100,7 @@ $(function(){ initResizable(false); });
 <div class="contents">
 <a href="contextmap_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;cassert&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;functional&gt;</span>  <span class="comment">// invoke</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;map&gt;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;mutex&gt;</span></div>
@@ -138,7 +141,7 @@ $(function(){ initResizable(false); });
 <div class="foldopen" id="foldopen00038" data-start="{" data-end="}">
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="classopcua_1_1detail_1_1ContextMap.html#ae1c0592a6fb9213cf4c45bfc9dab8345">   38</a></span><span class="comment"></span>    Item* <a class="code hl_function" href="classopcua_1_1detail_1_1ContextMap.html#ae1c0592a6fb9213cf4c45bfc9dab8345">operator[]</a>(Key key) {</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <a class="code hl_function" href="classopcua_1_1detail_1_1ContextMap.html#a37326ae43822a847fb0c21f161081d6d">eraseStale</a>();</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="keyword">auto</span> lock = <a class="code hl_function" href="classopcua_1_1detail_1_1ContextMap.html#ab1746231f2a30810dbcbc0a762bdc564">acquireLock</a>();</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="keyword">auto</span> lock = acquireLock();</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keyword">auto</span>&amp; item = map_[key];</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordflow">if</span> (item == <span class="keyword">nullptr</span>) {</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            item = std::make_unique&lt;Item&gt;();  <span class="comment">// allocate item if empty</span></div>
@@ -151,14 +154,14 @@ $(function(){ initResizable(false); });
 <div class="foldopen" id="foldopen00049" data-start="{" data-end="}">
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="classopcua_1_1detail_1_1ContextMap.html#ae54d70c4016f4f359fbeeace32f4927d">   49</a></span><span class="comment"></span>    Item* <a class="code hl_function" href="classopcua_1_1detail_1_1ContextMap.html#ae54d70c4016f4f359fbeeace32f4927d">insert</a>(Key key, std::unique_ptr&lt;Item&gt;&amp;&amp; item) {</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <a class="code hl_function" href="classopcua_1_1detail_1_1ContextMap.html#a37326ae43822a847fb0c21f161081d6d">eraseStale</a>();</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keyword">auto</span> lock = <a class="code hl_function" href="classopcua_1_1detail_1_1ContextMap.html#ab1746231f2a30810dbcbc0a762bdc564">acquireLock</a>();</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keyword">auto</span> lock = acquireLock();</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keywordflow">return</span> map_.insert_or_assign(key, std::move(item)).first-&gt;second.get();</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    }</div>
 </div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
 <div class="foldopen" id="foldopen00055" data-start="{" data-end="}">
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="classopcua_1_1detail_1_1ContextMap.html#a94eb75f66da8eec5449929654b831e3e">   55</a></span>    <span class="keywordtype">size_t</span> <a class="code hl_function" href="classopcua_1_1detail_1_1ContextMap.html#a94eb75f66da8eec5449929654b831e3e">erase</a>(Key key) {</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keyword">auto</span> lock = <a class="code hl_function" href="classopcua_1_1detail_1_1ContextMap.html#ab1746231f2a30810dbcbc0a762bdc564">acquireLock</a>();</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keyword">auto</span> lock = acquireLock();</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keywordflow">return</span> map_.erase(key);</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    }</div>
 </div>
@@ -167,7 +170,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="classopcua_1_1detail_1_1ContextMap.html#a37326ae43822a847fb0c21f161081d6d">   60</a></span>    <span class="keywordtype">size_t</span> <a class="code hl_function" href="classopcua_1_1detail_1_1ContextMap.html#a37326ae43822a847fb0c21f161081d6d">eraseStale</a>() {</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="keyword">const</span> <span class="keywordtype">size_t</span> count = map_.size();</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_struct" href="structopcua_1_1detail_1_1IsStaleable.html">IsStaleable&lt;Item&gt;::value</a>) {</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            <span class="keyword">auto</span> lock = <a class="code hl_function" href="classopcua_1_1detail_1_1ContextMap.html#ab1746231f2a30810dbcbc0a762bdc564">acquireLock</a>();</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            <span class="keyword">auto</span> lock = acquireLock();</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = map_.begin(); it != map_.end();) {</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                <span class="keywordflow">if</span> (it-&gt;second-&gt;stale) {</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                    it = map_.erase(it);</div>
@@ -182,14 +185,14 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
 <div class="foldopen" id="foldopen00075" data-start="{" data-end="}">
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="classopcua_1_1detail_1_1ContextMap.html#a99918003c6dd9a8a545e6880362e5214">   75</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classopcua_1_1detail_1_1ContextMap.html#a99918003c6dd9a8a545e6880362e5214">contains</a>(Key key)<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keyword">auto</span> lock = <a class="code hl_function" href="classopcua_1_1detail_1_1ContextMap.html#ab1746231f2a30810dbcbc0a762bdc564">acquireLock</a>();</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keyword">auto</span> lock = acquireLock();</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        <span class="keywordflow">return</span> map_.count(key) &gt; 0;</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    }</div>
 </div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
 <div class="foldopen" id="foldopen00080" data-start="{" data-end="}">
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="classopcua_1_1detail_1_1ContextMap.html#a27f55dfe03770c2c8a4dbf3c35f52ee7">   80</a></span>    <span class="keyword">const</span> Item* <a class="code hl_function" href="classopcua_1_1detail_1_1ContextMap.html#a27f55dfe03770c2c8a4dbf3c35f52ee7">find</a>(Key key)<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="keyword">auto</span> lock = <a class="code hl_function" href="classopcua_1_1detail_1_1ContextMap.html#ab1746231f2a30810dbcbc0a762bdc564">acquireLock</a>();</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="keyword">auto</span> lock = acquireLock();</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <span class="keyword">auto</span> it = map_.find(key);</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        <span class="keywordflow">if</span> (it != map_.end()) {</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            <span class="keywordflow">return</span> it-&gt;second.get();</div>
@@ -197,43 +200,37 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    }</div>
 </div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment"></span> </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">    /// Acquire the lock/mutex for unique access to the underlying map.</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> F&gt;</div>
 <div class="foldopen" id="foldopen00090" data-start="{" data-end="}">
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="classopcua_1_1detail_1_1ContextMap.html#ab1746231f2a30810dbcbc0a762bdc564">   90</a></span><span class="comment"></span>    [[nodiscard]] <span class="keyword">auto</span> <a class="code hl_function" href="classopcua_1_1detail_1_1ContextMap.html#ab1746231f2a30810dbcbc0a762bdc564">acquireLock</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        <span class="keywordflow">return</span> std::unique_lock(mutex_);</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    }</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="classopcua_1_1detail_1_1ContextMap.html#a1f70e3fb0adca86473c623bc19dbae41">   90</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classopcua_1_1detail_1_1ContextMap.html#a1f70e3fb0adca86473c623bc19dbae41">iterate</a>(F&amp;&amp; func)<span class="keyword"> const </span>{  <span class="comment">// NOLINT(cppcoreguidelines-missing-std-forward)</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        <span class="keyword">auto</span> lock = acquireLock();</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; pair : map_) {</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            std::invoke(func, pair);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        }</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    }</div>
 </div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment"></span> </div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">    /// Get access to the underlying map. Use `acquireLock` before any operation.</span></div>
-<div class="foldopen" id="foldopen00095" data-start="{" data-end="}">
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="classopcua_1_1detail_1_1ContextMap.html#aca7b408a004c911ee18057bb985cb41e">   95</a></span><span class="comment"></span>    <span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_function" href="classopcua_1_1detail_1_1ContextMap.html#aca7b408a004c911ee18057bb985cb41e">underlying</a>() const noexcept {</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        assertLocked();</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <span class="keywordflow">return</span> map_;</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    }</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    [[nodiscard]] <span class="keyword">auto</span> acquireLock()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        <span class="keywordflow">return</span> std::unique_lock(mutex_);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    }</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    std::map&lt;Key, std::unique_ptr&lt;Item&gt;&gt; map_;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <span class="keyword">mutable</span> std::mutex mutex_;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>};</div>
 </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keywordtype">void</span> assertLocked()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        assert(std::unique_lock(mutex_, std::defer_lock).try_lock() == <span class="keyword">false</span>);</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    }</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    std::map&lt;Key, std::unique_ptr&lt;Item&gt;&gt; map_;</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keyword">mutable</span> std::mutex mutex_;</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>};</div>
-</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>}  <span class="comment">// namespace opcua::detail</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>}  <span class="comment">// namespace opcua::detail</span></div>
 <div class="ttc" id="aclassopcua_1_1detail_1_1ContextMap_html"><div class="ttname"><a href="classopcua_1_1detail_1_1ContextMap.html">opcua::detail::ContextMap</a></div><div class="ttdoc">Thread-safe map for context objects.</div><div class="ttdef"><b>Definition</b> <a href="#l00035">contextmap.hpp:35</a></div></div>
+<div class="ttc" id="aclassopcua_1_1detail_1_1ContextMap_html_a1f70e3fb0adca86473c623bc19dbae41"><div class="ttname"><a href="classopcua_1_1detail_1_1ContextMap.html#a1f70e3fb0adca86473c623bc19dbae41">opcua::detail::ContextMap::iterate</a></div><div class="ttdeci">void iterate(F &amp;&amp;func) const</div><div class="ttdef"><b>Definition</b> <a href="#l00090">contextmap.hpp:90</a></div></div>
 <div class="ttc" id="aclassopcua_1_1detail_1_1ContextMap_html_a27f55dfe03770c2c8a4dbf3c35f52ee7"><div class="ttname"><a href="classopcua_1_1detail_1_1ContextMap.html#a27f55dfe03770c2c8a4dbf3c35f52ee7">opcua::detail::ContextMap::find</a></div><div class="ttdeci">const Item * find(Key key) const</div><div class="ttdef"><b>Definition</b> <a href="#l00080">contextmap.hpp:80</a></div></div>
 <div class="ttc" id="aclassopcua_1_1detail_1_1ContextMap_html_a37326ae43822a847fb0c21f161081d6d"><div class="ttname"><a href="classopcua_1_1detail_1_1ContextMap.html#a37326ae43822a847fb0c21f161081d6d">opcua::detail::ContextMap::eraseStale</a></div><div class="ttdeci">size_t eraseStale()</div><div class="ttdef"><b>Definition</b> <a href="#l00060">contextmap.hpp:60</a></div></div>
 <div class="ttc" id="aclassopcua_1_1detail_1_1ContextMap_html_a94eb75f66da8eec5449929654b831e3e"><div class="ttname"><a href="classopcua_1_1detail_1_1ContextMap.html#a94eb75f66da8eec5449929654b831e3e">opcua::detail::ContextMap::erase</a></div><div class="ttdeci">size_t erase(Key key)</div><div class="ttdef"><b>Definition</b> <a href="#l00055">contextmap.hpp:55</a></div></div>
 <div class="ttc" id="aclassopcua_1_1detail_1_1ContextMap_html_a99918003c6dd9a8a545e6880362e5214"><div class="ttname"><a href="classopcua_1_1detail_1_1ContextMap.html#a99918003c6dd9a8a545e6880362e5214">opcua::detail::ContextMap::contains</a></div><div class="ttdeci">bool contains(Key key) const</div><div class="ttdef"><b>Definition</b> <a href="#l00075">contextmap.hpp:75</a></div></div>
-<div class="ttc" id="aclassopcua_1_1detail_1_1ContextMap_html_ab1746231f2a30810dbcbc0a762bdc564"><div class="ttname"><a href="classopcua_1_1detail_1_1ContextMap.html#ab1746231f2a30810dbcbc0a762bdc564">opcua::detail::ContextMap::acquireLock</a></div><div class="ttdeci">auto acquireLock() const</div><div class="ttdoc">Acquire the lock/mutex for unique access to the underlying map.</div><div class="ttdef"><b>Definition</b> <a href="#l00090">contextmap.hpp:90</a></div></div>
-<div class="ttc" id="aclassopcua_1_1detail_1_1ContextMap_html_aca7b408a004c911ee18057bb985cb41e"><div class="ttname"><a href="classopcua_1_1detail_1_1ContextMap.html#aca7b408a004c911ee18057bb985cb41e">opcua::detail::ContextMap::underlying</a></div><div class="ttdeci">const auto &amp; underlying() const noexcept</div><div class="ttdoc">Get access to the underlying map. Use acquireLock before any operation.</div><div class="ttdef"><b>Definition</b> <a href="#l00095">contextmap.hpp:95</a></div></div>
 <div class="ttc" id="aclassopcua_1_1detail_1_1ContextMap_html_ae1c0592a6fb9213cf4c45bfc9dab8345"><div class="ttname"><a href="classopcua_1_1detail_1_1ContextMap.html#ae1c0592a6fb9213cf4c45bfc9dab8345">opcua::detail::ContextMap::operator[]</a></div><div class="ttdeci">Item * operator[](Key key)</div><div class="ttdoc">Access or insert specified element.</div><div class="ttdef"><b>Definition</b> <a href="#l00038">contextmap.hpp:38</a></div></div>
 <div class="ttc" id="aclassopcua_1_1detail_1_1ContextMap_html_ae54d70c4016f4f359fbeeace32f4927d"><div class="ttname"><a href="classopcua_1_1detail_1_1ContextMap.html#ae54d70c4016f4f359fbeeace32f4927d">opcua::detail::ContextMap::insert</a></div><div class="ttdeci">Item * insert(Key key, std::unique_ptr&lt; Item &gt; &amp;&amp;item)</div><div class="ttdoc">Inserts an element or assigns to the current element if the key already exists.</div><div class="ttdef"><b>Definition</b> <a href="#l00049">contextmap.hpp:49</a></div></div>
-<div class="ttc" id="anamespaceopcua_1_1detail_html"><div class="ttname"><a href="namespaceopcua_1_1detail.html">opcua::detail</a></div><div class="ttdef"><b>Definition</b> <a href="client_8hpp_source.html#l00027">client.hpp:27</a></div></div>
+<div class="ttc" id="anamespaceopcua_1_1detail_html"><div class="ttname"><a href="namespaceopcua_1_1detail.html">opcua::detail</a></div><div class="ttdef"><b>Definition</b> <a href="datatype_8hpp_source.html#l00145">datatype.hpp:145</a></div></div>
 <div class="ttc" id="astructopcua_1_1detail_1_1IsStaleable_html"><div class="ttname"><a href="structopcua_1_1detail_1_1IsStaleable.html">opcua::detail::IsStaleable</a></div><div class="ttdoc">Check if an object as a boolean stale flag.</div><div class="ttdef"><b>Definition</b> <a href="#l00022">contextmap.hpp:22</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

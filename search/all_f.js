@@ -1105,7 +1105,7 @@ var searchData=
   ['notificationscount_1102',['NotificationsCount',['open62541/struct__OpcUa__SubscriptionDiagnosticsDataType.html#a476a5b2c484df45e64474bd6a5578cd3',0,'_OpcUa_SubscriptionDiagnosticsDataType']]],
   ['notificationsperpublish_1103',['notificationsPerPublish',['open62541/structUA__Subscription.html#a24ce17a9324bc61ebe3d08eb3bbbffd3',0,'UA_Subscription']]],
   ['now_1104',['now',['../classopcua_1_1DateTime.html#a5de9914e05b33f27840f059bb4238a5c',1,'opcua::DateTime']]],
-  ['ns_1105',['ns',['open62541/structmessage.html#a0cfe814499a121f73cadc896e0f2c0fa',0,'message::ns'],['open62541/structresource.html#a149159caf787730d5bdc07846fba1193',0,'resource::ns'],['open62541/structUA__ServerStatistics.html#a3da8f049ea6750b23ee6d3ee98d4ce23',0,'UA_ServerStatistics::ns']]],
+  ['ns_1105',['ns',['open62541/structmessage.html#a0cfe814499a121f73cadc896e0f2c0fa',0,'message::ns'],['open62541/structresource.html#ab7e3ab4e8b240a8abb8b4c587ed8e2cb',0,'resource::ns'],['open62541/structUA__ServerStatistics.html#a3da8f049ea6750b23ee6d3ee98d4ce23',0,'UA_ServerStatistics::ns']]],
   ['nscount_1106',['nscount',['open62541/structmessage.html#afcd665a441fec120b12746479b3104f4',0,'message']]],
   ['num_5freturn_5fcodes_1107',['num_return_codes',['open62541/structmqtt__response__suback.html#a9040462add7b7e770f061fe089f3677a',0,'mqtt_response_suback']]],
   ['number_1108',['Number',['../group__NodeIds.html#gga5d7e0b8d020dc1893a646f9ea8ae780aab2ee912b91d69b435159c7c3f6df7f5f',1,'opcua']]],

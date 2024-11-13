@@ -1,5 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$structopcua_1_1services_1_1detail_1_1AttributeHandlerScalar.html" title=" " alt="" coords="5,5,227,60"/>
-<area shape="rect" id="Node000001" href="$structopcua_1_1services_1_1detail_1_1AttributeHandler_3_01AttributeId_1_1EventNotifier_01_4.html" title=" " alt="" coords="275,5,485,60"/>
-<area shape="poly" id="edge8_Node000000_Node000001" title=" " alt="" coords="241,30,274,30,274,35,241,35"/>
+<area shape="rect" id="Node000000" href="$structopcua_1_1services_1_1detail_1_1AttributeHandlerScalar.html" title=" " alt="" coords="5,45,221,100"/>
+<area shape="rect" id="Node000001" href="$structopcua_1_1services_1_1detail_1_1AttributeHandler_3_01AttributeId_1_1AccessLevel_01_4.html" title=" " alt="" coords="269,5,480,60"/>
+<area shape="poly" id="edge6_Node000000_Node000001" title=" " alt="" coords="234,51,269,46,269,51,235,57"/>
+<area shape="rect" id="Node000002" href="$structopcua_1_1services_1_1detail_1_1AttributeHandler_3_01AttributeId_1_1UserAccessLevel_01_4.html" title=" " alt="" coords="269,84,480,139"/>
+<area shape="poly" id="edge7_Node000000_Node000002" title=" " alt="" coords="235,88,269,93,269,98,234,93"/>
 </map>

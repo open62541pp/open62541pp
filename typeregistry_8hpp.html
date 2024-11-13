@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: /home/runner/work/open62541pp/open62541pp/include/open62541pp/typeregistry.hpp File Reference</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -104,17 +107,16 @@ $(function(){ initResizable(false); });
 <div class="textblock"><code>#include &lt;type_traits&gt;</code><br />
 <code>#include &quot;<a class="el" href="common_8h_source.html">open62541pp/detail/open62541/common.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="traits_8hpp_source.html">open62541pp/detail/traits.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="typewrapper_8hpp_source.html">open62541pp/typewrapper.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="typeregistry__generated_8hpp_source.html">open62541pp/typeregistry_generated.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for typeregistry.hpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="typeregistry_8hpp__incl.svg" width="1982" height="652"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="typeregistry_8hpp__incl.svg" width="1476" height="476"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="typeregistry_8hpp__dep__incl.svg" width="4232" height="1327"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="typeregistry_8hpp__dep__incl.svg" width="4944" height="1107"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="typeregistry_8hpp_source.html">Go to the source code of this file.</a></p>
@@ -124,8 +126,6 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1IsRegisteredType.html">opcua::detail::IsRegisteredType&lt; T, typename &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1IsRegisteredType_3_01T_00_01std_1_1void__t_3_01decltype_07TypeRegistry_3_01T_01_4_02_03_08_4_01_4.html">opcua::detail::IsRegisteredType&lt; T, std::void_t&lt; decltype(TypeRegistry&lt; T &gt;{})&gt; &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1TypeRegistry_3_01T_00_01std_1_1enable__if__t_3_01detail_1_1isTypeWrapper_3_01T_01_4_01_4_01_4.html">opcua::TypeRegistry&lt; T, std::enable_if_t&lt; detail::isTypeWrapper&lt; T &gt; &gt; &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -179,7 +179,7 @@ Variables</h2></td></tr>
 <div class="line">    };</div>
 <div class="ttc" id="atypes__generated_8h_html_aba037b86f18a7b7bceef5c098910c2c7"><div class="ttname"><a href="open62541/types__generated_8h.html#aba037b86f18a7b7bceef5c098910c2c7">UA_TYPES</a></div><div class="ttdeci">const UA_DataType UA_TYPES[191]</div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="typeregistry_8hpp_source.html#l00067">67</a> of file <a class="el" href="typeregistry_8hpp_source.html">typeregistry.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="typeregistry_8hpp_source.html#l00059">59</a> of file <a class="el" href="typeregistry_8hpp_source.html">typeregistry.hpp</a>.</p>
 
 </div>
 </div>

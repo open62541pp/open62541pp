@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: /home/runner/work/open62541pp/open62541pp/include/open62541pp/session.hpp Source File</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -172,7 +175,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>}  <span class="comment">// namespace opcua</span></div>
 <div class="ttc" id="aclassopcua_1_1NodeId_html"><div class="ttname"><a href="classopcua_1_1NodeId.html">opcua::NodeId</a></div><div class="ttdoc">UA_NodeId wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00590">types.hpp:590</a></div></div>
 <div class="ttc" id="aclassopcua_1_1QualifiedName_html"><div class="ttname"><a href="classopcua_1_1QualifiedName.html">opcua::QualifiedName</a></div><div class="ttdoc">UA_QualifiedName wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00800">types.hpp:800</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Server_html"><div class="ttname"><a href="classopcua_1_1Server.html">opcua::Server</a></div><div class="ttdoc">High-level server class.</div><div class="ttdef"><b>Definition</b> <a href="server_8hpp_source.html#l00063">server.hpp:63</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Server_html"><div class="ttname"><a href="classopcua_1_1Server.html">opcua::Server</a></div><div class="ttdoc">High-level server class.</div><div class="ttdef"><b>Definition</b> <a href="server_8hpp_source.html#l00132">server.hpp:132</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Session_html"><div class="ttname"><a href="classopcua_1_1Session.html">opcua::Session</a></div><div class="ttdoc">High-level session class to manage client sessions.</div><div class="ttdef"><b>Definition</b> <a href="#l00020">session.hpp:20</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Session_html_a39106e290ce13536e6f36a129109ce0c"><div class="ttname"><a href="classopcua_1_1Session.html#a39106e290ce13536e6f36a129109ce0c">opcua::Session::setSessionAttribute</a></div><div class="ttdeci">void setSessionAttribute(const QualifiedName &amp;key, const Variant &amp;value)</div><div class="ttdoc">Attach a session attribute as a key-value pair.</div></div>
 <div class="ttc" id="aclassopcua_1_1Session_html_a4a2ab4a25f6ec8b80b43fa1e59eb9093"><div class="ttname"><a href="classopcua_1_1Session.html#a4a2ab4a25f6ec8b80b43fa1e59eb9093">opcua::Session::Session</a></div><div class="ttdeci">Session(Server &amp;connection, NodeId sessionId) noexcept</div><div class="ttdef"><b>Definition</b> <a href="#l00022">session.hpp:22</a></div></div>
@@ -185,8 +188,8 @@ $(function(){ initResizable(false); });
 <div class="ttc" id="aclassopcua_1_1Variant_html"><div class="ttname"><a href="classopcua_1_1Variant.html">opcua::Variant</a></div><div class="ttdoc">UA_Variant wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00887">types.hpp:887</a></div></div>
 <div class="ttc" id="anamespaceopcua_html"><div class="ttname"><a href="namespaceopcua.html">opcua</a></div><div class="ttdef"><b>Definition</b> <a href="async_8hpp_source.html#l00011">async.hpp:11</a></div></div>
 <div class="ttc" id="anamespaceopcua_html_a68cb6a5e2027c6b73055cb2f4eaeb36da9aa1b03934893d7134a660af4204f2a9"><div class="ttname"><a href="namespaceopcua.html#a68cb6a5e2027c6b73055cb2f4eaeb36da9aa1b03934893d7134a660af4204f2a9">opcua::TimestampsToReturn::Server</a></div><div class="ttdeci">@ Server</div></div>
-<div class="ttc" id="anamespaceopcua_html_abcf304697d5a73fe6ae8dd828c71555a"><div class="ttname"><a href="namespaceopcua.html#abcf304697d5a73fe6ae8dd828c71555a">opcua::operator!=</a></div><div class="ttdeci">bool operator!=(const Client &amp;lhs, const Client &amp;rhs) noexcept</div><div class="ttdef"><b>Definition</b> <a href="client_8hpp_source.html#l00223">client.hpp:223</a></div></div>
-<div class="ttc" id="anamespaceopcua_html_ae0e5a6398e45b32585e329f8685867c4"><div class="ttname"><a href="namespaceopcua.html#ae0e5a6398e45b32585e329f8685867c4">opcua::operator==</a></div><div class="ttdeci">bool operator==(const Client &amp;lhs, const Client &amp;rhs) noexcept</div><div class="ttdef"><b>Definition</b> <a href="client_8hpp_source.html#l00219">client.hpp:219</a></div></div>
+<div class="ttc" id="anamespaceopcua_html_abcf304697d5a73fe6ae8dd828c71555a"><div class="ttname"><a href="namespaceopcua.html#abcf304697d5a73fe6ae8dd828c71555a">opcua::operator!=</a></div><div class="ttdeci">bool operator!=(const Client &amp;lhs, const Client &amp;rhs) noexcept</div><div class="ttdef"><b>Definition</b> <a href="client_8hpp_source.html#l00297">client.hpp:297</a></div></div>
+<div class="ttc" id="anamespaceopcua_html_ae0e5a6398e45b32585e329f8685867c4"><div class="ttname"><a href="namespaceopcua.html#ae0e5a6398e45b32585e329f8685867c4">opcua::operator==</a></div><div class="ttdeci">bool operator==(const Client &amp;lhs, const Client &amp;rhs) noexcept</div><div class="ttdef"><b>Definition</b> <a href="client_8hpp_source.html#l00293">client.hpp:293</a></div></div>
 <div class="ttc" id="atypes_8hpp_html"><div class="ttname"><a href="types_8hpp.html">types.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

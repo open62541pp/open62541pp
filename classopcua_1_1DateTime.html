@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: opcua::DateTime Class Reference</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -111,7 +114,7 @@ Inheritance diagram for opcua::DateTime:</div>
 <div class="textblock"><p>UA_DateTime wrapper class. </p>
 <p>An instance in time. A <a class="el" href="classopcua_1_1DateTime.html" title="UA_DateTime wrapper class.">DateTime</a> value is encoded as a 64-bit signed integer which represents the number of 100 nanosecond intervals since January 1, 1601 (UTC).</p>
 <dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/Core/Part6/v105/docs/5.2.2.5">https://reference.opcfoundation.org/Core/Part6/v105/docs/5.2.2.5</a> </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_connect_8cpp-example.html#_a7">client_connect.cpp</a>, <a class="el" href="client_minimal_8cpp-example.html#_a5">client_minimal.cpp</a>, <a class="el" href="client_subscription_8cpp-example.html#_a16">client_subscription.cpp</a>, <a class="el" href="events_2client_eventfilter_8cpp-example.html#_a22">events/client_eventfilter.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#_a8">server_valuecallback.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_connect_8cpp-example.html#_a8">client_connect.cpp</a>, <a class="el" href="client_minimal_8cpp-example.html#_a5">client_minimal.cpp</a>, <a class="el" href="client_subscription_8cpp-example.html#_a16">client_subscription.cpp</a>, <a class="el" href="events_2client_eventfilter_8cpp-example.html#_a22">events/client_eventfilter.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#_a8">server_valuecallback.cpp</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00354">354</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
@@ -311,7 +314,7 @@ template&lt;typename Clock , typename <a class="el" href="group__NodeIds.html#gg
 </div><div class="memdoc">
 
 <p>Get current <a class="el" href="classopcua_1_1DateTime.html" title="UA_DateTime wrapper class.">DateTime</a>. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="events_2server_events_8cpp-example.html#a10">events/server_events.cpp</a>, <a class="el" href="server_datasource_8cpp-example.html#a14">server_datasource.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#a4">server_valuecallback.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="events_2server_events_8cpp-example.html#a10">events/server_events.cpp</a>, <a class="el" href="server_datasource_8cpp-example.html#a16">server_datasource.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#a4">server_valuecallback.cpp</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00366">366</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
@@ -607,7 +610,7 @@ template&lt;typename Clock  = DefaultClock, typename <a class="el" href="group__
 
 <p>Constructor with native object (deep copy). </p>
 
-<p class="definition">Definition at line <a class="el" href="typewrapper_8hpp_source.html#l00030">30</a> of file <a class="el" href="typewrapper_8hpp_source.html">typewrapper.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="typewrapper_8hpp_source.html#l00031">31</a> of file <a class="el" href="typewrapper_8hpp_source.html">typewrapper.hpp</a>.</p>
 
 </div>
 </div>
@@ -636,7 +639,7 @@ template&lt;typename Clock  = DefaultClock, typename <a class="el" href="group__
 
 <p>Constructor with native object (move rvalue). </p>
 
-<p class="definition">Definition at line <a class="el" href="typewrapper_8hpp_source.html#l00034">34</a> of file <a class="el" href="typewrapper_8hpp_source.html">typewrapper.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="typewrapper_8hpp_source.html#l00035">35</a> of file <a class="el" href="typewrapper_8hpp_source.html">typewrapper.hpp</a>.</p>
 
 </div>
 </div>
@@ -665,7 +668,7 @@ template&lt;typename Clock  = DefaultClock, typename <a class="el" href="group__
 
 <p>Copy constructor (deep copy). </p>
 
-<p class="definition">Definition at line <a class="el" href="typewrapper_8hpp_source.html#l00042">42</a> of file <a class="el" href="typewrapper_8hpp_source.html">typewrapper.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="typewrapper_8hpp_source.html#l00043">43</a> of file <a class="el" href="typewrapper_8hpp_source.html">typewrapper.hpp</a>.</p>
 
 </div>
 </div>
@@ -694,7 +697,7 @@ template&lt;typename Clock  = DefaultClock, typename <a class="el" href="group__
 
 <p>Move constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="typewrapper_8hpp_source.html#l00046">46</a> of file <a class="el" href="typewrapper_8hpp_source.html">typewrapper.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="typewrapper_8hpp_source.html#l00047">47</a> of file <a class="el" href="typewrapper_8hpp_source.html">typewrapper.hpp</a>.</p>
 
 </div>
 </div>

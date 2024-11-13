@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: /home/runner/work/open62541pp/open62541pp/include/open62541pp/datatype.hpp File Reference</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -101,7 +104,9 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;cassert&gt;</code><br />
 <code>#include &lt;cstdint&gt;</code><br />
+<code>#include &lt;iterator&gt;</code><br />
 <code>#include &lt;type_traits&gt;</code><br />
 <code>#include &lt;utility&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
@@ -116,12 +121,12 @@ $(function(){ initResizable(false); });
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for datatype.hpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="datatype_8hpp__incl.svg" width="3147" height="814"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="datatype_8hpp__incl.svg" width="3548" height="726"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="datatype_8hpp__dep__incl.svg" width="1342" height="784"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="datatype_8hpp__dep__incl.svg" width="1164" height="271"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="datatype_8hpp_source.html">Go to the source code of this file.</a></p>
@@ -159,6 +164,8 @@ Functions</h2></td></tr>
 <tr class="separator:a26e6cc3815fbdff1a063e330004338d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa48bf20af106cd14395c4e9425504862" id="r_aa48bf20af106cd14395c4e9425504862"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#aa48bf20af106cd14395c4e9425504862">opcua::detail::createDataType</a> (const char *typeName, <a class="elRef" target="_blank" href="open62541/structUA__NodeId.html">UA_NodeId</a> typeId, <a class="elRef" target="_blank" href="open62541/structUA__NodeId.html">UA_NodeId</a> binaryEncodingId, uint16_t memSize, uint8_t typeKind, bool pointerFree, bool overlayable, uint32_t membersSize, <a class="el" href="namespaceopcua.html#ad9413a25cc79acbae79a9fac66bbcf27">DataTypeMember</a> *members) noexcept</td></tr>
 <tr class="separator:aa48bf20af106cd14395c4e9425504862"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cecd26e8423be9a986ebf7b52fae021" id="r_a8cecd26e8423be9a986ebf7b52fae021"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__DataTypeArray.html">UA_DataTypeArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a8cecd26e8423be9a986ebf7b52fae021">opcua::detail::createDataTypeArray</a> (<a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1DataType.html">DataType</a> &gt; types, const <a class="elRef" target="_blank" href="open62541/structUA__DataTypeArray.html">UA_DataTypeArray</a> *next=nullptr) noexcept</td></tr>
+<tr class="separator:a8cecd26e8423be9a986ebf7b52fae021"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5aac2b384c5edbd228045f15e2913c5" id="r_aa5aac2b384c5edbd228045f15e2913c5"><td class="memTemplParams" colspan="2">template&lt;auto memberPtr&gt; </td></tr>
 <tr class="memitem:aa5aac2b384c5edbd228045f15e2913c5"><td class="memTemplItemLeft" align="right" valign="top">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#aa5aac2b384c5edbd228045f15e2913c5">opcua::detail::getMemberDataType</a> ()</td></tr>
 <tr class="separator:aa5aac2b384c5edbd228045f15e2913c5"><td class="memSeparator" colspan="2">&#160;</td></tr>

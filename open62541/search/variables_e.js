@@ -6,7 +6,7 @@ var searchData=
   ['objecttypenode_3',['objectTypeNode',['../unionUA__Node.html#ab43457d3e5209ac9814b4cf5f775dc94',1,'UA_Node']]],
   ['offset_4',['Offset',['../struct__OpcUa__TimeZoneDataType.html#aee015b4de40dd83049b11affdcbb4a47',1,'_OpcUa_TimeZoneDataType']]],
   ['offset_5',['offset',['../structUA__NetworkMessageOffset.html#a7b6fade5b14e433ca749bcc96e5795df',1,'UA_NetworkMessageOffset::offset'],['../structUA__TimeZoneDataType.html#af2335ac398e34df77427a439ca0b6de8',1,'UA_TimeZoneDataType::offset']]],
-  ['offsetdata_6',['offsetData',['../structUA__NetworkMessageOffset.html#a03e5c8f4cb9429f73d9f268b5dd94f22',1,'UA_NetworkMessageOffset']]],
+  ['offsetdata_6',['offsetData',['../structUA__NetworkMessageOffset.html#a109ca35d20b10e02dbdfca1176d7542c',1,'UA_NetworkMessageOffset']]],
   ['offsets_7',['offsets',['../structUA__NetworkMessageOffsetBuffer.html#a2481b24020f3c04f888ce5817696e484',1,'UA_NetworkMessageOffsetBuffer']]],
   ['offsetssize_8',['offsetsSize',['../structUA__NetworkMessageOffsetBuffer.html#a2ce581edba879deb9a3bab0d1276648b',1,'UA_NetworkMessageOffsetBuffer']]],
   ['oldchannelstate_9',['oldChannelState',['../structUA__Client.html#a4156168e5ea7c0b802b1f8158ed8e5c9',1,'UA_Client']]],

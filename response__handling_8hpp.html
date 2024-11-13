@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: /home/runner/work/open62541pp/open62541pp/include/open62541pp/services/detail/response_handling.hpp File Reference</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -99,11 +102,9 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">response_handling.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;algorithm&gt;</code><br />
-<code>#include &lt;iterator&gt;</code><br />
+<div class="textblock"><code>#include &lt;functional&gt;</code><br />
 <code>#include &lt;type_traits&gt;</code><br />
 <code>#include &lt;utility&gt;</code><br />
-<code>#include &lt;vector&gt;</code><br />
 <code>#include &quot;<a class="el" href="common_8h_source.html">open62541pp/detail/open62541/common.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="result__utils_8hpp_source.html">open62541pp/detail/result_utils.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="result_8hpp_source.html">open62541pp/result.hpp</a>&quot;</code><br />
@@ -113,12 +114,12 @@ $(function(){ initResizable(false); });
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for response_handling.hpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="response__handling_8hpp__incl.svg" width="2876" height="975"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="response__handling_8hpp__incl.svg" width="2735" height="887"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="response__handling_8hpp__dep__incl.svg" width="1190" height="476"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="response__handling_8hpp__dep__incl.svg" width="1936" height="579"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="response__handling_8hpp_source.html">Go to the source code of this file.</a></p>
@@ -145,23 +146,20 @@ Functions</h2></td></tr>
 <tr class="memitem:acd7371be7992e9bed29fc0f53bef3b99" id="r_acd7371be7992e9bed29fc0f53bef3b99"><td class="memTemplParams" colspan="2">template&lt;typename Response &gt; </td></tr>
 <tr class="memitem:acd7371be7992e9bed29fc0f53bef3b99"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1services_1_1detail.html#acd7371be7992e9bed29fc0f53bef3b99">opcua::services::detail::getServiceResult</a> (const Response &amp;response) noexcept</td></tr>
 <tr class="separator:acd7371be7992e9bed29fc0f53bef3b99"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a25e2dc7d8faf597c867a87bdb4378a29" id="r_a25e2dc7d8faf597c867a87bdb4378a29"><td class="memTemplParams" colspan="2">template&lt;typename Response &gt; </td></tr>
-<tr class="memitem:a25e2dc7d8faf597c867a87bdb4378a29"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1services_1_1detail.html#a25e2dc7d8faf597c867a87bdb4378a29">opcua::services::detail::getSingleResult</a> (Response &amp;response) noexcept -&gt; <a class="el" href="classopcua_1_1Result.html">Result</a>&lt; decltype(std::ref(*response.results))&gt;</td></tr>
-<tr class="separator:a25e2dc7d8faf597c867a87bdb4378a29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecf673a600588b5c1a39a0fc51898bc4" id="r_aecf673a600588b5c1a39a0fc51898bc4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; void &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1services_1_1detail.html#aecf673a600588b5c1a39a0fc51898bc4">opcua::services::detail::toResult</a> (<a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> code) noexcept</td></tr>
-<tr class="separator:aecf673a600588b5c1a39a0fc51898bc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad23555deeb7b454860c419fbe690ece7" id="r_ad23555deeb7b454860c419fbe690ece7"><td class="memTemplParams" colspan="2">template&lt;typename Response &gt; </td></tr>
+<tr class="memitem:ad23555deeb7b454860c419fbe690ece7"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1services_1_1detail.html#ad23555deeb7b454860c419fbe690ece7">opcua::services::detail::getSingleResultRef</a> (Response &amp;response) noexcept</td></tr>
+<tr class="separator:ad23555deeb7b454860c419fbe690ece7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a822944c0722170b99d47fcb8a5fa22c3" id="r_a822944c0722170b99d47fcb8a5fa22c3"><td class="memTemplParams" colspan="2">template&lt;typename Response &gt; </td></tr>
+<tr class="memitem:a822944c0722170b99d47fcb8a5fa22c3"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1services_1_1detail.html#a822944c0722170b99d47fcb8a5fa22c3">opcua::services::detail::getSingleStatus</a> (const Response &amp;response) noexcept</td></tr>
+<tr class="separator:a822944c0722170b99d47fcb8a5fa22c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac180c78fc2fa870a52fbfbc1c07d5544" id="r_ac180c78fc2fa870a52fbfbc1c07d5544"><td class="memTemplParams" colspan="2">template&lt;typename WrapperType , typename Response &gt; </td></tr>
+<tr class="memitem:ac180c78fc2fa870a52fbfbc1c07d5544"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; WrapperType &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1services_1_1detail.html#ac180c78fc2fa870a52fbfbc1c07d5544">opcua::services::detail::wrapSingleResult</a> (Response &amp;response) noexcept</td></tr>
+<tr class="separator:ac180c78fc2fa870a52fbfbc1c07d5544"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7be9cd3858680fd1fb9dd14f8cf29080" id="r_a7be9cd3858680fd1fb9dd14f8cf29080"><td class="memTemplParams" colspan="2">template&lt;typename WrapperType , typename Response &gt; </td></tr>
+<tr class="memitem:a7be9cd3858680fd1fb9dd14f8cf29080"><td class="memTemplItemLeft" align="right" valign="top">WrapperType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1services_1_1detail.html#a7be9cd3858680fd1fb9dd14f8cf29080">opcua::services::detail::wrapSingleResultWithStatus</a> (Response &amp;response) noexcept</td></tr>
+<tr class="separator:a7be9cd3858680fd1fb9dd14f8cf29080"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c8313523ca58bbc2e62c55962084fa8" id="r_a2c8313523ca58bbc2e62c55962084fa8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1services_1_1detail.html#a2c8313523ca58bbc2e62c55962084fa8">opcua::services::detail::getAddedNodeId</a> (<a class="elRef" target="_blank" href="open62541/structUA__AddNodesResult.html">UA_AddNodesResult</a> &amp;result) noexcept</td></tr>
 <tr class="separator:a2c8313523ca58bbc2e62c55962084fa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe3a6f6180bdce35cb4e6ca7a3be7a51" id="r_afe3a6f6180bdce35cb4e6ca7a3be7a51"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; std::vector&lt; <a class="el" href="classopcua_1_1Variant.html">Variant</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1services_1_1detail.html#afe3a6f6180bdce35cb4e6ca7a3be7a51">opcua::services::detail::getOutputArguments</a> (<a class="elRef" target="_blank" href="open62541/structUA__CallMethodResult.html">UA_CallMethodResult</a> &amp;result) noexcept</td></tr>
-<tr class="separator:afe3a6f6180bdce35cb4e6ca7a3be7a51"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1fa88a22ba7ad80e7413dd9f353886bc" id="r_a1fa88a22ba7ad80e7413dd9f353886bc"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="structopcua_1_1services_1_1SubscriptionParameters.html">SubscriptionParameters</a> , typename Response &gt; </td></tr>
-<tr class="memitem:a1fa88a22ba7ad80e7413dd9f353886bc"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1services_1_1detail.html#a1fa88a22ba7ad80e7413dd9f353886bc">opcua::services::detail::reviseSubscriptionParameters</a> (<a class="el" href="structopcua_1_1services_1_1SubscriptionParameters.html">SubscriptionParameters</a> &amp;parameters, const Response &amp;response) noexcept</td></tr>
-<tr class="separator:a1fa88a22ba7ad80e7413dd9f353886bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d0541ea9612208cb42ef231824962f4" id="r_a1d0541ea9612208cb42ef231824962f4"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="classopcua_1_1MonitoringParameters.html">MonitoringParameters</a> , typename <a class="el" href="classopcua_1_1Result.html">Result</a> &gt; </td></tr>
-<tr class="memitem:a1d0541ea9612208cb42ef231824962f4"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1services_1_1detail.html#a1d0541ea9612208cb42ef231824962f4">opcua::services::detail::reviseMonitoringParameters</a> (<a class="el" href="classopcua_1_1MonitoringParameters.html">MonitoringParameters</a> &amp;parameters, const <a class="el" href="classopcua_1_1Result.html">Result</a> &amp;result) noexcept</td></tr>
-<tr class="separator:a1d0541ea9612208cb42ef231824962f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fb18cd59134d3e3626d0e3e724ff9c4" id="r_a6fb18cd59134d3e3626d0e3e724ff9c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1services_1_1detail.html#a6fb18cd59134d3e3626d0e3e724ff9c4">opcua::services::detail::getMonitoredItemId</a> (const <a class="elRef" target="_blank" href="open62541/structUA__MonitoredItemCreateResult.html">UA_MonitoredItemCreateResult</a> &amp;result) noexcept</td></tr>
-<tr class="separator:a6fb18cd59134d3e3626d0e3e724ff9c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

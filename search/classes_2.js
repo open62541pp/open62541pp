@@ -15,5 +15,6 @@ var searchData=
   ['browserequest_12',['BrowseRequest',['../classopcua_1_1BrowseRequest.html',1,'opcua']]],
   ['browseresponse_13',['BrowseResponse',['../classopcua_1_1BrowseResponse.html',1,'opcua']]],
   ['browseresult_14',['BrowseResult',['../classopcua_1_1BrowseResult.html',1,'opcua']]],
-  ['bytestring_15',['ByteString',['../classopcua_1_1ByteString.html',1,'opcua']]]
+  ['buildinfo_15',['BuildInfo',['../classopcua_1_1BuildInfo.html',1,'opcua']]],
+  ['bytestring_16',['ByteString',['../classopcua_1_1ByteString.html',1,'opcua']]]
 ];

@@ -15,5 +15,6 @@ var searchData=
   ['hassourcetimestamp_12',['hasSourceTimestamp',['../classopcua_1_1DataValue.html#a56ab026f3444ca48beba26b199e7aab5',1,'opcua::DataValue']]],
   ['hasstatus_13',['hasStatus',['../classopcua_1_1DataValue.html#a81bcff03a925f089da5d7ecd9af3fda0',1,'opcua::DataValue']]],
   ['hassymbolicid_14',['hasSymbolicId',['../classopcua_1_1DiagnosticInfo.html#a42d74155a56d44692ae07e3f2a9252d9',1,'opcua::DiagnosticInfo']]],
-  ['hasvalue_15',['hasValue',['../classopcua_1_1Result.html#a65122b158d953d915db6946e198f48dd',1,'opcua::Result::hasValue()'],['../classopcua_1_1Result_3_01void_01_4.html#a36149241a2f45556aba57d6dcd998b3d',1,'opcua::Result&lt; void &gt;::hasValue()'],['../classopcua_1_1DataValue.html#a257e429eb800416b4ed028661d88d264',1,'opcua::DataValue::hasValue()']]]
+  ['hasvalue_15',['hasValue',['../classopcua_1_1Result.html#a65122b158d953d915db6946e198f48dd',1,'opcua::Result::hasValue()'],['../classopcua_1_1Result_3_01void_01_4.html#a36149241a2f45556aba57d6dcd998b3d',1,'opcua::Result&lt; void &gt;::hasValue()'],['../classopcua_1_1DataValue.html#a257e429eb800416b4ed028661d88d264',1,'opcua::DataValue::hasValue()']]],
+  ['hooktoken_16',['HookToken',['../structopcua_1_1services_1_1detail_1_1HookToken.html#a04c5cb4b36b294d35482e66903b0b1c8',1,'opcua::services::detail::HookToken::HookToken()'],['../namespaceopcua_1_1services_1_1detail.html#a5fc25966339e25a27f8a5412db00abb8',1,'opcua::services::detail::HookToken()']]]
 ];

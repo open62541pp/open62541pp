@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: /home/runner/work/open62541pp/open62541pp/include/open62541pp/plugin/log.hpp Source File</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -137,7 +140,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment"></span> </div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">/**</span></div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment"> * Logger base class.</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment"> * </span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment"> *</span></div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment"> * Custom logger can be implemented by deriving from this class and overwriting the log function.</span></div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment"> */</span></div>
 <div class="foldopen" id="foldopen00042" data-start="{" data-end="};">
@@ -145,19 +148,21 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="classopcua_1_1LoggerBase.html#a814e5db2081fc207232ef2d6d26759e3">   44</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classopcua_1_1LoggerBase.html#a814e5db2081fc207232ef2d6d26759e3">log</a>(<a class="code hl_enumeration" href="namespaceopcua.html#a016225e750f216587c011ea43f212d8d">LogLevel</a> level, <a class="code hl_enumeration" href="namespaceopcua.html#a82c59334b1772f47ada395785f5bf70a">LogCategory</a> category, std::string_view msg) = 0;</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classopcua_1_1LoggerBase.html#a2a7fc6949fe401822097fefd923f31ad">   46</a></span>    <a class="code hl_structRef" target="_blank" href="open62541/structUA__Logger.html">UA_Logger</a> <a class="code hl_function" href="classopcua_1_1LoggerBase.html#a2a7fc6949fe401822097fefd923f31ad">create</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classopcua_1_1LoggerBase.html#a3ad4824da826950e9c7f4da376d181c5">   47</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classopcua_1_1LoggerBase.html#a3ad4824da826950e9c7f4da376d181c5">clear</a>(<a class="code hl_structRef" target="_blank" href="open62541/structUA__Logger.html">UA_Logger</a>&amp; native) <span class="keyword">noexcept</span> <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>};</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classopcua_1_1LoggerBase.html#a7545baeac55dd8970abf54590b56bb3c">   46</a></span>    <a class="code hl_structRef" target="_blank" href="open62541/structUA__Logger.html">UA_Logger</a> <a class="code hl_function" href="classopcua_1_1LoggerBase.html#a7545baeac55dd8970abf54590b56bb3c">create</a>(<span class="keywordtype">bool</span> ownsAdapter) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>};</div>
 </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>}  <span class="comment">// namespace opcua</span></div>
-<div class="ttc" id="aclassopcua_1_1Client_html"><div class="ttname"><a href="classopcua_1_1Client.html">opcua::Client</a></div><div class="ttdoc">High-level client class.</div><div class="ttdef"><b>Definition</b> <a href="client_8hpp_source.html#l00063">client.hpp:63</a></div></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keyword">namespace </span>detail {</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#af79afbe47ab163fa0a77b8213ef02ae8">   50</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespaceopcua_1_1detail.html#a59dd6f1873366732e403e7e77e080b84">clear</a>(<a class="code hl_structRef" target="_blank" href="open62541/structUA__Logger.html">UA_Logger</a>&amp; logger) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>}  <span class="comment">// namespace detail</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>}  <span class="comment">// namespace opcua</span></div>
+<div class="ttc" id="aclassopcua_1_1Client_html"><div class="ttname"><a href="classopcua_1_1Client.html">opcua::Client</a></div><div class="ttdoc">High-level client class.</div><div class="ttdef"><b>Definition</b> <a href="client_8hpp_source.html#l00121">client.hpp:121</a></div></div>
 <div class="ttc" id="aclassopcua_1_1LoggerBase_html"><div class="ttname"><a href="classopcua_1_1LoggerBase.html">opcua::LoggerBase</a></div><div class="ttdoc">Logger base class.</div><div class="ttdef"><b>Definition</b> <a href="#l00042">log.hpp:42</a></div></div>
-<div class="ttc" id="aclassopcua_1_1LoggerBase_html_a2a7fc6949fe401822097fefd923f31ad"><div class="ttname"><a href="classopcua_1_1LoggerBase.html#a2a7fc6949fe401822097fefd923f31ad">opcua::LoggerBase::create</a></div><div class="ttdeci">UA_Logger create() override</div></div>
-<div class="ttc" id="aclassopcua_1_1LoggerBase_html_a3ad4824da826950e9c7f4da376d181c5"><div class="ttname"><a href="classopcua_1_1LoggerBase.html#a3ad4824da826950e9c7f4da376d181c5">opcua::LoggerBase::clear</a></div><div class="ttdeci">void clear(UA_Logger &amp;native) noexcept override</div></div>
+<div class="ttc" id="aclassopcua_1_1LoggerBase_html_a7545baeac55dd8970abf54590b56bb3c"><div class="ttname"><a href="classopcua_1_1LoggerBase.html#a7545baeac55dd8970abf54590b56bb3c">opcua::LoggerBase::create</a></div><div class="ttdeci">UA_Logger create(bool ownsAdapter) override</div></div>
 <div class="ttc" id="aclassopcua_1_1LoggerBase_html_a814e5db2081fc207232ef2d6d26759e3"><div class="ttname"><a href="classopcua_1_1LoggerBase.html#a814e5db2081fc207232ef2d6d26759e3">opcua::LoggerBase::log</a></div><div class="ttdeci">virtual void log(LogLevel level, LogCategory category, std::string_view msg)=0</div></div>
 <div class="ttc" id="aclassopcua_1_1PluginAdapter_html"><div class="ttname"><a href="classopcua_1_1PluginAdapter.html">opcua::PluginAdapter</a></div><div class="ttdoc">Base class to implement plugin adapters.</div><div class="ttdef"><b>Definition</b> <a href="pluginadapter_8hpp_source.html#l00019">pluginadapter.hpp:19</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Server_html"><div class="ttname"><a href="classopcua_1_1Server.html">opcua::Server</a></div><div class="ttdoc">High-level server class.</div><div class="ttdef"><b>Definition</b> <a href="server_8hpp_source.html#l00063">server.hpp:63</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Server_html"><div class="ttname"><a href="classopcua_1_1Server.html">opcua::Server</a></div><div class="ttdoc">High-level server class.</div><div class="ttdef"><b>Definition</b> <a href="server_8hpp_source.html#l00132">server.hpp:132</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Session_html"><div class="ttname"><a href="classopcua_1_1Session.html">opcua::Session</a></div><div class="ttdoc">High-level session class to manage client sessions.</div><div class="ttdef"><b>Definition</b> <a href="session_8hpp_source.html#l00020">session.hpp:20</a></div></div>
 <div class="ttc" id="acommon_8h_html"><div class="ttname"><a href="common_8h.html">common.h</a></div></div>
 <div class="ttc" id="alog_8h_html_a8ef40be05c138d1635386794b46ebf76a0460537443396e9fce08df95bbf90a63"><div class="ttname"><a href="open62541/log_8h.html#a8ef40be05c138d1635386794b46ebf76a0460537443396e9fce08df95bbf90a63">UA_LOGLEVEL_TRACE</a></div><div class="ttdeci">UA_LOGLEVEL_TRACE</div></div>
@@ -173,6 +178,7 @@ $(function(){ initResizable(false); });
 <div class="ttc" id="alog_8h_html_ae3af3c02fdb05fd1bd53060113aac471aa3e81898861054238eeca849a72e72d8"><div class="ttname"><a href="open62541/log_8h.html#ae3af3c02fdb05fd1bd53060113aac471aa3e81898861054238eeca849a72e72d8">UA_LOGCATEGORY_SECURITYPOLICY</a></div><div class="ttdeci">UA_LOGCATEGORY_SECURITYPOLICY</div></div>
 <div class="ttc" id="alog_8h_html_ae3af3c02fdb05fd1bd53060113aac471ad9ebaa1b3ce7618c9903eb181643f667"><div class="ttname"><a href="open62541/log_8h.html#ae3af3c02fdb05fd1bd53060113aac471ad9ebaa1b3ce7618c9903eb181643f667">UA_LOGCATEGORY_CLIENT</a></div><div class="ttdeci">UA_LOGCATEGORY_CLIENT</div></div>
 <div class="ttc" id="alog_8h_html_ae3af3c02fdb05fd1bd53060113aac471adf08457db96e5160669e88c8deb1184d"><div class="ttname"><a href="open62541/log_8h.html#ae3af3c02fdb05fd1bd53060113aac471adf08457db96e5160669e88c8deb1184d">UA_LOGCATEGORY_SECURECHANNEL</a></div><div class="ttdeci">UA_LOGCATEGORY_SECURECHANNEL</div></div>
+<div class="ttc" id="anamespaceopcua_1_1detail_html_a59dd6f1873366732e403e7e77e080b84"><div class="ttname"><a href="namespaceopcua_1_1detail.html#a59dd6f1873366732e403e7e77e080b84">opcua::detail::clear</a></div><div class="ttdeci">constexpr void clear(T &amp;native, const UA_DataType &amp;type) noexcept</div><div class="ttdef"><b>Definition</b> <a href="types__handling_8hpp_source.html#l00062">types_handling.hpp:62</a></div></div>
 <div class="ttc" id="anamespaceopcua_html"><div class="ttname"><a href="namespaceopcua.html">opcua</a></div><div class="ttdef"><b>Definition</b> <a href="async_8hpp_source.html#l00011">async.hpp:11</a></div></div>
 <div class="ttc" id="anamespaceopcua_html_a016225e750f216587c011ea43f212d8d"><div class="ttname"><a href="namespaceopcua.html#a016225e750f216587c011ea43f212d8d">opcua::LogLevel</a></div><div class="ttdeci">LogLevel</div><div class="ttdoc">Log level.</div><div class="ttdef"><b>Definition</b> <a href="#l00014">log.hpp:14</a></div></div>
 <div class="ttc" id="anamespaceopcua_html_a016225e750f216587c011ea43f212d8da0eaadb4fcb48a0a0ed7bc9868be9fbaa"><div class="ttname"><a href="namespaceopcua.html#a016225e750f216587c011ea43f212d8da0eaadb4fcb48a0a0ed7bc9868be9fbaa">opcua::LogLevel::Warning</a></div><div class="ttdeci">@ Warning</div></div>

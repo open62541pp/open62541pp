@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: /home/runner/work/open62541pp/open62541pp/include/open62541pp/detail/types_handling.hpp Source File</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -99,170 +102,222 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;algorithm&gt;</span>  <span class="comment">// copy_n</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;cassert&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;new&gt;</span>  <span class="comment">// bad_alloc</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="common_8h.html">open62541pp/detail/open62541/common.h</a>&quot;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="traits_8hpp.html">open62541pp/detail/traits.hpp</a>&quot;</span>  <span class="comment">// IsOneOf</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="exception_8hpp.html">open62541pp/exception.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceopcua_1_1detail.html">opcua::detail</a> {</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">/* ------------------------------------ Generic type handling ----------------------------------- */</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#a2551600f6cb98793afa727b0d98486e9">   17</a></span><span class="keyword">inline</span> <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_variable" href="namespaceopcua_1_1detail.html#a2551600f6cb98793afa727b0d98486e9">isPointerFree</a> = <a class="code hl_typedef" href="namespaceopcua_1_1detail.html#ac0d6cbb3b0e3542b582052e179f65b6d">IsOneOf</a>&lt;  <span class="comment">// NOLINT(modernize-type-traits)</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    T,</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <a class="code hl_variableRef" target="_blank" href="open62541/types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>,</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#a4ba04733a2525e207fa5ea5337ad17f3">UA_SByte</a>,</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a>,</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#a2dfa954c25e6984956ab6fa8e8fd73db">UA_Int16</a>,</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a>,</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#a01ce3c3b2fb34ef81c97c313f516004e">UA_Int32</a>,</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>,</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#ae5c13df54009d7a3e374bfc594af8059">UA_Int64</a>,</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a>,</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#a899228311700e99d006f1ba5bcfcbd02">UA_Float</a>,</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a>,</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a>,</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <a class="code hl_structRef" target="_blank" href="open62541/structUA__Guid.html">UA_Guid</a>,</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&gt;::value;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00035" data-start="{" data-end="}">
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#a4646000cf6e99b3c6d09915169a33e1e">   35</a></span><span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="namespaceopcua_1_1detail.html#a4646000cf6e99b3c6d09915169a33e1e">isValidTypeCombination</a>(<span class="keyword">const</span> <a class="code hl_structRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>&amp; type) {</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_void_v&lt;T&gt;) {</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;  <span class="comment">// allow type-erasure</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keywordflow">return</span> <span class="keyword">sizeof</span>(T) == type.<a class="code hl_variableRef" target="_blank" href="open62541/structUA__DataType.html#a5af370acd88614a6869e78bba0c5de17">memSize</a>;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    }</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>}</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;cstring&gt;</span>  <span class="comment">// memcpy, memset</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;new&gt;</span>  <span class="comment">// bad_alloc</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="common_8h.html">open62541pp/detail/open62541/common.h</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="traits_8hpp.html">open62541pp/detail/traits.hpp</a>&quot;</span>  <span class="comment">// IsOneOf</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="exception_8hpp.html">open62541pp/exception.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceopcua_1_1detail.html">opcua::detail</a> {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">/* ------------------------------------ Generic type handling ----------------------------------- */</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#a2551600f6cb98793afa727b0d98486e9">   18</a></span><span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_variable" href="namespaceopcua_1_1detail.html#a2551600f6cb98793afa727b0d98486e9">isPointerFree</a> = <a class="code hl_typedef" href="namespaceopcua_1_1detail.html#ac0d6cbb3b0e3542b582052e179f65b6d">IsOneOf</a>&lt;  <span class="comment">// NOLINT(modernize-type-traits)</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    T,</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <a class="code hl_variableRef" target="_blank" href="open62541/types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>,</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#a4ba04733a2525e207fa5ea5337ad17f3">UA_SByte</a>,</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a>,</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#a2dfa954c25e6984956ab6fa8e8fd73db">UA_Int16</a>,</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a>,</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#a01ce3c3b2fb34ef81c97c313f516004e">UA_Int32</a>,</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>,</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#ae5c13df54009d7a3e374bfc594af8059">UA_Int64</a>,</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a>,</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#a899228311700e99d006f1ba5bcfcbd02">UA_Float</a>,</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a>,</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a>,</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <a class="code hl_structRef" target="_blank" href="open62541/structUA__Guid.html">UA_Guid</a>,</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&gt;::value;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00036" data-start="{" data-end="}">
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#a7c3d4d172f3b383452a77dab5b6bfd9f">   36</a></span><span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="namespaceopcua_1_1detail.html#a7c3d4d172f3b383452a77dab5b6bfd9f">isBorrowed</a>(<span class="keyword">const</span> T&amp; <span class="comment">/* unused */</span>) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>}</div>
 </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="foldopen" id="foldopen00040" data-start="{" data-end="}">
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#ac47cfeae2d11c4a35879789ab4099a1f">   40</a></span><span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="namespaceopcua_1_1detail.html#a7c3d4d172f3b383452a77dab5b6bfd9f">isBorrowed</a>(<span class="keyword">const</span> <a class="code hl_structRef" target="_blank" href="open62541/structUA__Variant.html">UA_Variant</a>&amp; native) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordflow">return</span> native.storageType == <a class="code hl_variableRef" target="_blank" href="open62541/types_8h.html#aa1478e00bedf1421f5f5462e8263c522ae8998cef426fb827da4c155c6791bc16">UA_VARIANT_DATA_NODELETE</a>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>}</div>
+</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
 <div class="foldopen" id="foldopen00044" data-start="{" data-end="}">
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#a59dd6f1873366732e403e7e77e080b84">   44</a></span><span class="keyword">constexpr</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceopcua_1_1detail.html#a59dd6f1873366732e403e7e77e080b84">clear</a>(T&amp; native, <span class="keyword">const</span> <a class="code hl_structRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>&amp; type) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    assert(<a class="code hl_function" href="namespaceopcua_1_1detail.html#a4646000cf6e99b3c6d09915169a33e1e">isValidTypeCombination&lt;T&gt;</a>(type));</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (!<a class="code hl_variable" href="namespaceopcua_1_1detail.html#a2551600f6cb98793afa727b0d98486e9">isPointerFree&lt;T&gt;</a>) {</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <a class="code hl_functionRef" target="_blank" href="open62541/types_8h.html#ab615e6928fa544fb7caf34c9e241fd4b">UA_clear</a>(&amp;native, &amp;type);</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    }</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>}</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#a8c72ae02a17e47035dc3a155261c63ca">   44</a></span><span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="namespaceopcua_1_1detail.html#a7c3d4d172f3b383452a77dab5b6bfd9f">isBorrowed</a>(<span class="keyword">const</span> <a class="code hl_structRef" target="_blank" href="open62541/structUA__DataValue.html">UA_DataValue</a>&amp; native) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordflow">return</span> native.value.storageType == <a class="code hl_variableRef" target="_blank" href="open62541/types_8h.html#aa1478e00bedf1421f5f5462e8263c522ae8998cef426fb827da4c155c6791bc16">UA_VARIANT_DATA_NODELETE</a>;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>}</div>
 </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00052" data-start="{" data-end="}">
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#a8db8cebe283317d6690d06ef094c7606">   52</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceopcua_1_1detail.html#a8db8cebe283317d6690d06ef094c7606">deallocate</a>(T* native, <span class="keyword">const</span> <a class="code hl_structRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>&amp; type) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    assert(<a class="code hl_function" href="namespaceopcua_1_1detail.html#a4646000cf6e99b3c6d09915169a33e1e">isValidTypeCombination&lt;T&gt;</a>(type));</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <a class="code hl_functionRef" target="_blank" href="open62541/types_8h.html#ac1fe49fb8120e59038e6f4d276ffa1ec">UA_delete</a>(native, &amp;type);</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>}</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="foldopen" id="foldopen00048" data-start="{" data-end="}">
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#aee420e7d5deff78111e8cc63aabb8c00">   48</a></span><span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="namespaceopcua_1_1detail.html#a7c3d4d172f3b383452a77dab5b6bfd9f">isBorrowed</a>(<span class="keyword">const</span> <a class="code hl_structRef" target="_blank" href="open62541/structUA__ExtensionObject.html">UA_ExtensionObject</a>&amp; native) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordflow">return</span> native.encoding == <a class="code hl_variableRef" target="_blank" href="open62541/types_8h.html#a1d9cb3b91e317874b51be6471cb370dcad72826b08914adc05ad6fb4e500dd322">UA_EXTENSIONOBJECT_DECODED_NODELETE</a>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>}</div>
 </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00058" data-start="{" data-end="}">
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#a6bfe1da0cd011dac8cb6bafd01893a18">   58</a></span>[[nodiscard]] <span class="keyword">inline</span> T* <a class="code hl_function" href="namespaceopcua_1_1detail.html#a6bfe1da0cd011dac8cb6bafd01893a18">allocate</a>(<span class="keyword">const</span> <a class="code hl_structRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>&amp; type) {</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    assert(<a class="code hl_function" href="namespaceopcua_1_1detail.html#a4646000cf6e99b3c6d09915169a33e1e">isValidTypeCombination&lt;T&gt;</a>(type));</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keyword">auto</span>* result = <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(<a class="code hl_functionRef" target="_blank" href="open62541/types_8h.html#a921a4b0f6b27972f427493106673050e">UA_new</a>(&amp;type));</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordflow">if</span> (result == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordflow">throw</span> std::bad_alloc();</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    }</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>}</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00053" data-start="{" data-end="}">
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#a4646000cf6e99b3c6d09915169a33e1e">   53</a></span><span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="namespaceopcua_1_1detail.html#a4646000cf6e99b3c6d09915169a33e1e">isValidTypeCombination</a>(<span class="keyword">const</span> <a class="code hl_structRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>&amp; type) {</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_void_v&lt;T&gt;) {</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;  <span class="comment">// allow type-erasure</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keywordflow">return</span> <span class="keyword">sizeof</span>(T) == type.<a class="code hl_variableRef" target="_blank" href="open62541/structUA__DataType.html#a5af370acd88614a6869e78bba0c5de17">memSize</a>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    }</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>}</div>
 </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00068" data-start="{" data-end="}">
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#a2165c36c5e511be0bfd9601cef3a622f">   68</a></span>[[nodiscard]] <span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="namespaceopcua_1_1detail.html#a2165c36c5e511be0bfd9601cef3a622f">allocateUniquePtr</a>(<span class="keyword">const</span> <a class="code hl_structRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>&amp; type) {</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keyword">auto</span> deleter = [&amp;type](T* native) { <a class="code hl_function" href="namespaceopcua_1_1detail.html#a8db8cebe283317d6690d06ef094c7606">deallocate</a>(native, type); };</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordflow">return</span> std::unique_ptr&lt;T, decltype(deleter)&gt;(<a class="code hl_function" href="namespaceopcua_1_1detail.html#a6bfe1da0cd011dac8cb6bafd01893a18">allocate&lt;T&gt;</a>(type), deleter);</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>}</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00062" data-start="{" data-end="}">
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#a59dd6f1873366732e403e7e77e080b84">   62</a></span><span class="keyword">constexpr</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceopcua_1_1detail.html#a59dd6f1873366732e403e7e77e080b84">clear</a>(T&amp; native, <span class="keyword">const</span> <a class="code hl_structRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>&amp; type) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    assert(<a class="code hl_function" href="namespaceopcua_1_1detail.html#a4646000cf6e99b3c6d09915169a33e1e">isValidTypeCombination&lt;T&gt;</a>(type));</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="comment">// NOLINTNEXTLINE(bugprone-branch-clone)</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_variable" href="namespaceopcua_1_1detail.html#a2551600f6cb98793afa727b0d98486e9">isPointerFree&lt;T&gt;</a>) {</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        native = {};</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code hl_function" href="namespaceopcua_1_1detail.html#a7c3d4d172f3b383452a77dab5b6bfd9f">isBorrowed</a>(native)) {</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        native = {};</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <a class="code hl_functionRef" target="_blank" href="open62541/types_8h.html#ab615e6928fa544fb7caf34c9e241fd4b">UA_clear</a>(&amp;native, &amp;type);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    }</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>}</div>
 </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00074" data-start="{" data-end="}">
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#a050e0c852294259d380e48717bc993ec">   74</a></span>[[nodiscard]] <span class="keyword">constexpr</span> T <a class="code hl_function" href="namespaceopcua_1_1detail.html#a050e0c852294259d380e48717bc993ec">copy</a>(<span class="keyword">const</span> T&amp; src, <span class="keyword">const</span> <a class="code hl_structRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>&amp; type) <span class="keyword">noexcept</span>(<a class="code hl_variable" href="namespaceopcua_1_1detail.html#a2551600f6cb98793afa727b0d98486e9">isPointerFree&lt;T&gt;</a>) {</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    assert(<a class="code hl_function" href="namespaceopcua_1_1detail.html#a4646000cf6e99b3c6d09915169a33e1e">isValidTypeCombination&lt;T&gt;</a>(type));</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (!<a class="code hl_variable" href="namespaceopcua_1_1detail.html#a2551600f6cb98793afa727b0d98486e9">isPointerFree&lt;T&gt;</a>) {</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        T dst;  <span class="comment">// NOLINT, initialized in UA_copy function</span></div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <a class="code hl_function" href="namespaceopcua.html#a51131f59e2ce7f22a984fa6577fb2c27">throwIfBad</a>(<a class="code hl_functionRef" target="_blank" href="open62541/types_8h.html#a06dc3ec388f93ee9aab177e3b50ca7e4">UA_copy</a>(&amp;src, &amp;dst, &amp;type));</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <span class="keywordflow">return</span> dst;</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="keywordflow">return</span> src;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    }</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>}</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00075" data-start="{" data-end="}">
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#a8db8cebe283317d6690d06ef094c7606">   75</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespaceopcua_1_1detail.html#a8db8cebe283317d6690d06ef094c7606">deallocate</a>(T* native, <span class="keyword">const</span> <a class="code hl_structRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>&amp; type) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    assert(<a class="code hl_function" href="namespaceopcua_1_1detail.html#a4646000cf6e99b3c6d09915169a33e1e">isValidTypeCombination&lt;T&gt;</a>(type));</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <a class="code hl_functionRef" target="_blank" href="open62541/types_8h.html#ac1fe49fb8120e59038e6f4d276ffa1ec">UA_delete</a>(native, &amp;type);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>}</div>
 </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">/* ----------------------------------- Generic array handling ----------------------------------- */</span></div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00088" data-start="{" data-end="}">
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#a8e9708d27e1926f62d47789a6b99dc0a">   88</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceopcua_1_1detail.html#a8e9708d27e1926f62d47789a6b99dc0a">deallocateArray</a>(T* array, <span class="keywordtype">size_t</span> size, <span class="keyword">const</span> <a class="code hl_structRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>&amp; type) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    assert(<a class="code hl_function" href="namespaceopcua_1_1detail.html#a4646000cf6e99b3c6d09915169a33e1e">isValidTypeCombination&lt;T&gt;</a>(type));</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <a class="code hl_functionRef" target="_blank" href="open62541/types_8h.html#a05af722df9c9a11fd6b497a7a35b8cdb">UA_Array_delete</a>(array, size, &amp;type);</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>}</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00081" data-start="{" data-end="}">
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#a6bfe1da0cd011dac8cb6bafd01893a18">   81</a></span>[[nodiscard]] T* <a class="code hl_function" href="namespaceopcua_1_1detail.html#a6bfe1da0cd011dac8cb6bafd01893a18">allocate</a>(<span class="keyword">const</span> <a class="code hl_structRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>&amp; type) {</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    assert(<a class="code hl_function" href="namespaceopcua_1_1detail.html#a4646000cf6e99b3c6d09915169a33e1e">isValidTypeCombination&lt;T&gt;</a>(type));</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keyword">auto</span>* result = <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(<a class="code hl_functionRef" target="_blank" href="open62541/types_8h.html#a921a4b0f6b27972f427493106673050e">UA_new</a>(&amp;type));</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordflow">if</span> (result == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        <span class="keywordflow">throw</span> std::bad_alloc();</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    }</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>}</div>
 </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00094" data-start="{" data-end="}">
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#a92bea411311fb5c975db8166e25f3011">   94</a></span>[[nodiscard]] <span class="keyword">inline</span> T* <a class="code hl_function" href="namespaceopcua_1_1detail.html#a92bea411311fb5c975db8166e25f3011">allocateArray</a>(<span class="keywordtype">size_t</span> size, <span class="keyword">const</span> <a class="code hl_structRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>&amp; type) {</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    assert(<a class="code hl_function" href="namespaceopcua_1_1detail.html#a4646000cf6e99b3c6d09915169a33e1e">isValidTypeCombination&lt;T&gt;</a>(type));</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keyword">auto</span>* result = <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(<a class="code hl_functionRef" target="_blank" href="open62541/types_8h.html#ab49966aa2cff36fe08c3052db3b51dd3">UA_Array_new</a>(size, &amp;type));</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordflow">if</span> (result == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <span class="keywordflow">throw</span> std::bad_alloc();</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    }</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>}</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00091" data-start="{" data-end="}">
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#a2165c36c5e511be0bfd9601cef3a622f">   91</a></span>[[nodiscard]] <span class="keyword">auto</span> <a class="code hl_function" href="namespaceopcua_1_1detail.html#a2165c36c5e511be0bfd9601cef3a622f">allocateUniquePtr</a>(<span class="keyword">const</span> <a class="code hl_structRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>&amp; type) {</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="keyword">auto</span> deleter = [&amp;type](T* native) { <a class="code hl_function" href="namespaceopcua_1_1detail.html#a8db8cebe283317d6690d06ef094c7606">deallocate</a>(native, type); };</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="keywordflow">return</span> std::unique_ptr&lt;T, decltype(deleter)&gt;(<a class="code hl_function" href="namespaceopcua_1_1detail.html#a6bfe1da0cd011dac8cb6bafd01893a18">allocate&lt;T&gt;</a>(type), deleter);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>}</div>
 </div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00104" data-start="{" data-end="}">
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#a7442d8afcfb2631ff179801ac8d96e6e">  104</a></span>[[nodiscard]] <span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="namespaceopcua_1_1detail.html#a7442d8afcfb2631ff179801ac8d96e6e">allocateArrayUniquePtr</a>(<span class="keywordtype">size_t</span> size, <span class="keyword">const</span> <a class="code hl_structRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>&amp; type) {</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="keyword">auto</span> deleter = [&amp;type, size](T* native) { <a class="code hl_function" href="namespaceopcua_1_1detail.html#a8e9708d27e1926f62d47789a6b99dc0a">deallocateArray</a>(native, size, type); };</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keywordflow">return</span> std::unique_ptr&lt;T, decltype(deleter)&gt;(<a class="code hl_function" href="namespaceopcua_1_1detail.html#a92bea411311fb5c975db8166e25f3011">allocateArray&lt;T&gt;</a>(size, type), deleter);</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>}</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00097" data-start="{" data-end="}">
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#a050e0c852294259d380e48717bc993ec">   97</a></span>[[nodiscard]] <span class="keyword">constexpr</span> T <a class="code hl_function" href="namespaceopcua_1_1detail.html#a050e0c852294259d380e48717bc993ec">copy</a>(<span class="keyword">const</span> T&amp; src, <span class="keyword">const</span> <a class="code hl_structRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>&amp; type) <span class="keyword">noexcept</span>(<a class="code hl_variable" href="namespaceopcua_1_1detail.html#a2551600f6cb98793afa727b0d98486e9">isPointerFree&lt;T&gt;</a>) {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    assert(<a class="code hl_function" href="namespaceopcua_1_1detail.html#a4646000cf6e99b3c6d09915169a33e1e">isValidTypeCombination&lt;T&gt;</a>(type));</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (!<a class="code hl_variable" href="namespaceopcua_1_1detail.html#a2551600f6cb98793afa727b0d98486e9">isPointerFree&lt;T&gt;</a>) {</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        T dst;  <span class="comment">// NOLINT, initialized in UA_copy function</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        <a class="code hl_function" href="namespaceopcua.html#a51131f59e2ce7f22a984fa6577fb2c27">throwIfBad</a>(<a class="code hl_functionRef" target="_blank" href="open62541/types_8h.html#a06dc3ec388f93ee9aab177e3b50ca7e4">UA_copy</a>(&amp;src, &amp;dst, &amp;type));</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        <span class="keywordflow">return</span> dst;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        <span class="keywordflow">return</span> src;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    }</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>}</div>
 </div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00110" data-start="{" data-end="}">
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#a50b7a1a1c56c1311c4365d0a71005cc3">  110</a></span>[[nodiscard]] <span class="keyword">inline</span> T* <a class="code hl_function" href="namespaceopcua_1_1detail.html#a50b7a1a1c56c1311c4365d0a71005cc3">copyArray</a>(<span class="keyword">const</span> T* src, <span class="keywordtype">size_t</span> size, <span class="keyword">const</span> <a class="code hl_structRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>&amp; type) {</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    assert(<a class="code hl_function" href="namespaceopcua_1_1detail.html#a4646000cf6e99b3c6d09915169a33e1e">isValidTypeCombination&lt;T&gt;</a>(type));</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (!<a class="code hl_variable" href="namespaceopcua_1_1detail.html#a2551600f6cb98793afa727b0d98486e9">isPointerFree&lt;T&gt;</a>) {</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        T* dst{};</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        <a class="code hl_function" href="namespaceopcua.html#a51131f59e2ce7f22a984fa6577fb2c27">throwIfBad</a>(<a class="code hl_functionRef" target="_blank" href="open62541/types_8h.html#af27a32f7f16ce2676dfadc56f15282a5">UA_Array_copy</a>(src, size, (<span class="keywordtype">void</span>**)&amp;dst, &amp;type));  <span class="comment">// NOLINT</span></div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        <span class="keywordflow">return</span> dst;</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        T* dst = <a class="code hl_function" href="namespaceopcua_1_1detail.html#a92bea411311fb5c975db8166e25f3011">allocateArray&lt;T&gt;</a>(size, type);</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        std::copy_n(src, size, dst);</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        <span class="keywordflow">return</span> dst;</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    }</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>}</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment">/* ----------------------------------- Generic array handling ----------------------------------- */</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00111" data-start="{" data-end="}">
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#a8e9708d27e1926f62d47789a6b99dc0a">  111</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespaceopcua_1_1detail.html#a8e9708d27e1926f62d47789a6b99dc0a">deallocateArray</a>(T* array, <span class="keywordtype">size_t</span> size, <span class="keyword">const</span> <a class="code hl_structRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>&amp; type) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    assert(<a class="code hl_function" href="namespaceopcua_1_1detail.html#a4646000cf6e99b3c6d09915169a33e1e">isValidTypeCombination&lt;T&gt;</a>(type));</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <a class="code hl_functionRef" target="_blank" href="open62541/types_8h.html#a05af722df9c9a11fd6b497a7a35b8cdb">UA_Array_delete</a>(array, size, &amp;type);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>}</div>
 </div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>}  <span class="comment">// namespace opcua::detail</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00117" data-start="{" data-end="}">
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#a92bea411311fb5c975db8166e25f3011">  117</a></span>[[nodiscard]] T* <a class="code hl_function" href="namespaceopcua_1_1detail.html#a92bea411311fb5c975db8166e25f3011">allocateArray</a>(<span class="keywordtype">size_t</span> size, <span class="keyword">const</span> <a class="code hl_structRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>&amp; type) {</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    assert(<a class="code hl_function" href="namespaceopcua_1_1detail.html#a4646000cf6e99b3c6d09915169a33e1e">isValidTypeCombination&lt;T&gt;</a>(type));</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keyword">auto</span>* result = <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(<a class="code hl_functionRef" target="_blank" href="open62541/types_8h.html#ab49966aa2cff36fe08c3052db3b51dd3">UA_Array_new</a>(size, &amp;type));</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <span class="keywordflow">if</span> (result == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        <span class="keywordflow">throw</span> std::bad_alloc();</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    }</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>}</div>
+</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00127" data-start="{" data-end="}">
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#a7442d8afcfb2631ff179801ac8d96e6e">  127</a></span>[[nodiscard]] <span class="keyword">auto</span> <a class="code hl_function" href="namespaceopcua_1_1detail.html#a7442d8afcfb2631ff179801ac8d96e6e">allocateArrayUniquePtr</a>(<span class="keywordtype">size_t</span> size, <span class="keyword">const</span> <a class="code hl_structRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>&amp; type) {</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="keyword">auto</span> deleter = [&amp;type, size](T* native) { <a class="code hl_function" href="namespaceopcua_1_1detail.html#a8e9708d27e1926f62d47789a6b99dc0a">deallocateArray</a>(native, size, type); };</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="keywordflow">return</span> std::unique_ptr&lt;T, decltype(deleter)&gt;(<a class="code hl_function" href="namespaceopcua_1_1detail.html#a92bea411311fb5c975db8166e25f3011">allocateArray&lt;T&gt;</a>(size, type), deleter);</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>}</div>
+</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00133" data-start="{" data-end="}">
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#a50b7a1a1c56c1311c4365d0a71005cc3">  133</a></span>[[nodiscard]] T* <a class="code hl_function" href="namespaceopcua_1_1detail.html#a50b7a1a1c56c1311c4365d0a71005cc3">copyArray</a>(<span class="keyword">const</span> T* src, <span class="keywordtype">size_t</span> size, <span class="keyword">const</span> <a class="code hl_structRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>&amp; type) {</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    T* dst = <a class="code hl_function" href="namespaceopcua_1_1detail.html#a92bea411311fb5c975db8166e25f3011">allocateArray&lt;T&gt;</a>(size, type);</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (!<a class="code hl_variable" href="namespaceopcua_1_1detail.html#a2551600f6cb98793afa727b0d98486e9">isPointerFree&lt;T&gt;</a>) {</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <span class="comment">// NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        std::transform(src, src + size, dst, [&amp;](<span class="keyword">const</span> T&amp; item) { <span class="keywordflow">return</span> <a class="code hl_function" href="namespaceopcua_1_1detail.html#a050e0c852294259d380e48717bc993ec">copy</a>(item, type); });</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        std::copy_n(src, size, dst);</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    }</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <span class="keywordflow">return</span> dst;</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>}</div>
+</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00145" data-start="{" data-end="}">
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#a29bbe807c7534df686abb7e77fa94d28">  145</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespaceopcua_1_1detail.html#a29bbe807c7534df686abb7e77fa94d28">resizeArray</a>(T*&amp; array, <span class="keywordtype">size_t</span>&amp; size, <span class="keywordtype">size_t</span> newSize, <span class="keyword">const</span> <a class="code hl_structRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>&amp; type) {</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    <span class="keywordflow">if</span> (newSize == size) {</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    }</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    T* newArray = <a class="code hl_function" href="namespaceopcua_1_1detail.html#a92bea411311fb5c975db8166e25f3011">allocateArray&lt;T&gt;</a>(newSize, type);</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    std::memcpy(newArray, array, std::min(size, newSize) * <span class="keyword">sizeof</span>(T));</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keywordflow">if</span> (newSize &gt; size) {</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        std::memset(newArray + size, 0, newSize - size);  <span class="comment">// NOLINT</span></div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    }</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    <a class="code hl_function" href="namespaceopcua_1_1detail.html#a8e9708d27e1926f62d47789a6b99dc0a">deallocateArray&lt;T&gt;</a>(array, size, type);</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    array = newArray;</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    size = newSize;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>}</div>
+</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>}  <span class="comment">// namespace opcua::detail</span></div>
 <div class="ttc" id="acommon_8h_html"><div class="ttname"><a href="common_8h.html">common.h</a></div></div>
 <div class="ttc" id="aexception_8hpp_html"><div class="ttname"><a href="exception_8hpp.html">exception.hpp</a></div></div>
-<div class="ttc" id="anamespaceopcua_1_1detail_html"><div class="ttname"><a href="namespaceopcua_1_1detail.html">opcua::detail</a></div><div class="ttdef"><b>Definition</b> <a href="client_8hpp_source.html#l00027">client.hpp:27</a></div></div>
-<div class="ttc" id="anamespaceopcua_1_1detail_html_a050e0c852294259d380e48717bc993ec"><div class="ttname"><a href="namespaceopcua_1_1detail.html#a050e0c852294259d380e48717bc993ec">opcua::detail::copy</a></div><div class="ttdeci">constexpr T copy(const T &amp;src, const UA_DataType &amp;type) noexcept(isPointerFree&lt; T &gt;)</div><div class="ttdef"><b>Definition</b> <a href="#l00074">types_handling.hpp:74</a></div></div>
-<div class="ttc" id="anamespaceopcua_1_1detail_html_a2165c36c5e511be0bfd9601cef3a622f"><div class="ttname"><a href="namespaceopcua_1_1detail.html#a2165c36c5e511be0bfd9601cef3a622f">opcua::detail::allocateUniquePtr</a></div><div class="ttdeci">auto allocateUniquePtr(const UA_DataType &amp;type)</div><div class="ttdef"><b>Definition</b> <a href="#l00068">types_handling.hpp:68</a></div></div>
-<div class="ttc" id="anamespaceopcua_1_1detail_html_a2551600f6cb98793afa727b0d98486e9"><div class="ttname"><a href="namespaceopcua_1_1detail.html#a2551600f6cb98793afa727b0d98486e9">opcua::detail::isPointerFree</a></div><div class="ttdeci">constexpr bool isPointerFree</div><div class="ttdef"><b>Definition</b> <a href="#l00017">types_handling.hpp:17</a></div></div>
-<div class="ttc" id="anamespaceopcua_1_1detail_html_a4646000cf6e99b3c6d09915169a33e1e"><div class="ttname"><a href="namespaceopcua_1_1detail.html#a4646000cf6e99b3c6d09915169a33e1e">opcua::detail::isValidTypeCombination</a></div><div class="ttdeci">constexpr bool isValidTypeCombination(const UA_DataType &amp;type)</div><div class="ttdef"><b>Definition</b> <a href="#l00035">types_handling.hpp:35</a></div></div>
-<div class="ttc" id="anamespaceopcua_1_1detail_html_a50b7a1a1c56c1311c4365d0a71005cc3"><div class="ttname"><a href="namespaceopcua_1_1detail.html#a50b7a1a1c56c1311c4365d0a71005cc3">opcua::detail::copyArray</a></div><div class="ttdeci">T * copyArray(const T *src, size_t size, const UA_DataType &amp;type)</div><div class="ttdef"><b>Definition</b> <a href="#l00110">types_handling.hpp:110</a></div></div>
-<div class="ttc" id="anamespaceopcua_1_1detail_html_a59dd6f1873366732e403e7e77e080b84"><div class="ttname"><a href="namespaceopcua_1_1detail.html#a59dd6f1873366732e403e7e77e080b84">opcua::detail::clear</a></div><div class="ttdeci">constexpr void clear(T &amp;native, const UA_DataType &amp;type) noexcept</div><div class="ttdef"><b>Definition</b> <a href="#l00044">types_handling.hpp:44</a></div></div>
-<div class="ttc" id="anamespaceopcua_1_1detail_html_a6bfe1da0cd011dac8cb6bafd01893a18"><div class="ttname"><a href="namespaceopcua_1_1detail.html#a6bfe1da0cd011dac8cb6bafd01893a18">opcua::detail::allocate</a></div><div class="ttdeci">T * allocate(const UA_DataType &amp;type)</div><div class="ttdef"><b>Definition</b> <a href="#l00058">types_handling.hpp:58</a></div></div>
-<div class="ttc" id="anamespaceopcua_1_1detail_html_a7442d8afcfb2631ff179801ac8d96e6e"><div class="ttname"><a href="namespaceopcua_1_1detail.html#a7442d8afcfb2631ff179801ac8d96e6e">opcua::detail::allocateArrayUniquePtr</a></div><div class="ttdeci">auto allocateArrayUniquePtr(size_t size, const UA_DataType &amp;type)</div><div class="ttdef"><b>Definition</b> <a href="#l00104">types_handling.hpp:104</a></div></div>
-<div class="ttc" id="anamespaceopcua_1_1detail_html_a8db8cebe283317d6690d06ef094c7606"><div class="ttname"><a href="namespaceopcua_1_1detail.html#a8db8cebe283317d6690d06ef094c7606">opcua::detail::deallocate</a></div><div class="ttdeci">void deallocate(T *native, const UA_DataType &amp;type) noexcept</div><div class="ttdef"><b>Definition</b> <a href="#l00052">types_handling.hpp:52</a></div></div>
-<div class="ttc" id="anamespaceopcua_1_1detail_html_a8e9708d27e1926f62d47789a6b99dc0a"><div class="ttname"><a href="namespaceopcua_1_1detail.html#a8e9708d27e1926f62d47789a6b99dc0a">opcua::detail::deallocateArray</a></div><div class="ttdeci">void deallocateArray(T *array, size_t size, const UA_DataType &amp;type) noexcept</div><div class="ttdef"><b>Definition</b> <a href="#l00088">types_handling.hpp:88</a></div></div>
-<div class="ttc" id="anamespaceopcua_1_1detail_html_a92bea411311fb5c975db8166e25f3011"><div class="ttname"><a href="namespaceopcua_1_1detail.html#a92bea411311fb5c975db8166e25f3011">opcua::detail::allocateArray</a></div><div class="ttdeci">T * allocateArray(size_t size, const UA_DataType &amp;type)</div><div class="ttdef"><b>Definition</b> <a href="#l00094">types_handling.hpp:94</a></div></div>
+<div class="ttc" id="anamespaceopcua_1_1detail_html"><div class="ttname"><a href="namespaceopcua_1_1detail.html">opcua::detail</a></div><div class="ttdef"><b>Definition</b> <a href="datatype_8hpp_source.html#l00145">datatype.hpp:145</a></div></div>
+<div class="ttc" id="anamespaceopcua_1_1detail_html_a050e0c852294259d380e48717bc993ec"><div class="ttname"><a href="namespaceopcua_1_1detail.html#a050e0c852294259d380e48717bc993ec">opcua::detail::copy</a></div><div class="ttdeci">constexpr T copy(const T &amp;src, const UA_DataType &amp;type) noexcept(isPointerFree&lt; T &gt;)</div><div class="ttdef"><b>Definition</b> <a href="#l00097">types_handling.hpp:97</a></div></div>
+<div class="ttc" id="anamespaceopcua_1_1detail_html_a2165c36c5e511be0bfd9601cef3a622f"><div class="ttname"><a href="namespaceopcua_1_1detail.html#a2165c36c5e511be0bfd9601cef3a622f">opcua::detail::allocateUniquePtr</a></div><div class="ttdeci">auto allocateUniquePtr(const UA_DataType &amp;type)</div><div class="ttdef"><b>Definition</b> <a href="#l00091">types_handling.hpp:91</a></div></div>
+<div class="ttc" id="anamespaceopcua_1_1detail_html_a2551600f6cb98793afa727b0d98486e9"><div class="ttname"><a href="namespaceopcua_1_1detail.html#a2551600f6cb98793afa727b0d98486e9">opcua::detail::isPointerFree</a></div><div class="ttdeci">constexpr bool isPointerFree</div><div class="ttdef"><b>Definition</b> <a href="#l00018">types_handling.hpp:18</a></div></div>
+<div class="ttc" id="anamespaceopcua_1_1detail_html_a29bbe807c7534df686abb7e77fa94d28"><div class="ttname"><a href="namespaceopcua_1_1detail.html#a29bbe807c7534df686abb7e77fa94d28">opcua::detail::resizeArray</a></div><div class="ttdeci">void resizeArray(T *&amp;array, size_t &amp;size, size_t newSize, const UA_DataType &amp;type)</div><div class="ttdef"><b>Definition</b> <a href="#l00145">types_handling.hpp:145</a></div></div>
+<div class="ttc" id="anamespaceopcua_1_1detail_html_a4646000cf6e99b3c6d09915169a33e1e"><div class="ttname"><a href="namespaceopcua_1_1detail.html#a4646000cf6e99b3c6d09915169a33e1e">opcua::detail::isValidTypeCombination</a></div><div class="ttdeci">constexpr bool isValidTypeCombination(const UA_DataType &amp;type)</div><div class="ttdef"><b>Definition</b> <a href="#l00053">types_handling.hpp:53</a></div></div>
+<div class="ttc" id="anamespaceopcua_1_1detail_html_a50b7a1a1c56c1311c4365d0a71005cc3"><div class="ttname"><a href="namespaceopcua_1_1detail.html#a50b7a1a1c56c1311c4365d0a71005cc3">opcua::detail::copyArray</a></div><div class="ttdeci">T * copyArray(const T *src, size_t size, const UA_DataType &amp;type)</div><div class="ttdef"><b>Definition</b> <a href="#l00133">types_handling.hpp:133</a></div></div>
+<div class="ttc" id="anamespaceopcua_1_1detail_html_a59dd6f1873366732e403e7e77e080b84"><div class="ttname"><a href="namespaceopcua_1_1detail.html#a59dd6f1873366732e403e7e77e080b84">opcua::detail::clear</a></div><div class="ttdeci">constexpr void clear(T &amp;native, const UA_DataType &amp;type) noexcept</div><div class="ttdef"><b>Definition</b> <a href="#l00062">types_handling.hpp:62</a></div></div>
+<div class="ttc" id="anamespaceopcua_1_1detail_html_a6bfe1da0cd011dac8cb6bafd01893a18"><div class="ttname"><a href="namespaceopcua_1_1detail.html#a6bfe1da0cd011dac8cb6bafd01893a18">opcua::detail::allocate</a></div><div class="ttdeci">T * allocate(const UA_DataType &amp;type)</div><div class="ttdef"><b>Definition</b> <a href="#l00081">types_handling.hpp:81</a></div></div>
+<div class="ttc" id="anamespaceopcua_1_1detail_html_a7442d8afcfb2631ff179801ac8d96e6e"><div class="ttname"><a href="namespaceopcua_1_1detail.html#a7442d8afcfb2631ff179801ac8d96e6e">opcua::detail::allocateArrayUniquePtr</a></div><div class="ttdeci">auto allocateArrayUniquePtr(size_t size, const UA_DataType &amp;type)</div><div class="ttdef"><b>Definition</b> <a href="#l00127">types_handling.hpp:127</a></div></div>
+<div class="ttc" id="anamespaceopcua_1_1detail_html_a7c3d4d172f3b383452a77dab5b6bfd9f"><div class="ttname"><a href="namespaceopcua_1_1detail.html#a7c3d4d172f3b383452a77dab5b6bfd9f">opcua::detail::isBorrowed</a></div><div class="ttdeci">constexpr bool isBorrowed(const T &amp;) noexcept</div><div class="ttdef"><b>Definition</b> <a href="#l00036">types_handling.hpp:36</a></div></div>
+<div class="ttc" id="anamespaceopcua_1_1detail_html_a8db8cebe283317d6690d06ef094c7606"><div class="ttname"><a href="namespaceopcua_1_1detail.html#a8db8cebe283317d6690d06ef094c7606">opcua::detail::deallocate</a></div><div class="ttdeci">void deallocate(T *native, const UA_DataType &amp;type) noexcept</div><div class="ttdef"><b>Definition</b> <a href="#l00075">types_handling.hpp:75</a></div></div>
+<div class="ttc" id="anamespaceopcua_1_1detail_html_a8e9708d27e1926f62d47789a6b99dc0a"><div class="ttname"><a href="namespaceopcua_1_1detail.html#a8e9708d27e1926f62d47789a6b99dc0a">opcua::detail::deallocateArray</a></div><div class="ttdeci">void deallocateArray(T *array, size_t size, const UA_DataType &amp;type) noexcept</div><div class="ttdef"><b>Definition</b> <a href="#l00111">types_handling.hpp:111</a></div></div>
+<div class="ttc" id="anamespaceopcua_1_1detail_html_a92bea411311fb5c975db8166e25f3011"><div class="ttname"><a href="namespaceopcua_1_1detail.html#a92bea411311fb5c975db8166e25f3011">opcua::detail::allocateArray</a></div><div class="ttdeci">T * allocateArray(size_t size, const UA_DataType &amp;type)</div><div class="ttdef"><b>Definition</b> <a href="#l00117">types_handling.hpp:117</a></div></div>
 <div class="ttc" id="anamespaceopcua_1_1detail_html_ac0d6cbb3b0e3542b582052e179f65b6d"><div class="ttname"><a href="namespaceopcua_1_1detail.html#ac0d6cbb3b0e3542b582052e179f65b6d">opcua::detail::IsOneOf</a></div><div class="ttdeci">std::disjunction&lt; std::is_same&lt; T, Ts &gt;... &gt; IsOneOf</div><div class="ttdef"><b>Definition</b> <a href="traits_8hpp_source.html#l00019">traits.hpp:19</a></div></div>
 <div class="ttc" id="anamespaceopcua_html_a51131f59e2ce7f22a984fa6577fb2c27"><div class="ttname"><a href="namespaceopcua.html#a51131f59e2ce7f22a984fa6577fb2c27">opcua::throwIfBad</a></div><div class="ttdeci">constexpr void throwIfBad(UA_StatusCode code)</div><div class="ttdoc">Check the status code and throw a BadStatus exception if the status code is bad.</div><div class="ttdef"><b>Definition</b> <a href="exception_8hpp_source.html#l00087">exception.hpp:87</a></div></div>
 <div class="ttc" id="astructUA__DataType_html"><div class="ttname"><a href="open62541/structUA__DataType.html">UA_DataType</a></div></div>
 <div class="ttc" id="astructUA__DataType_html_a5af370acd88614a6869e78bba0c5de17"><div class="ttname"><a href="open62541/structUA__DataType.html#a5af370acd88614a6869e78bba0c5de17">UA_DataType::memSize</a></div><div class="ttdeci">UA_UInt32 memSize</div></div>
+<div class="ttc" id="astructUA__DataValue_html"><div class="ttname"><a href="open62541/structUA__DataValue.html">UA_DataValue</a></div></div>
+<div class="ttc" id="astructUA__ExtensionObject_html"><div class="ttname"><a href="open62541/structUA__ExtensionObject.html">UA_ExtensionObject</a></div></div>
 <div class="ttc" id="astructUA__Guid_html"><div class="ttname"><a href="open62541/structUA__Guid.html">UA_Guid</a></div></div>
+<div class="ttc" id="astructUA__Variant_html"><div class="ttname"><a href="open62541/structUA__Variant.html">UA_Variant</a></div></div>
 <div class="ttc" id="atraits_8hpp_html"><div class="ttname"><a href="traits_8hpp.html">traits.hpp</a></div></div>
 <div class="ttc" id="atypes_8h_html_a01ce3c3b2fb34ef81c97c313f516004e"><div class="ttname"><a href="open62541/types_8h.html#a01ce3c3b2fb34ef81c97c313f516004e">UA_Int32</a></div><div class="ttdeci">int32_t UA_Int32</div></div>
 <div class="ttc" id="atypes_8h_html_a05af722df9c9a11fd6b497a7a35b8cdb"><div class="ttname"><a href="open62541/types_8h.html#a05af722df9c9a11fd6b497a7a35b8cdb">UA_Array_delete</a></div><div class="ttdeci">void UA_Array_delete(void *p, size_t size, const UA_DataType *type)</div></div>
 <div class="ttc" id="atypes_8h_html_a06dc3ec388f93ee9aab177e3b50ca7e4"><div class="ttname"><a href="open62541/types_8h.html#a06dc3ec388f93ee9aab177e3b50ca7e4">UA_copy</a></div><div class="ttdeci">UA_StatusCode UA_copy(const void *src, void *dst, const UA_DataType *type)</div></div>
 <div class="ttc" id="atypes_8h_html_a0a44d61c7e7e9107300c8e477c54bd47"><div class="ttname"><a href="open62541/types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a></div><div class="ttdeci">_UA_BEGIN_DECLS typedef bool UA_Boolean</div></div>
 <div class="ttc" id="atypes_8h_html_a0a5ff540581b2a3ca4757de792c68f05"><div class="ttname"><a href="open62541/types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a></div><div class="ttdeci">uint16_t UA_UInt16</div></div>
+<div class="ttc" id="atypes_8h_html_a1d9cb3b91e317874b51be6471cb370dcad72826b08914adc05ad6fb4e500dd322"><div class="ttname"><a href="open62541/types_8h.html#a1d9cb3b91e317874b51be6471cb370dcad72826b08914adc05ad6fb4e500dd322">UA_EXTENSIONOBJECT_DECODED_NODELETE</a></div><div class="ttdeci">UA_EXTENSIONOBJECT_DECODED_NODELETE</div></div>
 <div class="ttc" id="atypes_8h_html_a2dfa954c25e6984956ab6fa8e8fd73db"><div class="ttname"><a href="open62541/types_8h.html#a2dfa954c25e6984956ab6fa8e8fd73db">UA_Int16</a></div><div class="ttdeci">int16_t UA_Int16</div></div>
 <div class="ttc" id="atypes_8h_html_a4ba04733a2525e207fa5ea5337ad17f3"><div class="ttname"><a href="open62541/types_8h.html#a4ba04733a2525e207fa5ea5337ad17f3">UA_SByte</a></div><div class="ttdeci">int8_t UA_SByte</div></div>
 <div class="ttc" id="atypes_8h_html_a5f0721b034e4c44a7f81589b15ba1baf"><div class="ttname"><a href="open62541/types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a></div><div class="ttdeci">uint32_t UA_UInt32</div></div>
@@ -270,6 +325,7 @@ $(function(){ initResizable(false); });
 <div class="ttc" id="atypes_8h_html_a899228311700e99d006f1ba5bcfcbd02"><div class="ttname"><a href="open62541/types_8h.html#a899228311700e99d006f1ba5bcfcbd02">UA_Float</a></div><div class="ttdeci">float UA_Float</div></div>
 <div class="ttc" id="atypes_8h_html_a8beaefc7873465d6baa54a21634b6ea7"><div class="ttname"><a href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div><div class="ttdeci">uint32_t UA_StatusCode</div></div>
 <div class="ttc" id="atypes_8h_html_a921a4b0f6b27972f427493106673050e"><div class="ttname"><a href="open62541/types_8h.html#a921a4b0f6b27972f427493106673050e">UA_new</a></div><div class="ttdeci">void * UA_new(const UA_DataType *type)</div></div>
+<div class="ttc" id="atypes_8h_html_aa1478e00bedf1421f5f5462e8263c522ae8998cef426fb827da4c155c6791bc16"><div class="ttname"><a href="open62541/types_8h.html#aa1478e00bedf1421f5f5462e8263c522ae8998cef426fb827da4c155c6791bc16">UA_VARIANT_DATA_NODELETE</a></div><div class="ttdeci">UA_VARIANT_DATA_NODELETE</div></div>
 <div class="ttc" id="atypes_8h_html_aac69e6c4659bdcafdb30498200a0ab07"><div class="ttname"><a href="open62541/types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a></div><div class="ttdeci">double UA_Double</div></div>
 <div class="ttc" id="atypes_8h_html_ab49966aa2cff36fe08c3052db3b51dd3"><div class="ttname"><a href="open62541/types_8h.html#ab49966aa2cff36fe08c3052db3b51dd3">UA_Array_new</a></div><div class="ttdeci">void * UA_Array_new(size_t size, const UA_DataType *type)</div></div>
 <div class="ttc" id="atypes_8h_html_ab615e6928fa544fb7caf34c9e241fd4b"><div class="ttname"><a href="open62541/types_8h.html#ab615e6928fa544fb7caf34c9e241fd4b">UA_clear</a></div><div class="ttdeci">void UA_clear(void *p, const UA_DataType *type)</div></div>
@@ -277,7 +333,6 @@ $(function(){ initResizable(false); });
 <div class="ttc" id="atypes_8h_html_ac31865e6fcb9a042b5eaf5a5bd4ed30d"><div class="ttname"><a href="open62541/types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a></div><div class="ttdeci">uint8_t UA_Byte</div></div>
 <div class="ttc" id="atypes_8h_html_ad0d8e52a357b7fbe50a0b93a2b688b51"><div class="ttname"><a href="open62541/types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a></div><div class="ttdeci">uint64_t UA_UInt64</div></div>
 <div class="ttc" id="atypes_8h_html_ae5c13df54009d7a3e374bfc594af8059"><div class="ttname"><a href="open62541/types_8h.html#ae5c13df54009d7a3e374bfc594af8059">UA_Int64</a></div><div class="ttdeci">int64_t UA_Int64</div></div>
-<div class="ttc" id="atypes_8h_html_af27a32f7f16ce2676dfadc56f15282a5"><div class="ttname"><a href="open62541/types_8h.html#af27a32f7f16ce2676dfadc56f15282a5">UA_Array_copy</a></div><div class="ttdeci">UA_StatusCode UA_Array_copy(const void *src, size_t size, void **dst, const UA_DataType *type)</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

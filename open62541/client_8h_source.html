@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541: /home/runner/work/open62541pp/open62541pp/build/doc/open62541/include/open62541/client.h Source File</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.12</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.14</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -297,8 +300,8 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    <a class="code hl_struct" href="structUA__ClientConfig.html">UA_ClientConfig</a> *cc = <a class="code hl_function" href="client_8h.html#a24b90187586fcdc30222c49c11bafb14">UA_Client_getConfig</a>(client);</div>
 <div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    UA_ExtensionObject_clear(&amp;cc-&gt;<a class="code hl_variable" href="structUA__ClientConfig.html#a8b5f3385f794c67139476d5956394963">userIdentityToken</a>);</div>
 <div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    cc-&gt;<a class="code hl_variable" href="structUA__ClientConfig.html#a8b5f3385f794c67139476d5956394963">userIdentityToken</a>.<a class="code hl_variable" href="structUA__ExtensionObject.html#a12f4e0212831d9948cde30506ae08a7f">encoding</a> = <a class="code hl_enumvalue" href="types_8h.html#a1d9cb3b91e317874b51be6471cb370dca948c275d7d1207c9d4c71811022300f9">UA_EXTENSIONOBJECT_DECODED</a>;</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    cc-&gt;<a class="code hl_variable" href="structUA__ClientConfig.html#a8b5f3385f794c67139476d5956394963">userIdentityToken</a>.<a class="code hl_variable" href="structUA__ExtensionObject.html#ad8648a2c3b4da9d8e6b97ab38c1422b0">content</a>.<a class="code hl_variable" href="structUA__ExtensionObject.html#abd6c3a6838c0a3d4f74054f776d4f33f">decoded</a>.<a class="code hl_variable" href="structUA__ExtensionObject.html#a779308659bff83a4a572e6436c1b2c98">type</a> = &amp;<a class="code hl_variable" href="types__generated_8h.html#aba037b86f18a7b7bceef5c098910c2c7">UA_TYPES</a>[<a class="code hl_define" href="types__generated_8h.html#ac190fc61da322a4992541c09e87aee65">UA_TYPES_USERNAMEIDENTITYTOKEN</a>];</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    cc-&gt;<a class="code hl_variable" href="structUA__ClientConfig.html#a8b5f3385f794c67139476d5956394963">userIdentityToken</a>.<a class="code hl_variable" href="structUA__ExtensionObject.html#ad8648a2c3b4da9d8e6b97ab38c1422b0">content</a>.<a class="code hl_variable" href="structUA__ExtensionObject.html#abd6c3a6838c0a3d4f74054f776d4f33f">decoded</a>.<a class="code hl_variable" href="structUA__ExtensionObject.html#a5767c86ad0c1012878e76ddad0ab61eb">data</a> = identityToken;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    cc-&gt;<a class="code hl_variable" href="structUA__ClientConfig.html#a8b5f3385f794c67139476d5956394963">userIdentityToken</a>.<a class="code hl_variable" href="structUA__ExtensionObject.html#a5e917ece86f695dccb530e01bfc35518">content</a>.<a class="code hl_variable" href="structUA__ExtensionObject.html#af57b0cab70d503307e6e901589c28615">decoded</a>.<a class="code hl_variable" href="structUA__ExtensionObject.html#a779308659bff83a4a572e6436c1b2c98">type</a> = &amp;<a class="code hl_variable" href="types__generated_8h.html#aba037b86f18a7b7bceef5c098910c2c7">UA_TYPES</a>[<a class="code hl_define" href="types__generated_8h.html#ac190fc61da322a4992541c09e87aee65">UA_TYPES_USERNAMEIDENTITYTOKEN</a>];</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    cc-&gt;<a class="code hl_variable" href="structUA__ClientConfig.html#a8b5f3385f794c67139476d5956394963">userIdentityToken</a>.<a class="code hl_variable" href="structUA__ExtensionObject.html#a5e917ece86f695dccb530e01bfc35518">content</a>.<a class="code hl_variable" href="structUA__ExtensionObject.html#af57b0cab70d503307e6e901589c28615">decoded</a>.<a class="code hl_variable" href="structUA__ExtensionObject.html#a5767c86ad0c1012878e76ddad0ab61eb">data</a> = identityToken;</div>
 <div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="client_8h.html#a2563462060669577c66dcc3bf02d9c72">UA_Client_connect</a>(client, endpointUrl);</div>
 <div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>}</div>
 <div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span><span class="comment"></span> </div>
@@ -801,9 +804,9 @@ $(function(){ initResizable(false); });
 <div class="ttc" id="astructUA__ExtensionObject_html"><div class="ttname"><a href="structUA__ExtensionObject.html">UA_ExtensionObject</a></div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00701">types.h:701</a></div></div>
 <div class="ttc" id="astructUA__ExtensionObject_html_a12f4e0212831d9948cde30506ae08a7f"><div class="ttname"><a href="structUA__ExtensionObject.html#a12f4e0212831d9948cde30506ae08a7f">UA_ExtensionObject::encoding</a></div><div class="ttdeci">UA_ExtensionObjectEncoding encoding</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00702">types.h:702</a></div></div>
 <div class="ttc" id="astructUA__ExtensionObject_html_a5767c86ad0c1012878e76ddad0ab61eb"><div class="ttname"><a href="structUA__ExtensionObject.html#a5767c86ad0c1012878e76ddad0ab61eb">UA_ExtensionObject::data</a></div><div class="ttdeci">void * data</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00710">types.h:710</a></div></div>
+<div class="ttc" id="astructUA__ExtensionObject_html_a5e917ece86f695dccb530e01bfc35518"><div class="ttname"><a href="structUA__ExtensionObject.html#a5e917ece86f695dccb530e01bfc35518">UA_ExtensionObject::content</a></div><div class="ttdeci">union UA_ExtensionObject::@26 content</div></div>
 <div class="ttc" id="astructUA__ExtensionObject_html_a779308659bff83a4a572e6436c1b2c98"><div class="ttname"><a href="structUA__ExtensionObject.html#a779308659bff83a4a572e6436c1b2c98">UA_ExtensionObject::type</a></div><div class="ttdeci">const UA_DataType * type</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00709">types.h:709</a></div></div>
-<div class="ttc" id="astructUA__ExtensionObject_html_abd6c3a6838c0a3d4f74054f776d4f33f"><div class="ttname"><a href="structUA__ExtensionObject.html#abd6c3a6838c0a3d4f74054f776d4f33f">UA_ExtensionObject::decoded</a></div><div class="ttdeci">struct UA_ExtensionObject::@25::@27 decoded</div></div>
-<div class="ttc" id="astructUA__ExtensionObject_html_ad8648a2c3b4da9d8e6b97ab38c1422b0"><div class="ttname"><a href="structUA__ExtensionObject.html#ad8648a2c3b4da9d8e6b97ab38c1422b0">UA_ExtensionObject::content</a></div><div class="ttdeci">union UA_ExtensionObject::@25 content</div></div>
+<div class="ttc" id="astructUA__ExtensionObject_html_af57b0cab70d503307e6e901589c28615"><div class="ttname"><a href="structUA__ExtensionObject.html#af57b0cab70d503307e6e901589c28615">UA_ExtensionObject::decoded</a></div><div class="ttdeci">struct UA_ExtensionObject::@26::@28 decoded</div></div>
 <div class="ttc" id="astructUA__Logger_html"><div class="ttname"><a href="structUA__Logger.html">UA_Logger</a></div><div class="ttdef"><b>Definition</b> <a href="log_8h_source.html#l00039">log.h:39</a></div></div>
 <div class="ttc" id="astructUA__NodeId_html"><div class="ttname"><a href="structUA__NodeId.html">UA_NodeId</a></div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00283">types.h:283</a></div></div>
 <div class="ttc" id="astructUA__ReadRequest_html"><div class="ttname"><a href="structUA__ReadRequest.html">UA_ReadRequest</a></div><div class="ttdef"><b>Definition</b> <a href="types__generated_8h_source.html#l01187">types_generated.h:1187</a></div></div>

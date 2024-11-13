@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: /home/runner/work/open62541pp/open62541pp/include/open62541pp/detail/types_handling.hpp File Reference</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -101,6 +104,7 @@ $(function(){ initResizable(false); });
 <div class="contents">
 <div class="textblock"><code>#include &lt;algorithm&gt;</code><br />
 <code>#include &lt;cassert&gt;</code><br />
+<code>#include &lt;cstring&gt;</code><br />
 <code>#include &lt;memory&gt;</code><br />
 <code>#include &lt;new&gt;</code><br />
 <code>#include &quot;<a class="el" href="common_8h_source.html">open62541pp/detail/open62541/common.h</a>&quot;</code><br />
@@ -114,7 +118,7 @@ Include dependency graph for types_handling.hpp:</div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="types__handling_8hpp__dep__incl.svg" width="4268" height="1532"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="types__handling_8hpp__dep__incl.svg" width="4975" height="1107"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="types__handling_8hpp_source.html">Go to the source code of this file.</a></p>
@@ -128,6 +132,15 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a7c3d4d172f3b383452a77dab5b6bfd9f" id="r_a7c3d4d172f3b383452a77dab5b6bfd9f"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a7c3d4d172f3b383452a77dab5b6bfd9f"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a7c3d4d172f3b383452a77dab5b6bfd9f">opcua::detail::isBorrowed</a> (const T &amp;) noexcept</td></tr>
+<tr class="separator:a7c3d4d172f3b383452a77dab5b6bfd9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac47cfeae2d11c4a35879789ab4099a1f" id="r_ac47cfeae2d11c4a35879789ab4099a1f"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ac47cfeae2d11c4a35879789ab4099a1f">opcua::detail::isBorrowed</a> (const <a class="elRef" target="_blank" href="open62541/structUA__Variant.html">UA_Variant</a> &amp;native) noexcept</td></tr>
+<tr class="separator:ac47cfeae2d11c4a35879789ab4099a1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c72ae02a17e47035dc3a155261c63ca" id="r_a8c72ae02a17e47035dc3a155261c63ca"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a8c72ae02a17e47035dc3a155261c63ca">opcua::detail::isBorrowed</a> (const <a class="elRef" target="_blank" href="open62541/structUA__DataValue.html">UA_DataValue</a> &amp;native) noexcept</td></tr>
+<tr class="separator:a8c72ae02a17e47035dc3a155261c63ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee420e7d5deff78111e8cc63aabb8c00" id="r_aee420e7d5deff78111e8cc63aabb8c00"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#aee420e7d5deff78111e8cc63aabb8c00">opcua::detail::isBorrowed</a> (const <a class="elRef" target="_blank" href="open62541/structUA__ExtensionObject.html">UA_ExtensionObject</a> &amp;native) noexcept</td></tr>
+<tr class="separator:aee420e7d5deff78111e8cc63aabb8c00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4646000cf6e99b3c6d09915169a33e1e" id="r_a4646000cf6e99b3c6d09915169a33e1e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a4646000cf6e99b3c6d09915169a33e1e"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a4646000cf6e99b3c6d09915169a33e1e">opcua::detail::isValidTypeCombination</a> (const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;type)</td></tr>
 <tr class="separator:a4646000cf6e99b3c6d09915169a33e1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -158,6 +171,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a50b7a1a1c56c1311c4365d0a71005cc3" id="r_a50b7a1a1c56c1311c4365d0a71005cc3"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a50b7a1a1c56c1311c4365d0a71005cc3"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a50b7a1a1c56c1311c4365d0a71005cc3">opcua::detail::copyArray</a> (const T *src, size_t size, const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;type)</td></tr>
 <tr class="separator:a50b7a1a1c56c1311c4365d0a71005cc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29bbe807c7534df686abb7e77fa94d28" id="r_a29bbe807c7534df686abb7e77fa94d28"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a29bbe807c7534df686abb7e77fa94d28"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a29bbe807c7534df686abb7e77fa94d28">opcua::detail::resizeArray</a> (T *&amp;array, size_t &amp;size, size_t newSize, const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;type)</td></tr>
+<tr class="separator:a29bbe807c7534df686abb7e77fa94d28"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>

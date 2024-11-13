@@ -1,7 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
 <area shape="rect" id="Node000000" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="5,13,164,53"/>
-<area shape="rect" id="Node000001" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="212,5,435,60"/>
-<area shape="poly" id="edge179_Node000000_Node000001" title=" " alt="" coords="178,30,212,30,212,35,178,35"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1QualifiedName.html" title="UA_QualifiedName wrapper class." alt="" coords="483,20,649,45"/>
-<area shape="poly" id="edge180_Node000001_Node000002" title=" " alt="" coords="448,30,482,30,482,35,448,35"/>
+<area shape="rect" id="Node000001" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="212,5,444,60"/>
+<area shape="poly" id="edge174_Node000000_Node000001" title=" " alt="" coords="178,30,212,30,212,35,178,35"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1NodeAttributes.html" title="UA_NodeAttributes wrapper class." alt="" coords="492,20,659,45"/>
+<area shape="poly" id="edge175_Node000001_Node000002" title=" " alt="" coords="458,30,492,30,492,35,458,35"/>
 </map>

@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: Error handling</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -119,7 +122,7 @@ Exceptions</h1>
 <div class="ttc" id="aclassopcua_1_1BadStatus_html_aa157f985a878295568af33aa718cf520"><div class="ttname"><a href="classopcua_1_1BadStatus.html#aa157f985a878295568af33aa718cf520">opcua::BadStatus::code</a></div><div class="ttdeci">UA_StatusCode code() const noexcept</div><div class="ttdef"><b>Definition</b> <a href="exception_8hpp_source.html#l00020">exception.hpp:20</a></div></div>
 <div class="ttc" id="aclassopcua_1_1BadStatus_html_ae28cf76cb44982688d768f4f64b630b6"><div class="ttname"><a href="classopcua_1_1BadStatus.html#ae28cf76cb44982688d768f4f64b630b6">opcua::BadStatus::what</a></div><div class="ttdeci">const char * what() const noexcept override</div><div class="ttdef"><b>Definition</b> <a href="exception_8hpp_source.html#l00024">exception.hpp:24</a></div></div>
 <div class="ttc" id="aclassopcua_1_1NodeId_html"><div class="ttname"><a href="classopcua_1_1NodeId.html">opcua::NodeId</a></div><div class="ttdoc">UA_NodeId wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00590">types.hpp:590</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Node_html"><div class="ttname"><a href="classopcua_1_1Node.html">opcua::Node</a></div><div class="ttdoc">High-level node class to access node attribute, browse and populate address space.</div><div class="ttdef"><b>Definition</b> <a href="server_8hpp_source.html#l00027">server.hpp:27</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Node_html"><div class="ttname"><a href="classopcua_1_1Node.html">opcua::Node</a></div><div class="ttdoc">High-level node class to access node attribute, browse and populate address space.</div><div class="ttdef"><b>Definition</b> <a href="server_8hpp_source.html#l00030">server.hpp:30</a></div></div>
 <div class="ttc" id="agroup__NodeIds_html_ggab93e889b7152d5a78a993070276d1a70a0d8ba6d48210c58515c100ffcdc9b1b2"><div class="ttname"><a href="group__NodeIds.html#ggab93e889b7152d5a78a993070276d1a70a0d8ba6d48210c58515c100ffcdc9b1b2">opcua::VariableId::Server_ServerStatus_CurrentTime</a></div><div class="ttdeci">@ Server_ServerStatus_CurrentTime</div></div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md20"></a>
 Result type</h1>
@@ -146,7 +149,7 @@ Result type</h1>
 <div class="ttc" id="aclassopcua_1_1StatusCode_html_aa8edfc4253bc97d93129d7b123ab468f"><div class="ttname"><a href="classopcua_1_1StatusCode.html#aa8edfc4253bc97d93129d7b123ab468f">opcua::StatusCode::name</a></div><div class="ttdeci">std::string_view name() const noexcept</div><div class="ttdoc">Get human-readable name of the StatusCode.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00061">types.hpp:61</a></div></div>
 <div class="ttc" id="aclassopcua_1_1StatusCode_html_ace5935f872494fe518def45b1105f312"><div class="ttname"><a href="classopcua_1_1StatusCode.html#ace5935f872494fe518def45b1105f312">opcua::StatusCode::get</a></div><div class="ttdeci">constexpr UA_StatusCode get() const noexcept</div><div class="ttdoc">Explicitly get underlying UA_StatusCode.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00053">types.hpp:53</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Variant_html"><div class="ttname"><a href="classopcua_1_1Variant.html">opcua::Variant</a></div><div class="ttdoc">UA_Variant wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00887">types.hpp:887</a></div></div>
-<div class="ttc" id="agroup__Read_html_gaaf1c6945f6ca882fdafa7d3be783f68c"><div class="ttname"><a href="group__Read.html#gaaf1c6945f6ca882fdafa7d3be783f68c">opcua::services::readValue</a></div><div class="ttdeci">Result&lt; Variant &gt; readValue(T &amp;connection, const NodeId &amp;id) noexcept</div><div class="ttdoc">Read the AttributeId::Value attribute of a node.</div><div class="ttdef"><b>Definition</b> <a href="attribute__highlevel_8hpp_source.html#l00648">attribute_highlevel.hpp:648</a></div></div>
+<div class="ttc" id="agroup__Read_html_gaaf1c6945f6ca882fdafa7d3be783f68c"><div class="ttname"><a href="group__Read.html#gaaf1c6945f6ca882fdafa7d3be783f68c">opcua::services::readValue</a></div><div class="ttdeci">Result&lt; Variant &gt; readValue(T &amp;connection, const NodeId &amp;id) noexcept</div><div class="ttdoc">Read the AttributeId::Value attribute of a node.</div><div class="ttdef"><b>Definition</b> <a href="attribute__highlevel_8hpp_source.html#l00595">attribute_highlevel.hpp:595</a></div></div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md21"></a>
 Error propagation is user callbacks</h1>
 <p>Since callbacks are executed within the open62541 C event loop, which does not support exceptions, any exceptions thrown inside user-defined callbacks are automatically caught and stored by <a class="el" href="classopcua_1_1detail_1_1ExceptionCatcher.html" title="Catch &amp; store exceptions from user-defined callbacks in an exception-unaware context (open62541).">opcua::detail::ExceptionCatcher</a>. These exceptions are then propagated to the <a class="el" href="classopcua_1_1Client.html#a8b1a8e65b22a27b245dd478170e4922d" title="Run the client&#39;s main loop by. This method will block until Client::stop is called.">opcua::Client::run()</a> and <a class="el" href="classopcua_1_1Server.html#a7346a714c85e2d99fc8bc9fd1dd31d6d" title="Run the server&#39;s main loop. This method will block until Server::stop is called.">opcua::Server::run()</a> functions, ensuring they can be handled properly.</p>
@@ -162,7 +165,7 @@ Error propagation is user callbacks</h1>
 <div class="line">} <span class="keywordflow">catch</span> (<span class="keyword">const</span> std::exception&amp; e) {</div>
 <div class="line">    std::cerr &lt;&lt; e.what() &lt;&lt; std::endl;</div>
 <div class="line">}</div>
-<div class="ttc" id="aclassopcua_1_1Client_html"><div class="ttname"><a href="classopcua_1_1Client.html">opcua::Client</a></div><div class="ttdoc">High-level client class.</div><div class="ttdef"><b>Definition</b> <a href="client_8hpp_source.html#l00063">client.hpp:63</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Client_html"><div class="ttname"><a href="classopcua_1_1Client.html">opcua::Client</a></div><div class="ttdoc">High-level client class.</div><div class="ttdef"><b>Definition</b> <a href="client_8hpp_source.html#l00121">client.hpp:121</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Client_html_a6dbd84c74a6214369470379a355555ab"><div class="ttname"><a href="classopcua_1_1Client.html#a6dbd84c74a6214369470379a355555ab">opcua::Client::connect</a></div><div class="ttdeci">void connect(std::string_view endpointUrl)</div><div class="ttdoc">Connect to the selected server.</div></div>
 <div class="ttc" id="aclassopcua_1_1Client_html_a84ce29636803d55d617f09f70a82ae48"><div class="ttname"><a href="classopcua_1_1Client.html#a84ce29636803d55d617f09f70a82ae48">opcua::Client::onSessionActivated</a></div><div class="ttdeci">void onSessionActivated(StateCallback callback)</div><div class="ttdoc">Set a state callback that will be called after the session is activated.</div></div>
 <div class="ttc" id="aclassopcua_1_1Client_html_a8b1a8e65b22a27b245dd478170e4922d"><div class="ttname"><a href="classopcua_1_1Client.html#a8b1a8e65b22a27b245dd478170e4922d">opcua::Client::run</a></div><div class="ttdeci">void run()</div><div class="ttdoc">Run the client's main loop by. This method will block until Client::stop is called.</div></div>

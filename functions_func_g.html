@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: Class Members - Functions</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -117,6 +120,8 @@ $(function(){ initResizable(false); });
 <li>getBrowseName()&#160;:&#160;<a class="el" href="classopcua_1_1AddNodesItem.html#a5311469873122ecdaf4cf1c2048027c4">opcua::AddNodesItem</a>, <a class="el" href="classopcua_1_1ReferenceDescription.html#aa42d49897f1edd47c48c26106dcf8dff">opcua::ReferenceDescription</a></li>
 <li>getBrowsePath()&#160;:&#160;<a class="el" href="classopcua_1_1AttributeOperand.html#a9c9f4fc01a18b2250161ce8df48d662d">opcua::AttributeOperand</a>, <a class="el" href="classopcua_1_1SimpleAttributeOperand.html#a6770cd6d2a29b98a39661ac63c53fcde">opcua::SimpleAttributeOperand</a></li>
 <li>getBrowsePaths()&#160;:&#160;<a class="el" href="classopcua_1_1TranslateBrowsePathsToNodeIdsRequest.html#a69982d7910dd296599c8e759b6c95e96">opcua::TranslateBrowsePathsToNodeIdsRequest</a></li>
+<li>getBuildDate()&#160;:&#160;<a class="el" href="classopcua_1_1BuildInfo.html#a9b272eb6694656f2e72dc126c80a9610">opcua::BuildInfo</a></li>
+<li>getBuildNumber()&#160;:&#160;<a class="el" href="classopcua_1_1BuildInfo.html#a5b005c61fa9983477db01e0a5f733e90">opcua::BuildInfo</a></li>
 <li>getCertificateData()&#160;:&#160;<a class="el" href="classopcua_1_1X509IdentityToken.html#ae6fb9755c7dcf0a3a9bc29b2c9b091f6">opcua::X509IdentityToken</a></li>
 <li>getContinuationPoint()&#160;:&#160;<a class="el" href="classopcua_1_1BrowseResult.html#a4f7dcd7ed74c32f38ed7effe0c38001b">opcua::BrowseResult</a></li>
 <li>getContinuationPoints()&#160;:&#160;<a class="el" href="classopcua_1_1BrowseNextRequest.html#add1ab05e12a93868825e54fb7339b7c6">opcua::BrowseNextRequest</a></li>
@@ -177,6 +182,7 @@ $(function(){ initResizable(false); });
 <li>getLinksToRemove()&#160;:&#160;<a class="el" href="classopcua_1_1SetTriggeringRequest.html#a61590bededc503ca22887f5ab44bd4aa">opcua::SetTriggeringRequest</a></li>
 <li>getLocale()&#160;:&#160;<a class="el" href="classopcua_1_1DiagnosticInfo.html#a700712d099ee72c68007fe7e0d216a1b">opcua::DiagnosticInfo</a>, <a class="el" href="classopcua_1_1LocalizedText.html#aa010d12fecf11b64060756f8d41299c1">opcua::LocalizedText</a></li>
 <li>getLocalizedText()&#160;:&#160;<a class="el" href="classopcua_1_1DiagnosticInfo.html#a6ddf2b2867f9ca89922ba7c070d2782a">opcua::DiagnosticInfo</a></li>
+<li>getManufacturerName()&#160;:&#160;<a class="el" href="classopcua_1_1BuildInfo.html#af8c9f7c05c8e924d1103bea570346ff9">opcua::BuildInfo</a></li>
 <li>getMaxAge()&#160;:&#160;<a class="el" href="classopcua_1_1ReadRequest.html#a5ae636d1332c4e79c50c2c56178f6fbb">opcua::ReadRequest</a></li>
 <li>getMaxNotificationsPerPublish()&#160;:&#160;<a class="el" href="classopcua_1_1CreateSubscriptionRequest.html#afde0e1c71f9acdd7b29eab49d8156072">opcua::CreateSubscriptionRequest</a>, <a class="el" href="classopcua_1_1ModifySubscriptionRequest.html#ac8bdbae0c008ff93474f35b590fecc63">opcua::ModifySubscriptionRequest</a></li>
 <li>getMaxStringLength()&#160;:&#160;<a class="el" href="classopcua_1_1StructureField.html#a06fefc38fd3f8d1399dc71e7db6c54a7">opcua::StructureField</a></li>
@@ -215,7 +221,8 @@ $(function(){ initResizable(false); });
 <li>getPolicyId()&#160;:&#160;<a class="el" href="classopcua_1_1AnonymousIdentityToken.html#a5318d8823d733868a2163edffbc0b1ae">opcua::AnonymousIdentityToken</a>, <a class="el" href="classopcua_1_1IssuedIdentityToken.html#a2d8d1e1d8ac8a17c3159c6dc0ed882c3">opcua::IssuedIdentityToken</a>, <a class="el" href="classopcua_1_1UserIdentityToken.html#a5bd29c0e6b9d8e77090c26b15991b909">opcua::UserIdentityToken</a>, <a class="el" href="classopcua_1_1UserNameIdentityToken.html#adc52eb435bac91bffa9bd470f7132b4c">opcua::UserNameIdentityToken</a>, <a class="el" href="classopcua_1_1UserTokenPolicy.html#ac27acb7e2e6bb70c83d395eb31d0de01">opcua::UserTokenPolicy</a>, <a class="el" href="classopcua_1_1X509IdentityToken.html#ae25df4eabe2ca7546e573b47ab9ce3c0">opcua::X509IdentityToken</a></li>
 <li>getPriority()&#160;:&#160;<a class="el" href="classopcua_1_1CreateSubscriptionRequest.html#acf3b6fb3754e83c1c4bbcf3b4e5b37f6">opcua::CreateSubscriptionRequest</a>, <a class="el" href="classopcua_1_1ModifySubscriptionRequest.html#a998e006ff822842150963bed33e04472">opcua::ModifySubscriptionRequest</a></li>
 <li>getProcessingInterval()&#160;:&#160;<a class="el" href="classopcua_1_1AggregateFilter.html#a4ba285c0a836aeb9b6f252f26f96c5f5">opcua::AggregateFilter</a></li>
-<li>getProductUri()&#160;:&#160;<a class="el" href="classopcua_1_1ApplicationDescription.html#aba5545906a0676b2921a774ae5d3ddb0">opcua::ApplicationDescription</a></li>
+<li>getProductName()&#160;:&#160;<a class="el" href="classopcua_1_1BuildInfo.html#aa7c5b64b1b67e315f1869fed098e9d56">opcua::BuildInfo</a></li>
+<li>getProductUri()&#160;:&#160;<a class="el" href="classopcua_1_1ApplicationDescription.html#aba5545906a0676b2921a774ae5d3ddb0">opcua::ApplicationDescription</a>, <a class="el" href="classopcua_1_1BuildInfo.html#a08ed3f472c445e2c2d4e3fb5ad0a4e67">opcua::BuildInfo</a></li>
 <li>getPublishingEnabled()&#160;:&#160;<a class="el" href="classopcua_1_1CreateSubscriptionRequest.html#a08f76a8ef1921788a5280541a8a0ada0">opcua::CreateSubscriptionRequest</a>, <a class="el" href="classopcua_1_1SetPublishingModeRequest.html#aafede4679ab1d3fdc10492f24b9d9403">opcua::SetPublishingModeRequest</a></li>
 <li>getQueueSize()&#160;:&#160;<a class="el" href="classopcua_1_1MonitoringParameters.html#a07d97e64a9afa90d1c85f72a45f0a72e">opcua::MonitoringParameters</a></li>
 <li>getReferences()&#160;:&#160;<a class="el" href="classopcua_1_1BrowseResult.html#a261fbc67c73d9cf8d1f553a9ed008328">opcua::BrowseResult</a></li>
@@ -262,6 +269,7 @@ $(function(){ initResizable(false); });
 <li>getServiceResult()&#160;:&#160;<a class="el" href="classopcua_1_1ResponseHeader.html#ac362fec8c2598577aa98e8edede2ae28">opcua::ResponseHeader</a></li>
 <li>getSessionAttribute()&#160;:&#160;<a class="el" href="classopcua_1_1Session.html#a72211283db8536005f89cfdf06d39402">opcua::Session</a></li>
 <li>getSessions()&#160;:&#160;<a class="el" href="classopcua_1_1Server.html#a2c27e90f1fbb00a064f06b94e32a6eef">opcua::Server</a></li>
+<li>getSoftwareVersion()&#160;:&#160;<a class="el" href="classopcua_1_1BuildInfo.html#a03105702151dc0f5c0c41fd417bdaa64">opcua::BuildInfo</a></li>
 <li>getSourceNodeId()&#160;:&#160;<a class="el" href="classopcua_1_1AddReferencesItem.html#aa289bd9dc777f7fb7adf272821433670">opcua::AddReferencesItem</a>, <a class="el" href="classopcua_1_1DeleteReferencesItem.html#a5a11cec3ff0b93da4f74f99165f285fd">opcua::DeleteReferencesItem</a></li>
 <li>getSourcePicoseconds()&#160;:&#160;<a class="el" href="classopcua_1_1DataValue.html#ad86005b9515a9002977481a872b8dc7d">opcua::DataValue</a></li>
 <li>getSourceTimestamp()&#160;:&#160;<a class="el" href="classopcua_1_1DataValue.html#af7a89342dbd67f06b88583da51f4bee6">opcua::DataValue</a></li>

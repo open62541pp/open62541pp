@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: Class Members</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -98,8 +101,10 @@ $(function(){ initResizable(false); });
 <li>DataChangeFilter()&#160;:&#160;<a class="el" href="classopcua_1_1DataChangeFilter.html#a09221c28bde1e3822e748f0d053a8c41">opcua::DataChangeFilter</a></li>
 <li>dataSource&#160;:&#160;<a class="el" href="structopcua_1_1detail_1_1NodeContext.html#a1e5c1ded16a9b42988c1a62effb5d1a4">opcua::detail::NodeContext</a></li>
 <li>DataType()&#160;:&#160;<a class="el" href="classopcua_1_1DataType.html#a9ecc867e6773904f5c8bb65e43d69145">opcua::DataType</a></li>
+<li>dataTypeArray&#160;:&#160;<a class="el" href="structopcua_1_1detail_1_1ClientContext.html#aebdb7b4c4f7e2b514ac2449c4edbb7d9">opcua::detail::ClientContext</a>, <a class="el" href="structopcua_1_1detail_1_1ServerContext.html#af8d83adf86b312b2e89a3ccce120298e">opcua::detail::ServerContext</a></li>
 <li>DataTypeAttributes()&#160;:&#160;<a class="el" href="classopcua_1_1DataTypeAttributes.html#ad5d04276b03eb0f5024496b9964b734f">opcua::DataTypeAttributes</a></li>
 <li>DataTypeBuilder&#160;:&#160;<a class="el" href="classopcua_1_1DataTypeBuilder.html#afcdbb2ff8c2b8cff554708ba72b09c55">opcua::DataTypeBuilder&lt; T, Tag, U &gt;</a></li>
+<li>dataTypes&#160;:&#160;<a class="el" href="structopcua_1_1detail_1_1ClientContext.html#a8290a4880d2f238dff3337e231fc7692">opcua::detail::ClientContext</a>, <a class="el" href="structopcua_1_1detail_1_1ServerContext.html#ae0aa913a051703a3f081a501417ba7bf">opcua::detail::ServerContext</a></li>
 <li>DataValue()&#160;:&#160;<a class="el" href="classopcua_1_1DataValue.html#a2f00daa230f2c3ac401ad9fdcf16fa1e">opcua::DataValue</a></li>
 <li>DateTime()&#160;:&#160;<a class="el" href="classopcua_1_1DateTime.html#aaed4988ef6c14a612aa17a5f6487c976">opcua::DateTime</a></li>
 <li>DefaultClock&#160;:&#160;<a class="el" href="classopcua_1_1DateTime.html#ae7375ebfe4e6809021b759bee9774329">opcua::DateTime</a></li>
@@ -108,19 +113,22 @@ $(function(){ initResizable(false); });
 <li>deleteMonitoredItem()&#160;:&#160;<a class="el" href="classopcua_1_1MonitoredItem.html#a604297e1c7c549f17da7338a02f03b22">opcua::MonitoredItem&lt; Connection &gt;</a></li>
 <li>DeleteMonitoredItemsRequest()&#160;:&#160;<a class="el" href="classopcua_1_1DeleteMonitoredItemsRequest.html#a0409322595f59097ea9666f022eecf55">opcua::DeleteMonitoredItemsRequest</a></li>
 <li>deleteNode()&#160;:&#160;<a class="el" href="classopcua_1_1Node.html#a5d3b26bc67e5bc2dfc43ce6d9cf889b1">opcua::Node&lt; Connection &gt;</a></li>
+<li>deleteNodeAsync()&#160;:&#160;<a class="el" href="classopcua_1_1Node.html#a5dacbfb4bb6b394d57eaad591253cc87">opcua::Node&lt; Connection &gt;</a></li>
 <li>DeleteNodesItem()&#160;:&#160;<a class="el" href="classopcua_1_1DeleteNodesItem.html#a7fec8c6d21a57c30f25564053507d4e2">opcua::DeleteNodesItem</a></li>
 <li>DeleteNodesRequest()&#160;:&#160;<a class="el" href="classopcua_1_1DeleteNodesRequest.html#a64632194579b519f3c0fac61c0044692">opcua::DeleteNodesRequest</a></li>
-<li>deleteReference()&#160;:&#160;<a class="el" href="classopcua_1_1Node.html#aa242738101de9ad5e79b2ee1de04c943">opcua::Node&lt; Connection &gt;</a></li>
+<li>deleteReference()&#160;:&#160;<a class="el" href="classopcua_1_1Node.html#a673cafcb707902bbb6ba44c0d6a3bc8d">opcua::Node&lt; Connection &gt;</a></li>
+<li>deleteReferenceAsync()&#160;:&#160;<a class="el" href="classopcua_1_1Node.html#a6df790274c857743a41e17cc469bae5d">opcua::Node&lt; Connection &gt;</a></li>
 <li>DeleteReferencesItem()&#160;:&#160;<a class="el" href="classopcua_1_1DeleteReferencesItem.html#abb961136b9314009690cc9ec01eb3e06">opcua::DeleteReferencesItem</a></li>
 <li>DeleteReferencesRequest()&#160;:&#160;<a class="el" href="classopcua_1_1DeleteReferencesRequest.html#a9a13785ce63f0c01d79f4e4a6c637e8e">opcua::DeleteReferencesRequest</a></li>
 <li>deleteSessionAttribute()&#160;:&#160;<a class="el" href="classopcua_1_1Session.html#ae39b29659ac821354ce4bb24233f2b87">opcua::Session</a></li>
 <li>deleteSubscription()&#160;:&#160;<a class="el" href="classopcua_1_1Subscription.html#a0eedd9ae5361667d0c8402bc52495d66">opcua::Subscription&lt; Connection &gt;</a></li>
 <li>DeleteSubscriptionsRequest()&#160;:&#160;<a class="el" href="classopcua_1_1DeleteSubscriptionsRequest.html#a010e5e3e2734e8d5a8db49928ea7b8b9">opcua::DeleteSubscriptionsRequest</a></li>
-<li>detail::getConnection&#160;:&#160;<a class="el" href="classopcua_1_1Client.html#aa2312224ff523df76321878c1116bac0">opcua::Client</a>, <a class="el" href="classopcua_1_1Server.html#acc82a6662ea510addcb31044a5086c7d">opcua::Server</a></li>
+<li>detail::getContext&#160;:&#160;<a class="el" href="classopcua_1_1Client.html#a0a96cab312749ac9cb732f1705fbff06">opcua::Client</a>, <a class="el" href="classopcua_1_1Server.html#ad36e4ae5f38c24406d75aface49b41f4">opcua::Server</a></li>
 <li>difference_type&#160;:&#160;<a class="el" href="classopcua_1_1detail_1_1StringWrapper.html#ae9e42f4a4b940f584826e269046dff8a">opcua::detail::StringWrapper&lt; T, typeIndex, CharT &gt;</a>, <a class="el" href="classopcua_1_1Span.html#ab8c77debe56a4b74d3d37cc5ade01121">opcua::Span&lt; T &gt;</a></li>
 <li>dimensions()&#160;:&#160;<a class="el" href="classopcua_1_1NumericRange.html#a69ab86f49ef89215b2cc1362cc9d88d9">opcua::NumericRange</a></li>
 <li>discardOldest&#160;:&#160;<a class="el" href="structopcua_1_1services_1_1MonitoringParametersEx.html#af0cebd1ea54bbdf3d4174f847d3e007f">opcua::services::MonitoringParametersEx</a></li>
-<li>disconnect()&#160;:&#160;<a class="el" href="classopcua_1_1Client.html#ae03a726547da46698d93e781f2dfcff9">opcua::Client</a></li>
+<li>disconnect()&#160;:&#160;<a class="el" href="classopcua_1_1Client.html#a012374e064a1f030d560d73490bcc431">opcua::Client</a></li>
+<li>disconnectAsync()&#160;:&#160;<a class="el" href="classopcua_1_1Client.html#aa023216372c0abbf9a130aec01b23969">opcua::Client</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

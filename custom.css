@@ -1,0 +1,6 @@
+@media (prefers-color-scheme: dark) {
+  html:not(.light-mode) {
+    --page-background-color: #13171f;
+    --page-foreground-color: #c2c7d0;
+  }
+}

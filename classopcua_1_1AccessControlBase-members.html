@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: Member List</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -107,10 +110,8 @@ $(function(){ initResizable(false); });
   <tr class="even"><td class="entry"><a class="el" href="classopcua_1_1AccessControlBase.html#a385130ee1c59032ba747332e70750500">allowHistoryDelete</a>(Session &amp;session, const NodeId &amp;nodeId, DateTime startTimestamp, DateTime endTimestamp, bool isDeleteModified)=0</td><td class="entry"><a class="el" href="classopcua_1_1AccessControlBase.html">opcua::AccessControlBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classopcua_1_1AccessControlBase.html#aedb08b1a04530b9e9c3ac768b112cc34">allowHistoryUpdate</a>(Session &amp;session, const NodeId &amp;nodeId, PerformUpdateType performInsertReplace, const DataValue &amp;value)=0</td><td class="entry"><a class="el" href="classopcua_1_1AccessControlBase.html">opcua::AccessControlBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classopcua_1_1AccessControlBase.html#aed0e1174d749993b0381ac3d66dbe0d8">allowTransferSubscription</a>(Session &amp;oldSession, Session &amp;newSession)=0</td><td class="entry"><a class="el" href="classopcua_1_1AccessControlBase.html">opcua::AccessControlBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classopcua_1_1AccessControlBase.html#a0e0a21f5d11ba6ac0a895fa910821adf">clear</a>(UA_AccessControl &amp;ac) noexcept override</td><td class="entry"><a class="el" href="classopcua_1_1AccessControlBase.html">opcua::AccessControlBase</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classopcua_1_1PluginAdapter.html#a4fdf18c3a057088d4dacc2f2369624da">opcua::PluginAdapter&lt; UA_AccessControl &gt;::clear</a>(UA_AccessControl *&amp;plugin) noexcept</td><td class="entry"><a class="el" href="classopcua_1_1PluginAdapter.html">opcua::PluginAdapter&lt; UA_AccessControl &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classopcua_1_1AccessControlBase.html#af035b0dca438f1d71591fa50493bb70c">closeSession</a>(Session &amp;session)=0</td><td class="entry"><a class="el" href="classopcua_1_1AccessControlBase.html">opcua::AccessControlBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classopcua_1_1AccessControlBase.html#a8dd48baffa342eda1948d01a83f9a983">create</a>() override</td><td class="entry"><a class="el" href="classopcua_1_1AccessControlBase.html">opcua::AccessControlBase</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classopcua_1_1AccessControlBase.html#aaa15bed5cdf49aec7383adc86edea03b">create</a>(bool ownsAdapter) override</td><td class="entry"><a class="el" href="classopcua_1_1AccessControlBase.html">opcua::AccessControlBase</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classopcua_1_1AccessControlBase.html#ab305f8401618d750ab78719c2486b524">getUserAccessLevel</a>(Session &amp;session, const NodeId &amp;nodeId)=0</td><td class="entry"><a class="el" href="classopcua_1_1AccessControlBase.html">opcua::AccessControlBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classopcua_1_1AccessControlBase.html#a860c5c9097400c61f242be5c1ed3cb01">getUserExecutable</a>(Session &amp;session, const NodeId &amp;methodId)=0</td><td class="entry"><a class="el" href="classopcua_1_1AccessControlBase.html">opcua::AccessControlBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classopcua_1_1AccessControlBase.html#a717efd6e1188707e3301e838e4e45b56">getUserExecutableOnObject</a>(Session &amp;session, const NodeId &amp;methodId, const NodeId &amp;objectId)=0</td><td class="entry"><a class="el" href="classopcua_1_1AccessControlBase.html">opcua::AccessControlBase</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>

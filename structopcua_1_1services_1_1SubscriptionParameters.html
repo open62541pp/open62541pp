@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: opcua::services::SubscriptionParameters Struct Reference</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -102,11 +105,10 @@ $(function(){ initResizable(false); });
 <p><code>#include &lt;<a class="el" href="services_2subscription_8hpp_source.html">subscription.hpp</a>&gt;</code></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classopcua_1_1Subscription.html" title="High-level subscription class.">Subscription</a> parameters with default values from open62541. </p>
-<p>Parameters are passed by reference because illegal parameters can be revised by the server. The updated parameters reflect the actual values that the server will use. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_subscription_8cpp-example.html#_a3">client_subscription.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_async_8cpp-example.html#_a14">client_async.cpp</a>, and <a class="el" href="client_subscription_8cpp-example.html#_a3">client_subscription.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="services_2subscription_8hpp_source.html#l00038">38</a> of file <a class="el" href="services_2subscription_8hpp_source.html">subscription.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="services_2subscription_8hpp_source.html#l00046">46</a> of file <a class="el" href="services_2subscription_8hpp_source.html">subscription.hpp</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -138,7 +140,7 @@ Public Attributes</h2></td></tr>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_subscription_8cpp-example.html#a4">client_subscription.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="services_2subscription_8hpp_source.html#l00040">40</a> of file <a class="el" href="services_2subscription_8hpp_source.html">subscription.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="services_2subscription_8hpp_source.html#l00048">48</a> of file <a class="el" href="services_2subscription_8hpp_source.html">subscription.hpp</a>.</p>
 
 </div>
 </div>
@@ -156,7 +158,7 @@ Public Attributes</h2></td></tr>
 
 <p>Delete the subscription after defined publishing cycles without sending any notifications. </p>
 
-<p class="definition">Definition at line <a class="el" href="services_2subscription_8hpp_source.html#l00042">42</a> of file <a class="el" href="services_2subscription_8hpp_source.html">subscription.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="services_2subscription_8hpp_source.html#l00050">50</a> of file <a class="el" href="services_2subscription_8hpp_source.html">subscription.hpp</a>.</p>
 
 </div>
 </div>
@@ -174,7 +176,7 @@ Public Attributes</h2></td></tr>
 
 <p>Send keep-alive message after defined publishing cycles without notifications. </p>
 
-<p class="definition">Definition at line <a class="el" href="services_2subscription_8hpp_source.html#l00044">44</a> of file <a class="el" href="services_2subscription_8hpp_source.html">subscription.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="services_2subscription_8hpp_source.html#l00052">52</a> of file <a class="el" href="services_2subscription_8hpp_source.html">subscription.hpp</a>.</p>
 
 </div>
 </div>
@@ -192,7 +194,7 @@ Public Attributes</h2></td></tr>
 
 <p>The maximum number of notifications per publish (0 if unlimited). </p>
 
-<p class="definition">Definition at line <a class="el" href="services_2subscription_8hpp_source.html#l00046">46</a> of file <a class="el" href="services_2subscription_8hpp_source.html">subscription.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="services_2subscription_8hpp_source.html#l00054">54</a> of file <a class="el" href="services_2subscription_8hpp_source.html">subscription.hpp</a>.</p>
 
 </div>
 </div>
@@ -210,7 +212,7 @@ Public Attributes</h2></td></tr>
 
 <p>Relative priority of the subscription. Notifications with higher priority are sent first. </p>
 
-<p class="definition">Definition at line <a class="el" href="services_2subscription_8hpp_source.html#l00048">48</a> of file <a class="el" href="services_2subscription_8hpp_source.html">subscription.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="services_2subscription_8hpp_source.html#l00056">56</a> of file <a class="el" href="services_2subscription_8hpp_source.html">subscription.hpp</a>.</p>
 
 </div>
 </div>

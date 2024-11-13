@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: opcua::DataValue Class Reference</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -109,7 +112,7 @@ Inheritance diagram for opcua::DataValue:</div>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="elRef" target="_blank" href="open62541/structUA__DataValue.html">UA_DataValue</a> wrapper class. </p>
 <dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/Core/Part4/v105/docs/7.11">https://reference.opcfoundation.org/Core/Part4/v105/docs/7.11</a> </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_subscription_8cpp-example.html#_a7">client_subscription.cpp</a>, <a class="el" href="server_datasource_8cpp-example.html#_a9">server_datasource.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#_a7">server_valuecallback.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_async_8cpp-example.html#_a20">client_async.cpp</a>, <a class="el" href="client_subscription_8cpp-example.html#_a7">client_subscription.cpp</a>, <a class="el" href="server_datasource_8cpp-example.html#_a11">server_datasource.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#_a7">server_valuecallback.cpp</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01478">1478</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
@@ -355,7 +358,7 @@ template&lt;<a class="el" href="namespaceopcua.html#a2e5d6c3d23b95bdcb5fe678277a
 
 <p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01514">1514</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="attribute__handler_8hpp_source.html#l00075">opcua::services::detail::AttributeHandlerScalar&lt; T, Enable &gt;::toDataValue()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="attribute__handler_8hpp_source.html#l00062">opcua::services::detail::AttributeHandlerScalar&lt; T, Enable &gt;::toDataValue()</a>.</p>
 
 </div>
 </div>
@@ -389,7 +392,7 @@ template&lt;<a class="el" href="namespaceopcua.html#a2e5d6c3d23b95bdcb5fe678277a
 
 <p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01521">1521</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="attribute__handler_8hpp_source.html#l00181">opcua::services::detail::AttributeHandler&lt; AttributeId::ArrayDimensions &gt;::toDataValue()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="attribute__handler_8hpp_source.html#l00168">opcua::services::detail::AttributeHandler&lt; AttributeId::ArrayDimensions &gt;::toDataValue()</a>.</p>
 
 </div>
 </div>
@@ -418,7 +421,7 @@ template&lt;<a class="el" href="namespaceopcua.html#a2e5d6c3d23b95bdcb5fe678277a
 
 <p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01525">1525</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="attribute__handler_8hpp_source.html#l00057">opcua::services::detail::AttributeHandlerVariant::toDataValue()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="attribute__handler_8hpp_source.html#l00040">opcua::services::detail::AttributeHandlerVariant::toDataValue()</a>.</p>
 
 </div>
 </div>
@@ -581,7 +584,7 @@ template&lt;<a class="el" href="namespaceopcua.html#a2e5d6c3d23b95bdcb5fe678277a
 </div><div class="memdoc">
 
 <p>Get value. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_subscription_8cpp-example.html#a14">client_subscription.cpp</a>, and <a class="el" href="server_datasource_8cpp-example.html#a11">server_datasource.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_subscription_8cpp-example.html#a14">client_subscription.cpp</a>, and <a class="el" href="server_datasource_8cpp-example.html#a13">server_datasource.cpp</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01550">1550</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
@@ -904,7 +907,7 @@ template&lt;<a class="el" href="namespaceopcua.html#a2e5d6c3d23b95bdcb5fe678277a
 </div><div class="memdoc">
 
 <p>Set source timestamp for the value. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_datasource_8cpp-example.html#a13">server_datasource.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_datasource_8cpp-example.html#a15">server_datasource.cpp</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01607">1607</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
@@ -1025,8 +1028,6 @@ template&lt;<a class="el" href="namespaceopcua.html#a2e5d6c3d23b95bdcb5fe678277a
 
 <p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01631">1631</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="attribute__handler_8hpp_source.html#l00037">opcua::services::detail::createDataValueFromStatus()</a>.</p>
-
 </div>
 </div>
 <a id="a80f2c2a0a19ec7da288b4d68911f9884" name="a80f2c2a0a19ec7da288b4d68911f9884"></a>
@@ -1079,7 +1080,7 @@ template&lt;<a class="el" href="namespaceopcua.html#a2e5d6c3d23b95bdcb5fe678277a
 
 <p>Constructor with native object (deep copy). </p>
 
-<p class="definition">Definition at line <a class="el" href="typewrapper_8hpp_source.html#l00030">30</a> of file <a class="el" href="typewrapper_8hpp_source.html">typewrapper.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="typewrapper_8hpp_source.html#l00031">31</a> of file <a class="el" href="typewrapper_8hpp_source.html">typewrapper.hpp</a>.</p>
 
 </div>
 </div>
@@ -1108,7 +1109,7 @@ template&lt;<a class="el" href="namespaceopcua.html#a2e5d6c3d23b95bdcb5fe678277a
 
 <p>Constructor with native object (move rvalue). </p>
 
-<p class="definition">Definition at line <a class="el" href="typewrapper_8hpp_source.html#l00034">34</a> of file <a class="el" href="typewrapper_8hpp_source.html">typewrapper.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="typewrapper_8hpp_source.html#l00035">35</a> of file <a class="el" href="typewrapper_8hpp_source.html">typewrapper.hpp</a>.</p>
 
 </div>
 </div>
@@ -1137,7 +1138,7 @@ template&lt;<a class="el" href="namespaceopcua.html#a2e5d6c3d23b95bdcb5fe678277a
 
 <p>Copy constructor (deep copy). </p>
 
-<p class="definition">Definition at line <a class="el" href="typewrapper_8hpp_source.html#l00042">42</a> of file <a class="el" href="typewrapper_8hpp_source.html">typewrapper.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="typewrapper_8hpp_source.html#l00043">43</a> of file <a class="el" href="typewrapper_8hpp_source.html">typewrapper.hpp</a>.</p>
 
 </div>
 </div>
@@ -1166,7 +1167,7 @@ template&lt;<a class="el" href="namespaceopcua.html#a2e5d6c3d23b95bdcb5fe678277a
 
 <p>Move constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="typewrapper_8hpp_source.html#l00046">46</a> of file <a class="el" href="typewrapper_8hpp_source.html">typewrapper.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="typewrapper_8hpp_source.html#l00047">47</a> of file <a class="el" href="typewrapper_8hpp_source.html">typewrapper.hpp</a>.</p>
 
 </div>
 </div>

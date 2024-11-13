@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: Member List</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -103,10 +106,10 @@ $(function(){ initResizable(false); });
   <tr class="even"><td class="entry"><a class="el" href="classopcua_1_1Subscription.html#a0eedd9ae5361667d0c8402bc52495d66">deleteSubscription</a>()</td><td class="entry"><a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription&lt; Connection &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classopcua_1_1Subscription.html#afb1edd9c6dacd554f5ef4ed958649ce2">getMonitoredItems</a>()</td><td class="entry"><a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription&lt; Connection &gt;</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classopcua_1_1Subscription.html#ae93cbad3a365a2226432e93dde44fbe1">setPublishingMode</a>(bool publishing)</td><td class="entry"><a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription&lt; Connection &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classopcua_1_1Subscription.html#a75c65d904ebe354daf1ba5d40d6c5c84">setSubscriptionParameters</a>(SubscriptionParameters &amp;parameters)</td><td class="entry"><a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription&lt; Connection &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classopcua_1_1Subscription.html#a5b405d901bfe59c6c378671120eacd00">subscribeDataChange</a>(const NodeId &amp;id, AttributeId attribute, MonitoringMode monitoringMode, MonitoringParametersEx &amp;parameters, DataChangeNotificationCallback onDataChange)</td><td class="entry"><a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription&lt; Connection &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classopcua_1_1Subscription.html#a37a2f24a9eb2b21f0a1b9a092e99f554">setSubscriptionParameters</a>(const SubscriptionParameters &amp;parameters)</td><td class="entry"><a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription&lt; Connection &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classopcua_1_1Subscription.html#a1b0d47d15b1527fd7446dff3ae07d005">subscribeDataChange</a>(const NodeId &amp;id, AttributeId attribute, MonitoringMode monitoringMode, const MonitoringParametersEx &amp;parameters, DataChangeNotificationCallback onDataChange)</td><td class="entry"><a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription&lt; Connection &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classopcua_1_1Subscription.html#aae0205cb6b40558991fb170487944b50">subscribeDataChange</a>(const NodeId &amp;id, AttributeId attribute, DataChangeNotificationCallback onDataChange)</td><td class="entry"><a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription&lt; Connection &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classopcua_1_1Subscription.html#a79a23448012a7a3ebe051851e61f3d3e">subscribeEvent</a>(const NodeId &amp;id, MonitoringMode monitoringMode, MonitoringParametersEx &amp;parameters, EventNotificationCallback onEvent)</td><td class="entry"><a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription&lt; Connection &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classopcua_1_1Subscription.html#af00ff75dd73b42e0eda47a06f629cdef">subscribeEvent</a>(const NodeId &amp;id, MonitoringMode monitoringMode, const MonitoringParametersEx &amp;parameters, EventNotificationCallback onEvent)</td><td class="entry"><a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription&lt; Connection &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classopcua_1_1Subscription.html#ad73249ca431810a51640d9d8dd69fa8d">subscribeEvent</a>(const NodeId &amp;id, const EventFilter &amp;eventFilter, EventNotificationCallback onEvent)</td><td class="entry"><a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription&lt; Connection &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classopcua_1_1Subscription.html#aeced3376404ec9d37b50563e6ac4ff54">Subscription</a>(Connection &amp;connection, uint32_t subscriptionId) noexcept</td><td class="entry"><a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription&lt; Connection &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classopcua_1_1Subscription.html#a1bb7f7a6536eccd575c47d304b599194">subscriptionId</a>() const noexcept</td><td class="entry"><a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription&lt; Connection &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>

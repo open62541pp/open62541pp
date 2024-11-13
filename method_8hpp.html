@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: /home/runner/work/open62541pp/open62541pp/include/open62541pp/services/method.hpp File Reference</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -99,11 +102,10 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;utility&gt;</code><br />
-<code>#include &lt;vector&gt;</code><br />
 <code>#include &quot;<a class="el" href="async_8hpp_source.html">open62541pp/async.hpp</a>&quot;</code><br />
 <code>#include &quot;open62541pp/config.hpp&quot;</code><br />
-<code>#include &quot;<a class="el" href="result_8hpp_source.html">open62541pp/result.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="client__services_8hpp_source.html">open62541pp/services/detail/client_services.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="async__transform_8hpp_source.html">open62541pp/services/detail/async_transform.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="client__service_8hpp_source.html">open62541pp/services/detail/client_service.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="request__handling_8hpp_source.html">open62541pp/services/detail/request_handling.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="response__handling_8hpp_source.html">open62541pp/services/detail/response_handling.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="span_8hpp_source.html">open62541pp/span.hpp</a>&quot;</code><br />
@@ -112,7 +114,7 @@ $(function(){ initResizable(false); });
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for method.hpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="method_8hpp__incl.svg" width="5059" height="931"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="method_8hpp__incl.svg" width="5376" height="770"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
@@ -133,15 +135,15 @@ Namespaces</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:ga9c90d9c5b4330db47fd3301c4693022b" id="r_ga9c90d9c5b4330db47fd3301c4693022b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1CallResponse.html">CallResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Call.html#ga9c90d9c5b4330db47fd3301c4693022b">opcua::services::call</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1CallRequest.html">CallRequest</a> &amp;request) noexcept</td></tr>
 <tr class="separator:ga9c90d9c5b4330db47fd3301c4693022b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac14fa503d57ec9fdf8f591296b5332f9" id="r_gac14fa503d57ec9fdf8f591296b5332f9"><td class="memTemplParams" colspan="2">template&lt;typename CompletionToken  = DefaultCompletionToken&gt; </td></tr>
-<tr class="memitem:gac14fa503d57ec9fdf8f591296b5332f9"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Call.html#gac14fa503d57ec9fdf8f591296b5332f9">opcua::services::callAsync</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1CallRequest.html">CallRequest</a> &amp;request, CompletionToken &amp;&amp;token=<a class="el" href="group__Async.html#gade3fccc6425d7e77d67aba7ed3baa15a">DefaultCompletionToken</a>())</td></tr>
-<tr class="separator:gac14fa503d57ec9fdf8f591296b5332f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga510a2c3b6f695ccbb9add97e76963382" id="r_ga510a2c3b6f695ccbb9add97e76963382"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ga510a2c3b6f695ccbb9add97e76963382"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; std::vector&lt; <a class="el" href="classopcua_1_1Variant.html">Variant</a> &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Call.html#ga510a2c3b6f695ccbb9add97e76963382">opcua::services::call</a> (T &amp;connection, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;objectId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;methodId, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1Variant.html">Variant</a> &gt; inputArguments) noexcept</td></tr>
-<tr class="separator:ga510a2c3b6f695ccbb9add97e76963382"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad01703e48fd3d7817a7aa588f2a0e840" id="r_gad01703e48fd3d7817a7aa588f2a0e840"><td class="memTemplParams" colspan="2">template&lt;typename CompletionToken  = DefaultCompletionToken&gt; </td></tr>
-<tr class="memitem:gad01703e48fd3d7817a7aa588f2a0e840"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Call.html#gad01703e48fd3d7817a7aa588f2a0e840">opcua::services::callAsync</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;objectId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;methodId, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1Variant.html">Variant</a> &gt; inputArguments, CompletionToken &amp;&amp;token=<a class="el" href="group__Async.html#gade3fccc6425d7e77d67aba7ed3baa15a">DefaultCompletionToken</a>())</td></tr>
-<tr class="separator:gad01703e48fd3d7817a7aa588f2a0e840"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaaebec2adfeaf4046215f77f6bdca5724" id="r_gaaebec2adfeaf4046215f77f6bdca5724"><td class="memTemplParams" colspan="2">template&lt;typename CompletionToken &gt; </td></tr>
+<tr class="memitem:gaaebec2adfeaf4046215f77f6bdca5724"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Call.html#gaaebec2adfeaf4046215f77f6bdca5724">opcua::services::callAsync</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1CallRequest.html">CallRequest</a> &amp;request, CompletionToken &amp;&amp;token)</td></tr>
+<tr class="separator:gaaebec2adfeaf4046215f77f6bdca5724"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga968eab3588d151ae096794d32f9ac154" id="r_ga968eab3588d151ae096794d32f9ac154"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ga968eab3588d151ae096794d32f9ac154"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1CallMethodResult.html">CallMethodResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Call.html#ga968eab3588d151ae096794d32f9ac154">opcua::services::call</a> (T &amp;connection, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;objectId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;methodId, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1Variant.html">Variant</a> &gt; inputArguments) noexcept</td></tr>
+<tr class="separator:ga968eab3588d151ae096794d32f9ac154"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac8e054fcc339439b8a1c25d91414fce7" id="r_gac8e054fcc339439b8a1c25d91414fce7"><td class="memTemplParams" colspan="2">template&lt;typename CompletionToken &gt; </td></tr>
+<tr class="memitem:gac8e054fcc339439b8a1c25d91414fce7"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Call.html#gac8e054fcc339439b8a1c25d91414fce7">opcua::services::callAsync</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;objectId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;methodId, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1Variant.html">Variant</a> &gt; inputArguments, CompletionToken &amp;&amp;token)</td></tr>
+<tr class="separator:gac8e054fcc339439b8a1c25d91414fce7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

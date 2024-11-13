@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: Asynchronous model</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -110,21 +113,20 @@ $(function(){ initResizable(false); });
 <h1><a class="anchor" id="autotoc_md13"></a>
 Completion tokens</h1>
 <p>Open62541pp accepts completion tokens as the final argument of asynchronous operations.</p>
-<div class="fragment"><div class="line"><span class="comment">// Function signature of the completion handler: void(opcua::Result&lt;opcua::Variant&gt;&amp;)</span></div>
-<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CompletionToken = opcua::DefaultCompletionToken&gt;</div>
-<div class="line"><span class="keyword">auto</span> <a class="code hl_function" href="group__Read.html#ga4dd74b12f6efc315afe54039c7cb766b">opcua::services::readValueAsync</a>(</div>
-<div class="line">    <a class="code hl_class" href="classopcua_1_1Client.html">opcua::Client</a>&amp; client,</div>
-<div class="line">    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">opcua::NodeId</a>&amp; <span class="keywordtype">id</span>,</div>
-<div class="line">    CompletionToken&amp;&amp; token = <a class="code hl_struct" href="structopcua_1_1UseFutureToken.html">opcua::DefaultCompletionToken</a>()</div>
+<div class="fragment"><div class="line"><span class="comment">// Function signature of the completion handler: void(opcua::ReadResponse&amp;)</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CompletionToken&gt;</div>
+<div class="line"><span class="keyword">auto</span> <a class="code hl_function" href="group__Read.html#ga538a98e90445b1e39dc099edda570752">opcua::services::readAsync</a>(</div>
+<div class="line">    <a class="code hl_class" href="classopcua_1_1Client.html">opcua::Client</a>&amp; connection,</div>
+<div class="line">    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1ReadRequest.html">opcua::ReadRequest</a>&amp; request,</div>
+<div class="line">    CompletionToken&amp;&amp; token</div>
 <div class="line">);</div>
-<div class="ttc" id="aclassopcua_1_1Client_html"><div class="ttname"><a href="classopcua_1_1Client.html">opcua::Client</a></div><div class="ttdoc">High-level client class.</div><div class="ttdef"><b>Definition</b> <a href="client_8hpp_source.html#l00063">client.hpp:63</a></div></div>
-<div class="ttc" id="aclassopcua_1_1NodeId_html"><div class="ttname"><a href="classopcua_1_1NodeId.html">opcua::NodeId</a></div><div class="ttdoc">UA_NodeId wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00590">types.hpp:590</a></div></div>
-<div class="ttc" id="agroup__Read_html_ga4dd74b12f6efc315afe54039c7cb766b"><div class="ttname"><a href="group__Read.html#ga4dd74b12f6efc315afe54039c7cb766b">opcua::services::readValueAsync</a></div><div class="ttdeci">auto readValueAsync(Client &amp;connection, const NodeId &amp;id, CompletionToken &amp;&amp;token=DefaultCompletionToken())</div><div class="ttdoc">Asynchronously read the AttributeId::Value attribute of a node.</div><div class="ttdef"><b>Definition</b> <a href="attribute__highlevel_8hpp_source.html#l00659">attribute_highlevel.hpp:659</a></div></div>
-<div class="ttc" id="astructopcua_1_1UseFutureToken_html"><div class="ttname"><a href="structopcua_1_1UseFutureToken.html">opcua::UseFutureToken</a></div><div class="ttdoc">Future completion token type.</div><div class="ttdef"><b>Definition</b> <a href="async_8hpp_source.html#l00054">async.hpp:54</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Client_html"><div class="ttname"><a href="classopcua_1_1Client.html">opcua::Client</a></div><div class="ttdoc">High-level client class.</div><div class="ttdef"><b>Definition</b> <a href="client_8hpp_source.html#l00121">client.hpp:121</a></div></div>
+<div class="ttc" id="aclassopcua_1_1ReadRequest_html"><div class="ttname"><a href="classopcua_1_1ReadRequest.html">opcua::ReadRequest</a></div><div class="ttdoc">UA_ReadRequest wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types__composed_8hpp_source.html#l01330">types_composed.hpp:1330</a></div></div>
+<div class="ttc" id="agroup__Read_html_ga538a98e90445b1e39dc099edda570752"><div class="ttname"><a href="group__Read.html#ga538a98e90445b1e39dc099edda570752">opcua::services::readAsync</a></div><div class="ttdeci">auto readAsync(Client &amp;connection, const ReadRequest &amp;request, CompletionToken &amp;&amp;token)</div><div class="ttdoc">Read one or more attributes of one or more nodes (client only).</div><div class="ttdef"><b>Definition</b> <a href="attribute_8hpp_source.html#l00061">attribute.hpp:61</a></div></div>
 </div><!-- fragment --><p>Following completion tokens can be used (and described in more detail below):</p>
 <ul>
 <li>A callback function (object) with the expected completion signature</li>
-<li><code><a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c" title="Future completion token object.">opcua::useFuture</a></code> to return a future object <code>std::future&lt;<a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">opcua::Result</a>&lt;T&gt;&gt;</code></li>
+<li><code><a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c" title="Future completion token object.">opcua::useFuture</a></code> to return a future object <code>std::future&lt;T&gt;</code></li>
 <li><code><a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36" title="Deferred completion token object.">opcua::useDeferred</a></code> to return a callable for deferred execution</li>
 <li><code><a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863" title="Detached completion token object.">opcua::useDetached</a></code> to detach the asynchronous operation</li>
 <li>Custom tokens by providing template specializations for <code><a class="el" href="structopcua_1_1AsyncResult.html">opcua::AsyncResult</a></code></li>
@@ -132,40 +134,39 @@ Completion tokens</h1>
 <h2><a class="anchor" id="autotoc_md14"></a>
 Callback function</h2>
 <p>If the user passes a function object as the completion token, the asynchronous operation behaves as previously described: the operation begins, and when the operation completes the result is passed to the callback. The callback function must match the expected signature:</p>
-<div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1Result.html">opcua::Result&lt;T&gt;</a>);   <span class="comment">// for void and non-void, trivially-copyable value types</span></div>
-<div class="line">void(<a class="code hl_class" href="classopcua_1_1Result.html">opcua::Result&lt;T&gt;</a>&amp;);  <span class="comment">// for non-void value types</span></div>
-<div class="ttc" id="aclassopcua_1_1Result_html"><div class="ttname"><a href="classopcua_1_1Result.html">opcua::Result</a></div><div class="ttdoc">The template class Result encapsulates a StatusCode and optionally a value.</div><div class="ttdef"><b>Definition</b> <a href="result_8hpp_source.html#l00053">result.hpp:53</a></div></div>
-</div><!-- fragment --><div class="fragment"><div class="line"><a class="code hl_function" href="group__Read.html#ga4dd74b12f6efc315afe54039c7cb766b">opcua::services::readValueAsync</a>(</div>
+<div class="fragment"><div class="line">void(T);   <span class="comment">// for trivially copyable types</span></div>
+<div class="line">void(T&amp;);  <span class="comment">// for non-trivially copyable types</span></div>
+</div><!-- fragment --><div class="fragment"><div class="line"><a class="code hl_function" href="group__Read.html#ga538a98e90445b1e39dc099edda570752">opcua::services::readAsync</a>(</div>
 <div class="line">    client,</div>
-<div class="line">    <span class="keywordtype">id</span>,</div>
-<div class="line">    [](<a class="code hl_class" href="classopcua_1_1Result.html">opcua::Result&lt;opcua::Variant&gt;</a>&amp; result) {</div>
+<div class="line">    request,</div>
+<div class="line">    [](<a class="code hl_class" href="classopcua_1_1ReadResponse.html">opcua::ReadResponse</a>&amp; response) {</div>
 <div class="line">        <span class="comment">// ...</span></div>
 <div class="line">    }</div>
 <div class="line">);</div>
+<div class="ttc" id="aclassopcua_1_1ReadResponse_html"><div class="ttname"><a href="classopcua_1_1ReadResponse.html">opcua::ReadResponse</a></div><div class="ttdoc">UA_ReadResponse wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types__composed_8hpp_source.html#l01357">types_composed.hpp:1357</a></div></div>
 </div><!-- fragment --><p>The callback is executed within the client's or server's event loop. Please make sure not to block the event loop. Waiting for asynchronous results within the callback will block the further execution of the event loop.</p>
 <h2><a class="anchor" id="autotoc_md15"></a>
 Future completion token</h2>
-<p>The special token <code><a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c" title="Future completion token object.">opcua::useFuture</a></code> can be passed as completion token to return a future object <code>std::future&lt;<a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">opcua::Result</a>&lt;T&gt;&gt;</code>.</p>
-<div class="fragment"><div class="line">std::future&lt;opcua::Result&lt;opcua::Variant&gt;&gt; future = <a class="code hl_function" href="group__Read.html#ga4dd74b12f6efc315afe54039c7cb766b">opcua::services::readValueAsync</a>(client, <span class="keywordtype">id</span>, <a class="code hl_variable" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">opcua::useFuture</a>);</div>
-<div class="line"><span class="keyword">auto</span> value = future.get().value();  <span class="comment">// throws an exception if an error occurred</span></div>
+<p>The special token <code><a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c" title="Future completion token object.">opcua::useFuture</a></code> can be passed as completion token to return a future object <code>std::future&lt;T&gt;</code>.</p>
+<div class="fragment"><div class="line">std::future&lt;opcua::ReadResponse&gt; future = <a class="code hl_function" href="group__Read.html#ga538a98e90445b1e39dc099edda570752">opcua::services::readAsync</a>(client, request, <a class="code hl_variable" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">opcua::useFuture</a>);</div>
+<div class="line"><span class="keyword">auto</span> response = future.get();</div>
 <div class="ttc" id="agroup__Async_html_gae789f136da0b3d4d725f1ba59ca0614c"><div class="ttname"><a href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">opcua::useFuture</a></div><div class="ttdeci">constexpr UseFutureToken useFuture</div><div class="ttdoc">Future completion token object.</div><div class="ttdef"><b>Definition</b> <a href="async_8hpp_source.html#l00060">async.hpp:60</a></div></div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md16"></a>
 Deferred completion token</h2>
 <p>The token <code><a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36" title="Deferred completion token object.">opcua::useDeferred</a></code> is used to indicate that an asynchronous operation should return a function object to lazily launch the operation.</p>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> func = <a class="code hl_function" href="group__Read.html#ga4dd74b12f6efc315afe54039c7cb766b">opcua::services::readValueAsync</a>(client, <span class="keywordtype">id</span>, <a class="code hl_variable" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">opcua::useDeferred</a>);</div>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> func = <a class="code hl_function" href="group__Read.html#ga538a98e90445b1e39dc099edda570752">opcua::services::readAsync</a>(client, request, <a class="code hl_variable" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">opcua::useDeferred</a>);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// start operation with provided completion token</span></div>
-<div class="line">func([](<span class="keyword">auto</span>&amp;&amp; result) {</div>
-<div class="line">    <span class="comment">// ...</span></div>
-<div class="line">});</div>
+<div class="line">func([](<span class="keyword">auto</span>&amp;&amp; response) { <span class="comment">/* ... */</span> });</div>
+<div class="line"><span class="keyword">auto</span> future = func(useFuture);</div>
+<div class="line"><span class="comment">// ...</span></div>
 <div class="ttc" id="agroup__Async_html_ga85a5c61e4024d350f333d7763bbdff36"><div class="ttname"><a href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">opcua::useDeferred</a></div><div class="ttdeci">constexpr UseDeferredToken useDeferred</div><div class="ttdoc">Deferred completion token object.</div><div class="ttdef"><b>Definition</b> <a href="async_8hpp_source.html#l00090">async.hpp:90</a></div></div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md17"></a>
 Detached completion token</h2>
 <p>The token <code><a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863" title="Detached completion token object.">opcua::useDetached</a></code> is used to indicate that an asynchronous operation is detached. That is, there is no completion handler waiting for the operation's result.</p>
-<div class="fragment"><div class="line"><a class="code hl_function" href="group__Write.html#ga8b4669b9e79772cd79ad4137cef8b470">opcua::services::writeValueAsync</a>(client, <span class="keywordtype">id</span>, <a class="code hl_function" href="classopcua_1_1Variant.html#a722a05b6e729d3c7d0d144a1f3b3d808">opcua::Variant::fromScalar</a>(1));</div>
+<div class="fragment"><div class="line"><a class="code hl_function" href="group__Read.html#ga538a98e90445b1e39dc099edda570752">opcua::services::readAsync</a>(client, request, <a class="code hl_variable" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">opcua::useDetached</a>);</div>
 <div class="line"><span class="comment">// no way to check if the operation succeeded...</span></div>
-<div class="ttc" id="aclassopcua_1_1Variant_html_a722a05b6e729d3c7d0d144a1f3b3d808"><div class="ttname"><a href="classopcua_1_1Variant.html#a722a05b6e729d3c7d0d144a1f3b3d808">opcua::Variant::fromScalar</a></div><div class="ttdeci">static Variant fromScalar(T &amp;&amp;value)</div><div class="ttdoc">Create Variant from scalar value.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00894">types.hpp:894</a></div></div>
-<div class="ttc" id="agroup__Write_html_ga8b4669b9e79772cd79ad4137cef8b470"><div class="ttname"><a href="group__Write.html#ga8b4669b9e79772cd79ad4137cef8b470">opcua::services::writeValueAsync</a></div><div class="ttdeci">auto writeValueAsync(Client &amp;connection, const NodeId &amp;id, const Variant &amp;value, CompletionToken &amp;&amp;token=DefaultCompletionToken())</div><div class="ttdoc">Asynchronously write the AttributeId::Value attribute of a node.</div><div class="ttdef"><b>Definition</b> <a href="attribute__highlevel_8hpp_source.html#l00686">attribute_highlevel.hpp:686</a></div></div>
+<div class="ttc" id="agroup__Async_html_ga84807736f5bcb08a19160455f71a8863"><div class="ttname"><a href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">opcua::useDetached</a></div><div class="ttdeci">constexpr UseDetachedToken useDetached</div><div class="ttdoc">Detached completion token object.</div><div class="ttdef"><b>Definition</b> <a href="async_8hpp_source.html#l00125">async.hpp:125</a></div></div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md18"></a>
 Custom completion token</h2>
 <p>The <code><a class="el" href="structopcua_1_1AsyncResult.html">opcua::AsyncResult</a></code> trait is a customization point to define user-defined completion tokens via template specialization:</p>
@@ -179,8 +180,8 @@ Custom completion token</h2>
 <div class="line">    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="structopcua_1_1AsyncResult.html#aa6dc04bbf4940717e92e71ec58f346ec">initiate</a>(Initiation&amp;&amp; initiation, PrintResultToken, Args&amp;&amp;... args) {</div>
 <div class="line">        std::invoke(</div>
 <div class="line">            std::forward&lt;Initiation&gt;(initiation),</div>
-<div class="line">            [](<a class="code hl_class" href="classopcua_1_1Result.html">opcua::Result&lt;T&gt;</a>&amp; result) {</div>
-<div class="line">                std::cout &lt;&lt; <span class="stringliteral">&quot;Async operation completed: code=&quot;</span> &lt;&lt; result.<a class="code hl_function" href="classopcua_1_1Result.html#af8c52372741a4af137d3600d9e9e77e0">code</a>() &lt;&lt; <span class="stringliteral">&quot;, value=&quot;</span> &lt;&lt; result.<a class="code hl_function" href="classopcua_1_1Result.html#ad8906b4a4e26406476f3f5f38816a62b">value</a>() &lt;&lt; std::endl;</div>
+<div class="line">            [](T&amp; result) {</div>
+<div class="line">                std::cout &lt;&lt; <span class="stringliteral">&quot;Async operation completed with result &quot;</span> &lt;&lt; result &lt;&lt; std::endl;</div>
 <div class="line">            },</div>
 <div class="line">            std::forward&lt;Args&gt;(args)...</div>
 <div class="line">        );</div>
@@ -188,13 +189,11 @@ Custom completion token</h2>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line">}</div>
-<div class="ttc" id="aclassopcua_1_1Result_html_ad8906b4a4e26406476f3f5f38816a62b"><div class="ttname"><a href="classopcua_1_1Result.html#ad8906b4a4e26406476f3f5f38816a62b">opcua::Result::value</a></div><div class="ttdeci">constexpr T &amp; value() &amp;</div><div class="ttdoc">Get the value of the Result.</div><div class="ttdef"><b>Definition</b> <a href="result_8hpp_source.html#l00162">result.hpp:162</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Result_html_af8c52372741a4af137d3600d9e9e77e0"><div class="ttname"><a href="classopcua_1_1Result.html#af8c52372741a4af137d3600d9e9e77e0">opcua::Result::code</a></div><div class="ttdeci">constexpr StatusCode code() const noexcept</div><div class="ttdoc">Get the StatusCode of the Result.</div><div class="ttdef"><b>Definition</b> <a href="result_8hpp_source.html#l00140">result.hpp:140</a></div></div>
 <div class="ttc" id="anamespaceopcua_html"><div class="ttname"><a href="namespaceopcua.html">opcua</a></div><div class="ttdef"><b>Definition</b> <a href="async_8hpp_source.html#l00011">async.hpp:11</a></div></div>
 <div class="ttc" id="astructopcua_1_1AsyncResult_html_aa6dc04bbf4940717e92e71ec58f346ec"><div class="ttname"><a href="structopcua_1_1AsyncResult.html#aa6dc04bbf4940717e92e71ec58f346ec">opcua::AsyncResult::initiate</a></div><div class="ttdeci">static void initiate(Initiation &amp;&amp;initiation, CompletionHandler &amp;&amp;handler, Args &amp;&amp;... args)</div><div class="ttdef"><b>Definition</b> <a href="async_8hpp_source.html#l00029">async.hpp:29</a></div></div>
 </div><!-- fragment --><p>The trait's <code><a class="el" href="structopcua_1_1AsyncResult.html#aa6dc04bbf4940717e92e71ec58f346ec">opcua::AsyncResult::initiate</a></code> member function is called with three arguments:</p><ol type="1">
 <li>A function object that launches the async operation (initiating function)</li>
-<li>A concrete completion handler with the signature <code>void(<a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">opcua::Result</a>&lt;T&gt;)</code> or <code>void(<a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">opcua::Result</a>&lt;T&gt;&amp;)</code></li>
+<li>A concrete completion handler with the signature <code>void(T)</code> or <code>void(T&amp;)</code></li>
 <li>Any additional arguments for the function object</li>
 </ol>
 <p>Please have a look at implementations in <a class="el" href="async_8hpp.html">async.hpp</a> for further details. </p>

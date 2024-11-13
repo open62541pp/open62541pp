@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: open62541pp</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -134,10 +137,10 @@ Server</h3>
 <div class="line"> </div>
 <div class="line">    server.<a class="code hl_function" href="classopcua_1_1Server.html#a7346a714c85e2d99fc8bc9fd1dd31d6d">run</a>();</div>
 <div class="line">}</div>
-<div class="ttc" id="aclassopcua_1_1Node_html"><div class="ttname"><a href="classopcua_1_1Node.html">opcua::Node</a></div><div class="ttdoc">High-level node class to access node attribute, browse and populate address space.</div><div class="ttdef"><b>Definition</b> <a href="server_8hpp_source.html#l00027">server.hpp:27</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Node_html_a32a42875f8e81df814ee3f5fce51b249"><div class="ttname"><a href="classopcua_1_1Node.html#a32a42875f8e81df814ee3f5fce51b249">opcua::Node::writeValueScalar</a></div><div class="ttdeci">Node &amp; writeValueScalar(const T &amp;value)</div><div class="ttdoc">Write scalar to variable node.</div><div class="ttdef"><b>Definition</b> <a href="node_8hpp_source.html#l00537">node.hpp:537</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Node_html_ad7fab8b5a5060a46b62efcfb3980910a"><div class="ttname"><a href="classopcua_1_1Node.html#ad7fab8b5a5060a46b62efcfb3980910a">opcua::Node::addVariable</a></div><div class="ttdeci">Node addVariable(const NodeId &amp;id, std::string_view browseName, const VariableAttributes &amp;attributes={}, const NodeId &amp;variableType=VariableTypeId::BaseDataVariableType, const NodeId &amp;referenceType=ReferenceTypeId::HasComponent)</div><div class="ttdoc">Add variable.</div><div class="ttdef"><b>Definition</b> <a href="node_8hpp_source.html#l00102">node.hpp:102</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Server_html"><div class="ttname"><a href="classopcua_1_1Server.html">opcua::Server</a></div><div class="ttdoc">High-level server class.</div><div class="ttdef"><b>Definition</b> <a href="server_8hpp_source.html#l00063">server.hpp:63</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Node_html"><div class="ttname"><a href="classopcua_1_1Node.html">opcua::Node</a></div><div class="ttdoc">High-level node class to access node attribute, browse and populate address space.</div><div class="ttdef"><b>Definition</b> <a href="server_8hpp_source.html#l00030">server.hpp:30</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Node_html_a32a42875f8e81df814ee3f5fce51b249"><div class="ttname"><a href="classopcua_1_1Node.html#a32a42875f8e81df814ee3f5fce51b249">opcua::Node::writeValueScalar</a></div><div class="ttdeci">Node &amp; writeValueScalar(const T &amp;value)</div><div class="ttdoc">Write scalar to variable node.</div><div class="ttdef"><b>Definition</b> <a href="node_8hpp_source.html#l01168">node.hpp:1168</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Node_html_ad7fab8b5a5060a46b62efcfb3980910a"><div class="ttname"><a href="classopcua_1_1Node.html#ad7fab8b5a5060a46b62efcfb3980910a">opcua::Node::addVariable</a></div><div class="ttdeci">Node addVariable(const NodeId &amp;id, std::string_view browseName, const VariableAttributes &amp;attributes={}, const NodeId &amp;variableType=VariableTypeId::BaseDataVariableType, const NodeId &amp;referenceType=ReferenceTypeId::HasComponent)</div><div class="ttdoc">Add variable.</div><div class="ttdef"><b>Definition</b> <a href="node_8hpp_source.html#l00156">node.hpp:156</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Server_html"><div class="ttname"><a href="classopcua_1_1Server.html">opcua::Server</a></div><div class="ttdoc">High-level server class.</div><div class="ttdef"><b>Definition</b> <a href="server_8hpp_source.html#l00132">server.hpp:132</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Server_html_a7346a714c85e2d99fc8bc9fd1dd31d6d"><div class="ttname"><a href="classopcua_1_1Server.html#a7346a714c85e2d99fc8bc9fd1dd31d6d">opcua::Server::run</a></div><div class="ttdeci">void run()</div><div class="ttdoc">Run the server's main loop. This method will block until Server::stop is called.</div></div>
 <div class="ttc" id="agroup__NodeIds_html_gga6b06d7222b3fa4b8831080ac76bb6016a47989e0a5dfb2c0f170a6f77c1a8feba"><div class="ttname"><a href="group__NodeIds.html#gga6b06d7222b3fa4b8831080ac76bb6016a47989e0a5dfb2c0f170a6f77c1a8feba">opcua::ObjectId::ObjectsFolder</a></div><div class="ttdeci">@ ObjectsFolder</div></div>
 <div class="ttc" id="aopen62541pp_8hpp_html"><div class="ttname"><a href="open62541pp_8hpp.html">open62541pp.hpp</a></div></div>
@@ -156,7 +159,7 @@ Client</h3>
 <div class="line"> </div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Server date (UTC): &quot;</span> &lt;&lt; dt.<a class="code hl_function" href="classopcua_1_1DateTime.html#adc058b53ee4123c5ea3be4bba633cb2a">format</a>(<span class="stringliteral">&quot;%Y-%m-%d %H:%M:%S&quot;</span>) &lt;&lt; std::endl;</div>
 <div class="line">}</div>
-<div class="ttc" id="aclassopcua_1_1Client_html"><div class="ttname"><a href="classopcua_1_1Client.html">opcua::Client</a></div><div class="ttdoc">High-level client class.</div><div class="ttdef"><b>Definition</b> <a href="client_8hpp_source.html#l00063">client.hpp:63</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Client_html"><div class="ttname"><a href="classopcua_1_1Client.html">opcua::Client</a></div><div class="ttdoc">High-level client class.</div><div class="ttdef"><b>Definition</b> <a href="client_8hpp_source.html#l00121">client.hpp:121</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Client_html_a6dbd84c74a6214369470379a355555ab"><div class="ttname"><a href="classopcua_1_1Client.html#a6dbd84c74a6214369470379a355555ab">opcua::Client::connect</a></div><div class="ttdeci">void connect(std::string_view endpointUrl)</div><div class="ttdoc">Connect to the selected server.</div></div>
 <div class="ttc" id="aclassopcua_1_1DateTime_html"><div class="ttname"><a href="classopcua_1_1DateTime.html">opcua::DateTime</a></div><div class="ttdoc">UA_DateTime wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00354">types.hpp:354</a></div></div>
 <div class="ttc" id="aclassopcua_1_1DateTime_html_adc058b53ee4123c5ea3be4bba633cb2a"><div class="ttname"><a href="classopcua_1_1DateTime.html#adc058b53ee4123c5ea3be4bba633cb2a">opcua::DateTime::format</a></div><div class="ttdeci">std::string format(std::string_view format, bool localtime=false) const</div><div class="ttdoc">Convert to string with given format (same format codes as strftime).</div></div>

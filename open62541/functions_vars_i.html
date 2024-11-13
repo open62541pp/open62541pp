@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541: Data Fields - Variables</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.12</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.14</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -93,7 +96,7 @@ $(function(){ initResizable(false); });
 <h3><a id="index_i" name="index_i"></a>- i -</h3><ul>
 <li>id&#160;:&#160;<a class="el" href="structmessage.html#abc0f04f1a402fc68c5a461b9ef20f7ca">message</a>, <a class="el" href="structPeriodicServerRegisterCallback.html#a315200492aac7e53cd53f72a72df9913">PeriodicServerRegisterCallback</a>, <a class="el" href="unionUA__NodePointer.html#a30ad69ea5640290560f8aaa8aef13b91">UA_NodePointer</a>, <a class="el" href="structUA__TimerEntry.html#a62257c4fbeaa75de1af51f2df4cbc365">UA_TimerEntry</a></li>
 <li>idCounter&#160;:&#160;<a class="el" href="structUA__Timer.html#a2d7b1920b3680e1fc452cd19a0b7b6f3">UA_Timer</a></li>
-<li>identifier&#160;:&#160;<a class="el" href="structUA__DataSetField.html#a50f41fe2f98701ad963f15e46d81e24c">UA_DataSetField</a>, <a class="el" href="structUA__DataSetReader.html#ac6dec9b1ef4ef9ba59ba66b451faec92">UA_DataSetReader</a>, <a class="el" href="structUA__DataSetWriter.html#af8a5b6cade575b35371fa5280146e3bb">UA_DataSetWriter</a>, <a class="el" href="structUA__NodeId.html#a46449585ca41fa9b03da53095948d424">UA_NodeId</a>, <a class="el" href="structUA__PublishedDataSet.html#a57e524561a722403e06bd8c38c3c46b7">UA_PublishedDataSet</a>, <a class="el" href="structUA__PubSubConnection.html#a0c5e52d7aa94ceb0389ee59d19a7caa7">UA_PubSubConnection</a>, <a class="el" href="structUA__ReaderGroup.html#a03d574bd09408fb666f868ee28bfe9c0">UA_ReaderGroup</a>, <a class="el" href="structUA__WriterGroup.html#a39171251efc29462181caa5c66440862">UA_WriterGroup</a></li>
+<li>identifier&#160;:&#160;<a class="el" href="structUA__DataSetField.html#a50f41fe2f98701ad963f15e46d81e24c">UA_DataSetField</a>, <a class="el" href="structUA__DataSetReader.html#ac6dec9b1ef4ef9ba59ba66b451faec92">UA_DataSetReader</a>, <a class="el" href="structUA__DataSetWriter.html#af8a5b6cade575b35371fa5280146e3bb">UA_DataSetWriter</a>, <a class="el" href="structUA__NodeId.html#ae5032f4fe95db20c7dad9cfc141fd44d">UA_NodeId</a>, <a class="el" href="structUA__PublishedDataSet.html#a57e524561a722403e06bd8c38c3c46b7">UA_PublishedDataSet</a>, <a class="el" href="structUA__PubSubConnection.html#a0c5e52d7aa94ceb0389ee59d19a7caa7">UA_PubSubConnection</a>, <a class="el" href="structUA__ReaderGroup.html#a03d574bd09408fb666f868ee28bfe9c0">UA_ReaderGroup</a>, <a class="el" href="structUA__WriterGroup.html#a39171251efc29462181caa5c66440862">UA_WriterGroup</a></li>
 <li>identifierType&#160;:&#160;<a class="el" href="structUA__NodeId.html#a525dd4ac72bb569babda7aad2769f707">UA_NodeId</a></li>
 <li>idRoot&#160;:&#160;<a class="el" href="structUA__Timer.html#a64ab96445d948b8387426a0206cc381f">UA_Timer</a></li>
 <li>idTreeEntry&#160;:&#160;<a class="el" href="structUA__ReferenceTargetTreeElem.html#a434d28018acb711483a4e8efb95d0e19">UA_ReferenceTargetTreeElem</a>, <a class="el" href="structUA__TimerEntry.html#a0a98172417dba9936752132837208e08">UA_TimerEntry</a></li>
@@ -129,12 +132,13 @@ $(function(){ initResizable(false); });
 <li>insertEventCapability&#160;:&#160;<a class="el" href="structUA__ServerConfig.html#a102a6c45c6568d3c70db6df81f232310">UA_ServerConfig</a></li>
 <li>insertNode&#160;:&#160;<a class="el" href="structUA__Nodestore.html#a82cd031007fc452d9884bc504d690e39">UA_Nodestore</a></li>
 <li>inspector_callback&#160;:&#160;<a class="el" href="structmqtt__client.html#a1c0ca63710b008b9827ab4438b22dc3e">mqtt_client</a></li>
-<li>internal&#160;:&#160;<a class="el" href="structUA__ValueBackend.html#ad87ce69b7a49cfae8df3cc06056552b0">UA_ValueBackend</a></li>
+<li>internal&#160;:&#160;<a class="el" href="structUA__ValueBackend.html#ad67cb95d0cb04d5988febe5f2e6c2777">UA_ValueBackend</a></li>
 <li>interval&#160;:&#160;<a class="el" href="structUA__TimerEntry.html#af9bf5b38c2207c4636e1e646e7077326">UA_TimerEntry</a></li>
 <li>InverseName&#160;:&#160;<a class="el" href="struct__OpcUa__ReferenceTypeAttributes.html#a20c3cdcf1142f3813d7fe9e06eaee120">_OpcUa_ReferenceTypeAttributes</a>, <a class="el" href="struct__OpcUa__ReferenceTypeNode.html#a6c10428ff1424c63f10d2950af685548">_OpcUa_ReferenceTypeNode</a></li>
 <li>inverseName&#160;:&#160;<a class="el" href="structUA__ReferenceTypeAttributes.html#a7de2f36f5a83688b1d9280b59bd80888">UA_ReferenceTypeAttributes</a>, <a class="el" href="structUA__ReferenceTypeNode.html#a5bd8dd0386fec4407d596a9af8275ded">UA_ReferenceTypeNode</a></li>
 <li>InvocationCreationTime&#160;:&#160;<a class="el" href="struct__OpcUa__ProgramDiagnostic2DataType.html#abafe5d9d87f3cc652968c02049a9b0fc">_OpcUa_ProgramDiagnostic2DataType</a>, <a class="el" href="struct__OpcUa__ProgramDiagnosticDataType.html#aab845ad7725c39d51fd900978e9d2a6d">_OpcUa_ProgramDiagnosticDataType</a></li>
 <li>ip&#160;:&#160;<a class="el" href="structmdns__answer.html#a371e1a030a2589f2750976dea22a2f71">mdns_answer</a>, <a class="el" href="structresource.html#af2b2922b59692cbb722c57aab19d77f8">resource</a></li>
+<li>ip6&#160;:&#160;<a class="el" href="structmdns__answer.html#ab15c67e8a49765ce2a98c0ab8d3ffecc">mdns_answer</a>, <a class="el" href="structresource.html#aac5cedc3a60190da0950dd5de7dcaf43">resource</a></li>
 <li>IsAbstract&#160;:&#160;<a class="el" href="struct__OpcUa__DataTypeAttributes.html#a6f248f4207c4530de3617912b104fb24">_OpcUa_DataTypeAttributes</a>, <a class="el" href="struct__OpcUa__DataTypeNode.html#a1f8fe13b44e1a7b711682c717616219d">_OpcUa_DataTypeNode</a>, <a class="el" href="struct__OpcUa__ObjectTypeAttributes.html#ad6a309d780fdc093a337f8e7891e9c58">_OpcUa_ObjectTypeAttributes</a>, <a class="el" href="struct__OpcUa__ObjectTypeNode.html#a61b8be0d314f6ed80456cda1aa527431">_OpcUa_ObjectTypeNode</a>, <a class="el" href="struct__OpcUa__ReferenceTypeAttributes.html#a619dfff1acf9f18a5bc7f7e403aefada">_OpcUa_ReferenceTypeAttributes</a>, <a class="el" href="struct__OpcUa__ReferenceTypeNode.html#aaa481e6ce394180c79638205fe373a33">_OpcUa_ReferenceTypeNode</a>, <a class="el" href="struct__OpcUa__VariableTypeAttributes.html#a141299627ae33e792a5728db7068e03a">_OpcUa_VariableTypeAttributes</a>, <a class="el" href="struct__OpcUa__VariableTypeNode.html#ad2365fa88f1a42e6f2cfaa520effd278">_OpcUa_VariableTypeNode</a></li>
 <li>isAbstract&#160;:&#160;<a class="el" href="structUA__DataTypeAttributes.html#a626a39074e8acc6450c8e42132920b75">UA_DataTypeAttributes</a>, <a class="el" href="structUA__DataTypeNode.html#acb0bb9986544b6c986e2244d25028c76">UA_DataTypeNode</a>, <a class="el" href="structUA__ObjectTypeAttributes.html#a3a0b1fc9d74cfb1ba4d5e1f8e5c01847">UA_ObjectTypeAttributes</a>, <a class="el" href="structUA__ObjectTypeNode.html#abe33d21807dc1830b578770198fd3e94">UA_ObjectTypeNode</a>, <a class="el" href="structUA__ReferenceTypeAttributes.html#a5ec894c8bda41c0a3c83467ca544328f">UA_ReferenceTypeAttributes</a>, <a class="el" href="structUA__ReferenceTypeNode.html#a0884ce456e3286bdc3d7d160ed4aa1ce">UA_ReferenceTypeNode</a>, <a class="el" href="structUA__VariableTypeAttributes.html#aae195991d11201ed3705b326f905869a">UA_VariableTypeAttributes</a>, <a class="el" href="structUA__VariableTypeNode.html#a0cab53df560ee619d69b85ab01e5109b">UA_VariableTypeNode</a></li>
 <li>isArray&#160;:&#160;<a class="el" href="structUA__DataTypeMember.html#a3aae258d5eb8c84c65d59ad90673a605">UA_DataTypeMember</a></li>

@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: opcua::services::MonitoringParametersEx Struct Reference</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -102,11 +105,11 @@ $(function(){ initResizable(false); });
 <p><code>#include &lt;<a class="el" href="services_2monitoreditem_8hpp_source.html">monitoreditem.hpp</a>&gt;</code></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Extended monitoring parameters with default values from open62541. </p>
-<p>This is an extended version of <code><a class="elRef" target="_blank" href="open62541/structUA__MonitoringParameters.html">UA_MonitoringParameters</a></code> with the <code>timestamps</code> parameter. Parameters are passed by reference because illegal parameters can be revised by the server. The updated parameters reflect the actual values that the server will use. </p><dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/Core/Part4/v105/docs/7.21">https://reference.opcfoundation.org/Core/Part4/v105/docs/7.21</a> </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_subscription_8cpp-example.html#_a18">client_subscription.cpp</a>.</dd>
+<p>This is an extended version of <code><a class="elRef" target="_blank" href="open62541/structUA__MonitoringParameters.html">UA_MonitoringParameters</a></code> with the <code>timestamps</code> parameter. </p><dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/Core/Part4/v105/docs/7.21">https://reference.opcfoundation.org/Core/Part4/v105/docs/7.21</a> </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_async_8cpp-example.html#_a19">client_async.cpp</a>, and <a class="el" href="client_subscription_8cpp-example.html#_a18">client_subscription.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="services_2monitoreditem_8hpp_source.html#l00045">45</a> of file <a class="el" href="services_2monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="services_2monitoreditem_8hpp_source.html#l00053">53</a> of file <a class="el" href="services_2monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -134,9 +137,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Timestamps to be transmitted. Won't be revised by the server. </p>
+<p>Timestamps to be transmitted. </p>
 
-<p class="definition">Definition at line <a class="el" href="services_2monitoreditem_8hpp_source.html#l00047">47</a> of file <a class="el" href="services_2monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="services_2monitoreditem_8hpp_source.html#l00055">55</a> of file <a class="el" href="services_2monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
 
 </div>
 </div>
@@ -160,7 +163,7 @@ Public Attributes</h2></td></tr>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_subscription_8cpp-example.html#a19">client_subscription.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="services_2monitoreditem_8hpp_source.html#l00052">52</a> of file <a class="el" href="services_2monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="services_2monitoreditem_8hpp_source.html#l00060">60</a> of file <a class="el" href="services_2monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
 
 </div>
 </div>
@@ -179,9 +182,9 @@ Public Attributes</h2></td></tr>
 <p>Filter is used by the server to determine if the <a class="el" href="classopcua_1_1MonitoredItem.html" title="High-level monitored item class.">MonitoredItem</a> should generate notifications. </p>
 <p>The filter parameter type is an extensible parameter type and can be, for example, of type <a class="el" href="classopcua_1_1DataChangeFilter.html" title="UA_DataChangeFilter wrapper class.">DataChangeFilter</a>, <a class="el" href="classopcua_1_1EventFilter.html" title="UA_EventFilter wrapper class.">EventFilter</a> or <a class="el" href="classopcua_1_1AggregateFilter.html" title="UA_AggregateFilter wrapper class.">AggregateFilter</a>. </p><dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/Core/Part4/v105/docs/7.22">https://reference.opcfoundation.org/Core/Part4/v105/docs/7.22</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="services_2monitoreditem_8hpp_source.html#l00057">57</a> of file <a class="el" href="services_2monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="services_2monitoreditem_8hpp_source.html#l00065">65</a> of file <a class="el" href="services_2monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="subscription_8hpp_source.html#l00140">opcua::Subscription&lt; Connection &gt;::subscribeEvent()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="subscription_8hpp_source.html#l00143">opcua::Subscription&lt; Connection &gt;::subscribeEvent()</a>.</p>
 
 </div>
 </div>
@@ -203,7 +206,7 @@ Public Attributes</h2></td></tr>
 <li><code>1</code> to retrieve the server's minimum queue size In the case of a queue overflow, an <a class="el" href="classopcua_1_1Event.html" title="Create and trigger events.">Event</a> of the type EventQueueOverflowEventType is generated. </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="services_2monitoreditem_8hpp_source.html#l00064">64</a> of file <a class="el" href="services_2monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="services_2monitoreditem_8hpp_source.html#l00072">72</a> of file <a class="el" href="services_2monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
 
 </div>
 </div>
@@ -225,7 +228,7 @@ Public Attributes</h2></td></tr>
 <li><code>false</code>: the last notification added to the queue gets replaced with the new notification </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="services_2monitoreditem_8hpp_source.html#l00068">68</a> of file <a class="el" href="services_2monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="services_2monitoreditem_8hpp_source.html#l00076">76</a> of file <a class="el" href="services_2monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
 
 </div>
 </div>

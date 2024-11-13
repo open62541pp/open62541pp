@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: CreateSubscription service</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -89,6 +92,7 @@ $(function(){ initResizable(false); });
 
 <div class="header">
   <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">CreateSubscription service<div class="ingroups"><a class="el" href="group__Services.html">Services</a> &raquo; <a class="el" href="group__Subscription.html">Subscription service set</a></div></div></div>
@@ -97,12 +101,17 @@ $(function(){ initResizable(false); });
 <div class="dynheader">
 Collaboration diagram for CreateSubscription service:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="group__CreateSubscription.svg" width="382" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="group__CreateSubscription.svg" width="746" height="102"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Create subscriptions. </p>
 <p>Subscriptions monitor a set of monitored items for notifications and return them to the client. </p><dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.2">https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.2</a> </dd></dl>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1services_1_1detail.html">opcua::services::detail</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:ga9c4d131655df8ad8eae78ee2e62a059e" id="r_ga9c4d131655df8ad8eae78ee2e62a059e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga9c4d131655df8ad8eae78ee2e62a059e">opcua::services::DeleteSubscriptionCallback</a> = std::function&lt;void(uint32_t subId)&gt;</td></tr>
@@ -112,10 +121,10 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga53a25e6ade5a338ead2106723913658d" id="r_ga53a25e6ade5a338ead2106723913658d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1CreateSubscriptionResponse.html">CreateSubscriptionResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga53a25e6ade5a338ead2106723913658d">opcua::services::createSubscription</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1CreateSubscriptionRequest.html">CreateSubscriptionRequest</a> &amp;request, <a class="el" href="#gace7c32be5b9d198ab878a40b117c28ea">StatusChangeNotificationCallback</a> statusChangeCallback={}, <a class="el" href="#ga9c4d131655df8ad8eae78ee2e62a059e">DeleteSubscriptionCallback</a> deleteCallback={})</td></tr>
-<tr class="separator:ga53a25e6ade5a338ead2106723913658d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7901d0fdc7b885eeb660617d810baace" id="r_ga7901d0fdc7b885eeb660617d810baace"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga7901d0fdc7b885eeb660617d810baace">opcua::services::createSubscription</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, <a class="el" href="structopcua_1_1services_1_1SubscriptionParameters.html">SubscriptionParameters</a> &amp;parameters, bool publishingEnabled=true, <a class="el" href="#gace7c32be5b9d198ab878a40b117c28ea">StatusChangeNotificationCallback</a> statusChangeCallback={}, <a class="el" href="#ga9c4d131655df8ad8eae78ee2e62a059e">DeleteSubscriptionCallback</a> deleteCallback={}) noexcept</td></tr>
-<tr class="separator:ga7901d0fdc7b885eeb660617d810baace"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab21e45d9ee9c919cbab006c942be79ff" id="r_gab21e45d9ee9c919cbab006c942be79ff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1CreateSubscriptionResponse.html">CreateSubscriptionResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gab21e45d9ee9c919cbab006c942be79ff">opcua::services::createSubscription</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1CreateSubscriptionRequest.html">CreateSubscriptionRequest</a> &amp;request, <a class="el" href="#gace7c32be5b9d198ab878a40b117c28ea">StatusChangeNotificationCallback</a> statusChangeCallback, <a class="el" href="#ga9c4d131655df8ad8eae78ee2e62a059e">DeleteSubscriptionCallback</a> deleteCallback)</td></tr>
+<tr class="separator:gab21e45d9ee9c919cbab006c942be79ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga31bfe41c445ee10d3998ce31935a78e6" id="r_ga31bfe41c445ee10d3998ce31935a78e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1CreateSubscriptionResponse.html">CreateSubscriptionResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga31bfe41c445ee10d3998ce31935a78e6">opcua::services::createSubscription</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="structopcua_1_1services_1_1SubscriptionParameters.html">SubscriptionParameters</a> &amp;parameters, bool publishingEnabled, <a class="el" href="#gace7c32be5b9d198ab878a40b117c28ea">StatusChangeNotificationCallback</a> statusChangeCallback, <a class="el" href="#ga9c4d131655df8ad8eae78ee2e62a059e">DeleteSubscriptionCallback</a> deleteCallback) noexcept</td></tr>
+<tr class="separator:ga31bfe41c445ee10d3998ce31935a78e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="ga9c4d131655df8ad8eae78ee2e62a059e" name="ga9c4d131655df8ad8eae78ee2e62a059e"></a>
@@ -138,7 +147,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="services_2subscription_8hpp_source.html#l00063">63</a> of file <a class="el" href="services_2subscription_8hpp_source.html">subscription.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="services_2subscription_8hpp_source.html#l00071">71</a> of file <a class="el" href="services_2subscription_8hpp_source.html">subscription.hpp</a>.</p>
 
 </div>
 </div>
@@ -156,7 +165,7 @@ Functions</h2></td></tr>
 <b>Initial value:</b><div class="fragment"><div class="line"> </div>
 <div class="line">    std::function&lt;void(uint32_t subId, StatusChangeNotification&amp; notification)&gt;</div>
 </div><!-- fragment -->
-<p>s <a class="el" href="classopcua_1_1Subscription.html" title="High-level subscription class.">Subscription</a> status change notification callback. </p>
+<p><a class="el" href="classopcua_1_1Subscription.html" title="High-level subscription class.">Subscription</a> status change notification callback. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">subId</td><td><a class="el" href="classopcua_1_1Subscription.html" title="High-level subscription class.">Subscription</a> identifier </td></tr>
@@ -165,16 +174,19 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="services_2subscription_8hpp_source.html#l00070">70</a> of file <a class="el" href="services_2subscription_8hpp_source.html">subscription.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="services_2subscription_8hpp_source.html#l00078">78</a> of file <a class="el" href="services_2subscription_8hpp_source.html">subscription.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ga53a25e6ade5a338ead2106723913658d" name="ga53a25e6ade5a338ead2106723913658d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga53a25e6ade5a338ead2106723913658d">&#9670;&#160;</a></span>createSubscription() <span class="overload">[1/2]</span></h2>
+<a id="gab21e45d9ee9c919cbab006c942be79ff" name="gab21e45d9ee9c919cbab006c942be79ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab21e45d9ee9c919cbab006c942be79ff">&#9670;&#160;</a></span>createSubscription() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classopcua_1_1CreateSubscriptionResponse.html">CreateSubscriptionResponse</a> opcua::services::createSubscription </td>
@@ -189,14 +201,19 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="#gace7c32be5b9d198ab878a40b117c28ea">StatusChangeNotificationCallback</a></td>          <td class="paramname"><span class="paramname"><em>statusChangeCallback</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>, </td>
+          <td class="paramtype"><a class="el" href="#gace7c32be5b9d198ab878a40b117c28ea">StatusChangeNotificationCallback</a></td>          <td class="paramname"><span class="paramname"><em>statusChangeCallback</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="#ga9c4d131655df8ad8eae78ee2e62a059e">DeleteSubscriptionCallback</a></td>          <td class="paramname"><span class="paramname"><em>deleteCallback</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="#ga9c4d131655df8ad8eae78ee2e62a059e">DeleteSubscriptionCallback</a></td>          <td class="paramname"><span class="paramname"><em>deleteCallback</em></span>&#160;)</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">nodiscard</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Create a subscription. </p>
@@ -212,8 +229,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga7901d0fdc7b885eeb660617d810baace" name="ga7901d0fdc7b885eeb660617d810baace"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga7901d0fdc7b885eeb660617d810baace">&#9670;&#160;</a></span>createSubscription() <span class="overload">[2/2]</span></h2>
+<a id="ga31bfe41c445ee10d3998ce31935a78e6" name="ga31bfe41c445ee10d3998ce31935a78e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga31bfe41c445ee10d3998ce31935a78e6">&#9670;&#160;</a></span>createSubscription() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -222,29 +239,29 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; uint32_t &gt; opcua::services::createSubscription </td>
+          <td class="memname"><a class="el" href="classopcua_1_1CreateSubscriptionResponse.html">CreateSubscriptionResponse</a> opcua::services::createSubscription </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>connection</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structopcua_1_1services_1_1SubscriptionParameters.html">SubscriptionParameters</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>parameters</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="structopcua_1_1services_1_1SubscriptionParameters.html">SubscriptionParameters</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>parameters</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>publishingEnabled</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>, </td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>publishingEnabled</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="#gace7c32be5b9d198ab878a40b117c28ea">StatusChangeNotificationCallback</a></td>          <td class="paramname"><span class="paramname"><em>statusChangeCallback</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>, </td>
+          <td class="paramtype"><a class="el" href="#gace7c32be5b9d198ab878a40b117c28ea">StatusChangeNotificationCallback</a></td>          <td class="paramname"><span class="paramname"><em>statusChangeCallback</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="#ga9c4d131655df8ad8eae78ee2e62a059e">DeleteSubscriptionCallback</a></td>          <td class="paramname"><span class="paramname"><em>deleteCallback</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="#ga9c4d131655df8ad8eae78ee2e62a059e">DeleteSubscriptionCallback</a></td>          <td class="paramname"><span class="paramname"><em>deleteCallback</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -254,18 +271,7 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Create a subscription. </p>
-<p>Parameters are passed by reference because illegal parameters can be revised by the server. The updated parameters reflect the actual values that the server will use.    </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
-    <tr><td class="paramname">parameters</td><td><a class="el" href="classopcua_1_1Subscription.html" title="High-level subscription class.">Subscription</a> parameters, may be revised by server </td></tr>
-    <tr><td class="paramname">publishingEnabled</td><td>Enable/disable publishing of the subscription </td></tr>
-    <tr><td class="paramname">statusChangeCallback</td><td>Invoked when the status of a subscription is changed </td></tr>
-    <tr><td class="paramname">deleteCallback</td><td>Invoked when the subscription is deleted </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Server-assigned identifier of the subscription </dd></dl>
+<p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
 
 </div>
 </div>

@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541: /home/runner/work/open62541pp/open62541pp/build/doc/open62541/include/open62541/types.h Source File</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.12</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.14</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -394,7 +397,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00288" name="l00288"></a><span class="lineno"><a class="line" href="structUA__NodeId.html#ad8656745fcaf75f1482e2644a7ea0eb1">  288</a></span>        <a class="code hl_struct" href="structUA__String.html">UA_String</a>     <a class="code hl_variable" href="structUA__NodeId.html#ad8656745fcaf75f1482e2644a7ea0eb1">string</a>;</div>
 <div class="line"><a id="l00289" name="l00289"></a><span class="lineno"><a class="line" href="structUA__NodeId.html#a703d19ab1cd3c3f2a49fc25b1520aeae">  289</a></span>        <a class="code hl_struct" href="structUA__Guid.html">UA_Guid</a>       <a class="code hl_variable" href="structUA__NodeId.html#a703d19ab1cd3c3f2a49fc25b1520aeae">guid</a>;</div>
 <div class="line"><a id="l00290" name="l00290"></a><span class="lineno"><a class="line" href="structUA__NodeId.html#aea4a6299c5ce6a23a8312af364f4b69b">  290</a></span>        <a class="code hl_struct" href="structUA__String.html">UA_ByteString</a> <a class="code hl_variable" href="structUA__NodeId.html#aea4a6299c5ce6a23a8312af364f4b69b">byteString</a>;</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno"><a class="line" href="structUA__NodeId.html#a46449585ca41fa9b03da53095948d424">  291</a></span>    } identifier;</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno"><a class="line" href="structUA__NodeId.html#ae5032f4fe95db20c7dad9cfc141fd44d">  291</a></span>    } identifier;</div>
 <div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>} <a class="code hl_struct" href="structUA__NodeId.html">UA_NodeId</a>;</div>
 </div>
 <div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span> </div>
@@ -828,12 +831,12 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00704" name="l00704"></a><span class="lineno">  704</span>        <span class="keyword">struct </span>{</div>
 <div class="line"><a id="l00705" name="l00705"></a><span class="lineno"><a class="line" href="structUA__ExtensionObject.html#aae7bb3e696306431a2cd7bc511bd5c3f">  705</a></span>            <a class="code hl_struct" href="structUA__NodeId.html">UA_NodeId</a> <a class="code hl_variable" href="structUA__ExtensionObject.html#aae7bb3e696306431a2cd7bc511bd5c3f">typeId</a>;   <span class="comment">/* The nodeid of the datatype */</span></div>
 <div class="line"><a id="l00706" name="l00706"></a><span class="lineno"><a class="line" href="structUA__ExtensionObject.html#ac1af8afdad7bb507bf0e25c93527c645">  706</a></span>            <a class="code hl_struct" href="structUA__String.html">UA_ByteString</a> <a class="code hl_variable" href="structUA__ExtensionObject.html#ac1af8afdad7bb507bf0e25c93527c645">body</a>; <span class="comment">/* The bytestring of the encoded data */</span></div>
-<div class="line"><a id="l00707" name="l00707"></a><span class="lineno"><a class="line" href="structUA__ExtensionObject.html#a4c1214045d8aec78b9249f5b2d9eaa7c">  707</a></span>        } encoded;</div>
+<div class="line"><a id="l00707" name="l00707"></a><span class="lineno"><a class="line" href="structUA__ExtensionObject.html#a59e04ee4fcb665a8c63da6f36047bf00">  707</a></span>        } encoded;</div>
 <div class="line"><a id="l00708" name="l00708"></a><span class="lineno">  708</span>        <span class="keyword">struct </span>{</div>
 <div class="line"><a id="l00709" name="l00709"></a><span class="lineno"><a class="line" href="structUA__ExtensionObject.html#a779308659bff83a4a572e6436c1b2c98">  709</a></span>            <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *<a class="code hl_variable" href="structUA__ExtensionObject.html#a779308659bff83a4a572e6436c1b2c98">type</a>;</div>
 <div class="line"><a id="l00710" name="l00710"></a><span class="lineno"><a class="line" href="structUA__ExtensionObject.html#a5767c86ad0c1012878e76ddad0ab61eb">  710</a></span>            <span class="keywordtype">void</span> *<a class="code hl_variable" href="structUA__ExtensionObject.html#a5767c86ad0c1012878e76ddad0ab61eb">data</a>;</div>
-<div class="line"><a id="l00711" name="l00711"></a><span class="lineno"><a class="line" href="structUA__ExtensionObject.html#abd6c3a6838c0a3d4f74054f776d4f33f">  711</a></span>        } decoded;</div>
-<div class="line"><a id="l00712" name="l00712"></a><span class="lineno"><a class="line" href="structUA__ExtensionObject.html#ad8648a2c3b4da9d8e6b97ab38c1422b0">  712</a></span>    } content;</div>
+<div class="line"><a id="l00711" name="l00711"></a><span class="lineno"><a class="line" href="structUA__ExtensionObject.html#af57b0cab70d503307e6e901589c28615">  711</a></span>        } decoded;</div>
+<div class="line"><a id="l00712" name="l00712"></a><span class="lineno"><a class="line" href="structUA__ExtensionObject.html#a5e917ece86f695dccb530e01bfc35518">  712</a></span>    } content;</div>
 <div class="line"><a id="l00713" name="l00713"></a><span class="lineno">  713</span>} <a class="code hl_struct" href="structUA__ExtensionObject.html">UA_ExtensionObject</a>;</div>
 </div>
 <div class="line"><a id="l00714" name="l00714"></a><span class="lineno">  714</span><span class="comment"></span> </div>

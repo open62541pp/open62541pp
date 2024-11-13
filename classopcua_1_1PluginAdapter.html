@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: opcua::PluginAdapter&lt; T &gt; Class Template Reference</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -105,7 +108,7 @@ $(function(){ initResizable(false); });
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
 class opcua::PluginAdapter&lt; T &gt;</div><p>Base class to implement plugin adapters. </p>
 <p>Plugin adapters will provide a different (modern) interface for open62541's native plugins. For example <a class="el" href="classopcua_1_1AccessControlBase.html" title="Access control base class.">AccessControlBase</a> is the plugin adapter for <a class="elRef" target="_blank" href="open62541/structUA__AccessControl.html">UA_AccessControl</a>.</p>
-<p>The native plugin is created via the <a class="el" href="#aa2caf480e487ff8029b07a76c5fd4a2d">PluginAdapter::create</a> function. The <a class="el" href="#a347ba1a55a54dde376e386f570140d9a">PluginAdapter::clear</a> function is used to clear the created plugin after usage. Usually the native plugin carries a <code>void* context</code> pointer which will refer back to the plugin adapter. Make sure that the plugin adapter outlives the native plugin to avoid dangling pointers.</p>
+<p>The native plugin is created via the <a class="el" href="#a89c0771409b5f62dd46a1d14046a46b8">PluginAdapter::create</a> function. Usually, the native plugin carries a <code>void* context</code> pointer which will refer back to the plugin adapter. Either move the adapter ownership to the plugin with <code>ownsAdapter = true</code> or make sure that the plugin adapter outlives the native plugin to avoid dangling pointers.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>Type of the native plugin, e.g. <a class="elRef" target="_blank" href="open62541/structUA__AccessControl.html">UA_AccessControl</a> </td></tr>
@@ -134,12 +137,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a44c79742e60562a659e2931337683ea4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa361423975808307664c60854495eda8" id="r_aa361423975808307664c60854495eda8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1PluginAdapter.html">PluginAdapter</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa361423975808307664c60854495eda8">operator=</a> (<a class="el" href="classopcua_1_1PluginAdapter.html">PluginAdapter</a> &amp;&amp;) noexcept=default</td></tr>
 <tr class="separator:aa361423975808307664c60854495eda8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2caf480e487ff8029b07a76c5fd4a2d" id="r_aa2caf480e487ff8029b07a76c5fd4a2d"><td class="memItemLeft" align="right" valign="top">virtual T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa2caf480e487ff8029b07a76c5fd4a2d">create</a> ()=0</td></tr>
-<tr class="separator:aa2caf480e487ff8029b07a76c5fd4a2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a347ba1a55a54dde376e386f570140d9a" id="r_a347ba1a55a54dde376e386f570140d9a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a347ba1a55a54dde376e386f570140d9a">clear</a> (T &amp;plugin) noexcept=0</td></tr>
-<tr class="separator:a347ba1a55a54dde376e386f570140d9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4fdf18c3a057088d4dacc2f2369624da" id="r_a4fdf18c3a057088d4dacc2f2369624da"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4fdf18c3a057088d4dacc2f2369624da">clear</a> (T *&amp;plugin) noexcept</td></tr>
-<tr class="separator:a4fdf18c3a057088d4dacc2f2369624da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89c0771409b5f62dd46a1d14046a46b8" id="r_a89c0771409b5f62dd46a1d14046a46b8"><td class="memItemLeft" align="right" valign="top">virtual T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a89c0771409b5f62dd46a1d14046a46b8">create</a> (bool ownsAdapter)=0</td></tr>
+<tr class="separator:a89c0771409b5f62dd46a1d14046a46b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="aa13e9d5e1cd9e693b93941736c579b2a" name="aa13e9d5e1cd9e693b93941736c579b2a"></a>
@@ -324,8 +323,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="aa2caf480e487ff8029b07a76c5fd4a2d" name="aa2caf480e487ff8029b07a76c5fd4a2d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa2caf480e487ff8029b07a76c5fd4a2d">&#9670;&#160;</a></span>create()</h2>
+<a id="a89c0771409b5f62dd46a1d14046a46b8" name="a89c0771409b5f62dd46a1d14046a46b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89c0771409b5f62dd46a1d14046a46b8">&#9670;&#160;</a></span>create()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -338,7 +337,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="memname">virtual T <a class="el" href="classopcua_1_1PluginAdapter.html">opcua::PluginAdapter</a>&lt; T &gt;::create </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>ownsAdapter</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -349,67 +348,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classopcua_1_1AccessControlBase.html#a8dd48baffa342eda1948d01a83f9a983">opcua::AccessControlBase</a>, and <a class="el" href="classopcua_1_1LoggerBase.html#a2a7fc6949fe401822097fefd923f31ad">opcua::LoggerBase</a>.</p>
-
-</div>
-</div>
-<a id="a347ba1a55a54dde376e386f570140d9a" name="a347ba1a55a54dde376e386f570140d9a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a347ba1a55a54dde376e386f570140d9a">&#9670;&#160;</a></span>clear() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void <a class="el" href="classopcua_1_1PluginAdapter.html">opcua::PluginAdapter</a>&lt; T &gt;::clear </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;</td>          <td class="paramname"><span class="paramname"><em>plugin</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implemented in <a class="el" href="classopcua_1_1AccessControlBase.html#a0e0a21f5d11ba6ac0a895fa910821adf">opcua::AccessControlBase</a>, and <a class="el" href="classopcua_1_1LoggerBase.html#a3ad4824da826950e9c7f4da376d181c5">opcua::LoggerBase</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="pluginadapter_8hpp_source.html#l00035">opcua::PluginAdapter&lt; T &gt;::clear()</a>.</p>
-
-</div>
-</div>
-<a id="a4fdf18c3a057088d4dacc2f2369624da" name="a4fdf18c3a057088d4dacc2f2369624da"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4fdf18c3a057088d4dacc2f2369624da">&#9670;&#160;</a></span>clear() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void <a class="el" href="classopcua_1_1PluginAdapter.html">opcua::PluginAdapter</a>&lt; T &gt;::clear </td>
-          <td>(</td>
-          <td class="paramtype">T *&amp;</td>          <td class="paramname"><span class="paramname"><em>plugin</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="pluginadapter_8hpp_source.html#l00035">35</a> of file <a class="el" href="pluginadapter_8hpp_source.html">pluginadapter.hpp</a>.</p>
+<p>Implemented in <a class="el" href="classopcua_1_1AccessControlBase.html#aaa15bed5cdf49aec7383adc86edea03b">opcua::AccessControlBase</a>, and <a class="el" href="classopcua_1_1LoggerBase.html#a7545baeac55dd8970abf54590b56bb3c">opcua::LoggerBase</a>.</p>
 
 </div>
 </div>

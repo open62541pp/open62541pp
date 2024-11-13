@@ -1,4 +1,6 @@
 <map id="CreateMonitoredItems service" name="CreateMonitoredItems service">
-<area shape="rect" id="Node000001" title="Create and add a monitored item to a subscription." alt="" coords="247,5,415,45"/>
-<area shape="rect" id="Node000002" href="$group__MonitoredItem.html" title="Subscribe to data and events." alt="" coords="5,13,199,38"/>
+<area shape="rect" id="Node000003" href="$group__Attribute.html" title="Read and write node attributes." alt="" coords="611,5,765,31"/>
+<area shape="rect" id="Node000001" title="Create and add a monitored item to a subscription." alt="" coords="248,27,416,67"/>
+<area shape="rect" id="Node000004" href="$group__CreateSubscription.html" title="Create subscriptions." alt="" coords="615,55,761,95"/>
+<area shape="rect" id="Node000002" href="$group__MonitoredItem.html" title="Subscribe to data and events." alt="" coords="5,35,199,60"/>
 </map>

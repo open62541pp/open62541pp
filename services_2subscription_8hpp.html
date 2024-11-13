@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: /home/runner/work/open62541pp/open62541pp/include/open62541pp/services/subscription.hpp File Reference</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -102,18 +105,29 @@ $(function(){ initResizable(false); });
 <div class="contents">
 <div class="textblock"><code>#include &lt;cstdint&gt;</code><br />
 <code>#include &lt;functional&gt;</code><br />
+<code>#include &lt;memory&gt;</code><br />
+<code>#include &lt;utility&gt;</code><br />
+<code>#include &quot;<a class="el" href="async_8hpp_source.html">open62541pp/async.hpp</a>&quot;</code><br />
 <code>#include &quot;open62541pp/config.hpp&quot;</code><br />
-<code>#include &quot;<a class="el" href="result_8hpp_source.html">open62541pp/result.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="client__utils_8hpp_source.html">open62541pp/detail/client_utils.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="client_8h_source.html">open62541pp/detail/open62541/client.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="exception_8hpp_source.html">open62541pp/exception.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="async__hook_8hpp_source.html">open62541pp/services/detail/async_hook.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="async__transform_8hpp_source.html">open62541pp/services/detail/async_transform.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="client__service_8hpp_source.html">open62541pp/services/detail/client_service.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="request__handling_8hpp_source.html">open62541pp/services/detail/request_handling.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="response__handling_8hpp_source.html">open62541pp/services/detail/response_handling.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="subscription__context_8hpp_source.html">open62541pp/services/detail/subscription_context.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="types__composed_8hpp_source.html">open62541pp/types_composed.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for subscription.hpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="services_2subscription_8hpp__incl.svg" width="3480" height="740"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="services_2subscription_8hpp__incl.svg" width="4984" height="784"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="services_2subscription_8hpp__dep__incl.svg" width="1638" height="887"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="services_2subscription_8hpp__dep__incl.svg" width="815" height="374"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="services_2subscription_8hpp_source.html">Go to the source code of this file.</a></p>
@@ -129,6 +143,8 @@ Namespaces</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1services.html">opcua::services</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1services_1_1detail.html">opcua::services::detail</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -139,22 +155,32 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga53a25e6ade5a338ead2106723913658d" id="r_ga53a25e6ade5a338ead2106723913658d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1CreateSubscriptionResponse.html">CreateSubscriptionResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CreateSubscription.html#ga53a25e6ade5a338ead2106723913658d">opcua::services::createSubscription</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1CreateSubscriptionRequest.html">CreateSubscriptionRequest</a> &amp;request, <a class="el" href="group__CreateSubscription.html#gace7c32be5b9d198ab878a40b117c28ea">StatusChangeNotificationCallback</a> statusChangeCallback={}, <a class="el" href="group__CreateSubscription.html#ga9c4d131655df8ad8eae78ee2e62a059e">DeleteSubscriptionCallback</a> deleteCallback={})</td></tr>
-<tr class="separator:ga53a25e6ade5a338ead2106723913658d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7901d0fdc7b885eeb660617d810baace" id="r_ga7901d0fdc7b885eeb660617d810baace"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CreateSubscription.html#ga7901d0fdc7b885eeb660617d810baace">opcua::services::createSubscription</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, <a class="el" href="structopcua_1_1services_1_1SubscriptionParameters.html">SubscriptionParameters</a> &amp;parameters, bool publishingEnabled=true, <a class="el" href="group__CreateSubscription.html#gace7c32be5b9d198ab878a40b117c28ea">StatusChangeNotificationCallback</a> statusChangeCallback={}, <a class="el" href="group__CreateSubscription.html#ga9c4d131655df8ad8eae78ee2e62a059e">DeleteSubscriptionCallback</a> deleteCallback={}) noexcept</td></tr>
-<tr class="separator:ga7901d0fdc7b885eeb660617d810baace"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2dad4226b94622757d27ac0acec9ace" id="r_af2dad4226b94622757d27ac0acec9ace"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="structopcua_1_1services_1_1detail_1_1SubscriptionContext.html">SubscriptionContext</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1services_1_1detail.html#af2dad4226b94622757d27ac0acec9ace">opcua::services::detail::createSubscriptionContext</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, <a class="el" href="group__CreateSubscription.html#gace7c32be5b9d198ab878a40b117c28ea">StatusChangeNotificationCallback</a> &amp;&amp;statusChangeCallback, <a class="el" href="group__CreateSubscription.html#ga9c4d131655df8ad8eae78ee2e62a059e">DeleteSubscriptionCallback</a> &amp;&amp;deleteCallback)</td></tr>
+<tr class="separator:af2dad4226b94622757d27ac0acec9ace"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21b3b10a16180f94c434417da5795f76" id="r_a21b3b10a16180f94c434417da5795f76"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1services_1_1detail.html#a21b3b10a16180f94c434417da5795f76">opcua::services::detail::storeSubscriptionContext</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, uint32_t subscriptionId, std::unique_ptr&lt; <a class="el" href="structopcua_1_1services_1_1detail_1_1SubscriptionContext.html">SubscriptionContext</a> &gt; &amp;&amp;context)</td></tr>
+<tr class="separator:a21b3b10a16180f94c434417da5795f76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab21e45d9ee9c919cbab006c942be79ff" id="r_gab21e45d9ee9c919cbab006c942be79ff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1CreateSubscriptionResponse.html">CreateSubscriptionResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CreateSubscription.html#gab21e45d9ee9c919cbab006c942be79ff">opcua::services::createSubscription</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1CreateSubscriptionRequest.html">CreateSubscriptionRequest</a> &amp;request, <a class="el" href="group__CreateSubscription.html#gace7c32be5b9d198ab878a40b117c28ea">StatusChangeNotificationCallback</a> statusChangeCallback, <a class="el" href="group__CreateSubscription.html#ga9c4d131655df8ad8eae78ee2e62a059e">DeleteSubscriptionCallback</a> deleteCallback)</td></tr>
+<tr class="separator:gab21e45d9ee9c919cbab006c942be79ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga31bfe41c445ee10d3998ce31935a78e6" id="r_ga31bfe41c445ee10d3998ce31935a78e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1CreateSubscriptionResponse.html">CreateSubscriptionResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CreateSubscription.html#ga31bfe41c445ee10d3998ce31935a78e6">opcua::services::createSubscription</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="structopcua_1_1services_1_1SubscriptionParameters.html">SubscriptionParameters</a> &amp;parameters, bool publishingEnabled, <a class="el" href="group__CreateSubscription.html#gace7c32be5b9d198ab878a40b117c28ea">StatusChangeNotificationCallback</a> statusChangeCallback, <a class="el" href="group__CreateSubscription.html#ga9c4d131655df8ad8eae78ee2e62a059e">DeleteSubscriptionCallback</a> deleteCallback) noexcept</td></tr>
+<tr class="separator:ga31bfe41c445ee10d3998ce31935a78e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga1157f9d4cae2e7487c0212d3951fe2a1" id="r_ga1157f9d4cae2e7487c0212d3951fe2a1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1ModifySubscriptionResponse.html">ModifySubscriptionResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ModifySubscription.html#ga1157f9d4cae2e7487c0212d3951fe2a1">opcua::services::modifySubscription</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1ModifySubscriptionRequest.html">ModifySubscriptionRequest</a> &amp;request) noexcept</td></tr>
 <tr class="separator:ga1157f9d4cae2e7487c0212d3951fe2a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga104bdd5f6f21a75554224451c159eb4e" id="r_ga104bdd5f6f21a75554224451c159eb4e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; void &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ModifySubscription.html#ga104bdd5f6f21a75554224451c159eb4e">opcua::services::modifySubscription</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, uint32_t subscriptionId, <a class="el" href="structopcua_1_1services_1_1SubscriptionParameters.html">SubscriptionParameters</a> &amp;parameters) noexcept</td></tr>
-<tr class="separator:ga104bdd5f6f21a75554224451c159eb4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8f9e4ce11c22da0d3e38df0c1bb2b1d1" id="r_ga8f9e4ce11c22da0d3e38df0c1bb2b1d1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1ModifySubscriptionResponse.html">ModifySubscriptionResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ModifySubscription.html#ga8f9e4ce11c22da0d3e38df0c1bb2b1d1">opcua::services::modifySubscription</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, uint32_t subscriptionId, const <a class="el" href="structopcua_1_1services_1_1SubscriptionParameters.html">SubscriptionParameters</a> &amp;parameters) noexcept</td></tr>
+<tr class="separator:ga8f9e4ce11c22da0d3e38df0c1bb2b1d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0d72f76d29d516a935210e9b8db3dc10" id="r_ga0d72f76d29d516a935210e9b8db3dc10"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1SetPublishingModeResponse.html">SetPublishingModeResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SetPublishingMode.html#ga0d72f76d29d516a935210e9b8db3dc10">opcua::services::setPublishingMode</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1SetPublishingModeRequest.html">SetPublishingModeRequest</a> &amp;request) noexcept</td></tr>
 <tr class="separator:ga0d72f76d29d516a935210e9b8db3dc10"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae8f8af46aaee0365d06d285356f0961f" id="r_gae8f8af46aaee0365d06d285356f0961f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; void &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SetPublishingMode.html#gae8f8af46aaee0365d06d285356f0961f">opcua::services::setPublishingMode</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, uint32_t subscriptionId, bool publishing) noexcept</td></tr>
-<tr class="separator:gae8f8af46aaee0365d06d285356f0961f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3be6ea1b7b366aadb89ae5450d4c32cf" id="r_ga3be6ea1b7b366aadb89ae5450d4c32cf"><td class="memTemplParams" colspan="2">template&lt;typename CompletionToken &gt; </td></tr>
+<tr class="memitem:ga3be6ea1b7b366aadb89ae5450d4c32cf"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__SetPublishingMode.html#ga3be6ea1b7b366aadb89ae5450d4c32cf">opcua::services::setPublishingModeAsync</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1SetPublishingModeRequest.html">SetPublishingModeRequest</a> &amp;request, CompletionToken &amp;&amp;token)</td></tr>
+<tr class="separator:ga3be6ea1b7b366aadb89ae5450d4c32cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf24941bfee0117bad66b4852b7cada5e" id="r_gaf24941bfee0117bad66b4852b7cada5e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__SetPublishingMode.html#gaf24941bfee0117bad66b4852b7cada5e">opcua::services::setPublishingMode</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, uint32_t subscriptionId, bool publishing) noexcept</td></tr>
+<tr class="separator:gaf24941bfee0117bad66b4852b7cada5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf0b4cf96ea085310f8eaef67a1ada700" id="r_gaf0b4cf96ea085310f8eaef67a1ada700"><td class="memTemplParams" colspan="2">template&lt;typename CompletionToken &gt; </td></tr>
+<tr class="memitem:gaf0b4cf96ea085310f8eaef67a1ada700"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__SetPublishingMode.html#gaf0b4cf96ea085310f8eaef67a1ada700">opcua::services::setPublishingModeAsync</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, uint32_t subscriptionId, bool publishing, CompletionToken &amp;&amp;token)</td></tr>
+<tr class="separator:gaf0b4cf96ea085310f8eaef67a1ada700"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga15b4d04ea9aecd2ef818eda33f2cfa55" id="r_ga15b4d04ea9aecd2ef818eda33f2cfa55"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1DeleteSubscriptionsResponse.html">DeleteSubscriptionsResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__DeleteSubscriptions.html#ga15b4d04ea9aecd2ef818eda33f2cfa55">opcua::services::deleteSubscriptions</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1DeleteSubscriptionsRequest.html">DeleteSubscriptionsRequest</a> &amp;request) noexcept</td></tr>
 <tr class="separator:ga15b4d04ea9aecd2ef818eda33f2cfa55"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga644bc70919ce7e06ac3c8cffaa09ee45" id="r_ga644bc70919ce7e06ac3c8cffaa09ee45"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; void &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__DeleteSubscriptions.html#ga644bc70919ce7e06ac3c8cffaa09ee45">opcua::services::deleteSubscription</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, uint32_t subscriptionId) noexcept</td></tr>
-<tr class="separator:ga644bc70919ce7e06ac3c8cffaa09ee45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga13c6bb449e683ca7559f5254540cda37" id="r_ga13c6bb449e683ca7559f5254540cda37"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__DeleteSubscriptions.html#ga13c6bb449e683ca7559f5254540cda37">opcua::services::deleteSubscription</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, uint32_t subscriptionId) noexcept</td></tr>
+<tr class="separator:ga13c6bb449e683ca7559f5254540cda37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

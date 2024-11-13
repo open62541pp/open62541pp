@@ -1,7 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="5,13,164,53"/>
-<area shape="rect" id="Node000001" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="212,5,389,60"/>
-<area shape="poly" id="edge137_Node000000_Node000001" title=" " alt="" coords="178,30,212,30,212,35,178,35"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1EventFilter.html" title="UA_EventFilter wrapper class." alt="" coords="437,20,576,45"/>
-<area shape="poly" id="edge138_Node000001_Node000002" title=" " alt="" coords="403,30,437,30,437,35,403,35"/>
+<area shape="rect" id="Node000000" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="5,13,180,53"/>
+<area shape="rect" id="Node000001" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="228,5,499,60"/>
+<area shape="poly" id="edge132_Node000000_Node000001" title=" " alt="" coords="194,30,228,30,228,35,194,35"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1EndpointDescription.html" title="UA_EndpointDescription wrapper class." alt="" coords="547,20,747,45"/>
+<area shape="poly" id="edge133_Node000001_Node000002" title=" " alt="" coords="512,30,547,30,547,35,512,35"/>
 </map>

@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: TranslateBrowsePathsToNodeIds service</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -106,21 +109,21 @@ Collaboration diagram for TranslateBrowsePathsToNodeIds service:</div>
 Functions</h2></td></tr>
 <tr class="memitem:ga442e7c25e9212c707320551e430c59cc" id="r_ga442e7c25e9212c707320551e430c59cc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1TranslateBrowsePathsToNodeIdsResponse.html">TranslateBrowsePathsToNodeIdsResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga442e7c25e9212c707320551e430c59cc">opcua::services::translateBrowsePathsToNodeIds</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1TranslateBrowsePathsToNodeIdsRequest.html">TranslateBrowsePathsToNodeIdsRequest</a> &amp;request) noexcept</td></tr>
 <tr class="separator:ga442e7c25e9212c707320551e430c59cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3616799c7705b85ffda6268972762582" id="r_ga3616799c7705b85ffda6268972762582"><td class="memTemplParams" colspan="2">template&lt;typename CompletionToken  = DefaultCompletionToken&gt; </td></tr>
-<tr class="memitem:ga3616799c7705b85ffda6268972762582"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ga3616799c7705b85ffda6268972762582">opcua::services::translateBrowsePathsToNodeIdsAsync</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1TranslateBrowsePathsToNodeIdsRequest.html">TranslateBrowsePathsToNodeIdsRequest</a> &amp;request, CompletionToken &amp;&amp;token=<a class="el" href="group__Async.html#gade3fccc6425d7e77d67aba7ed3baa15a">DefaultCompletionToken</a>())</td></tr>
-<tr class="separator:ga3616799c7705b85ffda6268972762582"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf1535b2232538ea6d8d35d8813379c1c" id="r_gaf1535b2232538ea6d8d35d8813379c1c"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:gaf1535b2232538ea6d8d35d8813379c1c"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; <a class="el" href="classopcua_1_1BrowsePathResult.html">BrowsePathResult</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#gaf1535b2232538ea6d8d35d8813379c1c">opcua::services::translateBrowsePathToNodeIds</a> (T &amp;connection, const <a class="el" href="classopcua_1_1BrowsePath.html">BrowsePath</a> &amp;browsePath) noexcept</td></tr>
-<tr class="separator:gaf1535b2232538ea6d8d35d8813379c1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0f3af2a8723be73b4d19fd7238ca2281" id="r_ga0f3af2a8723be73b4d19fd7238ca2281"><td class="memTemplParams" colspan="2">template&lt;typename CompletionToken  = DefaultCompletionToken&gt; </td></tr>
-<tr class="memitem:ga0f3af2a8723be73b4d19fd7238ca2281"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ga0f3af2a8723be73b4d19fd7238ca2281">opcua::services::translateBrowsePathToNodeIdsAsync</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1BrowsePath.html">BrowsePath</a> &amp;browsePath, CompletionToken &amp;&amp;token=<a class="el" href="group__Async.html#gade3fccc6425d7e77d67aba7ed3baa15a">DefaultCompletionToken</a>())</td></tr>
-<tr class="separator:ga0f3af2a8723be73b4d19fd7238ca2281"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga41cd1be808b317c72bd150b9bdece0bc" id="r_ga41cd1be808b317c72bd150b9bdece0bc"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ga41cd1be808b317c72bd150b9bdece0bc"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; <a class="el" href="classopcua_1_1BrowsePathResult.html">BrowsePathResult</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ga41cd1be808b317c72bd150b9bdece0bc">opcua::services::browseSimplifiedBrowsePath</a> (T &amp;connection, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;origin, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1QualifiedName.html">QualifiedName</a> &gt; browsePath)</td></tr>
-<tr class="separator:ga41cd1be808b317c72bd150b9bdece0bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga202bee6785bd509147d6b4248ed5fb43" id="r_ga202bee6785bd509147d6b4248ed5fb43"><td class="memTemplParams" colspan="2">template&lt;typename CompletionToken  = DefaultCompletionToken&gt; </td></tr>
-<tr class="memitem:ga202bee6785bd509147d6b4248ed5fb43"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ga202bee6785bd509147d6b4248ed5fb43">opcua::services::browseSimplifiedBrowsePathAsync</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;origin, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1QualifiedName.html">QualifiedName</a> &gt; browsePath, CompletionToken &amp;&amp;token=<a class="el" href="group__Async.html#gade3fccc6425d7e77d67aba7ed3baa15a">DefaultCompletionToken</a>())</td></tr>
-<tr class="separator:ga202bee6785bd509147d6b4248ed5fb43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2fa5f279ee827d97e05d0c0129db6fc0" id="r_ga2fa5f279ee827d97e05d0c0129db6fc0"><td class="memTemplParams" colspan="2">template&lt;typename CompletionToken &gt; </td></tr>
+<tr class="memitem:ga2fa5f279ee827d97e05d0c0129db6fc0"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ga2fa5f279ee827d97e05d0c0129db6fc0">opcua::services::translateBrowsePathsToNodeIdsAsync</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1TranslateBrowsePathsToNodeIdsRequest.html">TranslateBrowsePathsToNodeIdsRequest</a> &amp;request, CompletionToken &amp;&amp;token)</td></tr>
+<tr class="separator:ga2fa5f279ee827d97e05d0c0129db6fc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1a4ad7b0d799d02718f07560462517a0" id="r_ga1a4ad7b0d799d02718f07560462517a0"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ga1a4ad7b0d799d02718f07560462517a0"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1BrowsePathResult.html">BrowsePathResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ga1a4ad7b0d799d02718f07560462517a0">opcua::services::translateBrowsePathToNodeIds</a> (T &amp;connection, const <a class="el" href="classopcua_1_1BrowsePath.html">BrowsePath</a> &amp;browsePath) noexcept</td></tr>
+<tr class="separator:ga1a4ad7b0d799d02718f07560462517a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8e83164e5ce7921c985c972f9c548fd1" id="r_ga8e83164e5ce7921c985c972f9c548fd1"><td class="memTemplParams" colspan="2">template&lt;typename CompletionToken &gt; </td></tr>
+<tr class="memitem:ga8e83164e5ce7921c985c972f9c548fd1"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ga8e83164e5ce7921c985c972f9c548fd1">opcua::services::translateBrowsePathToNodeIdsAsync</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1BrowsePath.html">BrowsePath</a> &amp;browsePath, CompletionToken &amp;&amp;token)</td></tr>
+<tr class="separator:ga8e83164e5ce7921c985c972f9c548fd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaeb15e69e0bc83e64a3da516d64ad49cb" id="r_gaeb15e69e0bc83e64a3da516d64ad49cb"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:gaeb15e69e0bc83e64a3da516d64ad49cb"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1BrowsePathResult.html">BrowsePathResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#gaeb15e69e0bc83e64a3da516d64ad49cb">opcua::services::browseSimplifiedBrowsePath</a> (T &amp;connection, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;origin, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1QualifiedName.html">QualifiedName</a> &gt; browsePath)</td></tr>
+<tr class="separator:gaeb15e69e0bc83e64a3da516d64ad49cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac1bf2268dccf0a7f55fdb75f78188118" id="r_gac1bf2268dccf0a7f55fdb75f78188118"><td class="memTemplParams" colspan="2">template&lt;typename CompletionToken &gt; </td></tr>
+<tr class="memitem:gac1bf2268dccf0a7f55fdb75f78188118"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#gac1bf2268dccf0a7f55fdb75f78188118">opcua::services::browseSimplifiedBrowsePathAsync</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;origin, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1QualifiedName.html">QualifiedName</a> &gt; browsePath, CompletionToken &amp;&amp;token)</td></tr>
+<tr class="separator:gac1bf2268dccf0a7f55fdb75f78188118"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ga442e7c25e9212c707320551e430c59cc" name="ga442e7c25e9212c707320551e430c59cc"></a>
@@ -162,13 +165,13 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga3616799c7705b85ffda6268972762582" name="ga3616799c7705b85ffda6268972762582"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga3616799c7705b85ffda6268972762582">&#9670;&#160;</a></span>translateBrowsePathsToNodeIdsAsync()</h2>
+<a id="ga2fa5f279ee827d97e05d0c0129db6fc0" name="ga2fa5f279ee827d97e05d0c0129db6fc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2fa5f279ee827d97e05d0c0129db6fc0">&#9670;&#160;</a></span>translateBrowsePathsToNodeIdsAsync()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename CompletionToken  = DefaultCompletionToken&gt; </div>
+template&lt;typename CompletionToken &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">auto opcua::services::translateBrowsePathsToNodeIdsAsync </td>
@@ -183,32 +186,45 @@ template&lt;typename CompletionToken  = DefaultCompletionToken&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">CompletionToken &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group__Async.html#gade3fccc6425d7e77d67aba7ed3baa15a">DefaultCompletionToken</a>()</span>&#160;)</td>
+          <td class="paramtype">CompletionToken &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Asynchronously translate browse paths to NodeIds (client only). </p>
+<p>Translate browse paths to NodeIds (client only).    </p>
 <dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.4">https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.4</a> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
     <tr><td class="paramname">request</td><td>Request    </td></tr>
-    <tr><td class="paramname">token</td><td><p class="starttd"><br  />
- The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a> (default), <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be:</p>
-<div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1TranslateBrowsePathsToNodeIdsResponse.html">TranslateBrowsePathsToNodeIdsResponse</a>&amp;) </div>
-<div class="ttc" id="aclassopcua_1_1TranslateBrowsePathsToNodeIdsResponse_html"><div class="ttname"><a href="classopcua_1_1TranslateBrowsePathsToNodeIdsResponse.html">opcua::TranslateBrowsePathsToNodeIdsResponse</a></div><div class="ttdoc">UA_TranslateBrowsePathsToNodeIdsResponse wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types__composed_8hpp_source.html#l01225">types_composed.hpp:1228</a></div></div>
+    <tr><td class="paramname">token</td><td><div class="fragment"><div class="line">The @ref async_model <span class="stringliteral">&quot;completion token&quot;</span> that will be used to produce a completion handler, which will be called when the operation completes.</div>
+<div class="line">Potential completion tokens include @ref <a class="code hl_variable" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, @ref <a class="code hl_variable" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, @ref <a class="code hl_variable" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (<span class="keywordtype">object</span>) with the correct completion signature.</div>
+<div class="line">The function signature of the completion handler must be:</div>
+<div class="ttc" id="agroup__Async_html_ga84807736f5bcb08a19160455f71a8863"><div class="ttname"><a href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">opcua::useDetached</a></div><div class="ttdeci">constexpr UseDetachedToken useDetached</div><div class="ttdoc">Detached completion token object.</div><div class="ttdef"><b>Definition</b> <a href="async_8hpp_source.html#l00125">async.hpp:125</a></div></div>
+<div class="ttc" id="agroup__Async_html_ga85a5c61e4024d350f333d7763bbdff36"><div class="ttname"><a href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">opcua::useDeferred</a></div><div class="ttdeci">constexpr UseDeferredToken useDeferred</div><div class="ttdoc">Deferred completion token object.</div><div class="ttdef"><b>Definition</b> <a href="async_8hpp_source.html#l00090">async.hpp:90</a></div></div>
+<div class="ttc" id="agroup__Async_html_gae789f136da0b3d4d725f1ba59ca0614c"><div class="ttname"><a href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">opcua::useFuture</a></div><div class="ttdeci">constexpr UseFutureToken useFuture</div><div class="ttdoc">Future completion token object.</div><div class="ttdef"><b>Definition</b> <a href="async_8hpp_source.html#l00060">async.hpp:60</a></div></div>
+</div><!-- fragment -->  <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1TranslateBrowsePathsToNodeIdsResponse.html">TranslateBrowsePathsToNodeIdsResponse</a>&amp;) </div>
+<div class="ttc" id="aclassopcua_1_1TranslateBrowsePathsToNodeIdsResponse_html"><div class="ttname"><a href="classopcua_1_1TranslateBrowsePathsToNodeIdsResponse.html">opcua::TranslateBrowsePathsToNodeIdsResponse</a></div><div class="ttdoc">UA_TranslateBrowsePathsToNodeIdsResponse wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types__composed_8hpp_source.html#l01227">types_composed.hpp:1230</a></div></div>
 </div><!-- fragment -->  </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd><ul>
+<li><code>void</code> if <code>token</code> is a callback function (object)</li>
+<li><code>std::future&lt;<a class="el" href="classopcua_1_1TranslateBrowsePathsToNodeIdsResponse.html" title="UA_TranslateBrowsePathsToNodeIdsResponse wrapper class.">TranslateBrowsePathsToNodeIdsResponse</a>&gt;</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseFutureToken.html" title="Future completion token type.">UseFutureToken</a></li>
+<li><code>auto(auto&amp;&amp; token)</code> callable for deferred execution if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDeferredToken.html" title="Deferred completion token type.">UseDeferredToken</a></li>
+<li><code>void</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDetachedToken.html" title="Detached completion token type.">UseDetachedToken</a>  </li>
+</ul>
+</dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="view_8hpp_source.html#l00193">193</a> of file <a class="el" href="view_8hpp_source.html">view.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="view_8hpp_source.html#l00183">183</a> of file <a class="el" href="view_8hpp_source.html">view.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="view_8hpp_source.html#l00208">opcua::services::translateBrowsePathToNodeIdsAsync()</a>.</p>
 
 </div>
 </div>
-<a id="gaf1535b2232538ea6d8d35d8813379c1c" name="gaf1535b2232538ea6d8d35d8813379c1c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaf1535b2232538ea6d8d35d8813379c1c">&#9670;&#160;</a></span>translateBrowsePathToNodeIds()</h2>
+<a id="ga1a4ad7b0d799d02718f07560462517a0" name="ga1a4ad7b0d799d02718f07560462517a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1a4ad7b0d799d02718f07560462517a0">&#9670;&#160;</a></span>translateBrowsePathToNodeIds()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -219,7 +235,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; <a class="el" href="classopcua_1_1BrowsePathResult.html">BrowsePathResult</a> &gt; opcua::services::translateBrowsePathToNodeIds </td>
+          <td class="memname"><a class="el" href="classopcua_1_1BrowsePathResult.html">BrowsePathResult</a> opcua::services::translateBrowsePathToNodeIds </td>
           <td>(</td>
           <td class="paramtype">T &amp;</td>          <td class="paramname"><span class="paramname"><em>connection</em></span>, </td>
         </tr>
@@ -246,17 +262,17 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="reference">Referenced by <a class="el" href="view_8hpp_source.html#l00254">opcua::services::browseSimplifiedBrowsePath()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="view_8hpp_source.html#l00236">opcua::services::browseSimplifiedBrowsePath()</a>.</p>
 
 </div>
 </div>
-<a id="ga0f3af2a8723be73b4d19fd7238ca2281" name="ga0f3af2a8723be73b4d19fd7238ca2281"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga0f3af2a8723be73b4d19fd7238ca2281">&#9670;&#160;</a></span>translateBrowsePathToNodeIdsAsync()</h2>
+<a id="ga8e83164e5ce7921c985c972f9c548fd1" name="ga8e83164e5ce7921c985c972f9c548fd1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8e83164e5ce7921c985c972f9c548fd1">&#9670;&#160;</a></span>translateBrowsePathToNodeIdsAsync()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename CompletionToken  = DefaultCompletionToken&gt; </div>
+template&lt;typename CompletionToken &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">auto opcua::services::translateBrowsePathToNodeIdsAsync </td>
@@ -271,45 +287,50 @@ template&lt;typename CompletionToken  = DefaultCompletionToken&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">CompletionToken &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group__Async.html#gade3fccc6425d7e77d67aba7ed3baa15a">DefaultCompletionToken</a>()</span>&#160;)</td>
+          <td class="paramtype">CompletionToken &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Asynchronously translate a browse path to NodeIds. </p>
+<p>Translate a browse path to NodeIds.    </p>
 <dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.4">https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.4</a> </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a> or <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
     <tr><td class="paramname">browsePath</td><td>Browse path (starting node &amp; relative path)    </td></tr>
-    <tr><td class="paramname">token</td><td><p class="starttd"><br  />
- The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a> (default), <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be:</p>
-<div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1Result.html">Result&lt;BrowsePathResult&gt;</a>&amp;) </div>
-<div class="ttc" id="aclassopcua_1_1Result_html"><div class="ttname"><a href="classopcua_1_1Result.html">opcua::Result</a></div><div class="ttdoc">The template class Result encapsulates a StatusCode and optionally a value.</div><div class="ttdef"><b>Definition</b> <a href="result_8hpp_source.html#l00053">result.hpp:53</a></div></div>
+    <tr><td class="paramname">token</td><td><div class="fragment"><div class="line">The @ref async_model <span class="stringliteral">&quot;completion token&quot;</span> that will be used to produce a completion handler, which will be called when the operation completes.</div>
+<div class="line">Potential completion tokens include @ref <a class="code hl_variable" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, @ref <a class="code hl_variable" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, @ref <a class="code hl_variable" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (<span class="keywordtype">object</span>) with the correct completion signature.</div>
+<div class="line">The function signature of the completion handler must be:</div>
+</div><!-- fragment -->  <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1BrowsePathResult.html">BrowsePathResult</a>&amp;) </div>
+<div class="ttc" id="aclassopcua_1_1BrowsePathResult_html"><div class="ttname"><a href="classopcua_1_1BrowsePathResult.html">opcua::BrowsePathResult</a></div><div class="ttdoc">UA_BrowsePathResult wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types__composed_8hpp_source.html#l01194">types_composed.hpp:1194</a></div></div>
 </div><!-- fragment -->  </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd><ul>
+<li><code>void</code> if <code>token</code> is a callback function (object)</li>
+<li><code>std::future&lt;<a class="el" href="classopcua_1_1BrowsePathResult.html" title="UA_BrowsePathResult wrapper class.">BrowsePathResult</a>&gt;</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseFutureToken.html" title="Future completion token type.">UseFutureToken</a></li>
+<li><code>auto(auto&amp;&amp; token)</code> callable for deferred execution if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDeferredToken.html" title="Deferred completion token type.">UseDeferredToken</a></li>
+<li><code>void</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDetachedToken.html" title="Detached completion token type.">UseDetachedToken</a>  </li>
+</ul>
+</dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="view_8hpp_source.html#l00225">225</a> of file <a class="el" href="view_8hpp_source.html">view.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="view_8hpp_source.html#l00208">208</a> of file <a class="el" href="view_8hpp_source.html">view.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="view_8hpp_source.html#l00266">opcua::services::browseSimplifiedBrowsePathAsync()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="view_8hpp_source.html#l00248">opcua::services::browseSimplifiedBrowsePathAsync()</a>.</p>
 
 </div>
 </div>
-<a id="ga41cd1be808b317c72bd150b9bdece0bc" name="ga41cd1be808b317c72bd150b9bdece0bc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga41cd1be808b317c72bd150b9bdece0bc">&#9670;&#160;</a></span>browseSimplifiedBrowsePath()</h2>
+<a id="gaeb15e69e0bc83e64a3da516d64ad49cb" name="gaeb15e69e0bc83e64a3da516d64ad49cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaeb15e69e0bc83e64a3da516d64ad49cb">&#9670;&#160;</a></span>browseSimplifiedBrowsePath()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; <a class="el" href="classopcua_1_1BrowsePathResult.html">BrowsePathResult</a> &gt; opcua::services::browseSimplifiedBrowsePath </td>
+          <td class="memname"><a class="el" href="classopcua_1_1BrowsePathResult.html">BrowsePathResult</a> opcua::services::browseSimplifiedBrowsePath </td>
           <td>(</td>
           <td class="paramtype">T &amp;</td>          <td class="paramname"><span class="paramname"><em>connection</em></span>, </td>
         </tr>
@@ -324,14 +345,9 @@ template&lt;typename T &gt; </div>
           <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1QualifiedName.html">QualifiedName</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>browsePath</em></span>&#160;)</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>A simplified version of <a class="el" href="#gaf1535b2232538ea6d8d35d8813379c1c">translateBrowsePathToNodeIds</a>. </p>
+<p>A simplified version of <a class="el" href="#ga1a4ad7b0d799d02718f07560462517a0">translateBrowsePathToNodeIds</a>. </p>
 <p>The relative path is specified using browse names instead of the <a class="el" href="classopcua_1_1RelativePath.html" title="UA_RelativePath wrapper class.">RelativePath</a> structure. The list of browse names is equivalent to a <a class="el" href="classopcua_1_1RelativePath.html" title="UA_RelativePath wrapper class.">RelativePath</a> that specifies forward references which are subtypes of the HierarchicalReferences ReferenceTypeId.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -342,22 +358,19 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="view_8hpp_source.html#l00254">254</a> of file <a class="el" href="view_8hpp_source.html">view.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="view_8hpp_source.html#l00236">236</a> of file <a class="el" href="view_8hpp_source.html">view.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="node_8hpp_source.html#l00301">opcua::Node&lt; Connection &gt;::browseChild()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="node_8hpp_source.html#l00623">opcua::Node&lt; Connection &gt;::browseChild()</a>.</p>
 
 </div>
 </div>
-<a id="ga202bee6785bd509147d6b4248ed5fb43" name="ga202bee6785bd509147d6b4248ed5fb43"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga202bee6785bd509147d6b4248ed5fb43">&#9670;&#160;</a></span>browseSimplifiedBrowsePathAsync()</h2>
+<a id="gac1bf2268dccf0a7f55fdb75f78188118" name="gac1bf2268dccf0a7f55fdb75f78188118"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac1bf2268dccf0a7f55fdb75f78188118">&#9670;&#160;</a></span>browseSimplifiedBrowsePathAsync()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename CompletionToken  = DefaultCompletionToken&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
+template&lt;typename CompletionToken &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">auto opcua::services::browseSimplifiedBrowsePathAsync </td>
@@ -377,32 +390,35 @@ template&lt;typename CompletionToken  = DefaultCompletionToken&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">CompletionToken &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group__Async.html#gade3fccc6425d7e77d67aba7ed3baa15a">DefaultCompletionToken</a>()</span>&#160;)</td>
+          <td class="paramtype">CompletionToken &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span>&#160;)</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>A simplified version of <a class="el" href="#ga0f3af2a8723be73b4d19fd7238ca2281">translateBrowsePathToNodeIdsAsync</a>. </p>
+<p>A simplified version of <a class="el" href="#ga1a4ad7b0d799d02718f07560462517a0">translateBrowsePathToNodeIds</a>.    </p>
 <p>The relative path is specified using browse names instead of the <a class="el" href="classopcua_1_1RelativePath.html" title="UA_RelativePath wrapper class.">RelativePath</a> structure. The list of browse names is equivalent to a <a class="el" href="classopcua_1_1RelativePath.html" title="UA_RelativePath wrapper class.">RelativePath</a> that specifies forward references which are subtypes of the HierarchicalReferences ReferenceTypeId.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a> or <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
     <tr><td class="paramname">origin</td><td>Starting node of the browse path </td></tr>
     <tr><td class="paramname">browsePath</td><td>Browse path as a list of browse names    </td></tr>
-    <tr><td class="paramname">token</td><td><p class="starttd"><br  />
- The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a> (default), <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be:</p>
-<div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1Result.html">Result&lt;BrowsePathResult&gt;</a>&amp;) </div>
+    <tr><td class="paramname">token</td><td><div class="fragment"><div class="line">The @ref async_model <span class="stringliteral">&quot;completion token&quot;</span> that will be used to produce a completion handler, which will be called when the operation completes.</div>
+<div class="line">Potential completion tokens include @ref <a class="code hl_variable" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, @ref <a class="code hl_variable" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, @ref <a class="code hl_variable" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (<span class="keywordtype">object</span>) with the correct completion signature.</div>
+<div class="line">The function signature of the completion handler must be:</div>
+</div><!-- fragment -->  <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1BrowsePathResult.html">BrowsePathResult</a>&amp;) </div>
 </div><!-- fragment -->  </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd><ul>
+<li><code>void</code> if <code>token</code> is a callback function (object)</li>
+<li><code>std::future&lt;<a class="el" href="classopcua_1_1BrowsePathResult.html" title="UA_BrowsePathResult wrapper class.">BrowsePathResult</a>&gt;</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseFutureToken.html" title="Future completion token type.">UseFutureToken</a></li>
+<li><code>auto(auto&amp;&amp; token)</code> callable for deferred execution if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDeferredToken.html" title="Deferred completion token type.">UseDeferredToken</a></li>
+<li><code>void</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDetachedToken.html" title="Detached completion token type.">UseDetachedToken</a>  </li>
+</ul>
+</dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="view_8hpp_source.html#l00266">266</a> of file <a class="el" href="view_8hpp_source.html">view.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="view_8hpp_source.html#l00248">248</a> of file <a class="el" href="view_8hpp_source.html">view.hpp</a>.</p>
 
 </div>
 </div>

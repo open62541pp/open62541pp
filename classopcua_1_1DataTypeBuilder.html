@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: opcua::DataTypeBuilder&lt; T, Tag, U &gt; Class Template Reference</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -107,7 +110,7 @@ $(function(){ initResizable(false); });
 class opcua::DataTypeBuilder&lt; T, Tag, U &gt;</div><p>Builder to create <a class="el" href="classopcua_1_1DataType.html" title="UA_DataType wrapper class.">DataType</a> definitions of custom types. </p>
 <p>The attributes <code>memSize</code>, <code>padding</code>, <code>pointerFree</code>, <code>isArray</code> and <code>isOptional</code> are automatically deduced from the types itself. </p>
 
-<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00198">198</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00204">204</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -194,7 +197,7 @@ template&lt;typename T , typename Tag , typename U &gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2custom_datatypes_8hpp-example.html#a7">custom_datatypes/custom_datatypes.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00309">309</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00315">315</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
 
 </div>
 </div>
@@ -244,7 +247,7 @@ template&lt;typename T , typename Tag , typename U &gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2custom_datatypes_8hpp-example.html#a1">custom_datatypes/custom_datatypes.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00325">325</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00331">331</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
 
 </div>
 </div>
@@ -294,7 +297,7 @@ template&lt;typename T , typename Tag , typename U &gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2custom_datatypes_8hpp-example.html#a4">custom_datatypes/custom_datatypes.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00341">341</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00347">347</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
 
 </div>
 </div>
@@ -336,9 +339,7 @@ template&lt;auto U::* field&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00358">358</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="datatype_8hpp_source.html#l00240">opcua::DataTypeBuilder&lt; T, Tag, U &gt;::addField()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00364">364</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
 
 </div>
 </div>
@@ -372,7 +373,7 @@ template&lt;auto U::* field&gt; </div>
 <p>Add a structure field (derive <a class="el" href="classopcua_1_1DataType.html" title="UA_DataType wrapper class.">DataType</a> from <code>field</code>). </p>
 <p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
 
-<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00240">240</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00246">246</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
 
 </div>
 </div>
@@ -415,7 +416,7 @@ template&lt;auto U::* fieldSize, auto U::* fieldArray&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00387">387</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00393">393</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
 
 </div>
 </div>
@@ -449,7 +450,7 @@ template&lt;auto U::* fieldSize, auto U::* fieldArray&gt; </div>
 <p>Add a structure array field (derive <a class="el" href="classopcua_1_1DataType.html" title="UA_DataType wrapper class.">DataType</a> from <code>fieldArray</code>). </p>
 <p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
 
-<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00261">261</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00267">267</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
 
 </div>
 </div>
@@ -492,9 +493,7 @@ template&lt;auto U::* memberUnion, typename TField &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00418">418</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="datatype_8hpp_source.html#l00280">opcua::DataTypeBuilder&lt; T, Tag, U &gt;::addUnionField()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00424">424</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
 
 </div>
 </div>
@@ -528,7 +527,7 @@ template&lt;auto U::* memberUnion, typename TField &gt; </div>
 <p>Add a union field (derive <a class="el" href="classopcua_1_1DataType.html" title="UA_DataType wrapper class.">DataType</a> from <code>TField</code>). </p>
 <p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
 
-<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00280">280</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00286">286</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
 
 </div>
 </div>
@@ -559,7 +558,7 @@ template&lt;typename T , typename Tag , typename U &gt; </div>
 
 <p>Create the actual <a class="el" href="classopcua_1_1DataType.html" title="UA_DataType wrapper class.">DataType</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00449">449</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00455">455</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
 
 </div>
 </div>
@@ -588,7 +587,7 @@ template&lt;typename , typename , typename &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00291">291</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00297">297</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
 
 </div>
 </div>

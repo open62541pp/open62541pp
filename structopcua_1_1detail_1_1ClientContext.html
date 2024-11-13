@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: opcua::detail::ClientContext Struct Reference</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -103,9 +106,8 @@ $(function(){ initResizable(false); });
 <p><code>#include &lt;<a class="el" href="client__context_8hpp_source.html">client_context.hpp</a>&gt;</code></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Internal storage for <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> class. </p>
-<p>Mainly used to store stateful function pointers. </p>
 
-<p class="definition">Definition at line <a class="el" href="client__context_8hpp_source.html#l00029">29</a> of file <a class="el" href="client__context_8hpp_source.html">client_context.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="client__context_8hpp_source.html#l00032">32</a> of file <a class="el" href="client__context_8hpp_source.html">client_context.hpp</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
@@ -118,20 +120,26 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:a9a92b249d382c9a4eaacf6f471f80f49" id="r_a9a92b249d382c9a4eaacf6f471f80f49"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1detail_1_1ExceptionCatcher.html">ExceptionCatcher</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9a92b249d382c9a4eaacf6f471f80f49">exceptionCatcher</a></td></tr>
+<tr class="separator:a9a92b249d382c9a4eaacf6f471f80f49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f9447a31b07b14ab422e8ad3c35dfc3" id="r_a5f9447a31b07b14ab422e8ad3c35dfc3"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5f9447a31b07b14ab422e8ad3c35dfc3">running</a> {false}</td></tr>
+<tr class="separator:a5f9447a31b07b14ab422e8ad3c35dfc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8290a4880d2f238dff3337e231fc7692" id="r_a8290a4880d2f238dff3337e231fc7692"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classopcua_1_1DataType.html">DataType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8290a4880d2f238dff3337e231fc7692">dataTypes</a></td></tr>
+<tr class="separator:a8290a4880d2f238dff3337e231fc7692"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebdb7b4c4f7e2b514ac2449c4edbb7d9" id="r_aebdb7b4c4f7e2b514ac2449c4edbb7d9"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="elRef" target="_blank" href="open62541/structUA__DataTypeArray.html">UA_DataTypeArray</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aebdb7b4c4f7e2b514ac2449c4edbb7d9">dataTypeArray</a></td></tr>
+<tr class="separator:aebdb7b4c4f7e2b514ac2449c4edbb7d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af791a140492e492269ac58c10a5086ba" id="r_af791a140492e492269ac58c10a5086ba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1detail_1_1ContextMap.html">ContextMap</a>&lt; <a class="el" href="#aa82c7354d3ea92a4fc6bd81551fd3ff6">SubId</a>, <a class="el" href="structopcua_1_1services_1_1detail_1_1SubscriptionContext.html">services::detail::SubscriptionContext</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af791a140492e492269ac58c10a5086ba">subscriptions</a></td></tr>
 <tr class="separator:af791a140492e492269ac58c10a5086ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af275d7496e38768c83a578e33e44c082" id="r_af275d7496e38768c83a578e33e44c082"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1detail_1_1ContextMap.html">ContextMap</a>&lt; <a class="el" href="#a004862f934c08174e2d0a76213f59d9f">SubMonId</a>, <a class="el" href="structopcua_1_1services_1_1detail_1_1MonitoredItemContext.html">services::detail::MonitoredItemContext</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af275d7496e38768c83a578e33e44c082">monitoredItems</a></td></tr>
 <tr class="separator:af275d7496e38768c83a578e33e44c082"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a278db6d0be2ac6228cc2a125fde1ee0d" id="r_a278db6d0be2ac6228cc2a125fde1ee0d"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/common_8h.html#a8c3787777dac67ecf48c13ad1ddb112e">UA_SecureChannelState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a278db6d0be2ac6228cc2a125fde1ee0d">lastChannelState</a> {}</td></tr>
-<tr class="separator:a278db6d0be2ac6228cc2a125fde1ee0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e8fb0a39f66a1585009d515470c9013" id="r_a5e8fb0a39f66a1585009d515470c9013"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/common_8h.html#a66e73dba25a0a0771ed1a850291ca96f">UA_SessionState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5e8fb0a39f66a1585009d515470c9013">lastSessionState</a> {}</td></tr>
 <tr class="separator:a5e8fb0a39f66a1585009d515470c9013"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2de563f7edc7742b0e3a15ea12e24d51" id="r_a2de563f7edc7742b0e3a15ea12e24d51"><td class="memItemLeft" align="right" valign="top">std::array&lt; <a class="el" href="namespaceopcua.html#a4116c04ad6ead34fc773fa7232d41604">StateCallback</a>, <a class="el" href="namespaceopcua_1_1detail.html#a15f5a076ed892e14ac830d64364b5186">clientStateCount</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2de563f7edc7742b0e3a15ea12e24d51">stateCallbacks</a></td></tr>
-<tr class="separator:a2de563f7edc7742b0e3a15ea12e24d51"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec92d7470af5873a784e0203886f1149" id="r_aec92d7470af5873a784e0203886f1149"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceopcua.html#ab721e65910243f2e639702352c938396">InactivityCallback</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aec92d7470af5873a784e0203886f1149">inactivityCallback</a></td></tr>
-<tr class="separator:aec92d7470af5873a784e0203886f1149"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a92b249d382c9a4eaacf6f471f80f49" id="r_a9a92b249d382c9a4eaacf6f471f80f49"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1detail_1_1ExceptionCatcher.html">ExceptionCatcher</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9a92b249d382c9a4eaacf6f471f80f49">exceptionCatcher</a></td></tr>
-<tr class="separator:a9a92b249d382c9a4eaacf6f471f80f49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a278db6d0be2ac6228cc2a125fde1ee0d" id="r_a278db6d0be2ac6228cc2a125fde1ee0d"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/common_8h.html#a8c3787777dac67ecf48c13ad1ddb112e">UA_SecureChannelState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a278db6d0be2ac6228cc2a125fde1ee0d">lastChannelState</a> {}</td></tr>
+<tr class="separator:a278db6d0be2ac6228cc2a125fde1ee0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae35102fa8770feeb7e3d9a68139b401e" id="r_ae35102fa8770feeb7e3d9a68139b401e"><td class="memItemLeft" align="right" valign="top">std::array&lt; std::function&lt; void()&gt;, <a class="el" href="namespaceopcua_1_1detail.html#a15f5a076ed892e14ac830d64364b5186">clientStateCount</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae35102fa8770feeb7e3d9a68139b401e">stateCallbacks</a></td></tr>
+<tr class="separator:ae35102fa8770feeb7e3d9a68139b401e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02d8657570331631b756f008bfca7229" id="r_a02d8657570331631b756f008bfca7229"><td class="memItemLeft" align="right" valign="top">std::function&lt; void()&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a02d8657570331631b756f008bfca7229">inactivityCallback</a></td></tr>
+<tr class="separator:a02d8657570331631b756f008bfca7229"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="aa82c7354d3ea92a4fc6bd81551fd3ff6" name="aa82c7354d3ea92a4fc6bd81551fd3ff6"></a>
@@ -146,7 +154,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="client__context_8hpp_source.html#l00031">31</a> of file <a class="el" href="client__context_8hpp_source.html">client_context.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="client__context_8hpp_source.html#l00040">40</a> of file <a class="el" href="client__context_8hpp_source.html">client_context.hpp</a>.</p>
 
 </div>
 </div>
@@ -162,7 +170,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="client__context_8hpp_source.html#l00032">32</a> of file <a class="el" href="client__context_8hpp_source.html">client_context.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="client__context_8hpp_source.html#l00041">41</a> of file <a class="el" href="client__context_8hpp_source.html">client_context.hpp</a>.</p>
 
 </div>
 </div>
@@ -178,11 +186,75 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="client__context_8hpp_source.html#l00033">33</a> of file <a class="el" href="client__context_8hpp_source.html">client_context.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="client__context_8hpp_source.html#l00042">42</a> of file <a class="el" href="client__context_8hpp_source.html">client_context.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a9a92b249d382c9a4eaacf6f471f80f49" name="a9a92b249d382c9a4eaacf6f471f80f49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a92b249d382c9a4eaacf6f471f80f49">&#9670;&#160;</a></span>exceptionCatcher</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1detail_1_1ExceptionCatcher.html">ExceptionCatcher</a> opcua::detail::ClientContext::exceptionCatcher</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="client__context_8hpp_source.html#l00033">33</a> of file <a class="el" href="client__context_8hpp_source.html">client_context.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a5f9447a31b07b14ab422e8ad3c35dfc3" name="a5f9447a31b07b14ab422e8ad3c35dfc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f9447a31b07b14ab422e8ad3c35dfc3">&#9670;&#160;</a></span>running</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::atomic&lt;bool&gt; opcua::detail::ClientContext::running {false}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="client__context_8hpp_source.html#l00034">34</a> of file <a class="el" href="client__context_8hpp_source.html">client_context.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a8290a4880d2f238dff3337e231fc7692" name="a8290a4880d2f238dff3337e231fc7692"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8290a4880d2f238dff3337e231fc7692">&#9670;&#160;</a></span>dataTypes</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="classopcua_1_1DataType.html">DataType</a>&gt; opcua::detail::ClientContext::dataTypes</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="client__context_8hpp_source.html#l00036">36</a> of file <a class="el" href="client__context_8hpp_source.html">client_context.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aebdb7b4c4f7e2b514ac2449c4edbb7d9" name="aebdb7b4c4f7e2b514ac2449c4edbb7d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebdb7b4c4f7e2b514ac2449c4edbb7d9">&#9670;&#160;</a></span>dataTypeArray</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt;<a class="elRef" target="_blank" href="open62541/structUA__DataTypeArray.html">UA_DataTypeArray</a>&gt; opcua::detail::ClientContext::dataTypeArray</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="client__context_8hpp_source.html#l00037">37</a> of file <a class="el" href="client__context_8hpp_source.html">client_context.hpp</a>.</p>
+
+</div>
+</div>
 <a id="af791a140492e492269ac58c10a5086ba" name="af791a140492e492269ac58c10a5086ba"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af791a140492e492269ac58c10a5086ba">&#9670;&#160;</a></span>subscriptions</h2>
 
@@ -195,7 +267,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="client__context_8hpp_source.html#l00034">34</a> of file <a class="el" href="client__context_8hpp_source.html">client_context.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="client__context_8hpp_source.html#l00043">43</a> of file <a class="el" href="client__context_8hpp_source.html">client_context.hpp</a>.</p>
 
 </div>
 </div>
@@ -211,23 +283,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="client__context_8hpp_source.html#l00035">35</a> of file <a class="el" href="client__context_8hpp_source.html">client_context.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a278db6d0be2ac6228cc2a125fde1ee0d" name="a278db6d0be2ac6228cc2a125fde1ee0d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a278db6d0be2ac6228cc2a125fde1ee0d">&#9670;&#160;</a></span>lastChannelState</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="elRef" target="_blank" href="open62541/common_8h.html#a8c3787777dac67ecf48c13ad1ddb112e">UA_SecureChannelState</a> opcua::detail::ClientContext::lastChannelState {}</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="client__context_8hpp_source.html#l00041">41</a> of file <a class="el" href="client__context_8hpp_source.html">client_context.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="client__context_8hpp_source.html#l00044">44</a> of file <a class="el" href="client__context_8hpp_source.html">client_context.hpp</a>.</p>
 
 </div>
 </div>
@@ -243,55 +299,55 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="client__context_8hpp_source.html#l00042">42</a> of file <a class="el" href="client__context_8hpp_source.html">client_context.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="client__context_8hpp_source.html#l00050">50</a> of file <a class="el" href="client__context_8hpp_source.html">client_context.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a2de563f7edc7742b0e3a15ea12e24d51" name="a2de563f7edc7742b0e3a15ea12e24d51"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2de563f7edc7742b0e3a15ea12e24d51">&#9670;&#160;</a></span>stateCallbacks</h2>
+<a id="a278db6d0be2ac6228cc2a125fde1ee0d" name="a278db6d0be2ac6228cc2a125fde1ee0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a278db6d0be2ac6228cc2a125fde1ee0d">&#9670;&#160;</a></span>lastChannelState</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::array&lt;<a class="el" href="namespaceopcua.html#a4116c04ad6ead34fc773fa7232d41604">StateCallback</a>, <a class="el" href="namespaceopcua_1_1detail.html#a15f5a076ed892e14ac830d64364b5186">clientStateCount</a>&gt; opcua::detail::ClientContext::stateCallbacks</td>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/common_8h.html#a8c3787777dac67ecf48c13ad1ddb112e">UA_SecureChannelState</a> opcua::detail::ClientContext::lastChannelState {}</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="client__context_8hpp_source.html#l00044">44</a> of file <a class="el" href="client__context_8hpp_source.html">client_context.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="client__context_8hpp_source.html#l00051">51</a> of file <a class="el" href="client__context_8hpp_source.html">client_context.hpp</a>.</p>
 
 </div>
 </div>
-<a id="aec92d7470af5873a784e0203886f1149" name="aec92d7470af5873a784e0203886f1149"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aec92d7470af5873a784e0203886f1149">&#9670;&#160;</a></span>inactivityCallback</h2>
+<a id="ae35102fa8770feeb7e3d9a68139b401e" name="ae35102fa8770feeb7e3d9a68139b401e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae35102fa8770feeb7e3d9a68139b401e">&#9670;&#160;</a></span>stateCallbacks</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceopcua.html#ab721e65910243f2e639702352c938396">InactivityCallback</a> opcua::detail::ClientContext::inactivityCallback</td>
+          <td class="memname">std::array&lt;std::function&lt;void()&gt;, <a class="el" href="namespaceopcua_1_1detail.html#a15f5a076ed892e14ac830d64364b5186">clientStateCount</a>&gt; opcua::detail::ClientContext::stateCallbacks</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="client__context_8hpp_source.html#l00045">45</a> of file <a class="el" href="client__context_8hpp_source.html">client_context.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="client__context_8hpp_source.html#l00053">53</a> of file <a class="el" href="client__context_8hpp_source.html">client_context.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a9a92b249d382c9a4eaacf6f471f80f49" name="a9a92b249d382c9a4eaacf6f471f80f49"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9a92b249d382c9a4eaacf6f471f80f49">&#9670;&#160;</a></span>exceptionCatcher</h2>
+<a id="a02d8657570331631b756f008bfca7229" name="a02d8657570331631b756f008bfca7229"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02d8657570331631b756f008bfca7229">&#9670;&#160;</a></span>inactivityCallback</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1detail_1_1ExceptionCatcher.html">ExceptionCatcher</a> opcua::detail::ClientContext::exceptionCatcher</td>
+          <td class="memname">std::function&lt;void()&gt; opcua::detail::ClientContext::inactivityCallback</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="client__context_8hpp_source.html#l00047">47</a> of file <a class="el" href="client__context_8hpp_source.html">client_context.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="client__context_8hpp_source.html#l00054">54</a> of file <a class="el" href="client__context_8hpp_source.html">client_context.hpp</a>.</p>
 
 </div>
 </div>

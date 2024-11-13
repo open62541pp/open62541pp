@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: /home/runner/work/open62541pp/open62541pp/include/open62541pp/services/detail/attribute_handler.hpp File Reference</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -99,20 +102,19 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">attribute_handler.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;cstdint&gt;</code><br />
+<div class="textblock"><code>#include &lt;cassert&gt;</code><br />
+<code>#include &lt;cstdint&gt;</code><br />
 <code>#include &lt;type_traits&gt;</code><br />
 <code>#include &lt;utility&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 <code>#include &quot;<a class="el" href="bitmask_8hpp_source.html">open62541pp/bitmask.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="common_8hpp_source.html">open62541pp/common.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="common_8h_source.html">open62541pp/detail/open62541/common.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="result__utils_8hpp_source.html">open62541pp/detail/result_utils.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="exception_8hpp_source.html">open62541pp/exception.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="types_8hpp_source.html">open62541pp/types.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for attribute_handler.hpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="attribute__handler_8hpp__incl.svg" width="3162" height="975"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="attribute__handler_8hpp__incl.svg" width="2740" height="726"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
@@ -192,14 +194,6 @@ Namespaces</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a602d5b91674f0d724aa8c12072ff6217" id="r_a602d5b91674f0d724aa8c12072ff6217"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; <a class="el" href="classopcua_1_1Variant.html">Variant</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1services_1_1detail.html#a602d5b91674f0d724aa8c12072ff6217">opcua::services::detail::getVariant</a> (<a class="el" href="classopcua_1_1DataValue.html">DataValue</a> &amp;&amp;dv) noexcept</td></tr>
 <tr class="separator:a602d5b91674f0d724aa8c12072ff6217"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a3610501974b76c47239e07511157d2" id="r_a5a3610501974b76c47239e07511157d2"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a5a3610501974b76c47239e07511157d2"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1services_1_1detail.html#a5a3610501974b76c47239e07511157d2">opcua::services::detail::tryGetScalar</a> (<a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;&amp;var) noexcept</td></tr>
-<tr class="separator:a5a3610501974b76c47239e07511157d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afb25371d966cad231915231bc65e40df" id="r_afb25371d966cad231915231bc65e40df"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:afb25371d966cad231915231bc65e40df"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; std::vector&lt; T &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1services_1_1detail.html#afb25371d966cad231915231bc65e40df">opcua::services::detail::tryGetArray</a> (<a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;&amp;var) noexcept</td></tr>
-<tr class="separator:afb25371d966cad231915231bc65e40df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10fa879e96cf66f618381bd327851193" id="r_a10fa879e96cf66f618381bd327851193"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1DataValue.html">DataValue</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1services_1_1detail.html#a10fa879e96cf66f618381bd327851193">opcua::services::detail::createDataValueFromStatus</a> (<a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a> code) noexcept</td></tr>
-<tr class="separator:a10fa879e96cf66f618381bd327851193"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

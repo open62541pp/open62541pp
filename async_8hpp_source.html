@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: /home/runner/work/open62541pp/open62541pp/include/open62541pp/async.hpp Source File</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -140,7 +143,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Initiation, <span class="keyword">typename</span> CompletionToken, <span class="keyword">typename</span>... Args&gt;</div>
 <div class="foldopen" id="foldopen00040" data-start="{" data-end="}">
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="group__Async.html#gacf9e2ae61c43a64be20def67eb9a4f4b">   40</a></span><span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code hl_function" href="group__Async.html#gacf9e2ae61c43a64be20def67eb9a4f4b">asyncInitiate</a>(Initiation&amp;&amp; initiation, CompletionToken&amp;&amp; token, Args&amp;&amp;... args) {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="group__Async.html#gacf9e2ae61c43a64be20def67eb9a4f4b">   40</a></span><span class="keyword">auto</span> <a class="code hl_function" href="group__Async.html#gacf9e2ae61c43a64be20def67eb9a4f4b">asyncInitiate</a>(Initiation&amp;&amp; initiation, CompletionToken&amp;&amp; token, Args&amp;&amp;... args) {</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="structopcua_1_1AsyncResult.html">AsyncResult&lt;std::decay_t&lt;CompletionToken&gt;</a>, T&gt;::initiate(</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        std::forward&lt;Initiation&gt;(initiation),</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        std::forward&lt;CompletionToken&gt;(token),</div>

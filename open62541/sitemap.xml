@@ -53,12 +53,6 @@
     <loc>https://open62541pp.github.io/open62541pp/open62541/mdnsd_8h_source.html</loc>
   </url>
   <url>
-    <loc>https://open62541pp.github.io/open62541pp/open62541/mdnsd_2libmdnsd_2ms__stdint_8h_source.html</loc>
-  </url>
-  <url>
-    <loc>https://open62541pp.github.io/open62541pp/open62541/ms__stdint_8h_source.html</loc>
-  </url>
-  <url>
     <loc>https://open62541pp.github.io/open62541pp/open62541/sdtxt_8h_source.html</loc>
   </url>
   <url>
@@ -84,6 +78,12 @@
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/open62541/mqtt__pal_8h_source.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/open62541/mdnsd_2libmdnsd_2ms__stdint_8h_source.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/open62541/ms__stdint_8h_source.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/open62541/open62541__queue_8h_source.html</loc>
@@ -365,12 +365,6 @@
     <loc>https://open62541pp.github.io/open62541pp/open62541/mdnsd_8h.html</loc>
   </url>
   <url>
-    <loc>https://open62541pp.github.io/open62541pp/open62541/mdnsd_2libmdnsd_2ms__stdint_8h.html</loc>
-  </url>
-  <url>
-    <loc>https://open62541pp.github.io/open62541pp/open62541/ms__stdint_8h.html</loc>
-  </url>
-  <url>
     <loc>https://open62541pp.github.io/open62541pp/open62541/sdtxt_8h.html</loc>
   </url>
   <url>
@@ -396,6 +390,12 @@
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/open62541/mqtt__pal_8h.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/open62541/mdnsd_2libmdnsd_2ms__stdint_8h.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/open62541/ms__stdint_8h.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/open62541/open62541__queue_8h.html</loc>

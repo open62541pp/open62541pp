@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: DeleteReferences service</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -106,15 +109,15 @@ Collaboration diagram for DeleteReferences service:</div>
 Functions</h2></td></tr>
 <tr class="memitem:ga55e10411f41271fccecc84c8b5379800" id="r_ga55e10411f41271fccecc84c8b5379800"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1DeleteReferencesResponse.html">DeleteReferencesResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga55e10411f41271fccecc84c8b5379800">opcua::services::deleteReferences</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1DeleteReferencesRequest.html">DeleteReferencesRequest</a> &amp;request) noexcept</td></tr>
 <tr class="separator:ga55e10411f41271fccecc84c8b5379800"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gafd1491897acb66e2066defc1a9320ac5" id="r_gafd1491897acb66e2066defc1a9320ac5"><td class="memTemplParams" colspan="2">template&lt;typename CompletionToken  = DefaultCompletionToken&gt; </td></tr>
-<tr class="memitem:gafd1491897acb66e2066defc1a9320ac5"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#gafd1491897acb66e2066defc1a9320ac5">opcua::services::deleteReferencesAsync</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1DeleteReferencesRequest.html">DeleteReferencesRequest</a> &amp;request, CompletionToken &amp;&amp;token=<a class="el" href="group__Async.html#gade3fccc6425d7e77d67aba7ed3baa15a">DefaultCompletionToken</a>())</td></tr>
-<tr class="separator:gafd1491897acb66e2066defc1a9320ac5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga11692bbca72c2444aa7a03f4dcc6674b" id="r_ga11692bbca72c2444aa7a03f4dcc6674b"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ga11692bbca72c2444aa7a03f4dcc6674b"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; void &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ga11692bbca72c2444aa7a03f4dcc6674b">opcua::services::deleteReference</a> (T &amp;connection, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;sourceId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;targetId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;referenceType, bool isForward, bool deleteBidirectional) noexcept</td></tr>
-<tr class="separator:ga11692bbca72c2444aa7a03f4dcc6674b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga471f7228a533af70026ecfc05f93c2cc" id="r_ga471f7228a533af70026ecfc05f93c2cc"><td class="memTemplParams" colspan="2">template&lt;typename CompletionToken  = DefaultCompletionToken&gt; </td></tr>
-<tr class="memitem:ga471f7228a533af70026ecfc05f93c2cc"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ga471f7228a533af70026ecfc05f93c2cc">opcua::services::deleteReferenceAsync</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;sourceId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;targetId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;referenceType, bool isForward, bool deleteBidirectional, CompletionToken &amp;&amp;token=<a class="el" href="group__Async.html#gade3fccc6425d7e77d67aba7ed3baa15a">DefaultCompletionToken</a>())</td></tr>
-<tr class="separator:ga471f7228a533af70026ecfc05f93c2cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3f2b6af1cb229b45815621e05827c25d" id="r_ga3f2b6af1cb229b45815621e05827c25d"><td class="memTemplParams" colspan="2">template&lt;typename CompletionToken &gt; </td></tr>
+<tr class="memitem:ga3f2b6af1cb229b45815621e05827c25d"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ga3f2b6af1cb229b45815621e05827c25d">opcua::services::deleteReferencesAsync</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1DeleteReferencesRequest.html">DeleteReferencesRequest</a> &amp;request, CompletionToken &amp;&amp;token)</td></tr>
+<tr class="separator:ga3f2b6af1cb229b45815621e05827c25d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf691994b6dffa5d6b26f4af6aeec65ed" id="r_gaf691994b6dffa5d6b26f4af6aeec65ed"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:gaf691994b6dffa5d6b26f4af6aeec65ed"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#gaf691994b6dffa5d6b26f4af6aeec65ed">opcua::services::deleteReference</a> (T &amp;connection, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;sourceId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;targetId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;referenceType, bool isForward, bool deleteBidirectional) noexcept</td></tr>
+<tr class="separator:gaf691994b6dffa5d6b26f4af6aeec65ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga93537ceb917644368aed051b47e05c53" id="r_ga93537ceb917644368aed051b47e05c53"><td class="memTemplParams" colspan="2">template&lt;typename CompletionToken &gt; </td></tr>
+<tr class="memitem:ga93537ceb917644368aed051b47e05c53"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ga93537ceb917644368aed051b47e05c53">opcua::services::deleteReferenceAsync</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;sourceId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;targetId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;referenceType, bool isForward, bool deleteBidirectional, CompletionToken &amp;&amp;token)</td></tr>
+<tr class="separator:ga93537ceb917644368aed051b47e05c53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ga55e10411f41271fccecc84c8b5379800" name="ga55e10411f41271fccecc84c8b5379800"></a>
@@ -153,17 +156,17 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00265">opcua::services::deleteNodeAsync()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="request__handling_8hpp_source.html#l00091">opcua::services::detail::createDeleteNodesItem()</a>, and <a class="el" href="nodemanagement_8hpp_source.html#l00236">opcua::services::deleteNodeAsync()</a>.</p>
 
 </div>
 </div>
-<a id="gafd1491897acb66e2066defc1a9320ac5" name="gafd1491897acb66e2066defc1a9320ac5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gafd1491897acb66e2066defc1a9320ac5">&#9670;&#160;</a></span>deleteReferencesAsync()</h2>
+<a id="ga3f2b6af1cb229b45815621e05827c25d" name="ga3f2b6af1cb229b45815621e05827c25d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3f2b6af1cb229b45815621e05827c25d">&#9670;&#160;</a></span>deleteReferencesAsync()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename CompletionToken  = DefaultCompletionToken&gt; </div>
+template&lt;typename CompletionToken &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">auto opcua::services::deleteReferencesAsync </td>
@@ -178,31 +181,44 @@ template&lt;typename CompletionToken  = DefaultCompletionToken&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">CompletionToken &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group__Async.html#gade3fccc6425d7e77d67aba7ed3baa15a">DefaultCompletionToken</a>()</span>&#160;)</td>
+          <td class="paramtype">CompletionToken &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Asynchronously delete one or more references (client only). </p>
+<p>Delete one or more references (client only).    </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
     <tr><td class="paramname">request</td><td>Delete references request    </td></tr>
-    <tr><td class="paramname">token</td><td><p class="starttd"><br  />
- The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a> (default), <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be:</p>
-<div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1Result.html">Result&lt;DeleteReferencesResponse&gt;</a>&amp;) </div>
-<div class="ttc" id="aclassopcua_1_1Result_html"><div class="ttname"><a href="classopcua_1_1Result.html">opcua::Result</a></div><div class="ttdoc">The template class Result encapsulates a StatusCode and optionally a value.</div><div class="ttdef"><b>Definition</b> <a href="result_8hpp_source.html#l00053">result.hpp:53</a></div></div>
+    <tr><td class="paramname">token</td><td><div class="fragment"><div class="line">The @ref async_model <span class="stringliteral">&quot;completion token&quot;</span> that will be used to produce a completion handler, which will be called when the operation completes.</div>
+<div class="line">Potential completion tokens include @ref <a class="code hl_variable" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, @ref <a class="code hl_variable" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, @ref <a class="code hl_variable" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (<span class="keywordtype">object</span>) with the correct completion signature.</div>
+<div class="line">The function signature of the completion handler must be:</div>
+<div class="ttc" id="agroup__Async_html_ga84807736f5bcb08a19160455f71a8863"><div class="ttname"><a href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">opcua::useDetached</a></div><div class="ttdeci">constexpr UseDetachedToken useDetached</div><div class="ttdoc">Detached completion token object.</div><div class="ttdef"><b>Definition</b> <a href="async_8hpp_source.html#l00125">async.hpp:125</a></div></div>
+<div class="ttc" id="agroup__Async_html_ga85a5c61e4024d350f333d7763bbdff36"><div class="ttname"><a href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">opcua::useDeferred</a></div><div class="ttdeci">constexpr UseDeferredToken useDeferred</div><div class="ttdoc">Deferred completion token object.</div><div class="ttdef"><b>Definition</b> <a href="async_8hpp_source.html#l00090">async.hpp:90</a></div></div>
+<div class="ttc" id="agroup__Async_html_gae789f136da0b3d4d725f1ba59ca0614c"><div class="ttname"><a href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">opcua::useFuture</a></div><div class="ttdeci">constexpr UseFutureToken useFuture</div><div class="ttdoc">Future completion token object.</div><div class="ttdef"><b>Definition</b> <a href="async_8hpp_source.html#l00060">async.hpp:60</a></div></div>
+</div><!-- fragment -->  <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1DeleteReferencesResponse.html">DeleteReferencesResponse</a>&amp;) </div>
+<div class="ttc" id="aclassopcua_1_1DeleteReferencesResponse_html"><div class="ttname"><a href="classopcua_1_1DeleteReferencesResponse.html">opcua::DeleteReferencesResponse</a></div><div class="ttdoc">UA_DeleteReferencesResponse wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types__composed_8hpp_source.html#l00922">types_composed.hpp:923</a></div></div>
 </div><!-- fragment -->  </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd><ul>
+<li><code>void</code> if <code>token</code> is a callback function (object)</li>
+<li><code>std::future&lt;<a class="el" href="classopcua_1_1DeleteReferencesResponse.html" title="UA_DeleteReferencesResponse wrapper class.">DeleteReferencesResponse</a>&gt;</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseFutureToken.html" title="Future completion token type.">UseFutureToken</a></li>
+<li><code>auto(auto&amp;&amp; token)</code> callable for deferred execution if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDeferredToken.html" title="Deferred completion token type.">UseDeferredToken</a></li>
+<li><code>void</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDetachedToken.html" title="Detached completion token type.">UseDetachedToken</a>  </li>
+</ul>
+</dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00310">310</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00273">273</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00306">opcua::services::deleteReferenceAsync()</a>.</p>
 
 </div>
 </div>
-<a id="ga11692bbca72c2444aa7a03f4dcc6674b" name="ga11692bbca72c2444aa7a03f4dcc6674b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga11692bbca72c2444aa7a03f4dcc6674b">&#9670;&#160;</a></span>deleteReference()</h2>
+<a id="gaf691994b6dffa5d6b26f4af6aeec65ed" name="gaf691994b6dffa5d6b26f4af6aeec65ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf691994b6dffa5d6b26f4af6aeec65ed">&#9670;&#160;</a></span>deleteReference()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -213,7 +229,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; void &gt; opcua::services::deleteReference </td>
+          <td class="memname"><a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a> opcua::services::deleteReference </td>
           <td>(</td>
           <td class="paramtype">T &amp;</td>          <td class="paramname"><span class="paramname"><em>connection</em></span>, </td>
         </tr>
@@ -263,17 +279,17 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="reference">Referenced by <a class="el" href="node_8hpp_source.html#l00233">opcua::Node&lt; Connection &gt;::deleteReference()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="node_8hpp_source.html#l00529">opcua::Node&lt; Connection &gt;::deleteReference()</a>.</p>
 
 </div>
 </div>
-<a id="ga471f7228a533af70026ecfc05f93c2cc" name="ga471f7228a533af70026ecfc05f93c2cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga471f7228a533af70026ecfc05f93c2cc">&#9670;&#160;</a></span>deleteReferenceAsync()</h2>
+<a id="ga93537ceb917644368aed051b47e05c53" name="ga93537ceb917644368aed051b47e05c53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga93537ceb917644368aed051b47e05c53">&#9670;&#160;</a></span>deleteReferenceAsync()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename CompletionToken  = DefaultCompletionToken&gt; </div>
+template&lt;typename CompletionToken &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">auto opcua::services::deleteReferenceAsync </td>
@@ -308,12 +324,12 @@ template&lt;typename CompletionToken  = DefaultCompletionToken&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">CompletionToken &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group__Async.html#gade3fccc6425d7e77d67aba7ed3baa15a">DefaultCompletionToken</a>()</span>&#160;)</td>
+          <td class="paramtype">CompletionToken &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Asynchronously delete reference. </p>
+<p>Delete reference.    </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> (or <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>) </td></tr>
@@ -322,15 +338,26 @@ template&lt;typename CompletionToken  = DefaultCompletionToken&gt; </div>
     <tr><td class="paramname">referenceType</td><td><a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> of the reference type that defines the reference to delete </td></tr>
     <tr><td class="paramname">isForward</td><td>Delete the forward reference if <code>true</code>, delete the inverse reference if <code>false</code> </td></tr>
     <tr><td class="paramname">deleteBidirectional</td><td>Delete the specified and opposite reference from the target node    </td></tr>
-    <tr><td class="paramname">token</td><td><p class="starttd"><br  />
- The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a> (default), <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be:</p>
-<div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1Result.html">Result&lt;void&gt;</a>) </div>
+    <tr><td class="paramname">token</td><td><div class="fragment"><div class="line">The @ref async_model <span class="stringliteral">&quot;completion token&quot;</span> that will be used to produce a completion handler, which will be called when the operation completes.</div>
+<div class="line">Potential completion tokens include @ref <a class="code hl_variable" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, @ref <a class="code hl_variable" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, @ref <a class="code hl_variable" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (<span class="keywordtype">object</span>) with the correct completion signature.</div>
+<div class="line">The function signature of the completion handler must be:</div>
+</div><!-- fragment -->  <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1StatusCode.html">StatusCode</a>) </div>
+<div class="ttc" id="aclassopcua_1_1StatusCode_html"><div class="ttname"><a href="classopcua_1_1StatusCode.html">opcua::StatusCode</a></div><div class="ttdoc">UA_StatusCode wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00044">types.hpp:44</a></div></div>
 </div><!-- fragment -->  </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd><ul>
+<li><code>void</code> if <code>token</code> is a callback function (object)</li>
+<li><code>std::future&lt;<a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a>&gt;</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseFutureToken.html" title="Future completion token type.">UseFutureToken</a></li>
+<li><code>auto(auto&amp;&amp; token)</code> callable for deferred execution if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDeferredToken.html" title="Deferred completion token type.">UseDeferredToken</a></li>
+<li><code>void</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDetachedToken.html" title="Detached completion token type.">UseDetachedToken</a>  </li>
+</ul>
+</dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00348">348</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00306">306</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="node_8hpp_source.html#l00546">opcua::Node&lt; Connection &gt;::deleteReferenceAsync()</a>.</p>
 
 </div>
 </div>

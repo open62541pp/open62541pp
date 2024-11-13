@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: SetMonitoringMode service</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -106,8 +109,14 @@ Collaboration diagram for SetMonitoringMode service:</div>
 Functions</h2></td></tr>
 <tr class="memitem:ga7ddcfa42c4123ef59db013586f4f49c0" id="r_ga7ddcfa42c4123ef59db013586f4f49c0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1SetMonitoringModeResponse.html">SetMonitoringModeResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga7ddcfa42c4123ef59db013586f4f49c0">opcua::services::setMonitoringMode</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1SetMonitoringModeRequest.html">SetMonitoringModeRequest</a> &amp;request) noexcept</td></tr>
 <tr class="separator:ga7ddcfa42c4123ef59db013586f4f49c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga609ecb7586c0a64f9ac978c0d9ca1458" id="r_ga609ecb7586c0a64f9ac978c0d9ca1458"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; void &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga609ecb7586c0a64f9ac978c0d9ca1458">opcua::services::setMonitoringMode</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, uint32_t subscriptionId, uint32_t monitoredItemId, <a class="el" href="namespaceopcua.html#a78a3c3ace4c759ec414715466928ee81">MonitoringMode</a> monitoringMode) noexcept</td></tr>
-<tr class="separator:ga609ecb7586c0a64f9ac978c0d9ca1458"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6309133cc5bdc2707559596b1e3c4279" id="r_ga6309133cc5bdc2707559596b1e3c4279"><td class="memTemplParams" colspan="2">template&lt;typename CompletionToken &gt; </td></tr>
+<tr class="memitem:ga6309133cc5bdc2707559596b1e3c4279"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ga6309133cc5bdc2707559596b1e3c4279">opcua::services::setMonitoringModeAsync</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1SetMonitoringModeRequest.html">SetMonitoringModeRequest</a> &amp;request, CompletionToken &amp;&amp;token)</td></tr>
+<tr class="separator:ga6309133cc5bdc2707559596b1e3c4279"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8924f91f4847e6785fb020697c79d4e5" id="r_ga8924f91f4847e6785fb020697c79d4e5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga8924f91f4847e6785fb020697c79d4e5">opcua::services::setMonitoringMode</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, uint32_t subscriptionId, uint32_t monitoredItemId, <a class="el" href="namespaceopcua.html#a78a3c3ace4c759ec414715466928ee81">MonitoringMode</a> monitoringMode) noexcept</td></tr>
+<tr class="separator:ga8924f91f4847e6785fb020697c79d4e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7e08b42b1e9dfb4e3009017d29ff2476" id="r_ga7e08b42b1e9dfb4e3009017d29ff2476"><td class="memTemplParams" colspan="2">template&lt;typename CompletionToken &gt; </td></tr>
+<tr class="memitem:ga7e08b42b1e9dfb4e3009017d29ff2476"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ga7e08b42b1e9dfb4e3009017d29ff2476">opcua::services::setMonitoringModeAsync</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, uint32_t subscriptionId, uint32_t monitoredItemId, <a class="el" href="namespaceopcua.html#a78a3c3ace4c759ec414715466928ee81">MonitoringMode</a> monitoringMode, CompletionToken &amp;&amp;token)</td></tr>
+<tr class="separator:ga7e08b42b1e9dfb4e3009017d29ff2476"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ga7ddcfa42c4123ef59db013586f4f49c0" name="ga7ddcfa42c4123ef59db013586f4f49c0"></a>
@@ -146,12 +155,69 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="reference">Referenced by <a class="el" href="monitoreditem_8hpp_source.html#l00077">opcua::MonitoredItem&lt; Connection &gt;::setMonitoringMode()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="monitoreditem_8hpp_source.html#l00078">opcua::MonitoredItem&lt; Connection &gt;::setMonitoringMode()</a>, and <a class="el" href="services_2monitoreditem_8hpp_source.html#l00520">opcua::services::setMonitoringMode()</a>.</p>
 
 </div>
 </div>
-<a id="ga609ecb7586c0a64f9ac978c0d9ca1458" name="ga609ecb7586c0a64f9ac978c0d9ca1458"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga609ecb7586c0a64f9ac978c0d9ca1458">&#9670;&#160;</a></span>setMonitoringMode() <span class="overload">[2/2]</span></h2>
+<a id="ga6309133cc5bdc2707559596b1e3c4279" name="ga6309133cc5bdc2707559596b1e3c4279"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6309133cc5bdc2707559596b1e3c4279">&#9670;&#160;</a></span>setMonitoringModeAsync() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionToken &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto opcua::services::setMonitoringModeAsync </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>connection</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1SetMonitoringModeRequest.html">SetMonitoringModeRequest</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>request</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CompletionToken &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the monitoring mode of monitored items.    </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
+    <tr><td class="paramname">request</td><td>Set monitoring mode request    </td></tr>
+    <tr><td class="paramname">token</td><td><div class="fragment"><div class="line">The @ref async_model <span class="stringliteral">&quot;completion token&quot;</span> that will be used to produce a completion handler, which will be called when the operation completes.</div>
+<div class="line">Potential completion tokens include @ref <a class="code hl_variable" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, @ref <a class="code hl_variable" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, @ref <a class="code hl_variable" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (<span class="keywordtype">object</span>) with the correct completion signature.</div>
+<div class="line">The function signature of the completion handler must be:</div>
+<div class="ttc" id="agroup__Async_html_ga84807736f5bcb08a19160455f71a8863"><div class="ttname"><a href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">opcua::useDetached</a></div><div class="ttdeci">constexpr UseDetachedToken useDetached</div><div class="ttdoc">Detached completion token object.</div><div class="ttdef"><b>Definition</b> <a href="async_8hpp_source.html#l00125">async.hpp:125</a></div></div>
+<div class="ttc" id="agroup__Async_html_ga85a5c61e4024d350f333d7763bbdff36"><div class="ttname"><a href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">opcua::useDeferred</a></div><div class="ttdeci">constexpr UseDeferredToken useDeferred</div><div class="ttdoc">Deferred completion token object.</div><div class="ttdef"><b>Definition</b> <a href="async_8hpp_source.html#l00090">async.hpp:90</a></div></div>
+<div class="ttc" id="agroup__Async_html_gae789f136da0b3d4d725f1ba59ca0614c"><div class="ttname"><a href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">opcua::useFuture</a></div><div class="ttdeci">constexpr UseFutureToken useFuture</div><div class="ttdoc">Future completion token object.</div><div class="ttdef"><b>Definition</b> <a href="async_8hpp_source.html#l00060">async.hpp:60</a></div></div>
+</div><!-- fragment -->  <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1SetMonitoringModeResponse.html">SetMonitoringModeResponse</a>&amp;) </div>
+<div class="ttc" id="aclassopcua_1_1SetMonitoringModeResponse_html"><div class="ttname"><a href="classopcua_1_1SetMonitoringModeResponse.html">opcua::SetMonitoringModeResponse</a></div><div class="ttdoc">UA_SetMonitoringModeResponse wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types__composed_8hpp_source.html#l02088">types_composed.hpp:2089</a></div></div>
+</div><!-- fragment -->  </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><ul>
+<li><code>void</code> if <code>token</code> is a callback function (object)</li>
+<li><code>std::future&lt;<a class="el" href="classopcua_1_1SetMonitoringModeResponse.html" title="UA_SetMonitoringModeResponse wrapper class.">SetMonitoringModeResponse</a>&gt;</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseFutureToken.html" title="Future completion token type.">UseFutureToken</a></li>
+<li><code>auto(auto&amp;&amp; token)</code> callable for deferred execution if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDeferredToken.html" title="Deferred completion token type.">UseDeferredToken</a></li>
+<li><code>void</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDetachedToken.html" title="Detached completion token type.">UseDetachedToken</a>  </li>
+</ul>
+</dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="services_2monitoreditem_8hpp_source.html#l00504">504</a> of file <a class="el" href="services_2monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="services_2monitoreditem_8hpp_source.html#l00540">opcua::services::setMonitoringModeAsync()</a>.</p>
+
+</div>
+</div>
+<a id="ga8924f91f4847e6785fb020697c79d4e5" name="ga8924f91f4847e6785fb020697c79d4e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8924f91f4847e6785fb020697c79d4e5">&#9670;&#160;</a></span>setMonitoringMode() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -160,7 +226,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; void &gt; opcua::services::setMonitoringMode </td>
+          <td class="memname"><a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a> opcua::services::setMonitoringMode </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>connection</em></span>, </td>
         </tr>
@@ -182,7 +248,7 @@ Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -191,12 +257,78 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
-    <tr><td class="paramname">subscriptionId</td><td>Identifier of the subscription returned by <a class="el" href="group__CreateSubscription.html#ga53a25e6ade5a338ead2106723913658d">createSubscription</a> </td></tr>
+    <tr><td class="paramname">subscriptionId</td><td>Identifier of the subscription returned by <a class="el" href="group__CreateSubscription.html#gab21e45d9ee9c919cbab006c942be79ff">createSubscription</a> </td></tr>
     <tr><td class="paramname">monitoredItemId</td><td>Identifier of the monitored item </td></tr>
     <tr><td class="paramname">monitoringMode</td><td>Monitoring mode </td></tr>
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="services_2monitoreditem_8hpp_source.html#l00520">520</a> of file <a class="el" href="services_2monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ga7e08b42b1e9dfb4e3009017d29ff2476" name="ga7e08b42b1e9dfb4e3009017d29ff2476"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7e08b42b1e9dfb4e3009017d29ff2476">&#9670;&#160;</a></span>setMonitoringModeAsync() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionToken &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto opcua::services::setMonitoringModeAsync </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>connection</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>subscriptionId</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>monitoredItemId</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#a78a3c3ace4c759ec414715466928ee81">MonitoringMode</a></td>          <td class="paramname"><span class="paramname"><em>monitoringMode</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CompletionToken &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the monitoring mode of a monitored item.    </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
+    <tr><td class="paramname">subscriptionId</td><td>Identifier of the subscription returned by <a class="el" href="group__CreateSubscription.html#gab21e45d9ee9c919cbab006c942be79ff">createSubscription</a> </td></tr>
+    <tr><td class="paramname">monitoredItemId</td><td>Identifier of the monitored item </td></tr>
+    <tr><td class="paramname">monitoringMode</td><td>Monitoring mode    </td></tr>
+    <tr><td class="paramname">token</td><td><div class="fragment"><div class="line">The @ref async_model <span class="stringliteral">&quot;completion token&quot;</span> that will be used to produce a completion handler, which will be called when the operation completes.</div>
+<div class="line">Potential completion tokens include @ref <a class="code hl_variable" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, @ref <a class="code hl_variable" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, @ref <a class="code hl_variable" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (<span class="keywordtype">object</span>) with the correct completion signature.</div>
+<div class="line">The function signature of the completion handler must be:</div>
+</div><!-- fragment -->  <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1StatusCode.html">StatusCode</a>) </div>
+<div class="ttc" id="aclassopcua_1_1StatusCode_html"><div class="ttname"><a href="classopcua_1_1StatusCode.html">opcua::StatusCode</a></div><div class="ttdoc">UA_StatusCode wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00044">types.hpp:44</a></div></div>
+</div><!-- fragment -->  </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><ul>
+<li><code>void</code> if <code>token</code> is a callback function (object)</li>
+<li><code>std::future&lt;<a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a>&gt;</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseFutureToken.html" title="Future completion token type.">UseFutureToken</a></li>
+<li><code>auto(auto&amp;&amp; token)</code> callable for deferred execution if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDeferredToken.html" title="Deferred completion token type.">UseDeferredToken</a></li>
+<li><code>void</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDetachedToken.html" title="Detached completion token type.">UseDetachedToken</a>  </li>
+</ul>
+</dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="services_2monitoreditem_8hpp_source.html#l00540">540</a> of file <a class="el" href="services_2monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
 
 </div>
 </div>

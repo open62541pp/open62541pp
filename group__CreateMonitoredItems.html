@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: CreateMonitoredItems service</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -89,6 +92,7 @@ $(function(){ initResizable(false); });
 
 <div class="header">
   <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">CreateMonitoredItems service<div class="ingroups"><a class="el" href="group__Services.html">Services</a> &raquo; <a class="el" href="group__MonitoredItem.html">MonitoredItem service set</a></div></div></div>
@@ -97,12 +101,17 @@ $(function(){ initResizable(false); });
 <div class="dynheader">
 Collaboration diagram for CreateMonitoredItems service:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="group__CreateMonitoredItems.svg" width="420" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="group__CreateMonitoredItems.svg" width="771" height="102"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Create and add a monitored item to a subscription. </p>
 <dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.2">https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.2</a> </dd></dl>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1services_1_1detail.html">opcua::services::detail</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:ga14497f410530f994ce6500a67e0994ea" id="r_ga14497f410530f994ce6500a67e0994ea"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga14497f410530f994ce6500a67e0994ea">opcua::services::DeleteMonitoredItemCallback</a> = std::function&lt;void(uint32_t subId, uint32_t monId)&gt;</td></tr>
@@ -114,15 +123,15 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gad8948aef3e5e86d2b0a7996469e09b04" id="r_gad8948aef3e5e86d2b0a7996469e09b04"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1CreateMonitoredItemsResponse.html">CreateMonitoredItemsResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gad8948aef3e5e86d2b0a7996469e09b04">opcua::services::createMonitoredItemsDataChange</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1CreateMonitoredItemsRequest.html">CreateMonitoredItemsRequest</a> &amp;request, <a class="el" href="#ga6d40b5a3af967a8a635ff8f5a79dd9c9">DataChangeNotificationCallback</a> dataChangeCallback, <a class="el" href="#ga14497f410530f994ce6500a67e0994ea">DeleteMonitoredItemCallback</a> deleteCallback={})</td></tr>
-<tr class="separator:gad8948aef3e5e86d2b0a7996469e09b04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaee345ae4b7eafb4927ab4dbc86890704" id="r_gaee345ae4b7eafb4927ab4dbc86890704"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:gaee345ae4b7eafb4927ab4dbc86890704"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; uint32_t &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#gaee345ae4b7eafb4927ab4dbc86890704">opcua::services::createMonitoredItemDataChange</a> (T &amp;connection, uint32_t subscriptionId, const <a class="el" href="classopcua_1_1ReadValueId.html">ReadValueId</a> &amp;itemToMonitor, <a class="el" href="namespaceopcua.html#a78a3c3ace4c759ec414715466928ee81">MonitoringMode</a> monitoringMode, <a class="el" href="structopcua_1_1services_1_1MonitoringParametersEx.html">MonitoringParametersEx</a> &amp;parameters, <a class="el" href="#ga6d40b5a3af967a8a635ff8f5a79dd9c9">DataChangeNotificationCallback</a> dataChangeCallback, <a class="el" href="#ga14497f410530f994ce6500a67e0994ea">DeleteMonitoredItemCallback</a> deleteCallback={})</td></tr>
-<tr class="separator:gaee345ae4b7eafb4927ab4dbc86890704"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga45a6dffa7921f081d6116368755e4a9d" id="r_ga45a6dffa7921f081d6116368755e4a9d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1CreateMonitoredItemsResponse.html">CreateMonitoredItemsResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga45a6dffa7921f081d6116368755e4a9d">opcua::services::createMonitoredItemsEvent</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1CreateMonitoredItemsRequest.html">CreateMonitoredItemsRequest</a> &amp;request, <a class="el" href="#gad4007ecb0f82b372361173cc9edfc48e">EventNotificationCallback</a> eventCallback, <a class="el" href="#ga14497f410530f994ce6500a67e0994ea">DeleteMonitoredItemCallback</a> deleteCallback={})</td></tr>
-<tr class="separator:ga45a6dffa7921f081d6116368755e4a9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac691f760d59b9a528ea7f5ff249cd09a" id="r_gac691f760d59b9a528ea7f5ff249cd09a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gac691f760d59b9a528ea7f5ff249cd09a">opcua::services::createMonitoredItemEvent</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, uint32_t subscriptionId, const <a class="el" href="classopcua_1_1ReadValueId.html">ReadValueId</a> &amp;itemToMonitor, <a class="el" href="namespaceopcua.html#a78a3c3ace4c759ec414715466928ee81">MonitoringMode</a> monitoringMode, <a class="el" href="structopcua_1_1services_1_1MonitoringParametersEx.html">MonitoringParametersEx</a> &amp;parameters, <a class="el" href="#gad4007ecb0f82b372361173cc9edfc48e">EventNotificationCallback</a> eventCallback, <a class="el" href="#ga14497f410530f994ce6500a67e0994ea">DeleteMonitoredItemCallback</a> deleteCallback={})</td></tr>
-<tr class="separator:gac691f760d59b9a528ea7f5ff249cd09a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga020e5a80df8197a78baf06f72a1acca2" id="r_ga020e5a80df8197a78baf06f72a1acca2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1CreateMonitoredItemsResponse.html">CreateMonitoredItemsResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga020e5a80df8197a78baf06f72a1acca2">opcua::services::createMonitoredItemsDataChange</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1CreateMonitoredItemsRequest.html">CreateMonitoredItemsRequest</a> &amp;request, <a class="el" href="#ga6d40b5a3af967a8a635ff8f5a79dd9c9">DataChangeNotificationCallback</a> dataChangeCallback, <a class="el" href="#ga14497f410530f994ce6500a67e0994ea">DeleteMonitoredItemCallback</a> deleteCallback)</td></tr>
+<tr class="separator:ga020e5a80df8197a78baf06f72a1acca2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga143c2663463204a271c104c0d4cd0f26" id="r_ga143c2663463204a271c104c0d4cd0f26"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ga143c2663463204a271c104c0d4cd0f26"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1MonitoredItemCreateResult.html">MonitoredItemCreateResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ga143c2663463204a271c104c0d4cd0f26">opcua::services::createMonitoredItemDataChange</a> (T &amp;connection, uint32_t subscriptionId, const <a class="el" href="classopcua_1_1ReadValueId.html">ReadValueId</a> &amp;itemToMonitor, <a class="el" href="namespaceopcua.html#a78a3c3ace4c759ec414715466928ee81">MonitoringMode</a> monitoringMode, const <a class="el" href="structopcua_1_1services_1_1MonitoringParametersEx.html">MonitoringParametersEx</a> &amp;parameters, <a class="el" href="#ga6d40b5a3af967a8a635ff8f5a79dd9c9">DataChangeNotificationCallback</a> dataChangeCallback, <a class="el" href="#ga14497f410530f994ce6500a67e0994ea">DeleteMonitoredItemCallback</a> deleteCallback)</td></tr>
+<tr class="separator:ga143c2663463204a271c104c0d4cd0f26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9c1208c2cc9b205959aca76a3ac8b019" id="r_ga9c1208c2cc9b205959aca76a3ac8b019"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1CreateMonitoredItemsResponse.html">CreateMonitoredItemsResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga9c1208c2cc9b205959aca76a3ac8b019">opcua::services::createMonitoredItemsEvent</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1CreateMonitoredItemsRequest.html">CreateMonitoredItemsRequest</a> &amp;request, <a class="el" href="#gad4007ecb0f82b372361173cc9edfc48e">EventNotificationCallback</a> eventCallback, <a class="el" href="#ga14497f410530f994ce6500a67e0994ea">DeleteMonitoredItemCallback</a> deleteCallback)</td></tr>
+<tr class="separator:ga9c1208c2cc9b205959aca76a3ac8b019"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa89a312ffd4956f0115de560de51d613" id="r_gaa89a312ffd4956f0115de560de51d613"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1MonitoredItemCreateResult.html">MonitoredItemCreateResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gaa89a312ffd4956f0115de560de51d613">opcua::services::createMonitoredItemEvent</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, uint32_t subscriptionId, const <a class="el" href="classopcua_1_1ReadValueId.html">ReadValueId</a> &amp;itemToMonitor, <a class="el" href="namespaceopcua.html#a78a3c3ace4c759ec414715466928ee81">MonitoringMode</a> monitoringMode, const <a class="el" href="structopcua_1_1services_1_1MonitoringParametersEx.html">MonitoringParametersEx</a> &amp;parameters, <a class="el" href="#gad4007ecb0f82b372361173cc9edfc48e">EventNotificationCallback</a> eventCallback, <a class="el" href="#ga14497f410530f994ce6500a67e0994ea">DeleteMonitoredItemCallback</a> deleteCallback={})</td></tr>
+<tr class="separator:gaa89a312ffd4956f0115de560de51d613"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="ga14497f410530f994ce6500a67e0994ea" name="ga14497f410530f994ce6500a67e0994ea"></a>
@@ -146,7 +155,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="services_2monitoreditem_8hpp_source.html#l00083">83</a> of file <a class="el" href="services_2monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="services_2monitoreditem_8hpp_source.html#l00091">91</a> of file <a class="el" href="services_2monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
 
 </div>
 </div>
@@ -174,7 +183,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="services_2monitoreditem_8hpp_source.html#l00091">91</a> of file <a class="el" href="services_2monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="services_2monitoreditem_8hpp_source.html#l00099">99</a> of file <a class="el" href="services_2monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
 
 </div>
 </div>
@@ -202,16 +211,19 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="services_2monitoreditem_8hpp_source.html#l00100">100</a> of file <a class="el" href="services_2monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="services_2monitoreditem_8hpp_source.html#l00108">108</a> of file <a class="el" href="services_2monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="gad8948aef3e5e86d2b0a7996469e09b04" name="gad8948aef3e5e86d2b0a7996469e09b04"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gad8948aef3e5e86d2b0a7996469e09b04">&#9670;&#160;</a></span>createMonitoredItemsDataChange()</h2>
+<a id="ga020e5a80df8197a78baf06f72a1acca2" name="ga020e5a80df8197a78baf06f72a1acca2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga020e5a80df8197a78baf06f72a1acca2">&#9670;&#160;</a></span>createMonitoredItemsDataChange()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classopcua_1_1CreateMonitoredItemsResponse.html">CreateMonitoredItemsResponse</a> opcua::services::createMonitoredItemsDataChange </td>
@@ -231,13 +243,18 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="#ga14497f410530f994ce6500a67e0994ea">DeleteMonitoredItemCallback</a></td>          <td class="paramname"><span class="paramname"><em>deleteCallback</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="#ga14497f410530f994ce6500a67e0994ea">DeleteMonitoredItemCallback</a></td>          <td class="paramname"><span class="paramname"><em>deleteCallback</em></span>&#160;)</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">nodiscard</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Create and add monitored items to a subscription for data change notifications. </p>
-<p>Don't use this function to monitor the <code>EventNotifier</code> attribute. Create monitored items with <a class="el" href="#ga45a6dffa7921f081d6116368755e4a9d">createMonitoredItemsEvent</a> instead.</p>
+<p>Don't use this function to monitor the <code>EventNotifier</code> attribute. Create monitored items with <a class="el" href="#ga9c1208c2cc9b205959aca76a3ac8b019">createMonitoredItemsEvent</a> instead.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
@@ -250,8 +267,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="gaee345ae4b7eafb4927ab4dbc86890704" name="gaee345ae4b7eafb4927ab4dbc86890704"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaee345ae4b7eafb4927ab4dbc86890704">&#9670;&#160;</a></span>createMonitoredItemDataChange()</h2>
+<a id="ga143c2663463204a271c104c0d4cd0f26" name="ga143c2663463204a271c104c0d4cd0f26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga143c2663463204a271c104c0d4cd0f26">&#9670;&#160;</a></span>createMonitoredItemDataChange()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -262,7 +279,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; uint32_t &gt; opcua::services::createMonitoredItemDataChange </td>
+          <td class="memname"><a class="el" href="classopcua_1_1MonitoredItemCreateResult.html">MonitoredItemCreateResult</a> opcua::services::createMonitoredItemDataChange </td>
           <td>(</td>
           <td class="paramtype">T &amp;</td>          <td class="paramname"><span class="paramname"><em>connection</em></span>, </td>
         </tr>
@@ -284,7 +301,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structopcua_1_1services_1_1MonitoringParametersEx.html">MonitoringParametersEx</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>parameters</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="structopcua_1_1services_1_1MonitoringParametersEx.html">MonitoringParametersEx</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>parameters</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -294,7 +311,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="#ga14497f410530f994ce6500a67e0994ea">DeleteMonitoredItemCallback</a></td>          <td class="paramname"><span class="paramname"><em>deleteCallback</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="#ga14497f410530f994ce6500a67e0994ea">DeleteMonitoredItemCallback</a></td>          <td class="paramname"><span class="paramname"><em>deleteCallback</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -305,30 +322,32 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 
 <p>Create and add a monitored item to a subscription for data change notifications. </p>
-<p>Don't use this function to monitor the <code>EventNotifier</code> attribute. Create a monitored item with <a class="el" href="#gac691f760d59b9a528ea7f5ff249cd09a">createMonitoredItemEvent</a> instead.   This is an extended version of <code><a class="elRef" target="_blank" href="open62541/structUA__MonitoringParameters.html">UA_MonitoringParameters</a></code> with the <code>timestamps</code> parameter. Parameters are passed by reference because illegal parameters can be revised by the server. The updated parameters reflect the actual values that the server will use. </p><dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/Core/Part4/v105/docs/7.21">https://reference.opcfoundation.org/Core/Part4/v105/docs/7.21</a>   </dd></dl>
-<dl class="section return"><dt>Returns</dt><dd>Server-assigned identifier of the monitored item </dd></dl>
+<p>Don't use this function to monitor the <code>EventNotifier</code> attribute. Create a monitored item with <a class="el" href="#gaa89a312ffd4956f0115de560de51d613">createMonitoredItemEvent</a> instead.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a> or <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
-    <tr><td class="paramname">subscriptionId</td><td>Identifier of the subscription returned by <a class="el" href="group__CreateSubscription.html#ga53a25e6ade5a338ead2106723913658d">createSubscription</a>. Use <code>0U</code> for a local server-side monitored item. </td></tr>
+    <tr><td class="paramname">subscriptionId</td><td>Identifier of the subscription returned by <a class="el" href="group__CreateSubscription.html#gab21e45d9ee9c919cbab006c942be79ff">createSubscription</a>. Use <code>0U</code> for a local server-side monitored item. </td></tr>
     <tr><td class="paramname">itemToMonitor</td><td>Item to monitor </td></tr>
     <tr><td class="paramname">monitoringMode</td><td>Monitoring mode </td></tr>
-    <tr><td class="paramname">parameters</td><td>Monitoring parameters, may be revised by server </td></tr>
+    <tr><td class="paramname">parameters</td><td>Monitoring parameters </td></tr>
     <tr><td class="paramname">dataChangeCallback</td><td>Invoked when the monitored item is changed </td></tr>
     <tr><td class="paramname">deleteCallback</td><td>Invoked when the monitored item is deleted </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="reference">Referenced by <a class="el" href="subscription_8hpp_source.html#l00085">opcua::Subscription&lt; Connection &gt;::subscribeDataChange()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="subscription_8hpp_source.html#l00087">opcua::Subscription&lt; Connection &gt;::subscribeDataChange()</a>.</p>
 
 </div>
 </div>
-<a id="ga45a6dffa7921f081d6116368755e4a9d" name="ga45a6dffa7921f081d6116368755e4a9d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga45a6dffa7921f081d6116368755e4a9d">&#9670;&#160;</a></span>createMonitoredItemsEvent()</h2>
+<a id="ga9c1208c2cc9b205959aca76a3ac8b019" name="ga9c1208c2cc9b205959aca76a3ac8b019"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9c1208c2cc9b205959aca76a3ac8b019">&#9670;&#160;</a></span>createMonitoredItemsEvent()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classopcua_1_1CreateMonitoredItemsResponse.html">CreateMonitoredItemsResponse</a> opcua::services::createMonitoredItemsEvent </td>
@@ -348,9 +367,14 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="#ga14497f410530f994ce6500a67e0994ea">DeleteMonitoredItemCallback</a></td>          <td class="paramname"><span class="paramname"><em>deleteCallback</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="#ga14497f410530f994ce6500a67e0994ea">DeleteMonitoredItemCallback</a></td>          <td class="paramname"><span class="paramname"><em>deleteCallback</em></span>&#160;)</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">nodiscard</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Create and add monitored items to a subscription for event notifications. </p>
@@ -367,8 +391,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="gac691f760d59b9a528ea7f5ff249cd09a" name="gac691f760d59b9a528ea7f5ff249cd09a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gac691f760d59b9a528ea7f5ff249cd09a">&#9670;&#160;</a></span>createMonitoredItemEvent()</h2>
+<a id="gaa89a312ffd4956f0115de560de51d613" name="gaa89a312ffd4956f0115de560de51d613"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa89a312ffd4956f0115de560de51d613">&#9670;&#160;</a></span>createMonitoredItemEvent()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -377,7 +401,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; uint32_t &gt; opcua::services::createMonitoredItemEvent </td>
+          <td class="memname"><a class="el" href="classopcua_1_1MonitoredItemCreateResult.html">MonitoredItemCreateResult</a> opcua::services::createMonitoredItemEvent </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>connection</em></span>, </td>
         </tr>
@@ -399,7 +423,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structopcua_1_1services_1_1MonitoringParametersEx.html">MonitoringParametersEx</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>parameters</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="structopcua_1_1services_1_1MonitoringParametersEx.html">MonitoringParametersEx</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>parameters</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -420,22 +444,21 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 
 <p>Create and add a monitored item to a subscription for event notifications. </p>
-<p>The <code>attributeId</code> of <a class="el" href="classopcua_1_1ReadValueId.html" title="UA_ReadValueId wrapper class.">ReadValueId</a> must be set to <a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917a54868874f2641f20364ba96922f27dc4" title="Indicates if the node can be used to subscribe to events or the read/write historic events.">AttributeId::EventNotifier</a>.   This is an extended version of <code><a class="elRef" target="_blank" href="open62541/structUA__MonitoringParameters.html">UA_MonitoringParameters</a></code> with the <code>timestamps</code> parameter. Parameters are passed by reference because illegal parameters can be revised by the server. The updated parameters reflect the actual values that the server will use. </p><dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/Core/Part4/v105/docs/7.21">https://reference.opcfoundation.org/Core/Part4/v105/docs/7.21</a>   </dd></dl>
-<dl class="section return"><dt>Returns</dt><dd>Server-assigned identifier of the monitored item </dd></dl>
+<p>The <code>attributeId</code> of <a class="el" href="classopcua_1_1ReadValueId.html" title="UA_ReadValueId wrapper class.">ReadValueId</a> must be set to <a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917a54868874f2641f20364ba96922f27dc4" title="Indicates if the node can be used to subscribe to events or the read/write historic events.">AttributeId::EventNotifier</a>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
-    <tr><td class="paramname">subscriptionId</td><td>Identifier of the subscription returned by <a class="el" href="group__CreateSubscription.html#ga53a25e6ade5a338ead2106723913658d">createSubscription</a> </td></tr>
+    <tr><td class="paramname">subscriptionId</td><td>Identifier of the subscription returned by <a class="el" href="group__CreateSubscription.html#gab21e45d9ee9c919cbab006c942be79ff">createSubscription</a> </td></tr>
     <tr><td class="paramname">itemToMonitor</td><td>Item to monitor </td></tr>
     <tr><td class="paramname">monitoringMode</td><td>Monitoring mode </td></tr>
-    <tr><td class="paramname">parameters</td><td>Monitoring parameters, may be revised by server </td></tr>
+    <tr><td class="paramname">parameters</td><td>Monitoring parameters </td></tr>
     <tr><td class="paramname">eventCallback</td><td>Invoked when an event is published </td></tr>
     <tr><td class="paramname">deleteCallback</td><td>Invoked when the monitored item is deleted </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="reference">Referenced by <a class="el" href="subscription_8hpp_source.html#l00119">opcua::Subscription&lt; Connection &gt;::subscribeEvent()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="subscription_8hpp_source.html#l00121">opcua::Subscription&lt; Connection &gt;::subscribeEvent()</a>.</p>
 
 </div>
 </div>

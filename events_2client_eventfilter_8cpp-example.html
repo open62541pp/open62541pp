@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: events/client_eventfilter.cpp</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -162,15 +165,15 @@ $(function(){ initResizable(false); });
 <div class="line">    <span class="comment">// This will block until client.stop() is called or an exception is thrown.</span></div>
 <div class="line">    client.<a id="a25" name="a25"></a><a class="code hl_function" href="classopcua_1_1Client.html#a8b1a8e65b22a27b245dd478170e4922d">run</a>();</div>
 <div class="line">}</div>
-<div class="ttc" id="aclassopcua_1_1Client_html"><div class="ttname"><a href="classopcua_1_1Client.html">opcua::Client</a></div><div class="ttdoc">High-level client class.</div><div class="ttdef"><b>Definition</b> <a href="client_8hpp_source.html#l00063">client.hpp:63</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Client_html"><div class="ttname"><a href="classopcua_1_1Client.html">opcua::Client</a></div><div class="ttdoc">High-level client class.</div><div class="ttdef"><b>Definition</b> <a href="client_8hpp_source.html#l00121">client.hpp:121</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Client_html_a0a0372f3bc943406219f857fd355190b"><div class="ttname"><a href="classopcua_1_1Client.html#a0a0372f3bc943406219f857fd355190b">opcua::Client::createSubscription</a></div><div class="ttdeci">Subscription&lt; Client &gt; createSubscription()</div><div class="ttdoc">Create a subscription to monitor data changes and events (default subscription parameters).</div></div>
 <div class="ttc" id="aclassopcua_1_1Client_html_a6dbd84c74a6214369470379a355555ab"><div class="ttname"><a href="classopcua_1_1Client.html#a6dbd84c74a6214369470379a355555ab">opcua::Client::connect</a></div><div class="ttdeci">void connect(std::string_view endpointUrl)</div><div class="ttdoc">Connect to the selected server.</div></div>
 <div class="ttc" id="aclassopcua_1_1Client_html_a8b1a8e65b22a27b245dd478170e4922d"><div class="ttname"><a href="classopcua_1_1Client.html#a8b1a8e65b22a27b245dd478170e4922d">opcua::Client::run</a></div><div class="ttdeci">void run()</div><div class="ttdoc">Run the client's main loop by. This method will block until Client::stop is called.</div></div>
-<div class="ttc" id="aclassopcua_1_1ContentFilterElement_html"><div class="ttname"><a href="classopcua_1_1ContentFilterElement.html">opcua::ContentFilterElement</a></div><div class="ttdoc">UA_ContentFilterElement wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types__composed_8hpp_source.html#l01690">types_composed.hpp:1691</a></div></div>
-<div class="ttc" id="aclassopcua_1_1ContentFilter_html"><div class="ttname"><a href="classopcua_1_1ContentFilter.html">opcua::ContentFilter</a></div><div class="ttdoc">UA_ContentFilter wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types__composed_8hpp_source.html#l01712">types_composed.hpp:1712</a></div></div>
+<div class="ttc" id="aclassopcua_1_1ContentFilterElement_html"><div class="ttname"><a href="classopcua_1_1ContentFilterElement.html">opcua::ContentFilterElement</a></div><div class="ttdoc">UA_ContentFilterElement wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types__composed_8hpp_source.html#l01724">types_composed.hpp:1725</a></div></div>
+<div class="ttc" id="aclassopcua_1_1ContentFilter_html"><div class="ttname"><a href="classopcua_1_1ContentFilter.html">opcua::ContentFilter</a></div><div class="ttdoc">UA_ContentFilter wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types__composed_8hpp_source.html#l01746">types_composed.hpp:1746</a></div></div>
 <div class="ttc" id="aclassopcua_1_1DateTime_html"><div class="ttname"><a href="classopcua_1_1DateTime.html">opcua::DateTime</a></div><div class="ttdoc">UA_DateTime wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00354">types.hpp:354</a></div></div>
-<div class="ttc" id="aclassopcua_1_1EventFilter_html"><div class="ttname"><a href="classopcua_1_1EventFilter.html">opcua::EventFilter</a></div><div class="ttdoc">UA_EventFilter wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types__composed_8hpp_source.html#l01782">types_composed.hpp:1782</a></div></div>
-<div class="ttc" id="aclassopcua_1_1LiteralOperand_html"><div class="ttname"><a href="classopcua_1_1LiteralOperand.html">opcua::LiteralOperand</a></div><div class="ttdoc">UA_LiteralOperand wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types__composed_8hpp_source.html#l01584">types_composed.hpp:1584</a></div></div>
+<div class="ttc" id="aclassopcua_1_1EventFilter_html"><div class="ttname"><a href="classopcua_1_1EventFilter.html">opcua::EventFilter</a></div><div class="ttdoc">UA_EventFilter wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types__composed_8hpp_source.html#l01816">types_composed.hpp:1816</a></div></div>
+<div class="ttc" id="aclassopcua_1_1LiteralOperand_html"><div class="ttname"><a href="classopcua_1_1LiteralOperand.html">opcua::LiteralOperand</a></div><div class="ttdoc">UA_LiteralOperand wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types__composed_8hpp_source.html#l01618">types_composed.hpp:1618</a></div></div>
 <div class="ttc" id="aclassopcua_1_1LocalizedText_html"><div class="ttname"><a href="classopcua_1_1LocalizedText.html">opcua::LocalizedText</a></div><div class="ttdoc">UA_LocalizedText wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00837">types.hpp:837</a></div></div>
 <div class="ttc" id="aclassopcua_1_1MonitoredItem_html"><div class="ttname"><a href="classopcua_1_1MonitoredItem.html">opcua::MonitoredItem</a></div><div class="ttdoc">High-level monitored item class.</div><div class="ttdef"><b>Definition</b> <a href="monitoreditem_8hpp_source.html#l00029">monitoreditem.hpp:29</a></div></div>
 <div class="ttc" id="aclassopcua_1_1MonitoredItem_html_a9433db8f5fd1055a0aa1c46f0bd23dce"><div class="ttname"><a href="classopcua_1_1MonitoredItem.html#a9433db8f5fd1055a0aa1c46f0bd23dce">opcua::MonitoredItem::subscriptionId</a></div><div class="ttdeci">uint32_t subscriptionId() const noexcept</div><div class="ttdoc">Get the server-assigned identifier of the underlying subscription.</div><div class="ttdef"><b>Definition</b> <a href="monitoreditem_8hpp_source.html#l00051">monitoreditem.hpp:51</a></div></div>

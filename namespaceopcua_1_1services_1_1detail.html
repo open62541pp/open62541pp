@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: opcua::services::detail Namespace Reference</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -95,7 +98,7 @@ $(function(){ initResizable(false); });
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#func-members">Functions</a>  </div>
-  <div class="headertitle"><div class="title">opcua::services::detail Namespace Reference<div class="ingroups"><a class="el" href="group__Services.html">Services</a> &raquo; <a class="el" href="group__Attribute.html">Attribute service set</a></div></div></div>
+  <div class="headertitle"><div class="title">opcua::services::detail Namespace Reference<div class="ingroups"><a class="el" href="group__Services.html">Services</a> &raquo; <a class="el" href="group__Attribute.html">Attribute service set</a> &#124; <a class="el" href="group__Services.html">Services</a> &raquo; <a class="el" href="group__MonitoredItem.html">MonitoredItem service set</a> &raquo; <a class="el" href="group__CreateMonitoredItems.html">CreateMonitoredItems service</a> &#124; <a class="el" href="group__Services.html">Services</a> &raquo; <a class="el" href="group__Subscription.html">Subscription service set</a> &raquo; <a class="el" href="group__CreateSubscription.html">CreateSubscription service</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
@@ -161,11 +164,13 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1services_1_1detail_1_1CallbackAdapter.html">CallbackAdapter</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1services_1_1detail_1_1HookToken.html">HookToken</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1services_1_1detail_1_1MonitoredItemContext.html">MonitoredItemContext</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1services_1_1detail_1_1SubscriptionContext.html">SubscriptionContext</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1services_1_1detail_1_1SyncOperation.html">SyncOperation</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1services_1_1detail_1_1TransformToken.html">TransformToken</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1services_1_1detail_1_1Wrap.html">Wrap</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -178,28 +183,29 @@ Functions</h2></td></tr>
 <tr class="memitem:a6f240ca4f47dc4ddcf23135357b8809f" id="r_a6f240ca4f47dc4ddcf23135357b8809f"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917">AttributeId</a> Attribute, typename CompletionToken &gt; </td></tr>
 <tr class="memitem:a6f240ca4f47dc4ddcf23135357b8809f"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a6f240ca4f47dc4ddcf23135357b8809f">readAttributeAsyncImpl</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, CompletionToken &amp;&amp;token)</td></tr>
 <tr class="separator:a6f240ca4f47dc4ddcf23135357b8809f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae65094828654525973e3c972a6b3620b" id="r_ae65094828654525973e3c972a6b3620b"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917">AttributeId</a> Attribute, typename T , typename U &gt; </td></tr>
-<tr class="memitem:ae65094828654525973e3c972a6b3620b"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; void &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ae65094828654525973e3c972a6b3620b">writeAttributeImpl</a> (T &amp;connection, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, U &amp;&amp;value) noexcept</td></tr>
-<tr class="separator:ae65094828654525973e3c972a6b3620b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3aee74430bdc86488ca99b7d893e6ad8" id="r_a3aee74430bdc86488ca99b7d893e6ad8"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917">AttributeId</a> Attribute, typename T , typename U &gt; </td></tr>
+<tr class="memitem:a3aee74430bdc86488ca99b7d893e6ad8"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a3aee74430bdc86488ca99b7d893e6ad8">writeAttributeImpl</a> (T &amp;connection, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, U &amp;&amp;value) noexcept</td></tr>
+<tr class="separator:a3aee74430bdc86488ca99b7d893e6ad8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab2699aeda527ac7660a87eacdb3242c1" id="r_ab2699aeda527ac7660a87eacdb3242c1"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917">AttributeId</a> Attribute, typename T , typename U , typename CompletionToken &gt; </td></tr>
 <tr class="memitem:ab2699aeda527ac7660a87eacdb3242c1"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ab2699aeda527ac7660a87eacdb3242c1">writeAttributeAsyncImpl</a> (T &amp;connection, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, U &amp;&amp;value, CompletionToken &amp;&amp;token)</td></tr>
 <tr class="separator:ab2699aeda527ac7660a87eacdb3242c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fc25966339e25a27f8a5412db00abb8" id="r_a5fc25966339e25a27f8a5412db00abb8"><td class="memTemplParams" colspan="2">template&lt;typename HookFunction , typename CompletionToken &gt; </td></tr>
+<tr class="memitem:a5fc25966339e25a27f8a5412db00abb8"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a5fc25966339e25a27f8a5412db00abb8">HookToken</a> (HookFunction &amp;&amp;, CompletionToken &amp;&amp;) -&gt; HookToken&lt; HookFunction, CompletionToken &gt;</td></tr>
+<tr class="separator:a5fc25966339e25a27f8a5412db00abb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae283013f5cc0fd3745317284588c91ce" id="r_ae283013f5cc0fd3745317284588c91ce"><td class="memTemplParams" colspan="2">template&lt;typename CompletionHandler , typename Transform &gt; </td></tr>
+<tr class="memitem:ae283013f5cc0fd3745317284588c91ce"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ae283013f5cc0fd3745317284588c91ce">asyncTransform</a> (CompletionHandler &amp;&amp;handler, Transform &amp;&amp;transform)</td></tr>
+<tr class="separator:ae283013f5cc0fd3745317284588c91ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a245b95fafe89d57b7bad58f6c7c8fffc" id="r_a245b95fafe89d57b7bad58f6c7c8fffc"><td class="memTemplParams" colspan="2">template&lt;typename TransformFunction , typename CompletionToken &gt; </td></tr>
+<tr class="memitem:a245b95fafe89d57b7bad58f6c7c8fffc"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a245b95fafe89d57b7bad58f6c7c8fffc">TransformToken</a> (TransformFunction &amp;&amp;, CompletionToken &amp;&amp;) -&gt; TransformToken&lt; TransformFunction, CompletionToken &gt;</td></tr>
+<tr class="separator:a245b95fafe89d57b7bad58f6c7c8fffc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a602d5b91674f0d724aa8c12072ff6217" id="r_a602d5b91674f0d724aa8c12072ff6217"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; <a class="el" href="classopcua_1_1Variant.html">Variant</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a602d5b91674f0d724aa8c12072ff6217">getVariant</a> (<a class="el" href="classopcua_1_1DataValue.html">DataValue</a> &amp;&amp;dv) noexcept</td></tr>
 <tr class="separator:a602d5b91674f0d724aa8c12072ff6217"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a3610501974b76c47239e07511157d2" id="r_a5a3610501974b76c47239e07511157d2"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a5a3610501974b76c47239e07511157d2"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a5a3610501974b76c47239e07511157d2">tryGetScalar</a> (<a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;&amp;var) noexcept</td></tr>
-<tr class="separator:a5a3610501974b76c47239e07511157d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afb25371d966cad231915231bc65e40df" id="r_afb25371d966cad231915231bc65e40df"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:afb25371d966cad231915231bc65e40df"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; std::vector&lt; T &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#afb25371d966cad231915231bc65e40df">tryGetArray</a> (<a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;&amp;var) noexcept</td></tr>
-<tr class="separator:afb25371d966cad231915231bc65e40df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10fa879e96cf66f618381bd327851193" id="r_a10fa879e96cf66f618381bd327851193"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1DataValue.html">DataValue</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a10fa879e96cf66f618381bd327851193">createDataValueFromStatus</a> (<a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a> code) noexcept</td></tr>
-<tr class="separator:a10fa879e96cf66f618381bd327851193"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3fff5bc55cb436b0678b44b4a17b78fa" id="r_a3fff5bc55cb436b0678b44b4a17b78fa"><td class="memTemplParams" colspan="2">template&lt;typename Request , typename Response , typename TransformResponse , typename CompletionToken &gt; </td></tr>
-<tr class="memitem:a3fff5bc55cb436b0678b44b4a17b78fa"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a3fff5bc55cb436b0678b44b4a17b78fa">sendRequest</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;client, const Request &amp;request, TransformResponse &amp;&amp;transformResponse, CompletionToken &amp;&amp;token)</td></tr>
-<tr class="separator:a3fff5bc55cb436b0678b44b4a17b78fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac447eb72d8a74c219231b0ef17359825" id="r_ac447eb72d8a74c219231b0ef17359825"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ac447eb72d8a74c219231b0ef17359825"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1ExtensionObject.html">ExtensionObject</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ac447eb72d8a74c219231b0ef17359825">wrapNodeAttributes</a> (const T &amp;attributes) noexcept</td></tr>
-<tr class="separator:ac447eb72d8a74c219231b0ef17359825"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9718e463e39e14bb65e24c553b22915" id="r_aa9718e463e39e14bb65e24c553b22915"><td class="memTemplParams" colspan="2">template&lt;typename Request , typename Response , typename CompletionToken &gt; </td></tr>
+<tr class="memitem:aa9718e463e39e14bb65e24c553b22915"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#aa9718e463e39e14bb65e24c553b22915">sendRequestAsync</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;client, const Request &amp;request, CompletionToken &amp;&amp;token)</td></tr>
+<tr class="separator:aa9718e463e39e14bb65e24c553b22915"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a590eb6d27fa592e3fc520d90fc002b29" id="r_a590eb6d27fa592e3fc520d90fc002b29"><td class="memTemplParams" colspan="2">template&lt;typename Request , typename Response &gt; </td></tr>
+<tr class="memitem:a590eb6d27fa592e3fc520d90fc002b29"><td class="memTemplItemLeft" align="right" valign="top">Response&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a590eb6d27fa592e3fc520d90fc002b29">sendRequest</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;client, const Request &amp;request) noexcept</td></tr>
+<tr class="separator:a590eb6d27fa592e3fc520d90fc002b29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ecdc939426735c846d46d072876c227" id="r_a0ecdc939426735c846d46d072876c227"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a0ecdc939426735c846d46d072876c227"><td class="memTemplItemLeft" align="right" valign="top">auto *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a0ecdc939426735c846d46d072876c227">getPointer</a> (T &amp;value) noexcept</td></tr>
 <tr class="separator:a0ecdc939426735c846d46d072876c227"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -212,6 +218,25 @@ Functions</h2></td></tr>
 <tr class="memitem:ac08863ec27d7787bf14c9a56d862c64c" id="r_ac08863ec27d7787bf14c9a56d862c64c"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ac08863ec27d7787bf14c9a56d862c64c"><td class="memTemplItemLeft" align="right" valign="top">auto *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ac08863ec27d7787bf14c9a56d862c64c">getNativePointer</a> (<a class="el" href="classopcua_1_1Span.html">Span</a>&lt; T &gt; array) noexcept</td></tr>
 <tr class="separator:ac08863ec27d7787bf14c9a56d862c64c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac447eb72d8a74c219231b0ef17359825" id="r_ac447eb72d8a74c219231b0ef17359825"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ac447eb72d8a74c219231b0ef17359825"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1ExtensionObject.html">ExtensionObject</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ac447eb72d8a74c219231b0ef17359825">wrapNodeAttributes</a> (const T &amp;attributes) noexcept</td></tr>
+<tr class="separator:ac447eb72d8a74c219231b0ef17359825"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7854278191e26f2fc83fefb479319aae" id="r_a7854278191e26f2fc83fefb479319aae"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__AddNodesItem.html">UA_AddNodesItem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7854278191e26f2fc83fefb479319aae">createAddNodesItem</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;parentId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;referenceType, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::string_view browseName, <a class="el" href="namespaceopcua.html#a15d78f717a24899cb2ca2af33f5c7c96">NodeClass</a> nodeClass, const <a class="el" href="classopcua_1_1ExtensionObject.html">ExtensionObject</a> &amp;nodeAttributes, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;typeDefinition) noexcept</td></tr>
+<tr class="separator:a7854278191e26f2fc83fefb479319aae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9960c6198a5d04741e42b5b2269f8bf4" id="r_a9960c6198a5d04741e42b5b2269f8bf4"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__AddNodesRequest.html">UA_AddNodesRequest</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9960c6198a5d04741e42b5b2269f8bf4">createAddNodesRequest</a> (<a class="elRef" target="_blank" href="open62541/structUA__AddNodesItem.html">UA_AddNodesItem</a> &amp;item) noexcept</td></tr>
+<tr class="separator:a9960c6198a5d04741e42b5b2269f8bf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e650dee2cbb747858519c26789ed57d" id="r_a0e650dee2cbb747858519c26789ed57d"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__AddReferencesItem.html">UA_AddReferencesItem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0e650dee2cbb747858519c26789ed57d">createAddReferencesItem</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;sourceId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;referenceType, bool forward, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;targetId) noexcept</td></tr>
+<tr class="separator:a0e650dee2cbb747858519c26789ed57d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c7c51065aad84de46c4d4c0fd39b09d" id="r_a4c7c51065aad84de46c4d4c0fd39b09d"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__AddReferencesRequest.html">UA_AddReferencesRequest</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4c7c51065aad84de46c4d4c0fd39b09d">createAddReferencesRequest</a> (<a class="elRef" target="_blank" href="open62541/structUA__AddReferencesItem.html">UA_AddReferencesItem</a> &amp;item) noexcept</td></tr>
+<tr class="separator:a4c7c51065aad84de46c4d4c0fd39b09d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98f76a9205b9c38b2d0a5fefc0e075be" id="r_a98f76a9205b9c38b2d0a5fefc0e075be"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__DeleteNodesItem.html">UA_DeleteNodesItem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a98f76a9205b9c38b2d0a5fefc0e075be">createDeleteNodesItem</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, bool <a class="el" href="group__DeleteReferences.html#ga55e10411f41271fccecc84c8b5379800">deleteReferences</a>) noexcept</td></tr>
+<tr class="separator:a98f76a9205b9c38b2d0a5fefc0e075be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc5eb9cc2625d6247025c53f499aed95" id="r_abc5eb9cc2625d6247025c53f499aed95"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__DeleteNodesRequest.html">UA_DeleteNodesRequest</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abc5eb9cc2625d6247025c53f499aed95">createDeleteNodesRequest</a> (<a class="elRef" target="_blank" href="open62541/structUA__DeleteNodesItem.html">UA_DeleteNodesItem</a> &amp;item) noexcept</td></tr>
+<tr class="separator:abc5eb9cc2625d6247025c53f499aed95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1006e83381e76a9c32bbad067b5e8e7e" id="r_a1006e83381e76a9c32bbad067b5e8e7e"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__DeleteReferencesItem.html">UA_DeleteReferencesItem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1006e83381e76a9c32bbad067b5e8e7e">createDeleteReferencesItem</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;sourceId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;referenceType, bool isForward, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;targetId, bool deleteBidirectional) noexcept</td></tr>
+<tr class="separator:a1006e83381e76a9c32bbad067b5e8e7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abda865710cbc6613734d52dba55b91db" id="r_abda865710cbc6613734d52dba55b91db"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__DeleteReferencesRequest.html">UA_DeleteReferencesRequest</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abda865710cbc6613734d52dba55b91db">createDeleteReferencesRequest</a> (<a class="elRef" target="_blank" href="open62541/structUA__DeleteReferencesItem.html">UA_DeleteReferencesItem</a> &amp;item) noexcept</td></tr>
+<tr class="separator:abda865710cbc6613734d52dba55b91db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c459481f359c01c16ad77108be28923" id="r_a2c459481f359c01c16ad77108be28923"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__ReadValueId.html">UA_ReadValueId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2c459481f359c01c16ad77108be28923">createReadValueId</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917">AttributeId</a> attributeId) noexcept</td></tr>
 <tr class="separator:a2c459481f359c01c16ad77108be28923"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0207ab66b0a8443e5d12f11ba3b94fe9" id="r_a0207ab66b0a8443e5d12f11ba3b94fe9"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__ReadRequest.html">UA_ReadRequest</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0207ab66b0a8443e5d12f11ba3b94fe9">createReadRequest</a> (<a class="el" href="namespaceopcua.html#a68cb6a5e2027c6b73055cb2f4eaeb36d">TimestampsToReturn</a> timestamps, <a class="elRef" target="_blank" href="open62541/structUA__ReadValueId.html">UA_ReadValueId</a> &amp;item) noexcept</td></tr>
@@ -226,6 +251,8 @@ Functions</h2></td></tr>
 <tr class="separator:af72659c57afeb459fa14463562288c3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61b73afd11c5afdfbad8617b9489dfd6" id="r_a61b73afd11c5afdfbad8617b9489dfd6"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__CallMethodRequest.html">UA_CallMethodRequest</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a61b73afd11c5afdfbad8617b9489dfd6">createCallMethodRequest</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;objectId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;methodId, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1Variant.html">Variant</a> &gt; inputArguments) noexcept</td></tr>
 <tr class="separator:a61b73afd11c5afdfbad8617b9489dfd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a331bea0a0a52a830ef196cdb5ed22b6c" id="r_a331bea0a0a52a830ef196cdb5ed22b6c"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__CallRequest.html">UA_CallRequest</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a331bea0a0a52a830ef196cdb5ed22b6c">createCallRequest</a> (<a class="elRef" target="_blank" href="open62541/structUA__CallMethodRequest.html">UA_CallMethodRequest</a> &amp;item) noexcept</td></tr>
+<tr class="separator:a331bea0a0a52a830ef196cdb5ed22b6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3337b316bb4f91fe1a3cbfbaef15f251" id="r_a3337b316bb4f91fe1a3cbfbaef15f251"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__BrowseRequest.html">UA_BrowseRequest</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3337b316bb4f91fe1a3cbfbaef15f251">createBrowseRequest</a> (const <a class="el" href="classopcua_1_1BrowseDescription.html">BrowseDescription</a> &amp;bd, uint32_t maxReferences) noexcept</td></tr>
 <tr class="separator:a3337b316bb4f91fe1a3cbfbaef15f251"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeab927f3af82d592632ac887f84f9aa2" id="r_aeab927f3af82d592632ac887f84f9aa2"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__BrowseNextRequest.html">UA_BrowseNextRequest</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeab927f3af82d592632ac887f84f9aa2">createBrowseNextRequest</a> (bool releaseContinuationPoint, const <a class="el" href="classopcua_1_1ByteString.html">ByteString</a> &amp;continuationPoint) noexcept</td></tr>
@@ -234,12 +261,24 @@ Functions</h2></td></tr>
 <tr class="separator:ab84ca301b82f014a56037aec7b292c32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa75f0dfd2a31535208eebf97b842f3e7" id="r_aa75f0dfd2a31535208eebf97b842f3e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1BrowsePath.html">BrowsePath</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa75f0dfd2a31535208eebf97b842f3e7">createBrowsePath</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;origin, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1QualifiedName.html">QualifiedName</a> &gt; browsePath)</td></tr>
 <tr class="separator:aa75f0dfd2a31535208eebf97b842f3e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae676bb5794b52691290c746b9201307" id="r_aae676bb5794b52691290c746b9201307"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="structopcua_1_1services_1_1SubscriptionParameters.html">SubscriptionParameters</a> &gt; </td></tr>
+<tr class="memitem:aae676bb5794b52691290c746b9201307"><td class="memTemplItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__CreateSubscriptionRequest.html">UA_CreateSubscriptionRequest</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#aae676bb5794b52691290c746b9201307">createCreateSubscriptionRequest</a> (const <a class="el" href="structopcua_1_1services_1_1SubscriptionParameters.html">SubscriptionParameters</a> &amp;parameters, bool publishingEnabled) noexcept</td></tr>
+<tr class="separator:aae676bb5794b52691290c746b9201307"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a908922a6862fe82c3be7259d4fdec761" id="r_a908922a6862fe82c3be7259d4fdec761"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="structopcua_1_1services_1_1SubscriptionParameters.html">SubscriptionParameters</a> &gt; </td></tr>
+<tr class="memitem:a908922a6862fe82c3be7259d4fdec761"><td class="memTemplItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__ModifySubscriptionRequest.html">UA_ModifySubscriptionRequest</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a908922a6862fe82c3be7259d4fdec761">createModifySubscriptionRequest</a> (uint32_t subscriptionId, const <a class="el" href="structopcua_1_1services_1_1SubscriptionParameters.html">SubscriptionParameters</a> &amp;parameters) noexcept</td></tr>
+<tr class="separator:a908922a6862fe82c3be7259d4fdec761"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a882c0bd5cb784f55e7595d13a5d9de2c" id="r_a882c0bd5cb784f55e7595d13a5d9de2c"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__SetPublishingModeRequest.html">UA_SetPublishingModeRequest</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a882c0bd5cb784f55e7595d13a5d9de2c">createSetPublishingModeRequest</a> (bool publishing, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const uint32_t &gt; subscriptionIds) noexcept</td></tr>
+<tr class="separator:a882c0bd5cb784f55e7595d13a5d9de2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add4249491fc21a95ca8323b91563b0d8" id="r_add4249491fc21a95ca8323b91563b0d8"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__DeleteSubscriptionsRequest.html">UA_DeleteSubscriptionsRequest</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#add4249491fc21a95ca8323b91563b0d8">createDeleteSubscriptionsRequest</a> (uint32_t &amp;subscriptionId) noexcept</td></tr>
+<tr class="separator:add4249491fc21a95ca8323b91563b0d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1216084fd26c4bbe56da0d4f560cb929" id="r_a1216084fd26c4bbe56da0d4f560cb929"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="classopcua_1_1MonitoringParameters.html">MonitoringParameters</a> &gt; </td></tr>
 <tr class="memitem:a1216084fd26c4bbe56da0d4f560cb929"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a1216084fd26c4bbe56da0d4f560cb929">copyMonitoringParametersToNative</a> (const <a class="el" href="classopcua_1_1MonitoringParameters.html">MonitoringParameters</a> &amp;parameters, <a class="elRef" target="_blank" href="open62541/structUA__MonitoringParameters.html">UA_MonitoringParameters</a> &amp;native) noexcept</td></tr>
 <tr class="separator:a1216084fd26c4bbe56da0d4f560cb929"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47bfe98065fdd998ffc898501c8e34a9" id="r_a47bfe98065fdd998ffc898501c8e34a9"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="classopcua_1_1MonitoringParameters.html">MonitoringParameters</a> &gt; </td></tr>
 <tr class="memitem:a47bfe98065fdd998ffc898501c8e34a9"><td class="memTemplItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__MonitoredItemCreateRequest.html">UA_MonitoredItemCreateRequest</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a47bfe98065fdd998ffc898501c8e34a9">createMonitoredItemCreateRequest</a> (const <a class="el" href="classopcua_1_1ReadValueId.html">ReadValueId</a> &amp;itemToMonitor, <a class="el" href="namespaceopcua.html#a78a3c3ace4c759ec414715466928ee81">MonitoringMode</a> monitoringMode, <a class="el" href="classopcua_1_1MonitoringParameters.html">MonitoringParameters</a> &amp;parameters) noexcept</td></tr>
 <tr class="separator:a47bfe98065fdd998ffc898501c8e34a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a334f400439804dfaf5051503df23d9a5" id="r_a334f400439804dfaf5051503df23d9a5"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__CreateMonitoredItemsRequest.html">UA_CreateMonitoredItemsRequest</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a334f400439804dfaf5051503df23d9a5">createCreateMonitoredItemsRequest</a> (uint32_t subscriptionId, <a class="el" href="namespaceopcua.html#a68cb6a5e2027c6b73055cb2f4eaeb36d">TimestampsToReturn</a> timestampsToReturn, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="elRef" target="_blank" href="open62541/structUA__MonitoredItemCreateRequest.html">UA_MonitoredItemCreateRequest</a> &gt; itemsToCreate) noexcept</td></tr>
+<tr class="separator:a334f400439804dfaf5051503df23d9a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17d4272c94fd450ec848e2bf7fb13915" id="r_a17d4272c94fd450ec848e2bf7fb13915"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="classopcua_1_1MonitoringParameters.html">MonitoringParameters</a> &gt; </td></tr>
 <tr class="memitem:a17d4272c94fd450ec848e2bf7fb13915"><td class="memTemplItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__MonitoredItemModifyRequest.html">UA_MonitoredItemModifyRequest</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a17d4272c94fd450ec848e2bf7fb13915">createMonitoredItemModifyRequest</a> (uint32_t monitoredItemId, <a class="el" href="classopcua_1_1MonitoringParameters.html">MonitoringParameters</a> &amp;parameters) noexcept</td></tr>
 <tr class="separator:a17d4272c94fd450ec848e2bf7fb13915"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -250,29 +289,38 @@ Functions</h2></td></tr>
 <tr class="separator:a9517045dd7323ad73bd3a315b25473bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45f2951f4959325bcfd5f7ad9545761d" id="r_a45f2951f4959325bcfd5f7ad9545761d"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__SetTriggeringRequest.html">UA_SetTriggeringRequest</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a45f2951f4959325bcfd5f7ad9545761d">createSetTriggeringRequest</a> (uint32_t subscriptionId, uint32_t triggeringItemId, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const uint32_t &gt; linksToAdd, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const uint32_t &gt; linksToRemove) noexcept</td></tr>
 <tr class="separator:a45f2951f4959325bcfd5f7ad9545761d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c69f19c93a256953b1b81dd7f04b1ec" id="r_a9c69f19c93a256953b1b81dd7f04b1ec"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__DeleteMonitoredItemsRequest.html">UA_DeleteMonitoredItemsRequest</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9c69f19c93a256953b1b81dd7f04b1ec">createDeleteMonitoredItemsRequest</a> (uint32_t subscriptionId, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const uint32_t &gt; monitoredItemIds) noexcept</td></tr>
+<tr class="separator:a9c69f19c93a256953b1b81dd7f04b1ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7372458b8c1bf0b0a8d1bd7a052b357c" id="r_a7372458b8c1bf0b0a8d1bd7a052b357c"><td class="memTemplParams" colspan="2">template&lt;typename Response &gt; </td></tr>
 <tr class="memitem:a7372458b8c1bf0b0a8d1bd7a052b357c"><td class="memTemplItemLeft" align="right" valign="top">const <a class="elRef" target="_blank" href="open62541/structUA__ResponseHeader.html">UA_ResponseHeader</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a7372458b8c1bf0b0a8d1bd7a052b357c">getResponseHeader</a> (const Response &amp;response) noexcept</td></tr>
 <tr class="separator:a7372458b8c1bf0b0a8d1bd7a052b357c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd7371be7992e9bed29fc0f53bef3b99" id="r_acd7371be7992e9bed29fc0f53bef3b99"><td class="memTemplParams" colspan="2">template&lt;typename Response &gt; </td></tr>
 <tr class="memitem:acd7371be7992e9bed29fc0f53bef3b99"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#acd7371be7992e9bed29fc0f53bef3b99">getServiceResult</a> (const Response &amp;response) noexcept</td></tr>
 <tr class="separator:acd7371be7992e9bed29fc0f53bef3b99"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a25e2dc7d8faf597c867a87bdb4378a29" id="r_a25e2dc7d8faf597c867a87bdb4378a29"><td class="memTemplParams" colspan="2">template&lt;typename Response &gt; </td></tr>
-<tr class="memitem:a25e2dc7d8faf597c867a87bdb4378a29"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a25e2dc7d8faf597c867a87bdb4378a29">getSingleResult</a> (Response &amp;response) noexcept -&gt; <a class="el" href="classopcua_1_1Result.html">Result</a>&lt; decltype(std::ref(*response.results))&gt;</td></tr>
-<tr class="separator:a25e2dc7d8faf597c867a87bdb4378a29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecf673a600588b5c1a39a0fc51898bc4" id="r_aecf673a600588b5c1a39a0fc51898bc4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; void &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aecf673a600588b5c1a39a0fc51898bc4">toResult</a> (<a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> code) noexcept</td></tr>
-<tr class="separator:aecf673a600588b5c1a39a0fc51898bc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad23555deeb7b454860c419fbe690ece7" id="r_ad23555deeb7b454860c419fbe690ece7"><td class="memTemplParams" colspan="2">template&lt;typename Response &gt; </td></tr>
+<tr class="memitem:ad23555deeb7b454860c419fbe690ece7"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ad23555deeb7b454860c419fbe690ece7">getSingleResultRef</a> (Response &amp;response) noexcept</td></tr>
+<tr class="separator:ad23555deeb7b454860c419fbe690ece7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a822944c0722170b99d47fcb8a5fa22c3" id="r_a822944c0722170b99d47fcb8a5fa22c3"><td class="memTemplParams" colspan="2">template&lt;typename Response &gt; </td></tr>
+<tr class="memitem:a822944c0722170b99d47fcb8a5fa22c3"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a822944c0722170b99d47fcb8a5fa22c3">getSingleStatus</a> (const Response &amp;response) noexcept</td></tr>
+<tr class="separator:a822944c0722170b99d47fcb8a5fa22c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac180c78fc2fa870a52fbfbc1c07d5544" id="r_ac180c78fc2fa870a52fbfbc1c07d5544"><td class="memTemplParams" colspan="2">template&lt;typename WrapperType , typename Response &gt; </td></tr>
+<tr class="memitem:ac180c78fc2fa870a52fbfbc1c07d5544"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; WrapperType &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ac180c78fc2fa870a52fbfbc1c07d5544">wrapSingleResult</a> (Response &amp;response) noexcept</td></tr>
+<tr class="separator:ac180c78fc2fa870a52fbfbc1c07d5544"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7be9cd3858680fd1fb9dd14f8cf29080" id="r_a7be9cd3858680fd1fb9dd14f8cf29080"><td class="memTemplParams" colspan="2">template&lt;typename WrapperType , typename Response &gt; </td></tr>
+<tr class="memitem:a7be9cd3858680fd1fb9dd14f8cf29080"><td class="memTemplItemLeft" align="right" valign="top">WrapperType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a7be9cd3858680fd1fb9dd14f8cf29080">wrapSingleResultWithStatus</a> (Response &amp;response) noexcept</td></tr>
+<tr class="separator:a7be9cd3858680fd1fb9dd14f8cf29080"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c8313523ca58bbc2e62c55962084fa8" id="r_a2c8313523ca58bbc2e62c55962084fa8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2c8313523ca58bbc2e62c55962084fa8">getAddedNodeId</a> (<a class="elRef" target="_blank" href="open62541/structUA__AddNodesResult.html">UA_AddNodesResult</a> &amp;result) noexcept</td></tr>
 <tr class="separator:a2c8313523ca58bbc2e62c55962084fa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe3a6f6180bdce35cb4e6ca7a3be7a51" id="r_afe3a6f6180bdce35cb4e6ca7a3be7a51"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; std::vector&lt; <a class="el" href="classopcua_1_1Variant.html">Variant</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe3a6f6180bdce35cb4e6ca7a3be7a51">getOutputArguments</a> (<a class="elRef" target="_blank" href="open62541/structUA__CallMethodResult.html">UA_CallMethodResult</a> &amp;result) noexcept</td></tr>
-<tr class="separator:afe3a6f6180bdce35cb4e6ca7a3be7a51"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1fa88a22ba7ad80e7413dd9f353886bc" id="r_a1fa88a22ba7ad80e7413dd9f353886bc"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="structopcua_1_1services_1_1SubscriptionParameters.html">SubscriptionParameters</a> , typename Response &gt; </td></tr>
-<tr class="memitem:a1fa88a22ba7ad80e7413dd9f353886bc"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a1fa88a22ba7ad80e7413dd9f353886bc">reviseSubscriptionParameters</a> (<a class="el" href="structopcua_1_1services_1_1SubscriptionParameters.html">SubscriptionParameters</a> &amp;parameters, const Response &amp;response) noexcept</td></tr>
-<tr class="separator:a1fa88a22ba7ad80e7413dd9f353886bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d0541ea9612208cb42ef231824962f4" id="r_a1d0541ea9612208cb42ef231824962f4"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="classopcua_1_1MonitoringParameters.html">MonitoringParameters</a> , typename <a class="el" href="classopcua_1_1Result.html">Result</a> &gt; </td></tr>
-<tr class="memitem:a1d0541ea9612208cb42ef231824962f4"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a1d0541ea9612208cb42ef231824962f4">reviseMonitoringParameters</a> (<a class="el" href="classopcua_1_1MonitoringParameters.html">MonitoringParameters</a> &amp;parameters, const <a class="el" href="classopcua_1_1Result.html">Result</a> &amp;result) noexcept</td></tr>
-<tr class="separator:a1d0541ea9612208cb42ef231824962f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fb18cd59134d3e3626d0e3e724ff9c4" id="r_a6fb18cd59134d3e3626d0e3e724ff9c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6fb18cd59134d3e3626d0e3e724ff9c4">getMonitoredItemId</a> (const <a class="elRef" target="_blank" href="open62541/structUA__MonitoredItemCreateResult.html">UA_MonitoredItemCreateResult</a> &amp;result) noexcept</td></tr>
-<tr class="separator:a6fb18cd59134d3e3626d0e3e724ff9c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ef0aca884600cbc52c683080b5cf74a" id="r_a1ef0aca884600cbc52c683080b5cf74a"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::unique_ptr&lt; <a class="el" href="structopcua_1_1services_1_1detail_1_1MonitoredItemContext.html">MonitoredItemContext</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1ef0aca884600cbc52c683080b5cf74a">createMonitoredItemContexts</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1CreateMonitoredItemsRequest.html">CreateMonitoredItemsRequest</a> &amp;request, <a class="el" href="group__CreateMonitoredItems.html#ga6d40b5a3af967a8a635ff8f5a79dd9c9">DataChangeNotificationCallback</a> dataChangeCallback, <a class="el" href="group__CreateMonitoredItems.html#gad4007ecb0f82b372361173cc9edfc48e">EventNotificationCallback</a> eventCallback, <a class="el" href="group__CreateMonitoredItems.html#ga14497f410530f994ce6500a67e0994ea">DeleteMonitoredItemCallback</a> deleteCallback)</td></tr>
+<tr class="separator:a1ef0aca884600cbc52c683080b5cf74a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73d964c82ffd4fc18af7dbe21f4d9b16" id="r_a73d964c82ffd4fc18af7dbe21f4d9b16"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a73d964c82ffd4fc18af7dbe21f4d9b16">convertMonitoredItemContexts</a> (<a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const std::unique_ptr&lt; <a class="el" href="structopcua_1_1services_1_1detail_1_1MonitoredItemContext.html">MonitoredItemContext</a> &gt; &gt; contexts, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; <a class="el" href="structopcua_1_1services_1_1detail_1_1MonitoredItemContext.html">MonitoredItemContext</a> * &gt; contextsPtr, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; <a class="elRef" target="_blank" href="open62541/client__subscriptions_8h.html#a9899bb6e9665889aceb6309dea1789c0">UA_Client_DataChangeNotificationCallback</a> &gt; dataChangeCallbacksNative, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; <a class="elRef" target="_blank" href="open62541/client__subscriptions_8h.html#a2565ae31fb3bc75132ef88c68daa5a9c">UA_Client_EventNotificationCallback</a> &gt; eventCallbacksNative, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; <a class="elRef" target="_blank" href="open62541/client__subscriptions_8h.html#a351ee8bd9d3d3acf59951235fcf83c8e">UA_Client_DeleteMonitoredItemCallback</a> &gt; deleteCallbacksNative) noexcept</td></tr>
+<tr class="separator:a73d964c82ffd4fc18af7dbe21f4d9b16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af80dca62a0e465b9094483ebb6224f74" id="r_af80dca62a0e465b9094483ebb6224f74"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af80dca62a0e465b9094483ebb6224f74">storeMonitoredItemContexts</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, uint32_t subscriptionId, const <a class="el" href="classopcua_1_1CreateMonitoredItemsResponse.html">CreateMonitoredItemsResponse</a> &amp;response, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; std::unique_ptr&lt; <a class="el" href="structopcua_1_1services_1_1detail_1_1MonitoredItemContext.html">MonitoredItemContext</a> &gt; &gt; contexts)</td></tr>
+<tr class="separator:af80dca62a0e465b9094483ebb6224f74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2dad4226b94622757d27ac0acec9ace" id="r_af2dad4226b94622757d27ac0acec9ace"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="structopcua_1_1services_1_1detail_1_1SubscriptionContext.html">SubscriptionContext</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af2dad4226b94622757d27ac0acec9ace">createSubscriptionContext</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, <a class="el" href="group__CreateSubscription.html#gace7c32be5b9d198ab878a40b117c28ea">StatusChangeNotificationCallback</a> &amp;&amp;statusChangeCallback, <a class="el" href="group__CreateSubscription.html#ga9c4d131655df8ad8eae78ee2e62a059e">DeleteSubscriptionCallback</a> &amp;&amp;deleteCallback)</td></tr>
+<tr class="separator:af2dad4226b94622757d27ac0acec9ace"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21b3b10a16180f94c434417da5795f76" id="r_a21b3b10a16180f94c434417da5795f76"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a21b3b10a16180f94c434417da5795f76">storeSubscriptionContext</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, uint32_t subscriptionId, std::unique_ptr&lt; <a class="el" href="structopcua_1_1services_1_1detail_1_1SubscriptionContext.html">SubscriptionContext</a> &gt; &amp;&amp;context)</td></tr>
+<tr class="separator:a21b3b10a16180f94c434417da5795f76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a83ff313c7ef93605a33c4d61d09e988d" name="a83ff313c7ef93605a33c4d61d09e988d"></a>
@@ -299,14 +347,14 @@ template&lt;<a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a5
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="attribute_8hpp_source.html#l00242">242</a> of file <a class="el" href="attribute_8hpp_source.html">attribute.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="attribute_8hpp_source.html#l00217">217</a> of file <a class="el" href="attribute_8hpp_source.html">attribute.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="attribute__highlevel_8hpp_source.html#l00878">opcua::services::readAccessLevel()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00818">opcua::services::readArrayDimensions()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00070">opcua::services::readBrowseName()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00530">opcua::services::readContainsNoLoops()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00704">opcua::services::readDataType()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l01227">opcua::services::readDataTypeDefinition()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00186">opcua::services::readDescription()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00128">opcua::services::readDisplayName()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00590">opcua::services::readEventNotifier()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l01112">opcua::services::readExecutable()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l01056">opcua::services::readHistorizing()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00472">opcua::services::readInverseName()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00360">opcua::services::readIsAbstract()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00996">opcua::services::readMinimumSamplingInterval()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00044">opcua::services::readNodeClass()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00018">opcua::services::readNodeId()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00416">opcua::services::readSymmetric()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00936">opcua::services::readUserAccessLevel()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l01168">opcua::services::readUserExecutable()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00302">opcua::services::readUserWriteMask()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00648">opcua::services::readValue()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00762">opcua::services::readValueRank()</a>, and <a class="el" href="attribute__highlevel_8hpp_source.html#l00244">opcua::services::readWriteMask()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="attribute__highlevel_8hpp_source.html#l00806">opcua::services::readAccessLevel()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00748">opcua::services::readArrayDimensions()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00066">opcua::services::readBrowseName()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00484">opcua::services::readContainsNoLoops()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00646">opcua::services::readDataType()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l01128">opcua::services::readDataTypeDefinition()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00172">opcua::services::readDescription()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00119">opcua::services::readDisplayName()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00539">opcua::services::readEventNotifier()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l01025">opcua::services::readExecutable()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00974">opcua::services::readHistorizing()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00431">opcua::services::readInverseName()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00329">opcua::services::readIsAbstract()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00917">opcua::services::readMinimumSamplingInterval()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00042">opcua::services::readNodeClass()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00018">opcua::services::readNodeId()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00380">opcua::services::readSymmetric()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00859">opcua::services::readUserAccessLevel()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l01076">opcua::services::readUserExecutable()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00276">opcua::services::readUserWriteMask()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00595">opcua::services::readValue()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00697">opcua::services::readValueRank()</a>, and <a class="el" href="attribute__highlevel_8hpp_source.html#l00225">opcua::services::readWriteMask()</a>.</p>
 
 </div>
 </div>
@@ -317,9 +365,6 @@ template&lt;<a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a5
 <div class="memproto">
 <div class="memtemplate">
 template&lt;<a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917">AttributeId</a> Attribute, typename CompletionToken &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">auto opcua::services::detail::readAttributeAsyncImpl </td>
@@ -337,21 +382,16 @@ template&lt;<a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a5
           <td class="paramtype">CompletionToken &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span>&#160;)</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="attribute_8hpp_source.html#l00248">248</a> of file <a class="el" href="attribute_8hpp_source.html">attribute.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="attribute_8hpp_source.html#l00224">224</a> of file <a class="el" href="attribute_8hpp_source.html">attribute.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="attribute__highlevel_8hpp_source.html#l00889">opcua::services::readAccessLevelAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00829">opcua::services::readArrayDimensionsAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00081">opcua::services::readBrowseNameAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00541">opcua::services::readContainsNoLoopsAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00715">opcua::services::readDataTypeAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l01238">opcua::services::readDataTypeDefinitionAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00197">opcua::services::readDescriptionAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00139">opcua::services::readDisplayNameAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00601">opcua::services::readEventNotifierAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l01123">opcua::services::readExecutableAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l01067">opcua::services::readHistorizingAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00483">opcua::services::readInverseNameAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00371">opcua::services::readIsAbstractAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l01007">opcua::services::readMinimumSamplingIntervalAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00055">opcua::services::readNodeClassAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00029">opcua::services::readNodeIdAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00427">opcua::services::readSymmetricAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00947">opcua::services::readUserAccessLevelAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l01179">opcua::services::readUserExecutableAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00313">opcua::services::readUserWriteMaskAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00659">opcua::services::readValueAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00773">opcua::services::readValueRankAsync()</a>, and <a class="el" href="attribute__highlevel_8hpp_source.html#l00255">opcua::services::readWriteMaskAsync()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="attribute__highlevel_8hpp_source.html#l00817">opcua::services::readAccessLevelAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00759">opcua::services::readArrayDimensionsAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00077">opcua::services::readBrowseNameAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00495">opcua::services::readContainsNoLoopsAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00657">opcua::services::readDataTypeAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l01139">opcua::services::readDataTypeDefinitionAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00183">opcua::services::readDescriptionAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00130">opcua::services::readDisplayNameAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00550">opcua::services::readEventNotifierAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l01036">opcua::services::readExecutableAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00985">opcua::services::readHistorizingAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00442">opcua::services::readInverseNameAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00340">opcua::services::readIsAbstractAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00928">opcua::services::readMinimumSamplingIntervalAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00053">opcua::services::readNodeClassAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00029">opcua::services::readNodeIdAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00391">opcua::services::readSymmetricAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00870">opcua::services::readUserAccessLevelAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l01087">opcua::services::readUserExecutableAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00287">opcua::services::readUserWriteMaskAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00606">opcua::services::readValueAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00708">opcua::services::readValueRankAsync()</a>, and <a class="el" href="attribute__highlevel_8hpp_source.html#l00236">opcua::services::readWriteMaskAsync()</a>.</p>
 
 </div>
 </div>
-<a id="ae65094828654525973e3c972a6b3620b" name="ae65094828654525973e3c972a6b3620b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae65094828654525973e3c972a6b3620b">&#9670;&#160;</a></span>writeAttributeImpl()</h2>
+<a id="a3aee74430bdc86488ca99b7d893e6ad8" name="a3aee74430bdc86488ca99b7d893e6ad8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3aee74430bdc86488ca99b7d893e6ad8">&#9670;&#160;</a></span>writeAttributeImpl()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -362,7 +402,7 @@ template&lt;<a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a5
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; void &gt; opcua::services::detail::writeAttributeImpl </td>
+          <td class="memname"><a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a> opcua::services::detail::writeAttributeImpl </td>
           <td>(</td>
           <td class="paramtype">T &amp;</td>          <td class="paramname"><span class="paramname"><em>connection</em></span>, </td>
         </tr>
@@ -379,14 +419,14 @@ template&lt;<a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a5
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="attribute_8hpp_source.html#l00265">265</a> of file <a class="el" href="attribute_8hpp_source.html">attribute.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="attribute_8hpp_source.html#l00241">241</a> of file <a class="el" href="attribute_8hpp_source.html">attribute.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="attribute__highlevel_8hpp_source.html#l00905">opcua::services::writeAccessLevel()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00845">opcua::services::writeArrayDimensions()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00097">opcua::services::writeBrowseName()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00557">opcua::services::writeContainsNoLoops()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00731">opcua::services::writeDataType()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00213">opcua::services::writeDescription()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00155">opcua::services::writeDisplayName()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00617">opcua::services::writeEventNotifier()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l01139">opcua::services::writeExecutable()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l01083">opcua::services::writeHistorizing()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00499">opcua::services::writeInverseName()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00387">opcua::services::writeIsAbstract()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l01023">opcua::services::writeMinimumSamplingInterval()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00443">opcua::services::writeSymmetric()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00963">opcua::services::writeUserAccessLevel()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l01195">opcua::services::writeUserExecutable()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00329">opcua::services::writeUserWriteMask()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00675">opcua::services::writeValue()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00789">opcua::services::writeValueRank()</a>, and <a class="el" href="attribute__highlevel_8hpp_source.html#l00271">opcua::services::writeWriteMask()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="attribute__highlevel_8hpp_source.html#l00831">opcua::services::writeAccessLevel()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00773">opcua::services::writeArrayDimensions()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00091">opcua::services::writeBrowseName()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00509">opcua::services::writeContainsNoLoops()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00671">opcua::services::writeDataType()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00197">opcua::services::writeDescription()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00144">opcua::services::writeDisplayName()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00564">opcua::services::writeEventNotifier()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l01050">opcua::services::writeExecutable()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00999">opcua::services::writeHistorizing()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00456">opcua::services::writeInverseName()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00354">opcua::services::writeIsAbstract()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00944">opcua::services::writeMinimumSamplingInterval()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00405">opcua::services::writeSymmetric()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00884">opcua::services::writeUserAccessLevel()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l01101">opcua::services::writeUserExecutable()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00301">opcua::services::writeUserWriteMask()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00620">opcua::services::writeValue()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00722">opcua::services::writeValueRank()</a>, and <a class="el" href="attribute__highlevel_8hpp_source.html#l00250">opcua::services::writeWriteMask()</a>.</p>
 
 </div>
 </div>
@@ -397,9 +437,6 @@ template&lt;<a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a5
 <div class="memproto">
 <div class="memtemplate">
 template&lt;<a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917">AttributeId</a> Attribute, typename T , typename U , typename CompletionToken &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">auto opcua::services::detail::writeAttributeAsyncImpl </td>
@@ -422,16 +459,84 @@ template&lt;<a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a5
           <td class="paramtype">CompletionToken &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span>&#160;)</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="attribute_8hpp_source.html#l00271">271</a> of file <a class="el" href="attribute_8hpp_source.html">attribute.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="attribute_8hpp_source.html#l00247">247</a> of file <a class="el" href="attribute_8hpp_source.html">attribute.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="attribute__highlevel_8hpp_source.html#l00918">opcua::services::writeAccessLevelAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00860">opcua::services::writeArrayDimensionsAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00110">opcua::services::writeBrowseNameAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00572">opcua::services::writeContainsNoLoopsAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00744">opcua::services::writeDataTypeAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00226">opcua::services::writeDescriptionAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00168">opcua::services::writeDisplayNameAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00630">opcua::services::writeEventNotifierAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l01150">opcua::services::writeExecutableAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l01094">opcua::services::writeHistorizingAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00512">opcua::services::writeInverseNameAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00398">opcua::services::writeIsAbstractAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l01038">opcua::services::writeMinimumSamplingIntervalAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00454">opcua::services::writeSymmetricAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00978">opcua::services::writeUserAccessLevelAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l01208">opcua::services::writeUserExecutableAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00342">opcua::services::writeUserWriteMaskAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00686">opcua::services::writeValueAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00800">opcua::services::writeValueRankAsync()</a>, and <a class="el" href="attribute__highlevel_8hpp_source.html#l00284">opcua::services::writeWriteMaskAsync()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="attribute__highlevel_8hpp_source.html#l00844">opcua::services::writeAccessLevelAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00788">opcua::services::writeArrayDimensionsAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00104">opcua::services::writeBrowseNameAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00524">opcua::services::writeContainsNoLoopsAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00682">opcua::services::writeDataTypeAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00210">opcua::services::writeDescriptionAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00157">opcua::services::writeDisplayNameAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00577">opcua::services::writeEventNotifierAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l01061">opcua::services::writeExecutableAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l01010">opcua::services::writeHistorizingAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00469">opcua::services::writeInverseNameAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00365">opcua::services::writeIsAbstractAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00959">opcua::services::writeMinimumSamplingIntervalAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00416">opcua::services::writeSymmetricAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00899">opcua::services::writeUserAccessLevelAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l01112">opcua::services::writeUserExecutableAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00314">opcua::services::writeUserWriteMaskAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00631">opcua::services::writeValueAsync()</a>, <a class="el" href="attribute__highlevel_8hpp_source.html#l00733">opcua::services::writeValueRankAsync()</a>, and <a class="el" href="attribute__highlevel_8hpp_source.html#l00261">opcua::services::writeWriteMaskAsync()</a>.</p>
+
+</div>
+</div>
+<a id="a5fc25966339e25a27f8a5412db00abb8" name="a5fc25966339e25a27f8a5412db00abb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fc25966339e25a27f8a5412db00abb8">&#9670;&#160;</a></span>HookToken()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename HookFunction , typename CompletionToken &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">opcua::services::detail::HookToken </td>
+          <td>(</td>
+          <td class="paramtype">HookFunction &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CompletionToken &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;) -&gt;  HookToken&lt; HookFunction, CompletionToken &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae283013f5cc0fd3745317284588c91ce" name="ae283013f5cc0fd3745317284588c91ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae283013f5cc0fd3745317284588c91ce">&#9670;&#160;</a></span>asyncTransform()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionHandler , typename Transform &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto opcua::services::detail::asyncTransform </td>
+          <td>(</td>
+          <td class="paramtype">CompletionHandler &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>handler</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Transform &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>transform</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="async__transform_8hpp_source.html#l00012">12</a> of file <a class="el" href="async__transform_8hpp_source.html">async_transform.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="async__transform_8hpp_source.html#l00047">opcua::AsyncResult&lt; services::detail::TransformToken&lt; TransformFunction, CompletionToken &gt;, T &gt;::initiate()</a>.</p>
+
+</div>
+</div>
+<a id="a245b95fafe89d57b7bad58f6c7c8fffc" name="a245b95fafe89d57b7bad58f6c7c8fffc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a245b95fafe89d57b7bad58f6c7c8fffc">&#9670;&#160;</a></span>TransformToken()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TransformFunction , typename CompletionToken &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">opcua::services::detail::TransformToken </td>
+          <td>(</td>
+          <td class="paramtype">TransformFunction &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CompletionToken &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;) -&gt;  TransformToken&lt; TransformFunction, CompletionToken &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -458,113 +563,22 @@ template&lt;<a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a5
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="attribute__handler_8hpp_source.html#l00017">17</a> of file <a class="el" href="attribute__handler_8hpp_source.html">attribute_handler.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="attribute__handler_8hpp_source.html#l00016">16</a> of file <a class="el" href="attribute__handler_8hpp_source.html">attribute_handler.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="attribute__handler_8hpp_source.html#l00177">opcua::services::detail::AttributeHandler&lt; AttributeId::ArrayDimensions &gt;::fromDataValue()</a>, <a class="el" href="attribute__handler_8hpp_source.html#l00125">opcua::services::detail::AttributeHandler&lt; AttributeId::NodeClass &gt;::fromDataValue()</a>, <a class="el" href="attribute__handler_8hpp_source.html#l00070">opcua::services::detail::AttributeHandlerScalar&lt; T, Enable &gt;::fromDataValue()</a>, and <a class="el" href="attribute__handler_8hpp_source.html#l00053">opcua::services::detail::AttributeHandlerVariant::fromDataValue()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="attribute__handler_8hpp_source.html#l00160">opcua::services::detail::AttributeHandler&lt; AttributeId::ArrayDimensions &gt;::fromDataValue()</a>, <a class="el" href="attribute__handler_8hpp_source.html#l00108">opcua::services::detail::AttributeHandler&lt; AttributeId::NodeClass &gt;::fromDataValue()</a>, <a class="el" href="attribute__handler_8hpp_source.html#l00053">opcua::services::detail::AttributeHandlerScalar&lt; T, Enable &gt;::fromDataValue()</a>, and <a class="el" href="attribute__handler_8hpp_source.html#l00036">opcua::services::detail::AttributeHandlerVariant::fromDataValue()</a>.</p>
 
 </div>
 </div>
-<a id="a5a3610501974b76c47239e07511157d2" name="a5a3610501974b76c47239e07511157d2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a3610501974b76c47239e07511157d2">&#9670;&#160;</a></span>tryGetScalar()</h2>
+<a id="aa9718e463e39e14bb65e24c553b22915" name="aa9718e463e39e14bb65e24c553b22915"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9718e463e39e14bb65e24c553b22915">&#9670;&#160;</a></span>sendRequestAsync()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
+template&lt;typename Request , typename Response , typename CompletionToken &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; T &gt; opcua::services::detail::tryGetScalar </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>var</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="attribute__handler_8hpp_source.html#l00028">28</a> of file <a class="el" href="attribute__handler_8hpp_source.html">attribute_handler.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="attribute__handler_8hpp_source.html#l00070">opcua::services::detail::AttributeHandlerScalar&lt; T, Enable &gt;::fromDataValue()</a>.</p>
-
-</div>
-</div>
-<a id="afb25371d966cad231915231bc65e40df" name="afb25371d966cad231915231bc65e40df"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afb25371d966cad231915231bc65e40df">&#9670;&#160;</a></span>tryGetArray()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; std::vector&lt; T &gt; &gt; opcua::services::detail::tryGetArray </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>var</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="attribute__handler_8hpp_source.html#l00033">33</a> of file <a class="el" href="attribute__handler_8hpp_source.html">attribute_handler.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="attribute__handler_8hpp_source.html#l00177">opcua::services::detail::AttributeHandler&lt; AttributeId::ArrayDimensions &gt;::fromDataValue()</a>.</p>
-
-</div>
-</div>
-<a id="a10fa879e96cf66f618381bd327851193" name="a10fa879e96cf66f618381bd327851193"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a10fa879e96cf66f618381bd327851193">&#9670;&#160;</a></span>createDataValueFromStatus()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1DataValue.html">DataValue</a> opcua::services::detail::createDataValueFromStatus </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a></td>          <td class="paramname"><span class="paramname"><em>code</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="attribute__handler_8hpp_source.html#l00037">37</a> of file <a class="el" href="attribute__handler_8hpp_source.html">attribute_handler.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="attribute__handler_8hpp_source.html#l00181">opcua::services::detail::AttributeHandler&lt; AttributeId::ArrayDimensions &gt;::toDataValue()</a>, and <a class="el" href="attribute__handler_8hpp_source.html#l00075">opcua::services::detail::AttributeHandlerScalar&lt; T, Enable &gt;::toDataValue()</a>.</p>
-
-</div>
-</div>
-<a id="a3fff5bc55cb436b0678b44b4a17b78fa" name="a3fff5bc55cb436b0678b44b4a17b78fa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3fff5bc55cb436b0678b44b4a17b78fa">&#9670;&#160;</a></span>sendRequest()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Request , typename Response , typename TransformResponse , typename CompletionToken &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">auto opcua::services::detail::sendRequest </td>
+          <td class="memname">auto opcua::services::detail::sendRequestAsync </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>client</em></span>, </td>
         </tr>
@@ -576,48 +590,53 @@ template&lt;typename Request , typename Response , typename TransformResponse , 
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TransformResponse &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>transformResponse</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">CompletionToken &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="client__services_8hpp_source.html#l00109">109</a> of file <a class="el" href="client__services_8hpp_source.html">client_services.hpp</a>.</p>
+<p>Async client service requests. </p>
 
-<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00097">opcua::services::addNodeAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00057">opcua::services::addNodesAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00189">opcua::services::addReferenceAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00153">opcua::services::addReferencesAsync()</a>, <a class="el" href="view_8hpp_source.html#l00082">opcua::services::browseAsync()</a>, <a class="el" href="view_8hpp_source.html#l00054">opcua::services::browseAsync()</a>, <a class="el" href="view_8hpp_source.html#l00153">opcua::services::browseNextAsync()</a>, <a class="el" href="view_8hpp_source.html#l00121">opcua::services::browseNextAsync()</a>, <a class="el" href="method_8hpp_source.html#l00050">opcua::services::callAsync()</a>, <a class="el" href="method_8hpp_source.html#l00092">opcua::services::callAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00265">opcua::services::deleteNodeAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00237">opcua::services::deleteNodesAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00348">opcua::services::deleteReferenceAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00310">opcua::services::deleteReferencesAsync()</a>, <a class="el" href="attribute_8hpp_source.html#l00064">opcua::services::readAsync()</a>, <a class="el" href="attribute_8hpp_source.html#l00112">opcua::services::readAttributeAsync()</a>, <a class="el" href="attribute_8hpp_source.html#l00248">readAttributeAsyncImpl()</a>, <a class="el" href="view_8hpp_source.html#l00303">opcua::services::registerNodesAsync()</a>, <a class="el" href="view_8hpp_source.html#l00193">opcua::services::translateBrowsePathsToNodeIdsAsync()</a>, <a class="el" href="view_8hpp_source.html#l00225">opcua::services::translateBrowsePathToNodeIdsAsync()</a>, <a class="el" href="view_8hpp_source.html#l00340">opcua::services::unregisterNodesAsync()</a>, <a class="el" href="attribute_8hpp_source.html#l00172">opcua::services::writeAsync()</a>, and <a class="el" href="attribute_8hpp_source.html#l00214">opcua::services::writeAttributeAsync()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="client__service_8hpp_source.html#l00101">101</a> of file <a class="el" href="client__service_8hpp_source.html">client_service.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00057">opcua::services::addNodesAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00142">opcua::services::addReferencesAsync()</a>, <a class="el" href="view_8hpp_source.html#l00054">opcua::services::browseAsync()</a>, <a class="el" href="view_8hpp_source.html#l00113">opcua::services::browseNextAsync()</a>, <a class="el" href="method_8hpp_source.html#l00049">opcua::services::callAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00213">opcua::services::deleteNodesAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00273">opcua::services::deleteReferencesAsync()</a>, <a class="el" href="attribute_8hpp_source.html#l00061">opcua::services::readAsync()</a>, <a class="el" href="view_8hpp_source.html#l00285">opcua::services::registerNodesAsync()</a>, <a class="el" href="client__service_8hpp_source.html#l00101">sendRequestAsync()</a>, <a class="el" href="services_2monitoreditem_8hpp_source.html#l00504">opcua::services::setMonitoringModeAsync()</a>, <a class="el" href="services_2monitoreditem_8hpp_source.html#l00586">opcua::services::setTriggeringAsync()</a>, <a class="el" href="view_8hpp_source.html#l00183">opcua::services::translateBrowsePathsToNodeIdsAsync()</a>, <a class="el" href="view_8hpp_source.html#l00317">opcua::services::unregisterNodesAsync()</a>, and <a class="el" href="attribute_8hpp_source.html#l00158">opcua::services::writeAsync()</a>.</p>
 
 </div>
 </div>
-<a id="ac447eb72d8a74c219231b0ef17359825" name="ac447eb72d8a74c219231b0ef17359825"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac447eb72d8a74c219231b0ef17359825">&#9670;&#160;</a></span>wrapNodeAttributes()</h2>
+<a id="a590eb6d27fa592e3fc520d90fc002b29" name="a590eb6d27fa592e3fc520d90fc002b29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a590eb6d27fa592e3fc520d90fc002b29">&#9670;&#160;</a></span>sendRequest()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename Request , typename Response &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1ExtensionObject.html">ExtensionObject</a> opcua::services::detail::wrapNodeAttributes </td>
+          <td class="memname">Response opcua::services::detail::sendRequest </td>
           <td>(</td>
-          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>attributes</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>client</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const Request &amp;</td>          <td class="paramname"><span class="paramname"><em>request</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00017">17</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+<p>Sync client service requests. </p>
+
+<p class="definition">Definition at line <a class="el" href="client__service_8hpp_source.html#l00121">121</a> of file <a class="el" href="client__service_8hpp_source.html">client_service.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="client__service_8hpp_source.html#l00121">sendRequest()</a>.</p>
 
 </div>
 </div>
@@ -641,14 +660,14 @@ template&lt;typename T &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00023">23</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00018">18</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="request__handling_8hpp_source.html#l00194">createSetMonitoringModeRequest()</a>, <a class="el" href="request__handling_8hpp_source.html#l00205">createSetTriggeringRequest()</a>, <a class="el" href="request__handling_8hpp_source.html#l00040">getNativePointer()</a>, and <a class="el" href="request__handling_8hpp_source.html#l00035">getNativePointer()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="request__handling_8hpp_source.html#l00316">createCreateMonitoredItemsRequest()</a>, <a class="el" href="request__handling_8hpp_source.html#l00378">createDeleteMonitoredItemsRequest()</a>, <a class="el" href="request__handling_8hpp_source.html#l00351">createSetMonitoringModeRequest()</a>, <a class="el" href="request__handling_8hpp_source.html#l00275">createSetPublishingModeRequest()</a>, <a class="el" href="request__handling_8hpp_source.html#l00362">createSetTriggeringRequest()</a>, <a class="el" href="request__handling_8hpp_source.html#l00035">getNativePointer()</a>, and <a class="el" href="request__handling_8hpp_source.html#l00030">getNativePointer()</a>.</p>
 
 </div>
 </div>
@@ -672,12 +691,12 @@ template&lt;typename T &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00029">29</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00024">24</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
 
 </div>
 </div>
@@ -701,14 +720,14 @@ template&lt;typename T &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00035">35</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00030">30</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="request__handling_8hpp_source.html#l00117">createBrowseNextRequest()</a>, <a class="el" href="request__handling_8hpp_source.html#l00107">createBrowseRequest()</a>, <a class="el" href="request__handling_8hpp_source.html#l00096">createCallMethodRequest()</a>, <a class="el" href="request__handling_8hpp_source.html#l00061">createReadRequest()</a>, <a class="el" href="request__handling_8hpp_source.html#l00127">createTranslateBrowsePathsToNodeIdsRequest()</a>, and <a class="el" href="request__handling_8hpp_source.html#l00089">createWriteRequest()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="request__handling_8hpp_source.html#l00213">createBrowseNextRequest()</a>, <a class="el" href="request__handling_8hpp_source.html#l00203">createBrowseRequest()</a>, <a class="el" href="request__handling_8hpp_source.html#l00183">createCallMethodRequest()</a>, <a class="el" href="request__handling_8hpp_source.html#l00146">createReadRequest()</a>, <a class="el" href="request__handling_8hpp_source.html#l00223">createTranslateBrowsePathsToNodeIdsRequest()</a>, and <a class="el" href="request__handling_8hpp_source.html#l00174">createWriteRequest()</a>.</p>
 
 </div>
 </div>
@@ -732,12 +751,341 @@ template&lt;typename T &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00035">35</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ac447eb72d8a74c219231b0ef17359825" name="ac447eb72d8a74c219231b0ef17359825"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac447eb72d8a74c219231b0ef17359825">&#9670;&#160;</a></span>wrapNodeAttributes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1ExtensionObject.html">ExtensionObject</a> opcua::services::detail::wrapNodeAttributes </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>attributes</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00040">40</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00825">opcua::services::addDataType()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00851">opcua::services::addDataTypeAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00608">opcua::services::addMethodAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00351">opcua::services::addObject()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00378">opcua::services::addObjectAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00645">opcua::services::addObjectType()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00671">opcua::services::addObjectTypeAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00766">opcua::services::addReferenceType()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00792">opcua::services::addReferenceTypeAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00464">opcua::services::addVariable()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00491">opcua::services::addVariableAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00705">opcua::services::addVariableType()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00732">opcua::services::addVariableTypeAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00884">opcua::services::addView()</a>, and <a class="el" href="nodemanagement_8hpp_source.html#l00910">opcua::services::addViewAsync()</a>.</p>
+
+</div>
+</div>
+<a id="a7854278191e26f2fc83fefb479319aae" name="a7854278191e26f2fc83fefb479319aae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7854278191e26f2fc83fefb479319aae">&#9670;&#160;</a></span>createAddNodesItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__AddNodesItem.html">UA_AddNodesItem</a> opcua::services::detail::createAddNodesItem </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>parentId</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>referenceType</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>browseName</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#a15d78f717a24899cb2ca2af33f5c7c96">NodeClass</a></td>          <td class="paramname"><span class="paramname"><em>nodeClass</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1ExtensionObject.html">ExtensionObject</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>nodeAttributes</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>typeDefinition</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00045">45</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00092">opcua::services::addNodeAsync()</a>.</p>
+
+</div>
+</div>
+<a id="a9960c6198a5d04741e42b5b2269f8bf4" name="a9960c6198a5d04741e42b5b2269f8bf4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9960c6198a5d04741e42b5b2269f8bf4">&#9670;&#160;</a></span>createAddNodesRequest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__AddNodesRequest.html">UA_AddNodesRequest</a> opcua::services::detail::createAddNodesRequest </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" target="_blank" href="open62541/structUA__AddNodesItem.html">UA_AddNodesItem</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00066">66</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00092">opcua::services::addNodeAsync()</a>.</p>
+
+</div>
+</div>
+<a id="a0e650dee2cbb747858519c26789ed57d" name="a0e650dee2cbb747858519c26789ed57d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e650dee2cbb747858519c26789ed57d">&#9670;&#160;</a></span>createAddReferencesItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__AddReferencesItem.html">UA_AddReferencesItem</a> opcua::services::detail::createAddReferencesItem </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>sourceId</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>referenceType</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>forward</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>targetId</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00073">73</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00173">opcua::services::addReferenceAsync()</a>.</p>
+
+</div>
+</div>
+<a id="a4c7c51065aad84de46c4d4c0fd39b09d" name="a4c7c51065aad84de46c4d4c0fd39b09d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c7c51065aad84de46c4d4c0fd39b09d">&#9670;&#160;</a></span>createAddReferencesRequest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__AddReferencesRequest.html">UA_AddReferencesRequest</a> opcua::services::detail::createAddReferencesRequest </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" target="_blank" href="open62541/structUA__AddReferencesItem.html">UA_AddReferencesItem</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00084">84</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00173">opcua::services::addReferenceAsync()</a>.</p>
+
+</div>
+</div>
+<a id="a98f76a9205b9c38b2d0a5fefc0e075be" name="a98f76a9205b9c38b2d0a5fefc0e075be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98f76a9205b9c38b2d0a5fefc0e075be">&#9670;&#160;</a></span>createDeleteNodesItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__DeleteNodesItem.html">UA_DeleteNodesItem</a> opcua::services::detail::createDeleteNodesItem </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>deleteReferences</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00091">91</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00236">opcua::services::deleteNodeAsync()</a>.</p>
+
+</div>
+</div>
+<a id="abc5eb9cc2625d6247025c53f499aed95" name="abc5eb9cc2625d6247025c53f499aed95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc5eb9cc2625d6247025c53f499aed95">&#9670;&#160;</a></span>createDeleteNodesRequest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__DeleteNodesRequest.html">UA_DeleteNodesRequest</a> opcua::services::detail::createDeleteNodesRequest </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" target="_blank" href="open62541/structUA__DeleteNodesItem.html">UA_DeleteNodesItem</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00098">98</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00236">opcua::services::deleteNodeAsync()</a>.</p>
+
+</div>
+</div>
+<a id="a1006e83381e76a9c32bbad067b5e8e7e" name="a1006e83381e76a9c32bbad067b5e8e7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1006e83381e76a9c32bbad067b5e8e7e">&#9670;&#160;</a></span>createDeleteReferencesItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__DeleteReferencesItem.html">UA_DeleteReferencesItem</a> opcua::services::detail::createDeleteReferencesItem </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>sourceId</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>referenceType</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>isForward</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>targetId</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>deleteBidirectional</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00105">105</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00306">opcua::services::deleteReferenceAsync()</a>.</p>
+
+</div>
+</div>
+<a id="abda865710cbc6613734d52dba55b91db" name="abda865710cbc6613734d52dba55b91db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abda865710cbc6613734d52dba55b91db">&#9670;&#160;</a></span>createDeleteReferencesRequest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__DeleteReferencesRequest.html">UA_DeleteReferencesRequest</a> opcua::services::detail::createDeleteReferencesRequest </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" target="_blank" href="open62541/structUA__DeleteReferencesItem.html">UA_DeleteReferencesItem</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00121">121</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00306">opcua::services::deleteReferenceAsync()</a>.</p>
 
 </div>
 </div>
@@ -768,9 +1116,9 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00044">44</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00129">129</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="attribute_8hpp_source.html#l00112">opcua::services::readAttributeAsync()</a>, and <a class="el" href="attribute_8hpp_source.html#l00248">readAttributeAsyncImpl()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="attribute_8hpp_source.html#l00100">opcua::services::readAttributeAsync()</a>.</p>
 
 </div>
 </div>
@@ -801,9 +1149,9 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00051">51</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00136">136</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="attribute_8hpp_source.html#l00050">opcua::services::read()</a>, <a class="el" href="attribute_8hpp_source.html#l00078">opcua::services::readAsync()</a>, <a class="el" href="attribute_8hpp_source.html#l00112">opcua::services::readAttributeAsync()</a>, and <a class="el" href="attribute_8hpp_source.html#l00248">readAttributeAsyncImpl()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="attribute_8hpp_source.html#l00049">opcua::services::read()</a>, <a class="el" href="attribute_8hpp_source.html#l00069">opcua::services::readAsync()</a>, and <a class="el" href="attribute_8hpp_source.html#l00100">opcua::services::readAttributeAsync()</a>.</p>
 
 </div>
 </div>
@@ -834,7 +1182,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00061">61</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00146">146</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
 
 </div>
 </div>
@@ -870,9 +1218,9 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00071">71</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00156">156</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="attribute_8hpp_source.html#l00214">opcua::services::writeAttributeAsync()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="attribute_8hpp_source.html#l00190">opcua::services::writeAttributeAsync()</a>.</p>
 
 </div>
 </div>
@@ -899,9 +1247,9 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00082">82</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00167">167</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="attribute_8hpp_source.html#l00162">opcua::services::write()</a>, <a class="el" href="attribute_8hpp_source.html#l00186">opcua::services::writeAsync()</a>, and <a class="el" href="attribute_8hpp_source.html#l00214">opcua::services::writeAttributeAsync()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="attribute_8hpp_source.html#l00148">opcua::services::write()</a>, <a class="el" href="attribute_8hpp_source.html#l00166">opcua::services::writeAsync()</a>, and <a class="el" href="attribute_8hpp_source.html#l00190">opcua::services::writeAttributeAsync()</a>.</p>
 
 </div>
 </div>
@@ -928,7 +1276,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00089">89</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00174">174</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
 
 </div>
 </div>
@@ -964,9 +1312,38 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00096">96</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00183">183</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="method_8hpp_source.html#l00092">opcua::services::callAsync()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="method_8hpp_source.html#l00078">opcua::services::callAsync()</a>.</p>
+
+</div>
+</div>
+<a id="a331bea0a0a52a830ef196cdb5ed22b6c" name="a331bea0a0a52a830ef196cdb5ed22b6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a331bea0a0a52a830ef196cdb5ed22b6c">&#9670;&#160;</a></span>createCallRequest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__CallRequest.html">UA_CallRequest</a> opcua::services::detail::createCallRequest </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" target="_blank" href="open62541/structUA__CallMethodRequest.html">UA_CallMethodRequest</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00194">194</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="method_8hpp_source.html#l00078">opcua::services::callAsync()</a>.</p>
 
 </div>
 </div>
@@ -997,9 +1374,9 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00107">107</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00203">203</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="view_8hpp_source.html#l00082">opcua::services::browseAsync()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="view_8hpp_source.html#l00076">opcua::services::browseAsync()</a>.</p>
 
 </div>
 </div>
@@ -1030,9 +1407,9 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00117">117</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00213">213</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="view_8hpp_source.html#l00153">opcua::services::browseNextAsync()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="view_8hpp_source.html#l00140">opcua::services::browseNextAsync()</a>.</p>
 
 </div>
 </div>
@@ -1059,9 +1436,9 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00127">127</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00223">223</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="view_8hpp_source.html#l00225">opcua::services::translateBrowsePathToNodeIdsAsync()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="view_8hpp_source.html#l00208">opcua::services::translateBrowsePathToNodeIdsAsync()</a>.</p>
 
 </div>
 </div>
@@ -1092,9 +1469,133 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00136">136</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00232">232</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="view_8hpp_source.html#l00254">opcua::services::browseSimplifiedBrowsePath()</a>, and <a class="el" href="view_8hpp_source.html#l00266">opcua::services::browseSimplifiedBrowsePathAsync()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="view_8hpp_source.html#l00236">opcua::services::browseSimplifiedBrowsePath()</a>, and <a class="el" href="view_8hpp_source.html#l00248">opcua::services::browseSimplifiedBrowsePathAsync()</a>.</p>
+
+</div>
+</div>
+<a id="aae676bb5794b52691290c746b9201307" name="aae676bb5794b52691290c746b9201307"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae676bb5794b52691290c746b9201307">&#9670;&#160;</a></span>createCreateSubscriptionRequest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="structopcua_1_1services_1_1SubscriptionParameters.html">SubscriptionParameters</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__CreateSubscriptionRequest.html">UA_CreateSubscriptionRequest</a> opcua::services::detail::createCreateSubscriptionRequest </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structopcua_1_1services_1_1SubscriptionParameters.html">SubscriptionParameters</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>parameters</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>publishingEnabled</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00248">248</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a908922a6862fe82c3be7259d4fdec761" name="a908922a6862fe82c3be7259d4fdec761"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a908922a6862fe82c3be7259d4fdec761">&#9670;&#160;</a></span>createModifySubscriptionRequest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="structopcua_1_1services_1_1SubscriptionParameters.html">SubscriptionParameters</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__ModifySubscriptionRequest.html">UA_ModifySubscriptionRequest</a> opcua::services::detail::createModifySubscriptionRequest </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>subscriptionId</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structopcua_1_1services_1_1SubscriptionParameters.html">SubscriptionParameters</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>parameters</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00262">262</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a882c0bd5cb784f55e7595d13a5d9de2c" name="a882c0bd5cb784f55e7595d13a5d9de2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a882c0bd5cb784f55e7595d13a5d9de2c">&#9670;&#160;</a></span>createSetPublishingModeRequest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__SetPublishingModeRequest.html">UA_SetPublishingModeRequest</a> opcua::services::detail::createSetPublishingModeRequest </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>publishing</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const uint32_t &gt;</td>          <td class="paramname"><span class="paramname"><em>subscriptionIds</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00275">275</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+
+</div>
+</div>
+<a id="add4249491fc21a95ca8323b91563b0d8" name="add4249491fc21a95ca8323b91563b0d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add4249491fc21a95ca8323b91563b0d8">&#9670;&#160;</a></span>createDeleteSubscriptionsRequest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__DeleteSubscriptionsRequest.html">UA_DeleteSubscriptionsRequest</a> opcua::services::detail::createDeleteSubscriptionsRequest </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t &amp;</td>          <td class="paramname"><span class="paramname"><em>subscriptionId</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00285">285</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
 
 </div>
 </div>
@@ -1127,9 +1628,9 @@ template&lt;typename <a class="el" href="classopcua_1_1MonitoringParameters.html
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00150">150</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00294">294</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="request__handling_8hpp_source.html#l00160">createMonitoredItemCreateRequest()</a>, and <a class="el" href="request__handling_8hpp_source.html#l00173">createMonitoredItemModifyRequest()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="request__handling_8hpp_source.html#l00304">createMonitoredItemCreateRequest()</a>, and <a class="el" href="request__handling_8hpp_source.html#l00330">createMonitoredItemModifyRequest()</a>.</p>
 
 </div>
 </div>
@@ -1162,12 +1663,48 @@ template&lt;typename <a class="el" href="classopcua_1_1MonitoringParameters.html
       </table>
   </td>
   <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00304">304</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a334f400439804dfaf5051503df23d9a5" name="a334f400439804dfaf5051503df23d9a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a334f400439804dfaf5051503df23d9a5">&#9670;&#160;</a></span>createCreateMonitoredItemsRequest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__CreateMonitoredItemsRequest.html">UA_CreateMonitoredItemsRequest</a> opcua::services::detail::createCreateMonitoredItemsRequest </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>subscriptionId</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#a68cb6a5e2027c6b73055cb2f4eaeb36d">TimestampsToReturn</a></td>          <td class="paramname"><span class="paramname"><em>timestampsToReturn</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="elRef" target="_blank" href="open62541/structUA__MonitoredItemCreateRequest.html">UA_MonitoredItemCreateRequest</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>itemsToCreate</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00160">160</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00316">316</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
 
 </div>
 </div>
@@ -1195,12 +1732,14 @@ template&lt;typename <a class="el" href="classopcua_1_1MonitoringParameters.html
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00173">173</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00330">330</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="services_2monitoreditem_8hpp_source.html#l00437">opcua::services::modifyMonitoredItem()</a>.</p>
 
 </div>
 </div>
@@ -1233,12 +1772,14 @@ template&lt;typename <a class="el" href="classopcua_1_1MonitoringParameters.html
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00183">183</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00340">340</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="services_2monitoreditem_8hpp_source.html#l00437">opcua::services::modifyMonitoredItem()</a>.</p>
 
 </div>
 </div>
@@ -1274,7 +1815,9 @@ template&lt;typename <a class="el" href="classopcua_1_1MonitoringParameters.html
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00194">194</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00351">351</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="services_2monitoreditem_8hpp_source.html#l00520">opcua::services::setMonitoringMode()</a>, and <a class="el" href="services_2monitoreditem_8hpp_source.html#l00540">opcua::services::setMonitoringModeAsync()</a>.</p>
 
 </div>
 </div>
@@ -1315,7 +1858,38 @@ template&lt;typename <a class="el" href="classopcua_1_1MonitoringParameters.html
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00205">205</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00362">362</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9c69f19c93a256953b1b81dd7f04b1ec" name="a9c69f19c93a256953b1b81dd7f04b1ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c69f19c93a256953b1b81dd7f04b1ec">&#9670;&#160;</a></span>createDeleteMonitoredItemsRequest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__DeleteMonitoredItemsRequest.html">UA_DeleteMonitoredItemsRequest</a> opcua::services::detail::createDeleteMonitoredItemsRequest </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>subscriptionId</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const uint32_t &gt;</td>          <td class="paramname"><span class="paramname"><em>monitoredItemIds</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="request__handling_8hpp_source.html#l00378">378</a> of file <a class="el" href="request__handling_8hpp_source.html">request_handling.hpp</a>.</p>
 
 </div>
 </div>
@@ -1339,14 +1913,14 @@ template&lt;typename Response &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="response__handling_8hpp_source.html#l00037">37</a> of file <a class="el" href="response__handling_8hpp_source.html">response_handling.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="response__handling_8hpp_source.html#l00035">35</a> of file <a class="el" href="response__handling_8hpp_source.html">response_handling.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="response__handling_8hpp_source.html#l00046">getServiceResult()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="response__handling_8hpp_source.html#l00044">getServiceResult()</a>.</p>
 
 </div>
 </div>
@@ -1370,19 +1944,19 @@ template&lt;typename Response &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="response__handling_8hpp_source.html#l00046">46</a> of file <a class="el" href="response__handling_8hpp_source.html">response_handling.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="response__handling_8hpp_source.html#l00044">44</a> of file <a class="el" href="response__handling_8hpp_source.html">response_handling.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="response__handling_8hpp_source.html#l00051">getSingleResult()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="response__handling_8hpp_source.html#l00049">getSingleResultRef()</a>.</p>
 
 </div>
 </div>
-<a id="a25e2dc7d8faf597c867a87bdb4378a29" name="a25e2dc7d8faf597c867a87bdb4378a29"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a25e2dc7d8faf597c867a87bdb4378a29">&#9670;&#160;</a></span>getSingleResult()</h2>
+<a id="ad23555deeb7b454860c419fbe690ece7" name="ad23555deeb7b454860c419fbe690ece7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad23555deeb7b454860c419fbe690ece7">&#9670;&#160;</a></span>getSingleResultRef()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1393,10 +1967,10 @@ template&lt;typename Response &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto opcua::services::detail::getSingleResult </td>
+          <td class="memname">auto opcua::services::detail::getSingleResultRef </td>
           <td>(</td>
           <td class="paramtype">Response &amp;</td>          <td class="paramname"><span class="paramname"><em>response</em></span></td><td>)</td>
-          <td> -&gt; <a class="el" href="classopcua_1_1Result.html">Result</a>&lt;decltype(std::ref(*response.results))&gt; </td>
+          <td></td>
         </tr>
       </table>
   </td>
@@ -1406,38 +1980,102 @@ template&lt;typename Response &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="response__handling_8hpp_source.html#l00051">51</a> of file <a class="el" href="response__handling_8hpp_source.html">response_handling.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="response__handling_8hpp_source.html#l00049">49</a> of file <a class="el" href="response__handling_8hpp_source.html">response_handling.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00097">opcua::services::addNodeAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00189">opcua::services::addReferenceAsync()</a>, <a class="el" href="view_8hpp_source.html#l00082">opcua::services::browseAsync()</a>, <a class="el" href="view_8hpp_source.html#l00153">opcua::services::browseNextAsync()</a>, <a class="el" href="method_8hpp_source.html#l00092">opcua::services::callAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00265">opcua::services::deleteNodeAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00348">opcua::services::deleteReferenceAsync()</a>, <a class="el" href="attribute_8hpp_source.html#l00112">opcua::services::readAttributeAsync()</a>, <a class="el" href="attribute_8hpp_source.html#l00248">readAttributeAsyncImpl()</a>, <a class="el" href="view_8hpp_source.html#l00225">opcua::services::translateBrowsePathToNodeIdsAsync()</a>, and <a class="el" href="attribute_8hpp_source.html#l00214">opcua::services::writeAttributeAsync()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00092">opcua::services::addNodeAsync()</a>, <a class="el" href="response__handling_8hpp_source.html#l00068">getSingleStatus()</a>, and <a class="el" href="response__handling_8hpp_source.html#l00074">wrapSingleResult()</a>.</p>
 
 </div>
 </div>
-<a id="aecf673a600588b5c1a39a0fc51898bc4" name="aecf673a600588b5c1a39a0fc51898bc4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aecf673a600588b5c1a39a0fc51898bc4">&#9670;&#160;</a></span>toResult()</h2>
+<a id="a822944c0722170b99d47fcb8a5fa22c3" name="a822944c0722170b99d47fcb8a5fa22c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a822944c0722170b99d47fcb8a5fa22c3">&#9670;&#160;</a></span>getSingleStatus()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename Response &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; void &gt; opcua::services::detail::toResult </td>
+          <td class="memname"><a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a> opcua::services::detail::getSingleStatus </td>
           <td>(</td>
-          <td class="paramtype"><a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></td>          <td class="paramname"><span class="paramname"><em>code</em></span></td><td>)</td>
+          <td class="paramtype">const Response &amp;</td>          <td class="paramname"><span class="paramname"><em>response</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="response__handling_8hpp_source.html#l00061">61</a> of file <a class="el" href="response__handling_8hpp_source.html">response_handling.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="response__handling_8hpp_source.html#l00068">68</a> of file <a class="el" href="response__handling_8hpp_source.html">response_handling.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00189">opcua::services::addReferenceAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00265">opcua::services::deleteNodeAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00348">opcua::services::deleteReferenceAsync()</a>, and <a class="el" href="attribute_8hpp_source.html#l00214">opcua::services::writeAttributeAsync()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00173">opcua::services::addReferenceAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00236">opcua::services::deleteNodeAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00306">opcua::services::deleteReferenceAsync()</a>, <a class="el" href="services_2monitoreditem_8hpp_source.html#l00520">opcua::services::setMonitoringMode()</a>, <a class="el" href="services_2monitoreditem_8hpp_source.html#l00540">opcua::services::setMonitoringModeAsync()</a>, and <a class="el" href="attribute_8hpp_source.html#l00190">opcua::services::writeAttributeAsync()</a>.</p>
+
+</div>
+</div>
+<a id="ac180c78fc2fa870a52fbfbc1c07d5544" name="ac180c78fc2fa870a52fbfbc1c07d5544"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac180c78fc2fa870a52fbfbc1c07d5544">&#9670;&#160;</a></span>wrapSingleResult()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename WrapperType , typename Response &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; WrapperType &gt; opcua::services::detail::wrapSingleResult </td>
+          <td>(</td>
+          <td class="paramtype">Response &amp;</td>          <td class="paramname"><span class="paramname"><em>response</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="response__handling_8hpp_source.html#l00074">74</a> of file <a class="el" href="response__handling_8hpp_source.html">response_handling.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="attribute_8hpp_source.html#l00100">opcua::services::readAttributeAsync()</a>, and <a class="el" href="response__handling_8hpp_source.html#l00080">wrapSingleResultWithStatus()</a>.</p>
+
+</div>
+</div>
+<a id="a7be9cd3858680fd1fb9dd14f8cf29080" name="a7be9cd3858680fd1fb9dd14f8cf29080"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7be9cd3858680fd1fb9dd14f8cf29080">&#9670;&#160;</a></span>wrapSingleResultWithStatus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename WrapperType , typename Response &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">WrapperType opcua::services::detail::wrapSingleResultWithStatus </td>
+          <td>(</td>
+          <td class="paramtype">Response &amp;</td>          <td class="paramname"><span class="paramname"><em>response</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="response__handling_8hpp_source.html#l00080">80</a> of file <a class="el" href="response__handling_8hpp_source.html">response_handling.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="view_8hpp_source.html#l00076">opcua::services::browseAsync()</a>, <a class="el" href="view_8hpp_source.html#l00140">opcua::services::browseNextAsync()</a>, <a class="el" href="method_8hpp_source.html#l00078">opcua::services::callAsync()</a>, <a class="el" href="services_2monitoreditem_8hpp_source.html#l00437">opcua::services::modifyMonitoredItem()</a>, and <a class="el" href="view_8hpp_source.html#l00208">opcua::services::translateBrowsePathToNodeIdsAsync()</a>.</p>
 
 </div>
 </div>
@@ -1464,109 +2102,50 @@ template&lt;typename Response &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="response__handling_8hpp_source.html#l00068">68</a> of file <a class="el" href="response__handling_8hpp_source.html">response_handling.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="response__handling_8hpp_source.html#l00088">88</a> of file <a class="el" href="response__handling_8hpp_source.html">response_handling.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00097">opcua::services::addNodeAsync()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00092">opcua::services::addNodeAsync()</a>.</p>
 
 </div>
 </div>
-<a id="afe3a6f6180bdce35cb4e6ca7a3be7a51" name="afe3a6f6180bdce35cb4e6ca7a3be7a51"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe3a6f6180bdce35cb4e6ca7a3be7a51">&#9670;&#160;</a></span>getOutputArguments()</h2>
+<a id="a1ef0aca884600cbc52c683080b5cf74a" name="a1ef0aca884600cbc52c683080b5cf74a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ef0aca884600cbc52c683080b5cf74a">&#9670;&#160;</a></span>createMonitoredItemContexts()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; std::vector&lt; <a class="el" href="classopcua_1_1Variant.html">Variant</a> &gt; &gt; opcua::services::detail::getOutputArguments </td>
+          <td class="memname">std::vector&lt; std::unique_ptr&lt; <a class="el" href="structopcua_1_1services_1_1detail_1_1MonitoredItemContext.html">MonitoredItemContext</a> &gt; &gt; opcua::services::detail::createMonitoredItemContexts </td>
           <td>(</td>
-          <td class="paramtype"><a class="elRef" target="_blank" href="open62541/structUA__CallMethodResult.html">UA_CallMethodResult</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>result</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="response__handling_8hpp_source.html#l00075">75</a> of file <a class="el" href="response__handling_8hpp_source.html">response_handling.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="method_8hpp_source.html#l00092">opcua::services::callAsync()</a>.</p>
-
-</div>
-</div>
-<a id="a1fa88a22ba7ad80e7413dd9f353886bc" name="a1fa88a22ba7ad80e7413dd9f353886bc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1fa88a22ba7ad80e7413dd9f353886bc">&#9670;&#160;</a></span>reviseSubscriptionParameters()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename <a class="el" href="structopcua_1_1services_1_1SubscriptionParameters.html">SubscriptionParameters</a> , typename Response &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void opcua::services::detail::reviseSubscriptionParameters </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structopcua_1_1services_1_1SubscriptionParameters.html">SubscriptionParameters</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>parameters</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>connection</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const Response &amp;</td>          <td class="paramname"><span class="paramname"><em>response</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="response__handling_8hpp_source.html#l00094">94</a> of file <a class="el" href="response__handling_8hpp_source.html">response_handling.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a1d0541ea9612208cb42ef231824962f4" name="a1d0541ea9612208cb42ef231824962f4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1d0541ea9612208cb42ef231824962f4">&#9670;&#160;</a></span>reviseMonitoringParameters()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename <a class="el" href="classopcua_1_1MonitoringParameters.html">MonitoringParameters</a> , typename <a class="el" href="classopcua_1_1Result.html">Result</a> &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void opcua::services::detail::reviseMonitoringParameters </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1MonitoringParameters.html">MonitoringParameters</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>parameters</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1CreateMonitoredItemsRequest.html">CreateMonitoredItemsRequest</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>request</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1Result.html">Result</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>result</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="group__CreateMonitoredItems.html#ga6d40b5a3af967a8a635ff8f5a79dd9c9">DataChangeNotificationCallback</a></td>          <td class="paramname"><span class="paramname"><em>dataChangeCallback</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__CreateMonitoredItems.html#gad4007ecb0f82b372361173cc9edfc48e">EventNotificationCallback</a></td>          <td class="paramname"><span class="paramname"><em>eventCallback</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__CreateMonitoredItems.html#ga14497f410530f994ce6500a67e0994ea">DeleteMonitoredItemCallback</a></td>          <td class="paramname"><span class="paramname"><em>deleteCallback</em></span>&#160;)</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="response__handling_8hpp_source.html#l00103">103</a> of file <a class="el" href="response__handling_8hpp_source.html">response_handling.hpp</a>.</p>
-
 </div>
 </div>
-<a id="a6fb18cd59134d3e3626d0e3e724ff9c4" name="a6fb18cd59134d3e3626d0e3e724ff9c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6fb18cd59134d3e3626d0e3e724ff9c4">&#9670;&#160;</a></span>getMonitoredItemId()</h2>
+<a id="a73d964c82ffd4fc18af7dbe21f4d9b16" name="a73d964c82ffd4fc18af7dbe21f4d9b16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73d964c82ffd4fc18af7dbe21f4d9b16">&#9670;&#160;</a></span>convertMonitoredItemContexts()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1575,20 +2154,122 @@ template&lt;typename <a class="el" href="classopcua_1_1MonitoringParameters.html
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; uint32_t &gt; opcua::services::detail::getMonitoredItemId </td>
+          <td class="memname">void opcua::services::detail::convertMonitoredItemContexts </td>
           <td>(</td>
-          <td class="paramtype">const <a class="elRef" target="_blank" href="open62541/structUA__MonitoredItemCreateResult.html">UA_MonitoredItemCreateResult</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>result</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const std::unique_ptr&lt; <a class="el" href="structopcua_1_1services_1_1detail_1_1MonitoredItemContext.html">MonitoredItemContext</a> &gt; &gt;</td>          <td class="paramname"><span class="paramname"><em>contexts</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; <a class="el" href="structopcua_1_1services_1_1detail_1_1MonitoredItemContext.html">MonitoredItemContext</a> * &gt;</td>          <td class="paramname"><span class="paramname"><em>contextsPtr</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; <a class="elRef" target="_blank" href="open62541/client__subscriptions_8h.html#a9899bb6e9665889aceb6309dea1789c0">UA_Client_DataChangeNotificationCallback</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>dataChangeCallbacksNative</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; <a class="elRef" target="_blank" href="open62541/client__subscriptions_8h.html#a2565ae31fb3bc75132ef88c68daa5a9c">UA_Client_EventNotificationCallback</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>eventCallbacksNative</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; <a class="elRef" target="_blank" href="open62541/client__subscriptions_8h.html#a351ee8bd9d3d3acf59951235fcf83c8e">UA_Client_DeleteMonitoredItemCallback</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>deleteCallbacksNative</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="response__handling_8hpp_source.html#l00112">112</a> of file <a class="el" href="response__handling_8hpp_source.html">response_handling.hpp</a>.</p>
+</div>
+</div>
+<a id="af80dca62a0e465b9094483ebb6224f74" name="af80dca62a0e465b9094483ebb6224f74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af80dca62a0e465b9094483ebb6224f74">&#9670;&#160;</a></span>storeMonitoredItemContexts()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::services::detail::storeMonitoredItemContexts </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>connection</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>subscriptionId</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1CreateMonitoredItemsResponse.html">CreateMonitoredItemsResponse</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>response</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; std::unique_ptr&lt; <a class="el" href="structopcua_1_1services_1_1detail_1_1MonitoredItemContext.html">MonitoredItemContext</a> &gt; &gt;</td>          <td class="paramname"><span class="paramname"><em>contexts</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af2dad4226b94622757d27ac0acec9ace" name="af2dad4226b94622757d27ac0acec9ace"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2dad4226b94622757d27ac0acec9ace">&#9670;&#160;</a></span>createSubscriptionContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt; <a class="el" href="structopcua_1_1services_1_1detail_1_1SubscriptionContext.html">SubscriptionContext</a> &gt; opcua::services::detail::createSubscriptionContext </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>connection</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__CreateSubscription.html#gace7c32be5b9d198ab878a40b117c28ea">StatusChangeNotificationCallback</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>statusChangeCallback</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__CreateSubscription.html#ga9c4d131655df8ad8eae78ee2e62a059e">DeleteSubscriptionCallback</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>deleteCallback</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="group__CreateSubscription.html#ga31bfe41c445ee10d3998ce31935a78e6">opcua::services::createSubscription()</a>.</p>
+
+</div>
+</div>
+<a id="a21b3b10a16180f94c434417da5795f76" name="a21b3b10a16180f94c434417da5795f76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21b3b10a16180f94c434417da5795f76">&#9670;&#160;</a></span>storeSubscriptionContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::services::detail::storeSubscriptionContext </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>connection</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>subscriptionId</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="structopcua_1_1services_1_1detail_1_1SubscriptionContext.html">SubscriptionContext</a> &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>context</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

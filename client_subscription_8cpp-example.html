@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: client_subscription.cpp</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -150,7 +153,7 @@ $(function(){ initResizable(false); });
 <div class="line">        } <span class="keywordflow">catch</span> (<span class="keyword">const</span> <a id="_a23" name="_a23"></a><a class="code hl_class" href="classopcua_1_1BadStatus.html">opcua::BadStatus</a>&amp; e) {</div>
 <div class="line">            <span class="comment">// Workaround to enforce a new session</span></div>
 <div class="line">            <span class="comment">// https://github.com/open62541pp/open62541pp/issues/51</span></div>
-<div class="line">            client.<a id="a24" name="a24"></a><a class="code hl_function" href="classopcua_1_1Client.html#ae03a726547da46698d93e781f2dfcff9">disconnect</a>();</div>
+<div class="line">            client.<a id="a24" name="a24"></a><a class="code hl_function" href="classopcua_1_1Client.html#a012374e064a1f030d560d73490bcc431">disconnect</a>();</div>
 <div class="line">            std::cout &lt;&lt; <span class="stringliteral">&quot;Error: &quot;</span> &lt;&lt; e.<a id="a25" name="a25"></a><a class="code hl_function" href="classopcua_1_1BadStatus.html#ae28cf76cb44982688d768f4f64b630b6">what</a>() &lt;&lt; <span class="stringliteral">&quot;\nRetry to connect in 3 seconds\n&quot;</span>;</div>
 <div class="line">            std::this_thread::sleep_for(std::chrono::seconds(3));</div>
 <div class="line">        }</div>
@@ -158,12 +161,12 @@ $(function(){ initResizable(false); });
 <div class="line">}</div>
 <div class="ttc" id="aclassopcua_1_1BadStatus_html"><div class="ttname"><a href="classopcua_1_1BadStatus.html">opcua::BadStatus</a></div><div class="ttdoc">Exception for bad status codes from open62541 UA_STATUSCODE_*.</div><div class="ttdef"><b>Definition</b> <a href="exception_8hpp_source.html#l00015">exception.hpp:15</a></div></div>
 <div class="ttc" id="aclassopcua_1_1BadStatus_html_ae28cf76cb44982688d768f4f64b630b6"><div class="ttname"><a href="classopcua_1_1BadStatus.html#ae28cf76cb44982688d768f4f64b630b6">opcua::BadStatus::what</a></div><div class="ttdeci">const char * what() const noexcept override</div><div class="ttdef"><b>Definition</b> <a href="exception_8hpp_source.html#l00024">exception.hpp:24</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Client_html"><div class="ttname"><a href="classopcua_1_1Client.html">opcua::Client</a></div><div class="ttdoc">High-level client class.</div><div class="ttdef"><b>Definition</b> <a href="client_8hpp_source.html#l00063">client.hpp:63</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Client_html"><div class="ttname"><a href="classopcua_1_1Client.html">opcua::Client</a></div><div class="ttdoc">High-level client class.</div><div class="ttdef"><b>Definition</b> <a href="client_8hpp_source.html#l00121">client.hpp:121</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Client_html_a012374e064a1f030d560d73490bcc431"><div class="ttname"><a href="classopcua_1_1Client.html#a012374e064a1f030d560d73490bcc431">opcua::Client::disconnect</a></div><div class="ttdeci">void disconnect()</div><div class="ttdoc">Disconnect and close the connection to the server.</div></div>
 <div class="ttc" id="aclassopcua_1_1Client_html_a0a0372f3bc943406219f857fd355190b"><div class="ttname"><a href="classopcua_1_1Client.html#a0a0372f3bc943406219f857fd355190b">opcua::Client::createSubscription</a></div><div class="ttdeci">Subscription&lt; Client &gt; createSubscription()</div><div class="ttdoc">Create a subscription to monitor data changes and events (default subscription parameters).</div></div>
 <div class="ttc" id="aclassopcua_1_1Client_html_a6dbd84c74a6214369470379a355555ab"><div class="ttname"><a href="classopcua_1_1Client.html#a6dbd84c74a6214369470379a355555ab">opcua::Client::connect</a></div><div class="ttdeci">void connect(std::string_view endpointUrl)</div><div class="ttdoc">Connect to the selected server.</div></div>
 <div class="ttc" id="aclassopcua_1_1Client_html_a84ce29636803d55d617f09f70a82ae48"><div class="ttname"><a href="classopcua_1_1Client.html#a84ce29636803d55d617f09f70a82ae48">opcua::Client::onSessionActivated</a></div><div class="ttdeci">void onSessionActivated(StateCallback callback)</div><div class="ttdoc">Set a state callback that will be called after the session is activated.</div></div>
 <div class="ttc" id="aclassopcua_1_1Client_html_a8b1a8e65b22a27b245dd478170e4922d"><div class="ttname"><a href="classopcua_1_1Client.html#a8b1a8e65b22a27b245dd478170e4922d">opcua::Client::run</a></div><div class="ttdeci">void run()</div><div class="ttdoc">Run the client's main loop by. This method will block until Client::stop is called.</div></div>
-<div class="ttc" id="aclassopcua_1_1Client_html_ae03a726547da46698d93e781f2dfcff9"><div class="ttname"><a href="classopcua_1_1Client.html#ae03a726547da46698d93e781f2dfcff9">opcua::Client::disconnect</a></div><div class="ttdeci">void disconnect() noexcept</div><div class="ttdoc">Disconnect and close a connection to the server (async, without blocking).</div></div>
 <div class="ttc" id="aclassopcua_1_1DataValue_html"><div class="ttname"><a href="classopcua_1_1DataValue.html">opcua::DataValue</a></div><div class="ttdoc">UA_DataValue wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l01478">types.hpp:1478</a></div></div>
 <div class="ttc" id="aclassopcua_1_1DataValue_html_a8a81ec905f2f40aaf5ef5a268f895d32"><div class="ttname"><a href="classopcua_1_1DataValue.html#a8a81ec905f2f40aaf5ef5a268f895d32">opcua::DataValue::getValue</a></div><div class="ttdeci">Variant &amp; getValue() &amp;noexcept</div><div class="ttdoc">Get value.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l01550">types.hpp:1550</a></div></div>
 <div class="ttc" id="aclassopcua_1_1DateTime_html"><div class="ttname"><a href="classopcua_1_1DateTime.html">opcua::DateTime</a></div><div class="ttdoc">UA_DateTime wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00354">types.hpp:354</a></div></div>
@@ -179,10 +182,10 @@ $(function(){ initResizable(false); });
 <div class="ttc" id="agroup__NodeIds_html_ggab93e889b7152d5a78a993070276d1a70a0d8ba6d48210c58515c100ffcdc9b1b2"><div class="ttname"><a href="group__NodeIds.html#ggab93e889b7152d5a78a993070276d1a70a0d8ba6d48210c58515c100ffcdc9b1b2">opcua::VariableId::Server_ServerStatus_CurrentTime</a></div><div class="ttdeci">@ Server_ServerStatus_CurrentTime</div></div>
 <div class="ttc" id="anamespaceopcua_html_a78a3c3ace4c759ec414715466928ee81ac5562ce2e22a86c247849904ecef3dc8"><div class="ttname"><a href="namespaceopcua.html#a78a3c3ace4c759ec414715466928ee81ac5562ce2e22a86c247849904ecef3dc8">opcua::MonitoringMode::Reporting</a></div><div class="ttdeci">@ Reporting</div></div>
 <div class="ttc" id="anamespaceopcua_html_ac702b87ae822429bbdde24595a526917a689202409e48743b914713f96d93947c"><div class="ttname"><a href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917a689202409e48743b914713f96d93947c">opcua::AttributeId::Value</a></div><div class="ttdeci">@ Value</div><div class="ttdoc">The most recent value of the variable that the server has.</div></div>
-<div class="ttc" id="astructopcua_1_1services_1_1MonitoringParametersEx_html"><div class="ttname"><a href="structopcua_1_1services_1_1MonitoringParametersEx.html">opcua::services::MonitoringParametersEx</a></div><div class="ttdoc">Extended monitoring parameters with default values from open62541.</div><div class="ttdef"><b>Definition</b> <a href="services_2monitoreditem_8hpp_source.html#l00045">monitoreditem.hpp:45</a></div></div>
-<div class="ttc" id="astructopcua_1_1services_1_1MonitoringParametersEx_html_ac7a2494c97d8884a6f0c9b97ec366344"><div class="ttname"><a href="structopcua_1_1services_1_1MonitoringParametersEx.html#ac7a2494c97d8884a6f0c9b97ec366344">opcua::services::MonitoringParametersEx::samplingInterval</a></div><div class="ttdeci">double samplingInterval</div><div class="ttdoc">Interval in milliseconds that defines the fastest rate at which the MonitoredItem should be accessed ...</div><div class="ttdef"><b>Definition</b> <a href="services_2monitoreditem_8hpp_source.html#l00052">monitoreditem.hpp:52</a></div></div>
-<div class="ttc" id="astructopcua_1_1services_1_1SubscriptionParameters_html"><div class="ttname"><a href="structopcua_1_1services_1_1SubscriptionParameters.html">opcua::services::SubscriptionParameters</a></div><div class="ttdoc">Subscription parameters with default values from open62541.</div><div class="ttdef"><b>Definition</b> <a href="services_2subscription_8hpp_source.html#l00038">subscription.hpp:38</a></div></div>
-<div class="ttc" id="astructopcua_1_1services_1_1SubscriptionParameters_html_afa3f33dbc876b1657209d161d54c88b9"><div class="ttname"><a href="structopcua_1_1services_1_1SubscriptionParameters.html#afa3f33dbc876b1657209d161d54c88b9">opcua::services::SubscriptionParameters::publishingInterval</a></div><div class="ttdeci">double publishingInterval</div><div class="ttdoc">Cyclic interval in milliseconds that the subscription is requested to return notifications.</div><div class="ttdef"><b>Definition</b> <a href="services_2subscription_8hpp_source.html#l00040">subscription.hpp:40</a></div></div>
+<div class="ttc" id="astructopcua_1_1services_1_1MonitoringParametersEx_html"><div class="ttname"><a href="structopcua_1_1services_1_1MonitoringParametersEx.html">opcua::services::MonitoringParametersEx</a></div><div class="ttdoc">Extended monitoring parameters with default values from open62541.</div><div class="ttdef"><b>Definition</b> <a href="services_2monitoreditem_8hpp_source.html#l00053">monitoreditem.hpp:53</a></div></div>
+<div class="ttc" id="astructopcua_1_1services_1_1MonitoringParametersEx_html_ac7a2494c97d8884a6f0c9b97ec366344"><div class="ttname"><a href="structopcua_1_1services_1_1MonitoringParametersEx.html#ac7a2494c97d8884a6f0c9b97ec366344">opcua::services::MonitoringParametersEx::samplingInterval</a></div><div class="ttdeci">double samplingInterval</div><div class="ttdoc">Interval in milliseconds that defines the fastest rate at which the MonitoredItem should be accessed ...</div><div class="ttdef"><b>Definition</b> <a href="services_2monitoreditem_8hpp_source.html#l00060">monitoreditem.hpp:60</a></div></div>
+<div class="ttc" id="astructopcua_1_1services_1_1SubscriptionParameters_html"><div class="ttname"><a href="structopcua_1_1services_1_1SubscriptionParameters.html">opcua::services::SubscriptionParameters</a></div><div class="ttdoc">Subscription parameters with default values from open62541.</div><div class="ttdef"><b>Definition</b> <a href="services_2subscription_8hpp_source.html#l00046">subscription.hpp:46</a></div></div>
+<div class="ttc" id="astructopcua_1_1services_1_1SubscriptionParameters_html_afa3f33dbc876b1657209d161d54c88b9"><div class="ttname"><a href="structopcua_1_1services_1_1SubscriptionParameters.html#afa3f33dbc876b1657209d161d54c88b9">opcua::services::SubscriptionParameters::publishingInterval</a></div><div class="ttdeci">double publishingInterval</div><div class="ttdoc">Cyclic interval in milliseconds that the subscription is requested to return notifications.</div><div class="ttdef"><b>Definition</b> <a href="services_2subscription_8hpp_source.html#l00048">subscription.hpp:48</a></div></div>
 </div><!-- fragment --> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

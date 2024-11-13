@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: opcua::services::detail::AsyncServiceAdapter&lt; Response &gt; Struct Template Reference</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -101,12 +104,12 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="client__services_8hpp_source.html">client_services.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="client__service_8hpp_source.html">client_service.hpp</a>&gt;</code></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename Response&gt;<br />
 struct opcua::services::detail::AsyncServiceAdapter&lt; Response &gt;</div><p>Adapter to initiate open62541 async client operations with completion tokens. </p>
 
-<p class="definition">Definition at line <a class="el" href="client__services_8hpp_source.html#l00025">25</a> of file <a class="el" href="client__services_8hpp_source.html">client_services.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="client__service_8hpp_source.html#l00022">22</a> of file <a class="el" href="client__service_8hpp_source.html">client_service.hpp</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -120,12 +123,12 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a916d789c1d96977dc1304b92076eb8c0" id="r_a916d789c1d96977dc1304b92076eb8c0"><td class="memTemplParams" colspan="2">template&lt;typename CompletionHandler , typename TransformResponse &gt; </td></tr>
-<tr class="memitem:a916d789c1d96977dc1304b92076eb8c0"><td class="memTemplItemLeft" align="right" valign="top">static auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a916d789c1d96977dc1304b92076eb8c0">createCallbackAndContext</a> (<a class="el" href="#aaf5a610303f6c803db81b095dcfee279">ExceptionCatcher</a> &amp;exceptionCatcher, TransformResponse &amp;&amp;transformResponse, CompletionHandler &amp;&amp;completionHandler)</td></tr>
-<tr class="separator:a916d789c1d96977dc1304b92076eb8c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afeec91f50696e7776b0b4e2cec09ee0b" id="r_afeec91f50696e7776b0b4e2cec09ee0b"><td class="memTemplParams" colspan="2">template&lt;typename Initiation , typename TransformResponse , typename CompletionToken &gt; </td></tr>
-<tr class="memitem:afeec91f50696e7776b0b4e2cec09ee0b"><td class="memTemplItemLeft" align="right" valign="top">static auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#afeec91f50696e7776b0b4e2cec09ee0b">initiate</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;client, Initiation &amp;&amp;initiation, TransformResponse &amp;&amp;transformResponse, CompletionToken &amp;&amp;token)</td></tr>
-<tr class="separator:afeec91f50696e7776b0b4e2cec09ee0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a770e7aa003faf31b93eb5867d878915f" id="r_a770e7aa003faf31b93eb5867d878915f"><td class="memTemplParams" colspan="2">template&lt;typename CompletionHandler &gt; </td></tr>
+<tr class="memitem:a770e7aa003faf31b93eb5867d878915f"><td class="memTemplItemLeft" align="right" valign="top">static auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a770e7aa003faf31b93eb5867d878915f">createCallbackAndContext</a> (<a class="el" href="#aaf5a610303f6c803db81b095dcfee279">ExceptionCatcher</a> &amp;exceptionCatcher, CompletionHandler &amp;&amp;handler)</td></tr>
+<tr class="separator:a770e7aa003faf31b93eb5867d878915f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebaa498a84311ac76c0c457265d57927" id="r_aebaa498a84311ac76c0c457265d57927"><td class="memTemplParams" colspan="2">template&lt;typename Initiation , typename CompletionToken &gt; </td></tr>
+<tr class="memitem:aebaa498a84311ac76c0c457265d57927"><td class="memTemplItemLeft" align="right" valign="top">static auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#aebaa498a84311ac76c0c457265d57927">initiate</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;client, Initiation &amp;&amp;initiation, CompletionToken &amp;&amp;token)</td></tr>
+<tr class="separator:aebaa498a84311ac76c0c457265d57927"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="aaf5a610303f6c803db81b095dcfee279" name="aaf5a610303f6c803db81b095dcfee279"></a>
@@ -142,20 +145,20 @@ template&lt;typename Response &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="client__services_8hpp_source.html#l00026">26</a> of file <a class="el" href="client__services_8hpp_source.html">client_services.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="client__service_8hpp_source.html#l00023">23</a> of file <a class="el" href="client__service_8hpp_source.html">client_service.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a916d789c1d96977dc1304b92076eb8c0" name="a916d789c1d96977dc1304b92076eb8c0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a916d789c1d96977dc1304b92076eb8c0">&#9670;&#160;</a></span>createCallbackAndContext()</h2>
+<a id="a770e7aa003faf31b93eb5867d878915f" name="a770e7aa003faf31b93eb5867d878915f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a770e7aa003faf31b93eb5867d878915f">&#9670;&#160;</a></span>createCallbackAndContext()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Response &gt; </div>
 <div class="memtemplate">
-template&lt;typename CompletionHandler , typename TransformResponse &gt; </div>
+template&lt;typename CompletionHandler &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -168,12 +171,7 @@ template&lt;typename CompletionHandler , typename TransformResponse &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TransformResponse &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>transformResponse</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">CompletionHandler &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>completionHandler</em></span>&#160;)</td>
+          <td class="paramtype">CompletionHandler &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>handler</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -183,21 +181,19 @@ template&lt;typename CompletionHandler , typename TransformResponse &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="client__services_8hpp_source.html#l00035">35</a> of file <a class="el" href="client__services_8hpp_source.html">client_services.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="client__services_8hpp_source.html#l00078">opcua::services::detail::AsyncServiceAdapter&lt; Response &gt;::initiate()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="client__service_8hpp_source.html#l00032">32</a> of file <a class="el" href="client__service_8hpp_source.html">client_service.hpp</a>.</p>
 
 </div>
 </div>
-<a id="afeec91f50696e7776b0b4e2cec09ee0b" name="afeec91f50696e7776b0b4e2cec09ee0b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afeec91f50696e7776b0b4e2cec09ee0b">&#9670;&#160;</a></span>initiate()</h2>
+<a id="aebaa498a84311ac76c0c457265d57927" name="aebaa498a84311ac76c0c457265d57927"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebaa498a84311ac76c0c457265d57927">&#9670;&#160;</a></span>initiate()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Response &gt; </div>
 <div class="memtemplate">
-template&lt;typename Initiation , typename TransformResponse , typename CompletionToken &gt; </div>
+template&lt;typename Initiation , typename CompletionToken &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -211,11 +207,6 @@ template&lt;typename Initiation , typename TransformResponse , typename Completi
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">Initiation &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>initiation</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">TransformResponse &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>transformResponse</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -235,15 +226,14 @@ template&lt;typename Initiation , typename TransformResponse , typename Completi
   <table class="params">
     <tr><td class="paramname">client</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
     <tr><td class="paramname">initiation</td><td>Callable to initiate the async operation. Following signature is expected: <code>void(UA_ClientAsyncServiceCallback callback, void* userdata)</code> </td></tr>
-    <tr><td class="paramname">transformResponse</td><td>Callable to transform the <code>Response</code> type to the desired output </td></tr>
     <tr><td class="paramname">token</td><td>Completion token </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="client__services_8hpp_source.html#l00078">78</a> of file <a class="el" href="client__services_8hpp_source.html">client_services.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="client__service_8hpp_source.html#l00071">71</a> of file <a class="el" href="client__service_8hpp_source.html">client_service.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="client__services_8hpp_source.html#l00109">opcua::services::detail::sendRequest()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="group__CreateSubscription.html#ga31bfe41c445ee10d3998ce31935a78e6">opcua::services::createSubscription()</a>, <a class="el" href="group__DeleteMonitoredItems.html#ga6e5627195854b40eb1b84f8f5acca3d2">opcua::services::deleteMonitoredItems()</a>, and <a class="el" href="group__ModifyMonitoredItems.html#ga0606e899369b87b21f5f5c9ad5a4b7fb">opcua::services::modifyMonitoredItems()</a>.</p>
 
 </div>
 </div>

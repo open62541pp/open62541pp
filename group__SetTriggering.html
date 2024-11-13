@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: SetTriggering service</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -108,12 +111,13 @@ Collaboration diagram for SetTriggering service:</div>
 Functions</h2></td></tr>
 <tr class="memitem:ga5751439f623dc83aa36619e6eea39398" id="r_ga5751439f623dc83aa36619e6eea39398"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1SetTriggeringResponse.html">SetTriggeringResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga5751439f623dc83aa36619e6eea39398">opcua::services::setTriggering</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1SetTriggeringRequest.html">SetTriggeringRequest</a> &amp;request) noexcept</td></tr>
 <tr class="separator:ga5751439f623dc83aa36619e6eea39398"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga62a69d59082e6f13d71ca4ecaa80c552" id="r_ga62a69d59082e6f13d71ca4ecaa80c552"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; void &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga62a69d59082e6f13d71ca4ecaa80c552">opcua::services::setTriggering</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, uint32_t subscriptionId, uint32_t triggeringItemId, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const uint32_t &gt; linksToAdd, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const uint32_t &gt; linksToRemove) noexcept</td></tr>
-<tr class="separator:ga62a69d59082e6f13d71ca4ecaa80c552"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacdd8e970947fb3971fc9fb8b01089c5d" id="r_gacdd8e970947fb3971fc9fb8b01089c5d"><td class="memTemplParams" colspan="2">template&lt;typename CompletionToken &gt; </td></tr>
+<tr class="memitem:gacdd8e970947fb3971fc9fb8b01089c5d"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#gacdd8e970947fb3971fc9fb8b01089c5d">opcua::services::setTriggeringAsync</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1SetTriggeringRequest.html">SetTriggeringRequest</a> &amp;request, CompletionToken &amp;&amp;token)</td></tr>
+<tr class="separator:gacdd8e970947fb3971fc9fb8b01089c5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ga5751439f623dc83aa36619e6eea39398" name="ga5751439f623dc83aa36619e6eea39398"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga5751439f623dc83aa36619e6eea39398">&#9670;&#160;</a></span>setTriggering() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5751439f623dc83aa36619e6eea39398">&#9670;&#160;</a></span>setTriggering()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -151,60 +155,59 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga62a69d59082e6f13d71ca4ecaa80c552" name="ga62a69d59082e6f13d71ca4ecaa80c552"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga62a69d59082e6f13d71ca4ecaa80c552">&#9670;&#160;</a></span>setTriggering() <span class="overload">[2/2]</span></h2>
+<a id="gacdd8e970947fb3971fc9fb8b01089c5d" name="gacdd8e970947fb3971fc9fb8b01089c5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gacdd8e970947fb3971fc9fb8b01089c5d">&#9670;&#160;</a></span>setTriggeringAsync()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
+<div class="memtemplate">
+template&lt;typename CompletionToken &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; void &gt; opcua::services::setTriggering </td>
+          <td class="memname">auto opcua::services::setTriggeringAsync </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>connection</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>subscriptionId</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1SetTriggeringRequest.html">SetTriggeringRequest</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>request</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>triggeringItemId</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const uint32_t &gt;</td>          <td class="paramname"><span class="paramname"><em>linksToAdd</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const uint32_t &gt;</td>          <td class="paramname"><span class="paramname"><em>linksToRemove</em></span>&#160;)</td>
+          <td class="paramtype">CompletionToken &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span>&#160;)</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>Add and delete triggering links of a monitored item. </p>
+<p>Add and delete triggering links of monitored items.    </p>
 <p>The triggering item and the items to report shall belong to the same subscription. </p><dl class="section note"><dt>Note</dt><dd>Supported since open62541 v1.2</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
-    <tr><td class="paramname">subscriptionId</td><td>Identifier of the subscription returned by <a class="el" href="group__CreateSubscription.html#ga53a25e6ade5a338ead2106723913658d">createSubscription</a> </td></tr>
-    <tr><td class="paramname">triggeringItemId</td><td>Identifier of the triggering monitored item </td></tr>
-    <tr><td class="paramname">linksToAdd</td><td>List of monitoring item identifiers to be added as triggering links </td></tr>
-    <tr><td class="paramname">linksToRemove</td><td>List of monitoring item identifiers to be removed as triggering links </td></tr>
+    <tr><td class="paramname">request</td><td>Set triggering request    </td></tr>
+    <tr><td class="paramname">token</td><td><div class="fragment"><div class="line">The @ref async_model <span class="stringliteral">&quot;completion token&quot;</span> that will be used to produce a completion handler, which will be called when the operation completes.</div>
+<div class="line">Potential completion tokens include @ref <a class="code hl_variable" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, @ref <a class="code hl_variable" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, @ref <a class="code hl_variable" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (<span class="keywordtype">object</span>) with the correct completion signature.</div>
+<div class="line">The function signature of the completion handler must be:</div>
+<div class="ttc" id="agroup__Async_html_ga84807736f5bcb08a19160455f71a8863"><div class="ttname"><a href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">opcua::useDetached</a></div><div class="ttdeci">constexpr UseDetachedToken useDetached</div><div class="ttdoc">Detached completion token object.</div><div class="ttdef"><b>Definition</b> <a href="async_8hpp_source.html#l00125">async.hpp:125</a></div></div>
+<div class="ttc" id="agroup__Async_html_ga85a5c61e4024d350f333d7763bbdff36"><div class="ttname"><a href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">opcua::useDeferred</a></div><div class="ttdeci">constexpr UseDeferredToken useDeferred</div><div class="ttdoc">Deferred completion token object.</div><div class="ttdef"><b>Definition</b> <a href="async_8hpp_source.html#l00090">async.hpp:90</a></div></div>
+<div class="ttc" id="agroup__Async_html_gae789f136da0b3d4d725f1ba59ca0614c"><div class="ttname"><a href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">opcua::useFuture</a></div><div class="ttdeci">constexpr UseFutureToken useFuture</div><div class="ttdoc">Future completion token object.</div><div class="ttdef"><b>Definition</b> <a href="async_8hpp_source.html#l00060">async.hpp:60</a></div></div>
+</div><!-- fragment -->  <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1SetTriggeringResponse.html">SetTriggeringResponse</a>&amp;) </div>
+<div class="ttc" id="aclassopcua_1_1SetTriggeringResponse_html"><div class="ttname"><a href="classopcua_1_1SetTriggeringResponse.html">opcua::SetTriggeringResponse</a></div><div class="ttdoc">UA_SetTriggeringResponse wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types__composed_8hpp_source.html#l02136">types_composed.hpp:2137</a></div></div>
+</div><!-- fragment -->  </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd><ul>
+<li><code>void</code> if <code>token</code> is a callback function (object)</li>
+<li><code>std::future&lt;<a class="el" href="classopcua_1_1SetTriggeringResponse.html" title="UA_SetTriggeringResponse wrapper class.">SetTriggeringResponse</a>&gt;</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseFutureToken.html" title="Future completion token type.">UseFutureToken</a></li>
+<li><code>auto(auto&amp;&amp; token)</code> callable for deferred execution if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDeferredToken.html" title="Deferred completion token type.">UseDeferredToken</a></li>
+<li><code>void</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDetachedToken.html" title="Detached completion token type.">UseDetachedToken</a>  </li>
+</ul>
+</dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="services_2monitoreditem_8hpp_source.html#l00586">586</a> of file <a class="el" href="services_2monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
 
 </div>
 </div>

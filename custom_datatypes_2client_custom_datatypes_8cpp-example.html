@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: custom_datatypes/client_custom_datatypes.cpp</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -110,7 +113,7 @@ $(function(){ initResizable(false); });
 <div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span>&amp; dataTypeColor = getColorDataType();</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Provide custom data type definitions to client</span></div>
-<div class="line">    client.<a id="a1" name="a1"></a><a class="code hl_function" href="classopcua_1_1Client.html#a718f1c02e4105c32446b7bb0dcb56ceb">setCustomDataTypes</a>({</div>
+<div class="line">    client.<a id="a1" name="a1"></a><a class="code hl_function" href="classopcua_1_1Client.html#a98a9afac08af216155b722146985d15a">setCustomDataTypes</a>({</div>
 <div class="line">        dataTypePoint,</div>
 <div class="line">        dataTypeMeasurements,</div>
 <div class="line">        dataTypeOpt,</div>
@@ -191,9 +194,9 @@ $(function(){ initResizable(false); });
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;Color: &quot;</span> &lt;&lt; variant.<a id="a13" name="a13"></a><a class="code hl_function" href="classopcua_1_1Variant.html#ad0fa259c073f62b72f54f9e4eec2829e">getScalar</a>&lt;int32_t&gt;() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-<div class="ttc" id="aclassopcua_1_1Client_html"><div class="ttname"><a href="classopcua_1_1Client.html">opcua::Client</a></div><div class="ttdoc">High-level client class.</div><div class="ttdef"><b>Definition</b> <a href="client_8hpp_source.html#l00063">client.hpp:63</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Client_html"><div class="ttname"><a href="classopcua_1_1Client.html">opcua::Client</a></div><div class="ttdoc">High-level client class.</div><div class="ttdef"><b>Definition</b> <a href="client_8hpp_source.html#l00121">client.hpp:121</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Client_html_a6dbd84c74a6214369470379a355555ab"><div class="ttname"><a href="classopcua_1_1Client.html#a6dbd84c74a6214369470379a355555ab">opcua::Client::connect</a></div><div class="ttdeci">void connect(std::string_view endpointUrl)</div><div class="ttdoc">Connect to the selected server.</div></div>
-<div class="ttc" id="aclassopcua_1_1Client_html_a718f1c02e4105c32446b7bb0dcb56ceb"><div class="ttname"><a href="classopcua_1_1Client.html#a718f1c02e4105c32446b7bb0dcb56ceb">opcua::Client::setCustomDataTypes</a></div><div class="ttdeci">void setCustomDataTypes(std::vector&lt; DataType &gt; dataTypes)</div><div class="ttdoc">Set custom data types.</div></div>
+<div class="ttc" id="aclassopcua_1_1Client_html_a98a9afac08af216155b722146985d15a"><div class="ttname"><a href="classopcua_1_1Client.html#a98a9afac08af216155b722146985d15a">opcua::Client::setCustomDataTypes</a></div><div class="ttdeci">void setCustomDataTypes(Span&lt; const DataType &gt; dataTypes)</div><div class="ttdoc">Set custom data types.</div></div>
 <div class="ttc" id="aclassopcua_1_1ExtensionObject_html"><div class="ttname"><a href="classopcua_1_1ExtensionObject.html">opcua::ExtensionObject</a></div><div class="ttdoc">UA_ExtensionObject wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l01664">types.hpp:1664</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Variant_html"><div class="ttname"><a href="classopcua_1_1Variant.html">opcua::Variant</a></div><div class="ttdoc">UA_Variant wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00887">types.hpp:887</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Variant_html_a0b7d4c49967e248e03db995b1a979007"><div class="ttname"><a href="classopcua_1_1Variant.html#a0b7d4c49967e248e03db995b1a979007">opcua::Variant::isType</a></div><div class="ttdeci">bool isType(const UA_DataType *dataType) const noexcept</div><div class="ttdoc">Check if the variant type is equal to the provided data type.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00976">types.hpp:976</a></div></div>

@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: ModifyMonitoredItems service</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -106,8 +109,8 @@ Collaboration diagram for ModifyMonitoredItems service:</div>
 Functions</h2></td></tr>
 <tr class="memitem:ga0606e899369b87b21f5f5c9ad5a4b7fb" id="r_ga0606e899369b87b21f5f5c9ad5a4b7fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1ModifyMonitoredItemsResponse.html">ModifyMonitoredItemsResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga0606e899369b87b21f5f5c9ad5a4b7fb">opcua::services::modifyMonitoredItems</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1ModifyMonitoredItemsRequest.html">ModifyMonitoredItemsRequest</a> &amp;request) noexcept</td></tr>
 <tr class="separator:ga0606e899369b87b21f5f5c9ad5a4b7fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9f1dcbd45b698a7d064bc8d194f3d28f" id="r_ga9f1dcbd45b698a7d064bc8d194f3d28f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; void &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga9f1dcbd45b698a7d064bc8d194f3d28f">opcua::services::modifyMonitoredItem</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, uint32_t subscriptionId, uint32_t monitoredItemId, <a class="el" href="structopcua_1_1services_1_1MonitoringParametersEx.html">MonitoringParametersEx</a> &amp;parameters) noexcept</td></tr>
-<tr class="separator:ga9f1dcbd45b698a7d064bc8d194f3d28f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8e2f797476b706e5b4dc4d04ae2796b7" id="r_ga8e2f797476b706e5b4dc4d04ae2796b7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1MonitoredItemModifyResult.html">MonitoredItemModifyResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga8e2f797476b706e5b4dc4d04ae2796b7">opcua::services::modifyMonitoredItem</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, uint32_t subscriptionId, uint32_t monitoredItemId, const <a class="el" href="structopcua_1_1services_1_1MonitoringParametersEx.html">MonitoringParametersEx</a> &amp;parameters) noexcept</td></tr>
+<tr class="separator:ga8e2f797476b706e5b4dc4d04ae2796b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ga0606e899369b87b21f5f5c9ad5a4b7fb" name="ga0606e899369b87b21f5f5c9ad5a4b7fb"></a>
@@ -146,10 +149,12 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
+<p class="reference">Referenced by <a class="el" href="services_2monitoreditem_8hpp_source.html#l00437">opcua::services::modifyMonitoredItem()</a>.</p>
+
 </div>
 </div>
-<a id="ga9f1dcbd45b698a7d064bc8d194f3d28f" name="ga9f1dcbd45b698a7d064bc8d194f3d28f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga9f1dcbd45b698a7d064bc8d194f3d28f">&#9670;&#160;</a></span>modifyMonitoredItem()</h2>
+<a id="ga8e2f797476b706e5b4dc4d04ae2796b7" name="ga8e2f797476b706e5b4dc4d04ae2796b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8e2f797476b706e5b4dc4d04ae2796b7">&#9670;&#160;</a></span>modifyMonitoredItem()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -158,7 +163,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; void &gt; opcua::services::modifyMonitoredItem </td>
+          <td class="memname"><a class="el" href="classopcua_1_1MonitoredItemModifyResult.html">MonitoredItemModifyResult</a> opcua::services::modifyMonitoredItem </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>connection</em></span>, </td>
         </tr>
@@ -175,27 +180,28 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structopcua_1_1services_1_1MonitoringParametersEx.html">MonitoringParametersEx</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>parameters</em></span>&#160;)</td>
+          <td class="paramtype">const <a class="el" href="structopcua_1_1services_1_1MonitoringParametersEx.html">MonitoringParametersEx</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>parameters</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Modify a monitored item of a subscription. </p>
-<p>This is an extended version of <code><a class="elRef" target="_blank" href="open62541/structUA__MonitoringParameters.html">UA_MonitoringParameters</a></code> with the <code>timestamps</code> parameter. Parameters are passed by reference because illegal parameters can be revised by the server. The updated parameters reflect the actual values that the server will use. </p><dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/Core/Part4/v105/docs/7.21">https://reference.opcfoundation.org/Core/Part4/v105/docs/7.21</a>   </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
-    <tr><td class="paramname">subscriptionId</td><td>Identifier of the subscription returned by <a class="el" href="group__CreateSubscription.html#ga53a25e6ade5a338ead2106723913658d">createSubscription</a> </td></tr>
+    <tr><td class="paramname">subscriptionId</td><td>Identifier of the subscription returned by <a class="el" href="group__CreateSubscription.html#gab21e45d9ee9c919cbab006c942be79ff">createSubscription</a> </td></tr>
     <tr><td class="paramname">monitoredItemId</td><td>Identifier of the monitored item </td></tr>
-    <tr><td class="paramname">parameters</td><td>Monitoring parameters, may be revised by server </td></tr>
+    <tr><td class="paramname">parameters</td><td>Monitoring parameters </td></tr>
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="services_2monitoreditem_8hpp_source.html#l00437">437</a> of file <a class="el" href="services_2monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="monitoreditem_8hpp_source.html#l00069">opcua::MonitoredItem&lt; Connection &gt;::setMonitoringParameters()</a>.</p>
 

@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541: /home/runner/work/open62541pp/open62541pp/build/doc/open62541/include/open62541/plugin/nodestore.h Source File</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.12</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.14</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -359,8 +362,8 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>        <span class="keyword">struct </span>{</div>
 <div class="line"><a id="l00252" name="l00252"></a><span class="lineno"><a class="line" href="structUA__NodeReferenceKind.html#a5d06b78be127e7d6aed01be523e402e0">  252</a></span>            <span class="keyword">struct </span><a class="code hl_struct" href="structaa__entry.html">aa_entry</a> *<a class="code hl_variable" href="structUA__NodeReferenceKind.html#a5d06b78be127e7d6aed01be523e402e0">idTreeRoot</a>;   <span class="comment">/* Fast lookup based on the target id */</span></div>
 <div class="line"><a id="l00253" name="l00253"></a><span class="lineno"><a class="line" href="structUA__NodeReferenceKind.html#abcd7f71b0820a9cd24004ebdc397f1c8">  253</a></span>            <span class="keyword">struct </span><a class="code hl_struct" href="structaa__entry.html">aa_entry</a> *<a class="code hl_variable" href="structUA__NodeReferenceKind.html#abcd7f71b0820a9cd24004ebdc397f1c8">nameTreeRoot</a>; <span class="comment">/* Fast lookup based on the target browseName*/</span></div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno"><a class="line" href="structUA__NodeReferenceKind.html#a87fa99556bf3d17fa754f2cad458e9c7">  254</a></span>        } tree;</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno"><a class="line" href="structUA__NodeReferenceKind.html#a9a671883324f8e99cd68ecc552292299">  255</a></span>    } targets;</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno"><a class="line" href="structUA__NodeReferenceKind.html#a656e2d810280f5bc81161b2c65004315">  254</a></span>        } tree;</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno"><a class="line" href="structUA__NodeReferenceKind.html#a7b030a859dc176777492f048156de28f">  255</a></span>    } targets;</div>
 <div class="line"><a id="l00256" name="l00256"></a><span class="lineno"><a class="line" href="structUA__NodeReferenceKind.html#a25295cd28c8c63f94cad04553596cba7">  256</a></span>    <span class="keywordtype">size_t</span> <a class="code hl_variable" href="structUA__NodeReferenceKind.html#a25295cd28c8c63f94cad04553596cba7">targetsSize</a>;</div>
 <div class="line"><a id="l00257" name="l00257"></a><span class="lineno"><a class="line" href="structUA__NodeReferenceKind.html#aac34ad85e67eef470f229b3e6ad0218c">  257</a></span>    <a class="code hl_variable" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> <a class="code hl_variable" href="structUA__NodeReferenceKind.html#aac34ad85e67eef470f229b3e6ad0218c">hasRefTree</a>; <span class="comment">/* RefTree or RefArray? */</span></div>
 <div class="line"><a id="l00258" name="l00258"></a><span class="lineno"><a class="line" href="structUA__NodeReferenceKind.html#adf4e83ea7ef1f5815cb4e4bda3e347dc">  258</a></span>    <a class="code hl_typedef" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a> <a class="code hl_variable" href="structUA__NodeReferenceKind.html#adf4e83ea7ef1f5815cb4e4bda3e347dc">referenceTypeIndex</a>;</div>
@@ -568,13 +571,13 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>        <span class="keyword">struct </span>{</div>
 <div class="line"><a id="l00447" name="l00447"></a><span class="lineno"><a class="line" href="structUA__ValueBackend.html#a109a3a35813bff2c357168b9f2e6fd2e">  447</a></span>            <a class="code hl_struct" href="structUA__DataValue.html">UA_DataValue</a> <a class="code hl_variable" href="structUA__ValueBackend.html#a109a3a35813bff2c357168b9f2e6fd2e">value</a>;</div>
 <div class="line"><a id="l00448" name="l00448"></a><span class="lineno"><a class="line" href="structUA__ValueBackend.html#aff60205fc2e45117166f2255b5e56a2b">  448</a></span>            <a class="code hl_struct" href="structUA__ValueCallback.html">UA_ValueCallback</a> <a class="code hl_variable" href="structUA__ValueBackend.html#aff60205fc2e45117166f2255b5e56a2b">callback</a>;</div>
-<div class="line"><a id="l00449" name="l00449"></a><span class="lineno"><a class="line" href="structUA__ValueBackend.html#ad87ce69b7a49cfae8df3cc06056552b0">  449</a></span>        } internal;</div>
+<div class="line"><a id="l00449" name="l00449"></a><span class="lineno"><a class="line" href="structUA__ValueBackend.html#ad67cb95d0cb04d5988febe5f2e6c2777">  449</a></span>        } internal;</div>
 <div class="line"><a id="l00450" name="l00450"></a><span class="lineno"><a class="line" href="structUA__ValueBackend.html#a938bae706d480e68f36fea9e53a8c183">  450</a></span>        <a class="code hl_struct" href="structUA__DataSource.html">UA_DataSource</a> <a class="code hl_variable" href="structUA__ValueBackend.html#a938bae706d480e68f36fea9e53a8c183">dataSource</a>;</div>
 <div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span>        <span class="keyword">struct </span>{</div>
 <div class="line"><a id="l00452" name="l00452"></a><span class="lineno"><a class="line" href="structUA__ValueBackend.html#a66e0fa169dec882fc2fe1e57156b0e9d">  452</a></span>            <a class="code hl_struct" href="structUA__DataValue.html">UA_DataValue</a> **<a class="code hl_variable" href="structUA__ValueBackend.html#a66e0fa169dec882fc2fe1e57156b0e9d">value</a>;</div>
 <div class="line"><a id="l00453" name="l00453"></a><span class="lineno"><a class="line" href="structUA__ValueBackend.html#afeb55642ef662c83e754652e732b1a9f">  453</a></span>            <a class="code hl_struct" href="structUA__ExternalValueCallback.html">UA_ExternalValueCallback</a> <a class="code hl_variable" href="structUA__ValueBackend.html#afeb55642ef662c83e754652e732b1a9f">callback</a>;</div>
-<div class="line"><a id="l00454" name="l00454"></a><span class="lineno"><a class="line" href="structUA__ValueBackend.html#a5a8e7f8142d446e1338c2f6bd9052df8">  454</a></span>        } external;</div>
-<div class="line"><a id="l00455" name="l00455"></a><span class="lineno"><a class="line" href="structUA__ValueBackend.html#a8c27c12477ae2cde2501e2114cbb19b7">  455</a></span>    } backend;</div>
+<div class="line"><a id="l00454" name="l00454"></a><span class="lineno"><a class="line" href="structUA__ValueBackend.html#a7f39560fbc6cfa46b3e4a7e0c8d4c681">  454</a></span>        } external;</div>
+<div class="line"><a id="l00455" name="l00455"></a><span class="lineno"><a class="line" href="structUA__ValueBackend.html#a57555997f6e7a7ac171553a8281757c6">  455</a></span>    } backend;</div>
 <div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span>} <a class="code hl_struct" href="structUA__ValueBackend.html">UA_ValueBackend</a>;</div>
 </div>
 <div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span> </div>

@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541pp: opcua::Result&lt; T &gt; Class Template Reference</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.15.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.16.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -114,7 +117,7 @@ class opcua::Result&lt; T &gt;</div><p>The template class <a class="el" href="cl
 <li><a href="https://doc.rust-lang.org/std/result" target="_blank">Rust's <code>Result</code> type</a></li>
 <li><a href="https://developer.apple.com/documentation/swift/result" target="_blank">Swift's <code>Result</code> enumeration</a> </li>
 </ul>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="method_2client_method_async_8cpp-example.html#_a10">method/client_method_async.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_async_8cpp-example.html#_a5">client_async.cpp</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00053">53</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
@@ -574,10 +577,12 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 
 <p>Get the <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a> of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_async_8cpp-example.html#a6">client_async.cpp</a>.</dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00140">140</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="view_8hpp_source.html#l00365">opcua::services::browseAll()</a>, and <a class="el" href="result_8hpp_source.html#l00393">opcua::Result&lt; void &gt;::value()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="result_8hpp_source.html#l00393">opcua::Result&lt; void &gt;::value()</a>.</p>
 
 </div>
 </div>
@@ -677,10 +682,10 @@ template&lt;typename T &gt; </div>
   </table>
   </dd>
 </dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_async_8cpp-example.html#a7">client_async.cpp</a>.</dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00162">162</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="view_8hpp_source.html#l00365">opcua::services::browseAll()</a>.</p>
 
 </div>
 </div>
@@ -899,6 +904,8 @@ template&lt;typename F &gt; </div>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00207">207</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="response__handling_8hpp_source.html#l00074">opcua::services::detail::wrapSingleResult()</a>.</p>
 
 </div>
 </div>

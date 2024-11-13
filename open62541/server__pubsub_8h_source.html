@@ -7,6 +7,8 @@
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>open62541: /home/runner/work/open62541pp/open62541pp/build/doc/open62541/include/open62541/server_pubsub.h Source File</title>
+<link rel="icon" type="image/png" sizes="16x16" href="https://open62541pp.github.io//favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://open62541pp.github.io//favicon-32x32.png" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,6 +21,7 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e95fb465-e14d-4239-be4d-bad5246adc7a"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.12</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.14</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -142,7 +145,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keyword">union </span>{ <span class="comment">/* std: valid types UInt or String */</span></div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="structUA__PubSubConnectionConfig.html#aac3f99f8b6f4b39213dafa32aa6bb47d">   41</a></span>        <a class="code hl_typedef" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> <a class="code hl_variable" href="structUA__PubSubConnectionConfig.html#aac3f99f8b6f4b39213dafa32aa6bb47d">numeric</a>;</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="structUA__PubSubConnectionConfig.html#ab567764e3fedd7fbac6b0a01633e49c5">   42</a></span>        <a class="code hl_struct" href="structUA__String.html">UA_String</a> <a class="code hl_variable" href="structUA__PubSubConnectionConfig.html#ab567764e3fedd7fbac6b0a01633e49c5">string</a>;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="structUA__PubSubConnectionConfig.html#acfe537eadeb1f256702b79976d65d257">   43</a></span>    } <a class="code hl_variable" href="structUA__PubSubConnectionConfig.html#acfe537eadeb1f256702b79976d65d257">publisherId</a>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="structUA__PubSubConnectionConfig.html#aa769f9bfe41efded92d659d896500a14">   43</a></span>    } <a class="code hl_variable" href="structUA__PubSubConnectionConfig.html#aa769f9bfe41efded92d659d896500a14">publisherId</a>;</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="structUA__PubSubConnectionConfig.html#a5fe1f3c90c148c4647abe55f0c791ecc">   44</a></span>    <a class="code hl_struct" href="structUA__String.html">UA_String</a> <a class="code hl_variable" href="structUA__PubSubConnectionConfig.html#a5fe1f3c90c148c4647abe55f0c791ecc">transportProfileUri</a>;</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="structUA__PubSubConnectionConfig.html#ada1f4669a74795ff757b7a7e07b904ea">   45</a></span>    <a class="code hl_struct" href="structUA__Variant.html">UA_Variant</a> <a class="code hl_variable" href="structUA__PubSubConnectionConfig.html#ada1f4669a74795ff757b7a7e07b904ea">address</a>;</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="structUA__PubSubConnectionConfig.html#ad913d38b70d8a869ec5ad27766e91488">   46</a></span>    <span class="keywordtype">size_t</span> <a class="code hl_variable" href="structUA__PubSubConnectionConfig.html#ad913d38b70d8a869ec5ad27766e91488">connectionPropertiesSize</a>;</div>
@@ -282,7 +285,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00168" name="l00168"></a><span class="lineno"><a class="line" href="structUA__PublishedDataSetConfig.html#ad5bfdfba180c6f1e91efbee65281b5a1">  168</a></span>        <a class="code hl_struct" href="structUA__PublishedDataItemsTemplateConfig.html">UA_PublishedDataItemsTemplateConfig</a> <a class="code hl_variable" href="structUA__PublishedDataSetConfig.html#ad5bfdfba180c6f1e91efbee65281b5a1">itemsTemplate</a>;</div>
 <div class="line"><a id="l00169" name="l00169"></a><span class="lineno"><a class="line" href="structUA__PublishedDataSetConfig.html#a07abe81e6e93375d64cab06b0f0b717a">  169</a></span>        <a class="code hl_struct" href="structUA__PublishedEventConfig.html">UA_PublishedEventConfig</a> <a class="code hl_variable" href="structUA__PublishedDataSetConfig.html#a07abe81e6e93375d64cab06b0f0b717a">event</a>;</div>
 <div class="line"><a id="l00170" name="l00170"></a><span class="lineno"><a class="line" href="structUA__PublishedDataSetConfig.html#a7b620408bd7b64c40cc6aef984135546">  170</a></span>        <a class="code hl_struct" href="structUA__PublishedEventTemplateConfig.html">UA_PublishedEventTemplateConfig</a> <a class="code hl_variable" href="structUA__PublishedDataSetConfig.html#a7b620408bd7b64c40cc6aef984135546">eventTemplate</a>;</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno"><a class="line" href="structUA__PublishedDataSetConfig.html#a448ab59769108596e5f8b0a348dfd8f3">  171</a></span>    } config;</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno"><a class="line" href="structUA__PublishedDataSetConfig.html#affe8f7a2cb9ce20a5caabdd93189f8f6">  171</a></span>    } config;</div>
 <div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>} <a class="code hl_struct" href="structUA__PublishedDataSetConfig.html">UA_PublishedDataSetConfig</a>;</div>
 </div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
@@ -337,7 +340,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00219" name="l00219"></a><span class="lineno"><a class="line" href="structUA__DataSetVariableConfig.html#a5fb936ca1b4e8d8d89307af7ed3d1234">  219</a></span>        <a class="code hl_variable" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> <a class="code hl_variable" href="structUA__DataSetVariableConfig.html#a5fb936ca1b4e8d8d89307af7ed3d1234">rtInformationModelNode</a>;</div>
 <div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        <span class="comment">//TODO -&gt; decide if suppress C++ warnings and use &#39;UA_DataValue * * const staticValueSource;&#39;</span></div>
 <div class="line"><a id="l00221" name="l00221"></a><span class="lineno"><a class="line" href="structUA__DataSetVariableConfig.html#ae23522ebf902baa0f04458757a5603c9">  221</a></span>        <a class="code hl_struct" href="structUA__DataValue.html">UA_DataValue</a> ** <a class="code hl_variable" href="structUA__DataSetVariableConfig.html#ae23522ebf902baa0f04458757a5603c9">staticValueSource</a>;</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno"><a class="line" href="structUA__DataSetVariableConfig.html#a2b83fa659e46713805c1c9ea68dce8f3">  222</a></span>    } rtValueSource;</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno"><a class="line" href="structUA__DataSetVariableConfig.html#ad28f65f4acdb5f70c6da4bfc96297bf6">  222</a></span>    } rtValueSource;</div>
 <div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span> </div>
 <div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span> </div>
 <div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>} <a class="code hl_struct" href="structUA__DataSetVariableConfig.html">UA_DataSetVariableConfig</a>;</div>
@@ -356,7 +359,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    <span class="keyword">union </span>{</div>
 <div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>        <span class="comment">/* events need other config later */</span></div>
 <div class="line"><a id="l00236" name="l00236"></a><span class="lineno"><a class="line" href="structUA__DataSetFieldConfig.html#ae5ac43d25ecf70b2e22f731d59fe3806">  236</a></span>        <a class="code hl_struct" href="structUA__DataSetVariableConfig.html">UA_DataSetVariableConfig</a> <a class="code hl_variable" href="structUA__DataSetFieldConfig.html#ae5ac43d25ecf70b2e22f731d59fe3806">variable</a>;</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno"><a class="line" href="structUA__DataSetFieldConfig.html#a88a941f4f675ce7adf55c35d09d70590">  237</a></span>    } field;</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno"><a class="line" href="structUA__DataSetFieldConfig.html#a4ca02f29b4e9b96d0d5a9edee1bba234">  237</a></span>    } field;</div>
 <div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>} <a class="code hl_struct" href="structUA__DataSetFieldConfig.html">UA_DataSetFieldConfig</a>;</div>
 </div>
 <div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span> </div>
@@ -645,7 +648,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00499" name="l00499"></a><span class="lineno">  499</span>    <span class="keyword">union </span>{</div>
 <div class="line"><a id="l00500" name="l00500"></a><span class="lineno"><a class="line" href="structUA__DataSetReaderConfig.html#a5bfb757ad914d1f74e712e79ded1ce1a">  500</a></span>        <a class="code hl_struct" href="structUA__TargetVariables.html">UA_TargetVariables</a> <a class="code hl_variable" href="structUA__DataSetReaderConfig.html#a5bfb757ad914d1f74e712e79ded1ce1a">subscribedDataSetTarget</a>;</div>
 <div class="line"><a id="l00501" name="l00501"></a><span class="lineno">  501</span>        <span class="comment">// UA_SubscribedDataSetMirrorDataType subscribedDataSetMirror;</span></div>
-<div class="line"><a id="l00502" name="l00502"></a><span class="lineno"><a class="line" href="structUA__DataSetReaderConfig.html#a368b71712bd6d31a2b7e7fd25dd8f029">  502</a></span>    } subscribedDataSet;</div>
+<div class="line"><a id="l00502" name="l00502"></a><span class="lineno"><a class="line" href="structUA__DataSetReaderConfig.html#a088f3699c3abaa43edf927b43f65f98d">  502</a></span>    } subscribedDataSet;</div>
 <div class="line"><a id="l00503" name="l00503"></a><span class="lineno">  503</span>    <span class="comment">/* non std. fields */</span></div>
 <div class="line"><a id="l00504" name="l00504"></a><span class="lineno"><a class="line" href="structUA__DataSetReaderConfig.html#a945386c53aa6d8b5e3efe5d0b1aec8b0">  504</a></span>    <a class="code hl_enumeration" href="server__pubsub_8h.html#a64c099f9dad9a1270f4fded6e0590bff">UA_PubSubRtEncoding</a> <a class="code hl_variable" href="structUA__DataSetReaderConfig.html#a945386c53aa6d8b5e3efe5d0b1aec8b0">expectedEncoding</a>;</div>
 <div class="line"><a id="l00505" name="l00505"></a><span class="lineno">  505</span>} <a class="code hl_struct" href="structUA__DataSetReaderConfig.html">UA_DataSetReaderConfig</a>;</div>
@@ -902,11 +905,11 @@ $(function(){ initResizable(false); });
 <div class="ttc" id="astructUA__PubSubConnectionConfig_html_a022eb24aa04a2a4e11b3eefec7a7852c"><div class="ttname"><a href="structUA__PubSubConnectionConfig.html#a022eb24aa04a2a4e11b3eefec7a7852c">UA_PubSubConnectionConfig::connectionProperties</a></div><div class="ttdeci">UA_KeyValuePair * connectionProperties</div><div class="ttdef"><b>Definition</b> <a href="#l00047">server_pubsub.h:47</a></div></div>
 <div class="ttc" id="astructUA__PubSubConnectionConfig_html_a5fe1f3c90c148c4647abe55f0c791ecc"><div class="ttname"><a href="structUA__PubSubConnectionConfig.html#a5fe1f3c90c148c4647abe55f0c791ecc">UA_PubSubConnectionConfig::transportProfileUri</a></div><div class="ttdeci">UA_String transportProfileUri</div><div class="ttdef"><b>Definition</b> <a href="#l00044">server_pubsub.h:44</a></div></div>
 <div class="ttc" id="astructUA__PubSubConnectionConfig_html_a7a94d1ec478fe2dbfc972eb44e4e2b7b"><div class="ttname"><a href="structUA__PubSubConnectionConfig.html#a7a94d1ec478fe2dbfc972eb44e4e2b7b">UA_PubSubConnectionConfig::name</a></div><div class="ttdeci">UA_String name</div><div class="ttdef"><b>Definition</b> <a href="#l00037">server_pubsub.h:37</a></div></div>
+<div class="ttc" id="astructUA__PubSubConnectionConfig_html_aa769f9bfe41efded92d659d896500a14"><div class="ttname"><a href="structUA__PubSubConnectionConfig.html#aa769f9bfe41efded92d659d896500a14">UA_PubSubConnectionConfig::publisherId</a></div><div class="ttdeci">union UA_PubSubConnectionConfig::@20 publisherId</div></div>
 <div class="ttc" id="astructUA__PubSubConnectionConfig_html_aac3f99f8b6f4b39213dafa32aa6bb47d"><div class="ttname"><a href="structUA__PubSubConnectionConfig.html#aac3f99f8b6f4b39213dafa32aa6bb47d">UA_PubSubConnectionConfig::numeric</a></div><div class="ttdeci">UA_UInt32 numeric</div><div class="ttdef"><b>Definition</b> <a href="#l00041">server_pubsub.h:41</a></div></div>
 <div class="ttc" id="astructUA__PubSubConnectionConfig_html_ab54a3e9f28dd2cff344e572b4afb5d11"><div class="ttname"><a href="structUA__PubSubConnectionConfig.html#ab54a3e9f28dd2cff344e572b4afb5d11">UA_PubSubConnectionConfig::enabled</a></div><div class="ttdeci">UA_Boolean enabled</div><div class="ttdef"><b>Definition</b> <a href="#l00038">server_pubsub.h:38</a></div></div>
 <div class="ttc" id="astructUA__PubSubConnectionConfig_html_ab567764e3fedd7fbac6b0a01633e49c5"><div class="ttname"><a href="structUA__PubSubConnectionConfig.html#ab567764e3fedd7fbac6b0a01633e49c5">UA_PubSubConnectionConfig::string</a></div><div class="ttdeci">UA_String string</div><div class="ttdef"><b>Definition</b> <a href="#l00042">server_pubsub.h:42</a></div></div>
 <div class="ttc" id="astructUA__PubSubConnectionConfig_html_ac580daec9dd3addc54c3da8459aa6990"><div class="ttname"><a href="structUA__PubSubConnectionConfig.html#ac580daec9dd3addc54c3da8459aa6990">UA_PubSubConnectionConfig::connectionTransportSettings</a></div><div class="ttdeci">UA_Variant connectionTransportSettings</div><div class="ttdef"><b>Definition</b> <a href="#l00048">server_pubsub.h:48</a></div></div>
-<div class="ttc" id="astructUA__PubSubConnectionConfig_html_acfe537eadeb1f256702b79976d65d257"><div class="ttname"><a href="structUA__PubSubConnectionConfig.html#acfe537eadeb1f256702b79976d65d257">UA_PubSubConnectionConfig::publisherId</a></div><div class="ttdeci">union UA_PubSubConnectionConfig::@19 publisherId</div></div>
 <div class="ttc" id="astructUA__PubSubConnectionConfig_html_ad84d57b28668ba00c3200a475bc07940"><div class="ttname"><a href="structUA__PubSubConnectionConfig.html#ad84d57b28668ba00c3200a475bc07940">UA_PubSubConnectionConfig::publisherIdType</a></div><div class="ttdeci">UA_PublisherIdType publisherIdType</div><div class="ttdef"><b>Definition</b> <a href="#l00039">server_pubsub.h:39</a></div></div>
 <div class="ttc" id="astructUA__PubSubConnectionConfig_html_ad913d38b70d8a869ec5ad27766e91488"><div class="ttname"><a href="structUA__PubSubConnectionConfig.html#ad913d38b70d8a869ec5ad27766e91488">UA_PubSubConnectionConfig::connectionPropertiesSize</a></div><div class="ttdeci">size_t connectionPropertiesSize</div><div class="ttdef"><b>Definition</b> <a href="#l00046">server_pubsub.h:46</a></div></div>
 <div class="ttc" id="astructUA__PubSubConnectionConfig_html_ada1f4669a74795ff757b7a7e07b904ea"><div class="ttname"><a href="structUA__PubSubConnectionConfig.html#ada1f4669a74795ff757b7a7e07b904ea">UA_PubSubConnectionConfig::address</a></div><div class="ttdeci">UA_Variant address</div><div class="ttdef"><b>Definition</b> <a href="#l00045">server_pubsub.h:45</a></div></div>
