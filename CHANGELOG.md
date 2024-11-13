@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.16.0] - 2024-11-13
+
 ### Added
 
 - Update open62541 to v1.3.14 (#375)
@@ -15,6 +17,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `ServerConfig::setBuildInfo` (#386)
 - Async support for Subscription service set (#419)
 - Async support for MonitoredItem service set (#421)
+- Async `Node` functions (#434)
+- `Client::connectAsync`/`Client::disconnectAsync` (#429)
+- Example `client_async` (#430)
 
 ### Changed
 
@@ -35,6 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Move constructor and move assignment of `Client` and `Server` (#373)
+- Build with minimal open62541 options (#433)
 
 ## [0.15.0] - 2024-10-01
 
@@ -745,7 +751,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial public release
 
-[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.15.0...HEAD
+[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.16.0...HEAD
+[0.16.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.16.0
 [0.15.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.15.0
 [0.14.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.14.0
 [0.13.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.13.0
