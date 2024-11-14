@@ -6,8 +6,8 @@
 #include "open62541pp/common.hpp"  // TypeIndex
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/detail/types_handling.hpp"
-#include "open62541pp/wrapper.hpp"
 #include "open62541pp/typeregistry.hpp"
+#include "open62541pp/wrapper.hpp"
 
 namespace opcua {
 

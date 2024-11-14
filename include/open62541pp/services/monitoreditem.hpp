@@ -254,8 +254,9 @@ auto createMonitoredItemDataChangeAsync(
         std::move(dataChangeCallback),
         std::move(deleteCallback),
         detail::TransformToken(
-            detail::
-                wrapSingleResultWithStatus<MonitoredItemCreateResult, CreateMonitoredItemsResponse>,
+            detail::wrapSingleResultWithStatus<
+                MonitoredItemCreateResult,
+                CreateMonitoredItemsResponse>,
             std::forward<CompletionToken>(token)
         )
     );
@@ -378,8 +379,9 @@ auto createMonitoredItemEventAsync(
         std::move(eventCallback),
         std::move(deleteCallback),
         detail::TransformToken(
-            detail::
-                wrapSingleResultWithStatus<MonitoredItemCreateResult, CreateMonitoredItemsResponse>,
+            detail::wrapSingleResultWithStatus<
+                MonitoredItemCreateResult,
+                CreateMonitoredItemsResponse>,
             std::forward<CompletionToken>(token)
         )
     );
