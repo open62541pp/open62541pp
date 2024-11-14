@@ -18,8 +18,8 @@ TEST_CASE_TEMPLATE("Subscription service set", T, Client, Async<Client>) {
 
     SUBCASE("createSubscription") {
         CreateSubscriptionResponse response;
-        if constexpr (isAsync<T> && UAPP_OPEN62541_VER_GE(1, 1)) {
-#if UAPP_OPEN62541_VER_GE(1, 1)
+        if constexpr (isAsync<T> && UAPP_HAS_ASYNC_SUBSCRIPTIONS) {
+#if UAPP_HAS_ASYNC_SUBSCRIPTIONS
             auto future = services::createSubscriptionAsync(
                 connection, parameters, true, {}, {}, useFuture
             );
@@ -40,8 +40,8 @@ TEST_CASE_TEMPLATE("Subscription service set", T, Client, Async<Client>) {
 
         parameters.priority = 1;
         ModifySubscriptionResponse response;
-        if constexpr (isAsync<T> && UAPP_OPEN62541_VER_GE(1, 1)) {
-#if UAPP_OPEN62541_VER_GE(1, 1)
+        if constexpr (isAsync<T> && UAPP_HAS_ASYNC_SUBSCRIPTIONS) {
+#if UAPP_HAS_ASYNC_SUBSCRIPTIONS
             auto future = services::modifySubscriptionAsync(
                 connection, subId, parameters, useFuture
             );
@@ -80,7 +80,7 @@ TEST_CASE_TEMPLATE("Subscription service set", T, Client, Async<Client>) {
             services::createSubscription(connection, parameters, true, {}, {}).getSubscriptionId();
 
         if constexpr (isAsync<T>) {
-#if UAPP_OPEN62541_VER_GE(1, 1) && UAPP_OPEN62541_VER_LE(1, 3)
+#if UAPP_HAS_ASYNC_SUBSCRIPTIONS && UAPP_OPEN62541_VER_LE(1, 3)
             auto future = services::deleteSubscriptionAsync(connection, subId, useFuture);
             setup.client.runIterate();
             // TODO: multiple calls required by v1.4

@@ -1,6 +1,6 @@
 #include "open62541pp/plugin/create_certificate.hpp"
 
-#ifdef UA_ENABLE_ENCRYPTION
+#if UAPP_HAS_CREATE_CERTIFICATE
 
 #include <optional>
 #include <string>
@@ -12,8 +12,6 @@
 #include "open62541pp/plugin/log_default.hpp"
 
 namespace opcua::crypto {
-
-#ifdef UAPP_CREATE_CERTIFICATE
 
 static_assert(static_cast<int>(CertificateFormat::DER) == UA_CERTIFICATEFORMAT_DER);
 static_assert(static_cast<int>(CertificateFormat::PEM) == UA_CERTIFICATEFORMAT_PEM);
@@ -66,8 +64,6 @@ CreateCertificateResult createCertificate(
     return result;
 }
 
-#endif  // ifdef UAPP_CREATE_CERTIFICATE
-
 }  // namespace opcua::crypto
 
-#endif  // ifdef UA_ENABLE_ENCRYPTION
+#endif

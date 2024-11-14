@@ -4,11 +4,9 @@
 #include "open62541pp/span.hpp"
 #include "open62541pp/types.hpp"
 
-#ifdef UA_ENABLE_ENCRYPTION
+#if UAPP_HAS_CREATE_CERTIFICATE
 
 namespace opcua::crypto {
-
-#ifdef UAPP_CREATE_CERTIFICATE
 
 enum class CertificateFormat {
     DER,
@@ -45,8 +43,6 @@ CreateCertificateResult createCertificate(
     CertificateFormat certificateFormat = CertificateFormat::DER
 );
 
-#endif  // ifdef UAPP_CREATE_CERTIFICATE
-
 }  // namespace opcua::crypto
 
-#endif  // ifdef UA_ENABLE_ENCRYPTION
+#endif  // if UAPP_HAS_CREATE_CERTIFICATE

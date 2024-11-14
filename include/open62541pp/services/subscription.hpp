@@ -113,7 +113,7 @@ void storeSubscriptionContext(
     DeleteSubscriptionCallback deleteCallback
 ) noexcept;
 
-#if UAPP_OPEN62541_VER_GE(1, 1)
+#if UAPP_HAS_ASYNC_SUBSCRIPTIONS
 /**
  * @copydoc createSubscription(Client&, const CreateSubscriptionRequest&,
  *          StatusChangeNotificationCallback, DeleteSubscriptionCallback)
@@ -204,7 +204,7 @@ inline ModifySubscriptionResponse modifySubscription(
     return modifySubscription(connection, asWrapper<ModifySubscriptionRequest>(request));
 }
 
-#if UAPP_OPEN62541_VER_GE(1, 1)
+#if UAPP_HAS_ASYNC_SUBSCRIPTIONS
 /**
  * @copydoc modifySubscription(Client&, const ModifySubscriptionRequest&)
  * @param token @completiontoken{void(ModifySubscriptionResponse&)}
@@ -327,7 +327,7 @@ DeleteSubscriptionsResponse deleteSubscriptions(
     Client& connection, const DeleteSubscriptionsRequest& request
 ) noexcept;
 
-#if UAPP_OPEN62541_VER_GE(1, 1)
+#if UAPP_HAS_ASYNC_SUBSCRIPTIONS
 /**
  * @copydoc deleteSubscriptions
  * @param token @completiontoken{void(DeleteSubscriptionsResponse&)}
@@ -361,7 +361,7 @@ inline StatusCode deleteSubscription(Client& connection, uint32_t subscriptionId
     );
 }
 
-#if UAPP_OPEN62541_VER_GE(1, 1)
+#if UAPP_HAS_ASYNC_SUBSCRIPTIONS
 /**
  * @copydoc deleteSubscription
  * @param token @completiontoken{void(StatusCode)}
