@@ -1,6 +1,6 @@
 ﻿---
 # Documentation: https://clang.llvm.org/docs/ClangFormatStyleOptions.html
-# LLVM defaults: https://github.com/llvm/llvm-project/blob/main/clang/lib/Format/Format.cpp#L1248
+# LLVM defaults: https://github.com/llvm/llvm-project/blob/release/19.x/clang/lib/Format/Format.cpp#L1412-L1630
 BasedOnStyle: LLVM
 
 AccessModifierOffset: -4
@@ -8,6 +8,7 @@ AlignAfterOpenBracket: BlockIndent # version >= 14 required
 # AlignConsecutiveAssignments: true
 # AlignConsecutiveDeclarations: true
 AlignOperands: DontAlign
+AllowBreakBeforeNoexceptSpecifier: Never
 AllowShortFunctionsOnASingleLine: Empty
 AlignTrailingComments: false
 AlwaysBreakTemplateDeclarations: Yes
@@ -18,13 +19,15 @@ ColumnLimit: 100
 FixNamespaceComments: true
 IndentWidth: 4
 InsertBraces: true
+InsertNewlineAtEOF: true
 InsertTrailingCommas: Wrapped # currently only available for JavaScript
 Language: Cpp
 PackConstructorInitializers: Never
 PointerAlignment: Left
-QualifierAlignment: Left
+QualifierAlignment: Custom # v14
+QualifierOrder: [friend, inline, static, constexpr, const, volatile, type] # v14
 ReferenceAlignment: Left
-SeparateDefinitionBlocks: Always # version >= 14 required
+SeparateDefinitionBlocks: Always # v14
 SpacesBeforeTrailingComments: 2
 
 # Adjust penalties to prefer break after open bracket
@@ -33,6 +36,7 @@ PenaltyBreakBeforeFirstCallParameter: 0 # default: 19
 PenaltyBreakComment: 300 # default: 300
 PenaltyBreakFirstLessLess: 0 # default: 120
 PenaltyBreakOpenParenthesis: 0 # default: 0
+PenaltyBreakScopeResolution: 1000 # default: 500; v18
 PenaltyBreakString: 1000 # default: 1000
 PenaltyBreakTemplateDeclaration: 0 # default: ?
 PenaltyExcessCharacter: 1000000 # default: 1000000
