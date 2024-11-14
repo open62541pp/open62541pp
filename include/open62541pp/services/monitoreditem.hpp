@@ -150,7 +150,7 @@ void storeMonitoredItemContexts(
     DeleteMonitoredItemCallback deleteCallback
 );
 
-#if UAPP_OPEN62541_VER_GE(1, 1)
+#if UAPP_HAS_ASYNC_SUBSCRIPTIONS
 /**
  * @copydoc createMonitoredItemsDataChange(Client&, const CreateMonitoredItemsRequest&,
  *          DataChangeNotificationCallback, DeleteMonitoredItemCallback)
@@ -225,7 +225,7 @@ template <typename T>
     DeleteMonitoredItemCallback deleteCallback
 );
 
-#if UAPP_OPEN62541_VER_GE(1, 1)
+#if UAPP_HAS_ASYNC_SUBSCRIPTIONS
 /**
  * @copydoc createMonitoredItemDataChange(Client&, uint32_t, const ReadValueId&, MonitoringMode,
  *          const MonitoringParametersEx&, DataChangeNotificationCallback,
@@ -279,7 +279,7 @@ auto createMonitoredItemDataChangeAsync(
     DeleteMonitoredItemCallback deleteCallback
 );
 
-#if UAPP_OPEN62541_VER_GE(1, 1)
+#if UAPP_HAS_ASYNC_SUBSCRIPTIONS
 /**
  * @copydoc createMonitoredItemsEvent(Client&, const CreateMonitoredItemsRequest&,
  *          EventNotificationCallback, DeleteMonitoredItemCallback)
@@ -351,7 +351,7 @@ auto createMonitoredItemsEventAsync(
     DeleteMonitoredItemCallback deleteCallback = {}
 );
 
-#if UAPP_OPEN62541_VER_GE(1, 1)
+#if UAPP_HAS_ASYNC_SUBSCRIPTIONS
 /**
  * @copydoc createMonitoredItemEvent(Client&, uint32_t, const ReadValueId&, MonitoringMode,
  *          const MonitoringParametersEx&, EventNotificationCallback, DeleteMonitoredItemCallback)
@@ -406,7 +406,7 @@ ModifyMonitoredItemsResponse modifyMonitoredItems(
     Client& connection, const ModifyMonitoredItemsRequest& request
 ) noexcept;
 
-#if UAPP_OPEN62541_VER_GE(1, 1)
+#if UAPP_HAS_ASYNC_SUBSCRIPTIONS
 /**
  * @copydoc modifyMonitoredItems(Client&, const ModifyMonitoredItemsRequest&)
  * @param token @completiontoken{void(ModifyMonitoredItemsResponse&)}
@@ -450,7 +450,7 @@ inline MonitoredItemModifyResult modifyMonitoredItem(
     return detail::wrapSingleResultWithStatus<MonitoredItemModifyResult>(response);
 }
 
-#if UAPP_OPEN62541_VER_GE(1, 1)
+#if UAPP_HAS_ASYNC_SUBSCRIPTIONS
 /**
  * @copydoc modifyMonitoredItems(Client&, uint32_t, uint32_t, const MonitoringParametersEx&)
  * @param token @completiontoken{void(MonitoredItemModifyResult&)}
@@ -611,7 +611,7 @@ DeleteMonitoredItemsResponse deleteMonitoredItems(
     Client& connection, const DeleteMonitoredItemsRequest& request
 ) noexcept;
 
-#if UAPP_OPEN62541_VER_GE(1, 1)
+#if UAPP_HAS_ASYNC_SUBSCRIPTIONS
 /**
  * @copydoc deleteMonitoredItems
  * @param token @completiontoken{void(DeleteMonitoredItemsResponse&)}
@@ -644,7 +644,7 @@ auto deleteMonitoredItemsAsync(
 template <typename T>
 StatusCode deleteMonitoredItem(T& connection, uint32_t subscriptionId, uint32_t monitoredItemId);
 
-#if UAPP_OPEN62541_VER_GE(1, 1)
+#if UAPP_HAS_ASYNC_SUBSCRIPTIONS
 /**
  * @copydoc deleteMonitoredItem
  * @param token @completiontoken{void(StatusCode)}

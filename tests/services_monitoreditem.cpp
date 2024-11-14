@@ -66,8 +66,8 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
         };
 
         const auto createMonitoredItemDataChange = [&](auto&&... args) {
-            if constexpr (isAsync<T> && UAPP_OPEN62541_VER_GE(1, 1)) {
-#if UAPP_OPEN62541_VER_GE(1, 1)
+            if constexpr (isAsync<T> && UAPP_HAS_ASYNC_SUBSCRIPTIONS) {
+#if UAPP_HAS_ASYNC_SUBSCRIPTIONS
                 auto future = services::createMonitoredItemDataChangeAsync(args..., useFuture);
                 setup.client.runIterate();
                 return future.get();
@@ -116,8 +116,8 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
         };
 
         const auto createMonitoredItemEvent = [&](auto&&... args) {
-            if constexpr (isAsync<T> && UAPP_OPEN62541_VER_GE(1, 1)) {
-#if UAPP_OPEN62541_VER_GE(1, 1)
+            if constexpr (isAsync<T> && UAPP_HAS_ASYNC_SUBSCRIPTIONS) {
+#if UAPP_HAS_ASYNC_SUBSCRIPTIONS
                 auto future = services::createMonitoredItemEventAsync(args..., useFuture);
                 setup.client.runIterate();
                 return future.get();
@@ -162,8 +162,8 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
         CAPTURE(monId);
 
         const auto modifyMonitoredItem = [&](auto&&... args) {
-            if constexpr (isAsync<T> && UAPP_OPEN62541_VER_GE(1, 1)) {
-#if UAPP_OPEN62541_VER_GE(1, 1)
+            if constexpr (isAsync<T> && UAPP_HAS_ASYNC_SUBSCRIPTIONS) {
+#if UAPP_HAS_ASYNC_SUBSCRIPTIONS
                 auto future = services::modifyMonitoredItemAsync(args..., useFuture);
                 setup.client.runIterate();
                 return future.get();
@@ -297,8 +297,8 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
             ).getMonitoredItemId();
 
         const auto deleteMonitoredItem = [&](auto&&... args) {
-            if constexpr (isAsync<T> && UAPP_OPEN62541_VER_GE(1, 1)) {
-#if UAPP_OPEN62541_VER_GE(1, 1)
+            if constexpr (isAsync<T> && UAPP_HAS_ASYNC_SUBSCRIPTIONS) {
+#if UAPP_HAS_ASYNC_SUBSCRIPTIONS
                 auto future = services::deleteMonitoredItemAsync(args..., useFuture);
                 setup.client.runIterate();
                 return future.get();

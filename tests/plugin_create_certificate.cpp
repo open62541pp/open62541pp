@@ -11,8 +11,7 @@
 
 using namespace opcua;
 
-#ifdef UA_ENABLE_ENCRYPTION
-#ifdef UAPP_CREATE_CERTIFICATE
+#if UAPP_HAS_CREATE_CERTIFICATE
 
 TEST_CASE("Create certificate") {
     SUBCASE("Empty subject / subjectAltName") {
@@ -109,5 +108,4 @@ TEST_CASE("Encrypted connection server/client") {
     }
 }
 
-#endif  // ifdef UAPP_CREATE_CERTIFICATE
-#endif  // ifdef UA_ENABLE_ENCRYPTION
+#endif  // if UAPP_HAS_CREATE_CERTIFICATE
