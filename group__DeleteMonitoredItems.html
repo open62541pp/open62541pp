@@ -109,9 +109,15 @@ Collaboration diagram for DeleteMonitoredItems service:</div>
 Functions</h2></td></tr>
 <tr class="memitem:ga6e5627195854b40eb1b84f8f5acca3d2" id="r_ga6e5627195854b40eb1b84f8f5acca3d2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1DeleteMonitoredItemsResponse.html">DeleteMonitoredItemsResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga6e5627195854b40eb1b84f8f5acca3d2">opcua::services::deleteMonitoredItems</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1DeleteMonitoredItemsRequest.html">DeleteMonitoredItemsRequest</a> &amp;request) noexcept</td></tr>
 <tr class="separator:ga6e5627195854b40eb1b84f8f5acca3d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadce64082f8ebf941b051d1f448a57434" id="r_gadce64082f8ebf941b051d1f448a57434"><td class="memTemplParams" colspan="2">template&lt;typename CompletionToken &gt; </td></tr>
+<tr class="memitem:gadce64082f8ebf941b051d1f448a57434"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#gadce64082f8ebf941b051d1f448a57434">opcua::services::deleteMonitoredItemsAsync</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1DeleteMonitoredItemsRequest.html">DeleteMonitoredItemsRequest</a> &amp;request, CompletionToken &amp;&amp;token)</td></tr>
+<tr class="separator:gadce64082f8ebf941b051d1f448a57434"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga444cbf5e7107ddeb261f0022d730bf62" id="r_ga444cbf5e7107ddeb261f0022d730bf62"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ga444cbf5e7107ddeb261f0022d730bf62"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ga444cbf5e7107ddeb261f0022d730bf62">opcua::services::deleteMonitoredItem</a> (T &amp;connection, uint32_t subscriptionId, uint32_t monitoredItemId)</td></tr>
 <tr class="separator:ga444cbf5e7107ddeb261f0022d730bf62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5f1f77d789de9407dfb68bc009780c96" id="r_ga5f1f77d789de9407dfb68bc009780c96"><td class="memTemplParams" colspan="2">template&lt;typename CompletionToken &gt; </td></tr>
+<tr class="memitem:ga5f1f77d789de9407dfb68bc009780c96"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ga5f1f77d789de9407dfb68bc009780c96">opcua::services::deleteMonitoredItemAsync</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, uint32_t subscriptionId, uint32_t monitoredItemId, CompletionToken &amp;&amp;token)</td></tr>
+<tr class="separator:ga5f1f77d789de9407dfb68bc009780c96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ga6e5627195854b40eb1b84f8f5acca3d2" name="ga6e5627195854b40eb1b84f8f5acca3d2"></a>
@@ -152,6 +158,57 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="gadce64082f8ebf941b051d1f448a57434" name="gadce64082f8ebf941b051d1f448a57434"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gadce64082f8ebf941b051d1f448a57434">&#9670;&#160;</a></span>deleteMonitoredItemsAsync()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionToken &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto opcua::services::deleteMonitoredItemsAsync </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>connection</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1DeleteMonitoredItemsRequest.html">DeleteMonitoredItemsRequest</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>request</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CompletionToken &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Delete monitored items from a subscription.    </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
+    <tr><td class="paramname">request</td><td>Delete monitored items request    </td></tr>
+    <tr><td class="paramname">token</td><td>The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be: <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1DeleteMonitoredItemsResponse.html">DeleteMonitoredItemsResponse</a>&amp;) </div>
+<div class="ttc" id="aclassopcua_1_1DeleteMonitoredItemsResponse_html"><div class="ttname"><a href="classopcua_1_1DeleteMonitoredItemsResponse.html">opcua::DeleteMonitoredItemsResponse</a></div><div class="ttdoc">UA_DeleteMonitoredItemsResponse wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types__composed_8hpp_source.html#l02179">types_composed.hpp:2180</a></div></div>
+</div><!-- fragment --> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><ul>
+<li><code>void</code> if <code>token</code> is a callback function (object)</li>
+<li><code>std::future&lt;<a class="el" href="classopcua_1_1DeleteMonitoredItemsResponse.html" title="UA_DeleteMonitoredItemsResponse wrapper class.">DeleteMonitoredItemsResponse</a>&gt;</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseFutureToken.html" title="Future completion token type.">UseFutureToken</a></li>
+<li><code>auto(auto&amp;&amp; token)</code> callable for deferred execution if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDeferredToken.html" title="Deferred completion token type.">UseDeferredToken</a></li>
+<li><code>void</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDetachedToken.html" title="Detached completion token type.">UseDetachedToken</a> </li>
+</ul>
+</dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="services_2monitoreditem_8hpp_source.html#l00621">621</a> of file <a class="el" href="services_2monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="services_2monitoreditem_8hpp_source.html#l00654">opcua::services::deleteMonitoredItemAsync()</a>.</p>
+
+</div>
+</div>
 <a id="ga444cbf5e7107ddeb261f0022d730bf62" name="ga444cbf5e7107ddeb261f0022d730bf62"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga444cbf5e7107ddeb261f0022d730bf62">&#9670;&#160;</a></span>deleteMonitoredItem()</h2>
 
@@ -189,6 +246,61 @@ template&lt;typename T &gt; </div>
 </dl>
 
 <p class="reference">Referenced by <a class="el" href="monitoreditem_8hpp_source.html#l00087">opcua::MonitoredItem&lt; Connection &gt;::deleteMonitoredItem()</a>.</p>
+
+</div>
+</div>
+<a id="ga5f1f77d789de9407dfb68bc009780c96" name="ga5f1f77d789de9407dfb68bc009780c96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5f1f77d789de9407dfb68bc009780c96">&#9670;&#160;</a></span>deleteMonitoredItemAsync()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionToken &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto opcua::services::deleteMonitoredItemAsync </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>connection</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>subscriptionId</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>monitoredItemId</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CompletionToken &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Delete a monitored item from a subscription.    </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a> or <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
+    <tr><td class="paramname">subscriptionId</td><td>Identifier of the subscription returned by <a class="el" href="group__CreateSubscription.html#gab21e45d9ee9c919cbab006c942be79ff">createSubscription</a>. Use <code>0U</code> for a local server-side monitored item. </td></tr>
+    <tr><td class="paramname">monitoredItemId</td><td>Identifier of the monitored item    </td></tr>
+    <tr><td class="paramname">token</td><td>The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be: <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1StatusCode.html">StatusCode</a>) </div>
+<div class="ttc" id="aclassopcua_1_1StatusCode_html"><div class="ttname"><a href="classopcua_1_1StatusCode.html">opcua::StatusCode</a></div><div class="ttdoc">UA_StatusCode wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00044">types.hpp:44</a></div></div>
+</div><!-- fragment --> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><ul>
+<li><code>void</code> if <code>token</code> is a callback function (object)</li>
+<li><code>std::future&lt;<a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a>&gt;</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseFutureToken.html" title="Future completion token type.">UseFutureToken</a></li>
+<li><code>auto(auto&amp;&amp; token)</code> callable for deferred execution if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDeferredToken.html" title="Deferred completion token type.">UseDeferredToken</a></li>
+<li><code>void</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDetachedToken.html" title="Detached completion token type.">UseDetachedToken</a> </li>
+</ul>
+</dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="services_2monitoreditem_8hpp_source.html#l00654">654</a> of file <a class="el" href="services_2monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
 
 </div>
 </div>

@@ -111,6 +111,12 @@ Functions</h2></td></tr>
 <tr class="separator:ga1157f9d4cae2e7487c0212d3951fe2a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga8f9e4ce11c22da0d3e38df0c1bb2b1d1" id="r_ga8f9e4ce11c22da0d3e38df0c1bb2b1d1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1ModifySubscriptionResponse.html">ModifySubscriptionResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga8f9e4ce11c22da0d3e38df0c1bb2b1d1">opcua::services::modifySubscription</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, uint32_t subscriptionId, const <a class="el" href="structopcua_1_1services_1_1SubscriptionParameters.html">SubscriptionParameters</a> &amp;parameters) noexcept</td></tr>
 <tr class="separator:ga8f9e4ce11c22da0d3e38df0c1bb2b1d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad909b444442c40f3d37e0e74a8baba6e" id="r_gad909b444442c40f3d37e0e74a8baba6e"><td class="memTemplParams" colspan="2">template&lt;typename CompletionToken &gt; </td></tr>
+<tr class="memitem:gad909b444442c40f3d37e0e74a8baba6e"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#gad909b444442c40f3d37e0e74a8baba6e">opcua::services::modifySubscriptionAsync</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1ModifySubscriptionRequest.html">ModifySubscriptionRequest</a> &amp;request, CompletionToken &amp;&amp;token)</td></tr>
+<tr class="separator:gad909b444442c40f3d37e0e74a8baba6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabde9e1135a3cb60c63de495b2c02dd9f" id="r_gabde9e1135a3cb60c63de495b2c02dd9f"><td class="memTemplParams" colspan="2">template&lt;typename CompletionToken &gt; </td></tr>
+<tr class="memitem:gabde9e1135a3cb60c63de495b2c02dd9f"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#gabde9e1135a3cb60c63de495b2c02dd9f">opcua::services::modifySubscriptionAsync</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, uint32_t subscriptionId, const <a class="el" href="structopcua_1_1services_1_1SubscriptionParameters.html">SubscriptionParameters</a> &amp;parameters, CompletionToken &amp;&amp;token)</td></tr>
+<tr class="separator:gabde9e1135a3cb60c63de495b2c02dd9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ga1157f9d4cae2e7487c0212d3951fe2a1" name="ga1157f9d4cae2e7487c0212d3951fe2a1"></a>
@@ -188,6 +194,94 @@ Functions</h2></td></tr>
 <p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
 
 <p class="definition">Definition at line <a class="el" href="services_2subscription_8hpp_source.html#l00200">200</a> of file <a class="el" href="services_2subscription_8hpp_source.html">subscription.hpp</a>.</p>
+
+</div>
+</div>
+<a id="gad909b444442c40f3d37e0e74a8baba6e" name="gad909b444442c40f3d37e0e74a8baba6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad909b444442c40f3d37e0e74a8baba6e">&#9670;&#160;</a></span>modifySubscriptionAsync() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionToken &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto opcua::services::modifySubscriptionAsync </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>connection</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1ModifySubscriptionRequest.html">ModifySubscriptionRequest</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>request</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CompletionToken &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Modify a subscription.    </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
+    <tr><td class="paramname">request</td><td>Modify subscription request    </td></tr>
+    <tr><td class="paramname">token</td><td>The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be: <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1ModifySubscriptionResponse.html">ModifySubscriptionResponse</a>&amp;) </div>
+<div class="ttc" id="aclassopcua_1_1ModifySubscriptionResponse_html"><div class="ttname"><a href="classopcua_1_1ModifySubscriptionResponse.html">opcua::ModifySubscriptionResponse</a></div><div class="ttdoc">UA_ModifySubscriptionResponse wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types__composed_8hpp_source.html#l02283">types_composed.hpp:2284</a></div></div>
+</div><!-- fragment --> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><ul>
+<li><code>void</code> if <code>token</code> is a callback function (object)</li>
+<li><code>std::future&lt;<a class="el" href="classopcua_1_1ModifySubscriptionResponse.html" title="UA_ModifySubscriptionResponse wrapper class.">ModifySubscriptionResponse</a>&gt;</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseFutureToken.html" title="Future completion token type.">UseFutureToken</a></li>
+<li><code>auto(auto&amp;&amp; token)</code> callable for deferred execution if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDeferredToken.html" title="Deferred completion token type.">UseDeferredToken</a></li>
+<li><code>void</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDetachedToken.html" title="Detached completion token type.">UseDetachedToken</a> </li>
+</ul>
+</dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="services_2subscription_8hpp_source.html#l00214">214</a> of file <a class="el" href="services_2subscription_8hpp_source.html">subscription.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="services_2subscription_8hpp_source.html#l00214">opcua::services::modifySubscriptionAsync()</a>, and <a class="el" href="services_2subscription_8hpp_source.html#l00230">opcua::services::modifySubscriptionAsync()</a>.</p>
+
+</div>
+</div>
+<a id="gabde9e1135a3cb60c63de495b2c02dd9f" name="gabde9e1135a3cb60c63de495b2c02dd9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabde9e1135a3cb60c63de495b2c02dd9f">&#9670;&#160;</a></span>modifySubscriptionAsync() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionToken &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto opcua::services::modifySubscriptionAsync </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>connection</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>subscriptionId</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structopcua_1_1services_1_1SubscriptionParameters.html">SubscriptionParameters</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>parameters</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CompletionToken &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+
+<p class="definition">Definition at line <a class="el" href="services_2subscription_8hpp_source.html#l00230">230</a> of file <a class="el" href="services_2subscription_8hpp_source.html">subscription.hpp</a>.</p>
 
 </div>
 </div>

@@ -215,7 +215,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <a class="code hl_typedef" href="group__CreateSubscription.html#ga9c4d131655df8ad8eae78ee2e62a059e">DeleteSubscriptionCallback</a> deleteCallback</div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>) <span class="keyword">noexcept</span>;</div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="preprocessor">#if UAPP_OPEN62541_VER_GE(1, 1)</span><span class="comment"></span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="preprocessor">#if UAPP_HAS_ASYNC_SUBSCRIPTIONS</span><span class="comment"></span></div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="comment">/**</span></div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="comment"> * @copydoc createSubscription(Client&amp;, const CreateSubscriptionRequest&amp;,</span></div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="comment"> *          StatusChangeNotificationCallback, DeleteSubscriptionCallback)</span></div>
@@ -223,7 +223,8 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="comment"> * @return @asyncresult{CreateSubscriptionResponse}</span></div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="comment"> */</span><span class="preprocessor"></span></div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CompletionToken&gt;</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="keyword">auto</span> createSubscriptionAsync(</div>
+<div class="foldopen" id="foldopen00124" data-start="{" data-end="}">
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno"><a class="line" href="group__CreateSubscription.html#ga5ab3aa1f54b2fcc5fecfd9348e8a9499">  124</a></span><span class="keyword">auto</span> <a class="code hl_function" href="group__CreateSubscription.html#ga5ab3aa1f54b2fcc5fecfd9348e8a9499">createSubscriptionAsync</a>(</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <a class="code hl_class" href="classopcua_1_1Client.html">Client</a>&amp; connection,</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1CreateSubscriptionRequest.html">CreateSubscriptionRequest</a>&amp; request,</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <a class="code hl_typedef" href="group__CreateSubscription.html#gace7c32be5b9d198ab878a40b117c28ea">StatusChangeNotificationCallback</a> statusChangeCallback,</div>
@@ -259,19 +260,21 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        )</div>
 <div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    );</div>
 <div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>}</div>
+</div>
 <div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><span class="comment"></span> </div>
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span><span class="comment">/// @overload</span></div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CompletionToken&gt;</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><span class="keyword">auto</span> createSubscriptionAsync(</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    Client&amp; connection,</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    <span class="keyword">const</span> SubscriptionParameters&amp; parameters,</div>
+<div class="foldopen" id="foldopen00163" data-start="{" data-end="}">
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno"><a class="line" href="group__CreateSubscription.html#ga579ab69bb9a6d7e8a05fa659f8cc490f">  163</a></span><span class="keyword">auto</span> <a class="code hl_function" href="group__CreateSubscription.html#ga5ab3aa1f54b2fcc5fecfd9348e8a9499">createSubscriptionAsync</a>(</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <a class="code hl_class" href="classopcua_1_1Client.html">Client</a>&amp; connection,</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structopcua_1_1services_1_1SubscriptionParameters.html">SubscriptionParameters</a>&amp; parameters,</div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <span class="keywordtype">bool</span> publishingEnabled,</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    StatusChangeNotificationCallback statusChangeCallback,</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    DeleteSubscriptionCallback deleteCallback,</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    <a class="code hl_typedef" href="group__CreateSubscription.html#gace7c32be5b9d198ab878a40b117c28ea">StatusChangeNotificationCallback</a> statusChangeCallback,</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <a class="code hl_typedef" href="group__CreateSubscription.html#ga9c4d131655df8ad8eae78ee2e62a059e">DeleteSubscriptionCallback</a> deleteCallback,</div>
 <div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    CompletionToken&amp;&amp; token</div>
 <div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>) {</div>
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    <span class="keyword">const</span> <span class="keyword">auto</span> request = detail::createCreateSubscriptionRequest(parameters, publishingEnabled);</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <span class="keywordflow">return</span> createSubscriptionAsync(</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__CreateSubscription.html#ga5ab3aa1f54b2fcc5fecfd9348e8a9499">createSubscriptionAsync</a>(</div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>        connection,</div>
 <div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>        asWrapper&lt;CreateSubscriptionRequest&gt;(request),</div>
 <div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>        std::move(statusChangeCallback),</div>
@@ -279,6 +282,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>        std::forward&lt;CompletionToken&gt;(token)</div>
 <div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    );</div>
 <div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>}</div>
+</div>
 <div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="comment"></span> </div>
 <div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><span class="comment">/**</span></div>
@@ -308,19 +312,20 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>}</div>
 </div>
 <div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span> </div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span><span class="preprocessor">#if UAPP_OPEN62541_VER_GE(1, 1)</span><span class="comment"></span></div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span><span class="preprocessor">#if UAPP_HAS_ASYNC_SUBSCRIPTIONS</span><span class="comment"></span></div>
 <div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span><span class="comment">/**</span></div>
 <div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><span class="comment"> * @copydoc modifySubscription(Client&amp;, const ModifySubscriptionRequest&amp;)</span></div>
 <div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="comment"> * @param token @completiontoken{void(ModifySubscriptionResponse&amp;)}</span></div>
 <div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span><span class="comment"> * @return @asyncresult{ModifySubscriptionResponse}</span></div>
 <div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span><span class="comment"> */</span><span class="preprocessor"></span></div>
 <div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CompletionToken&gt;</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span><span class="keyword">auto</span> modifySubscriptionAsync(</div>
+<div class="foldopen" id="foldopen00214" data-start="{" data-end="}">
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno"><a class="line" href="group__ModifySubscription.html#gad909b444442c40f3d37e0e74a8baba6e">  214</a></span><span class="keyword">auto</span> <a class="code hl_function" href="group__ModifySubscription.html#gad909b444442c40f3d37e0e74a8baba6e">modifySubscriptionAsync</a>(</div>
 <div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    <a class="code hl_class" href="classopcua_1_1Client.html">Client</a>&amp; connection, <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1ModifySubscriptionRequest.html">ModifySubscriptionRequest</a>&amp; request, CompletionToken&amp;&amp; token</div>
 <div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>) {</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    <span class="keywordflow">return</span> detail::AsyncServiceAdapter&lt;ModifySubscriptionResponse&gt;::initiate(</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="structopcua_1_1services_1_1detail_1_1AsyncServiceAdapter.html">detail::AsyncServiceAdapter&lt;ModifySubscriptionResponse&gt;::initiate</a>(</div>
 <div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>        connection,</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        [&amp;](UA_ClientAsyncServiceCallback callback, <span class="keywordtype">void</span>* userdata) {</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        [&amp;](<a class="code hl_typedefRef" target="_blank" href="open62541/client_8h.html#a0798176d568f4a010e2b76430a81529f">UA_ClientAsyncServiceCallback</a> callback, <span class="keywordtype">void</span>* userdata) {</div>
 <div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>            <a class="code hl_function" href="namespaceopcua.html#a51131f59e2ce7f22a984fa6577fb2c27">throwIfBad</a>(<a class="code hl_functionRef" target="_blank" href="open62541/client__subscriptions_8h.html#ae461fdef752e28909736eb06588b7ec6">UA_Client_Subscriptions_modify_async</a>(</div>
 <div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>                <a class="code hl_function" href="namespaceopcua_1_1detail.html#a19e485c8c4e320d9f9f4b24956ae9183">opcua::detail::getHandle</a>(connection), <a class="code hl_function" href="group__Wrapper.html#ga820fdc2f355b734fd07dd71b518d0367">asNative</a>(request), callback, userdata, <span class="keyword">nullptr</span></div>
 <div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>            ));</div>
@@ -328,22 +333,25 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>        std::forward&lt;CompletionToken&gt;(token)</div>
 <div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    );</div>
 <div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>}</div>
+</div>
 <div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span><span class="comment"></span> </div>
 <div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span><span class="comment">/// @overload</span></div>
 <div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span><span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CompletionToken&gt;</div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span><span class="keyword">auto</span> modifySubscriptionAsync(</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    Client&amp; connection,</div>
+<div class="foldopen" id="foldopen00230" data-start="{" data-end="}">
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno"><a class="line" href="group__ModifySubscription.html#gabde9e1135a3cb60c63de495b2c02dd9f">  230</a></span><span class="keyword">auto</span> <a class="code hl_function" href="group__ModifySubscription.html#gad909b444442c40f3d37e0e74a8baba6e">modifySubscriptionAsync</a>(</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <a class="code hl_class" href="classopcua_1_1Client.html">Client</a>&amp; connection,</div>
 <div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    uint32_t subscriptionId,</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    <span class="keyword">const</span> SubscriptionParameters&amp; parameters,</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structopcua_1_1services_1_1SubscriptionParameters.html">SubscriptionParameters</a>&amp; parameters,</div>
 <div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    CompletionToken&amp;&amp; token</div>
 <div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>) {</div>
 <div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    <span class="keyword">const</span> <span class="keyword">auto</span> request = detail::createModifySubscriptionRequest(subscriptionId, parameters);</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    <span class="keywordflow">return</span> modifySubscriptionAsync(</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__ModifySubscription.html#gad909b444442c40f3d37e0e74a8baba6e">modifySubscriptionAsync</a>(</div>
 <div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>        connection,</div>
 <div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>        asWrapper&lt;ModifySubscriptionRequest&gt;(request),</div>
 <div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>        std::forward&lt;CompletionToken&gt;(token)</div>
 <div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    );</div>
 <div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>}</div>
+</div>
 <div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span><span class="comment"></span> </div>
 <div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span><span class="comment">/**</span></div>
@@ -437,14 +445,15 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>    <a class="code hl_class" href="classopcua_1_1Client.html">Client</a>&amp; connection, <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1DeleteSubscriptionsRequest.html">DeleteSubscriptionsRequest</a>&amp; request</div>
 <div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>) <span class="keyword">noexcept</span>;</div>
 <div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span> </div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span><span class="preprocessor">#if UAPP_OPEN62541_VER_GE(1, 1)</span><span class="comment"></span></div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span><span class="preprocessor">#if UAPP_HAS_ASYNC_SUBSCRIPTIONS</span><span class="comment"></span></div>
 <div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span><span class="comment">/**</span></div>
 <div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span><span class="comment"> * @copydoc deleteSubscriptions</span></div>
 <div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span><span class="comment"> * @param token @completiontoken{void(DeleteSubscriptionsResponse&amp;)}</span></div>
 <div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span><span class="comment"> * @return @asyncresult{DeleteSubscriptionsResponse}</span></div>
 <div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span><span class="comment"> */</span><span class="preprocessor"></span></div>
 <div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CompletionToken&gt;</div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span><span class="keyword">auto</span> deleteSubscriptionsAsync(</div>
+<div class="foldopen" id="foldopen00337" data-start="{" data-end="}">
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno"><a class="line" href="group__DeleteSubscriptions.html#ga9771100704d90f2ed3b4a8a242516c96">  337</a></span><span class="keyword">auto</span> <a class="code hl_function" href="group__DeleteSubscriptions.html#ga9771100704d90f2ed3b4a8a242516c96">deleteSubscriptionsAsync</a>(</div>
 <div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>    <a class="code hl_class" href="classopcua_1_1Client.html">Client</a>&amp; connection, <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1DeleteSubscriptionsRequest.html">DeleteSubscriptionsRequest</a>&amp; request, CompletionToken&amp;&amp; token</div>
 <div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>) {</div>
 <div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>    <span class="keywordflow">return</span> <a class="code hl_struct" href="structopcua_1_1services_1_1detail_1_1AsyncServiceAdapter.html">detail::AsyncServiceAdapter&lt;DeleteSubscriptionsResponse&gt;::initiate</a>(</div>
@@ -457,6 +466,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>        std::forward&lt;CompletionToken&gt;(token)</div>
 <div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>    );</div>
 <div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>}</div>
+</div>
 <div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span><span class="comment"></span> </div>
 <div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span><span class="comment">/**</span></div>
@@ -473,24 +483,26 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>}</div>
 </div>
 <div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span> </div>
-<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span><span class="preprocessor">#if UAPP_OPEN62541_VER_GE(1, 1)</span><span class="comment"></span></div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span><span class="preprocessor">#if UAPP_HAS_ASYNC_SUBSCRIPTIONS</span><span class="comment"></span></div>
 <div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span><span class="comment">/**</span></div>
 <div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span><span class="comment"> * @copydoc deleteSubscription</span></div>
 <div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span><span class="comment"> * @param token @completiontoken{void(StatusCode)}</span></div>
 <div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span><span class="comment"> * @return @asyncresult{StatusCode}</span></div>
 <div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span><span class="comment"> */</span><span class="preprocessor"></span></div>
 <div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CompletionToken&gt;</div>
-<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span><span class="keyword">auto</span> deleteSubscriptionAsync(<a class="code hl_class" href="classopcua_1_1Client.html">Client</a>&amp; connection, uint32_t subscriptionId, CompletionToken&amp;&amp; token) {</div>
+<div class="foldopen" id="foldopen00371" data-start="{" data-end="}">
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno"><a class="line" href="group__DeleteSubscriptions.html#gabd9482b4157b7a1836ce0fcb345f2472">  371</a></span><span class="keyword">auto</span> <a class="code hl_function" href="group__DeleteSubscriptions.html#gabd9482b4157b7a1836ce0fcb345f2472">deleteSubscriptionAsync</a>(<a class="code hl_class" href="classopcua_1_1Client.html">Client</a>&amp; connection, uint32_t subscriptionId, CompletionToken&amp;&amp; token) {</div>
 <div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>    <span class="keyword">const</span> <span class="keyword">auto</span> request = detail::createDeleteSubscriptionsRequest(subscriptionId);</div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>    <span class="keywordflow">return</span> deleteSubscriptionsAsync(</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__DeleteSubscriptions.html#ga9771100704d90f2ed3b4a8a242516c96">deleteSubscriptionsAsync</a>(</div>
 <div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>        connection,</div>
 <div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>        asWrapper&lt;DeleteSubscriptionsRequest&gt;(request),</div>
-<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>        detail::TransformToken{</div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>        <a class="code hl_struct" href="structopcua_1_1services_1_1detail_1_1TransformToken.html">detail::TransformToken</a>{</div>
 <div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>            detail::getSingleStatus&lt;UA_DeleteSubscriptionsResponse&gt;,</div>
 <div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>            std::forward&lt;CompletionToken&gt;(token)</div>
 <div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>        }</div>
 <div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>    );</div>
 <div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>}</div>
+</div>
 <div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span><span class="comment"></span> </div>
 <div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span><span class="comment">/**</span></div>
@@ -522,12 +534,16 @@ $(function(){ initResizable(false); });
 <div class="ttc" id="aclient__subscriptions_8h_html_ae461fdef752e28909736eb06588b7ec6"><div class="ttname"><a href="open62541/client__subscriptions_8h.html#ae461fdef752e28909736eb06588b7ec6">UA_Client_Subscriptions_modify_async</a></div><div class="ttdeci">UA_StatusCode UA_Client_Subscriptions_modify_async(UA_Client *client, const UA_ModifySubscriptionRequest request, UA_ClientAsyncServiceCallback callback, void *userdata, UA_UInt32 *requestId)</div></div>
 <div class="ttc" id="aclient__utils_8hpp_html"><div class="ttname"><a href="client__utils_8hpp.html">client_utils.hpp</a></div></div>
 <div class="ttc" id="aexception_8hpp_html"><div class="ttname"><a href="exception_8hpp.html">exception.hpp</a></div></div>
+<div class="ttc" id="agroup__CreateSubscription_html_ga5ab3aa1f54b2fcc5fecfd9348e8a9499"><div class="ttname"><a href="group__CreateSubscription.html#ga5ab3aa1f54b2fcc5fecfd9348e8a9499">opcua::services::createSubscriptionAsync</a></div><div class="ttdeci">auto createSubscriptionAsync(Client &amp;connection, const CreateSubscriptionRequest &amp;request, StatusChangeNotificationCallback statusChangeCallback, DeleteSubscriptionCallback deleteCallback, CompletionToken &amp;&amp;token)</div><div class="ttdoc">Create a subscription.</div><div class="ttdef"><b>Definition</b> <a href="#l00124">subscription.hpp:124</a></div></div>
 <div class="ttc" id="agroup__CreateSubscription_html_ga9c4d131655df8ad8eae78ee2e62a059e"><div class="ttname"><a href="group__CreateSubscription.html#ga9c4d131655df8ad8eae78ee2e62a059e">opcua::services::DeleteSubscriptionCallback</a></div><div class="ttdeci">std::function&lt; void(uint32_t subId)&gt; DeleteSubscriptionCallback</div><div class="ttdoc">Subscription deletion callback.</div><div class="ttdef"><b>Definition</b> <a href="#l00071">subscription.hpp:71</a></div></div>
 <div class="ttc" id="agroup__CreateSubscription_html_gab21e45d9ee9c919cbab006c942be79ff"><div class="ttname"><a href="group__CreateSubscription.html#gab21e45d9ee9c919cbab006c942be79ff">opcua::services::createSubscription</a></div><div class="ttdeci">CreateSubscriptionResponse createSubscription(Client &amp;connection, const CreateSubscriptionRequest &amp;request, StatusChangeNotificationCallback statusChangeCallback, DeleteSubscriptionCallback deleteCallback)</div><div class="ttdoc">Create a subscription.</div></div>
 <div class="ttc" id="agroup__CreateSubscription_html_gace7c32be5b9d198ab878a40b117c28ea"><div class="ttname"><a href="group__CreateSubscription.html#gace7c32be5b9d198ab878a40b117c28ea">opcua::services::StatusChangeNotificationCallback</a></div><div class="ttdeci">std::function&lt; void(uint32_t subId, StatusChangeNotification &amp;notification)&gt; StatusChangeNotificationCallback</div><div class="ttdoc">Subscription status change notification callback.</div><div class="ttdef"><b>Definition</b> <a href="#l00078">subscription.hpp:78</a></div></div>
 <div class="ttc" id="agroup__DeleteSubscriptions_html_ga13c6bb449e683ca7559f5254540cda37"><div class="ttname"><a href="group__DeleteSubscriptions.html#ga13c6bb449e683ca7559f5254540cda37">opcua::services::deleteSubscription</a></div><div class="ttdeci">StatusCode deleteSubscription(Client &amp;connection, uint32_t subscriptionId) noexcept</div><div class="ttdoc">Delete a single subscription.</div><div class="ttdef"><b>Definition</b> <a href="#l00357">subscription.hpp:357</a></div></div>
 <div class="ttc" id="agroup__DeleteSubscriptions_html_ga15b4d04ea9aecd2ef818eda33f2cfa55"><div class="ttname"><a href="group__DeleteSubscriptions.html#ga15b4d04ea9aecd2ef818eda33f2cfa55">opcua::services::deleteSubscriptions</a></div><div class="ttdeci">DeleteSubscriptionsResponse deleteSubscriptions(Client &amp;connection, const DeleteSubscriptionsRequest &amp;request) noexcept</div><div class="ttdoc">Delete subscriptions.</div></div>
+<div class="ttc" id="agroup__DeleteSubscriptions_html_ga9771100704d90f2ed3b4a8a242516c96"><div class="ttname"><a href="group__DeleteSubscriptions.html#ga9771100704d90f2ed3b4a8a242516c96">opcua::services::deleteSubscriptionsAsync</a></div><div class="ttdeci">auto deleteSubscriptionsAsync(Client &amp;connection, const DeleteSubscriptionsRequest &amp;request, CompletionToken &amp;&amp;token)</div><div class="ttdoc">Delete subscriptions.</div><div class="ttdef"><b>Definition</b> <a href="#l00337">subscription.hpp:337</a></div></div>
+<div class="ttc" id="agroup__DeleteSubscriptions_html_gabd9482b4157b7a1836ce0fcb345f2472"><div class="ttname"><a href="group__DeleteSubscriptions.html#gabd9482b4157b7a1836ce0fcb345f2472">opcua::services::deleteSubscriptionAsync</a></div><div class="ttdeci">auto deleteSubscriptionAsync(Client &amp;connection, uint32_t subscriptionId, CompletionToken &amp;&amp;token)</div><div class="ttdoc">Delete a single subscription.</div><div class="ttdef"><b>Definition</b> <a href="#l00371">subscription.hpp:371</a></div></div>
 <div class="ttc" id="agroup__ModifySubscription_html_ga1157f9d4cae2e7487c0212d3951fe2a1"><div class="ttname"><a href="group__ModifySubscription.html#ga1157f9d4cae2e7487c0212d3951fe2a1">opcua::services::modifySubscription</a></div><div class="ttdeci">ModifySubscriptionResponse modifySubscription(Client &amp;connection, const ModifySubscriptionRequest &amp;request) noexcept</div><div class="ttdoc">Modify a subscription.</div></div>
+<div class="ttc" id="agroup__ModifySubscription_html_gad909b444442c40f3d37e0e74a8baba6e"><div class="ttname"><a href="group__ModifySubscription.html#gad909b444442c40f3d37e0e74a8baba6e">opcua::services::modifySubscriptionAsync</a></div><div class="ttdeci">auto modifySubscriptionAsync(Client &amp;connection, const ModifySubscriptionRequest &amp;request, CompletionToken &amp;&amp;token)</div><div class="ttdoc">Modify a subscription.</div><div class="ttdef"><b>Definition</b> <a href="#l00214">subscription.hpp:214</a></div></div>
 <div class="ttc" id="agroup__SetPublishingMode_html_ga0d72f76d29d516a935210e9b8db3dc10"><div class="ttname"><a href="group__SetPublishingMode.html#ga0d72f76d29d516a935210e9b8db3dc10">opcua::services::setPublishingMode</a></div><div class="ttdeci">SetPublishingModeResponse setPublishingMode(Client &amp;connection, const SetPublishingModeRequest &amp;request) noexcept</div><div class="ttdoc">Enable/disable publishing of notification messages of subscriptions.</div></div>
 <div class="ttc" id="agroup__SetPublishingMode_html_ga3be6ea1b7b366aadb89ae5450d4c32cf"><div class="ttname"><a href="group__SetPublishingMode.html#ga3be6ea1b7b366aadb89ae5450d4c32cf">opcua::services::setPublishingModeAsync</a></div><div class="ttdeci">auto setPublishingModeAsync(Client &amp;connection, const SetPublishingModeRequest &amp;request, CompletionToken &amp;&amp;token)</div><div class="ttdoc">Enable/disable publishing of notification messages of subscriptions.</div><div class="ttdef"><b>Definition</b> <a href="#l00270">subscription.hpp:270</a></div></div>
 <div class="ttc" id="agroup__Wrapper_html_ga820fdc2f355b734fd07dd71b518d0367"><div class="ttname"><a href="group__Wrapper.html#ga820fdc2f355b734fd07dd71b518d0367">opcua::asNative</a></div><div class="ttdeci">constexpr NativeType * asNative(WrapperType *wrapper) noexcept</div><div class="ttdoc">Cast Wrapper object pointers to native object pointers.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00191">wrapper.hpp:191</a></div></div>
