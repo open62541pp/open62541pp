@@ -6,7 +6,7 @@
 
 #if UAPP_HAS_CREATE_CERTIFICATE
 
-namespace opcua::crypto {
+namespace opcua {
 
 enum class CertificateFormat {
     DER,
@@ -43,6 +43,6 @@ CreateCertificateResult createCertificate(
     CertificateFormat certificateFormat = CertificateFormat::DER
 );
 
-}  // namespace opcua::crypto
+}  // namespace opcua
 
 #endif  // if UAPP_HAS_CREATE_CERTIFICATE

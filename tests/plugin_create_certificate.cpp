@@ -15,21 +15,21 @@ using namespace opcua;
 
 TEST_CASE("Create certificate") {
     SUBCASE("Empty subject / subjectAltName") {
-        CHECK_THROWS_AS(crypto::createCertificate({}, {}), CreateCertificateError);
+        CHECK_THROWS_AS(createCertificate({}, {}), CreateCertificateError);
     }
 
     SUBCASE("Invalid subject / subjectAltName") {
         CHECK_THROWS_AS(
-            crypto::createCertificate({String{"X=Y"}}, {String{"DNS:localhost"}}),
+            createCertificate({String{"X=Y"}}, {String{"DNS:localhost"}}),
             CreateCertificateError
         );
         CHECK_THROWS_AS(
-            crypto::createCertificate({String{"C=DE"}}, {String{"X:Y"}}), CreateCertificateError
+            createCertificate({String{"C=DE"}}, {String{"X:Y"}}), CreateCertificateError
         );
     }
 
     SUBCASE("Valid") {
-        const auto cert = crypto::createCertificate(
+        const auto cert = createCertificate(
             {
                 String{"C=DE"},
                 String{"O=open62541pp"},
@@ -50,7 +50,7 @@ TEST_CASE("Encrypted connection server/client") {
     const std::string clientApplicationUri = "urn:unconfigured:application";  // default
 
     // create server certificate
-    const auto certServer = crypto::createCertificate(
+    const auto certServer = createCertificate(
         {
             String{"C=DE"},
             String{"O=open62541pp"},
@@ -63,7 +63,7 @@ TEST_CASE("Encrypted connection server/client") {
     );
 
     // create client certificate
-    const auto certClient = crypto::createCertificate(
+    const auto certClient = createCertificate(
         {
             String{"C=DE"},
             String{"O=open62541pp"},
