@@ -1,6 +1,7 @@
 #pragma once
 
 #include <type_traits>
+#include <utility>  // move
 
 namespace opcua {
 
@@ -44,6 +45,18 @@ public:
     /// Move constructor with native object.
     constexpr explicit Wrapper(T&& native) noexcept
         : native_(std::move(native)) {}
+
+    /// Copy assignment with native object.
+    constexpr Wrapper& operator=(const T& native) noexcept {
+        this->native() = native;
+        return *this;
+    }
+
+    /// Move assignment with native object.
+    constexpr Wrapper& operator=(T&& native) noexcept {
+        this->native() = std::move(native);
+        return *this;
+    }
 
     /// Implicit conversion to native object.
     constexpr operator T&() noexcept {  // NOLINT(hicpp-explicit-conversions)
