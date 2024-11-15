@@ -3,10 +3,9 @@
 #include <cstdint>
 #include <functional>
 
-#include "open62541pp/common.hpp"
 #include "open62541pp/services/detail/callbackadapter.hpp"
 #include "open62541pp/span.hpp"
-#include "open62541pp/types_composed.hpp"  // DataValue, Variant
+#include "open62541pp/types_composed.hpp"  // DataValue, IntegerId, Variant
 #include "open62541pp/wrapper.hpp"  // asWrapper
 
 struct UA_Client;

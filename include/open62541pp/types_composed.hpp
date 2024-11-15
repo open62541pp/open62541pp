@@ -75,6 +75,10 @@ UA_EXPORT extern const UA_ViewAttributes UA_ViewAttributes_default;
 
 namespace opcua {
 
+/// IntegerId.
+/// @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.19
+using IntegerId = uint32_t;
+
 /**
  * @addtogroup Wrapper
  * @{

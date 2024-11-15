@@ -2,10 +2,9 @@
 
 #include <functional>
 
-#include "open62541pp/common.hpp"
 #include "open62541pp/config.hpp"
 #include "open62541pp/services/detail/callbackadapter.hpp"
-#include "open62541pp/types_composed.hpp"  // StatusChangeNotification
+#include "open62541pp/types_composed.hpp"  // IntegerId, StatusChangeNotification
 #include "open62541pp/wrapper.hpp"  // asWrapper
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS

@@ -7,7 +7,6 @@
 #include <utility>  // pair
 #include <vector>
 
-#include "open62541pp/common.hpp"  // IntegerId
 #include "open62541pp/config.hpp"
 #include "open62541pp/datatype.hpp"
 #include "open62541pp/detail/contextmap.hpp"
@@ -16,6 +15,7 @@
 #include "open62541pp/plugin/nodestore.hpp"
 #include "open62541pp/services/detail/monitoreditem_context.hpp"
 #include "open62541pp/types.hpp"  // NodeId, Variant
+#include "open62541pp/types_composed.hpp"  // IntegerId
 
 namespace opcua::detail {
 
