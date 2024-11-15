@@ -15,6 +15,7 @@
 #include "open62541pp/detail/open62541/client.h"  // UA_SessionState, UA_SecureChannelState
 #include "open62541pp/services/detail/monitoreditem_context.hpp"
 #include "open62541pp/services/detail/subscription_context.hpp"
+#include "open62541pp/types_composed.hpp"  // IntegerId
 
 namespace opcua::detail {
 
@@ -37,9 +38,9 @@ struct ClientContext {
     std::unique_ptr<UA_DataTypeArray> dataTypeArray;
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
-    using SubId = uint32_t;
-    using MonId = uint32_t;
-    using SubMonId = std::pair<uint32_t, uint32_t>;
+    using SubId = IntegerId;
+    using MonId = IntegerId;
+    using SubMonId = std::pair<SubId, MonId>;
     ContextMap<SubId, services::detail::SubscriptionContext> subscriptions;
     ContextMap<SubMonId, services::detail::MonitoredItemContext> monitoredItems;
 #endif

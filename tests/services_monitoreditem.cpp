@@ -60,7 +60,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
     SUBCASE("createMonitoredItemDataChange") {
         size_t notificationCount = 0;
         DataValue changedValue;
-        const auto callback = [&](uint32_t, uint32_t, const DataValue& value) {
+        const auto callback = [&](IntegerId, IntegerId, const DataValue& value) {
             notificationCount++;
             changedValue = value;
         };
@@ -110,7 +110,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
 
         size_t notificationCount = 0;
         size_t eventFieldsSize = 0;
-        const auto callback = [&](uint32_t, uint32_t, Span<const Variant> eventFields) {
+        const auto callback = [&](IntegerId, IntegerId, Span<const Variant> eventFields) {
             notificationCount++;
             eventFieldsSize = eventFields.size();
         };
@@ -222,7 +222,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
                 {VariableId::Server_ServerStatus_CurrentTime, AttributeId::Value},
                 MonitoringMode::Reporting,
                 monitoringParameters,
-                [&](uint32_t, uint32_t, const DataValue&) { notificationCountTriggering++; },
+                [&](IntegerId, IntegerId, const DataValue&) { notificationCountTriggering++; },
                 {}
             )
                 .getMonitoredItemId();
@@ -237,7 +237,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
                 {id, AttributeId::Value},
                 MonitoringMode::Sampling,
                 monitoringParameters,
-                [&](uint32_t, uint32_t, const DataValue&) { notificationCount++; },
+                [&](IntegerId, IntegerId, const DataValue&) { notificationCount++; },
                 {}
             )
                 .getMonitoredItemId();
@@ -293,7 +293,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
                 MonitoringMode::Reporting,
                 monitoringParameters,
                 {},
-                [&](uint32_t, uint32_t) { deleted = true; }
+                [&](IntegerId, IntegerId) { deleted = true; }
             ).getMonitoredItemId();
 
         const auto deleteMonitoredItem = [&](auto&&... args) {
@@ -339,7 +339,7 @@ TEST_CASE("MonitoredItem service set (server)") {
                 {id, AttributeId::Value},
                 MonitoringMode::Reporting,
                 monitoringParameters,
-                [&](uint32_t, uint32_t, const DataValue&) { notificationCount++; },
+                [&](IntegerId, IntegerId, const DataValue&) { notificationCount++; },
                 {}
             )
                 .getMonitoredItemId();

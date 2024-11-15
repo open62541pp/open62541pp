@@ -5,7 +5,7 @@
 
 #include "open62541pp/services/detail/callbackadapter.hpp"
 #include "open62541pp/span.hpp"
-#include "open62541pp/types_composed.hpp"  // DataValue, Variant
+#include "open62541pp/types_composed.hpp"  // DataValue, IntegerId, Variant
 #include "open62541pp/wrapper.hpp"  // asWrapper
 
 struct UA_Client;
@@ -17,13 +17,13 @@ struct MonitoredItemContext : CallbackAdapter {
     bool stale{false};
     bool inserted{false};
     ReadValueId itemToMonitor;
-    std::function<void(uint32_t subId, uint32_t monId, const DataValue&)> dataChangeCallback;
-    std::function<void(uint32_t subId, uint32_t monId, Span<const Variant>)> eventCallback;
-    std::function<void(uint32_t subId, uint32_t monId)> deleteCallback;
+    std::function<void(IntegerId subId, IntegerId monId, const DataValue&)> dataChangeCallback;
+    std::function<void(IntegerId subId, IntegerId monId, Span<const Variant>)> eventCallback;
+    std::function<void(IntegerId subId, IntegerId monId)> deleteCallback;
 
     static void dataChangeCallbackNativeServer(
         [[maybe_unused]] UA_Server* server,
-        uint32_t monId,
+        IntegerId monId,
         void* monContext,
         [[maybe_unused]] const UA_NodeId* nodeId,
         [[maybe_unused]] void* nodeContext,
@@ -41,9 +41,9 @@ struct MonitoredItemContext : CallbackAdapter {
 
     static void dataChangeCallbackNativeClient(
         [[maybe_unused]] UA_Client* client,
-        uint32_t subId,
+        IntegerId subId,
         [[maybe_unused]] void* subContext,
-        uint32_t monId,
+        IntegerId monId,
         void* monContext,
         UA_DataValue* value
     ) noexcept {
@@ -58,9 +58,9 @@ struct MonitoredItemContext : CallbackAdapter {
 
     static void eventCallbackNative(
         [[maybe_unused]] UA_Client* client,
-        uint32_t subId,
+        IntegerId subId,
         [[maybe_unused]] void* subContext,
-        uint32_t monId,
+        IntegerId monId,
         void* monContext,
         size_t nEventFields,
         UA_Variant* eventFields
@@ -81,9 +81,9 @@ struct MonitoredItemContext : CallbackAdapter {
 
     static void deleteCallbackNative(
         [[maybe_unused]] UA_Client* client,
-        uint32_t subId,
+        IntegerId subId,
         [[maybe_unused]] void* subContext,
-        uint32_t monId,
+        IntegerId monId,
         void* monContext
     ) noexcept {
         if (monContext != nullptr) {

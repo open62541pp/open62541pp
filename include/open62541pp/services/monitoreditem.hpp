@@ -88,7 +88,7 @@ struct MonitoringParametersEx {
  * @param subId Subscription identifier
  * @param monId MonitoredItem identifier
  */
-using DeleteMonitoredItemCallback = std::function<void(uint32_t subId, uint32_t monId)>;
+using DeleteMonitoredItemCallback = std::function<void(IntegerId subId, IntegerId monId)>;
 
 /**
  * Data change notification callback.
@@ -97,7 +97,7 @@ using DeleteMonitoredItemCallback = std::function<void(uint32_t subId, uint32_t 
  * @param value Changed value
  */
 using DataChangeNotificationCallback =
-    std::function<void(uint32_t subId, uint32_t monId, const DataValue& value)>;
+    std::function<void(IntegerId subId, IntegerId monId, const DataValue& value)>;
 
 /**
  * Event notification callback.
@@ -106,7 +106,7 @@ using DataChangeNotificationCallback =
  * @param eventFields Event fields
  */
 using EventNotificationCallback =
-    std::function<void(uint32_t subId, uint32_t monId, Span<const Variant> eventFields)>;
+    std::function<void(IntegerId subId, IntegerId monId, Span<const Variant> eventFields)>;
 
 namespace detail {
 std::vector<std::unique_ptr<MonitoredItemContext>> createMonitoredItemContexts(
@@ -127,7 +127,7 @@ void convertMonitoredItemContexts(
 
 void storeMonitoredItemContexts(
     Client& connection,
-    uint32_t subscriptionId,
+    IntegerId subscriptionId,
     const CreateMonitoredItemsResponse& response,
     Span<std::unique_ptr<MonitoredItemContext>> contexts
 );
@@ -217,7 +217,7 @@ auto createMonitoredItemsDataChangeAsync(
 template <typename T>
 [[nodiscard]] MonitoredItemCreateResult createMonitoredItemDataChange(
     T& connection,
-    uint32_t subscriptionId,
+    IntegerId subscriptionId,
     const ReadValueId& itemToMonitor,
     MonitoringMode monitoringMode,
     const MonitoringParametersEx& parameters,
@@ -227,7 +227,7 @@ template <typename T>
 
 #if UAPP_HAS_ASYNC_SUBSCRIPTIONS
 /**
- * @copydoc createMonitoredItemDataChange(Client&, uint32_t, const ReadValueId&, MonitoringMode,
+ * @copydoc createMonitoredItemDataChange(Client&, IntegerId, const ReadValueId&, MonitoringMode,
  *          const MonitoringParametersEx&, DataChangeNotificationCallback,
  *          DeleteMonitoredItemCallback)
  * @param token @completiontoken{void(MonitoredItemCreateResult&)}
@@ -236,7 +236,7 @@ template <typename T>
 template <typename CompletionToken>
 auto createMonitoredItemDataChangeAsync(
     Client& connection,
-    uint32_t subscriptionId,
+    IntegerId subscriptionId,
     const ReadValueId& itemToMonitor,
     MonitoringMode monitoringMode,
     const MonitoringParametersEx& parameters,
@@ -343,7 +343,7 @@ auto createMonitoredItemsEventAsync(
  */
 [[nodiscard]] MonitoredItemCreateResult createMonitoredItemEvent(
     Client& connection,
-    uint32_t subscriptionId,
+    IntegerId subscriptionId,
     const ReadValueId& itemToMonitor,
     MonitoringMode monitoringMode,
     const MonitoringParametersEx& parameters,
@@ -353,7 +353,7 @@ auto createMonitoredItemsEventAsync(
 
 #if UAPP_HAS_ASYNC_SUBSCRIPTIONS
 /**
- * @copydoc createMonitoredItemEvent(Client&, uint32_t, const ReadValueId&, MonitoringMode,
+ * @copydoc createMonitoredItemEvent(Client&, IntegerId, const ReadValueId&, MonitoringMode,
  *          const MonitoringParametersEx&, EventNotificationCallback, DeleteMonitoredItemCallback)
  * @param token @completiontoken{void(MonitoredItemCreateResult&)}
  * @return @asyncresult{MonitoredItemCreateResult}
@@ -361,7 +361,7 @@ auto createMonitoredItemsEventAsync(
 template <typename CompletionToken>
 auto createMonitoredItemEventAsync(
     Client& connection,
-    uint32_t subscriptionId,
+    IntegerId subscriptionId,
     const ReadValueId& itemToMonitor,
     MonitoringMode monitoringMode,
     const MonitoringParametersEx& parameters,
@@ -438,8 +438,8 @@ auto modifyMonitoredItemsAsync(
  */
 inline MonitoredItemModifyResult modifyMonitoredItem(
     Client& connection,
-    uint32_t subscriptionId,
-    uint32_t monitoredItemId,
+    IntegerId subscriptionId,
+    IntegerId monitoredItemId,
     const MonitoringParametersEx& parameters
 ) noexcept {
     auto item = detail::createMonitoredItemModifyRequest(monitoredItemId, parameters);
@@ -452,15 +452,15 @@ inline MonitoredItemModifyResult modifyMonitoredItem(
 
 #if UAPP_HAS_ASYNC_SUBSCRIPTIONS
 /**
- * @copydoc modifyMonitoredItems(Client&, uint32_t, uint32_t, const MonitoringParametersEx&)
+ * @copydoc modifyMonitoredItems(Client&, IntegerId, IntegerId, const MonitoringParametersEx&)
  * @param token @completiontoken{void(MonitoredItemModifyResult&)}
  * @return @asyncresult{MonitoredItemModifyResult}
  */
 template <typename CompletionToken>
 auto modifyMonitoredItemAsync(
     Client& connection,
-    uint32_t subscriptionId,
-    uint32_t monitoredItemId,
+    IntegerId subscriptionId,
+    IntegerId monitoredItemId,
     const MonitoringParametersEx& parameters,
     CompletionToken&& token
 ) {
@@ -521,8 +521,8 @@ auto setMonitoringModeAsync(
  */
 inline StatusCode setMonitoringMode(
     Client& connection,
-    uint32_t subscriptionId,
-    uint32_t monitoredItemId,
+    IntegerId subscriptionId,
+    IntegerId monitoredItemId,
     MonitoringMode monitoringMode
 ) noexcept {
     const auto request = detail::createSetMonitoringModeRequest(
@@ -534,15 +534,15 @@ inline StatusCode setMonitoringMode(
 }
 
 /**
- * @copydoc setMonitoringMode(Client&, uint32_t, uint32_t, MonitoringMode)
+ * @copydoc setMonitoringMode(Client&, IntegerId, IntegerId, MonitoringMode)
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  */
 template <typename CompletionToken>
 auto setMonitoringModeAsync(
     Client& connection,
-    uint32_t subscriptionId,
-    uint32_t monitoredItemId,
+    IntegerId subscriptionId,
+    IntegerId monitoredItemId,
     MonitoringMode monitoringMode,
     CompletionToken&& token
 ) {
@@ -642,7 +642,7 @@ auto deleteMonitoredItemsAsync(
  * @param monitoredItemId Identifier of the monitored item
  */
 template <typename T>
-StatusCode deleteMonitoredItem(T& connection, uint32_t subscriptionId, uint32_t monitoredItemId);
+StatusCode deleteMonitoredItem(T& connection, IntegerId subscriptionId, IntegerId monitoredItemId);
 
 #if UAPP_HAS_ASYNC_SUBSCRIPTIONS
 /**
@@ -652,7 +652,7 @@ StatusCode deleteMonitoredItem(T& connection, uint32_t subscriptionId, uint32_t 
  */
 template <typename CompletionToken>
 auto deleteMonitoredItemAsync(
-    Client& connection, uint32_t subscriptionId, uint32_t monitoredItemId, CompletionToken&& token
+    Client& connection, IntegerId subscriptionId, IntegerId monitoredItemId, CompletionToken&& token
 ) {
     const auto request = detail::createDeleteMonitoredItemsRequest(
         subscriptionId, {&monitoredItemId, 1}

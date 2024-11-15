@@ -46,7 +46,9 @@ int main() {
     sub.subscribeEvent(
         opcua::ObjectId::Server,
         eventFilter,
-        [&](uint32_t subId, uint32_t monId, opcua::Span<const opcua::Variant> eventFields) {
+        [&](opcua::IntegerId subId,
+            opcua::IntegerId monId,
+            opcua::Span<const opcua::Variant> eventFields) {
             opcua::MonitoredItem item(client, subId, monId);
             std::cout
                 << "Event notification:\n"

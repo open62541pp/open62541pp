@@ -16,7 +16,7 @@
 #include "open62541pp/services/detail/request_handling.hpp"
 #include "open62541pp/services/detail/response_handling.hpp"
 #include "open62541pp/services/detail/subscription_context.hpp"
-#include "open62541pp/types_composed.hpp"  // StatusChangeNotification
+#include "open62541pp/types_composed.hpp"  // IntegerId, StatusChangeNotification
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 
@@ -68,7 +68,7 @@ struct SubscriptionParameters {
  * Subscription deletion callback.
  * @param subId Subscription identifier
  */
-using DeleteSubscriptionCallback = std::function<void(uint32_t subId)>;
+using DeleteSubscriptionCallback = std::function<void(IntegerId subId)>;
 
 /**
  * Subscription status change notification callback.
@@ -76,7 +76,7 @@ using DeleteSubscriptionCallback = std::function<void(uint32_t subId)>;
  * @param notification Status change notification
  */
 using StatusChangeNotificationCallback =
-    std::function<void(uint32_t subId, StatusChangeNotification& notification)>;
+    std::function<void(IntegerId subId, StatusChangeNotification& notification)>;
 
 namespace detail {
 std::unique_ptr<SubscriptionContext> createSubscriptionContext(
@@ -86,7 +86,7 @@ std::unique_ptr<SubscriptionContext> createSubscriptionContext(
 );
 
 void storeSubscriptionContext(
-    Client& connection, uint32_t subscriptionId, std::unique_ptr<SubscriptionContext>&& context
+    Client& connection, IntegerId subscriptionId, std::unique_ptr<SubscriptionContext>&& context
 );
 }  // namespace detail
 
@@ -198,7 +198,7 @@ ModifySubscriptionResponse modifySubscription(
 
 /// @overload
 inline ModifySubscriptionResponse modifySubscription(
-    Client& connection, uint32_t subscriptionId, const SubscriptionParameters& parameters
+    Client& connection, IntegerId subscriptionId, const SubscriptionParameters& parameters
 ) noexcept {
     const auto request = detail::createModifySubscriptionRequest(subscriptionId, parameters);
     return modifySubscription(connection, asWrapper<ModifySubscriptionRequest>(request));
@@ -229,7 +229,7 @@ auto modifySubscriptionAsync(
 template <typename CompletionToken>
 auto modifySubscriptionAsync(
     Client& connection,
-    uint32_t subscriptionId,
+    IntegerId subscriptionId,
     const SubscriptionParameters& parameters,
     CompletionToken&& token
 ) {
@@ -282,7 +282,7 @@ auto setPublishingModeAsync(
  * @param publishing Enable/disable publishing
  */
 inline StatusCode setPublishingMode(
-    Client& connection, uint32_t subscriptionId, bool publishing
+    Client& connection, IntegerId subscriptionId, bool publishing
 ) noexcept {
     const auto request = detail::createSetPublishingModeRequest(publishing, {&subscriptionId, 1});
     return detail::getSingleStatus(
@@ -291,13 +291,13 @@ inline StatusCode setPublishingMode(
 }
 
 /**
- * @copydoc setPublishingMode(Client&, uint32_t, bool)
+ * @copydoc setPublishingMode(Client&, IntegerId, bool)
  * @param token @completiontoken{void(StatusCode)}
  * @return @asyncresult{StatusCode}
  */
 template <typename CompletionToken>
 auto setPublishingModeAsync(
-    Client& connection, uint32_t subscriptionId, bool publishing, CompletionToken&& token
+    Client& connection, IntegerId subscriptionId, bool publishing, CompletionToken&& token
 ) {
     const auto request = detail::createSetPublishingModeRequest(publishing, {&subscriptionId, 1});
     return setPublishingModeAsync(
@@ -354,7 +354,7 @@ auto deleteSubscriptionsAsync(
  * @param connection Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  */
-inline StatusCode deleteSubscription(Client& connection, uint32_t subscriptionId) noexcept {
+inline StatusCode deleteSubscription(Client& connection, IntegerId subscriptionId) noexcept {
     const auto request = detail::createDeleteSubscriptionsRequest(subscriptionId);
     return detail::getSingleStatus(
         deleteSubscriptions(connection, asWrapper<DeleteSubscriptionsRequest>(request))
@@ -368,7 +368,9 @@ inline StatusCode deleteSubscription(Client& connection, uint32_t subscriptionId
  * @return @asyncresult{StatusCode}
  */
 template <typename CompletionToken>
-auto deleteSubscriptionAsync(Client& connection, uint32_t subscriptionId, CompletionToken&& token) {
+auto deleteSubscriptionAsync(
+    Client& connection, IntegerId subscriptionId, CompletionToken&& token
+) {
     const auto request = detail::createDeleteSubscriptionsRequest(subscriptionId);
     return deleteSubscriptionsAsync(
         connection,

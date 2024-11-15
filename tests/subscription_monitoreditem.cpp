@@ -43,7 +43,7 @@ TEST_CASE("Subscription & MonitoredItem (server)") {
             AttributeId::Value,
             MonitoringMode::Reporting,
             monitoringParameters,
-            [&](uint32_t, uint32_t, const DataValue&) { notificationCount++; }
+            [&](IntegerId, IntegerId, const DataValue&) { notificationCount++; }
         );
         CHECK(sub.getMonitoredItems().size() == 1);
 
@@ -111,7 +111,7 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
             AttributeId::Value,
             MonitoringMode::Sampling,  // won't trigger notifications
             monitoringParameters,
-            [&](uint32_t, uint32_t, const DataValue&) { notificationCount++; }
+            [&](IntegerId, IntegerId, const DataValue&) { notificationCount++; }
         );
 
         CHECK(sub.getMonitoredItems().size() == 1);
@@ -138,18 +138,18 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
     SUBCASE("Monitor data change with multiple monitored items") {
         auto sub = client.createSubscription();
 
-        uint32_t monId1 = 0;
+        IntegerId monId1 = 0;
         auto monItem1 = sub.subscribeDataChange(
             VariableId::Server_ServerStatus_CurrentTime,
             AttributeId::Value,
-            [&](uint32_t, uint32_t monId, const DataValue&) { monId1 = monId; }
+            [&](IntegerId, IntegerId monId, const DataValue&) { monId1 = monId; }
         );
 
-        uint32_t monId2 = 0;
+        IntegerId monId2 = 0;
         auto monItem2 = sub.subscribeDataChange(
             VariableId::Server_ServerStatus_CurrentTime,
             AttributeId::Value,
-            [&](uint32_t, uint32_t monId, const DataValue&) { monId2 = monId; }
+            [&](IntegerId, IntegerId monId, const DataValue&) { monId2 = monId; }
         );
 
         client.runIterate();
@@ -190,7 +190,7 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
         auto mon = sub.subscribeEvent(
             ObjectId::Server,
             eventFilter,
-            [](uint32_t subId, uint32_t monId, const auto& eventFields) {
+            [](IntegerId subId, IntegerId monId, const auto& eventFields) {
                 CAPTURE(subId);
                 CAPTURE(monId);
                 CAPTURE(eventFields.size());

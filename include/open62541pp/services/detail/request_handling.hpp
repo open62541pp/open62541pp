@@ -260,7 +260,7 @@ UA_CreateSubscriptionRequest createCreateSubscriptionRequest(
 
 template <typename SubscriptionParameters>
 UA_ModifySubscriptionRequest createModifySubscriptionRequest(
-    uint32_t subscriptionId, const SubscriptionParameters& parameters
+    IntegerId subscriptionId, const SubscriptionParameters& parameters
 ) noexcept {
     UA_ModifySubscriptionRequest request{};
     request.subscriptionId = subscriptionId;
@@ -273,7 +273,7 @@ UA_ModifySubscriptionRequest createModifySubscriptionRequest(
 }
 
 inline UA_SetPublishingModeRequest createSetPublishingModeRequest(
-    bool publishing, Span<const uint32_t> subscriptionIds
+    bool publishing, Span<const IntegerId> subscriptionIds
 ) noexcept {
     UA_SetPublishingModeRequest request{};
     request.publishingEnabled = publishing;
@@ -282,7 +282,7 @@ inline UA_SetPublishingModeRequest createSetPublishingModeRequest(
     return request;
 }
 
-inline UA_DeleteSubscriptionsRequest createDeleteSubscriptionsRequest(uint32_t& subscriptionId
+inline UA_DeleteSubscriptionsRequest createDeleteSubscriptionsRequest(IntegerId& subscriptionId
 ) noexcept {
     UA_DeleteSubscriptionsRequest request{};
     request.subscriptionIdsSize = 1;
@@ -314,7 +314,7 @@ UA_MonitoredItemCreateRequest createMonitoredItemCreateRequest(
 }
 
 inline UA_CreateMonitoredItemsRequest createCreateMonitoredItemsRequest(
-    uint32_t subscriptionId,
+    IntegerId subscriptionId,
     TimestampsToReturn timestampsToReturn,
     Span<const UA_MonitoredItemCreateRequest> itemsToCreate
 ) noexcept {
@@ -328,7 +328,7 @@ inline UA_CreateMonitoredItemsRequest createCreateMonitoredItemsRequest(
 
 template <typename MonitoringParameters>
 UA_MonitoredItemModifyRequest createMonitoredItemModifyRequest(
-    uint32_t monitoredItemId, MonitoringParameters& parameters
+    IntegerId monitoredItemId, MonitoringParameters& parameters
 ) noexcept {
     UA_MonitoredItemModifyRequest item{};
     item.monitoredItemId = monitoredItemId;
@@ -338,7 +338,7 @@ UA_MonitoredItemModifyRequest createMonitoredItemModifyRequest(
 
 template <typename MonitoringParameters>
 UA_ModifyMonitoredItemsRequest createModifyMonitoredItemsRequest(
-    uint32_t subscriptionId, MonitoringParameters& parameters, UA_MonitoredItemModifyRequest& item
+    IntegerId subscriptionId, MonitoringParameters& parameters, UA_MonitoredItemModifyRequest& item
 ) noexcept {
     UA_ModifyMonitoredItemsRequest request{};
     request.subscriptionId = subscriptionId;
@@ -349,7 +349,7 @@ UA_ModifyMonitoredItemsRequest createModifyMonitoredItemsRequest(
 }
 
 inline UA_SetMonitoringModeRequest createSetMonitoringModeRequest(
-    uint32_t subscriptionId, Span<const uint32_t> monitoredItemIds, MonitoringMode monitoringMode
+    IntegerId subscriptionId, Span<const IntegerId> monitoredItemIds, MonitoringMode monitoringMode
 ) noexcept {
     UA_SetMonitoringModeRequest request{};
     request.subscriptionId = subscriptionId;
@@ -360,10 +360,10 @@ inline UA_SetMonitoringModeRequest createSetMonitoringModeRequest(
 }
 
 inline UA_SetTriggeringRequest createSetTriggeringRequest(
-    uint32_t subscriptionId,
-    uint32_t triggeringItemId,
-    Span<const uint32_t> linksToAdd,
-    Span<const uint32_t> linksToRemove
+    IntegerId subscriptionId,
+    IntegerId triggeringItemId,
+    Span<const IntegerId> linksToAdd,
+    Span<const IntegerId> linksToRemove
 ) noexcept {
     UA_SetTriggeringRequest request{};
     request.subscriptionId = subscriptionId;
@@ -376,7 +376,7 @@ inline UA_SetTriggeringRequest createSetTriggeringRequest(
 }
 
 inline UA_DeleteMonitoredItemsRequest createDeleteMonitoredItemsRequest(
-    uint32_t subscriptionId, Span<const uint32_t> monitoredItemIds
+    IntegerId subscriptionId, Span<const IntegerId> monitoredItemIds
 ) noexcept {
     UA_DeleteMonitoredItemsRequest request{};
     request.subscriptionId = subscriptionId;

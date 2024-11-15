@@ -44,7 +44,9 @@ int main() {
             opcua::SubscriptionParameters{},  // default subscription parameters
             true,  // publishingEnabled
             {},  // statusChangeCallback
-            [](uint32_t subId) { std::cout << "Subscription deleted: " << subId << std::endl; },
+            [](opcua::IntegerId subId) {
+                std::cout << "Subscription deleted: " << subId << std::endl;
+            },
             [&](opcua::CreateSubscriptionResponse& response) {
                 std::cout
                     << "Subscription created:\n"
@@ -61,7 +63,7 @@ int main() {
                     ),
                     opcua::MonitoringMode::Reporting,
                     opcua::MonitoringParametersEx{},  // default monitoring parameters
-                    [](uint32_t subId, uint32_t monId, const opcua::DataValue& dv) {
+                    [](opcua::IntegerId subId, opcua::IntegerId monId, const opcua::DataValue& dv) {
                         std::cout
                             << "Data change notification:\n"
                             << "- subscription id: " << subId << "\n"

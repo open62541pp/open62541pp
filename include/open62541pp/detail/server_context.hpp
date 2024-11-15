@@ -1,6 +1,5 @@
 #pragma once
 
-#include <cstdint>
 #include <functional>
 #include <memory>
 #include <mutex>
@@ -16,6 +15,7 @@
 #include "open62541pp/plugin/nodestore.hpp"
 #include "open62541pp/services/detail/monitoreditem_context.hpp"
 #include "open62541pp/types.hpp"  // NodeId, Variant
+#include "open62541pp/types_composed.hpp"  // IntegerId
 
 namespace opcua::detail {
 
@@ -46,9 +46,9 @@ struct ServerContext {
     std::unique_ptr<UA_DataTypeArray> dataTypeArray;
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
-    using SubId = uint32_t;  // always 0
-    using MonId = uint32_t;
-    using SubMonId = std::pair<uint32_t, uint32_t>;
+    using SubId = IntegerId;  // always 0
+    using MonId = IntegerId;
+    using SubMonId = std::pair<SubId, MonId>;
     ContextMap<SubMonId, services::detail::MonitoredItemContext> monitoredItems;
 #endif
 
