@@ -7,8 +7,8 @@ namespace opcua {
 /**
  * @defgroup Wrapper Wrapper classes
  *
- * All wrapper classes inherit from Wrapper (and optionally from TypeWrapper).
- * Native open62541 objects can be accessed using the Wrapper::handle() method.
+ * All wrapper classes inherit from Wrapper.
+ * Native open62541 objects can be accessed using the Wrapper::handle() member function.
  *
  * Wrapper types are pointer-interconvertible to the wrapped native type and vice versa:
  * - Use asWrapper(NativeType*) to cast native object pointers to wrapper object pointers.
@@ -33,11 +33,13 @@ class Wrapper {
 public:
     using NativeType = T;
 
-    constexpr Wrapper() = default;
+    constexpr Wrapper() noexcept = default;
 
-    constexpr explicit Wrapper(const T& native)
+    /// Copy constructor with native object.
+    constexpr explicit Wrapper(const T& native) noexcept
         : native_(native) {}
 
+    /// Move constructor with native object.
     constexpr explicit Wrapper(T&& native) noexcept
         : native_(std::move(native)) {}
 
