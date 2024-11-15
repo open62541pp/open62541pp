@@ -5,5 +5,6 @@ var searchData=
   ['variableattributes_2',['VariableAttributes',['../classopcua_1_1VariableAttributes.html#aeb2f338400f4ff43119d131da6d17c39',1,'opcua::VariableAttributes']]],
   ['variabletypeattributes_3',['VariableTypeAttributes',['../classopcua_1_1VariableTypeAttributes.html#ab3c23bc04743577a2c9e607611321ac4',1,'opcua::VariableTypeAttributes']]],
   ['viewattributes_4',['ViewAttributes',['../classopcua_1_1ViewAttributes.html#a0b93ce925c7251b04e3b69e8cc1cc8e3',1,'opcua::ViewAttributes']]],
-  ['viewdescription_5',['ViewDescription',['../classopcua_1_1ViewDescription.html#a8079866f31b5583b2f126d07ad2cbaae',1,'opcua::ViewDescription']]]
+  ['viewdescription_5',['ViewDescription',['../classopcua_1_1ViewDescription.html#a8079866f31b5583b2f126d07ad2cbaae',1,'opcua::ViewDescription']]],
+  ['virtualfunc_6',['virtualfunc',['../classMyLibrary_1_1Example.html#a8431ef1c10c4e2a36302b8e8556514f6',1,'MyLibrary::Example::virtualfunc()'],['../classMyLibrary_1_1SubclassExample.html#a08668a9f16511ad37fb547c985d62764',1,'MyLibrary::SubclassExample::virtualfunc()']]]
 ];

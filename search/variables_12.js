@@ -214,6 +214,6 @@ var searchData=
   ['subtypes_211',['subTypes',['open62541/structUA__ReferenceTypeNode.html#a9b58aa8fb504e2a36d7e47fe3fd73a83',0,'UA_ReferenceTypeNode']]],
   ['symbolicid_212',['symbolicId',['open62541/structUA__DiagnosticInfo.html#aa7bba7f8e9135a2c2c0f82f8a74187fe',0,'UA_DiagnosticInfo']]],
   ['symmetric_213',['Symmetric',['open62541/struct__OpcUa__ReferenceTypeAttributes.html#ac497a5b96bb63cef8bbf5d408006c378',0,'_OpcUa_ReferenceTypeAttributes::Symmetric'],['open62541/struct__OpcUa__ReferenceTypeNode.html#a33fc429cc2b5c3726b7b8ffe8354318d',0,'_OpcUa_ReferenceTypeNode::Symmetric']]],
-  ['symmetric_214',['symmetric',['open62541/structUA__ReferenceTypeAttributes.html#a3d4967dd5edd1e160fab9931504c3b73',0,'UA_ReferenceTypeAttributes::symmetric'],['open62541/structUA__ReferenceTypeNode.html#a23412eb8c1019df83415b76a35f9d80a',0,'UA_ReferenceTypeNode::symmetric']]],
+  ['symmetric_214',['symmetric',['open62541/structUA__ReferenceTypeAttributes.html#a3d4967dd5edd1e160fab9931504c3b73',0,'UA_ReferenceTypeAttributes::symmetric'],['open62541/structUA__ReferenceTypeNode.html#a23412eb8c1019df83415b76a35f9d80a',0,'UA_ReferenceTypeNode::symmetric'],['../symmetric_8dox.html#a84cf94818f12dbd5f2b8bfa37c91f42c',1,'symmetric:&#160;symmetric.dox']]],
   ['symmetricmodule_215',['symmetricModule',['open62541/structUA__SecurityPolicy.html#a7db130fba998ffa8dfd3bf887edc6726',0,'UA_SecurityPolicy']]]
 ];

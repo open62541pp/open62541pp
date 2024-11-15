@@ -179,10 +179,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab108e1958016a09090d13f495e1cfc02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a55d167a624c3520696f994e9194e39e4" id="r_a55d167a624c3520696f994e9194e39e4"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a55d167a624c3520696f994e9194e39e4">getNamespaceArray</a> ()</td></tr>
 <tr class="separator:a55d167a624c3520696f994e9194e39e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a0372f3bc943406219f857fd355190b" id="r_a0a0372f3bc943406219f857fd355190b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Subscription.html">Subscription</a>&lt; <a class="el" href="classopcua_1_1Client.html">Client</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0a0372f3bc943406219f857fd355190b">createSubscription</a> ()</td></tr>
-<tr class="separator:a0a0372f3bc943406219f857fd355190b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8d07376c5486fded8b2a4750204d19c" id="r_ac8d07376c5486fded8b2a4750204d19c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Subscription.html">Subscription</a>&lt; <a class="el" href="classopcua_1_1Client.html">Client</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac8d07376c5486fded8b2a4750204d19c">createSubscription</a> (const <a class="el" href="namespaceopcua.html#a781fb70e471735fd9a6f80e9f0677c99">SubscriptionParameters</a> &amp;parameters)</td></tr>
-<tr class="separator:ac8d07376c5486fded8b2a4750204d19c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab947d3cdc2ba81898e4fbe7fbf83bfe8" id="r_ab947d3cdc2ba81898e4fbe7fbf83bfe8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Subscription.html">Subscription</a>&lt; <a class="el" href="classopcua_1_1Client.html">Client</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab947d3cdc2ba81898e4fbe7fbf83bfe8">createSubscription</a> (const <a class="el" href="namespaceopcua.html#a781fb70e471735fd9a6f80e9f0677c99">SubscriptionParameters</a> &amp;parameters={})</td></tr>
+<tr class="separator:ab947d3cdc2ba81898e4fbe7fbf83bfe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3103a3a0cdc46177fb9177b1f7dac361" id="r_a3103a3a0cdc46177fb9177b1f7dac361"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classopcua_1_1Subscription.html">Subscription</a>&lt; <a class="el" href="classopcua_1_1Client.html">Client</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3103a3a0cdc46177fb9177b1f7dac361">getSubscriptions</a> ()</td></tr>
 <tr class="separator:a3103a3a0cdc46177fb9177b1f7dac361"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf983173379812dfaa4adecb214f34b0" id="r_acf983173379812dfaa4adecb214f34b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acf983173379812dfaa4adecb214f34b0">runIterate</a> (uint16_t timeoutMilliseconds=1000)</td></tr>
@@ -945,8 +943,8 @@ template&lt;typename Token &gt; </div>
 
 </div>
 </div>
-<a id="a0a0372f3bc943406219f857fd355190b" name="a0a0372f3bc943406219f857fd355190b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0a0372f3bc943406219f857fd355190b">&#9670;&#160;</a></span>createSubscription() <span class="overload">[1/2]</span></h2>
+<a id="ab947d3cdc2ba81898e4fbe7fbf83bfe8" name="ab947d3cdc2ba81898e4fbe7fbf83bfe8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab947d3cdc2ba81898e4fbe7fbf83bfe8">&#9670;&#160;</a></span>createSubscription()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -954,34 +952,15 @@ template&lt;typename Token &gt; </div>
         <tr>
           <td class="memname"><a class="el" href="classopcua_1_1Subscription.html">Subscription</a>&lt; <a class="el" href="classopcua_1_1Client.html">Client</a> &gt; opcua::Client::createSubscription </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Create a subscription to monitor data changes and events (default subscription parameters). </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_subscription_8cpp-example.html#a2">client_subscription.cpp</a>, and <a class="el" href="events_2client_eventfilter_8cpp-example.html#a13">events/client_eventfilter.cpp</a>.</dd>
-</dl>
-
-</div>
-</div>
-<a id="ac8d07376c5486fded8b2a4750204d19c" name="ac8d07376c5486fded8b2a4750204d19c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac8d07376c5486fded8b2a4750204d19c">&#9670;&#160;</a></span>createSubscription() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Subscription.html">Subscription</a>&lt; <a class="el" href="classopcua_1_1Client.html">Client</a> &gt; opcua::Client::createSubscription </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="namespaceopcua.html#a781fb70e471735fd9a6f80e9f0677c99">SubscriptionParameters</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>parameters</em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="namespaceopcua.html#a781fb70e471735fd9a6f80e9f0677c99">SubscriptionParameters</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>parameters</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Create a subscription to monitor data changes and events. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_subscription_8cpp-example.html#a2">client_subscription.cpp</a>, and <a class="el" href="events_2client_eventfilter_8cpp-example.html#a13">events/client_eventfilter.cpp</a>.</dd>
+</dl>
 
 </div>
 </div>

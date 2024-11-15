@@ -1,7 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="5,13,169,53"/>
-<area shape="rect" id="Node000001" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="217,5,469,60"/>
-<area shape="poly" id="edge261_Node000000_Node000001" title=" " alt="" coords="183,30,217,30,217,35,183,35"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1X509IdentityToken.html" title="UA_X509IdentityToken wrapper class." alt="" coords="517,20,707,45"/>
-<area shape="poly" id="edge262_Node000001_Node000002" title=" " alt="" coords="483,30,517,30,517,35,483,35"/>
+<area shape="rect" id="Node000000" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="5,13,164,53"/>
+<area shape="rect" id="Node000001" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="212,5,437,60"/>
+<area shape="poly" id="edge258_Node000000_Node000001" title=" " alt="" coords="178,30,212,30,212,35,178,35"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1WriteResponse.html" title="UA_WriteResponse wrapper class." alt="" coords="485,20,652,45"/>
+<area shape="poly" id="edge259_Node000001_Node000002" title=" " alt="" coords="451,30,485,30,485,35,451,35"/>
 </map>

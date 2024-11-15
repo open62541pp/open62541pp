@@ -7,7 +7,8 @@ var searchData=
   ['enumvaluetype_4',['EnumValueType',['../classopcua_1_1EnumValueType.html',1,'opcua']]],
   ['event_5',['Event',['../classopcua_1_1Event.html',1,'opcua']]],
   ['eventfilter_6',['EventFilter',['../classopcua_1_1EventFilter.html',1,'opcua']]],
-  ['exceptioncatcher_7',['ExceptionCatcher',['../classopcua_1_1detail_1_1ExceptionCatcher.html',1,'opcua::detail']]],
-  ['expandednodeid_8',['ExpandedNodeId',['../classopcua_1_1ExpandedNodeId.html',1,'opcua']]],
-  ['extensionobject_9',['ExtensionObject',['../classopcua_1_1ExtensionObject.html',1,'opcua']]]
+  ['example_7',['Example',['../classMyLibrary_1_1Example.html',1,'MyLibrary']]],
+  ['exceptioncatcher_8',['ExceptionCatcher',['../classopcua_1_1detail_1_1ExceptionCatcher.html',1,'opcua::detail']]],
+  ['expandednodeid_9',['ExpandedNodeId',['../classopcua_1_1ExpandedNodeId.html',1,'opcua']]],
+  ['extensionobject_10',['ExtensionObject',['../classopcua_1_1ExtensionObject.html',1,'opcua']]]
 ];

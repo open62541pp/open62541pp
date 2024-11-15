@@ -23,8 +23,8 @@
  @licend  The above is the entire license notice for the JavaScript code in this file
 */
 var menudata={children:[
-{text:"Main",url:"index.html"},
-{text:"Overview",url:"overview.html"},
+{text:"About",url:"index.html"},
+{text:"Guide",url:"guide.html"},
 {text:"Examples",url:"examples.html"},
 {text:"Server",url:"classopcua_1_1Server.html"},
 {text:"Client",url:"classopcua_1_1Client.html"},
@@ -92,7 +92,8 @@ var menudata={children:[
 {text:"t",url:"namespacemembers_enum.html#index_t"},
 {text:"u",url:"namespacemembers_enum.html#index_u"},
 {text:"v",url:"namespacemembers_enum.html#index_v"},
-{text:"w",url:"namespacemembers_enum.html#index_w"}]}]}]},
+{text:"w",url:"namespacemembers_enum.html#index_w"}]},
+{text:"Enumerator",url:"namespacemembers_eval.html"}]}]},
 {text:"Class List",url:"annotated.html",children:[
 {text:"Class List",url:"annotated.html"},
 {text:"Class Index",url:"classes.html"},
@@ -184,6 +185,7 @@ var menudata={children:[
 {text:"File List",url:"files.html"},
 {text:"File Members",url:"globals.html",children:[
 {text:"All",url:"globals.html"},
+{text:"Functions",url:"globals_func.html"},
 {text:"Variables",url:"globals_vars.html"},
 {text:"Macros",url:"globals_defs.html"}]}]}]},
 {text:"Links",url:"usergroup1.html",children:[

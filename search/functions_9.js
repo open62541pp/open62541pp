@@ -8,5 +8,6 @@ var searchData=
   ['localizedtext_5',['LocalizedText',['../classopcua_1_1LocalizedText.html#aee6649f0e3e9e1b95b6ae1c97ba3f042',1,'opcua::LocalizedText']]],
   ['localtimeutcoffset_6',['localTimeUtcOffset',['../classopcua_1_1DateTime.html#aa73cb15f63b355d31263e917af54015d',1,'opcua::DateTime']]],
   ['log_7',['log',['../classopcua_1_1LoggerBase.html#a814e5db2081fc207232ef2d6d26759e3',1,'opcua::LoggerBase::log()'],['../classopcua_1_1LoggerDefault.html#a0adc7562a6c3856e4e145d98fe74bf97',1,'opcua::LoggerDefault::log(LogLevel level, LogCategory category, std::string_view msg) override']]],
-  ['loggerdefault_8',['LoggerDefault',['../classopcua_1_1LoggerDefault.html#a9c5b1b3cc485c873ad17d665fb1fe934',1,'opcua::LoggerDefault']]]
+  ['loggerdefault_8',['LoggerDefault',['../classopcua_1_1LoggerDefault.html#a9c5b1b3cc485c873ad17d665fb1fe934',1,'opcua::LoggerDefault']]],
+  ['long_5ffunction_5fwith_5fmany_5fparameters_9',['long_function_with_many_parameters',['../classMyLibrary_1_1SubclassExample.html#a92227fff4f72a11be0e21d88914ba63e',1,'MyLibrary::SubclassExample']]]
 ];

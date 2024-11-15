@@ -10,5 +10,6 @@ var searchData=
   ['yarrayitemtype_5fvalueprecision_7',['YArrayItemType_ValuePrecision',['../group__NodeIds.html#ggab93e889b7152d5a78a993070276d1a70a77ced2c633b9acfce19b7af2235711ef',1,'opcua']]],
   ['yarrayitemtype_5fxaxisdefinition_8',['YArrayItemType_XAxisDefinition',['../group__NodeIds.html#ggab93e889b7152d5a78a993070276d1a70aefbdf526066c7aed16c24d4f69326a10',1,'opcua']]],
   ['year_9',['year',['open62541/structUA__DateTimeStruct.html#a770b483a1e65dfb8c4992e1a79dc35ee',0,'UA_DateTimeStruct']]],
-  ['yield_10',['yield',['open62541/structUA__PubSubChannel.html#aa11aa8fa0db9f1a43a4b1353b67489b4',0,'UA_PubSubChannel']]]
+  ['yield_10',['yield',['open62541/structUA__PubSubChannel.html#aa11aa8fa0db9f1a43a4b1353b67489b4',0,'UA_PubSubChannel']]],
+  ['your_20customizations_11',['Share your customizations',['../md__2home_2runner_2work_2open62541pp_2open62541pp_2doc_2doxygen-awesome-css_2docs_2customization.html#autotoc_md18',1,'']]]
 ];

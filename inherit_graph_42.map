@@ -1,3 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classopcua_1_1Result_3_01void_01_4.html" title="Template specialization of Result class for void types." alt="" coords="5,5,173,31"/>
+<area shape="rect" id="Node000000" href="$classopcua_1_1PluginAdapter.html" title=" " alt="" coords="5,5,165,45"/>
+<area shape="rect" id="Node000001" href="$classopcua_1_1LoggerBase.html" title="Logger base class." alt="" coords="213,13,359,38"/>
+<area shape="poly" id="edge5_Node000000_Node000001" title=" " alt="" coords="179,23,213,23,213,28,179,28"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1LoggerDefault.html" title="Logger class that wraps a LogFunction." alt="" coords="407,13,568,38"/>
+<area shape="poly" id="edge6_Node000001_Node000002" title=" " alt="" coords="373,23,407,23,407,28,373,28"/>
 </map>

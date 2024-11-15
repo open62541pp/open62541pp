@@ -90,7 +90,7 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="overview.html">Overview</a></li>  </ul>
+<li class="navelem"><a class="el" href="guide.html">Development guide</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
@@ -99,14 +99,18 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#autotoc_md19">Exceptions</a></li>
-<li class="level1"><a href="#autotoc_md20">Result type</a></li>
-<li class="level1"><a href="#autotoc_md21">Error propagation is user callbacks</a></li>
+<ul><li class="level1"><a href="#error_handling-exceptions">Exceptions</a></li>
+<li class="level1"><a href="#error_handling-result-type">Result type</a></li>
+<li class="level1"><a href="#autotoc_md60">Error propagation is user callbacks</a></li>
 </ul>
 </div>
-<div class="textblock"><p><a class="anchor" id="md__2home_2runner_2work_2open62541pp_2open62541pp_2doc_2error__handling"></a></p>
+<div class="textblock"><p><a class="anchor" id="md__2home_2runner_2work_2open62541pp_2open62541pp_2doc_2guide_2error__handling"></a></p>
 <p>In OPC UA, <a href="https://reference.opcfoundation.org/Core/Part4/v105/docs/7.39" target="_blank">status codes</a> are used to indicate the result of an operation or request. They are returned as part of service responses and node values to describe the outcome, including success, failure, or error conditions. The underlying open62541 C-library adopts this model, returning a status code (<a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>) from any function that may encounter an error. In open62541pp, the <a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> is wrapped as <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">opcua::StatusCode</a> and enhanced with utility functions for easier use.</p>
-<h1><a class="anchor" id="autotoc_md19"></a>
+<p>The following two error handling methods are used, which are described below:</p><ol type="1">
+<li>Exceptions in the high-level classes (<code>opcua</code> namespace)</li>
+<li>Result return types for low-level functions (<code><a class="el" href="namespaceopcua_1_1services.html" title="OPC UA services as free functions.">opcua::services</a></code> namespace)</li>
+</ol>
+<h1><a class="anchor" id="error_handling-exceptions"></a>
 Exceptions</h1>
 <p>Exceptions are the main used mechanism to report bad status codes in function calls.</p>
 <p>The bases exception type <a class="el" href="classopcua_1_1BadStatus.html" title="Exception for bad status codes from open62541 UA_STATUSCODE_*.">opcua::BadStatus</a> wraps a bad status code. The underlying status code can be accessed with <a class="el" href="classopcua_1_1BadStatus.html#aa157f985a878295568af33aa718cf520">opcua::BadStatus::code()</a>. <a class="el" href="classopcua_1_1BadStatus.html#ae28cf76cb44982688d768f4f64b630b6">opcua::BadStatus::what()</a> provides a human-readable name for the status code.</p>
@@ -124,7 +128,7 @@ Exceptions</h1>
 <div class="ttc" id="aclassopcua_1_1NodeId_html"><div class="ttname"><a href="classopcua_1_1NodeId.html">opcua::NodeId</a></div><div class="ttdoc">UA_NodeId wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00590">types.hpp:590</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Node_html"><div class="ttname"><a href="classopcua_1_1Node.html">opcua::Node</a></div><div class="ttdoc">High-level node class to access node attribute, browse and populate address space.</div><div class="ttdef"><b>Definition</b> <a href="server_8hpp_source.html#l00030">server.hpp:30</a></div></div>
 <div class="ttc" id="agroup__NodeIds_html_ggab93e889b7152d5a78a993070276d1a70a0d8ba6d48210c58515c100ffcdc9b1b2"><div class="ttname"><a href="group__NodeIds.html#ggab93e889b7152d5a78a993070276d1a70a0d8ba6d48210c58515c100ffcdc9b1b2">opcua::VariableId::Server_ServerStatus_CurrentTime</a></div><div class="ttdeci">@ Server_ServerStatus_CurrentTime</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md20"></a>
+</div><!-- fragment --><h1><a class="anchor" id="error_handling-result-type"></a>
 Result type</h1>
 <p>The <a class="el" href="classopcua_1_1Result.html">opcua::Result&lt;T&gt;</a> type wraps both the result of a function and the corresponding status code. Its design is similar to <a href="https://en.cppreference.com/w/cpp/utility/optional" target="_blank"><code>std::optional</code></a> or <a href="https://en.cppreference.com/w/cpp/utility/expected" target="_blank"><code>std::expected</code></a>, making it suitable for scenarios that involve error handling without exceptions. The key difference from <code>std::expected</code> is that the status code is always present, while the result is only available if the status code indicates success. This approach avoids the performance overhead of exceptions and enhances clarity in function signatures. It also supports finer control over error management, especially in <a class="el" href="async_model.html">asynchronous contexts</a>.</p>
 <p><b>Key functions:</b></p>
@@ -133,7 +137,6 @@ Result type</h1>
 <li><a class="el" href="classopcua_1_1Result.html#a44ab2194ce7b95f6d54396829619d423" title="Get the value of the Result or a default value.">opcua::Result&lt;T&gt;::valueOr</a> returns the value or the provided default value if the status code is bad</li>
 <li><a class="el" href="classopcua_1_1Result.html#af8c52372741a4af137d3600d9e9e77e0" title="Get the StatusCode of the Result.">opcua::Result&lt;T&gt;::code</a> returns the status code directly</li>
 </ul>
-<p>The result type is consistently used for all functions in the <a class="el" href="namespaceopcua_1_1services.html" title="OPC UA services as free functions.">opcua::services</a> namespace. For codebases that do not use exceptions, these functions can provide an alternative error-handling strategy.</p>
 <p><b>Example:</b></p>
 <div class="fragment"><div class="line"><span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">opcua::NodeId</a> id(<a class="code hl_enumvalue" href="group__NodeIds.html#ggab93e889b7152d5a78a993070276d1a70a0d8ba6d48210c58515c100ffcdc9b1b2">opcua::VariableId::Server_ServerStatus_CurrentTime</a>);</div>
 <div class="line"><a class="code hl_class" href="classopcua_1_1Result.html">opcua::Result&lt;opcua::Variant&gt;</a> result = <a class="code hl_function" href="group__Read.html#gaaf1c6945f6ca882fdafa7d3be783f68c">opcua::services::readValue</a>(client, <span class="keywordtype">id</span>);</div>
@@ -150,7 +153,7 @@ Result type</h1>
 <div class="ttc" id="aclassopcua_1_1StatusCode_html_ace5935f872494fe518def45b1105f312"><div class="ttname"><a href="classopcua_1_1StatusCode.html#ace5935f872494fe518def45b1105f312">opcua::StatusCode::get</a></div><div class="ttdeci">constexpr UA_StatusCode get() const noexcept</div><div class="ttdoc">Explicitly get underlying UA_StatusCode.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00053">types.hpp:53</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Variant_html"><div class="ttname"><a href="classopcua_1_1Variant.html">opcua::Variant</a></div><div class="ttdoc">UA_Variant wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00887">types.hpp:887</a></div></div>
 <div class="ttc" id="agroup__Read_html_gaaf1c6945f6ca882fdafa7d3be783f68c"><div class="ttname"><a href="group__Read.html#gaaf1c6945f6ca882fdafa7d3be783f68c">opcua::services::readValue</a></div><div class="ttdeci">Result&lt; Variant &gt; readValue(T &amp;connection, const NodeId &amp;id) noexcept</div><div class="ttdoc">Read the AttributeId::Value attribute of a node.</div><div class="ttdef"><b>Definition</b> <a href="attribute__highlevel_8hpp_source.html#l00595">attribute_highlevel.hpp:595</a></div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md21"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md60"></a>
 Error propagation is user callbacks</h1>
 <p>Since callbacks are executed within the open62541 C event loop, which does not support exceptions, any exceptions thrown inside user-defined callbacks are automatically caught and stored by <a class="el" href="classopcua_1_1detail_1_1ExceptionCatcher.html" title="Catch &amp; store exceptions from user-defined callbacks in an exception-unaware context (open62541).">opcua::detail::ExceptionCatcher</a>. These exceptions are then propagated to the <a class="el" href="classopcua_1_1Client.html#a8b1a8e65b22a27b245dd478170e4922d" title="Run the client&#39;s main loop by. This method will block until Client::stop is called.">opcua::Client::run()</a> and <a class="el" href="classopcua_1_1Server.html#a7346a714c85e2d99fc8bc9fd1dd31d6d" title="Run the server&#39;s main loop. This method will block until Server::stop is called.">opcua::Server::run()</a> functions, ensuring they can be handled properly.</p>
 <p><b>Example:</b></p>

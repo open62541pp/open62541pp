@@ -1,7 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="5,13,192,53"/>
-<area shape="rect" id="Node000001" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="240,5,515,60"/>
-<area shape="poly" id="edge59_Node000000_Node000001" title=" " alt="" coords="206,30,240,30,240,35,206,35"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1BrowseNextResponse.html" title="UA_BrowseNextResponse wrapper class." alt="" coords="563,20,773,45"/>
-<area shape="poly" id="edge60_Node000001_Node000002" title=" " alt="" coords="529,30,563,30,563,35,529,35"/>
+<area shape="rect" id="Node000000" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="5,13,172,53"/>
+<area shape="rect" id="Node000001" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="220,5,479,60"/>
+<area shape="poly" id="edge56_Node000000_Node000001" title=" " alt="" coords="186,30,220,30,220,35,186,35"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1BrowseDescription.html" title="UA_BrowseDescription wrapper class." alt="" coords="527,20,717,45"/>
+<area shape="poly" id="edge57_Node000001_Node000002" title=" " alt="" coords="493,30,527,30,527,35,493,35"/>
 </map>

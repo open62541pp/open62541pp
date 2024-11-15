@@ -125,9 +125,10 @@ struct opcua::IsBitmaskEnum&lt; T &gt;</div><p>Trait to define an enum (class) a
 <div class="line"><span class="keyword">constexpr</span> std::true_type <a class="code hl_function" href="group__BitmaskAbstraction.html#ga4be2e13b6c648cfa5070fa61b9201168">isBitmaskEnum</a>(Access);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// use bitwise operations</span></div>
-<div class="line">Access mask = Access::Read | Access::Write;</div>
+<div class="line">Access <a class="code hl_variable" href="userwritemask_8dox.html#a942310fa4930389c7b8153fa71b142d1">mask</a> = Access::Read | Access::Write;</div>
 <div class="ttc" id="agroup__BitmaskAbstraction_html_ga4be2e13b6c648cfa5070fa61b9201168"><div class="ttname"><a href="group__BitmaskAbstraction.html#ga4be2e13b6c648cfa5070fa61b9201168">opcua::isBitmaskEnum</a></div><div class="ttdeci">constexpr std::false_type isBitmaskEnum(T)</div><div class="ttdoc">Function template to define an enum (class) as a bitmask and allow bitwise operations.</div></div>
 <div class="ttc" id="astructopcua_1_1IsBitmaskEnum_html"><div class="ttname"><a href="structopcua_1_1IsBitmaskEnum.html">opcua::IsBitmaskEnum</a></div><div class="ttdoc">Trait to define an enum (class) as a bitmask and allow bitwise operations.</div><div class="ttdef"><b>Definition</b> <a href="bitmask_8hpp_source.html#l00044">bitmask.hpp:44</a></div></div>
+<div class="ttc" id="auserwritemask_8dox_html_a942310fa4930389c7b8153fa71b142d1"><div class="ttname"><a href="userwritemask_8dox.html#a942310fa4930389c7b8153fa71b142d1">mask</a></div><div class="ttdeci">Exposes the possibilities of a client to write the attributes of the node In contrast to the write mask</div><div class="ttdef"><b>Definition</b> <a href="userwritemask_8dox_source.html#l00002">userwritemask.dox:2</a></div></div>
 </div><!-- fragment --> 
 <p class="definition">Definition at line <a class="el" href="bitmask_8hpp_source.html#l00044">44</a> of file <a class="el" href="bitmask_8hpp_source.html">bitmask.hpp</a>.</p>
 </div><table class="memberdecls">
