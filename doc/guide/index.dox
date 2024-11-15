@@ -1,0 +1,16 @@
+/*!
+@page guide Development guide
+
+@tableofcontents
+
+This guide covers key topics and concepts of **open62541pp** at a high level.
+It provides background information and explanations of the library's architecture, design principles, and core components.
+The guide helps developers integrate and extend the library in their applications.
+
+# Core concepts
+
+- @subpage wrapper
+- @subpage error_handling
+- @subpage async_model
+
+*/

@@ -5,7 +5,11 @@
 In OPC UA, [status codes](https://reference.opcfoundation.org/Core/Part4/v105/docs/7.39) are used to indicate the result of an operation or request. They are returned as part of service responses and node values to describe the outcome, including success, failure, or error conditions.
 The underlying open62541 C-library adopts this model, returning a status code (@ref UA_StatusCode) from any function that may encounter an error. In open62541pp, the @ref UA_StatusCode is wrapped as opcua::StatusCode and enhanced with utility functions for easier use.
 
-## Exceptions
+The following two error handling methods are used, which are described below:
+1. Exceptions in the high-level classes (`opcua` namespace)
+2. Result return types for low-level functions (`opcua::services` namespace)
+
+## Exceptions {#error_handling-exceptions}
 
 Exceptions are the main used mechanism to report bad status codes in function calls.
 
@@ -24,7 +28,7 @@ try {
 }
 ```
 
-## Result type
+## Result type {#error_handling-result-type}
 
 The @ref opcua::Result<T> type wraps both the result of a function and the corresponding status code.
 Its design is similar to [`std::optional`](https://en.cppreference.com/w/cpp/utility/optional) or [`std::expected`](https://en.cppreference.com/w/cpp/utility/expected), making it suitable for scenarios that involve error handling without exceptions.  The key difference from `std::expected` is that the status code is always present, while the result is only available if the status code indicates success.
@@ -35,8 +39,6 @@ This approach avoids the performance overhead of exceptions and enhances clarity
 - opcua::Result<T>::value returns the value or throws an opcua::BadStatus exception if the status code is bad
 - opcua::Result<T>::valueOr returns the value or the provided default value if the status code is bad
 - opcua::Result<T>::code returns the status code directly
-
-The result type is consistently used for all functions in the opcua::services namespace. For codebases that do not use exceptions, these functions can provide an alternative error-handling strategy.
 
 **Example:**
 
