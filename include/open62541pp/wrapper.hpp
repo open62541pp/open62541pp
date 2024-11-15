@@ -71,6 +71,16 @@ public:
         return &native_;
     }
 
+    /// Swap with wrapper object.
+    constexpr void swap(Wrapper& other) noexcept {
+        std::swap(this->native(), other.native());
+    }
+
+    /// Swap with native object.
+    constexpr void swap(T& native) noexcept {
+        std::swap(this->native(), native);
+    }
+
 protected:
     constexpr const T& native() const noexcept {
         return native_;

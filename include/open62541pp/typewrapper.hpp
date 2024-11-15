@@ -83,18 +83,6 @@ public:
         return *this;
     }
 
-    /// Swap with wrapper object.
-    constexpr void swap(TypeWrapper& other) noexcept {
-        static_assert(std::is_nothrow_swappable_v<T>);
-        std::swap(this->native(), other.native());
-    }
-
-    /// Swap with native object.
-    constexpr void swap(T& native) noexcept {
-        static_assert(std::is_nothrow_swappable_v<T>);
-        std::swap(this->native(), native);
-    }
-
     /// Get type as type index of the ::UA_TYPES array.
     static constexpr TypeIndex getTypeIndex() {
         return typeIndex;
