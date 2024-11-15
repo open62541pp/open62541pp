@@ -12,12 +12,12 @@
 namespace opcua {
 
 /**
- * Template base class to wrap `UA_*` type objects.
+ * Template base class to wrap `UA_*` type objects that require manual memory management.
  *
- * Zero cost abstraction to wrap the C API objects and delete them on destruction. The derived
- * classes should implement specific constructors to convert from other data types.
+ * Provides a zero-cost abstraction to wrap C API objects and automatically delete them upon
+ * destruction.
  *
- * @warning No virtual constructor defined, don't implement a destructor in the derived classes.
+ * @warning No virtual constructor is defined; do not implement a destructor in derived classes.
  * @ingroup Wrapper
  */
 template <typename T, TypeIndex typeIndex>
@@ -25,7 +25,7 @@ class TypeWrapper : public Wrapper<T> {
 public:
     static_assert(typeIndex < UA_TYPES_COUNT);
 
-    constexpr TypeWrapper() = default;
+    constexpr TypeWrapper() noexcept = default;
 
     /// Constructor with native object (deep copy).
     explicit constexpr TypeWrapper(const T& native)
@@ -81,18 +81,6 @@ public:
             this->native() = std::exchange(native, {});
         }
         return *this;
-    }
-
-    /// Swap with wrapper object.
-    constexpr void swap(TypeWrapper& other) noexcept {
-        static_assert(std::is_nothrow_swappable_v<T>);
-        std::swap(this->native(), other.native());
-    }
-
-    /// Swap with native object.
-    constexpr void swap(T& native) noexcept {
-        static_assert(std::is_nothrow_swappable_v<T>);
-        std::swap(this->native(), native);
     }
 
     /// Get type as type index of the ::UA_TYPES array.

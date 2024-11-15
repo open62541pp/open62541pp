@@ -7,116 +7,71 @@
 
 using namespace opcua;
 
-TEST_CASE("TypeWrapper") {
-    SUBCASE("Constructor empty") {
-        CHECK_NOTHROW(TypeWrapper<UA_Boolean, UA_TYPES_BOOLEAN>());
+TEST_CASE("Wrapper") {
+    SUBCASE("Default constructor") {
+        Wrapper<int> wrapper;
+        CHECK(*wrapper.handle() == 0);
     }
 
-    SUBCASE("Constructor with native type") {
-        UA_Boolean value{true};
-        TypeWrapper<UA_Boolean, UA_TYPES_BOOLEAN> wrapper(value);
-        CHECK(*wrapper.handle() == true);
+    SUBCASE("Copy constructor with native type") {
+        int native = 11;
+        Wrapper<int> wrapper(native);
+        CHECK(*wrapper.handle() == 11);
     }
 
-    SUBCASE("Constructor with native type (implicit)") {
-        TypeWrapper<UA_Int32, UA_TYPES_INT32> wrapper = UA_Int32{123};
-        CHECK(*wrapper.handle() == 123);
-    }
-
-    SUBCASE("Constructor with wrapper type") {
-        TypeWrapper<UA_Double, UA_TYPES_DOUBLE> wrapper(11.11);
-        CHECK(*wrapper.handle() == 11.11);
-    }
-
-    SUBCASE("Copy constructor") {
-        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper(UA_STRING_ALLOC("test"));
-        TypeWrapper<UA_String, UA_TYPES_STRING> wrapperConstructor(wrapper);
-
-        CHECK(wrapperConstructor.handle()->data != wrapper.handle()->data);
-        CHECK(detail::toString(*wrapperConstructor.handle()) == "test");
-    }
-
-    SUBCASE("Copy assignment") {
-        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper(UA_STRING_ALLOC("test"));
-        TypeWrapper<UA_String, UA_TYPES_STRING> wrapperAssignment = wrapper;
-
-        CHECK(wrapperAssignment.handle()->data != wrapper.handle()->data);
-        CHECK(detail::toString(*wrapperAssignment.handle()) == "test");
+    SUBCASE("Move constructor with native type") {
+        Wrapper<int> wrapper(11);
+        CHECK(*wrapper.handle() == 11);
     }
 
     SUBCASE("Copy assignment with native type") {
-        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper(UA_STRING_ALLOC("overwrite"));
-        UA_String str = UA_STRING_ALLOC("test");
-        wrapper = str;
-        CHECK(detail::toString(*wrapper.handle()) == "test");
-        UA_clear(&str, &UA_TYPES[UA_TYPES_STRING]);
-    }
-
-    SUBCASE("Move constructor") {
-        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper(UA_STRING_ALLOC("test"));
-        TypeWrapper<UA_String, UA_TYPES_STRING> wrapperConstructor(std::move(wrapper));
-
-        CHECK(wrapper.handle()->data == nullptr);
-        CHECK(detail::toString(*wrapperConstructor.handle()) == "test");
-    }
-
-    SUBCASE("Move assignment") {
-        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper(UA_STRING_ALLOC("test"));
-        TypeWrapper<UA_String, UA_TYPES_STRING> wrapperAssignment = std::move(wrapper);
-
-        CHECK(wrapper.handle()->data == nullptr);
-        CHECK(detail::toString(*wrapperAssignment.handle()) == "test");
+        Wrapper<int> wrapper;
+        int native = 11;
+        wrapper = native;
+        CHECK(*wrapper.handle() == 11);
     }
 
     SUBCASE("Move assignment with native type") {
-        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper(UA_STRING_ALLOC("overwrite"));
-        wrapper = UA_STRING_ALLOC("test");
-        CHECK(detail::toString(*wrapper.handle()) == "test");
+        Wrapper<int> wrapper;
+        wrapper = 11;
+        CHECK(*wrapper.handle() == 11);
     }
 
-    SUBCASE("Implicit conversion") {
-        TypeWrapper<UA_Float, UA_TYPES_FLOAT> wrapper(11.11f);
-
-        float& value = wrapper;
-        CHECK(value == 11.11f);
-
-        const float& cvalue = wrapper;
-        CHECK(cvalue == 11.11f);
+    SUBCASE("Implicit conversion to native type") {
+        Wrapper<int> wrapper(11);
+        {
+            int& native = wrapper;
+            CHECK(native == 11);
+        }
+        {
+            const int& native = wrapper;
+            CHECK(native == 11);
+        }
     }
 
-    SUBCASE("Member access") {
-        TypeWrapper<UA_NodeId, UA_TYPES_NODEID> wrapper(UA_NODEID_NUMERIC(1, 1000));
-        CHECK(wrapper->namespaceIndex == 1);
-        CHECK(wrapper->identifierType == UA_NODEIDTYPE_NUMERIC);
-        CHECK(wrapper->identifier.numeric == 1000);
-    }
-
-    SUBCASE("Swap") {
-        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper1(UA_STRING_ALLOC("test"));
-        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper2;
-
-        CHECK(wrapper1.handle()->data != nullptr);
-        CHECK(wrapper2.handle()->data == nullptr);
-        CHECK(detail::toString(*wrapper1.handle()) == "test");
-
+    SUBCASE("Swap with wrapper object") {
+        Wrapper<int> wrapper1(1);
+        Wrapper<int> wrapper2(2);
         wrapper1.swap(wrapper2);
-        CHECK(wrapper1.handle()->data == nullptr);
-        CHECK(wrapper2.handle()->data != nullptr);
-        CHECK(detail::toString(*wrapper2.handle()) == "test");
+        CHECK(*wrapper1.handle() == 2);
+        CHECK(*wrapper2.handle() == 1);
     }
 
     SUBCASE("Swap with native object") {
-        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper;
-        UA_String str = UA_STRING_ALLOC("test");
+        Wrapper<int> wrapper(1);
+        int native = 2;
+        wrapper.swap(native);
+        CHECK(*wrapper.handle() == 2);
+        CHECK(native == 1);
+    }
 
-        CHECK(wrapper.handle()->data == nullptr);
-        CHECK(str.data != nullptr);
+    SUBCASE("Member access") {
+        struct S {
+            int value;
+        };
 
-        wrapper.swap(str);
-        CHECK(wrapper.handle()->data != nullptr);
-        CHECK(str.data == nullptr);
-
-        // UA_clear not necessary, because data is now owned by wrapper
+        Wrapper<S> wrapper(S{11});
+        CHECK(wrapper->value == 11);
     }
 }
 
@@ -165,5 +120,64 @@ TEST_CASE("asWrapper / asNative") {
             const int32_t& native = asNative(wrapper);
             CHECK(native == 1);
         }
+    }
+}
+
+TEST_CASE("TypeWrapper") {
+    SUBCASE("Copy constructor") {
+        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper(UA_STRING_ALLOC("test"));
+        TypeWrapper<UA_String, UA_TYPES_STRING> wrapperConstructor(wrapper);
+
+        CHECK(wrapperConstructor.handle()->data != wrapper.handle()->data);
+        CHECK(detail::toString(*wrapperConstructor.handle()) == "test");
+    }
+
+    SUBCASE("Copy constructor with native type") {
+        double value = 11.11;
+        TypeWrapper<double, UA_TYPES_DOUBLE> wrapper(value);
+        CHECK(*wrapper.handle() == 11.11);
+    }
+
+    SUBCASE("Move Constructor with native type") {
+        TypeWrapper<double, UA_TYPES_DOUBLE> wrapper(11.11);
+        CHECK(*wrapper.handle() == 11.11);
+    }
+
+    SUBCASE("Move constructor") {
+        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper(UA_STRING_ALLOC("test"));
+        TypeWrapper<UA_String, UA_TYPES_STRING> wrapperConstructor(std::move(wrapper));
+
+        CHECK(wrapper.handle()->data == nullptr);
+        CHECK(detail::toString(*wrapperConstructor.handle()) == "test");
+    }
+
+    SUBCASE("Copy assignment") {
+        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper(UA_STRING_ALLOC("test"));
+        TypeWrapper<UA_String, UA_TYPES_STRING> wrapperAssignment = wrapper;
+
+        CHECK(wrapperAssignment.handle()->data != wrapper.handle()->data);
+        CHECK(detail::toString(*wrapperAssignment.handle()) == "test");
+    }
+
+    SUBCASE("Copy assignment with native type") {
+        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper(UA_STRING_ALLOC("overwrite"));
+        UA_String str = UA_STRING_ALLOC("test");
+        wrapper = str;
+        CHECK(detail::toString(*wrapper.handle()) == "test");
+        UA_clear(&str, &UA_TYPES[UA_TYPES_STRING]);
+    }
+
+    SUBCASE("Move assignment") {
+        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper(UA_STRING_ALLOC("test"));
+        TypeWrapper<UA_String, UA_TYPES_STRING> wrapperAssignment = std::move(wrapper);
+
+        CHECK(wrapper.handle()->data == nullptr);
+        CHECK(detail::toString(*wrapperAssignment.handle()) == "test");
+    }
+
+    SUBCASE("Move assignment with native type") {
+        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper(UA_STRING_ALLOC("overwrite"));
+        wrapper = UA_STRING_ALLOC("test");
+        CHECK(detail::toString(*wrapper.handle()) == "test");
     }
 }

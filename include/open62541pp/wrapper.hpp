@@ -1,14 +1,15 @@
 #pragma once
 
 #include <type_traits>
+#include <utility>  // move
 
 namespace opcua {
 
 /**
  * @defgroup Wrapper Wrapper classes
  *
- * All wrapper classes inherit from Wrapper (and optionally from TypeWrapper).
- * Native open62541 objects can be accessed using the Wrapper::handle() method.
+ * All wrapper classes inherit from Wrapper.
+ * Native open62541 objects can be accessed using the Wrapper::handle() member function.
  *
  * Wrapper types are pointer-interconvertible to the wrapped native type and vice versa:
  * - Use asWrapper(NativeType*) to cast native object pointers to wrapper object pointers.
@@ -31,15 +32,31 @@ namespace opcua {
 template <typename T>
 class Wrapper {
 public:
+    static_assert(std::is_trivial_v<T>);
+
     using NativeType = T;
 
-    constexpr Wrapper() = default;
+    constexpr Wrapper() noexcept = default;
 
-    constexpr explicit Wrapper(const T& native)
+    /// Copy constructor with native object.
+    constexpr explicit Wrapper(const T& native) noexcept
         : native_(native) {}
 
+    /// Move constructor with native object.
     constexpr explicit Wrapper(T&& native) noexcept
         : native_(std::move(native)) {}
+
+    /// Copy assignment with native object.
+    constexpr Wrapper& operator=(const T& native) noexcept {
+        this->native() = native;
+        return *this;
+    }
+
+    /// Move assignment with native object.
+    constexpr Wrapper& operator=(T&& native) noexcept {
+        this->native() = std::move(native);
+        return *this;
+    }
 
     /// Implicit conversion to native object.
     constexpr operator T&() noexcept {  // NOLINT(hicpp-explicit-conversions)
@@ -69,6 +86,16 @@ public:
     /// Return pointer to native object.
     constexpr const T* handle() const noexcept {
         return &native_;
+    }
+
+    /// Swap with wrapper object.
+    constexpr void swap(Wrapper& other) noexcept {
+        std::swap(this->native(), other.native());
+    }
+
+    /// Swap with native object.
+    constexpr void swap(T& native) noexcept {
+        std::swap(this->native(), native);
     }
 
 protected:
