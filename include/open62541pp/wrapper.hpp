@@ -31,6 +31,8 @@ namespace opcua {
 template <typename T>
 class Wrapper {
 public:
+    static_assert(std::is_trivial_v<T>);
+
     using NativeType = T;
 
     constexpr Wrapper() noexcept = default;
