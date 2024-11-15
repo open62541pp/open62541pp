@@ -37,11 +37,8 @@ WARN_IF_INCOMPLETE_DOC = NO
 # Input files
 INPUT                  = "${PROJECT_SOURCE_DIR}/include/" \
                          "${PROJECT_SOURCE_DIR}/README.md" \
-                         "${CMAKE_CURRENT_SOURCE_DIR}/examples.dox" \
-                         "${CMAKE_CURRENT_SOURCE_DIR}/overview.dox" \
-                         "${CMAKE_CURRENT_SOURCE_DIR}/async_model.md" \
-                         "${CMAKE_CURRENT_SOURCE_DIR}/error_handling.md"
-FILE_PATTERNS          = *.h *.hpp *.cpp
+                         "${CMAKE_CURRENT_SOURCE_DIR}/"
+FILE_PATTERNS          = *.h *.hpp *.cpp *.dox *.md
 RECURSIVE              = YES
 EXAMPLE_PATH           = "${PROJECT_SOURCE_DIR}/examples" \
                          "${CMAKE_CURRENT_SOURCE_DIR}/fragments"
