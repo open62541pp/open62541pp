@@ -1,11 +1,10 @@
 #pragma once
 
-#include <cstdint>
 #include <type_traits>
 #include <utility>  // move
 #include <vector>
 
-#include "open62541pp/common.hpp"  // AttributeId, MonitoringMode
+#include "open62541pp/common.hpp"  // AttributeId, IntegerId, MonitoringMode
 #include "open62541pp/config.hpp"
 #include "open62541pp/monitoreditem.hpp"
 #include "open62541pp/services/monitoreditem.hpp"
@@ -44,7 +43,7 @@ class Subscription {
 public:
     /// Wrap an existing subscription.
     /// The `subscriptionId` is ignored and set to `0U` for servers.
-    Subscription(Connection& connection, uint32_t subscriptionId) noexcept
+    Subscription(Connection& connection, IntegerId subscriptionId) noexcept
         : connection_(&connection),
           subscriptionId_(std::is_same_v<Connection, Server> ? 0U : subscriptionId) {}
 
@@ -59,7 +58,7 @@ public:
     }
 
     /// Get the server-assigned identifier of this subscription.
-    uint32_t subscriptionId() const noexcept {
+    IntegerId subscriptionId() const noexcept {
         return subscriptionId_;
     }
 
@@ -156,7 +155,7 @@ public:
 
 private:
     Connection* connection_;
-    uint32_t subscriptionId_{0U};
+    IntegerId subscriptionId_{0U};
 };
 
 /* ---------------------------------------------------------------------------------------------- */

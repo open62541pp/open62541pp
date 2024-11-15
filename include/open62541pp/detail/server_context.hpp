@@ -1,6 +1,5 @@
 #pragma once
 
-#include <cstdint>
 #include <functional>
 #include <memory>
 #include <mutex>
@@ -8,6 +7,7 @@
 #include <utility>  // pair
 #include <vector>
 
+#include "open62541pp/common.hpp"  // IntegerId
 #include "open62541pp/config.hpp"
 #include "open62541pp/datatype.hpp"
 #include "open62541pp/detail/contextmap.hpp"
@@ -46,9 +46,9 @@ struct ServerContext {
     std::unique_ptr<UA_DataTypeArray> dataTypeArray;
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
-    using SubId = uint32_t;  // always 0
-    using MonId = uint32_t;
-    using SubMonId = std::pair<uint32_t, uint32_t>;
+    using SubId = IntegerId;  // always 0
+    using MonId = IntegerId;
+    using SubMonId = std::pair<SubId, MonId>;
     ContextMap<SubMonId, services::detail::MonitoredItemContext> monitoredItems;
 #endif
 

@@ -29,7 +29,7 @@ std::unique_ptr<SubscriptionContext> createSubscriptionContext(
 }
 
 void storeSubscriptionContext(
-    Client& connection, uint32_t subscriptionId, std::unique_ptr<SubscriptionContext>&& context
+    Client& connection, IntegerId subscriptionId, std::unique_ptr<SubscriptionContext>&& context
 ) {
     opcua::detail::getContext(connection).subscriptions.insert(subscriptionId, std::move(context));
 }

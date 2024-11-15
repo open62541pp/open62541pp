@@ -95,7 +95,7 @@ void convertMonitoredItemContexts(
 template <typename T>
 static void storeMonitoredItemContext(
     T& connection,
-    uint32_t subscriptionId,
+    IntegerId subscriptionId,
     const MonitoredItemCreateResult& result,
     std::unique_ptr<MonitoredItemContext>& context
 ) {
@@ -111,7 +111,7 @@ static void storeMonitoredItemContext(
 
 void storeMonitoredItemContexts(
     Client& connection,
-    uint32_t subscriptionId,
+    IntegerId subscriptionId,
     const CreateMonitoredItemsResponse& response,
     Span<std::unique_ptr<MonitoredItemContext>> contexts
 ) {
@@ -155,7 +155,7 @@ CreateMonitoredItemsResponse createMonitoredItemsDataChange(
 template <>
 MonitoredItemCreateResult createMonitoredItemDataChange<Client>(
     Client& connection,
-    uint32_t subscriptionId,
+    IntegerId subscriptionId,
     const ReadValueId& itemToMonitor,
     MonitoringMode monitoringMode,
     const MonitoringParametersEx& parameters,
@@ -178,7 +178,7 @@ MonitoredItemCreateResult createMonitoredItemDataChange<Client>(
 template <>
 MonitoredItemCreateResult createMonitoredItemDataChange<Server>(
     Server& connection,
-    [[maybe_unused]] uint32_t subscriptionId,
+    [[maybe_unused]] IntegerId subscriptionId,
     const ReadValueId& itemToMonitor,
     MonitoringMode monitoringMode,
     const MonitoringParametersEx& parameters,
@@ -228,7 +228,7 @@ CreateMonitoredItemsResponse createMonitoredItemsEvent(
 
 MonitoredItemCreateResult createMonitoredItemEvent(
     Client& connection,
-    uint32_t subscriptionId,
+    IntegerId subscriptionId,
     const ReadValueId& itemToMonitor,
     MonitoringMode monitoringMode,
     const MonitoringParametersEx& parameters,
@@ -274,7 +274,7 @@ DeleteMonitoredItemsResponse deleteMonitoredItems(
 
 template <>
 StatusCode deleteMonitoredItem<Client>(
-    Client& connection, uint32_t subscriptionId, uint32_t monitoredItemId
+    Client& connection, IntegerId subscriptionId, IntegerId monitoredItemId
 ) {
     const auto request = detail::createDeleteMonitoredItemsRequest(
         subscriptionId, {&monitoredItemId, 1}
@@ -286,7 +286,7 @@ StatusCode deleteMonitoredItem<Client>(
 
 template <>
 StatusCode deleteMonitoredItem<Server>(
-    Server& connection, [[maybe_unused]] uint32_t subscriptionId, uint32_t monitoredItemId
+    Server& connection, [[maybe_unused]] IntegerId subscriptionId, IntegerId monitoredItemId
 ) {
     const auto status = UA_Server_deleteMonitoredItem(connection.handle(), monitoredItemId);
     opcua::detail::getContext(connection).monitoredItems.erase({0U, monitoredItemId});

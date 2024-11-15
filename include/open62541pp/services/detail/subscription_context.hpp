@@ -1,8 +1,8 @@
 #pragma once
 
-#include <cstdint>
 #include <functional>
 
+#include "open62541pp/common.hpp"
 #include "open62541pp/config.hpp"
 #include "open62541pp/services/detail/callbackadapter.hpp"
 #include "open62541pp/types_composed.hpp"  // StatusChangeNotification
@@ -16,12 +16,12 @@ namespace opcua::services::detail {
 
 struct SubscriptionContext : CallbackAdapter {
     bool stale{false};
-    std::function<void(uint32_t subId, StatusChangeNotification&)> statusChangeCallback;
-    std::function<void(uint32_t subId)> deleteCallback;
+    std::function<void(IntegerId subId, StatusChangeNotification&)> statusChangeCallback;
+    std::function<void(IntegerId subId)> deleteCallback;
 
     static void statusChangeCallbackNative(
         [[maybe_unused]] UA_Client* client,
-        uint32_t subId,
+        IntegerId subId,
         void* subContext,
         UA_StatusChangeNotification* notification
     ) noexcept {
@@ -36,7 +36,7 @@ struct SubscriptionContext : CallbackAdapter {
     }
 
     static void deleteCallbackNative(
-        [[maybe_unused]] UA_Client* client, uint32_t subId, void* subContext
+        [[maybe_unused]] UA_Client* client, IntegerId subId, void* subContext
     ) noexcept {
         if (subContext != nullptr) {
             auto* self = static_cast<SubscriptionContext*>(subContext);

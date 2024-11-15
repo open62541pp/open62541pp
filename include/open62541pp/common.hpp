@@ -7,6 +7,10 @@
 
 namespace opcua {
 
+/// Integer id used as an identifier.
+/// @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.19
+using IntegerId = uint32_t;
+
 /// Namespace index.
 /// @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.2.2
 using NamespaceIndex = uint16_t;

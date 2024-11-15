@@ -13,7 +13,7 @@ namespace opcua {
 
 template <typename T>
 static auto& getMonitoredItemContext(
-    T& connection, uint32_t subscriptionId, uint32_t monitoredItemId
+    T& connection, IntegerId subscriptionId, IntegerId monitoredItemId
 ) {
     const auto* context =
         detail::getContext(connection).monitoredItems.find({subscriptionId, monitoredItemId});

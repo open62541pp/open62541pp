@@ -1,9 +1,8 @@
 #pragma once
 
-#include <cstdint>
 #include <type_traits>
 
-#include "open62541pp/common.hpp"  // AttributeId
+#include "open62541pp/common.hpp"  // AttributeId, IntegerId
 #include "open62541pp/config.hpp"
 #include "open62541pp/services/monitoreditem.hpp"
 #include "open62541pp/types.hpp"
@@ -31,7 +30,7 @@ public:
     /// Wrap an existing monitored item.
     /// The `subscriptionId` is ignored and set to `0U` for servers.
     MonitoredItem(
-        Connection& connection, uint32_t subscriptionId, uint32_t monitoredItemId
+        Connection& connection, IntegerId subscriptionId, IntegerId monitoredItemId
     ) noexcept
         : connection_(&connection),
           subscriptionId_(std::is_same_v<Connection, Server> ? 0U : subscriptionId),
@@ -48,12 +47,12 @@ public:
     }
 
     /// Get the server-assigned identifier of the underlying subscription.
-    uint32_t subscriptionId() const noexcept {
+    IntegerId subscriptionId() const noexcept {
         return subscriptionId_;
     }
 
     /// Get the server-assigned identifier of this monitored item.
-    uint32_t monitoredItemId() const noexcept {
+    IntegerId monitoredItemId() const noexcept {
         return monitoredItemId_;
     }
 
@@ -91,8 +90,8 @@ public:
 
 private:
     Connection* connection_;
-    uint32_t subscriptionId_{0U};
-    uint32_t monitoredItemId_{0U};
+    IntegerId subscriptionId_{0U};
+    IntegerId monitoredItemId_{0U};
 };
 
 /* ---------------------------------------------------------------------------------------------- */

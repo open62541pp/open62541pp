@@ -128,7 +128,7 @@ public:
     RequestHeader(
         NodeId authenticationToken,
         DateTime timestamp,
-        uint32_t requestHandle,
+        IntegerId requestHandle,
         uint32_t returnDiagnostics,
         std::string_view auditEntryId,
         uint32_t timeoutHint,
@@ -145,7 +145,7 @@ public:
 
     UAPP_GETTER_WRAPPER(NodeId, getAuthenticationToken, authenticationToken)
     UAPP_GETTER_WRAPPER(DateTime, getTimestamp, timestamp)
-    UAPP_GETTER(uint32_t, getRequestHandle, requestHandle)
+    UAPP_GETTER(IntegerId, getRequestHandle, requestHandle)
     UAPP_GETTER(uint32_t, getReturnDiagnostics, returnDiagnostics)
     UAPP_GETTER_WRAPPER(String, getAuditEntryId, auditEntryId)
     UAPP_GETTER(uint32_t, getTimeoutHint, timeoutHint)
@@ -161,7 +161,7 @@ public:
     using TypeWrapper::TypeWrapper;
 
     UAPP_GETTER_WRAPPER(DateTime, getTimestamp, timestamp)
-    UAPP_GETTER(uint32_t, getRequestHandle, requestHandle)
+    UAPP_GETTER(IntegerId, getRequestHandle, requestHandle)
     UAPP_GETTER(StatusCode, getServiceResult, serviceResult)
     UAPP_GETTER_WRAPPER(DiagnosticInfo, getServiceDiagnostics, serviceDiagnostics)
     UAPP_GETTER_SPAN_WRAPPER(String, getStringTable, stringTable, stringTableSize)
@@ -1922,9 +1922,9 @@ public:
     using TypeWrapper::TypeWrapper;
 
     UAPP_GETTER_WRAPPER(StatusCode, getStatusCode, statusCode);
-    UAPP_GETTER(uint32_t, getMonitoredItemId, monitoredItemId);
+    UAPP_GETTER(IntegerId, getMonitoredItemId, monitoredItemId);
     UAPP_GETTER(double, getRevisedSamplingInterval, revisedSamplingInterval);
-    UAPP_GETTER(uint32_t, getRevisedQueueSize, revisedQueueSize);
+    UAPP_GETTER(IntegerId, getRevisedQueueSize, revisedQueueSize);
     UAPP_GETTER_WRAPPER(ExtensionObject, getFilterResult, filterResult);
 };
 
@@ -1939,7 +1939,7 @@ public:
 
     CreateMonitoredItemsRequest(
         RequestHeader requestHeader,
-        uint32_t subscriptionId,
+        IntegerId subscriptionId,
         TimestampsToReturn timestampsToReturn,
         Span<const MonitoredItemCreateRequest> itemsToCreate
     ) {
@@ -1951,7 +1951,7 @@ public:
     }
 
     UAPP_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
-    UAPP_GETTER(uint32_t, getSubscriptionId, subscriptionId)
+    UAPP_GETTER(IntegerId, getSubscriptionId, subscriptionId)
     UAPP_GETTER_CAST(TimestampsToReturn, getTimestampsToReturn, timestampsToReturn)
     UAPP_GETTER_SPAN_WRAPPER(
         MonitoredItemCreateRequest, getItemsToCreate, itemsToCreate, itemsToCreateSize
@@ -1983,12 +1983,14 @@ class MonitoredItemModifyRequest
 public:
     using TypeWrapper::TypeWrapper;
 
-    MonitoredItemModifyRequest(uint32_t monitoredItemId, MonitoringParameters requestedParameters) {
+    MonitoredItemModifyRequest(
+        IntegerId monitoredItemId, MonitoringParameters requestedParameters
+    ) {
         handle()->monitoredItemId = monitoredItemId;
         handle()->requestedParameters = detail::toNative(std::move(requestedParameters));
     }
 
-    UAPP_GETTER(uint32_t, getMonitoredItemId, monitoredItemId);
+    UAPP_GETTER(IntegerId, getMonitoredItemId, monitoredItemId);
     UAPP_GETTER_WRAPPER(MonitoringParameters, getRequestedParameters, requestedParameters)
 };
 
@@ -2018,7 +2020,7 @@ public:
 
     ModifyMonitoredItemsRequest(
         RequestHeader requestHeader,
-        uint32_t subscriptionId,
+        IntegerId subscriptionId,
         TimestampsToReturn timestampsToReturn,
         Span<const MonitoredItemModifyRequest> itemsToModify
     ) {
@@ -2030,7 +2032,7 @@ public:
     }
 
     UAPP_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
-    UAPP_GETTER(uint32_t, getSubscriptionId, subscriptionId)
+    UAPP_GETTER(IntegerId, getSubscriptionId, subscriptionId)
     UAPP_GETTER_CAST(TimestampsToReturn, getTimestampsToReturn, timestampsToReturn)
     UAPP_GETTER_SPAN_WRAPPER(
         MonitoredItemModifyRequest, getItemsToModify, itemsToModify, itemsToModifySize
@@ -2064,9 +2066,9 @@ public:
 
     SetMonitoringModeRequest(
         RequestHeader requestHeader,
-        uint32_t subscriptionId,
+        IntegerId subscriptionId,
         MonitoringMode monitoringMode,
-        Span<const uint32_t> monitoredItemIds
+        Span<const IntegerId> monitoredItemIds
     ) {
         handle()->requestHeader = detail::toNative(std::move(requestHeader));
         handle()->subscriptionId = subscriptionId;
@@ -2076,9 +2078,9 @@ public:
     }
 
     UAPP_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
-    UAPP_GETTER(uint32_t, getSubscriptionId, subscriptionId)
+    UAPP_GETTER(IntegerId, getSubscriptionId, subscriptionId)
     UAPP_GETTER_CAST(MonitoringMode, getMonitoringMode, monitoringMode)
-    UAPP_GETTER_SPAN(uint32_t, getMonitoredItemIds, monitoredItemIds, monitoredItemIdsSize)
+    UAPP_GETTER_SPAN(IntegerId, getMonitoredItemIds, monitoredItemIds, monitoredItemIdsSize)
 };
 
 /**
@@ -2108,10 +2110,10 @@ public:
 
     SetTriggeringRequest(
         RequestHeader requestHeader,
-        uint32_t subscriptionId,
-        uint32_t triggeringItemId,
-        Span<const uint32_t> linksToAdd,
-        Span<const uint32_t> linksToRemove
+        IntegerId subscriptionId,
+        IntegerId triggeringItemId,
+        Span<const IntegerId> linksToAdd,
+        Span<const IntegerId> linksToRemove
     ) {
         handle()->requestHeader = detail::toNative(std::move(requestHeader));
         handle()->subscriptionId = subscriptionId;
@@ -2123,10 +2125,10 @@ public:
     }
 
     UAPP_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
-    UAPP_GETTER(uint32_t, getSubscriptionId, subscriptionId)
-    UAPP_GETTER(uint32_t, getTriggeringItemId, triggeringItemId)
-    UAPP_GETTER_SPAN(uint32_t, getLinksToAdd, linksToAdd, linksToAddSize)
-    UAPP_GETTER_SPAN(uint32_t, getLinksToRemove, linksToRemove, linksToRemoveSize)
+    UAPP_GETTER(IntegerId, getSubscriptionId, subscriptionId)
+    UAPP_GETTER(IntegerId, getTriggeringItemId, triggeringItemId)
+    UAPP_GETTER_SPAN(IntegerId, getLinksToAdd, linksToAdd, linksToAddSize)
+    UAPP_GETTER_SPAN(IntegerId, getLinksToRemove, linksToRemove, linksToRemoveSize)
 };
 
 /**
@@ -2159,7 +2161,9 @@ public:
     using TypeWrapper::TypeWrapper;
 
     DeleteMonitoredItemsRequest(
-        RequestHeader requestHeader, uint32_t subscriptionId, Span<const uint32_t> monitoredItemIds
+        RequestHeader requestHeader,
+        IntegerId subscriptionId,
+        Span<const IntegerId> monitoredItemIds
     ) {
         handle()->requestHeader = detail::toNative(std::move(requestHeader));
         handle()->subscriptionId = subscriptionId;
@@ -2168,8 +2172,8 @@ public:
     }
 
     UAPP_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
-    UAPP_GETTER(uint32_t, getSubscriptionId, subscriptionId)
-    UAPP_GETTER_SPAN(uint32_t, getMonitoredItemIds, monitoredItemIds, monitoredItemIdsSize)
+    UAPP_GETTER(IntegerId, getSubscriptionId, subscriptionId)
+    UAPP_GETTER_SPAN(IntegerId, getMonitoredItemIds, monitoredItemIds, monitoredItemIdsSize)
 };
 
 /**
@@ -2234,7 +2238,7 @@ public:
     using TypeWrapper::TypeWrapper;
 
     UAPP_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
-    UAPP_GETTER(uint32_t, getSubscriptionId, subscriptionId)
+    UAPP_GETTER(IntegerId, getSubscriptionId, subscriptionId)
     UAPP_GETTER(bool, getRevisedPublishingInterval, revisedPublishingInterval)
     UAPP_GETTER(uint32_t, getRevisedLifetimeCount, revisedLifetimeCount)
     UAPP_GETTER(uint32_t, getRevisedMaxKeepAliveCount, revisedMaxKeepAliveCount)
@@ -2251,7 +2255,7 @@ public:
 
     ModifySubscriptionRequest(
         RequestHeader requestHeader,
-        uint32_t subscriptionId,
+        IntegerId subscriptionId,
         double requestedPublishingInterval,
         uint32_t requestedLifetimeCount,
         uint32_t requestedMaxKeepAliveCount,
@@ -2268,7 +2272,7 @@ public:
     }
 
     UAPP_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
-    UAPP_GETTER(uint32_t, getSubscriptionId, subscriptionId)
+    UAPP_GETTER(IntegerId, getSubscriptionId, subscriptionId)
     UAPP_GETTER(double, getRequestedPublishingInterval, requestedPublishingInterval)
     UAPP_GETTER(uint32_t, getRequestedLifetimeCount, requestedLifetimeCount)
     UAPP_GETTER(uint32_t, getRequestedMaxKeepAliveCount, requestedMaxKeepAliveCount)
@@ -2301,7 +2305,7 @@ public:
     using TypeWrapper::TypeWrapper;
 
     SetPublishingModeRequest(
-        RequestHeader requestHeader, bool publishingEnabled, Span<const uint32_t> subscriptionIds
+        RequestHeader requestHeader, bool publishingEnabled, Span<const IntegerId> subscriptionIds
     ) {
         handle()->requestHeader = detail::toNative(std::move(requestHeader));
         handle()->publishingEnabled = publishingEnabled;
@@ -2311,7 +2315,7 @@ public:
 
     UAPP_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
     UAPP_GETTER(bool, getPublishingEnabled, publishingEnabled)
-    UAPP_GETTER_SPAN(uint32_t, getSubscriptionIds, subscriptionIds, subscriptionIdsSize)
+    UAPP_GETTER_SPAN(IntegerId, getSubscriptionIds, subscriptionIds, subscriptionIdsSize)
 };
 
 /**
@@ -2352,14 +2356,14 @@ class DeleteSubscriptionsRequest
 public:
     using TypeWrapper::TypeWrapper;
 
-    DeleteSubscriptionsRequest(RequestHeader requestHeader, Span<const uint32_t> subscriptionIds) {
+    DeleteSubscriptionsRequest(RequestHeader requestHeader, Span<const IntegerId> subscriptionIds) {
         handle()->requestHeader = detail::toNative(std::move(requestHeader));
         handle()->subscriptionIdsSize = subscriptionIds.size();
         handle()->subscriptionIds = detail::toNativeArray(subscriptionIds);
     }
 
     UAPP_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
-    UAPP_GETTER_SPAN(uint32_t, getSubscriptionIds, subscriptionIds, subscriptionIdsSize)
+    UAPP_GETTER_SPAN(IntegerId, getSubscriptionIds, subscriptionIds, subscriptionIdsSize)
 };
 
 /**

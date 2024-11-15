@@ -100,7 +100,7 @@ TEST_CASE_TEMPLATE("Subscription service set", T, Client, Async<Client>) {
 
     SUBCASE("deleteSubscription with callback") {
         bool deleted = false;
-        const auto deleteCallback = [&](uint32_t) { deleted = true; };
+        const auto deleteCallback = [&](IntegerId) { deleted = true; };
         const auto subId =
             services::createSubscription(connection, parameters, true, {}, deleteCallback)
                 .getSubscriptionId();

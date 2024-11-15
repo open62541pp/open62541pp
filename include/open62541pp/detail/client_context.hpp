@@ -8,6 +8,7 @@
 #include <utility>  // pair
 #include <vector>
 
+#include "open62541pp/common.hpp"  // IntegerId
 #include "open62541pp/config.hpp"
 #include "open62541pp/datatype.hpp"
 #include "open62541pp/detail/contextmap.hpp"
@@ -37,9 +38,9 @@ struct ClientContext {
     std::unique_ptr<UA_DataTypeArray> dataTypeArray;
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
-    using SubId = uint32_t;
-    using MonId = uint32_t;
-    using SubMonId = std::pair<uint32_t, uint32_t>;
+    using SubId = IntegerId;
+    using MonId = IntegerId;
+    using SubMonId = std::pair<SubId, MonId>;
     ContextMap<SubId, services::detail::SubscriptionContext> subscriptions;
     ContextMap<SubMonId, services::detail::MonitoredItemContext> monitoredItems;
 #endif
