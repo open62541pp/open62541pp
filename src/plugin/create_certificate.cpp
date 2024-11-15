@@ -11,7 +11,7 @@
 #include "open62541pp/exception.hpp"
 #include "open62541pp/plugin/log_default.hpp"
 
-namespace opcua::crypto {
+namespace opcua {
 
 static_assert(static_cast<int>(CertificateFormat::DER) == UA_CERTIFICATEFORMAT_DER);
 static_assert(static_cast<int>(CertificateFormat::PEM) == UA_CERTIFICATEFORMAT_PEM);
@@ -64,6 +64,6 @@ CreateCertificateResult createCertificate(
     return result;
 }
 
-}  // namespace opcua::crypto
+}  // namespace opcua
 
 #endif
