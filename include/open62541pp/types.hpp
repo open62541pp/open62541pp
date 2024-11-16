@@ -616,6 +616,8 @@ public:
     NodeId(NamespaceIndex namespaceIndex, ByteString identifier) noexcept {
         handle()->namespaceIndex = namespaceIndex;
         handle()->identifierType = UA_NODEIDTYPE_BYTESTRING;
+        // force zero-initialization, only first member of identifier union is zero-initialized
+        handle()->identifier.byteString = {};  // NOLINT
         asWrapper<ByteString>(handle()->identifier.byteString) = std::move(identifier);  // NOLINT
     }
 
