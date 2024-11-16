@@ -718,6 +718,29 @@ public:
     /// Get identifier variant.
     [[deprecated("use identifier<T>() or identifierIf<T>() instead")]]
     std::variant<uint32_t, String, Guid, ByteString> getIdentifier() const {
+        return getIdentifierImpl();
+    }
+
+    /// Get identifier by template type.
+    template <typename T>
+    [[deprecated("use identifier<T>() or identifierIf<T>() instead")]]
+    auto getIdentifierAs() const {
+        return getIdentifierAsImpl<T>();
+    }
+
+    /// Get identifier by NodeIdType enum.
+    template <NodeIdType E>
+    [[deprecated("use identifier<T>() or identifierIf<T>() instead")]]
+    auto getIdentifierAs() const {
+        return getIdentifierAsImpl<E>();
+    }
+
+    /// Encode NodeId as a string like `ns=1;s=SomeNode`.
+    /// @see https://reference.opcfoundation.org/Core/Part6/v105/docs/5.3.1.10
+    std::string toString() const;
+
+private:
+    std::variant<uint32_t, String, Guid, ByteString> getIdentifierImpl() const {
         switch (handle()->identifierType) {
         case UA_NODEIDTYPE_NUMERIC:
             return handle()->identifier.numeric;  // NOLINT
@@ -732,34 +755,26 @@ public:
         }
     }
 
-    /// Get identifier by template type.
     template <typename T>
-    [[deprecated("use identifier<T>() or identifierIf<T>() instead")]]
-    auto getIdentifierAs() const {
-        return std::get<T>(getIdentifier());
+    auto getIdentifierAsImpl() const {
+        return std::get<T>(getIdentifierImpl());
     }
 
-    /// Get identifier by NodeIdType enum.
     template <NodeIdType E>
-    [[deprecated("use identifier<T>() or identifierIf<T>() instead")]]
-    auto getIdentifierAs() const {
+    auto getIdentifierAsImpl() const {
         if constexpr (E == NodeIdType::Numeric) {
-            return getIdentifierAs<uint32_t>();
+            return getIdentifierAsImpl<uint32_t>();
         }
         if constexpr (E == NodeIdType::String) {
-            return getIdentifierAs<String>();
+            return getIdentifierAsImpl<String>();
         }
         if constexpr (E == NodeIdType::Guid) {
-            return getIdentifierAs<Guid>();
+            return getIdentifierAsImpl<Guid>();
         }
         if constexpr (E == NodeIdType::ByteString) {
-            return getIdentifierAs<ByteString>();
+            return getIdentifierAsImpl<ByteString>();
         }
     }
-
-    /// Encode NodeId as a string like `ns=1;s=SomeNode`.
-    /// @see https://reference.opcfoundation.org/Core/Part6/v105/docs/5.3.1.10
-    std::string toString() const;
 };
 
 inline bool operator==(const UA_NodeId& lhs, const UA_NodeId& rhs) noexcept {
