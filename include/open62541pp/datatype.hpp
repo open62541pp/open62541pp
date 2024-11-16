@@ -74,7 +74,7 @@ public:
 #if UAPP_OPEN62541_VER_GE(1, 2)
         asWrapper<NodeId>(handle()->binaryEncodingId) = std::move(binaryEncodingId);
 #else
-        handle()->binaryEncodingId = binaryEncodingId.getIdentifierAs<uint32_t>();
+        handle()->binaryEncodingId = binaryEncodingId.identifier<uint32_t>();
 #endif
     }
 
