@@ -73,6 +73,26 @@ TEST_CASE("Wrapper") {
         Wrapper<S> wrapper(S{11});
         CHECK(wrapper->value == 11);
     }
+
+    SUBCASE("Zero-initialize unions or structs with unions") {
+        union U {
+            char c;  // braced-initialization will only zero-initialize c
+            int i;
+        };
+
+        struct S {
+            U u;
+        };
+
+        SUBCASE("Union") {
+            Wrapper<U> wrapper;
+            CHECK(wrapper->i == 0);  // NOLINT
+        }
+        SUBCASE("Struct with union") {
+            Wrapper<S> wrapper;
+            CHECK(wrapper->u.i == 0);  // NOLINT
+        }
+    }
 }
 
 TEST_CASE("asWrapper / asNative") {

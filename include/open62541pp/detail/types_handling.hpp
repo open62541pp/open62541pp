@@ -59,13 +59,24 @@ constexpr bool isValidTypeCombination(const UA_DataType& type) {
 }
 
 template <typename T>
+constexpr void init(T& native) noexcept {
+    // caution: braced initialization will only zero-initialize the first member of a union
+    // use memset for unions or structs that may contain unions
+    if constexpr (std::is_union_v<T> || std::is_class_v<T>) {
+        std::memset(&native, 0, sizeof(T));
+    } else {
+        native = {};
+    }
+}
+
+template <typename T>
 constexpr void clear(T& native, const UA_DataType& type) noexcept {
     assert(isValidTypeCombination<T>(type));
     // NOLINTNEXTLINE(bugprone-branch-clone)
     if constexpr (isPointerFree<T>) {
-        native = {};
+        init(native);
     } else if (isBorrowed(native)) {
-        native = {};
+        init(native);
     } else {
         UA_clear(&native, &type);
     }

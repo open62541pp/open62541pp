@@ -3,6 +3,8 @@
 #include <type_traits>
 #include <utility>  // move
 
+#include "open62541pp/detail/types_handling.hpp"
+
 namespace opcua {
 
 /**
@@ -36,7 +38,9 @@ public:
 
     using NativeType = T;
 
-    constexpr Wrapper() noexcept = default;
+    constexpr Wrapper() noexcept {
+        detail::init(native());
+    }
 
     /// Copy constructor with native object.
     constexpr explicit Wrapper(const T& native) noexcept
@@ -108,7 +112,7 @@ protected:
     }
 
 private:
-    T native_{};
+    T native_;
 };
 
 /* -------------------------------------------- Trait ------------------------------------------- */
