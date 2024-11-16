@@ -598,18 +598,11 @@ public:
         handle()->identifier.numeric = identifier;  // NOLINT
     }
 
-    /// Create NodeId with String identifier from standard strings.
+    /// Create NodeId with String identifier.
     NodeId(NamespaceIndex namespaceIndex, std::string_view identifier) {
         handle()->namespaceIndex = namespaceIndex;
         handle()->identifierType = UA_NODEIDTYPE_STRING;
         handle()->identifier.string = detail::allocNativeString(identifier);  // NOLINT
-    }
-
-    /// Create NodeId with String identifier from String wrapper class.
-    NodeId(NamespaceIndex namespaceIndex, String identifier) noexcept {
-        handle()->namespaceIndex = namespaceIndex;
-        handle()->identifierType = UA_NODEIDTYPE_STRING;
-        handle()->identifier.string = std::exchange(asNative(identifier), {});  // NOLINT
     }
 
     /// Create NodeId with Guid identifier.
@@ -623,7 +616,7 @@ public:
     NodeId(NamespaceIndex namespaceIndex, ByteString identifier) noexcept {
         handle()->namespaceIndex = namespaceIndex;
         handle()->identifierType = UA_NODEIDTYPE_BYTESTRING;
-        handle()->identifier.byteString = std::exchange(asNative(identifier), {});  // NOLINT
+        asWrapper<ByteString>(handle()->identifier.byteString) = std::move(identifier);  // NOLINT
     }
 
     /// Create NodeId from enum class with numeric identifiers like `opcua::ObjectId`.
