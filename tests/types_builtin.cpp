@@ -405,7 +405,6 @@ TEST_CASE("NodeId") {
         CHECK(*id.identifierIf<Guid>() == guid);
     }
 
-#ifndef __APPLE__  // weird SIGABRT in macOS test runner
     SUBCASE("ByteString identifier") {
         ByteString byteStr("Test789");
         NodeId id(4, byteStr);
@@ -415,7 +414,6 @@ TEST_CASE("NodeId") {
         CHECK(id.identifierIf<ByteString>() != nullptr);
         CHECK(*id.identifierIf<ByteString>() == byteStr);
     }
-#endif
 
     SUBCASE("Construct from node id enums") {
         CHECK(NodeId(DataTypeId::Boolean) == NodeId(0, UA_NS0ID_BOOLEAN));
