@@ -21,8 +21,10 @@ static AccessControlBase& getAdapter(UA_AccessControl* ac) {
 
 template <typename WrapperType, typename NativeType = typename WrapperType::NativeType>
 static const WrapperType& asWrapperRef(const NativeType* nativePtr) {
-    static const WrapperType empty;
-    return nativePtr == nullptr ? empty : asWrapper<WrapperType>(*nativePtr);
+    static constexpr NativeType empty{};
+    return nativePtr == nullptr
+        ? asWrapper<WrapperType>(empty)
+        : asWrapper<WrapperType>(*nativePtr);
 }
 
 static std::optional<Session> getSession(UA_Server* server, const UA_NodeId* sessionId) noexcept {

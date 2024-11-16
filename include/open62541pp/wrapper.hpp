@@ -1,9 +1,8 @@
 #pragma once
 
+#include <cstring>  // memset
 #include <type_traits>
 #include <utility>  // move
-
-#include "open62541pp/detail/types_handling.hpp"
 
 namespace opcua {
 
@@ -39,7 +38,9 @@ public:
     using NativeType = T;
 
     constexpr Wrapper() noexcept {
-        detail::init(native());
+        // caution: braced initialization will only zero-initialize the first member of a union
+        // use memset for unions or structs that may contain unions
+        std::memset(&native_, 0, sizeof(T));
     }
 
     /// Copy constructor with native object.
@@ -52,13 +53,13 @@ public:
 
     /// Copy assignment with native object.
     constexpr Wrapper& operator=(const T& native) noexcept {
-        this->native() = native;
+        native_ = native;
         return *this;
     }
 
     /// Move assignment with native object.
     constexpr Wrapper& operator=(T&& native) noexcept {
-        this->native() = std::move(native);
+        native_ = std::move(native);
         return *this;
     }
 
@@ -94,12 +95,12 @@ public:
 
     /// Swap with wrapper object.
     constexpr void swap(Wrapper& other) noexcept {
-        std::swap(this->native(), other.native());
+        std::swap(native_, other.native_);
     }
 
     /// Swap with native object.
     constexpr void swap(T& native) noexcept {
-        std::swap(this->native(), native);
+        std::swap(native_, native);
     }
 
 protected:
@@ -112,7 +113,7 @@ protected:
     }
 
 private:
-    T native_;
+    T native_{};
 };
 
 /* -------------------------------------------- Trait ------------------------------------------- */
