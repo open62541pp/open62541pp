@@ -18,6 +18,11 @@ struct CreateCertificateResult {
     ByteString certificate;
 };
 
+class CreateCertificateError : public std::runtime_error {
+public:
+    using runtime_error::runtime_error;  // inherit constructors
+};
+
 /**
  * Create a self-signed X.509 v3 certificate.
  *
