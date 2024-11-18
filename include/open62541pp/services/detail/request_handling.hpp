@@ -4,7 +4,7 @@
 #include <type_traits>  // remove_const_t
 #include <vector>
 
-#include "open62541pp/common.hpp"  // AttributeId, TimestampsToReturn, MonitoringMode
+#include "open62541pp/common.hpp"  // AttributeId
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/detail/string_utils.hpp"  // toNativeString
 #include "open62541pp/span.hpp"
