@@ -2461,6 +2461,147 @@ enum class PerformUpdateType : int32_t {
     // clang-format on
 };
 
+/* ----------------------------------------- DataAccess ----------------------------------------- */
+
+#ifdef UA_ENABLE_DA
+
+/**
+ * UA_Range wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part8/v105/docs/5.6.2
+ */
+class Range : public TypeWrapper<UA_Range, UA_TYPES_RANGE> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    Range(double low, double high) noexcept {
+        handle()->low = low;
+        handle()->high = high;
+    }
+
+    UAPP_GETTER(double, getLow, low)
+    UAPP_GETTER(double, getHigh, high)
+};
+
+/**
+ * UA_EUInformation wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part8/v105/docs/5.6.3
+ */
+class EUInformation : public TypeWrapper<UA_EUInformation, UA_TYPES_EUINFORMATION> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    EUInformation(
+        std::string_view namespaceUri,
+        int32_t unitId,
+        LocalizedText displayName,
+        LocalizedText description
+    ) {
+        handle()->namespaceUri = detail::toNative(namespaceUri);
+        handle()->unitId = unitId;
+        handle()->displayName = detail::toNative(std::move(displayName));
+        handle()->description = detail::toNative(std::move(description));
+    }
+
+    UAPP_GETTER_WRAPPER(String, getNamespaceUri, namespaceUri)
+    UAPP_GETTER(int32_t, getUnitId, unitId)
+    UAPP_GETTER_WRAPPER(LocalizedText, getDisplayName, displayName)
+    UAPP_GETTER_WRAPPER(LocalizedText, getDescription, description)
+};
+
+/**
+ * UA_ComplexNumberType wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part8/v105/docs/5.6.4
+ */
+class ComplexNumberType : public TypeWrapper<UA_ComplexNumberType, UA_TYPES_COMPLEXNUMBERTYPE> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    ComplexNumberType(float real, float imaginary) noexcept {
+        handle()->real = real;
+        handle()->imaginary = imaginary;
+    }
+
+    UAPP_GETTER(float, getReal, real)
+    UAPP_GETTER(float, getImaginary, imaginary)
+};
+
+/**
+ * UA_DoubleComplexNumberType wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part8/v105/docs/5.6.5
+ */
+class DoubleComplexNumberType
+    : public TypeWrapper<UA_DoubleComplexNumberType, UA_TYPES_DOUBLECOMPLEXNUMBERTYPE> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    DoubleComplexNumberType(double real, double imaginary) noexcept {
+        handle()->real = real;
+        handle()->imaginary = imaginary;
+    }
+
+    UAPP_GETTER(double, getReal, real)
+    UAPP_GETTER(double, getImaginary, imaginary)
+};
+
+/**
+ * Axis scale.
+ * @see https://reference.opcfoundation.org/Core/Part8/v105/docs/5.6.7
+ */
+enum class AxisScaleEnumeration : int32_t {
+    Linear = 1,
+    Log = 2,
+    Ln = 3,
+};
+
+/**
+ * UA_AxisInformation wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part8/v105/docs/5.6.6
+ */
+class AxisInformation : public TypeWrapper<UA_AxisInformation, UA_TYPES_AXISINFORMATION> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    AxisInformation(
+        EUInformation engineeringUnits,
+        Range eURange,
+        LocalizedText title,
+        AxisScaleEnumeration axisScaleType,
+        Span<const double> axisSteps
+    ) {
+        handle()->engineeringUnits = detail::toNative(std::move(engineeringUnits));
+        handle()->eURange = detail::toNative(std::move(eURange));
+        handle()->title = detail::toNative(std::move(title));
+        handle()->axisScaleType = static_cast<UA_AxisScaleEnumeration>(axisScaleType);
+        handle()->axisStepsSize = axisSteps.size();
+        handle()->axisSteps = detail::toNativeArray(axisSteps);
+    }
+
+    UAPP_GETTER_WRAPPER(EUInformation, getEngineeringUnits, engineeringUnits)
+    UAPP_GETTER_WRAPPER(Range, getEURange, eURange)
+    UAPP_GETTER_WRAPPER(LocalizedText, getTitle, title)
+    UAPP_GETTER_CAST(AxisScaleEnumeration, getAxisScaleType, axisScaleType)
+    UAPP_GETTER_SPAN(double, getAxisSteps, axisSteps, axisStepsSize)
+};
+
+/**
+ * UA_XVType wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part8/v105/docs/5.6.8
+ */
+class XVType : public TypeWrapper<UA_XVType, UA_TYPES_XVTYPE> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    XVType(double x, float value) noexcept {
+        handle()->x = x;
+        handle()->value = value;
+    }
+
+    UAPP_GETTER(double, getX, x)
+    UAPP_GETTER(float, getValue, value)
+};
+
+#endif  // UA_ENABLE_DA
+
 /* -------------------------------------- Type description -------------------------------------- */
 
 #ifdef UA_ENABLE_TYPEDESCRIPTION
