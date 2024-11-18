@@ -8,7 +8,7 @@
 #include <variant>
 
 #include "open62541pp/bitmask.hpp"
-#include "open62541pp/common.hpp"  // AttributeId, TimestampsToReturn, ...
+#include "open62541pp/common.hpp"  // AttributeId, ...
 #include "open62541pp/config.hpp"
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/detail/traits.hpp"  // IsOneOf
@@ -170,6 +170,20 @@ public:
     UAPP_GETTER_WRAPPER(DiagnosticInfo, getServiceDiagnostics, serviceDiagnostics)
     UAPP_GETTER_SPAN_WRAPPER(String, getStringTable, stringTable, stringTableSize)
     UAPP_GETTER_WRAPPER(ExtensionObject, getAdditionalHeader, additionalHeader)
+};
+
+/**
+ * Message security mode.
+ * @see UA_MessageSecurityMode
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.20
+ */
+enum class MessageSecurityMode : int32_t {
+    // clang-format off
+    Invalid        = 0,  ///< Will always be rejected
+    None           = 1,  ///< No security applied
+    Sign           = 2,  ///< All messages are signed but not encrypted
+    SignAndEncrypt = 3,  ///< All messages are signed and encrypted
+    // clang-format on
 };
 
 /**
@@ -954,6 +968,21 @@ public:
 };
 
 /**
+ * Browse direction.
+ * An enumeration that specifies the direction of references to follow.
+ * @see UA_BrowseDirection
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.5
+ */
+enum class BrowseDirection : int32_t {
+    // clang-format off
+    Forward = 0,
+    Inverse = 1,
+    Both    = 2,
+    Invalid = 3,
+    // clang-format on
+};
+
+/**
  * Browse result mask.
  *
  * The enum can be used as a bitmask and allows bitwise operations, e.g.:
@@ -1302,6 +1331,21 @@ public:
 };
 
 /**
+ * Timestamps to return.
+ * @see UA_TimestampsToReturn
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.40
+ */
+enum class TimestampsToReturn : int32_t {
+    // clang-format off
+    Source   = 0,
+    Server   = 1,
+    Both     = 2,
+    Neither  = 3,
+    Invalid  = 4,
+    // clang-format on
+};
+
+/**
  * UA_ReadValueId wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.29
  */
@@ -1570,6 +1614,19 @@ public:
 /* ---------------------------------------- Subscriptions --------------------------------------- */
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
+
+/**
+ * Monitoring mode.
+ * @see UA_MonitoringMode
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.23
+ */
+enum class MonitoringMode : int32_t {
+    // clang-format off
+    Disabled  = 0,
+    Sampling  = 1,
+    Reporting = 2,
+    // clang-format on
+};
 
 /**
  * Filter operator.

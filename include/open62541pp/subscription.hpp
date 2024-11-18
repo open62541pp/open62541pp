@@ -4,7 +4,7 @@
 #include <utility>  // move
 #include <vector>
 
-#include "open62541pp/common.hpp"  // AttributeId, MonitoringMode
+#include "open62541pp/common.hpp"  // AttributeId
 #include "open62541pp/config.hpp"
 #include "open62541pp/monitoreditem.hpp"
 #include "open62541pp/services/monitoreditem.hpp"

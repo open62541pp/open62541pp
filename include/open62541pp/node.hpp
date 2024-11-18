@@ -6,7 +6,7 @@
 #include <vector>
 
 #include "open62541pp/bitmask.hpp"
-#include "open62541pp/common.hpp"  // BrowseDirection
+#include "open62541pp/common.hpp"
 #include "open62541pp/config.hpp"
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/exception.hpp"
