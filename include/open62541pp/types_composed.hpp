@@ -2463,7 +2463,7 @@ enum class PerformUpdateType : int32_t {
 
 /* ----------------------------------------- DataAccess ----------------------------------------- */
 
-#ifdef UA_ENABLE_DA
+#if UAPP_HAS_DATAACCESS
 
 /**
  * UA_Range wrapper class.
@@ -2600,7 +2600,7 @@ public:
     UAPP_GETTER(float, getValue, value)
 };
 
-#endif  // UA_ENABLE_DA
+#endif  // UAPP_HAS_DATAACCESS
 
 /* -------------------------------------- Type description -------------------------------------- */
 

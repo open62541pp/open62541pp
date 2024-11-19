@@ -630,7 +630,7 @@ TEST_CASE("DeleteSubscriptionsRequest") {
 
 #endif
 
-#ifdef UA_ENABLE_DA
+#if UAPP_HAS_DATAACCESS
 
 TEST_CASE("Range") {
     const Range range(1.1, 2.2);
