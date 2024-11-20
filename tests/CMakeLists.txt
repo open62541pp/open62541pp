@@ -35,8 +35,8 @@ add_executable(
     typeconverter.cpp
     typeregistry.cpp
     types_builtin.cpp
-    types_composed.cpp
     types_handling.cpp
+    ua_types.cpp
     wrapper.cpp
 )
 target_link_libraries(
