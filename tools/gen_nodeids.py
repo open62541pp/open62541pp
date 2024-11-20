@@ -5,7 +5,7 @@ from subprocess import check_call
 
 URL = "http://www.opcfoundation.org/UA/schemas/1.04/NodeIds.csv"
 HERE = Path(__file__).parent
-HEADER_FILE = HERE.parent / "include" / "open62541pp" / "nodeids.hpp"
+HEADER_FILE = HERE.parent / "include" / "open62541pp" / "ua" / "nodeids.hpp"
 
 TEMPLATE_HEADER = """
 /* ---------------------------------------------------------------------------------------------- */
@@ -26,6 +26,7 @@ TEMPLATE_HEADER = """
 #endif
 
 namespace opcua {{
+inline namespace ua {{
 
 /**
  * @defgroup NodeIds Generated NodeIds
@@ -39,6 +40,7 @@ namespace opcua {{
 
 // clang-format on
 
+}}  // namespace ua
 }}  // namespace opcua
 
 #ifndef _MSC_VER

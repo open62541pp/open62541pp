@@ -10,7 +10,7 @@
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/services/detail/response_handling.hpp"
 #include "open62541pp/services/detail/subscription_context.hpp"
-#include "open62541pp/types_composed.hpp"
+#include "open62541pp/ua/types.hpp"
 
 namespace opcua::services {
 

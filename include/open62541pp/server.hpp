@@ -13,11 +13,11 @@
 #include "open62541pp/detail/open62541/server.h"
 #include "open62541pp/detail/server_utils.hpp"
 #include "open62541pp/event.hpp"
-#include "open62541pp/nodeids.hpp"
 #include "open62541pp/session.hpp"
 #include "open62541pp/span.hpp"
 #include "open62541pp/subscription.hpp"
 #include "open62541pp/types.hpp"
+#include "open62541pp/ua/nodeids.hpp"
 #include "open62541pp/wrapper.hpp"
 
 #include "open62541pp/plugin/accesscontrol.hpp"

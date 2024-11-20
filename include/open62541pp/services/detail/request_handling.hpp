@@ -9,7 +9,7 @@
 #include "open62541pp/detail/string_utils.hpp"  // toNativeString
 #include "open62541pp/span.hpp"
 #include "open62541pp/types.hpp"
-#include "open62541pp/types_composed.hpp"
+#include "open62541pp/ua/types.hpp"
 #include "open62541pp/wrapper.hpp"  // asNative
 
 namespace opcua::services::detail {

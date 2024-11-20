@@ -9,7 +9,6 @@
 #include "open62541pp/common.hpp"  // ModellingRule
 #include "open62541pp/config.hpp"
 #include "open62541pp/detail/open62541/common.h"
-#include "open62541pp/nodeids.hpp"  // *TypeId
 #include "open62541pp/result.hpp"
 #include "open62541pp/services/detail/async_transform.hpp"
 #include "open62541pp/services/detail/client_service.hpp"
@@ -17,7 +16,8 @@
 #include "open62541pp/services/detail/response_handling.hpp"
 #include "open62541pp/span.hpp"
 #include "open62541pp/types.hpp"
-#include "open62541pp/types_composed.hpp"
+#include "open62541pp/ua/nodeids.hpp"  // *TypeId
+#include "open62541pp/ua/types.hpp"
 
 namespace opcua {
 class Client;

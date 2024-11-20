@@ -1,7 +1,7 @@
 #include <doctest/doctest.h>
 
 #include "open62541pp/config.hpp"
-#include "open62541pp/types_composed.hpp"
+#include "open62541pp/ua/types.hpp"
 
 using namespace opcua;
 

@@ -16,6 +16,7 @@
 #endif
 
 namespace opcua {
+inline namespace ua {
 
 /**
  * @defgroup NodeIds Generated NodeIds
@@ -14641,6 +14642,7 @@ constexpr Namespace getNamespace(MethodId /* unused */) noexcept {
 
 // clang-format on
 
+}  // namespace ua
 }  // namespace opcua
 
 #ifndef _MSC_VER

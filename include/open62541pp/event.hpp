@@ -3,8 +3,8 @@
 #include <cstdint>
 #include <string_view>
 
-#include "open62541pp/nodeids.hpp"
 #include "open62541pp/types.hpp"
+#include "open62541pp/ua/nodeids.hpp"
 
 namespace opcua {
 
