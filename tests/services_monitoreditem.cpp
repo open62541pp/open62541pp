@@ -5,12 +5,12 @@
 
 #include "open62541pp/config.hpp"
 #include "open62541pp/event.hpp"
-#include "open62541pp/nodeids.hpp"
 #include "open62541pp/services/attribute_highlevel.hpp"  // writeValue
 #include "open62541pp/services/monitoreditem.hpp"
 #include "open62541pp/services/nodemanagement.hpp"  // addVariable
 #include "open62541pp/services/subscription.hpp"
 #include "open62541pp/types.hpp"
+#include "open62541pp/ua/nodeids.hpp"
 
 #include "helper/server_client_setup.hpp"
 

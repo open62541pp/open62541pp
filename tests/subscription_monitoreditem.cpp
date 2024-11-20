@@ -8,7 +8,7 @@
 #include "open62541pp/monitoreditem.hpp"
 #include "open62541pp/server.hpp"
 #include "open62541pp/subscription.hpp"
-#include "open62541pp/types_composed.hpp"
+#include "open62541pp/ua/types.hpp"
 
 #include "helper/server_client_setup.hpp"
 #include "helper/server_runner.hpp"

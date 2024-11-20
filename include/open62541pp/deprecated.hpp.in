@@ -1,6 +1,6 @@
 #pragma once
 
-#include "open62541pp/Config.h"
+#include "open62541pp/config.hpp"
 #include "open62541pp/${header_new}"
 
 #ifdef __GNUC__

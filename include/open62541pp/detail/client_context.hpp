@@ -15,7 +15,7 @@
 #include "open62541pp/detail/open62541/client.h"  // UA_SessionState, UA_SecureChannelState
 #include "open62541pp/services/detail/monitoreditem_context.hpp"
 #include "open62541pp/services/detail/subscription_context.hpp"
-#include "open62541pp/types_composed.hpp"  // IntegerId
+#include "open62541pp/ua/types.hpp"  // IntegerId
 
 namespace opcua::detail {
 

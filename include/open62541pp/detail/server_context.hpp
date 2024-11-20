@@ -15,7 +15,7 @@
 #include "open62541pp/plugin/nodestore.hpp"
 #include "open62541pp/services/detail/monitoreditem_context.hpp"
 #include "open62541pp/types.hpp"  // NodeId, Variant
-#include "open62541pp/types_composed.hpp"  // IntegerId
+#include "open62541pp/ua/types.hpp"  // IntegerId
 
 namespace opcua::detail {
 

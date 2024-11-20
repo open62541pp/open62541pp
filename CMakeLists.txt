@@ -164,6 +164,8 @@ deprecated_header(TypeRegistryNative.h typeregistry_generated.hpp)
 deprecated_header(TypeWrapper.h typewrapper.hpp)
 deprecated_header(ValueBackend.h plugin/nodestore.hpp)
 deprecated_header(Wrapper.h wrapper.hpp)
+deprecated_header(nodeids.hpp ua/nodeids.hpp)
+deprecated_header(types_composed.hpp ua/types.hpp)
 
 add_library(
     open62541pp
@@ -186,8 +188,8 @@ add_library(
     src/session.cpp
     src/string_utils.cpp
     src/subscription.cpp
-    src/types_builtin.cpp
-    src/types_composed.cpp
+    src/types.cpp
+    src/ua_types.cpp
 )
 add_library(open62541pp::open62541pp ALIAS open62541pp)
 target_include_directories(

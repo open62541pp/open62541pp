@@ -3,7 +3,6 @@
 #include <utility>
 
 #include "open62541pp/async.hpp"
-#include "open62541pp/common.hpp"  // TimestampsToReturn
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/result.hpp"
 #include "open62541pp/services/detail/async_transform.hpp"
@@ -13,7 +12,7 @@
 #include "open62541pp/services/detail/response_handling.hpp"
 #include "open62541pp/span.hpp"
 #include "open62541pp/types.hpp"
-#include "open62541pp/types_composed.hpp"
+#include "open62541pp/ua/types.hpp"
 
 namespace opcua {
 class Client;

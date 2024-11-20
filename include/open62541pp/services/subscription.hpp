@@ -16,7 +16,7 @@
 #include "open62541pp/services/detail/request_handling.hpp"
 #include "open62541pp/services/detail/response_handling.hpp"
 #include "open62541pp/services/detail/subscription_context.hpp"
-#include "open62541pp/types_composed.hpp"  // IntegerId, StatusChangeNotification
+#include "open62541pp/ua/types.hpp"  // IntegerId, StatusChangeNotification
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 

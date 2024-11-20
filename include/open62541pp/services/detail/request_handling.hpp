@@ -4,12 +4,12 @@
 #include <type_traits>  // remove_const_t
 #include <vector>
 
-#include "open62541pp/common.hpp"  // AttributeId, TimestampsToReturn, MonitoringMode
+#include "open62541pp/common.hpp"  // AttributeId
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/detail/string_utils.hpp"  // toNativeString
 #include "open62541pp/span.hpp"
 #include "open62541pp/types.hpp"
-#include "open62541pp/types_composed.hpp"
+#include "open62541pp/ua/types.hpp"
 #include "open62541pp/wrapper.hpp"  // asNative
 
 namespace opcua::services::detail {

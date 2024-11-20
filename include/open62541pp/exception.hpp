@@ -49,11 +49,6 @@ public:
     using TypeError::TypeError;
 };
 
-class CreateCertificateError : public std::runtime_error {
-public:
-    using runtime_error::runtime_error;
-};
-
 namespace detail {
 
 [[nodiscard]] constexpr bool isGood(UA_StatusCode code) noexcept {

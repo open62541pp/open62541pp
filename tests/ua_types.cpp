@@ -1,7 +1,7 @@
 #include <doctest/doctest.h>
 
 #include "open62541pp/config.hpp"
-#include "open62541pp/types_composed.hpp"
+#include "open62541pp/ua/types.hpp"
 
 using namespace opcua;
 
@@ -626,6 +626,59 @@ TEST_CASE("DeleteSubscriptionsRequest") {
     CHECK(request.getSubscriptionIds()[0] == 1);
     CHECK(request.getSubscriptionIds()[1] == 2);
     CHECK(request.getSubscriptionIds()[2] == 3);
+}
+
+#endif
+
+#if UAPP_HAS_DATAACCESS
+
+TEST_CASE("Range") {
+    const Range range(1.1, 2.2);
+    CHECK(range.getLow() == 1.1);
+    CHECK(range.getHigh() == 2.2);
+}
+
+TEST_CASE("EUInformation") {
+    const EUInformation info("namespaceUri", 1, {"", "displayName"}, {"", "description"});
+    CHECK(info.getNamespaceUri() == "namespaceUri");
+    CHECK(info.getUnitId() == 1);
+    CHECK(info.getDisplayName() == LocalizedText("", "displayName"));
+    CHECK(info.getDescription() == LocalizedText("", "description"));
+}
+
+TEST_CASE("ComplexNumberType") {
+    const ComplexNumberType complex(1.1f, 2.2f);
+    CHECK(complex.getReal() == 1.1f);
+    CHECK(complex.getImaginary() == 2.2f);
+}
+
+TEST_CASE("DoubleComplexNumberType") {
+    const DoubleComplexNumberType complex(1.1, 2.2);
+    CHECK(complex.getReal() == 1.1);
+    CHECK(complex.getImaginary() == 2.2);
+}
+
+TEST_CASE("AxisInformation") {
+    const AxisInformation axis(
+        EUInformation("namespaceUri", 1, {}, {}),
+        Range(1.1, 3.3),
+        {"", "title"},
+        AxisScaleEnumeration::Log,
+        {1.1, 2.2, 3.3}
+    );
+    CHECK(axis.getEngineeringUnits().getNamespaceUri() == "namespaceUri");
+    CHECK(axis.getEURange().getLow() == 1.1);
+    CHECK(axis.getEURange().getHigh() == 3.3);
+    CHECK(axis.getTitle() == LocalizedText("", "title"));
+    CHECK(axis.getAxisScaleType() == AxisScaleEnumeration::Log);
+    CHECK(axis.getAxisSteps().size() == 3);
+    CHECK(axis.getAxisSteps()[0] == 1.1);
+}
+
+TEST_CASE("XVType") {
+    const XVType xv(1.1, 2.2f);
+    CHECK(xv.getX() == 1.1);
+    CHECK(xv.getValue() == 2.2f);
 }
 
 #endif

@@ -15,7 +15,7 @@
 #include "open62541pp/span.hpp"
 #include "open62541pp/subscription.hpp"
 #include "open62541pp/types.hpp"
-#include "open62541pp/types_composed.hpp"
+#include "open62541pp/ua/types.hpp"
 #include "open62541pp/wrapper.hpp"
 
 #include "open62541pp/plugin/log.hpp"

@@ -4,8 +4,8 @@
 
 #include "open62541pp/config.hpp"
 #include "open62541pp/detail/string_utils.hpp"  // toNativeString
-#include "open62541pp/nodeids.hpp"
 #include "open62541pp/types.hpp"
+#include "open62541pp/ua/nodeids.hpp"
 
 using namespace opcua;
 

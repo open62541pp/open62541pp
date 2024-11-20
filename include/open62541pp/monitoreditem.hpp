@@ -6,7 +6,7 @@
 #include "open62541pp/config.hpp"
 #include "open62541pp/services/monitoreditem.hpp"
 #include "open62541pp/types.hpp"
-#include "open62541pp/types_composed.hpp"  // IntegerId
+#include "open62541pp/ua/types.hpp"  // IntegerId
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 

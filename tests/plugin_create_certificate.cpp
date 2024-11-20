@@ -20,8 +20,7 @@ TEST_CASE("Create certificate") {
 
     SUBCASE("Invalid subject / subjectAltName") {
         CHECK_THROWS_AS(
-            createCertificate({String{"X=Y"}}, {String{"DNS:localhost"}}),
-            CreateCertificateError
+            createCertificate({String{"X=Y"}}, {String{"DNS:localhost"}}), CreateCertificateError
         );
         CHECK_THROWS_AS(
             createCertificate({String{"C=DE"}}, {String{"X:Y"}}), CreateCertificateError

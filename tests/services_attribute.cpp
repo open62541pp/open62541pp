@@ -3,11 +3,11 @@
 #include <doctest/doctest.h>
 
 #include "open62541pp/config.hpp"
-#include "open62541pp/nodeids.hpp"
 #include "open62541pp/services/attribute.hpp"
 #include "open62541pp/services/attribute_highlevel.hpp"
 #include "open62541pp/services/nodemanagement.hpp"  // add*
-#include "open62541pp/types_composed.hpp"
+#include "open62541pp/ua/nodeids.hpp"
+#include "open62541pp/ua/types.hpp"
 
 #include "helper/server_client_setup.hpp"
 

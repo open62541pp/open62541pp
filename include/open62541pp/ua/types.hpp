@@ -8,17 +8,17 @@
 #include <variant>
 
 #include "open62541pp/bitmask.hpp"
-#include "open62541pp/common.hpp"  // AttributeId, TimestampsToReturn, ...
+#include "open62541pp/common.hpp"  // AttributeId, ...
 #include "open62541pp/config.hpp"
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/detail/traits.hpp"  // IsOneOf
 #include "open62541pp/detail/types_conversion.hpp"  // toNative, toNativeArray
 #include "open62541pp/detail/types_handling.hpp"  // deallocateArray, copyArray
-#include "open62541pp/nodeids.hpp"  // ReferenceTypeId
 #include "open62541pp/span.hpp"
 #include "open62541pp/typeregistry.hpp"  // getDataType
 #include "open62541pp/types.hpp"
 #include "open62541pp/typewrapper.hpp"
+#include "open62541pp/ua/nodeids.hpp"  // ReferenceTypeId
 
 #ifndef UA_DEFAULT_ATTRIBUTES_DEFINED
 #define UA_DEFAULT_ATTRIBUTES_DEFINED
@@ -74,6 +74,7 @@ UA_EXPORT extern const UA_ViewAttributes UA_ViewAttributes_default;
 // NOLINTEND(cppcoreguidelines-macro-usage)
 
 namespace opcua {
+inline namespace ua {
 
 /// IntegerId.
 /// @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.19
@@ -170,6 +171,20 @@ public:
     UAPP_GETTER_WRAPPER(DiagnosticInfo, getServiceDiagnostics, serviceDiagnostics)
     UAPP_GETTER_SPAN_WRAPPER(String, getStringTable, stringTable, stringTableSize)
     UAPP_GETTER_WRAPPER(ExtensionObject, getAdditionalHeader, additionalHeader)
+};
+
+/**
+ * Message security mode.
+ * @see UA_MessageSecurityMode
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.20
+ */
+enum class MessageSecurityMode : int32_t {
+    // clang-format off
+    Invalid        = 0,  ///< Will always be rejected
+    None           = 1,  ///< No security applied
+    Sign           = 2,  ///< All messages are signed but not encrypted
+    SignAndEncrypt = 3,  ///< All messages are signed and encrypted
+    // clang-format on
 };
 
 /**
@@ -282,8 +297,7 @@ enum class NodeAttributesMask : uint32_t {
     // clang-format on
 };
 
-template <>
-struct IsBitmaskEnum<NodeAttributesMask> : std::true_type {};
+constexpr std::true_type isBitmaskEnum(NodeAttributesMask);
 
 // Specifialized macros to generate getters/setters for `UA_*Attribute` classes.
 // The `specifiedAttributes` mask is automatically updated in the setter methods.
@@ -954,6 +968,21 @@ public:
 };
 
 /**
+ * Browse direction.
+ * An enumeration that specifies the direction of references to follow.
+ * @see UA_BrowseDirection
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.5
+ */
+enum class BrowseDirection : int32_t {
+    // clang-format off
+    Forward = 0,
+    Inverse = 1,
+    Both    = 2,
+    Invalid = 3,
+    // clang-format on
+};
+
+/**
  * Browse result mask.
  *
  * The enum can be used as a bitmask and allows bitwise operations, e.g.:
@@ -979,8 +1008,7 @@ enum class BrowseResultMask : uint32_t {
     // clang-format on
 };
 
-template <>
-struct IsBitmaskEnum<BrowseResultMask> : std::true_type {};
+constexpr std::true_type isBitmaskEnum(BrowseResultMask);
 
 /**
  * UA_BrowseDescription wrapper class.
@@ -1302,6 +1330,21 @@ public:
 };
 
 /**
+ * Timestamps to return.
+ * @see UA_TimestampsToReturn
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.40
+ */
+enum class TimestampsToReturn : int32_t {
+    // clang-format off
+    Source   = 0,
+    Server   = 1,
+    Both     = 2,
+    Neither  = 3,
+    Invalid  = 4,
+    // clang-format on
+};
+
+/**
  * UA_ReadValueId wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.29
  */
@@ -1570,6 +1613,19 @@ public:
 /* ---------------------------------------- Subscriptions --------------------------------------- */
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
+
+/**
+ * Monitoring mode.
+ * @see UA_MonitoringMode
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.23
+ */
+enum class MonitoringMode : int32_t {
+    // clang-format off
+    Disabled  = 0,
+    Sampling  = 1,
+    Reporting = 2,
+    // clang-format on
+};
 
 /**
  * Filter operator.
@@ -2404,6 +2460,147 @@ enum class PerformUpdateType : int32_t {
     // clang-format on
 };
 
+/* ----------------------------------------- DataAccess ----------------------------------------- */
+
+#if UAPP_HAS_DATAACCESS
+
+/**
+ * UA_Range wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part8/v105/docs/5.6.2
+ */
+class Range : public TypeWrapper<UA_Range, UA_TYPES_RANGE> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    Range(double low, double high) noexcept {
+        handle()->low = low;
+        handle()->high = high;
+    }
+
+    UAPP_GETTER(double, getLow, low)
+    UAPP_GETTER(double, getHigh, high)
+};
+
+/**
+ * UA_EUInformation wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part8/v105/docs/5.6.3
+ */
+class EUInformation : public TypeWrapper<UA_EUInformation, UA_TYPES_EUINFORMATION> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    EUInformation(
+        std::string_view namespaceUri,
+        int32_t unitId,
+        LocalizedText displayName,
+        LocalizedText description
+    ) {
+        handle()->namespaceUri = detail::toNative(namespaceUri);
+        handle()->unitId = unitId;
+        handle()->displayName = detail::toNative(std::move(displayName));
+        handle()->description = detail::toNative(std::move(description));
+    }
+
+    UAPP_GETTER_WRAPPER(String, getNamespaceUri, namespaceUri)
+    UAPP_GETTER(int32_t, getUnitId, unitId)
+    UAPP_GETTER_WRAPPER(LocalizedText, getDisplayName, displayName)
+    UAPP_GETTER_WRAPPER(LocalizedText, getDescription, description)
+};
+
+/**
+ * UA_ComplexNumberType wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part8/v105/docs/5.6.4
+ */
+class ComplexNumberType : public TypeWrapper<UA_ComplexNumberType, UA_TYPES_COMPLEXNUMBERTYPE> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    ComplexNumberType(float real, float imaginary) noexcept {
+        handle()->real = real;
+        handle()->imaginary = imaginary;
+    }
+
+    UAPP_GETTER(float, getReal, real)
+    UAPP_GETTER(float, getImaginary, imaginary)
+};
+
+/**
+ * UA_DoubleComplexNumberType wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part8/v105/docs/5.6.5
+ */
+class DoubleComplexNumberType
+    : public TypeWrapper<UA_DoubleComplexNumberType, UA_TYPES_DOUBLECOMPLEXNUMBERTYPE> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    DoubleComplexNumberType(double real, double imaginary) noexcept {
+        handle()->real = real;
+        handle()->imaginary = imaginary;
+    }
+
+    UAPP_GETTER(double, getReal, real)
+    UAPP_GETTER(double, getImaginary, imaginary)
+};
+
+/**
+ * Axis scale.
+ * @see https://reference.opcfoundation.org/Core/Part8/v105/docs/5.6.7
+ */
+enum class AxisScaleEnumeration : int32_t {
+    Linear = 1,
+    Log = 2,
+    Ln = 3,
+};
+
+/**
+ * UA_AxisInformation wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part8/v105/docs/5.6.6
+ */
+class AxisInformation : public TypeWrapper<UA_AxisInformation, UA_TYPES_AXISINFORMATION> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    AxisInformation(
+        EUInformation engineeringUnits,
+        Range eURange,
+        LocalizedText title,
+        AxisScaleEnumeration axisScaleType,
+        Span<const double> axisSteps
+    ) {
+        handle()->engineeringUnits = detail::toNative(std::move(engineeringUnits));
+        handle()->eURange = detail::toNative(std::move(eURange));
+        handle()->title = detail::toNative(std::move(title));
+        handle()->axisScaleType = static_cast<UA_AxisScaleEnumeration>(axisScaleType);
+        handle()->axisStepsSize = axisSteps.size();
+        handle()->axisSteps = detail::toNativeArray(axisSteps);
+    }
+
+    UAPP_GETTER_WRAPPER(EUInformation, getEngineeringUnits, engineeringUnits)
+    UAPP_GETTER_WRAPPER(Range, getEURange, eURange)
+    UAPP_GETTER_WRAPPER(LocalizedText, getTitle, title)
+    UAPP_GETTER_CAST(AxisScaleEnumeration, getAxisScaleType, axisScaleType)
+    UAPP_GETTER_SPAN(double, getAxisSteps, axisSteps, axisStepsSize)
+};
+
+/**
+ * UA_XVType wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part8/v105/docs/5.6.8
+ */
+class XVType : public TypeWrapper<UA_XVType, UA_TYPES_XVTYPE> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    XVType(double x, float value) noexcept {
+        handle()->x = x;
+        handle()->value = value;
+    }
+
+    UAPP_GETTER(double, getX, x)
+    UAPP_GETTER(float, getValue, value)
+};
+
+#endif  // UAPP_HAS_DATAACCESS
+
 /* -------------------------------------- Type description -------------------------------------- */
 
 #ifdef UA_ENABLE_TYPEDESCRIPTION
@@ -2503,4 +2700,5 @@ public:
  * @}
  */
 
+}  // namespace ua
 }  // namespace opcua

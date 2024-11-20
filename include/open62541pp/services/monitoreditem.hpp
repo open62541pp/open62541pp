@@ -7,7 +7,6 @@
 #include <vector>
 
 #include "open62541pp/async.hpp"
-#include "open62541pp/common.hpp"  // TimestampsToReturn, MonitoringMode
 #include "open62541pp/config.hpp"
 #include "open62541pp/detail/client_utils.hpp"  // getHandle
 #include "open62541pp/services/detail/async_hook.hpp"
@@ -18,7 +17,7 @@
 #include "open62541pp/services/detail/response_handling.hpp"
 #include "open62541pp/span.hpp"
 #include "open62541pp/types.hpp"
-#include "open62541pp/types_composed.hpp"
+#include "open62541pp/ua/types.hpp"
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 

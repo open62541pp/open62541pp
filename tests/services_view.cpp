@@ -1,8 +1,8 @@
 #include <doctest/doctest.h>
 
-#include "open62541pp/nodeids.hpp"
 #include "open62541pp/services/nodemanagement.hpp"
 #include "open62541pp/services/view.hpp"
+#include "open62541pp/ua/nodeids.hpp"
 
 #include "helper/server_client_setup.hpp"
 
