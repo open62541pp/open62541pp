@@ -20,8 +20,6 @@
 #include "open62541pp/typeregistry_generated.hpp"
 #include "open62541pp/types.hpp"
 #include "open62541pp/typewrapper.hpp"
-#include "open62541pp/ua/nodeids.hpp"
-#include "open62541pp/ua/types.hpp"
 #include "open62541pp/wrapper.hpp"
 
 #include "open62541pp/plugin/accesscontrol.hpp"
@@ -33,3 +31,5 @@
 #include "open62541pp/plugin/pluginadapter.hpp"
 
 #include "open62541pp/services/services.hpp"
+
+#include "open62541pp/ua/ua.hpp"
