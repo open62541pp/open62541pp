@@ -12,7 +12,7 @@
 #include "open62541pp/services/detail/response_handling.hpp"
 #include "open62541pp/span.hpp"
 #include "open62541pp/types.hpp"
-#include "open62541pp/types_composed.hpp"
+#include "open62541pp/ua/types.hpp"
 
 namespace opcua {
 class Client;

@@ -1,8 +1,9 @@
-#include "open62541pp/types_composed.hpp"
+#include "open62541pp/ua/types.hpp"
 
 #include <algorithm>  // copy, transform
 
 namespace opcua {
+inline namespace ua {
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 
@@ -145,4 +146,5 @@ ContentFilter operator||(const ContentFilter& lhs, const ContentFilter& rhs) {
 
 #endif
 
+}  // namespace ua
 }  // namespace opcua

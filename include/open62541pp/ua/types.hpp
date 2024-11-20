@@ -14,11 +14,11 @@
 #include "open62541pp/detail/traits.hpp"  // IsOneOf
 #include "open62541pp/detail/types_conversion.hpp"  // toNative, toNativeArray
 #include "open62541pp/detail/types_handling.hpp"  // deallocateArray, copyArray
-#include "open62541pp/nodeids.hpp"  // ReferenceTypeId
 #include "open62541pp/span.hpp"
 #include "open62541pp/typeregistry.hpp"  // getDataType
 #include "open62541pp/types.hpp"
 #include "open62541pp/typewrapper.hpp"
+#include "open62541pp/ua/nodeids.hpp"  // ReferenceTypeId
 
 #ifndef UA_DEFAULT_ATTRIBUTES_DEFINED
 #define UA_DEFAULT_ATTRIBUTES_DEFINED
@@ -74,6 +74,7 @@ UA_EXPORT extern const UA_ViewAttributes UA_ViewAttributes_default;
 // NOLINTEND(cppcoreguidelines-macro-usage)
 
 namespace opcua {
+inline namespace ua {
 
 /// IntegerId.
 /// @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.19
@@ -296,8 +297,7 @@ enum class NodeAttributesMask : uint32_t {
     // clang-format on
 };
 
-template <>
-struct IsBitmaskEnum<NodeAttributesMask> : std::true_type {};
+constexpr std::true_type isBitmaskEnum(NodeAttributesMask);
 
 // Specifialized macros to generate getters/setters for `UA_*Attribute` classes.
 // The `specifiedAttributes` mask is automatically updated in the setter methods.
@@ -1008,8 +1008,7 @@ enum class BrowseResultMask : uint32_t {
     // clang-format on
 };
 
-template <>
-struct IsBitmaskEnum<BrowseResultMask> : std::true_type {};
+constexpr std::true_type isBitmaskEnum(BrowseResultMask);
 
 /**
  * UA_BrowseDescription wrapper class.
@@ -2701,4 +2700,5 @@ public:
  * @}
  */
 
+}  // namespace ua
 }  // namespace opcua

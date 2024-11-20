@@ -7,7 +7,7 @@
 #include "open62541pp/session.hpp"
 #include "open62541pp/span.hpp"
 #include "open62541pp/types.hpp"
-#include "open62541pp/types_composed.hpp"  // UserTokenPolicy, PerformUpdateType
+#include "open62541pp/ua/types.hpp"  // UserTokenPolicy, PerformUpdateType
 
 namespace opcua {
 

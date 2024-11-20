@@ -10,7 +10,6 @@
 #include "open62541pp/exception.hpp"
 #include "open62541pp/monitoreditem.hpp"
 #include "open62541pp/node.hpp"
-#include "open62541pp/nodeids.hpp"
 #include "open62541pp/result.hpp"
 #include "open62541pp/server.hpp"
 #include "open62541pp/session.hpp"
@@ -20,8 +19,9 @@
 #include "open62541pp/typeregistry.hpp"
 #include "open62541pp/typeregistry_generated.hpp"
 #include "open62541pp/types.hpp"
-#include "open62541pp/types_composed.hpp"
 #include "open62541pp/typewrapper.hpp"
+#include "open62541pp/ua/nodeids.hpp"
+#include "open62541pp/ua/types.hpp"
 #include "open62541pp/wrapper.hpp"
 
 #include "open62541pp/plugin/accesscontrol.hpp"

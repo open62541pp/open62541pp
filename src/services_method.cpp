@@ -4,7 +4,7 @@
 
 #include "open62541pp/client.hpp"
 #include "open62541pp/server.hpp"
-#include "open62541pp/types_composed.hpp"
+#include "open62541pp/ua/types.hpp"
 
 namespace opcua::services {
 

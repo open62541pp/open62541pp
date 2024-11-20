@@ -10,12 +10,12 @@
 #include "open62541pp/config.hpp"
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/exception.hpp"
-#include "open62541pp/nodeids.hpp"
 #include "open62541pp/services/detail/async_transform.hpp"
 #include "open62541pp/span.hpp"
 #include "open62541pp/typeregistry.hpp"  // getDataType
 #include "open62541pp/types.hpp"
-#include "open62541pp/types_composed.hpp"
+#include "open62541pp/ua/nodeids.hpp"
+#include "open62541pp/ua/types.hpp"
 #include "open62541pp/wrapper.hpp"  // asWrapper
 
 #include "open62541pp/services/attribute.hpp"
