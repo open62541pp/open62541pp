@@ -394,6 +394,21 @@ void Client::onInactive(InactivityCallback callback) {
     };
 }
 
+void Client::onSubscriptionInactive([[maybe_unused]] SubscriptionInactivityCallback callback) {
+#ifdef UA_ENABLE_SUBSCRIPTIONS
+    context().subscriptionInactivityCallback = std::move(callback);
+    config()->subscriptionInactivityCallback =
+        [](UA_Client* client, UA_UInt32 subscriptionId, void* /* subContext */) noexcept {
+            auto* context = detail::getContext(client);
+            if (context != nullptr && context->subscriptionInactivityCallback != nullptr) {
+                context->exceptionCatcher.invoke(
+                    context->subscriptionInactivityCallback, subscriptionId
+                );
+            }
+        };
+#endif
+}
+
 void Client::connect(std::string_view endpointUrl) {
     throwIfBad(UA_Client_connect(handle(), std::string(endpointUrl).c_str()));
 }

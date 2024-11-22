@@ -100,6 +100,7 @@ public:
 
 using StateCallback = std::function<void()>;
 using InactivityCallback = std::function<void()>;
+using SubscriptionInactivityCallback = std::function<void(IntegerId subscriptionId)>;
 
 /**
  * High-level client class.
@@ -199,6 +200,10 @@ public:
     /// Every UA_ClientConfig::connectivityCheckInterval (in ms), an async read request is performed
     /// on the server. The callback is called when the client receives no response for this request.
     void onInactive(InactivityCallback callback);
+    /// Set a subscription inactivity callback.
+    /// The callback is called when the client does not receive a publish response after the defined
+    /// delay of `(publishingInterval * maxKeepAliveCount) + UA_ClientConfig::timeout)`.
+    void onSubscriptionInactive(SubscriptionInactivityCallback callback);
 
     /**
      * Connect to the selected server.
