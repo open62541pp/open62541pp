@@ -37,14 +37,6 @@ struct ClientContext {
     std::vector<DataType> dataTypes;
     std::unique_ptr<UA_DataTypeArray> dataTypeArray;
 
-#ifdef UA_ENABLE_SUBSCRIPTIONS
-    using SubId = IntegerId;
-    using MonId = IntegerId;
-    using SubMonId = std::pair<SubId, MonId>;
-    ContextMap<SubId, services::detail::SubscriptionContext> subscriptions;
-    ContextMap<SubMonId, services::detail::MonitoredItemContext> monitoredItems;
-#endif
-
 #if UAPP_OPEN62541_VER_LE(1, 0)
     UA_ClientState lastClientState{};
 #else
@@ -53,6 +45,15 @@ struct ClientContext {
 #endif
     std::array<std::function<void()>, clientStateCount> stateCallbacks;
     std::function<void()> inactivityCallback;
+
+#ifdef UA_ENABLE_SUBSCRIPTIONS
+    using SubId = IntegerId;
+    using MonId = IntegerId;
+    using SubMonId = std::pair<SubId, MonId>;
+    ContextMap<SubId, services::detail::SubscriptionContext> subscriptions;
+    ContextMap<SubMonId, services::detail::MonitoredItemContext> monitoredItems;
+    std::function<void(IntegerId)> subscriptionInactivityCallback;
+#endif
 };
 
 }  // namespace opcua::detail

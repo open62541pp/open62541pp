@@ -246,6 +246,21 @@ TEST_CASE("Client inactivity callback") {
     CHECK(inactive);
 }
 
+TEST_CASE("Client subscription inactivity callback") {
+    Client client;
+    bool inactive = false;
+    IntegerId subscriptionId = 0;
+    client.onSubscriptionInactive([&](IntegerId id) {
+        inactive = true;
+        subscriptionId = id;
+    });
+#ifdef UA_ENABLE_SUBSCRIPTIONS
+    client.config()->subscriptionInactivityCallback(client.handle(), 11, nullptr);
+    CHECK(inactive);
+    CHECK(subscriptionId == 11);
+#endif
+}
+
 TEST_CASE("Client methods") {
     Server server;
     ServerRunner serverRunner(server);
