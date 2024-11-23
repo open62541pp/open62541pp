@@ -367,11 +367,11 @@ template <typename CompletionToken>
 auto browseAllAsync(Client& connection, const BrowseDescription& bd, CompletionToken&& token) {
     return asyncInitiate<Result<std::vector<ReferenceDescription>>>(
         [&](auto&& handler) {
+            using HandlerType = std::remove_reference_t<decltype(handler)>;
             struct RecursiveHandler : std::enable_shared_from_this<RecursiveHandler> {
-                using HandlerType = std::remove_reference_t<decltype(handler)>;
-                RecursiveHandler(Client& connection, HandlerType handler)
-                    : connection(connection),
-                      handler(std::move(handler)) {}
+                RecursiveHandler(Client& innerClient, HandlerType innerHandler)
+                    : client(innerClient),
+                      handler(std::move(innerHandler)) {}
 
                 void handle(BrowseResult& result) {
                     refs.insert(
@@ -384,17 +384,17 @@ auto browseAllAsync(Client& connection, const BrowseDescription& bd, CompletionT
                         std::invoke(handler, refsResult);
                     } else {
                         browseNextAsync(
-                            connection,
+                            client,
                             false,
                             result.getContinuationPoint(),
-                            [handlerPtr = this->shared_from_this()](BrowseResult& result) {
-                                return handlerPtr->handle(result);
+                            [handlerPtr = this->shared_from_this()](BrowseResult& innerResult) {
+                                return handlerPtr->handle(innerResult);
                             }
                         );
                     }
                 }
 
-                Client& connection;  // NOLINT(*ref-data-members)
+                Client& client;  // NOLINT(*ref-data-members)
                 HandlerType handler;
                 std::vector<ReferenceDescription> refs;
             };
