@@ -96,7 +96,14 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
 
     SUBCASE("browseAll") {
         const BrowseDescription bd(id, BrowseDirection::Both);
-        CHECK(services::browseAll(connection, bd).value().size() == 2);
+        if constexpr (isAsync<T>) {
+            auto future = services::browseAllAsync(connection, bd, useFuture);
+            setup.client.runIterate();
+            auto refs = future.get();
+            CHECK(refs.value().size() == 2);
+        } else {
+            CHECK(services::browseAll(connection, bd).value().size() == 2);
+        }
     }
 
     SUBCASE("browseSimplifiedBrowsePath") {

@@ -1,7 +1,9 @@
 #pragma once
 
 #include <cstdint>
+#include <functional>  // invoke
 #include <iterator>  // make_move_iterator
+#include <memory>  // enable_shared_from_this, make_shared
 #include <type_traits>
 #include <utility>
 #include <vector>
@@ -331,14 +333,10 @@ auto unregisterNodesAsync(
 /* ----------------------------------- Non-standard functions ----------------------------------- */
 
 /**
- * @ingroup Browse
- * @{
- */
-
-/**
  * Discover all the references of a specified node (without calling @ref browseNext).
  * @param connection Instance of type Server or Client
  * @param bd Browse description
+ * @ingroup Browse
  */
 template <typename T>
 Result<std::vector<ReferenceDescription>> browseAll(T& connection, const BrowseDescription& bd) {
@@ -360,6 +358,64 @@ Result<std::vector<ReferenceDescription>> browseAll(T& connection, const BrowseD
 }
 
 /**
+ * @copydoc browseAll
+ * @param token @completiontoken{void(Result<std::vector<ReferenceDescription>>&)}
+ * @return @asyncresult{Result<std::vector<ReferenceDescription>>}
+ * @ingroup Browse
+ */
+template <typename CompletionToken>
+auto browseAllAsync(Client& connection, const BrowseDescription& bd, CompletionToken&& token) {
+    return asyncInitiate<Result<std::vector<ReferenceDescription>>>(
+        [&](auto&& handler) {
+            struct RecursiveHandler : std::enable_shared_from_this<RecursiveHandler> {
+                using HandlerType = std::remove_reference_t<decltype(handler)>;
+                RecursiveHandler(Client& connection, HandlerType handler)
+                    : connection(connection),
+                      handler(std::move(handler)) {}
+
+                void handle(BrowseResult& result) {
+                    refs.insert(
+                        refs.end(),
+                        std::make_move_iterator(result.getReferences().begin()),
+                        std::make_move_iterator(result.getReferences().end())
+                    );
+                    if (result.getContinuationPoint().empty()) {
+                        Result refsResult(std::move(refs), result.getStatusCode());
+                        std::invoke(handler, refsResult);
+                    } else {
+                        browseNextAsync(
+                            connection,
+                            false,
+                            result.getContinuationPoint(),
+                            [handlerPtr = this->shared_from_this()](BrowseResult& result) {
+                                return handlerPtr->handle(result);
+                            }
+                        );
+                    }
+                }
+
+                Client& connection;  // NOLINT(*ref-data-members)
+                HandlerType handler;
+                std::vector<ReferenceDescription> refs;
+            };
+
+            auto handlerPtr = std::make_shared<RecursiveHandler>(
+                connection, std::forward<decltype(handler)>(handler)
+            );
+            browseAsync(
+                connection,
+                bd,
+                0U,
+                [handlerPtr = std::move(handlerPtr)](BrowseResult& result) {
+                    handlerPtr->handle(result);
+                }
+            );
+        },
+        std::forward<CompletionToken>(token)
+    );
+}
+
+/**
  * Discover child nodes recursively (non-standard).
  *
  * Possible loops (that can occur for non-hierarchical references) are handled internally. Every
@@ -372,17 +428,13 @@ Result<std::vector<ReferenceDescription>> browseAll(T& connection, const BrowseD
  *
  * @param connection Instance of type Server
  * @param bd Browse description
- * @see UA_Server_browseRecursive
  * @ingroup Browse
+ * @see UA_Server_browseRecursive
  */
 [[deprecated("will be removed in the future, use UA_Server_browseRecursive instead")]]
 Result<std::vector<ExpandedNodeId>> browseRecursive(
     Server& connection, const BrowseDescription& bd
 );
-
-/**
- * @}
- */
 
 /**
  * @}
