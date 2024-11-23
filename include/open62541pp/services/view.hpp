@@ -1,6 +1,8 @@
 #pragma once
 
 #include <cstdint>
+#include <iterator>  // make_move_iterator
+#include <type_traits>
 #include <utility>
 #include <vector>
 
@@ -329,14 +331,33 @@ auto unregisterNodesAsync(
 /* ----------------------------------- Non-standard functions ----------------------------------- */
 
 /**
- * Discover all the references of a specified node (without calling @ref browseNext).
- * @copydetails browse(T&, const BrowseDescription&, uint32_t)
  * @ingroup Browse
+ * @{
+ */
+
+/**
+ * Discover all the references of a specified node (without calling @ref browseNext).
+ * @param connection Instance of type Server or Client
+ * @param bd Browse description
  */
 template <typename T>
-Result<std::vector<ReferenceDescription>> browseAll(
-    T& connection, const BrowseDescription& bd, uint32_t maxReferences = 0
-);
+Result<std::vector<ReferenceDescription>> browseAll(T& connection, const BrowseDescription& bd) {
+    std::vector<ReferenceDescription> refs;
+    auto handler = [&](BrowseResult& result) {
+        refs.insert(
+            refs.end(),
+            std::make_move_iterator(result.getReferences().begin()),
+            std::make_move_iterator(result.getReferences().end())
+        );
+    };
+    BrowseResult result = browse(connection, bd, 0U);
+    handler(result);
+    while (!result.getContinuationPoint().empty()) {
+        result = browseNext(connection, false, result.getContinuationPoint());
+        handler(result);
+    }
+    return {std::move(refs), result.getStatusCode()};
+}
 
 /**
  * Discover child nodes recursively (non-standard).
@@ -358,6 +379,10 @@ Result<std::vector<ReferenceDescription>> browseAll(
 Result<std::vector<ExpandedNodeId>> browseRecursive(
     Server& connection, const BrowseDescription& bd
 );
+
+/**
+ * @}
+ */
 
 /**
  * @}
