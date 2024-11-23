@@ -2,7 +2,6 @@
 
 #include <cstdint>
 #include <iterator>  // make_move_iterator
-#include <memory>  // enable_shared_from_this, make_shared
 #include <type_traits>
 #include <utility>
 #include <vector>
