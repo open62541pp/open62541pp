@@ -96,8 +96,7 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
 
     SUBCASE("browseAll") {
         const BrowseDescription bd(id, BrowseDirection::Both);
-        CHECK(services::browseAll(connection, bd, 0).value().size() == 2);
-        CHECK(services::browseAll(connection, bd, 1).value().size() == 1);
+        CHECK(services::browseAll(connection, bd).value().size() == 2);
     }
 
     SUBCASE("browseSimplifiedBrowsePath") {
