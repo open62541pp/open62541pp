@@ -892,11 +892,10 @@ static constexpr bool isCopyableOrConvertible = detail::isRegisteredType<T> ||
 
 }  // namespace detail
 
-// TODO:
-// Preparations for constructor tags.
-
+/// Tag used for constructing a Variant that references a value.
 struct ReferenceTag {};
 
+/// Tag instance used for constructing a Variant that references a value.
 static constexpr ReferenceTag reference{};
 
 /**
@@ -907,48 +906,47 @@ class Variant : public TypeWrapper<UA_Variant, UA_TYPES_VARIANT> {
 public:
     using TypeWrapper::TypeWrapper;  // inherit constructors
 
-    // Universal constructors with default copy policy
-
     // TODO:
     // Allow implicit constructor?
+
+    /// Create a Variant object from a value.
+    /// The value is copied into the Variant.
     template <typename T, typename X = std::enable_if_t<!std::is_same_v<T, Variant>, void>>
     explicit Variant(T&& value) {
         setValueCopy(std::forward<T>(value));
     }
 
+    /// Create a Variant object from a value.
+    /// The value is referenced from the Variant.
     template <typename T>
     Variant(ReferenceTag /*unused*/, T&& value) {
         setValue(std::forward<T>(value));
     }
 
+    /// Create a Variant object from a value with a custom data type.
+    /// The value is copied into the Variant.
     template <typename T>
     Variant(T&& value, const UA_DataType& dataType) {
         setValueCopy(std::forward<T>(value), dataType);
     }
 
+    /// Create a Variant object from a value with a custom data type.
+    /// The value is referenced from the Variant.
     template <typename T>
     Variant(ReferenceTag /*unused*/, T&& value, const UA_DataType& dataType) {
         setValue(std::forward<T>(value), dataType);
     }
 
+    /// Create a Variant object from a range of elements (copy required).
     template <typename InputIt>
     Variant(InputIt first, InputIt last) {
         setValueCopy(first, last);
     }
 
-    template <typename InputIt>
-    Variant(ReferenceTag /*unused*/, InputIt first, InputIt last) {
-        setValue(first, last);
-    }
-
+    /// Create a Variant object from a range of elements with a custom data type (copy required).
     template <typename InputIt>
     Variant(InputIt first, InputIt last, const UA_DataType& dataType) {
         setValueCopy(first, last, dataType);
-    }
-
-    template <typename InputIt>
-    Variant(ReferenceTag /*unused*/, InputIt first, InputIt last, const UA_DataType& dataType) {
-        setValue(first, last, dataType);
     }
 
     /// Create Variant from scalar value.
