@@ -332,6 +332,11 @@ auto unregisterNodesAsync(
 
 /* ----------------------------------- Non-standard functions ----------------------------------- */
 
+// default maxReferences arg of initial browse request within browseAll, primarily for testing
+#ifndef UAPP_BROWSE_ALL_MAX_REFERENCES
+#define UAPP_BROWSE_ALL_MAX_REFERENCES 0U  // NOLINT(*macro-usage)
+#endif
+
 /**
  * Discover all the references of a specified node (without calling @ref browseNext).
  * @param connection Instance of type Server or Client
@@ -348,7 +353,7 @@ Result<std::vector<ReferenceDescription>> browseAll(T& connection, const BrowseD
             std::make_move_iterator(result.getReferences().end())
         );
     };
-    BrowseResult result = browse(connection, bd, 0U);
+    BrowseResult result = browse(connection, bd, UAPP_BROWSE_ALL_MAX_REFERENCES);
     handler(result);
     while (!result.getContinuationPoint().empty()) {
         result = browseNext(connection, false, result.getContinuationPoint());
@@ -405,7 +410,7 @@ auto browseAllAsync(Client& connection, const BrowseDescription& bd, CompletionT
             browseAsync(
                 connection,
                 bd,
-                0U,
+                UAPP_BROWSE_ALL_MAX_REFERENCES,
                 [handlerPtr = std::move(handlerPtr)](BrowseResult& result) {
                     handlerPtr->handle(result);
                 }

@@ -1,5 +1,8 @@
 #include <doctest/doctest.h>
 
+// force browseNext request in browseAll* functions
+#define UAPP_BROWSE_ALL_MAX_REFERENCES 1U
+
 #include "open62541pp/services/nodemanagement.hpp"
 #include "open62541pp/services/view.hpp"
 #include "open62541pp/ua/nodeids.hpp"
@@ -98,6 +101,7 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
         const BrowseDescription bd(id, BrowseDirection::Both);
         if constexpr (isAsync<T>) {
             auto future = services::browseAllAsync(connection, bd, useFuture);
+            setup.client.runIterate();
             setup.client.runIterate();
             auto refs = future.get();
             CHECK(refs.value().size() == 2);
