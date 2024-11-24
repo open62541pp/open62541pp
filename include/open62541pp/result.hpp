@@ -39,7 +39,7 @@ private:
  * The template class Result encapsulates a StatusCode and optionally a value.
  *
  * A result may have one of the following contents:
- * - a value and a good or uncertain StatusCode
+ * - a value and a StatusCode (usually good or uncertain)
  * - no value and a bad StatusCode
  *
  * Result<void> is a template specialization containing only a StatusCode.
@@ -64,26 +64,22 @@ public:
     // NOLINTBEGIN(hicpp-explicit-conversions)
 
     /**
-     * Construct a Result with a value and a StatusCode (good or uncertain).
+     * Construct a Result with a value and a StatusCode.
      */
     constexpr Result(
         const T& value, StatusCode code = UA_STATUSCODE_GOOD
     ) noexcept(std::is_nothrow_copy_constructible_v<T>)
         : code_(code),
-          maybeValue_(value) {
-        assert(!code_.isBad());
-    }
+          maybeValue_(value) {}
 
     /**
-     * Construct a Result with a value and a StatusCode (good or uncertain).
+     * Construct a Result with a value and a StatusCode.
      */
     constexpr Result(
         T&& value, StatusCode code = UA_STATUSCODE_GOOD
     ) noexcept(std::is_nothrow_move_constructible_v<T>)
         : code_(code),
-          maybeValue_(std::move(value)) {
-        assert(!code_.isBad());
-    }
+          maybeValue_(std::move(value)) {}
 
     /**
      * Create a Result with the given error.
