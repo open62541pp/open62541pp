@@ -392,8 +392,8 @@ auto browseAllAsync(Client& connection, const BrowseDescription& bd, CompletionT
                             client,
                             false,
                             result.getContinuationPoint(),
-                            [handlerPtr = this->shared_from_this()](BrowseResult& innerResult) {
-                                return handlerPtr->handle(innerResult);
+                            [self = this->shared_from_this()](BrowseResult& innerResult) {
+                                return self->handle(innerResult);
                             }
                         );
                     }
