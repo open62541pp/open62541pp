@@ -64,7 +64,7 @@ public:
     // NOLINTBEGIN(hicpp-explicit-conversions)
 
     /**
-     * Construct a Result with a value and a StatusCode.
+     * Construct a Result from a value (lvalue) and a StatusCode.
      */
     constexpr Result(
         const T& value, StatusCode code = UA_STATUSCODE_GOOD
@@ -73,7 +73,7 @@ public:
           maybeValue_(value) {}
 
     /**
-     * Construct a Result with a value and a StatusCode.
+     * Construct a Result from a value (rvalue) and a StatusCode.
      */
     constexpr Result(
         T&& value, StatusCode code = UA_STATUSCODE_GOOD
@@ -82,7 +82,7 @@ public:
           maybeValue_(std::move(value)) {}
 
     /**
-     * Create a Result with the given error.
+     * Construct a Result from a BadResult.
      */
     constexpr Result(BadResult error) noexcept
         : code_(error.code()),
