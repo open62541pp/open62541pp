@@ -205,14 +205,14 @@ TEST_CASE("DataSource") {
     int data = 0;
 
     ValueBackendDataSource dataSource;
-    dataSource.read = [&](DataValue& value, const NumericRange&, bool includeSourceTimestamp) {
+    dataSource.read = [&](opcua::NodeId id, DataValue& value, const NumericRange&, bool includeSourceTimestamp) {
         value.getValue().setScalar(data);
         if (includeSourceTimestamp) {
             value.setSourceTimestamp(DateTime::now());
         }
         return UA_STATUSCODE_GOOD;
     };
-    dataSource.write = [&](const DataValue& value, const NumericRange&) {
+    dataSource.write = [&](opcua::NodeId id, const DataValue& value, const NumericRange&) {
         data = value.getValue().getScalarCopy<int>();
         return UA_STATUSCODE_GOOD;
     };
@@ -243,7 +243,7 @@ TEST_CASE("DataSource with exception in callback") {
 
     SUBCASE("BadStatus exception") {
         ValueBackendDataSource dataSource;
-        dataSource.read = [&](DataValue&, const NumericRange&, bool) -> StatusCode {
+        dataSource.read = [&](opcua::NodeId id, DataValue&, const NumericRange&, bool) -> StatusCode {
             throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
         };
         server.setVariableNodeValueBackend(id, dataSource);
@@ -253,7 +253,7 @@ TEST_CASE("DataSource with exception in callback") {
 
     SUBCASE("Other exception types") {
         ValueBackendDataSource dataSource;
-        dataSource.read = [&](DataValue&, const NumericRange&, bool) -> StatusCode {
+        dataSource.read = [&](opcua::NodeId id, DataValue&, const NumericRange&, bool) -> StatusCode {
             throw std::runtime_error("test");
         };
         server.setVariableNodeValueBackend(id, dataSource);
