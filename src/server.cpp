@@ -384,10 +384,10 @@ static UA_StatusCode valueSourceRead(
     const UA_NumericRange* range,
     UA_DataValue* value
 ) noexcept {
-    assert(nodeContext != nullptr && value != nullptr);
+    assert(nodeContext != nullptr && value != nullptr && nodeId != nullptr);
     auto& callback = static_cast<detail::NodeContext*>(nodeContext)->dataSource.read;
     if (callback) {
-        auto result = detail::tryInvoke(callback, NodeId(*nodeId), asWrapper<DataValue>(*value), asRange(range), includeSourceTimestamp);
+        auto result = detail::tryInvoke(callback, asWrapper<NodeId>(*nodeId), asWrapper<DataValue>(*value), asRange(range), includeSourceTimestamp);
         return result.code();
     }
     return UA_STATUSCODE_BADINTERNALERROR;
@@ -402,10 +402,10 @@ static UA_StatusCode valueSourceWrite(
     const UA_NumericRange* range,
     const UA_DataValue* value
 ) noexcept {
-    assert(nodeContext != nullptr && value != nullptr);
+    assert(nodeContext != nullptr && value != nullptr && nodeId != nullptr);
     auto& callback = static_cast<detail::NodeContext*>(nodeContext)->dataSource.write;
     if (callback) {
-        auto result = detail::tryInvoke(callback, NodeId(*nodeId), asWrapper<DataValue>(*value), asRange(range));
+        auto result = detail::tryInvoke(callback, asWrapper<NodeId>(*nodeId), asWrapper<DataValue>(*value), asRange(range));
         return result.code();
     }
     return UA_STATUSCODE_BADINTERNALERROR;

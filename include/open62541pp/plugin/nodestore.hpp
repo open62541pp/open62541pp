@@ -61,7 +61,7 @@ struct ValueBackendDataSource {
      * @param timestamp Set the source timestamp of `value` if `true`
      * @return StatusCode
      */
-    std::function<StatusCode(NodeId id, DataValue& value, const NumericRange& range, bool timestamp)> read;
+    std::function<StatusCode(const NodeId& id, DataValue& value, const NumericRange& range, bool timestamp)> read;
 
     /**
      * Callback to write the value into a data source.
@@ -73,7 +73,7 @@ struct ValueBackendDataSource {
      *              into the data source
      * @return StatusCode
      */
-    std::function<StatusCode(NodeId id, const DataValue& value, const NumericRange& range)> write;
+    std::function<StatusCode(const NodeId& id, const DataValue& value, const NumericRange& range)> write;
 };
 
 }  // namespace opcua
