@@ -603,7 +603,7 @@ public:
         nodes.reserve(refs.size());
         for (auto&& ref : refs) {
             if (ref.getNodeId().isLocal()) {
-                nodes.emplace_back(connection(), std::move(ref.getNodeId().getNodeId()));
+                nodes.emplace_back(connection(), std::move(ref.getNodeId().nodeId()));
             }
         }
         return nodes;
@@ -625,7 +625,7 @@ public:
         result.getStatusCode().throwIfBad();
         for (auto&& target : result.getTargets()) {
             if (target.getTargetId().isLocal()) {
-                return {connection(), std::move(target.getTargetId().getNodeId())};
+                return {connection(), std::move(target.getTargetId().nodeId())};
             }
         }
         throw BadStatus(UA_STATUSCODE_BADNOMATCH);
@@ -1355,7 +1355,7 @@ private:
         if (!id.isLocal()) {
             throw BadStatus(UA_STATUSCODE_BADNODEIDUNKNOWN);
         }
-        return {connection, std::move(id.getNodeId())};
+        return {connection, std::move(id.nodeId())};
     }
 
     template <typename CompletionToken>
@@ -1378,7 +1378,7 @@ private:
         result.getStatusCode().throwIfBad();
         for (auto&& target : result.getTargets()) {
             if (target.getTargetId().isLocal()) {
-                return {connection(), std::move(target.getTargetId().getNodeId())};
+                return {connection(), std::move(target.getTargetId().nodeId())};
             }
         }
         throw BadStatus(UA_STATUSCODE_BADNOTFOUND);

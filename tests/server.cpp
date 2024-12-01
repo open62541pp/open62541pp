@@ -172,13 +172,13 @@ TEST_CASE("ValueCallback") {
     int valueAfterWrite = 0;
 
     ValueCallback valueCallback;
-    valueCallback.onBeforeRead = [&](const DataValue& value) {
+    valueCallback.onBeforeRead = [&](const DataValue& dv) {
         onBeforeReadCalled = true;
-        valueBeforeRead = value.getValue().getScalar<int>();
+        valueBeforeRead = dv.value().getScalar<int>();
     };
-    valueCallback.onAfterWrite = [&](const DataValue& value) {
+    valueCallback.onAfterWrite = [&](const DataValue& dv) {
         onAfterWriteCalled = true;
-        valueAfterWrite = value.getValue().getScalar<int>();
+        valueAfterWrite = dv.value().getScalar<int>();
     };
     server.setVariableNodeValueCallback(id, valueCallback);
 
@@ -205,15 +205,15 @@ TEST_CASE("DataSource") {
     int data = 0;
 
     ValueBackendDataSource dataSource;
-    dataSource.read = [&](DataValue& value, const NumericRange&, bool includeSourceTimestamp) {
-        value.getValue().setScalar(data);
+    dataSource.read = [&](DataValue& dv, const NumericRange&, bool includeSourceTimestamp) {
+        dv.value().setScalar(data);
         if (includeSourceTimestamp) {
-            value.setSourceTimestamp(DateTime::now());
+            dv.setSourceTimestamp(DateTime::now());
         }
         return UA_STATUSCODE_GOOD;
     };
-    dataSource.write = [&](const DataValue& value, const NumericRange&) {
-        data = value.getValue().getScalarCopy<int>();
+    dataSource.write = [&](const DataValue& dv, const NumericRange&) {
+        data = dv.value().getScalarCopy<int>();
         return UA_STATUSCODE_GOOD;
     };
 

@@ -114,13 +114,13 @@ TEST_CASE("AddNodesItem / AddNodesRequest") {
         ExtensionObject::fromDecodedCopy(ObjectAttributes{}),
         ExpandedNodeId({1, 1003})
     );
-    CHECK(item.getParentNodeId().getNodeId() == NodeId(1, 1000));
+    CHECK(item.getParentNodeId().nodeId() == NodeId(1, 1000));
     CHECK(item.getReferenceTypeId() == NodeId(1, 1001));
-    CHECK(item.getRequestedNewNodeId().getNodeId() == NodeId(1, 1002));
+    CHECK(item.getRequestedNewNodeId().nodeId() == NodeId(1, 1002));
     CHECK(item.getBrowseName() == QualifiedName(1, "item"));
     CHECK(item.getNodeClass() == NodeClass::Object);
     CHECK(item.getNodeAttributes().getDecodedDataType() == &UA_TYPES[UA_TYPES_OBJECTATTRIBUTES]);
-    CHECK(item.getTypeDefinition().getNodeId() == NodeId(1, 1003));
+    CHECK(item.getTypeDefinition().nodeId() == NodeId(1, 1003));
 
     const AddNodesRequest request({}, {item});
     CHECK_NOTHROW(request.getRequestHeader());
@@ -135,7 +135,7 @@ TEST_CASE("AddReferencesItem / AddReferencesRequest") {
     CHECK(item.getReferenceTypeId() == NodeId(1, 1001));
     CHECK(item.getIsForward() == true);
     CHECK(item.getTargetServerUri().empty());
-    CHECK(item.getTargetNodeId().getNodeId() == NodeId(1, 1002));
+    CHECK(item.getTargetNodeId().nodeId() == NodeId(1, 1002));
     CHECK(item.getTargetNodeClass() == NodeClass::Object);
 
     const AddReferencesRequest request({}, {item});
@@ -158,7 +158,7 @@ TEST_CASE("DeleteReferencesItem / DeleteReferencesRequest") {
     CHECK(item.getSourceNodeId() == NodeId(1, 1000));
     CHECK(item.getReferenceTypeId() == NodeId(1, 1001));
     CHECK(item.getIsForward() == true);
-    CHECK(item.getTargetNodeId().getNodeId() == NodeId(1, 1002));
+    CHECK(item.getTargetNodeId().nodeId() == NodeId(1, 1002));
     CHECK(item.getDeleteBidirectional() == true);
 
     const DeleteReferencesRequest request({}, {item});
@@ -277,7 +277,7 @@ TEST_CASE("WriteValue") {
     CHECK(wv.getNodeId() == NodeId(1, 1000));
     CHECK(wv.getAttributeId() == AttributeId::Value);
     CHECK(wv.getIndexRange().empty());
-    CHECK(wv.getValue().getValue().getScalar<double>() == 11.11);
+    CHECK(wv.getValue().value().getScalar<double>() == 11.11);
 }
 
 TEST_CASE("WriteRequest") {
@@ -291,7 +291,7 @@ TEST_CASE("WriteRequest") {
     CHECK(request.getNodesToWrite().size() == 1);
     CHECK(request.getNodesToWrite()[0].getNodeId() == NodeId(1, 1000));
     CHECK(request.getNodesToWrite()[0].getAttributeId() == AttributeId::Value);
-    CHECK(request.getNodesToWrite()[0].getValue().getValue().getScalar<double>() == 11.11);
+    CHECK(request.getNodesToWrite()[0].getValue().value().getScalar<double>() == 11.11);
 }
 
 TEST_CASE("WriteResponse") {

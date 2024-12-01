@@ -25,7 +25,7 @@ int main() {
         auto mon = sub.subscribeDataChange(
             opcua::VariableId::Server_ServerStatus_CurrentTime,  // monitored node id
             opcua::AttributeId::Value,  // monitored attribute
-            [&](opcua::IntegerId subId, opcua::IntegerId monId, const opcua::DataValue& value) {
+            [&](opcua::IntegerId subId, opcua::IntegerId monId, const opcua::DataValue& dv) {
                 opcua::MonitoredItem item(client, subId, monId);
                 std::cout
                     << "Data change notification:\n"
@@ -34,7 +34,7 @@ int main() {
                     << "- node id:           " << item.getNodeId().toString() << "\n"
                     << "- attribute id:      " << static_cast<int>(item.getAttributeId()) << "\n";
 
-                const auto dt = value.getValue().getScalarCopy<opcua::DateTime>();
+                const auto dt = dv.value().getScalarCopy<opcua::DateTime>();
                 std::cout << "Current server time (UTC): " << dt.format("%H:%M:%S") << std::endl;
             }
         );

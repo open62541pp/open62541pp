@@ -14,13 +14,13 @@
 namespace opcua::services::detail {
 
 inline Result<Variant> getVariant(DataValue&& dv) noexcept {
-    if (dv.getStatus().isBad()) {
-        return BadResult(dv.getStatus());
+    if (dv.status().isBad()) {
+        return BadResult(dv.status());
     }
     if (!dv.hasValue()) {
         return BadResult(UA_STATUSCODE_BADUNEXPECTEDERROR);
     }
-    return std::move(dv).getValue();
+    return std::move(dv).value();
 }
 
 /**

@@ -25,18 +25,18 @@ int main() {
 
     // Define data source with its read and write callbacks
     opcua::ValueBackendDataSource dataSource;
-    dataSource.read = [&](opcua::DataValue& value, const opcua::NumericRange&, bool timestamp) {
+    dataSource.read = [&](opcua::DataValue& dv, const opcua::NumericRange&, bool timestamp) {
         // Increment counter before every read
         counter++;
-        value.getValue().setScalarCopy(counter);
+        dv.value().setScalarCopy(counter);
         if (timestamp) {
-            value.setSourceTimestamp(opcua::DateTime::now());
+            dv.setSourceTimestamp(opcua::DateTime::now());
         }
         std::cout << "Read counter from data source: " << counter << "\n";
         return UA_STATUSCODE_GOOD;
     };
-    dataSource.write = [&](const opcua::DataValue& value, const opcua::NumericRange&) {
-        counter = value.getValue().getScalarCopy<int>();
+    dataSource.write = [&](const opcua::DataValue& dv, const opcua::NumericRange&) {
+        counter = dv.value().getScalarCopy<int>();
         std::cout << "Write counter to data source: " << counter << "\n";
         return UA_STATUSCODE_GOOD;
     };

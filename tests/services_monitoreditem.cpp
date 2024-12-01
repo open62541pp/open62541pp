@@ -91,7 +91,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
         services::writeValue(server, id, Variant::fromScalar(11.11)).throwIfBad();
         setup.client.runIterate();
         CHECK(notificationCount > 0);
-        CHECK(changedValue.getValue().getScalar<double>() == 11.11);
+        CHECK(changedValue.value().getScalar<double>() == 11.11);
     }
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS_EVENTS

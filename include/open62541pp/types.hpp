@@ -636,12 +636,22 @@ public:
         return UA_NodeId_hash(handle());
     }
 
-    NamespaceIndex getNamespaceIndex() const noexcept {
+    NamespaceIndex namespaceIndex() const noexcept {
         return handle()->namespaceIndex;
     }
 
-    NodeIdType getIdentifierType() const noexcept {
+    [[deprecated("use namespaceIndex() instead")]]
+    NamespaceIndex getNamespaceIndex() const noexcept {
+        return namespaceIndex();
+    }
+
+    NodeIdType identifierType() const noexcept {
         return static_cast<NodeIdType>(handle()->identifierType);
+    }
+
+    [[deprecated("use identifierType() instead")]]
+    NodeIdType getIdentifierType() const noexcept {
+        return identifierType();
     }
 
     /**
@@ -668,22 +678,22 @@ public:
         );
         // NOLINTBEGIN(cppcoreguidelines-pro-type-union-access)
         if constexpr (std::is_same_v<T, uint32_t>) {
-            return getIdentifierType() == NodeIdType::Numeric
+            return identifierType() == NodeIdType::Numeric
                 ? &handle()->identifier.numeric
                 : nullptr;
         }
         if constexpr (std::is_same_v<T, String>) {
-            return getIdentifierType() == NodeIdType::String
+            return identifierType() == NodeIdType::String
                 ? asWrapper<String>(&handle()->identifier.string)
                 : nullptr;
         }
         if constexpr (std::is_same_v<T, Guid>) {
-            return getIdentifierType() == NodeIdType::Guid
+            return identifierType() == NodeIdType::Guid
                 ? asWrapper<Guid>(&handle()->identifier.guid)
                 : nullptr;
         }
         if constexpr (std::is_same_v<T, ByteString>) {
-            return getIdentifierType() == NodeIdType::ByteString
+            return identifierType() == NodeIdType::ByteString
                 ? asWrapper<ByteString>(&handle()->identifier.byteString)
                 : nullptr;
         }
@@ -830,20 +840,40 @@ public:
         return UA_ExpandedNodeId_hash(handle());
     }
 
+    NodeId& nodeId() noexcept {
+        return asWrapper<NodeId>(handle()->nodeId);
+    }
+
+    const NodeId& nodeId() const noexcept {
+        return asWrapper<NodeId>(handle()->nodeId);
+    }
+
+    [[deprecated("use nodeId() instead")]]
     NodeId& getNodeId() noexcept {
-        return asWrapper<NodeId>(handle()->nodeId);
+        return nodeId();
     }
 
+    [[deprecated("use nodeId() instead")]]
     const NodeId& getNodeId() const noexcept {
-        return asWrapper<NodeId>(handle()->nodeId);
+        return nodeId();
     }
 
-    std::string_view getNamespaceUri() const {
+    std::string_view namespaceUri() const {
         return detail::toStringView(handle()->namespaceUri);
     }
 
-    uint32_t getServerIndex() const noexcept {
+    [[deprecated("use namespaceUri() instead")]]
+    std::string_view getNamespaceUri() const {
+        return namespaceUri();
+    }
+
+    uint32_t serverIndex() const noexcept {
         return handle()->serverIndex;
+    }
+
+    [[deprecated("use serverIndex() instead")]]
+    uint32_t getServerIndex() const noexcept {
+        return serverIndex();
     }
 
     /// Encode ExpandedNodeId as a string like `svr=1;nsu=http://test.org/UA/Data/;ns=2;i=10157`.
@@ -890,12 +920,22 @@ public:
         handle()->name = detail::allocNativeString(name);
     }
 
-    NamespaceIndex getNamespaceIndex() const noexcept {
+    NamespaceIndex namespaceIndex() const noexcept {
         return handle()->namespaceIndex;
     }
 
-    std::string_view getName() const noexcept {
+    [[deprecated("use namespaceIndex() instead")]]
+    NamespaceIndex getNamespaceIndex() const noexcept {
+        return namespaceIndex();
+    }
+
+    std::string_view name() const noexcept {
         return detail::toStringView(handle()->name);
+    }
+
+    [[deprecated("use name() instead")]]
+    std::string_view getName() const noexcept {
+        return name();
     }
 };
 
@@ -927,12 +967,22 @@ public:
         handle()->text = detail::allocNativeString(text);
     }
 
-    std::string_view getLocale() const noexcept {
+    std::string_view locale() const noexcept {
         return detail::toStringView(handle()->locale);
     }
 
-    std::string_view getText() const noexcept {
+    [[deprecated("use locale() instead")]]
+    std::string_view getLocale() const noexcept {
+        return locale();
+    }
+
+    std::string_view text() const noexcept {
         return detail::toStringView(handle()->text);
+    }
+
+    [[deprecated("use text() instead")]]
+    std::string_view getText() const noexcept {
+        return text();
     }
 };
 
@@ -1631,48 +1681,93 @@ public:
     }
 
     /// Get value.
-    Variant& getValue() & noexcept {
+    Variant& value() & noexcept {
         return asWrapper<Variant>(handle()->value);
     }
 
     /// Get value.
-    const Variant& getValue() const& noexcept {
+    const Variant& value() const& noexcept {
         return asWrapper<Variant>(handle()->value);
     }
 
     /// Get value (rvalue).
-    Variant&& getValue() && noexcept {
-        return std::move(asWrapper<Variant>(handle()->value));
+    Variant&& value() && noexcept {
+        return std::move(value());
     }
 
     /// Get value (rvalue).
+    const Variant&& value() const&& noexcept {
+        return std::move(value());  // NOLINT(*move-const-arg)
+    }
+
+    [[deprecated("use value() instead")]]
+    Variant& getValue() & noexcept {
+        return value();
+    }
+
+    [[deprecated("use value() instead")]]
+    const Variant& getValue() const& noexcept {
+        return value();
+    }
+
+    [[deprecated("use value() instead")]]
+    Variant&& getValue() && noexcept {
+        return std::move(value());
+    }
+
+    [[deprecated("use value() instead")]]
     const Variant&& getValue() const&& noexcept {
-        return std::move(asWrapper<Variant>(handle()->value));  // NOLINT
+        return std::move(value());  // NOLINT(*move-const-arg)
     }
 
     /// Get source timestamp for the value.
-    DateTime getSourceTimestamp() const noexcept {
+    DateTime sourceTimestamp() const noexcept {
         return DateTime(handle()->sourceTimestamp);  // NOLINT
     }
 
+    [[deprecated("use sourceTimestamp() instead")]]
+    DateTime getSourceTimestamp() const noexcept {
+        return sourceTimestamp();
+    }
+
     /// Get server timestamp for the value.
-    DateTime getServerTimestamp() const noexcept {
+    DateTime serverTimestamp() const noexcept {
         return DateTime(handle()->serverTimestamp);  // NOLINT
     }
 
+    [[deprecated("use serverTimestamp() instead")]]
+    DateTime getServerTimestamp() const noexcept {
+        return serverTimestamp();
+    }
+
     /// Get picoseconds interval added to the source timestamp.
-    uint16_t getSourcePicoseconds() const noexcept {
+    uint16_t sourcePicoseconds() const noexcept {
         return handle()->sourcePicoseconds;
     }
 
+    [[deprecated("use sourcePicoseconds() instead")]]
+    uint16_t getSourcePicoseconds() const noexcept {
+        return sourcePicoseconds();
+    }
+
     /// Get picoseconds interval added to the server timestamp.
-    uint16_t getServerPicoseconds() const noexcept {
+    uint16_t serverPicoseconds() const noexcept {
         return handle()->serverPicoseconds;
     }
 
+    [[deprecated("use serverPicoseconds() instead")]]
+    uint16_t getServerPicoseconds() const noexcept {
+        return serverPicoseconds();
+    }
+
     /// Get status.
-    StatusCode getStatus() const noexcept {
+    StatusCode status() const noexcept {
         return handle()->status;
+    }
+
+    [[deprecated("use status() instead")]]
+    StatusCode getStatus() const noexcept {
+        return status();
     }
 
     /// Set value (copy).
@@ -1922,32 +2017,67 @@ public:
         return handle()->hasInnerDiagnosticInfo;
     }
 
-    int32_t getSymbolicId() const noexcept {
+    int32_t symbolicId() const noexcept {
         return handle()->symbolicId;
     }
 
-    int32_t getNamespaceUri() const noexcept {
+    [[deprecated("use symbolicId() instead")]]
+    int32_t getSymbolicId() const noexcept {
+        return symbolicId();
+    }
+
+    int32_t namespaceUri() const noexcept {
         return handle()->namespaceUri;
     }
 
-    int32_t getLocalizedText() const noexcept {
+    [[deprecated("use namespaceUri() instead")]]
+    int32_t getNamespaceUri() const noexcept {
+        return namespaceUri();
+    }
+
+    int32_t localizedText() const noexcept {
         return handle()->localizedText;
     }
 
-    int32_t getLocale() const noexcept {
+    [[deprecated("use localizedText() instead")]]
+    int32_t getLocalizedText() const noexcept {
+        return localizedText();
+    }
+
+    int32_t locale() const noexcept {
         return handle()->locale;
     }
 
-    const String& getAdditionalInfo() const noexcept {
+    [[deprecated("use locale() instead")]]
+    int32_t getLocale() const noexcept {
+        return locale();
+    }
+
+    const String& additionalInfo() const noexcept {
         return asWrapper<String>(handle()->additionalInfo);
     }
 
-    StatusCode getInnerStatusCode() const noexcept {
+    [[deprecated("use additionalInfo() instead")]]
+    const String& getAdditionalInfo() const noexcept {
+        return additionalInfo();
+    }
+
+    StatusCode innerStatusCode() const noexcept {
         return handle()->innerStatusCode;
     }
 
-    const DiagnosticInfo* getInnerDiagnosticInfo() const noexcept {
+    [[deprecated("use innerStatusCode() instead")]]
+    StatusCode getInnerStatusCode() const noexcept {
+        return innerStatusCode();
+    }
+
+    const DiagnosticInfo* innerDiagnosticInfo() const noexcept {
         return asWrapper<DiagnosticInfo>(handle()->innerDiagnosticInfo);
+    }
+
+    [[deprecated("use innerDiagnosticInfo() instead")]]
+    const DiagnosticInfo* getInnerDiagnosticInfo() const noexcept {
+        return innerDiagnosticInfo();
     }
 };
 

@@ -45,7 +45,7 @@ void printNodeTree(opcua::Node<opcua::Client>& node, int indent);
 // ...
 void printNodeTree(opcua::Node<opcua::Client>& node, int indent) {  // NOLINT
     for (auto&& child : node.browseChildren()) {
-        std::cout << std::setw(indent) << "- " << child.readBrowseName().getName() << " ("
+        std::cout << std::setw(indent) << "- " << child.readBrowseName().name() << " ("
                   << getEnumName(child.readNodeClass()) << ")\n";
         printNodeTree(child, indent + 2);
     }
@@ -65,6 +65,6 @@ int main() {
     // Browse the parent node
     auto nodeServerParent = nodeServer.browseParent();
 
-    std::cout << nodeServer.readDisplayName().getText() << "'s parent node is "
-              << nodeServerParent.readDisplayName().getText() << "\n";
+    std::cout << nodeServer.readDisplayName().text() << "'s parent node is "
+              << nodeServerParent.readDisplayName().text() << "\n";
 }
