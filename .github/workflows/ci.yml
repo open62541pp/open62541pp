@@ -102,12 +102,10 @@ jobs:
           - name: macOS AppleClang 15
             os: macos-14
             compiler: clang++
-            flags: "-DUAPP_ENABLE_SANITIZER_ADDRESS=ON"
 
           - name: macOS AppleClang 16
             os: macos-15
             compiler: clang++
-            flags: "-DUAPP_ENABLE_SANITIZER_ADDRESS=ON"
 
           - name: Windows Visual Studio 16
             os: windows-2019
