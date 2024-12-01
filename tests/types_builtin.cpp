@@ -376,46 +376,44 @@ TEST_CASE("DateTime") {
 }
 
 TEST_CASE("NodeId") {
-    SUBCASE("Construct with numeric identifier") {
+    SUBCASE("Numeric identifier") {
         NodeId id(1, 123);
         CHECK(id.getIdentifierType() == NodeIdType::Numeric);
         CHECK(id.getNamespaceIndex() == 1);
-        CHECK(id.getIdentifierAs<NodeIdType::Numeric>() == 123);
+        CHECK(id.identifier<uint32_t>() == 123);
+        CHECK(id.identifierIf<uint32_t>() != nullptr);
+        CHECK(*id.identifierIf<uint32_t>() == 123);
     }
 
-    SUBCASE("Constructor with string identifier from string_view") {
-        std::string_view sv("Test123");
-        NodeId id(1, sv);
-        CHECK(id.getIdentifierType() == NodeIdType::String);
-        CHECK(id.getNamespaceIndex() == 1);
-        CHECK(id.getIdentifierAs<String>() == sv);
-    }
-
-    SUBCASE("Constructor with string identifier") {
+    SUBCASE("String identifier") {
         String str("Test456");
         NodeId id(2, str);
         CHECK(id.getIdentifierType() == NodeIdType::String);
         CHECK(id.getNamespaceIndex() == 2);
-        CHECK(id.getIdentifierAs<String>() == str);
+        CHECK(id.identifier<String>() == str);
+        CHECK(id.identifierIf<String>() != nullptr);
+        CHECK(*id.identifierIf<String>() == str);
     }
 
-    SUBCASE("Constructor with guid identifier") {
-        Guid guid(11, 22, 33, {1, 2, 3, 4, 5, 6, 7, 8});
+    SUBCASE("Guid identifier") {
+        Guid guid = Guid::random();
         NodeId id(3, guid);
         CHECK(id.getIdentifierType() == NodeIdType::Guid);
         CHECK(id.getNamespaceIndex() == 3);
-        CHECK(id.getIdentifierAs<Guid>() == guid);
+        CHECK(id.identifier<Guid>() == guid);
+        CHECK(id.identifierIf<Guid>() != nullptr);
+        CHECK(*id.identifierIf<Guid>() == guid);
     }
 
-#ifndef __APPLE__  // weird SIGABRT in macOS test runner
-    SUBCASE("Constructor with byte string identifier") {
+    SUBCASE("ByteString identifier") {
         ByteString byteStr("Test789");
         NodeId id(4, byteStr);
         CHECK(id.getIdentifierType() == NodeIdType::ByteString);
         CHECK(id.getNamespaceIndex() == 4);
-        CHECK(id.getIdentifierAs<ByteString>() == byteStr);
+        CHECK(id.identifier<ByteString>() == byteStr);
+        CHECK(id.identifierIf<ByteString>() != nullptr);
+        CHECK(*id.identifierIf<ByteString>() == byteStr);
     }
-#endif
 
     SUBCASE("Construct from node id enums") {
         CHECK(NodeId(DataTypeId::Boolean) == NodeId(0, UA_NS0ID_BOOLEAN));
@@ -425,6 +423,18 @@ TEST_CASE("NodeId") {
         CHECK(NodeId(ObjectId::RootFolder) == NodeId(0, UA_NS0ID_ROOTFOLDER));
         CHECK(NodeId(VariableId::LocalTime) == NodeId(0, UA_NS0ID_LOCALTIME));
         CHECK(NodeId(MethodId::AddCommentMethodType) == NodeId(0, UA_NS0ID_ADDCOMMENTMETHODTYPE));
+    }
+
+    SUBCASE("Get invalid identifier type") {
+        NodeId id(1, 123);
+        CHECK(id.identifierIf<uint32_t>() != nullptr);
+        CHECK(id.identifierIf<String>() == nullptr);
+        CHECK(id.identifierIf<Guid>() == nullptr);
+        CHECK(id.identifierIf<ByteString>() == nullptr);
+        CHECK_NOTHROW(id.identifier<uint32_t>());
+        CHECK_THROWS_AS(id.identifier<String>(), TypeError);
+        CHECK_THROWS_AS(id.identifier<Guid>(), TypeError);
+        CHECK_THROWS_AS(id.identifier<ByteString>(), TypeError);
     }
 
     SUBCASE("Comparison") {

@@ -126,16 +126,16 @@ std::string NodeId::toString() const {
     }
     switch (getIdentifierType()) {
     case NodeIdType::Numeric:
-        result.append("i=").append(std::to_string(getIdentifierAs<uint32_t>()));
+        result.append("i=").append(std::to_string(identifier<uint32_t>()));
         break;
     case NodeIdType::String:
-        result.append("s=").append(getIdentifierAs<String>());
+        result.append("s=").append(identifier<String>());
         break;
     case NodeIdType::Guid:
-        result.append("g=").append(getIdentifierAs<Guid>().toString());
+        result.append("g=").append(identifier<Guid>().toString());
         break;
     case NodeIdType::ByteString:
-        result.append("b=").append(getIdentifierAs<ByteString>().toBase64());
+        result.append("b=").append(identifier<ByteString>().toBase64());
         break;
     }
     return result;

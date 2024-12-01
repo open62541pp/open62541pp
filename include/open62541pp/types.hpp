@@ -598,18 +598,11 @@ public:
         handle()->identifier.numeric = identifier;  // NOLINT
     }
 
-    /// Create NodeId with String identifier from standard strings.
+    /// Create NodeId with String identifier.
     NodeId(NamespaceIndex namespaceIndex, std::string_view identifier) {
         handle()->namespaceIndex = namespaceIndex;
         handle()->identifierType = UA_NODEIDTYPE_STRING;
         handle()->identifier.string = detail::allocNativeString(identifier);  // NOLINT
-    }
-
-    /// Create NodeId with String identifier from String wrapper class.
-    NodeId(NamespaceIndex namespaceIndex, String identifier) noexcept {
-        handle()->namespaceIndex = namespaceIndex;
-        handle()->identifierType = UA_NODEIDTYPE_STRING;
-        handle()->identifier.string = std::exchange(asNative(identifier), {});  // NOLINT
     }
 
     /// Create NodeId with Guid identifier.
@@ -623,7 +616,9 @@ public:
     NodeId(NamespaceIndex namespaceIndex, ByteString identifier) noexcept {
         handle()->namespaceIndex = namespaceIndex;
         handle()->identifierType = UA_NODEIDTYPE_BYTESTRING;
-        handle()->identifier.byteString = std::exchange(asNative(identifier), {});  // NOLINT
+        // force zero-initialization, only first member of identifier union is zero-initialized
+        handle()->identifier.byteString = {};  // NOLINT
+        asWrapper<ByteString>(handle()->identifier.byteString) = std::move(identifier);  // NOLINT
     }
 
     /// Create NodeId from enum class with numeric identifiers like `opcua::ObjectId`.
@@ -649,8 +644,103 @@ public:
         return static_cast<NodeIdType>(handle()->identifierType);
     }
 
+    /**
+     * Get identifier pointer or `nullptr` on error.
+     * @tparam T Requested identifier type, should be either:
+     *         - `uint32_t` for NodeIdType::Numeric
+     *         - `String` for NodeIdType::String
+     *         - `Guid` for NodeIdType::Guid
+     *         - `ByteString` for NodeIdType::ByteString
+     * @return Pointer to the stored identifier
+     *         or a `nullptr` if `T` doesn't match the stored identifier type
+     */
+    template <typename T>
+    T* identifierIf() noexcept {
+        return const_cast<T*>(std::as_const(*this).identifierIf<T>());  // NOLINT
+    }
+
+    /// @copydoc identifierIf
+    template <typename T>
+    const T* identifierIf() const noexcept {
+        static_assert(
+            detail::IsOneOf<T, uint32_t, String, Guid, ByteString>::value,
+            "Invalid type for NodeId identifier"
+        );
+        // NOLINTBEGIN(cppcoreguidelines-pro-type-union-access)
+        if constexpr (std::is_same_v<T, uint32_t>) {
+            return getIdentifierType() == NodeIdType::Numeric
+                ? &handle()->identifier.numeric
+                : nullptr;
+        }
+        if constexpr (std::is_same_v<T, String>) {
+            return getIdentifierType() == NodeIdType::String
+                ? asWrapper<String>(&handle()->identifier.string)
+                : nullptr;
+        }
+        if constexpr (std::is_same_v<T, Guid>) {
+            return getIdentifierType() == NodeIdType::Guid
+                ? asWrapper<Guid>(&handle()->identifier.guid)
+                : nullptr;
+        }
+        if constexpr (std::is_same_v<T, ByteString>) {
+            return getIdentifierType() == NodeIdType::ByteString
+                ? asWrapper<ByteString>(&handle()->identifier.byteString)
+                : nullptr;
+        }
+        // NOLINTEND(cppcoreguidelines-pro-type-union-access)
+        return nullptr;
+    }
+
+    /**
+     * Get identifier reference.
+     * @tparam T Requested identifier type, should be either:
+     *         - `uint32_t` for NodeIdType::Numeric
+     *         - `String` for NodeIdType::String
+     *         - `Guid` for NodeIdType::Guid
+     *         - `ByteString` for NodeIdType::ByteString
+     * @return Reference to the stored identifier
+     * @throws TypeError If the requested type `T` doesn't match the stored identifier type
+     */
+    template <typename T>
+    T& identifier() {
+        return const_cast<T&>(std::as_const(*this).identifier<T>());  // NOLINT
+    }
+
+    /// @copydoc identifier
+    template <typename T>
+    const T& identifier() const {
+        if (auto* ptr = identifierIf<T>()) {
+            return *ptr;
+        }
+        throw TypeError("NodeId identifier type doesn't match the requested type");
+    }
+
     /// Get identifier variant.
+    [[deprecated("use identifier<T>() or identifierIf<T>() instead")]]
     std::variant<uint32_t, String, Guid, ByteString> getIdentifier() const {
+        return getIdentifierImpl();
+    }
+
+    /// Get identifier by template type.
+    template <typename T>
+    [[deprecated("use identifier<T>() or identifierIf<T>() instead")]]
+    auto getIdentifierAs() const {
+        return getIdentifierAsImpl<T>();
+    }
+
+    /// Get identifier by NodeIdType enum.
+    template <NodeIdType E>
+    [[deprecated("use identifier<T>() or identifierIf<T>() instead")]]
+    auto getIdentifierAs() const {
+        return getIdentifierAsImpl<E>();
+    }
+
+    /// Encode NodeId as a string like `ns=1;s=SomeNode`.
+    /// @see https://reference.opcfoundation.org/Core/Part6/v105/docs/5.3.1.10
+    std::string toString() const;
+
+private:
+    std::variant<uint32_t, String, Guid, ByteString> getIdentifierImpl() const {
         switch (handle()->identifierType) {
         case UA_NODEIDTYPE_NUMERIC:
             return handle()->identifier.numeric;  // NOLINT
@@ -665,32 +755,26 @@ public:
         }
     }
 
-    /// Get identifier by template type.
     template <typename T>
-    auto getIdentifierAs() const {
-        return std::get<T>(getIdentifier());
+    auto getIdentifierAsImpl() const {
+        return std::get<T>(getIdentifierImpl());
     }
 
-    /// Get identifier by NodeIdType enum.
     template <NodeIdType E>
-    auto getIdentifierAs() const {
+    auto getIdentifierAsImpl() const {
         if constexpr (E == NodeIdType::Numeric) {
-            return getIdentifierAs<uint32_t>();
+            return getIdentifierAsImpl<uint32_t>();
         }
         if constexpr (E == NodeIdType::String) {
-            return getIdentifierAs<String>();
+            return getIdentifierAsImpl<String>();
         }
         if constexpr (E == NodeIdType::Guid) {
-            return getIdentifierAs<Guid>();
+            return getIdentifierAsImpl<Guid>();
         }
         if constexpr (E == NodeIdType::ByteString) {
-            return getIdentifierAs<ByteString>();
+            return getIdentifierAsImpl<ByteString>();
         }
     }
-
-    /// Encode NodeId as a string like `ns=1;s=SomeNode`.
-    /// @see https://reference.opcfoundation.org/Core/Part6/v105/docs/5.3.1.10
-    std::string toString() const;
 };
 
 inline bool operator==(const UA_NodeId& lhs, const UA_NodeId& rhs) noexcept {
