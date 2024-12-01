@@ -257,7 +257,7 @@ TEST_CASE("Attribute service set (highlevel)") {
         // CHECK_EQ(valueRead->hasSourcePicoseconds, true);
         CHECK_EQ(valueRead->hasStatus, false);  // doesn't contain error code on success
 
-        CHECK(valueRead.getValue().getScalar<int>() == 11);
+        CHECK(valueRead.value().getScalar<int>() == 11);
         CHECK(valueRead->sourceTimestamp == valueWrite->sourceTimestamp);
         CHECK(valueRead->sourcePicoseconds == valueWrite->sourcePicoseconds);
     }
@@ -378,5 +378,5 @@ TEST_CASE_TEMPLATE("Attribute service set write/read", T, Server, Client, Async<
         );
     }
 
-    CHECK(result.value().getValue().getScalar<double>() == value);
+    CHECK(result.value().value().getScalar<double>() == value);
 }

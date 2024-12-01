@@ -87,7 +87,7 @@ TEST_CASE("sendRequest") {
         const auto response = sendReadRequest();
         CHECK(response.getResponseHeader().getServiceResult().isGood());
         CHECK_EQ(
-            response.getResults()[0].getValue().getScalar<QualifiedName>(),
+            response.getResults()[0].value().getScalar<QualifiedName>(),
             QualifiedName(0, "Objects")
         );
     }
@@ -125,7 +125,7 @@ TEST_CASE("sendRequestAsync") {
         sendReadRequest([&](ReadResponse& response) {
             CHECK(response.getResponseHeader().getServiceResult().isGood());
             CHECK_EQ(
-                response.getResults()[0].getValue().getScalar<QualifiedName>(),
+                response.getResults()[0].value().getScalar<QualifiedName>(),
                 QualifiedName(0, "Objects")
             );
             executed = true;
