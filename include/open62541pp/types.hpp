@@ -577,10 +577,6 @@ public:
         init(first, last);
     }
 
-    XmlElement(std::initializer_list<char> values) {
-        init(values.begin(), values.end());
-    }
-
     /// Implicit conversion to std::string_view.
     operator std::string_view() const noexcept {  // NOLINT(hicpp-explicit-conversions)
         return {data(), size()};
