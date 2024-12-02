@@ -114,7 +114,7 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
         }
         CHECK(result.getStatusCode().isGood());
         CHECK(result.getTargets().size() == 1);
-        // https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8
+        // https://reference.opcfoundation.org/Core/Part4/v105/docs/5.9
         // value shall be equal to the maximum value of uint32 if all elements processed
         CHECK(result.getTargets()[0].getRemainingPathIndex() == 0xffffffff);
         CHECK(result.getTargets()[0].getTargetId().nodeId() == id);

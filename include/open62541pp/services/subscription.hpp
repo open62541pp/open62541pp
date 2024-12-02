@@ -35,7 +35,7 @@ namespace opcua::services {
  * attached to exactly one Subscription. And a Subscription can contain many MonitoredItems.
  *
  * @see MonitoredItem
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.14
  * @ingroup Services
  * @{
  */
@@ -60,7 +60,7 @@ struct SubscriptionParameters {
  * @defgroup CreateSubscription CreateSubscription service
  * Create subscriptions. Subscriptions monitor a set of monitored items for notifications and return
  * them to the client.
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.2
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.14.2
  * @{
  */
 
@@ -183,7 +183,7 @@ auto createSubscriptionAsync(
  * @}
  * @defgroup ModifySubscription ModifySubscription service
  * Modify subscriptions.
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.3
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.14.3
  * @{
  */
 
@@ -248,7 +248,7 @@ auto modifySubscriptionAsync(
  * Enable/disable sending of notifications on subscriptions.
  * Disable publishing of NotificationMessages of the subscription doesn't discontinue the sending
  * of keep-alive messages, nor change the monitoring mode.
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.4
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.14.4
  * @{
  */
 
@@ -314,7 +314,7 @@ auto setPublishingModeAsync(
  * @}
  * @defgroup DeleteSubscriptions DeleteSubscriptions service
  * Delete subscriptions.
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.8
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.14.8
  * @{
  */
 

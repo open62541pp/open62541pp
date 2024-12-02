@@ -15,7 +15,7 @@ class Server;
  * A session carries attributes in a key-value list. Custom attributes/meta-data can be attached to
  * a session as key-value pairs of QualifiedName and Variant.
  *
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.6
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7
  */
 class Session {
 public:

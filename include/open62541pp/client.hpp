@@ -56,7 +56,7 @@ public:
      * @param trustList List of trusted certificates in `DER` encoded format
      * @param revocationList Certificate revocation lists (CRL) in `DER` encoded format
      *
-     * @see https://reference.opcfoundation.org/Core/Part2/v105/docs/8
+     * @see https://reference.opcfoundation.org/Core/Part2/v105/docs/9
      * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/6.2
      */
     ClientConfig(
