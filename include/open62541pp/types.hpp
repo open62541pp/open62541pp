@@ -1933,72 +1933,122 @@ public:
     }
 
     /// Get the encoding.
-    ExtensionObjectEncoding getEncoding() const noexcept {
+    ExtensionObjectEncoding encoding() const noexcept {
         return static_cast<ExtensionObjectEncoding>(handle()->encoding);
+    }
+
+    /// @deprecated Use encoding() instead
+    [[deprecated("use encoding() instead")]]
+    ExtensionObjectEncoding getEncoding() const noexcept {
+        return encoding();
     }
 
     /// Get the encoded type id.
     /// Returns `nullptr` if ExtensionObject is not encoded.
-    const NodeId* getEncodedTypeId() const noexcept {
+    const NodeId* encodedTypeId() const noexcept {
         return isEncoded()
             ? asWrapper<NodeId>(&handle()->content.encoded.typeId)  // NOLINT
             : nullptr;
     }
 
+    /// @deprecated Use encodedTypeId() instead
+    [[deprecated("use encodedTypeId() instead")]]
+    const NodeId* getEncodedTypeId() const noexcept {
+        return encodedTypeId();
+    }
+
     /// Get the encoded body.
     /// Returns `nullptr` if ExtensionObject is not encoded.
-    const ByteString* getEncodedBody() const noexcept {
+    const ByteString* encodedBody() const noexcept {
         return isEncoded()
             ? asWrapper<ByteString>(&handle()->content.encoded.body)  // NOLINT
             : nullptr;
     }
 
+    /// @deprecated Use encodedBody() instead
+    [[deprecated("use encodedBody() instead")]]
+    const ByteString* getEncodedBody() const noexcept {
+        return encodedBody();
+    }
+
     /// Get the decoded data type.
     /// Returns `nullptr` if ExtensionObject is not decoded.
-    const UA_DataType* getDecodedDataType() const noexcept {
+    const UA_DataType* decodedType() const noexcept {
         return isDecoded()
             ? handle()->content.decoded.type  // NOLINT
             : nullptr;
+    }
+
+    /// @deprecated Use decodedType() instead
+    [[deprecated("use decodedType() instead")]]
+    const UA_DataType* getDecodedDataType() const noexcept {
+        return decodedType();
     }
 
     /// Get pointer to the decoded data with given template type.
     /// Returns `nullptr` if the ExtensionObject is either not decoded or the decoded data is not of
     /// type `T`.
     template <typename T>
+    T* decodedData() noexcept {
+        return isDecodedType<T>() ? static_cast<T*>(decodedData()) : nullptr;
+    }
+
+    /// @deprecated Use decodedData<T>() instead
+    template <typename T>
+    [[deprecated("use decodedData<T>() instead")]]
     T* getDecodedData() noexcept {
-        return isDecodedDataType<T>() ? static_cast<T*>(getDecodedData()) : nullptr;
+        return decodedData<T>();
     }
 
     /// Get const pointer to the decoded data with given template type.
     /// Returns `nullptr` if the ExtensionObject is either not decoded or the decoded data is not of
     /// type `T`.
     template <typename T>
+    const T* decodedData() const noexcept {
+        return isDecodedType<T>() ? static_cast<const T*>(decodedData()) : nullptr;
+    }
+
+    /// @deprecated Use decodedData<T>() instead
+    template <typename T>
+    [[deprecated("use decodedData<T>() instead")]]
     const T* getDecodedData() const noexcept {
-        return isDecodedDataType<T>() ? static_cast<const T*>(getDecodedData()) : nullptr;
+        return decodedData<T>();
     }
 
     /// Get pointer to the decoded data.
     /// Returns `nullptr` if the ExtensionObject is not decoded.
     /// @warning Type erased version, use with caution.
+    void* decodedData() noexcept {
+        return isDecoded()
+            ? handle()->content.decoded.data  // NOLINT
+            : nullptr;
+    }
+
+    /// @deprecated Use decodedData() instead
+    [[deprecated("use decodedData() instead")]]
     void* getDecodedData() noexcept {
-        return isDecoded()
-            ? handle()->content.decoded.data  // NOLINT
-            : nullptr;
+        return decodedData();
     }
 
     /// Get pointer to the decoded data.
     /// Returns `nullptr` if the ExtensionObject is not decoded.
     /// @warning Type erased version, use with caution.
-    const void* getDecodedData() const noexcept {
+    const void* decodedData() const noexcept {
         return isDecoded()
             ? handle()->content.decoded.data  // NOLINT
             : nullptr;
+    }
+
+    /// @deprecated Use decodedData() instead
+    [[deprecated("use decodedData() instead")]]
+    const void* getDecodedData() const noexcept {
+        return decodedData();
     }
 
 private:
     template <typename T>
-    bool isDecodedDataType() const noexcept {
-        const auto* type = getDecodedDataType();
+    bool isDecodedType() const noexcept {
+        const auto* type = decodedType();
         return (type != nullptr) && (type->typeId == getDataType<T>().typeId);
     }
 };

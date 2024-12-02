@@ -52,8 +52,8 @@ Result<NodeId> addNode<Server>(
         referenceType.handle(),
         {id.namespaceIndex(), opcua::detail::toNativeString(browseName)},
         typeDefinition.handle(),
-        static_cast<const UA_NodeAttributes*>(nodeAttributes.getDecodedData()),
-        nodeAttributes.getDecodedDataType(),
+        static_cast<const UA_NodeAttributes*>(nodeAttributes.decodedData()),
+        nodeAttributes.decodedType(),
         nullptr,  // nodeContext
         addedNodeId.handle()
     );

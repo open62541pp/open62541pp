@@ -956,37 +956,37 @@ TEST_CASE("ExtensionObject") {
         CHECK(obj.isEmpty());
         CHECK_FALSE(obj.isEncoded());
         CHECK_FALSE(obj.isDecoded());
-        CHECK(obj.getEncoding() == ExtensionObjectEncoding::EncodedNoBody);
-        CHECK(obj.getEncodedTypeId() == nullptr);
-        CHECK(obj.getEncodedBody() == nullptr);
-        CHECK(obj.getDecodedDataType() == nullptr);
-        CHECK(obj.getDecodedData() == nullptr);
+        CHECK(obj.encoding() == ExtensionObjectEncoding::EncodedNoBody);
+        CHECK(obj.encodedTypeId() == nullptr);
+        CHECK(obj.encodedBody() == nullptr);
+        CHECK(obj.decodedType() == nullptr);
+        CHECK(obj.decodedData() == nullptr);
     }
 
     SUBCASE("fromDecoded (type erased variant)") {
         int32_t value = 11;
         const auto obj = ExtensionObject::fromDecoded(&value, UA_TYPES[UA_TYPES_INT32]);
-        CHECK(obj.getEncoding() == ExtensionObjectEncoding::DecodedNoDelete);
+        CHECK(obj.encoding() == ExtensionObjectEncoding::DecodedNoDelete);
         CHECK(obj.isDecoded());
-        CHECK(obj.getDecodedDataType() == &UA_TYPES[UA_TYPES_INT32]);
-        CHECK(obj.getDecodedData() == &value);
+        CHECK(obj.decodedType() == &UA_TYPES[UA_TYPES_INT32]);
+        CHECK(obj.decodedData() == &value);
     }
 
     SUBCASE("fromDecoded") {
         String value("test123");
         const auto obj = ExtensionObject::fromDecoded(value);
-        CHECK(obj.getEncoding() == ExtensionObjectEncoding::DecodedNoDelete);
+        CHECK(obj.encoding() == ExtensionObjectEncoding::DecodedNoDelete);
         CHECK(obj.isDecoded());
-        CHECK(obj.getDecodedDataType() == &UA_TYPES[UA_TYPES_STRING]);
-        CHECK(obj.getDecodedData() == value.handle());
+        CHECK(obj.decodedType() == &UA_TYPES[UA_TYPES_STRING]);
+        CHECK(obj.decodedData() == value.handle());
     }
 
     SUBCASE("fromDecodedCopy") {
         auto obj = ExtensionObject::fromDecodedCopy(Variant::fromScalar(11.11));
-        CHECK(obj.getEncoding() == ExtensionObjectEncoding::Decoded);
+        CHECK(obj.encoding() == ExtensionObjectEncoding::Decoded);
         CHECK(obj.isDecoded());
-        CHECK(obj.getDecodedDataType() == &UA_TYPES[UA_TYPES_VARIANT]);
-        auto* varPtr = static_cast<Variant*>(obj.getDecodedData());
+        CHECK(obj.decodedType() == &UA_TYPES[UA_TYPES_VARIANT]);
+        auto* varPtr = static_cast<Variant*>(obj.decodedData());
         CHECK(varPtr != nullptr);
         CHECK(varPtr->getScalar<double>() == 11.11);
     }
@@ -994,8 +994,8 @@ TEST_CASE("ExtensionObject") {
     SUBCASE("getDecodedData") {
         double value = 11.11;
         auto obj = ExtensionObject::fromDecoded(value);
-        CHECK(obj.getDecodedData() == &value);
-        CHECK(obj.getDecodedData<int>() == nullptr);
-        CHECK(obj.getDecodedData<double>() == &value);
+        CHECK(obj.decodedData() == &value);
+        CHECK(obj.decodedData<int>() == nullptr);
+        CHECK(obj.decodedData<double>() == &value);
     }
 }

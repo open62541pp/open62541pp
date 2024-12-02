@@ -62,7 +62,7 @@ StatusCode AccessControlDefault::activateSession(
     }
 
     // anonymous login
-    if (const auto* token = userIdentityToken.getDecodedData<AnonymousIdentityToken>();
+    if (const auto* token = userIdentityToken.decodedData<AnonymousIdentityToken>();
         token != nullptr) {
         if (!allowAnonymous_) {
             return UA_STATUSCODE_BADIDENTITYTOKENINVALID;
@@ -74,7 +74,7 @@ StatusCode AccessControlDefault::activateSession(
     }
 
     // username and password
-    if (const auto* token = userIdentityToken.getDecodedData<UserNameIdentityToken>();
+    if (const auto* token = userIdentityToken.decodedData<UserNameIdentityToken>();
         token != nullptr) {
         if (token->getPolicyId() != policyIdUsername) {
             return UA_STATUSCODE_BADIDENTITYTOKENINVALID;
