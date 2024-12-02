@@ -108,15 +108,6 @@ public:
     using const_reverse_iterator = std::reverse_iterator<const_iterator>;
     // clang-format on
 
-    template <typename InputIt>
-    StringLikeMixin(InputIt first, InputIt last)
-        : StringLikeMixin(
-              first, last, typename std::iterator_traits<InputIt>::iterator_category{}
-          ) {}
-
-    StringLikeMixin(std::initializer_list<CharT> init)
-        : StringLikeMixin(init.begin(), init.end()) {}
-
     size_t size() const noexcept {
         const auto& native = asNative(static_cast<const WrapperType&>(*this));
         return native.length;
@@ -219,24 +210,6 @@ public:
     }
 
 protected:
-    friend WrapperType;
-
-    StringLikeMixin() noexcept = default;
-
-    template <typename InputIt, typename Tag>
-    StringLikeMixin(InputIt first, InputIt last, Tag /* unused */) {
-        init(std::distance(first, last));
-        std::copy(first, last, data());
-    }
-
-    template <typename InputIt>
-    StringLikeMixin(InputIt first, InputIt last, std::input_iterator_tag /* unused */) {
-        // input iterator can only be read once -> buffer data in vector
-        std::vector<uint8_t> buffer(first, last);
-        init(buffer.size());
-        std::copy(buffer.begin(), buffer.end(), data());
-    }
-
     void init(size_t length) {
         auto& native = asNative(static_cast<WrapperType&>(*this));
         native.length = length;
@@ -246,6 +219,25 @@ protected:
                 throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
             }
         }
+    }
+
+    template <typename InputIt>
+    void init(InputIt first, InputIt last) {
+        init(first, last, typename std::iterator_traits<InputIt>::iterator_category{});
+    }
+
+    template <typename InputIt, typename Tag>
+    void init(InputIt first, InputIt last, Tag /* unused */) {
+        init(std::distance(first, last));
+        std::copy(first, last, data());
+    }
+
+    template <typename InputIt>
+    void init(InputIt first, InputIt last, std::input_iterator_tag /* unused */) {
+        // input iterator can only be read once -> buffer data in vector
+        std::vector<uint8_t> buffer(first, last);
+        init(buffer.size());
+        std::copy(buffer.begin(), buffer.end(), data());
     }
 };
 
@@ -261,13 +253,19 @@ class String
     : public TypeWrapper<UA_String, UA_TYPES_STRING>,
       public detail::StringLikeMixin<String, char> {
 public:
-    using StringLikeMixin ::StringLikeMixin;
     using TypeWrapper::TypeWrapper;
-
-    String() noexcept = default;
 
     explicit String(std::string_view str)
         : TypeWrapper(detail::allocNativeString(str)) {}
+
+    template <typename InputIt>
+    String(InputIt first, InputIt last) {
+        init(first, last);
+    }
+
+    String(std::initializer_list<char> values) {
+        init(values.begin(), values.end());
+    }
 
     /// Implicit conversion to std::string_view.
     operator std::string_view() const noexcept {  // NOLINT(hicpp-explicit-conversions)
@@ -506,10 +504,7 @@ class ByteString
     : public TypeWrapper<UA_String, UA_TYPES_STRING>,
       public detail::StringLikeMixin<ByteString, uint8_t> {
 public:
-    using StringLikeMixin ::StringLikeMixin;
     using TypeWrapper::TypeWrapper;
-
-    ByteString() noexcept = default;
 
     explicit ByteString(std::string_view str)
         : TypeWrapper(detail::allocNativeString(str)) {}
@@ -517,8 +512,14 @@ public:
     explicit ByteString(const char* str)  // required to avoid ambiguity
         : ByteString(std::string_view(str)) {}
 
-    explicit ByteString(Span<const uint8_t> bytes)
-        : StringLikeMixin(bytes.begin(), bytes.end()) {}
+    explicit ByteString(Span<const uint8_t> bytes) {
+        init(bytes.begin(), bytes.end());
+    }
+
+    template <typename InputIt>
+    ByteString(InputIt first, InputIt last) {
+        init(first, last);
+    }
 
     /// Parse ByteString from Base64 encoded string.
     /// @note Supported since open62541 v1.1
@@ -566,13 +567,19 @@ class XmlElement
     : public TypeWrapper<UA_String, UA_TYPES_STRING>,
       public detail::StringLikeMixin<XmlElement, char> {
 public:
-    using StringLikeMixin ::StringLikeMixin;
     using TypeWrapper::TypeWrapper;
-
-    XmlElement() noexcept = default;
 
     explicit XmlElement(std::string_view str)
         : TypeWrapper(detail::allocNativeString(str)) {}
+
+    template <typename InputIt>
+    XmlElement(InputIt first, InputIt last) {
+        init(first, last);
+    }
+
+    XmlElement(std::initializer_list<char> values) {
+        init(values.begin(), values.end());
+    }
 
     /// Implicit conversion to std::string_view.
     operator std::string_view() const noexcept {  // NOLINT(hicpp-explicit-conversions)
