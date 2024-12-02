@@ -119,7 +119,7 @@ TEST_CASE("AddNodesItem / AddNodesRequest") {
     CHECK(item.getRequestedNewNodeId().nodeId() == NodeId(1, 1002));
     CHECK(item.getBrowseName() == QualifiedName(1, "item"));
     CHECK(item.getNodeClass() == NodeClass::Object);
-    CHECK(item.getNodeAttributes().getDecodedDataType() == &UA_TYPES[UA_TYPES_OBJECTATTRIBUTES]);
+    CHECK(item.getNodeAttributes().decodedType() == &UA_TYPES[UA_TYPES_OBJECTATTRIBUTES]);
     CHECK(item.getTypeDefinition().nodeId() == NodeId(1, 1003));
 
     const AddNodesRequest request({}, {item});
@@ -394,15 +394,15 @@ TEST_CASE("ContentFilter(Element)") {
     CHECK(elements.size() == 3);
     CHECK(elements[0].getFilterOperator() == FilterOperator::And);
     CHECK(elements[0].getFilterOperands().size() == 2);
-    CHECK(elements[0].getFilterOperands()[0].getDecodedData<ElementOperand>()->getIndex() == 1);
-    CHECK(elements[0].getFilterOperands()[1].getDecodedData<ElementOperand>()->getIndex() == 2);
+    CHECK(elements[0].getFilterOperands()[0].decodedData<ElementOperand>()->getIndex() == 1);
+    CHECK(elements[0].getFilterOperands()[1].decodedData<ElementOperand>()->getIndex() == 2);
     CHECK(elements[1].getFilterOperator() == FilterOperator::OfType);
     CHECK(elements[1].getFilterOperands().size() == 1);
-    CHECK(elements[1].getFilterOperands()[0].getDecodedData<LiteralOperand>() != nullptr);
+    CHECK(elements[1].getFilterOperands()[0].decodedData<LiteralOperand>() != nullptr);
     CHECK(elements[2].getFilterOperator() == FilterOperator::Equals);
     CHECK(elements[2].getFilterOperands().size() == 2);
-    CHECK(elements[2].getFilterOperands()[0].getDecodedData<LiteralOperand>() != nullptr);
-    CHECK(elements[2].getFilterOperands()[1].getDecodedData<LiteralOperand>() != nullptr);
+    CHECK(elements[2].getFilterOperands()[0].decodedData<LiteralOperand>() != nullptr);
+    CHECK(elements[2].getFilterOperands()[1].decodedData<LiteralOperand>() != nullptr);
 }
 
 TEST_CASE("ContentFilter(Element) operators") {
@@ -423,7 +423,7 @@ TEST_CASE("ContentFilter(Element) operators") {
     };
 
     auto elementOperandIndex = [](const ExtensionObject& operand) {
-        return operand.getDecodedData<ElementOperand>()->getIndex();
+        return operand.decodedData<ElementOperand>()->getIndex();
     };
 
     auto firstOperator = [](const ContentFilter& contentFilter) {

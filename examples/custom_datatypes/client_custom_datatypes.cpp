@@ -49,7 +49,7 @@ int main() {
     if (variant.isArray() && variant.isType<opcua::ExtensionObject>()) {
         size_t i = 0;
         for (auto&& extObj : variant.getArray<opcua::ExtensionObject>()) {
-            const auto* p = static_cast<Point*>(extObj.getDecodedData());
+            const auto* p = static_cast<Point*>(extObj.decodedData());
             std::cout << "PointVec[" << i++ << "]:\n";
             std::cout << "- x = " << p->x << "\n";
             std::cout << "- y = " << p->y << "\n";

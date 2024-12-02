@@ -23,7 +23,7 @@ public:
     ) override {
         // Grant admin rights if user is logged in as "admin"
         // Store attribute "isAdmin" as session attribute to use it in access callbacks
-        const auto* token = userIdentityToken.getDecodedData<UserNameIdentityToken>();
+        const auto* token = userIdentityToken.decodedData<UserNameIdentityToken>();
         const bool isAdmin = (token != nullptr && token->getUserName() == "admin");
         std::cout << "User has admin rights: " << isAdmin << std::endl;
         session.setSessionAttribute({0, "isAdmin"}, Variant::fromScalar(isAdmin));

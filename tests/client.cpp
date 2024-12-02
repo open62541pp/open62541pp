@@ -29,16 +29,16 @@ TEST_CASE("ClientConfig") {
         CHECK(token.isEmpty());
 
         config.setUserIdentityToken(AnonymousIdentityToken{});
-        CHECK(token.getDecodedData<AnonymousIdentityToken>() != nullptr);
+        CHECK(token.decodedData<AnonymousIdentityToken>() != nullptr);
 
         config.setUserIdentityToken(UserNameIdentityToken{});
-        CHECK(token.getDecodedData<UserNameIdentityToken>() != nullptr);
+        CHECK(token.decodedData<UserNameIdentityToken>() != nullptr);
 
         config.setUserIdentityToken(X509IdentityToken{});
-        CHECK(token.getDecodedData<X509IdentityToken>() != nullptr);
+        CHECK(token.decodedData<X509IdentityToken>() != nullptr);
 
         config.setUserIdentityToken(IssuedIdentityToken{});
-        CHECK(token.getDecodedData<IssuedIdentityToken>() != nullptr);
+        CHECK(token.decodedData<IssuedIdentityToken>() != nullptr);
 
         CHECK_FALSE(token.isEmpty());
     }
