@@ -264,6 +264,8 @@ public:
     using StringLikeMixin ::StringLikeMixin;
     using TypeWrapper::TypeWrapper;
 
+    String() noexcept = default;
+
     explicit String(std::string_view str)
         : TypeWrapper(detail::allocNativeString(str)) {}
 
@@ -507,6 +509,8 @@ public:
     using StringLikeMixin ::StringLikeMixin;
     using TypeWrapper::TypeWrapper;
 
+    ByteString() noexcept = default;
+
     explicit ByteString(std::string_view str)
         : TypeWrapper(detail::allocNativeString(str)) {}
 
@@ -564,6 +568,8 @@ class XmlElement
 public:
     using StringLikeMixin ::StringLikeMixin;
     using TypeWrapper::TypeWrapper;
+
+    XmlElement() noexcept = default;
 
     explicit XmlElement(std::string_view str)
         : TypeWrapper(detail::allocNativeString(str)) {}
