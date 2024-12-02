@@ -13,7 +13,7 @@ class Server;
 /**
  * Create and trigger events.
  *
- * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/4.6
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/4.7
  * @see https://reference.opcfoundation.org/Core/Part5/v105/docs/6.4.2
  */
 class Event {
