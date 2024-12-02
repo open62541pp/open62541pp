@@ -963,18 +963,15 @@ TEST_CASE("ExtensionObject") {
         CHECK(obj.decodedData() == nullptr);
     }
 
-    SUBCASE("fromDecoded (type erased variant)") {
-        int32_t value = 11;
-        const auto obj = ExtensionObject::fromDecoded(&value, UA_TYPES[UA_TYPES_INT32]);
-        CHECK(obj.encoding() == ExtensionObjectEncoding::DecodedNoDelete);
-        CHECK(obj.isDecoded());
-        CHECK(obj.decodedType() == &UA_TYPES[UA_TYPES_INT32]);
-        CHECK(obj.decodedData() == &value);
-    }
-
     SUBCASE("fromDecoded") {
+        ExtensionObject obj;
         String value("test123");
-        const auto obj = ExtensionObject::fromDecoded(value);
+        SUBCASE("Deduce data type") {
+            obj = ExtensionObject::fromDecoded(value);
+        }
+        SUBCASE("Custom data type") {
+            obj = ExtensionObject::fromDecoded(value, UA_TYPES[UA_TYPES_STRING]);
+        }
         CHECK(obj.encoding() == ExtensionObjectEncoding::DecodedNoDelete);
         CHECK(obj.isDecoded());
         CHECK(obj.decodedType() == &UA_TYPES[UA_TYPES_STRING]);
@@ -982,16 +979,22 @@ TEST_CASE("ExtensionObject") {
     }
 
     SUBCASE("fromDecodedCopy") {
-        auto obj = ExtensionObject::fromDecodedCopy(Variant::fromScalar(11.11));
+        ExtensionObject obj;
+        const auto value = Variant::fromScalar(11.11);
+        SUBCASE("Deduce data type") {
+            obj = ExtensionObject::fromDecodedCopy(value);
+        }
+        SUBCASE("Custom data type") {
+            obj = ExtensionObject::fromDecodedCopy(value, UA_TYPES[UA_TYPES_VARIANT]);
+        }
         CHECK(obj.encoding() == ExtensionObjectEncoding::Decoded);
         CHECK(obj.isDecoded());
         CHECK(obj.decodedType() == &UA_TYPES[UA_TYPES_VARIANT]);
-        auto* varPtr = static_cast<Variant*>(obj.decodedData());
-        CHECK(varPtr != nullptr);
-        CHECK(varPtr->getScalar<double>() == 11.11);
+        CHECK(obj.decodedData<Variant>() != nullptr);
+        CHECK(obj.decodedData<Variant>()->getScalar<double>() == 11.11);
     }
 
-    SUBCASE("getDecodedData") {
+    SUBCASE("decodedData") {
         double value = 11.11;
         auto obj = ExtensionObject::fromDecoded(value);
         CHECK(obj.decodedData() == &value);

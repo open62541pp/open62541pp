@@ -1874,44 +1874,43 @@ public:
     /// @param data Decoded data
     template <typename T>
     [[nodiscard]] static ExtensionObject fromDecoded(T& data) noexcept {
-        return fromDecoded(&data, getDataType<T>());
+        return fromDecoded(data, getDataType<T>());
     }
 
-    /// Create an ExtensionObject from a decoded object (reference).
+    /// Create an ExtensionObject from a decoded object (reference) with a custom data type.
     /// The data will *not* be deleted when the ExtensionObject is destructed.
     /// @param data Decoded data
     /// @param type Data type of the decoded data
-    /// @warning Type erased version, use with caution.
-    [[nodiscard]] static ExtensionObject fromDecoded(void* data, const UA_DataType& type) noexcept {
+    template <typename T>
+    [[nodiscard]] static ExtensionObject fromDecoded(T& data, const UA_DataType& type) noexcept {
+        assert(sizeof(T) == type.memSize);
         ExtensionObject obj;
         obj->encoding = UA_EXTENSIONOBJECT_DECODED_NODELETE;
         obj->content.decoded.type = &type;  // NOLINT
-        obj->content.decoded.data = data;  // NOLINT
+        obj->content.decoded.data = &data;  // NOLINT
         return obj;
     }
 
     /// Create an ExtensionObject from a decoded object (copy).
-    /// Set the "decoded" data to a copy of the given object.
     /// @param data Decoded data
     template <typename T>
     [[nodiscard]] static ExtensionObject fromDecodedCopy(const T& data) {
-        return fromDecodedCopy(&data, getDataType<T>());
+        return fromDecodedCopy(data, getDataType<T>());
     }
 
-    /// Create an ExtensionObject from a decoded object (copy).
+    /// Create an ExtensionObject from a decoded object (copy) with a custom data type.
     /// @param data Decoded data
     /// @param type Data type of the decoded data
-    /// @warning Type erased version, use with caution.
-    [[nodiscard]] static ExtensionObject fromDecodedCopy(
-        const void* data, const UA_DataType& type
-    ) {
+    template <typename T>
+    [[nodiscard]] static ExtensionObject fromDecodedCopy(const T& data, const UA_DataType& type) {
         // manual implementation instead of UA_ExtensionObject_setValueCopy to support open62541
         // v1.0 https://github.com/open62541/open62541/blob/v1.3.5/src/ua_types.c#L503-L524
+        assert(sizeof(T) == type.memSize);
         ExtensionObject obj;
         obj->encoding = UA_EXTENSIONOBJECT_DECODED;
         obj->content.decoded.data = detail::allocate<void>(type);  // NOLINT
         obj->content.decoded.type = &type;  // NOLINT
-        throwIfBad(UA_copy(data, obj->content.decoded.data, &type));  // NOLINT
+        throwIfBad(UA_copy(&data, obj->content.decoded.data, &type));  // NOLINT
         return obj;
     }
 
