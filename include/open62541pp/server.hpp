@@ -71,7 +71,7 @@ public:
      * @param issuerList List of issuer certificates (i.e. CAs) in `DER` encoded format
      * @param revocationList Certificate revocation lists (CRL) in `DER` encoded format
      *
-     * @see https://reference.opcfoundation.org/Core/Part2/v105/docs/8
+     * @see https://reference.opcfoundation.org/Core/Part2/v105/docs/9
      * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/6.1
      * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/6.2
      */

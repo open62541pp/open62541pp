@@ -25,7 +25,7 @@ namespace opcua::services {
 /**
  * @defgroup Attribute Attribute service set
  * Read and write node attributes.
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.10
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.11
  * @ingroup Services
  * @{
  */
@@ -33,7 +33,7 @@ namespace opcua::services {
 /**
  * @defgroup Read Read service
  * This service is used to read attributes of nodes.
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.10.2
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.11.2
  * @{
  */
 
@@ -132,7 +132,7 @@ auto readAttributeAsync(
  * - AttributeId::UserAccessLevel
  * - AttributeId::UserExecutable
  *
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.10.4
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.11.4
  * @{
  */
 

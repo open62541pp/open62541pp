@@ -12,7 +12,7 @@ namespace opcua {
 
 // ignore namespace index for v1.3, v1.4 uses qualified keys
 [[maybe_unused]] static std::string unqualify(const QualifiedName& key) {
-    return std::string{key.getName()};
+    return std::string{key.name()};
 }
 
 Variant Session::getSessionAttribute([[maybe_unused]] const QualifiedName& key) {

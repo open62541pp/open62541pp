@@ -43,7 +43,7 @@ int main() {
         const auto& name = server.getApplicationUri();
         std::cout
             << "Server[" << serverIndex++ << "] " << name << "\n"
-            << "\tName:             " << server.getApplicationName().getText() << "\n"
+            << "\tName:             " << server.getApplicationName().text() << "\n"
             << "\tApplication URI:  " << server.getApplicationUri() << "\n"
             << "\tProduct URI:      " << server.getProductUri() << "\n"
             << "\tApplication type: " << getEnumName(server.getApplicationType()) << "\n"

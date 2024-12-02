@@ -39,9 +39,14 @@ public:
         : BadStatus(UA_STATUSCODE_BADDISCONNECT) {}
 };
 
-class BadVariantAccess : public std::runtime_error {
+class TypeError : public std::runtime_error {
 public:
-    using runtime_error::runtime_error;  // inherit constructors
+    using runtime_error::runtime_error;
+};
+
+class BadVariantAccess : public TypeError {
+public:
+    using TypeError::TypeError;
 };
 
 namespace detail {

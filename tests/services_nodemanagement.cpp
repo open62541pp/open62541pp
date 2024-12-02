@@ -332,6 +332,6 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
                 .value();
 
         CHECK(id != NodeId(1, 0));
-        CHECK(id.getNamespaceIndex() == 1);
+        CHECK(id.namespaceIndex() == 1);
     }
 }

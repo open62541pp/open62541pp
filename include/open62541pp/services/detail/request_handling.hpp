@@ -55,7 +55,7 @@ inline UA_AddNodesItem createAddNodesItem(
     item.parentNodeId.nodeId = parentId;
     item.referenceTypeId = referenceType;
     item.requestedNewNodeId.nodeId = id;
-    item.browseName.namespaceIndex = id.getNamespaceIndex();
+    item.browseName.namespaceIndex = id.namespaceIndex();
     item.browseName.name = opcua::detail::toNativeString(browseName);
     item.nodeClass = static_cast<UA_NodeClass>(nodeClass);
     item.nodeAttributes = nodeAttributes;

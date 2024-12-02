@@ -29,7 +29,7 @@ namespace opcua::services {
  * @defgroup NodeManagement NodeManagement service set
  * Add/delete nodes and references.
  *
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8
  * @ingroup Services
  * @{
  */
@@ -37,7 +37,7 @@ namespace opcua::services {
 /**
  * @defgroup AddNodes AddNodes service
  * Add nodes into the address space hierarchy.
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.2
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.2
  * @{
  */
 
@@ -120,7 +120,7 @@ auto addNodeAsync(
  * @}
  * @defgroup AddReferences AddReferences service
  * Add references to nodes.
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.3
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.3
  * @{
  */
 
@@ -193,7 +193,7 @@ auto addReferenceAsync(
  * @}
  * @defgroup DeleteNodes DeleteNodes service
  * Delete nodes from the address space.
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.4
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.4
  * @{
  */
 
@@ -251,7 +251,7 @@ auto deleteNodeAsync(
  * @}
  * @defgroup DeleteReferences DeleteReferences service
  * Delete references from nodes.
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.5
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.5
  * @{
  */
 

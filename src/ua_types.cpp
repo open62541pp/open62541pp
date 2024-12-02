@@ -65,7 +65,7 @@ static ContentFilter concatFilterElements(
         // increment element operand indexes by offset
         for (auto& element : resultElementsView) {
             for (auto& operand : element.getFilterOperands()) {
-                auto* elementOperand = operand.getDecodedData<ElementOperand>();
+                auto* elementOperand = operand.decodedData<ElementOperand>();
                 if (elementOperand != nullptr) {
                     elementOperand->handle()->index += static_cast<uint32_t>(offset);
                 }

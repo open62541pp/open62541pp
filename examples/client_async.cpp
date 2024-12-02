@@ -34,7 +34,7 @@ int main() {
         opcua::services::browseAsync(client, bd, 0, [](opcua::BrowseResult& result) {
             std::cout << "Browse result with " << result.getReferences().size() << " references:\n";
             for (const auto& reference : result.getReferences()) {
-                std::cout << "- " << reference.getBrowseName().getName() << std::endl;
+                std::cout << "- " << reference.getBrowseName().name() << std::endl;
             }
         });
 
@@ -68,7 +68,7 @@ int main() {
                             << "Data change notification:\n"
                             << "- subscription id: " << subId << "\n"
                             << "- monitored item id: " << monId << "\n"
-                            << "- timestamp: " << dv.getSourceTimestamp() << std::endl;
+                            << "- timestamp: " << dv.sourceTimestamp() << std::endl;
                     },
                     {},  // delete callback
                     [](opcua::MonitoredItemCreateResult& result) {

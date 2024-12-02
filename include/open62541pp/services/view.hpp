@@ -27,7 +27,7 @@ namespace opcua::services {
 /**
  * @defgroup View View service set
  * Browse the address space / view created by a server.
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.9
  * @ingroup Services
  * @{
  */
@@ -35,13 +35,12 @@ namespace opcua::services {
 /**
  * @defgroup Browse Browse service
  * Discover references of nodes.
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.2
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.9.2
  * @{
  */
 
 /**
  * Discover the references of one or more nodes (client only).
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.2
  * @param connection Instance of type Client
  * @param request Browse request
  */
@@ -61,7 +60,6 @@ auto browseAsync(Client& connection, const BrowseRequest& request, CompletionTok
 
 /**
  * Discover the references of a specified node.
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.2
  * @param connection Instance of type Server or Client
  * @param bd Browse description
  * @param maxReferences The maximum number of references to return (0 if no limit)
@@ -94,13 +92,12 @@ auto browseAsync(
  * @defgroup BrowseNext BrowseNext service
  * Request the next set of a Browse or BrowseNext response information that is too large to be sent
  * in a single response. Discover references of nodes.
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.3
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.9.3
  * @{
  */
 
 /**
  * Request the next sets of @ref browse / @ref browseNext responses (client only).
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.3
  * @param connection Instance of type Client
  * @param request Browse request
  */
@@ -123,7 +120,6 @@ auto browseNextAsync(
 /**
  * Request the next set of a @ref browse or @ref browseNext response.
  * The response might get split up if the information is too large to be sent in a single response.
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.3
  * @param connection Instance of type Server or Client
  * @param releaseContinuationPoint Free resources in server if `true`, get next result if `false`
  * @param continuationPoint Continuation point from a preview browse/browseNext request
@@ -162,13 +158,12 @@ auto browseNextAsync(
  * @}
  * @defgroup TranslateBrowsePathsToNodeIds TranslateBrowsePathsToNodeIds service
  * Request that the server translates browse paths to node ids.
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.4
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.9.4
  * @{
  */
 
 /**
  * Translate browse paths to NodeIds (client only).
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.4
  * @param connection Instance of type Client
  * @param request Request
  */
@@ -194,7 +189,6 @@ auto translateBrowsePathsToNodeIdsAsync(
 
 /**
  * Translate a browse path to NodeIds.
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.4
  * @param connection Instance of type Server or Client
  * @param browsePath Browse path (starting node & relative path)
  */
@@ -265,7 +259,7 @@ auto browseSimplifiedBrowsePathAsync(
  * @defgroup RegisterNodes RegisterNodes service
  * Register nodes for efficient access operations.
  * Clients shall unregister unneeded nodes immediately to free up resources.
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.5
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.9.5
  * @{
  */
 
@@ -296,13 +290,12 @@ auto registerNodesAsync(
  * @}
  * @defgroup UnregisterNodes UnregisterNodes service
  * Unregister nodes that have been obtained via the RegisterNodes service.
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.6
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.9.6
  * @{
  */
 
 /**
  * Unregister nodes (client only).
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.6
  * @param connection Instance of type Client
  * @param request Request
  */

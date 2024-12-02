@@ -376,46 +376,44 @@ TEST_CASE("DateTime") {
 }
 
 TEST_CASE("NodeId") {
-    SUBCASE("Construct with numeric identifier") {
+    SUBCASE("Numeric identifier") {
         NodeId id(1, 123);
-        CHECK(id.getIdentifierType() == NodeIdType::Numeric);
-        CHECK(id.getNamespaceIndex() == 1);
-        CHECK(id.getIdentifierAs<NodeIdType::Numeric>() == 123);
+        CHECK(id.identifierType() == NodeIdType::Numeric);
+        CHECK(id.namespaceIndex() == 1);
+        CHECK(id.identifier<uint32_t>() == 123);
+        CHECK(id.identifierIf<uint32_t>() != nullptr);
+        CHECK(*id.identifierIf<uint32_t>() == 123);
     }
 
-    SUBCASE("Constructor with string identifier from string_view") {
-        std::string_view sv("Test123");
-        NodeId id(1, sv);
-        CHECK(id.getIdentifierType() == NodeIdType::String);
-        CHECK(id.getNamespaceIndex() == 1);
-        CHECK(id.getIdentifierAs<String>() == sv);
-    }
-
-    SUBCASE("Constructor with string identifier") {
+    SUBCASE("String identifier") {
         String str("Test456");
         NodeId id(2, str);
-        CHECK(id.getIdentifierType() == NodeIdType::String);
-        CHECK(id.getNamespaceIndex() == 2);
-        CHECK(id.getIdentifierAs<String>() == str);
+        CHECK(id.identifierType() == NodeIdType::String);
+        CHECK(id.namespaceIndex() == 2);
+        CHECK(id.identifier<String>() == str);
+        CHECK(id.identifierIf<String>() != nullptr);
+        CHECK(*id.identifierIf<String>() == str);
     }
 
-    SUBCASE("Constructor with guid identifier") {
-        Guid guid(11, 22, 33, {1, 2, 3, 4, 5, 6, 7, 8});
+    SUBCASE("Guid identifier") {
+        Guid guid = Guid::random();
         NodeId id(3, guid);
-        CHECK(id.getIdentifierType() == NodeIdType::Guid);
-        CHECK(id.getNamespaceIndex() == 3);
-        CHECK(id.getIdentifierAs<Guid>() == guid);
+        CHECK(id.identifierType() == NodeIdType::Guid);
+        CHECK(id.namespaceIndex() == 3);
+        CHECK(id.identifier<Guid>() == guid);
+        CHECK(id.identifierIf<Guid>() != nullptr);
+        CHECK(*id.identifierIf<Guid>() == guid);
     }
 
-#ifndef __APPLE__  // weird SIGABRT in macOS test runner
-    SUBCASE("Constructor with byte string identifier") {
+    SUBCASE("ByteString identifier") {
         ByteString byteStr("Test789");
         NodeId id(4, byteStr);
-        CHECK(id.getIdentifierType() == NodeIdType::ByteString);
-        CHECK(id.getNamespaceIndex() == 4);
-        CHECK(id.getIdentifierAs<ByteString>() == byteStr);
+        CHECK(id.identifierType() == NodeIdType::ByteString);
+        CHECK(id.namespaceIndex() == 4);
+        CHECK(id.identifier<ByteString>() == byteStr);
+        CHECK(id.identifierIf<ByteString>() != nullptr);
+        CHECK(*id.identifierIf<ByteString>() == byteStr);
     }
-#endif
 
     SUBCASE("Construct from node id enums") {
         CHECK(NodeId(DataTypeId::Boolean) == NodeId(0, UA_NS0ID_BOOLEAN));
@@ -425,6 +423,18 @@ TEST_CASE("NodeId") {
         CHECK(NodeId(ObjectId::RootFolder) == NodeId(0, UA_NS0ID_ROOTFOLDER));
         CHECK(NodeId(VariableId::LocalTime) == NodeId(0, UA_NS0ID_LOCALTIME));
         CHECK(NodeId(MethodId::AddCommentMethodType) == NodeId(0, UA_NS0ID_ADDCOMMENTMETHODTYPE));
+    }
+
+    SUBCASE("Get invalid identifier type") {
+        NodeId id(1, 123);
+        CHECK(id.identifierIf<uint32_t>() != nullptr);
+        CHECK(id.identifierIf<String>() == nullptr);
+        CHECK(id.identifierIf<Guid>() == nullptr);
+        CHECK(id.identifierIf<ByteString>() == nullptr);
+        CHECK_NOTHROW(id.identifier<uint32_t>());
+        CHECK_THROWS_AS(id.identifier<String>(), TypeError);
+        CHECK_THROWS_AS(id.identifier<Guid>(), TypeError);
+        CHECK_THROWS_AS(id.identifier<ByteString>(), TypeError);
     }
 
     SUBCASE("Comparison") {
@@ -475,15 +485,15 @@ TEST_CASE("NodeId") {
 TEST_CASE("ExpandedNodeId") {
     ExpandedNodeId idLocal({1, "local"}, {}, 0);
     CHECK(idLocal.isLocal());
-    CHECK(idLocal.getNodeId() == NodeId{1, "local"});
-    CHECK(idLocal.getNodeId().handle() == &idLocal.handle()->nodeId);  // return ref
-    CHECK(idLocal.getNamespaceUri().empty());
-    CHECK(idLocal.getServerIndex() == 0);
+    CHECK(idLocal.nodeId() == NodeId{1, "local"});
+    CHECK(idLocal.nodeId().handle() == &idLocal.handle()->nodeId);  // return ref
+    CHECK(idLocal.namespaceUri().empty());
+    CHECK(idLocal.serverIndex() == 0);
 
     ExpandedNodeId idFull({1, "full"}, "namespace", 1);
-    CHECK(idFull.getNodeId() == NodeId{1, "full"});
-    CHECK(std::string(idFull.getNamespaceUri()) == "namespace");
-    CHECK(idFull.getServerIndex() == 1);
+    CHECK(idFull.nodeId() == NodeId{1, "full"});
+    CHECK(std::string(idFull.namespaceUri()) == "namespace");
+    CHECK(idFull.serverIndex() == 1);
 
     CHECK(idLocal == idLocal);
     CHECK(idLocal != idFull);
@@ -818,12 +828,12 @@ TEST_CASE("Variant") {
 
 TEST_CASE("DataValue") {
     SUBCASE("Create from scalar") {
-        CHECK(DataValue::fromScalar(5).getValue().getScalar<int>() == 5);
+        CHECK(DataValue::fromScalar(5).value().getScalar<int>() == 5);
     }
 
     SUBCASE("Create from array") {
         std::vector<int> vec{1, 2, 3};
-        CHECK(DataValue::fromArray(vec).getValue().getArrayCopy<int>() == vec);
+        CHECK(DataValue::fromArray(vec).value().getArrayCopy<int>() == vec);
     }
 
     SUBCASE("Empty") {
@@ -855,12 +865,12 @@ TEST_CASE("DataValue") {
             uint16_t{4},
             UA_STATUSCODE_BADINTERNALERROR
         );
-        CHECK(dv.getValue().isScalar());
-        CHECK(dv.getSourceTimestamp() == DateTime{1});
-        CHECK(dv.getServerTimestamp() == DateTime{2});
-        CHECK(dv.getSourcePicoseconds() == 3);
-        CHECK(dv.getServerPicoseconds() == 4);
-        CHECK(dv.getStatus() == UA_STATUSCODE_BADINTERNALERROR);
+        CHECK(dv.value().isScalar());
+        CHECK(dv.sourceTimestamp() == DateTime{1});
+        CHECK(dv.serverTimestamp() == DateTime{2});
+        CHECK(dv.sourcePicoseconds() == 3);
+        CHECK(dv.serverPicoseconds() == 4);
+        CHECK(dv.status() == UA_STATUSCODE_BADINTERNALERROR);
     }
 
     SUBCASE("Setter methods") {
@@ -872,7 +882,7 @@ TEST_CASE("DataValue") {
             CHECK(var->data == &value);
             dv.setValue(std::move(var));
             CHECK(dv.hasValue());
-            CHECK(dv.getValue().getScalar<float>() == value);
+            CHECK(dv.value().getScalar<float>() == value);
             CHECK(dv->value.data == &value);
         }
         SUBCASE("Value (copy)") {
@@ -881,59 +891,59 @@ TEST_CASE("DataValue") {
             var.setScalar(value);
             dv.setValue(var);
             CHECK(dv.hasValue());
-            CHECK(dv.getValue().getScalar<float>() == value);
+            CHECK(dv.value().getScalar<float>() == value);
         }
         SUBCASE("Source timestamp") {
             DateTime dt{123};
             dv.setSourceTimestamp(dt);
             CHECK(dv.hasSourceTimestamp());
-            CHECK(dv.getSourceTimestamp() == dt);
+            CHECK(dv.sourceTimestamp() == dt);
         }
         SUBCASE("Server timestamp") {
             DateTime dt{456};
             dv.setServerTimestamp(dt);
             CHECK(dv.hasServerTimestamp());
-            CHECK(dv.getServerTimestamp() == dt);
+            CHECK(dv.serverTimestamp() == dt);
         }
         SUBCASE("Source picoseconds") {
             const uint16_t ps = 123;
             dv.setSourcePicoseconds(ps);
             CHECK(dv.hasSourcePicoseconds());
-            CHECK(dv.getSourcePicoseconds() == ps);
+            CHECK(dv.sourcePicoseconds() == ps);
         }
         SUBCASE("Server picoseconds") {
             const uint16_t ps = 456;
             dv.setServerPicoseconds(ps);
             CHECK(dv.hasServerPicoseconds());
-            CHECK(dv.getServerPicoseconds() == ps);
+            CHECK(dv.serverPicoseconds() == ps);
         }
         SUBCASE("Status") {
             const UA_StatusCode statusCode = UA_STATUSCODE_BADALREADYEXISTS;
             dv.setStatus(statusCode);
             CHECK(dv.hasStatus());
-            CHECK(dv.getStatus() == statusCode);
+            CHECK(dv.status() == statusCode);
         }
     }
 
     SUBCASE("getValue (lvalue & rvalue)") {
         DataValue dv(Variant::fromScalar(11));
-        void* data = dv.getValue().data();
+        void* data = dv.value().data();
 
         Variant var;
         SUBCASE("rvalue") {
-            var = dv.getValue();
+            var = dv.value();
             CHECK(var.data() != data);  // copy
         }
         SUBCASE("const rvalue") {
-            var = std::as_const(dv).getValue();
+            var = std::as_const(dv).value();
             CHECK(var.data() != data);  // copy
         }
         SUBCASE("lvalue") {
-            var = std::move(dv).getValue();
+            var = std::move(dv).value();
             CHECK(var.data() == data);  // move
         }
         SUBCASE("const lvalue") {
-            var = std::move(std::as_const(dv)).getValue();
+            var = std::move(std::as_const(dv)).value();
             CHECK(var.data() != data);  // can not move const -> copy
         }
         CHECK(var.getScalar<int>() == 11);
@@ -946,46 +956,49 @@ TEST_CASE("ExtensionObject") {
         CHECK(obj.isEmpty());
         CHECK_FALSE(obj.isEncoded());
         CHECK_FALSE(obj.isDecoded());
-        CHECK(obj.getEncoding() == ExtensionObjectEncoding::EncodedNoBody);
-        CHECK(obj.getEncodedTypeId() == nullptr);
-        CHECK(obj.getEncodedBody() == nullptr);
-        CHECK(obj.getDecodedDataType() == nullptr);
-        CHECK(obj.getDecodedData() == nullptr);
-    }
-
-    SUBCASE("fromDecoded (type erased variant)") {
-        int32_t value = 11;
-        const auto obj = ExtensionObject::fromDecoded(&value, UA_TYPES[UA_TYPES_INT32]);
-        CHECK(obj.getEncoding() == ExtensionObjectEncoding::DecodedNoDelete);
-        CHECK(obj.isDecoded());
-        CHECK(obj.getDecodedDataType() == &UA_TYPES[UA_TYPES_INT32]);
-        CHECK(obj.getDecodedData() == &value);
+        CHECK(obj.encoding() == ExtensionObjectEncoding::EncodedNoBody);
+        CHECK(obj.encodedTypeId() == nullptr);
+        CHECK(obj.encodedBody() == nullptr);
+        CHECK(obj.decodedType() == nullptr);
+        CHECK(obj.decodedData() == nullptr);
     }
 
     SUBCASE("fromDecoded") {
+        ExtensionObject obj;
         String value("test123");
-        const auto obj = ExtensionObject::fromDecoded(value);
-        CHECK(obj.getEncoding() == ExtensionObjectEncoding::DecodedNoDelete);
+        SUBCASE("Deduce data type") {
+            obj = ExtensionObject::fromDecoded(value);
+        }
+        SUBCASE("Custom data type") {
+            obj = ExtensionObject::fromDecoded(value, UA_TYPES[UA_TYPES_STRING]);
+        }
+        CHECK(obj.encoding() == ExtensionObjectEncoding::DecodedNoDelete);
         CHECK(obj.isDecoded());
-        CHECK(obj.getDecodedDataType() == &UA_TYPES[UA_TYPES_STRING]);
-        CHECK(obj.getDecodedData() == value.handle());
+        CHECK(obj.decodedType() == &UA_TYPES[UA_TYPES_STRING]);
+        CHECK(obj.decodedData() == value.handle());
     }
 
     SUBCASE("fromDecodedCopy") {
-        auto obj = ExtensionObject::fromDecodedCopy(Variant::fromScalar(11.11));
-        CHECK(obj.getEncoding() == ExtensionObjectEncoding::Decoded);
+        ExtensionObject obj;
+        const auto value = Variant::fromScalar(11.11);
+        SUBCASE("Deduce data type") {
+            obj = ExtensionObject::fromDecodedCopy(value);
+        }
+        SUBCASE("Custom data type") {
+            obj = ExtensionObject::fromDecodedCopy(value, UA_TYPES[UA_TYPES_VARIANT]);
+        }
+        CHECK(obj.encoding() == ExtensionObjectEncoding::Decoded);
         CHECK(obj.isDecoded());
-        CHECK(obj.getDecodedDataType() == &UA_TYPES[UA_TYPES_VARIANT]);
-        auto* varPtr = static_cast<Variant*>(obj.getDecodedData());
-        CHECK(varPtr != nullptr);
-        CHECK(varPtr->getScalar<double>() == 11.11);
+        CHECK(obj.decodedType() == &UA_TYPES[UA_TYPES_VARIANT]);
+        CHECK(obj.decodedData<Variant>() != nullptr);
+        CHECK(obj.decodedData<Variant>()->getScalar<double>() == 11.11);
     }
 
-    SUBCASE("getDecodedData") {
+    SUBCASE("decodedData") {
         double value = 11.11;
         auto obj = ExtensionObject::fromDecoded(value);
-        CHECK(obj.getDecodedData() == &value);
-        CHECK(obj.getDecodedData<int>() == nullptr);
-        CHECK(obj.getDecodedData<double>() == &value);
+        CHECK(obj.decodedData() == &value);
+        CHECK(obj.decodedData<int>() == nullptr);
+        CHECK(obj.decodedData<double>() == &value);
     }
 }

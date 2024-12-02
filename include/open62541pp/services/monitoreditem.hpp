@@ -39,7 +39,7 @@ namespace opcua::services {
  * to a user-defined callback instead of a remote client.
  *
  * @see Subscription
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13
  * @ingroup Services
  * @{
  */
@@ -78,7 +78,7 @@ struct MonitoringParametersEx {
 /**
  * @defgroup CreateMonitoredItems CreateMonitoredItems service
  * Create and add a monitored item to a subscription.
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.2
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.2
  * @{
  */
 
@@ -391,7 +391,7 @@ auto createMonitoredItemEventAsync(
  * @}
  * @defgroup ModifyMonitoredItems ModifyMonitoredItems service
  * Modify a monitored items of a subscription.
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.3
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.3
  * @{
  */
 
@@ -482,7 +482,7 @@ auto modifyMonitoredItemAsync(
  * @}
  * @defgroup SetMonitoringMode SetMonitoringMode service
  * Set the monitoring mode of a monitored items.
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.4
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.4
  * @{
  */
 
@@ -561,8 +561,8 @@ auto setMonitoringModeAsync(
  * @}
  * @defgroup SetTriggering SetTriggering service
  * Create and delete triggering links for a triggering item.
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.1.6
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.5
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.1.6
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.5
  * @{
  */
 
@@ -596,7 +596,7 @@ auto setTriggeringAsync(
  * @}
  * @defgroup DeleteMonitoredItems DeleteMonitoredItems service
  * Delete a monitored items from subscriptions.
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.6
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.6
  * @{
  */
 

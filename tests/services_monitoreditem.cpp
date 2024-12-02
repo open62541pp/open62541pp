@@ -91,7 +91,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
         services::writeValue(server, id, Variant::fromScalar(11.11)).throwIfBad();
         setup.client.runIterate();
         CHECK(notificationCount > 0);
-        CHECK(changedValue.getValue().getScalar<double>() == 11.11);
+        CHECK(changedValue.value().getScalar<double>() == 11.11);
     }
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS_EVENTS
@@ -229,7 +229,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
         CAPTURE(monIdTriggering);
         // set triggered item's monitoring mode to sampling
         // -> will only report if triggered by triggering item
-        // https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.1.6
+        // https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.1.6
         const auto monId =
             services::createMonitoredItemDataChange(
                 connection,

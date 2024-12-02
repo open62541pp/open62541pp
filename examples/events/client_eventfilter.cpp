@@ -63,7 +63,7 @@ int main() {
 
             std::cout << "Time:     " << time.format("%Y-%m-%d %H:%M:%S") << "\n";
             std::cout << "Severity: " << severity << "\n";
-            std::cout << "Message:  " << message.getText() << "\n";
+            std::cout << "Message:  " << message.text() << "\n";
         }
     );
 

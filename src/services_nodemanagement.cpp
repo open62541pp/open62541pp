@@ -50,10 +50,10 @@ Result<NodeId> addNode<Server>(
         id.handle(),
         parentId.handle(),
         referenceType.handle(),
-        {id.getNamespaceIndex(), opcua::detail::toNativeString(browseName)},
+        {id.namespaceIndex(), opcua::detail::toNativeString(browseName)},
         typeDefinition.handle(),
-        static_cast<const UA_NodeAttributes*>(nodeAttributes.getDecodedData()),
-        nodeAttributes.getDecodedDataType(),
+        static_cast<const UA_NodeAttributes*>(nodeAttributes.decodedData()),
+        nodeAttributes.decodedType(),
         nullptr,  // nodeContext
         addedNodeId.handle()
     );
@@ -132,7 +132,7 @@ Result<NodeId> addMethod(
             id,
             parentId,
             referenceType,
-            {id.getNamespaceIndex(), opcua::detail::toNativeString(browseName)},
+            {id.namespaceIndex(), opcua::detail::toNativeString(browseName)},
             attributes,
             methodCallback,
             inputArguments.size(),
