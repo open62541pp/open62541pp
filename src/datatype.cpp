@@ -4,20 +4,23 @@
 #include <cassert>
 #include <utility>  // exchange
 
+#include "open62541pp/detail/types_handling.hpp"
+
 namespace opcua {
 
 static void clearMembers(UA_DataType& native) noexcept {
-    delete[] native.members;  // NOLINT
+    detail::deallocateArray(native.members);
     native.members = nullptr;
     native.membersSize = 0;
 }
 
 static void clear(UA_DataType& native) noexcept {
     clearMembers(native);
+    native = {};
 }
 
 static void copyMembers(const DataTypeMember* members, size_t membersSize, UA_DataType& dst) {
-    dst.members = new DataTypeMember[membersSize];  // NOLINT
+    dst.members = detail::allocateArray<DataTypeMember>(membersSize);
     dst.membersSize = membersSize;
     std::copy_n(members, membersSize, dst.members);
 }

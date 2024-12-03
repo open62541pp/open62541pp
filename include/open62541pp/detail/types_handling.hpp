@@ -1,6 +1,6 @@
 #pragma once
 
-#include <algorithm>  // copy_n
+#include <algorithm>  // copy_n, for_each_n, transform
 #include <cassert>
 #include <cstring>  // memcpy, memset
 #include <memory>
@@ -82,7 +82,7 @@ template <typename T>
     assert(isValidTypeCombination<T>(type));
     auto* result = static_cast<T*>(UA_new(&type));
     if (result == nullptr) {
-        throw std::bad_alloc();
+        throw std::bad_alloc{};
     }
     return result;
 }
@@ -107,20 +107,56 @@ template <typename T>
 
 /* ----------------------------------- Generic array handling ----------------------------------- */
 
+/**
+ * Sentinel for empty but defined arrays.
+ *
+ * In OPC UA, arrays can have a length of zero or more with the usual meaning.
+ * In addition, arrays can be undefined. Then, they don't even have a length.
+ * In the binary encoding, this is indicated by an array of length -1.
+ *
+ * In open62541, size_t is used for array lengths.
+ * An undefined array has length 0 and the data pointer is NULL.
+ * An array of length 0 also has length 0 but a data pointer UA_EMPTY_ARRAY_SENTINEL (0x01).
+ */
+inline constexpr uintptr_t emptyArraySentinel = 0x01;
+
 template <typename T>
-void deallocateArray(T* array, size_t size, const UA_DataType& type) noexcept {
-    assert(isValidTypeCombination<T>(type));
-    UA_Array_delete(array, size, &type);
+T* stripEmptyArraySentinel(T* array) noexcept {
+    // NOLINTNEXTLINE
+    return reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(array) & ~emptyArraySentinel);
 }
 
 template <typename T>
-[[nodiscard]] T* allocateArray(size_t size, const UA_DataType& type) {
+void deallocateArray(T* array) noexcept {
+    UA_free(stripEmptyArraySentinel(array));  // NOLINT
+}
+
+template <typename T>
+void deallocateArray(T* array, size_t size, const UA_DataType& type) noexcept {
     assert(isValidTypeCombination<T>(type));
-    auto* result = static_cast<T*>(UA_Array_new(size, &type));
+    std::for_each_n(array, size, [&](auto& item) { clear(item, type); });
+    deallocateArray(array);
+}
+
+template <typename T>
+[[nodiscard]] T* allocateArray(size_t size) {
+    if (size > UA_INT32_MAX) {
+        throw std::bad_alloc{};
+    }
+    if (size == 0) {
+        return reinterpret_cast<T*>(emptyArraySentinel);  // NOLINT
+    }
+    auto* result = static_cast<T*>(UA_calloc(size, sizeof(T)));  // NOLINT
     if (result == nullptr) {
-        throw std::bad_alloc();
+        throw std::bad_alloc{};
     }
     return result;
+}
+
+template <typename T>
+[[nodiscard]] T* allocateArray(size_t size, [[maybe_unused]] const UA_DataType& type) {
+    assert(isValidTypeCombination<T>(type));
+    return allocateArray<T>(size);
 }
 
 template <typename T>
