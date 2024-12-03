@@ -449,7 +449,7 @@ bool Client::isConnected() noexcept {
 #endif
 }
 
-std::vector<std::string> Client::getNamespaceArray() {
+std::vector<std::string> Client::namespaceArray() {
     return services::readValue(*this, {0, UA_NS0ID_SERVER_NAMESPACEARRAY})
         .value()
         .getArrayCopy<std::string>();
