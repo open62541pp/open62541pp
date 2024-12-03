@@ -20,16 +20,16 @@ namespace opcua {
  * @warning No virtual constructor is defined; do not implement a destructor in derived classes.
  * @ingroup Wrapper
  */
-template <typename T, TypeIndex typeIndex>
+template <typename T, TypeIndex Index>
 class TypeWrapper : public Wrapper<T> {
 public:
-    static_assert(typeIndex < UA_TYPES_COUNT);
+    static_assert(Index < UA_TYPES_COUNT);
 
     constexpr TypeWrapper() noexcept = default;
 
     /// Constructor with native object (deep copy).
     explicit constexpr TypeWrapper(const T& native)
-        : Wrapper<T>(detail::copy(native, UA_TYPES[typeIndex])) {}
+        : Wrapper<T>(detail::copy(native, UA_TYPES[Index])) {}
 
     /// Constructor with native object (move rvalue).
     constexpr TypeWrapper(T&& native) noexcept  // NOLINT
@@ -41,7 +41,7 @@ public:
 
     /// Copy constructor (deep copy).
     constexpr TypeWrapper(const TypeWrapper& other)
-        : Wrapper<T>(detail::copy(other.native(), UA_TYPES[typeIndex])) {}
+        : Wrapper<T>(detail::copy(other.native(), UA_TYPES[Index])) {}
 
     /// Move constructor.
     constexpr TypeWrapper(TypeWrapper&& other) noexcept
@@ -51,7 +51,7 @@ public:
     constexpr TypeWrapper& operator=(const TypeWrapper& other) {
         if (this != &other) {
             clear();
-            this->native() = detail::copy(other.native(), UA_TYPES[typeIndex]);
+            this->native() = detail::copy(other.native(), UA_TYPES[Index]);
         }
         return *this;
     }
@@ -60,7 +60,7 @@ public:
     constexpr TypeWrapper& operator=(const T& native) {
         if (&this->native() != &native) {
             clear();
-            this->native() = detail::copy(native, UA_TYPES[typeIndex]);
+            this->native() = detail::copy(native, UA_TYPES[Index]);
         }
         return *this;
     }
@@ -84,13 +84,13 @@ public:
     }
 
     /// Get type as type index of the ::UA_TYPES array.
-    static constexpr TypeIndex getTypeIndex() {
-        return typeIndex;
+    static constexpr TypeIndex typeIndex() {
+        return Index;
     }
 
 protected:
     constexpr void clear() noexcept {
-        detail::clear(this->native(), UA_TYPES[typeIndex]);
+        detail::clear(this->native(), UA_TYPES[Index]);
     }
 };
 
@@ -101,8 +101,8 @@ namespace detail {
 template <typename T>
 struct IsTypeWrapper {
     // https://stackoverflow.com/a/51910887
-    template <typename U, TypeIndex typeIndex>
-    static std::true_type check(const TypeWrapper<U, typeIndex>&);
+    template <typename U, TypeIndex Index>
+    static std::true_type check(const TypeWrapper<U, Index>&);
 
     static std::false_type check(...);
 
@@ -120,7 +120,7 @@ constexpr bool isTypeWrapper = IsTypeWrapper<T>::value;
 template <typename T>
 struct TypeRegistry<T, std::enable_if_t<detail::isTypeWrapper<T>>> {
     static const UA_DataType& getDataType() noexcept {
-        return UA_TYPES[T::getTypeIndex()];
+        return UA_TYPES[T::typeIndex()];
     }
 };
 
