@@ -82,7 +82,7 @@ template <typename T>
     assert(isValidTypeCombination<T>(type));
     auto* result = static_cast<T*>(UA_new(&type));
     if (result == nullptr) {
-        throw std::bad_alloc();
+        throw std::bad_alloc{};
     }
     return result;
 }
@@ -139,13 +139,24 @@ void deallocateArray(T* array, size_t size, const UA_DataType& type) noexcept {
 }
 
 template <typename T>
-[[nodiscard]] T* allocateArray(size_t size, const UA_DataType& type) {
-    assert(isValidTypeCombination<T>(type));
-    auto* result = static_cast<T*>(UA_Array_new(size, &type));
+[[nodiscard]] T* allocateArray(size_t size) {
+    if (size > UA_INT32_MAX) {
+        throw std::bad_alloc{};
+    }
+    if (size == 0) {
+        return reinterpret_cast<T*>(emptyArraySentinel);  // NOLINT
+    }
+    auto* result = static_cast<T*>(UA_calloc(size, sizeof(T)));  // NOLINT
     if (result == nullptr) {
-        throw std::bad_alloc();
+        throw std::bad_alloc{};
     }
     return result;
+}
+
+template <typename T>
+[[nodiscard]] T* allocateArray(size_t size, [[maybe_unused]] const UA_DataType& type) {
+    assert(isValidTypeCombination<T>(type));
+    return allocateArray<T>(size);
 }
 
 template <typename T>
