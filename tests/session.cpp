@@ -19,16 +19,16 @@ TEST_CASE("Session") {
 
 #if UAPP_OPEN62541_VER_GE(1, 3)
     SUBCASE("Get active session") {
-        CHECK(server.getSessions().empty());
+        CHECK(server.sessions().empty());
         client.connect(localServerUrl);
-        CHECK(server.getSessions().size() == 1);
+        CHECK(server.sessions().size() == 1);
         client.disconnect();
-        CHECK(server.getSessions().empty());
+        CHECK(server.sessions().empty());
     }
 
     SUBCASE("Session attributes") {
         client.connect(localServerUrl);
-        auto session = server.getSessions().at(0);
+        auto session = server.sessions().at(0);
 
         const QualifiedName key(0, "testAttribute");
         CHECK_THROWS_WITH(session.getSessionAttribute(key), "BadNotFound");
@@ -39,7 +39,7 @@ TEST_CASE("Session") {
         CHECK(session.getSessionAttribute(key).getScalar<double>() == 11.11);
 
         // retry with newly created session object
-        CHECK(server.getSessions().at(0).getSessionAttribute(key).getScalar<double>() == 11.11);
+        CHECK(server.sessions().at(0).getSessionAttribute(key).getScalar<double>() == 11.11);
 
         // delete session attribute
         CHECK_NOTHROW(session.deleteSessionAttribute(key));
@@ -52,7 +52,7 @@ TEST_CASE("Session") {
         // false? bug in open62541?
 #ifndef UAPP_TSAN_ENABLED
         client.connect(localServerUrl);
-        auto session = server.getSessions().at(0);
+        auto session = server.sessions().at(0);
         CHECK_NOTHROW(session.close());
         CHECK_THROWS_WITH(session.close(), "BadSessionIdInvalid");
 #endif

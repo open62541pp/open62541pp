@@ -309,12 +309,12 @@ void Server::setCustomDataTypes(Span<const DataType> dataTypes) {
     config()->customDataTypes = context().dataTypeArray.get();
 }
 
-std::vector<Session> Server::getSessions() {
-    std::vector<Session> sessions;
+std::vector<Session> Server::sessions() {
+    std::vector<Session> result;
     for (auto&& id : context().sessionRegistry.sessionIds) {
-        sessions.emplace_back(*this, id);
+        result.emplace_back(*this, id);
     }
-    return sessions;
+    return result;
 }
 
 std::vector<std::string> Server::getNamespaceArray() {

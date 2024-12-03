@@ -212,8 +212,14 @@ public:
     /// All data types provided are automatically considered for decoding of received messages.
     void setCustomDataTypes(Span<const DataType> dataTypes);
 
-    /// Get active server session.
-    std::vector<Session> getSessions();
+    /// Get active sessions.
+    std::vector<Session> sessions();
+
+    /// @deprecated Use sessions() instead
+    [[deprecated("use sessions() instead")]]
+    std::vector<Session> getSessions() {
+        return sessions();
+    }
 
     /// Get all defined namespaces.
     std::vector<std::string> getNamespaceArray();
