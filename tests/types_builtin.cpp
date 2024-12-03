@@ -46,9 +46,7 @@ TEST_CASE("StatusCode") {
     }
 }
 
-using StringWrapper = detail::StringWrapper<UA_String, UA_TYPES_STRING, char>;
-
-TEST_CASE_TEMPLATE("StringWrapper constructors", T, StringWrapper, const StringWrapper) {
+TEST_CASE_TEMPLATE("StringLikeMixin constructors", T, String, const String) {
     SUBCASE("Default") {
         T str;
         CHECK(str.size() == 0);
@@ -79,7 +77,7 @@ TEST_CASE_TEMPLATE("StringWrapper constructors", T, StringWrapper, const StringW
     SUBCASE("From iterator pair (input iterator, single-pass)") {
         std::istringstream ss("abc");  // allows only single-pass reading
         std::istream_iterator<char> first(ss), last;
-        StringWrapper str(first, last);
+        T str(first, last);
         CHECK(str.size() == 3);
         CHECK(str.length() == 3);
         CHECK_FALSE(str.empty());
@@ -97,7 +95,7 @@ TEST_CASE_TEMPLATE("StringWrapper constructors", T, StringWrapper, const StringW
     }
 }
 
-TEST_CASE_TEMPLATE("StringWrapper element access", T, StringWrapper, const StringWrapper) {
+TEST_CASE_TEMPLATE("StringLikeMixin element access", T, String, const String) {
     T str{'a', 'b', 'c'};
 
     SUBCASE("operator[]") {
@@ -112,7 +110,7 @@ TEST_CASE_TEMPLATE("StringWrapper element access", T, StringWrapper, const Strin
     }
 }
 
-TEST_CASE_TEMPLATE("StringWrapper iterators", T, StringWrapper, const StringWrapper) {
+TEST_CASE_TEMPLATE("StringLikeMixin iterators", T, String, const String) {
     T str{'a', 'b', 'c'};
 
     SUBCASE("begin(), end() iterators") {

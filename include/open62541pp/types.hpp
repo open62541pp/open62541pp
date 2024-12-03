@@ -84,15 +84,16 @@ public:
     }
 };
 
-/* ---------------------------------------- StringWrapper --------------------------------------- */
+/* --------------------------------------- StringLikeMixin -------------------------------------- */
 
 namespace detail {
 
-template <typename T, TypeIndex typeIndex, typename CharT>
-class StringWrapper : public TypeWrapper<T, typeIndex> {
+/**
+ * CRTP mixin class to provide a STL-compatible string interface.
+ */
+template <typename WrapperType, typename CharT>
+class StringLikeMixin {
 public:
-    static_assert(std::is_same_v<T, UA_String>);
-
     // clang-format off
     using value_type             = CharT;
     using size_type              = size_t;
@@ -107,17 +108,9 @@ public:
     using const_reverse_iterator = std::reverse_iterator<const_iterator>;
     // clang-format on
 
-    using TypeWrapper<T, typeIndex>::TypeWrapper;  // inherit constructors
-
-    template <typename InputIt>
-    StringWrapper(InputIt first, InputIt last)
-        : StringWrapper(first, last, typename std::iterator_traits<InputIt>::iterator_category{}) {}
-
-    StringWrapper(std::initializer_list<CharT> init)
-        : StringWrapper(init.begin(), init.end()) {}
-
     size_t size() const noexcept {
-        return this->native().length;
+        const auto& native = asNative(static_cast<const WrapperType&>(*this));
+        return native.length;
     }
 
     size_t length() const noexcept {
@@ -129,11 +122,13 @@ public:
     }
 
     pointer data() noexcept {
-        return reinterpret_cast<pointer>(this->native().data);  // NOLINT
+        auto& native = asNative(static_cast<WrapperType&>(*this));
+        return reinterpret_cast<pointer>(native.data);  // NOLINT
     }
 
     const_pointer data() const noexcept {
-        return reinterpret_cast<const_pointer>(this->native().data);  // NOLINT
+        const auto& native = asNative(static_cast<const WrapperType&>(*this));
+        return reinterpret_cast<const_pointer>(native.data);  // NOLINT
     }
 
     reference operator[](size_t index) noexcept {
@@ -216,23 +211,29 @@ public:
 
 protected:
     void init(size_t length) {
-        this->native().length = length;
+        auto& native = asNative(static_cast<WrapperType&>(*this));
+        native.length = length;
         if (length > 0) {
-            this->native().data = static_cast<uint8_t*>(UA_malloc(length));  // NOLINT
+            native.data = static_cast<uint8_t*>(UA_malloc(length));  // NOLINT
             if (data() == nullptr) {
                 throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
             }
         }
     }
 
+    template <typename InputIt>
+    void init(InputIt first, InputIt last) {
+        init(first, last, typename std::iterator_traits<InputIt>::iterator_category{});
+    }
+
     template <typename InputIt, typename Tag>
-    StringWrapper(InputIt first, InputIt last, Tag /* unused */) {
+    void init(InputIt first, InputIt last, Tag /* unused */) {
         init(std::distance(first, last));
         std::copy(first, last, data());
     }
 
     template <typename InputIt>
-    StringWrapper(InputIt first, InputIt last, std::input_iterator_tag /* unused */) {
+    void init(InputIt first, InputIt last, std::input_iterator_tag /* unused */) {
         // input iterator can only be read once -> buffer data in vector
         std::vector<uint8_t> buffer(first, last);
         init(buffer.size());
@@ -248,12 +249,23 @@ protected:
  * UA_String wrapper class.
  * @ingroup Wrapper
  */
-class String : public detail::StringWrapper<UA_String, UA_TYPES_STRING, char> {
+class String
+    : public TypeWrapper<UA_String, UA_TYPES_STRING>,
+      public detail::StringLikeMixin<String, char> {
 public:
-    using StringWrapper::StringWrapper;  // inherit constructors
+    using TypeWrapper::TypeWrapper;
 
     explicit String(std::string_view str)
-        : StringWrapper(detail::allocNativeString(str)) {}
+        : TypeWrapper(detail::allocNativeString(str)) {}
+
+    template <typename InputIt>
+    String(InputIt first, InputIt last) {
+        init(first, last);
+    }
+
+    String(std::initializer_list<char> values) {
+        init(values.begin(), values.end());
+    }
 
     /// Implicit conversion to std::string_view.
     operator std::string_view() const noexcept {  // NOLINT(hicpp-explicit-conversions)
@@ -488,18 +500,26 @@ std::ostream& operator<<(std::ostream& os, const Guid& guid);
  * UA_ByteString wrapper class.
  * @ingroup Wrapper
  */
-class ByteString : public detail::StringWrapper<UA_ByteString, UA_TYPES_BYTESTRING, uint8_t> {
+class ByteString
+    : public TypeWrapper<UA_String, UA_TYPES_STRING>,
+      public detail::StringLikeMixin<ByteString, uint8_t> {
 public:
-    using StringWrapper::StringWrapper;  // inherit constructors
+    using TypeWrapper::TypeWrapper;
 
     explicit ByteString(std::string_view str)
-        : StringWrapper(detail::allocNativeString(str)) {}
+        : TypeWrapper(detail::allocNativeString(str)) {}
 
     explicit ByteString(const char* str)  // required to avoid ambiguity
         : ByteString(std::string_view(str)) {}
 
-    explicit ByteString(Span<const uint8_t> bytes)
-        : StringWrapper(bytes.begin(), bytes.end()) {}
+    explicit ByteString(Span<const uint8_t> bytes) {
+        init(bytes.begin(), bytes.end());
+    }
+
+    template <typename InputIt>
+    ByteString(InputIt first, InputIt last) {
+        init(first, last);
+    }
 
     /// Parse ByteString from Base64 encoded string.
     /// @note Supported since open62541 v1.1
@@ -543,12 +563,19 @@ inline bool operator!=(std::string_view lhs, const ByteString& rhs) noexcept {
  * UA_XmlElement wrapper class.
  * @ingroup Wrapper
  */
-class XmlElement : public detail::StringWrapper<UA_XmlElement, UA_TYPES_XMLELEMENT, char> {
+class XmlElement
+    : public TypeWrapper<UA_String, UA_TYPES_STRING>,
+      public detail::StringLikeMixin<XmlElement, char> {
 public:
-    using StringWrapper::StringWrapper;  // inherit constructors
+    using TypeWrapper::TypeWrapper;
 
     explicit XmlElement(std::string_view str)
-        : StringWrapper(detail::allocNativeString(str)) {}
+        : TypeWrapper(detail::allocNativeString(str)) {}
+
+    template <typename InputIt>
+    XmlElement(InputIt first, InputIt last) {
+        init(first, last);
+    }
 
     /// Implicit conversion to std::string_view.
     operator std::string_view() const noexcept {  // NOLINT(hicpp-explicit-conversions)
