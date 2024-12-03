@@ -64,7 +64,7 @@ static ContentFilter concatFilterElements(
         std::copy(filterElements.begin(), filterElements.end(), resultElementsView.begin());
         // increment element operand indexes by offset
         for (auto& element : resultElementsView) {
-            for (auto& operand : element.getFilterOperands()) {
+            for (auto& operand : element.filterOperands()) {
                 auto* elementOperand = operand.decodedData<ElementOperand>();
                 if (elementOperand != nullptr) {
                     elementOperand->handle()->index += static_cast<uint32_t>(offset);
@@ -109,7 +109,7 @@ ContentFilter operator!(const ContentFilterElement& filterElement) {
 }
 
 ContentFilter operator!(const ContentFilter& filter) {
-    return applyUnaryOperator(FilterOperator::Not, filter.getElements());
+    return applyUnaryOperator(FilterOperator::Not, filter.elements());
 }
 
 ContentFilter operator&&(const ContentFilterElement& lhs, const ContentFilterElement& rhs) {
@@ -117,15 +117,15 @@ ContentFilter operator&&(const ContentFilterElement& lhs, const ContentFilterEle
 }
 
 ContentFilter operator&&(const ContentFilterElement& lhs, const ContentFilter& rhs) {
-    return applyBinaryOperator(FilterOperator::And, {lhs}, rhs.getElements());
+    return applyBinaryOperator(FilterOperator::And, {lhs}, rhs.elements());
 }
 
 ContentFilter operator&&(const ContentFilter& lhs, const ContentFilterElement& rhs) {
-    return applyBinaryOperator(FilterOperator::And, lhs.getElements(), {rhs});
+    return applyBinaryOperator(FilterOperator::And, lhs.elements(), {rhs});
 }
 
 ContentFilter operator&&(const ContentFilter& lhs, const ContentFilter& rhs) {
-    return applyBinaryOperator(FilterOperator::And, lhs.getElements(), rhs.getElements());
+    return applyBinaryOperator(FilterOperator::And, lhs.elements(), rhs.elements());
 }
 
 ContentFilter operator||(const ContentFilterElement& lhs, const ContentFilterElement& rhs) {
@@ -133,15 +133,15 @@ ContentFilter operator||(const ContentFilterElement& lhs, const ContentFilterEle
 }
 
 ContentFilter operator||(const ContentFilterElement& lhs, const ContentFilter& rhs) {
-    return applyBinaryOperator(FilterOperator::Or, {lhs}, rhs.getElements());
+    return applyBinaryOperator(FilterOperator::Or, {lhs}, rhs.elements());
 }
 
 ContentFilter operator||(const ContentFilter& lhs, const ContentFilterElement& rhs) {
-    return applyBinaryOperator(FilterOperator::Or, lhs.getElements(), {rhs});
+    return applyBinaryOperator(FilterOperator::Or, lhs.elements(), {rhs});
 }
 
 ContentFilter operator||(const ContentFilter& lhs, const ContentFilter& rhs) {
-    return applyBinaryOperator(FilterOperator::Or, lhs.getElements(), rhs.getElements());
+    return applyBinaryOperator(FilterOperator::Or, lhs.elements(), rhs.elements());
 }
 
 #endif

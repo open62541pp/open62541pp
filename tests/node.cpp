@@ -228,7 +228,7 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         const auto refs = root.browseReferences();
         CHECK(refs.size() > 0);
         CHECK(std::any_of(refs.begin(), refs.end(), [&](auto& ref) {
-            return ref.getBrowseName() == QualifiedName(0, "Objects");
+            return ref.browseName() == QualifiedName(0, "Objects");
         }));
     }
 

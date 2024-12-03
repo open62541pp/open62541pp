@@ -6,7 +6,7 @@
 #include <open62541pp/node.hpp>
 
 /// Get name of node class.
-constexpr std::string_view getEnumName(opcua::NodeClass nodeClass) {
+constexpr std::string_view toString(opcua::NodeClass nodeClass) {
     switch (nodeClass) {
     case opcua::NodeClass::Object:
         return "Object";
@@ -46,7 +46,7 @@ void printNodeTree(opcua::Node<opcua::Client>& node, int indent);
 void printNodeTree(opcua::Node<opcua::Client>& node, int indent) {  // NOLINT
     for (auto&& child : node.browseChildren()) {
         std::cout << std::setw(indent) << "- " << child.readBrowseName().name() << " ("
-                  << getEnumName(child.readNodeClass()) << ")\n";
+                  << toString(child.readNodeClass()) << ")\n";
         printNodeTree(child, indent + 2);
     }
 }

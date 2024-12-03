@@ -602,8 +602,8 @@ public:
         std::vector<Node> nodes;
         nodes.reserve(refs.size());
         for (auto&& ref : refs) {
-            if (ref.getNodeId().isLocal()) {
-                nodes.emplace_back(connection(), std::move(ref.getNodeId().nodeId()));
+            if (ref.nodeId().isLocal()) {
+                nodes.emplace_back(connection(), std::move(ref.nodeId().nodeId()));
             }
         }
         return nodes;
@@ -622,10 +622,10 @@ public:
     /// @exception BadStatus (BadNoMatch) If path not found
     Node browseChild(Span<const QualifiedName> path) {
         auto result = services::browseSimplifiedBrowsePath(connection(), id(), path);
-        result.getStatusCode().throwIfBad();
-        for (auto&& target : result.getTargets()) {
-            if (target.getTargetId().isLocal()) {
-                return {connection(), std::move(target.getTargetId().nodeId())};
+        result.statusCode().throwIfBad();
+        for (auto&& target : result.targets()) {
+            if (target.targetId().isLocal()) {
+                return {connection(), std::move(target.targetId().nodeId())};
             }
         }
         throw BadStatus(UA_STATUSCODE_BADNOMATCH);
@@ -644,11 +644,11 @@ public:
             BrowseResultMask::TargetInfo
         );
         auto result = services::browse(connection(), bd, 1);
-        result.getStatusCode().throwIfBad();
-        if (result.getReferences().empty()) {
+        result.statusCode().throwIfBad();
+        if (result.references().empty()) {
             throw BadStatus(UA_STATUSCODE_BADNOTFOUND);
         }
-        return fromId(connection(), result.getReferences().front().getNodeId());
+        return fromId(connection(), result.references().front().nodeId());
     }
 
 #ifdef UA_ENABLE_METHODCALLS
@@ -1375,10 +1375,10 @@ private:
             connection(),
             BrowsePath(id(), {{ReferenceTypeId::HasProperty, false, true, propertyName}})
         );
-        result.getStatusCode().throwIfBad();
-        for (auto&& target : result.getTargets()) {
-            if (target.getTargetId().isLocal()) {
-                return {connection(), std::move(target.getTargetId().nodeId())};
+        result.statusCode().throwIfBad();
+        for (auto&& target : result.targets()) {
+            if (target.targetId().isLocal()) {
+                return {connection(), std::move(target.targetId().nodeId())};
             }
         }
         throw BadStatus(UA_STATUSCODE_BADNOTFOUND);

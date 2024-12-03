@@ -29,14 +29,14 @@ TEST_CASE_TEMPLATE("Subscription service set", T, Client, Async<Client>) {
         } else {
             response = services::createSubscription(connection, parameters, true, {}, {});
         }
-        CHECK(response.getResponseHeader().getServiceResult().isGood());
-        CAPTURE(response.getSubscriptionId());
-        CHECK(detail::getContext(connection).subscriptions.contains(response.getSubscriptionId()));
+        CHECK(response.responseHeader().serviceResult().isGood());
+        CAPTURE(response.subscriptionId());
+        CHECK(detail::getContext(connection).subscriptions.contains(response.subscriptionId()));
     }
 
     SUBCASE("modifySubscription") {
         const auto subId =
-            services::createSubscription(connection, parameters, true, {}, {}).getSubscriptionId();
+            services::createSubscription(connection, parameters, true, {}, {}).subscriptionId();
 
         parameters.priority = 1;
         ModifySubscriptionResponse response;
@@ -51,20 +51,20 @@ TEST_CASE_TEMPLATE("Subscription service set", T, Client, Async<Client>) {
         } else {
             response = services::modifySubscription(connection, subId, parameters);
         }
-        CHECK(response.getResponseHeader().getServiceResult().isGood());
+        CHECK(response.responseHeader().serviceResult().isGood());
 
         SUBCASE("Invalid subscription id") {
             CHECK(
                 services::modifySubscription(connection, subId + 1, parameters)
-                    .getResponseHeader()
-                    .getServiceResult() == UA_STATUSCODE_BADSUBSCRIPTIONIDINVALID
+                    .responseHeader()
+                    .serviceResult() == UA_STATUSCODE_BADSUBSCRIPTIONIDINVALID
             );
         }
     }
 
     SUBCASE("setPublishingMode") {
         const auto subId =
-            services::createSubscription(connection, parameters, true, {}, {}).getSubscriptionId();
+            services::createSubscription(connection, parameters, true, {}, {}).subscriptionId();
 
         if constexpr (isAsync<T>) {
             auto future = services::setPublishingModeAsync(connection, subId, false, useFuture);
@@ -77,7 +77,7 @@ TEST_CASE_TEMPLATE("Subscription service set", T, Client, Async<Client>) {
 
     SUBCASE("deleteSubscription") {
         const auto subId =
-            services::createSubscription(connection, parameters, true, {}, {}).getSubscriptionId();
+            services::createSubscription(connection, parameters, true, {}, {}).subscriptionId();
 
         if constexpr (isAsync<T>) {
 #if UAPP_HAS_ASYNC_SUBSCRIPTIONS && UAPP_OPEN62541_VER_LE(1, 3)
@@ -103,7 +103,7 @@ TEST_CASE_TEMPLATE("Subscription service set", T, Client, Async<Client>) {
         const auto deleteCallback = [&](IntegerId) { deleted = true; };
         const auto subId =
             services::createSubscription(connection, parameters, true, {}, deleteCallback)
-                .getSubscriptionId();
+                .subscriptionId();
 
         CHECK(services::deleteSubscription(connection, subId).isGood());
         CHECK(deleted == true);

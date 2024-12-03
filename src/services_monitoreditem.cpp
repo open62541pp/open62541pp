@@ -42,11 +42,11 @@ std::vector<std::unique_ptr<MonitoredItemContext>> createMonitoredItemContexts(
     // NOLINTEND(performance-unnecessary-value-param)
 ) {
     // TODO: move first callback, then copy
-    const auto items = request.getItemsToCreate();
+    const auto items = request.itemsToCreate();
     std::vector<std::unique_ptr<MonitoredItemContext>> contexts(items.size());
     std::transform(items.begin(), items.end(), contexts.begin(), [&](const auto& item) {
         return createMonitoredItemContext(
-            connection, item.getItemToMonitor(), dataChangeCallback, eventCallback, deleteCallback
+            connection, item.itemToMonitor(), dataChangeCallback, eventCallback, deleteCallback
         );
     });
     return contexts;
@@ -99,12 +99,10 @@ static void storeMonitoredItemContext(
     const MonitoredItemCreateResult& result,
     std::unique_ptr<MonitoredItemContext>& context
 ) {
-    if (result.getStatusCode().isGood()) {
+    if (result.statusCode().isGood()) {
         auto* contextPtr = context.get();
         opcua::detail::getContext(connection)
-            .monitoredItems.insert(
-                {subscriptionId, result.getMonitoredItemId()}, std::move(context)
-            );
+            .monitoredItems.insert({subscriptionId, result.monitoredItemId()}, std::move(context));
         contextPtr->inserted = true;
     }
 }
@@ -116,7 +114,7 @@ void storeMonitoredItemContexts(
     Span<std::unique_ptr<MonitoredItemContext>> contexts
 ) {
     if (getServiceResult(response).isGood()) {
-        const auto results = response.getResults();
+        const auto results = response.results();
         for (size_t i = 0; i < results.size(); ++i) {
             storeMonitoredItemContext(connection, subscriptionId, results[i], contexts[i]);
         }
@@ -148,7 +146,7 @@ CreateMonitoredItemsResponse createMonitoredItemsDataChange(
         dataChangeCallbacks.data(),
         deleteCallbacks.data()
     );
-    detail::storeMonitoredItemContexts(connection, request.getSubscriptionId(), response, contexts);
+    detail::storeMonitoredItemContexts(connection, request.subscriptionId(), response, contexts);
     return response;
 }
 
@@ -222,7 +220,7 @@ CreateMonitoredItemsResponse createMonitoredItemsEvent(
         eventCallbacks.data(),
         deleteCallbacks.data()
     );
-    detail::storeMonitoredItemContexts(connection, request.getSubscriptionId(), response, contexts);
+    detail::storeMonitoredItemContexts(connection, request.subscriptionId(), response, contexts);
     return response;
 }
 

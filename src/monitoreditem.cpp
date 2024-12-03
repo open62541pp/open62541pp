@@ -26,13 +26,13 @@ static auto& getMonitoredItemContext(
 template <typename T>
 const NodeId& MonitoredItem<T>::getNodeId() {
     return getMonitoredItemContext(connection(), subscriptionId(), monitoredItemId())
-        .itemToMonitor.getNodeId();
+        .itemToMonitor.nodeId();
 }
 
 template <typename T>
 AttributeId MonitoredItem<T>::getAttributeId() {
     return getMonitoredItemContext(connection(), subscriptionId(), monitoredItemId())
-        .itemToMonitor.getAttributeId();
+        .itemToMonitor.attributeId();
 }
 
 // explicit template instantiations

@@ -53,9 +53,7 @@ CreateSubscriptionResponse createSubscription(
         detail::SubscriptionContext::deleteCallbackNative
     );
     if (detail::getServiceResult(response).isGood()) {
-        detail::storeSubscriptionContext(
-            connection, response.getSubscriptionId(), std::move(context)
-        );
+        detail::storeSubscriptionContext(connection, response.subscriptionId(), std::move(context));
     }
     return response;
 }

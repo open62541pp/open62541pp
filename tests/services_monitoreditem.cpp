@@ -49,12 +49,12 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
             {},
             {}
         );
-        CHECK(result.getStatusCode().isBad());
+        CHECK(result.statusCode().isBad());
     }
 
     const auto subId =
         services::createSubscription(connection, subscriptionParameters, true, {}, {})
-            .getSubscriptionId();
+            .subscriptionId();
     CAPTURE(subId);
 
     SUBCASE("createMonitoredItemDataChange") {
@@ -85,8 +85,8 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
             callback,
             nullptr
         );
-        CHECK(result.getStatusCode().isGood());
-        CAPTURE(result.getMonitoredItemId());
+        CHECK(result.statusCode().isGood());
+        CAPTURE(result.monitoredItemId());
 
         services::writeValue(server, id, Variant::fromScalar(11.11)).throwIfBad();
         setup.client.runIterate();
@@ -135,8 +135,8 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
             callback,
             nullptr
         );
-        CHECK(result.getStatusCode().isGood());
-        CAPTURE(result.getMonitoredItemId());
+        CHECK(result.statusCode().isGood());
+        CAPTURE(result.monitoredItemId());
 
         Event event(server);
         event.writeTime(DateTime::now());
@@ -158,7 +158,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
                 {},
                 {}
             )
-                .getMonitoredItemId();
+                .monitoredItemId();
         CAPTURE(monId);
 
         const auto modifyMonitoredItem = [&](auto&&... args) {
@@ -178,7 +178,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
         const MonitoredItemModifyResult result = modifyMonitoredItem(
             connection, subId, monId, modifiedParameters
         );
-        CHECK(result.getStatusCode().isGood());
+        CHECK(result.statusCode().isGood());
     }
 
     SUBCASE("setMonitoringMode") {
@@ -192,7 +192,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
                 {},
                 {}
             )
-                .getMonitoredItemId();
+                .monitoredItemId();
         CAPTURE(monId);
 
         const auto setMonitoringMode = [&](auto&&... args) {
@@ -225,7 +225,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
                 [&](IntegerId, IntegerId, const DataValue&) { notificationCountTriggering++; },
                 {}
             )
-                .getMonitoredItemId();
+                .monitoredItemId();
         CAPTURE(monIdTriggering);
         // set triggered item's monitoring mode to sampling
         // -> will only report if triggered by triggering item
@@ -240,7 +240,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
                 [&](IntegerId, IntegerId, const DataValue&) { notificationCount++; },
                 {}
             )
-                .getMonitoredItemId();
+                .monitoredItemId();
         CAPTURE(monId);
 
         setup.client.runIterate();
@@ -266,9 +266,9 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
                 {}  // links to remove
             )
         );
-        CHECK(response.getResponseHeader().getServiceResult().isGood());
-        CHECK(response.getAddResults().size() == 1);
-        CHECK(response.getAddResults()[0].isGood());
+        CHECK(response.responseHeader().serviceResult().isGood());
+        CHECK(response.addResults().size() == 1);
+        CHECK(response.addResults()[0].isGood());
 
         setup.client.runIterate();
 #if UAPP_OPEN62541_VER_LE(1, 3)
@@ -294,7 +294,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
                 monitoringParameters,
                 {},
                 [&](IntegerId, IntegerId) { deleted = true; }
-            ).getMonitoredItemId();
+            ).monitoredItemId();
 
         const auto deleteMonitoredItem = [&](auto&&... args) {
             if constexpr (isAsync<T> && UAPP_HAS_ASYNC_SUBSCRIPTIONS) {
@@ -342,7 +342,7 @@ TEST_CASE("MonitoredItem service set (server)") {
                 [&](IntegerId, IntegerId, const DataValue&) { notificationCount++; },
                 {}
             )
-                .getMonitoredItemId();
+                .monitoredItemId();
         CAPTURE(monId);
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
         services::writeValue(server, id, Variant::fromScalar(11.11)).throwIfBad();
@@ -366,7 +366,7 @@ TEST_CASE("MonitoredItem service set (server)") {
                 {},
                 {}
             )
-                .getMonitoredItemId();
+                .monitoredItemId();
         CAPTURE(monId);
         CHECK(services::deleteMonitoredItem(server, 0U, monId).isGood());
     }

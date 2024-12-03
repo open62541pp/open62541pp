@@ -458,8 +458,8 @@ std::vector<std::string> Client::getNamespaceArray() {
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 Subscription<Client> Client::createSubscription(const SubscriptionParameters& parameters) {
     const auto response = services::createSubscription(*this, parameters, true, {}, {});
-    response.getResponseHeader().getServiceResult().throwIfBad();
-    return {*this, response.getSubscriptionId()};
+    response.responseHeader().serviceResult().throwIfBad();
+    return {*this, response.subscriptionId()};
 }
 
 std::vector<Subscription<Client>> Client::getSubscriptions() {

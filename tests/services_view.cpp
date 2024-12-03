@@ -39,21 +39,21 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
             result = services::browse(connection, bd, 0);
         }
 
-        CHECK(result.getStatusCode().isGood());
-        CHECK(result.getContinuationPoint().empty());
+        CHECK(result.statusCode().isGood());
+        CHECK(result.continuationPoint().empty());
 
-        const auto refs = result.getReferences();
+        const auto refs = result.references();
         CHECK(refs.size() == 2);
         // 1. ComponentOf Objects
-        CHECK(refs[0].getReferenceTypeId() == NodeId(0, UA_NS0ID_HASCOMPONENT));
-        CHECK(refs[0].getIsForward() == false);
-        CHECK(refs[0].getNodeId() == ExpandedNodeId({0, UA_NS0ID_OBJECTSFOLDER}));
-        CHECK(refs[0].getBrowseName() == QualifiedName(0, "Objects"));
+        CHECK(refs[0].referenceTypeId() == NodeId(0, UA_NS0ID_HASCOMPONENT));
+        CHECK(refs[0].isForward() == false);
+        CHECK(refs[0].nodeId() == ExpandedNodeId({0, UA_NS0ID_OBJECTSFOLDER}));
+        CHECK(refs[0].browseName() == QualifiedName(0, "Objects"));
         // 2. HasTypeDefinition BaseDataVariableType
-        CHECK(refs[1].getReferenceTypeId() == NodeId(0, UA_NS0ID_HASTYPEDEFINITION));
-        CHECK(refs[1].getIsForward() == true);
-        CHECK(refs[1].getNodeId() == ExpandedNodeId({0, UA_NS0ID_BASEDATAVARIABLETYPE}));
-        CHECK(refs[1].getBrowseName() == QualifiedName(0, "BaseDataVariableType"));
+        CHECK(refs[1].referenceTypeId() == NodeId(0, UA_NS0ID_HASTYPEDEFINITION));
+        CHECK(refs[1].isForward() == true);
+        CHECK(refs[1].nodeId() == ExpandedNodeId({0, UA_NS0ID_BASEDATAVARIABLETYPE}));
+        CHECK(refs[1].browseName() == QualifiedName(0, "BaseDataVariableType"));
     }
 
     SUBCASE("browseNext") {
@@ -63,35 +63,35 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
 
         // restrict browse result to max 1 reference, more with browseNext
         result = services::browse(connection, bd, 1);
-        CHECK(result.getStatusCode().isGood());
-        CHECK(result.getContinuationPoint().empty() == false);
-        CHECK(result.getReferences().size() == 1);
+        CHECK(result.statusCode().isGood());
+        CHECK(result.continuationPoint().empty() == false);
+        CHECK(result.references().size() == 1);
 
         auto browseNext = [&](bool releaseContinuationPoint) {
             if constexpr (isAsync<T>) {
                 auto future = services::browseNextAsync(
-                    connection, releaseContinuationPoint, result.getContinuationPoint(), useFuture
+                    connection, releaseContinuationPoint, result.continuationPoint(), useFuture
                 );
                 client.runIterate();
                 result = future.get();
             } else {
                 result = services::browseNext(
-                    connection, releaseContinuationPoint, result.getContinuationPoint()
+                    connection, releaseContinuationPoint, result.continuationPoint()
                 );
             }
         };
 
         // get next result
         browseNext(false);
-        CHECK(result.getStatusCode().isGood());
-        CHECK(result.getContinuationPoint().empty() == false);
-        CHECK(result.getReferences().size() == 1);
+        CHECK(result.statusCode().isGood());
+        CHECK(result.continuationPoint().empty() == false);
+        CHECK(result.references().size() == 1);
 
         // release continuation point, result should be empty
         browseNext(true);
-        CHECK(result.getStatusCode().isGood());
-        CHECK(result.getContinuationPoint().empty());
-        CHECK(result.getReferences().size() == 0);
+        CHECK(result.statusCode().isGood());
+        CHECK(result.continuationPoint().empty());
+        CHECK(result.references().size() == 0);
     }
 
     SUBCASE("browseAll") {
@@ -112,12 +112,12 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
                 connection, {0, UA_NS0ID_ROOTFOLDER}, {{0, "Objects"}, {1, "Variable"}}
             );
         }
-        CHECK(result.getStatusCode().isGood());
-        CHECK(result.getTargets().size() == 1);
+        CHECK(result.statusCode().isGood());
+        CHECK(result.targets().size() == 1);
         // https://reference.opcfoundation.org/Core/Part4/v105/docs/5.9
         // value shall be equal to the maximum value of uint32 if all elements processed
-        CHECK(result.getTargets()[0].getRemainingPathIndex() == 0xffffffff);
-        CHECK(result.getTargets()[0].getTargetId().nodeId() == id);
+        CHECK(result.targets()[0].remainingPathIndex() == 0xffffffff);
+        CHECK(result.targets()[0].targetId().nodeId() == id);
     }
 
     SUBCASE("Register/unregister nodes") {
@@ -131,8 +131,8 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
             } else {
                 response = services::registerNodes(client, request);
             }
-            CHECK(response.getRegisteredNodeIds().size() == 1);
-            CHECK(response.getRegisteredNodeIds()[0] == NodeId(1, 1000));
+            CHECK(response.registeredNodeIds().size() == 1);
+            CHECK(response.registeredNodeIds()[0] == NodeId(1, 1000));
         }
         {
             UnregisterNodesResponse response;
@@ -144,7 +144,7 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
             } else {
                 response = services::unregisterNodes(client, request);
             }
-            CHECK(response.getResponseHeader().getServiceResult().isGood());
+            CHECK(response.responseHeader().serviceResult().isGood());
         }
     }
 }
