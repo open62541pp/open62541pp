@@ -73,19 +73,19 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
     }
 
     SUBCASE("Create & delete subscription") {
-        CHECK(client.getSubscriptions().empty());
+        CHECK(client.subscriptions().empty());
 
         const SubscriptionParameters parameters{};
         auto sub = client.createSubscription(parameters);
         CAPTURE(sub.subscriptionId());
 
-        CHECK(client.getSubscriptions().size() == 1);
-        CHECK(client.getSubscriptions().at(0) == sub);
+        CHECK(client.subscriptions().size() == 1);
+        CHECK(client.subscriptions().at(0) == sub);
 
         CHECK(sub.monitoredItems().empty());
 
         sub.deleteSubscription();
-        CHECK(client.getSubscriptions().empty());
+        CHECK(client.subscriptions().empty());
         CHECK_THROWS_WITH(sub.deleteSubscription(), "BadSubscriptionIdInvalid");
     }
 

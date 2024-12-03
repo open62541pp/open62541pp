@@ -462,7 +462,7 @@ Subscription<Client> Client::createSubscription(const SubscriptionParameters& pa
     return {*this, response.subscriptionId()};
 }
 
-std::vector<Subscription<Client>> Client::getSubscriptions() {
+std::vector<Subscription<Client>> Client::subscriptions() {
     std::vector<Subscription<Client>> result;
     auto& subscriptions = context().subscriptions;
     subscriptions.eraseStale();
