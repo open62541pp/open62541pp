@@ -76,7 +76,7 @@ TEST_CASE("sendRequest") {
     SUBCASE("Disconnected") {
         const auto response = sendReadRequest();
         // UA_STATUSCODE_BADCONNECTIONCLOSED or UA_STATUSCODE_BADINTERNALERROR (v1.0)
-        CHECK(response.getResponseHeader().getServiceResult().isBad());
+        CHECK(response.responseHeader().serviceResult().isBad());
     }
 
     Server server;
@@ -85,10 +85,9 @@ TEST_CASE("sendRequest") {
 
     SUBCASE("Success") {
         const auto response = sendReadRequest();
-        CHECK(response.getResponseHeader().getServiceResult().isGood());
-        CHECK_EQ(
-            response.getResults()[0].value().getScalar<QualifiedName>(),
-            QualifiedName(0, "Objects")
+        CHECK(response.responseHeader().serviceResult().isGood());
+        CHECK(
+            response.results()[0].value().getScalar<QualifiedName>() == QualifiedName(0, "Objects")
         );
     }
 }
@@ -112,7 +111,7 @@ TEST_CASE("sendRequestAsync") {
     SUBCASE("Disconnected") {
         sendReadRequest([&](ReadResponse& response) {
             // UA_STATUSCODE_BADSERVERNOTCONNECTED since v1.1
-            CHECK(response.getResponseHeader().getServiceResult().isBad());
+            CHECK(response.responseHeader().serviceResult().isBad());
         });
     }
 
@@ -123,9 +122,9 @@ TEST_CASE("sendRequestAsync") {
     SUBCASE("Success") {
         bool executed = false;
         sendReadRequest([&](ReadResponse& response) {
-            CHECK(response.getResponseHeader().getServiceResult().isGood());
+            CHECK(response.responseHeader().serviceResult().isGood());
             CHECK_EQ(
-                response.getResults()[0].value().getScalar<QualifiedName>(),
+                response.results()[0].value().getScalar<QualifiedName>(),
                 QualifiedName(0, "Objects")
             );
             executed = true;

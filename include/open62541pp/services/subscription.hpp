@@ -149,7 +149,7 @@ auto createSubscriptionAsync(
             [&, context = std::move(context)](const CreateSubscriptionResponse& response) mutable {
                 if (detail::getServiceResult(response).isGood()) {
                     detail::storeSubscriptionContext(
-                        connection, response.getSubscriptionId(), std::move(context)
+                        connection, response.subscriptionId(), std::move(context)
                     );
                 }
             },

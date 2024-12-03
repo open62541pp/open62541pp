@@ -39,19 +39,19 @@ TEST_CASE("Attribute service set (highlevel)") {
             ReferenceTypeId::HasComponent
         ));
 
-        CHECK(services::readDisplayName(server, id).value() == attr.getDisplayName());
-        CHECK(services::readDescription(server, id).value() == attr.getDescription());
-        CHECK(services::readWriteMask(server, id).value() == attr.getWriteMask());
-        CHECK(services::readDataType(server, id).value() == attr.getDataType());
-        CHECK(services::readValueRank(server, id).value() == attr.getValueRank());
+        CHECK(services::readDisplayName(server, id).value() == attr.displayName());
+        CHECK(services::readDescription(server, id).value() == attr.description());
+        CHECK(services::readWriteMask(server, id).value() == attr.writeMask());
+        CHECK(services::readDataType(server, id).value() == attr.dataType());
+        CHECK(services::readValueRank(server, id).value() == attr.valueRank());
         CHECK(
             services::readArrayDimensions(server, id).value() ==
-            std::vector(attr.getArrayDimensions().begin(), attr.getArrayDimensions().end())
+            std::vector(attr.arrayDimensions().begin(), attr.arrayDimensions().end())
         );
-        CHECK(services::readAccessLevel(server, id).value() == attr.getAccessLevel());
+        CHECK(services::readAccessLevel(server, id).value() == attr.accessLevel());
         CHECK(
             services::readMinimumSamplingInterval(server, id).value() ==
-            attr.getMinimumSamplingInterval()
+            attr.minimumSamplingInterval()
         );
     }
 
@@ -271,10 +271,10 @@ TEST_CASE("Attribute service set (highlevel)") {
         CHECK(variant.getDataType() == &UA_TYPES[UA_TYPES_STRUCTUREDEFINITION]);
 
         const auto definition = variant.getScalar<StructureDefinition>();
-        CHECK(definition.getDefaultEncodingId() == NodeId(0, 340));
-        CHECK(definition.getBaseDataType() == NodeId(0, 22));
-        CHECK(definition.getStructureType() == StructureType::Structure);
-        CHECK(definition.getFields().size() == 6);
+        CHECK(definition.defaultEncodingId() == NodeId(0, 340));
+        CHECK(definition.baseDataType() == NodeId(0, 22));
+        CHECK(definition.structureType() == StructureType::Structure);
+        CHECK(definition.fields().size() == 6);
     }
 
     // SUBCASE("Data type definition (write/read EnumDefinition, not supported yet)") {

@@ -3,7 +3,7 @@
 
 #include <open62541pp/client.hpp>
 
-constexpr std::string_view getEnumName(UA_ApplicationType applicationType) {
+constexpr std::string_view toString(UA_ApplicationType applicationType) {
     switch (applicationType) {
     case UA_APPLICATIONTYPE_SERVER:
         return "Server";
@@ -18,7 +18,7 @@ constexpr std::string_view getEnumName(UA_ApplicationType applicationType) {
     }
 }
 
-constexpr std::string_view getEnumName(UA_MessageSecurityMode securityMode) {
+constexpr std::string_view toString(UA_MessageSecurityMode securityMode) {
     switch (securityMode) {
     case UA_MESSAGESECURITYMODE_INVALID:
         return "Invalid";
@@ -40,16 +40,16 @@ int main() {
     const auto servers = client.findServers("opc.tcp://localhost:4840");
     size_t serverIndex = 0;
     for (const auto& server : servers) {
-        const auto& name = server.getApplicationUri();
+        const auto& name = server.applicationUri();
         std::cout
             << "Server[" << serverIndex++ << "] " << name << "\n"
-            << "\tName:             " << server.getApplicationName().text() << "\n"
-            << "\tApplication URI:  " << server.getApplicationUri() << "\n"
-            << "\tProduct URI:      " << server.getProductUri() << "\n"
-            << "\tApplication type: " << getEnumName(server.getApplicationType()) << "\n"
+            << "\tName:             " << server.applicationName().text() << "\n"
+            << "\tApplication URI:  " << server.applicationUri() << "\n"
+            << "\tProduct URI:      " << server.productUri() << "\n"
+            << "\tApplication type: " << toString(server.applicationType()) << "\n"
             << "\tDiscovery URLs:\n";
 
-        const auto discoveryUrls = server.getDiscoveryUrls();
+        const auto discoveryUrls = server.discoveryUrls();
         if (discoveryUrls.empty()) {
             std::cout << "No discovery urls provided. Skip endpoint search.";
         }
@@ -62,15 +62,15 @@ int main() {
             for (const auto& endpoint : client.getEndpoints(url)) {
                 std::cout
                     << "\tEndpoint[" << endpointIndex++ << "]:\n"
-                    << "\t- Endpoint URL:      " << endpoint.getEndpointUrl() << "\n"
-                    << "\t- Transport profile: " << endpoint.getTransportProfileUri() << "\n"
-                    << "\t- Security mode:     " << getEnumName(endpoint.getSecurityMode()) << "\n"
-                    << "\t- Security profile:  " << endpoint.getSecurityPolicyUri() << "\n"
-                    << "\t- Security level:    " << endpoint.getSecurityLevel() << "\n"
+                    << "\t- Endpoint URL:      " << endpoint.endpointUrl() << "\n"
+                    << "\t- Transport profile: " << endpoint.transportProfileUri() << "\n"
+                    << "\t- Security mode:     " << toString(endpoint.securityMode()) << "\n"
+                    << "\t- Security profile:  " << endpoint.securityPolicyUri() << "\n"
+                    << "\t- Security level:    " << endpoint.securityLevel() << "\n"
                     << "\t- User identity token:\n";
 
-                for (const auto& token : endpoint.getUserIdentityTokens()) {
-                    std::cout << "\t  - " << token.getPolicyId() << "\n";
+                for (const auto& token : endpoint.userIdentityTokens()) {
+                    std::cout << "\t  - " << token.policyId() << "\n";
                 }
             }
         }

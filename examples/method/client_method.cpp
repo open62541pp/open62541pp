@@ -17,5 +17,5 @@ int main() {
     const auto result = objectsNode.callMethod(
         greetMethodNode.id(), {opcua::Variant::fromScalar("World")}
     );
-    std::cout << result.getOutputArguments()[0].getScalar<opcua::String>() << std::endl;
+    std::cout << result.outputArguments()[0].getScalar<opcua::String>() << std::endl;
 }

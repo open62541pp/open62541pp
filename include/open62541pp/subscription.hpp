@@ -72,7 +72,7 @@ public:
         const auto response = services::modifySubscription(
             connection(), subscriptionId(), parameters
         );
-        response.getResponseHeader().getServiceResult().throwIfBad();
+        response.responseHeader().serviceResult().throwIfBad();
     }
 
     /// Enable/disable publishing of notification messages.
@@ -99,8 +99,8 @@ public:
             std::move(onDataChange),
             {}
         );
-        result.getStatusCode().throwIfBad();
-        return {connection(), subscriptionId(), result.getMonitoredItemId()};
+        result.statusCode().throwIfBad();
+        return {connection(), subscriptionId(), result.monitoredItemId()};
     }
 
     /// Create a monitored item for data change notifications (default settings).
@@ -131,8 +131,8 @@ public:
             parameters,
             std::move(onEvent)
         );
-        result.getStatusCode().throwIfBad();
-        return {connection(), subscriptionId(), result.getMonitoredItemId()};
+        result.statusCode().throwIfBad();
+        return {connection(), subscriptionId(), result.monitoredItemId()};
     }
 
     /// Create a monitored item for event notifications (default settings).

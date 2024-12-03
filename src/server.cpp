@@ -99,22 +99,22 @@ static ApplicationDescription& getApplicationDescription(UA_ServerConfig& config
 static void copyApplicationDescriptionToEndpoints(UA_ServerConfig& config) {
     auto endpoints = Span(asWrapper<EndpointDescription>(config.endpoints), config.endpointsSize);
     for (auto& endpoint : endpoints) {
-        endpoint.getServer() = getApplicationDescription(config);
+        endpoint.server() = getApplicationDescription(config);
     }
 }
 
 void ServerConfig::setApplicationUri(std::string_view uri) {
-    getApplicationDescription(native()).getApplicationUri() = String(uri);
+    getApplicationDescription(native()).applicationUri() = String(uri);
     copyApplicationDescriptionToEndpoints(native());
 }
 
 void ServerConfig::setProductUri(std::string_view uri) {
-    getApplicationDescription(native()).getProductUri() = String(uri);
+    getApplicationDescription(native()).productUri() = String(uri);
     copyApplicationDescriptionToEndpoints(native());
 }
 
 void ServerConfig::setApplicationName(std::string_view name) {
-    getApplicationDescription(native()).getApplicationName() = LocalizedText("", name);
+    getApplicationDescription(native()).applicationName() = LocalizedText("", name);
     copyApplicationDescriptionToEndpoints(native());
 }
 
@@ -143,9 +143,9 @@ static void setHighestSecurityPolicyForUserTokenTransfer(UA_ServerConfig& config
     if (!securityPolicies.empty()) {
         const auto& highestSecurityPoliciyUri = securityPolicies.back().policyUri;
         for (auto& userTokenPolicy : userTokenPolicies) {
-            if (userTokenPolicy.getTokenType() != UserTokenType::Anonymous &&
-                userTokenPolicy.getSecurityPolicyUri().empty()) {
-                userTokenPolicy.getSecurityPolicyUri() = String(highestSecurityPoliciyUri);
+            if (userTokenPolicy.tokenType() != UserTokenType::Anonymous &&
+                userTokenPolicy.securityPolicyUri().empty()) {
+                userTokenPolicy.securityPolicyUri() = String(highestSecurityPoliciyUri);
             }
         }
     }

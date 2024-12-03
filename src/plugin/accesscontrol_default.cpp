@@ -67,7 +67,7 @@ StatusCode AccessControlDefault::activateSession(
         if (!allowAnonymous_) {
             return UA_STATUSCODE_BADIDENTITYTOKENINVALID;
         }
-        if (token->getPolicyId().empty() || token->getPolicyId() == policyIdAnonymous) {
+        if (token->policyId().empty() || token->policyId() == policyIdAnonymous) {
             return UA_STATUSCODE_GOOD;
         }
         return UA_STATUSCODE_BADIDENTITYTOKENINVALID;
@@ -76,17 +76,16 @@ StatusCode AccessControlDefault::activateSession(
     // username and password
     if (const auto* token = userIdentityToken.decodedData<UserNameIdentityToken>();
         token != nullptr) {
-        if (token->getPolicyId() != policyIdUsername) {
+        if (token->policyId() != policyIdUsername) {
             return UA_STATUSCODE_BADIDENTITYTOKENINVALID;
         }
         // empty username and password
-        if (token->getUserName().empty() && token->getPassword().empty()) {
+        if (token->userName().empty() && token->password().empty()) {
             return UA_STATUSCODE_BADIDENTITYTOKENINVALID;
         }
         // try to match username / password
         for (const auto& login : logins_) {
-            if ((login.username == token->getUserName()) &&
-                (login.password == token->getPassword())) {
+            if ((login.username == token->userName()) && (login.password == token->password())) {
                 return UA_STATUSCODE_GOOD;
             }
         }

@@ -68,7 +68,7 @@ public:
     /// @see services::modifyMonitoredItem
     void setMonitoringParameters(const MonitoringParametersEx& parameters) {
         services::modifyMonitoredItem(connection(), subscriptionId(), monitoredItemId(), parameters)
-            .getStatusCode()
+            .statusCode()
             .throwIfBad();
     }
 
