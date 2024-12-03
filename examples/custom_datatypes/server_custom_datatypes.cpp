@@ -24,12 +24,12 @@ int main() {
 
     // Add data type nodes
     opcua::Node structureDataTypeNode(server, opcua::DataTypeId::Structure);
-    structureDataTypeNode.addDataType(dataTypePoint.getTypeId(), "PointDataType");
-    structureDataTypeNode.addDataType(dataTypeMeasurements.getTypeId(), "MeasurementsDataType");
-    structureDataTypeNode.addDataType(dataTypeOpt.getTypeId(), "OptDataType");
-    structureDataTypeNode.addDataType(dataTypeUni.getTypeId(), "UniDataType");
+    structureDataTypeNode.addDataType(dataTypePoint.typeId(), "PointDataType");
+    structureDataTypeNode.addDataType(dataTypeMeasurements.typeId(), "MeasurementsDataType");
+    structureDataTypeNode.addDataType(dataTypeOpt.typeId(), "OptDataType");
+    structureDataTypeNode.addDataType(dataTypeUni.typeId(), "UniDataType");
     opcua::Node enumerationDataTypeNode(server, opcua::DataTypeId::Enumeration);
-    enumerationDataTypeNode.addDataType(dataTypeColor.getTypeId(), "Color")
+    enumerationDataTypeNode.addDataType(dataTypeColor.typeId(), "Color")
         .addProperty(
             {0, 0},  // auto-generate node id
             "EnumValues",
@@ -51,7 +51,7 @@ int main() {
         {1, 4243},
         "PointType",
         opcua::VariableTypeAttributes{}
-            .setDataType(dataTypePoint.getTypeId())
+            .setDataType(dataTypePoint.typeId())
             .setValueRank(opcua::ValueRank::ScalarOrOneDimension)
             .setValueScalar(Point{1, 2, 3}, dataTypePoint)
     );
@@ -59,7 +59,7 @@ int main() {
         {1, 4444},
         "MeasurementsType",
         opcua::VariableTypeAttributes{}
-            .setDataType(dataTypeMeasurements.getTypeId())
+            .setDataType(dataTypeMeasurements.typeId())
             .setValueRank(opcua::ValueRank::Scalar)
             .setValueScalar(Measurements{}, dataTypeMeasurements)
     );
@@ -67,7 +67,7 @@ int main() {
         {1, 4645},
         "OptType",
         opcua::VariableTypeAttributes{}
-            .setDataType(dataTypeOpt.getTypeId())
+            .setDataType(dataTypeOpt.typeId())
             .setValueRank(opcua::ValueRank::Scalar)
             .setValueScalar(Opt{}, dataTypeOpt)
     );
@@ -75,7 +75,7 @@ int main() {
         {1, 4846},
         "UniType",
         opcua::VariableTypeAttributes{}
-            .setDataType(dataTypeUni.getTypeId())
+            .setDataType(dataTypeUni.typeId())
             .setValueRank(opcua::ValueRank::Scalar)
             .setValueScalar(Uni{}, dataTypeUni)
     );
@@ -88,7 +88,7 @@ int main() {
         {1, "Point"},
         "Point",
         opcua::VariableAttributes{}
-            .setDataType(dataTypePoint.getTypeId())
+            .setDataType(dataTypePoint.typeId())
             .setValueRank(opcua::ValueRank::Scalar)
             .setValueScalar(point, dataTypePoint),
         variableTypePointNode.id()
@@ -99,7 +99,7 @@ int main() {
         {1, "PointVec"},
         "PointVec",
         opcua::VariableAttributes{}
-            .setDataType(dataTypePoint.getTypeId())
+            .setDataType(dataTypePoint.typeId())
             .setArrayDimensions({0})  // single dimension but unknown in size
             .setValueRank(opcua::ValueRank::OneDimension)
             .setValueArray(pointVec, dataTypePoint),
@@ -116,7 +116,7 @@ int main() {
         {1, "Measurements"},
         "Measurements",
         opcua::VariableAttributes{}
-            .setDataType(dataTypeMeasurements.getTypeId())
+            .setDataType(dataTypeMeasurements.typeId())
             .setValueRank(opcua::ValueRank::Scalar)
             .setValueScalar(measurements, dataTypeMeasurements),
         variableTypeMeasurementNode.id()
@@ -128,7 +128,7 @@ int main() {
         {1, "Opt"},
         "Opt",
         opcua::VariableAttributes{}
-            .setDataType(dataTypeOpt.getTypeId())
+            .setDataType(dataTypeOpt.typeId())
             .setValueRank(opcua::ValueRank::Scalar)
             .setValueScalar(opt, dataTypeOpt),
         variableTypeOptNode.id()
@@ -141,7 +141,7 @@ int main() {
         {1, "Uni"},
         "Uni",
         opcua::VariableAttributes{}
-            .setDataType(dataTypeUni.getTypeId())
+            .setDataType(dataTypeUni.typeId())
             .setValueRank(opcua::ValueRank::Scalar)
             .setValueScalar(uni, dataTypeUni),
         variableTypeUniNode.id()
@@ -151,7 +151,7 @@ int main() {
         {1, "Color"},
         "Color",
         opcua::VariableAttributes{}
-            .setDataType(dataTypeColor.getTypeId())
+            .setDataType(dataTypeColor.typeId())
             .setValueRank(opcua::ValueRank::Scalar)
             .setValueScalar(Color::Green, dataTypeColor)
     );
