@@ -1,6 +1,6 @@
 #pragma once
 
-#include <algorithm>  // copy_n
+#include <algorithm>  // copy_n, for_each_n, transform
 #include <cassert>
 #include <cstring>  // memcpy, memset
 #include <memory>
@@ -107,10 +107,35 @@ template <typename T>
 
 /* ----------------------------------- Generic array handling ----------------------------------- */
 
+/**
+ * Sentinel for empty but defined arrays.
+ *
+ * In OPC UA, arrays can have a length of zero or more with the usual meaning.
+ * In addition, arrays can be undefined. Then, they don't even have a length.
+ * In the binary encoding, this is indicated by an array of length -1.
+ *
+ * In open62541, size_t is used for array lengths.
+ * An undefined array has length 0 and the data pointer is NULL.
+ * An array of length 0 also has length 0 but a data pointer UA_EMPTY_ARRAY_SENTINEL (0x01).
+ */
+inline constexpr uintptr_t emptyArraySentinel = 0x01;
+
+template <typename T>
+T* stripEmptyArraySentinel(T* array) noexcept {
+    // NOLINTNEXTLINE
+    return reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(array) & ~emptyArraySentinel);
+}
+
+template <typename T>
+void deallocateArray(T* array) noexcept {
+    UA_free(stripEmptyArraySentinel(array));  // NOLINT
+}
+
 template <typename T>
 void deallocateArray(T* array, size_t size, const UA_DataType& type) noexcept {
     assert(isValidTypeCombination<T>(type));
-    UA_Array_delete(array, size, &type);
+    std::for_each_n(array, size, [&](auto& item) { clear(item, type); });
+    deallocateArray(array);
 }
 
 template <typename T>
