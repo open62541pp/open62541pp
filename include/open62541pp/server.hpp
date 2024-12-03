@@ -222,7 +222,14 @@ public:
     }
 
     /// Get all defined namespaces.
-    std::vector<std::string> getNamespaceArray();
+    std::vector<std::string> namespaceArray();
+
+    /// @deprecated Use namespaceArray() instead
+    [[deprecated("use namespaceArray() instead")]]
+    std::vector<std::string> getNamespaceArray() {
+        return namespaceArray();
+    }
+
     /// Register namespace. The new namespace index will be returned.
     [[nodiscard]] NamespaceIndex registerNamespace(std::string_view uri);
 

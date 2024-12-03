@@ -144,7 +144,7 @@ TEST_CASE("Server methods") {
     Server server;
 
     SUBCASE("getNamespaceArray") {
-        const auto namespaces = server.getNamespaceArray();
+        const auto namespaces = server.namespaceArray();
         CHECK(namespaces.size() == 2);
         CHECK(namespaces.at(0) == "http://opcfoundation.org/UA/");
         CHECK(namespaces.at(1) == "urn:open62541.server.application");
@@ -152,10 +152,10 @@ TEST_CASE("Server methods") {
 
     SUBCASE("registerNamespace") {
         CHECK(server.registerNamespace("test1") == 2);
-        CHECK(server.getNamespaceArray().at(2) == "test1");
+        CHECK(server.namespaceArray().at(2) == "test1");
 
         CHECK(server.registerNamespace("test2") == 3);
-        CHECK(server.getNamespaceArray().at(3) == "test2");
+        CHECK(server.namespaceArray().at(3) == "test2");
     }
 }
 

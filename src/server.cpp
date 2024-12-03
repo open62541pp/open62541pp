@@ -317,7 +317,7 @@ std::vector<Session> Server::sessions() {
     return result;
 }
 
-std::vector<std::string> Server::getNamespaceArray() {
+std::vector<std::string> Server::namespaceArray() {
     return services::readValue(*this, {0, UA_NS0ID_SERVER_NAMESPACEARRAY})
         .value()
         .getArrayCopy<std::string>();
