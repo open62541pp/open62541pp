@@ -24,22 +24,22 @@ static auto& getMonitoredItemContext(
 }
 
 template <typename T>
-const NodeId& MonitoredItem<T>::getNodeId() {
+const NodeId& MonitoredItem<T>::nodeId() {
     return getMonitoredItemContext(connection(), subscriptionId(), monitoredItemId())
         .itemToMonitor.nodeId();
 }
 
 template <typename T>
-AttributeId MonitoredItem<T>::getAttributeId() {
+AttributeId MonitoredItem<T>::attributeId() {
     return getMonitoredItemContext(connection(), subscriptionId(), monitoredItemId())
         .itemToMonitor.attributeId();
 }
 
 // explicit template instantiations
-template const NodeId& MonitoredItem<Client>::getNodeId();
-template const NodeId& MonitoredItem<Server>::getNodeId();
-template AttributeId MonitoredItem<Client>::getAttributeId();
-template AttributeId MonitoredItem<Server>::getAttributeId();
+template const NodeId& MonitoredItem<Client>::nodeId();
+template const NodeId& MonitoredItem<Server>::nodeId();
+template AttributeId MonitoredItem<Client>::attributeId();
+template AttributeId MonitoredItem<Server>::attributeId();
 
 }  // namespace opcua
 
