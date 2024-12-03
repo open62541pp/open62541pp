@@ -10,7 +10,7 @@
 namespace opcua {
 
 template <typename T>
-std::vector<MonitoredItem<T>> Subscription<T>::getMonitoredItems() {
+std::vector<MonitoredItem<T>> Subscription<T>::monitoredItems() {
     std::vector<MonitoredItem<T>> result;
     auto& monitoredItems = opcua::detail::getContext(connection()).monitoredItems;
     monitoredItems.eraseStale();
@@ -24,8 +24,8 @@ std::vector<MonitoredItem<T>> Subscription<T>::getMonitoredItems() {
 }
 
 // explicit template instantiation
-template std::vector<MonitoredItem<Client>> Subscription<Client>::getMonitoredItems();
-template std::vector<MonitoredItem<Server>> Subscription<Server>::getMonitoredItems();
+template std::vector<MonitoredItem<Client>> Subscription<Client>::monitoredItems();
+template std::vector<MonitoredItem<Server>> Subscription<Server>::monitoredItems();
 
 }  // namespace opcua
 

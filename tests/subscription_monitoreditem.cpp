@@ -32,7 +32,7 @@ TEST_CASE("Subscription & MonitoredItem (server)") {
 
     SUBCASE("Create & delete subscription") {
         auto sub = server.createSubscription();
-        CHECK(sub.getMonitoredItems().empty());
+        CHECK(sub.monitoredItems().empty());
 
         MonitoringParametersEx monitoringParameters{};
         monitoringParameters.samplingInterval = 0.0;  // = fastest practical
@@ -45,14 +45,14 @@ TEST_CASE("Subscription & MonitoredItem (server)") {
             monitoringParameters,
             [&](IntegerId, IntegerId, const DataValue&) { notificationCount++; }
         );
-        CHECK(sub.getMonitoredItems().size() == 1);
+        CHECK(sub.monitoredItems().size() == 1);
 
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
         server.runIterate();
         CHECK(notificationCount > 0);
 
         mon.deleteMonitoredItem();
-        CHECK(sub.getMonitoredItems().empty());
+        CHECK(sub.monitoredItems().empty());
     }
 }
 
@@ -82,7 +82,7 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
         CHECK(client.getSubscriptions().size() == 1);
         CHECK(client.getSubscriptions().at(0) == sub);
 
-        CHECK(sub.getMonitoredItems().empty());
+        CHECK(sub.monitoredItems().empty());
 
         sub.deleteSubscription();
         CHECK(client.getSubscriptions().empty());
@@ -114,8 +114,8 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
             [&](IntegerId, IntegerId, const DataValue&) { notificationCount++; }
         );
 
-        CHECK(sub.getMonitoredItems().size() == 1);
-        CHECK(sub.getMonitoredItems().at(0) == mon);
+        CHECK(sub.monitoredItems().size() == 1);
+        CHECK(sub.monitoredItems().at(0) == mon);
 
         client.runIterate();
         CHECK(notificationCount == 0);
@@ -197,8 +197,8 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
             }
         );
 
-        CHECK(sub.getMonitoredItems().size() == 1);
-        CHECK(sub.getMonitoredItems().at(0) == mon);
+        CHECK(sub.monitoredItems().size() == 1);
+        CHECK(sub.monitoredItems().at(0) == mon);
     }
 #endif
 }
