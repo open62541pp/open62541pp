@@ -599,7 +599,7 @@ template <typename T, typename = void>
 struct IsNodeIdEnum : std::false_type {};
 
 template <typename T>
-struct IsNodeIdEnum<T, std::void_t<decltype(getNamespace(std::declval<T>()))>> : std::true_type {};
+struct IsNodeIdEnum<T, std::void_t<decltype(namespaceOf(std::declval<T>()))>> : std::is_enum<T> {};
 }  // namespace detail
 
 /**
@@ -653,11 +653,11 @@ public:
     }
 
     /// Create NodeId from enum class with numeric identifiers like `opcua::ObjectId`.
-    /// The namespace is retrieved by calling e.g. `getNamespace(opcua::ObjectId)`.
+    /// The namespace is retrieved by calling e.g. `namespaceOf(opcua::ObjectId)`.
     /// Make sure to provide an overload for custom enum types.
     template <typename T, typename = std::enable_if_t<detail::IsNodeIdEnum<T>::value>>
     NodeId(T identifier) noexcept  // NOLINT(hicpp-explicit-conversions)
-        : NodeId(getNamespace(identifier).index, static_cast<uint32_t>(identifier)) {}
+        : NodeId(namespaceOf(identifier).index, static_cast<uint32_t>(identifier)) {}
 
     bool isNull() const noexcept {
         return UA_NodeId_isNull(handle());

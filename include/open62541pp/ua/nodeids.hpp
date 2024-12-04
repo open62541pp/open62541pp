@@ -445,7 +445,7 @@ enum class DataTypeId : int32_t {
  * Get namespace of DataTypeId.
  * @ingroup NodeIds
  */
-constexpr Namespace getNamespace(DataTypeId /* unused */) noexcept {
+constexpr Namespace namespaceOf(DataTypeId /* unused */) noexcept {
     return {0, "http://opcfoundation.org/UA/"};
 }
 
@@ -507,7 +507,7 @@ enum class ReferenceTypeId : int32_t {
  * Get namespace of ReferenceTypeId.
  * @ingroup NodeIds
  */
-constexpr Namespace getNamespace(ReferenceTypeId /* unused */) noexcept {
+constexpr Namespace namespaceOf(ReferenceTypeId /* unused */) noexcept {
     return {0, "http://opcfoundation.org/UA/"};
 }
 
@@ -756,7 +756,7 @@ enum class ObjectTypeId : int32_t {
  * Get namespace of ObjectTypeId.
  * @ingroup NodeIds
  */
-constexpr Namespace getNamespace(ObjectTypeId /* unused */) noexcept {
+constexpr Namespace namespaceOf(ObjectTypeId /* unused */) noexcept {
     return {0, "http://opcfoundation.org/UA/"};
 }
 
@@ -831,7 +831,7 @@ enum class VariableTypeId : int32_t {
  * Get namespace of VariableTypeId.
  * @ingroup NodeIds
  */
-constexpr Namespace getNamespace(VariableTypeId /* unused */) noexcept {
+constexpr Namespace namespaceOf(VariableTypeId /* unused */) noexcept {
     return {0, "http://opcfoundation.org/UA/"};
 }
 
@@ -2216,7 +2216,7 @@ enum class ObjectId : int32_t {
  * Get namespace of ObjectId.
  * @ingroup NodeIds
  */
-constexpr Namespace getNamespace(ObjectId /* unused */) noexcept {
+constexpr Namespace namespaceOf(ObjectId /* unused */) noexcept {
     return {0, "http://opcfoundation.org/UA/"};
 }
 
@@ -13450,7 +13450,7 @@ enum class VariableId : int32_t {
  * Get namespace of VariableId.
  * @ingroup NodeIds
  */
-constexpr Namespace getNamespace(VariableId /* unused */) noexcept {
+constexpr Namespace namespaceOf(VariableId /* unused */) noexcept {
     return {0, "http://opcfoundation.org/UA/"};
 }
 
@@ -14636,7 +14636,7 @@ enum class MethodId : int32_t {
  * Get namespace of MethodId.
  * @ingroup NodeIds
  */
-constexpr Namespace getNamespace(MethodId /* unused */) noexcept {
+constexpr Namespace namespaceOf(MethodId /* unused */) noexcept {
     return {0, "http://opcfoundation.org/UA/"};
 }
 
