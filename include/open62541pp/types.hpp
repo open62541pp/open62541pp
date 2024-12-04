@@ -886,7 +886,7 @@ static constexpr bool isRegisteredOrConvertible = detail::isRegisteredType<T> ||
 struct ReferenceTag {};
 
 /// Tag instance used for constructing a Variant that references a value.
-static constexpr ReferenceTag reference{};
+inline constexpr ReferenceTag reference{};
 
 /**
  * UA_Variant wrapper class.
