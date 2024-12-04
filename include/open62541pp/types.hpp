@@ -909,41 +909,37 @@ public:
     // TODO:
     // Allow implicit constructor?
 
-    /// Create a Variant object from a value.
-    /// The value is copied into the Variant.
+    /// Create Variant from a value (copy).
     template <typename T, typename X = std::enable_if_t<!std::is_same_v<T, Variant>, void>>
     explicit Variant(T&& value) {
         setValueCopy(std::forward<T>(value));
     }
 
-    /// Create a Variant object from a value.
-    /// The value is referenced from the Variant.
+    /// Create Variant from a value (no copy).
     template <typename T>
     Variant(ReferenceTag /*unused*/, T&& value) {
         setValue(std::forward<T>(value));
     }
 
-    /// Create a Variant object from a value with a custom data type.
-    /// The value is copied into the Variant.
+    /// Create Variant from a value with a custom data type (copy).
     template <typename T>
     Variant(T&& value, const UA_DataType& dataType) {
         setValueCopy(std::forward<T>(value), dataType);
     }
 
-    /// Create a Variant object from a value with a custom data type.
-    /// The value is referenced from the Variant.
+    /// Create Variant from a value with a custom data type (no copy).
     template <typename T>
     Variant(ReferenceTag /*unused*/, T&& value, const UA_DataType& dataType) {
         setValue(std::forward<T>(value), dataType);
     }
 
-    /// Create a Variant object from a range of elements (copy required).
+    /// Create Variant from a range of elements (copy required).
     template <typename InputIt>
     Variant(InputIt first, InputIt last) {
         setValueCopy(first, last);
     }
 
-    /// Create a Variant object from a range of elements with a custom data type (copy required).
+    /// Create Variant from a range of elements with a custom data type (copy required).
     template <typename InputIt>
     Variant(InputIt first, InputIt last, const UA_DataType& dataType) {
         setValueCopy(first, last, dataType);
@@ -1145,33 +1141,37 @@ public:
         return getArrayCopyImpl<T>();
     }
 
-    // Unified API for setting a value.
-
+    /// Assign value to variant (no copy).
     template <typename T>
     void setValue(T&& value) {
         setValueImpl(std::forward<T>(value));
     }
 
+    /// Assign value with custom data type to variant (no copy).
     template <typename T>
     void setValue(T&& value, const UA_DataType& dataType) {
         setValueImpl(std::forward<T>(value), dataType);
     }
 
+    /// Copy value to variant.
     template <typename T>
     void setValueCopy(T&& value) {
         setValueCopyImpl(std::forward<T>(value));
     }
 
+    /// Copy value to variant with custom data type.
     template <typename T>
     void setValueCopy(T&& value, const UA_DataType& dataType) {
         setValueCopyImpl(std::forward<T>(value), dataType);
     }
 
+    /// Copy range of elements as array to variant.
     template <typename InputIt>
     void setValueCopy(InputIt first, InputIt last) {
         setArrayCopy(first, last);
     }
 
+    /// Copy range of elements with custom data type as array to variant.
     template <typename InputIt>
     void setValueCopy(InputIt first, InputIt last, const UA_DataType& dataType) {
         setArrayCopy(first, last, dataType);

@@ -535,8 +535,13 @@ public:
     /// Write scalar to variable node.
     template <typename T>
     Node& writeValueScalar(const T& value) {
-        // NOLINTNEXTLINE(*-const-cast), variant isn't modified, try to avoid copy
-        writeValue(Variant::fromScalar<VariantPolicy::Reference>(const_cast<T&>(value)));
+        if constexpr (detail::isRegisteredType<T>) {
+            // NOLINTNEXTLINE(*-const-cast), variant isn't modified, try to avoid copy
+            writeValue(Variant::fromScalar<VariantPolicy::Reference>(const_cast<T&>(value)));
+        } else {
+            writeValue(Variant::fromScalar<VariantPolicy::Copy>(value));
+        }
+
         return *this;
     }
 
