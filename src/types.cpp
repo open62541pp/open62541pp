@@ -96,17 +96,16 @@ NumericRange::NumericRange(std::string_view encodedRange) {
 
 std::string NumericRange::toString() const {
     std::ostringstream ss;
-    for (size_t i = 0; i < dimensions().size(); ++i) {
-        const auto& dimension = dimensions()[i];
+    for (const auto& dimension : dimensions()) {
         ss << dimension.min;
         if (dimension.min != dimension.max) {
-            ss << ":" << dimension.max;
+            ss << ':' << dimension.max;
         }
-        if (i < dimensions().size() - 1) {
-            ss << ",";
-        }
+        ss << ',';
     }
-    return ss.str();
+    auto str = ss.str();
+    str.pop_back();  // remove last comma
+    return str;
 }
 
 /* ------------------------------------------- NodeId ------------------------------------------- */
