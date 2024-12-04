@@ -330,16 +330,6 @@ struct TypeConverter<const char*> {
     }
 };
 
-template <>
-struct TypeConverter<char*> {
-    using ValueType = char*;
-    using NativeType = String;
-
-    static void toNative(const char* src, NativeType& dst) {
-        dst = String(src);
-    }
-};
-
 template <size_t N>
 struct TypeConverter<char[N]> {  // NOLINT
     using ValueType = char[N];  // NOLINT
@@ -905,9 +895,6 @@ static constexpr ReferenceTag reference{};
 class Variant : public TypeWrapper<UA_Variant, UA_TYPES_VARIANT> {
 public:
     using TypeWrapper::TypeWrapper;  // inherit constructors
-
-    // TODO:
-    // Allow implicit constructor?
 
     /// Create Variant from a value (copy).
     template <typename T, typename X = std::enable_if_t<!std::is_same_v<T, Variant>, void>>
