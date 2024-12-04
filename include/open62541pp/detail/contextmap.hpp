@@ -96,7 +96,7 @@ public:
 
 private:
     [[nodiscard]] auto acquireLock() const {
-        return std::unique_lock(mutex_);
+        return std::scoped_lock(mutex_);
     }
 
     std::map<Key, std::unique_ptr<Item>> map_;
