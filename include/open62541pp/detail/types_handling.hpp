@@ -1,6 +1,6 @@
 #pragma once
 
-#include <algorithm>  // copy_n, for_each_n, transform
+#include <algorithm>  // for_each_n, transform
 #include <cassert>
 #include <cstring>  // memcpy, memset
 #include <memory>
@@ -172,7 +172,7 @@ template <typename T>
         // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
         std::transform(src, src + size, dst, [&](const T& item) { return copy(item, type); });
     } else {
-        std::copy_n(src, size, dst);
+        std::memcpy(dst, src, size * sizeof(T));
     }
     return dst;
 }
