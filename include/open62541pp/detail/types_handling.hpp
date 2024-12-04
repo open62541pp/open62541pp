@@ -166,6 +166,13 @@ template <typename T>
 }
 
 template <typename T>
+[[nodiscard]] T* copyArray(const T* src, size_t size) {
+    T* dst = allocateArray<T>(size);
+    std::memcpy(dst, src, size * sizeof(T));
+    return dst;
+}
+
+template <typename T>
 [[nodiscard]] T* copyArray(const T* src, size_t size, const UA_DataType& type) {
     T* dst = allocateArray<T>(size, type);
     if constexpr (!isPointerFree<T>) {
