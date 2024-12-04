@@ -194,6 +194,7 @@ static UA_StatusCode activateSession(
         sessionContext
     );
     if (detail::isGood(status) && sessionId != nullptr) {
+        const std::scoped_lock lock(context->sessionRegistry.mutex);
         context->sessionRegistry.sessionIds.insert(asWrapper<NodeId>(*sessionId));
     }
     return status;
@@ -209,6 +210,7 @@ static void closeSession(
     // call user-defined function
     context->sessionRegistry.closeSessionUser(server, ac, sessionId, sessionContext);
     if (sessionId != nullptr) {
+        const std::scoped_lock lock(context->sessionRegistry.mutex);
         context->sessionRegistry.sessionIds.erase(asWrapper<NodeId>(*sessionId));
     }
 }
@@ -311,6 +313,7 @@ void Server::setCustomDataTypes(Span<const DataType> dataTypes) {
 
 std::vector<Session> Server::sessions() {
     std::vector<Session> result;
+    const std::scoped_lock lock(context().sessionRegistry.mutex);
     for (auto&& id : context().sessionRegistry.sessionIds) {
         result.emplace_back(*this, id);
     }
