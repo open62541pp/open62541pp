@@ -877,7 +877,7 @@ enum class VariantPolicy {
 namespace detail {
 
 template <typename T>
-static constexpr bool isCopyableOrConvertible = detail::isRegisteredType<T> ||
+static constexpr bool isRegisteredOrConvertible = detail::isRegisteredType<T> ||
     detail::isConvertibleType<T>;
 
 }  // namespace detail
@@ -1086,7 +1086,7 @@ public:
     /// @exception BadVariantAccess If the variant is not a scalar or not convertible to `T`.
     template <typename T>
     T getScalarCopy() const {
-        assertIsCopyableOrConvertible<T>();
+        assertIsRegisteredOrConvertible<T>();
         return getScalarCopyImpl<T>();
     }
 
@@ -1124,7 +1124,7 @@ public:
     /// @exception BadVariantAccess If the variant is not an array or not convertible to `T`.
     template <typename T>
     std::vector<T> getArrayCopy() const {
-        assertIsCopyableOrConvertible<T>();
+        assertIsRegisteredOrConvertible<T>();
         return getArrayCopyImpl<T>();
     }
 
@@ -1180,7 +1180,7 @@ public:
     /// Copy scalar value to variant.
     template <typename T>
     void setScalarCopy(const T& value) {
-        assertIsCopyableOrConvertible<T>();
+        assertIsRegisteredOrConvertible<T>();
         if constexpr (detail::isRegisteredType<T>) {
             setScalarCopyImpl(value, opcua::getDataType<T>());
         } else {
@@ -1249,7 +1249,7 @@ public:
     template <typename InputIt>
     void setArrayCopy(InputIt first, InputIt last) {
         using ValueType = typename std::iterator_traits<InputIt>::value_type;
-        assertIsCopyableOrConvertible<ValueType>();
+        assertIsRegisteredOrConvertible<ValueType>();
         if constexpr (detail::isRegisteredType<ValueType>) {
             setArrayCopyImpl(first, last, opcua::getDataType<ValueType>());
         } else {
@@ -1282,9 +1282,9 @@ private:
     }
 
     template <typename T>
-    static constexpr void assertIsCopyableOrConvertible() {
+    static constexpr void assertIsRegisteredOrConvertible() {
         static_assert(
-            detail::isCopyableOrConvertible<T>,
+            detail::isRegisteredOrConvertible<T>,
             "Template type must be either a native/wrapper type (copyable) or a convertible "
             "type. "
             "If the type is a native type: Provide the data type (UA_DataType) manually "
@@ -1448,7 +1448,7 @@ template <typename T, typename... Args>
 void Variant::setValueImpl(T&& value, Args&&... args) {
     using Decayed = std::decay_t<T>;
 
-    if constexpr (detail::isContainer<Decayed> && !detail::isCopyableOrConvertible<Decayed>) {
+    if constexpr (detail::isContainer<Decayed> && !detail::isRegisteredOrConvertible<Decayed>) {
         setArray(Span{std::forward<T>(value)}, std::forward<Args>(args)...);
     } else {
         setScalar(std::forward<T>(value), std::forward<Args>(args)...);
@@ -1459,7 +1459,7 @@ template <typename T, typename... Args>
 void Variant::setValueCopyImpl(T&& value, Args&&... args) {
     using Decayed = std::decay_t<T>;
 
-    if constexpr (detail::isContainer<Decayed> && !detail::isCopyableOrConvertible<Decayed>) {
+    if constexpr (detail::isContainer<Decayed> && !detail::isRegisteredOrConvertible<Decayed>) {
         if constexpr (detail::IsContiguousContainer<Decayed>::value) {
             setArrayCopy(Span{std::forward<T>(value)}, std::forward<Args>(args)...);
         } else {
