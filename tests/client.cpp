@@ -47,6 +47,11 @@ TEST_CASE("ClientConfig") {
         config.setSecurityMode(MessageSecurityMode::Sign);
         CHECK(config->securityMode == UA_MESSAGESECURITYMODE_SIGN);
     }
+
+    SUBCASE("setApplicationUri") {
+        config.setApplicationUri("uri");
+        CHECK(detail::toString(config->applicationUri) == "uri");
+    }
 }
 
 TEST_CASE("Client discovery") {

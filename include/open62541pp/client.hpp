@@ -94,6 +94,9 @@ public:
 
     /// Set message security mode.
     void setSecurityMode(MessageSecurityMode mode) noexcept;
+
+    /// Set the application URI, e.g. `urn:open62541.client.application`.
+    void setApplicationUri(std::string_view uri);
 };
 
 /* ------------------------------------------- Client ------------------------------------------- */

@@ -141,6 +141,10 @@ void ClientConfig::setSecurityMode(MessageSecurityMode mode) noexcept {
     native().securityMode = static_cast<UA_MessageSecurityMode>(mode);
 }
 
+void ClientConfig::setApplicationUri(std::string_view uri) {
+    asWrapper<String>(native().applicationUri) = String(uri);
+}
+
 /* --------------------------------------- State callbacks -------------------------------------- */
 
 // State changes in open62541.
