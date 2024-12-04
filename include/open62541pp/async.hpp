@@ -57,7 +57,7 @@ struct UseFutureToken {};
  * Future completion token object.
  * @see UseFutureToken
  */
-constexpr UseFutureToken useFuture;
+inline constexpr UseFutureToken useFuture;
 
 template <typename T>
 struct AsyncResult<UseFutureToken, T> {
@@ -87,7 +87,7 @@ struct UseDeferredToken {};
  * Deferred completion token object.
  * @see UseDeferredToken
  */
-constexpr UseDeferredToken useDeferred;
+inline constexpr UseDeferredToken useDeferred;
 
 template <typename T>
 struct AsyncResult<UseDeferredToken, T> {
@@ -122,7 +122,7 @@ struct UseDetachedToken {};
  * Detached completion token object.
  * @see UseDetachedToken
  */
-constexpr UseDetachedToken useDetached;
+inline constexpr UseDetachedToken useDetached;
 
 template <typename T>
 struct AsyncResult<UseDetachedToken, T> {
