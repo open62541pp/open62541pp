@@ -86,30 +86,23 @@ std::ostream& operator<<(std::ostream& os, const XmlElement& xmlElement) {
 /* ---------------------------------------- NumericRange ---------------------------------------- */
 
 NumericRange::NumericRange(std::string_view encodedRange) {
-    const UA_String encodedRangeNative = detail::toNativeString(encodedRange);
-    UA_NumericRange native{};
+    const auto encodedRangeNative = detail::toNativeString(encodedRange);
 #if UAPP_OPEN62541_VER_GE(1, 1)
-    const auto status = UA_NumericRange_parse(&native, encodedRangeNative);
+    throwIfBad(UA_NumericRange_parse(handle(), encodedRangeNative));
 #else
-    const auto status = UA_NumericRange_parseFromString(&native, &encodedRangeNative);
+    throwIfBad(UA_NumericRange_parseFromString(handle(), &encodedRangeNative));
 #endif
-    dimensions_.assign(
-        native.dimensions,
-        native.dimensions + native.dimensionsSize  // NOLINT
-    );
-    UA_free(native.dimensions);  // NOLINT
-    throwIfBad(status);
 }
 
 std::string NumericRange::toString() const {
     std::ostringstream ss;
-    for (size_t i = 0; i < dimensions_.size(); ++i) {
-        const auto& dimension = dimensions_.at(i);
+    for (size_t i = 0; i < dimensions().size(); ++i) {
+        const auto& dimension = dimensions()[i];
         ss << dimension.min;
         if (dimension.min != dimension.max) {
             ss << ":" << dimension.max;
         }
-        if (i < dimensions_.size() - 1) {
+        if (i < dimensions().size() - 1) {
             ss << ",";
         }
     }

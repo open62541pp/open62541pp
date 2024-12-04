@@ -22,6 +22,7 @@
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/detail/string_utils.hpp"  // allocNativeString
 #include "open62541pp/detail/traits.hpp"
+#include "open62541pp/detail/types_handling.hpp"
 #include "open62541pp/exception.hpp"
 #include "open62541pp/span.hpp"
 #include "open62541pp/typeconverter.hpp"
@@ -2206,39 +2207,91 @@ inline bool operator!=(
 }
 
 /**
- * Numeric range to indicate subsets of (multidimensional) arrays.
+ * UA_NumericRange wrapper class.
+ *
+ * Numeric ranges indicate subsets of (multidimensional) arrays.
  * They are no official data type in the OPC UA standard and are transmitted only with a string
  * encoding, such as "1:2,0:3,5". The colon separates min/max index and the comma separates
  * dimensions. A single value indicates a range with a single element (min==max).
+ *
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.27
+ * @ingroup Wrapper
  */
-class NumericRange {
+class NumericRange : public Wrapper<UA_NumericRange> {
 public:
     NumericRange() = default;
 
+    /// Create a NumericRange from the encoded representation, e.g. `1:2,0:3,5`.
     explicit NumericRange(std::string_view encodedRange);
 
+    /// @overload
     explicit NumericRange(const char* encodedRange)  // required to avoid ambiguity
         : NumericRange(std::string_view(encodedRange)) {}
 
+    /// Create a NumericRange from dimensions.
     explicit NumericRange(Span<const NumericRangeDimension> dimensions)
-        : dimensions_(dimensions.begin(), dimensions.end()) {}
+        : Wrapper(copy(dimensions.data(), dimensions.size())) {}
 
+    /// Create a NumericRange from native object (copy).
     explicit NumericRange(const UA_NumericRange& native)
-        : NumericRange({native.dimensions, native.dimensionsSize}) {}
+        : Wrapper(copy(native)) {}
+
+    /// Create a NumericRange from native object (move).
+    NumericRange(UA_NumericRange&& native) noexcept  // NOLINT
+        : Wrapper(std::exchange(native, {})) {}
+
+    ~NumericRange() {
+        clear();
+    }
+
+    NumericRange(const NumericRange& other)
+        : Wrapper(copy(other.native())) {}
+
+    NumericRange(NumericRange&& other) noexcept
+        : Wrapper(std::exchange(other.native(), {})) {}
+
+    NumericRange& operator=(const NumericRange& other) {
+        if (this != &other) {
+            clear();
+            native() = copy(other.native());
+        }
+        return *this;
+    }
+
+    NumericRange& operator=(NumericRange&& other) noexcept {
+        if (this != &other) {
+            clear();
+            native() = std::exchange(other.native(), {});
+        }
+        return *this;
+    }
 
     bool empty() const noexcept {
-        return dimensions_.empty();
+        return native().dimensionsSize == 0;
     }
 
     Span<const NumericRangeDimension> dimensions() const noexcept {
-        return dimensions_;
+        return {native().dimensions, native().dimensionsSize};
     }
 
     std::string toString() const;
 
 private:
-    std::vector<NumericRangeDimension> dimensions_;
+    void clear() noexcept {
+        detail::deallocateArray(native().dimensions);
+        native() = {};
+    }
+
+    [[nodiscard]] static UA_NumericRange copy(const UA_NumericRangeDimension* array, size_t size) {
+        UA_NumericRange result{};
+        result.dimensions = detail::copyArray(array, size);
+        result.dimensionsSize = size;
+        return result;
+    }
+
+    [[nodiscard]] static UA_NumericRange copy(const UA_NumericRange& other) {
+        return copy(other.dimensions, other.dimensionsSize);
+    }
 };
 
 }  // namespace opcua

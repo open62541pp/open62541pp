@@ -280,50 +280,6 @@ TEST_CASE("Guid") {
     }
 }
 
-TEST_CASE("NumericRangeDimension") {
-    CHECK(NumericRangeDimension{} == NumericRangeDimension{});
-    CHECK(NumericRangeDimension{1, 2} == NumericRangeDimension{1, 2});
-    CHECK(NumericRangeDimension{1, 2} != NumericRangeDimension{1, 3});
-}
-
-TEST_CASE("NumericRange") {
-    SUBCASE("Empty") {
-        const NumericRange nr;
-        CHECK(nr.empty());
-        CHECK(nr.dimensions().size() == 0);
-    }
-
-    SUBCASE("Construct from native") {
-        UA_NumericRange native{};
-        std::vector<UA_NumericRangeDimension> dimensions{{1, 2}, {3, 4}};
-        native.dimensionsSize = dimensions.size();
-        native.dimensions = dimensions.data();
-        const NumericRange nr(native);
-        CHECK_FALSE(nr.empty());
-        CHECK(nr.dimensions().size() == 2);
-        CHECK(nr.dimensions()[0] == NumericRangeDimension{1, 2});
-        CHECK(nr.dimensions()[1] == NumericRangeDimension{3, 4});
-    }
-
-    SUBCASE("Parse invalid") {
-        CHECK_THROWS(NumericRange("abc"));
-    }
-
-    SUBCASE("Parse") {
-        const NumericRange nr("1:2,0:3,5");
-        CHECK(nr.dimensions().size() == 3);
-        CHECK(nr.dimensions()[0] == NumericRangeDimension{1, 2});
-        CHECK(nr.dimensions()[1] == NumericRangeDimension{0, 3});
-        CHECK(nr.dimensions()[2] == NumericRangeDimension{5, 5});
-    }
-
-    SUBCASE("toString") {
-        CHECK(NumericRange({{1, 1}}).toString() == "1");
-        CHECK(NumericRange({{1, 2}}).toString() == "1:2");
-        CHECK(NumericRange({{1, 2}, {0, 3}, {5, 5}}).toString() == "1:2,0:3,5");
-    }
-}
-
 TEST_CASE("DateTime") {
     SUBCASE("Empty") {
         const DateTime dt;
@@ -998,5 +954,96 @@ TEST_CASE("ExtensionObject") {
         CHECK(obj.decodedData() == &value);
         CHECK(obj.decodedData<int>() == nullptr);
         CHECK(obj.decodedData<double>() == &value);
+    }
+}
+
+TEST_CASE("NumericRangeDimension") {
+    CHECK(NumericRangeDimension{} == NumericRangeDimension{});
+    CHECK(NumericRangeDimension{1, 2} == NumericRangeDimension{1, 2});
+    CHECK(NumericRangeDimension{1, 2} != NumericRangeDimension{1, 3});
+}
+
+TEST_CASE("NumericRange") {
+    SUBCASE("Empty") {
+        const NumericRange nr;
+        CHECK(nr.empty());
+        CHECK(nr.dimensions().size() == 0);
+    }
+
+    SUBCASE("From encoded range (invalid)") {
+        CHECK_THROWS(NumericRange("abc"));
+    }
+
+    SUBCASE("From encoded range") {
+        const NumericRange nr("1:2,0:3,5");
+        CHECK(nr.dimensions().size() == 3);
+        CHECK(nr.dimensions()[0] == NumericRangeDimension{1, 2});
+        CHECK(nr.dimensions()[1] == NumericRangeDimension{0, 3});
+        CHECK(nr.dimensions()[2] == NumericRangeDimension{5, 5});
+    }
+
+    SUBCASE("From span") {
+        std::vector<NumericRangeDimension> dimensions{{1, 2}, {3, 4}};
+        const NumericRange nr(dimensions);
+        CHECK_FALSE(nr.empty());
+        CHECK(nr.dimensions().size() == 2);
+        CHECK(nr.dimensions()[0] == NumericRangeDimension{1, 2});
+        CHECK(nr.dimensions()[1] == NumericRangeDimension{3, 4});
+    }
+
+    SUBCASE("From native") {
+        UA_NumericRange native{};
+        std::vector<NumericRangeDimension> dimensions{{1, 2}, {3, 4}};
+        native.dimensionsSize = dimensions.size();
+        native.dimensions = dimensions.data();
+        const NumericRange nr(native);
+        CHECK_FALSE(nr.empty());
+        CHECK(nr.dimensions().size() == 2);
+        CHECK(nr.dimensions()[0] == NumericRangeDimension{1, 2});
+        CHECK(nr.dimensions()[1] == NumericRangeDimension{3, 4});
+    }
+
+    SUBCASE("Copy & move") {
+        std::vector<NumericRangeDimension> dimensions{{1, 2}, {3, 4}};
+        NumericRange src(dimensions);
+
+        SUBCASE("Copy constructor") {
+            const NumericRange dst(src);
+            CHECK(dst.dimensions().size() == 2);
+            CHECK(dst.dimensions()[0] == NumericRangeDimension{1, 2});
+            CHECK(dst.dimensions()[1] == NumericRangeDimension{3, 4});
+        }
+
+        SUBCASE("Move constructor") {
+            const NumericRange dst(std::move(src));
+            CHECK(src.dimensions().size() == 0);
+            CHECK(dst.dimensions().size() == 2);
+            CHECK(dst.dimensions()[0] == NumericRangeDimension{1, 2});
+            CHECK(dst.dimensions()[1] == NumericRangeDimension{3, 4});
+        }
+
+        SUBCASE("Copy assignment") {
+            NumericRange dst;
+            dst = src;
+            CHECK(dst.dimensions().size() == 2);
+            CHECK(dst.dimensions().size() == 2);
+            CHECK(dst.dimensions()[0] == NumericRangeDimension{1, 2});
+            CHECK(dst.dimensions()[1] == NumericRangeDimension{3, 4});
+        }
+
+        SUBCASE("Move assignment") {
+            NumericRange dst;
+            dst = std::move(src);
+            CHECK(src.dimensions().size() == 0);
+            CHECK(dst.dimensions().size() == 2);
+            CHECK(dst.dimensions()[0] == NumericRangeDimension{1, 2});
+            CHECK(dst.dimensions()[1] == NumericRangeDimension{3, 4});
+        }
+    }
+
+    SUBCASE("toString") {
+        CHECK(NumericRange({{1, 1}}).toString() == "1");
+        CHECK(NumericRange({{1, 2}}).toString() == "1:2");
+        CHECK(NumericRange({{1, 2}, {0, 3}, {5, 5}}).toString() == "1:2,0:3,5");
     }
 }
