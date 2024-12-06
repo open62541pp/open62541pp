@@ -1320,7 +1320,7 @@ public:
     /// Get array with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not an array or not of type `T`.
     template <typename T>
-    Span<T> getArray() {
+    Span<T> array() {
         assertIsRegistered<T>();
         checkIsArray();
         checkIsDataType<T>();
@@ -1330,11 +1330,25 @@ public:
     /// Get array with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not an array or not of type `T`.
     template <typename T>
-    Span<const T> getArray() const {
+    Span<const T> array() const {
         assertIsRegistered<T>();
         checkIsArray();
         checkIsDataType<T>();
         return Span<const T>(static_cast<const T*>(handle()->data), handle()->arrayLength);
+    }
+
+    /// @deprecated Use array() instead
+    template <typename T>
+    [[deprecated("use array() instead")]]
+    Span<T> getArray() {
+        return array<T>();
+    }
+
+    /// @deprecated Use array() instead
+    template <typename T>
+    [[deprecated("use array() instead")]]
+    Span<const T> getArray() const {
+        return array<T>();
     }
 
     /// Get copy of array with given template type and return it as a std::vector.
@@ -1581,13 +1595,13 @@ template <typename T>
 std::vector<T> Variant::getArrayCopyImpl() const {
     std::vector<T> result(handle()->arrayLength);
     if constexpr (detail::isRegisteredType<T>) {
-        auto native = getArray<T>();
+        auto native = array<T>();
         std::transform(native.begin(), native.end(), result.begin(), [](auto&& value) {
             return detail::copy(value, opcua::getDataType<T>());
         });
     } else {
         using Native = typename TypeConverter<T>::NativeType;
-        auto native = getArray<Native>();
+        auto native = array<Native>();
         for (size_t i = 0; i < native.size(); ++i) {
             TypeConverter<T>::fromNative(native[i], result[i]);
         }

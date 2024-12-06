@@ -488,7 +488,7 @@ TEST_CASE("Variant") {
         CHECK(var.arrayDimensions().empty());
         CHECK_THROWS(var.scalar<int>());
         CHECK_THROWS(var.scalarCopy<int>());
-        CHECK_THROWS(var.getArray<int>());
+        CHECK_THROWS(var.array<int>());
         CHECK_THROWS(var.getArrayCopy<int>());
     }
 
@@ -537,8 +537,8 @@ TEST_CASE("Variant") {
         std::vector<float> array{0, 1, 2};
         var.setArray(array);
         CHECK(var.data() == array.data());
-        CHECK(var.getArray<float>().data() == array.data());
-        CHECK(std::as_const(var).getArray<float>().data() == array.data());
+        CHECK(var.array<float>().data() == array.data());
+        CHECK(std::as_const(var).array<float>().data() == array.data());
         CHECK(var.getArrayCopy<float>() == array);
     }
 
@@ -560,7 +560,7 @@ TEST_CASE("Variant") {
         var.setArray(array);
         CHECK(var.data() == array.data());
         CHECK(var.arrayLength() == array.size());
-        CHECK(var.getArray<String>().data() == array.data());
+        CHECK(var.array<String>().data() == array.data());
     }
 
     SUBCASE("Set/get array of std::string (conversion)") {
@@ -654,7 +654,7 @@ TEST_CASE("Variant") {
             CHECK(var.type() == &dt);
             CHECK(var.data() == array.data());
             CHECK(var.arrayLength() == 3);
-            CHECK(var.getArray<CustomType>().data() == array.data());
+            CHECK(var.array<CustomType>().data() == array.data());
         }
 
         SUBCASE("Array (copy)") {
@@ -663,7 +663,7 @@ TEST_CASE("Variant") {
             CHECK(var.type() == &dt);
             CHECK(var.data() != array.data());
             CHECK(var.arrayLength() == 3);
-            CHECK(var.getArray<CustomType>().data() != array.data());
+            CHECK(var.array<CustomType>().data() != array.data());
         }
     }
 
@@ -722,8 +722,8 @@ TEST_CASE("Variant") {
             std::vector<float> array{0, 1, 2};
             var.setValue(array);
             CHECK(var.data() == array.data());
-            CHECK(var.getArray<float>().data() == array.data());
-            CHECK(std::as_const(var).getArray<float>().data() == array.data());
+            CHECK(var.array<float>().data() == array.data());
+            CHECK(std::as_const(var).array<float>().data() == array.data());
             CHECK(var.getArrayCopy<float>() == array);
         }
 
@@ -745,7 +745,7 @@ TEST_CASE("Variant") {
             var.setValue(array);
             CHECK(var.data() == array.data());
             CHECK(var.arrayLength() == array.size());
-            CHECK(var.getArray<String>().data() == array.data());
+            CHECK(var.array<String>().data() == array.data());
         }
 
         SUBCASE("Set/get array of std::string (conversion)") {
@@ -839,7 +839,7 @@ TEST_CASE("Variant") {
                 CHECK(var.type() == &dt);
                 CHECK(var.data() == array.data());
                 CHECK(var.arrayLength() == 3);
-                CHECK(var.getArray<CustomType>().data() == array.data());
+                CHECK(var.array<CustomType>().data() == array.data());
             }
 
             SUBCASE("Array (copy)") {
@@ -848,7 +848,7 @@ TEST_CASE("Variant") {
                 CHECK(var.type() == &dt);
                 CHECK(var.data() != array.data());
                 CHECK(var.arrayLength() == 3);
-                CHECK(var.getArray<CustomType>().data() != array.data());
+                CHECK(var.array<CustomType>().data() != array.data());
             }
         }
 
