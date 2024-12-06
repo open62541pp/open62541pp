@@ -268,7 +268,7 @@ TEST_CASE("Attribute service set (highlevel)") {
         const NodeId id{0, UA_NS0ID_BUILDINFO};
         const Variant variant = services::readDataTypeDefinition(server, id).value();
         CHECK(variant.isScalar());
-        CHECK(variant.getDataType() == &UA_TYPES[UA_TYPES_STRUCTUREDEFINITION]);
+        CHECK(variant.type() == &UA_TYPES[UA_TYPES_STRUCTUREDEFINITION]);
 
         const auto definition = variant.getScalar<StructureDefinition>();
         CHECK(definition.defaultEncodingId() == NodeId(0, 340));

@@ -1213,8 +1213,14 @@ public:
     }
 
     /// Get data type.
-    const UA_DataType* getDataType() const noexcept {
+    const UA_DataType* type() const noexcept {
         return handle()->type;
+    }
+
+    /// @deprecated Use type() instead
+    [[deprecated("use type() instead")]]
+    const UA_DataType* getDataType() const noexcept {
+        return type();
     }
 
     /// Get pointer to the underlying data.
@@ -1492,7 +1498,7 @@ private:
 
     template <typename T>
     void checkIsDataType() const {
-        const auto* dt = getDataType();
+        const auto* dt = type();
         if (dt == nullptr || dt->typeId != opcua::getDataType<T>().typeId) {
             throw BadVariantAccess("Variant does not contain a value convertible to template type");
         }

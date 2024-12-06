@@ -481,7 +481,7 @@ TEST_CASE("Variant") {
         CHECK(var.isEmpty());
         CHECK(!var.isScalar());
         CHECK(!var.isArray());
-        CHECK(var.getDataType() == nullptr);
+        CHECK(var.type() == nullptr);
         CHECK(var.data() == nullptr);
         CHECK(std::as_const(var).data() == nullptr);
         CHECK(var.getArrayLength() == 0);
@@ -497,13 +497,13 @@ TEST_CASE("Variant") {
         CHECK_FALSE(var.isType(UA_TYPES[UA_TYPES_STRING]));
         CHECK_FALSE(var.isType(DataTypeId::String));
         CHECK_FALSE(var.isType<String>());
-        CHECK(var.getDataType() == nullptr);
+        CHECK(var.type() == nullptr);
 
         var->type = &UA_TYPES[UA_TYPES_STRING];
         CHECK(var.isType(UA_TYPES[UA_TYPES_STRING]));
         CHECK(var.isType(DataTypeId::String));
         CHECK(var.isType<String>());
-        CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_STRING]);
+        CHECK(var.type() == &UA_TYPES[UA_TYPES_STRING]);
     }
 
     SUBCASE("Set/get scalar") {
@@ -570,7 +570,7 @@ TEST_CASE("Variant") {
 
         CHECK(var.isArray());
         CHECK(var.isType(NodeId{0, UA_NS0ID_STRING}));
-        CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_STRING]);
+        CHECK(var.type() == &UA_TYPES[UA_TYPES_STRING]);
 
         CHECK_THROWS(var.getScalarCopy<std::string>());
         CHECK_THROWS(var.getArrayCopy<int32_t>());
@@ -585,7 +585,7 @@ TEST_CASE("Variant") {
 
         CHECK(var.isArray());
         CHECK(var.isType(NodeId{0, UA_NS0ID_FLOAT}));
-        CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_FLOAT]);
+        CHECK(var.type() == &UA_TYPES[UA_TYPES_FLOAT]);
         CHECK(var.data() != array.data());
         CHECK(var.getArrayLength() == array.size());
 
@@ -633,7 +633,7 @@ TEST_CASE("Variant") {
         SUBCASE("Scalar") {
             var.setScalar(value, dt);
             CHECK(var.isScalar());
-            CHECK(var.getDataType() == &dt);
+            CHECK(var.type() == &dt);
             CHECK(var.data() == &value);
             CHECK(var.getScalar<CustomType>().attributeId == 1);
         }
@@ -641,7 +641,7 @@ TEST_CASE("Variant") {
         SUBCASE("Scalar (copy)") {
             var.setScalarCopy(value, dt);
             CHECK(var.isScalar());
-            CHECK(var.getDataType() == &dt);
+            CHECK(var.type() == &dt);
             CHECK(var.data() != &value);
             CHECK(var.getScalar<CustomType>().attributeId == 1);
         }
@@ -651,7 +651,7 @@ TEST_CASE("Variant") {
         SUBCASE("Array") {
             var.setArray(array, dt);
             CHECK(var.isArray());
-            CHECK(var.getDataType() == &dt);
+            CHECK(var.type() == &dt);
             CHECK(var.data() == array.data());
             CHECK(var.getArrayLength() == 3);
             CHECK(var.getArray<CustomType>().data() == array.data());
@@ -660,7 +660,7 @@ TEST_CASE("Variant") {
         SUBCASE("Array (copy)") {
             var.setArrayCopy(array, dt);
             CHECK(var.isArray());
-            CHECK(var.getDataType() == &dt);
+            CHECK(var.type() == &dt);
             CHECK(var.data() != array.data());
             CHECK(var.getArrayLength() == 3);
             CHECK(var.getArray<CustomType>().data() != array.data());
@@ -755,7 +755,7 @@ TEST_CASE("Variant") {
 
             CHECK(var.isArray());
             CHECK(var.isType(NodeId{0, UA_NS0ID_STRING}));
-            CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_STRING]);
+            CHECK(var.type() == &UA_TYPES[UA_TYPES_STRING]);
 
             CHECK_THROWS(var.getScalarCopy<std::string>());
             CHECK_THROWS(var.getArrayCopy<int32_t>());
@@ -770,7 +770,7 @@ TEST_CASE("Variant") {
 
             CHECK(var.isArray());
             CHECK(var.isType(NodeId{0, UA_NS0ID_FLOAT}));
-            CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_FLOAT]);
+            CHECK(var.type() == &UA_TYPES[UA_TYPES_FLOAT]);
             CHECK(var.data() != array.data());
             CHECK(var.getArrayLength() == array.size());
 
@@ -818,7 +818,7 @@ TEST_CASE("Variant") {
             SUBCASE("Scalar") {
                 var.setValue(value, dt);
                 CHECK(var.isScalar());
-                CHECK(var.getDataType() == &dt);
+                CHECK(var.type() == &dt);
                 CHECK(var.data() == &value);
                 CHECK(var.getScalar<CustomType>().attributeId == 1);
             }
@@ -826,7 +826,7 @@ TEST_CASE("Variant") {
             SUBCASE("Scalar (copy)") {
                 var.setValueCopy(value, dt);
                 CHECK(var.isScalar());
-                CHECK(var.getDataType() == &dt);
+                CHECK(var.type() == &dt);
                 CHECK(var.data() != &value);
                 CHECK(var.getScalar<CustomType>().attributeId == 1);
             }
@@ -836,7 +836,7 @@ TEST_CASE("Variant") {
             SUBCASE("Array") {
                 var.setValue(array, dt);
                 CHECK(var.isArray());
-                CHECK(var.getDataType() == &dt);
+                CHECK(var.type() == &dt);
                 CHECK(var.data() == array.data());
                 CHECK(var.getArrayLength() == 3);
                 CHECK(var.getArray<CustomType>().data() == array.data());
@@ -845,7 +845,7 @@ TEST_CASE("Variant") {
             SUBCASE("Array (copy)") {
                 var.setValueCopy(array, dt);
                 CHECK(var.isArray());
-                CHECK(var.getDataType() == &dt);
+                CHECK(var.type() == &dt);
                 CHECK(var.data() != array.data());
                 CHECK(var.getArrayLength() == 3);
                 CHECK(var.getArray<CustomType>().data() != array.data());
