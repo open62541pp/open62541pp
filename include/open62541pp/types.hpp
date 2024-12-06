@@ -1286,8 +1286,14 @@ public:
     }
 
     /// Get array dimensions.
-    Span<const uint32_t> getArrayDimensions() const noexcept {
+    Span<const uint32_t> arrayDimensions() const noexcept {
         return {handle()->arrayDimensions, handle()->arrayDimensionsSize};
+    }
+
+    /// @deprecated Use arrayDimensions() instead
+    [[deprecated("use arrayDimensions() instead")]]
+    Span<const uint32_t> getArrayDimensions() const noexcept {
+        return arrayDimensions();
     }
 
     /// Get array with given template type (only native or wrapper types).

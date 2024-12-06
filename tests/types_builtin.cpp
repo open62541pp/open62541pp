@@ -485,7 +485,7 @@ TEST_CASE("Variant") {
         CHECK(var.data() == nullptr);
         CHECK(std::as_const(var).data() == nullptr);
         CHECK(var.arrayLength() == 0);
-        CHECK(var.getArrayDimensions().empty());
+        CHECK(var.arrayDimensions().empty());
         CHECK_THROWS(var.getScalar<int>());
         CHECK_THROWS(var.getScalarCopy<int>());
         CHECK_THROWS(var.getArray<int>());
