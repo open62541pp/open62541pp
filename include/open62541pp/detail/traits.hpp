@@ -31,6 +31,18 @@ template <typename T>
 using MemberTypeT = typename MemberType<T>::type;
 
 template <typename T, typename = void>
+struct IsContainer : std::false_type {};
+
+template <typename T>
+struct IsContainer<
+    T,
+    std::void_t<decltype(std::declval<T>().begin()), decltype(std::declval<T>().end())>>
+    : std::true_type {};
+
+template <typename T>
+inline constexpr bool isContainer = IsContainer<T>::value;
+
+template <typename T, typename = void>
 struct IsContiguousContainer : std::false_type {};
 
 template <typename T>
