@@ -86,9 +86,7 @@ TEST_CASE("sendRequest") {
     SUBCASE("Success") {
         const auto response = sendReadRequest();
         CHECK(response.responseHeader().serviceResult().isGood());
-        CHECK(
-            response.results()[0].value().scalar<QualifiedName>() == QualifiedName(0, "Objects")
-        );
+        CHECK(response.results()[0].value().scalar<QualifiedName>() == QualifiedName(0, "Objects"));
     }
 }
 
@@ -124,8 +122,7 @@ TEST_CASE("sendRequestAsync") {
         sendReadRequest([&](ReadResponse& response) {
             CHECK(response.responseHeader().serviceResult().isGood());
             CHECK_EQ(
-                response.results()[0].value().scalar<QualifiedName>(),
-                QualifiedName(0, "Objects")
+                response.results()[0].value().scalar<QualifiedName>(), QualifiedName(0, "Objects")
             );
             executed = true;
         });
