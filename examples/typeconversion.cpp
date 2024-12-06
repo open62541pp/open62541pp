@@ -44,7 +44,7 @@ int main() {
     std::cout << "Byte value: " << std::to_integer<int>(value) << std::endl;
 
     // Read UA_Byte from variant (zero copy possible)
-    const auto& valueNative = variant.getScalar<UA_Byte>();
+    const auto& valueNative = variant.scalar<UA_Byte>();
     std::cout << "Byte value: " << static_cast<int>(valueNative) << std::endl;
 
     // Write array of bytes to variant

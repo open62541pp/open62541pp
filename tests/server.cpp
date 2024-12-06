@@ -174,11 +174,11 @@ TEST_CASE("ValueCallback") {
     ValueCallback valueCallback;
     valueCallback.onBeforeRead = [&](const DataValue& dv) {
         onBeforeReadCalled = true;
-        valueBeforeRead = dv.value().getScalar<int>();
+        valueBeforeRead = dv.value().scalar<int>();
     };
     valueCallback.onAfterWrite = [&](const DataValue& dv) {
         onAfterWriteCalled = true;
-        valueAfterWrite = dv.value().getScalar<int>();
+        valueAfterWrite = dv.value().scalar<int>();
     };
     server.setVariableNodeValueCallback(id, valueCallback);
 

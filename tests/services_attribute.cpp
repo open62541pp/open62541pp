@@ -228,7 +228,7 @@ TEST_CASE("Attribute service set (highlevel)") {
         services::writeValue(server, id, variantWrite).throwIfBad();
 
         Variant variantRead = services::readValue(server, id).value();
-        CHECK(variantRead.getScalar<double>() == 11.11);
+        CHECK(variantRead.scalar<double>() == 11.11);
     }
 
     SUBCASE("Read/write data value") {
@@ -257,7 +257,7 @@ TEST_CASE("Attribute service set (highlevel)") {
         // CHECK_EQ(valueRead->hasSourcePicoseconds, true);
         CHECK_EQ(valueRead->hasStatus, false);  // doesn't contain error code on success
 
-        CHECK(valueRead.value().getScalar<int>() == 11);
+        CHECK(valueRead.value().scalar<int>() == 11);
         CHECK(valueRead->sourceTimestamp == valueWrite->sourceTimestamp);
         CHECK(valueRead->sourcePicoseconds == valueWrite->sourcePicoseconds);
     }
@@ -270,7 +270,7 @@ TEST_CASE("Attribute service set (highlevel)") {
         CHECK(variant.isScalar());
         CHECK(variant.type() == &UA_TYPES[UA_TYPES_STRUCTUREDEFINITION]);
 
-        const auto definition = variant.getScalar<StructureDefinition>();
+        const auto definition = variant.scalar<StructureDefinition>();
         CHECK(definition.defaultEncodingId() == NodeId(0, 340));
         CHECK(definition.baseDataType() == NodeId(0, 22));
         CHECK(definition.structureType() == StructureType::Structure);
@@ -325,7 +325,7 @@ TEST_CASE("Attribute service set (highlevel, async)") {
         {
             auto future = services::readValueAsync(client, id, useFuture);
             client.runIterate();
-            CHECK(future.get().value().getScalar<double>() == 11.11);
+            CHECK(future.get().value().scalar<double>() == 11.11);
         }
     }
 
@@ -378,5 +378,5 @@ TEST_CASE_TEMPLATE("Attribute service set write/read", T, Server, Client, Async<
         );
     }
 
-    CHECK(result.value().value().getScalar<double>() == value);
+    CHECK(result.value().value().scalar<double>() == value);
 }

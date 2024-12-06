@@ -54,7 +54,7 @@ struct AttributeHandlerScalar {
         return getVariant(std::move(dv)).transform([](Variant&& var) {
             assert(var.isType<T>());
             assert(var.isScalar());
-            return std::move(var).getScalar<T>();
+            return std::move(var).scalar<T>();
         });
     }
 

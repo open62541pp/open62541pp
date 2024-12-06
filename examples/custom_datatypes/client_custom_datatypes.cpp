@@ -95,6 +95,6 @@ int main() {
 
     variant = opcua::Node(client, {1, "Color"}).readValue();
     if (variant.isType<int32_t>()) {
-        std::cout << "Color: " << variant.getScalar<int32_t>() << "\n";
+        std::cout << "Color: " << variant.scalar<int32_t>() << "\n";
     }
 }

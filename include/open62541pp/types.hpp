@@ -1238,7 +1238,7 @@ public:
     /// Get reference to scalar value with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not a scalar or not of type `T`.
     template <typename T>
-    T& getScalar() & {
+    T& scalar() & {
         assertIsRegistered<T>();
         checkIsScalar();
         checkIsDataType<T>();
@@ -1247,7 +1247,7 @@ public:
 
     /// @copydoc getScalar()&
     template <typename T>
-    const T& getScalar() const& {
+    const T& scalar() const& {
         assertIsRegistered<T>();
         checkIsScalar();
         checkIsDataType<T>();
@@ -1256,14 +1256,28 @@ public:
 
     /// @copydoc getScalar()&
     template <typename T>
-    T&& getScalar() && {
-        return std::move(getScalar<T>());
+    T&& scalar() && {
+        return std::move(scalar<T>());
     }
 
     /// @copydoc getScalar()&
     template <typename T>
-    const T&& getScalar() const&& {
-        return std::move(getScalar<T>());
+    const T&& scalar() const&& {
+        return std::move(scalar<T>());
+    }
+
+    /// @deprecated Use scalar() instead
+    template <typename T>
+    [[deprecated("use scalar() instead")]]
+    T& getScalar() {
+        return scalar<T>();
+    }
+
+    /// @deprecated Use scalar() instead
+    template <typename T>
+    [[deprecated("use scalar() instead")]]
+    const T& getScalar() const {
+        return scalar<T>();
     }
 
     /// Get copy of scalar value with given template type.
@@ -1547,11 +1561,11 @@ private:
 template <typename T>
 T Variant::getScalarCopyImpl() const {
     if constexpr (detail::isRegisteredType<T>) {
-        return detail::copy(getScalar<T>(), opcua::getDataType<T>());
+        return detail::copy(scalar<T>(), opcua::getDataType<T>());
     } else {
         using Native = typename TypeConverter<T>::NativeType;
         T result{};
-        TypeConverter<T>::fromNative(getScalar<Native>(), result);
+        TypeConverter<T>::fromNative(scalar<Native>(), result);
         return result;
     }
 }

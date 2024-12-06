@@ -36,10 +36,10 @@ TEST_CASE("Session") {
 #if UAPP_OPEN62541_VER_LE(1, 3)
         // TODO: fails with v1.4: https://github.com/open62541/open62541/issues/6724
         CHECK_NOTHROW(session.setSessionAttribute(key, Variant::fromScalar(11.11)));
-        CHECK(session.getSessionAttribute(key).getScalar<double>() == 11.11);
+        CHECK(session.getSessionAttribute(key).scalar<double>() == 11.11);
 
         // retry with newly created session object
-        CHECK(server.sessions().at(0).getSessionAttribute(key).getScalar<double>() == 11.11);
+        CHECK(server.sessions().at(0).getSessionAttribute(key).scalar<double>() == 11.11);
 
         // delete session attribute
         CHECK_NOTHROW(session.deleteSessionAttribute(key));

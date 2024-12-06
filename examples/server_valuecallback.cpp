@@ -18,7 +18,7 @@ int main() {
     // set variable value callback to write current time before every read operation
     opcua::ValueCallback valueCallback;
     valueCallback.onBeforeRead = [&](const opcua::DataValue& dv) {
-        const auto timeOld = dv.value().getScalar<opcua::DateTime>();
+        const auto timeOld = dv.value().scalar<opcua::DateTime>();
         const auto timeNow = opcua::DateTime::now();
         std::cout << "Time before read: " << timeOld.format("%Y-%m-%d %H:%M:%S") << std::endl;
         std::cout << "Set current time: " << timeNow.format("%Y-%m-%d %H:%M:%S") << std::endl;

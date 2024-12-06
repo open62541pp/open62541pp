@@ -371,10 +371,10 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         const auto variant = Variant::fromScalar(value);
         if constexpr (isAsync<T>) {
             CHECK(await(varNode.writeValueAsync(variant)).isGood());
-            CHECK(await(varNode.readValueAsync()).value().template getScalar<double>() == value);
+            CHECK(await(varNode.readValueAsync()).value().template scalar<double>() == value);
         } else {
             CHECK_NOTHROW(varNode.writeValue(variant));
-            CHECK(varNode.readValue().template getScalar<double>() == value);
+            CHECK(varNode.readValue().template scalar<double>() == value);
         }
     }
 
@@ -539,9 +539,9 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
                 .setDataType<double>()
                 .setValueScalar(11.11)
         );
-        CHECK(objNode.readObjectProperty({1, "Property"}).template getScalar<double>() == 11.11);
+        CHECK(objNode.readObjectProperty({1, "Property"}).template scalar<double>() == 11.11);
         CHECK_NOTHROW(objNode.writeObjectProperty({1, "Property"}, Variant::fromScalar(22.22)));
-        CHECK(objNode.readObjectProperty({1, "Property"}).template getScalar<double>() == 22.22);
+        CHECK(objNode.readObjectProperty({1, "Property"}).template scalar<double>() == 22.22);
     }
 
     SUBCASE("Equality") {
