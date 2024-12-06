@@ -897,7 +897,7 @@ public:
     using TypeWrapper::TypeWrapper;  // inherit constructors
 
     /// Create Variant from a value (copy).
-    template <typename T, typename X = std::enable_if_t<!std::is_same_v<T, Variant>, void>>
+    template <typename T, typename = std::enable_if_t<!std::is_same_v<T, Variant>>>
     explicit Variant(T&& value) {
         setValueCopy(std::forward<T>(value));
     }
