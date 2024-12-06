@@ -1354,9 +1354,16 @@ public:
     /// Get copy of array with given template type and return it as a std::vector.
     /// @exception BadVariantAccess If the variant is not an array or not convertible to `T`.
     template <typename T>
-    std::vector<T> getArrayCopy() const {
+    std::vector<T> arrayCopy() const {
         assertIsRegisteredOrConvertible<T>();
         return getArrayCopyImpl<T>();
+    }
+
+    /// @deprecated Use arrayCopy() instead
+    template <typename T>
+    [[deprecated("use arrayCopy() instead")]]
+    std::vector<T> getArrayCopy() const {
+        return arrayCopy<T>();
     }
 
     /// Assign value to variant (no copy).

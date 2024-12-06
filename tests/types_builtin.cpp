@@ -489,7 +489,7 @@ TEST_CASE("Variant") {
         CHECK_THROWS(var.scalar<int>());
         CHECK_THROWS(var.scalarCopy<int>());
         CHECK_THROWS(var.array<int>());
-        CHECK_THROWS(var.getArrayCopy<int>());
+        CHECK_THROWS(var.arrayCopy<int>());
     }
 
     SUBCASE("Type checks") {
@@ -539,7 +539,7 @@ TEST_CASE("Variant") {
         CHECK(var.data() == array.data());
         CHECK(var.array<float>().data() == array.data());
         CHECK(std::as_const(var).array<float>().data() == array.data());
-        CHECK(var.getArrayCopy<float>() == array);
+        CHECK(var.arrayCopy<float>() == array);
     }
 
     SUBCASE("Set array of native strings") {
@@ -573,9 +573,9 @@ TEST_CASE("Variant") {
         CHECK(var.type() == &UA_TYPES[UA_TYPES_STRING]);
 
         CHECK_THROWS(var.scalarCopy<std::string>());
-        CHECK_THROWS(var.getArrayCopy<int32_t>());
-        CHECK_THROWS(var.getArrayCopy<bool>());
-        CHECK(var.getArrayCopy<std::string>() == value);
+        CHECK_THROWS(var.arrayCopy<int32_t>());
+        CHECK_THROWS(var.arrayCopy<bool>());
+        CHECK(var.arrayCopy<std::string>() == value);
     }
 
     SUBCASE("Set/get array (copy)") {
@@ -589,9 +589,9 @@ TEST_CASE("Variant") {
         CHECK(var.data() != array.data());
         CHECK(var.arrayLength() == array.size());
 
-        CHECK_THROWS(var.getArrayCopy<int32_t>());
-        CHECK_THROWS(var.getArrayCopy<bool>());
-        CHECK(var.getArrayCopy<float>() == array);
+        CHECK_THROWS(var.arrayCopy<int32_t>());
+        CHECK_THROWS(var.arrayCopy<bool>());
+        CHECK(var.arrayCopy<float>() == array);
     }
 
     SUBCASE("Set array from initializer list (copy)") {
@@ -619,7 +619,7 @@ TEST_CASE("Variant") {
 
         CHECK(var.arrayLength() == array.size());
         CHECK(var.isType<bool>());
-        CHECK(var.getArrayCopy<bool>() == array);
+        CHECK(var.arrayCopy<bool>() == array);
     }
 
     SUBCASE("Set/get non-builtin data types") {
@@ -724,7 +724,7 @@ TEST_CASE("Variant") {
             CHECK(var.data() == array.data());
             CHECK(var.array<float>().data() == array.data());
             CHECK(std::as_const(var).array<float>().data() == array.data());
-            CHECK(var.getArrayCopy<float>() == array);
+            CHECK(var.arrayCopy<float>() == array);
         }
 
         SUBCASE("Set array of native strings") {
@@ -758,9 +758,9 @@ TEST_CASE("Variant") {
             CHECK(var.type() == &UA_TYPES[UA_TYPES_STRING]);
 
             CHECK_THROWS(var.scalarCopy<std::string>());
-            CHECK_THROWS(var.getArrayCopy<int32_t>());
-            CHECK_THROWS(var.getArrayCopy<bool>());
-            CHECK(var.getArrayCopy<std::string>() == value);
+            CHECK_THROWS(var.arrayCopy<int32_t>());
+            CHECK_THROWS(var.arrayCopy<bool>());
+            CHECK(var.arrayCopy<std::string>() == value);
         }
 
         SUBCASE("Set/get array (copy)") {
@@ -774,9 +774,9 @@ TEST_CASE("Variant") {
             CHECK(var.data() != array.data());
             CHECK(var.arrayLength() == array.size());
 
-            CHECK_THROWS(var.getArrayCopy<int32_t>());
-            CHECK_THROWS(var.getArrayCopy<bool>());
-            CHECK(var.getArrayCopy<float>() == array);
+            CHECK_THROWS(var.arrayCopy<int32_t>());
+            CHECK_THROWS(var.arrayCopy<bool>());
+            CHECK(var.arrayCopy<float>() == array);
         }
 
         SUBCASE("Set array from initializer list (copy)") {
@@ -804,7 +804,7 @@ TEST_CASE("Variant") {
 
             CHECK(var.arrayLength() == array.size());
             CHECK(var.isType<bool>());
-            CHECK(var.getArrayCopy<bool>() == array);
+            CHECK(var.arrayCopy<bool>() == array);
         }
 
         SUBCASE("Set/get non-builtin data types") {
@@ -884,7 +884,7 @@ TEST_CASE("DataValue") {
 
     SUBCASE("Create from array") {
         std::vector<int> vec{1, 2, 3};
-        CHECK(DataValue::fromArray(vec).value().getArrayCopy<int>() == vec);
+        CHECK(DataValue::fromArray(vec).value().arrayCopy<int>() == vec);
     }
 
     SUBCASE("Empty") {

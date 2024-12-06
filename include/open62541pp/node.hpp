@@ -854,7 +854,7 @@ public:
     /// Read array value from variable node.
     template <typename T>
     std::vector<T> readValueArray() {
-        return readValue().template getArrayCopy<T>();
+        return readValue().template arrayCopy<T>();
     }
 
     /// @wrapper{services::readDataType}

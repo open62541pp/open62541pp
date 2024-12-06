@@ -161,7 +161,7 @@ struct AttributeHandler<AttributeId::ArrayDimensions> {
         return getVariant(std::move(dv)).transform([](Variant&& var) {
             assert(var.isType<uint32_t>());
             assert(var.isArray());
-            return std::move(var).getArrayCopy<uint32_t>();
+            return std::move(var).arrayCopy<uint32_t>();
         });
     }
 
