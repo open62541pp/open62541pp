@@ -45,8 +45,12 @@ TEST_CASE("Create certificate") {
 }
 
 TEST_CASE("Encrypted connection server/client") {
-    const std::string serverApplicationUri = "urn:open62541.server.application";  // default
-    const std::string clientApplicationUri = "urn:unconfigured:application";  // default
+    const std::string serverApplicationUri = "urn:localhost:server";
+    const std::string clientApplicationUri = "urn:localhost:client";
+
+    const auto setClientApplicationUri = [](ClientConfig& config, std::string_view applicationUri) {
+        asWrapper<String>(config->clientDescription.applicationUri) = String(applicationUri);
+    };
 
     // create server certificate
     const auto certServer = createCertificate(
@@ -76,10 +80,12 @@ TEST_CASE("Encrypted connection server/client") {
 
     SUBCASE("Connect without trusting each others certificate") {
         ServerConfig serverConfig(4840, certServer.certificate, certServer.privateKey, {}, {}, {});
+        serverConfig.setApplicationUri(serverApplicationUri);
         Server server(std::move(serverConfig));
 
         ClientConfig clientConfig(certClient.certificate, certClient.privateKey, {}, {});
         clientConfig.setSecurityMode(MessageSecurityMode::SignAndEncrypt);
+        setClientApplicationUri(clientConfig, clientApplicationUri);
         Client client(std::move(clientConfig));
 
         {
@@ -92,12 +98,14 @@ TEST_CASE("Encrypted connection server/client") {
         ServerConfig serverConfig(
             4840, certServer.certificate, certServer.privateKey, {certClient.certificate}, {}, {}
         );
+        serverConfig.setApplicationUri(serverApplicationUri);
         Server server(std::move(serverConfig));
 
         ClientConfig clientConfig(
             certClient.certificate, certClient.privateKey, {certServer.certificate}, {}
         );
         clientConfig.setSecurityMode(MessageSecurityMode::SignAndEncrypt);
+        setClientApplicationUri(clientConfig, clientApplicationUri);
         Client client(std::move(clientConfig));
 
         {
