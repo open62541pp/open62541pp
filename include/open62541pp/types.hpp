@@ -1245,7 +1245,7 @@ public:
         return *static_cast<T*>(handle()->data);
     }
 
-    /// @copydoc getScalar()&
+    /// @copydoc scalar()&
     template <typename T>
     const T& scalar() const& {
         assertIsRegistered<T>();
@@ -1254,13 +1254,13 @@ public:
         return *static_cast<const T*>(handle()->data);
     }
 
-    /// @copydoc getScalar()&
+    /// @copydoc scalar()&
     template <typename T>
     T&& scalar() && {
         return std::move(scalar<T>());
     }
 
-    /// @copydoc getScalar()&
+    /// @copydoc scalar()&
     template <typename T>
     const T&& scalar() const&& {
         return std::move(scalar<T>());
