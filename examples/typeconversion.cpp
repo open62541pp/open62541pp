@@ -40,11 +40,11 @@ int main() {
     variant.setScalarCopy(std::byte{11});
 
     // Read std::byte from variant (conversion requires copy)
-    const auto value = variant.getScalarCopy<std::byte>();
+    const auto value = variant.scalarCopy<std::byte>();
     std::cout << "Byte value: " << std::to_integer<int>(value) << std::endl;
 
     // Read UA_Byte from variant (zero copy possible)
-    const auto& valueNative = variant.getScalar<UA_Byte>();
+    const auto& valueNative = variant.scalar<UA_Byte>();
     std::cout << "Byte value: " << static_cast<int>(valueNative) << std::endl;
 
     // Write array of bytes to variant
@@ -53,5 +53,5 @@ int main() {
     variant.setArrayCopy(opcua::Span{array.data(), array.size()});  // use raw array and size
     variant.setArrayCopy(array.begin(), array.end());  // use iterator pair
 
-    std::cout << "Array size: " << variant.getArrayLength() << std::endl;
+    std::cout << "Array size: " << variant.arrayLength() << std::endl;
 }

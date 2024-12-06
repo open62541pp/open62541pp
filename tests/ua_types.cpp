@@ -277,7 +277,7 @@ TEST_CASE("WriteValue") {
     CHECK(wv.nodeId() == NodeId(1, 1000));
     CHECK(wv.attributeId() == AttributeId::Value);
     CHECK(wv.indexRange().empty());
-    CHECK(wv.value().value().getScalar<double>() == 11.11);
+    CHECK(wv.value().value().scalar<double>() == 11.11);
 }
 
 TEST_CASE("WriteRequest") {
@@ -291,7 +291,7 @@ TEST_CASE("WriteRequest") {
     CHECK(request.nodesToWrite().size() == 1);
     CHECK(request.nodesToWrite()[0].nodeId() == NodeId(1, 1000));
     CHECK(request.nodesToWrite()[0].attributeId() == AttributeId::Value);
-    CHECK(request.nodesToWrite()[0].value().value().getScalar<double>() == 11.11);
+    CHECK(request.nodesToWrite()[0].value().value().scalar<double>() == 11.11);
 }
 
 TEST_CASE("WriteResponse") {
@@ -351,8 +351,8 @@ TEST_CASE("ElementOperand") {
 }
 
 TEST_CASE("LiteralOperand") {
-    CHECK(LiteralOperand(Variant::fromScalar(11)).value().getScalar<int>() == 11);
-    CHECK(LiteralOperand(11).value().getScalar<int>() == 11);
+    CHECK(LiteralOperand(Variant::fromScalar(11)).value().scalar<int>() == 11);
+    CHECK(LiteralOperand(11).value().scalar<int>() == 11);
 }
 
 TEST_CASE("AttributeOperand") {

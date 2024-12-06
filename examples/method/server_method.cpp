@@ -13,7 +13,7 @@ int main() {
         {1, 1000},
         "Greet",
         [](opcua::Span<const opcua::Variant> input, opcua::Span<opcua::Variant> output) {
-            const auto& name = input[0].getScalar<opcua::String>();
+            const auto& name = input[0].scalar<opcua::String>();
             const auto greeting = std::string("Hello ").append(name);
             output[0].setScalarCopy(greeting);
         },
@@ -27,8 +27,8 @@ int main() {
         {1, 1001},
         "IncInt32ArrayValues",
         [](opcua::Span<const opcua::Variant> input, opcua::Span<opcua::Variant> output) {
-            auto array = input[0].getArrayCopy<int32_t>();
-            const auto delta = input[1].getScalarCopy<int32_t>();
+            auto array = input[0].arrayCopy<int32_t>();
+            const auto delta = input[1].scalarCopy<int32_t>();
             std::for_each(array.begin(), array.end(), [&](auto& v) { v += delta; });
             output[0].setArrayCopy(array);
         },

@@ -34,7 +34,7 @@ public:
     }
 
     Bitmask<AccessLevel> getUserAccessLevel(Session& session, const NodeId& nodeId) override {
-        const bool isAdmin = session.getSessionAttribute({0, "isAdmin"}).getScalar<bool>();
+        const bool isAdmin = session.getSessionAttribute({0, "isAdmin"}).scalar<bool>();
         std::cout << "Get user access level of node id " << nodeId.toString() << std::endl;
         std::cout << "Admin rights granted: " << isAdmin << std::endl;
         return isAdmin

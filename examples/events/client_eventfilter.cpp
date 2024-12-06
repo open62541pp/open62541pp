@@ -57,9 +57,9 @@ int main() {
                 << "- node id:           " << item.nodeId().toString() << "\n"
                 << "- attribute id:      " << static_cast<int>(item.attributeId()) << "\n";
 
-            const auto& time = eventFields[0].getScalar<opcua::DateTime>();
-            const auto& severity = eventFields[1].getScalar<uint16_t>();
-            const auto& message = eventFields[2].getScalar<opcua::LocalizedText>();
+            const auto& time = eventFields[0].scalar<opcua::DateTime>();
+            const auto& severity = eventFields[1].scalar<uint16_t>();
+            const auto& message = eventFields[2].scalar<opcua::LocalizedText>();
 
             std::cout << "Time:     " << time.format("%Y-%m-%d %H:%M:%S") << "\n";
             std::cout << "Severity: " << severity << "\n";

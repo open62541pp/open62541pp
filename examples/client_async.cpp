@@ -20,7 +20,7 @@ int main() {
             opcua::VariableId::Server_ServerStatus_CurrentTime,
             [](opcua::Result<opcua::Variant>& result) {
                 std::cout << "Read result with status code: " << result.code() << std::endl;
-                const auto dt = result.value().getScalar<opcua::DateTime>();
+                const auto dt = result.value().scalar<opcua::DateTime>();
                 std::cout << "Server date (UTC): " << dt.format("%Y-%m-%d %H:%M:%S") << std::endl;
             }
         );

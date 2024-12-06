@@ -323,7 +323,7 @@ std::vector<Session> Server::sessions() {
 std::vector<std::string> Server::namespaceArray() {
     return services::readValue(*this, {0, UA_NS0ID_SERVER_NAMESPACEARRAY})
         .value()
-        .getArrayCopy<std::string>();
+        .arrayCopy<std::string>();
 }
 
 NamespaceIndex Server::registerNamespace(std::string_view uri) {

@@ -54,7 +54,7 @@ struct AttributeHandlerScalar {
         return getVariant(std::move(dv)).transform([](Variant&& var) {
             assert(var.isType<T>());
             assert(var.isScalar());
-            return std::move(var).getScalar<T>();
+            return std::move(var).scalar<T>();
         });
     }
 
@@ -161,7 +161,7 @@ struct AttributeHandler<AttributeId::ArrayDimensions> {
         return getVariant(std::move(dv)).transform([](Variant&& var) {
             assert(var.isType<uint32_t>());
             assert(var.isArray());
-            return std::move(var).getArrayCopy<uint32_t>();
+            return std::move(var).arrayCopy<uint32_t>();
         });
     }
 
