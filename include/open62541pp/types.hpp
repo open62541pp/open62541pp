@@ -1283,9 +1283,16 @@ public:
     /// Get copy of scalar value with given template type.
     /// @exception BadVariantAccess If the variant is not a scalar or not convertible to `T`.
     template <typename T>
-    T getScalarCopy() const {
+    T scalarCopy() const {
         assertIsRegisteredOrConvertible<T>();
         return getScalarCopyImpl<T>();
+    }
+
+    /// @deprecated Use scalarCopy() instead
+    template <typename T>
+    [[deprecated("use scalarCopy() instead")]]
+    T getScalarCopy() const {
+        return scalarCopy<T>();
     }
 
     /// Get array length or 0 if variant is not an array.

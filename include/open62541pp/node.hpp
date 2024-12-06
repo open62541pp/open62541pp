@@ -848,7 +848,7 @@ public:
     /// Read scalar value from variable node.
     template <typename T>
     T readValueScalar() {
-        return readValue().template getScalarCopy<T>();
+        return readValue().template scalarCopy<T>();
     }
 
     /// Read array value from variable node.

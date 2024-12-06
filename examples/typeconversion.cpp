@@ -40,7 +40,7 @@ int main() {
     variant.setScalarCopy(std::byte{11});
 
     // Read std::byte from variant (conversion requires copy)
-    const auto value = variant.getScalarCopy<std::byte>();
+    const auto value = variant.scalarCopy<std::byte>();
     std::cout << "Byte value: " << std::to_integer<int>(value) << std::endl;
 
     // Read UA_Byte from variant (zero copy possible)

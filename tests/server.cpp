@@ -213,7 +213,7 @@ TEST_CASE("DataSource") {
         return UA_STATUSCODE_GOOD;
     };
     dataSource.write = [&](const DataValue& dv, const NumericRange&) {
-        data = dv.value().getScalarCopy<int>();
+        data = dv.value().scalarCopy<int>();
         return UA_STATUSCODE_GOOD;
     };
 

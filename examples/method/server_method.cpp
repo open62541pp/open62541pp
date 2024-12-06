@@ -28,7 +28,7 @@ int main() {
         "IncInt32ArrayValues",
         [](opcua::Span<const opcua::Variant> input, opcua::Span<opcua::Variant> output) {
             auto array = input[0].getArrayCopy<int32_t>();
-            const auto delta = input[1].getScalarCopy<int32_t>();
+            const auto delta = input[1].scalarCopy<int32_t>();
             std::for_each(array.begin(), array.end(), [&](auto& v) { v += delta; });
             output[0].setArrayCopy(array);
         },
