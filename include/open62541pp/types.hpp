@@ -1055,7 +1055,7 @@ public:
     /// @exception BadVariantAccess If the variant is not a scalar or not of type `T`.
     template <typename T>
     T& getScalar() & {
-        assertIsNative<T>();
+        assertIsRegistered<T>();
         checkIsScalar();
         checkIsDataType<T>();
         return *static_cast<T*>(handle()->data);
@@ -1064,7 +1064,7 @@ public:
     /// @copydoc getScalar()&
     template <typename T>
     const T& getScalar() const& {
-        assertIsNative<T>();
+        assertIsRegistered<T>();
         checkIsScalar();
         checkIsDataType<T>();
         return *static_cast<const T*>(handle()->data);
@@ -1104,7 +1104,7 @@ public:
     /// @exception BadVariantAccess If the variant is not an array or not of type `T`.
     template <typename T>
     Span<T> getArray() {
-        assertIsNative<T>();
+        assertIsRegistered<T>();
         checkIsArray();
         checkIsDataType<T>();
         return Span<T>(static_cast<T*>(handle()->data), handle()->arrayLength);
@@ -1114,7 +1114,7 @@ public:
     /// @exception BadVariantAccess If the variant is not an array or not of type `T`.
     template <typename T>
     Span<const T> getArray() const {
-        assertIsNative<T>();
+        assertIsRegistered<T>();
         checkIsArray();
         checkIsDataType<T>();
         return Span<const T>(static_cast<const T*>(handle()->data), handle()->arrayLength);
@@ -1167,7 +1167,7 @@ public:
     /// Assign scalar value to variant (no copy).
     template <typename T>
     void setScalar(T& value) noexcept {
-        assertIsNative<T>();
+        assertIsRegistered<T>();
         setScalar(value, opcua::getDataType<T>());
     }
 
@@ -1203,7 +1203,7 @@ public:
     template <typename ArrayLike>
     void setArray(ArrayLike&& array) noexcept {
         using ValueType = typename std::remove_reference_t<ArrayLike>::value_type;
-        assertIsNative<ValueType>();
+        assertIsRegistered<ValueType>();
         setArray(std::forward<ArrayLike>(array), opcua::getDataType<ValueType>());
     }
 
@@ -1274,7 +1274,7 @@ private:
     }
 
     template <typename T>
-    static constexpr void assertIsNative() {
+    static constexpr void assertIsRegistered() {
         static_assert(
             detail::isRegisteredType<T>,
             "Template type must be a native/wrapper type to assign or get scalar/array without copy"
@@ -1285,10 +1285,9 @@ private:
     static constexpr void assertIsRegisteredOrConvertible() {
         static_assert(
             detail::isRegisteredOrConvertible<T>,
-            "Template type must be either a native/wrapper type (copyable) or a convertible "
-            "type. "
-            "If the type is a native type: Provide the data type (UA_DataType) manually "
-            "or register the type with a TypeRegistry template specialization. "
+            "Template type must be either a native/wrapper type (copyable) or a convertible type. "
+            "If the type is a native type: Provide the data type (UA_DataType) manually or "
+            "register the type with a TypeRegistry template specialization. "
             "If the type should be converted: Add a template specialization for TypeConverter."
         );
     }
