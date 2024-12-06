@@ -53,5 +53,5 @@ int main() {
     variant.setArrayCopy(opcua::Span{array.data(), array.size()});  // use raw array and size
     variant.setArrayCopy(array.begin(), array.end());  // use iterator pair
 
-    std::cout << "Array size: " << variant.getArrayLength() << std::endl;
+    std::cout << "Array size: " << variant.arrayLength() << std::endl;
 }

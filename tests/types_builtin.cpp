@@ -484,7 +484,7 @@ TEST_CASE("Variant") {
         CHECK(var.type() == nullptr);
         CHECK(var.data() == nullptr);
         CHECK(std::as_const(var).data() == nullptr);
-        CHECK(var.getArrayLength() == 0);
+        CHECK(var.arrayLength() == 0);
         CHECK(var.getArrayDimensions().empty());
         CHECK_THROWS(var.getScalar<int>());
         CHECK_THROWS(var.getScalarCopy<int>());
@@ -551,7 +551,7 @@ TEST_CASE("Variant") {
         };
         var.setArray(Span{array.data(), array.size()}, UA_TYPES[UA_TYPES_STRING]);
         CHECK(var.data() == array.data());
-        CHECK(var.getArrayLength() == array.size());
+        CHECK(var.arrayLength() == array.size());
     }
 
     SUBCASE("Set array of string wrapper") {
@@ -559,7 +559,7 @@ TEST_CASE("Variant") {
         std::vector<String> array{String{"item1"}, String{"item2"}, String{"item3"}};
         var.setArray(array);
         CHECK(var.data() == array.data());
-        CHECK(var.getArrayLength() == array.size());
+        CHECK(var.arrayLength() == array.size());
         CHECK(var.getArray<String>().data() == array.data());
     }
 
@@ -587,7 +587,7 @@ TEST_CASE("Variant") {
         CHECK(var.isType(NodeId{0, UA_NS0ID_FLOAT}));
         CHECK(var.type() == &UA_TYPES[UA_TYPES_FLOAT]);
         CHECK(var.data() != array.data());
-        CHECK(var.getArrayLength() == array.size());
+        CHECK(var.arrayLength() == array.size());
 
         CHECK_THROWS(var.getArrayCopy<int32_t>());
         CHECK_THROWS(var.getArrayCopy<bool>());
@@ -617,7 +617,7 @@ TEST_CASE("Variant") {
             var.setArrayCopy(array);
         }
 
-        CHECK(var.getArrayLength() == array.size());
+        CHECK(var.arrayLength() == array.size());
         CHECK(var.isType<bool>());
         CHECK(var.getArrayCopy<bool>() == array);
     }
@@ -653,7 +653,7 @@ TEST_CASE("Variant") {
             CHECK(var.isArray());
             CHECK(var.type() == &dt);
             CHECK(var.data() == array.data());
-            CHECK(var.getArrayLength() == 3);
+            CHECK(var.arrayLength() == 3);
             CHECK(var.getArray<CustomType>().data() == array.data());
         }
 
@@ -662,7 +662,7 @@ TEST_CASE("Variant") {
             CHECK(var.isArray());
             CHECK(var.type() == &dt);
             CHECK(var.data() != array.data());
-            CHECK(var.getArrayLength() == 3);
+            CHECK(var.arrayLength() == 3);
             CHECK(var.getArray<CustomType>().data() != array.data());
         }
     }
@@ -736,7 +736,7 @@ TEST_CASE("Variant") {
             };
             var.setValue(Span{array.data(), array.size()}, UA_TYPES[UA_TYPES_STRING]);
             CHECK(var.data() == array.data());
-            CHECK(var.getArrayLength() == array.size());
+            CHECK(var.arrayLength() == array.size());
         }
 
         SUBCASE("Set array of string wrapper") {
@@ -744,7 +744,7 @@ TEST_CASE("Variant") {
             std::vector<String> array{String{"item1"}, String{"item2"}, String{"item3"}};
             var.setValue(array);
             CHECK(var.data() == array.data());
-            CHECK(var.getArrayLength() == array.size());
+            CHECK(var.arrayLength() == array.size());
             CHECK(var.getArray<String>().data() == array.data());
         }
 
@@ -772,7 +772,7 @@ TEST_CASE("Variant") {
             CHECK(var.isType(NodeId{0, UA_NS0ID_FLOAT}));
             CHECK(var.type() == &UA_TYPES[UA_TYPES_FLOAT]);
             CHECK(var.data() != array.data());
-            CHECK(var.getArrayLength() == array.size());
+            CHECK(var.arrayLength() == array.size());
 
             CHECK_THROWS(var.getArrayCopy<int32_t>());
             CHECK_THROWS(var.getArrayCopy<bool>());
@@ -802,7 +802,7 @@ TEST_CASE("Variant") {
                 var.setValueCopy(array);
             }
 
-            CHECK(var.getArrayLength() == array.size());
+            CHECK(var.arrayLength() == array.size());
             CHECK(var.isType<bool>());
             CHECK(var.getArrayCopy<bool>() == array);
         }
@@ -838,7 +838,7 @@ TEST_CASE("Variant") {
                 CHECK(var.isArray());
                 CHECK(var.type() == &dt);
                 CHECK(var.data() == array.data());
-                CHECK(var.getArrayLength() == 3);
+                CHECK(var.arrayLength() == 3);
                 CHECK(var.getArray<CustomType>().data() == array.data());
             }
 
@@ -847,7 +847,7 @@ TEST_CASE("Variant") {
                 CHECK(var.isArray());
                 CHECK(var.type() == &dt);
                 CHECK(var.data() != array.data());
-                CHECK(var.getArrayLength() == 3);
+                CHECK(var.arrayLength() == 3);
                 CHECK(var.getArray<CustomType>().data() != array.data());
             }
         }

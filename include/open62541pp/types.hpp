@@ -1275,8 +1275,14 @@ public:
     }
 
     /// Get array length or 0 if variant is not an array.
-    size_t getArrayLength() const noexcept {
+    size_t arrayLength() const noexcept {
         return handle()->arrayLength;
+    }
+
+    /// @deprecated Use arrayLength() instead
+    [[deprecated("use arrayLength() instead")]]
+    size_t getArrayLength() const noexcept {
+        return arrayLength();
     }
 
     /// Get array dimensions.
