@@ -1447,7 +1447,6 @@ void Variant::setArrayCopyConvertImpl(InputIt first, InputIt last) {
 template <typename T, typename... Args>
 void Variant::setValueImpl(T&& value, Args&&... args) {
     using Decayed = std::decay_t<T>;
-
     if constexpr (detail::isContainer<Decayed> && !detail::isRegisteredOrConvertible<Decayed>) {
         setArray(Span{std::forward<T>(value)}, std::forward<Args>(args)...);
     } else {
@@ -1458,13 +1457,8 @@ void Variant::setValueImpl(T&& value, Args&&... args) {
 template <typename T, typename... Args>
 void Variant::setValueCopyImpl(T&& value, Args&&... args) {
     using Decayed = std::decay_t<T>;
-
     if constexpr (detail::isContainer<Decayed> && !detail::isRegisteredOrConvertible<Decayed>) {
-        if constexpr (detail::IsContiguousContainer<Decayed>::value) {
-            setArrayCopy(Span{std::forward<T>(value)}, std::forward<Args>(args)...);
-        } else {
-            setArrayCopy(value.begin(), value.end(), std::forward<Args>(args)...);
-        }
+        setArrayCopy(value.begin(), value.end(), std::forward<Args>(args)...);
     } else {
         setScalarCopy(std::forward<T>(value), std::forward<Args>(args)...);
     }
