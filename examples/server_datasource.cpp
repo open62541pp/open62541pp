@@ -36,7 +36,7 @@ int main() {
         return UA_STATUSCODE_GOOD;
     };
     dataSource.write = [&](const opcua::DataValue& dv, const opcua::NumericRange&) {
-        counter = dv.value().scalarCopy<int>();
+        counter = dv.value().scalar<int>();
         std::cout << "Write counter to data source: " << counter << "\n";
         return UA_STATUSCODE_GOOD;
     };

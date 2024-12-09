@@ -848,13 +848,13 @@ public:
     /// Read scalar value from variable node.
     template <typename T>
     T readValueScalar() {
-        return readValue().template scalarCopy<T>();
+        return readValue().template to<T>();
     }
 
     /// Read array value from variable node.
     template <typename T>
     std::vector<T> readValueArray() {
-        return readValue().template arrayCopy<T>();
+        return readValue().template to<std::vector<T>>();
     }
 
     /// @wrapper{services::readDataType}

@@ -39,13 +39,13 @@ int main() {
     // Write std::byte to variant
     variant.setScalarCopy(std::byte{11});
 
-    // Read std::byte from variant (conversion requires copy)
-    const auto value = variant.scalarCopy<std::byte>();
-    std::cout << "Byte value: " << std::to_integer<int>(value) << std::endl;
-
-    // Read UA_Byte from variant (zero copy possible)
+    // Read UA_Byte from variant (reference possible)
     const auto& valueNative = variant.scalar<UA_Byte>();
     std::cout << "Byte value: " << static_cast<int>(valueNative) << std::endl;
+
+    // Read std::byte from variant (copy and conversion required)
+    const auto value = variant.to<std::byte>();
+    std::cout << "Byte value: " << std::to_integer<int>(value) << std::endl;
 
     // Write array of bytes to variant
     std::array<std::byte, 3> array{};

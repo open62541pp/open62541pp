@@ -19,6 +19,7 @@
 #include <vector>
 
 #include "open62541pp/common.hpp"  // NamespaceIndex
+#include "open62541pp/detail/iterator.hpp"  // TransformIterator
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/detail/string_utils.hpp"  // allocNativeString
 #include "open62541pp/detail/traits.hpp"
@@ -1225,7 +1226,7 @@ public:
 
     /// Get pointer to the underlying data.
     /// Check the properties and data type before casting it to the actual type.
-    /// Use the methods @ref isScalar, @ref isArray, @ref isType / @ref getDataType.
+    /// Use the methods @ref isScalar, @ref isArray, @ref isType / @ref type.
     void* data() noexcept {
         return handle()->data;
     }
@@ -1280,19 +1281,11 @@ public:
         return scalar<T>();
     }
 
-    /// Get copy of scalar value with given template type.
-    /// @exception BadVariantAccess If the variant is not a scalar or not convertible to `T`.
+    /// @deprecated Use to<T>() instead
     template <typename T>
-    T scalarCopy() const {
-        assertIsRegisteredOrConvertible<T>();
-        return getScalarCopyImpl<T>();
-    }
-
-    /// @deprecated Use scalarCopy() instead
-    template <typename T>
-    [[deprecated("use scalarCopy() instead")]]
+    [[deprecated("use to<T>() instead")]]
     T getScalarCopy() const {
-        return scalarCopy<T>();
+        return to<T>();
     }
 
     /// Get array length or 0 if variant is not an array.
@@ -1317,7 +1310,7 @@ public:
         return arrayDimensions();
     }
 
-    /// Get array with given template type (only native or wrapper types).
+    /// Get reference to array with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not an array or not of type `T`.
     template <typename T>
     Span<T> array() {
@@ -1327,7 +1320,7 @@ public:
         return Span<T>(static_cast<T*>(handle()->data), handle()->arrayLength);
     }
 
-    /// Get array with given template type (only native or wrapper types).
+    /// Get reference to array with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not an array or not of type `T`.
     template <typename T>
     Span<const T> array() const {
@@ -1351,20 +1344,47 @@ public:
         return array<T>();
     }
 
-    /// Get copy of array with given template type and return it as a std::vector.
-    /// @exception BadVariantAccess If the variant is not an array or not convertible to `T`.
+    /// @deprecated Use to<std::vector<T>>() instead
     template <typename T>
-    std::vector<T> arrayCopy() const {
-        assertIsRegisteredOrConvertible<T>();
-        return getArrayCopyImpl<T>();
+    [[deprecated("use to<std::vector<T>>() instead")]]
+    std::vector<T> getArrayCopy() const {
+        return to<std::vector<T>>();
     }
 
-    /// @deprecated Use arrayCopy() instead
+    /**
+     * Get value with given template type, with conversion if needed.
+     *
+     * The type category (scalar or array) is determined based on the characteristics of `T`:
+     * - **Scalar**, if `T` is:
+     *   - A registered type (specialized in `TypeRegistry`). This applies to native/wrapper types.
+     *   - A type convertible from the stored value (specialized in `TypeConverter`).
+     *
+     *   @code
+     *   opcua::Variant var(11);
+     *   const auto value = var.to<int>();
+     *   @endcode
+     *
+     * - **Array**, if `T` is a container type (e.g. `std::vector` or `std::list`) and does not
+     *   satisfy the criterias of a scalar type.
+     *   The container must be constructible from an iterator pair.
+     *
+     *   @code
+     *   std::array<std::string, 3> array{"One", "Two", "Three"};
+     *   opcua::Variant var(array);
+     *   const auto vec = var.to<std::vector<std::string>>();
+     *   const auto lst = var.to<std::list<opcua::String>>();
+     *   @endcode
+     *
+     * @exception BadVariantAccess If the variant is not convertible to `T`.
+     */
     template <typename T>
-    [[deprecated("use arrayCopy() instead")]]
-    std::vector<T> getArrayCopy() const {
-        return arrayCopy<T>();
-    }
+    [[nodiscard]] T to() const {
+        if constexpr (isArrayType<T>()) {
+            return toArrayImpl<T>();
+        } else {
+            return toScalarImpl<T>();
+        }
+    };
 
     /// Assign value to variant (no copy).
     template <typename T>
@@ -1504,6 +1524,16 @@ public:
     }
 
 private:
+    template <typename T>
+    static constexpr bool isScalarType() noexcept {
+        return detail::isRegisteredType<T> || detail::isConvertibleType<T>;
+    }
+
+    template <typename T>
+    static constexpr bool isArrayType() noexcept {
+        return detail::isContainer<T> && !isScalarType<T>();
+    }
+
     template <typename ArrayLike>
     static constexpr bool isTemporaryArray() {
         constexpr bool isTemporary = std::is_rvalue_reference_v<ArrayLike>;
@@ -1559,9 +1589,9 @@ private:
     }
 
     template <typename T>
-    inline T getScalarCopyImpl() const;
+    T toScalarImpl() const;
     template <typename T>
-    inline std::vector<T> getArrayCopyImpl() const;
+    T toArrayImpl() const;
 
     template <typename T>
     inline void setScalarImpl(
@@ -1587,33 +1617,38 @@ private:
 };
 
 template <typename T>
-T Variant::getScalarCopyImpl() const {
+T Variant::toScalarImpl() const {
+    assertIsRegisteredOrConvertible<T>();
     if constexpr (detail::isRegisteredType<T>) {
-        return detail::copy(scalar<T>(), opcua::getDataType<T>());
+        return scalar<T>();
     } else {
-        using Native = typename TypeConverter<T>::NativeType;
+        using NativeType = typename TypeConverter<T>::NativeType;
         T result{};
-        TypeConverter<T>::fromNative(scalar<Native>(), result);
+        TypeConverter<T>::fromNative(scalar<NativeType>(), result);
         return result;
     }
 }
 
 template <typename T>
-std::vector<T> Variant::getArrayCopyImpl() const {
-    std::vector<T> result(handle()->arrayLength);
-    if constexpr (detail::isRegisteredType<T>) {
-        auto native = array<T>();
-        std::transform(native.begin(), native.end(), result.begin(), [](auto&& value) {
-            return detail::copy(value, opcua::getDataType<T>());
-        });
+T Variant::toArrayImpl() const {
+    using ValueType = typename T::value_type;
+    assertIsRegisteredOrConvertible<ValueType>();
+    if constexpr (detail::isRegisteredType<ValueType>) {
+        auto native = array<ValueType>();
+        return T(native.begin(), native.end());
     } else {
-        using Native = typename TypeConverter<T>::NativeType;
-        auto native = array<Native>();
-        for (size_t i = 0; i < native.size(); ++i) {
-            TypeConverter<T>::fromNative(native[i], result[i]);
-        }
+        using NativeType = typename TypeConverter<ValueType>::NativeType;
+        const auto transform = [](const NativeType& native) {
+            ValueType result{};
+            TypeConverter<ValueType>::fromNative(native, result);
+            return result;
+        };
+        auto native = array<NativeType>();
+        return T(
+            detail::TransformIterator(native.begin(), transform),
+            detail::TransformIterator(native.end(), transform)
+        );
     }
-    return result;
 }
 
 template <typename T>
@@ -1683,9 +1718,8 @@ void Variant::setArrayCopyConvertImpl(InputIt first, InputIt last) {
 
 template <typename T, typename... Args>
 void Variant::setValueImpl(T&& value, Args&&... args) {
-    using Decayed = std::decay_t<T>;
-    if constexpr (detail::isContainer<Decayed> && !detail::isRegisteredOrConvertible<Decayed>) {
-        setArray(Span{std::forward<T>(value)}, std::forward<Args>(args)...);
+    if constexpr (isArrayType<std::decay_t<T>>()) {
+        setArray(std::forward<T>(value), std::forward<Args>(args)...);
     } else {
         setScalar(std::forward<T>(value), std::forward<Args>(args)...);
     }
@@ -1693,8 +1727,7 @@ void Variant::setValueImpl(T&& value, Args&&... args) {
 
 template <typename T, typename... Args>
 void Variant::setValueCopyImpl(T&& value, Args&&... args) {
-    using Decayed = std::decay_t<T>;
-    if constexpr (detail::isContainer<Decayed> && !detail::isRegisteredOrConvertible<Decayed>) {
+    if constexpr (isArrayType<std::decay_t<T>>()) {
         setArrayCopy(value.begin(), value.end(), std::forward<Args>(args)...);
     } else {
         setScalarCopy(std::forward<T>(value), std::forward<Args>(args)...);
