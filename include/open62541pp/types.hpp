@@ -1381,7 +1381,7 @@ public:
         } else {
             return toScalarImpl<T>();
         }
-    };
+    }
 
     /// Assign value to variant (no copy).
     template <typename T>
