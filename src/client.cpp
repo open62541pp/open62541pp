@@ -452,7 +452,7 @@ bool Client::isConnected() noexcept {
 std::vector<std::string> Client::namespaceArray() {
     return services::readValue(*this, {0, UA_NS0ID_SERVER_NAMESPACEARRAY})
         .value()
-        .arrayCopy<std::string>();
+        .to<std::vector<std::string>>();
 }
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS

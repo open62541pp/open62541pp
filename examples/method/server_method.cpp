@@ -27,10 +27,13 @@ int main() {
         {1, 1001},
         "IncInt32ArrayValues",
         [](opcua::Span<const opcua::Variant> input, opcua::Span<opcua::Variant> output) {
-            auto array = input[0].arrayCopy<int32_t>();
-            const auto delta = input[1].scalarCopy<int32_t>();
-            std::for_each(array.begin(), array.end(), [&](auto& v) { v += delta; });
-            output[0].setArrayCopy(array);
+            auto values = input[0].array<int32_t>();
+            const auto delta = input[1].scalar<int32_t>();
+            std::vector<int32_t> incremented(values.size());
+            std::transform(values.begin(), values.end(), incremented.begin(), [&](auto& v) {
+                return v + delta;
+            });
+            output[0].setArrayCopy(incremented);
         },
         {
             opcua::Argument(
