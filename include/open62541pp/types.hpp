@@ -1221,6 +1221,28 @@ public:
         return type();
     }
 
+    /// Get array length or 0 if variant is not an array.
+    size_t arrayLength() const noexcept {
+        return handle()->arrayLength;
+    }
+
+    /// @deprecated Use arrayLength() instead
+    [[deprecated("use arrayLength() instead")]]
+    size_t getArrayLength() const noexcept {
+        return arrayLength();
+    }
+
+    /// Get array dimensions.
+    Span<const uint32_t> arrayDimensions() const noexcept {
+        return {handle()->arrayDimensions, handle()->arrayDimensionsSize};
+    }
+
+    /// @deprecated Use arrayDimensions() instead
+    [[deprecated("use arrayDimensions() instead")]]
+    Span<const uint32_t> getArrayDimensions() const noexcept {
+        return arrayDimensions();
+    }
+
     /// Get pointer to the underlying data.
     /// Check the properties and data type before casting it to the actual type.
     /// Use the methods @ref isScalar, @ref isArray, @ref isType / @ref type.
@@ -1283,28 +1305,6 @@ public:
     [[deprecated("use to<T>() instead")]]
     T getScalarCopy() const {
         return to<T>();
-    }
-
-    /// Get array length or 0 if variant is not an array.
-    size_t arrayLength() const noexcept {
-        return handle()->arrayLength;
-    }
-
-    /// @deprecated Use arrayLength() instead
-    [[deprecated("use arrayLength() instead")]]
-    size_t getArrayLength() const noexcept {
-        return arrayLength();
-    }
-
-    /// Get array dimensions.
-    Span<const uint32_t> arrayDimensions() const noexcept {
-        return {handle()->arrayDimensions, handle()->arrayDimensionsSize};
-    }
-
-    /// @deprecated Use arrayDimensions() instead
-    [[deprecated("use arrayDimensions() instead")]]
-    Span<const uint32_t> getArrayDimensions() const noexcept {
-        return arrayDimensions();
     }
 
     /// Get reference to array with given template type (only native or wrapper types).
