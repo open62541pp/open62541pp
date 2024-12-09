@@ -310,13 +310,13 @@ std::ostream& operator<<(std::ostream& os, const String& str);
 template <>
 struct TypeConverter<std::string_view> {
     using ValueType = std::string_view;
-    using Native = String;
+    using NativeType = String;
 
-    static void fromNative(const Native& src, std::string_view& dst) {
+    static void fromNative(const NativeType& src, std::string_view& dst) {
         dst = static_cast<std::string_view>(src);
     }
 
-    static void toNative(std::string_view src, Native& dst) {
+    static void toNative(std::string_view src, NativeType& dst) {
         dst = String(src);
     }
 };
@@ -324,13 +324,13 @@ struct TypeConverter<std::string_view> {
 template <>
 struct TypeConverter<std::string> {
     using ValueType = std::string;
-    using Native = String;
+    using NativeType = String;
 
-    static void fromNative(const Native& src, ValueType& dst) {
+    static void fromNative(const NativeType& src, ValueType& dst) {
         dst = std::string(src);
     }
 
-    static void toNative(const ValueType& src, Native& dst) {
+    static void toNative(const ValueType& src, NativeType& dst) {
         dst = String(src);
     }
 };
@@ -338,9 +338,9 @@ struct TypeConverter<std::string> {
 template <>
 struct TypeConverter<const char*> {
     using ValueType = const char*;
-    using Native = String;
+    using NativeType =String;
 
-    static void toNative(const char* src, Native& dst) {
+    static void toNative(const char* src, NativeType& dst) {
         dst = String(src);
     }
 };
@@ -348,9 +348,9 @@ struct TypeConverter<const char*> {
 template <size_t N>
 struct TypeConverter<char[N]> {  // NOLINT
     using ValueType = char[N];  // NOLINT
-    using Native = String;
+    using NativeType =String;
 
-    static void toNative(const ValueType& src, Native& dst) {
+    static void toNative(const ValueType& src, NativeType& dst) {
         dst = String({static_cast<const char*>(src), N});
     }
 };
@@ -438,13 +438,13 @@ public:
 template <typename Clock, typename Duration>
 struct TypeConverter<std::chrono::time_point<Clock, Duration>> {
     using ValueType = std::chrono::time_point<Clock, Duration>;
-    using Native = DateTime;
+    using NativeType =DateTime;
 
-    static void fromNative(const Native& src, ValueType& dst) {
+    static void fromNative(const NativeType& src, ValueType& dst) {
         dst = src.toTimePoint<Clock, Duration>();
     }
 
-    static void toNative(const ValueType& src, Native& dst) {
+    static void toNative(const ValueType& src, NativeType& dst) {
         dst = DateTime::fromTimePoint(src);
     }
 };
@@ -1619,7 +1619,7 @@ T Variant::toScalarImpl() const {
     if constexpr (detail::isRegisteredType<T>) {
         return scalar<T>();
     } else {
-        using Native = typename TypeConverter<T>::Native;
+        using Native = typename TypeConverter<T>::NativeType;
         T result{};
         TypeConverter<T>::fromNative(scalar<Native>(), result);
         return result;
@@ -1634,7 +1634,7 @@ T Variant::toArrayImpl() const {
         auto native = array<ValueType>();
         return T(native.begin(), native.end());
     } else {
-        using Native = typename TypeConverter<ValueType>::Native;
+        using Native = typename TypeConverter<ValueType>::NativeType;
         const auto transform = [](const Native& native) {
             ValueType result{};
             TypeConverter<ValueType>::fromNative(native, result);
@@ -1682,7 +1682,7 @@ void Variant::setScalarCopyImpl(const T& value, const UA_DataType& type) {
 
 template <typename T>
 void Variant::setScalarCopyConvertImpl(const T& value) {
-    using Native = typename TypeConverter<T>::Native;
+    using Native = typename TypeConverter<T>::NativeType;
     const auto& type = opcua::getDataType<Native>();
     auto native = detail::allocateUniquePtr<Native>(type);
     TypeConverter<T>::toNative(value, *native);
@@ -1703,7 +1703,7 @@ void Variant::setArrayCopyImpl(InputIt first, InputIt last, const UA_DataType& t
 template <typename InputIt>
 void Variant::setArrayCopyConvertImpl(InputIt first, InputIt last) {
     using ValueType = typename std::iterator_traits<InputIt>::value_type;
-    using Native = typename TypeConverter<ValueType>::Native;
+    using Native = typename TypeConverter<ValueType>::NativeType;
     const auto& type = opcua::getDataType<Native>();
     const size_t size = std::distance(first, last);
     auto native = detail::allocateArrayUniquePtr<Native>(size, type);
