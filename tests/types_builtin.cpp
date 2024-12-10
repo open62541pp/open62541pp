@@ -476,11 +476,11 @@ TEST_CASE("ExpandedNodeId") {
 }
 
 TEST_CASE("Variant") {
-    SUBCASE("Empty variant") {
+    SUBCASE("Empty") {
         Variant var;
         CHECK(var.isEmpty());
-        CHECK(!var.isScalar());
-        CHECK(!var.isArray());
+        CHECK_FALSE(var.isScalar());
+        CHECK_FALSE(var.isArray());
         CHECK(var.type() == nullptr);
         CHECK(var.data() == nullptr);
         CHECK(std::as_const(var).data() == nullptr);
@@ -488,6 +488,100 @@ TEST_CASE("Variant") {
         CHECK(var.arrayDimensions().empty());
         CHECK_THROWS(var.scalar<int>());
         CHECK_THROWS(var.array<int>());
+    }
+
+    SUBCASE("From scalar") {
+        double value = 11.11;
+        const auto& type = UA_TYPES[UA_TYPES_DOUBLE];
+        Variant var;
+
+        SUBCASE("Copy") {
+            SUBCASE("Constructor") {
+                var = Variant(value);
+            }
+            SUBCASE("Constructor with type") {
+                var = Variant(value, type);
+            }
+            SUBCASE("fromScalar") {
+                var = Variant::fromScalar(value);
+            }
+            SUBCASE("fromScalar with type") {
+                var = Variant::fromScalar(value, type);
+            }
+            CHECK(var.isScalar());
+            CHECK(var.type() == &type);
+            CHECK(var.data() != &value);
+            CHECK(var.scalar<double>() == value);
+        }
+
+        SUBCASE("Reference") {
+            SUBCASE("Constructor") {
+                var = Variant(reference, value);
+            }
+            SUBCASE("Constructor with type") {
+                var = Variant(reference, value, type);
+            }
+            CHECK(var.isScalar());
+            CHECK(var.type() == &type);
+            CHECK(var.data() == &value);
+            CHECK(var.scalar<double>() == value);
+        }
+    }
+
+    SUBCASE("From array") {
+        std::vector<double> array{11.11, 22.22, 33.33};
+        const auto& type = UA_TYPES[UA_TYPES_DOUBLE];
+        Variant var;
+
+        SUBCASE("Copy") {
+            SUBCASE("Constructor") {
+                var = Variant(array);
+            }
+            SUBCASE("Constructor with type") {
+                var = Variant(array, type);
+            }
+            SUBCASE("Constructor with iterator pair") {
+                var = Variant(array.begin(), array.end());
+            }
+            SUBCASE("Constructor with iterator pair and type") {
+                var = Variant(array.begin(), array.end(), type);
+            }
+            SUBCASE("fromArray") {
+                var = Variant::fromArray(array);
+            }
+            SUBCASE("fromArray with type") {
+                var = Variant::fromArray(array, type);
+            }
+            SUBCASE("fromArray with iterator pair") {
+                var = Variant::fromArray(array.begin(), array.end());
+            }
+            SUBCASE("fromArray with iterator pair and type") {
+                var = Variant::fromArray(array.begin(), array.end(), type);
+            }
+            CHECK(var.isArray());
+            CHECK(var.type() == &type);
+            CHECK(var.data() != array.data());
+            CHECK(var.to<std::vector<double>>() == array);
+        }
+
+        SUBCASE("Reference") {
+            SUBCASE("Constructor") {
+                var = Variant(reference, array);
+            }
+            SUBCASE("Constructor with type") {
+                var = Variant(reference, array, type);
+            }
+            SUBCASE("fromArray") {
+                var = Variant::fromArray<VariantPolicy::Reference>(array);
+            }
+            SUBCASE("fromArray with type") {
+                var = Variant::fromArray<VariantPolicy::Reference>(array, type);
+            }
+            CHECK(var.isArray());
+            CHECK(var.type() == &type);
+            CHECK(var.data() == array.data());
+            CHECK(var.to<std::vector<double>>() == array);
+        }
     }
 
     SUBCASE("Type checks") {
@@ -520,7 +614,7 @@ TEST_CASE("Variant") {
         CHECK(var.to<int32_t>() == value);
     }
 
-    SUBCASE("Set/get wrapped scalar types") {
+    SUBCASE("Set/get scalar wrapper") {
         Variant var;
         LocalizedText value("en-US", "text");
         SUBCASE("setScalar") {
@@ -529,6 +623,7 @@ TEST_CASE("Variant") {
         SUBCASE("setValue") {
             var.setValue(value);
         }
+        CHECK(var.isScalar());
         CHECK(&var.scalar<LocalizedText>() == &value);
         CHECK(var.scalar<LocalizedText>() == value);
         CHECK(var.to<LocalizedText>() == value);
@@ -605,8 +700,8 @@ TEST_CASE("Variant") {
             var.setValueCopy(array);
         }
         CHECK(var.isArray());
-        CHECK(var.isType(NodeId{0, UA_NS0ID_STRING}));
         CHECK(var.type() == &UA_TYPES[UA_TYPES_STRING]);
+        CHECK(var.arrayLength() == array.size());
         CHECK_NOTHROW(var.array<String>());
         CHECK(var.to<std::vector<std::string>>() == array);
     }
@@ -621,7 +716,6 @@ TEST_CASE("Variant") {
             var.setValueCopy(array);
         }
         CHECK(var.isArray());
-        CHECK(var.isType(NodeId{0, UA_NS0ID_FLOAT}));
         CHECK(var.type() == &UA_TYPES[UA_TYPES_FLOAT]);
         CHECK(var.data() != array.data());
         CHECK(var.arrayLength() == array.size());
@@ -636,6 +730,9 @@ TEST_CASE("Variant") {
         SUBCASE("setValueCopy") {
             var.setValueCopy(Span<const int>{1, 2, 3});  // TODO: avoid manual template types
         }
+        CHECK(var.isArray());
+        CHECK(var.type() == &UA_TYPES[UA_TYPES_INT32]);
+        CHECK(var.arrayLength() == 3);
     }
 
     SUBCASE("Set/get array with std::vector<bool> (copy)") {
@@ -643,13 +740,6 @@ TEST_CASE("Variant") {
         // several problems: https://github.com/open62541pp/open62541pp/issues/164
         Variant var;
         std::vector<bool> array{true, false, true};
-
-        SUBCASE("Constructor") {
-            var = Variant(array);
-        }
-        SUBCASE("fromArray") {
-            var = Variant::fromArray(array);
-        }
         SUBCASE("setArrayCopy") {
             var.setArrayCopy(array);
         }
@@ -664,13 +754,13 @@ TEST_CASE("Variant") {
         }
 
         CHECK(var.arrayLength() == array.size());
-        CHECK(var.isType<bool>());
+        CHECK(var.type() == &UA_TYPES[UA_TYPES_BOOLEAN]);
         CHECK(var.to<std::vector<bool>>() == array);
     }
 
     SUBCASE("Set/get non-builtin data types") {
         using CustomType = UA_WriteValue;
-        const auto& dt = UA_TYPES[UA_TYPES_WRITEVALUE];
+        const auto& type = UA_TYPES[UA_TYPES_WRITEVALUE];
 
         Variant var;
         CustomType value{};
@@ -678,26 +768,26 @@ TEST_CASE("Variant") {
 
         SUBCASE("Scalar") {
             SUBCASE("setScalar") {
-                var.setScalar(value, dt);
+                var.setScalar(value, type);
             }
             SUBCASE("setValue") {
-                var.setValue(value, dt);
+                var.setValue(value, type);
             }
             CHECK(var.isScalar());
-            CHECK(var.type() == &dt);
+            CHECK(var.type() == &type);
             CHECK(var.data() == &value);
             CHECK(var.scalar<CustomType>().attributeId == 1);
         }
 
         SUBCASE("Scalar (copy)") {
             SUBCASE("setScalarCopy") {
-                var.setScalarCopy(value, dt);
+                var.setScalarCopy(value, type);
             }
             SUBCASE("setValueCopy") {
-                var.setValueCopy(value, dt);
+                var.setValueCopy(value, type);
             }
             CHECK(var.isScalar());
-            CHECK(var.type() == &dt);
+            CHECK(var.type() == &type);
             CHECK(var.data() != &value);
             CHECK(var.scalar<CustomType>().attributeId == 1);
         }
@@ -706,13 +796,13 @@ TEST_CASE("Variant") {
 
         SUBCASE("Array") {
             SUBCASE("setArray") {
-                var.setArray(array, dt);
+                var.setArray(array, type);
             }
             SUBCASE("setValue") {
-                var.setValue(array, dt);
+                var.setValue(array, type);
             }
             CHECK(var.isArray());
-            CHECK(var.type() == &dt);
+            CHECK(var.type() == &type);
             CHECK(var.data() == array.data());
             CHECK(var.arrayLength() == 3);
             CHECK(var.array<CustomType>().data() == array.data());
@@ -720,13 +810,13 @@ TEST_CASE("Variant") {
 
         SUBCASE("Array (copy)") {
             SUBCASE("setArrayCopy") {
-                var.setArrayCopy(array, dt);
+                var.setArrayCopy(array, type);
             }
             SUBCASE("setValueCopy") {
-                var.setValueCopy(array, dt);
+                var.setValueCopy(array, type);
             }
             CHECK(var.isArray());
-            CHECK(var.type() == &dt);
+            CHECK(var.type() == &type);
             CHECK(var.data() != array.data());
             CHECK(var.arrayLength() == 3);
             CHECK(var.array<CustomType>().data() != array.data());
