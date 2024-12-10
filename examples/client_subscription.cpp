@@ -34,7 +34,7 @@ int main() {
                     << "- node id:           " << item.nodeId().toString() << "\n"
                     << "- attribute id:      " << static_cast<int>(item.attributeId()) << "\n";
 
-                const auto dt = dv.value().scalarCopy<opcua::DateTime>();
+                const auto dt = dv.value().scalar<opcua::DateTime>();
                 std::cout << "Current server time (UTC): " << dt.format("%H:%M:%S") << std::endl;
             }
         );
