@@ -1654,11 +1654,24 @@ private:
     inline void setArrayCopyImpl(InputIt first, InputIt last, const UA_DataType& type);
     template <typename InputIt>
     inline void setArrayCopyConvertImpl(InputIt first, InputIt last);
-    template <typename T, typename... Args>
 
-    void setValueImpl(T&& value, Args&&... args);
     template <typename T, typename... Args>
-    void setValueCopyImpl(T&& value, Args&&... args);
+    void setValueImpl(T&& value, Args&&... args) {
+        if constexpr (isArrayType<std::remove_reference_t<T>>()) {
+            setArray(std::forward<T>(value), std::forward<Args>(args)...);
+        } else {
+            setScalar(std::forward<T>(value), std::forward<Args>(args)...);
+        }
+    }
+
+    template <typename T, typename... Args>
+    void setValueCopyImpl(T&& value, Args&&... args) {
+        if constexpr (isArrayType<std::remove_reference_t<T>>()) {
+            setArrayCopy(value.begin(), value.end(), std::forward<Args>(args)...);
+        } else {
+            setScalarCopy(std::forward<T>(value), std::forward<Args>(args)...);
+        }
+    }
 };
 
 template <typename T>
@@ -1759,24 +1772,6 @@ void Variant::setArrayCopyConvertImpl(InputIt first, InputIt last) {
         TypeConverter<ValueType>::toNative(*first++, native.get()[i]);  // NOLINT
     }
     setArrayImpl(native.release(), size, type, UA_VARIANT_DATA);  // move ownership
-}
-
-template <typename T, typename... Args>
-void Variant::setValueImpl(T&& value, Args&&... args) {
-    if constexpr (isArrayType<std::decay_t<T>>()) {
-        setArray(std::forward<T>(value), std::forward<Args>(args)...);
-    } else {
-        setScalar(std::forward<T>(value), std::forward<Args>(args)...);
-    }
-}
-
-template <typename T, typename... Args>
-void Variant::setValueCopyImpl(T&& value, Args&&... args) {
-    if constexpr (isArrayType<std::decay_t<T>>()) {
-        setArrayCopy(value.begin(), value.end(), std::forward<Args>(args)...);
-    } else {
-        setScalarCopy(std::forward<T>(value), std::forward<Args>(args)...);
-    }
 }
 
 /* ------------------------------------------ DataValue ----------------------------------------- */
