@@ -338,7 +338,7 @@ struct TypeConverter<std::string> {
 template <>
 struct TypeConverter<const char*> {
     using ValueType = const char*;
-    using NativeType =String;
+    using NativeType = String;
 
     static void toNative(const char* src, NativeType& dst) {
         dst = String(src);
@@ -348,7 +348,7 @@ struct TypeConverter<const char*> {
 template <size_t N>
 struct TypeConverter<char[N]> {  // NOLINT
     using ValueType = char[N];  // NOLINT
-    using NativeType =String;
+    using NativeType = String;
 
     static void toNative(const ValueType& src, NativeType& dst) {
         dst = String({static_cast<const char*>(src), N});
@@ -438,7 +438,7 @@ public:
 template <typename Clock, typename Duration>
 struct TypeConverter<std::chrono::time_point<Clock, Duration>> {
     using ValueType = std::chrono::time_point<Clock, Duration>;
-    using NativeType =DateTime;
+    using NativeType = DateTime;
 
     static void fromNative(const NativeType& src, ValueType& dst) {
         dst = src.toTimePoint<Clock, Duration>();
@@ -1069,6 +1069,57 @@ inline constexpr ReferenceTag reference{};
 
 /**
  * UA_Variant wrapper class.
+ *
+ * Variants may contain scalar values or arrays of any type together with a type definition.
+ * The standard mandates that variants contain built-in data types only.
+ * open62541 transparently handles this wrapping in the encoding layer. If the type is unknown to
+ * the receiver, the variant stores the original ExtensionObject in binary or XML encoding.
+ *
+ * open62541pp enhances variant handling with the following features:
+ *
+ * 1. **Type category detection**: Identifies whether `T` is scalar or array:
+ *    - **Scalar**, if `T` is:
+ *      - A registered type (TypeRegistry spezialization). This applies to native types and
+ *        @ref Wrapper "wrapper types".
+ *      - A convertible type (TypeConverter spezialization).
+ *    - **Array**, if `T` is a container type (e.g. `std::vector` or `std::list`) and does not
+ *      satisfy the criterias of a scalar type.
+ *
+ *    Applied in @ref Variant::Variant "constructors", @ref setValue, and @ref to functions:
+ *
+ *    @code
+ *    opcua::Variant var(5);                  // set scalar (via constructor)
+ *    auto value = var.to<int>();             // convert scalar
+ *
+ *    std::array<int> array{1, 2, 3};
+ *    var.setValue(array);                    // set array (via setter)
+ *    auto vec = var.to<std::vector<int>>();  // convert array
+ *    @endcode
+ *
+ * 2. **Type definition retrieval**: Automatically retrieves UA_DataType via TypeRegistry.
+ *    For every registered type `T`, the type definition parameter can be omitted:
+ *
+ *    @code
+ *    opcua::Variant var(5, UA_TYPES[UA_TYPES_INT]);  // explicit type definition
+ *    opcua::Variant var(5);                          // auto-detected type definition
+ *    @endcode
+ *
+ * 3. **Type conversion**: Convert non-native types using TypeConverter.
+ *    Native `UA_*` types can be assigned and retrieved to/from variants without any conversion,
+ *    because their binary layout is described by the type definition (UA_DataType). The same is
+ *    true for wrapper types, that share the exact memory layout as their wrapped native type.
+ *    Non-native types, like `std::string` from the STL, may not be describeable by UA_DataType
+ *    because their memory layout is an implementation detail.
+ *    Instead, the conversion between non-native and native types can be defined with template
+ *    specializations of TypeConverter. If a type is convertible (TypeConverter specialization),
+ *    the Variant automatically manages the conversion, requiring a copy:
+ *
+ *    @code
+ *    opcua::Variant var(std::string("test"));     // convert to native type (copy)
+ *    auto& native = var.scalar<opcua::String>();  // reference to native type (no copy)
+ *    auto str = var.to<std::string>();            // conversion (copy required)
+ *    @endcode
+ *
  * @ingroup Wrapper
  */
 class Variant : public TypeWrapper<UA_Variant, UA_TYPES_VARIANT> {
@@ -1349,30 +1400,27 @@ public:
     }
 
     /**
-     * Get value with given template type, with conversion if needed.
+     * Converts the variant to the specified type `T` with automatic conversion if required.
      *
-     * The type category (scalar or array) is determined based on the characteristics of `T`:
-     * - **Scalar**, if `T` is:
-     *   - A registered type (specialized in `TypeRegistry`). This applies to native/wrapper types.
-     *   - A type convertible from the stored value (specialized in `TypeConverter`).
+     * Determines the type category (scalar or array) based on the characteristics of `T` using
+     * @ref Variant "type category detection".
+     * If `T` is a container, it must be constructible from an iterator pair.
      *
-     *   @code
-     *   opcua::Variant var(11);
-     *   const auto value = var.to<int>();
-     *   @endcode
+     * @code
+     * // Scalar
+     * opcua::Variant var(11);
+     * const auto value = var.to<int>();
+     * @endcode
      *
-     * - **Array**, if `T` is a container type (e.g. `std::vector` or `std::list`) and does not
-     *   satisfy the criterias of a scalar type.
-     *   The container must be constructible from an iterator pair.
+     * @code
+     * // Array
+     * std::array<std::string, 3> array{"One", "Two", "Three"};
+     * opcua::Variant var(array);
+     * const auto vec = var.to<std::vector<std::string>>();
+     * const auto lst = var.to<std::list<opcua::String>>();
+     * @endcode
      *
-     *   @code
-     *   std::array<std::string, 3> array{"One", "Two", "Three"};
-     *   opcua::Variant var(array);
-     *   const auto vec = var.to<std::vector<std::string>>();
-     *   const auto lst = var.to<std::list<opcua::String>>();
-     *   @endcode
-     *
-     * @exception BadVariantAccess If the variant is not convertible to `T`.
+     *  @exception BadVariantAccess If the variant is not convertible to `T`.
      */
     template <typename T>
     [[nodiscard]] T to() const {
@@ -1532,14 +1580,14 @@ private:
     }
 
     template <typename ArrayLike>
-    static constexpr bool isTemporaryArray() {
+    static constexpr bool isTemporaryArray() noexcept {
         constexpr bool isTemporary = std::is_rvalue_reference_v<ArrayLike>;
         constexpr bool isView = detail::IsSpan<std::remove_reference_t<ArrayLike>>::value;
         return isTemporary && !isView;
     }
 
     template <typename T>
-    static constexpr void assertIsRegistered() {
+    static constexpr void assertIsRegistered() noexcept {
         static_assert(
             detail::isRegisteredType<T>,
             "Template type must be a native/wrapper type to assign or get scalar/array without copy"
@@ -1547,7 +1595,7 @@ private:
     }
 
     template <typename T>
-    static constexpr void assertIsRegisteredOrConvertible() {
+    static constexpr void assertIsRegisteredOrConvertible() noexcept {
         static_assert(
             detail::isRegisteredOrConvertible<T>,
             "Template type must be either a native/wrapper type (copyable) or a convertible type. "
@@ -1558,7 +1606,7 @@ private:
     }
 
     template <typename T>
-    static constexpr void assertNoVariant() {
+    static constexpr void assertNoVariant() noexcept {
         static_assert(
             !std::is_same_v<T, Variant> && !std::is_same_v<T, UA_Variant>,
             "Variants cannot directly contain another variant"
@@ -1586,9 +1634,9 @@ private:
     }
 
     template <typename T>
-    T toScalarImpl() const;
+    inline T toScalarImpl() const;
     template <typename T>
-    T toArrayImpl() const;
+    inline T toArrayImpl() const;
 
     template <typename T>
     inline void setScalarImpl(
@@ -1606,11 +1654,10 @@ private:
     inline void setArrayCopyImpl(InputIt first, InputIt last, const UA_DataType& type);
     template <typename InputIt>
     inline void setArrayCopyConvertImpl(InputIt first, InputIt last);
-
     template <typename T, typename... Args>
-    void setValueImpl(T&& value, Args&&... args);
+    inline void setValueImpl(T&& value, Args&&... args);
     template <typename T, typename... Args>
-    void setValueCopyImpl(T&& value, Args&&... args);
+    inline void setValueCopyImpl(T&& value, Args&&... args);
 };
 
 template <typename T>
