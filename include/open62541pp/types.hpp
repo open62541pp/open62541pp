@@ -1580,14 +1580,14 @@ private:
     }
 
     template <typename ArrayLike>
-    static constexpr bool isTemporaryArray() noexcept {
+    static constexpr bool isTemporaryArray() {
         constexpr bool isTemporary = std::is_rvalue_reference_v<ArrayLike>;
         constexpr bool isView = detail::IsSpan<std::remove_reference_t<ArrayLike>>::value;
         return isTemporary && !isView;
     }
 
     template <typename T>
-    static constexpr void assertIsRegistered() noexcept {
+    static constexpr void assertIsRegistered() {
         static_assert(
             detail::isRegisteredType<T>,
             "Template type must be a native/wrapper type to assign or get scalar/array without copy"
@@ -1595,7 +1595,7 @@ private:
     }
 
     template <typename T>
-    static constexpr void assertIsRegisteredOrConvertible() noexcept {
+    static constexpr void assertIsRegisteredOrConvertible() {
         static_assert(
             detail::isRegisteredOrConvertible<T>,
             "Template type must be either a native/wrapper type (copyable) or a convertible type. "
@@ -1606,7 +1606,7 @@ private:
     }
 
     template <typename T>
-    static constexpr void assertNoVariant() noexcept {
+    static constexpr void assertNoVariant() {
         static_assert(
             !std::is_same_v<T, Variant> && !std::is_same_v<T, UA_Variant>,
             "Variants cannot directly contain another variant"
@@ -1634,9 +1634,9 @@ private:
     }
 
     template <typename T>
-    inline T toScalarImpl() const;
+    T toScalarImpl() const;
     template <typename T>
-    inline T toArrayImpl() const;
+    T toArrayImpl() const;
 
     template <typename T>
     inline void setScalarImpl(
@@ -1655,9 +1655,10 @@ private:
     template <typename InputIt>
     inline void setArrayCopyConvertImpl(InputIt first, InputIt last);
     template <typename T, typename... Args>
-    inline void setValueImpl(T&& value, Args&&... args);
+
+    void setValueImpl(T&& value, Args&&... args);
     template <typename T, typename... Args>
-    inline void setValueCopyImpl(T&& value, Args&&... args);
+    void setValueCopyImpl(T&& value, Args&&... args);
 };
 
 template <typename T>
