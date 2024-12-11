@@ -712,6 +712,9 @@ TEST_CASE("Variant") {
         SUBCASE("setArrayCopy") {
             var.setArrayCopy(array);
         }
+        SUBCASE("setArrayCopy (iterator pair)") {
+            var.setArrayCopy(array.begin(), array.end());
+        }
         SUBCASE("setValueCopy") {
             var.setValueCopy(array);
         }
@@ -748,9 +751,6 @@ TEST_CASE("Variant") {
         }
         SUBCASE("setValueCopy") {
             var.setValueCopy(array);
-        }
-        SUBCASE("setValueCopy (iterator pair)") {
-            var.setValueCopy(array.begin(), array.end());
         }
 
         CHECK(var.arrayLength() == array.size());
@@ -811,6 +811,9 @@ TEST_CASE("Variant") {
         SUBCASE("Array (copy)") {
             SUBCASE("setArrayCopy") {
                 var.setArrayCopy(array, type);
+            }
+            SUBCASE("setArrayCopy (iterator pair)") {
+                var.setArrayCopy(array.begin(), array.end(), type);
             }
             SUBCASE("setValueCopy") {
                 var.setValueCopy(array, type);

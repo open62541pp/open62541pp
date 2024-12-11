@@ -1153,13 +1153,13 @@ public:
     /// Create Variant from a range of elements (copy required).
     template <typename InputIt>
     Variant(InputIt first, InputIt last) {
-        setValueCopy(first, last);
+        setArrayCopy(first, last);
     }
 
     /// Create Variant from a range of elements with a custom data type (copy required).
     template <typename InputIt>
     Variant(InputIt first, InputIt last, const UA_DataType& type) {
-        setValueCopy(first, last, type);
+        setArrayCopy(first, last, type);
     }
 
     /// Create Variant from scalar value.
@@ -1455,18 +1455,6 @@ public:
         setValueCopyImpl(std::forward<T>(value), type);
     }
 
-    /// Copy range of elements as array to variant.
-    template <typename InputIt>
-    void setValueCopy(InputIt first, InputIt last) {
-        setArrayCopy(first, last);
-    }
-
-    /// Copy range of elements with custom data type as array to variant.
-    template <typename InputIt>
-    void setValueCopy(InputIt first, InputIt last, const UA_DataType& type) {
-        setArrayCopy(first, last, type);
-    }
-
     /// Assign scalar value to variant (no copy).
     template <typename T>
     void setScalar(T& value) noexcept {
@@ -1667,7 +1655,7 @@ private:
     template <typename T, typename... Args>
     void setValueCopyImpl(T&& value, Args&&... args) {
         if constexpr (isArrayType<std::remove_reference_t<T>>()) {
-            setArrayCopy(value.begin(), value.end(), std::forward<Args>(args)...);
+            setArrayCopy(std::forward<T>(value), std::forward<Args>(args)...);
         } else {
             setScalarCopy(std::forward<T>(value), std::forward<Args>(args)...);
         }
