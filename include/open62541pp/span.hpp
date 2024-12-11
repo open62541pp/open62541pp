@@ -81,7 +81,7 @@ public:
      * Implicit constructor from an initializer list.
      *
      * Only safe to use if `std::initializer_list` itself outlives the Span:
-     * @code{.cpp}
+     * @code
      * void takeView(Span<const int> values);
      * // ok
      * takeView({1, 2, 3});

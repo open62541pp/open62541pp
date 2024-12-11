@@ -22,7 +22,7 @@ constexpr std::false_type isBitmaskEnum(T);
 /**
  * Trait to define an enum (class) as a bitmask and allow bitwise operations.
  *
- * @code{.cpp}
+ * @code
  * // define enum (class)
  * enum class Access {
  *     Read  = 1 << 0,
@@ -109,7 +109,7 @@ constexpr typename std::enable_if_t<IsBitmaskEnum<T>::value, T> operator^=(T& lh
  * Bitmask using (scoped) enums.
  * Zero-cost abstraction to specify bitmasks with enums/ints or enum classes.
  *
- * @code{.cpp}
+ * @code
  * // construct with scoped enums
  * Bitmask<NodeClass> mask = NodeClass::Variable | NodeClass::Object;
  * // construct with unscoped enums or ints
