@@ -60,7 +60,7 @@ struct AttributeHandlerScalar {
 
     template <typename U>
     static DataValue toDataValue(U&& value) {
-        return DataValue::fromScalar(std::forward<U>(value));
+        return DataValue(Variant(std::forward<U>(value)));
     }
 };
 
@@ -166,7 +166,7 @@ struct AttributeHandler<AttributeId::ArrayDimensions> {
     }
 
     static DataValue toDataValue(Span<const uint32_t> dimensions) {
-        return DataValue::fromArray(dimensions);
+        return DataValue(Variant(dimensions));
     }
 };
 

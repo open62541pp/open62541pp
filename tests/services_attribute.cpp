@@ -282,7 +282,7 @@ TEST_CASE("Attribute service set (highlevel)") {
     //     services::addDataType(server, {0, UA_NS0ID_ENUMERATION}, id, "MyEnum");
 
     //     const EnumDefinition definition{{0, "Zero"}, {1, "One"}};
-    //     services::writeDataTypeDefinition(server, id, Variant::fromScalar(definition)).value();
+    //     services::writeDataTypeDefinition(server, id, Variant(definition)).value();
 
     //     const auto definitionRead = services::readDataTypeDefinition(server, id);
     //     CHECK(definitionRead.value().isType<EnumDefinition>());
@@ -315,7 +315,7 @@ TEST_CASE("Attribute service set (highlevel, async)") {
 
         // write
         {
-            auto variant = Variant::fromScalar(11.11);
+            auto variant = Variant(11.11);
             auto future = services::writeValueAsync(client, id, variant, useFuture);
             client.runIterate();
             future.get().throwIfBad();
@@ -356,12 +356,12 @@ TEST_CASE_TEMPLATE("Attribute service set write/read", T, Server, Client, Async<
     // write
     if constexpr (isAsync<T>) {
         auto future = services::writeAttributeAsync(
-            connection, id, AttributeId::Value, DataValue::fromScalar(value), useFuture
+            connection, id, AttributeId::Value, DataValue(Variant(value)), useFuture
         );
         client.runIterate();
         future.get().throwIfBad();
     } else {
-        services::writeAttribute(connection, id, AttributeId::Value, DataValue::fromScalar(value))
+        services::writeAttribute(connection, id, AttributeId::Value, DataValue(Variant(value)))
             .throwIfBad();
     }
 

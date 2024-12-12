@@ -273,7 +273,7 @@ TEST_CASE("ReadRequest") {
 }
 
 TEST_CASE("WriteValue") {
-    const WriteValue wv({1, 1000}, AttributeId::Value, {}, DataValue::fromScalar(11.11));
+    const WriteValue wv({1, 1000}, AttributeId::Value, {}, DataValue(Variant(11.11)));
     CHECK(wv.nodeId() == NodeId(1, 1000));
     CHECK(wv.attributeId() == AttributeId::Value);
     CHECK(wv.indexRange().empty());
@@ -284,7 +284,7 @@ TEST_CASE("WriteRequest") {
     const WriteRequest request(
         {},
         {
-            {{1, 1000}, AttributeId::Value, {}, DataValue::fromScalar(11.11)},
+            {{1, 1000}, AttributeId::Value, {}, DataValue(Variant(11.11))},
         }
     );
     CHECK_NOTHROW(request.requestHeader());
@@ -334,7 +334,7 @@ TEST_CASE("Argument") {
 }
 
 TEST_CASE("CallMethodRequest / CallRequest") {
-    const CallMethodRequest item({1, 1000}, {1, 1001}, {Variant::fromScalar(11)});
+    const CallMethodRequest item({1, 1000}, {1, 1001}, {Variant(11)});
     const CallRequest request({}, {item});
     CHECK(request.methodsToCall().size() == 1);
     CHECK(request.methodsToCall()[0].objectId() == NodeId(1, 1000));
@@ -351,7 +351,7 @@ TEST_CASE("ElementOperand") {
 }
 
 TEST_CASE("LiteralOperand") {
-    CHECK(LiteralOperand(Variant::fromScalar(11)).value().scalar<int>() == 11);
+    CHECK(LiteralOperand(Variant(11)).value().scalar<int>() == 11);
     CHECK(LiteralOperand(11).value().scalar<int>() == 11);
 }
 

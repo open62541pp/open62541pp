@@ -26,7 +26,7 @@ public:
         const auto* token = userIdentityToken.decodedData<UserNameIdentityToken>();
         const bool isAdmin = (token != nullptr && token->userName() == "admin");
         std::cout << "User has admin rights: " << isAdmin << std::endl;
-        session.setSessionAttribute({0, "isAdmin"}, Variant::fromScalar(isAdmin));
+        session.setSessionAttribute({0, "isAdmin"}, Variant(isAdmin));
 
         return AccessControlDefault::activateSession(
             session, endpointDescription, secureChannelRemoteCertificate, userIdentityToken

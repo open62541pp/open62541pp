@@ -58,8 +58,8 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
             objectsId,
             methodId,
             Span<const Variant>{
-                Variant::fromScalar(int32_t{1}),
-                Variant::fromScalar(int32_t{2}),
+                Variant(int32_t{1}),
+                Variant(int32_t{2}),
             }
         );
         CHECK(result.statusCode().isGood());
@@ -74,8 +74,8 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
             objectsId,
             methodId,
             Span<const Variant>{
-                Variant::fromScalar(int32_t{1}),
-                Variant::fromScalar(int32_t{2}),
+                Variant(int32_t{1}),
+                Variant(int32_t{2}),
             }
         );
         CHECK(result.statusCode() == UA_STATUSCODE_BADUNEXPECTEDERROR);
@@ -87,8 +87,8 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
             objectsId,
             methodId,
             Span<const Variant>{
-                Variant::fromScalar(true),
-                Variant::fromScalar(11.11f),
+                Variant(true),
+                Variant(11.11f),
             }
         );
         CHECK(result.statusCode() == UA_STATUSCODE_BADINVALIDARGUMENT);
@@ -107,9 +107,9 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
             objectsId,
             methodId,
             Span<const Variant>{
-                Variant::fromScalar(int32_t{1}),
-                Variant::fromScalar(int32_t{2}),
-                Variant::fromScalar(int32_t{3}),
+                Variant(int32_t{1}),
+                Variant(int32_t{2}),
+                Variant(int32_t{3}),
             }
         );
         CHECK(result.statusCode() == UA_STATUSCODE_BADTOOMANYARGUMENTS);
