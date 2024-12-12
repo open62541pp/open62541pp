@@ -495,6 +495,19 @@ TEST_CASE("Variant") {
         const auto& type = UA_TYPES[UA_TYPES_DOUBLE];
         Variant var;
 
+        SUBCASE("Pointer") {
+            SUBCASE("Constructor") {
+                var = Variant(&value);
+            }
+            SUBCASE("Constructor with type") {
+                var = Variant(&value, type);
+            }
+            CHECK(var.isScalar());
+            CHECK(var.type() == &type);
+            CHECK(var.data() == &value);
+            CHECK(var.scalar<double>() == value);
+        }
+
         SUBCASE("Copy") {
             SUBCASE("Constructor") {
                 var = Variant(value);
@@ -507,25 +520,25 @@ TEST_CASE("Variant") {
             CHECK(var.data() != &value);
             CHECK(var.scalar<double>() == value);
         }
-
-        SUBCASE("Reference") {
-            SUBCASE("Constructor") {
-                var = Variant(reference, value);
-            }
-            SUBCASE("Constructor with type") {
-                var = Variant(reference, value, type);
-            }
-            CHECK(var.isScalar());
-            CHECK(var.type() == &type);
-            CHECK(var.data() == &value);
-            CHECK(var.scalar<double>() == value);
-        }
     }
 
     SUBCASE("From array") {
         std::vector<double> array{11.11, 22.22, 33.33};
         const auto& type = UA_TYPES[UA_TYPES_DOUBLE];
         Variant var;
+
+        SUBCASE("Pointer") {
+            SUBCASE("Constructor") {
+                var = Variant(&array);
+            }
+            SUBCASE("Constructor with type") {
+                var = Variant(&array, type);
+            }
+            CHECK(var.isArray());
+            CHECK(var.type() == &type);
+            CHECK(var.data() == array.data());
+            CHECK(var.to<std::vector<double>>() == array);
+        }
 
         SUBCASE("Copy") {
             SUBCASE("Constructor") {
@@ -543,19 +556,6 @@ TEST_CASE("Variant") {
             CHECK(var.isArray());
             CHECK(var.type() == &type);
             CHECK(var.data() != array.data());
-            CHECK(var.to<std::vector<double>>() == array);
-        }
-
-        SUBCASE("Reference") {
-            SUBCASE("Constructor") {
-                var = Variant(reference, array);
-            }
-            SUBCASE("Constructor with type") {
-                var = Variant(reference, array, type);
-            }
-            CHECK(var.isArray());
-            CHECK(var.type() == &type);
-            CHECK(var.data() == array.data());
             CHECK(var.to<std::vector<double>>() == array);
         }
     }
@@ -577,7 +577,7 @@ TEST_CASE("Variant") {
     SUBCASE("Set/get scalar") {
         Variant var;
         int32_t value = 5;
-        var.assign(reference, value);
+        var.assign(&value);
         CHECK(var.isScalar());
         CHECK(var.data() == &value);
         CHECK(&var.scalar<int32_t>() == &value);
@@ -588,7 +588,7 @@ TEST_CASE("Variant") {
     SUBCASE("Set/get scalar wrapper") {
         Variant var;
         LocalizedText value("en-US", "text");
-        var.assign(reference, value);
+        var.assign(&value);
         CHECK(var.isScalar());
         CHECK(&var.scalar<LocalizedText>() == &value);
         CHECK(var.scalar<LocalizedText>() == value);
@@ -607,7 +607,7 @@ TEST_CASE("Variant") {
     SUBCASE("Set/get array") {
         Variant var;
         std::vector<float> array{0, 1, 2};
-        var.assign(reference, array);
+        var.assign(&array);
         CHECK(var.data() == array.data());
         CHECK(var.array<float>().data() == array.data());
         CHECK(std::as_const(var).array<float>().data() == array.data());
@@ -621,7 +621,7 @@ TEST_CASE("Variant") {
             detail::toNativeString("item2"),
             detail::toNativeString("item3"),
         };
-        var.assign(reference, array, UA_TYPES[UA_TYPES_STRING]);
+        var.assign(&array, UA_TYPES[UA_TYPES_STRING]);
         CHECK(var.isArray());
         CHECK(var.data() == array.data());
         CHECK(var.arrayLength() == array.size());
@@ -630,7 +630,7 @@ TEST_CASE("Variant") {
     SUBCASE("Set array of string wrapper") {
         Variant var;
         std::vector<String> array{String{"item1"}, String{"item2"}, String{"item3"}};
-        var.assign(reference, array);
+        var.assign(&array);
         CHECK(var.data() == array.data());
         CHECK(var.arrayLength() == array.size());
         CHECK(var.array<String>().data() == array.data());
@@ -699,7 +699,7 @@ TEST_CASE("Variant") {
         Custom value{11};
 
         SUBCASE("Scalar") {
-            var.assign(reference, value, type);
+            var.assign(&value, type);
             CHECK(var.isScalar());
             CHECK(var.type() == &type);
             CHECK(var.data() == &value);
@@ -717,7 +717,7 @@ TEST_CASE("Variant") {
         std::vector<Custom> array{Custom{11}, Custom{22}, Custom{33}};
 
         SUBCASE("Array") {
-            var.assign(reference, array, type);
+            var.assign(&array, type);
             CHECK(var.isArray());
             CHECK(var.type() == &type);
             CHECK(var.data() == array.data());
@@ -818,7 +818,7 @@ TEST_CASE("DataValue") {
         SUBCASE("Value (move)") {
             float value = 11.11f;
             Variant var;
-            var.assign(reference, value);
+            var.assign(&value);
             CHECK(var->data == &value);
             dv.setValue(std::move(var));
             CHECK(dv.hasValue());
