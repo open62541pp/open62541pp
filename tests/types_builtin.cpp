@@ -662,10 +662,10 @@ TEST_CASE("Variant") {
     SUBCASE("Set/get array (copy)") {
         Variant var;
         std::vector<float> array{0, 1, 2, 3, 4, 5};
-        SUBCASE("container") {
+        SUBCASE("Container") {
             var.assign(array);
         }
-        SUBCASE("iterator pair") {
+        SUBCASE("Iterator pair") {
             var.assign(array.begin(), array.end());
         }
         CHECK(var.isArray());
@@ -688,10 +688,10 @@ TEST_CASE("Variant") {
         // several problems: https://github.com/open62541pp/open62541pp/issues/164
         Variant var;
         std::vector<bool> array{true, false, true};
-        SUBCASE("container") {
+        SUBCASE("Container") {
             var.assign(array);
         }
-        SUBCASE("iterator pair") {
+        SUBCASE("Iterator pair") {
             var.assign(array.begin(), array.end());
         }
         CHECK(var.arrayLength() == array.size());
@@ -737,10 +737,10 @@ TEST_CASE("Variant") {
         }
 
         SUBCASE("Array (copy)") {
-            SUBCASE("container") {
+            SUBCASE("Container") {
                 var.assign(array, type);
             }
-            SUBCASE("iterator pair") {
+            SUBCASE("Iterator pair") {
                 var.assign(array.begin(), array.end(), type);
             }
             CHECK(var.isArray());
@@ -754,26 +754,25 @@ TEST_CASE("Variant") {
         }
     }
 
-    SUBCASE("Get scalar (lvalue & rvalue)") {
+    SUBCASE("Get scalar ref qualifiers") {
         Variant var("test");
         void* data = var.scalar<String>()->data;
 
-        String str;
-        SUBCASE("rvalue") {
-            str = var.scalar<String>();
-            CHECK(str->data != data);  // copy
-        }
-        SUBCASE("const rvalue") {
-            str = std::as_const(var).scalar<String>();
-            CHECK(str->data != data);  // copy
-        }
         SUBCASE("lvalue") {
-            str = std::move(var).scalar<String>();
-            CHECK(str->data == data);  // move
+            auto dst = var.scalar<String>();
+            CHECK(dst->data != data);  // copy
         }
         SUBCASE("const lvalue") {
-            str = std::move(std::as_const(var)).scalar<String>();
-            CHECK(str->data != data);  // can not move const -> copy
+            auto dst = std::as_const(var).scalar<String>();
+            CHECK(dst->data != data);  // copy
+        }
+        SUBCASE("rvalue") {
+            auto dst = std::move(var).scalar<String>();
+            CHECK(dst->data == data);  // move
+        }
+        SUBCASE("const rvalue") {
+            auto dst = std::move(std::as_const(var)).scalar<String>();
+            CHECK(dst->data != data);  // can not move const -> copy
         }
     }
 }
