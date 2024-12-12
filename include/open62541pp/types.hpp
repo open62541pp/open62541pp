@@ -1053,14 +1053,6 @@ enum class VariantPolicy {
     // clang-format on
 };
 
-namespace detail {
-
-template <typename T>
-static constexpr bool isRegisteredOrConvertible = detail::isRegisteredType<T> ||
-    detail::isConvertibleType<T>;
-
-}  // namespace detail
-
 /// Tag used for constructing a Variant that references a value.
 struct ReferenceTag {};
 
@@ -1085,14 +1077,14 @@ inline constexpr ReferenceTag reference{};
  *    - **Array**, if `T` is a container type (e.g. `std::vector` or `std::list`) and does not
  *      satisfy the criterias of a scalar type.
  *
- *    Applied in @ref Variant::Variant "constructors", @ref setValue, and @ref to functions:
+ *    Applied in @ref Variant::Variant "constructors", @ref assign, and @ref to functions:
  *
  *    @code
  *    opcua::Variant var(5);                  // set scalar (via constructor)
  *    auto value = var.to<int>();             // convert scalar
  *
  *    std::array<int> array{1, 2, 3};
- *    var.setValue(array);                    // set array (via setter)
+ *    var.assign(array);                      // set array (via assign)
  *    auto vec = var.to<std::vector<int>>();  // convert array
  *    @endcode
  *
@@ -1127,39 +1119,45 @@ public:
     using TypeWrapper::TypeWrapper;  // inherit constructors
 
     /// Create Variant from a value (copy).
+    /// @see assign(const T&)
     template <typename T, typename = std::enable_if_t<!std::is_same_v<T, Variant>>>
-    explicit Variant(T&& value) {
-        setValueCopy(std::forward<T>(value));
-    }
-
-    /// Create Variant from a value (no copy).
-    template <typename T>
-    Variant(ReferenceTag /*unused*/, T&& value) {
-        setValue(std::forward<T>(value));
+    explicit Variant(const T& value) {
+        assign(value);
     }
 
     /// Create Variant from a value with a custom data type (copy).
+    /// @see assign(const T&, const UA_DataType&)
     template <typename T>
-    Variant(T&& value, const UA_DataType& type) {
-        setValueCopy(std::forward<T>(value), type);
+    Variant(const T& value, const UA_DataType& type) {
+        assign(value, type);
+    }
+
+    /// Create Variant from a value (no copy).
+    /// @see assign(ReferenceTag, T&)
+    template <typename T>
+    Variant(ReferenceTag /* unused */, T& value) {
+        assign(reference, value);
     }
 
     /// Create Variant from a value with a custom data type (no copy).
+    /// @see assign(ReferenceTag, T&, const UA_DataType&)
     template <typename T>
-    Variant(ReferenceTag /*unused*/, T&& value, const UA_DataType& type) {
-        setValue(std::forward<T>(value), type);
+    Variant(ReferenceTag /* unused */, T& value, const UA_DataType& type) {
+        assign(reference, value, type);
     }
 
-    /// Create Variant from a range of elements (copy required).
+    /// Create Variant from a range of elements (copy).
+    /// @see assign(InputIt, InputIt)
     template <typename InputIt>
     Variant(InputIt first, InputIt last) {
-        setArrayCopy(first, last);
+        assign(first, last);
     }
 
-    /// Create Variant from a range of elements with a custom data type (copy required).
+    /// Create Variant from a range of elements with a custom data type (copy).
+    /// @see assign(InputIt, InputIt, const UA_DataType&)
     template <typename InputIt>
     Variant(InputIt first, InputIt last, const UA_DataType& type) {
-        setArrayCopy(first, last, type);
+        assign(first, last, type);
     }
 
     /// Create Variant from scalar value.
@@ -1300,7 +1298,7 @@ public:
     T& scalar() & {
         assertIsRegistered<T>();
         checkIsScalar();
-        checkIsDataType<T>();
+        checkIsType<T>();
         return *static_cast<T*>(handle()->data);
     }
 
@@ -1309,7 +1307,7 @@ public:
     const T& scalar() const& {
         assertIsRegistered<T>();
         checkIsScalar();
-        checkIsDataType<T>();
+        checkIsType<T>();
         return *static_cast<const T*>(handle()->data);
     }
 
@@ -1352,7 +1350,7 @@ public:
     Span<T> array() {
         assertIsRegistered<T>();
         checkIsArray();
-        checkIsDataType<T>();
+        checkIsType<T>();
         return Span<T>(static_cast<T*>(handle()->data), handle()->arrayLength);
     }
 
@@ -1362,7 +1360,7 @@ public:
     Span<const T> array() const {
         assertIsRegistered<T>();
         checkIsArray();
-        checkIsDataType<T>();
+        checkIsType<T>();
         return Span<const T>(static_cast<const T*>(handle()->data), handle()->arrayLength);
     }
 
@@ -1426,114 +1424,86 @@ public:
      * @{
      */
 
-    /// Assign value to variant (no copy).
+    /**
+     * Assign scalar or array to variant (no copy).
+     * @param value The value to assign to the variant. It can be:
+     *              - A scalar native or wrapper value.
+     *              - A contiguous container such as `std::array`, `std::vector`, or `Span` holding
+     *                native or wrapper elements.
+     *                The underlying array must be accessible with `std::data` and `std::size`.
+     */
     template <typename T>
-    void setValue(T&& value) {
-        setValueImpl(std::forward<T>(value));
-    }
-
-    /// Assign value with custom data type to variant (no copy).
-    template <typename T>
-    void setValue(T&& value, const UA_DataType& type) {
-        setValueImpl(std::forward<T>(value), type);
-    }
-
-    /// Copy value to variant.
-    template <typename T>
-    void setValueCopy(T&& value) {
-        setValueCopyImpl(std::forward<T>(value));
-    }
-
-    /// Copy value to variant with custom data type.
-    template <typename T>
-    void setValueCopy(T&& value, const UA_DataType& type) {
-        setValueCopyImpl(std::forward<T>(value), type);
-    }
-
-    /// Assign scalar value to variant (no copy).
-    template <typename T>
-    void setScalar(T& value) noexcept {
-        assertIsRegistered<T>();
-        setScalar(value, opcua::getDataType<T>());
-    }
-
-    /// Assign scalar value to variant with custom data type (no copy).
-    template <typename T>
-    void setScalar(T& value, const UA_DataType& type) noexcept {
-        setScalarImpl(&value, type, UA_VARIANT_DATA_NODELETE);
-    }
-
-    /// Copy scalar value to variant.
-    template <typename T>
-    void setScalarCopy(const T& value) {
-        assertIsRegisteredOrConvertible<T>();
-        if constexpr (detail::isRegisteredType<T>) {
-            setScalarCopyImpl(value, opcua::getDataType<T>());
+    void assign(ReferenceTag /* unused */, T& value) noexcept {
+        if constexpr (isArrayType<T>()) {
+            using ValueType = typename T::value_type;
+            assertIsRegistered<ValueType>();
+            assign(reference, value, opcua::getDataType<ValueType>());
         } else {
-            setScalarCopyConvertImpl(value);
+            assertIsRegistered<T>();
+            assign(reference, value, opcua::getDataType<T>());
         }
     }
 
-    /// Copy scalar value to variant with custom data type.
+    /**
+     * Assign scalar or array to variant with custom data type (no copy).
+     * @copydetails assign(ReferenceTag, T&)
+     * @param type Custom data type.
+     */
     template <typename T>
-    void setScalarCopy(const T& value, const UA_DataType& type) {
-        setScalarCopyImpl(value, type);
+    void assign(ReferenceTag /* unused */, T& value, const UA_DataType& type) noexcept {
+        if constexpr (isArrayType<T>()) {
+            setArrayImpl(std::data(value), std::size(value), type, UA_VARIANT_DATA_NODELETE);
+        } else {
+            setScalarImpl(&value, type, UA_VARIANT_DATA_NODELETE);
+        }
     }
 
     /**
-     * Assign array to variant (no copy).
-     * @param array Container with a contiguous sequence of elements.
-     *              For example `std::array`, `std::vector` or `Span`.
-     *              The underlying array must be accessible with `std::data` and `std::size`.
+     * Assign scalar or array to variant (copy and convert if required).
+     * @param value The value to copy to the variant. It can be:
+     *              - A scalar native, wrapper or convertible value.
+     *              - A container with native, wrapper or convertible elements.
+     *                The container must implement `begin()` and `end()`.
      */
-    template <typename ArrayLike>
-    void setArray(ArrayLike&& array) noexcept {
-        using ValueType = typename std::remove_reference_t<ArrayLike>::value_type;
-        assertIsRegistered<ValueType>();
-        setArray(std::forward<ArrayLike>(array), opcua::getDataType<ValueType>());
+    template <typename T>
+    void assign(const T& value) {
+        if constexpr (isArrayType<T>()) {
+            assign(value.begin(), value.end());
+        } else {
+            assertIsRegisteredOrConvertible<T>();
+            if constexpr (detail::isRegisteredType<T>) {
+                setScalarCopyImpl(value, opcua::getDataType<T>());
+            } else {
+                setScalarCopyConvertImpl(value);
+            }
+        }
     }
 
     /**
-     * Assign array to variant with custom data type (no copy).
-     * @copydetails setArray
+     * Assign scalar or array to variant with custom data type (copy).
+     * @param value The value to copy to the variant. It can be:
+     *              - A scalar native or wrapper value.
+     *              - A container with native or wrapper elements.
+     *                The container must implement `begin()` and `end()`.
      * @param type Custom data type.
      */
-    template <typename ArrayLike>
-    void setArray(ArrayLike&& array, const UA_DataType& type) noexcept {
-        static_assert(!isTemporaryArray<decltype(array)>());
-        setArrayImpl(
-            std::data(std::forward<ArrayLike>(array)),
-            std::size(std::forward<ArrayLike>(array)),
-            type,
-            UA_VARIANT_DATA_NODELETE
-        );
+    template <typename T>
+    void assign(const T& value, const UA_DataType& type) {
+        if constexpr (isArrayType<T>()) {
+            setArrayCopyImpl(value.begin(), value.end(), type);
+        } else {
+            setScalarCopyImpl(value, type);
+        }
     }
 
     /**
-     * Copy array to variant.
-     * @param array Iterable container, for example `std::vector`, `std::list` or `Span`.
-     *              The container must implement `begin()` and `end()`.
-     */
-    template <typename ArrayLike>
-    void setArrayCopy(const ArrayLike& array) {
-        setArrayCopy(array.begin(), array.end());
-    }
-
-    /**
-     * Copy array to variant with custom data type.
-     * @copydetails setArrayCopy
-     * @param type Custom data type.
-     */
-    template <typename ArrayLike>
-    void setArrayCopy(const ArrayLike& array, const UA_DataType& type) {
-        setArrayCopy(array.begin(), array.end(), type);
-    }
-
-    /**
-     * Copy range of elements as array to variant.
+     * Assign range to variant (copy and convert if required).
+     * @param first Iterator to the beginning of the range.
+     * @param last Iterator to the end of the range.
+     * @tparam InputIt Iterator of a container with native, wrapper or convertible elements.
      */
     template <typename InputIt>
-    void setArrayCopy(InputIt first, InputIt last) {
+    void assign(InputIt first, InputIt last) {
         using ValueType = typename std::iterator_traits<InputIt>::value_type;
         assertIsRegisteredOrConvertible<ValueType>();
         if constexpr (detail::isRegisteredType<ValueType>) {
@@ -1544,11 +1514,50 @@ public:
     }
 
     /**
-     * Copy range of elements as array to variant with custom data type.
+     * Assign range to variant with custom data type (copy).
+     * @param first Iterator to the beginning of the range.
+     * @param last Iterator to the end of the range.
+     * @param type Custom data type.
+     * @tparam InputIt Iterator of a container with native or wrapper elements.
      */
     template <typename InputIt>
-    void setArrayCopy(InputIt first, InputIt last, const UA_DataType& type) {
+    void assign(InputIt first, InputIt last, const UA_DataType& type) {
         setArrayCopyImpl(first, last, type);
+    }
+
+    /// @deprecated Use assign overload with reference tag instead
+    template <typename T, typename... Args>
+    [[deprecated("use assign with reference tag instead")]]
+    void setScalar(T& value, Args&&... args) noexcept {
+        assign(reference, value, std::forward<Args>(args)...);
+    }
+
+    /// @deprecated Use assign overload instead
+    template <typename T, typename... Args>
+    [[deprecated("use assign overload instead")]]
+    void setScalarCopy(const T& value, Args&&... args) {
+        assign(value, std::forward<Args>(args)...);
+    }
+
+    /// @deprecated Use assign overload with reference tag instead
+    template <typename T, typename... Args>
+    [[deprecated("use assign overload with reference tag instead")]]
+    void setArray(T& array, Args&&... args) noexcept {
+        assign(reference, array, std::forward<Args>(args)...);
+    }
+
+    /// @deprecated Use assign overload instead
+    template <typename T, typename... Args>
+    [[deprecated("use assign overload instead")]]
+    void setArrayCopy(const T& array, Args&&... args) {
+        assign(array, std::forward<Args>(args)...);
+    }
+
+    /// @deprecated Use assign overload instead
+    template <typename InputIt, typename... Args>
+    [[deprecated("use assign overload instead")]]
+    void setArrayCopy(InputIt first, InputIt last, Args&&... args) {
+        assign(first, last, std::forward<Args>(args)...);
     }
 
     /**
@@ -1566,13 +1575,6 @@ private:
         return detail::isContainer<T> && !isScalarType<T>();
     }
 
-    template <typename ArrayLike>
-    static constexpr bool isTemporaryArray() {
-        constexpr bool isTemporary = std::is_rvalue_reference_v<ArrayLike>;
-        constexpr bool isView = detail::IsSpan<std::remove_reference_t<ArrayLike>>::value;
-        return isTemporary && !isView;
-    }
-
     template <typename T>
     static constexpr void assertIsRegistered() {
         static_assert(
@@ -1584,9 +1586,9 @@ private:
     template <typename T>
     static constexpr void assertIsRegisteredOrConvertible() {
         static_assert(
-            detail::isRegisteredOrConvertible<T>,
-            "Template type must be either a native/wrapper type (copyable) or a convertible type. "
-            "If the type is a native type: Provide the data type (UA_DataType) manually or "
+            detail::isRegisteredType<T> || detail::isConvertibleType<T>,
+            "Template type must be either a native/wrapper type or a convertible type. "
+            "If the type is a native type: Provide the type definition (UA_DataType) manually or "
             "register the type with a TypeRegistry template specialization. "
             "If the type should be converted: Add a template specialization for TypeConverter."
         );
@@ -1613,7 +1615,7 @@ private:
     }
 
     template <typename T>
-    void checkIsDataType() const {
+    void checkIsType() const {
         const auto* dt = type();
         if (dt == nullptr || dt->typeId != opcua::getDataType<T>().typeId) {
             throw BadVariantAccess("Variant does not contain a value convertible to template type");
@@ -1641,24 +1643,6 @@ private:
     inline void setArrayCopyImpl(InputIt first, InputIt last, const UA_DataType& type);
     template <typename InputIt>
     inline void setArrayCopyConvertImpl(InputIt first, InputIt last);
-
-    template <typename T, typename... Args>
-    void setValueImpl(T&& value, Args&&... args) {
-        if constexpr (isArrayType<std::remove_reference_t<T>>()) {
-            setArray(std::forward<T>(value), std::forward<Args>(args)...);
-        } else {
-            setScalar(std::forward<T>(value), std::forward<Args>(args)...);
-        }
-    }
-
-    template <typename T, typename... Args>
-    void setValueCopyImpl(T&& value, Args&&... args) {
-        if constexpr (isArrayType<std::remove_reference_t<T>>()) {
-            setArrayCopy(std::forward<T>(value), std::forward<Args>(args)...);
-        } else {
-            setScalarCopy(std::forward<T>(value), std::forward<Args>(args)...);
-        }
-    }
 };
 
 template <typename T>

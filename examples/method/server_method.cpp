@@ -15,7 +15,7 @@ int main() {
         [](opcua::Span<const opcua::Variant> input, opcua::Span<opcua::Variant> output) {
             const auto& name = input[0].scalar<opcua::String>();
             const auto greeting = std::string("Hello ").append(name);
-            output[0].setScalarCopy(greeting);
+            output[0].assign(greeting);
         },
         {{"name", {"en-US", "your name"}, opcua::DataTypeId::String, opcua::ValueRank::Scalar}},
         {{"greeting", {"en-US", "greeting"}, opcua::DataTypeId::String, opcua::ValueRank::Scalar}}
@@ -33,7 +33,7 @@ int main() {
             std::transform(values.begin(), values.end(), incremented.begin(), [&](auto v) {
                 return v + delta;
             });
-            output[0].setArrayCopy(incremented);
+            output[0].assign(incremented);
         },
         {
             opcua::Argument(

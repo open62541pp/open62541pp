@@ -37,7 +37,7 @@ int main() {
     opcua::Variant variant;
 
     // Write std::byte to variant
-    variant.setScalarCopy(std::byte{11});
+    variant.assign(std::byte{11});
 
     // Read UA_Byte from variant (reference possible)
     const auto& valueNative = variant.scalar<UA_Byte>();
@@ -49,9 +49,9 @@ int main() {
 
     // Write array of bytes to variant
     std::array<std::byte, 3> array{};
-    variant.setArrayCopy(array);  // use array container
-    variant.setArrayCopy(opcua::Span{array.data(), array.size()});  // use raw array and size
-    variant.setArrayCopy(array.begin(), array.end());  // use iterator pair
+    variant.assign(array);  // use array container
+    variant.assign(opcua::Span{array.data(), array.size()});  // use raw array and size
+    variant.assign(array.begin(), array.end());  // use iterator pair
 
     std::cout << "Array size: " << variant.arrayLength() << std::endl;
 }
