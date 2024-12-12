@@ -223,8 +223,7 @@ TEST_CASE("Attribute service set (highlevel)") {
             ReferenceTypeId::HasComponent
         ));
 
-        Variant variantWrite;
-        variantWrite.setScalarCopy(11.11);
+        Variant variantWrite(11.11);
         services::writeValue(server, id, variantWrite).throwIfBad();
 
         Variant variantRead = services::readValue(server, id).value();
@@ -243,8 +242,7 @@ TEST_CASE("Attribute service set (highlevel)") {
             ReferenceTypeId::HasComponent
         ));
 
-        Variant variant;
-        variant.setScalarCopy<int>(11);
+        Variant variant(11);
         DataValue valueWrite(variant, {}, DateTime::now(), {}, uint16_t{1}, UA_STATUSCODE_GOOD);
         services::writeDataValue(server, id, valueWrite).throwIfBad();
 
