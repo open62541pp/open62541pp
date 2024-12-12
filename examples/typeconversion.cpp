@@ -17,16 +17,15 @@ namespace opcua {
 
 template <>
 struct TypeConverter<std::byte> {
-    using ValueType = std::byte;
     using NativeType = UA_Byte;
 
     // use `const NativeType& src` for non-primitive types
-    static void fromNative(NativeType src, ValueType& dst) {
+    static void fromNative(UA_Byte src, std::byte& dst) {
         dst = std::byte(src);
     }
 
     // use `const ValueType& src` for non-primitive types
-    static void toNative(ValueType src, NativeType& dst) {
+    static void toNative(std::byte src, UA_Byte& dst) {
         dst = std::to_integer<UA_Byte>(src);
     }
 };
