@@ -562,16 +562,27 @@ TEST_CASE("Variant") {
 
     SUBCASE("Type checks") {
         Variant var;
+        CHECK_FALSE(var.isType(&UA_TYPES[UA_TYPES_STRING]));
         CHECK_FALSE(var.isType(UA_TYPES[UA_TYPES_STRING]));
         CHECK_FALSE(var.isType(DataTypeId::String));
         CHECK_FALSE(var.isType<String>());
         CHECK(var.type() == nullptr);
 
         var->type = &UA_TYPES[UA_TYPES_STRING];
+        CHECK(var.isType(&UA_TYPES[UA_TYPES_STRING]));
         CHECK(var.isType(UA_TYPES[UA_TYPES_STRING]));
         CHECK(var.isType(DataTypeId::String));
         CHECK(var.isType<String>());
         CHECK(var.type() == &UA_TYPES[UA_TYPES_STRING]);
+    }
+
+    SUBCASE("Set nullptr") {
+        Variant var;
+        int* ptr{nullptr};
+        var.assign(ptr);
+        CHECK(var.isEmpty());
+        CHECK(var.type() == nullptr);
+        CHECK(var.data() == nullptr);
     }
 
     SUBCASE("Set/get scalar") {
