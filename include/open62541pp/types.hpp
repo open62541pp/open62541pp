@@ -1220,6 +1220,11 @@ public:
         return Variant{first, last, type};
     }
 
+    /**
+     * @name Observers
+     * Check the type category, type definition and array structure of the internal value.
+     */
+
     /// Check if the variant is empty.
     bool isEmpty() const noexcept {
         return handle()->type == nullptr;
@@ -1293,6 +1298,12 @@ public:
     Span<const uint32_t> getArrayDimensions() const noexcept {
         return arrayDimensions();
     }
+
+    /**
+     * @name Accessors
+     * Access internal scalar/array value.
+     * @{
+     */
 
     /// Get pointer to the underlying data.
     /// Check the properties and data type before casting it to the actual type.
@@ -1431,6 +1442,13 @@ public:
         }
     }
 
+    /**
+     * @}
+     * @name Modifiers
+     * Modify internal scalar/array value.
+     * @{
+     */
+
     /// Assign value to variant (no copy).
     template <typename T>
     void setValue(T&& value) {
@@ -1555,6 +1573,10 @@ public:
     void setArrayCopy(InputIt first, InputIt last, const UA_DataType& type) {
         setArrayCopyImpl(first, last, type);
     }
+
+    /**
+     * @}
+     */
 
 private:
     template <typename T>
