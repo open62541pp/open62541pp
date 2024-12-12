@@ -1189,21 +1189,27 @@ public:
      */
 
     /// Check if the variant is empty.
-    bool isEmpty() const noexcept {
+    bool empty() const noexcept {
         return handle()->type == nullptr;
+    }
+
+    /// @deprecated Use empty() instead
+    [[deprecated("use empty() instead")]]
+    bool isEmpty() const noexcept {
+        return empty();
     }
 
     /// Check if the variant is a scalar.
     bool isScalar() const noexcept {
         return (
-            !isEmpty() && handle()->arrayLength == 0 &&
+            !empty() && handle()->arrayLength == 0 &&
             handle()->data > UA_EMPTY_ARRAY_SENTINEL  // NOLINT
         );
     }
 
     /// Check if the variant is an array.
     bool isArray() const noexcept {
-        return !isEmpty() && !isScalar();
+        return !empty() && !isScalar();
     }
 
     /// Check if the variant type is equal to the provided data type.
@@ -2044,8 +2050,14 @@ public:
     }
 
     /// Check if the ExtensionObject is empty
-    bool isEmpty() const noexcept {
+    bool empty() const noexcept {
         return (handle()->encoding == UA_EXTENSIONOBJECT_ENCODED_NOBODY);
+    }
+
+    /// @deprecated Use empty() instead
+    [[deprecated("use empty() instead")]]
+    bool isEmpty() const noexcept {
+        return empty();
     }
 
     /// Check if the ExtensionObject is encoded (usually if the data type is unknown).

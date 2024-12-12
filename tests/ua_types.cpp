@@ -20,7 +20,7 @@ TEST_CASE("RequestHeader") {
     CHECK(header.requestHandle() == 1);
     CHECK(header.returnDiagnostics() == 2);
     CHECK(header.auditEntryId() == String("auditEntryId"));
-    CHECK(header.additionalHeader().isEmpty());
+    CHECK(header.additionalHeader().empty());
 }
 
 TEST_CASE("UserTokenPolicy") {
@@ -528,7 +528,7 @@ TEST_CASE("AggregateFilter") {
 TEST_CASE("MonitoringParameters") {
     const MonitoringParameters params(11.11, {}, 10, false);
     CHECK(params.samplingInterval() == 11.11);
-    CHECK(params.filter().isEmpty());
+    CHECK(params.filter().empty());
     CHECK(params.queueSize() == 10);
     CHECK(params.discardOldest() == false);
 }
