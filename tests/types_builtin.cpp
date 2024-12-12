@@ -578,8 +578,9 @@ TEST_CASE("Variant") {
 
     SUBCASE("Set nullptr") {
         Variant var;
-        int* ptr{nullptr};
+        float* ptr{nullptr};
         var.assign(ptr);
+        var.assign(ptr, UA_TYPES[UA_TYPES_FLOAT]);
         CHECK(var.isEmpty());
         CHECK(var.type() == nullptr);
         CHECK(var.data() == nullptr);
