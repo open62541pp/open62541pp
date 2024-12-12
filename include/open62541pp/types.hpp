@@ -1053,12 +1053,6 @@ enum class VariantPolicy {
     // clang-format on
 };
 
-/// Tag used for constructing a Variant that references a value.
-struct ReferenceTag {};
-
-/// Tag instance used for constructing a Variant that references a value.
-inline constexpr ReferenceTag reference{};
-
 /**
  * UA_Variant wrapper class.
  *
@@ -1118,32 +1112,32 @@ class Variant : public TypeWrapper<UA_Variant, UA_TYPES_VARIANT> {
 public:
     using TypeWrapper::TypeWrapper;  // inherit constructors
 
-    /// Create Variant from a value (copy).
+    /// Create Variant from a pointer to a scalar/array (no copy).
+    /// @see assign(T*)
+    template <typename T, typename = std::enable_if_t<!std::is_const_v<T>>>
+    explicit Variant(T* ptr) noexcept {
+        assign(ptr);
+    }
+
+    /// Create Variant from a pointer to a scalar/array with a custom data type (no copy).
+    /// @see assign(T*, const UA_DataType&)
+    template <typename T, typename = std::enable_if_t<!std::is_const_v<T>>>
+    Variant(T* ptr, const UA_DataType& type) noexcept {
+        assign(ptr, type);
+    }
+
+    /// Create Variant from a scalar/array (copy).
     /// @see assign(const T&)
     template <typename T, typename = std::enable_if_t<!std::is_same_v<T, Variant>>>
     explicit Variant(const T& value) {
         assign(value);
     }
 
-    /// Create Variant from a value with a custom data type (copy).
+    /// Create Variant from a scalar/array with a custom data type (copy).
     /// @see assign(const T&, const UA_DataType&)
     template <typename T>
     Variant(const T& value, const UA_DataType& type) {
         assign(value, type);
-    }
-
-    /// Create Variant from a value (no copy).
-    /// @see assign(ReferenceTag, T&)
-    template <typename T>
-    Variant(ReferenceTag /* unused */, T& value) {
-        assign(reference, value);
-    }
-
-    /// Create Variant from a value with a custom data type (no copy).
-    /// @see assign(ReferenceTag, T&, const UA_DataType&)
-    template <typename T>
-    Variant(ReferenceTag /* unused */, T& value, const UA_DataType& type) {
-        assign(reference, value, type);
     }
 
     /// Create Variant from a range of elements (copy).
@@ -1160,38 +1154,32 @@ public:
         assign(first, last, type);
     }
 
-    /// Create Variant from scalar value.
-    /// @tparam Policy Policy (@ref VariantPolicy) how to store the scalar inside the variant
-    /// @deprecated Use new unified Variant constructor instead
-    template <VariantPolicy Policy = VariantPolicy::Copy, typename... Args>
-    [[deprecated("use new unified Variant constructor instead")]]
-    [[nodiscard]] static Variant fromScalar(Args&&... args) {
+    /// @deprecated Use new universal Variant constructor instead
+    template <VariantPolicy Policy = VariantPolicy::Copy, typename T, typename... Args>
+    [[deprecated("use new universal Variant constructor instead")]] [[nodiscard]] static Variant
+    fromScalar(T&& value, Args&&... args) {
         if constexpr (Policy == VariantPolicy::Copy) {
-            return Variant{std::forward<Args>(args)...};
+            return Variant{std::forward<T>(value), std::forward<Args>(args)...};
         } else {
-            return Variant{reference, std::forward<Args>(args)...};
+            return Variant{&value, std::forward<Args>(args)...};
         }
     }
 
-    /// Create Variant from array.
-    /// @tparam Policy Policy (@ref VariantPolicy) how to store the array inside the variant
-    /// @deprecated Use new unified Variant constructor instead
-    template <VariantPolicy Policy = VariantPolicy::Copy, typename... Args>
-    [[deprecated("use new unified Variant constructor instead")]]
-    [[nodiscard]] static Variant fromArray(Args&&... args) {
+    /// @deprecated Use new universal Variant constructor instead
+    template <VariantPolicy Policy = VariantPolicy::Copy, typename T, typename... Args>
+    [[deprecated("use new universal Variant constructor instead")]] [[nodiscard]] static Variant
+    fromArray(T&& array, Args&&... args) {
         if constexpr (Policy == VariantPolicy::Copy) {
-            return Variant{std::forward<Args>(args)...};
+            return Variant{std::forward<T>(array), std::forward<Args>(args)...};
         } else {
-            return Variant{reference, std::forward<Args>(args)...};
+            return Variant{&array, std::forward<Args>(args)...};
         }
     }
 
-    /// Create Variant from range of elements (copy required).
-    /// @tparam Policy Policy (@ref VariantPolicy) how to store the array inside the variant
-    /// @deprecated Use new unified Variant constructor instead
+    /// @deprecated Use new universal Variant constructor instead
     template <VariantPolicy Policy = VariantPolicy::Copy, typename InputIt, typename... Args>
-    [[deprecated("use new unified Variant constructor instead")]]
-    [[nodiscard]] static Variant fromArray(InputIt first, InputIt last, Args&&... args) {
+    [[deprecated("use new universal Variant constructor instead")]] [[nodiscard]] static Variant
+    fromArray(InputIt first, InputIt last, Args&&... args) {
         return Variant{first, last, std::forward<Args>(args)...};
     }
 
@@ -1425,42 +1413,49 @@ public:
      */
 
     /**
-     * Assign scalar or array to variant (no copy).
-     * @param value The value to assign to the variant. It can be:
-     *              - A scalar native or wrapper value.
-     *              - A contiguous container such as `std::array`, `std::vector`, or `Span` holding
-     *                native or wrapper elements.
-     *                The underlying array must be accessible with `std::data` and `std::size`.
+     * Assign pointer to scalar/array to variant (no copy).
+     * @param ptr Non-const pointer to a value to assign to the variant. This can be:
+     *            - A pointer to a scalar native or wrapper value.
+     *            - A pointer to a contiguous container such as `std::array` or `std::vector`
+     *              holding native or wrapper elements.
+     *              The underlying array must be accessible with `std::data` and `std::size`.
+     *            - A `nullptr`, in which case the function returns without performing any action.
      */
-    template <typename T>
-    void assign(ReferenceTag /* unused */, T& value) noexcept {
+    template <typename T, typename = std::enable_if_t<!std::is_const_v<T>>>
+    void assign(T* ptr) noexcept {
+        if (ptr == nullptr) {
+            return;
+        }
         if constexpr (isArrayType<T>()) {
             using ValueType = typename T::value_type;
             assertIsRegistered<ValueType>();
-            assign(reference, value, opcua::getDataType<ValueType>());
+            assign(ptr, opcua::getDataType<ValueType>());
         } else {
             assertIsRegistered<T>();
-            assign(reference, value, opcua::getDataType<T>());
+            assign(ptr, opcua::getDataType<T>());
         }
     }
 
     /**
-     * Assign scalar or array to variant with custom data type (no copy).
-     * @copydetails assign(ReferenceTag, T&)
+     * Assign pointer to scalar/array to variant with custom data type (no copy).
+     * @copydetails assign(T*)
      * @param type Custom data type.
      */
-    template <typename T>
-    void assign(ReferenceTag /* unused */, T& value, const UA_DataType& type) noexcept {
+    template <typename T, typename = std::enable_if_t<!std::is_const_v<T>>>
+    void assign(T* ptr, const UA_DataType& type) noexcept {
+        if (ptr == nullptr) {
+            return;
+        }
         if constexpr (isArrayType<T>()) {
-            setArrayImpl(std::data(value), std::size(value), type, UA_VARIANT_DATA_NODELETE);
+            setArrayImpl(std::data(*ptr), std::size(*ptr), type, UA_VARIANT_DATA_NODELETE);
         } else {
-            setScalarImpl(&value, type, UA_VARIANT_DATA_NODELETE);
+            setScalarImpl(ptr, type, UA_VARIANT_DATA_NODELETE);
         }
     }
 
     /**
-     * Assign scalar or array to variant (copy and convert if required).
-     * @param value The value to copy to the variant. It can be:
+     * Assign scalar/array to variant (copy and convert if required).
+     * @param value Value to copy to the variant. It can be:
      *              - A scalar native, wrapper or convertible value.
      *              - A container with native, wrapper or convertible elements.
      *                The container must implement `begin()` and `end()`.
@@ -1480,8 +1475,8 @@ public:
     }
 
     /**
-     * Assign scalar or array to variant with custom data type (copy).
-     * @param value The value to copy to the variant. It can be:
+     * Assign scalar/array to variant with custom data type (copy).
+     * @param value Value to copy to the variant. It can be:
      *              - A scalar native or wrapper value.
      *              - A container with native or wrapper elements.
      *                The container must implement `begin()` and `end()`.
@@ -1525,11 +1520,11 @@ public:
         setArrayCopyImpl(first, last, type);
     }
 
-    /// @deprecated Use assign overload with reference tag instead
+    /// @deprecated Use assign overload with pointer instead
     template <typename T, typename... Args>
-    [[deprecated("use assign with reference tag instead")]]
+    [[deprecated("use assign overload with pointer instead")]]
     void setScalar(T& value, Args&&... args) noexcept {
-        assign(reference, value, std::forward<Args>(args)...);
+        assign(&value, std::forward<Args>(args)...);
     }
 
     /// @deprecated Use assign overload instead
@@ -1539,11 +1534,11 @@ public:
         assign(value, std::forward<Args>(args)...);
     }
 
-    /// @deprecated Use assign overload with reference tag instead
+    /// @deprecated Use assign overload with pointer instead
     template <typename T, typename... Args>
-    [[deprecated("use assign overload with reference tag instead")]]
+    [[deprecated("use assign overload with pointer instead")]]
     void setArray(T& array, Args&&... args) noexcept {
-        assign(reference, array, std::forward<Args>(args)...);
+        assign(&array, std::forward<Args>(args)...);
     }
 
     /// @deprecated Use assign overload instead
@@ -1786,21 +1781,23 @@ public:
     }
 
     /// Create DataValue from scalar value.
-    /// @deprecated Use constructor with new unified Variant constructor instead:
+    /// @deprecated Use constructor with new universal Variant constructor instead:
     ///             `opcua::DataValue dv(opcua::Variant(value))`
     template <VariantPolicy Policy = VariantPolicy::Copy, typename... Args>
-    [[deprecated("use constructor with new universal Variant constructor instead")]]
-    [[nodiscard]] static DataValue fromScalar(Args&&... args) {
+    [[deprecated("use constructor with new universal Variant constructor instead"
+    )]] [[nodiscard]] static DataValue
+    fromScalar(Args&&... args) {
         return DataValue(Variant::fromScalar<Policy>(std::forward<Args>(args)...));
     }
 
     /// Create DataValue from array.
     /// @see Variant::fromArray
-    /// @deprecated Use constructor with new unified Variant constructor instead:
+    /// @deprecated Use constructor with new universal Variant constructor instead:
     ///             `opcua::DataValue dv(opcua::Variant(array))`
     template <VariantPolicy Policy = VariantPolicy::Copy, typename... Args>
-    [[deprecated("use constructor with new universal Variant constructor instead")]]
-    [[nodiscard]] static DataValue fromArray(Args&&... args) {
+    [[deprecated("use constructor with new universal Variant constructor instead"
+    )]] [[nodiscard]] static DataValue
+    fromArray(Args&&... args) {
         return DataValue(Variant::fromArray<Policy>(std::forward<Args>(args)...));
     }
 

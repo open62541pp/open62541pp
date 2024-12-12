@@ -1168,7 +1168,7 @@ public:
     Node& writeValueScalar(const T& value) {
         if constexpr (detail::isRegisteredType<T>) {
             // NOLINTNEXTLINE(*-const-cast), variant isn't modified, avoid copy
-            writeValue(Variant(reference, const_cast<T&>(value)));
+            writeValue(Variant(const_cast<T*>(&value)));
         } else {
             writeValue(Variant(value));
         }
@@ -1181,7 +1181,7 @@ public:
     Node& writeValueArray(const ArrayLike& array) {
         if constexpr (detail::isRegisteredType<typename ArrayLike::value_type>) {
             // NOLINTNEXTLINE(*-const-cast), variant isn't modified, avoid copy
-            writeValue(Variant(reference, const_cast<ArrayLike&>(array)));
+            writeValue(Variant(const_cast<ArrayLike*>(&array)));
         } else {
             writeValue(Variant(array));
         }

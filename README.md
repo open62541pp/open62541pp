@@ -122,11 +122,11 @@ opcua::Variant var;
 
 // ✅ will compile
 int number = 5;
-var.assign(reference, number);
+var.assign(&number);
 
 // ❌ won't compile, because std::string can't be assigned without copy (conversion needed)
 std::string str{"test"};
-var.assign(reference, str);
+var.assign(&str);
 
 // ✅ will compile
 var.assign(str);
