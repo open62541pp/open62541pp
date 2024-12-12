@@ -445,16 +445,16 @@ public:
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR_WRAPPER(Variant, Value, value, UA_NODEATTRIBUTESMASK_VALUE)
 
-    /// @see Variant::fromScalar
+    /// @see Variant::Variant
     template <typename... Args>
     auto& setValueScalar(Args&&... args) {
-        return setValue(Variant::fromScalar(std::forward<Args>(args)...));
+        return setValue(Variant(std::forward<Args>(args)...));
     }
 
-    /// @see Variant::fromArray
+    /// @see Variant::Variant
     template <typename... Args>
     auto& setValueArray(Args&&... args) {
-        return setValue(Variant::fromArray(std::forward<Args>(args)...));
+        return setValue(Variant(std::forward<Args>(args)...));
     }
 
     UAPP_NODEATTR_WRAPPER(NodeId, DataType, dataType, UA_NODEATTRIBUTESMASK_DATATYPE)
@@ -542,16 +542,16 @@ public:
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR_WRAPPER(Variant, Value, value, UA_NODEATTRIBUTESMASK_VALUE)
 
-    /// @see Variant::fromScalar
+    /// @see Variant::Variant
     template <typename... Args>
     auto& setValueScalar(Args&&... args) {
-        return setValue(Variant::fromScalar(std::forward<Args>(args)...));
+        return setValue(Variant(std::forward<Args>(args)...));
     }
 
-    /// @see Variant::fromArray
+    /// @see Variant::Variant
     template <typename... Args>
     auto& setValueArray(Args&&... args) {
-        return setValue(Variant::fromArray(std::forward<Args>(args)...));
+        return setValue(Variant(std::forward<Args>(args)...));
     }
 
     UAPP_NODEATTR_WRAPPER(NodeId, DataType, dataType, UA_NODEATTRIBUTESMASK_DATATYPE)
@@ -1732,7 +1732,7 @@ public:
 
     template <typename T, typename = EnableIfLiteral<T>>
     explicit LiteralOperand(T&& literal)
-        : LiteralOperand(Variant::fromScalar(std::forward<T>(literal))) {}
+        : LiteralOperand(Variant(std::forward<T>(literal))) {}
 
     UAPP_GETTER_WRAPPER(Variant, getValue, value)
 };

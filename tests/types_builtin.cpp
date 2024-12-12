@@ -502,12 +502,6 @@ TEST_CASE("Variant") {
             SUBCASE("Constructor with type") {
                 var = Variant(value, type);
             }
-            SUBCASE("fromScalar") {
-                var = Variant::fromScalar(value);
-            }
-            SUBCASE("fromScalar with type") {
-                var = Variant::fromScalar(value, type);
-            }
             CHECK(var.isScalar());
             CHECK(var.type() == &type);
             CHECK(var.data() != &value);
@@ -546,18 +540,6 @@ TEST_CASE("Variant") {
             SUBCASE("Constructor with iterator pair and type") {
                 var = Variant(array.begin(), array.end(), type);
             }
-            SUBCASE("fromArray") {
-                var = Variant::fromArray(array);
-            }
-            SUBCASE("fromArray with type") {
-                var = Variant::fromArray(array, type);
-            }
-            SUBCASE("fromArray with iterator pair") {
-                var = Variant::fromArray(array.begin(), array.end());
-            }
-            SUBCASE("fromArray with iterator pair and type") {
-                var = Variant::fromArray(array.begin(), array.end(), type);
-            }
             CHECK(var.isArray());
             CHECK(var.type() == &type);
             CHECK(var.data() != array.data());
@@ -570,12 +552,6 @@ TEST_CASE("Variant") {
             }
             SUBCASE("Constructor with type") {
                 var = Variant(reference, array, type);
-            }
-            SUBCASE("fromArray") {
-                var = Variant::fromArray<VariantPolicy::Reference>(array);
-            }
-            SUBCASE("fromArray with type") {
-                var = Variant::fromArray<VariantPolicy::Reference>(array, type);
             }
             CHECK(var.isArray());
             CHECK(var.type() == &type);
@@ -852,12 +828,12 @@ TEST_CASE("Variant") {
 
 TEST_CASE("DataValue") {
     SUBCASE("Create from scalar") {
-        CHECK(DataValue::fromScalar(5).value().to<int>() == 5);
+        CHECK(DataValue(Variant(5)).value().to<int>() == 5);
     }
 
     SUBCASE("Create from array") {
         std::vector<int> vec{1, 2, 3};
-        CHECK(DataValue::fromArray(vec).value().to<std::vector<int>>() == vec);
+        CHECK(DataValue(Variant(vec)).value().to<std::vector<int>>() == vec);
     }
 
     SUBCASE("Empty") {
@@ -882,7 +858,7 @@ TEST_CASE("DataValue") {
 
     SUBCASE("Constructor with all optional parameter specified") {
         DataValue dv(
-            Variant::fromScalar(5),
+            Variant{5},
             DateTime{1},
             DateTime{2},
             uint16_t{3},
@@ -950,7 +926,7 @@ TEST_CASE("DataValue") {
     }
 
     SUBCASE("getValue (lvalue & rvalue)") {
-        DataValue dv(Variant::fromScalar(11));
+        DataValue dv(Variant(11));
         void* data = dv.value().data();
 
         Variant var;
@@ -1004,7 +980,7 @@ TEST_CASE("ExtensionObject") {
 
     SUBCASE("fromDecodedCopy") {
         ExtensionObject obj;
-        const auto value = Variant::fromScalar(11.11);
+        const auto value = Variant(11.11);
         SUBCASE("Deduce data type") {
             obj = ExtensionObject::fromDecodedCopy(value);
         }

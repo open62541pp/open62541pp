@@ -1164,60 +1164,37 @@ public:
 
     /// Create Variant from scalar value.
     /// @tparam Policy Policy (@ref VariantPolicy) how to store the scalar inside the variant
-    template <VariantPolicy Policy = VariantPolicy::Copy, typename T>
-    [[nodiscard]] static Variant fromScalar(T&& value) {
+    /// @deprecated Use new unified Variant constructor instead
+    template <VariantPolicy Policy = VariantPolicy::Copy, typename... Args>
+    [[deprecated("use new unified Variant constructor instead")]]
+    [[nodiscard]] static Variant fromScalar(Args&&... args) {
         if constexpr (Policy == VariantPolicy::Copy) {
-            return Variant{std::forward<T>(value)};
+            return Variant{std::forward<Args>(args)...};
         } else {
-            return Variant{reference, std::forward<T>(value)};
-        }
-    }
-
-    /// Create Variant from scalar value with custom data type.
-    /// @tparam Policy Policy (@ref VariantPolicy) how to store the scalar inside the variant
-    template <VariantPolicy Policy = VariantPolicy::Copy, typename T>
-    [[nodiscard]] static Variant fromScalar(T&& value, const UA_DataType& type) {
-        if constexpr (Policy == VariantPolicy::Copy) {
-            return Variant{std::forward<T>(value), type};
-        } else {
-            return Variant{reference, std::forward<T>(value), type};
+            return Variant{reference, std::forward<Args>(args)...};
         }
     }
 
     /// Create Variant from array.
     /// @tparam Policy Policy (@ref VariantPolicy) how to store the array inside the variant
-    template <VariantPolicy Policy = VariantPolicy::Copy, typename ArrayLike>
-    [[nodiscard]] static Variant fromArray(ArrayLike&& array) {
+    /// @deprecated Use new unified Variant constructor instead
+    template <VariantPolicy Policy = VariantPolicy::Copy, typename... Args>
+    [[deprecated("use new unified Variant constructor instead")]]
+    [[nodiscard]] static Variant fromArray(Args&&... args) {
         if constexpr (Policy == VariantPolicy::Copy) {
-            return Variant{std::forward<ArrayLike>(array)};
+            return Variant{std::forward<Args>(args)...};
         } else {
-            return Variant{reference, std::forward<ArrayLike>(array)};
-        }
-    }
-
-    /// Create Variant from array with custom data type.
-    /// @tparam Policy Policy (@ref VariantPolicy) how to store the array inside the variant
-    template <VariantPolicy Policy = VariantPolicy::Copy, typename ArrayLike>
-    [[nodiscard]] static Variant fromArray(ArrayLike&& array, const UA_DataType& type) {
-        if constexpr (Policy == VariantPolicy::Copy) {
-            return Variant{std::forward<ArrayLike>(array), type};
-        } else {
-            return Variant{reference, std::forward<ArrayLike>(array), type};
+            return Variant{reference, std::forward<Args>(args)...};
         }
     }
 
     /// Create Variant from range of elements (copy required).
     /// @tparam Policy Policy (@ref VariantPolicy) how to store the array inside the variant
-    template <VariantPolicy Policy = VariantPolicy::Copy, typename InputIt>
-    [[nodiscard]] static Variant fromArray(InputIt first, InputIt last) {
-        return Variant{first, last};
-    }
-
-    /// Create Variant from range of elements with custom data type (copy required).
-    /// @tparam Policy Policy (@ref VariantPolicy) how to store the array inside the variant
-    template <VariantPolicy Policy = VariantPolicy::Copy, typename InputIt>
-    [[nodiscard]] static Variant fromArray(InputIt first, InputIt last, const UA_DataType& type) {
-        return Variant{first, last, type};
+    /// @deprecated Use new unified Variant constructor instead
+    template <VariantPolicy Policy = VariantPolicy::Copy, typename InputIt, typename... Args>
+    [[deprecated("use new unified Variant constructor instead")]]
+    [[nodiscard]] static Variant fromArray(InputIt first, InputIt last, Args&&... args) {
+        return Variant{first, last, std::forward<Args>(args)...};
     }
 
     /**
@@ -1825,15 +1802,20 @@ public:
     }
 
     /// Create DataValue from scalar value.
-    /// @see Variant::fromScalar
+    /// @deprecated Use constructor with new unified Variant constructor instead:
+    ///             `opcua::DataValue dv(opcua::Variant(value))`
     template <VariantPolicy Policy = VariantPolicy::Copy, typename... Args>
+    [[deprecated("use constructor with new universal Variant constructor instead")]]
     [[nodiscard]] static DataValue fromScalar(Args&&... args) {
         return DataValue(Variant::fromScalar<Policy>(std::forward<Args>(args)...));
     }
 
     /// Create DataValue from array.
     /// @see Variant::fromArray
+    /// @deprecated Use constructor with new unified Variant constructor instead:
+    ///             `opcua::DataValue dv(opcua::Variant(array))`
     template <VariantPolicy Policy = VariantPolicy::Copy, typename... Args>
+    [[deprecated("use constructor with new universal Variant constructor instead")]]
     [[nodiscard]] static DataValue fromArray(Args&&... args) {
         return DataValue(Variant::fromArray<Policy>(std::forward<Args>(args)...));
     }

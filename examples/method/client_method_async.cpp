@@ -20,7 +20,7 @@ int main() {
     // Asynchronously call method (future variant - default)
     {
         auto future = objectsNode.callMethodAsync(
-            greetMethodNode.id(), {opcua::Variant::fromScalar("Future World")}, opcua::useFuture
+            greetMethodNode.id(), {opcua::Variant("Future World")}, opcua::useFuture
         );
         std::cout << "Waiting for asynchronous operation to complete\n";
         future.wait();
@@ -35,7 +35,7 @@ int main() {
     {
         objectsNode.callMethodAsync(
             greetMethodNode.id(),
-            {opcua::Variant::fromScalar("Callback World")},
+            {opcua::Variant("Callback World")},
             [](opcua::CallMethodResult& result) {
                 std::cout << "Callback with status code: " << result.statusCode() << std::endl;
                 std::cout << result.outputArguments()[0].scalar<opcua::String>() << std::endl;

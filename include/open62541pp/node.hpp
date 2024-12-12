@@ -1167,10 +1167,10 @@ public:
     template <typename T>
     Node& writeValueScalar(const T& value) {
         if constexpr (detail::isRegisteredType<T>) {
-            // NOLINTNEXTLINE(*-const-cast), variant isn't modified, try to avoid copy
-            writeValue(Variant::fromScalar<VariantPolicy::Reference>(const_cast<T&>(value)));
+            // NOLINTNEXTLINE(*-const-cast), variant isn't modified, avoid copy
+            writeValue(Variant(reference, const_cast<T&>(value)));
         } else {
-            writeValue(Variant::fromScalar<VariantPolicy::Copy>(value));
+            writeValue(Variant(value));
         }
 
         return *this;
@@ -1179,15 +1179,19 @@ public:
     /// Write array value to variable node.
     template <typename ArrayLike>
     Node& writeValueArray(const ArrayLike& array) {
-        // NOLINTNEXTLINE(*-const-cast), variant isn't modified, try to avoid copy
-        writeValue(Variant::fromArray<VariantPolicy::Reference>(const_cast<ArrayLike&>(array)));
+        if constexpr (detail::isRegisteredType<typename ArrayLike::value_type>) {
+            // NOLINTNEXTLINE(*-const-cast), variant isn't modified, avoid copy
+            writeValue(Variant(reference, const_cast<ArrayLike&>(array)));
+        } else {
+            writeValue(Variant(array));
+        }
         return *this;
     }
 
     /// Write range of elements as array value to variable node.
     template <typename InputIt>
     Node& writeValueArray(InputIt first, InputIt last) {
-        writeValue(Variant::fromArray<VariantPolicy::Copy>(first, last));
+        writeValue(Variant(first, last));
         return *this;
     }
 

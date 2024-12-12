@@ -88,7 +88,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
         CHECK(result.statusCode().isGood());
         CAPTURE(result.monitoredItemId());
 
-        services::writeValue(server, id, Variant::fromScalar(11.11)).throwIfBad();
+        services::writeValue(server, id, Variant(11.11)).throwIfBad();
         setup.client.runIterate();
         CHECK(notificationCount > 0);
         CHECK(changedValue.value().scalar<double>() == 11.11);
@@ -345,7 +345,7 @@ TEST_CASE("MonitoredItem service set (server)") {
                 .monitoredItemId();
         CAPTURE(monId);
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
-        services::writeValue(server, id, Variant::fromScalar(11.11)).throwIfBad();
+        services::writeValue(server, id, Variant(11.11)).throwIfBad();
         server.runIterate();
         CHECK(notificationCount > 0);
     }
