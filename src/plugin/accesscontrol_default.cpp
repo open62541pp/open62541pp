@@ -49,7 +49,7 @@ StatusCode AccessControlDefault::activateSession(
     // https://github.com/open62541/open62541/blob/v1.3.6/plugins/ua_accesscontrol_default.c#L38-L134
 
     // empty token
-    if (userIdentityToken.isEmpty()) {
+    if (userIdentityToken.empty()) {
         if (allowAnonymous_) {
             return UA_STATUSCODE_GOOD;
         }

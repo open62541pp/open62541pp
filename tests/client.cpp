@@ -26,7 +26,7 @@ TEST_CASE("ClientConfig") {
 
     SUBCASE("setUserIdentityToken") {
         const auto& token = asWrapper<ExtensionObject>(config->userIdentityToken);
-        CHECK(token.isEmpty());
+        CHECK(token.empty());
 
         config.setUserIdentityToken(AnonymousIdentityToken{});
         CHECK(token.decodedData<AnonymousIdentityToken>() != nullptr);
@@ -40,7 +40,7 @@ TEST_CASE("ClientConfig") {
         config.setUserIdentityToken(IssuedIdentityToken{});
         CHECK(token.decodedData<IssuedIdentityToken>() != nullptr);
 
-        CHECK_FALSE(token.isEmpty());
+        CHECK_FALSE(token.empty());
     }
 
     SUBCASE("setSecurityMode") {

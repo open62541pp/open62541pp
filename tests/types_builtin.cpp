@@ -478,7 +478,7 @@ TEST_CASE("ExpandedNodeId") {
 TEST_CASE("Variant") {
     SUBCASE("Empty") {
         Variant var;
-        CHECK(var.isEmpty());
+        CHECK(var.empty());
         CHECK_FALSE(var.isScalar());
         CHECK_FALSE(var.isArray());
         CHECK(var.type() == nullptr);
@@ -581,7 +581,7 @@ TEST_CASE("Variant") {
         float* ptr{nullptr};
         var.assign(ptr);
         var.assign(ptr, UA_TYPES[UA_TYPES_FLOAT]);
-        CHECK(var.isEmpty());
+        CHECK(var.empty());
         CHECK(var.type() == nullptr);
         CHECK(var.data() == nullptr);
     }
@@ -905,7 +905,7 @@ TEST_CASE("DataValue") {
 TEST_CASE("ExtensionObject") {
     SUBCASE("Empty") {
         ExtensionObject obj;
-        CHECK(obj.isEmpty());
+        CHECK(obj.empty());
         CHECK_FALSE(obj.isEncoded());
         CHECK_FALSE(obj.isDecoded());
         CHECK(obj.encoding() == ExtensionObjectEncoding::EncodedNoBody);
