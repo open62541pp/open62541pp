@@ -15,8 +15,8 @@ int main() {
         {1, 1000},
         "GenerateEvent",
         [&](opcua::Span<const opcua::Variant> input, opcua::Span<opcua::Variant>) {
-            const auto severity = input[0].scalar<uint16_t>();
-            const auto& message = input[1].scalar<opcua::String>();
+            const auto severity = input.at(0).scalar<uint16_t>();
+            const auto& message = input.at(1).scalar<opcua::String>();
 
             event.writeTime(opcua::DateTime::now());
             event.writeSeverity(severity);

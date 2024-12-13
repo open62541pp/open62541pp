@@ -454,7 +454,7 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         varNode.writeValueRank(ValueRank::OneDimension);
         if constexpr (isAsync<T>) {
             CHECK(await(varNode.writeArrayDimensionsAsync(dimensions)).isGood());
-            CHECK(await(varNode.readArrayDimensionsAsync()).value()[0] == 11);
+            CHECK(await(varNode.readArrayDimensionsAsync()).value().at(0) == 11);
         } else {
             CHECK_NOTHROW(varNode.writeArrayDimensions(dimensions));
             CHECK(varNode.readArrayDimensions() == dimensions);

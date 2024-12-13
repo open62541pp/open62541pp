@@ -13,9 +13,9 @@ int main() {
         {1, 1000},
         "Greet",
         [](opcua::Span<const opcua::Variant> input, opcua::Span<opcua::Variant> output) {
-            const auto& name = input[0].scalar<opcua::String>();
+            const auto& name = input.at(0).scalar<opcua::String>();
             const auto greeting = std::string("Hello ").append(name);
-            output[0].assign(greeting);
+            output.at(0).assign(greeting);
         },
         {{"name", {"en-US", "your name"}, opcua::DataTypeId::String, opcua::ValueRank::Scalar}},
         {{"greeting", {"en-US", "greeting"}, opcua::DataTypeId::String, opcua::ValueRank::Scalar}}
@@ -27,13 +27,13 @@ int main() {
         {1, 1001},
         "IncInt32ArrayValues",
         [](opcua::Span<const opcua::Variant> input, opcua::Span<opcua::Variant> output) {
-            const auto values = input[0].array<int32_t>();
-            const auto delta = input[1].scalar<int32_t>();
+            const auto values = input.at(0).array<int32_t>();
+            const auto delta = input.at(0).scalar<int32_t>();
             std::vector<int32_t> incremented(values.size());
             std::transform(values.begin(), values.end(), incremented.begin(), [&](auto v) {
                 return v + delta;
             });
-            output[0].assign(incremented);
+            output.at(0).assign(incremented);
         },
         {
             opcua::Argument(
