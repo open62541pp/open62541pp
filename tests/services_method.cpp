@@ -27,9 +27,9 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
             if (throwException) {
                 throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
             }
-            const auto a = inputs[0].scalar<int32_t>();
-            const auto b = inputs[1].scalar<int32_t>();
-            outputs[0].assign(a + b);
+            const auto a = inputs.at(0).scalar<int32_t>();
+            const auto b = inputs.at(1).scalar<int32_t>();
+            outputs.at(0).assign(a + b);
         },
         {
             Argument("a", {"en-US", "first number"}, DataTypeId::Int32, ValueRank::Scalar),
@@ -64,7 +64,7 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
         );
         CHECK(result.statusCode().isGood());
         CHECK(result.outputArguments().size() == 1);
-        CHECK(result.outputArguments()[0].scalar<int32_t>() == 3);
+        CHECK(result.outputArguments().at(0).scalar<int32_t>() == 3);
     }
 
     SUBCASE("Propagate exception") {

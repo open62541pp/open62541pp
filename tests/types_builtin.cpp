@@ -42,7 +42,7 @@ TEST_CASE("StatusCode") {
         CHECK(!code.isGood());
         CHECK(!code.isUncertain());
         CHECK(code.isBad());
-        CHECK_THROWS_AS_MESSAGE(code.throwIfBad(), BadStatus, "BadTimeout");
+        CHECK_THROWS_WITH_AS(code.throwIfBad(), "BadTimeout", BadStatus);
     }
 }
 

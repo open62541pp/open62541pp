@@ -46,7 +46,7 @@ TEST_CASE("AsyncServiceAdapter") {
             invokeCallback(nullptr);
             CHECK_FALSE(result.has_value());
             CHECK(catcher.hasException());
-            CHECK_THROWS_AS_MESSAGE(catcher.rethrow(), BadStatus, "BadUnexpectedError");
+            CHECK_THROWS_WITH_AS(catcher.rethrow(), "BadUnexpectedError", BadStatus);
         }
         SUBCASE("Exception in completion handler") {
             throwInCompletionHandler = true;
@@ -54,7 +54,7 @@ TEST_CASE("AsyncServiceAdapter") {
             CHECK(result.has_value());
             CHECK(result.value() == response);
             CHECK(catcher.hasException());
-            CHECK_THROWS_AS_MESSAGE(catcher.rethrow(), std::runtime_error, "CompletionHandler");
+            CHECK_THROWS_WITH_AS(catcher.rethrow(), "CompletionHandler", std::runtime_error);
         }
     }
 }
@@ -132,6 +132,6 @@ TEST_CASE("sendRequestAsync") {
 
     SUBCASE("Exception in user callback") {
         sendReadRequest([](ReadResponse&) { throw std::runtime_error("Error"); });
-        CHECK_THROWS_AS_MESSAGE(client.runIterate(), std::runtime_error, "Error");
+        CHECK_THROWS_WITH_AS(client.runIterate(), "Error", std::runtime_error);
     }
 }
