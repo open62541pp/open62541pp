@@ -47,10 +47,20 @@ TEST_CASE("Span") {
         CHECK(view.back() == 2);
         CHECK(view.data() == vec.data());
 
-        CHECK(view[2] == 2);
-        view[2] = 20;
-        CHECK(view[2] == 20);
-        CHECK(vec[2] == 20);
+        SUBCASE("operator[]") {
+            CHECK(view[2] == 2);
+            view[2] = 20;
+            CHECK(view[2] == 20);
+            CHECK(vec[2] == 20);
+        }
+
+        SUBCASE("at (with bounds checking)") {
+            CHECK(view.at(0) == 0);
+            CHECK(view.at(1) == 1);
+            CHECK(view.at(2) == 2);
+            CHECK_THROWS_WITH_AS((void)view.at(3), "index (3) >= size() (3)", std::out_of_range);
+            CHECK_THROWS_WITH_AS((void)view.at(4), "index (4) >= size() (3)", std::out_of_range);
+        }
     }
 
     SUBCASE("Iterators") {
