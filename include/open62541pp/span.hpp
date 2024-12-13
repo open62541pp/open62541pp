@@ -7,6 +7,7 @@
 #include <iterator>
 #include <limits>
 #include <stdexcept>  // out_of_range
+#include <string>
 #include <type_traits>
 #include <utility>  // swap
 
