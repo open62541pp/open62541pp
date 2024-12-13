@@ -372,7 +372,7 @@ public:
     using DefaultClock = std::chrono::system_clock;
     using UaDuration = std::chrono::duration<int64_t, std::ratio<1, 10'000'000>>;
 
-    using TypeWrapper::TypeWrapper;  // inherit constructors
+    using TypeWrapper::TypeWrapper;
 
     template <typename Clock, typename Duration>
     DateTime(std::chrono::time_point<Clock, Duration> timePoint)  // NOLINT(*-explicit-conversions)
@@ -458,7 +458,7 @@ struct TypeConverter<std::chrono::time_point<Clock, Duration>> {
  */
 class Guid : public TypeWrapper<UA_Guid, UA_TYPES_GUID> {
 public:
-    using TypeWrapper::TypeWrapper;  // inherit constructors
+    using TypeWrapper::TypeWrapper;
 
     explicit Guid(std::array<uint8_t, 16> data) noexcept
         : Guid(UA_Guid{
@@ -624,7 +624,7 @@ enum class NodeIdType : uint8_t {
  */
 class NodeId : public TypeWrapper<UA_NodeId, UA_TYPES_NODEID> {
 public:
-    using TypeWrapper::TypeWrapper;  // inherit constructors
+    using TypeWrapper::TypeWrapper;
 
     /// Create NodeId with numeric identifier.
     NodeId(NamespaceIndex namespaceIndex, uint32_t identifier) noexcept {
@@ -860,7 +860,7 @@ inline bool operator>=(const UA_NodeId& lhs, const UA_NodeId& rhs) noexcept {
  */
 class ExpandedNodeId : public TypeWrapper<UA_ExpandedNodeId, UA_TYPES_EXPANDEDNODEID> {
 public:
-    using TypeWrapper::TypeWrapper;  // inherit constructors
+    using TypeWrapper::TypeWrapper;
 
     explicit ExpandedNodeId(NodeId id) noexcept {
         asWrapper<NodeId>(handle()->nodeId) = std::move(id);
@@ -957,7 +957,7 @@ inline bool operator>=(const UA_ExpandedNodeId& lhs, const UA_ExpandedNodeId& rh
  */
 class QualifiedName : public TypeWrapper<UA_QualifiedName, UA_TYPES_QUALIFIEDNAME> {
 public:
-    using TypeWrapper::TypeWrapper;  // inherit constructors
+    using TypeWrapper::TypeWrapper;
 
     QualifiedName(NamespaceIndex namespaceIndex, std::string_view name) {
         handle()->namespaceIndex = namespaceIndex;
@@ -1006,7 +1006,7 @@ inline bool operator!=(const UA_QualifiedName& lhs, const UA_QualifiedName& rhs)
  */
 class LocalizedText : public TypeWrapper<UA_LocalizedText, UA_TYPES_LOCALIZEDTEXT> {
 public:
-    using TypeWrapper::TypeWrapper;  // inherit constructors
+    using TypeWrapper::TypeWrapper;
 
     LocalizedText(std::string_view locale, std::string_view text) {
         handle()->locale = detail::allocNativeString(locale);
@@ -1119,7 +1119,7 @@ private:
         std::is_same_v<std::remove_cv_t<std::remove_reference_t<T>>, UA_Variant>;
 
 public:
-    using TypeWrapper::TypeWrapper;  // inherit constructors
+    using TypeWrapper::TypeWrapper;
 
     /// Create Variant from a pointer to a scalar/array (no copy).
     /// @see assign(T*)
@@ -1190,234 +1190,6 @@ public:
     [[deprecated("use new universal Variant constructor instead")]] [[nodiscard]] static Variant
     fromArray(InputIt first, InputIt last, Args&&... args) {
         return Variant{first, last, std::forward<Args>(args)...};
-    }
-
-    /**
-     * @name Observers
-     * Check the type category, type definition and array structure of the internal value.
-     */
-
-    /// Check if the variant is empty.
-    bool empty() const noexcept {
-        return handle()->type == nullptr;
-    }
-
-    /// @deprecated Use empty() instead
-    [[deprecated("use empty() instead")]]
-    bool isEmpty() const noexcept {
-        return empty();
-    }
-
-    /// Check if the variant is a scalar.
-    bool isScalar() const noexcept {
-        return (
-            !empty() && handle()->arrayLength == 0 &&
-            handle()->data > UA_EMPTY_ARRAY_SENTINEL  // NOLINT
-        );
-    }
-
-    /// Check if the variant is an array.
-    bool isArray() const noexcept {
-        return !empty() && !isScalar();
-    }
-
-    /// Check if the variant type is equal to the provided data type.
-    bool isType(const UA_DataType* type) const noexcept {
-        return (
-            handle()->type != nullptr && type != nullptr && handle()->type->typeId == type->typeId
-        );
-    }
-
-    /// Check if the variant type is equal to the provided data type.
-    bool isType(const UA_DataType& type) const noexcept {
-        return isType(&type);
-    }
-
-    /// Check if the variant type is equal to the provided data type node id.
-    bool isType(const NodeId& id) const noexcept {
-        return (handle()->type != nullptr) && (handle()->type->typeId == id);
-    }
-
-    /// Check if the variant type is equal to the provided template type.
-    template <typename T>
-    bool isType() const noexcept {
-        return isType(opcua::getDataType<T>());
-    }
-
-    /// Get data type.
-    const UA_DataType* type() const noexcept {
-        return handle()->type;
-    }
-
-    /// @deprecated Use type() instead
-    [[deprecated("use type() instead")]]
-    const UA_DataType* getDataType() const noexcept {
-        return type();
-    }
-
-    /// Get array length or 0 if variant is not an array.
-    size_t arrayLength() const noexcept {
-        return handle()->arrayLength;
-    }
-
-    /// @deprecated Use arrayLength() instead
-    [[deprecated("use arrayLength() instead")]]
-    size_t getArrayLength() const noexcept {
-        return arrayLength();
-    }
-
-    /// Get array dimensions.
-    Span<const uint32_t> arrayDimensions() const noexcept {
-        return {handle()->arrayDimensions, handle()->arrayDimensionsSize};
-    }
-
-    /// @deprecated Use arrayDimensions() instead
-    [[deprecated("use arrayDimensions() instead")]]
-    Span<const uint32_t> getArrayDimensions() const noexcept {
-        return arrayDimensions();
-    }
-
-    /**
-     * @name Accessors
-     * Access internal scalar/array value.
-     * @{
-     */
-
-    /// Get pointer to the underlying data.
-    /// Check the properties and data type before casting it to the actual type.
-    /// Use the methods @ref isScalar, @ref isArray, @ref isType / @ref type.
-    void* data() noexcept {
-        return handle()->data;
-    }
-
-    /// @copydoc data
-    const void* data() const noexcept {
-        return handle()->data;
-    }
-
-    /// Get reference to scalar value with given template type (only native or wrapper types).
-    /// @exception BadVariantAccess If the variant is not a scalar or not of type `T`.
-    template <typename T>
-    T& scalar() & {
-        assertIsRegistered<T>();
-        checkIsScalar();
-        checkIsType<T>();
-        return *static_cast<T*>(handle()->data);
-    }
-
-    /// @copydoc scalar()&
-    template <typename T>
-    const T& scalar() const& {
-        assertIsRegistered<T>();
-        checkIsScalar();
-        checkIsType<T>();
-        return *static_cast<const T*>(handle()->data);
-    }
-
-    /// @copydoc scalar()&
-    template <typename T>
-    T&& scalar() && {
-        return std::move(scalar<T>());
-    }
-
-    /// @copydoc scalar()&
-    template <typename T>
-    const T&& scalar() const&& {
-        return std::move(scalar<T>());
-    }
-
-    /// @deprecated Use scalar() instead
-    template <typename T>
-    [[deprecated("use scalar() instead")]]
-    T& getScalar() {
-        return scalar<T>();
-    }
-
-    /// @deprecated Use scalar() instead
-    template <typename T>
-    [[deprecated("use scalar() instead")]]
-    const T& getScalar() const {
-        return scalar<T>();
-    }
-
-    /// @deprecated Use to<T>() instead
-    template <typename T>
-    [[deprecated("use to<T>() instead")]]
-    T getScalarCopy() const {
-        return to<T>();
-    }
-
-    /// Get reference to array with given template type (only native or wrapper types).
-    /// @exception BadVariantAccess If the variant is not an array or not of type `T`.
-    template <typename T>
-    Span<T> array() {
-        assertIsRegistered<T>();
-        checkIsArray();
-        checkIsType<T>();
-        return Span<T>(static_cast<T*>(handle()->data), handle()->arrayLength);
-    }
-
-    /// Get reference to array with given template type (only native or wrapper types).
-    /// @exception BadVariantAccess If the variant is not an array or not of type `T`.
-    template <typename T>
-    Span<const T> array() const {
-        assertIsRegistered<T>();
-        checkIsArray();
-        checkIsType<T>();
-        return Span<const T>(static_cast<const T*>(handle()->data), handle()->arrayLength);
-    }
-
-    /// @deprecated Use array() instead
-    template <typename T>
-    [[deprecated("use array() instead")]]
-    Span<T> getArray() {
-        return array<T>();
-    }
-
-    /// @deprecated Use array() instead
-    template <typename T>
-    [[deprecated("use array() instead")]]
-    Span<const T> getArray() const {
-        return array<T>();
-    }
-
-    /// @deprecated Use to<std::vector<T>>() instead
-    template <typename T>
-    [[deprecated("use to<std::vector<T>>() instead")]]
-    std::vector<T> getArrayCopy() const {
-        return to<std::vector<T>>();
-    }
-
-    /**
-     * Converts the variant to the specified type `T` with automatic conversion if required.
-     *
-     * Determines the type category (scalar or array) based on the characteristics of `T` using
-     * @ref Variant "type category detection".
-     * If `T` is a container, it must be constructible from an iterator pair.
-     *
-     * @code
-     * // Scalar
-     * opcua::Variant var(11);
-     * const auto value = var.to<int>();
-     * @endcode
-     *
-     * @code
-     * // Array
-     * std::array<std::string, 3> array{"One", "Two", "Three"};
-     * opcua::Variant var(array);
-     * const auto vec = var.to<std::vector<std::string>>();
-     * const auto lst = var.to<std::list<opcua::String>>();
-     * @endcode
-     *
-     *  @exception BadVariantAccess If the variant is not convertible to `T`.
-     */
-    template <typename T>
-    [[nodiscard]] T to() const {
-        if constexpr (isArrayType<T>()) {
-            return toArrayImpl<T>();
-        } else {
-            return toScalarImpl<T>();
-        }
     }
 
     /**
@@ -1584,6 +1356,234 @@ public:
     [[deprecated("use assign overload instead")]]
     void setArrayCopy(InputIt first, InputIt last, Args&&... args) {
         assign(first, last, std::forward<Args>(args)...);
+    }
+
+    /**
+     * @name Observers
+     * Check the type category, type definition and array structure of the internal value.
+     */
+
+    /// Check if the variant is empty.
+    bool empty() const noexcept {
+        return handle()->type == nullptr;
+    }
+
+    /// @deprecated Use empty() instead
+    [[deprecated("use empty() instead")]]
+    bool isEmpty() const noexcept {
+        return empty();
+    }
+
+    /// Check if the variant is a scalar.
+    bool isScalar() const noexcept {
+        return (
+            !empty() && handle()->arrayLength == 0 &&
+            handle()->data > UA_EMPTY_ARRAY_SENTINEL  // NOLINT
+        );
+    }
+
+    /// Check if the variant is an array.
+    bool isArray() const noexcept {
+        return !empty() && !isScalar();
+    }
+
+    /// Check if the variant type is equal to the provided data type.
+    bool isType(const UA_DataType* type) const noexcept {
+        return (
+            handle()->type != nullptr && type != nullptr && handle()->type->typeId == type->typeId
+        );
+    }
+
+    /// Check if the variant type is equal to the provided data type.
+    bool isType(const UA_DataType& type) const noexcept {
+        return isType(&type);
+    }
+
+    /// Check if the variant type is equal to the provided data type node id.
+    bool isType(const NodeId& id) const noexcept {
+        return (handle()->type != nullptr) && (handle()->type->typeId == id);
+    }
+
+    /// Check if the variant type is equal to the provided template type.
+    template <typename T>
+    bool isType() const noexcept {
+        return isType(opcua::getDataType<T>());
+    }
+
+    /// Get data type.
+    const UA_DataType* type() const noexcept {
+        return handle()->type;
+    }
+
+    /// @deprecated Use type() instead
+    [[deprecated("use type() instead")]]
+    const UA_DataType* getDataType() const noexcept {
+        return type();
+    }
+
+    /// Get array length or 0 if variant is not an array.
+    size_t arrayLength() const noexcept {
+        return handle()->arrayLength;
+    }
+
+    /// @deprecated Use arrayLength() instead
+    [[deprecated("use arrayLength() instead")]]
+    size_t getArrayLength() const noexcept {
+        return arrayLength();
+    }
+
+    /// Get array dimensions.
+    Span<const uint32_t> arrayDimensions() const noexcept {
+        return {handle()->arrayDimensions, handle()->arrayDimensionsSize};
+    }
+
+    /// @deprecated Use arrayDimensions() instead
+    [[deprecated("use arrayDimensions() instead")]]
+    Span<const uint32_t> getArrayDimensions() const noexcept {
+        return arrayDimensions();
+    }
+
+    /**
+     * @name Accessors
+     * Access and convert internal scalar/array value.
+     * @{
+     */
+
+    /// Get pointer to the underlying data.
+    /// Check the properties and data type before casting it to the actual type.
+    /// Use the methods @ref isScalar, @ref isArray, @ref isType / @ref type.
+    void* data() noexcept {
+        return handle()->data;
+    }
+
+    /// @copydoc data
+    const void* data() const noexcept {
+        return handle()->data;
+    }
+
+    /// Get reference to scalar value with given template type (only native or wrapper types).
+    /// @exception BadVariantAccess If the variant is not a scalar or not of type `T`.
+    template <typename T>
+    T& scalar() & {
+        assertIsRegistered<T>();
+        checkIsScalar();
+        checkIsType<T>();
+        return *static_cast<T*>(handle()->data);
+    }
+
+    /// @copydoc scalar()&
+    template <typename T>
+    const T& scalar() const& {
+        assertIsRegistered<T>();
+        checkIsScalar();
+        checkIsType<T>();
+        return *static_cast<const T*>(handle()->data);
+    }
+
+    /// @copydoc scalar()&
+    template <typename T>
+    T&& scalar() && {
+        return std::move(scalar<T>());
+    }
+
+    /// @copydoc scalar()&
+    template <typename T>
+    const T&& scalar() const&& {
+        return std::move(scalar<T>());
+    }
+
+    /// @deprecated Use scalar() instead
+    template <typename T>
+    [[deprecated("use scalar() instead")]]
+    T& getScalar() {
+        return scalar<T>();
+    }
+
+    /// @deprecated Use scalar() instead
+    template <typename T>
+    [[deprecated("use scalar() instead")]]
+    const T& getScalar() const {
+        return scalar<T>();
+    }
+
+    /// @deprecated Use to<T>() instead
+    template <typename T>
+    [[deprecated("use to<T>() instead")]]
+    T getScalarCopy() const {
+        return to<T>();
+    }
+
+    /// Get reference to array with given template type (only native or wrapper types).
+    /// @exception BadVariantAccess If the variant is not an array or not of type `T`.
+    template <typename T>
+    Span<T> array() {
+        assertIsRegistered<T>();
+        checkIsArray();
+        checkIsType<T>();
+        return Span<T>(static_cast<T*>(handle()->data), handle()->arrayLength);
+    }
+
+    /// Get reference to array with given template type (only native or wrapper types).
+    /// @exception BadVariantAccess If the variant is not an array or not of type `T`.
+    template <typename T>
+    Span<const T> array() const {
+        assertIsRegistered<T>();
+        checkIsArray();
+        checkIsType<T>();
+        return Span<const T>(static_cast<const T*>(handle()->data), handle()->arrayLength);
+    }
+
+    /// @deprecated Use array() instead
+    template <typename T>
+    [[deprecated("use array() instead")]]
+    Span<T> getArray() {
+        return array<T>();
+    }
+
+    /// @deprecated Use array() instead
+    template <typename T>
+    [[deprecated("use array() instead")]]
+    Span<const T> getArray() const {
+        return array<T>();
+    }
+
+    /// @deprecated Use to<std::vector<T>>() instead
+    template <typename T>
+    [[deprecated("use to<std::vector<T>>() instead")]]
+    std::vector<T> getArrayCopy() const {
+        return to<std::vector<T>>();
+    }
+
+    /**
+     * Converts the variant to the specified type `T` with automatic conversion if required.
+     *
+     * Determines the type category (scalar or array) based on the characteristics of `T` using
+     * @ref Variant "type category detection".
+     * If `T` is a container, it must be constructible from an iterator pair.
+     *
+     * @code
+     * // Scalar
+     * opcua::Variant var(11);
+     * const auto value = var.to<int>();
+     * @endcode
+     *
+     * @code
+     * // Array
+     * std::array<std::string, 3> array{"One", "Two", "Three"};
+     * opcua::Variant var(array);
+     * const auto vec = var.to<std::vector<std::string>>();
+     * const auto lst = var.to<std::list<opcua::String>>();
+     * @endcode
+     *
+     *  @exception BadVariantAccess If the variant is not convertible to `T`.
+     */
+    template <typename T>
+    [[nodiscard]] T to() const {
+        if constexpr (isArrayType<T>()) {
+            return toArrayImpl<T>();
+        } else {
+            return toScalarImpl<T>();
+        }
     }
 
     /**
@@ -1770,7 +1770,7 @@ void Variant::setArrayCopyConvertImpl(InputIt first, InputIt last) {
  */
 class DataValue : public TypeWrapper<UA_DataValue, UA_TYPES_DATAVALUE> {
 public:
-    using TypeWrapper::TypeWrapper;  // inherit constructors
+    using TypeWrapper::TypeWrapper;
 
     explicit DataValue(Variant value) noexcept {
         setValue(std::move(value));
@@ -1820,6 +1820,48 @@ public:
     )]] [[nodiscard]] static DataValue
     fromArray(Args&&... args) {
         return DataValue(Variant::fromArray<Policy>(std::forward<Args>(args)...));
+    }
+
+    /// Set value (copy).
+    void setValue(const Variant& value) {
+        asWrapper<Variant>(handle()->value) = value;
+        handle()->hasValue = true;
+    }
+
+    /// Set value (move).
+    void setValue(Variant&& value) noexcept {
+        asWrapper<Variant>(handle()->value) = std::move(value);
+        handle()->hasValue = true;
+    }
+
+    /// Set source timestamp for the value.
+    void setSourceTimestamp(DateTime sourceTimestamp) noexcept {  // NOLINT
+        handle()->sourceTimestamp = sourceTimestamp.get();
+        handle()->hasSourceTimestamp = true;
+    }
+
+    /// Set server timestamp for the value.
+    void setServerTimestamp(DateTime serverTimestamp) noexcept {  // NOLINT
+        handle()->serverTimestamp = serverTimestamp.get();
+        handle()->hasServerTimestamp = true;
+    }
+
+    /// Set picoseconds interval added to the source timestamp.
+    void setSourcePicoseconds(uint16_t sourcePicoseconds) noexcept {
+        handle()->sourcePicoseconds = sourcePicoseconds;
+        handle()->hasSourcePicoseconds = true;
+    }
+
+    /// Set picoseconds interval added to the server timestamp.
+    void setServerPicoseconds(uint16_t serverPicoseconds) noexcept {
+        handle()->serverPicoseconds = serverPicoseconds;
+        handle()->hasServerPicoseconds = true;
+    }
+
+    /// Set status.
+    void setStatus(StatusCode status) noexcept {
+        handle()->status = status;
+        handle()->hasStatus = true;
     }
 
     bool hasValue() const noexcept {
@@ -1944,48 +1986,6 @@ public:
     StatusCode getStatus() const noexcept {
         return status();
     }
-
-    /// Set value (copy).
-    void setValue(const Variant& value) {
-        asWrapper<Variant>(handle()->value) = value;
-        handle()->hasValue = true;
-    }
-
-    /// Set value (move).
-    void setValue(Variant&& value) noexcept {
-        asWrapper<Variant>(handle()->value) = std::move(value);
-        handle()->hasValue = true;
-    }
-
-    /// Set source timestamp for the value.
-    void setSourceTimestamp(DateTime sourceTimestamp) noexcept {  // NOLINT
-        handle()->sourceTimestamp = sourceTimestamp.get();
-        handle()->hasSourceTimestamp = true;
-    }
-
-    /// Set server timestamp for the value.
-    void setServerTimestamp(DateTime serverTimestamp) noexcept {  // NOLINT
-        handle()->serverTimestamp = serverTimestamp.get();
-        handle()->hasServerTimestamp = true;
-    }
-
-    /// Set picoseconds interval added to the source timestamp.
-    void setSourcePicoseconds(uint16_t sourcePicoseconds) noexcept {
-        handle()->sourcePicoseconds = sourcePicoseconds;
-        handle()->hasSourcePicoseconds = true;
-    }
-
-    /// Set picoseconds interval added to the server timestamp.
-    void setServerPicoseconds(uint16_t serverPicoseconds) noexcept {
-        handle()->serverPicoseconds = serverPicoseconds;
-        handle()->hasServerPicoseconds = true;
-    }
-
-    /// Set status.
-    void setStatus(StatusCode status) noexcept {
-        handle()->status = status;
-        handle()->hasStatus = true;
-    }
 };
 
 /* --------------------------------------- ExtensionObject -------------------------------------- */
@@ -2017,7 +2017,7 @@ enum class ExtensionObjectEncoding {
  */
 class ExtensionObject : public TypeWrapper<UA_ExtensionObject, UA_TYPES_EXTENSIONOBJECT> {
 public:
-    using TypeWrapper::TypeWrapper;  // inherit constructors
+    using TypeWrapper::TypeWrapper;
 
     /// Create an ExtensionObject from a decoded object (reference).
     /// The data will *not* be deleted when the ExtensionObject is destructed.
@@ -2217,7 +2217,7 @@ private:
  */
 class DiagnosticInfo : public TypeWrapper<UA_DiagnosticInfo, UA_TYPES_DIAGNOSTICINFO> {
 public:
-    using TypeWrapper::TypeWrapper;  // inherit constructors
+    using TypeWrapper::TypeWrapper;
 
     bool hasSymbolicId() const noexcept {
         return handle()->hasSymbolicId;
