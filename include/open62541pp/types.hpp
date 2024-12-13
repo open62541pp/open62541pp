@@ -1653,9 +1653,7 @@ T Variant::toScalarImpl() const {
         return scalar<T>();
     } else {
         using Native = typename TypeConverter<T>::NativeType;
-        T result{};
-        TypeConverter<T>::fromNative(scalar<Native>(), result);
-        return result;
+        return detail::fromNative<T>(scalar<Native>());
     }
 }
 
@@ -1668,15 +1666,10 @@ T Variant::toArrayImpl() const {
         return T(native.begin(), native.end());
     } else {
         using Native = typename TypeConverter<ValueType>::NativeType;
-        const auto transform = [](const Native& native) {
-            ValueType result{};
-            TypeConverter<ValueType>::fromNative(native, result);
-            return result;
-        };
         auto native = array<Native>();
         return T(
-            detail::TransformIterator(native.begin(), transform),
-            detail::TransformIterator(native.end(), transform)
+            detail::TransformIterator(native.begin(), detail::fromNative<ValueType>),
+            detail::TransformIterator(native.end(), detail::fromNative<ValueType>)
         );
     }
 }
@@ -1718,7 +1711,7 @@ void Variant::setScalarCopyConvertImpl(const T& value) {
     using Native = typename TypeConverter<T>::NativeType;
     const auto& type = opcua::getDataType<Native>();
     auto native = detail::allocateUniquePtr<Native>(type);
-    TypeConverter<T>::toNative(value, *native);
+    *native = detail::toNative(value);
     setScalarImpl(native.release(), type, UA_VARIANT_DATA);  // move ownership
 }
 
@@ -1740,9 +1733,9 @@ void Variant::setArrayCopyConvertImpl(InputIt first, InputIt last) {
     const auto& type = opcua::getDataType<Native>();
     const size_t size = std::distance(first, last);
     auto native = detail::allocateArrayUniquePtr<Native>(size, type);
-    for (size_t i = 0; i < size; ++i) {
-        TypeConverter<ValueType>::toNative(*first++, native.get()[i]);  // NOLINT
-    }
+    std::transform(first, last, native.get(), [&](const ValueType& value) {
+        return detail::toNative(value);
+    });
     setArrayImpl(native.release(), size, type, UA_VARIANT_DATA);  // move ownership
 }
 
