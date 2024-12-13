@@ -270,7 +270,8 @@ public:
     }
 
     /// Implicit conversion to std::string_view.
-    operator std::string_view() const noexcept {  // NOLINT(hicpp-explicit-conversions)
+    template <typename Traits>
+    operator std::basic_string_view<char, Traits>() const noexcept {  // NOLINT(*-conversions)
         return {data(), size()};
     }
 
@@ -307,51 +308,51 @@ inline bool operator!=(std::string_view lhs, const String& rhs) noexcept {
 
 std::ostream& operator<<(std::ostream& os, const String& str);
 
-template <>
-struct TypeConverter<std::string_view> {
-    using ValueType = std::string_view;
+template <typename Traits>
+struct TypeConverter<std::basic_string_view<char, Traits>> {
+    using Type = std::basic_string_view<char, Traits>;
     using NativeType = String;
 
-    static void fromNative(const NativeType& src, std::string_view& dst) {
-        dst = static_cast<std::string_view>(src);
+    static void fromNative(const NativeType& src, Type& dst) {
+        dst = Type{src.data(), src.size()};
     }
 
-    static void toNative(std::string_view src, NativeType& dst) {
-        dst = String(src);
+    static void toNative(Type src, NativeType& dst) {
+        dst = NativeType{src};
     }
 };
 
-template <>
-struct TypeConverter<std::string> {
-    using ValueType = std::string;
+template <typename Traits, typename Allocator>
+struct TypeConverter<std::basic_string<char, Traits, Allocator>> {
+    using Type = std::basic_string<char, Traits, Allocator>;
     using NativeType = String;
 
-    static void fromNative(const NativeType& src, ValueType& dst) {
-        dst = std::string(src);
+    static void fromNative(const NativeType& src, Type& dst) {
+        dst = Type{src.data(), src.size()};
     }
 
-    static void toNative(const ValueType& src, NativeType& dst) {
-        dst = String(src);
+    static void toNative(const Type& src, NativeType& dst) {
+        dst = NativeType{src};
     }
 };
 
 template <>
 struct TypeConverter<const char*> {
-    using ValueType = const char*;
+    using Type = const char*;
     using NativeType = String;
 
-    static void toNative(const char* src, NativeType& dst) {
-        dst = String(src);
+    static void toNative(Type src, NativeType& dst) {
+        dst = NativeType{src};
     }
 };
 
 template <size_t N>
 struct TypeConverter<char[N]> {  // NOLINT
-    using ValueType = char[N];  // NOLINT
+    using Type = char[N];  // NOLINT
     using NativeType = String;
 
-    static void toNative(const ValueType& src, NativeType& dst) {
-        dst = String({static_cast<const char*>(src), N});
+    static void toNative(const Type& src, NativeType& dst) {
+        dst = NativeType{std::string_view{static_cast<const char*>(src), N}};
     }
 };
 
@@ -437,14 +438,14 @@ public:
 
 template <typename Clock, typename Duration>
 struct TypeConverter<std::chrono::time_point<Clock, Duration>> {
-    using ValueType = std::chrono::time_point<Clock, Duration>;
+    using Type = std::chrono::time_point<Clock, Duration>;
     using NativeType = DateTime;
 
-    static void fromNative(const NativeType& src, ValueType& dst) {
+    static void fromNative(const NativeType& src, Type& dst) {
         dst = src.toTimePoint<Clock, Duration>();
     }
 
-    static void toNative(const ValueType& src, NativeType& dst) {
+    static void toNative(const Type& src, NativeType& dst) {
         dst = DateTime::fromTimePoint(src);
     }
 };
@@ -528,7 +529,8 @@ public:
     static ByteString fromBase64(std::string_view encoded);
 
     /// Explicit conversion to std::string_view.
-    explicit operator std::string_view() const noexcept {
+    template <typename Traits>
+    explicit operator std::basic_string_view<char, Traits>() const noexcept {
         return {reinterpret_cast<const char*>(data()), size()};  // NOLINT
     }
 
@@ -580,7 +582,8 @@ public:
     }
 
     /// Implicit conversion to std::string_view.
-    operator std::string_view() const noexcept {  // NOLINT(hicpp-explicit-conversions)
+    template <typename Traits>
+    operator std::basic_string_view<char, Traits>() const noexcept {  // NOLINT(*-conversions)
         return {data(), size()};
     }
 
