@@ -14,7 +14,7 @@ TEST_CASE("ExceptionCatcher") {
     SUBCASE("Set and rethrow exception") {
         catcher.setException(std::make_exception_ptr(std::runtime_error("Error")));
         CHECK(catcher.hasException());
-        CHECK_THROWS_AS_MESSAGE(catcher.rethrow(), std::runtime_error, "Error");
+        CHECK_THROWS_WITH_AS(catcher.rethrow(), "Error", std::runtime_error);
 
         CHECK_FALSE(catcher.hasException());
         CHECK_NOTHROW(catcher.rethrow());
@@ -26,7 +26,7 @@ TEST_CASE("ExceptionCatcher") {
 
         catcher.invoke([] { throw std::runtime_error("Error"); });
         CHECK(catcher.hasException());
-        CHECK_THROWS_AS_MESSAGE(catcher.rethrow(), std::runtime_error, "Error");
+        CHECK_THROWS_WITH_AS(catcher.rethrow(), "Error", std::runtime_error);
     }
 
     SUBCASE("Wrap callback") {
@@ -41,6 +41,6 @@ TEST_CASE("ExceptionCatcher") {
 
         wrapped(true);
         CHECK(catcher.hasException());
-        CHECK_THROWS_AS_MESSAGE(catcher.rethrow(), std::runtime_error, "Error");
+        CHECK_THROWS_WITH_AS(catcher.rethrow(), "Error", std::runtime_error);
     }
 }
