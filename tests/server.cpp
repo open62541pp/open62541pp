@@ -206,7 +206,7 @@ TEST_CASE("DataSource") {
 
     ValueBackendDataSource dataSource;
     dataSource.read = [&](DataValue& dv, const NumericRange&, bool includeSourceTimestamp) {
-        dv.value().assign(data);
+        dv.value() = data;
         if (includeSourceTimestamp) {
             dv.setSourceTimestamp(DateTime::now());
         }

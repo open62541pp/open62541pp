@@ -372,7 +372,7 @@ public:
     using DefaultClock = std::chrono::system_clock;
     using UaDuration = std::chrono::duration<int64_t, std::ratio<1, 10'000'000>>;
 
-    using TypeWrapper::TypeWrapper;  // inherit constructors
+    using TypeWrapper::TypeWrapper;
 
     template <typename Clock, typename Duration>
     DateTime(std::chrono::time_point<Clock, Duration> timePoint)  // NOLINT(*-explicit-conversions)
@@ -458,7 +458,7 @@ struct TypeConverter<std::chrono::time_point<Clock, Duration>> {
  */
 class Guid : public TypeWrapper<UA_Guid, UA_TYPES_GUID> {
 public:
-    using TypeWrapper::TypeWrapper;  // inherit constructors
+    using TypeWrapper::TypeWrapper;
 
     explicit Guid(std::array<uint8_t, 16> data) noexcept
         : Guid(UA_Guid{
@@ -624,7 +624,7 @@ enum class NodeIdType : uint8_t {
  */
 class NodeId : public TypeWrapper<UA_NodeId, UA_TYPES_NODEID> {
 public:
-    using TypeWrapper::TypeWrapper;  // inherit constructors
+    using TypeWrapper::TypeWrapper;
 
     /// Create NodeId with numeric identifier.
     NodeId(NamespaceIndex namespaceIndex, uint32_t identifier) noexcept {
@@ -860,7 +860,7 @@ inline bool operator>=(const UA_NodeId& lhs, const UA_NodeId& rhs) noexcept {
  */
 class ExpandedNodeId : public TypeWrapper<UA_ExpandedNodeId, UA_TYPES_EXPANDEDNODEID> {
 public:
-    using TypeWrapper::TypeWrapper;  // inherit constructors
+    using TypeWrapper::TypeWrapper;
 
     explicit ExpandedNodeId(NodeId id) noexcept {
         asWrapper<NodeId>(handle()->nodeId) = std::move(id);
@@ -957,7 +957,7 @@ inline bool operator>=(const UA_ExpandedNodeId& lhs, const UA_ExpandedNodeId& rh
  */
 class QualifiedName : public TypeWrapper<UA_QualifiedName, UA_TYPES_QUALIFIEDNAME> {
 public:
-    using TypeWrapper::TypeWrapper;  // inherit constructors
+    using TypeWrapper::TypeWrapper;
 
     QualifiedName(NamespaceIndex namespaceIndex, std::string_view name) {
         handle()->namespaceIndex = namespaceIndex;
@@ -1006,7 +1006,7 @@ inline bool operator!=(const UA_QualifiedName& lhs, const UA_QualifiedName& rhs)
  */
 class LocalizedText : public TypeWrapper<UA_LocalizedText, UA_TYPES_LOCALIZEDTEXT> {
 public:
-    using TypeWrapper::TypeWrapper;  // inherit constructors
+    using TypeWrapper::TypeWrapper;
 
     LocalizedText(std::string_view locale, std::string_view text) {
         handle()->locale = detail::allocNativeString(locale);
@@ -1112,8 +1112,14 @@ enum class VariantPolicy {
  * @ingroup Wrapper
  */
 class Variant : public TypeWrapper<UA_Variant, UA_TYPES_VARIANT> {
+private:
+    template <typename T>
+    static constexpr bool isVariant =
+        std::is_same_v<std::remove_cv_t<std::remove_reference_t<T>>, Variant> ||
+        std::is_same_v<std::remove_cv_t<std::remove_reference_t<T>>, UA_Variant>;
+
 public:
-    using TypeWrapper::TypeWrapper;  // inherit constructors
+    using TypeWrapper::TypeWrapper;
 
     /// Create Variant from a pointer to a scalar/array (no copy).
     /// @see assign(T*)
@@ -1131,7 +1137,7 @@ public:
 
     /// Create Variant from a scalar/array (copy).
     /// @see assign(const T&)
-    template <typename T, typename = std::enable_if_t<!std::is_same_v<T, Variant>>>
+    template <typename T, typename = std::enable_if_t<!isVariant<T>>>
     explicit Variant(const T& value) {
         assign(value);
     }
@@ -1184,6 +1190,172 @@ public:
     [[deprecated("use new universal Variant constructor instead")]] [[nodiscard]] static Variant
     fromArray(InputIt first, InputIt last, Args&&... args) {
         return Variant{first, last, std::forward<Args>(args)...};
+    }
+
+    /**
+     * @}
+     * @name Modifiers
+     * Modify internal scalar/array value.
+     * @{
+     */
+
+    /**
+     * Assign pointer to scalar/array to variant (no copy).
+     * @param ptr Non-const pointer to a value to assign to the variant. This can be:
+     *            - A pointer to a scalar native or wrapper value.
+     *            - A pointer to a contiguous container such as `std::array` or `std::vector`
+     *              holding native or wrapper elements.
+     *              The underlying array must be accessible with `std::data` and `std::size`.
+     *            - A `nullptr`, in which case the function returns without performing any action.
+     */
+    template <typename T, typename = std::enable_if_t<!std::is_const_v<T>>>
+    void assign(T* ptr) noexcept {
+        if (ptr == nullptr) {
+            return;
+        }
+        if constexpr (isArrayType<T>()) {
+            using ValueType = typename T::value_type;
+            assertIsRegistered<ValueType>();
+            assign(ptr, opcua::getDataType<ValueType>());
+        } else {
+            assertIsRegistered<T>();
+            assign(ptr, opcua::getDataType<T>());
+        }
+    }
+
+    /**
+     * Assign pointer to scalar/array to variant with custom data type (no copy).
+     * @copydetails assign(T*)
+     * @param type Custom data type.
+     */
+    template <typename T, typename = std::enable_if_t<!std::is_const_v<T>>>
+    void assign(T* ptr, const UA_DataType& type) noexcept {
+        if (ptr == nullptr) {
+            return;
+        }
+        if constexpr (isArrayType<T>()) {
+            setArrayImpl(std::data(*ptr), std::size(*ptr), type, UA_VARIANT_DATA_NODELETE);
+        } else {
+            setScalarImpl(ptr, type, UA_VARIANT_DATA_NODELETE);
+        }
+    }
+
+    /**
+     * Assign scalar/array to variant (copy and convert if required).
+     * @param value Value to copy to the variant. It can be:
+     *              - A scalar native, wrapper or convertible value.
+     *              - A container with native, wrapper or convertible elements.
+     *                The container must implement `begin()` and `end()`.
+     */
+    template <typename T>
+    void assign(const T& value) {
+        if constexpr (isArrayType<T>()) {
+            assign(value.begin(), value.end());
+        } else {
+            assertIsRegisteredOrConvertible<T>();
+            if constexpr (detail::isRegisteredType<T>) {
+                setScalarCopyImpl(value, opcua::getDataType<T>());
+            } else {
+                setScalarCopyConvertImpl(value);
+            }
+        }
+    }
+
+    /**
+     * Assign scalar/array to variant with custom data type (copy).
+     * @param value Value to copy to the variant. It can be:
+     *              - A scalar native or wrapper value.
+     *              - A container with native or wrapper elements.
+     *                The container must implement `begin()` and `end()`.
+     * @param type Custom data type.
+     */
+    template <typename T>
+    void assign(const T& value, const UA_DataType& type) {
+        if constexpr (isArrayType<T>()) {
+            setArrayCopyImpl(value.begin(), value.end(), type);
+        } else {
+            setScalarCopyImpl(value, type);
+        }
+    }
+
+    /**
+     * Assign range to variant (copy and convert if required).
+     * @param first Iterator to the beginning of the range.
+     * @param last Iterator to the end of the range.
+     * @tparam InputIt Iterator of a container with native, wrapper or convertible elements.
+     */
+    template <typename InputIt>
+    void assign(InputIt first, InputIt last) {
+        using ValueType = typename std::iterator_traits<InputIt>::value_type;
+        assertIsRegisteredOrConvertible<ValueType>();
+        if constexpr (detail::isRegisteredType<ValueType>) {
+            setArrayCopyImpl(first, last, opcua::getDataType<ValueType>());
+        } else {
+            setArrayCopyConvertImpl(first, last);
+        }
+    }
+
+    /**
+     * Assign range to variant with custom data type (copy).
+     * @param first Iterator to the beginning of the range.
+     * @param last Iterator to the end of the range.
+     * @param type Custom data type.
+     * @tparam InputIt Iterator of a container with native or wrapper elements.
+     */
+    template <typename InputIt>
+    void assign(InputIt first, InputIt last, const UA_DataType& type) {
+        setArrayCopyImpl(first, last, type);
+    }
+
+    /// Assign pointer to scalar/array to variant (no copy).
+    /// @see assign(T*)
+    template <typename T, typename = std::enable_if_t<!isVariant<T>>>
+    Variant& operator=(T* value) noexcept {
+        assign(value);
+        return *this;
+    }
+
+    /// Assign scalar/array to variant (copy and convert if required).
+    /// @see assign(const T&)
+    template <typename T, typename = std::enable_if_t<!isVariant<T>>>
+    Variant& operator=(const T& value) {
+        assign(value);
+        return *this;
+    }
+
+    /// @deprecated Use assign overload with pointer instead
+    template <typename T, typename... Args>
+    [[deprecated("use assign overload with pointer instead")]]
+    void setScalar(T& value, Args&&... args) noexcept {
+        assign(&value, std::forward<Args>(args)...);
+    }
+
+    /// @deprecated Use assign overload instead
+    template <typename T, typename... Args>
+    [[deprecated("use assign overload instead")]]
+    void setScalarCopy(const T& value, Args&&... args) {
+        assign(value, std::forward<Args>(args)...);
+    }
+
+    /// @deprecated Use assign overload with pointer instead
+    template <typename T, typename... Args>
+    [[deprecated("use assign overload with pointer instead")]]
+    void setArray(T& array, Args&&... args) noexcept {
+        assign(&array, std::forward<Args>(args)...);
+    }
+
+    /// @deprecated Use assign overload instead
+    template <typename T, typename... Args>
+    [[deprecated("use assign overload instead")]]
+    void setArrayCopy(const T& array, Args&&... args) {
+        assign(array, std::forward<Args>(args)...);
+    }
+
+    /// @deprecated Use assign overload instead
+    template <typename InputIt, typename... Args>
+    [[deprecated("use assign overload instead")]]
+    void setArrayCopy(InputIt first, InputIt last, Args&&... args) {
+        assign(first, last, std::forward<Args>(args)...);
     }
 
     /**
@@ -1273,7 +1445,7 @@ public:
 
     /**
      * @name Accessors
-     * Access internal scalar/array value.
+     * Access and convert internal scalar/array value.
      * @{
      */
 
@@ -1416,156 +1588,6 @@ public:
 
     /**
      * @}
-     * @name Modifiers
-     * Modify internal scalar/array value.
-     * @{
-     */
-
-    /**
-     * Assign pointer to scalar/array to variant (no copy).
-     * @param ptr Non-const pointer to a value to assign to the variant. This can be:
-     *            - A pointer to a scalar native or wrapper value.
-     *            - A pointer to a contiguous container such as `std::array` or `std::vector`
-     *              holding native or wrapper elements.
-     *              The underlying array must be accessible with `std::data` and `std::size`.
-     *            - A `nullptr`, in which case the function returns without performing any action.
-     */
-    template <typename T, typename = std::enable_if_t<!std::is_const_v<T>>>
-    void assign(T* ptr) noexcept {
-        if (ptr == nullptr) {
-            return;
-        }
-        if constexpr (isArrayType<T>()) {
-            using ValueType = typename T::value_type;
-            assertIsRegistered<ValueType>();
-            assign(ptr, opcua::getDataType<ValueType>());
-        } else {
-            assertIsRegistered<T>();
-            assign(ptr, opcua::getDataType<T>());
-        }
-    }
-
-    /**
-     * Assign pointer to scalar/array to variant with custom data type (no copy).
-     * @copydetails assign(T*)
-     * @param type Custom data type.
-     */
-    template <typename T, typename = std::enable_if_t<!std::is_const_v<T>>>
-    void assign(T* ptr, const UA_DataType& type) noexcept {
-        if (ptr == nullptr) {
-            return;
-        }
-        if constexpr (isArrayType<T>()) {
-            setArrayImpl(std::data(*ptr), std::size(*ptr), type, UA_VARIANT_DATA_NODELETE);
-        } else {
-            setScalarImpl(ptr, type, UA_VARIANT_DATA_NODELETE);
-        }
-    }
-
-    /**
-     * Assign scalar/array to variant (copy and convert if required).
-     * @param value Value to copy to the variant. It can be:
-     *              - A scalar native, wrapper or convertible value.
-     *              - A container with native, wrapper or convertible elements.
-     *                The container must implement `begin()` and `end()`.
-     */
-    template <typename T>
-    void assign(const T& value) {
-        if constexpr (isArrayType<T>()) {
-            assign(value.begin(), value.end());
-        } else {
-            assertIsRegisteredOrConvertible<T>();
-            if constexpr (detail::isRegisteredType<T>) {
-                setScalarCopyImpl(value, opcua::getDataType<T>());
-            } else {
-                setScalarCopyConvertImpl(value);
-            }
-        }
-    }
-
-    /**
-     * Assign scalar/array to variant with custom data type (copy).
-     * @param value Value to copy to the variant. It can be:
-     *              - A scalar native or wrapper value.
-     *              - A container with native or wrapper elements.
-     *                The container must implement `begin()` and `end()`.
-     * @param type Custom data type.
-     */
-    template <typename T>
-    void assign(const T& value, const UA_DataType& type) {
-        if constexpr (isArrayType<T>()) {
-            setArrayCopyImpl(value.begin(), value.end(), type);
-        } else {
-            setScalarCopyImpl(value, type);
-        }
-    }
-
-    /**
-     * Assign range to variant (copy and convert if required).
-     * @param first Iterator to the beginning of the range.
-     * @param last Iterator to the end of the range.
-     * @tparam InputIt Iterator of a container with native, wrapper or convertible elements.
-     */
-    template <typename InputIt>
-    void assign(InputIt first, InputIt last) {
-        using ValueType = typename std::iterator_traits<InputIt>::value_type;
-        assertIsRegisteredOrConvertible<ValueType>();
-        if constexpr (detail::isRegisteredType<ValueType>) {
-            setArrayCopyImpl(first, last, opcua::getDataType<ValueType>());
-        } else {
-            setArrayCopyConvertImpl(first, last);
-        }
-    }
-
-    /**
-     * Assign range to variant with custom data type (copy).
-     * @param first Iterator to the beginning of the range.
-     * @param last Iterator to the end of the range.
-     * @param type Custom data type.
-     * @tparam InputIt Iterator of a container with native or wrapper elements.
-     */
-    template <typename InputIt>
-    void assign(InputIt first, InputIt last, const UA_DataType& type) {
-        setArrayCopyImpl(first, last, type);
-    }
-
-    /// @deprecated Use assign overload with pointer instead
-    template <typename T, typename... Args>
-    [[deprecated("use assign overload with pointer instead")]]
-    void setScalar(T& value, Args&&... args) noexcept {
-        assign(&value, std::forward<Args>(args)...);
-    }
-
-    /// @deprecated Use assign overload instead
-    template <typename T, typename... Args>
-    [[deprecated("use assign overload instead")]]
-    void setScalarCopy(const T& value, Args&&... args) {
-        assign(value, std::forward<Args>(args)...);
-    }
-
-    /// @deprecated Use assign overload with pointer instead
-    template <typename T, typename... Args>
-    [[deprecated("use assign overload with pointer instead")]]
-    void setArray(T& array, Args&&... args) noexcept {
-        assign(&array, std::forward<Args>(args)...);
-    }
-
-    /// @deprecated Use assign overload instead
-    template <typename T, typename... Args>
-    [[deprecated("use assign overload instead")]]
-    void setArrayCopy(const T& array, Args&&... args) {
-        assign(array, std::forward<Args>(args)...);
-    }
-
-    /// @deprecated Use assign overload instead
-    template <typename InputIt, typename... Args>
-    [[deprecated("use assign overload instead")]]
-    void setArrayCopy(InputIt first, InputIt last, Args&&... args) {
-        assign(first, last, std::forward<Args>(args)...);
-    }
-
-    /**
-     * @}
      */
 
 private:
@@ -1600,10 +1622,7 @@ private:
 
     template <typename T>
     static constexpr void assertNoVariant() {
-        static_assert(
-            !std::is_same_v<T, Variant> && !std::is_same_v<T, UA_Variant>,
-            "Variants cannot directly contain another variant"
-        );
+        static_assert(!isVariant<T>, "Variants cannot directly contain another variant");
     }
 
     void checkIsScalar() const {
@@ -1751,7 +1770,7 @@ void Variant::setArrayCopyConvertImpl(InputIt first, InputIt last) {
  */
 class DataValue : public TypeWrapper<UA_DataValue, UA_TYPES_DATAVALUE> {
 public:
-    using TypeWrapper::TypeWrapper;  // inherit constructors
+    using TypeWrapper::TypeWrapper;
 
     explicit DataValue(Variant value) noexcept {
         setValue(std::move(value));
@@ -1801,6 +1820,48 @@ public:
     )]] [[nodiscard]] static DataValue
     fromArray(Args&&... args) {
         return DataValue(Variant::fromArray<Policy>(std::forward<Args>(args)...));
+    }
+
+    /// Set value (copy).
+    void setValue(const Variant& value) {
+        asWrapper<Variant>(handle()->value) = value;
+        handle()->hasValue = true;
+    }
+
+    /// Set value (move).
+    void setValue(Variant&& value) noexcept {
+        asWrapper<Variant>(handle()->value) = std::move(value);
+        handle()->hasValue = true;
+    }
+
+    /// Set source timestamp for the value.
+    void setSourceTimestamp(DateTime sourceTimestamp) noexcept {  // NOLINT
+        handle()->sourceTimestamp = sourceTimestamp.get();
+        handle()->hasSourceTimestamp = true;
+    }
+
+    /// Set server timestamp for the value.
+    void setServerTimestamp(DateTime serverTimestamp) noexcept {  // NOLINT
+        handle()->serverTimestamp = serverTimestamp.get();
+        handle()->hasServerTimestamp = true;
+    }
+
+    /// Set picoseconds interval added to the source timestamp.
+    void setSourcePicoseconds(uint16_t sourcePicoseconds) noexcept {
+        handle()->sourcePicoseconds = sourcePicoseconds;
+        handle()->hasSourcePicoseconds = true;
+    }
+
+    /// Set picoseconds interval added to the server timestamp.
+    void setServerPicoseconds(uint16_t serverPicoseconds) noexcept {
+        handle()->serverPicoseconds = serverPicoseconds;
+        handle()->hasServerPicoseconds = true;
+    }
+
+    /// Set status.
+    void setStatus(StatusCode status) noexcept {
+        handle()->status = status;
+        handle()->hasStatus = true;
     }
 
     bool hasValue() const noexcept {
@@ -1925,48 +1986,6 @@ public:
     StatusCode getStatus() const noexcept {
         return status();
     }
-
-    /// Set value (copy).
-    void setValue(const Variant& value) {
-        asWrapper<Variant>(handle()->value) = value;
-        handle()->hasValue = true;
-    }
-
-    /// Set value (move).
-    void setValue(Variant&& value) noexcept {
-        asWrapper<Variant>(handle()->value) = std::move(value);
-        handle()->hasValue = true;
-    }
-
-    /// Set source timestamp for the value.
-    void setSourceTimestamp(DateTime sourceTimestamp) noexcept {  // NOLINT
-        handle()->sourceTimestamp = sourceTimestamp.get();
-        handle()->hasSourceTimestamp = true;
-    }
-
-    /// Set server timestamp for the value.
-    void setServerTimestamp(DateTime serverTimestamp) noexcept {  // NOLINT
-        handle()->serverTimestamp = serverTimestamp.get();
-        handle()->hasServerTimestamp = true;
-    }
-
-    /// Set picoseconds interval added to the source timestamp.
-    void setSourcePicoseconds(uint16_t sourcePicoseconds) noexcept {
-        handle()->sourcePicoseconds = sourcePicoseconds;
-        handle()->hasSourcePicoseconds = true;
-    }
-
-    /// Set picoseconds interval added to the server timestamp.
-    void setServerPicoseconds(uint16_t serverPicoseconds) noexcept {
-        handle()->serverPicoseconds = serverPicoseconds;
-        handle()->hasServerPicoseconds = true;
-    }
-
-    /// Set status.
-    void setStatus(StatusCode status) noexcept {
-        handle()->status = status;
-        handle()->hasStatus = true;
-    }
 };
 
 /* --------------------------------------- ExtensionObject -------------------------------------- */
@@ -1998,7 +2017,7 @@ enum class ExtensionObjectEncoding {
  */
 class ExtensionObject : public TypeWrapper<UA_ExtensionObject, UA_TYPES_EXTENSIONOBJECT> {
 public:
-    using TypeWrapper::TypeWrapper;  // inherit constructors
+    using TypeWrapper::TypeWrapper;
 
     /// Create an ExtensionObject from a decoded object (reference).
     /// The data will *not* be deleted when the ExtensionObject is destructed.
@@ -2198,7 +2217,7 @@ private:
  */
 class DiagnosticInfo : public TypeWrapper<UA_DiagnosticInfo, UA_TYPES_DIAGNOSTICINFO> {
 public:
-    using TypeWrapper::TypeWrapper;  // inherit constructors
+    using TypeWrapper::TypeWrapper;
 
     bool hasSymbolicId() const noexcept {
         return handle()->hasSymbolicId;

@@ -29,7 +29,7 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
             }
             const auto a = inputs.at(0).scalar<int32_t>();
             const auto b = inputs.at(1).scalar<int32_t>();
-            outputs.at(0).assign(a + b);
+            outputs.at(0) = a + b;
         },
         {
             Argument("a", {"en-US", "first number"}, DataTypeId::Int32, ValueRank::Scalar),

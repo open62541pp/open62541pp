@@ -490,6 +490,27 @@ TEST_CASE("Variant") {
         CHECK_THROWS(var.array<int>());
     }
 
+    SUBCASE("From native") {
+        // assignment operator is overloaded for non-variant types -> test original overloads
+        float value = 5;
+        UA_Variant native{};
+        native.type = &UA_TYPES[UA_TYPES_FLOAT];
+        native.storageType = UA_VARIANT_DATA_NODELETE;
+        native.data = &value;
+
+        SUBCASE("lvalue (copy)") {
+            Variant var(native);
+            CHECK(var.type() == &UA_TYPES[UA_TYPES_FLOAT]);
+            CHECK(var.data() != &value);
+            CHECK(var.scalar<float>() == value);
+        }
+        SUBCASE("rvalue (move)") {
+            Variant var(std::move(native));
+            CHECK(var.type() == &UA_TYPES[UA_TYPES_FLOAT]);
+            CHECK(var.data() == &value);
+        }
+    }
+
     SUBCASE("From scalar") {
         double value = 11.11;
         const auto& type = UA_TYPES[UA_TYPES_DOUBLE];
@@ -579,17 +600,29 @@ TEST_CASE("Variant") {
     SUBCASE("Set nullptr") {
         Variant var;
         float* ptr{nullptr};
-        var.assign(ptr);
-        var.assign(ptr, UA_TYPES[UA_TYPES_FLOAT]);
+        SUBCASE("assign") {
+            var.assign(ptr);
+        }
+        SUBCASE("assign with type") {
+            var.assign(ptr, UA_TYPES[UA_TYPES_FLOAT]);
+        }
+        SUBCASE("assignment operator") {
+            var = ptr;
+        }
         CHECK(var.empty());
         CHECK(var.type() == nullptr);
         CHECK(var.data() == nullptr);
     }
 
-    SUBCASE("Set/get scalar") {
+    SUBCASE("Set/get scalar (pointer)") {
         Variant var;
         int32_t value = 5;
-        var.assign(&value);
+        SUBCASE("assign") {
+            var.assign(&value);
+        }
+        SUBCASE("assignment operator") {
+            var = &value;
+        }
         CHECK(var.isScalar());
         CHECK(var.data() == &value);
         CHECK(&var.scalar<int32_t>() == &value);
@@ -597,10 +630,15 @@ TEST_CASE("Variant") {
         CHECK(var.to<int32_t>() == value);
     }
 
-    SUBCASE("Set/get scalar wrapper") {
+    SUBCASE("Set/get scalar wrapper (pointer)") {
         Variant var;
         LocalizedText value("en-US", "text");
-        var.assign(&value);
+        SUBCASE("assign") {
+            var.assign(&value);
+        }
+        SUBCASE("assignment operator") {
+            var = &value;
+        }
         CHECK(var.isScalar());
         CHECK(&var.scalar<LocalizedText>() == &value);
         CHECK(var.scalar<LocalizedText>() == value);
@@ -610,23 +648,33 @@ TEST_CASE("Variant") {
     SUBCASE("Set/get scalar (copy)") {
         Variant var;
         double value = 11.11;
-        var.assign(value);
+        SUBCASE("assign") {
+            var.assign(value);
+        }
+        SUBCASE("assignment operator") {
+            var = value;
+        }
         CHECK(&var.scalar<double>() != &value);
         CHECK(var.scalar<double>() == value);
         CHECK(var.to<double>() == value);
     }
 
-    SUBCASE("Set/get array") {
+    SUBCASE("Set/get array (pointer)") {
         Variant var;
         std::vector<float> array{0, 1, 2};
-        var.assign(&array);
+        SUBCASE("assign") {
+            var.assign(&array);
+        }
+        SUBCASE("assignment operator") {
+            var = &array;
+        }
         CHECK(var.data() == array.data());
         CHECK(var.array<float>().data() == array.data());
         CHECK(std::as_const(var).array<float>().data() == array.data());
         CHECK(var.to<std::vector<float>>() == array);
     }
 
-    SUBCASE("Set array of native strings") {
+    SUBCASE("Set array of native strings (pointer)") {
         Variant var;
         std::array array{
             detail::toNativeString("item1"),
@@ -639,19 +687,32 @@ TEST_CASE("Variant") {
         CHECK(var.arrayLength() == array.size());
     }
 
-    SUBCASE("Set array of string wrapper") {
+    SUBCASE("Set array of string wrapper (pointer)") {
         Variant var;
         std::vector<String> array{String{"item1"}, String{"item2"}, String{"item3"}};
-        var.assign(&array);
+        SUBCASE("assign") {
+            var.assign(&array);
+        }
+        SUBCASE("assignment operator") {
+            var = &array;
+        }
         CHECK(var.data() == array.data());
         CHECK(var.arrayLength() == array.size());
         CHECK(var.array<String>().data() == array.data());
     }
 
-    SUBCASE("Set/get array of std::string (conversion)") {
+    SUBCASE("Set/get array of std::string (copy & conversion)") {
         Variant var;
         std::vector<std::string> array{"a", "b", "c"};
-        var.assign(array);
+        SUBCASE("assign") {
+            var.assign(array);
+        }
+        SUBCASE("assign with iterator pair") {
+            var.assign(array.begin(), array.end());
+        }
+        SUBCASE("assignment operator") {
+            var = array;
+        }
         CHECK(var.isArray());
         CHECK(var.type() == &UA_TYPES[UA_TYPES_STRING]);
         CHECK(var.arrayLength() == array.size());
@@ -662,11 +723,14 @@ TEST_CASE("Variant") {
     SUBCASE("Set/get array (copy)") {
         Variant var;
         std::vector<float> array{0, 1, 2, 3, 4, 5};
-        SUBCASE("Container") {
+        SUBCASE("assign") {
             var.assign(array);
         }
-        SUBCASE("Iterator pair") {
+        SUBCASE("assign with iterator pair") {
             var.assign(array.begin(), array.end());
+        }
+        SUBCASE("assignment operator") {
+            var = array;
         }
         CHECK(var.isArray());
         CHECK(var.type() == &UA_TYPES[UA_TYPES_FLOAT]);
@@ -688,11 +752,14 @@ TEST_CASE("Variant") {
         // several problems: https://github.com/open62541pp/open62541pp/issues/164
         Variant var;
         std::vector<bool> array{true, false, true};
-        SUBCASE("Container") {
+        SUBCASE("assign") {
             var.assign(array);
         }
-        SUBCASE("Iterator pair") {
+        SUBCASE("assign with iterator pair") {
             var.assign(array.begin(), array.end());
+        }
+        SUBCASE("assignment operator") {
+            var = array;
         }
         CHECK(var.arrayLength() == array.size());
         CHECK(var.type() == &UA_TYPES[UA_TYPES_BOOLEAN]);
@@ -710,7 +777,7 @@ TEST_CASE("Variant") {
         Variant var;
         Custom value{11};
 
-        SUBCASE("Scalar") {
+        SUBCASE("Scalar (pointer)") {
             var.assign(&value, type);
             CHECK(var.isScalar());
             CHECK(var.type() == &type);
@@ -728,7 +795,7 @@ TEST_CASE("Variant") {
 
         std::vector<Custom> array{Custom{11}, Custom{22}, Custom{33}};
 
-        SUBCASE("Array") {
+        SUBCASE("Array (pointer)") {
             var.assign(&array, type);
             CHECK(var.isArray());
             CHECK(var.type() == &type);

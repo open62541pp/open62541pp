@@ -37,6 +37,8 @@ int main() {
 
     // Write std::byte to variant
     variant.assign(std::byte{11});
+    // Use assignment operator
+    variant = std::byte{11};
 
     // Read UA_Byte from variant (reference possible)
     const auto& valueNative = variant.scalar<UA_Byte>();

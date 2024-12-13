@@ -28,7 +28,7 @@ int main() {
     dataSource.read = [&](opcua::DataValue& dv, const opcua::NumericRange&, bool timestamp) {
         // Increment counter before every read
         counter++;
-        dv.value().assign(counter);
+        dv.value() = counter;
         if (timestamp) {
             dv.setSourceTimestamp(opcua::DateTime::now());
         }
