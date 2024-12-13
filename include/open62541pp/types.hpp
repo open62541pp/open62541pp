@@ -1112,6 +1112,12 @@ enum class VariantPolicy {
  * @ingroup Wrapper
  */
 class Variant : public TypeWrapper<UA_Variant, UA_TYPES_VARIANT> {
+private:
+    template <typename T>
+    static constexpr bool isVariant =
+        std::is_same_v<std::remove_cv_t<std::remove_reference_t<T>>, Variant> ||
+        std::is_same_v<std::remove_cv_t<std::remove_reference_t<T>>, UA_Variant>;
+
 public:
     using TypeWrapper::TypeWrapper;  // inherit constructors
 
@@ -1131,7 +1137,7 @@ public:
 
     /// Create Variant from a scalar/array (copy).
     /// @see assign(const T&)
-    template <typename T, typename = std::enable_if_t<!std::is_same_v<T, Variant>>>
+    template <typename T, typename = std::enable_if_t<!isVariant<T>>>
     explicit Variant(const T& value) {
         assign(value);
     }
@@ -1529,6 +1535,22 @@ public:
         setArrayCopyImpl(first, last, type);
     }
 
+    /// Assign pointer to scalar/array to variant (no copy).
+    /// @see assign(T*)
+    template <typename T, typename = std::enable_if_t<!isVariant<T>>>
+    Variant& operator=(T* value) noexcept {
+        assign(value);
+        return *this;
+    }
+
+    /// Assign scalar/array to variant (copy and convert if required).
+    /// @see assign(const T&)
+    template <typename T, typename = std::enable_if_t<!isVariant<T>>>
+    Variant& operator=(const T& value) {
+        assign(value);
+        return *this;
+    }
+
     /// @deprecated Use assign overload with pointer instead
     template <typename T, typename... Args>
     [[deprecated("use assign overload with pointer instead")]]
@@ -1600,10 +1622,7 @@ private:
 
     template <typename T>
     static constexpr void assertNoVariant() {
-        static_assert(
-            !std::is_same_v<T, Variant> && !std::is_same_v<T, UA_Variant>,
-            "Variants cannot directly contain another variant"
-        );
+        static_assert(!isVariant<T>, "Variants cannot directly contain another variant");
     }
 
     void checkIsScalar() const {
