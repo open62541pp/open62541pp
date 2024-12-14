@@ -1056,6 +1056,11 @@ enum class VariantPolicy {
     // clang-format on
 };
 
+class BadVariantAccess : public TypeError {
+public:
+    using TypeError::TypeError;
+};
+
 /**
  * UA_Variant wrapper class.
  *
