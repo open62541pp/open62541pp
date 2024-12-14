@@ -106,7 +106,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
             // where clause
             {}
         );
-        monitoringParameters.filter = ExtensionObject::fromDecodedCopy(eventFilter);
+        monitoringParameters.filter = ExtensionObject(eventFilter);
 
         size_t notificationCount = 0;
         size_t eventFieldsSize = 0;

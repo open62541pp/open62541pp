@@ -111,7 +111,7 @@ TEST_CASE("AddNodesItem / AddNodesRequest") {
         ExpandedNodeId({1, 1002}),
         {1, "item"},
         NodeClass::Object,
-        ExtensionObject::fromDecodedCopy(ObjectAttributes{}),
+        ExtensionObject(ObjectAttributes{}),
         ExpandedNodeId({1, 1003})
     );
     CHECK(item.parentNodeId().nodeId() == NodeId(1, 1000));

@@ -1201,6 +1201,7 @@ public:
 
     /**
      * Assign pointer to scalar/array to variant (no copy).
+     * The object will *not* be deleted when the Variant is destructed.
      * @param ptr Non-const pointer to a value to assign to the variant. This can be:
      *            - A pointer to a scalar native or wrapper value.
      *            - A pointer to a contiguous container such as `std::array` or `std::vector`
@@ -2016,52 +2017,71 @@ enum class ExtensionObjectEncoding {
  * @ingroup Wrapper
  */
 class ExtensionObject : public TypeWrapper<UA_ExtensionObject, UA_TYPES_EXTENSIONOBJECT> {
+private:
+    template <typename T>
+    static constexpr bool isExtensionObject =
+        std::is_same_v<std::remove_cv_t<std::remove_reference_t<T>>, ExtensionObject> ||
+        std::is_same_v<std::remove_cv_t<std::remove_reference_t<T>>, UA_ExtensionObject>;
+
 public:
     using TypeWrapper::TypeWrapper;
 
-    /// Create an ExtensionObject from a decoded object (reference).
-    /// The data will *not* be deleted when the ExtensionObject is destructed.
-    /// @param data Decoded data
+    /**
+     * Create ExtensionObject from a pointer to a decoded object (no copy).
+     * The object will *not* be deleted when the ExtensionObject is destructed.
+     * @param ptr Pointer to decoded object (native or wrapper).
+     */
     template <typename T>
-    [[nodiscard]] static ExtensionObject fromDecoded(T& data) noexcept {
-        return fromDecoded(data, getDataType<T>());
-    }
+    explicit ExtensionObject(T* ptr) noexcept
+        : ExtensionObject(ptr, getDataType<T>()) {}
 
-    /// Create an ExtensionObject from a decoded object (reference) with a custom data type.
-    /// The data will *not* be deleted when the ExtensionObject is destructed.
-    /// @param data Decoded data
-    /// @param type Data type of the decoded data
+    /**
+     * Create ExtensionObject from a pointer to a decoded object with a custom data type (no copy).
+     * The object will *not* be deleted when the ExtensionObject is destructed.
+     * @param ptr Pointer to decoded object (native or wrapper).
+     * @param type Data type of the decoded object.
+     */
     template <typename T>
-    [[nodiscard]] static ExtensionObject fromDecoded(T& data, const UA_DataType& type) noexcept {
+    ExtensionObject(T* ptr, const UA_DataType& type) noexcept {
+        if (ptr == nullptr) {
+            return;
+        }
         assert(sizeof(T) == type.memSize);
-        ExtensionObject obj;
-        obj->encoding = UA_EXTENSIONOBJECT_DECODED_NODELETE;
-        obj->content.decoded.type = &type;  // NOLINT
-        obj->content.decoded.data = &data;  // NOLINT
-        return obj;
+        handle()->encoding = UA_EXTENSIONOBJECT_DECODED_NODELETE;
+        handle()->content.decoded.type = &type;  // NOLINT
+        handle()->content.decoded.data = ptr;  // NOLINT
     }
 
-    /// Create an ExtensionObject from a decoded object (copy).
-    /// @param data Decoded data
-    template <typename T>
-    [[nodiscard]] static ExtensionObject fromDecodedCopy(const T& data) {
-        return fromDecodedCopy(data, getDataType<T>());
+    /**
+     * Create ExtensionObject from a decoded object (copy).
+     * @param decoded Decoded object (native or wrapper).
+     */
+    template <typename T, typename = std::enable_if_t<!isExtensionObject<T>>>
+    explicit ExtensionObject(const T& decoded)
+        : ExtensionObject(decoded, getDataType<T>()) {}
+
+    /**
+     * Create ExtensionObject from a decoded object with a custom data type (copy).
+     * @param decoded Decoded object (native or wrapper).
+     * @param type Data type of the decoded object.
+     */
+    template <typename T, typename = std::enable_if_t<!isExtensionObject<T>>>
+    explicit ExtensionObject(const T& decoded, const UA_DataType& type) {
+        auto ptr = detail::allocateUniquePtr<T>(type);
+        *ptr = detail::copy(decoded, type);
+        handle()->encoding = UA_EXTENSIONOBJECT_DECODED;
+        handle()->content.decoded.type = &type;  // NOLINT
+        handle()->content.decoded.data = ptr.release();  // NOLINT
     }
 
-    /// Create an ExtensionObject from a decoded object (copy) with a custom data type.
-    /// @param data Decoded data
-    /// @param type Data type of the decoded data
-    template <typename T>
-    [[nodiscard]] static ExtensionObject fromDecodedCopy(const T& data, const UA_DataType& type) {
-        // manual implementation instead of UA_ExtensionObject_setValueCopy to support open62541
-        // v1.0 https://github.com/open62541/open62541/blob/v1.3.5/src/ua_types.c#L503-L524
-        assert(sizeof(T) == type.memSize);
-        ExtensionObject obj;
-        obj->encoding = UA_EXTENSIONOBJECT_DECODED;
-        obj->content.decoded.data = detail::allocate<void>(type);  // NOLINT
-        obj->content.decoded.type = &type;  // NOLINT
-        throwIfBad(UA_copy(&data, obj->content.decoded.data, &type));  // NOLINT
-        return obj;
+    template <typename T, typename... Args>
+    [[nodiscard]] static ExtensionObject fromDecoded(T& data, Args&&... args) noexcept {
+        return ExtensionObject(&data, std::forward<Args>(args)...);
+    }
+
+    template <typename T, typename... Args>
+    [[nodiscard]] static ExtensionObject fromDecodedCopy(const T& data, Args&&... args) {
+        return ExtensionObject(data, std::forward<Args>(args)...);
     }
 
     /// Check if the ExtensionObject is empty
@@ -2148,19 +2168,19 @@ public:
         return isDecodedType<T>() ? static_cast<T*>(decodedData()) : nullptr;
     }
 
-    /// @deprecated Use decodedData<T>() instead
-    template <typename T>
-    [[deprecated("use decodedData<T>() instead")]]
-    T* getDecodedData() noexcept {
-        return decodedData<T>();
-    }
-
     /// Get const pointer to the decoded data with given template type.
     /// Returns `nullptr` if the ExtensionObject is either not decoded or the decoded data is not of
     /// type `T`.
     template <typename T>
     const T* decodedData() const noexcept {
         return isDecodedType<T>() ? static_cast<const T*>(decodedData()) : nullptr;
+    }
+
+    /// @deprecated Use decodedData<T>() instead
+    template <typename T>
+    [[deprecated("use decodedData<T>() instead")]]
+    T* getDecodedData() noexcept {
+        return decodedData<T>();
     }
 
     /// @deprecated Use decodedData<T>() instead
@@ -2179,12 +2199,6 @@ public:
             : nullptr;
     }
 
-    /// @deprecated Use decodedData() instead
-    [[deprecated("use decodedData() instead")]]
-    void* getDecodedData() noexcept {
-        return decodedData();
-    }
-
     /// Get pointer to the decoded data.
     /// Returns `nullptr` if the ExtensionObject is not decoded.
     /// @warning Type erased version, use with caution.
@@ -2192,6 +2206,12 @@ public:
         return isDecoded()
             ? handle()->content.decoded.data  // NOLINT
             : nullptr;
+    }
+
+    /// @deprecated Use decodedData() instead
+    [[deprecated("use decodedData() instead")]]
+    void* getDecodedData() noexcept {
+        return decodedData();
     }
 
     /// @deprecated Use decodedData() instead

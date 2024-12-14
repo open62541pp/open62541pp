@@ -981,14 +981,20 @@ TEST_CASE("ExtensionObject") {
         CHECK(obj.decodedData() == nullptr);
     }
 
-    SUBCASE("fromDecoded") {
+    SUBCASE("From nullptr") {
+        int* value{nullptr};
+        ExtensionObject obj(value);
+        CHECK(obj.empty());
+    }
+
+    SUBCASE("From decoded (pointer)") {
         ExtensionObject obj;
         String value("test123");
         SUBCASE("Deduce data type") {
-            obj = ExtensionObject::fromDecoded(value);
+            obj = ExtensionObject(&value);
         }
         SUBCASE("Custom data type") {
-            obj = ExtensionObject::fromDecoded(value, UA_TYPES[UA_TYPES_STRING]);
+            obj = ExtensionObject(&value, UA_TYPES[UA_TYPES_STRING]);
         }
         CHECK(obj.encoding() == ExtensionObjectEncoding::DecodedNoDelete);
         CHECK(obj.isDecoded());
@@ -996,25 +1002,26 @@ TEST_CASE("ExtensionObject") {
         CHECK(obj.decodedData() == value.handle());
     }
 
-    SUBCASE("fromDecodedCopy") {
+    SUBCASE("From decoded (copy)") {
         ExtensionObject obj;
         const auto value = Variant(11.11);
         SUBCASE("Deduce data type") {
-            obj = ExtensionObject::fromDecodedCopy(value);
+            obj = ExtensionObject(value);
         }
         SUBCASE("Custom data type") {
-            obj = ExtensionObject::fromDecodedCopy(value, UA_TYPES[UA_TYPES_VARIANT]);
+            obj = ExtensionObject(value, UA_TYPES[UA_TYPES_VARIANT]);
         }
         CHECK(obj.encoding() == ExtensionObjectEncoding::Decoded);
         CHECK(obj.isDecoded());
         CHECK(obj.decodedType() == &UA_TYPES[UA_TYPES_VARIANT]);
+        CHECK(obj.decodedData() != nullptr);
         CHECK(obj.decodedData<Variant>() != nullptr);
         CHECK(obj.decodedData<Variant>()->scalar<double>() == 11.11);
     }
 
     SUBCASE("decodedData") {
         double value = 11.11;
-        auto obj = ExtensionObject::fromDecoded(value);
+        ExtensionObject obj(&value);
         CHECK(obj.decodedData() == &value);
         CHECK(obj.decodedData<int>() == nullptr);
         CHECK(obj.decodedData<double>() == &value);
