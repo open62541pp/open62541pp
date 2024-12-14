@@ -205,15 +205,15 @@ TEST_CASE("DataSource") {
     int data = 0;
 
     ValueBackendDataSource dataSource;
-    dataSource.read = [&](const NodeId&, DataValue& dv, const NumericRange&, bool timestamp) {
-        dv.value().setScalar(data);
-        if (timestamp) {
+    dataSource.read = [&](const NodeId&, DataValue& dv, const NumericRange&, bool includeSourceTimestamp) {
+        dv.value() = data;
+        if (includeSourceTimestamp) {
             dv.setSourceTimestamp(DateTime::now());
         }
         return UA_STATUSCODE_GOOD;
     };
     dataSource.write = [&](const NodeId&, const DataValue& dv, const NumericRange&) {
-        data = dv.value().getScalarCopy<int>();
+        data = dv.value().scalar<int>();
         return UA_STATUSCODE_GOOD;
     };
 

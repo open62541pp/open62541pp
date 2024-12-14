@@ -29,7 +29,7 @@ int main() {
         [&](const opcua::NodeId&, opcua::DataValue& dv, const opcua::NumericRange&, bool timestamp) {
             // Increment counter before every read
             counter++;
-            dv.value().setScalarCopy(counter);
+            dv.value() = counter;
             if (timestamp) {
                 dv.setSourceTimestamp(opcua::DateTime::now());
             }
@@ -38,7 +38,7 @@ int main() {
         };
     dataSource.write =
         [&](const opcua::NodeId&, const opcua::DataValue& dv, const opcua::NumericRange&) {
-            counter = dv.value().getScalarCopy<int>();
+            counter = dv.value().scalar<int>();
             std::cout << "Write counter to data source: " << counter << "\n";
             return UA_STATUSCODE_GOOD;
         };
