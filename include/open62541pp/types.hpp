@@ -504,7 +504,7 @@ std::ostream& operator<<(std::ostream& os, const Guid& guid);
  * @ingroup Wrapper
  */
 class ByteString
-    : public TypeWrapper<UA_String, UA_TYPES_STRING>,
+    : public TypeWrapper<UA_ByteString, UA_TYPES_BYTESTRING>,
       public detail::StringLikeMixin<ByteString, uint8_t> {
 public:
     using TypeWrapper::TypeWrapper;
@@ -568,7 +568,7 @@ inline bool operator!=(std::string_view lhs, const ByteString& rhs) noexcept {
  * @ingroup Wrapper
  */
 class XmlElement
-    : public TypeWrapper<UA_String, UA_TYPES_STRING>,
+    : public TypeWrapper<UA_XmlElement, UA_TYPES_XMLELEMENT>,
       public detail::StringLikeMixin<XmlElement, char> {
 public:
     using TypeWrapper::TypeWrapper;
