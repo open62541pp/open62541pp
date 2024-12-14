@@ -269,6 +269,19 @@ public:
         init(values.begin(), values.end());
     }
 
+    /// Assign null-termined character string.
+    String& operator=(const char* str) {
+        *this = String(str);
+        return *this;
+    }
+
+    /// Assign std::string_view.
+    template <typename Traits>
+    String& operator=(std::basic_string_view<char, Traits> str) {
+        *this = String(str);
+        return *this;
+    }
+
     /// Implicit conversion to std::string_view.
     template <typename Traits>
     operator std::basic_string_view<char, Traits>() const noexcept {  // NOLINT(*-conversions)
@@ -579,6 +592,19 @@ public:
     template <typename InputIt>
     XmlElement(InputIt first, InputIt last) {
         init(first, last);
+    }
+
+    /// Assign null-termined character string.
+    XmlElement& operator=(const char* str) {
+        *this = XmlElement(str);
+        return *this;
+    }
+
+    /// Assign std::string_view.
+    template <typename Traits>
+    XmlElement& operator=(std::basic_string_view<char, Traits> str) {
+        *this = XmlElement(str);
+        return *this;
     }
 
     /// Implicit conversion to std::string_view.

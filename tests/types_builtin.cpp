@@ -169,6 +169,18 @@ TEST_CASE_TEMPLATE("StringLike constructors", T, String, XmlElement) {
     }
 }
 
+TEST_CASE_TEMPLATE("StringLike assign const char*", T, String, XmlElement) {
+    T str;
+    str = "test123";
+    CHECK(str == T{"test123"});
+}
+
+TEST_CASE_TEMPLATE("StringLike assign string_view", T, String, XmlElement) {
+    T str;
+    str = std::string_view{"test123"};
+    CHECK(str == T{"test123"});
+}
+
 TEST_CASE_TEMPLATE("StringLike implicit conversion to string_view", T, String, XmlElement) {
     T str("test123");
     std::string_view view = str;
