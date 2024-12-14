@@ -1165,8 +1165,8 @@ public:
 
     /// @deprecated Use new universal Variant constructor instead
     template <VariantPolicy Policy = VariantPolicy::Copy, typename T, typename... Args>
-    [[deprecated("use new universal Variant constructor instead")]] [[nodiscard]] static Variant
-    fromScalar(T&& value, Args&&... args) {
+    [[deprecated("use new universal Variant constructor instead")]] [[nodiscard]]
+    static Variant fromScalar(T&& value, Args&&... args) {
         if constexpr (Policy == VariantPolicy::Copy) {
             return Variant{std::forward<T>(value), std::forward<Args>(args)...};
         } else {
@@ -1176,8 +1176,8 @@ public:
 
     /// @deprecated Use new universal Variant constructor instead
     template <VariantPolicy Policy = VariantPolicy::Copy, typename T, typename... Args>
-    [[deprecated("use new universal Variant constructor instead")]] [[nodiscard]] static Variant
-    fromArray(T&& array, Args&&... args) {
+    [[deprecated("use new universal Variant constructor instead")]] [[nodiscard]]
+    static Variant fromArray(T&& array, Args&&... args) {
         if constexpr (Policy == VariantPolicy::Copy) {
             return Variant{std::forward<T>(array), std::forward<Args>(args)...};
         } else {
@@ -1187,8 +1187,8 @@ public:
 
     /// @deprecated Use new universal Variant constructor instead
     template <VariantPolicy Policy = VariantPolicy::Copy, typename InputIt, typename... Args>
-    [[deprecated("use new universal Variant constructor instead")]] [[nodiscard]] static Variant
-    fromArray(InputIt first, InputIt last, Args&&... args) {
+    [[deprecated("use new universal Variant constructor instead")]] [[nodiscard]]
+    static Variant fromArray(InputIt first, InputIt last, Args&&... args) {
         return Variant{first, last, std::forward<Args>(args)...};
     }
 
@@ -1806,9 +1806,8 @@ public:
     /// @deprecated Use constructor with new universal Variant constructor instead:
     ///             `opcua::DataValue dv(opcua::Variant(value))`
     template <VariantPolicy Policy = VariantPolicy::Copy, typename... Args>
-    [[deprecated("use constructor with new universal Variant constructor instead"
-    )]] [[nodiscard]] static DataValue
-    fromScalar(Args&&... args) {
+    [[deprecated("use constructor with new universal Variant constructor instead")]] [[nodiscard]]
+    static DataValue fromScalar(Args&&... args) {
         return DataValue(Variant::fromScalar<Policy>(std::forward<Args>(args)...));
     }
 
@@ -1817,9 +1816,8 @@ public:
     /// @deprecated Use constructor with new universal Variant constructor instead:
     ///             `opcua::DataValue dv(opcua::Variant(array))`
     template <VariantPolicy Policy = VariantPolicy::Copy, typename... Args>
-    [[deprecated("use constructor with new universal Variant constructor instead"
-    )]] [[nodiscard]] static DataValue
-    fromArray(Args&&... args) {
+    [[deprecated("use constructor with new universal Variant constructor instead")]] [[nodiscard]]
+    static DataValue fromArray(Args&&... args) {
         return DataValue(Variant::fromArray<Policy>(std::forward<Args>(args)...));
     }
 
@@ -2074,13 +2072,17 @@ public:
         handle()->content.decoded.data = ptr.release();  // NOLINT
     }
 
+    /// @deprecated Use new universal ExtensionObject constructor instead
     template <typename T, typename... Args>
-    [[nodiscard]] static ExtensionObject fromDecoded(T& data, Args&&... args) noexcept {
+    [[deprecated("use new universal ExtensionObject constructor instead")]] [[nodiscard]]
+    static ExtensionObject fromDecoded(T& data, Args&&... args) noexcept {
         return ExtensionObject(&data, std::forward<Args>(args)...);
     }
 
+    /// @deprecated Use new universal ExtensionObject constructor instead
     template <typename T, typename... Args>
-    [[nodiscard]] static ExtensionObject fromDecodedCopy(const T& data, Args&&... args) {
+    [[deprecated("use new universal ExtensionObject constructor instead")]] [[nodiscard]]
+    static ExtensionObject fromDecodedCopy(const T& data, Args&&... args) {
         return ExtensionObject(data, std::forward<Args>(args)...);
     }
 
