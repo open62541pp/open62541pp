@@ -39,14 +39,12 @@ public:
         : BadStatus(UA_STATUSCODE_BADDISCONNECT) {}
 };
 
+/**
+ * Exception for type-related errors.
+ */
 class TypeError : public std::runtime_error {
 public:
     using runtime_error::runtime_error;
-};
-
-class BadVariantAccess : public TypeError {
-public:
-    using TypeError::TypeError;
 };
 
 namespace detail {
