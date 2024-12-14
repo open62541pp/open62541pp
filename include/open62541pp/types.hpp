@@ -2134,18 +2134,28 @@ public:
         return encodedTypeId();
     }
 
-    /// Get the encoded body.
-    /// Returns `nullptr` if ExtensionObject is not encoded.
-    const ByteString* encodedBody() const noexcept {
-        return isEncoded()
+    /// Get the encoded body in binary format.
+    /// Returns `nullptr` if ExtensionObject is not encoded in binary format.
+    const ByteString* encodedBinary() const noexcept {
+        return handle()->encoding == UA_EXTENSIONOBJECT_ENCODED_BYTESTRING
             ? asWrapper<ByteString>(&handle()->content.encoded.body)  // NOLINT
             : nullptr;
     }
 
-    /// @deprecated Use encodedBody() instead
-    [[deprecated("use encodedBody() instead")]]
+    /// Get the encoded body in XML format.
+    /// Returns `nullptr` if ExtensionObject is not encoded in XML format.
+    const XmlElement* encodedXml() const noexcept {
+        return handle()->encoding == UA_EXTENSIONOBJECT_ENCODED_XML
+            ? asWrapper<XmlElement>(&handle()->content.encoded.body)  // NOLINT
+            : nullptr;
+    }
+
+    /// @deprecated Use encodedBinary() or encodedXml() instead
+    [[deprecated("use encodedBinary() or encodedXml() instead")]]
     const ByteString* getEncodedBody() const noexcept {
-        return encodedBody();
+        return isEncoded()
+            ? asWrapper<ByteString>(&handle()->content.encoded.body)  // NOLINT
+            : nullptr;
     }
 
     /// Get the decoded data type.

@@ -976,7 +976,8 @@ TEST_CASE("ExtensionObject") {
         CHECK_FALSE(obj.isDecoded());
         CHECK(obj.encoding() == ExtensionObjectEncoding::EncodedNoBody);
         CHECK(obj.encodedTypeId() == nullptr);
-        CHECK(obj.encodedBody() == nullptr);
+        CHECK(obj.encodedBinary() == nullptr);
+        CHECK(obj.encodedXml() == nullptr);
         CHECK(obj.decodedType() == nullptr);
         CHECK(obj.decodedData() == nullptr);
     }
@@ -1000,6 +1001,9 @@ TEST_CASE("ExtensionObject") {
         CHECK(obj.isDecoded());
         CHECK(obj.decodedType() == &UA_TYPES[UA_TYPES_STRING]);
         CHECK(obj.decodedData() == value.handle());
+        CHECK(obj.decodedData<String>() == &value);
+        CHECK(obj.decodedData<int>() == nullptr);
+        CHECK(obj.decodedData<double>() == nullptr);
     }
 
     SUBCASE("From decoded (copy)") {
@@ -1019,12 +1023,34 @@ TEST_CASE("ExtensionObject") {
         CHECK(obj.decodedData<Variant>()->scalar<double>() == 11.11);
     }
 
-    SUBCASE("decodedData") {
-        double value = 11.11;
-        ExtensionObject obj(&value);
-        CHECK(obj.decodedData() == &value);
-        CHECK(obj.decodedData<int>() == nullptr);
-        CHECK(obj.decodedData<double>() == &value);
+    SUBCASE("Encoded binary") {
+        NodeId typeId(1, 1000);
+        ExtensionObject obj;
+        obj->encoding = UA_EXTENSIONOBJECT_ENCODED_BYTESTRING;
+        obj->content.encoded.typeId = typeId;
+        obj->content.encoded.body = UA_STRING_ALLOC("binary");
+        CHECK(obj.isEncoded());
+        CHECK(obj.encoding() == ExtensionObjectEncoding::EncodedByteString);
+        CHECK(obj.encodedTypeId() != nullptr);
+        CHECK(*obj.encodedTypeId() == typeId);
+        CHECK(obj.encodedBinary() != nullptr);
+        CHECK(*obj.encodedBinary() == ByteString("binary"));
+        CHECK(obj.encodedXml() == nullptr);
+    }
+
+    SUBCASE("Encoded XML") {
+        NodeId typeId(1, 1000);
+        ExtensionObject obj;
+        obj->encoding = UA_EXTENSIONOBJECT_ENCODED_XML;
+        obj->content.encoded.typeId = typeId;
+        obj->content.encoded.body = UA_STRING_ALLOC("xml");
+        CHECK(obj.isEncoded());
+        CHECK(obj.encoding() == ExtensionObjectEncoding::EncodedXml);
+        CHECK(obj.encodedTypeId() != nullptr);
+        CHECK(*obj.encodedTypeId() == typeId);
+        CHECK(obj.encodedBinary() == nullptr);
+        CHECK(obj.encodedXml() != nullptr);
+        CHECK(*obj.encodedXml() == XmlElement("xml"));
     }
 }
 
