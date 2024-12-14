@@ -118,7 +118,7 @@ void ClientConfig::setTimeout(uint32_t milliseconds) noexcept {
 
 template <typename T>
 static void setUserIdentityTokenHelper(UA_ClientConfig& config, const T& token) {
-    asWrapper<ExtensionObject>(config.userIdentityToken) = ExtensionObject::fromDecodedCopy(token);
+    asWrapper<ExtensionObject>(config.userIdentityToken) = ExtensionObject(token);
 }
 
 void ClientConfig::setUserIdentityToken(const AnonymousIdentityToken& token) {

@@ -149,7 +149,7 @@ public:
         const NodeId& id, const EventFilter& eventFilter, EventNotificationCallback onEvent
     ) {
         MonitoringParametersEx parameters;
-        parameters.filter = ExtensionObject::fromDecodedCopy(eventFilter);
+        parameters.filter = ExtensionObject(eventFilter);
         return subscribeEvent(id, MonitoringMode::Reporting, parameters, std::move(onEvent));
     }
 

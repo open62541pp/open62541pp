@@ -50,7 +50,7 @@ TEST_CASE("AccessControlDefault") {
             SUBCASE("Unknown token") {
                 IssuedIdentityToken token;
                 CHECK_EQ(
-                    activateSessionWithToken(ExtensionObject::fromDecoded(token)),
+                    activateSessionWithToken(ExtensionObject(token)),
                     UA_STATUSCODE_BADIDENTITYTOKENINVALID
                 );
             }
@@ -59,7 +59,7 @@ TEST_CASE("AccessControlDefault") {
                 AnonymousIdentityToken token;
                 token.policyId() = String("open62541-anonymous-policy");
                 CHECK_EQ(
-                    activateSessionWithToken(ExtensionObject::fromDecoded(token)),
+                    activateSessionWithToken(ExtensionObject(token)),
                     allowAnonymous ? UA_STATUSCODE_GOOD : UA_STATUSCODE_BADIDENTITYTOKENINVALID
                 );
             }
@@ -67,26 +67,26 @@ TEST_CASE("AccessControlDefault") {
             SUBCASE("Username and password") {
                 UserNameIdentityToken token;
                 CHECK_EQ(
-                    activateSessionWithToken(ExtensionObject::fromDecoded(token)),
+                    activateSessionWithToken(ExtensionObject(token)),
                     UA_STATUSCODE_BADIDENTITYTOKENINVALID
                 );
 
                 token.policyId() = String("open62541-username-policy");
                 CHECK_EQ(
-                    activateSessionWithToken(ExtensionObject::fromDecoded(token)),
+                    activateSessionWithToken(ExtensionObject(token)),
                     UA_STATUSCODE_BADIDENTITYTOKENINVALID
                 );
 
                 token.userName() = String("username");
                 token.password() = ByteString("wrongpassword");
                 CHECK_EQ(
-                    activateSessionWithToken(ExtensionObject::fromDecoded(token)),
+                    activateSessionWithToken(ExtensionObject(token)),
                     UA_STATUSCODE_BADUSERACCESSDENIED
                 );
 
                 token.password() = ByteString("password");
                 CHECK_EQ(
-                    activateSessionWithToken(ExtensionObject::fromDecoded(token)),
+                    activateSessionWithToken(ExtensionObject(token)),
                     UA_STATUSCODE_GOOD
                 );
             }

@@ -22,9 +22,7 @@ ContentFilterElement::ContentFilterElement(
         operands.end(),
         asWrapper<ExtensionObject>(handle()->filterOperands),
         [](auto&& variant) {
-            return std::visit(
-                [](auto&& operand) { return ExtensionObject::fromDecodedCopy(operand); }, variant
-            );
+            return std::visit([](auto&& operand) { return ExtensionObject(operand); }, variant);
         }
     );
 }
