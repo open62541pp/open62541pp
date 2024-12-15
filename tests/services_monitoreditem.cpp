@@ -270,11 +270,9 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
         CHECK(response.addResults().size() == 1);
         CHECK(response.addResults()[0].isGood());
 
-        setup.client.runIterate();
-#if UAPP_OPEN62541_VER_LE(1, 3)
-        // TODO: fails with v1.4, why?
-        CHECK(notificationCount > 0);
-#endif
+        CHECK(runIterateUntil(setup.client, [&]() {
+                  return notificationCount > 0;
+              }) == ConditionStatus::occurred);
     }
 #endif
 

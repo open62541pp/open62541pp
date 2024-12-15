@@ -125,11 +125,9 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
         CHECK(notificationCount == 0);
 
         mon.setMonitoringMode(MonitoringMode::Reporting);  // now we should get a notification
-        client.runIterate();
-#if UAPP_OPEN62541_VER_LE(1, 3)
-        // TODO: fails sporadically with v1.4, why?
-        CHECK(notificationCount > 0);
-#endif
+        CHECK(runIterateUntil(client, [&]() {
+                  return notificationCount > 0;
+              }) == ConditionStatus::occurred);
 
         mon.deleteMonitoredItem();
         CHECK_THROWS_WITH(mon.deleteMonitoredItem(), "BadMonitoredItemIdInvalid");
