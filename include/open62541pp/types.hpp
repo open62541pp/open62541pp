@@ -1199,6 +1199,9 @@ public:
      * @{
      */
 
+    void assign(std::nullptr_t ptr) noexcept = delete;
+    void assign(std::nullptr_t ptr, const UA_DataType& type) noexcept = delete;
+
     /**
      * Assign pointer to scalar/array to variant (no copy).
      * The object will *not* be deleted when the Variant is destructed.
@@ -1207,13 +1210,10 @@ public:
      *            - A pointer to a contiguous container such as `std::array` or `std::vector`
      *              holding native or wrapper elements.
      *              The underlying array must be accessible with `std::data` and `std::size`.
-     *            - A `nullptr`, in which case the function returns without performing any action.
+     *            - A `nullptr`, in which case the variant will be cleared.
      */
     template <typename T, typename = std::enable_if_t<!std::is_const_v<T>>>
     void assign(T* ptr) noexcept {
-        if (ptr == nullptr) {
-            return;
-        }
         if constexpr (isArrayType<T>()) {
             using ValueType = typename T::value_type;
             assertIsRegistered<ValueType>();
@@ -1232,9 +1232,8 @@ public:
     template <typename T, typename = std::enable_if_t<!std::is_const_v<T>>>
     void assign(T* ptr, const UA_DataType& type) noexcept {
         if (ptr == nullptr) {
-            return;
-        }
-        if constexpr (isArrayType<T>()) {
+            clear();
+        } else if constexpr (isArrayType<T>()) {
             setArrayImpl(std::data(*ptr), std::size(*ptr), type, UA_VARIANT_DATA_NODELETE);
         } else {
             setScalarImpl(ptr, type, UA_VARIANT_DATA_NODELETE);
