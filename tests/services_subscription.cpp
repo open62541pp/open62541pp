@@ -12,7 +12,7 @@ using namespace opcua;
 TEST_CASE_TEMPLATE("Subscription service set", T, Client, Async<Client>) {
     ServerClientSetup setup;
     setup.client.connect(setup.endpointUrl);
-    auto& connection = setup.getInstance<T>();
+    auto& connection = setup.instance<T>();
 
     services::SubscriptionParameters parameters{};
 

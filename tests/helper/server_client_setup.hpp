@@ -24,7 +24,7 @@ struct ServerClientSetup {
     ServerRunner serverRunner{server};
 
     template <typename T>
-    auto& getInstance() noexcept {
+    auto& instance() noexcept {
         if constexpr (IsTrait<T>::value) {
             using U = typename T::type;
             return std::get<U&>(std::tie(server, client));

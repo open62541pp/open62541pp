@@ -21,7 +21,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
     ServerClientSetup setup;
     setup.client.connect(setup.endpointUrl);
     auto& server = setup.server;
-    auto& connection = setup.getInstance<T>();
+    auto& connection = setup.instance<T>();
 
     // add variable node to test data change notifications
     const NodeId id{1, 1000};
