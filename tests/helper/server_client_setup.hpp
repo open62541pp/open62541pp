@@ -18,35 +18,6 @@ constexpr bool isServer = std::is_same_v<std::remove_reference_t<T>, opcua::Serv
 template <typename T>
 constexpr bool isClient = std::is_same_v<std::remove_reference_t<T>, opcua::Client>;
 
-// Call the connection's runIterate function until either condition or a timeout occurred.
-template <typename Connection, typename UnaryPred>
-bool runIterateUntil(Connection& connection, UnaryPred predicate, long timeoutMilliseconds = 1000) {
-    static_assert(std::is_same_v<std::invoke_result_t<UnaryPred>, bool>);
-    auto nowInMilliseconds = []() {
-        return std::chrono::duration_cast<std::chrono::milliseconds>(
-                   std::chrono::system_clock::now().time_since_epoch()
-        )
-            .count();
-    };
-
-    auto currentTime = nowInMilliseconds();
-    long duration{};
-    bool conditionTrue = false;
-    do {
-        connection.runIterate();
-        conditionTrue = predicate();
-        auto nextTime = nowInMilliseconds();
-        duration = nextTime - currentTime;
-        currentTime = nextTime;
-    } while (!conditionTrue && (duration < timeoutMilliseconds));
-
-    if (duration >= timeoutMilliseconds) {
-        INFO("Timeout during runIterateUntil");
-    }
-
-    return conditionTrue;
-}
-
 struct ServerClientSetup {
     Client client;
     Server server;
@@ -64,3 +35,23 @@ struct ServerClientSetup {
 
     static constexpr std::string_view endpointUrl = "opc.tcp://localhost:4840";
 };
+
+// Call the connection's runIterate function until either condition or a timeout occurred.
+template <typename Connection, typename UnaryPred>
+bool runIterateUntil(
+    Connection& connection, UnaryPred predicate, uint16_t timeoutMilliseconds = 1000
+) {
+    static_assert(std::is_same_v<std::invoke_result_t<UnaryPred>, bool>);
+
+    const auto now = [] { return std::chrono::system_clock::now(); };
+    const auto startTime = now();
+
+    while (!predicate()) {
+        connection.runIterate();
+        if ((now() - startTime) > std::chrono::milliseconds(timeoutMilliseconds)) {
+            INFO("Timeout during runIterateUntil");
+            break;
+        }
+    }
+    return predicate();
+}
