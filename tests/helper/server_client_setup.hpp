@@ -36,14 +36,14 @@ struct ServerClientSetup {
     static constexpr std::string_view endpointUrl = "opc.tcp://localhost:4840";
 };
 
-// Call the connection's runIterate function until either condition or a timeout occurred.
+// Call the connection's runIterate function until predicate returns `true` or a timeout occurs.
 template <typename Connection, typename UnaryPred>
 bool runIterateUntil(
     Connection& connection, UnaryPred predicate, uint16_t timeoutMilliseconds = 1000
 ) {
     static_assert(std::is_same_v<std::invoke_result_t<UnaryPred>, bool>);
 
-    const auto now = [] { return std::chrono::system_clock::now(); };
+    const auto now = [] { return std::chrono::steady_clock::now(); };
     const auto startTime = now();
 
     while (!predicate()) {
