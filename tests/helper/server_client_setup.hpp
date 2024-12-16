@@ -5,6 +5,8 @@
 #include <tuple>
 #include <type_traits>
 
+#include <doctest/doctest.h>
+
 #include "open62541pp/client.hpp"
 #include "open62541pp/server.hpp"
 
@@ -16,13 +18,9 @@ constexpr bool isServer = std::is_same_v<std::remove_reference_t<T>, opcua::Serv
 template <typename T>
 constexpr bool isClient = std::is_same_v<std::remove_reference_t<T>, opcua::Client>;
 
-enum class ConditionStatus { occurred, timeout };
-
 // Call the connection's runIterate function until either condition or a timeout occurred.
 template <typename Connection, typename UnaryPred>
-ConditionStatus runIterateUntil(
-    Connection& connection, UnaryPred predicate, long timeoutMilliseconds = 1000
-) {
+bool runIterateUntil(Connection& connection, UnaryPred predicate, long timeoutMilliseconds = 1000) {
     static_assert(std::is_same_v<std::invoke_result_t<UnaryPred>, bool>);
     auto nowInMilliseconds = []() {
         return std::chrono::duration_cast<std::chrono::milliseconds>(
@@ -42,7 +40,11 @@ ConditionStatus runIterateUntil(
         currentTime = nextTime;
     } while (!conditionTrue && (duration < timeoutMilliseconds));
 
-    return conditionTrue ? ConditionStatus::occurred : ConditionStatus::timeout;
+    if (duration >= timeoutMilliseconds) {
+        INFO("Timeout during runIterateUntil");
+    }
+
+    return conditionTrue;
 }
 
 struct ServerClientSetup {

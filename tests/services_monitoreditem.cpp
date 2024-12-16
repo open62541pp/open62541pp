@@ -270,9 +270,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
         CHECK(response.addResults().size() == 1);
         CHECK(response.addResults()[0].isGood());
 
-        CHECK(runIterateUntil(setup.client, [&]() {
-                  return notificationCount > 0;
-              }) == ConditionStatus::occurred);
+        CHECK(runIterateUntil(setup.client, [&] { return notificationCount > 0; }));
     }
 #endif
 

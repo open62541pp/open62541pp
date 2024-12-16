@@ -125,9 +125,7 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
         CHECK(notificationCount == 0);
 
         mon.setMonitoringMode(MonitoringMode::Reporting);  // now we should get a notification
-        CHECK(runIterateUntil(client, [&]() {
-                  return notificationCount > 0;
-              }) == ConditionStatus::occurred);
+        CHECK(runIterateUntil(client, [&] { return notificationCount > 0; }));
 
         mon.deleteMonitoredItem();
         CHECK_THROWS_WITH(mon.deleteMonitoredItem(), "BadMonitoredItemIdInvalid");
