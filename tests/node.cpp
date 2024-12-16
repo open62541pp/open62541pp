@@ -12,7 +12,7 @@ using namespace opcua;
 TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
     ServerClientSetup setup;
     setup.client.connect(setup.endpointUrl);
-    auto& connection = setup.getInstance<T>();
+    auto& connection = setup.instance<T>();
 
     [[maybe_unused]] const auto await = [&](auto future) {
         setup.client.runIterate();

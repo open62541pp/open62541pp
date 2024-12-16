@@ -12,7 +12,7 @@ using namespace opcua;
 TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
     ServerClientSetup setup;
     setup.client.connect(setup.endpointUrl);
-    auto& connection = setup.getInstance<T>();
+    auto& connection = setup.instance<T>();
 
     const NodeId objectsId{ObjectId::ObjectsFolder};
     const NodeId methodId{1, 1000};

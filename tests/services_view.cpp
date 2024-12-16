@@ -13,7 +13,7 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
     setup.client.connect(setup.endpointUrl);
     auto& server = setup.server;
     auto& client = setup.client;
-    auto& connection = setup.getInstance<T>();
+    auto& connection = setup.instance<T>();
 
     // add node to query references
     const NodeId id{1, 1000};

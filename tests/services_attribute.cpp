@@ -334,7 +334,7 @@ TEST_CASE_TEMPLATE("Attribute service set write/read", T, Server, Client, Async<
     ServerClientSetup setup;
     setup.client.connect(setup.endpointUrl);
     auto& client = setup.client;
-    auto& connection = setup.getInstance<T>();
+    auto& connection = setup.instance<T>();
 
     // create variable node
     const NodeId id{1, 1000};

@@ -12,7 +12,7 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
     ServerClientSetup setup;
     setup.client.connect(setup.endpointUrl);
     auto& server = setup.server;
-    auto& connection = setup.getInstance<T>();
+    auto& connection = setup.instance<T>();
 
     const NodeId objectsId{0, UA_NS0ID_OBJECTSFOLDER};
     const NodeId newId{1, 1000};
