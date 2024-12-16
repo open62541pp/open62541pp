@@ -50,7 +50,7 @@ private:
  * - [Swift's `Result` enumeration](https://developer.apple.com/documentation/swift/result)
  */
 template <typename T>
-class Result {
+class [[nodiscard]] Result {
 public:
     using ValueType = T;
 
@@ -339,7 +339,7 @@ private:
  * Result<void> contains only a StatusCode.
  */
 template <>
-class Result<void> {
+class [[nodiscard]] Result<void> {
 public:
     /**
      * Create a default Result (good StatusCode).
