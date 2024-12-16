@@ -50,8 +50,8 @@ bool runIterateUntil(
         connection.runIterate();
         if ((now() - startTime) > std::chrono::milliseconds(timeoutMilliseconds)) {
             INFO("Timeout during runIterateUntil");
-            break;
+            return false;
         }
     }
-    return predicate();
+    return true;
 }
