@@ -19,10 +19,11 @@ constexpr bool isClient = std::is_same_v<std::remove_reference_t<T>, opcua::Clie
 enum class ConditionStatus { occurred, timeout };
 
 // Call the connection's runIterate function until either condition or a timeout occurred.
-template <typename Connection>
-inline static ConditionStatus runIterateUntil(
-    Connection& connection, const std::function<bool()>& condition, long timeoutMilliseconds = 1000
+template <typename Connection, typename UnaryPred>
+ConditionStatus runIterateUntil(
+    Connection& connection, UnaryPred predicate, long timeoutMilliseconds = 1000
 ) {
+    static_assert(std::is_same_v<std::invoke_result_t<UnaryPred>, bool>);
     auto nowInMilliseconds = []() {
         return std::chrono::duration_cast<std::chrono::milliseconds>(
                    std::chrono::system_clock::now().time_since_epoch()
@@ -35,7 +36,7 @@ inline static ConditionStatus runIterateUntil(
     bool conditionTrue = false;
     do {
         connection.runIterate();
-        conditionTrue = condition();
+        conditionTrue = predicate();
         auto nextTime = nowInMilliseconds();
         duration = nextTime - currentTime;
         currentTime = nextTime;
