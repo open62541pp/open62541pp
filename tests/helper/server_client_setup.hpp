@@ -46,12 +46,13 @@ bool runIterateUntil(
     const auto now = [] { return std::chrono::steady_clock::now(); };
     const auto startTime = now();
 
-    while (!predicate()) {
+    do {
         connection.runIterate();
-        if ((now() - startTime) > std::chrono::milliseconds(timeoutMilliseconds)) {
-            INFO("Timeout during runIterateUntil");
-            break;
+        if (predicate()) {
+            return true;
         }
-    }
-    return predicate();
+    } while ((now() - startTime) <= std::chrono::milliseconds(timeoutMilliseconds));
+
+    INFO("Timeout during runIterateUntil");
+    return false;
 }
