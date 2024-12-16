@@ -1,6 +1,3 @@
-#include <chrono>
-#include <thread>
-
 #include <doctest/doctest.h>
 
 #include "open62541pp/client.hpp"
@@ -47,9 +44,7 @@ TEST_CASE("Subscription & MonitoredItem (server)") {
         );
         CHECK(sub.monitoredItems().size() == 1);
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(200));
-        server.runIterate();
-        CHECK(notificationCount > 0);
+        CHECK(runIterateUntil(server, [&] { return notificationCount > 0; }));
 
         mon.deleteMonitoredItem();
         CHECK(sub.monitoredItems().empty());

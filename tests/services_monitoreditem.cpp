@@ -89,8 +89,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
         CAPTURE(result.monitoredItemId());
 
         services::writeValue(server, id, Variant(11.11)).throwIfBad();
-        setup.client.runIterate();
-        CHECK(notificationCount > 0);
+        CHECK(runIterateUntil(setup.client, [&] { return notificationCount > 0; }));
         CHECK(changedValue.value().scalar<double>() == 11.11);
     }
 
@@ -141,8 +140,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
         Event event(server);
         event.writeTime(DateTime::now());
         event.trigger();
-        setup.client.runIterate();
-        CHECK(notificationCount == 1);
+        CHECK(runIterateUntil(setup.client, [&] { return notificationCount == 1; }));
         CHECK(eventFieldsSize == 3);
     }
 #endif
@@ -243,8 +241,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
                 .monitoredItemId();
         CAPTURE(monId);
 
-        setup.client.runIterate();
-        CHECK(notificationCountTriggering > 0);
+        CHECK(runIterateUntil(setup.client, [&] { return notificationCountTriggering > 0; }));
         CHECK(notificationCount == 0);  // no triggering links yet
 
         const auto setTriggering = [&](auto&&... args) {
@@ -305,8 +302,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
         };
         const StatusCode result = deleteMonitoredItem(connection, subId, monId);
         CHECK(result.isGood());
-        setup.client.runIterate();
-        CHECK(deleted == true);
+        CHECK(runIterateUntil(setup.client, [&] { return deleted == true; }));
     }
 }
 
@@ -342,8 +338,7 @@ TEST_CASE("MonitoredItem service set (server)") {
         CAPTURE(monId);
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
         services::writeValue(server, id, Variant(11.11)).throwIfBad();
-        server.runIterate();
-        CHECK(notificationCount > 0);
+        CHECK(runIterateUntil(server, [&] { return notificationCount > 0; }));
     }
 
     SUBCASE("deleteMonitoredItem") {
