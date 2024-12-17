@@ -334,15 +334,15 @@ static void valueCallbackOnRead(
     [[maybe_unused]] UA_Server* server,
     [[maybe_unused]] const UA_NodeId* sessionId,
     [[maybe_unused]] void* sessionContext,
-    [[maybe_unused]] const UA_NodeId* nodeId,
+    const UA_NodeId* nodeId,
     void* nodeContext,
     [[maybe_unused]] const UA_NumericRange* range,
     const UA_DataValue* value
 ) noexcept {
-    assert(nodeContext != nullptr && value != nullptr);
+    assert(nodeContext != nullptr && nodeId != nullptr && value != nullptr);
     auto& cb = static_cast<detail::NodeContext*>(nodeContext)->valueCallback.onBeforeRead;
     if (cb) {
-        detail::tryInvoke([&] { cb(asWrapper<DataValue>(*value)); });
+        detail::tryInvoke([&] { cb(asWrapper<NodeId>(*nodeId), asWrapper<DataValue>(*value)); });
     }
 }
 
@@ -350,15 +350,15 @@ static void valueCallbackOnWrite(
     [[maybe_unused]] UA_Server* server,
     [[maybe_unused]] const UA_NodeId* sessionId,
     [[maybe_unused]] void* sessionContext,
-    [[maybe_unused]] const UA_NodeId* nodeId,
+    const UA_NodeId* nodeId,
     void* nodeContext,
     [[maybe_unused]] const UA_NumericRange* range,
     const UA_DataValue* value
 ) noexcept {
-    assert(nodeContext != nullptr && value != nullptr);
+    assert(nodeContext != nullptr && nodeId != nullptr && value != nullptr);
     auto& cb = static_cast<detail::NodeContext*>(nodeContext)->valueCallback.onAfterWrite;
     if (cb) {
-        detail::tryInvoke([&] { cb(asWrapper<DataValue>(*value)); });
+        detail::tryInvoke([&] { cb(asWrapper<NodeId>(*nodeId), asWrapper<DataValue>(*value)); });
     }
 }
 
@@ -387,10 +387,16 @@ static UA_StatusCode valueSourceRead(
     const UA_NumericRange* range,
     UA_DataValue* value
 ) noexcept {
-    assert(nodeContext != nullptr && value != nullptr && nodeId != nullptr);
+    assert(nodeContext != nullptr && nodeId != nullptr && value != nullptr);
     auto& callback = static_cast<detail::NodeContext*>(nodeContext)->dataSource.read;
     if (callback) {
-        auto result = detail::tryInvoke(callback, asWrapper<NodeId>(*nodeId), asWrapper<DataValue>(*value), asRange(range), includeSourceTimestamp);
+        auto result = detail::tryInvoke(
+            callback,
+            asWrapper<NodeId>(*nodeId),
+            asWrapper<DataValue>(*value),
+            asRange(range),
+            includeSourceTimestamp
+        );
         return result.code();
     }
     return UA_STATUSCODE_BADINTERNALERROR;
@@ -405,10 +411,12 @@ static UA_StatusCode valueSourceWrite(
     const UA_NumericRange* range,
     const UA_DataValue* value
 ) noexcept {
-    assert(nodeContext != nullptr && value != nullptr && nodeId != nullptr);
+    assert(nodeContext != nullptr && nodeId != nullptr && value != nullptr);
     auto& callback = static_cast<detail::NodeContext*>(nodeContext)->dataSource.write;
     if (callback) {
-        auto result = detail::tryInvoke(callback, asWrapper<NodeId>(*nodeId), asWrapper<DataValue>(*value), asRange(range));
+        auto result = detail::tryInvoke(
+            callback, asWrapper<NodeId>(*nodeId), asWrapper<DataValue>(*value), asRange(range)
+        );
         return result.code();
     }
     return UA_STATUSCODE_BADINTERNALERROR;

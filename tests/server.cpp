@@ -172,11 +172,11 @@ TEST_CASE("ValueCallback") {
     int valueAfterWrite = 0;
 
     ValueCallback valueCallback;
-    valueCallback.onBeforeRead = [&](const DataValue& dv) {
+    valueCallback.onBeforeRead = [&](const NodeId&, const DataValue& dv) {
         onBeforeReadCalled = true;
         valueBeforeRead = dv.value().scalar<int>();
     };
-    valueCallback.onAfterWrite = [&](const DataValue& dv) {
+    valueCallback.onAfterWrite = [&](const NodeId&, const DataValue& dv) {
         onAfterWriteCalled = true;
         valueAfterWrite = dv.value().scalar<int>();
     };
@@ -205,13 +205,14 @@ TEST_CASE("DataSource") {
     int data = 0;
 
     ValueBackendDataSource dataSource;
-    dataSource.read = [&](const NodeId&, DataValue& dv, const NumericRange&, bool includeSourceTimestamp) {
-        dv.value() = data;
-        if (includeSourceTimestamp) {
-            dv.setSourceTimestamp(DateTime::now());
-        }
-        return UA_STATUSCODE_GOOD;
-    };
+    dataSource.read =
+        [&](const NodeId&, DataValue& dv, const NumericRange&, bool includeSourceTimestamp) {
+            dv.value() = data;
+            if (includeSourceTimestamp) {
+                dv.setSourceTimestamp(DateTime::now());
+            }
+            return UA_STATUSCODE_GOOD;
+        };
     dataSource.write = [&](const NodeId&, const DataValue& dv, const NumericRange&) {
         data = dv.value().scalar<int>();
         return UA_STATUSCODE_GOOD;
