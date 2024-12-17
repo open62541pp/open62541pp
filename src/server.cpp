@@ -377,10 +377,6 @@ void Server::setVariableNodeValueCallback(const NodeId& id, ValueCallback callba
     throwIfBad(UA_Server_setVariableNode_valueCallback(handle(), id, callbackNative));
 }
 
-static NumericRange asRange(const UA_NumericRange* range) noexcept {
-    return range == nullptr ? NumericRange() : NumericRange(*range);
-}
-
 static UA_StatusCode valueSourceRead(
     [[maybe_unused]] UA_Server* server,
     [[maybe_unused]] const UA_NodeId* sessionId,
@@ -398,7 +394,7 @@ static UA_StatusCode valueSourceRead(
             callback,
             asWrapper<NodeId>(*nodeId),
             asWrapper<DataValue>(*value),
-            asRange(range),
+            asWrapper<NumericRange>(range),
             includeSourceTimestamp
         );
         return result.code();
@@ -419,7 +415,10 @@ static UA_StatusCode valueSourceWrite(
     auto& callback = static_cast<detail::NodeContext*>(nodeContext)->dataSource.write;
     if (callback) {
         auto result = detail::tryInvoke(
-            callback, asWrapper<NodeId>(*nodeId), asWrapper<DataValue>(*value), asRange(range)
+            callback,
+            asWrapper<NodeId>(*nodeId),
+            asWrapper<DataValue>(*value),
+            asWrapper<NumericRange>(range)
         );
         return result.code();
     }
