@@ -46,7 +46,7 @@ TEST_CASE("AsyncServiceAdapter") {
             invokeCallback(nullptr);
             CHECK_FALSE(result.has_value());
             CHECK(catcher.hasException());
-            CHECK_THROWS_AS_MESSAGE(catcher.rethrow(), BadStatus, "BadUnexpectedError");
+            CHECK_THROWS_WITH_AS(catcher.rethrow(), "BadUnexpectedError", BadStatus);
         }
         SUBCASE("Exception in completion handler") {
             throwInCompletionHandler = true;
@@ -54,7 +54,7 @@ TEST_CASE("AsyncServiceAdapter") {
             CHECK(result.has_value());
             CHECK(result.value() == response);
             CHECK(catcher.hasException());
-            CHECK_THROWS_AS_MESSAGE(catcher.rethrow(), std::runtime_error, "CompletionHandler");
+            CHECK_THROWS_WITH_AS(catcher.rethrow(), "CompletionHandler", std::runtime_error);
         }
     }
 }
@@ -76,7 +76,7 @@ TEST_CASE("sendRequest") {
     SUBCASE("Disconnected") {
         const auto response = sendReadRequest();
         // UA_STATUSCODE_BADCONNECTIONCLOSED or UA_STATUSCODE_BADINTERNALERROR (v1.0)
-        CHECK(response.getResponseHeader().getServiceResult().isBad());
+        CHECK(response.responseHeader().serviceResult().isBad());
     }
 
     Server server;
@@ -85,11 +85,8 @@ TEST_CASE("sendRequest") {
 
     SUBCASE("Success") {
         const auto response = sendReadRequest();
-        CHECK(response.getResponseHeader().getServiceResult().isGood());
-        CHECK_EQ(
-            response.getResults()[0].value().getScalar<QualifiedName>(),
-            QualifiedName(0, "Objects")
-        );
+        CHECK(response.responseHeader().serviceResult().isGood());
+        CHECK(response.results()[0].value().scalar<QualifiedName>() == QualifiedName(0, "Objects"));
     }
 }
 
@@ -112,7 +109,7 @@ TEST_CASE("sendRequestAsync") {
     SUBCASE("Disconnected") {
         sendReadRequest([&](ReadResponse& response) {
             // UA_STATUSCODE_BADSERVERNOTCONNECTED since v1.1
-            CHECK(response.getResponseHeader().getServiceResult().isBad());
+            CHECK(response.responseHeader().serviceResult().isBad());
         });
     }
 
@@ -123,10 +120,9 @@ TEST_CASE("sendRequestAsync") {
     SUBCASE("Success") {
         bool executed = false;
         sendReadRequest([&](ReadResponse& response) {
-            CHECK(response.getResponseHeader().getServiceResult().isGood());
+            CHECK(response.responseHeader().serviceResult().isGood());
             CHECK_EQ(
-                response.getResults()[0].value().getScalar<QualifiedName>(),
-                QualifiedName(0, "Objects")
+                response.results()[0].value().scalar<QualifiedName>(), QualifiedName(0, "Objects")
             );
             executed = true;
         });
@@ -136,6 +132,6 @@ TEST_CASE("sendRequestAsync") {
 
     SUBCASE("Exception in user callback") {
         sendReadRequest([](ReadResponse&) { throw std::runtime_error("Error"); });
-        CHECK_THROWS_AS_MESSAGE(client.runIterate(), std::runtime_error, "Error");
+        CHECK_THROWS_WITH_AS(client.runIterate(), "Error", std::runtime_error);
     }
 }

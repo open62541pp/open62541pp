@@ -12,7 +12,7 @@ using namespace opcua;
 TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
     ServerClientSetup setup;
     setup.client.connect(setup.endpointUrl);
-    auto& connection = setup.getInstance<T>();
+    auto& connection = setup.instance<T>();
 
     const NodeId objectsId{ObjectId::ObjectsFolder};
     const NodeId methodId{1, 1000};
@@ -27,9 +27,9 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
             if (throwException) {
                 throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
             }
-            const auto a = inputs[0].getScalarCopy<int32_t>();
-            const auto b = inputs[1].getScalarCopy<int32_t>();
-            outputs[0].setScalarCopy(a + b);
+            const auto a = inputs.at(0).scalar<int32_t>();
+            const auto b = inputs.at(1).scalar<int32_t>();
+            outputs.at(0) = a + b;
         },
         {
             Argument("a", {"en-US", "first number"}, DataTypeId::Int32, ValueRank::Scalar),
@@ -58,13 +58,13 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
             objectsId,
             methodId,
             Span<const Variant>{
-                Variant::fromScalar(int32_t{1}),
-                Variant::fromScalar(int32_t{2}),
+                Variant(int32_t{1}),
+                Variant(int32_t{2}),
             }
         );
-        CHECK(result.getStatusCode().isGood());
-        CHECK(result.getOutputArguments().size() == 1);
-        CHECK(result.getOutputArguments()[0].getScalarCopy<int32_t>() == 3);
+        CHECK(result.statusCode().isGood());
+        CHECK(result.outputArguments().size() == 1);
+        CHECK(result.outputArguments().at(0).scalar<int32_t>() == 3);
     }
 
     SUBCASE("Propagate exception") {
@@ -74,11 +74,11 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
             objectsId,
             methodId,
             Span<const Variant>{
-                Variant::fromScalar(int32_t{1}),
-                Variant::fromScalar(int32_t{2}),
+                Variant(int32_t{1}),
+                Variant(int32_t{2}),
             }
         );
-        CHECK(result.getStatusCode() == UA_STATUSCODE_BADUNEXPECTEDERROR);
+        CHECK(result.statusCode() == UA_STATUSCODE_BADUNEXPECTEDERROR);
     }
 
     SUBCASE("Invalid input arguments") {
@@ -87,18 +87,18 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
             objectsId,
             methodId,
             Span<const Variant>{
-                Variant::fromScalar(true),
-                Variant::fromScalar(11.11f),
+                Variant(true),
+                Variant(11.11f),
             }
         );
-        CHECK(result.getStatusCode() == UA_STATUSCODE_BADINVALIDARGUMENT);
+        CHECK(result.statusCode() == UA_STATUSCODE_BADINVALIDARGUMENT);
     }
 
     SUBCASE("Missing arguments") {
         const CallMethodResult result = call(
             connection, objectsId, methodId, Span<const Variant>{}
         );
-        CHECK(result.getStatusCode() == UA_STATUSCODE_BADARGUMENTSMISSING);
+        CHECK(result.statusCode() == UA_STATUSCODE_BADARGUMENTSMISSING);
     }
 
     SUBCASE("Too many arguments") {
@@ -107,12 +107,12 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
             objectsId,
             methodId,
             Span<const Variant>{
-                Variant::fromScalar(int32_t{1}),
-                Variant::fromScalar(int32_t{2}),
-                Variant::fromScalar(int32_t{3}),
+                Variant(int32_t{1}),
+                Variant(int32_t{2}),
+                Variant(int32_t{3}),
             }
         );
-        CHECK(result.getStatusCode() == UA_STATUSCODE_BADTOOMANYARGUMENTS);
+        CHECK(result.statusCode() == UA_STATUSCODE_BADTOOMANYARGUMENTS);
     }
 }
 #endif

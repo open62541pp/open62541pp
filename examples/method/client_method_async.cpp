@@ -20,25 +20,25 @@ int main() {
     // Asynchronously call method (future variant - default)
     {
         auto future = objectsNode.callMethodAsync(
-            greetMethodNode.id(), {opcua::Variant::fromScalar("Future World")}, opcua::useFuture
+            greetMethodNode.id(), {opcua::Variant("Future World")}, opcua::useFuture
         );
         std::cout << "Waiting for asynchronous operation to complete\n";
         future.wait();
 
         std::cout << "Future ready, get method output\n";
         auto result = future.get();
-        std::cout << "Future with status code: " << result.getStatusCode() << std::endl;
-        std::cout << result.getOutputArguments()[0].getScalar<opcua::String>() << std::endl;
+        std::cout << "Future with status code: " << result.statusCode() << std::endl;
+        std::cout << result.outputArguments()[0].scalar<opcua::String>() << std::endl;
     }
 
     // Asynchronously call method (callback variant)
     {
         objectsNode.callMethodAsync(
             greetMethodNode.id(),
-            {opcua::Variant::fromScalar("Callback World")},
+            {opcua::Variant("Callback World")},
             [](opcua::CallMethodResult& result) {
-                std::cout << "Callback with status code: " << result.getStatusCode() << std::endl;
-                std::cout << result.getOutputArguments()[0].getScalar<opcua::String>() << std::endl;
+                std::cout << "Callback with status code: " << result.statusCode() << std::endl;
+                std::cout << result.outputArguments()[0].scalar<opcua::String>() << std::endl;
             }
         );
     }

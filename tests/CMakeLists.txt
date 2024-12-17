@@ -12,6 +12,7 @@ add_executable(
     event.cpp
     exception.cpp
     exceptioncatcher.cpp
+    iterator.cpp
     node.cpp
     plugin_accesscontrol.cpp
     plugin_create_certificate.cpp

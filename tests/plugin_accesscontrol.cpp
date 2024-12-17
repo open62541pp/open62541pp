@@ -17,11 +17,11 @@ TEST_CASE("AccessControlDefault") {
         AccessControlDefault ac(true, {{"username", "password"}});
 
         CHECK(ac.getUserTokenPolicies().size() == 2);
-        CHECK(ac.getUserTokenPolicies()[0].getPolicyId() == "open62541-anonymous-policy");
-        CHECK(ac.getUserTokenPolicies()[0].getTokenType() == UserTokenType::Anonymous);
+        CHECK(ac.getUserTokenPolicies()[0].policyId() == "open62541-anonymous-policy");
+        CHECK(ac.getUserTokenPolicies()[0].tokenType() == UserTokenType::Anonymous);
 
-        CHECK(ac.getUserTokenPolicies()[1].getPolicyId() == "open62541-username-policy");
-        CHECK(ac.getUserTokenPolicies()[1].getTokenType() == UserTokenType::Username);
+        CHECK(ac.getUserTokenPolicies()[1].policyId() == "open62541-username-policy");
+        CHECK(ac.getUserTokenPolicies()[1].tokenType() == UserTokenType::Username);
     }
 
     SUBCASE("activateSession") {
@@ -50,16 +50,16 @@ TEST_CASE("AccessControlDefault") {
             SUBCASE("Unknown token") {
                 IssuedIdentityToken token;
                 CHECK_EQ(
-                    activateSessionWithToken(ExtensionObject::fromDecoded(token)),
+                    activateSessionWithToken(ExtensionObject(token)),
                     UA_STATUSCODE_BADIDENTITYTOKENINVALID
                 );
             }
 
             SUBCASE("Anonymous login") {
                 AnonymousIdentityToken token;
-                token.getPolicyId() = String("open62541-anonymous-policy");
+                token.policyId() = String("open62541-anonymous-policy");
                 CHECK_EQ(
-                    activateSessionWithToken(ExtensionObject::fromDecoded(token)),
+                    activateSessionWithToken(ExtensionObject(token)),
                     allowAnonymous ? UA_STATUSCODE_GOOD : UA_STATUSCODE_BADIDENTITYTOKENINVALID
                 );
             }
@@ -67,26 +67,26 @@ TEST_CASE("AccessControlDefault") {
             SUBCASE("Username and password") {
                 UserNameIdentityToken token;
                 CHECK_EQ(
-                    activateSessionWithToken(ExtensionObject::fromDecoded(token)),
+                    activateSessionWithToken(ExtensionObject(token)),
                     UA_STATUSCODE_BADIDENTITYTOKENINVALID
                 );
 
-                token.getPolicyId() = String("open62541-username-policy");
+                token.policyId() = String("open62541-username-policy");
                 CHECK_EQ(
-                    activateSessionWithToken(ExtensionObject::fromDecoded(token)),
+                    activateSessionWithToken(ExtensionObject(token)),
                     UA_STATUSCODE_BADIDENTITYTOKENINVALID
                 );
 
-                token.getUserName() = String("username");
-                token.getPassword() = ByteString("wrongpassword");
+                token.userName() = String("username");
+                token.password() = ByteString("wrongpassword");
                 CHECK_EQ(
-                    activateSessionWithToken(ExtensionObject::fromDecoded(token)),
+                    activateSessionWithToken(ExtensionObject(token)),
                     UA_STATUSCODE_BADUSERACCESSDENIED
                 );
 
-                token.getPassword() = ByteString("password");
+                token.password() = ByteString("password");
                 CHECK_EQ(
-                    activateSessionWithToken(ExtensionObject::fromDecoded(token)),
+                    activateSessionWithToken(ExtensionObject(token)),
                     UA_STATUSCODE_GOOD
                 );
             }

@@ -42,13 +42,11 @@ TEST_CASE("StatusCode") {
         CHECK(!code.isGood());
         CHECK(!code.isUncertain());
         CHECK(code.isBad());
-        CHECK_THROWS_AS_MESSAGE(code.throwIfBad(), BadStatus, "BadTimeout");
+        CHECK_THROWS_WITH_AS(code.throwIfBad(), "BadTimeout", BadStatus);
     }
 }
 
-using StringWrapper = detail::StringWrapper<UA_String, UA_TYPES_STRING, char>;
-
-TEST_CASE_TEMPLATE("StringWrapper constructors", T, StringWrapper, const StringWrapper) {
+TEST_CASE_TEMPLATE("StringLikeMixin constructors", T, String, const String) {
     SUBCASE("Default") {
         T str;
         CHECK(str.size() == 0);
@@ -79,7 +77,7 @@ TEST_CASE_TEMPLATE("StringWrapper constructors", T, StringWrapper, const StringW
     SUBCASE("From iterator pair (input iterator, single-pass)") {
         std::istringstream ss("abc");  // allows only single-pass reading
         std::istream_iterator<char> first(ss), last;
-        StringWrapper str(first, last);
+        T str(first, last);
         CHECK(str.size() == 3);
         CHECK(str.length() == 3);
         CHECK_FALSE(str.empty());
@@ -97,7 +95,7 @@ TEST_CASE_TEMPLATE("StringWrapper constructors", T, StringWrapper, const StringW
     }
 }
 
-TEST_CASE_TEMPLATE("StringWrapper element access", T, StringWrapper, const StringWrapper) {
+TEST_CASE_TEMPLATE("StringLikeMixin element access", T, String, const String) {
     T str{'a', 'b', 'c'};
 
     SUBCASE("operator[]") {
@@ -112,7 +110,7 @@ TEST_CASE_TEMPLATE("StringWrapper element access", T, StringWrapper, const Strin
     }
 }
 
-TEST_CASE_TEMPLATE("StringWrapper iterators", T, StringWrapper, const StringWrapper) {
+TEST_CASE_TEMPLATE("StringLikeMixin iterators", T, String, const String) {
     T str{'a', 'b', 'c'};
 
     SUBCASE("begin(), end() iterators") {
@@ -169,6 +167,18 @@ TEST_CASE_TEMPLATE("StringLike constructors", T, String, XmlElement) {
         CHECK(str.empty());
         CHECK(str.data() != nullptr);
     }
+}
+
+TEST_CASE_TEMPLATE("StringLike assign const char*", T, String, XmlElement) {
+    T str;
+    str = "test123";
+    CHECK(str == T{"test123"});
+}
+
+TEST_CASE_TEMPLATE("StringLike assign string_view", T, String, XmlElement) {
+    T str;
+    str = std::string_view{"test123"};
+    CHECK(str == T{"test123"});
 }
 
 TEST_CASE_TEMPLATE("StringLike implicit conversion to string_view", T, String, XmlElement) {
@@ -279,50 +289,6 @@ TEST_CASE("Guid") {
         std::ostringstream ss;
         ss << Guid{};
         CHECK(ss.str() == "00000000-0000-0000-0000-000000000000");
-    }
-}
-
-TEST_CASE("NumericRangeDimension") {
-    CHECK(NumericRangeDimension{} == NumericRangeDimension{});
-    CHECK(NumericRangeDimension{1, 2} == NumericRangeDimension{1, 2});
-    CHECK(NumericRangeDimension{1, 2} != NumericRangeDimension{1, 3});
-}
-
-TEST_CASE("NumericRange") {
-    SUBCASE("Empty") {
-        const NumericRange nr;
-        CHECK(nr.empty());
-        CHECK(nr.dimensions().size() == 0);
-    }
-
-    SUBCASE("Construct from native") {
-        UA_NumericRange native{};
-        std::vector<UA_NumericRangeDimension> dimensions{{1, 2}, {3, 4}};
-        native.dimensionsSize = dimensions.size();
-        native.dimensions = dimensions.data();
-        const NumericRange nr(native);
-        CHECK_FALSE(nr.empty());
-        CHECK(nr.dimensions().size() == 2);
-        CHECK(nr.dimensions()[0] == NumericRangeDimension{1, 2});
-        CHECK(nr.dimensions()[1] == NumericRangeDimension{3, 4});
-    }
-
-    SUBCASE("Parse invalid") {
-        CHECK_THROWS(NumericRange("abc"));
-    }
-
-    SUBCASE("Parse") {
-        const NumericRange nr("1:2,0:3,5");
-        CHECK(nr.dimensions().size() == 3);
-        CHECK(nr.dimensions()[0] == NumericRangeDimension{1, 2});
-        CHECK(nr.dimensions()[1] == NumericRangeDimension{0, 3});
-        CHECK(nr.dimensions()[2] == NumericRangeDimension{5, 5});
-    }
-
-    SUBCASE("toString") {
-        CHECK(NumericRange({{1, 1}}).toString() == "1");
-        CHECK(NumericRange({{1, 2}}).toString() == "1:2");
-        CHECK(NumericRange({{1, 2}, {0, 3}, {5, 5}}).toString() == "1:2,0:3,5");
     }
 }
 
@@ -522,216 +488,275 @@ TEST_CASE("ExpandedNodeId") {
 }
 
 TEST_CASE("Variant") {
-    SUBCASE("fromScalar (ReferenceIfPossible)") {
-        constexpr auto policy = VariantPolicy::ReferenceIfPossible;
-        String value("test");
+    SUBCASE("Empty") {
         Variant var;
-        SUBCASE("Reference if mutable") {
-            SUBCASE("Deduce data type") {
-                var = Variant::fromScalar<policy>(value);
-            }
-            SUBCASE("Custom data type") {
-                var = Variant::fromScalar<policy>(value, UA_TYPES[UA_TYPES_STRING]);
-            }
-            CHECK(var->data == value.handle());
-        }
-        SUBCASE("Copy if rvalue") {
-            SUBCASE("Deduce data type") {
-                var = Variant::fromScalar<policy>(std::move(value));
-            }
-            SUBCASE("Custom data type") {
-                var = Variant::fromScalar<policy>(std::move(value), UA_TYPES[UA_TYPES_STRING]);
-            }
-            CHECK(var->data != value.handle());
-        }
-        SUBCASE("Copy if const") {
-            SUBCASE("Deduce data type") {
-                var = Variant::fromScalar<policy>(std::as_const(value));
-            }
-            SUBCASE("Custom data type") {
-                var = Variant::fromScalar<policy>(std::as_const(value), UA_TYPES[UA_TYPES_STRING]);
-            }
-            CHECK(var->data != value.handle());
-        }
-        SUBCASE("Copy if conversion needed") {
-            std::string str{"test"};
-            var = Variant::fromScalar<policy>(str);
-            CHECK(var->data != &str);
-        }
-        CHECK(var.isScalar());
-        CHECK(var->type == &UA_TYPES[UA_TYPES_STRING]);
-    }
-
-    SUBCASE("fromArray (ReferenceIfPossible)") {
-        constexpr auto policy = VariantPolicy::ReferenceIfPossible;
-        Variant var;
-        std::vector<String> vec{String("1"), String("2"), String("3")};
-        SUBCASE("Reference if mutable") {
-            SUBCASE("Deduce data type") {
-                var = Variant::fromArray<policy>(vec);
-            }
-            SUBCASE("Custom data type") {
-                var = Variant::fromArray<policy>(vec, UA_TYPES[UA_TYPES_STRING]);
-            }
-            CHECK(var->data == vec.data());
-        }
-        SUBCASE("Copy if rvalue") {
-            SUBCASE("Deduce data type") {
-                var = Variant::fromArray<policy>(std::move(vec));
-            }
-            SUBCASE("Custom data type") {
-                var = Variant::fromArray<policy>(std::move(vec), UA_TYPES[UA_TYPES_STRING]);
-            }
-            CHECK(var->data != vec.data());
-        }
-        SUBCASE("Copy if const") {
-            SUBCASE("Deduce data type") {
-                var = Variant::fromArray<policy>(std::as_const(vec));
-            }
-            SUBCASE("Custom data type") {
-                var = Variant::fromArray<policy>(std::as_const(vec), UA_TYPES[UA_TYPES_STRING]);
-            }
-            CHECK(var->data != vec.data());
-        }
-        SUBCASE("Copy if conversion needed") {
-            std::vector<std::string> vecStr{"1", "2", "3"};
-            var = Variant::fromArray<policy>(vecStr);
-            CHECK(var->data != vec.data());
-        }
-        SUBCASE("Copy iterator pair") {
-            SUBCASE("Deduce data type") {
-                var = Variant::fromArray<policy>(vec.begin(), vec.end());
-            }
-            SUBCASE("Custom data type") {
-                var = Variant::fromArray<policy>(vec.begin(), vec.end());
-            }
-            CHECK(var->data != vec.data());
-        }
-        CHECK(var.isArray());
-        CHECK(var->type == &UA_TYPES[UA_TYPES_STRING]);
-    }
-
-    SUBCASE("Empty variant") {
-        Variant var;
-        CHECK(var.isEmpty());
-        CHECK(!var.isScalar());
-        CHECK(!var.isArray());
-        CHECK(var.getDataType() == nullptr);
+        CHECK(var.empty());
+        CHECK_FALSE(var.isScalar());
+        CHECK_FALSE(var.isArray());
+        CHECK(var.type() == nullptr);
         CHECK(var.data() == nullptr);
         CHECK(std::as_const(var).data() == nullptr);
-        CHECK(var.getArrayLength() == 0);
-        CHECK(var.getArrayDimensions().empty());
-        CHECK_THROWS(var.getScalar<int>());
-        CHECK_THROWS(var.getScalarCopy<int>());
-        CHECK_THROWS(var.getArray<int>());
-        CHECK_THROWS(var.getArrayCopy<int>());
+        CHECK(var.arrayLength() == 0);
+        CHECK(var.arrayDimensions().empty());
+        CHECK_THROWS(var.scalar<int>());
+        CHECK_THROWS(var.array<int>());
+    }
+
+    SUBCASE("From native") {
+        // assignment operator is overloaded for non-variant types -> test original overloads
+        float value = 5;
+        UA_Variant native{};
+        native.type = &UA_TYPES[UA_TYPES_FLOAT];
+        native.storageType = UA_VARIANT_DATA_NODELETE;
+        native.data = &value;
+
+        SUBCASE("lvalue (copy)") {
+            Variant var(native);
+            CHECK(var.type() == &UA_TYPES[UA_TYPES_FLOAT]);
+            CHECK(var.data() != &value);
+            CHECK(var.scalar<float>() == value);
+        }
+        SUBCASE("rvalue (move)") {
+            Variant var(std::move(native));
+            CHECK(var.type() == &UA_TYPES[UA_TYPES_FLOAT]);
+            CHECK(var.data() == &value);
+        }
+    }
+
+    SUBCASE("From scalar") {
+        double value = 11.11;
+        const auto& type = UA_TYPES[UA_TYPES_DOUBLE];
+        Variant var;
+
+        SUBCASE("Pointer") {
+            SUBCASE("Constructor") {
+                var = Variant(&value);
+            }
+            SUBCASE("Constructor with type") {
+                var = Variant(&value, type);
+            }
+            CHECK(var.isScalar());
+            CHECK(var.type() == &type);
+            CHECK(var.data() == &value);
+            CHECK(var.scalar<double>() == value);
+        }
+
+        SUBCASE("Copy") {
+            SUBCASE("Constructor") {
+                var = Variant(value);
+            }
+            SUBCASE("Constructor with type") {
+                var = Variant(value, type);
+            }
+            CHECK(var.isScalar());
+            CHECK(var.type() == &type);
+            CHECK(var.data() != &value);
+            CHECK(var.scalar<double>() == value);
+        }
+    }
+
+    SUBCASE("From array") {
+        std::vector<double> array{11.11, 22.22, 33.33};
+        const auto& type = UA_TYPES[UA_TYPES_DOUBLE];
+        Variant var;
+
+        SUBCASE("Pointer") {
+            SUBCASE("Constructor") {
+                var = Variant(&array);
+            }
+            SUBCASE("Constructor with type") {
+                var = Variant(&array, type);
+            }
+            CHECK(var.isArray());
+            CHECK(var.type() == &type);
+            CHECK(var.data() == array.data());
+            CHECK(var.to<std::vector<double>>() == array);
+        }
+
+        SUBCASE("Copy") {
+            SUBCASE("Constructor") {
+                var = Variant(array);
+            }
+            SUBCASE("Constructor with type") {
+                var = Variant(array, type);
+            }
+            SUBCASE("Constructor with iterator pair") {
+                var = Variant(array.begin(), array.end());
+            }
+            SUBCASE("Constructor with iterator pair and type") {
+                var = Variant(array.begin(), array.end(), type);
+            }
+            CHECK(var.isArray());
+            CHECK(var.type() == &type);
+            CHECK(var.data() != array.data());
+            CHECK(var.to<std::vector<double>>() == array);
+        }
     }
 
     SUBCASE("Type checks") {
         Variant var;
+        CHECK_FALSE(var.isType(&UA_TYPES[UA_TYPES_STRING]));
         CHECK_FALSE(var.isType(UA_TYPES[UA_TYPES_STRING]));
         CHECK_FALSE(var.isType(DataTypeId::String));
         CHECK_FALSE(var.isType<String>());
-        CHECK(var.getDataType() == nullptr);
+        CHECK(var.type() == nullptr);
 
         var->type = &UA_TYPES[UA_TYPES_STRING];
+        CHECK(var.isType(&UA_TYPES[UA_TYPES_STRING]));
         CHECK(var.isType(UA_TYPES[UA_TYPES_STRING]));
         CHECK(var.isType(DataTypeId::String));
         CHECK(var.isType<String>());
-        CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_STRING]);
+        CHECK(var.type() == &UA_TYPES[UA_TYPES_STRING]);
     }
 
-    SUBCASE("Set/get scalar") {
+    SUBCASE("Set nullptr") {
+        Variant var{42};
+        float* ptr{nullptr};
+        SUBCASE("assign") {
+            var.assign(ptr);
+        }
+        SUBCASE("assign with type") {
+            var.assign(ptr, UA_TYPES[UA_TYPES_FLOAT]);
+        }
+        SUBCASE("assignment operator") {
+            var = ptr;
+        }
+        CHECK(var.empty());
+        CHECK(var.type() == nullptr);
+        CHECK(var.data() == nullptr);
+    }
+
+    SUBCASE("Set/get scalar (pointer)") {
         Variant var;
         int32_t value = 5;
-        var.setScalar(value);
+        SUBCASE("assign") {
+            var.assign(&value);
+        }
+        SUBCASE("assignment operator") {
+            var = &value;
+        }
         CHECK(var.isScalar());
         CHECK(var.data() == &value);
-        CHECK(&var.getScalar<int32_t>() == &value);
-        CHECK(&std::as_const(var).getScalar<int32_t>() == &value);
-        CHECK(var.getScalarCopy<int32_t>() == value);
+        CHECK(&var.scalar<int32_t>() == &value);
+        CHECK(&std::as_const(var).scalar<int32_t>() == &value);
+        CHECK(var.to<int32_t>() == value);
     }
 
-    SUBCASE("Set/get wrapped scalar types") {
+    SUBCASE("Set/get scalar wrapper (pointer)") {
         Variant var;
         LocalizedText value("en-US", "text");
-        var.setScalar(value);
-        CHECK(var.getScalar<LocalizedText>() == value);
-        CHECK(var.getScalarCopy<LocalizedText>() == value);
+        SUBCASE("assign") {
+            var.assign(&value);
+        }
+        SUBCASE("assignment operator") {
+            var = &value;
+        }
+        CHECK(var.isScalar());
+        CHECK(&var.scalar<LocalizedText>() == &value);
+        CHECK(var.scalar<LocalizedText>() == value);
+        CHECK(var.to<LocalizedText>() == value);
     }
 
     SUBCASE("Set/get scalar (copy)") {
         Variant var;
-        var.setScalarCopy(11.11);
-        CHECK(var.getScalar<double>() == 11.11);
-        CHECK(var.getScalarCopy<double>() == 11.11);
+        double value = 11.11;
+        SUBCASE("assign") {
+            var.assign(value);
+        }
+        SUBCASE("assignment operator") {
+            var = value;
+        }
+        CHECK(&var.scalar<double>() != &value);
+        CHECK(var.scalar<double>() == value);
+        CHECK(var.to<double>() == value);
     }
 
-    SUBCASE("Set/get array") {
+    SUBCASE("Set/get array (pointer)") {
         Variant var;
         std::vector<float> array{0, 1, 2};
-        var.setArray(array);
+        SUBCASE("assign") {
+            var.assign(&array);
+        }
+        SUBCASE("assignment operator") {
+            var = &array;
+        }
         CHECK(var.data() == array.data());
-        CHECK(var.getArray<float>().data() == array.data());
-        CHECK(std::as_const(var).getArray<float>().data() == array.data());
-        CHECK(var.getArrayCopy<float>() == array);
+        CHECK(var.array<float>().data() == array.data());
+        CHECK(std::as_const(var).array<float>().data() == array.data());
+        CHECK(var.to<std::vector<float>>() == array);
     }
 
-    SUBCASE("Set array of native strings") {
+    SUBCASE("Set array of native strings (pointer)") {
         Variant var;
         std::array array{
             detail::toNativeString("item1"),
             detail::toNativeString("item2"),
             detail::toNativeString("item3"),
         };
-        var.setArray(Span{array.data(), array.size()}, UA_TYPES[UA_TYPES_STRING]);
+        var.assign(&array, UA_TYPES[UA_TYPES_STRING]);
+        CHECK(var.isArray());
         CHECK(var.data() == array.data());
-        CHECK(var.getArrayLength() == array.size());
+        CHECK(var.arrayLength() == array.size());
     }
 
-    SUBCASE("Set array of string wrapper") {
+    SUBCASE("Set array of string wrapper (pointer)") {
         Variant var;
         std::vector<String> array{String{"item1"}, String{"item2"}, String{"item3"}};
-        var.setArray(array);
+        SUBCASE("assign") {
+            var.assign(&array);
+        }
+        SUBCASE("assignment operator") {
+            var = &array;
+        }
         CHECK(var.data() == array.data());
-        CHECK(var.getArrayLength() == array.size());
-        CHECK(var.getArray<String>().data() == array.data());
+        CHECK(var.arrayLength() == array.size());
+        CHECK(var.array<String>().data() == array.data());
     }
 
-    SUBCASE("Set/get array of std::string (conversion)") {
+    SUBCASE("Set/get array of std::string (copy & conversion)") {
         Variant var;
-        std::vector<std::string> value{"a", "b", "c"};
-        var.setArrayCopy(value);
-
+        std::vector<std::string> array{"a", "b", "c"};
+        SUBCASE("assign") {
+            var.assign(array);
+        }
+        SUBCASE("assign with iterator pair") {
+            var.assign(array.begin(), array.end());
+        }
+        SUBCASE("assignment operator") {
+            var = array;
+        }
         CHECK(var.isArray());
-        CHECK(var.isType(NodeId{0, UA_NS0ID_STRING}));
-        CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_STRING]);
-
-        CHECK_THROWS(var.getScalarCopy<std::string>());
-        CHECK_THROWS(var.getArrayCopy<int32_t>());
-        CHECK_THROWS(var.getArrayCopy<bool>());
-        CHECK(var.getArrayCopy<std::string>() == value);
+        CHECK(var.type() == &UA_TYPES[UA_TYPES_STRING]);
+        CHECK(var.arrayLength() == array.size());
+        CHECK_NOTHROW(var.array<String>());
+        CHECK(var.to<std::vector<std::string>>() == array);
     }
 
     SUBCASE("Set/get array (copy)") {
         Variant var;
         std::vector<float> array{0, 1, 2, 3, 4, 5};
-        var.setArrayCopy(array);
-
+        SUBCASE("assign") {
+            var.assign(array);
+        }
+        SUBCASE("assign with iterator pair") {
+            var.assign(array.begin(), array.end());
+        }
+        SUBCASE("assignment operator") {
+            var = array;
+        }
         CHECK(var.isArray());
-        CHECK(var.isType(NodeId{0, UA_NS0ID_FLOAT}));
-        CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_FLOAT]);
+        CHECK(var.type() == &UA_TYPES[UA_TYPES_FLOAT]);
         CHECK(var.data() != array.data());
-        CHECK(var.getArrayLength() == array.size());
-
-        CHECK_THROWS(var.getArrayCopy<int32_t>());
-        CHECK_THROWS(var.getArrayCopy<bool>());
-        CHECK(var.getArrayCopy<float>() == array);
+        CHECK(var.arrayLength() == array.size());
+        CHECK(var.to<std::vector<float>>() == array);
     }
 
     SUBCASE("Set array from initializer list (copy)") {
         Variant var;
-        var.setArrayCopy(Span<const int>{1, 2, 3});  // TODO: avoid manual template types
+        var.assign(Span<const int>{1, 2, 3});  // TODO: avoid manual template types
+        CHECK(var.isArray());
+        CHECK(var.type() == &UA_TYPES[UA_TYPES_INT32]);
+        CHECK(var.arrayLength() == 3);
     }
 
     SUBCASE("Set/get array with std::vector<bool> (copy)") {
@@ -739,101 +764,106 @@ TEST_CASE("Variant") {
         // several problems: https://github.com/open62541pp/open62541pp/issues/164
         Variant var;
         std::vector<bool> array{true, false, true};
-
-        SUBCASE("From vector") {
-            var = Variant::fromArray(array);
+        SUBCASE("assign") {
+            var.assign(array);
         }
-
-        SUBCASE("Copy from iterator") {
-            var.setArrayCopy(array.begin(), array.end());
+        SUBCASE("assign with iterator pair") {
+            var.assign(array.begin(), array.end());
         }
-
-        SUBCASE("Copy directly") {
-            var.setArrayCopy(array);
+        SUBCASE("assignment operator") {
+            var = array;
         }
-
-        CHECK(var.getArrayLength() == array.size());
-        CHECK(var.isType<bool>());
-        CHECK(var.getArrayCopy<bool>() == array);
+        CHECK(var.arrayLength() == array.size());
+        CHECK(var.type() == &UA_TYPES[UA_TYPES_BOOLEAN]);
+        CHECK(var.to<std::vector<bool>>() == array);
     }
 
-    SUBCASE("Set/get non-builtin data types") {
-        using CustomType = UA_WriteValue;
-        const auto& dt = UA_TYPES[UA_TYPES_WRITEVALUE];
+    SUBCASE("Set/get custom type") {
+        // same memory layout as int32_t
+        struct Custom {
+            int32_t number;
+        };
+
+        const auto& type = UA_TYPES[UA_TYPES_INT32];
 
         Variant var;
-        CustomType value{};
-        value.attributeId = 1;
+        Custom value{11};
 
-        SUBCASE("Scalar") {
-            var.setScalar(value, dt);
+        SUBCASE("Scalar (pointer)") {
+            var.assign(&value, type);
             CHECK(var.isScalar());
-            CHECK(var.getDataType() == &dt);
+            CHECK(var.type() == &type);
             CHECK(var.data() == &value);
-            CHECK(var.getScalar<CustomType>().attributeId == 1);
         }
 
         SUBCASE("Scalar (copy)") {
-            var.setScalarCopy(value, dt);
+            var.assign(value, type);
             CHECK(var.isScalar());
-            CHECK(var.getDataType() == &dt);
+            CHECK(var.type() == &type);
             CHECK(var.data() != &value);
-            CHECK(var.getScalar<CustomType>().attributeId == 1);
+            CHECK(var.data() != nullptr);
+            CHECK(static_cast<Custom*>(var.data())->number == 11);
         }
 
-        std::vector<CustomType> array(3);
+        std::vector<Custom> array{Custom{11}, Custom{22}, Custom{33}};
 
-        SUBCASE("Array") {
-            var.setArray(array, dt);
+        SUBCASE("Array (pointer)") {
+            var.assign(&array, type);
             CHECK(var.isArray());
-            CHECK(var.getDataType() == &dt);
+            CHECK(var.type() == &type);
             CHECK(var.data() == array.data());
-            CHECK(var.getArrayLength() == 3);
-            CHECK(var.getArray<CustomType>().data() == array.data());
+            CHECK(var.arrayLength() == 3);
         }
 
         SUBCASE("Array (copy)") {
-            var.setArrayCopy(array, dt);
+            SUBCASE("Container") {
+                var.assign(array, type);
+            }
+            SUBCASE("Iterator pair") {
+                var.assign(array.begin(), array.end(), type);
+            }
             CHECK(var.isArray());
-            CHECK(var.getDataType() == &dt);
+            CHECK(var.type() == &type);
             CHECK(var.data() != array.data());
-            CHECK(var.getArrayLength() == 3);
-            CHECK(var.getArray<CustomType>().data() != array.data());
+            CHECK(var.data() != nullptr);
+            CHECK(static_cast<Custom*>(var.data())[0].number == 11);
+            CHECK(static_cast<Custom*>(var.data())[1].number == 22);
+            CHECK(static_cast<Custom*>(var.data())[2].number == 33);
+            CHECK(var.arrayLength() == 3);
         }
     }
 
-    SUBCASE("getScalar (lvalue & rvalue)") {
-        auto var = Variant::fromScalar("test");
-        void* data = var.getScalar<String>()->data;
+    SUBCASE("Get scalar ref qualifiers") {
+        Variant var("test");
+        void* data = var.scalar<String>()->data;
 
-        String str;
-        SUBCASE("rvalue") {
-            str = var.getScalar<String>();
-            CHECK(str->data != data);  // copy
-        }
-        SUBCASE("const rvalue") {
-            str = std::as_const(var).getScalar<String>();
-            CHECK(str->data != data);  // copy
-        }
         SUBCASE("lvalue") {
-            str = std::move(var).getScalar<String>();
-            CHECK(str->data == data);  // move
+            auto dst = var.scalar<String>();
+            CHECK(dst->data != data);  // copy
         }
         SUBCASE("const lvalue") {
-            str = std::move(std::as_const(var)).getScalar<String>();
-            CHECK(str->data != data);  // can not move const -> copy
+            auto dst = std::as_const(var).scalar<String>();
+            CHECK(dst->data != data);  // copy
+        }
+        SUBCASE("rvalue") {
+            auto dst = std::move(var).scalar<String>();
+            CHECK(dst->data == data);  // move
+        }
+        SUBCASE("const rvalue") {
+            auto dst = std::move(std::as_const(var)).scalar<String>();
+            CHECK(dst->data != data);  // can not move const -> copy
         }
     }
 }
 
 TEST_CASE("DataValue") {
     SUBCASE("Create from scalar") {
-        CHECK(DataValue::fromScalar(5).value().getScalar<int>() == 5);
+        CHECK(DataValue(Variant(5)).value().to<int>() == 5);
     }
 
     SUBCASE("Create from array") {
         std::vector<int> vec{1, 2, 3};
-        CHECK(DataValue::fromArray(vec).value().getArrayCopy<int>() == vec);
+        CHECK(DataValue(Variant(vec)).value().to<std::vector<int>>() == vec);
     }
 
     SUBCASE("Empty") {
@@ -858,7 +888,7 @@ TEST_CASE("DataValue") {
 
     SUBCASE("Constructor with all optional parameter specified") {
         DataValue dv(
-            Variant::fromScalar(5),
+            Variant{5},
             DateTime{1},
             DateTime{2},
             uint16_t{3},
@@ -878,20 +908,20 @@ TEST_CASE("DataValue") {
         SUBCASE("Value (move)") {
             float value = 11.11f;
             Variant var;
-            var.setScalar(value);
+            var.assign(&value);
             CHECK(var->data == &value);
             dv.setValue(std::move(var));
             CHECK(dv.hasValue());
-            CHECK(dv.value().getScalar<float>() == value);
+            CHECK(dv.value().scalar<float>() == value);
             CHECK(dv->value.data == &value);
         }
         SUBCASE("Value (copy)") {
             float value = 11.11f;
             Variant var;
-            var.setScalar(value);
+            var.assign(value);
             dv.setValue(var);
             CHECK(dv.hasValue());
-            CHECK(dv.value().getScalar<float>() == value);
+            CHECK(dv.value().scalar<float>() == value);
         }
         SUBCASE("Source timestamp") {
             DateTime dt{123};
@@ -926,7 +956,7 @@ TEST_CASE("DataValue") {
     }
 
     SUBCASE("getValue (lvalue & rvalue)") {
-        DataValue dv(Variant::fromScalar(11));
+        DataValue dv(Variant(11));
         void* data = dv.value().data();
 
         Variant var;
@@ -946,59 +976,183 @@ TEST_CASE("DataValue") {
             var = std::move(std::as_const(dv)).value();
             CHECK(var.data() != data);  // can not move const -> copy
         }
-        CHECK(var.getScalar<int>() == 11);
+        CHECK(var.scalar<int>() == 11);
     }
 }
 
 TEST_CASE("ExtensionObject") {
     SUBCASE("Empty") {
         ExtensionObject obj;
-        CHECK(obj.isEmpty());
+        CHECK(obj.empty());
         CHECK_FALSE(obj.isEncoded());
         CHECK_FALSE(obj.isDecoded());
         CHECK(obj.encoding() == ExtensionObjectEncoding::EncodedNoBody);
         CHECK(obj.encodedTypeId() == nullptr);
-        CHECK(obj.encodedBody() == nullptr);
+        CHECK(obj.encodedBinary() == nullptr);
+        CHECK(obj.encodedXml() == nullptr);
         CHECK(obj.decodedType() == nullptr);
         CHECK(obj.decodedData() == nullptr);
     }
 
-    SUBCASE("fromDecoded") {
+    SUBCASE("From nullptr") {
+        int* value{nullptr};
+        ExtensionObject obj(value);
+        CHECK(obj.empty());
+    }
+
+    SUBCASE("From decoded (pointer)") {
         ExtensionObject obj;
         String value("test123");
         SUBCASE("Deduce data type") {
-            obj = ExtensionObject::fromDecoded(value);
+            obj = ExtensionObject(&value);
         }
         SUBCASE("Custom data type") {
-            obj = ExtensionObject::fromDecoded(value, UA_TYPES[UA_TYPES_STRING]);
+            obj = ExtensionObject(&value, UA_TYPES[UA_TYPES_STRING]);
         }
         CHECK(obj.encoding() == ExtensionObjectEncoding::DecodedNoDelete);
         CHECK(obj.isDecoded());
         CHECK(obj.decodedType() == &UA_TYPES[UA_TYPES_STRING]);
         CHECK(obj.decodedData() == value.handle());
+        CHECK(obj.decodedData<String>() == &value);
+        CHECK(obj.decodedData<int>() == nullptr);
+        CHECK(obj.decodedData<double>() == nullptr);
     }
 
-    SUBCASE("fromDecodedCopy") {
+    SUBCASE("From decoded (copy)") {
         ExtensionObject obj;
-        const auto value = Variant::fromScalar(11.11);
+        const auto value = Variant(11.11);
         SUBCASE("Deduce data type") {
-            obj = ExtensionObject::fromDecodedCopy(value);
+            obj = ExtensionObject(value);
         }
         SUBCASE("Custom data type") {
-            obj = ExtensionObject::fromDecodedCopy(value, UA_TYPES[UA_TYPES_VARIANT]);
+            obj = ExtensionObject(value, UA_TYPES[UA_TYPES_VARIANT]);
         }
         CHECK(obj.encoding() == ExtensionObjectEncoding::Decoded);
         CHECK(obj.isDecoded());
         CHECK(obj.decodedType() == &UA_TYPES[UA_TYPES_VARIANT]);
+        CHECK(obj.decodedData() != nullptr);
         CHECK(obj.decodedData<Variant>() != nullptr);
-        CHECK(obj.decodedData<Variant>()->getScalar<double>() == 11.11);
+        CHECK(obj.decodedData<Variant>()->scalar<double>() == 11.11);
     }
 
-    SUBCASE("decodedData") {
-        double value = 11.11;
-        auto obj = ExtensionObject::fromDecoded(value);
-        CHECK(obj.decodedData() == &value);
-        CHECK(obj.decodedData<int>() == nullptr);
-        CHECK(obj.decodedData<double>() == &value);
+    SUBCASE("Encoded binary") {
+        NodeId typeId(1, 1000);
+        ExtensionObject obj;
+        obj->encoding = UA_EXTENSIONOBJECT_ENCODED_BYTESTRING;
+        obj->content.encoded.typeId = typeId;
+        obj->content.encoded.body = UA_STRING_ALLOC("binary");
+        CHECK(obj.isEncoded());
+        CHECK(obj.encoding() == ExtensionObjectEncoding::EncodedByteString);
+        CHECK(obj.encodedTypeId() != nullptr);
+        CHECK(*obj.encodedTypeId() == typeId);
+        CHECK(obj.encodedBinary() != nullptr);
+        CHECK(*obj.encodedBinary() == ByteString("binary"));
+        CHECK(obj.encodedXml() == nullptr);
+    }
+
+    SUBCASE("Encoded XML") {
+        NodeId typeId(1, 1000);
+        ExtensionObject obj;
+        obj->encoding = UA_EXTENSIONOBJECT_ENCODED_XML;
+        obj->content.encoded.typeId = typeId;
+        obj->content.encoded.body = UA_STRING_ALLOC("xml");
+        CHECK(obj.isEncoded());
+        CHECK(obj.encoding() == ExtensionObjectEncoding::EncodedXml);
+        CHECK(obj.encodedTypeId() != nullptr);
+        CHECK(*obj.encodedTypeId() == typeId);
+        CHECK(obj.encodedBinary() == nullptr);
+        CHECK(obj.encodedXml() != nullptr);
+        CHECK(*obj.encodedXml() == XmlElement("xml"));
+    }
+}
+
+TEST_CASE("NumericRangeDimension") {
+    CHECK(NumericRangeDimension{} == NumericRangeDimension{});
+    CHECK(NumericRangeDimension{1, 2} == NumericRangeDimension{1, 2});
+    CHECK(NumericRangeDimension{1, 2} != NumericRangeDimension{1, 3});
+}
+
+TEST_CASE("NumericRange") {
+    SUBCASE("Empty") {
+        const NumericRange nr;
+        CHECK(nr.empty());
+        CHECK(nr.dimensions().size() == 0);
+    }
+
+    SUBCASE("From encoded range (invalid)") {
+        CHECK_THROWS(NumericRange("abc"));
+    }
+
+    SUBCASE("From encoded range") {
+        const NumericRange nr("1:2,0:3,5");
+        CHECK(nr.dimensions().size() == 3);
+        CHECK(nr.dimensions()[0] == NumericRangeDimension{1, 2});
+        CHECK(nr.dimensions()[1] == NumericRangeDimension{0, 3});
+        CHECK(nr.dimensions()[2] == NumericRangeDimension{5, 5});
+    }
+
+    SUBCASE("From span") {
+        std::vector<NumericRangeDimension> dimensions{{1, 2}, {3, 4}};
+        const NumericRange nr(dimensions);
+        CHECK_FALSE(nr.empty());
+        CHECK(nr.dimensions().size() == 2);
+        CHECK(nr.dimensions()[0] == NumericRangeDimension{1, 2});
+        CHECK(nr.dimensions()[1] == NumericRangeDimension{3, 4});
+    }
+
+    SUBCASE("From native") {
+        UA_NumericRange native{};
+        std::vector<NumericRangeDimension> dimensions{{1, 2}, {3, 4}};
+        native.dimensionsSize = dimensions.size();
+        native.dimensions = dimensions.data();
+        const NumericRange nr(native);
+        CHECK_FALSE(nr.empty());
+        CHECK(nr.dimensions().size() == 2);
+        CHECK(nr.dimensions()[0] == NumericRangeDimension{1, 2});
+        CHECK(nr.dimensions()[1] == NumericRangeDimension{3, 4});
+    }
+
+    SUBCASE("Copy & move") {
+        std::vector<NumericRangeDimension> dimensions{{1, 2}, {3, 4}};
+        NumericRange src(dimensions);
+
+        SUBCASE("Copy constructor") {
+            const NumericRange dst(src);
+            CHECK(dst.dimensions().size() == 2);
+            CHECK(dst.dimensions()[0] == NumericRangeDimension{1, 2});
+            CHECK(dst.dimensions()[1] == NumericRangeDimension{3, 4});
+        }
+
+        SUBCASE("Move constructor") {
+            const NumericRange dst(std::move(src));
+            CHECK(src.dimensions().size() == 0);
+            CHECK(dst.dimensions().size() == 2);
+            CHECK(dst.dimensions()[0] == NumericRangeDimension{1, 2});
+            CHECK(dst.dimensions()[1] == NumericRangeDimension{3, 4});
+        }
+
+        SUBCASE("Copy assignment") {
+            NumericRange dst;
+            dst = src;
+            CHECK(dst.dimensions().size() == 2);
+            CHECK(dst.dimensions().size() == 2);
+            CHECK(dst.dimensions()[0] == NumericRangeDimension{1, 2});
+            CHECK(dst.dimensions()[1] == NumericRangeDimension{3, 4});
+        }
+
+        SUBCASE("Move assignment") {
+            NumericRange dst;
+            dst = std::move(src);
+            CHECK(src.dimensions().size() == 0);
+            CHECK(dst.dimensions().size() == 2);
+            CHECK(dst.dimensions()[0] == NumericRangeDimension{1, 2});
+            CHECK(dst.dimensions()[1] == NumericRangeDimension{3, 4});
+        }
+    }
+
+    SUBCASE("toString") {
+        CHECK(NumericRange({{1, 1}}).toString() == "1");
+        CHECK(NumericRange({{1, 2}}).toString() == "1:2");
+        CHECK(NumericRange({{1, 2}, {0, 3}, {5, 5}}).toString() == "1:2,0:3,5");
     }
 }

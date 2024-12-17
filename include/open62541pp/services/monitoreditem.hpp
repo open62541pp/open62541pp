@@ -189,7 +189,7 @@ auto createMonitoredItemsDataChangeAsync(
         },
         detail::HookToken(
             [&connection,
-             subscriptionId = request.getSubscriptionId(),
+             subscriptionId = request.subscriptionId(),
              contexts = std::move(contexts)](const auto& response) mutable {
                 detail::storeMonitoredItemContexts(connection, subscriptionId, response, contexts);
             },
@@ -318,7 +318,7 @@ auto createMonitoredItemsEventAsync(
         },
         detail::HookToken(
             [&connection,
-             subscriptionId = request.getSubscriptionId(),
+             subscriptionId = request.subscriptionId(),
              contexts = std::move(contexts)](const auto& response) mutable {
                 detail::storeMonitoredItemContexts(connection, subscriptionId, response, contexts);
             },

@@ -1,6 +1,3 @@
-#include <chrono>
-#include <thread>
-
 #include <doctest/doctest.h>
 
 #include "open62541pp/client.hpp"
@@ -32,7 +29,7 @@ TEST_CASE("Subscription & MonitoredItem (server)") {
 
     SUBCASE("Create & delete subscription") {
         auto sub = server.createSubscription();
-        CHECK(sub.getMonitoredItems().empty());
+        CHECK(sub.monitoredItems().empty());
 
         MonitoringParametersEx monitoringParameters{};
         monitoringParameters.samplingInterval = 0.0;  // = fastest practical
@@ -45,14 +42,12 @@ TEST_CASE("Subscription & MonitoredItem (server)") {
             monitoringParameters,
             [&](IntegerId, IntegerId, const DataValue&) { notificationCount++; }
         );
-        CHECK(sub.getMonitoredItems().size() == 1);
+        CHECK(sub.monitoredItems().size() == 1);
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(200));
-        server.runIterate();
-        CHECK(notificationCount > 0);
+        CHECK(runIterateUntil(server, [&] { return notificationCount > 0; }));
 
         mon.deleteMonitoredItem();
-        CHECK(sub.getMonitoredItems().empty());
+        CHECK(sub.monitoredItems().empty());
     }
 }
 
@@ -73,19 +68,19 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
     }
 
     SUBCASE("Create & delete subscription") {
-        CHECK(client.getSubscriptions().empty());
+        CHECK(client.subscriptions().empty());
 
         const SubscriptionParameters parameters{};
         auto sub = client.createSubscription(parameters);
         CAPTURE(sub.subscriptionId());
 
-        CHECK(client.getSubscriptions().size() == 1);
-        CHECK(client.getSubscriptions().at(0) == sub);
+        CHECK(client.subscriptions().size() == 1);
+        CHECK(client.subscriptions().at(0) == sub);
 
-        CHECK(sub.getMonitoredItems().empty());
+        CHECK(sub.monitoredItems().empty());
 
         sub.deleteSubscription();
-        CHECK(client.getSubscriptions().empty());
+        CHECK(client.subscriptions().empty());
         CHECK_THROWS_WITH(sub.deleteSubscription(), "BadSubscriptionIdInvalid");
     }
 
@@ -114,8 +109,8 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
             [&](IntegerId, IntegerId, const DataValue&) { notificationCount++; }
         );
 
-        CHECK(sub.getMonitoredItems().size() == 1);
-        CHECK(sub.getMonitoredItems().at(0) == mon);
+        CHECK(sub.monitoredItems().size() == 1);
+        CHECK(sub.monitoredItems().at(0) == mon);
 
         client.runIterate();
         CHECK(notificationCount == 0);
@@ -125,11 +120,7 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
         CHECK(notificationCount == 0);
 
         mon.setMonitoringMode(MonitoringMode::Reporting);  // now we should get a notification
-        client.runIterate();
-#if UAPP_OPEN62541_VER_LE(1, 3)
-        // TODO: fails sporadically with v1.4, why?
-        CHECK(notificationCount > 0);
-#endif
+        CHECK(runIterateUntil(client, [&] { return notificationCount > 0; }));
 
         mon.deleteMonitoredItem();
         CHECK_THROWS_WITH(mon.deleteMonitoredItem(), "BadMonitoredItemIdInvalid");
@@ -197,8 +188,8 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
             }
         );
 
-        CHECK(sub.getMonitoredItems().size() == 1);
-        CHECK(sub.getMonitoredItems().at(0) == mon);
+        CHECK(sub.monitoredItems().size() == 1);
+        CHECK(sub.monitoredItems().at(0) == mon);
     }
 #endif
 }

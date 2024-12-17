@@ -19,8 +19,8 @@ int main(int argc, char* argv[]) {
     }
 
     const auto serverUrl = parser.args()[parser.nargs() - 1];
-    const auto username = parser.getValue("--username");
-    const auto password = parser.getValue("--password");
+    const auto username = parser.value("--username");
+    const auto password = parser.value("--password");
 
     opcua::Client client;
     if (username) {

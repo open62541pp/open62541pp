@@ -44,6 +44,21 @@ struct IsConvertibleType<T, std::void_t<decltype(TypeConverter<T>{})>> : std::tr
 template <typename T>
 constexpr bool isConvertibleType = IsConvertibleType<T>::value;
 
+template <typename T, typename = std::enable_if_t<detail::isConvertibleType<T>>>
+[[nodiscard]] constexpr T fromNative(const typename TypeConverter<T>::NativeType& src) {
+    T dst{};
+    TypeConverter<T>::fromNative(src, dst);
+    return dst;
+}
+
+template <typename T, typename = std::enable_if_t<detail::isConvertibleType<T>>>
+[[nodiscard]] constexpr auto toNative(const T& src) -> typename TypeConverter<T>::NativeType {
+    using NativeType = typename TypeConverter<T>::NativeType;
+    NativeType dst{};
+    TypeConverter<T>::toNative(src, dst);
+    return dst;
+}
+
 }  // namespace detail
 
 }  // namespace opcua

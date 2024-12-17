@@ -20,19 +20,19 @@ Event::~Event() {
 }
 
 Event& Event::writeSourceName(std::string_view sourceName) {
-    return writeProperty({0, "SourceName"}, Variant::fromScalar(sourceName));
+    return writeProperty({0, "SourceName"}, Variant(sourceName));
 }
 
 Event& Event::writeTime(DateTime time) {  // NOLINT(performance-unnecessary-value-param)
-    return writeProperty({0, "Time"}, Variant::fromScalar(time));
+    return writeProperty({0, "Time"}, Variant(time));
 }
 
 Event& Event::writeSeverity(uint16_t severity) {
-    return writeProperty({0, "Severity"}, Variant::fromScalar(severity));
+    return writeProperty({0, "Severity"}, Variant(severity));
 }
 
 Event& Event::writeMessage(const LocalizedText& message) {
-    return writeProperty({0, "Message"}, Variant::fromScalar(message));
+    return writeProperty({0, "Message"}, Variant(message));
 }
 
 Event& Event::writeProperty(const QualifiedName& propertyName, const Variant& value) {

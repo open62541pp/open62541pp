@@ -1,8 +1,11 @@
 #pragma once
 
+#include <chrono>
 #include <string_view>
 #include <tuple>
 #include <type_traits>
+
+#include <doctest/doctest.h>
 
 #include "open62541pp/client.hpp"
 #include "open62541pp/server.hpp"
@@ -21,7 +24,7 @@ struct ServerClientSetup {
     ServerRunner serverRunner{server};
 
     template <typename T>
-    auto& getInstance() noexcept {
+    auto& instance() noexcept {
         if constexpr (IsTrait<T>::value) {
             using U = typename T::type;
             return std::get<U&>(std::tie(server, client));
@@ -32,3 +35,24 @@ struct ServerClientSetup {
 
     static constexpr std::string_view endpointUrl = "opc.tcp://localhost:4840";
 };
+
+// Call the connection's runIterate function until predicate returns `true` or a timeout occurs.
+template <typename Connection, typename UnaryPred>
+bool runIterateUntil(
+    Connection& connection, UnaryPred predicate, uint16_t timeoutMilliseconds = 1000
+) {
+    static_assert(std::is_same_v<std::invoke_result_t<UnaryPred>, bool>);
+
+    const auto now = [] { return std::chrono::steady_clock::now(); };
+    const auto startTime = now();
+
+    do {
+        connection.runIterate();
+        if (predicate()) {
+            return true;
+        }
+    } while ((now() - startTime) <= std::chrono::milliseconds(timeoutMilliseconds));
+
+    INFO("Timeout during runIterateUntil");
+    return false;
+}

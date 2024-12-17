@@ -6,6 +6,8 @@
 #include <initializer_list>
 #include <iterator>
 #include <limits>
+#include <stdexcept>  // out_of_range
+#include <string>
 #include <type_traits>
 #include <utility>  // swap
 
@@ -81,7 +83,7 @@ public:
      * Implicit constructor from an initializer list.
      *
      * Only safe to use if `std::initializer_list` itself outlives the Span:
-     * @code{.cpp}
+     * @code
      * void takeView(Span<const int> values);
      * // ok
      * takeView({1, 2, 3});
@@ -110,8 +112,21 @@ public:
         return data_;
     }
 
+    /// Access element by index.
     [[nodiscard]] constexpr reference operator[](size_t index) const noexcept {
         assert(index < size());
+        return data()[index];
+    }
+
+    /// Access element by index with bounds checking.
+    /// @exception std::out_of_range If `index` >= size()
+    [[nodiscard]] constexpr reference at(size_t index) const {
+        if (index >= size()) {
+            throw std::out_of_range(
+                std::string("index (") + std::to_string(index) + ") >= size() (" +
+                std::to_string(size()) + ")"
+            );
+        }
         return data()[index];
     }
 

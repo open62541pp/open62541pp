@@ -21,7 +21,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
     ServerClientSetup setup;
     setup.client.connect(setup.endpointUrl);
     auto& server = setup.server;
-    auto& connection = setup.getInstance<T>();
+    auto& connection = setup.instance<T>();
 
     // add variable node to test data change notifications
     const NodeId id{1, 1000};
@@ -49,12 +49,12 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
             {},
             {}
         );
-        CHECK(result.getStatusCode().isBad());
+        CHECK(result.statusCode().isBad());
     }
 
     const auto subId =
         services::createSubscription(connection, subscriptionParameters, true, {}, {})
-            .getSubscriptionId();
+            .subscriptionId();
     CAPTURE(subId);
 
     SUBCASE("createMonitoredItemDataChange") {
@@ -85,13 +85,12 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
             callback,
             nullptr
         );
-        CHECK(result.getStatusCode().isGood());
-        CAPTURE(result.getMonitoredItemId());
+        CHECK(result.statusCode().isGood());
+        CAPTURE(result.monitoredItemId());
 
-        services::writeValue(server, id, Variant::fromScalar(11.11)).throwIfBad();
-        setup.client.runIterate();
-        CHECK(notificationCount > 0);
-        CHECK(changedValue.value().getScalar<double>() == 11.11);
+        services::writeValue(server, id, Variant(11.11)).throwIfBad();
+        CHECK(runIterateUntil(setup.client, [&] { return notificationCount > 0; }));
+        CHECK(changedValue.value().scalar<double>() == 11.11);
     }
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS_EVENTS
@@ -106,7 +105,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
             // where clause
             {}
         );
-        monitoringParameters.filter = ExtensionObject::fromDecodedCopy(eventFilter);
+        monitoringParameters.filter = ExtensionObject(eventFilter);
 
         size_t notificationCount = 0;
         size_t eventFieldsSize = 0;
@@ -135,14 +134,13 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
             callback,
             nullptr
         );
-        CHECK(result.getStatusCode().isGood());
-        CAPTURE(result.getMonitoredItemId());
+        CHECK(result.statusCode().isGood());
+        CAPTURE(result.monitoredItemId());
 
         Event event(server);
         event.writeTime(DateTime::now());
         event.trigger();
-        setup.client.runIterate();
-        CHECK(notificationCount == 1);
+        CHECK(runIterateUntil(setup.client, [&] { return notificationCount == 1; }));
         CHECK(eventFieldsSize == 3);
     }
 #endif
@@ -158,7 +156,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
                 {},
                 {}
             )
-                .getMonitoredItemId();
+                .monitoredItemId();
         CAPTURE(monId);
 
         const auto modifyMonitoredItem = [&](auto&&... args) {
@@ -178,7 +176,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
         const MonitoredItemModifyResult result = modifyMonitoredItem(
             connection, subId, monId, modifiedParameters
         );
-        CHECK(result.getStatusCode().isGood());
+        CHECK(result.statusCode().isGood());
     }
 
     SUBCASE("setMonitoringMode") {
@@ -192,7 +190,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
                 {},
                 {}
             )
-                .getMonitoredItemId();
+                .monitoredItemId();
         CAPTURE(monId);
 
         const auto setMonitoringMode = [&](auto&&... args) {
@@ -225,7 +223,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
                 [&](IntegerId, IntegerId, const DataValue&) { notificationCountTriggering++; },
                 {}
             )
-                .getMonitoredItemId();
+                .monitoredItemId();
         CAPTURE(monIdTriggering);
         // set triggered item's monitoring mode to sampling
         // -> will only report if triggered by triggering item
@@ -240,11 +238,10 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
                 [&](IntegerId, IntegerId, const DataValue&) { notificationCount++; },
                 {}
             )
-                .getMonitoredItemId();
+                .monitoredItemId();
         CAPTURE(monId);
 
-        setup.client.runIterate();
-        CHECK(notificationCountTriggering > 0);
+        CHECK(runIterateUntil(setup.client, [&] { return notificationCountTriggering > 0; }));
         CHECK(notificationCount == 0);  // no triggering links yet
 
         const auto setTriggering = [&](auto&&... args) {
@@ -266,15 +263,11 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
                 {}  // links to remove
             )
         );
-        CHECK(response.getResponseHeader().getServiceResult().isGood());
-        CHECK(response.getAddResults().size() == 1);
-        CHECK(response.getAddResults()[0].isGood());
+        CHECK(response.responseHeader().serviceResult().isGood());
+        CHECK(response.addResults().size() == 1);
+        CHECK(response.addResults()[0].isGood());
 
-        setup.client.runIterate();
-#if UAPP_OPEN62541_VER_LE(1, 3)
-        // TODO: fails with v1.4, why?
-        CHECK(notificationCount > 0);
-#endif
+        CHECK(runIterateUntil(setup.client, [&] { return notificationCount > 0; }));
     }
 #endif
 
@@ -294,7 +287,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
                 monitoringParameters,
                 {},
                 [&](IntegerId, IntegerId) { deleted = true; }
-            ).getMonitoredItemId();
+            ).monitoredItemId();
 
         const auto deleteMonitoredItem = [&](auto&&... args) {
             if constexpr (isAsync<T> && UAPP_HAS_ASYNC_SUBSCRIPTIONS) {
@@ -309,8 +302,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
         };
         const StatusCode result = deleteMonitoredItem(connection, subId, monId);
         CHECK(result.isGood());
-        setup.client.runIterate();
-        CHECK(deleted == true);
+        CHECK(runIterateUntil(setup.client, [&] { return deleted == true; }));
     }
 }
 
@@ -342,12 +334,11 @@ TEST_CASE("MonitoredItem service set (server)") {
                 [&](IntegerId, IntegerId, const DataValue&) { notificationCount++; },
                 {}
             )
-                .getMonitoredItemId();
+                .monitoredItemId();
         CAPTURE(monId);
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
-        services::writeValue(server, id, Variant::fromScalar(11.11)).throwIfBad();
-        server.runIterate();
-        CHECK(notificationCount > 0);
+        services::writeValue(server, id, Variant(11.11)).throwIfBad();
+        CHECK(runIterateUntil(server, [&] { return notificationCount > 0; }));
     }
 
     SUBCASE("deleteMonitoredItem") {
@@ -366,7 +357,7 @@ TEST_CASE("MonitoredItem service set (server)") {
                 {},
                 {}
             )
-                .getMonitoredItemId();
+                .monitoredItemId();
         CAPTURE(monId);
         CHECK(services::deleteMonitoredItem(server, 0U, monId).isGood());
     }

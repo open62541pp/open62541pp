@@ -122,15 +122,14 @@ opcua::Variant var;
 
 // ✅ will compile
 int number = 5;
-var.setScalar(number);
-var.setArrayCopy<double>({1.1, 2.2, 3.3});
+var.assign(&number);
 
 // ❌ won't compile, because std::string can't be assigned without copy (conversion needed)
 std::string str{"test"};
-var.setScalar(str);
+var.assign(&str);
 
 // ✅ will compile
-var.setScalarCopy(str);
+var.assign(str);
 ```
 
 You can add template specializations to add conversions for arbitrary types:

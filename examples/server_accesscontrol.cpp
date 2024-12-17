@@ -24,9 +24,9 @@ public:
         // Grant admin rights if user is logged in as "admin"
         // Store attribute "isAdmin" as session attribute to use it in access callbacks
         const auto* token = userIdentityToken.decodedData<UserNameIdentityToken>();
-        const bool isAdmin = (token != nullptr && token->getUserName() == "admin");
+        const bool isAdmin = (token != nullptr && token->userName() == "admin");
         std::cout << "User has admin rights: " << isAdmin << std::endl;
-        session.setSessionAttribute({0, "isAdmin"}, Variant::fromScalar(isAdmin));
+        session.setSessionAttribute({0, "isAdmin"}, Variant(isAdmin));
 
         return AccessControlDefault::activateSession(
             session, endpointDescription, secureChannelRemoteCertificate, userIdentityToken
@@ -34,7 +34,7 @@ public:
     }
 
     Bitmask<AccessLevel> getUserAccessLevel(Session& session, const NodeId& nodeId) override {
-        const bool isAdmin = session.getSessionAttribute({0, "isAdmin"}).getScalar<bool>();
+        const bool isAdmin = session.getSessionAttribute({0, "isAdmin"}).scalar<bool>();
         std::cout << "Get user access level of node id " << nodeId.toString() << std::endl;
         std::cout << "Admin rights granted: " << isAdmin << std::endl;
         return isAdmin

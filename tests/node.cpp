@@ -12,7 +12,7 @@ using namespace opcua;
 TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
     ServerClientSetup setup;
     setup.client.connect(setup.endpointUrl);
-    auto& connection = setup.getInstance<T>();
+    auto& connection = setup.instance<T>();
 
     [[maybe_unused]] const auto await = [&](auto future) {
         setup.client.runIterate();
@@ -228,7 +228,7 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         const auto refs = root.browseReferences();
         CHECK(refs.size() > 0);
         CHECK(std::any_of(refs.begin(), refs.end(), [&](auto& ref) {
-            return ref.getBrowseName() == QualifiedName(0, "Objects");
+            return ref.browseName() == QualifiedName(0, "Objects");
         }));
     }
 
@@ -368,13 +368,13 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
 
     SUBCASE("writeValue/readValue") {
         const double value = 11.11;
-        const auto variant = Variant::fromScalar(value);
+        const auto variant = Variant(value);
         if constexpr (isAsync<T>) {
             CHECK(await(varNode.writeValueAsync(variant)).isGood());
-            CHECK(await(varNode.readValueAsync()).value().template getScalar<double>() == value);
+            CHECK(await(varNode.readValueAsync()).value().template scalar<double>() == value);
         } else {
             CHECK_NOTHROW(varNode.writeValue(variant));
-            CHECK(varNode.readValue().template getScalar<double>() == value);
+            CHECK(varNode.readValue().template scalar<double>() == value);
         }
     }
 
@@ -454,7 +454,7 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         varNode.writeValueRank(ValueRank::OneDimension);
         if constexpr (isAsync<T>) {
             CHECK(await(varNode.writeArrayDimensionsAsync(dimensions)).isGood());
-            CHECK(await(varNode.readArrayDimensionsAsync()).value()[0] == 11);
+            CHECK(await(varNode.readArrayDimensionsAsync()).value().at(0) == 11);
         } else {
             CHECK_NOTHROW(varNode.writeArrayDimensions(dimensions));
             CHECK(varNode.readArrayDimensions() == dimensions);
@@ -539,9 +539,9 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
                 .setDataType<double>()
                 .setValueScalar(11.11)
         );
-        CHECK(objNode.readObjectProperty({1, "Property"}).template getScalar<double>() == 11.11);
-        CHECK_NOTHROW(objNode.writeObjectProperty({1, "Property"}, Variant::fromScalar(22.22)));
-        CHECK(objNode.readObjectProperty({1, "Property"}).template getScalar<double>() == 22.22);
+        CHECK(objNode.readObjectProperty({1, "Property"}).template scalar<double>() == 11.11);
+        CHECK_NOTHROW(objNode.writeObjectProperty({1, "Property"}, Variant(22.22)));
+        CHECK(objNode.readObjectProperty({1, "Property"}).template scalar<double>() == 22.22);
     }
 
     SUBCASE("Equality") {

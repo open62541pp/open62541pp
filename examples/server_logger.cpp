@@ -3,7 +3,7 @@
 
 #include <open62541pp/server.hpp>
 
-constexpr std::string_view getLogLevelName(opcua::LogLevel level) {
+constexpr std::string_view toString(opcua::LogLevel level) {
     switch (level) {
     case opcua::LogLevel::Trace:
         return "trace";
@@ -22,7 +22,7 @@ constexpr std::string_view getLogLevelName(opcua::LogLevel level) {
     }
 }
 
-constexpr std::string_view getLogCategoryName(opcua::LogCategory category) {
+constexpr std::string_view toString(opcua::LogCategory category) {
     switch (category) {
     case opcua::LogCategory::Network:
         return "network";
@@ -45,8 +45,8 @@ constexpr std::string_view getLogCategoryName(opcua::LogCategory category) {
 
 int main() {
     auto logger = [](auto level, auto category, auto msg) {
-        std::cout << "[" << getLogLevelName(level) << "] "
-                  << "[" << getLogCategoryName(category) << "] " << msg << std::endl;
+        std::cout << "[" << toString(level) << "] " << "[" << toString(category) << "] " << msg
+                  << std::endl;
     };
 
     // Create server configuration and set logger

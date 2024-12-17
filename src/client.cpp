@@ -118,7 +118,7 @@ void ClientConfig::setTimeout(uint32_t milliseconds) noexcept {
 
 template <typename T>
 static void setUserIdentityTokenHelper(UA_ClientConfig& config, const T& token) {
-    asWrapper<ExtensionObject>(config.userIdentityToken) = ExtensionObject::fromDecodedCopy(token);
+    asWrapper<ExtensionObject>(config.userIdentityToken) = ExtensionObject(token);
 }
 
 void ClientConfig::setUserIdentityToken(const AnonymousIdentityToken& token) {
@@ -449,20 +449,20 @@ bool Client::isConnected() noexcept {
 #endif
 }
 
-std::vector<std::string> Client::getNamespaceArray() {
+std::vector<std::string> Client::namespaceArray() {
     return services::readValue(*this, {0, UA_NS0ID_SERVER_NAMESPACEARRAY})
         .value()
-        .getArrayCopy<std::string>();
+        .to<std::vector<std::string>>();
 }
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 Subscription<Client> Client::createSubscription(const SubscriptionParameters& parameters) {
     const auto response = services::createSubscription(*this, parameters, true, {}, {});
-    response.getResponseHeader().getServiceResult().throwIfBad();
-    return {*this, response.getSubscriptionId()};
+    response.responseHeader().serviceResult().throwIfBad();
+    return {*this, response.subscriptionId()};
 }
 
-std::vector<Subscription<Client>> Client::getSubscriptions() {
+std::vector<Subscription<Client>> Client::subscriptions() {
     std::vector<Subscription<Client>> result;
     auto& subscriptions = context().subscriptions;
     subscriptions.eraseStale();

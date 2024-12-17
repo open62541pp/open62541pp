@@ -39,7 +39,7 @@ auto* getNativePointer(Span<T> array) noexcept {
 template <typename T>
 ExtensionObject wrapNodeAttributes(const T& attributes) noexcept {
     // NOLINTNEXTLINE(*-const-cast), won't be modified
-    return ExtensionObject::fromDecoded(const_cast<T&>(attributes));
+    return ExtensionObject(const_cast<T*>(&attributes));
 }
 
 inline UA_AddNodesItem createAddNodesItem(

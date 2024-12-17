@@ -31,6 +31,7 @@ struct SessionRegistry {
     decltype(UA_AccessControl::activateSession) activateSessionUser{nullptr};
     decltype(UA_AccessControl::closeSession) closeSessionUser{nullptr};
     std::set<NodeId> sessionIds;
+    std::mutex mutex;
 };
 
 /**

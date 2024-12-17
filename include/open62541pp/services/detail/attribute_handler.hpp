@@ -54,13 +54,13 @@ struct AttributeHandlerScalar {
         return getVariant(std::move(dv)).transform([](Variant&& var) {
             assert(var.isType<T>());
             assert(var.isScalar());
-            return std::move(var).getScalar<T>();
+            return std::move(var).scalar<T>();
         });
     }
 
     template <typename U>
     static DataValue toDataValue(U&& value) {
-        return DataValue::fromScalar(std::forward<U>(value));
+        return DataValue(Variant(std::forward<U>(value)));
     }
 };
 
@@ -161,12 +161,12 @@ struct AttributeHandler<AttributeId::ArrayDimensions> {
         return getVariant(std::move(dv)).transform([](Variant&& var) {
             assert(var.isType<uint32_t>());
             assert(var.isArray());
-            return std::move(var).getArrayCopy<uint32_t>();
+            return std::move(var).to<Type>();
         });
     }
 
     static DataValue toDataValue(Span<const uint32_t> dimensions) {
-        return DataValue::fromArray(dimensions);
+        return DataValue(Variant(dimensions));
     }
 };
 

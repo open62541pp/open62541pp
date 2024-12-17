@@ -20,7 +20,7 @@ int main() {
             opcua::VariableId::Server_ServerStatus_CurrentTime,
             [](opcua::Result<opcua::Variant>& result) {
                 std::cout << "Read result with status code: " << result.code() << std::endl;
-                const auto dt = result.value().getScalar<opcua::DateTime>();
+                const auto dt = result.value().scalar<opcua::DateTime>();
                 std::cout << "Server date (UTC): " << dt.format("%Y-%m-%d %H:%M:%S") << std::endl;
             }
         );
@@ -32,9 +32,9 @@ int main() {
             opcua::ReferenceTypeId::References
         );
         opcua::services::browseAsync(client, bd, 0, [](opcua::BrowseResult& result) {
-            std::cout << "Browse result with " << result.getReferences().size() << " references:\n";
-            for (const auto& reference : result.getReferences()) {
-                std::cout << "- " << reference.getBrowseName().name() << std::endl;
+            std::cout << "Browse result with " << result.references().size() << " references:\n";
+            for (const auto& reference : result.references()) {
+                std::cout << "- " << reference.browseName().name() << std::endl;
             }
         });
 
@@ -50,13 +50,13 @@ int main() {
             [&](opcua::CreateSubscriptionResponse& response) {
                 std::cout
                     << "Subscription created:\n"
-                    << "- status code: " << response.getResponseHeader().getServiceResult() << "\n"
-                    << "- subscription id: " << response.getSubscriptionId() << std::endl;
+                    << "- status code: " << response.responseHeader().serviceResult() << "\n"
+                    << "- subscription id: " << response.subscriptionId() << std::endl;
 
                 // Create MonitoredItem
                 opcua::services::createMonitoredItemDataChangeAsync(
                     client,
-                    response.getSubscriptionId(),
+                    response.subscriptionId(),
                     opcua::ReadValueId(
                         opcua::VariableId::Server_ServerStatus_CurrentTime,
                         opcua::AttributeId::Value
@@ -74,8 +74,8 @@ int main() {
                     [](opcua::MonitoredItemCreateResult& result) {
                         std::cout
                             << "MonitoredItem created:\n"
-                            << "- status code: " << result.getStatusCode() << "\n"
-                            << "- monitored item id: " << result.getMonitoredItemId() << std::endl;
+                            << "- status code: " << result.statusCode() << "\n"
+                            << "- monitored item id: " << result.monitoredItemId() << std::endl;
                     }
                 );
             }

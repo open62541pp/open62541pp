@@ -339,17 +339,17 @@ Result<std::vector<ReferenceDescription>> browseAll(T& connection, const BrowseD
     auto handler = [&](BrowseResult& result) {
         refs.insert(
             refs.end(),
-            std::make_move_iterator(result.getReferences().begin()),
-            std::make_move_iterator(result.getReferences().end())
+            std::make_move_iterator(result.references().begin()),
+            std::make_move_iterator(result.references().end())
         );
     };
     BrowseResult result = browse(connection, bd, 0U);
     handler(result);
-    while (!result.getContinuationPoint().empty()) {
-        result = browseNext(connection, false, result.getContinuationPoint());
+    while (!result.continuationPoint().empty()) {
+        result = browseNext(connection, false, result.continuationPoint());
         handler(result);
     }
-    return {std::move(refs), result.getStatusCode()};
+    return {std::move(refs), result.statusCode()};
 }
 
 /**

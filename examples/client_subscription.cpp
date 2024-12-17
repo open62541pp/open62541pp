@@ -31,10 +31,10 @@ int main() {
                     << "Data change notification:\n"
                     << "- subscription id:   " << item.subscriptionId() << "\n"
                     << "- monitored item id: " << item.monitoredItemId() << "\n"
-                    << "- node id:           " << item.getNodeId().toString() << "\n"
-                    << "- attribute id:      " << static_cast<int>(item.getAttributeId()) << "\n";
+                    << "- node id:           " << item.nodeId().toString() << "\n"
+                    << "- attribute id:      " << static_cast<int>(item.attributeId()) << "\n";
 
-                const auto dt = dv.value().getScalarCopy<opcua::DateTime>();
+                const auto dt = dv.value().scalar<opcua::DateTime>();
                 std::cout << "Current server time (UTC): " << dt.format("%H:%M:%S") << std::endl;
             }
         );

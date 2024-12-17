@@ -89,18 +89,18 @@ TEST_CASE("DataType") {
         DataType dt(pointType);
         CHECK(dt.handle() != &pointType);
 #ifdef UA_ENABLE_TYPEDESCRIPTION
-        CHECK(dt.getTypeName() == pointType.typeName);
+        CHECK(dt.typeName() == pointType.typeName);
 #endif
-        CHECK(dt.getTypeId() == NodeId(1, 1001));
-        CHECK(dt.getBinaryEncodingId() == NodeId(1, 1));
-        CHECK(dt.getMemSize() == sizeof(Point));
-        CHECK(dt.getTypeKind() == UA_DATATYPEKIND_STRUCTURE);
-        CHECK(dt.getPointerFree() == true);
-        CHECK(dt.getOverlayable() == false);
-        CHECK(dt.getMembers().size() == 3);
-        CHECK(dt.getMembers()[0] == pointMembers[0]);
-        CHECK(dt.getMembers()[1] == pointMembers[1]);
-        CHECK(dt.getMembers()[2] == pointMembers[2]);
+        CHECK(dt.typeId() == NodeId(1, 1001));
+        CHECK(dt.binaryEncodingId() == NodeId(1, 1));
+        CHECK(dt.memSize() == sizeof(Point));
+        CHECK(dt.typeKind() == UA_DATATYPEKIND_STRUCTURE);
+        CHECK(dt.pointerFree() == true);
+        CHECK(dt.overlayable() == false);
+        CHECK(dt.members().size() == 3);
+        CHECK(dt.members()[0] == pointMembers[0]);
+        CHECK(dt.members()[1] == pointMembers[1]);
+        CHECK(dt.members()[2] == pointMembers[2]);
     }
 
     SUBCASE("Construct from type index") {
@@ -155,10 +155,10 @@ TEST_CASE("DataTypeBuilder") {
         enum class TestEnum {};
         const auto dt = DataTypeBuilder<TestEnum>::createEnum("TestEnum", {1, 1}, {1, 1}).build();
 
-        CHECK(dt.getMemSize() == sizeof(TestEnum));
-        CHECK(dt.getTypeKind() == UA_DATATYPEKIND_ENUM);
-        CHECK(dt.getPointerFree() == true);
-        CHECK(dt.getMembers().empty());
+        CHECK(dt.memSize() == sizeof(TestEnum));
+        CHECK(dt.typeKind() == UA_DATATYPEKIND_ENUM);
+        CHECK(dt.pointerFree() == true);
+        CHECK(dt.members().empty());
     }
 
     SUBCASE("Struct") {

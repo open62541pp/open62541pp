@@ -99,22 +99,22 @@ static ApplicationDescription& getApplicationDescription(UA_ServerConfig& config
 static void copyApplicationDescriptionToEndpoints(UA_ServerConfig& config) {
     auto endpoints = Span(asWrapper<EndpointDescription>(config.endpoints), config.endpointsSize);
     for (auto& endpoint : endpoints) {
-        endpoint.getServer() = getApplicationDescription(config);
+        endpoint.server() = getApplicationDescription(config);
     }
 }
 
 void ServerConfig::setApplicationUri(std::string_view uri) {
-    getApplicationDescription(native()).getApplicationUri() = String(uri);
+    getApplicationDescription(native()).applicationUri() = String(uri);
     copyApplicationDescriptionToEndpoints(native());
 }
 
 void ServerConfig::setProductUri(std::string_view uri) {
-    getApplicationDescription(native()).getProductUri() = String(uri);
+    getApplicationDescription(native()).productUri() = String(uri);
     copyApplicationDescriptionToEndpoints(native());
 }
 
 void ServerConfig::setApplicationName(std::string_view name) {
-    getApplicationDescription(native()).getApplicationName() = LocalizedText("", name);
+    getApplicationDescription(native()).applicationName() = LocalizedText("", name);
     copyApplicationDescriptionToEndpoints(native());
 }
 
@@ -143,9 +143,9 @@ static void setHighestSecurityPolicyForUserTokenTransfer(UA_ServerConfig& config
     if (!securityPolicies.empty()) {
         const auto& highestSecurityPoliciyUri = securityPolicies.back().policyUri;
         for (auto& userTokenPolicy : userTokenPolicies) {
-            if (userTokenPolicy.getTokenType() != UserTokenType::Anonymous &&
-                userTokenPolicy.getSecurityPolicyUri().empty()) {
-                userTokenPolicy.getSecurityPolicyUri() = String(highestSecurityPoliciyUri);
+            if (userTokenPolicy.tokenType() != UserTokenType::Anonymous &&
+                userTokenPolicy.securityPolicyUri().empty()) {
+                userTokenPolicy.securityPolicyUri() = String(highestSecurityPoliciyUri);
             }
         }
     }
@@ -194,6 +194,7 @@ static UA_StatusCode activateSession(
         sessionContext
     );
     if (detail::isGood(status) && sessionId != nullptr) {
+        const std::scoped_lock lock(context->sessionRegistry.mutex);
         context->sessionRegistry.sessionIds.insert(asWrapper<NodeId>(*sessionId));
     }
     return status;
@@ -209,6 +210,7 @@ static void closeSession(
     // call user-defined function
     context->sessionRegistry.closeSessionUser(server, ac, sessionId, sessionContext);
     if (sessionId != nullptr) {
+        const std::scoped_lock lock(context->sessionRegistry.mutex);
         context->sessionRegistry.sessionIds.erase(asWrapper<NodeId>(*sessionId));
     }
 }
@@ -309,18 +311,19 @@ void Server::setCustomDataTypes(Span<const DataType> dataTypes) {
     config()->customDataTypes = context().dataTypeArray.get();
 }
 
-std::vector<Session> Server::getSessions() {
-    std::vector<Session> sessions;
+std::vector<Session> Server::sessions() {
+    std::vector<Session> result;
+    const std::scoped_lock lock(context().sessionRegistry.mutex);
     for (auto&& id : context().sessionRegistry.sessionIds) {
-        sessions.emplace_back(*this, id);
+        result.emplace_back(*this, id);
     }
-    return sessions;
+    return result;
 }
 
-std::vector<std::string> Server::getNamespaceArray() {
+std::vector<std::string> Server::namespaceArray() {
     return services::readValue(*this, {0, UA_NS0ID_SERVER_NAMESPACEARRAY})
         .value()
-        .getArrayCopy<std::string>();
+        .to<std::vector<std::string>>();
 }
 
 NamespaceIndex Server::registerNamespace(std::string_view uri) {

@@ -51,7 +51,7 @@ struct ValueBackendDataSource {
      * between read callbacks of a data source, as the result is already encoded on the network
      * buffer between each read operation.
      * To use zero-copy reads, set the value of the Variant (DataValue::getValue) without copying,
-     * e.g. with Variant::setScalar or Variant::setArray.
+     * e.g. with Variant::assign.
      *
      * @param id The ID of the node whose value was requested
      * @param value The DataValue that is returned to the reader

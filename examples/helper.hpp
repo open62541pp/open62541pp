@@ -23,7 +23,7 @@ public:
         return it != args_.end();
     }
 
-    std::optional<std::string_view> getValue(std::string_view option) const {
+    std::optional<std::string_view> value(std::string_view option) const {
         auto it = std::find(args_.begin() + 1, args_.end(), option);
         if (it != args_.end()) {
             ++it;

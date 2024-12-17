@@ -29,6 +29,13 @@ TEST_CASE("Types handling") {
 }
 
 TEST_CASE("Array handling") {
+    SUBCASE("Allocate empty array") {
+        auto* ptr = detail::allocateArray<int>(0);
+        CHECK(ptr != nullptr);
+        CHECK(ptr == UA_EMPTY_ARRAY_SENTINEL);  // NOLINT
+        detail::deallocateArray(ptr);
+    }
+
     SUBCASE("Allocate / deallocate") {
         auto* ptr = detail::allocateArray<UA_String>(3, UA_TYPES[UA_TYPES_STRING]);
         CHECK(ptr != nullptr);

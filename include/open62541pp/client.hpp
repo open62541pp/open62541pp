@@ -243,13 +243,26 @@ public:
     bool isConnected() noexcept;
 
     /// Get all defined namespaces.
-    std::vector<std::string> getNamespaceArray();
+    std::vector<std::string> namespaceArray();
+
+    /// @deprecated Use namespaceArray() instead
+    [[deprecated("use namespaceArray() instead")]]
+    std::vector<std::string> getNamespaceArray() {
+        return namespaceArray();
+    }
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
     /// Create a subscription to monitor data changes and events.
     Subscription<Client> createSubscription(const SubscriptionParameters& parameters = {});
+
     /// Get all active subscriptions
-    std::vector<Subscription<Client>> getSubscriptions();
+    std::vector<Subscription<Client>> subscriptions();
+
+    /// @deprecated Use subscriptions() instead
+    [[deprecated("use subscriptions() instead")]]
+    std::vector<Subscription<Client>> getSubscriptions() {
+        return subscriptions();
+    }
 #endif
 
     /**

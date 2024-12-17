@@ -26,7 +26,7 @@ TEST_CASE("ClientConfig") {
 
     SUBCASE("setUserIdentityToken") {
         const auto& token = asWrapper<ExtensionObject>(config->userIdentityToken);
-        CHECK(token.isEmpty());
+        CHECK(token.empty());
 
         config.setUserIdentityToken(AnonymousIdentityToken{});
         CHECK(token.decodedData<AnonymousIdentityToken>() != nullptr);
@@ -40,7 +40,7 @@ TEST_CASE("ClientConfig") {
         config.setUserIdentityToken(IssuedIdentityToken{});
         CHECK(token.decodedData<IssuedIdentityToken>() != nullptr);
 
-        CHECK_FALSE(token.isEmpty());
+        CHECK_FALSE(token.empty());
     }
 
     SUBCASE("setSecurityMode") {
@@ -59,10 +59,10 @@ TEST_CASE("Client discovery") {
         CHECK(results.size() == 1);
 
         const auto& result = results[0];
-        CHECK(result.getApplicationUri() == String("urn:open62541.server.application"));
-        CHECK(result.getProductUri() == String("http://open62541.org"));
-        CHECK(result.getApplicationType() == UA_APPLICATIONTYPE_SERVER);
-        CHECK(result.getDiscoveryUrls().size() >= 1);
+        CHECK(result.applicationUri() == String("urn:open62541.server.application"));
+        CHECK(result.productUri() == String("http://open62541.org"));
+        CHECK(result.applicationType() == UA_APPLICATIONTYPE_SERVER);
+        CHECK(result.discoveryUrls().size() >= 1);
     }
 
     SUBCASE("Get endpoints") {
@@ -70,15 +70,15 @@ TEST_CASE("Client discovery") {
         CHECK(endpoints.size() == 1);
 
         const auto& endpoint = endpoints[0];
-        CHECK(endpoint.getEndpointUrl() == String(localServerUrl));
-        CHECK(endpoint.getServerCertificate() == ByteString());
-        CHECK(endpoint.getSecurityMode() == UA_MESSAGESECURITYMODE_NONE);
+        CHECK(endpoint.endpointUrl() == String(localServerUrl));
+        CHECK(endpoint.serverCertificate() == ByteString());
+        CHECK(endpoint.securityMode() == UA_MESSAGESECURITYMODE_NONE);
         CHECK(
-            endpoint.getSecurityPolicyUri() ==
+            endpoint.securityPolicyUri() ==
             String("http://opcfoundation.org/UA/SecurityPolicy#None")
         );
         CHECK(
-            endpoint.getTransportProfileUri() ==
+            endpoint.transportProfileUri() ==
             String("http://opcfoundation.org/UA-Profile/Transport/uatcp-uasc-uabinary")
         );
     }
@@ -268,7 +268,7 @@ TEST_CASE("Client methods") {
     client.connect(localServerUrl);
 
     SUBCASE("getNamespaceArray") {
-        const auto namespaces = client.getNamespaceArray();
+        const auto namespaces = client.namespaceArray();
         CHECK(namespaces.size() == 2);
         CHECK(namespaces.at(0) == "http://opcfoundation.org/UA/");
         CHECK(namespaces.at(1) == "urn:open62541.server.application");

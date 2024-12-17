@@ -14,8 +14,6 @@ int main() {
     const opcua::Node greetMethodNode = objectsNode.browseChild({{1, "Greet"}});
 
     // Call method from parent node (Objects)
-    const auto result = objectsNode.callMethod(
-        greetMethodNode.id(), {opcua::Variant::fromScalar("World")}
-    );
-    std::cout << result.getOutputArguments()[0].getScalar<opcua::String>() << std::endl;
+    const auto result = objectsNode.callMethod(greetMethodNode.id(), {opcua::Variant("World")});
+    std::cout << result.outputArguments().at(0).scalar<opcua::String>() << std::endl;
 }

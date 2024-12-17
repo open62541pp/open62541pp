@@ -63,7 +63,13 @@ public:
     }
 
     /// Get all local monitored items.
-    std::vector<MonitoredItem<Connection>> getMonitoredItems();
+    std::vector<MonitoredItem<Connection>> monitoredItems();
+
+    /// @deprecated Use monitoredItems() instead
+    [[deprecated("use monitoredItems() instead")]]
+    std::vector<MonitoredItem<Connection>> getMonitoredItems() {
+        return monitoredItems();
+    }
 
     /// Modify this subscription.
     /// @note Not implemented for Server.
@@ -72,7 +78,7 @@ public:
         const auto response = services::modifySubscription(
             connection(), subscriptionId(), parameters
         );
-        response.getResponseHeader().getServiceResult().throwIfBad();
+        response.responseHeader().serviceResult().throwIfBad();
     }
 
     /// Enable/disable publishing of notification messages.
@@ -99,8 +105,8 @@ public:
             std::move(onDataChange),
             {}
         );
-        result.getStatusCode().throwIfBad();
-        return {connection(), subscriptionId(), result.getMonitoredItemId()};
+        result.statusCode().throwIfBad();
+        return {connection(), subscriptionId(), result.monitoredItemId()};
     }
 
     /// Create a monitored item for data change notifications (default settings).
@@ -131,8 +137,8 @@ public:
             parameters,
             std::move(onEvent)
         );
-        result.getStatusCode().throwIfBad();
-        return {connection(), subscriptionId(), result.getMonitoredItemId()};
+        result.statusCode().throwIfBad();
+        return {connection(), subscriptionId(), result.monitoredItemId()};
     }
 
     /// Create a monitored item for event notifications (default settings).
@@ -143,7 +149,7 @@ public:
         const NodeId& id, const EventFilter& eventFilter, EventNotificationCallback onEvent
     ) {
         MonitoringParametersEx parameters;
-        parameters.filter = ExtensionObject::fromDecodedCopy(eventFilter);
+        parameters.filter = ExtensionObject(eventFilter);
         return subscribeEvent(id, MonitoringMode::Reporting, parameters, std::move(onEvent));
     }
 

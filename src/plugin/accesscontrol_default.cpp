@@ -49,7 +49,7 @@ StatusCode AccessControlDefault::activateSession(
     // https://github.com/open62541/open62541/blob/v1.3.6/plugins/ua_accesscontrol_default.c#L38-L134
 
     // empty token
-    if (userIdentityToken.isEmpty()) {
+    if (userIdentityToken.empty()) {
         if (allowAnonymous_) {
             return UA_STATUSCODE_GOOD;
         }
@@ -67,7 +67,7 @@ StatusCode AccessControlDefault::activateSession(
         if (!allowAnonymous_) {
             return UA_STATUSCODE_BADIDENTITYTOKENINVALID;
         }
-        if (token->getPolicyId().empty() || token->getPolicyId() == policyIdAnonymous) {
+        if (token->policyId().empty() || token->policyId() == policyIdAnonymous) {
             return UA_STATUSCODE_GOOD;
         }
         return UA_STATUSCODE_BADIDENTITYTOKENINVALID;
@@ -76,17 +76,16 @@ StatusCode AccessControlDefault::activateSession(
     // username and password
     if (const auto* token = userIdentityToken.decodedData<UserNameIdentityToken>();
         token != nullptr) {
-        if (token->getPolicyId() != policyIdUsername) {
+        if (token->policyId() != policyIdUsername) {
             return UA_STATUSCODE_BADIDENTITYTOKENINVALID;
         }
         // empty username and password
-        if (token->getUserName().empty() && token->getPassword().empty()) {
+        if (token->userName().empty() && token->password().empty()) {
             return UA_STATUSCODE_BADIDENTITYTOKENINVALID;
         }
         // try to match username / password
         for (const auto& login : logins_) {
-            if ((login.username == token->getUserName()) &&
-                (login.password == token->getPassword())) {
+            if ((login.username == token->userName()) && (login.password == token->password())) {
                 return UA_STATUSCODE_GOOD;
             }
         }

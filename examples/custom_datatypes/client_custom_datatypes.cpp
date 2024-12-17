@@ -48,7 +48,7 @@ int main() {
     // transparently unwrap the array. So we have to do the unwrapping ourselves:
     if (variant.isArray() && variant.isType<opcua::ExtensionObject>()) {
         size_t i = 0;
-        for (auto&& extObj : variant.getArray<opcua::ExtensionObject>()) {
+        for (auto&& extObj : variant.array<opcua::ExtensionObject>()) {
             const auto* p = static_cast<Point*>(extObj.decodedData());
             std::cout << "PointVec[" << i++ << "]:\n";
             std::cout << "- x = " << p->x << "\n";
@@ -95,6 +95,6 @@ int main() {
 
     variant = opcua::Node(client, {1, "Color"}).readValue();
     if (variant.isType<int32_t>()) {
-        std::cout << "Color: " << variant.getScalar<int32_t>() << "\n";
+        std::cout << "Color: " << variant.scalar<int32_t>() << "\n";
     }
 }

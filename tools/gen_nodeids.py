@@ -62,7 +62,7 @@ enum class {enum_name} : int32_t {{
  * Get namespace of {enum_name}.
  * @ingroup NodeIds
  */
-constexpr Namespace getNamespace({enum_name} /* unused */) noexcept {{
+constexpr Namespace namespaceOf({enum_name} /* unused */) noexcept {{
     return {{0, "http://opcfoundation.org/UA/"}};
 }}
 """.strip()

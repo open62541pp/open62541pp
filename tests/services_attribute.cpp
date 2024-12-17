@@ -39,19 +39,19 @@ TEST_CASE("Attribute service set (highlevel)") {
             ReferenceTypeId::HasComponent
         ));
 
-        CHECK(services::readDisplayName(server, id).value() == attr.getDisplayName());
-        CHECK(services::readDescription(server, id).value() == attr.getDescription());
-        CHECK(services::readWriteMask(server, id).value() == attr.getWriteMask());
-        CHECK(services::readDataType(server, id).value() == attr.getDataType());
-        CHECK(services::readValueRank(server, id).value() == attr.getValueRank());
+        CHECK(services::readDisplayName(server, id).value() == attr.displayName());
+        CHECK(services::readDescription(server, id).value() == attr.description());
+        CHECK(services::readWriteMask(server, id).value() == attr.writeMask());
+        CHECK(services::readDataType(server, id).value() == attr.dataType());
+        CHECK(services::readValueRank(server, id).value() == attr.valueRank());
         CHECK(
             services::readArrayDimensions(server, id).value() ==
-            std::vector(attr.getArrayDimensions().begin(), attr.getArrayDimensions().end())
+            std::vector(attr.arrayDimensions().begin(), attr.arrayDimensions().end())
         );
-        CHECK(services::readAccessLevel(server, id).value() == attr.getAccessLevel());
+        CHECK(services::readAccessLevel(server, id).value() == attr.accessLevel());
         CHECK(
             services::readMinimumSamplingInterval(server, id).value() ==
-            attr.getMinimumSamplingInterval()
+            attr.minimumSamplingInterval()
         );
     }
 
@@ -223,12 +223,11 @@ TEST_CASE("Attribute service set (highlevel)") {
             ReferenceTypeId::HasComponent
         ));
 
-        Variant variantWrite;
-        variantWrite.setScalarCopy(11.11);
+        Variant variantWrite(11.11);
         services::writeValue(server, id, variantWrite).throwIfBad();
 
         Variant variantRead = services::readValue(server, id).value();
-        CHECK(variantRead.getScalar<double>() == 11.11);
+        CHECK(variantRead.scalar<double>() == 11.11);
     }
 
     SUBCASE("Read/write data value") {
@@ -243,8 +242,7 @@ TEST_CASE("Attribute service set (highlevel)") {
             ReferenceTypeId::HasComponent
         ));
 
-        Variant variant;
-        variant.setScalarCopy<int>(11);
+        Variant variant(11);
         DataValue valueWrite(variant, {}, DateTime::now(), {}, uint16_t{1}, UA_STATUSCODE_GOOD);
         services::writeDataValue(server, id, valueWrite).throwIfBad();
 
@@ -257,7 +255,7 @@ TEST_CASE("Attribute service set (highlevel)") {
         // CHECK_EQ(valueRead->hasSourcePicoseconds, true);
         CHECK_EQ(valueRead->hasStatus, false);  // doesn't contain error code on success
 
-        CHECK(valueRead.value().getScalar<int>() == 11);
+        CHECK(valueRead.value().scalar<int>() == 11);
         CHECK(valueRead->sourceTimestamp == valueWrite->sourceTimestamp);
         CHECK(valueRead->sourcePicoseconds == valueWrite->sourcePicoseconds);
     }
@@ -268,13 +266,13 @@ TEST_CASE("Attribute service set (highlevel)") {
         const NodeId id{0, UA_NS0ID_BUILDINFO};
         const Variant variant = services::readDataTypeDefinition(server, id).value();
         CHECK(variant.isScalar());
-        CHECK(variant.getDataType() == &UA_TYPES[UA_TYPES_STRUCTUREDEFINITION]);
+        CHECK(variant.type() == &UA_TYPES[UA_TYPES_STRUCTUREDEFINITION]);
 
-        const auto definition = variant.getScalar<StructureDefinition>();
-        CHECK(definition.getDefaultEncodingId() == NodeId(0, 340));
-        CHECK(definition.getBaseDataType() == NodeId(0, 22));
-        CHECK(definition.getStructureType() == StructureType::Structure);
-        CHECK(definition.getFields().size() == 6);
+        const auto definition = variant.scalar<StructureDefinition>();
+        CHECK(definition.defaultEncodingId() == NodeId(0, 340));
+        CHECK(definition.baseDataType() == NodeId(0, 22));
+        CHECK(definition.structureType() == StructureType::Structure);
+        CHECK(definition.fields().size() == 6);
     }
 
     // SUBCASE("Data type definition (write/read EnumDefinition, not supported yet)") {
@@ -282,7 +280,7 @@ TEST_CASE("Attribute service set (highlevel)") {
     //     services::addDataType(server, {0, UA_NS0ID_ENUMERATION}, id, "MyEnum");
 
     //     const EnumDefinition definition{{0, "Zero"}, {1, "One"}};
-    //     services::writeDataTypeDefinition(server, id, Variant::fromScalar(definition)).value();
+    //     services::writeDataTypeDefinition(server, id, Variant(definition)).value();
 
     //     const auto definitionRead = services::readDataTypeDefinition(server, id);
     //     CHECK(definitionRead.value().isType<EnumDefinition>());
@@ -315,7 +313,7 @@ TEST_CASE("Attribute service set (highlevel, async)") {
 
         // write
         {
-            auto variant = Variant::fromScalar(11.11);
+            auto variant = Variant(11.11);
             auto future = services::writeValueAsync(client, id, variant, useFuture);
             client.runIterate();
             future.get().throwIfBad();
@@ -325,7 +323,7 @@ TEST_CASE("Attribute service set (highlevel, async)") {
         {
             auto future = services::readValueAsync(client, id, useFuture);
             client.runIterate();
-            CHECK(future.get().value().getScalar<double>() == 11.11);
+            CHECK(future.get().value().scalar<double>() == 11.11);
         }
     }
 
@@ -336,7 +334,7 @@ TEST_CASE_TEMPLATE("Attribute service set write/read", T, Server, Client, Async<
     ServerClientSetup setup;
     setup.client.connect(setup.endpointUrl);
     auto& client = setup.client;
-    auto& connection = setup.getInstance<T>();
+    auto& connection = setup.instance<T>();
 
     // create variable node
     const NodeId id{1, 1000};
@@ -356,12 +354,12 @@ TEST_CASE_TEMPLATE("Attribute service set write/read", T, Server, Client, Async<
     // write
     if constexpr (isAsync<T>) {
         auto future = services::writeAttributeAsync(
-            connection, id, AttributeId::Value, DataValue::fromScalar(value), useFuture
+            connection, id, AttributeId::Value, DataValue(Variant(value)), useFuture
         );
         client.runIterate();
         future.get().throwIfBad();
     } else {
-        services::writeAttribute(connection, id, AttributeId::Value, DataValue::fromScalar(value))
+        services::writeAttribute(connection, id, AttributeId::Value, DataValue(Variant(value)))
             .throwIfBad();
     }
 
@@ -378,5 +376,5 @@ TEST_CASE_TEMPLATE("Attribute service set write/read", T, Server, Client, Async<
         );
     }
 
-    CHECK(result.value().value().getScalar<double>() == value);
+    CHECK(result.value().value().scalar<double>() == value);
 }

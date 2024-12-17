@@ -17,16 +17,15 @@ namespace opcua {
 
 template <>
 struct TypeConverter<std::byte> {
-    using ValueType = std::byte;
     using NativeType = UA_Byte;
 
     // use `const NativeType& src` for non-primitive types
-    static void fromNative(NativeType src, ValueType& dst) {
+    static void fromNative(UA_Byte src, std::byte& dst) {
         dst = std::byte(src);
     }
 
     // use `const ValueType& src` for non-primitive types
-    static void toNative(ValueType src, NativeType& dst) {
+    static void toNative(std::byte src, UA_Byte& dst) {
         dst = std::to_integer<UA_Byte>(src);
     }
 };
@@ -37,21 +36,23 @@ int main() {
     opcua::Variant variant;
 
     // Write std::byte to variant
-    variant.setScalarCopy(std::byte{11});
+    variant.assign(std::byte{11});
+    // Use assignment operator
+    variant = std::byte{11};
 
-    // Read std::byte from variant (conversion requires copy)
-    const auto value = variant.getScalarCopy<std::byte>();
-    std::cout << "Byte value: " << std::to_integer<int>(value) << std::endl;
-
-    // Read UA_Byte from variant (zero copy possible)
-    const auto& valueNative = variant.getScalar<UA_Byte>();
+    // Read UA_Byte from variant (reference possible)
+    const auto& valueNative = variant.scalar<UA_Byte>();
     std::cout << "Byte value: " << static_cast<int>(valueNative) << std::endl;
+
+    // Read std::byte from variant (copy and conversion required)
+    const auto value = variant.to<std::byte>();
+    std::cout << "Byte value: " << std::to_integer<int>(value) << std::endl;
 
     // Write array of bytes to variant
     std::array<std::byte, 3> array{};
-    variant.setArrayCopy(array);  // use array container
-    variant.setArrayCopy(opcua::Span{array.data(), array.size()});  // use raw array and size
-    variant.setArrayCopy(array.begin(), array.end());  // use iterator pair
+    variant.assign(array);  // use array container
+    variant.assign(opcua::Span{array.data(), array.size()});  // use raw array and size
+    variant.assign(array.begin(), array.end());  // use iterator pair
 
-    std::cout << "Array size: " << variant.getArrayLength() << std::endl;
+    std::cout << "Array size: " << variant.arrayLength() << std::endl;
 }

@@ -36,19 +36,40 @@ UA_EXPORT extern const UA_ViewAttributes UA_ViewAttributes_default;
 
 // NOLINTBEGIN(cppcoreguidelines-macro-usage)
 #define UAPP_GETTER(Type, getterName, member)                                                      \
+    Type member() const noexcept {                                                                 \
+        return handle()->member;                                                                   \
+    }                                                                                              \
+    /** @deprecated Use @ref member instead */                                                     \
+    [[deprecated("use " #member " instead")]]                                                      \
     Type getterName() const noexcept {                                                             \
         return handle()->member;                                                                   \
     }
+
 #define UAPP_GETTER_CAST(Type, getterName, member)                                                 \
+    Type member() const noexcept {                                                                 \
+        return static_cast<Type>(handle()->member);                                                \
+    }                                                                                              \
+    /** @deprecated Use @ref member instead */                                                     \
+    [[deprecated("use " #member " instead")]]                                                      \
     Type getterName() const noexcept {                                                             \
         return static_cast<Type>(handle()->member);                                                \
     }
 
 #define UAPP_GETTER_WRAPPER_CONST(Type, getterName, member)                                        \
+    const Type& member() const noexcept {                                                          \
+        return asWrapper<Type>(handle()->member);                                                  \
+    }                                                                                              \
+    /** @deprecated Use @ref member instead */                                                     \
+    [[deprecated("use " #member " instead")]]                                                      \
     const Type& getterName() const noexcept {                                                      \
         return asWrapper<Type>(handle()->member);                                                  \
     }
 #define UAPP_GETTER_WRAPPER_NONCONST(Type, getterName, member)                                     \
+    Type& member() noexcept {                                                                      \
+        return asWrapper<Type>(handle()->member);                                                  \
+    }                                                                                              \
+    /** @deprecated Use @ref member instead */                                                     \
+    [[deprecated("use " #member " instead")]]                                                      \
     Type& getterName() noexcept {                                                                  \
         return asWrapper<Type>(handle()->member);                                                  \
     }
@@ -57,16 +78,37 @@ UA_EXPORT extern const UA_ViewAttributes UA_ViewAttributes_default;
     UAPP_GETTER_WRAPPER_NONCONST(Type, getterName, member)
 
 #define UAPP_GETTER_SPAN(Type, getterName, memberArray, memberSize)                                \
+    Span<const Type> memberArray() const noexcept {                                                \
+        return {handle()->memberArray, handle()->memberSize};                                      \
+    }                                                                                              \
+    Span<Type> memberArray() noexcept {                                                            \
+        return {handle()->memberArray, handle()->memberSize};                                      \
+    }                                                                                              \
+    /** @deprecated Use @ref memberArray instead */                                                \
+    [[deprecated("use " #memberArray " instead")]]                                                 \
     Span<const Type> getterName() const noexcept {                                                 \
         return {handle()->memberArray, handle()->memberSize};                                      \
     }                                                                                              \
+    /** @deprecated Use @ref memberArray instead */                                                \
+    [[deprecated("use " #memberArray " instead")]]                                                 \
     Span<Type> getterName() noexcept {                                                             \
         return {handle()->memberArray, handle()->memberSize};                                      \
     }
+
 #define UAPP_GETTER_SPAN_WRAPPER(Type, getterName, memberArray, memberSize)                        \
+    Span<const Type> memberArray() const noexcept {                                                \
+        return {asWrapper<Type>(handle()->memberArray), handle()->memberSize};                     \
+    }                                                                                              \
+    Span<Type> memberArray() noexcept {                                                            \
+        return {asWrapper<Type>(handle()->memberArray), handle()->memberSize};                     \
+    }                                                                                              \
+    /** @deprecated Use @ref memberArray instead */                                                \
+    [[deprecated("use " #memberArray " instead")]]                                                 \
     Span<const Type> getterName() const noexcept {                                                 \
         return {asWrapper<Type>(handle()->memberArray), handle()->memberSize};                     \
     }                                                                                              \
+    /** @deprecated Use @ref memberArray instead */                                                \
+    [[deprecated("use " #memberArray " instead")]]                                                 \
     Span<Type> getterName() noexcept {                                                             \
         return {asWrapper<Type>(handle()->memberArray), handle()->memberSize};                     \
     }
@@ -403,16 +445,16 @@ public:
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR_WRAPPER(Variant, Value, value, UA_NODEATTRIBUTESMASK_VALUE)
 
-    /// @see Variant::fromScalar
+    /// @see Variant::Variant
     template <typename... Args>
     auto& setValueScalar(Args&&... args) {
-        return setValue(Variant::fromScalar(std::forward<Args>(args)...));
+        return setValue(Variant(std::forward<Args>(args)...));
     }
 
-    /// @see Variant::fromArray
+    /// @see Variant::Variant
     template <typename... Args>
     auto& setValueArray(Args&&... args) {
-        return setValue(Variant::fromArray(std::forward<Args>(args)...));
+        return setValue(Variant(std::forward<Args>(args)...));
     }
 
     UAPP_NODEATTR_WRAPPER(NodeId, DataType, dataType, UA_NODEATTRIBUTESMASK_DATATYPE)
@@ -500,16 +542,16 @@ public:
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR_WRAPPER(Variant, Value, value, UA_NODEATTRIBUTESMASK_VALUE)
 
-    /// @see Variant::fromScalar
+    /// @see Variant::Variant
     template <typename... Args>
     auto& setValueScalar(Args&&... args) {
-        return setValue(Variant::fromScalar(std::forward<Args>(args)...));
+        return setValue(Variant(std::forward<Args>(args)...));
     }
 
-    /// @see Variant::fromArray
+    /// @see Variant::Variant
     template <typename... Args>
     auto& setValueArray(Args&&... args) {
-        return setValue(Variant::fromArray(std::forward<Args>(args)...));
+        return setValue(Variant(std::forward<Args>(args)...));
     }
 
     UAPP_NODEATTR_WRAPPER(NodeId, DataType, dataType, UA_NODEATTRIBUTESMASK_DATATYPE)
@@ -1690,7 +1732,7 @@ public:
 
     template <typename T, typename = EnableIfLiteral<T>>
     explicit LiteralOperand(T&& literal)
-        : LiteralOperand(Variant::fromScalar(std::forward<T>(literal))) {}
+        : LiteralOperand(Variant(std::forward<T>(literal))) {}
 
     UAPP_GETTER_WRAPPER(Variant, getValue, value)
 };

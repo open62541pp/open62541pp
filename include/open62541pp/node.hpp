@@ -602,8 +602,8 @@ public:
         std::vector<Node> nodes;
         nodes.reserve(refs.size());
         for (auto&& ref : refs) {
-            if (ref.getNodeId().isLocal()) {
-                nodes.emplace_back(connection(), std::move(ref.getNodeId().nodeId()));
+            if (ref.nodeId().isLocal()) {
+                nodes.emplace_back(connection(), std::move(ref.nodeId().nodeId()));
             }
         }
         return nodes;
@@ -622,10 +622,10 @@ public:
     /// @exception BadStatus (BadNoMatch) If path not found
     Node browseChild(Span<const QualifiedName> path) {
         auto result = services::browseSimplifiedBrowsePath(connection(), id(), path);
-        result.getStatusCode().throwIfBad();
-        for (auto&& target : result.getTargets()) {
-            if (target.getTargetId().isLocal()) {
-                return {connection(), std::move(target.getTargetId().nodeId())};
+        result.statusCode().throwIfBad();
+        for (auto&& target : result.targets()) {
+            if (target.targetId().isLocal()) {
+                return {connection(), std::move(target.targetId().nodeId())};
             }
         }
         throw BadStatus(UA_STATUSCODE_BADNOMATCH);
@@ -644,11 +644,11 @@ public:
             BrowseResultMask::TargetInfo
         );
         auto result = services::browse(connection(), bd, 1);
-        result.getStatusCode().throwIfBad();
-        if (result.getReferences().empty()) {
+        result.statusCode().throwIfBad();
+        if (result.references().empty()) {
             throw BadStatus(UA_STATUSCODE_BADNOTFOUND);
         }
-        return fromId(connection(), result.getReferences().front().getNodeId());
+        return fromId(connection(), result.references().front().nodeId());
     }
 
 #ifdef UA_ENABLE_METHODCALLS
@@ -848,13 +848,13 @@ public:
     /// Read scalar value from variable node.
     template <typename T>
     T readValueScalar() {
-        return readValue().template getScalarCopy<T>();
+        return readValue().template to<T>();
     }
 
     /// Read array value from variable node.
     template <typename T>
     std::vector<T> readValueArray() {
-        return readValue().template getArrayCopy<T>();
+        return readValue().template to<std::vector<T>>();
     }
 
     /// @wrapper{services::readDataType}
@@ -1166,24 +1166,32 @@ public:
     /// Write scalar to variable node.
     template <typename T>
     Node& writeValueScalar(const T& value) {
-        // NOLINTNEXTLINE(*-const-cast), variant isn't modified, try to avoid copy
-        writeValue(Variant::fromScalar<VariantPolicy::ReferenceIfPossible>(const_cast<T&>(value)));
+        if constexpr (detail::isRegisteredType<T>) {
+            // NOLINTNEXTLINE(*-const-cast), variant isn't modified, avoid copy
+            writeValue(Variant(const_cast<T*>(&value)));
+        } else {
+            writeValue(Variant(value));
+        }
+
         return *this;
     }
 
     /// Write array value to variable node.
     template <typename ArrayLike>
-    Node& writeValueArray(ArrayLike&& array) {
-        writeValue(
-            Variant::fromArray<VariantPolicy::ReferenceIfPossible>(std::forward<ArrayLike>(array))
-        );
+    Node& writeValueArray(const ArrayLike& array) {
+        if constexpr (detail::isRegisteredType<typename ArrayLike::value_type>) {
+            // NOLINTNEXTLINE(*-const-cast), variant isn't modified, avoid copy
+            writeValue(Variant(const_cast<ArrayLike*>(&array)));
+        } else {
+            writeValue(Variant(array));
+        }
         return *this;
     }
 
     /// Write range of elements as array value to variable node.
     template <typename InputIt>
     Node& writeValueArray(InputIt first, InputIt last) {
-        writeValue(Variant::fromArray<VariantPolicy::ReferenceIfPossible>(first, last));
+        writeValue(Variant(first, last));
         return *this;
     }
 
@@ -1375,10 +1383,10 @@ private:
             connection(),
             BrowsePath(id(), {{ReferenceTypeId::HasProperty, false, true, propertyName}})
         );
-        result.getStatusCode().throwIfBad();
-        for (auto&& target : result.getTargets()) {
-            if (target.getTargetId().isLocal()) {
-                return {connection(), std::move(target.getTargetId().nodeId())};
+        result.statusCode().throwIfBad();
+        for (auto&& target : result.targets()) {
+            if (target.targetId().isLocal()) {
+                return {connection(), std::move(target.targetId().nodeId())};
             }
         }
         throw BadStatus(UA_STATUSCODE_BADNOTFOUND);
