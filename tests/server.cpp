@@ -205,14 +205,14 @@ TEST_CASE("DataSource") {
     int data = 0;
 
     ValueBackendDataSource dataSource;
-    dataSource.read = [&](DataValue& dv, const NumericRange&, bool includeSourceTimestamp) {
+    dataSource.read = [&](const NodeId&, DataValue& dv, const NumericRange&, bool includeSourceTimestamp) {
         dv.value() = data;
         if (includeSourceTimestamp) {
             dv.setSourceTimestamp(DateTime::now());
         }
         return UA_STATUSCODE_GOOD;
     };
-    dataSource.write = [&](const DataValue& dv, const NumericRange&) {
+    dataSource.write = [&](const NodeId&, const DataValue& dv, const NumericRange&) {
         data = dv.value().scalar<int>();
         return UA_STATUSCODE_GOOD;
     };
@@ -243,7 +243,7 @@ TEST_CASE("DataSource with exception in callback") {
 
     SUBCASE("BadStatus exception") {
         ValueBackendDataSource dataSource;
-        dataSource.read = [&](DataValue&, const NumericRange&, bool) -> StatusCode {
+        dataSource.read = [&](const NodeId&, DataValue&, const NumericRange&, bool) -> StatusCode {
             throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
         };
         server.setVariableNodeValueBackend(id, dataSource);
@@ -253,7 +253,7 @@ TEST_CASE("DataSource with exception in callback") {
 
     SUBCASE("Other exception types") {
         ValueBackendDataSource dataSource;
-        dataSource.read = [&](DataValue&, const NumericRange&, bool) -> StatusCode {
+        dataSource.read = [&](const NodeId&, DataValue&, const NumericRange&, bool) -> StatusCode {
             throw std::runtime_error("test");
         };
         server.setVariableNodeValueBackend(id, dataSource);

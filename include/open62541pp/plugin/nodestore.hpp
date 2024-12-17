@@ -53,6 +53,7 @@ struct ValueBackendDataSource {
      * To use zero-copy reads, set the value of the Variant (DataValue::getValue) without copying,
      * e.g. with Variant::assign.
      *
+     * @param id The ID of the node whose value was requested
      * @param value The DataValue that is returned to the reader
      * @param range If not empty, then the data source shall return only a selection of the
      *              (nonscalar) data.
@@ -60,18 +61,19 @@ struct ValueBackendDataSource {
      * @param timestamp Set the source timestamp of `value` if `true`
      * @return StatusCode
      */
-    std::function<StatusCode(DataValue& value, const NumericRange& range, bool timestamp)> read;
+    std::function<StatusCode(const NodeId& id, DataValue& value, const NumericRange& range, bool timestamp)> read;
 
     /**
      * Callback to write the value into a data source.
      * This function can be empty if the operation is unsupported.
      *
+     * @param id The ID of the node whose value is to be written
      * @param value The DataValue that has been written by the writer
      * @param range If not empty, then only this selection of (non-scalar) data should be written
      *              into the data source
      * @return StatusCode
      */
-    std::function<StatusCode(const DataValue& value, const NumericRange& range)> write;
+    std::function<StatusCode(const NodeId& id, const DataValue& value, const NumericRange& range)> write;
 };
 
 }  // namespace opcua
