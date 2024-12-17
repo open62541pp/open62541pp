@@ -21,18 +21,20 @@ struct ValueCallback {
      * services::writeValue or Node::writeValue). The node is re-opened afterwards so that changes
      * are considered in the following read operation.
      *
+     * @param id The identifier of the node being read from
      * @param value Current value before the read operation
      */
-    std::function<void(const DataValue& value)> onBeforeRead;
+    std::function<void(const NodeId& id, const DataValue& value)> onBeforeRead;
 
     /**
      * Called after writing the value attribute.
      *
      * The node is re-opened after writing so that the new value is visible in the callback.
      *
+     * @param id The identifier of the node being written to
      * @param value New value after the write operation
      */
-    std::function<void(const DataValue& value)> onAfterWrite;
+    std::function<void(const NodeId& id, const DataValue& value)> onAfterWrite;
 };
 
 /**
@@ -53,6 +55,7 @@ struct ValueBackendDataSource {
      * To use zero-copy reads, set the value of the Variant (DataValue::getValue) without copying,
      * e.g. with Variant::assign.
      *
+     * @param id The identifier of the node being read from
      * @param value The DataValue that is returned to the reader
      * @param range If not empty, then the data source shall return only a selection of the
      *              (nonscalar) data.
@@ -60,18 +63,19 @@ struct ValueBackendDataSource {
      * @param timestamp Set the source timestamp of `value` if `true`
      * @return StatusCode
      */
-    std::function<StatusCode(DataValue& value, const NumericRange& range, bool timestamp)> read;
+    std::function<StatusCode(const NodeId& id, DataValue& value, const NumericRange& range, bool timestamp)> read;
 
     /**
      * Callback to write the value into a data source.
      * This function can be empty if the operation is unsupported.
      *
+     * @param id The identifier of the node being written to
      * @param value The DataValue that has been written by the writer
      * @param range If not empty, then only this selection of (non-scalar) data should be written
      *              into the data source
      * @return StatusCode
      */
-    std::function<StatusCode(const DataValue& value, const NumericRange& range)> write;
+    std::function<StatusCode(const NodeId& id, const DataValue& value, const NumericRange& range)> write;
 };
 
 }  // namespace opcua

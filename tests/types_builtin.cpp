@@ -610,7 +610,7 @@ TEST_CASE("Variant") {
     }
 
     SUBCASE("Set nullptr") {
-        Variant var;
+        Variant var{42};
         float* ptr{nullptr};
         SUBCASE("assign") {
             var.assign(ptr);
