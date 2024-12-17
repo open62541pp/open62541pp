@@ -26,7 +26,7 @@ int main() {
     // Define data source with its read and write callbacks
     opcua::ValueBackendDataSource dataSource;
     dataSource.read =
-        [&](const opcua::NodeId&, opcua::DataValue& dv, const opcua::NumericRange&, bool timestamp) {
+        [&](const opcua::NodeId&, opcua::DataValue& dv, const opcua::NumericRange*, bool timestamp) {
             // Increment counter before every read
             counter++;
             dv.value() = counter;
@@ -37,7 +37,7 @@ int main() {
             return UA_STATUSCODE_GOOD;
         };
     dataSource.write =
-        [&](const opcua::NodeId&, const opcua::DataValue& dv, const opcua::NumericRange&) {
+        [&](const opcua::NodeId&, const opcua::DataValue& dv, const opcua::NumericRange*) {
             counter = dv.value().scalar<int>();
             std::cout << "Write counter to data source: " << counter << "\n";
             return UA_STATUSCODE_GOOD;
