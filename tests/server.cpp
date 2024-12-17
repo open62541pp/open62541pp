@@ -172,11 +172,11 @@ TEST_CASE("ValueCallback") {
     int valueAfterWrite = 0;
 
     ValueCallback valueCallback;
-    valueCallback.onBeforeRead = [&](const NodeId&, const DataValue& dv) {
+    valueCallback.onBeforeRead = [&](const NodeId&, const DataValue& dv, const NumericRange*) {
         onBeforeReadCalled = true;
         valueBeforeRead = dv.value().scalar<int>();
     };
-    valueCallback.onAfterWrite = [&](const NodeId&, const DataValue& dv) {
+    valueCallback.onAfterWrite = [&](const NodeId&, const DataValue& dv, const NumericRange*) {
         onAfterWriteCalled = true;
         valueAfterWrite = dv.value().scalar<int>();
     };
