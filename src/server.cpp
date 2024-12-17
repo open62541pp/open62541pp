@@ -340,9 +340,11 @@ static void valueCallbackOnRead(
     const UA_DataValue* value
 ) noexcept {
     assert(nodeContext != nullptr && nodeId != nullptr && value != nullptr);
-    auto& cb = static_cast<detail::NodeContext*>(nodeContext)->valueCallback.onBeforeRead;
-    if (cb) {
-        detail::tryInvoke([&] { cb(asWrapper<NodeId>(*nodeId), asWrapper<DataValue>(*value)); });
+    auto& callback = static_cast<detail::NodeContext*>(nodeContext)->valueCallback.onBeforeRead;
+    if (callback) {
+        [[maybe_unused]] auto result = detail::tryInvoke(
+            callback, asWrapper<NodeId>(*nodeId), asWrapper<DataValue>(*value)
+        );
     }
 }
 
@@ -356,9 +358,11 @@ static void valueCallbackOnWrite(
     const UA_DataValue* value
 ) noexcept {
     assert(nodeContext != nullptr && nodeId != nullptr && value != nullptr);
-    auto& cb = static_cast<detail::NodeContext*>(nodeContext)->valueCallback.onAfterWrite;
-    if (cb) {
-        detail::tryInvoke([&] { cb(asWrapper<NodeId>(*nodeId), asWrapper<DataValue>(*value)); });
+    auto& callback = static_cast<detail::NodeContext*>(nodeContext)->valueCallback.onAfterWrite;
+    if (callback) {
+        [[maybe_unused]] auto result = detail::tryInvoke(
+            callback, asWrapper<NodeId>(*nodeId), asWrapper<DataValue>(*value)
+        );
     }
 }
 
