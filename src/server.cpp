@@ -336,14 +336,17 @@ static void valueCallbackOnRead(
     [[maybe_unused]] void* sessionContext,
     const UA_NodeId* nodeId,
     void* nodeContext,
-    [[maybe_unused]] const UA_NumericRange* range,
+    const UA_NumericRange* range,
     const UA_DataValue* value
 ) noexcept {
     assert(nodeContext != nullptr && nodeId != nullptr && value != nullptr);
     auto& callback = static_cast<detail::NodeContext*>(nodeContext)->valueCallback.onBeforeRead;
     if (callback) {
         [[maybe_unused]] auto result = detail::tryInvoke(
-            callback, asWrapper<NodeId>(*nodeId), asWrapper<DataValue>(*value)
+            callback,
+            asWrapper<NodeId>(*nodeId),
+            asWrapper<DataValue>(*value),
+            asWrapper<NumericRange>(range)
         );
     }
 }
@@ -354,14 +357,17 @@ static void valueCallbackOnWrite(
     [[maybe_unused]] void* sessionContext,
     const UA_NodeId* nodeId,
     void* nodeContext,
-    [[maybe_unused]] const UA_NumericRange* range,
+    const UA_NumericRange* range,
     const UA_DataValue* value
 ) noexcept {
     assert(nodeContext != nullptr && nodeId != nullptr && value != nullptr);
     auto& callback = static_cast<detail::NodeContext*>(nodeContext)->valueCallback.onAfterWrite;
     if (callback) {
         [[maybe_unused]] auto result = detail::tryInvoke(
-            callback, asWrapper<NodeId>(*nodeId), asWrapper<DataValue>(*value)
+            callback,
+            asWrapper<NodeId>(*nodeId),
+            asWrapper<DataValue>(*value),
+            asWrapper<NumericRange>(range)
         );
     }
 }

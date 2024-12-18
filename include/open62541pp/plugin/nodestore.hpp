@@ -23,8 +23,9 @@ struct ValueCallback {
      *
      * @param id The identifier of the node being read from
      * @param value Current value before the read operation
+     * @param range Optional numeric range the client wants to read from
      */
-    std::function<void(const NodeId& id, const DataValue& value)> onBeforeRead;
+    std::function<void(const NodeId& id, const DataValue& value, const NumericRange* range)> onBeforeRead;
 
     /**
      * Called after writing the value attribute.
@@ -33,8 +34,9 @@ struct ValueCallback {
      *
      * @param id The identifier of the node being written to
      * @param value New value after the write operation
+     * @param range Optional numeric range the client wants to write to
      */
-    std::function<void(const NodeId& id, const DataValue& value)> onAfterWrite;
+    std::function<void(const NodeId& id, const DataValue& value, const NumericRange* range)> onAfterWrite;
 };
 
 /**
