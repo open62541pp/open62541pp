@@ -2492,24 +2492,30 @@ String toString(const NumericRange& range);
 
 /* --------------------------------------- Free functions --------------------------------------- */
 
-#if UAPP_HAS_TOSTRING
 /**
  * Converts an object to its string representation.
  *
  * This function wraps @ref UA_print to generate a string representation of the given object, based
- * on its data type description. The function requires that the open62541 library is compiled with
- * the `UA_ENABLE_TYPEDESCRIPTION` option, and that the library version is at least v1.2.
+ * on its data type description.
  *
- * @see UA_print
+ * @note
+ * Requires open62541 v1.2 or later.
+ * The open62541 library must be compiled with the `UA_ENABLE_TYPEDESCRIPTION` option.
+ * If these conditions are not met, the function returns an empty String.
+ * 
+ * @param object Native or wrapper object (`T` must be an registered type).
+ *
+ * @relates TypeWrapper
  * @ingroup Wrapper
  */
 template <typename T, typename = std::enable_if_t<detail::isRegisteredType<T>>>
 String toString(const T& object) {
     String output;
-    throwIfBad(UA_print(&object, &getDataType<T>(), output.handle()));
+    if constexpr (UAPP_HAS_TOSTRING) {
+        throwIfBad(UA_print(&object, &getDataType<T>(), output.handle()));
+    }
     return output;
 }
-#endif
 
 }  // namespace opcua
 

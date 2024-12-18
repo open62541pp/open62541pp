@@ -18,7 +18,6 @@ std::ostream& operator<<(std::ostream& os, const String& str) {
 
 /* -------------------------------------------- Guid -------------------------------------------- */
 
-#if UAPP_HAS_TOSTRING
 std::string Guid::toString() const {
     return std::string(opcua::toString(*this));
 }
@@ -27,7 +26,6 @@ std::ostream& operator<<(std::ostream& os, const Guid& guid) {
     os << toString(guid);
     return os;
 }
-#endif
 
 /* ------------------------------------------ DateTime ------------------------------------------ */
 
@@ -70,19 +68,15 @@ std::ostream& operator<<(std::ostream& os, const XmlElement& xmlElement) {
 
 /* ------------------------------------------- NodeId ------------------------------------------- */
 
-#if UAPP_HAS_TOSTRING
 std::string NodeId::toString() const {
     return std::string{opcua::toString(*this)};
 }
-#endif
 
 /* --------------------------------------- ExpandedNodeId --------------------------------------- */
 
-#if UAPP_HAS_TOSTRING
 std::string ExpandedNodeId::toString() const {
     return std::string{opcua::toString(*this)};
 }
-#endif
 
 /* ---------------------------------------- NumericRange ---------------------------------------- */
 
