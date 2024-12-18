@@ -274,12 +274,12 @@ TEST_CASE("Guid") {
 
 #if UAPP_HAS_TOSTRING
     SUBCASE("toString") {
-        CHECK(opcua::toString(Guid{}) == "00000000-0000-0000-0000-000000000000");
+        CHECK(::opcua::toString(Guid{}) == "00000000-0000-0000-0000-000000000000");
 
         const Guid guid{
             0x12345678, 0x1234, 0x5678, {0x12, 0x34, 0x56, 0x78, 0x90, 0xAB, 0xCD, 0xEF}
         };
-        CHECK(opcua::toString(guid) == "12345678-1234-5678-1234-567890abcdef");
+        CHECK(::opcua::toString(guid) == "12345678-1234-5678-1234-567890abcdef");
     }
 
     SUBCASE("ostream overload") {
@@ -432,11 +432,11 @@ TEST_CASE("NodeId") {
 
 #if UAPP_HAS_TOSTRING
     SUBCASE("toString") {
-        CHECK(opcua::toString(NodeId(0, 13)) == "i=13");
-        CHECK(opcua::toString(NodeId(10, 1)) == "ns=10;i=1");
-        CHECK(opcua::toString(NodeId(10, "Hello:World")) == "ns=10;s=Hello:World");
-        CHECK(opcua::toString(NodeId(0, Guid())) == "g=00000000-0000-0000-0000-000000000000");
-        CHECK(opcua::toString(NodeId(1, ByteString("test123"))) == "ns=1;b=dGVzdDEyMw==");
+        CHECK(::opcua::toString(NodeId(0, 13)) == "i=13");
+        CHECK(::opcua::toString(NodeId(10, 1)) == "ns=10;i=1");
+        CHECK(::opcua::toString(NodeId(10, "Hello:World")) == "ns=10;s=Hello:World");
+        CHECK(::opcua::toString(NodeId(0, Guid())) == "g=00000000-0000-0000-0000-000000000000");
+        CHECK(::opcua::toString(NodeId(1, ByteString("test123"))) == "ns=1;b=dGVzdDEyMw==");
     }
 #endif
 
@@ -470,13 +470,13 @@ TEST_CASE("ExpandedNodeId") {
 
 #if UAPP_HAS_TOSTRING
     SUBCASE("toString") {
-        CHECK_EQ(opcua::toString(ExpandedNodeId({2, 10157})), "ns=2;i=10157");
+        CHECK_EQ(::opcua::toString(ExpandedNodeId({2, 10157})), "ns=2;i=10157");
         CHECK_EQ(
-            opcua::toString(ExpandedNodeId({2, 10157}, "http://test.org/UA/Data/", 0)),
+            ::opcua::toString(ExpandedNodeId({2, 10157}, "http://test.org/UA/Data/", 0)),
             "nsu=http://test.org/UA/Data/;i=10157"
         );
         CHECK_EQ(
-            opcua::toString(ExpandedNodeId({2, 10157}, "http://test.org/UA/Data/", 1)),
+            ::opcua::toString(ExpandedNodeId({2, 10157}, "http://test.org/UA/Data/", 1)),
             "svr=1;nsu=http://test.org/UA/Data/;i=10157"
         );
     }
@@ -1151,8 +1151,8 @@ TEST_CASE("NumericRange") {
     }
 
     SUBCASE("toString") {
-        CHECK(opcua::toString(NumericRange({{1, 1}})) == "1");
-        CHECK(opcua::toString(NumericRange({{1, 2}})) == "1:2");
-        CHECK(opcua::toString(NumericRange({{1, 2}, {0, 3}, {5, 5}})) == "1:2,0:3,5");
+        CHECK(::opcua::toString(NumericRange({{1, 1}})) == "1");
+        CHECK(::opcua::toString(NumericRange({{1, 2}})) == "1:2");
+        CHECK(::opcua::toString(NumericRange({{1, 2}, {0, 3}, {5, 5}})) == "1:2,0:3,5");
     }
 }
