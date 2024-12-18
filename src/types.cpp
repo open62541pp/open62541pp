@@ -18,6 +18,7 @@ std::ostream& operator<<(std::ostream& os, const String& str) {
 
 /* -------------------------------------------- Guid -------------------------------------------- */
 
+#if UAPP_HAS_TOSTRING
 std::string Guid::toString() const {
     return std::string(opcua::toString(*this));
 }
@@ -26,6 +27,7 @@ std::ostream& operator<<(std::ostream& os, const Guid& guid) {
     os << toString(guid);
     return os;
 }
+#endif
 
 /* ------------------------------------------ DateTime ------------------------------------------ */
 
@@ -51,15 +53,13 @@ ByteString ByteString::fromBase64([[maybe_unused]] std::string_view encoded) {
 #endif
 }
 
-String ByteString::toBase64() const {
 #if UAPP_OPEN62541_VER_GE(1, 1)
+String ByteString::toBase64() const {
     String output;
     UA_ByteString_toBase64(handle(), output.handle());
     return output;
-#else
-    return {};
-#endif
 }
+#endif
 
 /* ----------------------------------------- XmlElement ----------------------------------------- */
 
@@ -70,15 +70,19 @@ std::ostream& operator<<(std::ostream& os, const XmlElement& xmlElement) {
 
 /* ------------------------------------------- NodeId ------------------------------------------- */
 
+#if UAPP_HAS_TOSTRING
 std::string NodeId::toString() const {
     return std::string{opcua::toString(*this)};
 }
+#endif
 
 /* --------------------------------------- ExpandedNodeId --------------------------------------- */
 
+#if UAPP_HAS_TOSTRING
 std::string ExpandedNodeId::toString() const {
     return std::string{opcua::toString(*this)};
 }
+#endif
 
 /* ---------------------------------------- NumericRange ---------------------------------------- */
 
