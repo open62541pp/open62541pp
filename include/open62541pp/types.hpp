@@ -2506,7 +2506,6 @@ String toString(const NumericRange& range);
  * @param object Native or wrapper object (`T` must be an registered type).
  *
  * @relates TypeWrapper
- * @ingroup Wrapper
  */
 template <typename T, typename = std::enable_if_t<detail::isRegisteredType<T>>>
 String toString(const T& object) {
