@@ -64,10 +64,10 @@ if(MSVC)
     )
 endif()
 # prepend header with doctest configuration for every translation unit
-target_compile_options(
+target_precompile_headers(
     open62541pp_tests
     PRIVATE
-        -include ${CMAKE_CURRENT_SOURCE_DIR}/doctest/config.hpp
+        "${CMAKE_CURRENT_SOURCE_DIR}/doctest/config.hpp"
 )
 
 # discover tests for ctest
