@@ -166,11 +166,13 @@ private:
 
 /* ---------------------------------------------------------------------------------------------- */
 
+/// @relates Subscription
 template <typename T>
 inline bool operator==(const Subscription<T>& lhs, const Subscription<T>& rhs) noexcept {
     return (lhs.connection() == rhs.connection()) && (lhs.subscriptionId() == rhs.subscriptionId());
 }
 
+/// @relates Subscription
 template <typename T>
 inline bool operator!=(const Subscription<T>& lhs, const Subscription<T>& rhs) noexcept {
     return !(lhs == rhs);

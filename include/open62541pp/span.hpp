@@ -208,9 +208,11 @@ private:
 
 /* -------------------------------------- Deduction guides -------------------------------------- */
 
+/// @relates Span
 template <typename Container>
 Span(Container&) -> Span<typename Container::value_type>;
 
+/// @relates Span
 template <typename Container>
 Span(const Container&) -> Span<const typename Container::value_type>;
 
@@ -237,11 +239,13 @@ using EnableIfEqualityComparable = typename std::enable_if_t<
 
 }  // namespace detail
 
+/// @relates Span
 template <typename T, typename U, typename = detail::EnableIfEqualityComparable<T, U>>
 constexpr bool operator==(Span<T> lhs, Span<U> rhs) {
     return std::equal(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 }
 
+/// @relates Span
 template <typename T, typename U, typename = detail::EnableIfEqualityComparable<T, U>>
 constexpr bool operator!=(Span<T> lhs, Span<U> rhs) {
     return !(lhs == rhs);

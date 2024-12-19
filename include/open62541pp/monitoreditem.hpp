@@ -109,6 +109,7 @@ private:
 
 /* ---------------------------------------------------------------------------------------------- */
 
+/// @relates MonitoredItem
 template <typename T>
 inline bool operator==(const MonitoredItem<T>& lhs, const MonitoredItem<T>& rhs) noexcept {
     return (lhs.connection() == rhs.connection()) &&
@@ -116,6 +117,7 @@ inline bool operator==(const MonitoredItem<T>& lhs, const MonitoredItem<T>& rhs)
         (lhs.monitoredItemId() == rhs.monitoredItemId());
 }
 
+/// @relates MonitoredItem
 template <typename T>
 inline bool operator!=(const MonitoredItem<T>& lhs, const MonitoredItem<T>& rhs) noexcept {
     return !(lhs == rhs);

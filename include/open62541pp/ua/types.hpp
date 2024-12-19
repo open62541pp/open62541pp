@@ -1855,17 +1855,31 @@ public:
     UAPP_GETTER_SPAN_WRAPPER(ContentFilterElement, getElements, elements, elementsSize)
 };
 
+/// @relates ContentFilterElement
 ContentFilter operator!(const ContentFilterElement& filterElement);
+/// @relates ContentFilter
 ContentFilter operator!(const ContentFilter& filter);
 
+/// @relates ContentFilterElement
 ContentFilter operator&&(const ContentFilterElement& lhs, const ContentFilterElement& rhs);
+/// @relates ContentFilterElement
+/// @relates ContentFilter
 ContentFilter operator&&(const ContentFilterElement& lhs, const ContentFilter& rhs);
+/// @relates ContentFilter
+/// @relates ContentFilterElement
 ContentFilter operator&&(const ContentFilter& lhs, const ContentFilterElement& rhs);
+/// @relates ContentFilter
 ContentFilter operator&&(const ContentFilter& lhs, const ContentFilter& rhs);
 
+/// @relates ContentFilterElement
 ContentFilter operator||(const ContentFilterElement& lhs, const ContentFilterElement& rhs);
+/// @relates ContentFilterElement
+/// @relates ContentFilter
 ContentFilter operator||(const ContentFilterElement& lhs, const ContentFilter& rhs);
+/// @relates ContentFilter
+/// @relates ContentFilterElement
 ContentFilter operator||(const ContentFilter& lhs, const ContentFilterElement& rhs);
+/// @relates ContentFilter
 ContentFilter operator||(const ContentFilter& lhs, const ContentFilter& rhs);
 
 /**

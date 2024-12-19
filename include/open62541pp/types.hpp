@@ -295,30 +295,37 @@ public:
     }
 };
 
+/// @relates String
 inline bool operator==(const UA_String& lhs, const UA_String& rhs) noexcept {
     return UA_String_equal(&lhs, &rhs);
 }
 
+/// @relates String
 inline bool operator!=(const UA_String& lhs, const UA_String& rhs) noexcept {
     return !(lhs == rhs);
 }
 
+/// @relates String
 inline bool operator==(const String& lhs, std::string_view rhs) noexcept {
-    return (static_cast<std::string_view>(lhs) == rhs);
+    return static_cast<std::string_view>(lhs) == rhs;
 }
 
+/// @relates String
 inline bool operator!=(const String& lhs, std::string_view rhs) noexcept {
-    return (static_cast<std::string_view>(lhs) != rhs);
+    return static_cast<std::string_view>(lhs) != rhs;
 }
 
+/// @relates String
 inline bool operator==(std::string_view lhs, const String& rhs) noexcept {
-    return (lhs == static_cast<std::string_view>(rhs));
+    return lhs == static_cast<std::string_view>(rhs);
 }
 
+/// @relates String
 inline bool operator!=(std::string_view lhs, const String& rhs) noexcept {
-    return (lhs != static_cast<std::string_view>(rhs));
+    return lhs != static_cast<std::string_view>(rhs);
 }
 
+/// @relates String
 std::ostream& operator<<(std::ostream& os, const String& str);
 
 template <typename Traits>
@@ -500,14 +507,17 @@ public:
     std::string toString() const;
 };
 
+/// @relates Guid
 inline bool operator==(const UA_Guid& lhs, const UA_Guid& rhs) noexcept {
     return UA_Guid_equal(&lhs, &rhs);
 }
 
+/// @relates Guid
 inline bool operator!=(const UA_Guid& lhs, const UA_Guid& rhs) noexcept {
     return !(lhs == rhs);
 }
 
+/// @relates Guid
 std::ostream& operator<<(std::ostream& os, const Guid& guid);
 
 /* ----------------------------------------- ByteString ----------------------------------------- */
@@ -558,18 +568,22 @@ public:
     }
 };
 
+/// @relates ByteString
 inline bool operator==(const ByteString& lhs, std::string_view rhs) noexcept {
     return (static_cast<std::string_view>(lhs) == rhs);
 }
 
+/// @relates ByteString
 inline bool operator!=(const ByteString& lhs, std::string_view rhs) noexcept {
     return (static_cast<std::string_view>(lhs) != rhs);
 }
 
+/// @relates ByteString
 inline bool operator==(std::string_view lhs, const ByteString& rhs) noexcept {
     return (lhs == static_cast<std::string_view>(rhs));
 }
 
+/// @relates ByteString
 inline bool operator!=(std::string_view lhs, const ByteString& rhs) noexcept {
     return (lhs != static_cast<std::string_view>(rhs));
 }
@@ -620,6 +634,7 @@ public:
     }
 };
 
+/// @relates XmlElement
 std::ostream& operator<<(std::ostream& os, const XmlElement& xmlElement);
 
 /* ------------------------------------------- NodeId ------------------------------------------- */
@@ -853,26 +868,32 @@ private:
     }
 };
 
+/// @relates NodeId
 inline bool operator==(const UA_NodeId& lhs, const UA_NodeId& rhs) noexcept {
     return UA_NodeId_equal(&lhs, &rhs);
 }
 
+/// @relates NodeId
 inline bool operator!=(const UA_NodeId& lhs, const UA_NodeId& rhs) noexcept {
     return !(lhs == rhs);
 }
 
+/// @relates NodeId
 inline bool operator<(const UA_NodeId& lhs, const UA_NodeId& rhs) noexcept {
     return UA_NodeId_order(&lhs, &rhs) == UA_ORDER_LESS;
 }
 
+/// @relates NodeId
 inline bool operator>(const UA_NodeId& lhs, const UA_NodeId& rhs) noexcept {
     return UA_NodeId_order(&lhs, &rhs) == UA_ORDER_MORE;
 }
 
+/// @relates NodeId
 inline bool operator<=(const UA_NodeId& lhs, const UA_NodeId& rhs) noexcept {
     return (lhs < rhs) || (lhs == rhs);
 }
 
+/// @relates NodeId
 inline bool operator>=(const UA_NodeId& lhs, const UA_NodeId& rhs) noexcept {
     return (lhs > rhs) || (lhs == rhs);
 }
@@ -951,26 +972,32 @@ public:
     std::string toString() const;
 };
 
+/// @relates ExpandedNodeId
 inline bool operator==(const UA_ExpandedNodeId& lhs, const UA_ExpandedNodeId& rhs) noexcept {
     return UA_ExpandedNodeId_equal(&lhs, &rhs);
 }
 
+/// @relates ExpandedNodeId
 inline bool operator!=(const UA_ExpandedNodeId& lhs, const UA_ExpandedNodeId& rhs) noexcept {
     return !(lhs == rhs);
 }
 
+/// @relates ExpandedNodeId
 inline bool operator<(const UA_ExpandedNodeId& lhs, const UA_ExpandedNodeId& rhs) noexcept {
     return UA_ExpandedNodeId_order(&lhs, &rhs) == UA_ORDER_LESS;
 }
 
+/// @relates ExpandedNodeId
 inline bool operator>(const UA_ExpandedNodeId& lhs, const UA_ExpandedNodeId& rhs) noexcept {
     return UA_ExpandedNodeId_order(&lhs, &rhs) == UA_ORDER_MORE;
 }
 
+/// @relates ExpandedNodeId
 inline bool operator<=(const UA_ExpandedNodeId& lhs, const UA_ExpandedNodeId& rhs) noexcept {
     return (lhs < rhs) || (lhs == rhs);
 }
 
+/// @relates ExpandedNodeId
 inline bool operator>=(const UA_ExpandedNodeId& lhs, const UA_ExpandedNodeId& rhs) noexcept {
     return (lhs > rhs) || (lhs == rhs);
 }
@@ -1011,10 +1038,12 @@ public:
     }
 };
 
+/// @relates QualifiedName
 inline bool operator==(const UA_QualifiedName& lhs, const UA_QualifiedName& rhs) noexcept {
     return (lhs.namespaceIndex == rhs.namespaceIndex) && (lhs.name == rhs.name);
 }
 
+/// @relates QualifiedName
 inline bool operator!=(const UA_QualifiedName& lhs, const UA_QualifiedName& rhs) noexcept {
     return !(lhs == rhs);
 }
@@ -1060,10 +1089,12 @@ public:
     }
 };
 
+/// @relates LocalizedText
 inline bool operator==(const UA_LocalizedText& lhs, const UA_LocalizedText& rhs) noexcept {
     return (lhs.locale == rhs.locale) && (lhs.text == rhs.text);
 }
 
+/// @relates LocalizedText
 inline bool operator!=(const UA_LocalizedText& lhs, const UA_LocalizedText& rhs) noexcept {
     return !(lhs == rhs);
 }
@@ -2384,12 +2415,14 @@ public:
 
 using NumericRangeDimension = UA_NumericRangeDimension;
 
+/// @relates NumericRange
 inline bool operator==(
     const NumericRangeDimension& lhs, const NumericRangeDimension& rhs
 ) noexcept {
     return (lhs.min == rhs.min) && (lhs.max == rhs.max);
 }
 
+/// @relates NumericRange
 inline bool operator!=(
     const NumericRangeDimension& lhs, const NumericRangeDimension& rhs
 ) noexcept {

@@ -1398,11 +1398,13 @@ private:
 
 /* ---------------------------------------------------------------------------------------------- */
 
+/// @relates Node
 template <typename Connection>
 bool operator==(const Node<Connection>& lhs, const Node<Connection>& rhs) noexcept {
     return (lhs.connection() == rhs.connection()) && (lhs.id() == rhs.id());
 }
 
+/// @relates Node
 template <typename Connection>
 bool operator!=(const Node<Connection>& lhs, const Node<Connection>& rhs) noexcept {
     return !(lhs == rhs);
