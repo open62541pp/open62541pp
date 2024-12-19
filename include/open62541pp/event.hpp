@@ -70,7 +70,10 @@ private:
     NodeId id_;
 };
 
+/// @relates Event
 bool operator==(const Event& lhs, const Event& rhs) noexcept;
+
+/// @relates Event
 bool operator!=(const Event& lhs, const Event& rhs) noexcept;
 
 }  // namespace opcua

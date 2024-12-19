@@ -59,7 +59,10 @@ private:
     NodeId sessionId_;
 };
 
+/// @relates Session
 bool operator==(const Session& lhs, const Session& rhs) noexcept;
+
+/// @relates Session
 bool operator!=(const Session& lhs, const Session& rhs) noexcept;
 
 }  // namespace opcua

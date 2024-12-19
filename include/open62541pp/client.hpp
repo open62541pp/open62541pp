@@ -304,12 +304,15 @@ private:
 
 /// Convert native UA_Client pointer to its wrapper instance.
 /// The native client must be owned by a Client instance.
+/// @relates Client
 Client* asWrapper(UA_Client* client) noexcept;
 
+/// @relates Client
 inline bool operator==(const Client& lhs, const Client& rhs) noexcept {
     return (lhs.handle() == rhs.handle());
 }
 
+/// @relates Client
 inline bool operator!=(const Client& lhs, const Client& rhs) noexcept {
     return !(lhs == rhs);
 }

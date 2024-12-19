@@ -284,12 +284,15 @@ private:
 
 /// Convert native UA_Server pointer to its wrapper instance.
 /// The native server must be owned by a Server instance.
+/// @relates Server
 Server* asWrapper(UA_Server* server) noexcept;
 
+/// @relates Server
 inline bool operator==(const Server& lhs, const Server& rhs) noexcept {
     return (lhs.handle() == rhs.handle());
 }
 
+/// @relates Server
 inline bool operator!=(const Server& lhs, const Server& rhs) noexcept {
     return !(lhs == rhs);
 }

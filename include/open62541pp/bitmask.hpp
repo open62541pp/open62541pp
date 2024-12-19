@@ -116,6 +116,8 @@ constexpr typename std::enable_if_t<IsBitmaskEnum<T>::value, T> operator^=(T& lh
  * Bitmask<NodeClass> mask = UA_NODECLASS_VARIABLE | UA_NODECLASS_OBJECT;
  * @endcode
  *
+ * Bitmask enums are defined by specializing the IsBitmaskEnum trait.
+ *
  * @tparam T Enumeration type
  *
  * @see https://www.strikerx3.dev/cpp/2019/02/27/typesafe-enum-class-bitmasks-in-cpp.html

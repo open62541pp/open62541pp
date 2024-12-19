@@ -188,12 +188,14 @@ struct WrapperConversion {
 /// Cast native object pointers to Wrapper object pointers.
 /// This is especially helpful to avoid copies in getter methods of composed types.
 /// @see https://github.com/open62541pp/open62541pp/issues/30
+/// @relates Wrapper
 template <typename WrapperType, typename NativeType = typename WrapperType::NativeType>
 constexpr WrapperType* asWrapper(NativeType* native) noexcept {
     return detail::WrapperConversion<WrapperType>::asWrapper(native);
 }
 
 /// @copydoc asWrapper(NativeType*)
+/// @relates Wrapper
 template <typename WrapperType, typename NativeType = typename WrapperType::NativeType>
 constexpr const WrapperType* asWrapper(const NativeType* native) noexcept {
     return detail::WrapperConversion<WrapperType>::asWrapper(native);
@@ -201,12 +203,14 @@ constexpr const WrapperType* asWrapper(const NativeType* native) noexcept {
 
 /// Cast native object references to Wrapper object references.
 /// @copydetails asWrapper(NativeType*)
+/// @relates Wrapper
 template <typename WrapperType, typename NativeType = typename WrapperType::NativeType>
 constexpr WrapperType& asWrapper(NativeType& native) noexcept {
     return detail::WrapperConversion<WrapperType>::asWrapper(native);
 }
 
 /// @copydoc asWrapper(NativeType&)
+/// @relates Wrapper
 template <typename WrapperType, typename NativeType = typename WrapperType::NativeType>
 constexpr const WrapperType& asWrapper(const NativeType& native) noexcept {
     return detail::WrapperConversion<WrapperType>::asWrapper(native);
@@ -214,12 +218,14 @@ constexpr const WrapperType& asWrapper(const NativeType& native) noexcept {
 
 /// Cast Wrapper object pointers to native object pointers.
 /// @copydoc detail::WrapperConversion
+/// @relates Wrapper
 template <typename WrapperType, typename NativeType = typename WrapperType::NativeType>
 constexpr NativeType* asNative(WrapperType* wrapper) noexcept {
     return detail::WrapperConversion<WrapperType>::asNative(wrapper);
 }
 
 /// @copydoc asNative(WrapperType*)
+/// @relates Wrapper
 template <typename WrapperType, typename NativeType = typename WrapperType::NativeType>
 constexpr const NativeType* asNative(const WrapperType* wrapper) noexcept {
     return detail::WrapperConversion<WrapperType>::asNative(wrapper);
@@ -227,12 +233,14 @@ constexpr const NativeType* asNative(const WrapperType* wrapper) noexcept {
 
 /// Cast Wrapper object references to native object references.
 /// @copydetails asNative(WrapperType*)
+/// @relates Wrapper
 template <typename WrapperType, typename NativeType = typename WrapperType::NativeType>
 constexpr NativeType& asNative(WrapperType& wrapper) noexcept {
     return detail::WrapperConversion<WrapperType>::asNative(wrapper);
 }
 
 /// @copydoc asNative(WrapperType&)
+/// @relates Wrapper
 template <typename WrapperType, typename NativeType = typename WrapperType::NativeType>
 constexpr const NativeType& asNative(const WrapperType& wrapper) noexcept {
     return detail::WrapperConversion<WrapperType>::asNative(wrapper);
