@@ -1,19 +1,21 @@
 #pragma once
 
-#include <functional>
-
+#include "open62541pp/detail/open62541/common.h"
+#include "open62541pp/plugin/pluginadapter.hpp"
+#include "open62541pp/session.hpp"
 #include "open62541pp/types.hpp"
 
 namespace opcua {
 
 /**
- * Value callbacks for variable nodes.
+ * Value callback base class for variable nodes.
  *
  * Value callbacks allow to synchronize a variable value with an external representation.
  * The attached callbacks are executed before every read and after every write operation.
  * @see https://www.open62541.org/doc/1.3/tutorial_server_datasource.html
  */
-struct ValueCallback {
+class ValueCallbackBase : PluginAdapter<UA_ValueCallback> {
+public:
     /**
      * Called before the value attribute is read.
      *
@@ -21,22 +23,30 @@ struct ValueCallback {
      * services::writeValue or Node::writeValue). The node is re-opened afterwards so that changes
      * are considered in the following read operation.
      *
+     * @param session Current session
      * @param id The identifier of the node being read from
-     * @param value Current value before the read operation
      * @param range Optional numeric range the client wants to read from
+     * @param value Current value before the read operation
      */
-    std::function<void(const NodeId& id, const DataValue& value, const NumericRange* range)> onBeforeRead;
+    virtual void onRead(
+        Session& session, const NodeId& id, const NumericRange* range, const DataValue& value
+    ) = 0;
 
     /**
      * Called after writing the value attribute.
      *
      * The node is re-opened after writing so that the new value is visible in the callback.
      *
+     * @param session Current session
      * @param id The identifier of the node being written to
-     * @param value New value after the write operation
      * @param range Optional numeric range the client wants to write to
+     * @param value New value after the write operation
      */
-    std::function<void(const NodeId& id, const DataValue& value, const NumericRange* range)> onAfterWrite;
+    virtual void onWrite(
+        Session& session, const NodeId& id, const NumericRange* range, const DataValue& value
+    ) = 0;
+
+    UA_ValueCallback create(bool ownsAdapter) override;
 };
 
 /**

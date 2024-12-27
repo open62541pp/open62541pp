@@ -23,6 +23,7 @@
 // plugins
 #include <open62541/plugin/accesscontrol.h>
 #include <open62541/plugin/log.h>
+#include <open62541/plugin/nodestore.h>
 #if __has_include(<open62541/plugin/create_certificate.h>)  // since v1.3
 #include <open62541/plugin/create_certificate.h>
 #endif
