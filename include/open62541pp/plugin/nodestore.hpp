@@ -15,7 +15,7 @@ namespace opcua {
  * The attached callbacks are executed before every read and after every write operation.
  * @see https://www.open62541.org/doc/1.3/tutorial_server_datasource.html
  */
-class ValueCallbackBase : PluginAdapter<UA_ValueCallback> {
+class ValueCallbackBase : public PluginAdapter<UA_ValueCallback> {
 public:
     /**
      * Called before the value attribute is read.
