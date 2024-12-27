@@ -159,6 +159,34 @@ TEST_CASE("Server methods") {
     }
 }
 
+struct ValueCallbackTest : public ValueCallbackBase {
+    void onRead(
+        [[maybe_unused]] Session& session,
+        [[maybe_unused]] const NodeId& id,
+        [[maybe_unused]] const NumericRange* range,
+        const DataValue& value
+    ) override {
+        onReadCalled = true;
+        valueBeforeRead = value;
+    }
+
+    void onWrite(
+        [[maybe_unused]] Session& session,
+        [[maybe_unused]] const NodeId& id,
+        [[maybe_unused]] const NumericRange* range,
+        const DataValue& value
+    ) override {
+        onWriteCalled = true;
+        valueAfterWrite = value;
+    }
+
+    bool onReadCalled = false;
+    bool onWriteCalled = false;
+
+    DataValue valueBeforeRead;
+    DataValue valueAfterWrite;
+};
+
 TEST_CASE("ValueCallback") {
     Server server;
 
@@ -166,34 +194,20 @@ TEST_CASE("ValueCallback") {
     auto node = Node(server, ObjectId::ObjectsFolder).addVariable(id, "testVariable");
     node.writeValueScalar<int>(1);
 
-    bool onBeforeReadCalled = false;
-    bool onAfterWriteCalled = false;
-    int valueBeforeRead = 0;
-    int valueAfterWrite = 0;
+    ValueCallbackTest callback;
+    server.setVariableNodeValueCallback(id, callback);
 
-    ValueCallback valueCallback;
-    valueCallback.onBeforeRead = [&](const NodeId&, const DataValue& dv, const NumericRange*) {
-        onBeforeReadCalled = true;
-        valueBeforeRead = dv.value().scalar<int>();
-    };
-    valueCallback.onAfterWrite = [&](const NodeId&, const DataValue& dv, const NumericRange*) {
-        onAfterWriteCalled = true;
-        valueAfterWrite = dv.value().scalar<int>();
-    };
-    server.setVariableNodeValueCallback(id, valueCallback);
-
-    // trigger onBeforeRead callback with read operation
-    const auto valueRead = node.readValueScalar<int>();
-    CHECK(onBeforeReadCalled == true);
-    CHECK(onAfterWriteCalled == false);
-    CHECK(valueBeforeRead == 1);
-    CHECK(valueRead == 1);
+    // trigger onRead callback with read operation
+    CHECK(node.readValueScalar<int>() == 1);
+    CHECK(callback.onReadCalled == true);
+    CHECK(callback.onWriteCalled == false);
+    CHECK(callback.valueBeforeRead.value().scalar<int>() == 1);
 
     // trigger onAfterWrite callback with write operation
     node.writeValueScalar<int>(2);
-    CHECK(onBeforeReadCalled == true);
-    CHECK(onAfterWriteCalled == true);
-    CHECK(valueAfterWrite == 2);
+    CHECK(callback.onReadCalled == true);
+    CHECK(callback.onWriteCalled == true);
+    CHECK(callback.valueAfterWrite.value().scalar<int>() == 2);
 }
 
 TEST_CASE("DataSource") {

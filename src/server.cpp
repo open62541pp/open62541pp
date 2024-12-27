@@ -11,8 +11,6 @@
 #include "open62541pp/event.hpp"
 #include "open62541pp/exception.hpp"
 #include "open62541pp/node.hpp"
-#include "open62541pp/plugin/accesscontrol.hpp"
-#include "open62541pp/plugin/nodestore.hpp"
 #include "open62541pp/services/attribute_highlevel.hpp"
 #include "open62541pp/session.hpp"
 #include "open62541pp/types.hpp"
@@ -330,57 +328,11 @@ NamespaceIndex Server::registerNamespace(std::string_view uri) {
     return UA_Server_addNamespace(handle(), std::string(uri).c_str());
 }
 
-static void valueCallbackOnRead(
-    [[maybe_unused]] UA_Server* server,
-    [[maybe_unused]] const UA_NodeId* sessionId,
-    [[maybe_unused]] void* sessionContext,
-    const UA_NodeId* nodeId,
-    void* nodeContext,
-    const UA_NumericRange* range,
-    const UA_DataValue* value
-) noexcept {
-    assert(nodeContext != nullptr && nodeId != nullptr && value != nullptr);
-    auto& callback = static_cast<detail::NodeContext*>(nodeContext)->valueCallback.onBeforeRead;
-    if (callback) {
-        [[maybe_unused]] auto result = detail::tryInvoke(
-            callback,
-            asWrapper<NodeId>(*nodeId),
-            asWrapper<DataValue>(*value),
-            asWrapper<NumericRange>(range)
-        );
-    }
-}
-
-static void valueCallbackOnWrite(
-    [[maybe_unused]] UA_Server* server,
-    [[maybe_unused]] const UA_NodeId* sessionId,
-    [[maybe_unused]] void* sessionContext,
-    const UA_NodeId* nodeId,
-    void* nodeContext,
-    const UA_NumericRange* range,
-    const UA_DataValue* value
-) noexcept {
-    assert(nodeContext != nullptr && nodeId != nullptr && value != nullptr);
-    auto& callback = static_cast<detail::NodeContext*>(nodeContext)->valueCallback.onAfterWrite;
-    if (callback) {
-        [[maybe_unused]] auto result = detail::tryInvoke(
-            callback,
-            asWrapper<NodeId>(*nodeId),
-            asWrapper<DataValue>(*value),
-            asWrapper<NumericRange>(range)
-        );
-    }
-}
-
-void Server::setVariableNodeValueCallback(const NodeId& id, ValueCallback callback) {
+void Server::setVariableNodeValueCallback(const NodeId& id, ValueCallbackBase& callback) {
     auto* nodeContext = detail::getContext(*this).nodeContexts[id];
-    nodeContext->valueCallback = std::move(callback);
+    nodeContext->valueCallback = &callback;
     throwIfBad(UA_Server_setNodeContext(handle(), id, nodeContext));
-
-    UA_ValueCallback callbackNative;
-    callbackNative.onRead = valueCallbackOnRead;
-    callbackNative.onWrite = valueCallbackOnWrite;
-    throwIfBad(UA_Server_setVariableNode_valueCallback(handle(), id, callbackNative));
+    throwIfBad(UA_Server_setVariableNode_valueCallback(handle(), id, callback.create(false)));
 }
 
 static UA_StatusCode valueSourceRead(

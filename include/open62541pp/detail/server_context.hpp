@@ -1,5 +1,6 @@
 #pragma once
 
+#include <atomic>
 #include <functional>
 #include <memory>
 #include <mutex>
@@ -20,7 +21,7 @@
 namespace opcua::detail {
 
 struct NodeContext {
-    ValueCallback valueCallback;
+    ValueCallbackBase* valueCallback{nullptr};
     ValueBackendDataSource dataSource;
 #ifdef UA_ENABLE_METHODCALLS
     std::function<void(Span<const Variant> input, Span<Variant> output)> methodCallback;
