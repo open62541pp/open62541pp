@@ -1,6 +1,7 @@
 #pragma once
 
 #include "open62541pp/detail/open62541/common.h"
+#include "open62541pp/detail/open62541/server.h"  // nodestore plugins defined in server.h before v1.2
 #include "open62541pp/plugin/pluginadapter.hpp"
 #include "open62541pp/session.hpp"
 #include "open62541pp/types.hpp"
