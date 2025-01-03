@@ -14,6 +14,8 @@
 #endif
 
 #ifdef _WIN32
+#ifndef NOMINMAX
 // don't define min/max macros, that break the STL
 #define NOMINMAX
+#endif
 #endif
