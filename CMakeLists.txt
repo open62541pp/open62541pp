@@ -178,6 +178,7 @@ add_library(
     src/plugin/accesscontrol_default.cpp
     src/plugin/create_certificate.cpp
     src/plugin/log.cpp
+    src/plugin/nodestore.cpp
     src/server.cpp
     src/services_attribute.cpp
     src/services_method.cpp

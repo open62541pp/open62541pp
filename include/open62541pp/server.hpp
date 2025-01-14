@@ -234,7 +234,7 @@ public:
     [[nodiscard]] NamespaceIndex registerNamespace(std::string_view uri);
 
     /// Set value callbacks to execute before every read and after every write operation.
-    void setVariableNodeValueCallback(const NodeId& id, ValueCallback callback);
+    void setVariableNodeValueCallback(const NodeId& id, ValueCallbackBase& callback);
     /// Set data source backend for variable node.
     void setVariableNodeValueBackend(const NodeId& id, ValueBackendDataSource backend);
 
