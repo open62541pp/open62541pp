@@ -51,13 +51,14 @@ public:
 };
 
 /**
- * Data source backend for variable nodes.
+ * Data source base class for variable nodes.
  *
  * The server redirects every read and write request to callback functions.
  * Internally, the data source needs to implement its own memory management.
  * @see https://www.open62541.org/doc/1.3/tutorial_server_datasource.html
  */
-struct ValueBackendDataSource {
+class DataSourceBase : public PluginAdapter<UA_DataSource> {
+public:
     /**
      * Callback to set the read value, the result status and optionally a source timestamp.
      *
@@ -65,30 +66,41 @@ struct ValueBackendDataSource {
      * content data. You can return a pointer to memory owned by the user. Memory can be reused
      * between read callbacks of a data source, as the result is already encoded on the network
      * buffer between each read operation.
-     * To use zero-copy reads, set the value of the Variant (DataValue::getValue) without copying,
+     * To use zero-copy reads, set the value of the Variant (DataValue::setValue) without copying,
      * e.g. with Variant::assign.
      *
+     * @param session Current session
      * @param id The identifier of the node being read from
-     * @param value The DataValue that is returned to the reader
      * @param range If not `nullptr`, then the data source shall return only a selection of the
      *              (non-scalar) data.
      *              Set `UA_STATUSCODE_BADINDEXRANGEINVALID` in `value` if this does not apply.
+     * @param value The DataValue that is returned to the reader
      * @param timestamp Set the source timestamp of `value` if `true`
      * @return StatusCode
      */
-    std::function<StatusCode(const NodeId& id, DataValue& value, const NumericRange* range, bool timestamp)> read;
+    virtual StatusCode read(
+        Session& session,
+        const NodeId& id,
+        const NumericRange* range,
+        DataValue& value,
+        bool timestamp
+    ) = 0;
 
     /**
      * Callback to write the value into a data source.
-     * This function can be empty if the operation is unsupported.
      *
+     * @param session Current session
      * @param id The identifier of the node being written to
-     * @param value The DataValue that has been written by the writer
      * @param range If not `nullptr`, then only this selection of (non-scalar) data should be
      *              written into the data source.
+     * @param value The DataValue that has been written by the writer
      * @return StatusCode
      */
-    std::function<StatusCode(const NodeId& id, const DataValue& value, const NumericRange* range)> write;
+    virtual StatusCode write(
+        Session& session, const NodeId& id, const NumericRange* range, const DataValue& value
+    ) = 0;
+
+    UA_DataSource create(bool ownsAdapter) override;
 };
 
 }  // namespace opcua

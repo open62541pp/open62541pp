@@ -335,63 +335,11 @@ void Server::setVariableNodeValueCallback(const NodeId& id, ValueCallbackBase& c
     throwIfBad(UA_Server_setVariableNode_valueCallback(handle(), id, callback.create(false)));
 }
 
-static UA_StatusCode valueSourceRead(
-    [[maybe_unused]] UA_Server* server,
-    [[maybe_unused]] const UA_NodeId* sessionId,
-    [[maybe_unused]] void* sessionContext,
-    const UA_NodeId* nodeId,
-    void* nodeContext,
-    UA_Boolean includeSourceTimestamp,
-    const UA_NumericRange* range,
-    UA_DataValue* value
-) noexcept {
-    assert(nodeContext != nullptr && nodeId != nullptr && value != nullptr);
-    auto& callback = static_cast<detail::NodeContext*>(nodeContext)->dataSource.read;
-    if (callback) {
-        auto result = detail::tryInvoke(
-            callback,
-            asWrapper<NodeId>(*nodeId),
-            asWrapper<DataValue>(*value),
-            asWrapper<NumericRange>(range),
-            includeSourceTimestamp
-        );
-        return result.code();
-    }
-    return UA_STATUSCODE_BADINTERNALERROR;
-}
-
-static UA_StatusCode valueSourceWrite(
-    [[maybe_unused]] UA_Server* server,
-    [[maybe_unused]] const UA_NodeId* sessionId,
-    [[maybe_unused]] void* sessionContext,
-    const UA_NodeId* nodeId,
-    void* nodeContext,
-    const UA_NumericRange* range,
-    const UA_DataValue* value
-) noexcept {
-    assert(nodeContext != nullptr && nodeId != nullptr && value != nullptr);
-    auto& callback = static_cast<detail::NodeContext*>(nodeContext)->dataSource.write;
-    if (callback) {
-        auto result = detail::tryInvoke(
-            callback,
-            asWrapper<NodeId>(*nodeId),
-            asWrapper<DataValue>(*value),
-            asWrapper<NumericRange>(range)
-        );
-        return result.code();
-    }
-    return UA_STATUSCODE_BADINTERNALERROR;
-}
-
-void Server::setVariableNodeValueBackend(const NodeId& id, ValueBackendDataSource backend) {
+void Server::setVariableNodeDataSource(const NodeId& id, DataSourceBase& source) {
     auto* nodeContext = detail::getContext(*this).nodeContexts[id];
-    nodeContext->dataSource = std::move(backend);
+    nodeContext->dataSource = &source;
     throwIfBad(UA_Server_setNodeContext(handle(), id, nodeContext));
-
-    UA_DataSource dataSourceNative;
-    dataSourceNative.read = valueSourceRead;
-    dataSourceNative.write = valueSourceWrite;
-    throwIfBad(UA_Server_setVariableNode_dataSource(handle(), id, dataSourceNative));
+    throwIfBad(UA_Server_setVariableNode_dataSource(handle(), id, source.create(false)));
 }
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
