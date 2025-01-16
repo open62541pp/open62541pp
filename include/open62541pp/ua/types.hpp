@@ -1863,10 +1863,10 @@ ContentFilter operator!(const ContentFilter& filter);
 /// @relates ContentFilterElement
 ContentFilter operator&&(const ContentFilterElement& lhs, const ContentFilterElement& rhs);
 /// @relates ContentFilterElement
-/// @relates ContentFilter
+/// @relatesalso ContentFilter
 ContentFilter operator&&(const ContentFilterElement& lhs, const ContentFilter& rhs);
 /// @relates ContentFilter
-/// @relates ContentFilterElement
+/// @relatesalso ContentFilterElement
 ContentFilter operator&&(const ContentFilter& lhs, const ContentFilterElement& rhs);
 /// @relates ContentFilter
 ContentFilter operator&&(const ContentFilter& lhs, const ContentFilter& rhs);
@@ -1874,10 +1874,10 @@ ContentFilter operator&&(const ContentFilter& lhs, const ContentFilter& rhs);
 /// @relates ContentFilterElement
 ContentFilter operator||(const ContentFilterElement& lhs, const ContentFilterElement& rhs);
 /// @relates ContentFilterElement
-/// @relates ContentFilter
+/// @relatesalso ContentFilter
 ContentFilter operator||(const ContentFilterElement& lhs, const ContentFilter& rhs);
 /// @relates ContentFilter
-/// @relates ContentFilterElement
+/// @relatesalso ContentFilterElement
 ContentFilter operator||(const ContentFilter& lhs, const ContentFilterElement& rhs);
 /// @relates ContentFilter
 ContentFilter operator||(const ContentFilter& lhs, const ContentFilter& rhs);
