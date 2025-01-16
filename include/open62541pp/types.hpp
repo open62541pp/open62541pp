@@ -1255,7 +1255,6 @@ public:
     }
 
     /**
-     * @}
      * @name Modifiers
      * Modify internal scalar/array value.
      * @{
