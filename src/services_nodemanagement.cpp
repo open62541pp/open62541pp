@@ -12,6 +12,14 @@
 
 namespace opcua::services {
 
+static std::optional<Session> getSession(UA_Server* server, const UA_NodeId* sessionId) noexcept {
+    auto* wrapper = asWrapper(server);
+    if (wrapper == nullptr || sessionId == nullptr) {
+        return std::nullopt;
+    }
+    return Session(*wrapper, asWrapper<NodeId>(*sessionId));
+}
+
 AddNodesResponse addNodes(Client& connection, const AddNodesRequest& request) noexcept {
     return UA_Client_Service_addNodes(connection.handle(), request);
 }
@@ -85,10 +93,10 @@ Result<NodeId> addNode<Client>(
 #ifdef UA_ENABLE_METHODCALLS
 
 static UA_StatusCode methodCallback(
-    [[maybe_unused]] UA_Server* server,
-    [[maybe_unused]] const UA_NodeId* sessionId,
+    UA_Server* server,
+    const UA_NodeId* sessionId,
     [[maybe_unused]] void* sessionContext,
-    [[maybe_unused]] const UA_NodeId* methodId,
+    const UA_NodeId* methodId,
     void* methodContext,
     [[maybe_unused]] const UA_NodeId* objectId,
     [[maybe_unused]] void* objectContext,
@@ -97,12 +105,15 @@ static UA_StatusCode methodCallback(
     size_t outputSize,
     UA_Variant* output
 ) noexcept {
-    assert(methodContext != nullptr);
+    assert(methodContext != nullptr && methodId != nullptr);
     const auto* nodeContext = static_cast<opcua::detail::NodeContext*>(methodContext);
     const auto& callback = nodeContext->methodCallback;
-    if (callback) {
+    auto session = getSession(server, sessionId);
+    if (callback != nullptr) {
         return opcua::detail::tryInvoke(
                    callback,
+                   session.value(),
+                   asWrapper<NodeId>(*methodId),
                    Span<const Variant>{asWrapper<Variant>(input), inputSize},
                    Span<Variant>{asWrapper<Variant>(output), outputSize}
         )

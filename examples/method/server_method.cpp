@@ -12,7 +12,7 @@ int main() {
     objectsNode.addMethod(
         {1, 1000},
         "Greet",
-        [](opcua::Span<const opcua::Variant> input, opcua::Span<opcua::Variant> output) {
+        [](opcua::Session& session, const opcua::NodeId &methodID, opcua::Span<const opcua::Variant> input, opcua::Span<opcua::Variant> output) {
             const auto& name = input.at(0).scalar<opcua::String>();
             const auto greeting = std::string("Hello ").append(name);
             output.at(0) = greeting;
@@ -26,9 +26,9 @@ int main() {
     objectsNode.addMethod(
         {1, 1001},
         "IncInt32ArrayValues",
-        [](opcua::Span<const opcua::Variant> input, opcua::Span<opcua::Variant> output) {
+        [](opcua::Session& session, const opcua::NodeId &methodID, opcua::Span<const opcua::Variant> input, opcua::Span<opcua::Variant> output) {
             const auto values = input.at(0).array<int32_t>();
-            const auto delta = input.at(0).scalar<int32_t>();
+            const auto delta = input.at(1).scalar<int32_t>();
             std::vector<int32_t> incremented(values.size());
             std::transform(values.begin(), values.end(), incremented.begin(), [&](auto v) {
                 return v + delta;
@@ -57,6 +57,30 @@ int main() {
                 opcua::DataTypeId::Int32,
                 opcua::ValueRank::OneDimension,
                 {5}
+            ),
+        }
+    );
+
+    opcua::services::MethodCallback methodCallback =
+    [&](opcua::Session& session, const opcua::NodeId &methodID, opcua::Span<const opcua::Variant> input, opcua::Span<opcua::Variant> output) {
+        opcua::Node methodNode(session.connection(), methodID);
+        opcua::Node parentNode = methodNode.browseParent();
+        auto references = parentNode.browseChildren();
+        output.at(0) =  references.size();
+    };
+
+    objectsNode.addMethod(
+        {1, 1002},
+        "ChildNodeNum",
+        methodCallback,
+        { //Input null
+        },
+        {
+            opcua::Argument(
+                "Child Node Num",
+                {"en-US", "Child Node Num"},
+                opcua::DataTypeId::UInt32,
+                opcua::ValueRank::Scalar
             ),
         }
     );

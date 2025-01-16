@@ -18,6 +18,7 @@
 #include "open62541pp/types.hpp"
 #include "open62541pp/ua/nodeids.hpp"  // *TypeId
 #include "open62541pp/ua/types.hpp"
+#include "open62541pp/session.hpp"
 
 namespace opcua {
 class Client;
@@ -570,7 +571,7 @@ auto addPropertyAsync(
  * @param input Input parameters
  * @param output Output parameters
  */
-using MethodCallback = std::function<void(Span<const Variant> input, Span<Variant> output)>;
+using MethodCallback = std::function<void(Session& session, const NodeId& methodID, Span<const Variant> input, Span<Variant> output)>;
 
 /**
  * Add method.

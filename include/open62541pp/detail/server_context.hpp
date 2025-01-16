@@ -17,6 +17,7 @@
 #include "open62541pp/services/detail/monitoreditem_context.hpp"
 #include "open62541pp/types.hpp"  // NodeId, Variant
 #include "open62541pp/ua/types.hpp"  // IntegerId
+#include "open62541pp/services/nodemanagement.hpp"
 
 namespace opcua::detail {
 
@@ -24,7 +25,7 @@ struct NodeContext {
     ValueCallbackBase* valueCallback{nullptr};
     ValueBackendDataSource dataSource;
 #ifdef UA_ENABLE_METHODCALLS
-    std::function<void(Span<const Variant> input, Span<Variant> output)> methodCallback;
+    opcua::services::MethodCallback methodCallback;
 #endif
 };
 
