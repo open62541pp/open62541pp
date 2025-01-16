@@ -3,48 +3,58 @@
 #include <open62541pp/server.hpp>
 #include <open62541pp/services/nodemanagement.hpp>
 
+/// Templated data source that stores the data of type `T` internally.
+template <typename T>
+struct DataSource : public opcua::DataSourceBase {
+    opcua::StatusCode read(
+        [[maybe_unused]] opcua::Session& session,
+        [[maybe_unused]] const opcua::NodeId& id,
+        [[maybe_unused]] const opcua::NumericRange* range,
+        opcua::DataValue& dv,
+        bool timestamp
+    ) override {
+        std::cout << "Read value from data source: " << data << "\n";
+        dv.setValue(opcua::Variant(data));
+        if (timestamp) {
+            dv.setSourceTimestamp(opcua::DateTime::now());
+        }
+        return UA_STATUSCODE_GOOD;
+    }
+
+    opcua::StatusCode write(
+        [[maybe_unused]] opcua::Session& session,
+        [[maybe_unused]] const opcua::NodeId& id,
+        [[maybe_unused]] const opcua::NumericRange* range,
+        const opcua::DataValue& dv
+    ) override {
+        data = dv.value().to<T>();
+        std::cout << "Write value to data source: " << data << "\n";
+        return UA_STATUSCODE_GOOD;
+    }
+
+    T data{};
+};
+
 int main() {
     opcua::Server server;
 
-    // Counter variable as an example of a simple data source
-    int counter = 0;
-
     // Add variable node
-    const auto counterId = opcua::services::addVariable(
-        server,
-        opcua::ObjectId::ObjectsFolder,
-        {1, 1000},
-        "Counter",
-        opcua::VariableAttributes{}
-            .setAccessLevel(UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE)
-            .setDataType<int>()
-            .setValueScalar(counter),
-        opcua::VariableTypeId::BaseDataVariableType,
-        opcua::ReferenceTypeId::HasComponent
-    ).value();
+    const auto id =
+        opcua::services::addVariable(
+            server,
+            opcua::ObjectId::ObjectsFolder,
+            {1, 1000},
+            "DataSource",
+            opcua::VariableAttributes{}
+                .setAccessLevel(UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE)
+                .setDataType<int>(),
+            opcua::VariableTypeId::BaseDataVariableType,
+            opcua::ReferenceTypeId::HasComponent
+        ).value();
 
-    // Define data source with its read and write callbacks
-    opcua::ValueBackendDataSource dataSource;
-    dataSource.read =
-        [&](const opcua::NodeId&, opcua::DataValue& dv, const opcua::NumericRange*, bool timestamp) {
-            // Increment counter before every read
-            counter++;
-            dv.value() = counter;
-            if (timestamp) {
-                dv.setSourceTimestamp(opcua::DateTime::now());
-            }
-            std::cout << "Read counter from data source: " << counter << "\n";
-            return UA_STATUSCODE_GOOD;
-        };
-    dataSource.write =
-        [&](const opcua::NodeId&, const opcua::DataValue& dv, const opcua::NumericRange*) {
-            counter = dv.value().scalar<int>();
-            std::cout << "Write counter to data source: " << counter << "\n";
-            return UA_STATUSCODE_GOOD;
-        };
-
-    // Define data source as variable node backend
-    server.setVariableNodeValueBackend(counterId, dataSource);
+    // Define data source
+    DataSource<int> dataSource;
+    server.setVariableNodeDataSource(id, dataSource);
 
     server.run();
 }

@@ -235,8 +235,8 @@ public:
 
     /// Set value callbacks to execute before every read and after every write operation.
     void setVariableNodeValueCallback(const NodeId& id, ValueCallbackBase& callback);
-    /// Set data source backend for variable node.
-    void setVariableNodeValueBackend(const NodeId& id, ValueBackendDataSource backend);
+    /// Set data source for variable node.
+    void setVariableNodeDataSource(const NodeId& id, DataSourceBase& source);
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
     /// Create a (pseudo) subscription to monitor local data changes and events.

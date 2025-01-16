@@ -22,7 +22,7 @@ namespace opcua::detail {
 
 struct NodeContext {
     ValueCallbackBase* valueCallback{nullptr};
-    ValueBackendDataSource dataSource;
+    DataSourceBase* dataSource{nullptr};
 #ifdef UA_ENABLE_METHODCALLS
     std::function<void(Span<const Variant> input, Span<Variant> output)> methodCallback;
 #endif

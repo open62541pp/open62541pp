@@ -120,7 +120,7 @@ TEST_CASE("Server run/stop/runIterate") {
     Server server;
     CHECK_FALSE(server.isRunning());
 
-    SUBCASE("Run/stop") {
+    SUBCASE("run/stop") {
         auto t = std::thread([&] { server.run(); });
         // wait for thread to execute run method
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
@@ -129,7 +129,7 @@ TEST_CASE("Server run/stop/runIterate") {
         t.join();  // wait until stopped
     }
 
-    SUBCASE("Run iterate") {
+    SUBCASE("runIterate") {
         const auto waitInterval = server.runIterate();
         CHECK(waitInterval > 0);
         CHECK(waitInterval <= 1000);
@@ -190,89 +190,92 @@ struct ValueCallbackTest : public ValueCallbackBase {
 TEST_CASE("ValueCallback") {
     Server server;
 
-    NodeId id{1, 1000};
-    auto node = Node(server, ObjectId::ObjectsFolder).addVariable(id, "testVariable");
+    const NodeId id{1, 1000};
+    auto node = Node(server, ObjectId::ObjectsFolder).addVariable(id, "TestVariable");
     node.writeValueScalar<int>(1);
 
     ValueCallbackTest callback;
     server.setVariableNodeValueCallback(id, callback);
 
-    // trigger onRead callback with read operation
-    CHECK(node.readValueScalar<int>() == 1);
-    CHECK(callback.onReadCalled == true);
-    CHECK(callback.onWriteCalled == false);
-    CHECK(callback.valueBeforeRead.value().scalar<int>() == 1);
+    SUBCASE("trigger onRead callback with read operation") {
+        CHECK(node.readValueScalar<int>() == 1);
+        CHECK(callback.onReadCalled == true);
+        CHECK(callback.onWriteCalled == false);
+        CHECK(callback.valueBeforeRead.value().scalar<int>() == 1);
+    }
 
-    // trigger onAfterWrite callback with write operation
-    node.writeValueScalar<int>(2);
-    CHECK(callback.onReadCalled == true);
-    CHECK(callback.onWriteCalled == true);
-    CHECK(callback.valueAfterWrite.value().scalar<int>() == 2);
+    SUBCASE("trigger onAfterWrite callback with write operation") {
+        node.writeValueScalar<int>(2);
+        CHECK(callback.onReadCalled == false);
+        CHECK(callback.onWriteCalled == true);
+        CHECK(callback.valueAfterWrite.value().scalar<int>() == 2);
+    }
 }
+
+struct DataSourceTest : public DataSourceBase {
+    StatusCode read(
+        [[maybe_unused]] Session& session,
+        [[maybe_unused]] const NodeId& id,
+        [[maybe_unused]] const NumericRange* range,
+        DataValue& dv,
+        bool timestamp
+    ) override {
+        dv.setValue(Variant(data));
+        if (timestamp) {
+            dv.setSourceTimestamp(DateTime::now());
+        }
+        if (exception.has_value()) {
+            throw exception.value();
+        }
+        return code;
+    }
+
+    StatusCode write(
+        [[maybe_unused]] Session& session,
+        [[maybe_unused]] const NodeId& id,
+        [[maybe_unused]] const NumericRange* range,
+        const DataValue& dv
+    ) override {
+        data = dv.value().scalar<int>();
+        if (exception.has_value()) {
+            throw exception.value();
+        }
+        return code;
+    }
+
+    std::optional<BadStatus> exception;
+    UA_StatusCode code = UA_STATUSCODE_GOOD;
+    int data = 0;
+};
 
 TEST_CASE("DataSource") {
     Server server;
-    NodeId id{1, 1000};
-    auto node = Node(server, ObjectId::ObjectsFolder).addVariable(id, "testVariable");
 
-    // primitive data source
-    int data = 0;
+    const NodeId id{1, 1000};
+    auto node = Node(server, ObjectId::ObjectsFolder).addVariable(id, "TestVariable");
 
-    ValueBackendDataSource dataSource;
-    dataSource.read =
-        [&](const NodeId&, DataValue& dv, const NumericRange*, bool includeSourceTimestamp) {
-            dv.value() = data;
-            if (includeSourceTimestamp) {
-                dv.setSourceTimestamp(DateTime::now());
-            }
-            return UA_STATUSCODE_GOOD;
-        };
-    dataSource.write = [&](const NodeId&, const DataValue& dv, const NumericRange*) {
-        data = dv.value().scalar<int>();
-        return UA_STATUSCODE_GOOD;
-    };
+    DataSourceTest source;
+    server.setVariableNodeDataSource(id, source);
 
-    CHECK_NOTHROW(server.setVariableNodeValueBackend(id, dataSource));
-
-    CHECK(node.readValueScalar<int>() == 0);
-    CHECK_NOTHROW(node.writeValueScalar<int>(1));
-    CHECK(data == 1);
-}
-
-TEST_CASE("DataSource with empty callbacks") {
-    Server server;
-    NodeId id{1, 1000};
-    auto node = Node(server, ObjectId::ObjectsFolder).addVariable(id, "testVariable");
-
-    server.setVariableNodeValueBackend(id, ValueBackendDataSource{});
-
-    Variant variant;
-    CHECK_THROWS_AS_MESSAGE(node.readValue(), BadStatus, "BadInternalError");
-    CHECK_THROWS_AS_MESSAGE(node.writeValue(variant), BadStatus, "BadInternalError");
-}
-
-TEST_CASE("DataSource with exception in callback") {
-    Server server;
-    NodeId id{1, 1000};
-    auto node = Node(server, ObjectId::ObjectsFolder).addVariable(id, "testVariable");
-
-    SUBCASE("BadStatus exception") {
-        ValueBackendDataSource dataSource;
-        dataSource.read = [&](const NodeId&, DataValue&, const NumericRange*, bool) -> StatusCode {
-            throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
-        };
-        server.setVariableNodeValueBackend(id, dataSource);
-        Variant variant;
-        CHECK_THROWS_AS_MESSAGE(node.readValue(), BadStatus, "BadUnexpectedError");
+    SUBCASE("read") {
+        source.data = 1;
+        CHECK(node.readValueScalar<int>() == 1);
     }
 
-    SUBCASE("Other exception types") {
-        ValueBackendDataSource dataSource;
-        dataSource.read = [&](const NodeId&, DataValue&, const NumericRange*, bool) -> StatusCode {
-            throw std::runtime_error("test");
-        };
-        server.setVariableNodeValueBackend(id, dataSource);
-        Variant variant;
-        CHECK_THROWS_AS_MESSAGE(node.readValue(), BadStatus, "BadInternalError");
+    SUBCASE("write") {
+        CHECK_NOTHROW(node.writeValueScalar<int>(2));
+        CHECK(source.data == 2);
+    }
+
+    SUBCASE("read/write with bad status code") {
+        source.code = UA_STATUSCODE_BADINTERNALERROR;
+        CHECK_THROWS_WITH_AS(node.readValueScalar<int>(), "BadInternalError", BadStatus);
+        CHECK_THROWS_WITH_AS(node.writeValueScalar<int>(2), "BadInternalError", BadStatus);
+    }
+
+    SUBCASE("read/write with exception in callback") {
+        source.exception = BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
+        CHECK_THROWS_WITH_AS(node.readValueScalar<int>(), "BadUnexpectedError", BadStatus);
+        CHECK_THROWS_WITH_AS(node.writeValueScalar<int>(2), "BadUnexpectedError", BadStatus);
     }
 }
