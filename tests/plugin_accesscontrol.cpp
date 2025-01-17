@@ -29,7 +29,7 @@ TEST_CASE("AccessControlDefault") {
             CAPTURE(allowAnonymous);
 
             AccessControlDefault ac(allowAnonymous, {{"username", "password"}});
-            Session session(server, NodeId{});
+            Session session(server, NodeId{}, nullptr);
             const EndpointDescription endpointDescription{};
             const ByteString secureChannelRemoteCertificate{};
 
@@ -95,7 +95,7 @@ TEST_CASE("AccessControlDefault") {
 
     SUBCASE("Access control callbacks (all permissive)") {
         AccessControlDefault ac;
-        Session session(server, NodeId{});
+        Session session(server, NodeId{}, nullptr);
 
         CHECK(ac.getUserRightsMask(session, {}) == 0xFFFFFFFF);
         CHECK(ac.getUserAccessLevel(session, {}) == static_cast<uint8_t>(0xFF));

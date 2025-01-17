@@ -11,18 +11,20 @@
 
 namespace opcua {
 
-static std::optional<Session> getSession(UA_Server* server, const UA_NodeId* sessionId) noexcept {
+static std::optional<Session> getSession(
+    UA_Server* server, const UA_NodeId* sessionId, void* sessionContext
+) noexcept {
     auto* wrapper = asWrapper(server);
     if (wrapper == nullptr || sessionId == nullptr) {
         return std::nullopt;
     }
-    return Session(*wrapper, asWrapper<NodeId>(*sessionId));
+    return Session(*wrapper, asWrapper<NodeId>(*sessionId), sessionContext);
 }
 
 static void onReadNative(
     UA_Server* server,
     const UA_NodeId* sessionId,
-    [[maybe_unused]] void* sessionContext,
+    void* sessionContext,
     const UA_NodeId* nodeId,
     void* nodeContext,
     const UA_NumericRange* range,
@@ -31,7 +33,7 @@ static void onReadNative(
     assert(nodeContext != nullptr && nodeId != nullptr && value != nullptr);
     auto& callback = static_cast<detail::NodeContext*>(nodeContext)->valueCallback;
     auto* catcher = detail::getExceptionCatcher(server);
-    auto session = getSession(server, sessionId);
+    auto session = getSession(server, sessionId, sessionContext);
     if (callback != nullptr && catcher != nullptr && session) {
         catcher->invoke([&] {
             callback->onRead(
@@ -47,7 +49,7 @@ static void onReadNative(
 static void onWriteNative(
     UA_Server* server,
     const UA_NodeId* sessionId,
-    [[maybe_unused]] void* sessionContext,
+    void* sessionContext,
     const UA_NodeId* nodeId,
     void* nodeContext,
     const UA_NumericRange* range,
@@ -56,7 +58,7 @@ static void onWriteNative(
     assert(nodeContext != nullptr && nodeId != nullptr && value != nullptr);
     auto& callback = static_cast<detail::NodeContext*>(nodeContext)->valueCallback;
     auto* catcher = detail::getExceptionCatcher(server);
-    auto session = getSession(server, sessionId);
+    auto session = getSession(server, sessionId, sessionContext);
     if (callback != nullptr && catcher != nullptr && session) {
         catcher->invoke([&] {
             callback->onWrite(
@@ -82,7 +84,7 @@ UA_ValueCallback ValueCallbackBase::create(bool ownsAdapter) {
 static UA_StatusCode readNative(
     UA_Server* server,
     const UA_NodeId* sessionId,
-    [[maybe_unused]] void* sessionContext,
+    void* sessionContext,
     const UA_NodeId* nodeId,
     void* nodeContext,
     UA_Boolean includeSourceTimeStamp,
@@ -91,17 +93,18 @@ static UA_StatusCode readNative(
 ) noexcept {
     assert(nodeContext != nullptr && nodeId != nullptr && value != nullptr);
     auto& source = static_cast<detail::NodeContext*>(nodeContext)->dataSource;
-    auto session = getSession(server, sessionId);
+    auto session = getSession(server, sessionId, sessionContext);
     if (source != nullptr && session) {
         return detail::tryInvoke([&] {
-            return source->read(
-                session.value(),
-                asWrapper<NodeId>(*nodeId),
-                asWrapper<NumericRange>(range),
-                asWrapper<DataValue>(*value),
-                includeSourceTimeStamp
-            );
-        }).code();
+                   return source->read(
+                       session.value(),
+                       asWrapper<NodeId>(*nodeId),
+                       asWrapper<NumericRange>(range),
+                       asWrapper<DataValue>(*value),
+                       includeSourceTimeStamp
+                   );
+               }
+        ).code();
     }
     return UA_STATUSCODE_BADINTERNALERROR;
 }
@@ -109,7 +112,7 @@ static UA_StatusCode readNative(
 static UA_StatusCode writeNative(
     UA_Server* server,
     const UA_NodeId* sessionId,
-    [[maybe_unused]] void* sessionContext,
+    void* sessionContext,
     const UA_NodeId* nodeId,
     void* nodeContext,
     const UA_NumericRange* range,
@@ -117,16 +120,17 @@ static UA_StatusCode writeNative(
 ) noexcept {
     assert(nodeContext != nullptr && nodeId != nullptr && value != nullptr);
     auto& source = static_cast<detail::NodeContext*>(nodeContext)->dataSource;
-    auto session = getSession(server, sessionId);
+    auto session = getSession(server, sessionId, sessionContext);
     if (source != nullptr && session) {
         return detail::tryInvoke([&] {
-            return source->write(
-                session.value(),
-                asWrapper<NodeId>(*nodeId),
-                asWrapper<NumericRange>(range),
-                asWrapper<DataValue>(*value)
-            );
-        }).code();
+                   return source->write(
+                       session.value(),
+                       asWrapper<NodeId>(*nodeId),
+                       asWrapper<NumericRange>(range),
+                       asWrapper<DataValue>(*value)
+                   );
+               }
+        ).code();
     }
     return UA_STATUSCODE_BADINTERNALERROR;
 }

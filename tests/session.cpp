@@ -17,6 +17,20 @@ TEST_CASE("Session") {
     ServerRunner serverRunner(server);
     Client client;
 
+    SUBCASE("Construct") {
+        const NodeId sessionId{1, 1000};
+        int sessionContext = 11;
+        Session session(server, sessionId, &sessionContext);
+
+        CHECK(session.connection() == server);
+        CHECK(std::as_const(session).connection() == server);
+
+        CHECK(session.id() == sessionId);
+
+        CHECK(session.context() == &sessionContext);
+        CHECK(std::as_const(session).context() == &sessionContext);
+    }
+
 #if UAPP_OPEN62541_VER_GE(1, 3)
     SUBCASE("Get active session") {
         CHECK(server.sessions().empty());
@@ -60,7 +74,7 @@ TEST_CASE("Session") {
 #endif
 
     SUBCASE("Equality") {
-        CHECK(Session(server, {1, 1000}) == Session(server, {1, 1000}));
-        CHECK(Session(server, {1, 1000}) != Session(server, {1, 1001}));
+        CHECK(Session(server, {1, 1000}, nullptr) == Session(server, {1, 1000}, nullptr));
+        CHECK(Session(server, {1, 1000}, nullptr) != Session(server, {1, 1001}, nullptr));
     }
 }
