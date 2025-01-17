@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- `IntegerId` alias for `uint32_t` (#446)
+- [`IntegerId`](https://reference.opcfoundation.org/Core/Part4/v105/docs/7.19) alias for `uint32_t` (#446)
 - Add DataAccess wrapper types (#451)
 - Define a subscription inactivity callback via `Client::onSubscriptionInactive` (#456)
 - Update open62541 to v1.3.15 (#463)
@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `ExtensionObject::encodedBinary` and `ExtensionObject::encodedXml` (#506)
 - `String`/`XmlElement` assignment operator for `const char*` and `string_view` (#507)
 - Mark `Result` class as `nodiscard` (#513)
+- `Session::context` to access session context (#531)
 
 ### Changed
 
