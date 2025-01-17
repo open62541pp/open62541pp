@@ -25,12 +25,14 @@ static const WrapperType& asWrapperRef(const NativeType* nativePtr) {
     return nativePtr == nullptr ? empty : asWrapper<WrapperType>(*nativePtr);
 }
 
-static std::optional<Session> getSession(UA_Server* server, const UA_NodeId* sessionId) noexcept {
+static std::optional<Session> getSession(
+    UA_Server* server, const UA_NodeId* sessionId, void* sessionContext
+) noexcept {
     auto* wrapper = asWrapper(server);
     if (wrapper == nullptr) {
         return std::nullopt;
     }
-    return Session(*wrapper, asWrapperRef<NodeId>(sessionId));
+    return Session(*wrapper, asWrapperRef<NodeId>(sessionId), sessionContext);
 }
 
 static void logException(
@@ -70,7 +72,8 @@ static UA_StatusCode activateSessionNative(
     [[maybe_unused]] void** sessionContext
 ) {
     return invokeAccessCallback(server, "activateSession", UA_STATUSCODE_BADINTERNALERROR, [&] {
-        auto session = getSession(server, sessionId);
+        // TODO: allow user to set sessionContext
+        auto session = getSession(server, sessionId, nullptr);
         return getAdapter(ac)
             .activateSession(
                 session.value(),
@@ -86,10 +89,10 @@ static void closeSessionNative(
     UA_Server* server,
     UA_AccessControl* ac,
     const UA_NodeId* sessionId,
-    [[maybe_unused]] void* sessionContext
+    void* sessionContext
 ) {
     invokeAccessCallback(server, "activateSession", UA_STATUSCODE_GOOD, [&] {
-        auto session = getSession(server, sessionId);
+        auto session = getSession(server, sessionId, sessionContext);
         getAdapter(ac).closeSession(session.value());  // NOLINT(bugprone-unchecked-optional-access)
         return UA_STATUSCODE_GOOD;
     });
@@ -99,12 +102,12 @@ static UA_UInt32 getUserRightsMaskNative(
     UA_Server* server,
     UA_AccessControl* ac,
     const UA_NodeId* sessionId,
-    [[maybe_unused]] void* sessionContext,
+    void* sessionContext,
     const UA_NodeId* nodeId,
     [[maybe_unused]] void* nodeContext
 ) {
     return invokeAccessCallback(server, "getUserRightsMask", UA_UInt32{}, [&] {
-        auto session = getSession(server, sessionId);
+        auto session = getSession(server, sessionId, sessionContext);
         return getAdapter(ac)
             .getUserRightsMask(session.value(), asWrapperRef<NodeId>(nodeId))
             .get();
@@ -115,12 +118,12 @@ static UA_Byte getUserAccessLevelNative(
     UA_Server* server,
     UA_AccessControl* ac,
     const UA_NodeId* sessionId,
-    [[maybe_unused]] void* sessionContext,
+    void* sessionContext,
     const UA_NodeId* nodeId,
     [[maybe_unused]] void* nodeContext
 ) {
     return invokeAccessCallback(server, "getUserAccessLevel", UA_Byte{}, [&] {
-        auto session = getSession(server, sessionId);
+        auto session = getSession(server, sessionId, sessionContext);
         return getAdapter(ac)
             .getUserAccessLevel(session.value(), asWrapperRef<NodeId>(nodeId))
             .get();
@@ -131,12 +134,12 @@ static UA_Boolean getUserExecutableNative(
     UA_Server* server,
     UA_AccessControl* ac,
     const UA_NodeId* sessionId,
-    [[maybe_unused]] void* sessionContext,
+    void* sessionContext,
     const UA_NodeId* methodId,
     [[maybe_unused]] void* methodContext
 ) {
     return invokeAccessCallback(server, "getUserExecutable", false, [&] {
-        auto session = getSession(server, sessionId);
+        auto session = getSession(server, sessionId, sessionContext);
         return getAdapter(ac).getUserExecutable(session.value(), asWrapperRef<NodeId>(methodId));
     });
 }
@@ -145,14 +148,14 @@ static UA_Boolean getUserExecutableOnObjectNative(
     UA_Server* server,
     UA_AccessControl* ac,
     const UA_NodeId* sessionId,
-    [[maybe_unused]] void* sessionContext,
+    void* sessionContext,
     const UA_NodeId* methodId,
     [[maybe_unused]] void* methodContext,
     const UA_NodeId* objectId,
     [[maybe_unused]] void* objectContext
 ) {
     return invokeAccessCallback(server, "getUserExecutableOnObject", false, [&] {
-        auto session = getSession(server, sessionId);
+        auto session = getSession(server, sessionId, sessionContext);
         return getAdapter(ac).getUserExecutableOnObject(
             session.value(), asWrapperRef<NodeId>(methodId), asWrapperRef<NodeId>(objectId)
         );
@@ -163,11 +166,11 @@ static UA_Boolean allowAddNodeNative(
     UA_Server* server,
     UA_AccessControl* ac,
     const UA_NodeId* sessionId,
-    [[maybe_unused]] void* sessionContext,
+    void* sessionContext,
     const UA_AddNodesItem* item
 ) {
     return invokeAccessCallback(server, "allowAddNode", false, [&] {
-        auto session = getSession(server, sessionId);
+        auto session = getSession(server, sessionId, sessionContext);
         return getAdapter(ac).allowAddNode(session.value(), asWrapperRef<AddNodesItem>(item));
     });
 }
@@ -176,11 +179,11 @@ static UA_Boolean allowAddReferenceNative(
     UA_Server* server,
     UA_AccessControl* ac,
     const UA_NodeId* sessionId,
-    [[maybe_unused]] void* sessionContext,
+    void* sessionContext,
     const UA_AddReferencesItem* item
 ) {
     return invokeAccessCallback(server, "allowAddReference", false, [&] {
-        auto session = getSession(server, sessionId);
+        auto session = getSession(server, sessionId, sessionContext);
         return getAdapter(ac).allowAddReference(
             session.value(), asWrapperRef<AddReferencesItem>(item)
         );
@@ -191,11 +194,11 @@ static UA_Boolean allowDeleteNodeNative(
     UA_Server* server,
     UA_AccessControl* ac,
     const UA_NodeId* sessionId,
-    [[maybe_unused]] void* sessionContext,
+    void* sessionContext,
     const UA_DeleteNodesItem* item
 ) {
     return invokeAccessCallback(server, "allowDeleteNode", false, [&] {
-        auto session = getSession(server, sessionId);
+        auto session = getSession(server, sessionId, sessionContext);
         return getAdapter(ac).allowDeleteNode(session.value(), asWrapperRef<DeleteNodesItem>(item));
     });
 }
@@ -204,11 +207,11 @@ static UA_Boolean allowDeleteReferenceNative(
     UA_Server* server,
     UA_AccessControl* ac,
     const UA_NodeId* sessionId,
-    [[maybe_unused]] void* sessionContext,
+    void* sessionContext,
     const UA_DeleteReferencesItem* item
 ) {
     return invokeAccessCallback(server, "allowDeleteReference", false, [&] {
-        auto session = getSession(server, sessionId);
+        auto session = getSession(server, sessionId, sessionContext);
         return getAdapter(ac).allowDeleteReference(
             session.value(), asWrapperRef<DeleteReferencesItem>(item)
         );
@@ -219,12 +222,12 @@ static UA_Boolean allowDeleteReferenceNative(
     UA_Server* server,
     UA_AccessControl* ac,
     const UA_NodeId* sessionId,
-    [[maybe_unused]] void* sessionContext,
+    void* sessionContext,
     const UA_NodeId* nodeId,
     [[maybe_unused]] void* nodeContext
 ) {
     return invokeAccessCallback(server, "allowBrowseNode", false, [&] {
-        auto session = getSession(server, sessionId);
+        auto session = getSession(server, sessionId, sessionContext);
         return getAdapter(ac).allowBrowseNode(session.value(), asWrapperRef<NodeId>(nodeId));
     });
 }
@@ -234,13 +237,13 @@ static UA_Boolean allowDeleteReferenceNative(
     UA_Server* server,
     UA_AccessControl* ac,
     const UA_NodeId* oldSessionId,
-    [[maybe_unused]] void* oldSessionContext,
+    void* oldSessionContext,
     const UA_NodeId* newSessionId,
-    [[maybe_unused]] void* newSessionContext
+    void* newSessionContext
 ) {
     return invokeAccessCallback(server, "allowTransferSubscription", false, [&] {
-        auto oldSession = getSession(server, oldSessionId);
-        auto newSession = getSession(server, newSessionId);
+        auto oldSession = getSession(server, oldSessionId, oldSessionContext);
+        auto newSession = getSession(server, newSessionId, newSessionContext);
         return getAdapter(ac).allowTransferSubscription(oldSession.value(), newSession.value());
     });
 }
@@ -251,13 +254,13 @@ static UA_Boolean allowHistoryUpdateUpdateDataNative(
     UA_Server* server,
     UA_AccessControl* ac,
     const UA_NodeId* sessionId,
-    [[maybe_unused]] void* sessionContext,
+    void* sessionContext,
     const UA_NodeId* nodeId,
     UA_PerformUpdateType performInsertReplace,
     const UA_DataValue* value
 ) {
     return invokeAccessCallback(server, "allowHistoryUpdate", false, [&] {
-        auto session = getSession(server, sessionId);
+        auto session = getSession(server, sessionId, sessionContext);
         return getAdapter(ac).allowHistoryUpdate(
             session.value(),
             asWrapperRef<NodeId>(nodeId),
@@ -271,14 +274,14 @@ static UA_Boolean allowHistoryUpdateDeleteRawModifiedNative(
     UA_Server* server,
     UA_AccessControl* ac,
     const UA_NodeId* sessionId,
-    [[maybe_unused]] void* sessionContext,
+    void* sessionContext,
     const UA_NodeId* nodeId,
     UA_DateTime startTimestamp,
     UA_DateTime endTimestamp,
     bool isDeleteModified
 ) {
     return invokeAccessCallback(server, "allowHistoryDelete", false, [&] {
-        auto session = getSession(server, sessionId);
+        auto session = getSession(server, sessionId, sessionContext);
         return getAdapter(ac).allowHistoryDelete(
             session.value(),
             asWrapperRef<NodeId>(nodeId),

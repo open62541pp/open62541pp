@@ -2,9 +2,9 @@
 
 #include <atomic>
 #include <functional>
+#include <map>
 #include <memory>
 #include <mutex>
-#include <set>
 #include <utility>  // pair
 #include <vector>
 
@@ -28,10 +28,13 @@ struct NodeContext {
 #endif
 };
 
+
 struct SessionRegistry {
+    using Context = void*;
+
     decltype(UA_AccessControl::activateSession) activateSessionUser{nullptr};
     decltype(UA_AccessControl::closeSession) closeSessionUser{nullptr};
-    std::set<NodeId> sessionIds;
+    std::map<NodeId, Context> sessions;
     std::mutex mutex;
 };
 

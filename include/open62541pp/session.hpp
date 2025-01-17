@@ -19,9 +19,10 @@ class Server;
  */
 class Session {
 public:
-    Session(Server& connection, NodeId sessionId) noexcept
+    Session(Server& connection, NodeId sessionId, void* sessionContext) noexcept
         : connection_(&connection),
-          sessionId_(std::move(sessionId)) {}
+          id_(std::move(sessionId)),
+          context_(sessionContext) {}
 
     /// Get the server instance.
     Server& connection() noexcept {
@@ -35,7 +36,17 @@ public:
 
     /// Get the session identifier.
     const NodeId& id() const noexcept {
-        return sessionId_;
+        return id_;
+    }
+
+    /// Get the session context.
+    void* context() noexcept {
+        return context_;
+    }
+
+    /// Get the session context.
+    const void* context() const noexcept {
+        return context_;
     }
 
     /// Get a session attribute by its key.
@@ -56,7 +67,8 @@ public:
 
 private:
     Server* connection_;
-    NodeId sessionId_;
+    NodeId id_;
+    void* context_;
 };
 
 /// @relates Session
