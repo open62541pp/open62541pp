@@ -1,5 +1,0 @@
-<map id="opcua::services::detail::MonitoredItemContext" name="opcua::services::detail::MonitoredItemContext">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,93,183,133"/>
-<area shape="rect" id="Node000002" href="$structopcua_1_1services_1_1detail_1_1CallbackAdapter.html" title="Helper class to map open62541 / C&#45;style callbacks to std::function objects." alt="" coords="10,5,178,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="97,59,97,93,91,93,91,59"/>
-</map>

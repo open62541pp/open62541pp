@@ -1,7 +1,0 @@
-<map id="opcua::IssuedIdentityToken" name="opcua::IssuedIdentityToken">
-<area shape="rect" id="Node000001" title="UA_IssuedIdentityToken wrapper class." alt="" coords="39,196,238,221"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,93,272,148"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="141,162,141,196,136,196,136,162"/>
-<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="52,5,225,45"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="141,59,141,93,136,93,136,59"/>
-</map>

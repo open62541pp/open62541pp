@@ -1,0 +1,7 @@
+<map id="opcua::ua::VariableAttributes" name="opcua::ua::VariableAttributes">
+<area shape="rect" id="Node000001" title="UA_VariableAttributes wrapper class." alt="" coords="29,196,239,221"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,93,263,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="137,162,137,196,131,196,131,162"/>
+<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="53,5,215,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="137,59,137,93,131,93,131,59"/>
+</map>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['usertokentype_0',['UserTokenType',['../group__Wrapper.html#ga3e43c887aab52b9c551b16d4bc086e71',1,'opcua']]]
+  ['usertokentype_0',['UserTokenType',['../group__Wrapper.html#ga3fec89f0a7f563e946174a7259c7b5e4',1,'opcua::UserTokenType'],['../group__Wrapper.html#ga3fec89f0a7f563e946174a7259c7b5e4',1,'opcua::ua::UserTokenType']]]
 ];

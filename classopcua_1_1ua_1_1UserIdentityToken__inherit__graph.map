@@ -1,0 +1,7 @@
+<map id="opcua::ua::UserIdentityToken" name="opcua::ua::UserIdentityToken">
+<area shape="rect" id="Node000001" title="UA_UserIdentityToken wrapper class." alt="" coords="27,196,238,221"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,93,260,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="135,162,135,196,130,196,130,162"/>
+<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="52,5,213,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="135,59,135,93,130,93,130,59"/>
+</map>

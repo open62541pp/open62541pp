@@ -16,6 +16,5 @@ var searchData=
   ['containsnoloops_2edox_13',['containsnoloops.dox',['../containsnoloops_8dox.html',1,'']]],
   ['contextmap_2ehpp_14',['contextmap.hpp',['../contextmap_8hpp.html',1,'']]],
   ['create_5fcertificate_2eh_15',['create_certificate.h',['open62541/create__certificate_8h.html',0,'']]],
-  ['create_5fcertificate_2ehpp_16',['create_certificate.hpp',['../create__certificate_8hpp.html',1,'']]],
-  ['customization_2emd_17',['customization.md',['../customization_8md.html',1,'']]]
+  ['create_5fcertificate_2ehpp_16',['create_certificate.hpp',['../create__certificate_8hpp.html',1,'']]]
 ];

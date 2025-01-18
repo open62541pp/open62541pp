@@ -1,6 +1,4 @@
 <map id="CreateSubscription service" name="CreateSubscription service">
-<area shape="rect" id="Node000003" href="$group__Attribute.html" title="Read and write node attributes." alt="" coords="579,5,733,31"/>
-<area shape="rect" id="Node000004" href="$group__CreateMonitoredItems.html" title="Create and add a monitored item to a subscription." alt="" coords="572,55,740,95"/>
-<area shape="rect" id="Node000001" title="Create subscriptions." alt="" coords="232,27,377,67"/>
-<area shape="rect" id="Node000002" href="$group__Subscription.html" title="Report notifications to the client." alt="" coords="5,35,183,60"/>
+<area shape="rect" id="Node000001" title="Create subscriptions." alt="" coords="231,5,376,45"/>
+<area shape="rect" id="Node000002" href="$group__Subscription.html" title="Report notifications to the client." alt="" coords="5,13,183,38"/>
 </map>

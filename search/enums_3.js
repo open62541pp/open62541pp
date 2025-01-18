@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['datachangetrigger_0',['DataChangeTrigger',['../group__Wrapper.html#ga35ddb594d16f1bc6d6ae707031f9bbeb',1,'opcua']]],
-  ['datatypeid_1',['DataTypeId',['../group__NodeIds.html#ga5d7e0b8d020dc1893a646f9ea8ae780a',1,'opcua']]],
-  ['deadbandtype_2',['DeadbandType',['../group__Wrapper.html#gae0dc9a333e88500f625a7c3747b4d9e0',1,'opcua']]]
+  ['datachangetrigger_0',['DataChangeTrigger',['../group__Wrapper.html#ga4ba1716f5368c900aff1ab61bfb143eb',1,'opcua::DataChangeTrigger'],['../group__Wrapper.html#ga4ba1716f5368c900aff1ab61bfb143eb',1,'opcua::ua::DataChangeTrigger']]],
+  ['datatypeid_1',['DataTypeId',['../group__NodeIds.html#gaedae20be023a8a8fc3c7929a538c36f5',1,'opcua::DataTypeId'],['../group__NodeIds.html#gaedae20be023a8a8fc3c7929a538c36f5',1,'opcua::ua::DataTypeId']]],
+  ['deadbandtype_2',['DeadbandType',['../group__Wrapper.html#ga16d8566823e303595fa2fb6fedc3d55d',1,'opcua::DeadbandType'],['../group__Wrapper.html#ga16d8566823e303595fa2fb6fedc3d55d',1,'opcua::ua::DeadbandType']]]
 ];

@@ -1,0 +1,7 @@
+<map id="opcua::ua::TranslateBrowsePathsToNodeIdsRequest" name="opcua::ua::TranslateBrowsePathsToNodeIdsRequest">
+<area shape="rect" id="Node000001" title="UA_TranslateBrowsePathsToNodeIdsRequest wrapper class." alt="" coords="677,20,877,60"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="272,5,629,75"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="643,37,677,37,677,43,643,43"/>
+<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="5,13,224,67"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="238,37,271,37,271,43,238,43"/>
+</map>

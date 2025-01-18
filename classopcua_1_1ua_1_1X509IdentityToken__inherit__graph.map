@@ -1,0 +1,7 @@
+<map id="opcua::ua::X509IdentityToken" name="opcua::ua::X509IdentityToken">
+<area shape="rect" id="Node000001" title="UA_X509IdentityToken wrapper class." alt="" coords="25,196,238,221"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,93,257,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,162,134,196,129,196,129,162"/>
+<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="49,5,213,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="134,59,134,93,129,93,129,59"/>
+</map>

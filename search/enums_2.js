@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['certificateformat_0',['CertificateFormat',['../namespaceopcua_1_1crypto.html#a15882ccfa0ebebfd7ac52fb1a3840094',1,'opcua::crypto']]],
-  ['clientstate_1',['ClientState',['../namespaceopcua_1_1detail.html#a20e33153f9bdce7da488ae12ee0ebc26',1,'opcua::detail']]],
-  ['color_2',['Color',['../namespaceMyLibrary.html#a79a9f4bbb675f6c082b09249c5a95ced',1,'MyLibrary']]]
+  ['certificateformat_0',['CertificateFormat',['../namespaceopcua.html#ae6c345608e9a1f87f85b5b1ae371c0cc',1,'opcua']]]
 ];

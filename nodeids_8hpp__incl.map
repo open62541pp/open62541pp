@@ -1,4 +1,4 @@
-<map id="/home/runner/work/open62541pp/open62541pp/include/open62541pp/nodeids.hpp" name="/home/runner/work/open62541pp/open62541pp/include/open62541pp/nodeids.hpp">
+<map id="/home/runner/work/open62541pp/open62541pp/include/open62541pp/ua/nodeids.hpp" name="/home/runner/work/open62541pp/open62541pp/include/open62541pp/ua/nodeids.hpp">
 <area shape="rect" id="Node000001" title=" " alt="" coords="5,5,263,60"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="47,181,114,207"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="118,61,94,109,87,139,84,168,79,167,82,138,89,107,113,59"/>

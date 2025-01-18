@@ -1,8 +1,6 @@
 <map id="Attribute service set" name="Attribute service set">
-<area shape="rect" id="Node000001" title="Read and write node attributes." alt="" coords="132,106,287,131"/>
-<area shape="rect" id="Node000005" href="$group__CreateMonitoredItems.html" title="Create and add a monitored item to a subscription." alt="" coords="481,5,649,45"/>
-<area shape="rect" id="Node000006" href="$group__CreateSubscription.html" title="Create subscriptions." alt="" coords="493,69,638,109"/>
-<area shape="rect" id="Node000003" href="$group__Read.html" title="This service is used to read attributes of nodes." alt="" coords="512,134,619,159"/>
-<area shape="rect" id="Node000004" href="$group__Write.html" title="This service is used to write attributes of nodes." alt="" coords="511,183,619,209"/>
-<area shape="rect" id="Node000002" href="$group__Services.html" title="OPC UA services as free functions." alt="" coords="5,106,83,131"/>
+<area shape="rect" id="Node000001" title="Read and write node attributes." alt="" coords="131,31,285,56"/>
+<area shape="rect" id="Node000003" href="$group__Read.html" title="This service is used to read attributes of nodes." alt="" coords="334,5,441,31"/>
+<area shape="rect" id="Node000004" href="$group__Write.html" title="This service is used to write attributes of nodes." alt="" coords="333,55,441,80"/>
+<area shape="rect" id="Node000002" href="$group__Services.html" title="OPC UA services as free functions." alt="" coords="5,31,83,56"/>
 </map>

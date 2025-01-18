@@ -1,5 +1,0 @@
-<map id="opcua::detail::IsStaleable&lt; T, std::void_t&lt; decltype(std::declval&lt; T &gt;().stale)&gt; &gt;" name="opcua::detail::IsStaleable&lt; T, std::void_t&lt; decltype(std::declval&lt; T &gt;().stale)&gt; &gt;">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,108,223,163"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="19,5,209,60"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="117,74,117,108,111,108,111,74"/>
-</map>

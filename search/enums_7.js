@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['messagesecuritymode_0',['MessageSecurityMode',['../namespaceopcua.html#afa3458939b0ac4cc2b091e3723b095cb',1,'opcua']]],
-  ['methodid_1',['MethodId',['../group__NodeIds.html#gac0a2d410d3bfad4769fc49900afc640c',1,'opcua']]],
+  ['messagesecuritymode_0',['MessageSecurityMode',['../group__Wrapper.html#ga8747da9421645210ff2d7a76d84d0a14',1,'opcua::MessageSecurityMode'],['../group__Wrapper.html#ga8747da9421645210ff2d7a76d84d0a14',1,'opcua::ua::MessageSecurityMode']]],
+  ['methodid_1',['MethodId',['../group__NodeIds.html#ga51af0785843a5179dc354d12a04d4c92',1,'opcua::MethodId'],['../group__NodeIds.html#ga51af0785843a5179dc354d12a04d4c92',1,'opcua::ua::MethodId']]],
   ['modellingrule_2',['ModellingRule',['../namespaceopcua.html#ad32e0c353b427fd8b7788a85a78335aa',1,'opcua']]],
-  ['monitoringmode_3',['MonitoringMode',['../namespaceopcua.html#a78a3c3ace4c759ec414715466928ee81',1,'opcua']]]
+  ['monitoringmode_3',['MonitoringMode',['../group__Wrapper.html#ga6c225fe0e557508a74bec61177a1d1a5',1,'opcua::MonitoringMode'],['../group__Wrapper.html#ga6c225fe0e557508a74bec61177a1d1a5',1,'opcua::ua::MonitoringMode']]]
 ];

@@ -34,6 +34,5 @@ var searchData=
   ['historyupdatedetails_31',['HistoryUpdateDetails',['open62541/struct__OpcUa__HistoryUpdateRequest.html#a63d3c47bd66520e33936b1887336ecbc',0,'_OpcUa_HistoryUpdateRequest']]],
   ['historyupdaterequest_32',['historyUpdateRequest',['open62541/unionUA__Request.html#a6559957d5af659f09c5658c83e54b9ef',0,'UA_Request']]],
   ['historyupdateresponse_33',['historyUpdateResponse',['open62541/unionUA__Response.html#a033c4f363ce340ef458f3d8be557a104',0,'UA_Response']]],
-  ['hook_34',['hook',['../structopcua_1_1services_1_1detail_1_1HookToken.html#a2528a04750e248f7e31df3bdd5c32e16',1,'opcua::services::detail::HookToken']]],
-  ['hour_35',['hour',['open62541/structUA__DateTimeStruct.html#a7c5113ba97db7d2635d83c5c54bc74a9',0,'UA_DateTimeStruct']]]
+  ['hour_34',['hour',['open62541/structUA__DateTimeStruct.html#a7c5113ba97db7d2635d83c5c54bc74a9',0,'UA_DateTimeStruct']]]
 ];

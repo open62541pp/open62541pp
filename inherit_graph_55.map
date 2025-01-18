@@ -1,15 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$structopcua_1_1services_1_1detail_1_1AttributeHandlerScalar.html" title=" " alt="" coords="5,203,184,257"/>
-<area shape="rect" id="Node000001" href="$structopcua_1_1services_1_1detail_1_1AttributeHandler_3_01AttributeId_1_1ContainsNoLoops_01_4.html" title=" " alt="" coords="232,5,443,60"/>
-<area shape="poly" id="edge12_Node000000_Node000001" title=" " alt="" coords="119,189,166,128,197,97,230,69,249,58,252,62,234,74,200,101,170,132,123,192"/>
-<area shape="rect" id="Node000002" href="$structopcua_1_1services_1_1detail_1_1AttributeHandler_3_01AttributeId_1_1Executable_01_4.html" title=" " alt="" coords="232,84,443,139"/>
-<area shape="poly" id="edge13_Node000000_Node000002" title=" " alt="" coords="149,193,231,148,257,136,259,141,233,152,151,198"/>
-<area shape="rect" id="Node000003" href="$structopcua_1_1services_1_1detail_1_1AttributeHandler_3_01AttributeId_1_1Historizing_01_4.html" title=" " alt="" coords="232,163,443,217"/>
-<area shape="poly" id="edge14_Node000000_Node000003" title=" " alt="" coords="197,210,231,205,232,210,198,216"/>
-<area shape="rect" id="Node000004" href="$structopcua_1_1services_1_1detail_1_1AttributeHandler_3_01AttributeId_1_1IsAbstract_01_4.html" title=" " alt="" coords="232,241,443,296"/>
-<area shape="poly" id="edge15_Node000000_Node000004" title=" " alt="" coords="198,244,232,249,231,254,197,249"/>
-<area shape="rect" id="Node000005" href="$structopcua_1_1services_1_1detail_1_1AttributeHandler_3_01AttributeId_1_1Symmetric_01_4.html" title=" " alt="" coords="232,320,443,375"/>
-<area shape="poly" id="edge16_Node000000_Node000005" title=" " alt="" coords="154,262,233,305,262,317,259,322,231,310,151,267"/>
-<area shape="rect" id="Node000006" href="$structopcua_1_1services_1_1detail_1_1AttributeHandler_3_01AttributeId_1_1UserExecutable_01_4.html" title=" " alt="" coords="232,399,443,453"/>
-<area shape="poly" id="edge17_Node000000_Node000006" title=" " alt="" coords="124,267,171,327,201,357,234,384,255,396,252,401,230,388,197,361,167,330,120,271"/>
+<area shape="rect" id="Node000000" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="5,13,181,53"/>
+<area shape="rect" id="Node000001" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="229,5,496,60"/>
+<area shape="poly" id="edge43_Node000000_Node000001" title=" " alt="" coords="195,30,229,30,229,35,195,35"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1ua_1_1BrowseNextRequest.html" title="UA_BrowseNextRequest wrapper class." alt="" coords="544,20,769,45"/>
+<area shape="poly" id="edge44_Node000001_Node000002" title=" " alt="" coords="510,30,544,30,544,35,510,35"/>
 </map>

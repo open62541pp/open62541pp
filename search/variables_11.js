@@ -9,7 +9,7 @@ var searchData=
   ['rdlen_6',['rdlen',['open62541/structmdns__answer.html#a583cb248121369eda86dbb2eb3056ed0',0,'mdns_answer']]],
   ['rdlength_7',['rdlength',['open62541/structresource.html#aee5dc9055f418c5f25aec243e39ef119',0,'resource']]],
   ['rdname_8',['rdname',['open62541/structmdns__answer.html#adaa2e5ea0d4e37e8985dc002d65cee13',0,'mdns_answer']]],
-  ['read_9',['read',['open62541/structUA__DataSource.html#a10591ec10a6f13e40b74fdbcec999613',0,'UA_DataSource::read'],['../structopcua_1_1ValueBackendDataSource.html#a8e18d9d305f865040933c25b1d675176',1,'opcua::ValueBackendDataSource::read']]],
+  ['read_9',['read',['open62541/structUA__DataSource.html#a10591ec10a6f13e40b74fdbcec999613',0,'UA_DataSource']]],
   ['readattime_10',['readAtTime',['open62541/structUA__HistoryDatabase.html#a4216aa891f491af02d633db47664a8be',0,'UA_HistoryDatabase']]],
   ['readcount_11',['ReadCount',['open62541/struct__OpcUa__SessionDiagnosticsDataType.html#a08ab2c865d97948eba6c9a5a1179fa0d',0,'_OpcUa_SessionDiagnosticsDataType']]],
   ['readergroupssize_12',['readerGroupsSize',['open62541/structUA__PubSubConnection.html#a266b31e32c055874ba3db7a915dd3399',0,'UA_PubSubConnection']]],
@@ -181,6 +181,5 @@ var searchData=
   ['rtinformationmodelnode_178',['rtInformationModelNode',['open62541/structUA__DataSetVariableConfig.html#a5fb936ca1b4e8d8d89307af7ed3d1234',0,'UA_DataSetVariableConfig']]],
   ['rtlevel_179',['rtLevel',['open62541/structUA__ReaderGroupConfig.html#a62adea152da13e3f9811400ce19b31a9',0,'UA_ReaderGroupConfig::rtLevel'],['open62541/structUA__WriterGroupConfig.html#ac68fdd865eb8e1f9f5683514acfc4158',0,'UA_WriterGroupConfig::rtLevel']]],
   ['rtsubscriberenabled_180',['RTsubscriberEnabled',['open62541/structUA__NetworkMessageOffsetBuffer.html#a6c32ac5551b4687c1e1f3be8a973f524',0,'UA_NetworkMessageOffsetBuffer']]],
-  ['rtvaluesource_181',['rtValueSource',['open62541/structUA__DataSetVariableConfig.html#ad28f65f4acdb5f70c6da4bfc96297bf6',0,'UA_DataSetVariableConfig']]],
-  ['running_182',['running',['../structopcua_1_1detail_1_1ClientContext.html#a5f9447a31b07b14ab422e8ad3c35dfc3',1,'opcua::detail::ClientContext::running'],['../structopcua_1_1detail_1_1ServerContext.html#a7451ada1c23abc94c4e92d16618b5ce5',1,'opcua::detail::ServerContext::running']]]
+  ['rtvaluesource_181',['rtValueSource',['open62541/structUA__DataSetVariableConfig.html#ad28f65f4acdb5f70c6da4bfc96297bf6',0,'UA_DataSetVariableConfig']]]
 ];

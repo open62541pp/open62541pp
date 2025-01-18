@@ -16,8 +16,7 @@ var searchData=
   ['statuscodes_2eh_13',['statuscodes.h',['open62541/statuscodes_8h.html',0,'']]],
   ['string_5fescape_2eh_14',['string_escape.h',['open62541/string__escape_8h.html',0,'']]],
   ['string_5futils_2ehpp_15',['string_utils.hpp',['../string__utils_8hpp.html',1,'']]],
-  ['subclass_2dexample_2ehpp_16',['subclass-example.hpp',['../subclass-example_8hpp.html',1,'']]],
-  ['subscription_2ehpp_17',['subscription.hpp',['../services_2subscription_8hpp.html',1,'(Global Namespace)'],['../subscription_8hpp.html',1,'(Global Namespace)']]],
-  ['subscription_5fcontext_2ehpp_18',['subscription_context.hpp',['../subscription__context_8hpp.html',1,'']]],
-  ['symmetric_2edox_19',['symmetric.dox',['../symmetric_8dox.html',1,'']]]
+  ['subscription_2ehpp_16',['subscription.hpp',['../services_2subscription_8hpp.html',1,'(Global Namespace)'],['../subscription_8hpp.html',1,'(Global Namespace)']]],
+  ['subscription_5fcontext_2ehpp_17',['subscription_context.hpp',['../subscription__context_8hpp.html',1,'']]],
+  ['symmetric_2edox_18',['symmetric.dox',['../symmetric_8dox.html',1,'']]]
 ];

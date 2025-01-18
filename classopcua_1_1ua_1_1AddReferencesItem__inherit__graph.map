@@ -1,0 +1,7 @@
+<map id="opcua::ua::AddReferencesItem" name="opcua::ua::AddReferencesItem">
+<area shape="rect" id="Node000001" title="UA_AddReferencesItem wrapper class." alt="" coords="25,196,246,221"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,93,265,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="138,162,138,196,133,196,133,162"/>
+<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="49,5,221,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="138,59,138,93,133,93,133,59"/>
+</map>

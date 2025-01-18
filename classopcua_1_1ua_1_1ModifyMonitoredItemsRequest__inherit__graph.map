@@ -1,0 +1,7 @@
+<map id="opcua::ua::ModifyMonitoredItemsRequest" name="opcua::ua::ModifyMonitoredItemsRequest">
+<area shape="rect" id="Node000001" title="UA_ModifyMonitoredItemsRequest wrapper class." alt="" coords="693,13,896,53"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="297,5,645,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="659,30,693,30,693,35,659,35"/>
+<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="5,13,249,53"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="263,30,297,30,297,35,263,35"/>
+</map>

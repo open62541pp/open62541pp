@@ -1,5 +1,0 @@
-<map id="opcua::detail::IsContiguousContainer&lt; T, std::void_t&lt; decltype(std::declval&lt; T &gt;().data()), decltype(std::declval&lt; T &gt;().size()), decltype(std::declval&lt; T &gt;().begin()), decltype(std::declval&lt; T &gt;().end())&gt; &gt;" name="opcua::detail::IsContiguousContainer&lt; T, std::void_t&lt; decltype(std::declval&lt; T &gt;().data()), decltype(std::declval&lt; T &gt;().size()), decltype(std::declval&lt; T &gt;().begin()), decltype(std::declval&lt; T &gt;().end())&gt; &gt;">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,79,204,207"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="49,5,161,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="107,45,107,78,102,78,102,45"/>
-</map>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['filteroperand_0',['FilterOperand',['../group__Wrapper.html#gaeab625205895bd72f316a463408995f6',1,'opcua']]]
+  ['filteroperand_0',['FilterOperand',['../group__Wrapper.html#gaef0269b244295bbc417aed3b0edd3370',1,'opcua::FilterOperand'],['../group__Wrapper.html#gaef0269b244295bbc417aed3b0edd3370',1,'opcua::ua::FilterOperand']]]
 ];

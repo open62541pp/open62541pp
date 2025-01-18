@@ -1,7 +1,0 @@
-<map id="opcua::DeleteMonitoredItemsRequest" name="opcua::DeleteMonitoredItemsRequest">
-<area shape="rect" id="Node000001" title="UA_DeleteMonitoredItemsRequest wrapper class." alt="" coords="689,13,904,53"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="296,5,641,60"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="655,30,689,30,689,35,655,35"/>
-<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="5,13,248,53"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="262,30,296,30,296,35,262,35"/>
-</map>

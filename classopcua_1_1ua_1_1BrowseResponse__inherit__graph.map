@@ -1,0 +1,7 @@
+<map id="opcua::ua::BrowseResponse" name="opcua::ua::BrowseResponse">
+<area shape="rect" id="Node000001" title="UA_BrowseResponse wrapper class." alt="" coords="23,196,227,221"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,93,245,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="128,162,128,196,123,196,123,162"/>
+<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="46,5,205,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="128,59,128,93,123,93,123,59"/>
+</map>

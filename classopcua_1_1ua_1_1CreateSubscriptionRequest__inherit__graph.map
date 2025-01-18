@@ -1,0 +1,7 @@
+<map id="opcua::ua::CreateSubscriptionRequest" name="opcua::ua::CreateSubscriptionRequest">
+<area shape="rect" id="Node000001" title="UA_CreateSubscriptionRequest wrapper class." alt="" coords="644,13,860,53"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="273,5,596,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="610,30,644,30,644,35,610,35"/>
+<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="5,13,225,53"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="239,30,273,30,273,35,239,35"/>
+</map>

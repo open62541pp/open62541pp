@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$structopcua_1_1detail_1_1MemberType.html" title="Derive member type from member pointer." alt="" coords="5,5,241,31"/>
+<area shape="rect" id="Node000000" href="$classopcua_1_1PluginAdapter.html" title=" " alt="" coords="5,5,176,45"/>
+<area shape="rect" id="Node000001" href="$classopcua_1_1ValueCallbackBase.html" title="Value callback base class for variable nodes." alt="" coords="224,13,417,38"/>
+<area shape="poly" id="edge15_Node000000_Node000001" title=" " alt="" coords="190,23,224,23,224,28,190,28"/>
 </map>

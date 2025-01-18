@@ -1,7 +1,0 @@
-<map id="opcua::SetMonitoringModeResponse" name="opcua::SetMonitoringModeResponse">
-<area shape="rect" id="Node000001" title="UA_SetMonitoringModeResponse wrapper class." alt="" coords="671,13,867,53"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="288,5,623,60"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="637,30,671,30,671,35,637,35"/>
-<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="5,13,240,53"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="254,30,288,30,288,35,254,35"/>
-</map>

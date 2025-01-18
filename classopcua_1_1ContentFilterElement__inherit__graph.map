@@ -1,7 +1,0 @@
-<map id="opcua::ContentFilterElement" name="opcua::ContentFilterElement">
-<area shape="rect" id="Node000001" title="UA_ContentFilterElement wrapper class." alt="" coords="43,196,249,221"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,93,287,148"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="149,162,149,196,143,196,143,162"/>
-<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="55,5,237,45"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="149,59,149,93,143,93,143,59"/>
-</map>

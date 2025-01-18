@@ -1,7 +1,5 @@
 var searchData=
 [
   ['uaduration_0',['UaDuration',['../classopcua_1_1DateTime.html#a6da98fe140ddd9cdec84f2da99332d12',1,'opcua::DateTime']]],
-  ['underlying_1',['Underlying',['../classopcua_1_1Bitmask.html#a08d8accdd8d7b311fa048c3607dccb45',1,'opcua::Bitmask']]],
-  ['underlyinghandler_2',['UnderlyingHandler',['../structopcua_1_1services_1_1detail_1_1AttributeHandlerScalar_3_01T_00_01std_1_1enable__if__t_3_0116dca1c17d4a5c28e956b29be28d01ad.html#a0d110ba99d96fce89199f2cb419372d8',1,'opcua::services::detail::AttributeHandlerScalar&lt; T, std::enable_if_t&lt; std::is_enum_v&lt; T &gt; &gt; &gt;::UnderlyingHandler'],['../structopcua_1_1services_1_1detail_1_1AttributeHandlerScalar_3_01Bitmask_3_01T_01_4_01_4.html#a2f3d9aa55575ca1b550e797437facef0',1,'opcua::services::detail::AttributeHandlerScalar&lt; Bitmask&lt; T &gt; &gt;::UnderlyingHandler']]],
-  ['underlyingtype_3',['UnderlyingType',['../structopcua_1_1services_1_1detail_1_1AttributeHandlerScalar_3_01T_00_01std_1_1enable__if__t_3_0116dca1c17d4a5c28e956b29be28d01ad.html#a515694e098eb91cab7221ca7cc87d981',1,'opcua::services::detail::AttributeHandlerScalar&lt; T, std::enable_if_t&lt; std::is_enum_v&lt; T &gt; &gt; &gt;::UnderlyingType'],['../structopcua_1_1services_1_1detail_1_1AttributeHandlerScalar_3_01Bitmask_3_01T_01_4_01_4.html#a53c1d55621bffcfaf4b7a5ee74b46c81',1,'opcua::services::detail::AttributeHandlerScalar&lt; Bitmask&lt; T &gt; &gt;::UnderlyingType']]]
+  ['underlying_1',['Underlying',['../classopcua_1_1Bitmask.html#a08d8accdd8d7b311fa048c3607dccb45',1,'opcua::Bitmask']]]
 ];

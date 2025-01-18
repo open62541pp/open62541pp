@@ -1,7 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classopcua_1_1PluginAdapter.html" title=" " alt="" coords="5,5,176,45"/>
-<area shape="rect" id="Node000001" href="$classopcua_1_1AccessControlBase.html" title="Access control base class." alt="" coords="224,13,417,38"/>
-<area shape="poly" id="edge3_Node000000_Node000001" title=" " alt="" coords="190,23,224,23,224,28,190,28"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1AccessControlDefault.html" title="Default access control." alt="" coords="465,13,675,38"/>
-<area shape="poly" id="edge4_Node000001_Node000002" title=" " alt="" coords="431,23,465,23,465,28,431,28"/>
+<area shape="rect" id="Node000000" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap native objects." alt="" coords="5,13,168,38"/>
+<area shape="rect" id="Node000001" href="$classopcua_1_1TypeWrapper.html" title="Template base class to wrap UA_* type objects that require manual memory management." alt="" coords="216,5,371,45"/>
+<area shape="poly" id="edge16_Node000000_Node000001" title=" " alt="" coords="182,23,216,23,216,28,182,28"/>
 </map>

@@ -1,7 +1,0 @@
-<map id="opcua::ModifySubscriptionRequest" name="opcua::ModifySubscriptionRequest">
-<area shape="rect" id="Node000001" title="UA_ModifySubscriptionRequest wrapper class." alt="" coords="647,13,840,53"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="275,5,599,60"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="613,30,646,30,646,35,613,35"/>
-<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="5,13,227,53"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="240,30,275,30,275,35,240,35"/>
-</map>

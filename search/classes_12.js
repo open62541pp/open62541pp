@@ -1,14 +1,14 @@
 var searchData=
 [
-  ['transformtoken_0',['TransformToken',['../structopcua_1_1services_1_1detail_1_1TransformToken.html',1,'opcua::services::detail']]],
-  ['translatebrowsepathstonodeidsrequest_1',['TranslateBrowsePathsToNodeIdsRequest',['../classopcua_1_1TranslateBrowsePathsToNodeIdsRequest.html',1,'opcua']]],
-  ['translatebrowsepathstonodeidsresponse_2',['TranslateBrowsePathsToNodeIdsResponse',['../classopcua_1_1TranslateBrowsePathsToNodeIdsResponse.html',1,'opcua']]],
-  ['typeconverter_3',['TypeConverter',['../structopcua_1_1TypeConverter.html',1,'opcua']]],
-  ['typeconverter_3c_20char_5bn_5d_3e_4',['TypeConverter&lt; char[N]&gt;',['../structopcua_1_1TypeConverter_3_01char_0fN_0e_4.html',1,'opcua']]],
-  ['typeconverter_3c_20const_20char_20_2a_20_3e_5',['TypeConverter&lt; const char * &gt;',['../structopcua_1_1TypeConverter_3_01const_01char_01_5_01_4.html',1,'opcua']]],
-  ['typeconverter_3c_20std_3a_3achrono_3a_3atime_5fpoint_3c_20clock_2c_20duration_20_3e_20_3e_6',['TypeConverter&lt; std::chrono::time_point&lt; Clock, Duration &gt; &gt;',['../structopcua_1_1TypeConverter_3_01std_1_1chrono_1_1time__point_3_01Clock_00_01Duration_01_4_01_4.html',1,'opcua']]],
-  ['typeconverter_3c_20std_3a_3astring_20_3e_7',['TypeConverter&lt; std::string &gt;',['../structopcua_1_1TypeConverter_3_01std_1_1string_01_4.html',1,'opcua']]],
-  ['typeconverter_3c_20std_3a_3astring_5fview_20_3e_8',['TypeConverter&lt; std::string_view &gt;',['../structopcua_1_1TypeConverter_3_01std_1_1string__view_01_4.html',1,'opcua']]],
+  ['translatebrowsepathstonodeidsrequest_0',['TranslateBrowsePathsToNodeIdsRequest',['../classopcua_1_1ua_1_1TranslateBrowsePathsToNodeIdsRequest.html',1,'opcua::TranslateBrowsePathsToNodeIdsRequest'],['../classopcua_1_1ua_1_1TranslateBrowsePathsToNodeIdsRequest.html',1,'opcua::ua::TranslateBrowsePathsToNodeIdsRequest']]],
+  ['translatebrowsepathstonodeidsresponse_1',['TranslateBrowsePathsToNodeIdsResponse',['../classopcua_1_1ua_1_1TranslateBrowsePathsToNodeIdsResponse.html',1,'opcua::TranslateBrowsePathsToNodeIdsResponse'],['../classopcua_1_1ua_1_1TranslateBrowsePathsToNodeIdsResponse.html',1,'opcua::ua::TranslateBrowsePathsToNodeIdsResponse']]],
+  ['typeconverter_2',['TypeConverter',['../structopcua_1_1TypeConverter.html',1,'opcua']]],
+  ['typeconverter_3c_20char_5bn_5d_3e_3',['TypeConverter&lt; char[N]&gt;',['../structopcua_1_1TypeConverter_3_01char_0fN_0e_4.html',1,'opcua']]],
+  ['typeconverter_3c_20const_20char_20_2a_20_3e_4',['TypeConverter&lt; const char * &gt;',['../structopcua_1_1TypeConverter_3_01const_01char_01_5_01_4.html',1,'opcua']]],
+  ['typeconverter_3c_20std_3a_3abasic_5fstring_3c_20char_2c_20traits_2c_20allocator_20_3e_20_3e_5',['TypeConverter&lt; std::basic_string&lt; char, Traits, Allocator &gt; &gt;',['../structopcua_1_1TypeConverter_3_01std_1_1basic__string_3_01char_00_01Traits_00_01Allocator_01_4_01_4.html',1,'opcua']]],
+  ['typeconverter_3c_20std_3a_3abasic_5fstring_5fview_3c_20char_2c_20traits_20_3e_20_3e_6',['TypeConverter&lt; std::basic_string_view&lt; char, Traits &gt; &gt;',['../structopcua_1_1TypeConverter_3_01std_1_1basic__string__view_3_01char_00_01Traits_01_4_01_4.html',1,'opcua']]],
+  ['typeconverter_3c_20std_3a_3achrono_3a_3atime_5fpoint_3c_20clock_2c_20duration_20_3e_20_3e_7',['TypeConverter&lt; std::chrono::time_point&lt; Clock, Duration &gt; &gt;',['../structopcua_1_1TypeConverter_3_01std_1_1chrono_1_1time__point_3_01Clock_00_01Duration_01_4_01_4.html',1,'opcua']]],
+  ['typeerror_8',['TypeError',['../classopcua_1_1TypeError.html',1,'opcua']]],
   ['typeregistry_9',['TypeRegistry',['../structopcua_1_1TypeRegistry.html',1,'opcua']]],
   ['typeregistry_3c_20t_2c_20std_3a_3aenable_5fif_5ft_3c_20detail_3a_3aistypewrapper_3c_20t_20_3e_20_3e_20_3e_10',['TypeRegistry&lt; T, std::enable_if_t&lt; detail::isTypeWrapper&lt; T &gt; &gt; &gt;',['../structopcua_1_1TypeRegistry_3_01T_00_01std_1_1enable__if__t_3_01detail_1_1isTypeWrapper_3_01T_01_4_01_4_01_4.html',1,'opcua']]],
   ['typewrapper_11',['TypeWrapper',['../classopcua_1_1TypeWrapper.html',1,'opcua']]],
@@ -34,7 +34,7 @@ var searchData=
   ['typewrapper_3c_20ua_5fbrowseresponse_2c_20ua_5ftypes_5fbrowseresponse_20_3e_31',['TypeWrapper&lt; UA_BrowseResponse, UA_TYPES_BROWSERESPONSE &gt;',['../classopcua_1_1TypeWrapper.html',1,'opcua']]],
   ['typewrapper_3c_20ua_5fbrowseresult_2c_20ua_5ftypes_5fbrowseresult_20_3e_32',['TypeWrapper&lt; UA_BrowseResult, UA_TYPES_BROWSERESULT &gt;',['../classopcua_1_1TypeWrapper.html',1,'opcua']]],
   ['typewrapper_3c_20ua_5fbuildinfo_2c_20ua_5ftypes_5fbuildinfo_20_3e_33',['TypeWrapper&lt; UA_BuildInfo, UA_TYPES_BUILDINFO &gt;',['../classopcua_1_1TypeWrapper.html',1,'opcua']]],
-  ['typewrapper_3c_20ua_5fbytestring_2c_20typeindex_20_3e_34',['TypeWrapper&lt; UA_ByteString, typeIndex &gt;',['../classopcua_1_1TypeWrapper.html',1,'opcua']]],
+  ['typewrapper_3c_20ua_5fbytestring_2c_20ua_5ftypes_5fbytestring_20_3e_34',['TypeWrapper&lt; UA_ByteString, UA_TYPES_BYTESTRING &gt;',['../classopcua_1_1TypeWrapper.html',1,'opcua']]],
   ['typewrapper_3c_20ua_5fcallmethodrequest_2c_20ua_5ftypes_5fcallmethodrequest_20_3e_35',['TypeWrapper&lt; UA_CallMethodRequest, UA_TYPES_CALLMETHODREQUEST &gt;',['../classopcua_1_1TypeWrapper.html',1,'opcua']]],
   ['typewrapper_3c_20ua_5fcallmethodresult_2c_20ua_5ftypes_5fcallmethodresult_20_3e_36',['TypeWrapper&lt; UA_CallMethodResult, UA_TYPES_CALLMETHODRESULT &gt;',['../classopcua_1_1TypeWrapper.html',1,'opcua']]],
   ['typewrapper_3c_20ua_5fcallrequest_2c_20ua_5ftypes_5fcallrequest_20_3e_37',['TypeWrapper&lt; UA_CallRequest, UA_TYPES_CALLREQUEST &gt;',['../classopcua_1_1TypeWrapper.html',1,'opcua']]],
@@ -106,7 +106,7 @@ var searchData=
   ['typewrapper_3c_20ua_5fsettriggeringresponse_2c_20ua_5ftypes_5fsettriggeringresponse_20_3e_103',['TypeWrapper&lt; UA_SetTriggeringResponse, UA_TYPES_SETTRIGGERINGRESPONSE &gt;',['../classopcua_1_1TypeWrapper.html',1,'opcua']]],
   ['typewrapper_3c_20ua_5fsimpleattributeoperand_2c_20ua_5ftypes_5fsimpleattributeoperand_20_3e_104',['TypeWrapper&lt; UA_SimpleAttributeOperand, UA_TYPES_SIMPLEATTRIBUTEOPERAND &gt;',['../classopcua_1_1TypeWrapper.html',1,'opcua']]],
   ['typewrapper_3c_20ua_5fstatuschangenotification_2c_20ua_5ftypes_5fstatuschangenotification_20_3e_105',['TypeWrapper&lt; UA_StatusChangeNotification, UA_TYPES_STATUSCHANGENOTIFICATION &gt;',['../classopcua_1_1TypeWrapper.html',1,'opcua']]],
-  ['typewrapper_3c_20ua_5fstring_2c_20typeindex_20_3e_106',['TypeWrapper&lt; UA_String, typeIndex &gt;',['../classopcua_1_1TypeWrapper.html',1,'opcua']]],
+  ['typewrapper_3c_20ua_5fstring_2c_20ua_5ftypes_5fstring_20_3e_106',['TypeWrapper&lt; UA_String, UA_TYPES_STRING &gt;',['../classopcua_1_1TypeWrapper.html',1,'opcua']]],
   ['typewrapper_3c_20ua_5fstructuredefinition_2c_20ua_5ftypes_5fstructuredefinition_20_3e_107',['TypeWrapper&lt; UA_StructureDefinition, UA_TYPES_STRUCTUREDEFINITION &gt;',['../classopcua_1_1TypeWrapper.html',1,'opcua']]],
   ['typewrapper_3c_20ua_5fstructurefield_2c_20ua_5ftypes_5fstructurefield_20_3e_108',['TypeWrapper&lt; UA_StructureField, UA_TYPES_STRUCTUREFIELD &gt;',['../classopcua_1_1TypeWrapper.html',1,'opcua']]],
   ['typewrapper_3c_20ua_5ftranslatebrowsepathstonodeidsrequest_2c_20ua_5ftypes_5ftranslatebrowsepathstonodeidsrequest_20_3e_109',['TypeWrapper&lt; UA_TranslateBrowsePathsToNodeIdsRequest, UA_TYPES_TRANSLATEBROWSEPATHSTONODEIDSREQUEST &gt;',['../classopcua_1_1TypeWrapper.html',1,'opcua']]],
@@ -125,5 +125,5 @@ var searchData=
   ['typewrapper_3c_20ua_5fwriteresponse_2c_20ua_5ftypes_5fwriteresponse_20_3e_122',['TypeWrapper&lt; UA_WriteResponse, UA_TYPES_WRITERESPONSE &gt;',['../classopcua_1_1TypeWrapper.html',1,'opcua']]],
   ['typewrapper_3c_20ua_5fwritevalue_2c_20ua_5ftypes_5fwritevalue_20_3e_123',['TypeWrapper&lt; UA_WriteValue, UA_TYPES_WRITEVALUE &gt;',['../classopcua_1_1TypeWrapper.html',1,'opcua']]],
   ['typewrapper_3c_20ua_5fx509identitytoken_2c_20ua_5ftypes_5fx509identitytoken_20_3e_124',['TypeWrapper&lt; UA_X509IdentityToken, UA_TYPES_X509IDENTITYTOKEN &gt;',['../classopcua_1_1TypeWrapper.html',1,'opcua']]],
-  ['typewrapper_3c_20ua_5fxmlelement_2c_20typeindex_20_3e_125',['TypeWrapper&lt; UA_XmlElement, typeIndex &gt;',['../classopcua_1_1TypeWrapper.html',1,'opcua']]]
+  ['typewrapper_3c_20ua_5fxmlelement_2c_20ua_5ftypes_5fxmlelement_20_3e_125',['TypeWrapper&lt; UA_XmlElement, UA_TYPES_XMLELEMENT &gt;',['../classopcua_1_1TypeWrapper.html',1,'opcua']]]
 ];
