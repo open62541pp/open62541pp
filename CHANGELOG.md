@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.17.0] - 2025-01-18
+
 ### Added
 
 - [`IntegerId`](https://reference.opcfoundation.org/Core/Part4/v105/docs/7.19) alias for `uint32_t` (#446)
@@ -27,7 +29,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Universal `Variant` constructor for scalars/arrays (#384, #495, #497)
   - Universal `Variant::assign` function for scalars/arrays, replacing `Variant::setScalar*`/`Variant::setArray*` functions (#496, #510)
   - Assignment operator for scalars/arrays (#503)
-  - `Variant::to<T>` function to retrieve/convert scalars/arrays (#492)
+  - `Variant::to<T>` function to retrieve/convert scalars/arrays replacing `Variant::getScalar*`/`Variant::getArray*` functions (#492)
+
+  ```cpp
+  int value = 11;
+
+  opcua::Variant var(value);   // copy
+  opcua::Variant var(&value);  // no copy
+
+  var.assign(value);           // copy
+  var.assign(&value);          // no copy
+  var = value;                 // copy
+  var = &value;                // no copy
+
+  int& valueRef = var.scalar<int>();
+  int valueCopy = var.to<int>();
+  ```
+
 - Remove `crypto` namespace (#445)
 - Move types and NodeIds of http://opcfoundation.org/UA/ (namespace zero) into inline namespace `ua` (#454)
 - Remove `maxReferences` parameter from `services::browseAll` (#457)
@@ -35,8 +53,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove `get` prefix of getter member functions (#459)
 - Rename `isEmpty` member functions to `empty` (#499)
 - Universal `ExtensionObject` constructor (#504)
-- `ValueCallback` as abstract base class (#522)
-- `DataSource` as abstract base class (#525)
+- `ValueCallback` as abstract base class exposing all parameters (#522)
+- `DataSource` as abstract base class exposing all parameters (#525)
 - Create `Subscription` via constructor (#533)
 
 ### Fixed
@@ -791,7 +809,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial public release
 
-[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.16.0...HEAD
+[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.17.0...HEAD
+[0.17.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.17.0
 [0.16.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.16.0
 [0.15.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.15.0
 [0.14.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.14.0
