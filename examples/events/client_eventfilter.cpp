@@ -42,7 +42,7 @@ int main() {
         filterCombined
     );
 
-    auto sub = client.createSubscription();
+    opcua::Subscription sub(client);
     sub.subscribeEvent(
         opcua::ObjectId::Server,
         eventFilter,

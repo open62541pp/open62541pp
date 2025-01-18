@@ -240,6 +240,8 @@ public:
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
     /// Create a (pseudo) subscription to monitor local data changes and events.
+    /// @deprecated Use Subscription constructor
+    [[deprecated("use Subscription constructor")]]
     Subscription<Server> createSubscription() noexcept;
 #endif
 

@@ -253,6 +253,8 @@ public:
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
     /// Create a subscription to monitor data changes and events.
+    /// @deprecated Use Subscription constructor
+    [[deprecated("use Subscription constructor")]]
     Subscription<Client> createSubscription(const SubscriptionParameters& parameters = {});
 
     /// Get all active subscriptions

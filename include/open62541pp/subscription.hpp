@@ -41,6 +41,11 @@ using EventNotificationCallback = services::EventNotificationCallback;
 template <typename Connection>
 class Subscription {
 public:
+    /// Create a new subscription.
+    /// The subscription is not automatically deleted by the destructor.
+    /// You must delete it manually with @ref deleteSubscription or services::deleteSubscription.
+    explicit Subscription(Connection& connection, const SubscriptionParameters& parameters = {});
+
     /// Wrap an existing subscription.
     /// The `subscriptionId` is ignored and set to `0U` for servers.
     Subscription(Connection& connection, IntegerId subscriptionId) noexcept

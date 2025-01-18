@@ -12,7 +12,7 @@ int main() {
     // items are deleted. This approach with the state callback assures, that the subscriptions are
     // recreated whenever the client reconnects to the server.
     client.onSessionActivated([&] {
-        auto sub = client.createSubscription();
+        opcua::Subscription sub(client);
 
         // Modify and delete the subscription via the returned Subscription<T> object
         opcua::SubscriptionParameters subscriptionParameters{};
