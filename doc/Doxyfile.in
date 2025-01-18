@@ -40,6 +40,8 @@ INPUT                  = "${PROJECT_SOURCE_DIR}/include/" \
                          "${CMAKE_CURRENT_SOURCE_DIR}/"
 FILE_PATTERNS          = *.h *.hpp *.cpp *.dox *.md
 RECURSIVE              = YES
+EXCLUDE_SYMBOLS        = opcua::detail \
+                         opcua::*::detail
 EXAMPLE_PATH           = "${PROJECT_SOURCE_DIR}/examples" \
                          "${CMAKE_CURRENT_SOURCE_DIR}/fragments"
 EXAMPLE_PATTERNS       = *.h *.hpp *.cpp
