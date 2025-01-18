@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.12)
 
 project(
     open62541pp
-    VERSION 0.16.0
+    VERSION 0.17.0
     DESCRIPTION "C++ wrapper of open62541"
     HOMEPAGE_URL "https://github.com/open62541pp/open62541pp"
     LANGUAGES CXX
