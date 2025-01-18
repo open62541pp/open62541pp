@@ -58,6 +58,12 @@ TEST_CASE("Array handling") {
     }
 
     SUBCASE("Copy") {
+        SUBCASE("Empty array") {
+            UA_Int32* src = nullptr;
+            CHECK(detail::copyArray(src, 0) == UA_EMPTY_ARRAY_SENTINEL);
+            CHECK(detail::copyArray(src, 0, UA_TYPES[UA_TYPES_INT32]) == UA_EMPTY_ARRAY_SENTINEL);
+        }
+
         SUBCASE("Without pointers") {
             const size_t size = 2;
             const auto& type = UA_TYPES[UA_TYPES_INT32];
