@@ -5,12 +5,17 @@
   <navindex>
     <tab type="mainpage" visible="yes" title="About"/>
     <tab type="user" url="@ref guide" title="Guide"/>
-    <tab type="examples" visible="yes" title="" intro=""/>
+    <tab type="examples" visible="yes" title="Examples" intro=""/>
 
-    <tab type="user" url="@ref opcua::Server" title="Server"/>
-    <tab type="user" url="@ref opcua::Client" title="Client"/>
-    <tab type="user" url="@ref opcua::Node" title="Node"/>
-    <tab type="user" url="@ref Wrapper" title="Wrapper"/>
+    <tab type="usergroup" title="Classes">
+      <tab type="user" url="@ref opcua::Server" title="Server"/>
+      <tab type="user" url="@ref opcua::Client" title="Client"/>
+      <tab type="user" url="@ref opcua::Node" title="Node"/>
+      <tab type="user" url="@ref opcua::Subscription" title="Subscription"/>
+      <tab type="user" url="@ref opcua::MonitoredItem" title="MonitoredItem"/>
+      <tab type="user" url="@ref Wrapper" title="Wrapper"/>
+    </tab>
+
     <tab type="user" url="@ref Services" title="Services"/>
     <tab type="user" url="@ref NodeIds" title="NodeIds"/>
 
