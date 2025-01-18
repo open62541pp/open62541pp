@@ -28,7 +28,8 @@ TEST_CASE("Subscription & MonitoredItem (server)") {
     }
 
     SUBCASE("Create & delete subscription") {
-        auto sub = server.createSubscription();
+        Subscription sub(server);
+        CHECK(sub.subscriptionId() == 0U);
         CHECK(sub.monitoredItems().empty());
 
         MonitoringParametersEx monitoringParameters{};
@@ -71,8 +72,8 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
         CHECK(client.subscriptions().empty());
 
         const SubscriptionParameters parameters{};
-        auto sub = client.createSubscription(parameters);
-        CAPTURE(sub.subscriptionId());
+        Subscription sub(client, parameters);
+        CHECK(sub.subscriptionId() > 0U);
 
         CHECK(client.subscriptions().size() == 1);
         CHECK(client.subscriptions().at(0) == sub);
@@ -85,10 +86,11 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
     }
 
     SUBCASE("Modify subscription") {
-        auto sub = client.createSubscription();
+        SubscriptionParameters parameters{};
+        Subscription sub(client, parameters);
+
         sub.setPublishingMode(false);
 
-        SubscriptionParameters parameters{};
         parameters.priority = 10;
         sub.setSubscriptionParameters(parameters);
     }
@@ -97,7 +99,7 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
         const SubscriptionParameters subscriptionParameters{};
         MonitoringParametersEx monitoringParameters{};
 
-        auto sub = client.createSubscription(subscriptionParameters);
+        Subscription sub(client, subscriptionParameters);
         sub.setPublishingMode(false);  // enable later
 
         size_t notificationCount = 0;
@@ -127,7 +129,7 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
     }
 
     SUBCASE("Monitor data change with multiple monitored items") {
-        auto sub = client.createSubscription();
+        Subscription sub(client);
 
         IntegerId monId1 = 0;
         auto monItem1 = sub.subscribeDataChange(
@@ -152,7 +154,7 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
     }
 
     SUBCASE("Modify monitored item") {
-        auto sub = client.createSubscription();
+        Subscription sub(client);
         auto mon = sub.subscribeDataChange(
             VariableId::Server_ServerStatus_CurrentTime,
             AttributeId::Value,
@@ -168,7 +170,7 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS_EVENTS
     SUBCASE("Monitor event") {
-        auto sub = client.createSubscription();
+        Subscription sub(client);
 
         EventFilter eventFilter(
             {

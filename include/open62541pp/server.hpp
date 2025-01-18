@@ -15,7 +15,7 @@
 #include "open62541pp/event.hpp"
 #include "open62541pp/session.hpp"
 #include "open62541pp/span.hpp"
-#include "open62541pp/subscription.hpp"
+#include "open62541pp/subscription.hpp"  // TODO: remove with Server::createSubscription
 #include "open62541pp/types.hpp"
 #include "open62541pp/ua/nodeids.hpp"
 #include "open62541pp/wrapper.hpp"
@@ -240,6 +240,8 @@ public:
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
     /// Create a (pseudo) subscription to monitor local data changes and events.
+    /// @deprecated Use Subscription constructor
+    [[deprecated("use Subscription constructor")]]
     Subscription<Server> createSubscription() noexcept;
 #endif
 
