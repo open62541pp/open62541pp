@@ -45,7 +45,7 @@ jobs:
           - name: Linux GCC 14
             os: ubuntu-24.04
             compiler: g++-14
-            coverage: true
+            coverage: false # TODO: gcovr processing errors
             gcov: gcov-14
 
           - name: Linux Clang 13

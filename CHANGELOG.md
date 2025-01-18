@@ -44,6 +44,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Result` constructor with value and bad status code (#460)
 - Thread-safe session registry (#486)
 - Avoid redefinition of `NOMINMAX` macro for Windows systems (#523)
+- Fix undefined behavior in `detail::copyArray` (#532)
 
 ## [0.16.0] - 2024-11-13
 

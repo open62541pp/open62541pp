@@ -168,6 +168,9 @@ template <typename T>
 template <typename T>
 [[nodiscard]] T* copyArray(const T* src, size_t size) {
     T* dst = allocateArray<T>(size);
+    if (src == nullptr) {
+        return dst;
+    }
     std::memcpy(dst, src, size * sizeof(T));
     return dst;
 }
@@ -175,6 +178,9 @@ template <typename T>
 template <typename T>
 [[nodiscard]] T* copyArray(const T* src, size_t size, const UA_DataType& type) {
     T* dst = allocateArray<T>(size, type);
+    if (src == nullptr) {
+        return dst;
+    }
     if constexpr (!isPointerFree<T>) {
         // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
         std::transform(src, src + size, dst, [&](const T& item) { return copy(item, type); });
@@ -186,7 +192,7 @@ template <typename T>
 
 template <typename T>
 void resizeArray(T*& array, size_t& size, size_t newSize, const UA_DataType& type) {
-    if (newSize == size) {
+    if (array == nullptr || newSize == size) {
         return;
     }
     T* newArray = allocateArray<T>(newSize, type);
