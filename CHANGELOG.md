@@ -30,7 +30,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Universal `Variant::assign` function for scalars/arrays, replacing `Variant::setScalar*`/`Variant::setArray*` functions (#496, #510)
   - Assignment operator for scalars/arrays (#503)
   - `Variant::to<T>` function to retrieve/convert scalars/arrays replacing `Variant::getScalar*`/`Variant::getArray*` functions (#492)
-
   ```cpp
   int value = 11;
 
@@ -45,7 +44,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   int& valueRef = var.scalar<int>();
   int valueCopy = var.to<int>();
   ```
-
 - Remove `crypto` namespace (#445)
 - Move types and NodeIds of http://opcfoundation.org/UA/ (namespace zero) into inline namespace `ua` (#454)
 - Remove `maxReferences` parameter from `services::browseAll` (#457)
