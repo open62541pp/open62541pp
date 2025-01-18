@@ -3,6 +3,7 @@
 #include <thread>
 
 #include <open62541pp/client.hpp>
+#include <open62541pp/subscription.hpp>
 
 int main() {
     opcua::Client client;

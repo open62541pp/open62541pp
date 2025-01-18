@@ -13,7 +13,7 @@
 #include "open62541pp/detail/client_utils.hpp"
 #include "open62541pp/detail/open62541/client.h"
 #include "open62541pp/span.hpp"
-#include "open62541pp/subscription.hpp"
+#include "open62541pp/subscription.hpp"  // TODO: remove with Client::createSubscription
 #include "open62541pp/types.hpp"
 #include "open62541pp/ua/types.hpp"
 #include "open62541pp/wrapper.hpp"
