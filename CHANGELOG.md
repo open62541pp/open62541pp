@@ -37,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Universal `ExtensionObject` constructor (#504)
 - `ValueCallback` as abstract base class (#522)
 - `DataSource` as abstract base class (#525)
+- Create `Subscription` via constructor (#533)
 
 ### Fixed
 
