@@ -759,24 +759,22 @@ public:
             return identifierType() == NodeIdType::Numeric
                 ? &handle()->identifier.numeric
                 : nullptr;
-        }
-        if constexpr (std::is_same_v<T, String>) {
+        } else if constexpr (std::is_same_v<T, String>) {
             return identifierType() == NodeIdType::String
                 ? asWrapper<String>(&handle()->identifier.string)
                 : nullptr;
-        }
-        if constexpr (std::is_same_v<T, Guid>) {
+        } else if constexpr (std::is_same_v<T, Guid>) {
             return identifierType() == NodeIdType::Guid
                 ? asWrapper<Guid>(&handle()->identifier.guid)
                 : nullptr;
-        }
-        if constexpr (std::is_same_v<T, ByteString>) {
+        } else if constexpr (std::is_same_v<T, ByteString>) {
             return identifierType() == NodeIdType::ByteString
                 ? asWrapper<ByteString>(&handle()->identifier.byteString)
                 : nullptr;
+        } else {
+            return nullptr;
         }
         // NOLINTEND(cppcoreguidelines-pro-type-union-access)
-        return nullptr;
     }
 
     /**
@@ -855,14 +853,11 @@ private:
     auto getIdentifierAsImpl() const {
         if constexpr (E == NodeIdType::Numeric) {
             return getIdentifierAsImpl<uint32_t>();
-        }
-        if constexpr (E == NodeIdType::String) {
+        } else if constexpr (E == NodeIdType::String) {
             return getIdentifierAsImpl<String>();
-        }
-        if constexpr (E == NodeIdType::Guid) {
+        } else if constexpr (E == NodeIdType::Guid) {
             return getIdentifierAsImpl<Guid>();
-        }
-        if constexpr (E == NodeIdType::ByteString) {
+        } else if constexpr (E == NodeIdType::ByteString) {
             return getIdentifierAsImpl<ByteString>();
         }
     }
