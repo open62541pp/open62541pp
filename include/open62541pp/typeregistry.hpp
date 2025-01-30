@@ -110,6 +110,3 @@ struct TypeRegistry<UA_String> {
 // @endcond
 
 }  // namespace opcua
-
-// include template specializations for native types
-#include "open62541pp/typeregistry_generated.hpp"

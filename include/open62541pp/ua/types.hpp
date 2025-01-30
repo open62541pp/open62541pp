@@ -19,6 +19,7 @@
 #include "open62541pp/types.hpp"
 #include "open62541pp/typewrapper.hpp"
 #include "open62541pp/ua/nodeids.hpp"  // ReferenceTypeId
+#include "open62541pp/ua/typeregistry.hpp"
 
 #ifndef UA_DEFAULT_ATTRIBUTES_DEFINED
 #define UA_DEFAULT_ATTRIBUTES_DEFINED

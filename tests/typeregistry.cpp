@@ -2,6 +2,7 @@
 
 #include "open62541pp/typeregistry.hpp"
 #include "open62541pp/typewrapper.hpp"
+#include "open62541pp/ua/typeregistry.hpp"
 
 using namespace opcua;
 
