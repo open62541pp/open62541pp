@@ -1,6 +1,7 @@
 #pragma once
 
 #include "open62541pp/ua/nodeids.hpp"
+#include "open62541pp/ua/typeregistry.hpp"
 #include "open62541pp/ua/types.hpp"
 
 namespace opcua {
