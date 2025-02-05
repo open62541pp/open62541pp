@@ -336,15 +336,18 @@ static void setVariableNodeValueCallbackImpl(
     auto* nodeContext = detail::getContext(server).nodeContexts[id];
     nodeContext->valueCallback = std::move(callback);
     throwIfBad(UA_Server_setNodeContext(server.handle(), id, nodeContext));
-    throwIfBad(UA_Server_setVariableNode_valueCallback(server.handle(), id, callback->create(false))
-    );
+    throwIfBad(UA_Server_setVariableNode_valueCallback(
+        server.handle(), id, nodeContext->valueCallback->create(false)
+    ));
 }
 
 void Server::setVariableNodeValueCallback(const NodeId& id, ValueCallbackBase& callback) {
     setVariableNodeValueCallbackImpl(*this, id, detail::UniqueOrRawPtr{&callback});
 }
 
-void Server::setVariableNodeValueCallback(const NodeId& id, std::unique_ptr<ValueCallbackBase>&& callback) {
+void Server::setVariableNodeValueCallback(
+    const NodeId& id, std::unique_ptr<ValueCallbackBase>&& callback
+) {
     setVariableNodeValueCallbackImpl(*this, id, detail::UniqueOrRawPtr{std::move(callback)});
 }
 
@@ -354,7 +357,9 @@ static void setVariableNodeDataSourceImpl(
     auto* nodeContext = detail::getContext(server).nodeContexts[id];
     nodeContext->dataSource = std::move(source);
     throwIfBad(UA_Server_setNodeContext(server.handle(), id, nodeContext));
-    throwIfBad(UA_Server_setVariableNode_dataSource(server.handle(), id, source->create(false)));
+    throwIfBad(UA_Server_setVariableNode_dataSource(
+        server.handle(), id, nodeContext->dataSource->create(false)
+    ));
 }
 
 void Server::setVariableNodeDataSource(const NodeId& id, DataSourceBase& source) {

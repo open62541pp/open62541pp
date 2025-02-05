@@ -45,7 +45,7 @@ public:
         return get();
     }
 
-    constexpr T* get() noexcept {
+    constexpr T* get() noexcept {  // NOLINT(*exception-escape)
         return std::visit(
             Overload{
                 [](T* ptr) { return ptr; },
