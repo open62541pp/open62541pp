@@ -29,11 +29,11 @@ public:
         return *this;
     }
 
-    constexpr T operator*() noexcept {
+    constexpr T& operator*() noexcept {
         return *get();
     }
 
-    constexpr T operator*() const noexcept {
+    constexpr const T& operator*() const noexcept {
         return *get();
     }
 
