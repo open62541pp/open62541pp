@@ -233,10 +233,14 @@ public:
     /// Register namespace. The new namespace index will be returned.
     [[nodiscard]] NamespaceIndex registerNamespace(std::string_view uri);
 
-    /// Set value callbacks to execute before every read and after every write operation.
+    /// Set value callback for variable node.
     void setVariableNodeValueCallback(const NodeId& id, ValueCallbackBase& callback);
+    /// Set value callback for variable node (move ownership to server).
+    void setVariableNodeValueCallback(const NodeId& id, std::unique_ptr<ValueCallbackBase>&& callback);
     /// Set data source for variable node.
     void setVariableNodeDataSource(const NodeId& id, DataSourceBase& source);
+    /// Set data source for variable node (move ownership to server).
+    void setVariableNodeDataSource(const NodeId& id, std::unique_ptr<DataSourceBase>&& source);
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
     /// Create a (pseudo) subscription to monitor local data changes and events.
