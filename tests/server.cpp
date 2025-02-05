@@ -194,8 +194,13 @@ TEST_CASE("ValueCallback") {
     auto node = Node(server, ObjectId::ObjectsFolder).addVariable(id, "TestVariable");
     node.writeValueScalar<int>(1);
 
-    ValueCallbackTest callback;
+    auto callbackPtr = std::make_unique<ValueCallbackTest>();
+    auto& callback = *callbackPtr;
     server.setVariableNodeValueCallback(id, callback);
+
+    SUBCASE("move ownership") {
+        server.setVariableNodeValueCallback(id, std::move(callbackPtr));
+    }
 
     SUBCASE("trigger onRead callback with read operation") {
         CHECK(node.readValueScalar<int>() == 1);
@@ -254,8 +259,12 @@ TEST_CASE("DataSource") {
     const NodeId id{1, 1000};
     auto node = Node(server, ObjectId::ObjectsFolder).addVariable(id, "TestVariable");
 
-    DataSourceTest source;
+    auto sourcePtr = std::make_unique<DataSourceTest>();
+    auto& source = *sourcePtr;
     server.setVariableNodeDataSource(id, source);
+    SUBCASE("move ownership") {
+        server.setVariableNodeDataSource(id, std::move(sourcePtr));
+    }
 
     SUBCASE("read") {
         source.data = 1;
