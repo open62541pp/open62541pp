@@ -330,18 +330,44 @@ NamespaceIndex Server::registerNamespace(std::string_view uri) {
     return UA_Server_addNamespace(handle(), std::string(uri).c_str());
 }
 
+static void setVariableNodeValueCallbackImpl(
+    Server& server, const NodeId& id, detail::UniqueOrRawPtr<ValueCallbackBase>&& callback
+) {
+    auto* nodeContext = detail::getContext(server).nodeContexts[id];
+    nodeContext->valueCallback = std::move(callback);
+    throwIfBad(UA_Server_setNodeContext(server.handle(), id, nodeContext));
+    throwIfBad(UA_Server_setVariableNode_valueCallback(
+        server.handle(), id, nodeContext->valueCallback->create(false)
+    ));
+}
+
 void Server::setVariableNodeValueCallback(const NodeId& id, ValueCallbackBase& callback) {
-    auto* nodeContext = detail::getContext(*this).nodeContexts[id];
-    nodeContext->valueCallback = &callback;
-    throwIfBad(UA_Server_setNodeContext(handle(), id, nodeContext));
-    throwIfBad(UA_Server_setVariableNode_valueCallback(handle(), id, callback.create(false)));
+    setVariableNodeValueCallbackImpl(*this, id, detail::UniqueOrRawPtr{&callback});
+}
+
+void Server::setVariableNodeValueCallback(
+    const NodeId& id, std::unique_ptr<ValueCallbackBase>&& callback
+) {
+    setVariableNodeValueCallbackImpl(*this, id, detail::UniqueOrRawPtr{std::move(callback)});
+}
+
+static void setVariableNodeDataSourceImpl(
+    Server& server, const NodeId& id, detail::UniqueOrRawPtr<DataSourceBase>&& source
+) {
+    auto* nodeContext = detail::getContext(server).nodeContexts[id];
+    nodeContext->dataSource = std::move(source);
+    throwIfBad(UA_Server_setNodeContext(server.handle(), id, nodeContext));
+    throwIfBad(UA_Server_setVariableNode_dataSource(
+        server.handle(), id, nodeContext->dataSource->create(false)
+    ));
 }
 
 void Server::setVariableNodeDataSource(const NodeId& id, DataSourceBase& source) {
-    auto* nodeContext = detail::getContext(*this).nodeContexts[id];
-    nodeContext->dataSource = &source;
-    throwIfBad(UA_Server_setNodeContext(handle(), id, nodeContext));
-    throwIfBad(UA_Server_setVariableNode_dataSource(handle(), id, source.create(false)));
+    setVariableNodeDataSourceImpl(*this, id, detail::UniqueOrRawPtr{&source});
+}
+
+void Server::setVariableNodeDataSource(const NodeId& id, std::unique_ptr<DataSourceBase>&& source) {
+    setVariableNodeDataSourceImpl(*this, id, detail::UniqueOrRawPtr{std::move(source)});
 }
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS

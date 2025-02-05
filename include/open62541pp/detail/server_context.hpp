@@ -13,6 +13,7 @@
 #include "open62541pp/detail/contextmap.hpp"
 #include "open62541pp/detail/exceptioncatcher.hpp"
 #include "open62541pp/detail/open62541/common.h"  // UA_AccessControl
+#include "open62541pp/detail/ptr.hpp"
 #include "open62541pp/plugin/nodestore.hpp"
 #include "open62541pp/services/detail/monitoreditem_context.hpp"
 #include "open62541pp/types.hpp"  // NodeId, Variant
@@ -21,13 +22,12 @@
 namespace opcua::detail {
 
 struct NodeContext {
-    ValueCallbackBase* valueCallback{nullptr};
-    DataSourceBase* dataSource{nullptr};
+    UniqueOrRawPtr<ValueCallbackBase> valueCallback;
+    UniqueOrRawPtr<DataSourceBase> dataSource;
 #ifdef UA_ENABLE_METHODCALLS
     std::function<void(Span<const Variant> input, Span<Variant> output)> methodCallback;
 #endif
 };
-
 
 struct SessionRegistry {
     using Context = void*;
