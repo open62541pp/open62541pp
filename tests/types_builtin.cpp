@@ -408,7 +408,15 @@ TEST_CASE("NodeId") {
         CHECK(NodeId(MethodId::AddCommentMethodType) == NodeId(0, UA_NS0ID_ADDCOMMENTMETHODTYPE));
     }
 
-    SUBCASE("Get invalid identifier type") {
+#if UAPP_HAS_PARSING
+    SUBCASE("parse") {
+        const auto id = NodeId::parse("ns=2;s=Test");
+        CHECK(id.namespaceIndex() == 2);
+        CHECK(id.identifier<String>() == "Test");
+    }
+#endif
+
+    SUBCASE("identifierIf/identifier") {
         NodeId id(1, 123);
         CHECK(id.identifierIf<uint32_t>() != nullptr);
         CHECK(id.identifierIf<String>() == nullptr);
@@ -418,6 +426,27 @@ TEST_CASE("NodeId") {
         CHECK_THROWS_AS(id.identifier<String>(), TypeError);
         CHECK_THROWS_AS(id.identifier<Guid>(), TypeError);
         CHECK_THROWS_AS(id.identifier<ByteString>(), TypeError);
+    }
+
+    SUBCASE("isNull") {
+        CHECK(NodeId().isNull());
+        CHECK_FALSE(NodeId(0, 1).isNull());
+    }
+
+    SUBCASE("hash") {
+        CHECK(NodeId(0, 1).hash() == NodeId(0, 1).hash());
+        CHECK(NodeId(0, 1).hash() != NodeId(0, 2).hash());
+        CHECK(NodeId(0, 1).hash() != NodeId(1, 1).hash());
+    }
+
+    SUBCASE("toString") {
+        CHECK(NodeId(0, 13).toString() == "i=13");
+        CHECK(NodeId(10, 1).toString() == "ns=10;i=1");
+        CHECK(NodeId(10, "Hello:World").toString() == "ns=10;s=Hello:World");
+        CHECK(NodeId(0, Guid()).toString() == "g=00000000-0000-0000-0000-000000000000");
+#if UAPP_OPEN62541_VER_GE(1, 1)
+        CHECK(NodeId(1, ByteString("test123")).toString() == "ns=1;b=dGVzdDEyMw==");
+#endif
     }
 
     SUBCASE("Comparison") {
@@ -436,27 +465,6 @@ TEST_CASE("NodeId") {
 
         CHECK(NodeId(1, "a") < NodeId(1, "b"));
         CHECK(NodeId(1, "b") > NodeId(1, "a"));
-    }
-
-    SUBCASE("isNull") {
-        CHECK(NodeId().isNull());
-        CHECK_FALSE(NodeId(0, 1).isNull());
-    }
-
-    SUBCASE("Hash") {
-        CHECK(NodeId(0, 1).hash() == NodeId(0, 1).hash());
-        CHECK(NodeId(0, 1).hash() != NodeId(0, 2).hash());
-        CHECK(NodeId(0, 1).hash() != NodeId(1, 1).hash());
-    }
-
-    SUBCASE("toString") {
-        CHECK(NodeId(0, 13).toString() == "i=13");
-        CHECK(NodeId(10, 1).toString() == "ns=10;i=1");
-        CHECK(NodeId(10, "Hello:World").toString() == "ns=10;s=Hello:World");
-        CHECK(NodeId(0, Guid()).toString() == "g=00000000-0000-0000-0000-000000000000");
-#if UAPP_OPEN62541_VER_GE(1, 1)
-        CHECK(NodeId(1, ByteString("test123")).toString() == "ns=1;b=dGVzdDEyMw==");
-#endif
     }
 
     SUBCASE("std::hash specialization") {
@@ -481,7 +489,18 @@ TEST_CASE("ExpandedNodeId") {
     CHECK(idLocal == idLocal);
     CHECK(idLocal != idFull);
 
-    SUBCASE("Hash") {
+
+#if UAPP_HAS_PARSING
+    SUBCASE("parse") {
+        const auto id = ExpandedNodeId::parse("svr=1;nsu=http://example.org/UA/;i=1234");
+        CHECK(id.serverIndex() == 1);
+        CHECK(id.namespaceUri() == "http://example.org/UA/");
+        CHECK(id.nodeId().namespaceIndex() == 0);
+        CHECK(id.nodeId().identifier<uint32_t>() == 1234);
+    }
+#endif
+
+    SUBCASE("hash") {
         CHECK(ExpandedNodeId().hash() == ExpandedNodeId().hash());
         CHECK(ExpandedNodeId().hash() != idLocal.hash());
         CHECK(ExpandedNodeId().hash() != idFull.hash());
