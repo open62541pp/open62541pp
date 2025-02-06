@@ -83,31 +83,6 @@ std::ostream& operator<<(std::ostream& os, const XmlElement& xmlElement) {
     return os;
 }
 
-/* ---------------------------------------- NumericRange ---------------------------------------- */
-
-NumericRange::NumericRange(std::string_view encodedRange) {
-    const auto encodedRangeNative = detail::toNativeString(encodedRange);
-#if UAPP_OPEN62541_VER_GE(1, 1)
-    throwIfBad(UA_NumericRange_parse(handle(), encodedRangeNative));
-#else
-    throwIfBad(UA_NumericRange_parseFromString(handle(), &encodedRangeNative));
-#endif
-}
-
-std::string NumericRange::toString() const {
-    std::ostringstream ss;
-    for (const auto& dimension : dimensions()) {
-        ss << dimension.min;
-        if (dimension.min != dimension.max) {
-            ss << ':' << dimension.max;
-        }
-        ss << ',';
-    }
-    auto str = ss.str();
-    str.pop_back();  // remove last comma
-    return str;
-}
-
 /* ------------------------------------------- NodeId ------------------------------------------- */
 
 std::string NodeId::toString() const {
@@ -146,6 +121,31 @@ std::string ExpandedNodeId::toString() const {
     }
     result.append(nodeId().toString());
     return result;
+}
+
+/* ---------------------------------------- NumericRange ---------------------------------------- */
+
+NumericRange::NumericRange(std::string_view encodedRange) {
+    const auto encodedRangeNative = detail::toNativeString(encodedRange);
+#if UAPP_OPEN62541_VER_GE(1, 1)
+    throwIfBad(UA_NumericRange_parse(handle(), encodedRangeNative));
+#else
+    throwIfBad(UA_NumericRange_parseFromString(handle(), &encodedRangeNative));
+#endif
+}
+
+std::string NumericRange::toString() const {
+    std::ostringstream ss;
+    for (const auto& dimension : dimensions()) {
+        ss << dimension.min;
+        if (dimension.min != dimension.max) {
+            ss << ':' << dimension.max;
+        }
+        ss << ',';
+    }
+    auto str = ss.str();
+    str.pop_back();  // remove last comma
+    return str;
 }
 
 }  // namespace opcua

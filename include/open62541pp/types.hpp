@@ -508,7 +508,7 @@ public:
 
 #if UAPP_HAS_PARSING
     /// Parse Guid from its string representation.
-    /// Format: C496578A-0DFE-4B8F-870A-745238C6AEAE.
+    /// Format: `C496578A-0DFE-4B8F-870A-745238C6AEAE`.
     static Guid parse(std::string_view str) {
         Guid guid;
         throwIfBad(UA_Guid_parse(guid.handle(), detail::toNativeString(str)));
@@ -715,6 +715,17 @@ public:
     template <typename T, typename = std::enable_if_t<detail::IsNodeIdEnum<T>::value>>
     NodeId(T identifier) noexcept  // NOLINT(hicpp-explicit-conversions)
         : NodeId(namespaceOf(identifier).index, static_cast<uint32_t>(identifier)) {}
+
+#if UAPP_HAS_PARSING
+    /// Parse NodeId from its string representation.
+    /// Format: `ns=<namespaceindex>;<type>=<value>`, e.g. `i=13` or `ns=10;s=HelloWorld`
+    /// @see https://reference.opcfoundation.org/Core/Part6/v104/docs/5.3.1.10
+    static NodeId parse(std::string_view str) {
+        NodeId id;
+        throwIfBad(UA_NodeId_parse(id.handle(), detail::toNativeString(str)));
+        return id;
+    }
+#endif
 
     bool isNull() const noexcept {
         return UA_NodeId_isNull(handle());
@@ -925,6 +936,18 @@ public:
         handle()->namespaceUri = detail::allocNativeString(namespaceUri);
         handle()->serverIndex = serverIndex;
     }
+
+#if UAPP_HAS_PARSING
+    /// Parse ExpandedNodeId from its string representation.
+    /// Format: `svr=<serverindex>;ns=<namespaceindex>;<type>=<value>` or
+    ///         `svr=<serverindex>;nsu=<uri>;<type>=<value>`
+    /// @see https://reference.opcfoundation.org/Core/Part6/v104/docs/5.3.1.11
+    static ExpandedNodeId parse(std::string_view str) {
+        ExpandedNodeId id;
+        throwIfBad(UA_ExpandedNodeId_parse(id.handle(), detail::toNativeString(str)));
+        return id;
+    }
+#endif
 
     bool isLocal() const noexcept {
         return handle()->serverIndex == 0;
