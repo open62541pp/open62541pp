@@ -272,6 +272,7 @@ TEST_CASE("Guid") {
         CHECK(Guid::random() != Guid::random());
     }
 
+#if UAPP_HAS_PARSING
     SUBCASE("parse") {
         const auto guid = Guid::parse("12345678-1234-5678-1234-567890ABCDEF");
         CHECK(guid->data1 == 0x12345678);
@@ -286,6 +287,7 @@ TEST_CASE("Guid") {
         CHECK(guid->data4[6] == 0xCD);
         CHECK(guid->data4[7] == 0xEF);
     }
+#endif
 
     SUBCASE("toString") {
         {
