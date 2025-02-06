@@ -267,9 +267,24 @@ TEST_CASE("Guid") {
         CHECK(wrapper.handle()->data4[7] == 15);
     }
 
-    SUBCASE("Random") {
+    SUBCASE("random") {
         CHECK(Guid::random() != Guid());
         CHECK(Guid::random() != Guid::random());
+    }
+
+    SUBCASE("parse") {
+        const auto guid = Guid::parse("12345678-1234-5678-1234-567890ABCDEF");
+        CHECK(guid->data1 == 0x12345678);
+        CHECK(guid->data2 == 0x1234);
+        CHECK(guid->data3 == 0x5678);
+        CHECK(guid->data4[0] == 0x12);
+        CHECK(guid->data4[1] == 0x34);
+        CHECK(guid->data4[2] == 0x56);
+        CHECK(guid->data4[3] == 0x78);
+        CHECK(guid->data4[4] == 0x90);
+        CHECK(guid->data4[5] == 0xAB);
+        CHECK(guid->data4[6] == 0xCD);
+        CHECK(guid->data4[7] == 0xEF);
     }
 
     SUBCASE("toString") {

@@ -474,6 +474,7 @@ struct TypeConverter<std::chrono::time_point<Clock, Duration>> {
 
 /**
  * UA_Guid wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/5.1.3
  * @ingroup Wrapper
  */
 class Guid : public TypeWrapper<UA_Guid, UA_TYPES_GUID> {
@@ -500,9 +501,20 @@ public:
               {data4[0], data4[1], data4[2], data4[3], data4[4], data4[5], data4[6], data4[7]},
           }) {}
 
+    /// Generate random Guid.
     static Guid random() noexcept {
         return Guid(UA_Guid_random());  // NOLINT
     }
+
+#if UAPP_HAS_PARSING
+    /// Parse Guid from its string representation.
+    /// Format: C496578A-0DFE-4B8F-870A-745238C6AEAE.
+    static Guid parse(std::string_view str) {
+        Guid guid;
+        throwIfBad(UA_Guid_parse(guid.handle(), detail::toNativeString(str)));
+        return guid;
+    }
+#endif
 
     std::string toString() const;
 };
