@@ -235,12 +235,18 @@ if(UAPP_ENABLE_NODESETLOADER)
         PRIVATE
             ${NODESETLOADER_DEPS_LIBS}
     )
-    target_compile_definitions(open62541pp_nodesetloader PUBLIC NODESETLOADER_CLEANUP_CUSTOM_DATATYPES=1)
-    set_target_properties(open62541pp_nodesetloader PROPERTIES C_VISIBILITY_PRESET hidden)
-    target_link_libraries(
-        open62541pp
-        PRIVATE
-            $<BUILD_INTERFACE:open62541pp_nodesetloader>
+    target_compile_definitions(
+        open62541pp_nodesetloader
+        PUBLIC
+            NODESETLOADER_CLEANUP_CUSTOM_DATATYPES=1
+    )
+    set_target_properties(
+        open62541pp_nodesetloader
+        PROPERTIES
+            C_VISIBILITY_PRESET hidden
+            POSITION_INDEPENDENT_CODE ON  # required for shared library
+    )
+    target_link_libraries(open62541pp PRIVATE $<BUILD_INTERFACE:open62541pp_nodesetloader>
     )
 endif()
 
