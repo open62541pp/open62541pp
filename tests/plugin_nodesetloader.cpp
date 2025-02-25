@@ -2,8 +2,11 @@
 
 #include <doctest/doctest.h>
 
+#include "open62541pp/config.hpp"
 #include "open62541pp/server.hpp"
 #include "open62541pp/plugin/nodesetloader.hpp"
+
+#if UAPP_HAS_NODESETLOADER
 
 namespace fs = std::filesystem;
 using namespace opcua;
@@ -27,3 +30,5 @@ TEST_CASE("loadNodeset") {
         CHECK(ns.back() == "http://opcfoundation.org/UA/DI/");
     }
 }
+
+#endif

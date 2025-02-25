@@ -1,5 +1,7 @@
 #include "open62541pp/plugin/nodesetloader.hpp"
 
+#if UAPP_HAS_NODESETLOADER
+
 #include <string>
 
 #include "open62541pp/detail/open62541/push_options.h"
@@ -19,3 +21,5 @@ StatusCode loadNodeset(Server& server, std::string_view nodeset2XmlFilePath) {
 }
 
 }  // namespace opcua
+
+#endif

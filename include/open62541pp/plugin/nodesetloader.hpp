@@ -2,6 +2,10 @@
 
 #include <string_view>
 
+#include "open62541pp/config.hpp"
+
+#if UAPP_HAS_NODESETLOADER
+
 namespace opcua {
 
 class Server;
@@ -15,3 +19,5 @@ class StatusCode;
 StatusCode loadNodeset(Server& server, std::string_view nodeset2XmlFilePath);
 
 }  // namespace opcua
+
+#endif
