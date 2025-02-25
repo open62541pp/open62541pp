@@ -378,3 +378,33 @@ TEST_CASE_TEMPLATE("Attribute service set write/read", T, Server, Client, Async<
 
     CHECK(result.value().value().scalar<double>() == value);
 }
+
+TEST_CASE("Attribute service set raw") {
+    Client client;
+
+    const std::vector<ReadValueId> nodesToRead{
+        {NodeId{1, 1000}, AttributeId::Value},
+    };
+    const std::vector<WriteValue> nodesToWrite{
+        {NodeId{1, 1000}, AttributeId::Value, {}, DataValue{}},
+    };
+
+    SUBCASE("read") {
+        const ReadRequest request{{}, {}, TimestampsToReturn{}, nodesToRead};
+        CHECK_NOTHROW(services::read(client, request));
+        CHECK_NOTHROW(services::readAsync(client, request, useFuture));
+    }
+    SUBCASE("read overload") {
+        CHECK_NOTHROW(services::read(client, nodesToRead, TimestampsToReturn{}));
+        CHECK_NOTHROW(services::readAsync(client, nodesToRead, TimestampsToReturn{}, useFuture));
+    }
+    SUBCASE("write") {
+        const WriteRequest request{{}, nodesToWrite};
+        CHECK_NOTHROW(services::write(client, request));
+        CHECK_NOTHROW(services::writeAsync(client, request, useFuture));
+    }
+    SUBCASE("write overload") {
+        CHECK_NOTHROW(services::write(client, nodesToWrite));
+        CHECK_NOTHROW(services::writeAsync(client, nodesToWrite, useFuture));
+    }
+}
