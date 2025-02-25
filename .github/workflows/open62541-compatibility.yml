@@ -54,6 +54,7 @@ jobs:
             -DUA_ENABLE_AMALGAMATION=${{ matrix.amalgamation }} \
             -DUA_ENABLE_SUBSCRIPTIONS=ON \
             -DUA_ENABLE_SUBSCRIPTIONS_EVENTS=ON \
+            -DUAPP_ENABLE_NODESETLOADER=ON \
             ..
           cmake --build . --parallel
           sudo cmake --install .
