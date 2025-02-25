@@ -213,8 +213,9 @@ target_link_libraries(
 # open62541-nodeset-loader
 option(UAPP_ENABLE_NODESETLOADER "Enable nodeset loader" OFF)
 if(UAPP_ENABLE_NODESETLOADER)
-    set(NODESETLOADER_ENABLE_EXAMPLES OFF CACHE BOOL "Enable examples")
-    set(NODESETLOADER_ENABLE_BACKEND_STDOUT OFF CACHE BOOL "Enable backend for stdout")
+    # variable OPEN62541_VERSION required by open62541-nodeset-loader
+    get_target_property(OPEN62541_VERSION open62541::open62541 VERSION)
+    set(NODESETLOADER_ENABLE_BUILD_INTO_OPEN62541 ON CACHE BOOL "")
     add_subdirectory(3rdparty/open62541-nodeset-loader EXCLUDE_FROM_ALL)
 
     # build and link as object library
