@@ -1306,7 +1306,7 @@ public:
     template <typename T, typename = std::enable_if_t<!std::is_const_v<T>>>
     void assign(T* ptr) noexcept {
         if constexpr (isArrayType<T>()) {
-            using ValueType = typename T::value_type;
+            using ValueType = detail::RangeValueT<T>;
             assertIsRegistered<ValueType>();
             assign(ptr, opcua::getDataType<ValueType>());
         } else {
@@ -1689,7 +1689,7 @@ private:
 
     template <typename T>
     static constexpr bool isArrayType() noexcept {
-        return detail::isContainer<T> && !isScalarType<T>();
+        return detail::IsRange<T>::value && !isScalarType<T>();
     }
 
     template <typename T>

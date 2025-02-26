@@ -9,32 +9,54 @@
 
 using namespace opcua;
 
-TEST_CASE_TEMPLATE("IsContiguousContainer true", T, std::vector<int>, std::array<int, 3>, Span<int>, Span<const int>) {
-    CHECK(detail::IsContiguousContainer<T>::value);
-    CHECK(detail::IsContiguousContainer<T&>::value);
-    CHECK(detail::IsContiguousContainer<T&&>::value);
-    CHECK(detail::IsContiguousContainer<const T>::value);
-    CHECK(detail::IsContiguousContainer<const T&>::value);
-    CHECK(detail::IsContiguousContainer<const T&&>::value);
+TEST_CASE("RangeValueT") {
+    CHECK(std::is_same_v<detail::RangeValueT<std::vector<int>>, int>);
+    CHECK(std::is_same_v<detail::RangeValueT<std::vector<int>&>, int>);
+    CHECK(std::is_same_v<detail::RangeValueT<std::vector<int>&&>, int>);
+    CHECK(std::is_same_v<detail::RangeValueT<const std::vector<int>>, int>);
+    CHECK(std::is_same_v<detail::RangeValueT<const std::vector<int>&>, int>);
+    CHECK(std::is_same_v<detail::RangeValueT<const std::vector<int>&&>, int>);
+
+    CHECK(std::is_same_v<detail::RangeValueT<int[3]>, int>);  // NOLINT(*avoid-c-arrays)
+    CHECK(std::is_same_v<detail::RangeValueT<std::array<int, 3>>, int>);
+    CHECK(std::is_same_v<detail::RangeValueT<Span<int>>, int>);
+    CHECK(std::is_same_v<detail::RangeValueT<Span<const int>>, int>);
+
+    CHECK(std::is_same_v<detail::RangeValueT<std::vector<bool>>, bool>);
 }
 
-TEST_CASE_TEMPLATE("IsContiguousContainer false", T, std::list<int>, std::vector<bool>) {
-    CHECK_FALSE(detail::IsContiguousContainer<T>::value);
-    CHECK_FALSE(detail::IsContiguousContainer<T&>::value);
-    CHECK_FALSE(detail::IsContiguousContainer<T&&>::value);
-    CHECK_FALSE(detail::IsContiguousContainer<const T>::value);
-    CHECK_FALSE(detail::IsContiguousContainer<const T&>::value);
-    CHECK_FALSE(detail::IsContiguousContainer<const T&&>::value);
+TEST_CASE_TEMPLATE("IsRange true", T, std::vector<int>, std::array<int, 3>, Span<int>, Span<const int>) {
+    CHECK(detail::IsRange<T>::value);
+    CHECK(detail::IsRange<T&>::value);
+    CHECK(detail::IsRange<T&&>::value);
+    CHECK(detail::IsRange<const T>::value);
+    CHECK(detail::IsRange<const T&>::value);
+    CHECK(detail::IsRange<const T&&>::value);
 }
 
-TEST_CASE_TEMPLATE("IsMutableContainer true", T, std::vector<int>, std::array<int, 3>, Span<int>, std::vector<bool>) {
-    CHECK(detail::IsMutableContainer<T>::value);
-    CHECK(detail::IsMutableContainer<T&>::value);
-    CHECK(detail::IsMutableContainer<T&&>::value);
+TEST_CASE_TEMPLATE("IsRange false", T, bool, int) {
+    CHECK_FALSE(detail::IsRange<T>::value);
+    CHECK_FALSE(detail::IsRange<T&>::value);
+    CHECK_FALSE(detail::IsRange<T&&>::value);
+    CHECK_FALSE(detail::IsRange<const T>::value);
+    CHECK_FALSE(detail::IsRange<const T&>::value);
+    CHECK_FALSE(detail::IsRange<const T&&>::value);
 }
 
-TEST_CASE_TEMPLATE("IsMutableContainer false", T, const std::vector<int>, const std::array<int, 3>, const Span<const int>, const std::vector<bool>) {
-    CHECK_FALSE(detail::IsMutableContainer<T>::value);
-    CHECK_FALSE(detail::IsMutableContainer<T&>::value);
-    CHECK_FALSE(detail::IsMutableContainer<T&&>::value);
+TEST_CASE_TEMPLATE("IsContiguousRange true", T, std::vector<int>, std::array<int, 3>, Span<int>, Span<const int>) {
+    CHECK(detail::IsContiguousRange<T>::value);
+    CHECK(detail::IsContiguousRange<T&>::value);
+    CHECK(detail::IsContiguousRange<T&&>::value);
+    CHECK(detail::IsContiguousRange<const T>::value);
+    CHECK(detail::IsContiguousRange<const T&>::value);
+    CHECK(detail::IsContiguousRange<const T&&>::value);
+}
+
+TEST_CASE_TEMPLATE("IsContiguousRange false", T, std::list<int>, std::vector<bool>) {
+    CHECK_FALSE(detail::IsContiguousRange<T>::value);
+    CHECK_FALSE(detail::IsContiguousRange<T&>::value);
+    CHECK_FALSE(detail::IsContiguousRange<T&&>::value);
+    CHECK_FALSE(detail::IsContiguousRange<const T>::value);
+    CHECK_FALSE(detail::IsContiguousRange<const T&>::value);
+    CHECK_FALSE(detail::IsContiguousRange<const T&&>::value);
 }

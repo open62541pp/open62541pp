@@ -1,6 +1,6 @@
 #pragma once
 
-#include <iterator>  // data, size
+#include <iterator>  // data, iterator_traits, size
 #include <type_traits>
 
 namespace opcua::detail {
@@ -31,11 +31,23 @@ struct MemberType<T C::*> {
 template <typename T>
 using MemberTypeT = typename MemberType<T>::type;
 
-template <typename, typename = void>
-struct HasSize : std::false_type {};
+template <typename T>
+using RangeIteratorT = decltype(std::begin(std::declval<T&>()));
 
 template <typename T>
-struct HasSize<T, std::void_t<decltype(std::size(std::declval<T&>()))>> : std::true_type {};
+using RangeValueT = typename std::iterator_traits<RangeIteratorT<T>>::value_type;
+
+template <typename, typename = void>
+struct HasBegin : std::false_type {};
+
+template <typename T>
+struct HasBegin<T, std::void_t<decltype(std::begin(std::declval<T&>()))>> : std::true_type {};
+
+template <typename, typename = void>
+struct HasEnd : std::false_type {};
+
+template <typename T>
+struct HasEnd<T, std::void_t<decltype(std::end(std::declval<T&>()))>> : std::true_type {};
 
 template <typename, typename = void>
 struct HasData : std::false_type {};
@@ -50,32 +62,16 @@ template <typename T>
 struct HasDataPointer<T, std::void_t<decltype(std::data(std::declval<T&>()))>>
     : std::is_pointer<decltype(std::data(std::declval<T&>()))> {};
 
-template <typename T, typename = void>
-struct IsContainer : std::false_type {};
+template <typename, typename = void>
+struct HasSize : std::false_type {};
 
 template <typename T>
-struct IsContainer<
-    T,
-    std::void_t<decltype(std::declval<T>().begin()), decltype(std::declval<T>().end())>>
-    : std::true_type {};
+struct HasSize<T, std::void_t<decltype(std::size(std::declval<T&>()))>> : std::true_type {};
 
 template <typename T>
-inline constexpr bool isContainer = IsContainer<T>::value;
+struct IsRange : std::conjunction<HasBegin<T>, HasEnd<T>> {};
 
 template <typename T>
-struct IsContiguousContainer : std::conjunction<HasSize<T>, HasDataPointer<T>> {};
-
-template <typename T>
-struct IsMutableContainer
-    : std::conjunction<
-          std::is_same<
-              decltype(std::declval<T>().begin()),
-              typename std::remove_reference_t<T>::iterator>,
-          std::is_same<
-              decltype(std::declval<T>().end()),
-              typename std::remove_reference_t<T>::iterator>,
-          std::negation<std::is_same<
-              typename std::remove_reference_t<T>::iterator,
-              typename std::remove_reference_t<T>::const_iterator>>> {};
+struct IsContiguousRange : std::conjunction<IsRange<T>, HasDataPointer<T>, HasSize<T>> {};
 
 }  // namespace opcua::detail
