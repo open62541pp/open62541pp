@@ -1341,7 +1341,7 @@ public:
     template <typename T>
     void assign(const T& value) {
         if constexpr (isArrayType<T>()) {
-            assign(value.begin(), value.end());
+            assign(std::begin(value), std::end(value));
         } else {
             assertIsRegisteredOrConvertible<T>();
             if constexpr (detail::isRegisteredType<T>) {
@@ -1363,7 +1363,7 @@ public:
     template <typename T>
     void assign(const T& value, const UA_DataType& type) {
         if constexpr (isArrayType<T>()) {
-            setArrayCopyImpl(value.begin(), value.end(), type);
+            setArrayCopyImpl(std::begin(value), std::end(value), type);
         } else {
             setScalarCopyImpl(value, type);
         }
