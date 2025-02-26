@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iterator>  // data, size
 #include <type_traits>
 
 namespace opcua::detail {
@@ -30,6 +31,25 @@ struct MemberType<T C::*> {
 template <typename T>
 using MemberTypeT = typename MemberType<T>::type;
 
+template <typename, typename = void>
+struct HasSize : std::false_type {};
+
+template <typename T>
+struct HasSize<T, std::void_t<decltype(std::size(std::declval<T&>()))>> : std::true_type {};
+
+template <typename, typename = void>
+struct HasData : std::false_type {};
+
+template <typename T>
+struct HasData<T, std::void_t<decltype(std::data(std::declval<T&>()))>> : std::true_type {};
+
+template <typename, typename = void>
+struct HasDataPointer : std::false_type {};
+
+template <typename T>
+struct HasDataPointer<T, std::void_t<decltype(std::data(std::declval<T&>()))>>
+    : std::is_pointer<decltype(std::data(std::declval<T&>()))> {};
+
 template <typename T, typename = void>
 struct IsContainer : std::false_type {};
 
@@ -42,22 +62,8 @@ struct IsContainer<
 template <typename T>
 inline constexpr bool isContainer = IsContainer<T>::value;
 
-template <typename T, typename = void>
-struct IsContiguousContainer : std::false_type {};
-
 template <typename T>
-struct IsContiguousContainer<
-    T,
-    std::void_t<
-        decltype(std::declval<T>().data()),
-        decltype(std::declval<T>().size()),
-        decltype(std::declval<T>().begin()),
-        decltype(std::declval<T>().end())>> : std::true_type {
-    using value_type = bool;
-    // detect vector<bool>::data() void return type
-    static constexpr bool value = std::is_pointer_v<decltype(std::declval<T>().data())>;
-    using type = std::bool_constant<value>;
-};
+struct IsContiguousContainer : std::conjunction<HasSize<T>, HasDataPointer<T>> {};
 
 template <typename T>
 struct IsMutableContainer
