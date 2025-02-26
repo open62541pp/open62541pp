@@ -425,6 +425,12 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
                 CHECK(varNode.template readValueArray<double>() == array);
             }
         }
+
+        SUBCASE("Array (std::vector<bool>)") {
+            std::vector<bool> array{true, false, true};
+            CHECK_NOTHROW(varNode.writeValueArray(array));
+            CHECK_NOTHROW(varNode.writeValueArray(array.begin(), array.end()));
+        }
     }
 
     SUBCASE("writeDataType/readDataType") {

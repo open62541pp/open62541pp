@@ -1179,7 +1179,8 @@ public:
     /// Write array value to variable node.
     template <typename ArrayLike>
     Node& writeValueArray(const ArrayLike& array) {
-        if constexpr (detail::isRegisteredType<typename ArrayLike::value_type>) {
+        if constexpr (detail::IsContiguousRange<ArrayLike>::value &&
+                      detail::isRegisteredType<detail::RangeValueT<ArrayLike>>) {
             // NOLINTNEXTLINE(*-const-cast), variant isn't modified, avoid copy
             writeValue(Variant(const_cast<ArrayLike*>(&array)));
         } else {

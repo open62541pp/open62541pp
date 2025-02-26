@@ -1306,7 +1306,7 @@ public:
     template <typename T, typename = std::enable_if_t<!std::is_const_v<T>>>
     void assign(T* ptr) noexcept {
         if constexpr (isArrayType<T>()) {
-            using ValueType = typename T::value_type;
+            using ValueType = detail::RangeValueT<T>;
             assertIsRegistered<ValueType>();
             assign(ptr, opcua::getDataType<ValueType>());
         } else {
@@ -1341,7 +1341,7 @@ public:
     template <typename T>
     void assign(const T& value) {
         if constexpr (isArrayType<T>()) {
-            assign(value.begin(), value.end());
+            assign(std::begin(value), std::end(value));
         } else {
             assertIsRegisteredOrConvertible<T>();
             if constexpr (detail::isRegisteredType<T>) {
@@ -1363,7 +1363,7 @@ public:
     template <typename T>
     void assign(const T& value, const UA_DataType& type) {
         if constexpr (isArrayType<T>()) {
-            setArrayCopyImpl(value.begin(), value.end(), type);
+            setArrayCopyImpl(std::begin(value), std::end(value), type);
         } else {
             setScalarCopyImpl(value, type);
         }
@@ -1689,7 +1689,7 @@ private:
 
     template <typename T>
     static constexpr bool isArrayType() noexcept {
-        return detail::isContainer<T> && !isScalarType<T>();
+        return detail::IsRange<T>::value && !isScalarType<T>();
     }
 
     template <typename T>
