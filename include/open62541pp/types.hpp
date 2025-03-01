@@ -1344,7 +1344,7 @@ public:
             assign(std::begin(value), std::end(value));
         } else {
             assertIsRegisteredOrConvertible<T>();
-            if constexpr (detail::isRegisteredType<T>) {
+            if constexpr (detail::IsRegistered<T>::value) {
                 setScalarCopyImpl(value, opcua::getDataType<T>());
             } else {
                 setScalarCopyConvertImpl(value);
@@ -1379,7 +1379,7 @@ public:
     void assign(InputIt first, InputIt last) {
         using ValueType = typename std::iterator_traits<InputIt>::value_type;
         assertIsRegisteredOrConvertible<ValueType>();
-        if constexpr (detail::isRegisteredType<ValueType>) {
+        if constexpr (detail::IsRegistered<ValueType>::value) {
             setArrayCopyImpl(first, last, opcua::getDataType<ValueType>());
         } else {
             setArrayCopyConvertImpl(first, last);
@@ -1684,7 +1684,7 @@ public:
 private:
     template <typename T>
     static constexpr bool isScalarType() noexcept {
-        return detail::isRegisteredType<T> || detail::isConvertibleType<T>;
+        return detail::IsRegistered<T>::value || detail::IsConvertible<T>::value;
     }
 
     template <typename T>
@@ -1695,7 +1695,7 @@ private:
     template <typename T>
     static constexpr void assertIsRegistered() {
         static_assert(
-            detail::isRegisteredType<T>,
+            detail::IsRegistered<T>::value,
             "Template type must be a native/wrapper type to assign or get scalar/array without copy"
         );
     }
@@ -1703,7 +1703,7 @@ private:
     template <typename T>
     static constexpr void assertIsRegisteredOrConvertible() {
         static_assert(
-            detail::isRegisteredType<T> || detail::isConvertibleType<T>,
+            detail::IsRegistered<T>::value || detail::IsConvertible<T>::value,
             "Template type must be either a native/wrapper type or a convertible type. "
             "If the type is a native type: Provide the type definition (UA_DataType) manually or "
             "register the type with a TypeRegistry template specialization. "
@@ -1762,7 +1762,7 @@ private:
 template <typename T>
 T Variant::toScalarImpl() const {
     assertIsRegisteredOrConvertible<T>();
-    if constexpr (detail::isRegisteredType<T>) {
+    if constexpr (detail::IsRegistered<T>::value) {
         return scalar<T>();
     } else {
         using Native = typename TypeConverter<T>::NativeType;
@@ -1774,7 +1774,7 @@ template <typename T>
 T Variant::toArrayImpl() const {
     using ValueType = typename T::value_type;
     assertIsRegisteredOrConvertible<ValueType>();
-    if constexpr (detail::isRegisteredType<ValueType>) {
+    if constexpr (detail::IsRegistered<ValueType>::value) {
         auto native = array<ValueType>();
         return T(native.begin(), native.end());
     } else {
