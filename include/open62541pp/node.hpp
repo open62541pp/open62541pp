@@ -1166,7 +1166,7 @@ public:
     /// Write scalar to variable node.
     template <typename T>
     Node& writeValueScalar(const T& value) {
-        if constexpr (detail::isRegisteredType<T>) {
+        if constexpr (detail::IsRegistered<T>::value) {
             // NOLINTNEXTLINE(*-const-cast), variant isn't modified, avoid copy
             writeValue(Variant(const_cast<T*>(&value)));
         } else {
@@ -1180,7 +1180,7 @@ public:
     template <typename ArrayLike>
     Node& writeValueArray(const ArrayLike& array) {
         if constexpr (detail::IsContiguousRange<ArrayLike>::value &&
-                      detail::isRegisteredType<detail::RangeValueT<ArrayLike>>) {
+                      detail::IsRegistered<detail::RangeValueT<ArrayLike>>::value) {
             // NOLINTNEXTLINE(*-const-cast), variant isn't modified, avoid copy
             writeValue(Variant(const_cast<ArrayLike*>(&array)));
         } else {

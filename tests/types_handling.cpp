@@ -7,13 +7,13 @@
 using namespace opcua;
 
 TEST_CASE("Types handling") {
-    SUBCASE("isPointerFree") {
-        CHECK(detail::isPointerFree<bool>);
-        CHECK(detail::isPointerFree<int>);
-        CHECK(detail::isPointerFree<float>);
-        CHECK(detail::isPointerFree<UA_Guid>);
-        CHECK_FALSE(detail::isPointerFree<UA_String>);
-        CHECK_FALSE(detail::isPointerFree<UA_NodeId>);
+    SUBCASE("IsPointerFree") {
+        CHECK(detail::IsPointerFree<bool>::value);
+        CHECK(detail::IsPointerFree<int>::value);
+        CHECK(detail::IsPointerFree<float>::value);
+        CHECK(detail::IsPointerFree<UA_Guid>::value);
+        CHECK_FALSE(detail::IsPointerFree<UA_String>::value);
+        CHECK_FALSE(detail::IsPointerFree<UA_NodeId>::value);
     }
 
     SUBCASE("Allocate / deallocate") {

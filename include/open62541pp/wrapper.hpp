@@ -126,9 +126,6 @@ struct IsWrapper {
     static constexpr bool value = type::value;
 };
 
-template <typename T>
-constexpr bool isWrapper = IsWrapper<T>::value;
-
 }  // namespace detail
 
 /* ------------------------------ Cast native type to wrapper type ------------------------------ */
@@ -137,7 +134,7 @@ namespace detail {
 
 template <typename WrapperType>
 struct WrapperConversion {
-    static_assert(isWrapper<WrapperType>);
+    static_assert(detail::IsWrapper<WrapperType>::value);
     static_assert(std::is_standard_layout_v<WrapperType>);
 
     using NativeType = typename WrapperType::NativeType;

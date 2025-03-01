@@ -110,15 +110,12 @@ struct IsTypeWrapper {
     static constexpr bool value = type::value;
 };
 
-template <typename T>
-constexpr bool isTypeWrapper = IsTypeWrapper<T>::value;
-
 }  // namespace detail
 
 /* --------------------------------- TypeRegistry specialization -------------------------------- */
 
 template <typename T>
-struct TypeRegistry<T, std::enable_if_t<detail::isTypeWrapper<T>>> {
+struct TypeRegistry<T, std::enable_if_t<detail::IsTypeWrapper<T>::value>> {
     static const UA_DataType& getDataType() noexcept {
         return UA_TYPES[T::typeIndex()];
     }
