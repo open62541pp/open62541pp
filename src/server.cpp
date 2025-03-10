@@ -416,6 +416,9 @@ void Server::run() {
 }
 
 void Server::stop() {
+    if (!context().running) {
+        return;
+    }
     context().running = false;
     // wait for run loop to complete
     const std::lock_guard<std::mutex> lock(context().mutexRun);
@@ -464,7 +467,9 @@ const detail::ServerContext& Server::context() const noexcept {
 
 void Server::Deleter::operator()(UA_Server* server) noexcept {
     if (server != nullptr) {
-        UA_Server_run_shutdown(server);
+        if (detail::getContext(server)->running) {
+            UA_Server_run_shutdown(server);
+        }
         UA_Server_delete(server);
     }
 }

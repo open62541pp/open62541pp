@@ -12,6 +12,11 @@
 #include "open62541pp/server.hpp"
 #include "open62541pp/types.hpp"
 
+#ifdef _WIN32
+#include <windows.h>
+#include <winsock2.h>
+#endif
+
 using namespace opcua;
 
 TEST_CASE("ServerConfig") {
@@ -139,6 +144,41 @@ TEST_CASE("Server run/stop/runIterate") {
 
     CHECK_FALSE(server.isRunning());
 }
+
+#ifdef _WIN32
+static bool isWinsockActive() {
+    SOCKET testSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+    if (testSocket == INVALID_SOCKET) {
+        int error = WSAGetLastError();
+        if (error == WSANOTINITIALISED) {
+            return false;
+        }
+    } else {
+        closesocket(testSocket);  // Close the test socket if it was created successfully
+    }
+    return true;
+}
+
+TEST_CASE("Server with Winsock (Windows only)") {
+    // https://github.com/open62541pp/open62541pp/issues/547
+    WSADATA wsaData;
+    CHECK(WSAStartup(MAKEWORD(2, 2), &wsaData) == NO_ERROR);
+    CHECK(isWinsockActive());
+
+    SUBCASE("Server was run") {
+        opcua::Server server;
+        server.runIterate();
+    }
+
+    SUBCASE("Server was not run") {
+        opcua::Server server;
+    }
+
+    CHECK(isWinsockActive());  // should not be affected by the server
+    WSACleanup();
+    CHECK(!isWinsockActive());
+}
+#endif
 
 TEST_CASE("Server methods") {
     Server server;
