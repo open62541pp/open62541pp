@@ -131,6 +131,7 @@ TEST_CASE("Server run/stop/runIterate") {
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
         CHECK(server.isRunning());
         server.stop();
+        server.stop();  // should do nothing
         t.join();  // wait until stopped
     }
 
@@ -140,6 +141,7 @@ TEST_CASE("Server run/stop/runIterate") {
         CHECK(waitInterval <= 1000);
         CHECK(server.isRunning());
         server.stop();
+        server.stop();  // should do nothing
     }
 
     CHECK_FALSE(server.isRunning());
