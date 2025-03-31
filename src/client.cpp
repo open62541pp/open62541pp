@@ -297,6 +297,7 @@ Client::Client(UA_Client* native)
     if (handle() == nullptr) {
         throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
     }
+    setWrapperAsContextPointer(*this);
 }
 
 Client::~Client() = default;

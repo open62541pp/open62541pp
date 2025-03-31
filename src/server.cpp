@@ -278,6 +278,7 @@ Server::Server(UA_Server* native)
     if (handle() == nullptr) {
         throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
     }
+    setWrapperAsContextPointer(*this);
 }
 
 Server::~Server() = default;
