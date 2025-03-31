@@ -49,6 +49,18 @@ TEST_CASE("ClientConfig") {
     }
 }
 
+TEST_CASE("Client constructors") {
+    SUBCASE("From native") {
+        UA_Client* native = UA_Client_new();
+        Client client{native};
+    }
+
+    SUBCASE("From native (nullptr)") {
+        UA_Client* native{nullptr};
+        CHECK_THROWS(Client{native});
+    }
+}
+
 TEST_CASE("Client discovery") {
     Server server;
     ServerRunner serverRunner(server);

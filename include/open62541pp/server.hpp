@@ -164,6 +164,9 @@ public:
           ) {}
 #endif
 
+    /// Create server from native instance (move ownership to server).
+    explicit Server(UA_Server* native);
+
     ~Server();
 
     Server(const Server&) = delete;

@@ -116,6 +116,20 @@ TEST_CASE("ServerConfig") {
     }
 }
 
+TEST_CASE("Server constructors") {
+    SUBCASE("From native") {
+        UA_ServerConfig config{};
+        UA_ServerConfig_setDefault(&config);
+        UA_Server* native = UA_Server_newWithConfig(&config);
+        Server server{native};
+    }
+
+    SUBCASE("From native (nullptr)") {
+        UA_Server* native{nullptr};
+        CHECK_THROWS(Server{native});
+    }
+}
+
 TEST_CASE("Server run/stop/runIterate") {
     Server server;
     CHECK_FALSE(server.isRunning());
