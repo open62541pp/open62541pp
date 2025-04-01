@@ -52,6 +52,7 @@ TEST_CASE("ClientConfig") {
 TEST_CASE("Client constructors") {
     SUBCASE("From native") {
         UA_Client* native = UA_Client_new();
+        UA_ClientConfig_setDefault(UA_Client_getConfig(native));
         Client client{native};
     }
 
