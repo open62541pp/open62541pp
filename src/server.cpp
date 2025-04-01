@@ -272,6 +272,15 @@ Server::Server(ServerConfig&& config)
     setWrapperAsContextPointer(*this);
 }
 
+Server::Server(UA_Server* native)
+    : context_(std::make_unique<detail::ServerContext>()),
+      server_(native) {
+    if (handle() == nullptr) {
+        throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
+    }
+    setWrapperAsContextPointer(*this);
+}
+
 Server::~Server() = default;
 
 Server::Server(Server&& other) noexcept
