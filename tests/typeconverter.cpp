@@ -1,4 +1,5 @@
-#include <doctest/doctest.h>
+#include <catch2/catch_template_test_macros.hpp>
+#include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/typeconverter.hpp"
 #include "open62541pp/types.hpp"
@@ -23,14 +24,14 @@ struct TypeConverter<Byte> {
 }  // namespace opcua
 
 TEST_CASE("TypeConverter") {
-    SUBCASE("fromNative") {
+    SECTION("fromNative") {
         UA_Byte src{101};
         Byte dst{};
         TypeConverter<Byte>::fromNative(src, dst);
         CHECK(static_cast<int>(dst) == 101);
     }
 
-    SUBCASE("toNative") {
+    SECTION("toNative") {
         Byte src{101};
         UA_Byte dst{};
         TypeConverter<Byte>::toNative(src, dst);
@@ -39,35 +40,35 @@ TEST_CASE("TypeConverter") {
 }
 
 TEST_CASE("TypeConverter helper functions") {
-    SUBCASE("fromNative") {
+    SECTION("fromNative") {
         UA_Byte src{101};
         Byte dst = detail::fromNative<Byte>(src);
         CHECK(static_cast<int>(dst) == 101);
     }
 
-    SUBCASE("toNative") {
+    SECTION("toNative") {
         Byte src{101};
         UA_Byte dst = detail::toNative(src);
         CHECK(static_cast<int>(dst) == 101);
     }
 }
 
-TEST_CASE_TEMPLATE("TypeConverter string", T, std::string, std::string_view) {
-    SUBCASE("fromNative") {
+TEMPLATE_TEST_CASE("TypeConverter string", "", std::string, std::string_view) {
+    SECTION("fromNative") {
         const String src("Test123");
-        T dst = detail::fromNative<T>(src);
+        TestType dst = detail::fromNative<TestType>(src);
         CHECK(std::string(dst) == "Test123");
     }
 
-    SUBCASE("toNative") {
-        T src("Test123");
+    SECTION("toNative") {
+        TestType src("Test123");
         String dst = detail::toNative(src);
         CHECK(detail::toString(dst) == "Test123");
     }
 }
 
 TEST_CASE("TypeConverter const char*") {
-    SUBCASE("toNative") {
+    SECTION("toNative") {
         const char* src = "Test123";
         String dst = detail::toNative(src);
         CHECK(detail::toString(dst) == "Test123");
@@ -75,7 +76,7 @@ TEST_CASE("TypeConverter const char*") {
 }
 
 TEST_CASE("TypeConverter char[N]") {
-    SUBCASE("toNative") {
+    SECTION("toNative") {
         char src[7] = {'T', 'e', 's', 't', '1', '2', '3'};
         String dst = detail::toNative(src);
         CHECK(detail::toString(dst) == "Test123");
@@ -85,14 +86,14 @@ TEST_CASE("TypeConverter char[N]") {
 TEST_CASE("TypeConverter std::chrono::time_point") {
     using TimePoint = std::chrono::time_point<std::chrono::system_clock>;
 
-    SUBCASE("fromNative") {
+    SECTION("fromNative") {
         const DateTime src = UA_DATETIME_UNIX_EPOCH;
         TimePoint dst = std::chrono::system_clock::now();
         dst = detail::fromNative<TimePoint>(src);
         CHECK(dst.time_since_epoch().count() == 0);
     }
 
-    SUBCASE("toNative") {
+    SECTION("toNative") {
         const TimePoint src{};  // = Unix epoch
         DateTime dst = detail::toNative(src);
         CHECK(dst.get() == UA_DATETIME_UNIX_EPOCH);

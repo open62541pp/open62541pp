@@ -1,8 +1,21 @@
-add_subdirectory(${PROJECT_SOURCE_DIR}/3rdparty/doctest doctest EXCLUDE_FROM_ALL)  # don't install
+include(FetchContent)
+
+option(CATCH_INSTALL_DOCS "Install documentation alongside library" OFF)
+FetchContent_Declare(
+    Catch2
+    GIT_REPOSITORY    https://github.com/catchorg/Catch2.git
+    GIT_TAG           v3.8.0
+    EXCLUDE_FROM_ALL
+    SYSTEM
+    FIND_PACKAGE_ARGS 3.8.0
+)
+FetchContent_MakeAvailable(Catch2)
+if(TARGET Catch2)
+    set_target_properties(Catch2 Catch2WithMain PROPERTIES CXX_CLANG_TIDY "")
+endif()
 
 add_executable(
     open62541pp_tests
-    main.cpp
     async.cpp
     bitmask.cpp
     client_server_common.cpp
@@ -43,9 +56,9 @@ add_executable(
 target_link_libraries(
     open62541pp_tests
     PRIVATE
-        doctest::doctest
         open62541pp::open62541pp
         open62541pp_project_options
+        Catch2::Catch2WithMain
 )
 target_include_directories(open62541pp_tests PRIVATE ../src)
 set_target_properties(
@@ -70,6 +83,6 @@ target_precompile_headers(
         "${CMAKE_CURRENT_SOURCE_DIR}/doctest/config.hpp"
 )
 
-# discover tests for ctest
-include(${PROJECT_SOURCE_DIR}/3rdparty/doctest/scripts/cmake/doctest.cmake)
-doctest_discover_tests(open62541pp_tests)
+include(CTest)
+include(Catch)
+catch_discover_tests(open62541pp_tests)

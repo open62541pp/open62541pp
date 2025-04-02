@@ -17,7 +17,6 @@
 #include "open62541pp/subscription.hpp"
 #include "open62541pp/typeconverter.hpp"
 #include "open62541pp/typeregistry.hpp"
-#include "open62541pp/typeregistry_generated.hpp"
 #include "open62541pp/types.hpp"
 #include "open62541pp/typewrapper.hpp"
 #include "open62541pp/wrapper.hpp"

@@ -3,18 +3,21 @@ from subprocess import check_call
 
 HERE = Path(__file__).parent
 SCHEMA_DIR = HERE.parent / "3rdparty" / "open62541" / "tools" / "schema"
-HEADER_FILE = HERE.parent / "include" / "open62541pp" / "typeregistry_generated.hpp"
+HEADER_FILE = HERE.parent / "include" / "open62541pp" / "ua" / "typeregistry.hpp"
 
 FILES_DATATYPES = [
-    SCHEMA_DIR / "datatypes_minimal.txt",
-    SCHEMA_DIR / "datatypes_method.txt",
-    SCHEMA_DIR / "datatypes_subscriptions.txt",
+    SCHEMA_DIR / "datatypes_dataaccess.txt",
+    SCHEMA_DIR / "datatypes_diagnostics.txt",
+    SCHEMA_DIR / "datatypes_discovery.txt",
     SCHEMA_DIR / "datatypes_events.txt",
     SCHEMA_DIR / "datatypes_historizing.txt",
-    SCHEMA_DIR / "datatypes_discovery.txt",
-    SCHEMA_DIR / "datatypes_query.txt",
+    SCHEMA_DIR / "datatypes_method.txt",
+    SCHEMA_DIR / "datatypes_minimal.txt",
     SCHEMA_DIR / "datatypes_pubsub.txt",
-    SCHEMA_DIR / "datatypes_dataaccess.txt",
+    SCHEMA_DIR / "datatypes_query.txt",
+    SCHEMA_DIR / "datatypes_subscriptions.txt",
+    SCHEMA_DIR / "datatypes_transport.txt",
+    SCHEMA_DIR / "datatypes_typedescription.txt",
 ]
 
 TEMPLATE_HEADER = """
@@ -24,10 +27,8 @@ TEMPLATE_HEADER = """
 
 #pragma once
 
-#ifndef UAPP_TYPEREGISTRY_NATIVE
-#include "open62541pp/typeregistry.hpp"
-#endif
 #include "open62541pp/detail/open62541/common.h"
+#include "open62541pp/typeregistry.hpp"
 
 namespace opcua {{
 

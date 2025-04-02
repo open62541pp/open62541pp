@@ -15,7 +15,7 @@
 #include "open62541pp/event.hpp"
 #include "open62541pp/session.hpp"
 #include "open62541pp/span.hpp"
-#include "open62541pp/subscription.hpp"
+#include "open62541pp/subscription.hpp"  // TODO: remove with Server::createSubscription
 #include "open62541pp/types.hpp"
 #include "open62541pp/ua/nodeids.hpp"
 #include "open62541pp/wrapper.hpp"
@@ -164,6 +164,9 @@ public:
           ) {}
 #endif
 
+    /// Create server from native instance (move ownership to server).
+    explicit Server(UA_Server* native);
+
     ~Server();
 
     Server(const Server&) = delete;
@@ -233,13 +236,19 @@ public:
     /// Register namespace. The new namespace index will be returned.
     [[nodiscard]] NamespaceIndex registerNamespace(std::string_view uri);
 
-    /// Set value callbacks to execute before every read and after every write operation.
-    void setVariableNodeValueCallback(const NodeId& id, ValueCallback callback);
-    /// Set data source backend for variable node.
-    void setVariableNodeValueBackend(const NodeId& id, ValueBackendDataSource backend);
+    /// Set value callback for variable node.
+    void setVariableNodeValueCallback(const NodeId& id, ValueCallbackBase& callback);
+    /// Set value callback for variable node (move ownership to server).
+    void setVariableNodeValueCallback(const NodeId& id, std::unique_ptr<ValueCallbackBase>&& callback);
+    /// Set data source for variable node.
+    void setVariableNodeDataSource(const NodeId& id, DataSourceBase& source);
+    /// Set data source for variable node (move ownership to server).
+    void setVariableNodeDataSource(const NodeId& id, std::unique_ptr<DataSourceBase>&& source);
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
     /// Create a (pseudo) subscription to monitor local data changes and events.
+    /// @deprecated Use Subscription constructor
+    [[deprecated("use Subscription constructor")]]
     Subscription<Server> createSubscription() noexcept;
 #endif
 
@@ -284,12 +293,15 @@ private:
 
 /// Convert native UA_Server pointer to its wrapper instance.
 /// The native server must be owned by a Server instance.
+/// @relates Server
 Server* asWrapper(UA_Server* server) noexcept;
 
+/// @relates Server
 inline bool operator==(const Server& lhs, const Server& rhs) noexcept {
     return (lhs.handle() == rhs.handle());
 }
 
+/// @relates Server
 inline bool operator!=(const Server& lhs, const Server& rhs) noexcept {
     return !(lhs == rhs);
 }

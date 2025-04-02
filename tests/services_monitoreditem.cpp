@@ -1,7 +1,9 @@
 #include <chrono>
 #include <thread>
 
-#include <doctest/doctest.h>
+#include <catch2/catch_template_test_macros.hpp>
+#include <catch2/catch_test_macros.hpp>
+
 
 #include "open62541pp/config.hpp"
 #include "open62541pp/event.hpp"
@@ -17,11 +19,11 @@
 using namespace opcua;
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
-TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
+TEMPLATE_TEST_CASE("MonitoredItem service set", "", Client, Async<Client>) {
     ServerClientSetup setup;
     setup.client.connect(setup.endpointUrl);
     auto& server = setup.server;
-    auto& connection = setup.getInstance<T>();
+    auto& connection = setup.instance<TestType>();
 
     // add variable node to test data change notifications
     const NodeId id{1, 1000};
@@ -39,7 +41,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
     services::MonitoringParametersEx monitoringParameters{};
     monitoringParameters.samplingInterval = 0.0;  // fastest
 
-    SUBCASE("createMonitoredItemDataChange without subscription") {
+    SECTION("createMonitoredItemDataChange without subscription") {
         const auto result = services::createMonitoredItemDataChange(
             connection,
             11U,  // random subId
@@ -57,7 +59,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
             .subscriptionId();
     CAPTURE(subId);
 
-    SUBCASE("createMonitoredItemDataChange") {
+    SECTION("createMonitoredItemDataChange") {
         size_t notificationCount = 0;
         DataValue changedValue;
         const auto callback = [&](IntegerId, IntegerId, const DataValue& value) {
@@ -66,7 +68,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
         };
 
         const auto createMonitoredItemDataChange = [&](auto&&... args) {
-            if constexpr (isAsync<T> && UAPP_HAS_ASYNC_SUBSCRIPTIONS) {
+            if constexpr (isAsync<TestType> && UAPP_HAS_ASYNC_SUBSCRIPTIONS) {
 #if UAPP_HAS_ASYNC_SUBSCRIPTIONS
                 auto future = services::createMonitoredItemDataChangeAsync(args..., useFuture);
                 setup.client.runIterate();
@@ -94,7 +96,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
     }
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS_EVENTS
-    SUBCASE("createMonitoredItemEvent") {
+    SECTION("createMonitoredItemEvent") {
         const EventFilter eventFilter(
             // select clause
             {
@@ -115,7 +117,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
         };
 
         const auto createMonitoredItemEvent = [&](auto&&... args) {
-            if constexpr (isAsync<T> && UAPP_HAS_ASYNC_SUBSCRIPTIONS) {
+            if constexpr (isAsync<TestType> && UAPP_HAS_ASYNC_SUBSCRIPTIONS) {
 #if UAPP_HAS_ASYNC_SUBSCRIPTIONS
                 auto future = services::createMonitoredItemEventAsync(args..., useFuture);
                 setup.client.runIterate();
@@ -145,7 +147,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
     }
 #endif
 
-    SUBCASE("modifyMonitoredItem") {
+    SECTION("modifyMonitoredItem") {
         const auto monId =
             services::createMonitoredItemDataChange(
                 connection,
@@ -160,7 +162,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
         CAPTURE(monId);
 
         const auto modifyMonitoredItem = [&](auto&&... args) {
-            if constexpr (isAsync<T> && UAPP_HAS_ASYNC_SUBSCRIPTIONS) {
+            if constexpr (isAsync<TestType> && UAPP_HAS_ASYNC_SUBSCRIPTIONS) {
 #if UAPP_HAS_ASYNC_SUBSCRIPTIONS
                 auto future = services::modifyMonitoredItemAsync(args..., useFuture);
                 setup.client.runIterate();
@@ -179,7 +181,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
         CHECK(result.statusCode().isGood());
     }
 
-    SUBCASE("setMonitoringMode") {
+    SECTION("setMonitoringMode") {
         const auto monId =
             services::createMonitoredItemDataChange(
                 connection,
@@ -194,7 +196,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
         CAPTURE(monId);
 
         const auto setMonitoringMode = [&](auto&&... args) {
-            if constexpr (isAsync<T>) {
+            if constexpr (isAsync<TestType>) {
                 auto future = services::setMonitoringModeAsync(args..., useFuture);
                 setup.client.runIterate();
                 return future.get();
@@ -209,7 +211,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
     }
 
 #if UAPP_OPEN62541_VER_GE(1, 2)
-    SUBCASE("setTriggering") {
+    SECTION("setTriggering") {
         // use current server time as triggering item and let it trigger the variable node
         size_t notificationCountTriggering = 0;
         size_t notificationCount = 0;
@@ -245,7 +247,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
         CHECK(notificationCount == 0);  // no triggering links yet
 
         const auto setTriggering = [&](auto&&... args) {
-            if constexpr (isAsync<T>) {
+            if constexpr (isAsync<TestType>) {
                 auto future = services::setTriggeringAsync(args..., useFuture);
                 setup.client.runIterate();
                 return future.get();
@@ -271,7 +273,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
     }
 #endif
 
-    SUBCASE("deleteMonitoredItem") {
+    SECTION("deleteMonitoredItem") {
         CHECK(
             services::deleteMonitoredItem(connection, subId, 11U) ==
             UA_STATUSCODE_BADMONITOREDITEMIDINVALID
@@ -290,7 +292,7 @@ TEST_CASE_TEMPLATE("MonitoredItem service set", T, Client, Async<Client>) {
             ).monitoredItemId();
 
         const auto deleteMonitoredItem = [&](auto&&... args) {
-            if constexpr (isAsync<T> && UAPP_HAS_ASYNC_SUBSCRIPTIONS) {
+            if constexpr (isAsync<TestType> && UAPP_HAS_ASYNC_SUBSCRIPTIONS) {
 #if UAPP_HAS_ASYNC_SUBSCRIPTIONS
                 auto future = services::deleteMonitoredItemAsync(args..., useFuture);
                 setup.client.runIterate();
@@ -322,7 +324,7 @@ TEST_CASE("MonitoredItem service set (server)") {
     services::MonitoringParametersEx monitoringParameters{};
     monitoringParameters.samplingInterval = 0.0;  // fastest
 
-    SUBCASE("createMonitoredItemDataChange") {
+    SECTION("createMonitoredItemDataChange") {
         size_t notificationCount = 0;
         const auto monId =
             services::createMonitoredItemDataChange(
@@ -341,7 +343,7 @@ TEST_CASE("MonitoredItem service set (server)") {
         CHECK(runIterateUntil(server, [&] { return notificationCount > 0; }));
     }
 
-    SUBCASE("deleteMonitoredItem") {
+    SECTION("deleteMonitoredItem") {
         CHECK(
             services::deleteMonitoredItem(server, 0U, 11U) ==
             UA_STATUSCODE_BADMONITOREDITEMIDINVALID

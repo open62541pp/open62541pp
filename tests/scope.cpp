@@ -1,13 +1,13 @@
 #include <utility>  // move
 
-#include <doctest/doctest.h>
+#include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/detail/scope.hpp"
 
 using namespace opcua;
 
 TEST_CASE("ScopeExit") {
-    SUBCASE("Common") {
+    SECTION("Common") {
         bool executed = false;
         {
             auto exit = detail::ScopeExit([&] { executed = true; });
@@ -15,7 +15,7 @@ TEST_CASE("ScopeExit") {
         CHECK(executed);
     }
 
-    SUBCASE("Move constructor") {
+    SECTION("Move constructor") {
         int executions = 0;
         {
             detail::ScopeExit exit1([&] { executions++; });
@@ -24,7 +24,7 @@ TEST_CASE("ScopeExit") {
         CHECK(executions == 1);
     }
 
-    SUBCASE("Release") {
+    SECTION("Release") {
         bool executed = false;
         {
             auto exit = detail::ScopeExit([&] { executed = true; });

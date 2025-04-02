@@ -1,6 +1,6 @@
 #include <memory>
 
-#include <doctest/doctest.h>
+#include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/plugin/pluginadapter.hpp"
 
@@ -32,13 +32,13 @@ TEST_CASE("PluginAdapter") {
     auto adapter = std::make_unique<TestAdapter>();
     TestPlugin plugin{};
 
-    SUBCASE("Borrow") {
+    SECTION("Borrow") {
         plugin = adapter->create(false);
         CHECK(plugin.context != nullptr);
         CHECK(plugin.clear == nullptr);
     }
 
-    SUBCASE("Owning") {
+    SECTION("Owning") {
         plugin = adapter->create(true);
         adapter.release();
         CHECK(plugin.context != nullptr);

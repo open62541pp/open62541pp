@@ -1,7 +1,7 @@
 #include <stdexcept>
 #include <utility>  // as_const
 
-#include <doctest/doctest.h>
+#include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/detail/result_utils.hpp"
 #include "open62541pp/result.hpp"
@@ -12,7 +12,7 @@ static constexpr StatusCode badCode(UA_STATUSCODE_BADUNEXPECTEDERROR);
 static constexpr BadResult badResult(badCode);
 
 TEST_CASE("Result") {
-    SUBCASE("Constructors") {
+    SECTION("Constructors") {
         CHECK(Result<int>().value() == 0);
         CHECK(Result<int>(1).value() == 1);
         CHECK(Result<int>(1, UA_STATUSCODE_GOODCLAMPED).value() == 1);
@@ -23,7 +23,7 @@ TEST_CASE("Result") {
         );
     }
 
-    SUBCASE("operator->") {
+    SECTION("operator->") {
         struct S {
             int a;
         };
@@ -33,32 +33,32 @@ TEST_CASE("Result") {
         CHECK(std::as_const(result)->a == 1);
     }
 
-    SUBCASE("operator*") {
+    SECTION("operator*") {
         Result<int> result(1);
         CHECK(*result == 1);
         CHECK(*std::as_const(result) == 1);
 
-        SUBCASE("rvalue") {
+        SECTION("rvalue") {
             CHECK(*Result<int>(1) == 1);
         }
     }
 
-    SUBCASE("code") {
+    SECTION("code") {
         CHECK(Result<int>(1).code() == UA_STATUSCODE_GOOD);
         CHECK(Result<int>(badResult).code() == badCode);
     }
 
-    SUBCASE("operator bool") {
+    SECTION("operator bool") {
         CHECK(static_cast<bool>(Result<int>(1)));
         CHECK_FALSE(static_cast<bool>(Result<int>(badResult)));
     }
 
-    SUBCASE("hasValue") {
+    SECTION("hasValue") {
         CHECK(Result<int>().hasValue());
         CHECK_FALSE(Result<int>(badResult).hasValue());
     }
 
-    SUBCASE("value") {
+    SECTION("value") {
         Result<int> resultDefault;
         CHECK(resultDefault.value() == 0);
 
@@ -70,26 +70,26 @@ TEST_CASE("Result") {
         CHECK_THROWS_AS(resultError.value(), BadStatus);
         CHECK_THROWS_AS(std::as_const(resultError).value(), BadStatus);
 
-        SUBCASE("rvalue") {
+        SECTION("rvalue") {
             CHECK(Result<int>(1).value() == 1);
             CHECK_THROWS_AS(Result<int>(badResult).value(), BadStatus);
         }
     }
 
-    SUBCASE("valueOr") {
+    SECTION("valueOr") {
         Result<int> result(1);
         CHECK(result.valueOr(2) == 1);
 
         Result<int> resultError(badResult);
         CHECK(resultError.valueOr(2) == 2);
 
-        SUBCASE("rvalue") {
+        SECTION("rvalue") {
             CHECK(Result<int>(1).valueOr(2) == 1);
             CHECK(Result<int>(badResult).valueOr(2) == 2);
         }
     }
 
-    SUBCASE("transform") {
+    SECTION("transform") {
         auto func = [](int value) { return 2 * value; };
         CHECK(Result<int>(1).transform(func).value() == 2);
         CHECK(Result<int>(1).transform(func).code().isGood());
@@ -97,13 +97,13 @@ TEST_CASE("Result") {
         CHECK_THROWS_AS(Result<int>(badResult).transform(func).value(), BadStatus);
         CHECK(Result<int>(badResult).transform(func).code().isBad());
 
-        SUBCASE("void return") {
+        SECTION("void return") {
             CHECK(Result<int>(1).transform([](auto&&) {}).code().isGood());
             CHECK(Result<int>(badResult).transform([](auto&&) {}).code().isBad());
         }
     }
 
-    SUBCASE("andThen") {
+    SECTION("andThen") {
         auto func = [](int value) -> Result<double> {
             if (value > 0) {
                 return 2.2 * value;
@@ -121,7 +121,7 @@ TEST_CASE("Result") {
         CHECK(Result<int>(0).andThen(func).code().isBad());
     }
 
-    SUBCASE("andThen with StatusCode") {
+    SECTION("andThen with StatusCode") {
         auto func = [](int value, StatusCode) -> Result<double> {
             if (value > 0) {
                 return 2.2 * value;
@@ -139,7 +139,7 @@ TEST_CASE("Result") {
         CHECK(Result<int>(0).andThen(func).code().isBad());
     }
 
-    SUBCASE("orElse") {
+    SECTION("orElse") {
         auto func = [](StatusCode) -> Result<int> { return 0; };
 
         CHECK(Result<int>(1).orElse(func).value() == 1);
@@ -151,55 +151,55 @@ TEST_CASE("Result") {
 }
 
 TEST_CASE("Result (void template specialization)") {
-    SUBCASE("code") {
+    SECTION("code") {
         CHECK(Result<void>().code() == UA_STATUSCODE_GOOD);
         CHECK(Result<void>(badResult).code() == badCode);
     }
 
-    SUBCASE("operator bool") {
+    SECTION("operator bool") {
         CHECK(static_cast<bool>(Result<void>()));
         CHECK_FALSE(static_cast<bool>(Result<void>(badResult)));
     }
 
-    SUBCASE("hasValue") {
+    SECTION("hasValue") {
         CHECK(Result<void>().hasValue());
         CHECK_FALSE(Result<void>(badResult).hasValue());
     }
 
-    SUBCASE("value") {
+    SECTION("value") {
         CHECK_NOTHROW(Result<void>().value());
         CHECK_THROWS_AS(Result<void>(badResult).value(), BadStatus);
     }
 }
 
 TEST_CASE("tryInvoke") {
-    SUBCASE("int return") {
+    SECTION("int return") {
         auto result = detail::tryInvoke([] { return 1; });
         CHECK(result.code() == UA_STATUSCODE_GOOD);
         CHECK(result.value() == 1);
     }
 
-    SUBCASE("void return") {
+    SECTION("void return") {
         auto result = detail::tryInvoke([] { return; });
         CHECK(result.code() == UA_STATUSCODE_GOOD);
     }
 
-    SUBCASE("StatusCode return") {
+    SECTION("StatusCode return") {
         auto result = detail::tryInvoke([] { return badCode; });
         CHECK(result.code() == badCode);
     }
 
-    SUBCASE("BadResult return") {
+    SECTION("BadResult return") {
         auto result = detail::tryInvoke([] { return badResult; });
         CHECK(result.code() == badCode);
     }
 
-    SUBCASE("BadStatus exception") {
+    SECTION("BadStatus exception") {
         auto result = detail::tryInvoke([] { throw BadStatus(badCode); });
         CHECK(result.code() == badCode);
     }
 
-    SUBCASE("Other exception types") {
+    SECTION("Other exception types") {
         auto result = detail::tryInvoke([] { throw std::runtime_error("test"); });
         CHECK(result.code() == UA_STATUSCODE_BADINTERNALERROR);
     }

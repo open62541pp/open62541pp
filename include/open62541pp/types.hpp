@@ -296,30 +296,47 @@ public:
     }
 };
 
+/// @relates String
 inline bool operator==(const UA_String& lhs, const UA_String& rhs) noexcept {
     return UA_String_equal(&lhs, &rhs);
 }
 
+/// @relates String
 inline bool operator!=(const UA_String& lhs, const UA_String& rhs) noexcept {
     return !(lhs == rhs);
 }
 
+/// @relates String
+inline bool operator==(const String& lhs, const String& rhs) noexcept {
+    return asNative(lhs) == asNative(rhs);
+}
+
+/// @relates String
+inline bool operator!=(const String& lhs, const String& rhs) noexcept {
+    return !(lhs == rhs);
+}
+
+/// @relates String
 inline bool operator==(const String& lhs, std::string_view rhs) noexcept {
-    return (static_cast<std::string_view>(lhs) == rhs);
+    return static_cast<std::string_view>(lhs) == rhs;
 }
 
+/// @relates String
 inline bool operator!=(const String& lhs, std::string_view rhs) noexcept {
-    return (static_cast<std::string_view>(lhs) != rhs);
+    return static_cast<std::string_view>(lhs) != rhs;
 }
 
+/// @relates String
 inline bool operator==(std::string_view lhs, const String& rhs) noexcept {
-    return (lhs == static_cast<std::string_view>(rhs));
+    return lhs == static_cast<std::string_view>(rhs);
 }
 
+/// @relates String
 inline bool operator!=(std::string_view lhs, const String& rhs) noexcept {
-    return (lhs != static_cast<std::string_view>(rhs));
+    return lhs != static_cast<std::string_view>(rhs);
 }
 
+/// @relates String
 std::ostream& operator<<(std::ostream& os, const String& str);
 
 template <typename Traits>
@@ -468,6 +485,7 @@ struct TypeConverter<std::chrono::time_point<Clock, Duration>> {
 
 /**
  * UA_Guid wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/5.1.3
  * @ingroup Wrapper
  */
 class Guid : public TypeWrapper<UA_Guid, UA_TYPES_GUID> {
@@ -494,23 +512,37 @@ public:
               {data4[0], data4[1], data4[2], data4[3], data4[4], data4[5], data4[6], data4[7]},
           }) {}
 
+    /// Generate random Guid.
     static Guid random() noexcept {
         return Guid(UA_Guid_random());  // NOLINT
     }
+
+#if UAPP_HAS_PARSING
+    /// Parse Guid from its string representation.
+    /// Format: `C496578A-0DFE-4B8F-870A-745238C6AEAE`.
+    static Guid parse(std::string_view str) {
+        Guid guid;
+        throwIfBad(UA_Guid_parse(guid.handle(), detail::toNativeString(str)));
+        return guid;
+    }
+#endif
 
     /// @deprecated Use free function opcua::toString(const T&) instead
     [[deprecated("use free function toString instead")]]
     std::string toString() const;
 };
 
+/// @relates Guid
 inline bool operator==(const UA_Guid& lhs, const UA_Guid& rhs) noexcept {
     return UA_Guid_equal(&lhs, &rhs);
 }
 
+/// @relates Guid
 inline bool operator!=(const UA_Guid& lhs, const UA_Guid& rhs) noexcept {
     return !(lhs == rhs);
 }
 
+/// @relates Guid
 std::ostream& operator<<(std::ostream& os, const Guid& guid);
 
 /* ----------------------------------------- ByteString ----------------------------------------- */
@@ -561,18 +593,22 @@ public:
     }
 };
 
+/// @relates ByteString
 inline bool operator==(const ByteString& lhs, std::string_view rhs) noexcept {
     return (static_cast<std::string_view>(lhs) == rhs);
 }
 
+/// @relates ByteString
 inline bool operator!=(const ByteString& lhs, std::string_view rhs) noexcept {
     return (static_cast<std::string_view>(lhs) != rhs);
 }
 
+/// @relates ByteString
 inline bool operator==(std::string_view lhs, const ByteString& rhs) noexcept {
     return (lhs == static_cast<std::string_view>(rhs));
 }
 
+/// @relates ByteString
 inline bool operator!=(std::string_view lhs, const ByteString& rhs) noexcept {
     return (lhs != static_cast<std::string_view>(rhs));
 }
@@ -623,6 +659,7 @@ public:
     }
 };
 
+/// @relates XmlElement
 std::ostream& operator<<(std::ostream& os, const XmlElement& xmlElement);
 
 /* ------------------------------------------- NodeId ------------------------------------------- */
@@ -692,6 +729,17 @@ public:
     NodeId(T identifier) noexcept  // NOLINT(hicpp-explicit-conversions)
         : NodeId(namespaceOf(identifier).index, static_cast<uint32_t>(identifier)) {}
 
+#if UAPP_HAS_PARSING
+    /// Parse NodeId from its string representation.
+    /// Format: `ns=<namespaceindex>;<type>=<value>`, e.g. `i=13` or `ns=10;s=HelloWorld`
+    /// @see https://reference.opcfoundation.org/Core/Part6/v104/docs/5.3.1.10
+    static NodeId parse(std::string_view str) {
+        NodeId id;
+        throwIfBad(UA_NodeId_parse(id.handle(), detail::toNativeString(str)));
+        return id;
+    }
+#endif
+
     bool isNull() const noexcept {
         return UA_NodeId_isNull(handle());
     }
@@ -747,24 +795,22 @@ public:
             return identifierType() == NodeIdType::Numeric
                 ? &handle()->identifier.numeric
                 : nullptr;
-        }
-        if constexpr (std::is_same_v<T, String>) {
+        } else if constexpr (std::is_same_v<T, String>) {
             return identifierType() == NodeIdType::String
                 ? asWrapper<String>(&handle()->identifier.string)
                 : nullptr;
-        }
-        if constexpr (std::is_same_v<T, Guid>) {
+        } else if constexpr (std::is_same_v<T, Guid>) {
             return identifierType() == NodeIdType::Guid
                 ? asWrapper<Guid>(&handle()->identifier.guid)
                 : nullptr;
-        }
-        if constexpr (std::is_same_v<T, ByteString>) {
+        } else if constexpr (std::is_same_v<T, ByteString>) {
             return identifierType() == NodeIdType::ByteString
                 ? asWrapper<ByteString>(&handle()->identifier.byteString)
                 : nullptr;
+        } else {
+            return nullptr;
         }
         // NOLINTEND(cppcoreguidelines-pro-type-union-access)
-        return nullptr;
     }
 
     /**
@@ -843,39 +889,42 @@ private:
     auto getIdentifierAsImpl() const {
         if constexpr (E == NodeIdType::Numeric) {
             return getIdentifierAsImpl<uint32_t>();
-        }
-        if constexpr (E == NodeIdType::String) {
+        } else if constexpr (E == NodeIdType::String) {
             return getIdentifierAsImpl<String>();
-        }
-        if constexpr (E == NodeIdType::Guid) {
+        } else if constexpr (E == NodeIdType::Guid) {
             return getIdentifierAsImpl<Guid>();
-        }
-        if constexpr (E == NodeIdType::ByteString) {
+        } else if constexpr (E == NodeIdType::ByteString) {
             return getIdentifierAsImpl<ByteString>();
         }
     }
 };
 
+/// @relates NodeId
 inline bool operator==(const UA_NodeId& lhs, const UA_NodeId& rhs) noexcept {
     return UA_NodeId_equal(&lhs, &rhs);
 }
 
+/// @relates NodeId
 inline bool operator!=(const UA_NodeId& lhs, const UA_NodeId& rhs) noexcept {
     return !(lhs == rhs);
 }
 
+/// @relates NodeId
 inline bool operator<(const UA_NodeId& lhs, const UA_NodeId& rhs) noexcept {
     return UA_NodeId_order(&lhs, &rhs) == UA_ORDER_LESS;
 }
 
+/// @relates NodeId
 inline bool operator>(const UA_NodeId& lhs, const UA_NodeId& rhs) noexcept {
     return UA_NodeId_order(&lhs, &rhs) == UA_ORDER_MORE;
 }
 
+/// @relates NodeId
 inline bool operator<=(const UA_NodeId& lhs, const UA_NodeId& rhs) noexcept {
     return (lhs < rhs) || (lhs == rhs);
 }
 
+/// @relates NodeId
 inline bool operator>=(const UA_NodeId& lhs, const UA_NodeId& rhs) noexcept {
     return (lhs > rhs) || (lhs == rhs);
 }
@@ -900,6 +949,18 @@ public:
         handle()->namespaceUri = detail::allocNativeString(namespaceUri);
         handle()->serverIndex = serverIndex;
     }
+
+#if UAPP_HAS_PARSING
+    /// Parse ExpandedNodeId from its string representation.
+    /// Format: `svr=<serverindex>;ns=<namespaceindex>;<type>=<value>` or
+    ///         `svr=<serverindex>;nsu=<uri>;<type>=<value>`
+    /// @see https://reference.opcfoundation.org/Core/Part6/v104/docs/5.3.1.11
+    static ExpandedNodeId parse(std::string_view str) {
+        ExpandedNodeId id;
+        throwIfBad(UA_ExpandedNodeId_parse(id.handle(), detail::toNativeString(str)));
+        return id;
+    }
+#endif
 
     bool isLocal() const noexcept {
         return handle()->serverIndex == 0;
@@ -954,26 +1015,32 @@ public:
     std::string toString() const;
 };
 
+/// @relates ExpandedNodeId
 inline bool operator==(const UA_ExpandedNodeId& lhs, const UA_ExpandedNodeId& rhs) noexcept {
     return UA_ExpandedNodeId_equal(&lhs, &rhs);
 }
 
+/// @relates ExpandedNodeId
 inline bool operator!=(const UA_ExpandedNodeId& lhs, const UA_ExpandedNodeId& rhs) noexcept {
     return !(lhs == rhs);
 }
 
+/// @relates ExpandedNodeId
 inline bool operator<(const UA_ExpandedNodeId& lhs, const UA_ExpandedNodeId& rhs) noexcept {
     return UA_ExpandedNodeId_order(&lhs, &rhs) == UA_ORDER_LESS;
 }
 
+/// @relates ExpandedNodeId
 inline bool operator>(const UA_ExpandedNodeId& lhs, const UA_ExpandedNodeId& rhs) noexcept {
     return UA_ExpandedNodeId_order(&lhs, &rhs) == UA_ORDER_MORE;
 }
 
+/// @relates ExpandedNodeId
 inline bool operator<=(const UA_ExpandedNodeId& lhs, const UA_ExpandedNodeId& rhs) noexcept {
     return (lhs < rhs) || (lhs == rhs);
 }
 
+/// @relates ExpandedNodeId
 inline bool operator>=(const UA_ExpandedNodeId& lhs, const UA_ExpandedNodeId& rhs) noexcept {
     return (lhs > rhs) || (lhs == rhs);
 }
@@ -1014,10 +1081,12 @@ public:
     }
 };
 
+/// @relates QualifiedName
 inline bool operator==(const UA_QualifiedName& lhs, const UA_QualifiedName& rhs) noexcept {
     return (lhs.namespaceIndex == rhs.namespaceIndex) && (lhs.name == rhs.name);
 }
 
+/// @relates QualifiedName
 inline bool operator!=(const UA_QualifiedName& lhs, const UA_QualifiedName& rhs) noexcept {
     return !(lhs == rhs);
 }
@@ -1063,10 +1132,12 @@ public:
     }
 };
 
+/// @relates LocalizedText
 inline bool operator==(const UA_LocalizedText& lhs, const UA_LocalizedText& rhs) noexcept {
     return (lhs.locale == rhs.locale) && (lhs.text == rhs.text);
 }
 
+/// @relates LocalizedText
 inline bool operator!=(const UA_LocalizedText& lhs, const UA_LocalizedText& rhs) noexcept {
     return !(lhs == rhs);
 }
@@ -1227,11 +1298,13 @@ public:
     }
 
     /**
-     * @}
      * @name Modifiers
      * Modify internal scalar/array value.
      * @{
      */
+
+    void assign(std::nullptr_t ptr) noexcept = delete;
+    void assign(std::nullptr_t ptr, const UA_DataType& type) noexcept = delete;
 
     /**
      * Assign pointer to scalar/array to variant (no copy).
@@ -1241,15 +1314,12 @@ public:
      *            - A pointer to a contiguous container such as `std::array` or `std::vector`
      *              holding native or wrapper elements.
      *              The underlying array must be accessible with `std::data` and `std::size`.
-     *            - A `nullptr`, in which case the function returns without performing any action.
+     *            - A `nullptr`, in which case the variant will be cleared.
      */
     template <typename T, typename = std::enable_if_t<!std::is_const_v<T>>>
     void assign(T* ptr) noexcept {
-        if (ptr == nullptr) {
-            return;
-        }
         if constexpr (isArrayType<T>()) {
-            using ValueType = typename T::value_type;
+            using ValueType = detail::RangeValueT<T>;
             assertIsRegistered<ValueType>();
             assign(ptr, opcua::getDataType<ValueType>());
         } else {
@@ -1266,9 +1336,8 @@ public:
     template <typename T, typename = std::enable_if_t<!std::is_const_v<T>>>
     void assign(T* ptr, const UA_DataType& type) noexcept {
         if (ptr == nullptr) {
-            return;
-        }
-        if constexpr (isArrayType<T>()) {
+            clear();
+        } else if constexpr (isArrayType<T>()) {
             setArrayImpl(std::data(*ptr), std::size(*ptr), type, UA_VARIANT_DATA_NODELETE);
         } else {
             setScalarImpl(ptr, type, UA_VARIANT_DATA_NODELETE);
@@ -1285,10 +1354,10 @@ public:
     template <typename T>
     void assign(const T& value) {
         if constexpr (isArrayType<T>()) {
-            assign(value.begin(), value.end());
+            assign(std::begin(value), std::end(value));
         } else {
             assertIsRegisteredOrConvertible<T>();
-            if constexpr (detail::isRegisteredType<T>) {
+            if constexpr (detail::IsRegistered<T>::value) {
                 setScalarCopyImpl(value, opcua::getDataType<T>());
             } else {
                 setScalarCopyConvertImpl(value);
@@ -1307,7 +1376,7 @@ public:
     template <typename T>
     void assign(const T& value, const UA_DataType& type) {
         if constexpr (isArrayType<T>()) {
-            setArrayCopyImpl(value.begin(), value.end(), type);
+            setArrayCopyImpl(std::begin(value), std::end(value), type);
         } else {
             setScalarCopyImpl(value, type);
         }
@@ -1323,7 +1392,7 @@ public:
     void assign(InputIt first, InputIt last) {
         using ValueType = typename std::iterator_traits<InputIt>::value_type;
         assertIsRegisteredOrConvertible<ValueType>();
-        if constexpr (detail::isRegisteredType<ValueType>) {
+        if constexpr (detail::IsRegistered<ValueType>::value) {
             setArrayCopyImpl(first, last, opcua::getDataType<ValueType>());
         } else {
             setArrayCopyConvertImpl(first, last);
@@ -1628,18 +1697,18 @@ public:
 private:
     template <typename T>
     static constexpr bool isScalarType() noexcept {
-        return detail::isRegisteredType<T> || detail::isConvertibleType<T>;
+        return detail::IsRegistered<T>::value || detail::IsConvertible<T>::value;
     }
 
     template <typename T>
     static constexpr bool isArrayType() noexcept {
-        return detail::isContainer<T> && !isScalarType<T>();
+        return detail::IsRange<T>::value && !isScalarType<T>();
     }
 
     template <typename T>
     static constexpr void assertIsRegistered() {
         static_assert(
-            detail::isRegisteredType<T>,
+            detail::IsRegistered<T>::value,
             "Template type must be a native/wrapper type to assign or get scalar/array without copy"
         );
     }
@@ -1647,7 +1716,7 @@ private:
     template <typename T>
     static constexpr void assertIsRegisteredOrConvertible() {
         static_assert(
-            detail::isRegisteredType<T> || detail::isConvertibleType<T>,
+            detail::IsRegistered<T>::value || detail::IsConvertible<T>::value,
             "Template type must be either a native/wrapper type or a convertible type. "
             "If the type is a native type: Provide the type definition (UA_DataType) manually or "
             "register the type with a TypeRegistry template specialization. "
@@ -1706,7 +1775,7 @@ private:
 template <typename T>
 T Variant::toScalarImpl() const {
     assertIsRegisteredOrConvertible<T>();
-    if constexpr (detail::isRegisteredType<T>) {
+    if constexpr (detail::IsRegistered<T>::value) {
         return scalar<T>();
     } else {
         using Native = typename TypeConverter<T>::NativeType;
@@ -1718,7 +1787,7 @@ template <typename T>
 T Variant::toArrayImpl() const {
     using ValueType = typename T::value_type;
     assertIsRegisteredOrConvertible<ValueType>();
-    if constexpr (detail::isRegisteredType<ValueType>) {
+    if constexpr (detail::IsRegistered<ValueType>::value) {
         auto native = array<ValueType>();
         return T(native.begin(), native.end());
     } else {
@@ -2388,12 +2457,14 @@ public:
 
 using NumericRangeDimension = UA_NumericRangeDimension;
 
+/// @relates NumericRange
 inline bool operator==(
     const NumericRangeDimension& lhs, const NumericRangeDimension& rhs
 ) noexcept {
     return (lhs.min == rhs.min) && (lhs.max == rhs.max);
 }
 
+/// @relates NumericRange
 inline bool operator!=(
     const NumericRangeDimension& lhs, const NumericRangeDimension& rhs
 ) noexcept {
@@ -2468,6 +2539,8 @@ public:
         return {native().dimensions, native().dimensionsSize};
     }
 
+    /// @deprecated Use free function opcua::toString(const T&) instead
+    [[deprecated("use free function toString instead")]]
     std::string toString() const;
 
 private:
@@ -2507,7 +2580,7 @@ String toString(const NumericRange& range);
  *
  * @relates TypeWrapper
  */
-template <typename T, typename = std::enable_if_t<detail::isRegisteredType<T>>>
+template <typename T, typename = std::enable_if_t<detail::IsRegistered<T>::value>>
 String toString(const T& object) {
     String output;
     if constexpr (UAPP_HAS_TOSTRING) {

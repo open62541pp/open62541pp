@@ -1,9 +1,12 @@
 #include <exception>
 #include <stdexcept>
 
-#include <doctest/doctest.h>
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_all.hpp>
 
 #include "open62541pp/detail/exceptioncatcher.hpp"
+
+using Catch::Matchers::Message;
 
 TEST_CASE("ExceptionCatcher") {
     opcua::detail::ExceptionCatcher catcher;
@@ -11,28 +14,28 @@ TEST_CASE("ExceptionCatcher") {
     CHECK_FALSE(catcher.hasException());
     CHECK_NOTHROW(catcher.rethrow());
 
-    SUBCASE("Set and rethrow exception") {
-        catcher.setException(std::make_exception_ptr(std::runtime_error("Error")));
+    SECTION("Set and rethrow exception") {
+        catcher.setException(std::make_exception_ptr(std::runtime_error{"Error"}));
         CHECK(catcher.hasException());
-        CHECK_THROWS_WITH_AS(catcher.rethrow(), "Error", std::runtime_error);
+        CHECK_THROWS_MATCHES(catcher.rethrow(), std::runtime_error, Message("Error"));
 
         CHECK_FALSE(catcher.hasException());
         CHECK_NOTHROW(catcher.rethrow());
     }
 
-    SUBCASE("Invoke and catch exception") {
+    SECTION("Invoke and catch exception") {
         catcher.invoke([] {});
         CHECK_FALSE(catcher.hasException());
 
-        catcher.invoke([] { throw std::runtime_error("Error"); });
+        catcher.invoke([] { throw std::runtime_error{"Error"}; });
         CHECK(catcher.hasException());
-        CHECK_THROWS_WITH_AS(catcher.rethrow(), "Error", std::runtime_error);
+        CHECK_THROWS_MATCHES(catcher.rethrow(), std::runtime_error, Message("Error"));
     }
 
-    SUBCASE("Wrap callback") {
+    SECTION("Wrap callback") {
         auto wrapped = catcher.wrapCallback([](bool error) {
             if (error) {
-                throw std::runtime_error("Error");
+                throw std::runtime_error{"Error"};
             }
         });
 
@@ -41,6 +44,6 @@ TEST_CASE("ExceptionCatcher") {
 
         wrapped(true);
         CHECK(catcher.hasException());
-        CHECK_THROWS_WITH_AS(catcher.rethrow(), "Error", std::runtime_error);
+        CHECK_THROWS_MATCHES(catcher.rethrow(), std::runtime_error, Message("Error"));
     }
 }

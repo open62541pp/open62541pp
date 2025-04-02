@@ -166,14 +166,17 @@ public:
     void setMembers(Span<const DataTypeMember> members);
 };
 
+/// @relates DataType
 inline bool operator==(const UA_DataType& lhs, const UA_DataType& rhs) noexcept {
     return lhs.typeId == rhs.typeId;
 }
 
+/// @relates DataType
 inline bool operator!=(const UA_DataType& lhs, const UA_DataType& rhs) noexcept {
     return !(lhs == rhs);
 }
 
+/// @relates DataType
 inline bool operator==(const UA_DataTypeMember& lhs, const UA_DataTypeMember& rhs) noexcept {
 #if UAPP_OPEN62541_VER_GE(1, 3)
     if (lhs.memberType == nullptr || rhs.memberType == nullptr) {
@@ -185,6 +188,7 @@ inline bool operator==(const UA_DataTypeMember& lhs, const UA_DataTypeMember& rh
 #endif
 }
 
+/// @relates DataType
 inline bool operator!=(const UA_DataTypeMember& lhs, const UA_DataTypeMember& rhs) noexcept {
     return !(lhs == rhs);
 }

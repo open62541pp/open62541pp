@@ -1,6 +1,6 @@
 #include <cstdint>
 
-#include <doctest/doctest.h>
+#include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/config.hpp"
 #include "open62541pp/plugin/accesscontrol.hpp"
@@ -13,7 +13,7 @@ using namespace opcua;
 TEST_CASE("AccessControlDefault") {
     Server server;
 
-    SUBCASE("getUserTokenPolicies") {
+    SECTION("getUserTokenPolicies") {
         AccessControlDefault ac(true, {{"username", "password"}});
 
         CHECK(ac.getUserTokenPolicies().size() == 2);
@@ -24,12 +24,12 @@ TEST_CASE("AccessControlDefault") {
         CHECK(ac.getUserTokenPolicies()[1].tokenType() == UserTokenType::Username);
     }
 
-    SUBCASE("activateSession") {
+    SECTION("activateSession") {
         for (bool allowAnonymous : {false, true}) {
             CAPTURE(allowAnonymous);
 
             AccessControlDefault ac(allowAnonymous, {{"username", "password"}});
-            Session session(server, NodeId{});
+            Session session(server, NodeId{}, nullptr);
             const EndpointDescription endpointDescription{};
             const ByteString secureChannelRemoteCertificate{};
 
@@ -39,63 +39,60 @@ TEST_CASE("AccessControlDefault") {
                 );
             };
 
-            SUBCASE("Empty token") {
+            SECTION("Empty token") {
                 const ExtensionObject userIdentityToken{};
-                CHECK_EQ(
-                    activateSessionWithToken(userIdentityToken),
-                    allowAnonymous ? UA_STATUSCODE_GOOD : UA_STATUSCODE_BADIDENTITYTOKENINVALID
+                CHECK(
+                    activateSessionWithToken(userIdentityToken) ==
+                    (allowAnonymous ? UA_STATUSCODE_GOOD : UA_STATUSCODE_BADIDENTITYTOKENINVALID)
                 );
             }
 
-            SUBCASE("Unknown token") {
+            SECTION("Unknown token") {
                 IssuedIdentityToken token;
-                CHECK_EQ(
-                    activateSessionWithToken(ExtensionObject(token)),
+                CHECK(
+                    activateSessionWithToken(ExtensionObject(token)) ==
                     UA_STATUSCODE_BADIDENTITYTOKENINVALID
                 );
             }
 
-            SUBCASE("Anonymous login") {
+            SECTION("Anonymous login") {
                 AnonymousIdentityToken token;
                 token.policyId() = String("open62541-anonymous-policy");
-                CHECK_EQ(
-                    activateSessionWithToken(ExtensionObject(token)),
-                    allowAnonymous ? UA_STATUSCODE_GOOD : UA_STATUSCODE_BADIDENTITYTOKENINVALID
+                CHECK(
+                    activateSessionWithToken(ExtensionObject(token)) ==
+                    (allowAnonymous ? UA_STATUSCODE_GOOD : UA_STATUSCODE_BADIDENTITYTOKENINVALID)
                 );
             }
 
-            SUBCASE("Username and password") {
+            SECTION("Username and password") {
                 UserNameIdentityToken token;
-                CHECK_EQ(
-                    activateSessionWithToken(ExtensionObject(token)),
+                CHECK(
+                    activateSessionWithToken(ExtensionObject(token)) ==
                     UA_STATUSCODE_BADIDENTITYTOKENINVALID
                 );
 
                 token.policyId() = String("open62541-username-policy");
-                CHECK_EQ(
-                    activateSessionWithToken(ExtensionObject(token)),
+                CHECK(
+                    activateSessionWithToken(ExtensionObject(token)) ==
                     UA_STATUSCODE_BADIDENTITYTOKENINVALID
                 );
 
                 token.userName() = String("username");
                 token.password() = ByteString("wrongpassword");
-                CHECK_EQ(
-                    activateSessionWithToken(ExtensionObject(token)),
+                CHECK(
+                    activateSessionWithToken(ExtensionObject(token)) ==
                     UA_STATUSCODE_BADUSERACCESSDENIED
                 );
 
                 token.password() = ByteString("password");
-                CHECK_EQ(
-                    activateSessionWithToken(ExtensionObject(token)),
-                    UA_STATUSCODE_GOOD
-                );
+                CHECK(activateSessionWithToken(ExtensionObject(token)) == UA_STATUSCODE_GOOD);
             }
         }
     }
 
-    SUBCASE("Access control callbacks (all permissive)") {
+    SECTION("Access control callbacks (all permissive)") {
         AccessControlDefault ac;
-        Session session(server, NodeId{});
+        Session session(server, NodeId{}, nullptr);
 
         CHECK(ac.getUserRightsMask(session, {}) == 0xFFFFFFFF);
         CHECK(ac.getUserAccessLevel(session, {}) == static_cast<uint8_t>(0xFF));

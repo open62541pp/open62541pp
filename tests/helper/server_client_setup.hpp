@@ -5,7 +5,7 @@
 #include <tuple>
 #include <type_traits>
 
-#include <doctest/doctest.h>
+#include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/client.hpp"
 #include "open62541pp/server.hpp"
@@ -24,7 +24,7 @@ struct ServerClientSetup {
     ServerRunner serverRunner{server};
 
     template <typename T>
-    auto& getInstance() noexcept {
+    auto& instance() noexcept {
         if constexpr (IsTrait<T>::value) {
             using U = typename T::type;
             return std::get<U&>(std::tie(server, client));

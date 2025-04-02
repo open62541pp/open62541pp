@@ -1,7 +1,8 @@
 #include <chrono>
 #include <thread>
 
-#include <doctest/doctest.h>
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_all.hpp>
 
 #include "open62541pp/config.hpp"
 #include "open62541pp/detail/open62541/server.h"
@@ -12,19 +13,25 @@
 #include "open62541pp/server.hpp"
 #include "open62541pp/types.hpp"
 
+#ifdef _WIN32
+#include <windows.h>
+#include <winsock2.h>
+#endif
+
+using Catch::Matchers::Message;
 using namespace opcua;
 
 TEST_CASE("ServerConfig") {
-    SUBCASE("Construct with custom port") {
+    SECTION("Construct with custom port") {
         CHECK_NOTHROW(ServerConfig(4850));
     }
 
-    SUBCASE("Construct with custom port and certificate") {
+    SECTION("Construct with custom port and certificate") {
         CHECK_NOTHROW(ServerConfig(4850, ByteString("certificate")));
     }
 
 #ifdef UA_ENABLE_ENCRYPTION
-    SUBCASE("Construct with encryption") {
+    SECTION("Construct with encryption") {
         ServerConfig config(
             4850,
             {},  // certificate, invalid
@@ -40,7 +47,7 @@ TEST_CASE("ServerConfig") {
 
     ServerConfig config;
 
-    SUBCASE("BuildInfo") {
+    SECTION("BuildInfo") {
         config.setBuildInfo(BuildInfo(
             "productUri",
             "manufacturerName",
@@ -53,7 +60,7 @@ TEST_CASE("ServerConfig") {
         // ...
     }
 
-    SUBCASE("ApplicationDescription") {
+    SECTION("ApplicationDescription") {
         config.setApplicationUri("http://app.com");
         CHECK(detail::toString(config->applicationDescription.applicationUri) == "http://app.com");
 
@@ -64,8 +71,8 @@ TEST_CASE("ServerConfig") {
         CHECK(detail::toString(config->applicationDescription.applicationName.text) == "Test App");
     }
 
-    SUBCASE("AccessControl") {
-        SUBCASE("setAccessControl borrow & owning") {
+    SECTION("AccessControl") {
+        SECTION("setAccessControl borrow & owning") {
             AccessControlDefault accessControl;
             config.setAccessControl(accessControl);
             config.setAccessControl(accessControl);
@@ -74,7 +81,7 @@ TEST_CASE("ServerConfig") {
             config.setAccessControl(std::make_unique<AccessControlDefault>());
         }
 
-        SUBCASE("Copy user token policies to endpoints") {
+        SECTION("Copy user token policies to endpoints") {
             CHECK(config->endpointsSize > 0);
 
             // delete endpoint user identity tokens first
@@ -97,7 +104,7 @@ TEST_CASE("ServerConfig") {
             }
         }
 
-        SUBCASE("Use highest security policy to transfer user tokens") {
+        SECTION("Use highest security policy to transfer user tokens") {
             AccessControlDefault accessControl(true, {{"user", "password"}});
             config.setAccessControl(accessControl);
             auto& ac = config->accessControl;
@@ -116,41 +123,92 @@ TEST_CASE("ServerConfig") {
     }
 }
 
+TEST_CASE("Server constructors") {
+    SECTION("From native") {
+        UA_ServerConfig config{};
+        UA_ServerConfig_setDefault(&config);
+        UA_Server* native = UA_Server_newWithConfig(&config);
+        Server server{native};
+    }
+
+    SECTION("From native (nullptr)") {
+        UA_Server* native{nullptr};
+        CHECK_THROWS(Server{native});
+    }
+}
+
 TEST_CASE("Server run/stop/runIterate") {
     Server server;
     CHECK_FALSE(server.isRunning());
 
-    SUBCASE("Run/stop") {
+    SECTION("run/stop") {
         auto t = std::thread([&] { server.run(); });
         // wait for thread to execute run method
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
         CHECK(server.isRunning());
         server.stop();
+        server.stop();  // should do nothing
         t.join();  // wait until stopped
     }
 
-    SUBCASE("Run iterate") {
+    SECTION("runIterate") {
         const auto waitInterval = server.runIterate();
         CHECK(waitInterval > 0);
         CHECK(waitInterval <= 1000);
         CHECK(server.isRunning());
         server.stop();
+        server.stop();  // should do nothing
     }
 
     CHECK_FALSE(server.isRunning());
 }
 
+#ifdef _WIN32
+static bool isWinsockActive() {
+    SOCKET testSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+    if (testSocket == INVALID_SOCKET) {
+        int error = WSAGetLastError();
+        if (error == WSANOTINITIALISED) {
+            return false;
+        }
+    } else {
+        closesocket(testSocket);  // Close the test socket if it was created successfully
+    }
+    return true;
+}
+
+TEST_CASE("Server with Winsock (Windows only)") {
+    // https://github.com/open62541pp/open62541pp/issues/547
+    WSADATA wsaData;
+    CHECK(WSAStartup(MAKEWORD(2, 2), &wsaData) == NO_ERROR);
+    CHECK(isWinsockActive());
+
+    SECTION("Server was run") {
+        opcua::Server server;
+        server.runIterate();
+    }
+
+    SECTION("Server was not run") {
+        opcua::Server server;
+    }
+
+    CHECK(isWinsockActive());  // should not be affected by the server
+    WSACleanup();
+    CHECK(!isWinsockActive());
+}
+#endif
+
 TEST_CASE("Server methods") {
     Server server;
 
-    SUBCASE("getNamespaceArray") {
+    SECTION("getNamespaceArray") {
         const auto namespaces = server.namespaceArray();
         CHECK(namespaces.size() == 2);
         CHECK(namespaces.at(0) == "http://opcfoundation.org/UA/");
         CHECK(namespaces.at(1) == "urn:open62541.server.application");
     }
 
-    SUBCASE("registerNamespace") {
+    SECTION("registerNamespace") {
         CHECK(server.registerNamespace("test1") == 2);
         CHECK(server.namespaceArray().at(2) == "test1");
 
@@ -159,105 +217,132 @@ TEST_CASE("Server methods") {
     }
 }
 
+struct ValueCallbackTest : public ValueCallbackBase {
+    void onRead(
+        [[maybe_unused]] Session& session,
+        [[maybe_unused]] const NodeId& id,
+        [[maybe_unused]] const NumericRange* range,
+        const DataValue& value
+    ) override {
+        onReadCalled = true;
+        valueBeforeRead = value;
+    }
+
+    void onWrite(
+        [[maybe_unused]] Session& session,
+        [[maybe_unused]] const NodeId& id,
+        [[maybe_unused]] const NumericRange* range,
+        const DataValue& value
+    ) override {
+        onWriteCalled = true;
+        valueAfterWrite = value;
+    }
+
+    bool onReadCalled = false;
+    bool onWriteCalled = false;
+
+    DataValue valueBeforeRead;
+    DataValue valueAfterWrite;
+};
+
 TEST_CASE("ValueCallback") {
     Server server;
 
-    NodeId id{1, 1000};
-    auto node = Node(server, ObjectId::ObjectsFolder).addVariable(id, "testVariable");
+    const NodeId id{1, 1000};
+    auto node = Node(server, ObjectId::ObjectsFolder).addVariable(id, "TestVariable");
     node.writeValueScalar<int>(1);
 
-    bool onBeforeReadCalled = false;
-    bool onAfterWriteCalled = false;
-    int valueBeforeRead = 0;
-    int valueAfterWrite = 0;
+    auto callbackPtr = std::make_unique<ValueCallbackTest>();
+    auto& callback = *callbackPtr;
+    server.setVariableNodeValueCallback(id, callback);
 
-    ValueCallback valueCallback;
-    valueCallback.onBeforeRead = [&](const DataValue& dv) {
-        onBeforeReadCalled = true;
-        valueBeforeRead = dv.value().scalar<int>();
-    };
-    valueCallback.onAfterWrite = [&](const DataValue& dv) {
-        onAfterWriteCalled = true;
-        valueAfterWrite = dv.value().scalar<int>();
-    };
-    server.setVariableNodeValueCallback(id, valueCallback);
+    SECTION("move ownership") {
+        server.setVariableNodeValueCallback(id, std::move(callbackPtr));
+    }
 
-    // trigger onBeforeRead callback with read operation
-    const auto valueRead = node.readValueScalar<int>();
-    CHECK(onBeforeReadCalled == true);
-    CHECK(onAfterWriteCalled == false);
-    CHECK(valueBeforeRead == 1);
-    CHECK(valueRead == 1);
+    SECTION("trigger onRead callback with read operation") {
+        CHECK(node.readValueScalar<int>() == 1);
+        CHECK(callback.onReadCalled == true);
+        CHECK(callback.onWriteCalled == false);
+        CHECK(callback.valueBeforeRead.value().scalar<int>() == 1);
+    }
 
-    // trigger onAfterWrite callback with write operation
-    node.writeValueScalar<int>(2);
-    CHECK(onBeforeReadCalled == true);
-    CHECK(onAfterWriteCalled == true);
-    CHECK(valueAfterWrite == 2);
+    SECTION("trigger onAfterWrite callback with write operation") {
+        node.writeValueScalar<int>(2);
+        CHECK(callback.onReadCalled == false);
+        CHECK(callback.onWriteCalled == true);
+        CHECK(callback.valueAfterWrite.value().scalar<int>() == 2);
+    }
 }
+
+struct DataSourceTest : public DataSourceBase {
+    StatusCode read(
+        [[maybe_unused]] Session& session,
+        [[maybe_unused]] const NodeId& id,
+        [[maybe_unused]] const NumericRange* range,
+        DataValue& dv,
+        bool timestamp
+    ) override {
+        dv.setValue(Variant(data));
+        if (timestamp) {
+            dv.setSourceTimestamp(DateTime::now());
+        }
+        if (exception.has_value()) {
+            throw exception.value();
+        }
+        return code;
+    }
+
+    StatusCode write(
+        [[maybe_unused]] Session& session,
+        [[maybe_unused]] const NodeId& id,
+        [[maybe_unused]] const NumericRange* range,
+        const DataValue& dv
+    ) override {
+        data = dv.value().scalar<int>();
+        if (exception.has_value()) {
+            throw exception.value();
+        }
+        return code;
+    }
+
+    std::optional<BadStatus> exception;
+    UA_StatusCode code = UA_STATUSCODE_GOOD;
+    int data = 0;
+};
 
 TEST_CASE("DataSource") {
     Server server;
-    NodeId id{1, 1000};
-    auto node = Node(server, ObjectId::ObjectsFolder).addVariable(id, "testVariable");
 
-    // primitive data source
-    int data = 0;
+    const NodeId id{1, 1000};
+    auto node = Node(server, ObjectId::ObjectsFolder).addVariable(id, "TestVariable");
 
-    ValueBackendDataSource dataSource;
-    dataSource.read = [&](DataValue& dv, const NumericRange&, bool includeSourceTimestamp) {
-        dv.value() = data;
-        if (includeSourceTimestamp) {
-            dv.setSourceTimestamp(DateTime::now());
-        }
-        return UA_STATUSCODE_GOOD;
-    };
-    dataSource.write = [&](const DataValue& dv, const NumericRange&) {
-        data = dv.value().scalar<int>();
-        return UA_STATUSCODE_GOOD;
-    };
-
-    CHECK_NOTHROW(server.setVariableNodeValueBackend(id, dataSource));
-
-    CHECK(node.readValueScalar<int>() == 0);
-    CHECK_NOTHROW(node.writeValueScalar<int>(1));
-    CHECK(data == 1);
-}
-
-TEST_CASE("DataSource with empty callbacks") {
-    Server server;
-    NodeId id{1, 1000};
-    auto node = Node(server, ObjectId::ObjectsFolder).addVariable(id, "testVariable");
-
-    server.setVariableNodeValueBackend(id, ValueBackendDataSource{});
-
-    Variant variant;
-    CHECK_THROWS_AS_MESSAGE(node.readValue(), BadStatus, "BadInternalError");
-    CHECK_THROWS_AS_MESSAGE(node.writeValue(variant), BadStatus, "BadInternalError");
-}
-
-TEST_CASE("DataSource with exception in callback") {
-    Server server;
-    NodeId id{1, 1000};
-    auto node = Node(server, ObjectId::ObjectsFolder).addVariable(id, "testVariable");
-
-    SUBCASE("BadStatus exception") {
-        ValueBackendDataSource dataSource;
-        dataSource.read = [&](DataValue&, const NumericRange&, bool) -> StatusCode {
-            throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
-        };
-        server.setVariableNodeValueBackend(id, dataSource);
-        Variant variant;
-        CHECK_THROWS_AS_MESSAGE(node.readValue(), BadStatus, "BadUnexpectedError");
+    auto sourcePtr = std::make_unique<DataSourceTest>();
+    auto& source = *sourcePtr;
+    server.setVariableNodeDataSource(id, source);
+    SECTION("move ownership") {
+        server.setVariableNodeDataSource(id, std::move(sourcePtr));
     }
 
-    SUBCASE("Other exception types") {
-        ValueBackendDataSource dataSource;
-        dataSource.read = [&](DataValue&, const NumericRange&, bool) -> StatusCode {
-            throw std::runtime_error("test");
-        };
-        server.setVariableNodeValueBackend(id, dataSource);
-        Variant variant;
-        CHECK_THROWS_AS_MESSAGE(node.readValue(), BadStatus, "BadInternalError");
+    SECTION("read") {
+        source.data = 1;
+        CHECK(node.readValueScalar<int>() == 1);
+    }
+
+    SECTION("write") {
+        CHECK_NOTHROW(node.writeValueScalar<int>(2));
+        CHECK(source.data == 2);
+    }
+
+    SECTION("read/write with bad status code") {
+        source.code = UA_STATUSCODE_BADINTERNALERROR;
+        CHECK_THROWS_MATCHES(node.readValueScalar<int>(), BadStatus, Message("BadInternalError"));
+        CHECK_THROWS_MATCHES(node.writeValueScalar<int>(2), BadStatus, Message("BadInternalError"));
+    }
+
+    SECTION("read/write with exception in callback") {
+        source.exception = BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
+        CHECK_THROWS_MATCHES(node.readValueScalar<int>(), BadStatus, Message("BadUnexpectedError"));
+        CHECK_THROWS_MATCHES(node.writeValueScalar<int>(2), BadStatus, Message("BadUnexpectedError"));
     }
 }

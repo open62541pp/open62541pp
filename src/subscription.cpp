@@ -9,6 +9,22 @@
 
 namespace opcua {
 
+static auto createSubscription(Client& connection, const SubscriptionParameters& parameters) {
+    const auto response = services::createSubscription(connection, parameters, true, {}, {});
+    response.responseHeader().serviceResult().throwIfBad();
+    return response.subscriptionId();
+}
+
+template <>
+Subscription<Client>::Subscription(Client& connection, const SubscriptionParameters& parameters)
+    : Subscription(connection, createSubscription(connection, parameters)) {}
+
+template <>
+Subscription<Server>::Subscription(
+    Server& connection, [[maybe_unused]] const SubscriptionParameters& parameters
+)
+    : Subscription(connection, 0U) {}
+
 template <typename T>
 std::vector<MonitoredItem<T>> Subscription<T>::monitoredItems() {
     std::vector<MonitoredItem<T>> result;

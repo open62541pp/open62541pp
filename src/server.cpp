@@ -11,8 +11,6 @@
 #include "open62541pp/event.hpp"
 #include "open62541pp/exception.hpp"
 #include "open62541pp/node.hpp"
-#include "open62541pp/plugin/accesscontrol.hpp"
-#include "open62541pp/plugin/nodestore.hpp"
 #include "open62541pp/services/attribute_highlevel.hpp"
 #include "open62541pp/session.hpp"
 #include "open62541pp/types.hpp"
@@ -195,7 +193,9 @@ static UA_StatusCode activateSession(
     );
     if (detail::isGood(status) && sessionId != nullptr) {
         const std::scoped_lock lock(context->sessionRegistry.mutex);
-        context->sessionRegistry.sessionIds.insert(asWrapper<NodeId>(*sessionId));
+        context->sessionRegistry.sessions.insert_or_assign(
+            asWrapper<NodeId>(*sessionId), *sessionContext
+        );
     }
     return status;
 }
@@ -211,7 +211,7 @@ static void closeSession(
     context->sessionRegistry.closeSessionUser(server, ac, sessionId, sessionContext);
     if (sessionId != nullptr) {
         const std::scoped_lock lock(context->sessionRegistry.mutex);
-        context->sessionRegistry.sessionIds.erase(asWrapper<NodeId>(*sessionId));
+        context->sessionRegistry.sessions.erase(asWrapper<NodeId>(*sessionId));
     }
 }
 
@@ -272,6 +272,15 @@ Server::Server(ServerConfig&& config)
     setWrapperAsContextPointer(*this);
 }
 
+Server::Server(UA_Server* native)
+    : context_(std::make_unique<detail::ServerContext>()),
+      server_(native) {
+    if (handle() == nullptr) {
+        throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
+    }
+    setWrapperAsContextPointer(*this);
+}
+
 Server::~Server() = default;
 
 Server::Server(Server&& other) noexcept
@@ -314,8 +323,8 @@ void Server::setCustomDataTypes(Span<const DataType> dataTypes) {
 std::vector<Session> Server::sessions() {
     std::vector<Session> result;
     const std::scoped_lock lock(context().sessionRegistry.mutex);
-    for (auto&& id : context().sessionRegistry.sessionIds) {
-        result.emplace_back(*this, id);
+    for (auto& [id, context] : context().sessionRegistry.sessions) {
+        result.emplace_back(*this, id, context);
     }
     return result;
 }
@@ -330,101 +339,44 @@ NamespaceIndex Server::registerNamespace(std::string_view uri) {
     return UA_Server_addNamespace(handle(), std::string(uri).c_str());
 }
 
-static void valueCallbackOnRead(
-    [[maybe_unused]] UA_Server* server,
-    [[maybe_unused]] const UA_NodeId* sessionId,
-    [[maybe_unused]] void* sessionContext,
-    [[maybe_unused]] const UA_NodeId* nodeId,
-    void* nodeContext,
-    [[maybe_unused]] const UA_NumericRange* range,
-    const UA_DataValue* value
-) noexcept {
-    assert(nodeContext != nullptr && value != nullptr);
-    auto& cb = static_cast<detail::NodeContext*>(nodeContext)->valueCallback.onBeforeRead;
-    if (cb) {
-        detail::tryInvoke([&] { cb(asWrapper<DataValue>(*value)); });
-    }
-}
-
-static void valueCallbackOnWrite(
-    [[maybe_unused]] UA_Server* server,
-    [[maybe_unused]] const UA_NodeId* sessionId,
-    [[maybe_unused]] void* sessionContext,
-    [[maybe_unused]] const UA_NodeId* nodeId,
-    void* nodeContext,
-    [[maybe_unused]] const UA_NumericRange* range,
-    const UA_DataValue* value
-) noexcept {
-    assert(nodeContext != nullptr && value != nullptr);
-    auto& cb = static_cast<detail::NodeContext*>(nodeContext)->valueCallback.onAfterWrite;
-    if (cb) {
-        detail::tryInvoke([&] { cb(asWrapper<DataValue>(*value)); });
-    }
-}
-
-void Server::setVariableNodeValueCallback(const NodeId& id, ValueCallback callback) {
-    auto* nodeContext = detail::getContext(*this).nodeContexts[id];
+static void setVariableNodeValueCallbackImpl(
+    Server& server, const NodeId& id, detail::UniqueOrRawPtr<ValueCallbackBase>&& callback
+) {
+    auto* nodeContext = detail::getContext(server).nodeContexts[id];
     nodeContext->valueCallback = std::move(callback);
-    throwIfBad(UA_Server_setNodeContext(handle(), id, nodeContext));
-
-    UA_ValueCallback callbackNative;
-    callbackNative.onRead = valueCallbackOnRead;
-    callbackNative.onWrite = valueCallbackOnWrite;
-    throwIfBad(UA_Server_setVariableNode_valueCallback(handle(), id, callbackNative));
+    throwIfBad(UA_Server_setNodeContext(server.handle(), id, nodeContext));
+    throwIfBad(UA_Server_setVariableNode_valueCallback(
+        server.handle(), id, nodeContext->valueCallback->create(false)
+    ));
 }
 
-static NumericRange asRange(const UA_NumericRange* range) noexcept {
-    return range == nullptr ? NumericRange() : NumericRange(*range);
+void Server::setVariableNodeValueCallback(const NodeId& id, ValueCallbackBase& callback) {
+    setVariableNodeValueCallbackImpl(*this, id, detail::UniqueOrRawPtr{&callback});
 }
 
-static UA_StatusCode valueSourceRead(
-    [[maybe_unused]] UA_Server* server,
-    [[maybe_unused]] const UA_NodeId* sessionId,
-    [[maybe_unused]] void* sessionContext,
-    [[maybe_unused]] const UA_NodeId* nodeId,
-    void* nodeContext,
-    UA_Boolean includeSourceTimestamp,
-    const UA_NumericRange* range,
-    UA_DataValue* value
-) noexcept {
-    assert(nodeContext != nullptr && value != nullptr);
-    auto& callback = static_cast<detail::NodeContext*>(nodeContext)->dataSource.read;
-    if (callback) {
-        auto result = detail::tryInvoke(
-            callback, asWrapper<DataValue>(*value), asRange(range), includeSourceTimestamp
-        );
-        return result.code();
-    }
-    return UA_STATUSCODE_BADINTERNALERROR;
+void Server::setVariableNodeValueCallback(
+    const NodeId& id, std::unique_ptr<ValueCallbackBase>&& callback
+) {
+    setVariableNodeValueCallbackImpl(*this, id, detail::UniqueOrRawPtr{std::move(callback)});
 }
 
-static UA_StatusCode valueSourceWrite(
-    [[maybe_unused]] UA_Server* server,
-    [[maybe_unused]] const UA_NodeId* sessionId,
-    [[maybe_unused]] void* sessionContext,
-    [[maybe_unused]] const UA_NodeId* nodeId,
-    void* nodeContext,
-    const UA_NumericRange* range,
-    const UA_DataValue* value
-) noexcept {
-    assert(nodeContext != nullptr && value != nullptr);
-    auto& callback = static_cast<detail::NodeContext*>(nodeContext)->dataSource.write;
-    if (callback) {
-        auto result = detail::tryInvoke(callback, asWrapper<DataValue>(*value), asRange(range));
-        return result.code();
-    }
-    return UA_STATUSCODE_BADINTERNALERROR;
+static void setVariableNodeDataSourceImpl(
+    Server& server, const NodeId& id, detail::UniqueOrRawPtr<DataSourceBase>&& source
+) {
+    auto* nodeContext = detail::getContext(server).nodeContexts[id];
+    nodeContext->dataSource = std::move(source);
+    throwIfBad(UA_Server_setNodeContext(server.handle(), id, nodeContext));
+    throwIfBad(UA_Server_setVariableNode_dataSource(
+        server.handle(), id, nodeContext->dataSource->create(false)
+    ));
 }
 
-void Server::setVariableNodeValueBackend(const NodeId& id, ValueBackendDataSource backend) {
-    auto* nodeContext = detail::getContext(*this).nodeContexts[id];
-    nodeContext->dataSource = std::move(backend);
-    throwIfBad(UA_Server_setNodeContext(handle(), id, nodeContext));
+void Server::setVariableNodeDataSource(const NodeId& id, DataSourceBase& source) {
+    setVariableNodeDataSourceImpl(*this, id, detail::UniqueOrRawPtr{&source});
+}
 
-    UA_DataSource dataSourceNative;
-    dataSourceNative.read = valueSourceRead;
-    dataSourceNative.write = valueSourceWrite;
-    throwIfBad(UA_Server_setVariableNode_dataSource(handle(), id, dataSourceNative));
+void Server::setVariableNodeDataSource(const NodeId& id, std::unique_ptr<DataSourceBase>&& source) {
+    setVariableNodeDataSourceImpl(*this, id, detail::UniqueOrRawPtr{std::move(source)});
 }
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
@@ -473,6 +425,9 @@ void Server::run() {
 }
 
 void Server::stop() {
+    if (!context().running) {
+        return;
+    }
     context().running = false;
     // wait for run loop to complete
     const std::lock_guard<std::mutex> lock(context().mutexRun);
@@ -521,7 +476,9 @@ const detail::ServerContext& Server::context() const noexcept {
 
 void Server::Deleter::operator()(UA_Server* server) noexcept {
     if (server != nullptr) {
-        UA_Server_run_shutdown(server);
+        if (detail::getContext(server)->running) {
+            UA_Server_run_shutdown(server);
+        }
         UA_Server_delete(server);
     }
 }

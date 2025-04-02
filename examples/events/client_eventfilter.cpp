@@ -5,6 +5,7 @@
 
 #include <open62541pp/client.hpp>
 #include <open62541pp/node.hpp>
+#include <open62541pp/subscription.hpp>
 
 int main() {
     opcua::Client client;
@@ -42,7 +43,7 @@ int main() {
         filterCombined
     );
 
-    auto sub = client.createSubscription();
+    opcua::Subscription sub(client);
     sub.subscribeEvent(
         opcua::ObjectId::Server,
         eventFilter,

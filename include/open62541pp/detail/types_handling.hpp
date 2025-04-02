@@ -15,22 +15,23 @@ namespace opcua::detail {
 /* ------------------------------------ Generic type handling ----------------------------------- */
 
 template <typename T>
-constexpr bool isPointerFree = IsOneOf<  // NOLINT(modernize-type-traits)
-    T,
-    UA_Boolean,
-    UA_SByte,
-    UA_Byte,
-    UA_Int16,
-    UA_UInt16,
-    UA_Int32,
-    UA_UInt32,
-    UA_Int64,
-    UA_UInt64,
-    UA_Float,
-    UA_Double,
-    UA_DateTime,
-    UA_Guid,
-    UA_StatusCode>::value;
+struct IsPointerFree
+    : IsOneOf<
+          T,
+          UA_Boolean,
+          UA_SByte,
+          UA_Byte,
+          UA_Int16,
+          UA_UInt16,
+          UA_Int32,
+          UA_UInt32,
+          UA_Int64,
+          UA_UInt64,
+          UA_Float,
+          UA_Double,
+          UA_DateTime,
+          UA_Guid,
+          UA_StatusCode> {};
 
 template <typename T>
 constexpr bool isBorrowed(const T& /* unused */) noexcept {
@@ -62,7 +63,7 @@ template <typename T>
 constexpr void clear(T& native, const UA_DataType& type) noexcept {
     assert(isValidTypeCombination<T>(type));
     // NOLINTNEXTLINE(bugprone-branch-clone)
-    if constexpr (isPointerFree<T>) {
+    if constexpr (IsPointerFree<T>::value) {
         native = {};
     } else if (isBorrowed(native)) {
         native = {};
@@ -94,9 +95,11 @@ template <typename T>
 }
 
 template <typename T>
-[[nodiscard]] constexpr T copy(const T& src, const UA_DataType& type) noexcept(isPointerFree<T>) {
+[[nodiscard]] constexpr T copy(const T& src, const UA_DataType& type) noexcept(
+    IsPointerFree<T>::value
+) {
     assert(isValidTypeCombination<T>(type));
-    if constexpr (!isPointerFree<T>) {
+    if constexpr (!IsPointerFree<T>::value) {
         T dst;  // NOLINT, initialized in UA_copy function
         throwIfBad(UA_copy(&src, &dst, &type));
         return dst;
@@ -168,6 +171,9 @@ template <typename T>
 template <typename T>
 [[nodiscard]] T* copyArray(const T* src, size_t size) {
     T* dst = allocateArray<T>(size);
+    if (src == nullptr) {
+        return dst;
+    }
     std::memcpy(dst, src, size * sizeof(T));
     return dst;
 }
@@ -175,7 +181,10 @@ template <typename T>
 template <typename T>
 [[nodiscard]] T* copyArray(const T* src, size_t size, const UA_DataType& type) {
     T* dst = allocateArray<T>(size, type);
-    if constexpr (!isPointerFree<T>) {
+    if (src == nullptr) {
+        return dst;
+    }
+    if constexpr (!IsPointerFree<T>::value) {
         // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
         std::transform(src, src + size, dst, [&](const T& item) { return copy(item, type); });
     } else {
@@ -186,7 +195,7 @@ template <typename T>
 
 template <typename T>
 void resizeArray(T*& array, size_t& size, size_t newSize, const UA_DataType& type) {
-    if (newSize == size) {
+    if (array == nullptr || newSize == size) {
         return;
     }
     T* newArray = allocateArray<T>(newSize, type);

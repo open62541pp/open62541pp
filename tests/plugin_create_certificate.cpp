@@ -1,6 +1,6 @@
 #include <string>
 
-#include <doctest/doctest.h>
+#include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/client.hpp"
 #include "open62541pp/config.hpp"
@@ -14,11 +14,11 @@ using namespace opcua;
 #if UAPP_HAS_CREATE_CERTIFICATE
 
 TEST_CASE("Create certificate") {
-    SUBCASE("Empty subject / subjectAltName") {
+    SECTION("Empty subject / subjectAltName") {
         CHECK_THROWS_AS(createCertificate({}, {}), CreateCertificateError);
     }
 
-    SUBCASE("Invalid subject / subjectAltName") {
+    SECTION("Invalid subject / subjectAltName") {
         CHECK_THROWS_AS(
             createCertificate({String{"X=Y"}}, {String{"DNS:localhost"}}), CreateCertificateError
         );
@@ -27,7 +27,7 @@ TEST_CASE("Create certificate") {
         );
     }
 
-    SUBCASE("Valid") {
+    SECTION("Valid") {
         const auto cert = createCertificate(
             {
                 String{"C=DE"},
@@ -78,7 +78,7 @@ TEST_CASE("Encrypted connection server/client") {
         }
     );
 
-    SUBCASE("Connect without trusting each others certificate") {
+    SECTION("Connect without trusting each others certificate") {
         ServerConfig serverConfig(4840, certServer.certificate, certServer.privateKey, {}, {}, {});
         serverConfig.setApplicationUri(serverApplicationUri);
         Server server(std::move(serverConfig));
@@ -94,7 +94,7 @@ TEST_CASE("Encrypted connection server/client") {
         }
     }
 
-    SUBCASE("Connect with trust lists") {
+    SECTION("Connect with trust lists") {
         ServerConfig serverConfig(
             4840, certServer.certificate, certServer.privateKey, {certClient.certificate}, {}, {}
         );

@@ -48,7 +48,8 @@ ReadResponse read(Client& connection, const ReadRequest& request) noexcept;
 inline ReadResponse read(
     Client& connection, Span<const ReadValueId> nodesToRead, TimestampsToReturn timestamps
 ) noexcept {
-    return read(connection, detail::createReadRequest(timestamps, nodesToRead));
+    const auto request = detail::createReadRequest(timestamps, nodesToRead);
+    return read(connection, asWrapper<ReadRequest>(request));
 }
 
 /**
@@ -71,10 +72,9 @@ auto readAsync(
     TimestampsToReturn timestamps,
     CompletionToken&& token
 ) {
+    const auto request = detail::createReadRequest(timestamps, nodesToRead);
     return readAsync(
-        connection,
-        detail::createReadRequest(timestamps, nodesToRead),
-        std::forward<CompletionToken>(token)
+        connection, asWrapper<ReadRequest>(request), std::forward<CompletionToken>(token)
     );
 }
 
@@ -145,7 +145,8 @@ WriteResponse write(Client& connection, const WriteRequest& request) noexcept;
 
 /// @overload
 inline WriteResponse write(Client& connection, Span<const WriteValue> nodesToWrite) noexcept {
-    return write(connection, detail::createWriteRequest(nodesToWrite));
+    const auto request = detail::createWriteRequest(nodesToWrite);
+    return write(connection, asWrapper<WriteRequest>(request));
 }
 
 /**
@@ -163,8 +164,9 @@ auto writeAsync(Client& connection, const WriteRequest& request, CompletionToken
 /// @overload
 template <typename CompletionToken>
 auto writeAsync(Client& connection, Span<const WriteValue> nodesToWrite, CompletionToken&& token) {
+    const auto request = detail::createWriteRequest(nodesToWrite);
     return writeAsync(
-        connection, detail::createWriteRequest(nodesToWrite), std::forward<CompletionToken>(token)
+        connection, asWrapper<WriteRequest>(request), std::forward<CompletionToken>(token)
     );
 }
 

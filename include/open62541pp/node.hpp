@@ -1166,7 +1166,7 @@ public:
     /// Write scalar to variable node.
     template <typename T>
     Node& writeValueScalar(const T& value) {
-        if constexpr (detail::isRegisteredType<T>) {
+        if constexpr (detail::IsRegistered<T>::value) {
             // NOLINTNEXTLINE(*-const-cast), variant isn't modified, avoid copy
             writeValue(Variant(const_cast<T*>(&value)));
         } else {
@@ -1179,7 +1179,8 @@ public:
     /// Write array value to variable node.
     template <typename ArrayLike>
     Node& writeValueArray(const ArrayLike& array) {
-        if constexpr (detail::isRegisteredType<typename ArrayLike::value_type>) {
+        if constexpr (detail::IsContiguousRange<ArrayLike>::value &&
+                      detail::IsRegistered<detail::RangeValueT<ArrayLike>>::value) {
             // NOLINTNEXTLINE(*-const-cast), variant isn't modified, avoid copy
             writeValue(Variant(const_cast<ArrayLike*>(&array)));
         } else {
@@ -1398,11 +1399,13 @@ private:
 
 /* ---------------------------------------------------------------------------------------------- */
 
+/// @relates Node
 template <typename Connection>
 bool operator==(const Node<Connection>& lhs, const Node<Connection>& rhs) noexcept {
     return (lhs.connection() == rhs.connection()) && (lhs.id() == rhs.id());
 }
 
+/// @relates Node
 template <typename Connection>
 bool operator!=(const Node<Connection>& lhs, const Node<Connection>& rhs) noexcept {
     return !(lhs == rhs);

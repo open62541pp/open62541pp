@@ -32,13 +32,10 @@ struct TypeRegistry;
 namespace detail {
 
 template <typename T, typename = void>
-struct IsRegisteredType : std::false_type {};
+struct IsRegistered : std::false_type {};
 
 template <typename T>
-struct IsRegisteredType<T, std::void_t<decltype(TypeRegistry<T>{})>> : std::true_type {};
-
-template <typename T>
-constexpr bool isRegisteredType = IsRegisteredType<T>::value;
+struct IsRegistered<T, std::void_t<decltype(TypeRegistry<T>{})>> : std::true_type {};
 
 }  // namespace detail
 
@@ -46,7 +43,7 @@ template <typename T>
 const UA_DataType& getDataType() noexcept {
     using ValueType = typename std::remove_cv_t<T>;
     static_assert(
-        detail::isRegisteredType<ValueType>,
+        detail::IsRegistered<ValueType>::value,
         "The provided template type is not registered. "
         "Specify the data type manually or add a template specialization for TypeRegistry."
     );
@@ -110,6 +107,3 @@ struct TypeRegistry<UA_String> {
 // @endcond
 
 }  // namespace opcua
-
-// include template specializations for native types
-#include "open62541pp/typeregistry_generated.hpp"

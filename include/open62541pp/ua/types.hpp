@@ -19,6 +19,7 @@
 #include "open62541pp/types.hpp"
 #include "open62541pp/typewrapper.hpp"
 #include "open62541pp/ua/nodeids.hpp"  // ReferenceTypeId
+#include "open62541pp/ua/typeregistry.hpp"
 
 #ifndef UA_DEFAULT_ATTRIBUTES_DEFINED
 #define UA_DEFAULT_ATTRIBUTES_DEFINED
@@ -1855,17 +1856,31 @@ public:
     UAPP_GETTER_SPAN_WRAPPER(ContentFilterElement, getElements, elements, elementsSize)
 };
 
+/// @relates ContentFilterElement
 ContentFilter operator!(const ContentFilterElement& filterElement);
+/// @relates ContentFilter
 ContentFilter operator!(const ContentFilter& filter);
 
+/// @relates ContentFilterElement
 ContentFilter operator&&(const ContentFilterElement& lhs, const ContentFilterElement& rhs);
+/// @relates ContentFilterElement
+/// @relatesalso ContentFilter
 ContentFilter operator&&(const ContentFilterElement& lhs, const ContentFilter& rhs);
+/// @relates ContentFilter
+/// @relatesalso ContentFilterElement
 ContentFilter operator&&(const ContentFilter& lhs, const ContentFilterElement& rhs);
+/// @relates ContentFilter
 ContentFilter operator&&(const ContentFilter& lhs, const ContentFilter& rhs);
 
+/// @relates ContentFilterElement
 ContentFilter operator||(const ContentFilterElement& lhs, const ContentFilterElement& rhs);
+/// @relates ContentFilterElement
+/// @relatesalso ContentFilter
 ContentFilter operator||(const ContentFilterElement& lhs, const ContentFilter& rhs);
+/// @relates ContentFilter
+/// @relatesalso ContentFilterElement
 ContentFilter operator||(const ContentFilter& lhs, const ContentFilterElement& rhs);
+/// @relates ContentFilter
 ContentFilter operator||(const ContentFilter& lhs, const ContentFilter& rhs);
 
 /**

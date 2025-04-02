@@ -20,7 +20,7 @@ template <typename T, typename = std::enable_if_t<std::is_enum_v<T>>>
     return allocNativeString(value);
 }
 
-template <typename T, typename = std::enable_if_t<isWrapper<T>>>
+template <typename T, typename = std::enable_if_t<IsWrapper<T>::value>>
 [[nodiscard]] auto toNative(T&& value) {
     using NativeType = typename T::NativeType;
     NativeType native{};
@@ -30,7 +30,7 @@ template <typename T, typename = std::enable_if_t<isWrapper<T>>>
 
 template <typename T>
 [[nodiscard]] auto* toNativeArray(Span<const T> array) {
-    if constexpr (isWrapper<T>) {
+    if constexpr (IsWrapper<T>::value) {
         return copyArray(asNative(array.data()), array.size(), getDataType<T>());
     } else {
         return copyArray(array.data(), array.size(), getDataType<T>());

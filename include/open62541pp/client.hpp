@@ -13,7 +13,7 @@
 #include "open62541pp/detail/client_utils.hpp"
 #include "open62541pp/detail/open62541/client.h"
 #include "open62541pp/span.hpp"
-#include "open62541pp/subscription.hpp"
+#include "open62541pp/subscription.hpp"  // TODO: remove with Client::createSubscription
 #include "open62541pp/types.hpp"
 #include "open62541pp/ua/types.hpp"
 #include "open62541pp/wrapper.hpp"
@@ -140,6 +140,9 @@ public:
     );
 #endif
 
+    /// Create client from native instance (move ownership to client).
+    explicit Client(UA_Client* native);
+
     ~Client();
 
     Client(const Client&) = delete;
@@ -253,6 +256,8 @@ public:
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
     /// Create a subscription to monitor data changes and events.
+    /// @deprecated Use Subscription constructor
+    [[deprecated("use Subscription constructor")]]
     Subscription<Client> createSubscription(const SubscriptionParameters& parameters = {});
 
     /// Get all active subscriptions
@@ -304,12 +309,15 @@ private:
 
 /// Convert native UA_Client pointer to its wrapper instance.
 /// The native client must be owned by a Client instance.
+/// @relates Client
 Client* asWrapper(UA_Client* client) noexcept;
 
+/// @relates Client
 inline bool operator==(const Client& lhs, const Client& rhs) noexcept {
     return (lhs.handle() == rhs.handle());
 }
 
+/// @relates Client
 inline bool operator!=(const Client& lhs, const Client& rhs) noexcept {
     return !(lhs == rhs);
 }
