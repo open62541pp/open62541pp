@@ -291,23 +291,6 @@ TEST_CASE("Guid") {
         CHECK(guid->data4[7] == 0xEF);
     }
 #endif
-
-#if UAPP_HAS_TOSTRING
-    SECTION("toString") {
-        CHECK(toString(Guid{}) == "00000000-0000-0000-0000-000000000000");
-
-        const Guid guid{
-            0x12345678, 0x1234, 0x5678, {0x12, 0x34, 0x56, 0x78, 0x90, 0xAB, 0xCD, 0xEF}
-        };
-        CHECK(toString(guid) == "12345678-1234-5678-1234-567890abcdef");
-    }
-
-    SECTION("ostream overload") {
-        std::ostringstream ss;
-        ss << Guid{};
-        CHECK(ss.str() == "00000000-0000-0000-0000-000000000000");
-    }
-#endif
 }
 
 TEST_CASE("DateTime") {
@@ -458,16 +441,6 @@ TEST_CASE("NodeId") {
         CHECK(NodeId(1, "b") > NodeId(1, "a"));
     }
 
-#if UAPP_HAS_TOSTRING
-    SECTION("toString") {
-        CHECK(toString(NodeId(0, 13)) == "i=13");
-        CHECK(toString(NodeId(10, 1)) == "ns=10;i=1");
-        CHECK(toString(NodeId(10, "Hello:World")) == "ns=10;s=Hello:World");
-        CHECK(toString(NodeId(0, Guid())) == "g=00000000-0000-0000-0000-000000000000");
-        CHECK(toString(NodeId(1, ByteString("test123"))) == "ns=1;b=dGVzdDEyMw==");
-    }
-#endif
-
     SECTION("std::hash specialization") {
         const NodeId id(1, "Test123");
         CHECK(std::hash<NodeId>{}(id) == id.hash());
@@ -505,20 +478,6 @@ TEST_CASE("ExpandedNodeId") {
         CHECK(ExpandedNodeId().hash() != idLocal.hash());
         CHECK(ExpandedNodeId().hash() != idFull.hash());
     }
-
-#if UAPP_HAS_TOSTRING
-    SECTION("toString") {
-        CHECK(toString(ExpandedNodeId({2, 10157})) == "ns=2;i=10157");
-        CHECK(
-            toString(ExpandedNodeId({2, 10157}, "http://test.org/UA/Data/", 0)) ==
-            "nsu=http://test.org/UA/Data/;i=10157"
-        );
-        CHECK(
-            toString(ExpandedNodeId({2, 10157}, "http://test.org/UA/Data/", 1)) ==
-            "svr=1;nsu=http://test.org/UA/Data/;i=10157"
-        );
-    }
-#endif
 
     SECTION("std::hash specialization") {
         CHECK(std::hash<ExpandedNodeId>()(idLocal) == idLocal.hash());
