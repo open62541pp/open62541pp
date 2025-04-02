@@ -76,12 +76,6 @@ if(MSVC)
             LINK_FLAGS "/NODEFAULTLIB:libcmt.lib /NODEFAULTLIB:libcmtd.lib"
     )
 endif()
-# prepend header with doctest configuration for every translation unit
-target_precompile_headers(
-    open62541pp_tests
-    PRIVATE
-        "${CMAKE_CURRENT_SOURCE_DIR}/doctest/config.hpp"
-)
 
 include(CTest)
 include(Catch)
