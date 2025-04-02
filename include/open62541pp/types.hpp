@@ -2576,17 +2576,29 @@ String toString(const NumericRange& range);
  * The open62541 library must be compiled with the `UA_ENABLE_TYPEDESCRIPTION` option.
  * If these conditions are not met, the function returns an empty String.
  * 
- * @param object Native or wrapper object (`T` must be an registered type).
+ * @param object Native or wrapper object.
+ * @param type Data type of `object`.
  *
  * @relates TypeWrapper
+ * @ingroup Wrapper
+ */
+template <typename T>
+String toString(const T& object, const UA_DataType& type) {
+    String output;
+    if constexpr (UAPP_HAS_TOSTRING) {
+        throwIfBad(UA_print(&object, &type, output.handle()));
+    }
+    return output;
+}
+
+/**
+ * @overload
+ * @relates TypeWrapper
+ * @ingroup Wrapper
  */
 template <typename T, typename = std::enable_if_t<detail::IsRegistered<T>::value>>
 String toString(const T& object) {
-    String output;
-    if constexpr (UAPP_HAS_TOSTRING) {
-        throwIfBad(UA_print(&object, &getDataType<T>(), output.handle()));
-    }
-    return output;
+    return toString(object, getDataType<T>());
 }
 
 }  // namespace opcua

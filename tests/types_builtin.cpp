@@ -9,6 +9,7 @@
 #include "open62541pp/types.hpp"
 #include "open62541pp/ua/nodeids.hpp"
 
+using Catch::Matchers::ContainsSubstring;
 using Catch::Matchers::Message;
 using namespace opcua;
 
@@ -1153,3 +1154,17 @@ TEST_CASE("NumericRange") {
         CHECK(toString(NumericRange({{1, 2}, {0, 3}, {5, 5}})) == "1:2,0:3,5");
     }
 }
+
+#if UAPP_HAS_TOSTRING
+TEST_CASE("toString") {
+    const auto toStringStl = [](auto... args) {
+        return std::string{toString(args...)};
+    };
+
+    CHECK_THAT(toStringStl(11), ContainsSubstring("11"));
+    CHECK_THAT(toStringStl(11, UA_TYPES[UA_TYPES_INT32]), ContainsSubstring("11"));
+
+    CHECK_THAT(toStringStl(String("test")), ContainsSubstring("test"));
+    CHECK_THAT(toStringStl(String("test"), UA_TYPES[UA_TYPES_STRING]), ContainsSubstring("test"));
+}
+#endif
