@@ -542,9 +542,6 @@ inline bool operator!=(const UA_Guid& lhs, const UA_Guid& rhs) noexcept {
     return !(lhs == rhs);
 }
 
-/// @relates Guid
-std::ostream& operator<<(std::ostream& os, const Guid& guid);
-
 /* ----------------------------------------- ByteString ----------------------------------------- */
 
 /**
@@ -658,9 +655,6 @@ public:
         return {data(), size()};
     }
 };
-
-/// @relates XmlElement
-std::ostream& operator<<(std::ostream& os, const XmlElement& xmlElement);
 
 /* ------------------------------------------- NodeId ------------------------------------------- */
 

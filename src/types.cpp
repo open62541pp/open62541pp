@@ -22,11 +22,6 @@ std::string Guid::toString() const {
     return std::string(opcua::toString(*this));
 }
 
-std::ostream& operator<<(std::ostream& os, const Guid& guid) {
-    os << toString(guid);
-    return os;
-}
-
 /* ------------------------------------------ DateTime ------------------------------------------ */
 
 std::string DateTime::format(std::string_view format, bool localtime) const {
@@ -58,13 +53,6 @@ String ByteString::toBase64() const {
     return output;
 }
 #endif
-
-/* ----------------------------------------- XmlElement ----------------------------------------- */
-
-std::ostream& operator<<(std::ostream& os, const XmlElement& xmlElement) {
-    os << static_cast<std::string_view>(xmlElement);
-    return os;
-}
 
 /* ------------------------------------------- NodeId ------------------------------------------- */
 

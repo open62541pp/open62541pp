@@ -208,7 +208,7 @@ TEMPLATE_TEST_CASE("StringLike equality overloads with std::string_view", "", St
     CHECK(std::string("test") != TestType("abc"));
 }
 
-TEMPLATE_TEST_CASE("StringLike ostream overloads", "", String, XmlElement) {
+TEMPLATE_TEST_CASE("StringLike ostream overloads", "", String) {
     std::ostringstream ss;
     ss << TestType("test123");
     CHECK(ss.str() == "test123");
