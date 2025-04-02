@@ -140,7 +140,7 @@ TEST_CASE("Bitmask") {
     }
 
     SECTION("set") {
-        CHECK(Bitmask<Bit>().set().get() == 0xFFFFFFFF);
+        CHECK(Bitmask<Bit>().set().get() == static_cast<int>(0xFFFFFFFF));
         CHECK(Bitmask<Bit>().set(Bit::One).get() == 1);
     }
 
@@ -150,8 +150,8 @@ TEST_CASE("Bitmask") {
     }
 
     SECTION("flip") {
-        CHECK(Bitmask<Bit>(0).flip().get() == 0xFFFFFFFF);
-        CHECK(Bitmask<Bit>(1).flip().get() == 0xFFFFFFFF - 1);
+        CHECK(Bitmask<Bit>(0).flip().get() == static_cast<int>(0xFFFFFFFF));
+        CHECK(Bitmask<Bit>(1).flip().get() == static_cast<int>(0xFFFFFFFE));
     }
 
     SECTION("Equality") {
