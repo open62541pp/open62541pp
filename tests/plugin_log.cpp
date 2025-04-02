@@ -1,7 +1,7 @@
 #include <memory>
 #include <string>
 
-#include <doctest/doctest.h>
+#include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/plugin/log.hpp"
 #include "open62541pp/plugin/log_default.hpp"

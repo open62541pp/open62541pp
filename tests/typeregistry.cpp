@@ -1,4 +1,4 @@
-#include <doctest/doctest.h>
+#include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/typeregistry.hpp"
 #include "open62541pp/typewrapper.hpp"
@@ -22,7 +22,7 @@ struct TypeRegistry<Custom> {
 }  // namespace opcua
 
 TEST_CASE("TypeRegistry") {
-    SUBCASE("Builtin") {
+    SECTION("Builtin") {
         CHECK(detail::IsRegistered<float>::value);
         CHECK_FALSE(detail::IsRegistered<const volatile float>::value);
         CHECK_FALSE(detail::IsRegistered<float*>::value);
@@ -33,19 +33,19 @@ TEST_CASE("TypeRegistry") {
         CHECK(&getDataType<const volatile float>() == &UA_TYPES[UA_TYPES_FLOAT]);
     }
 
-    SUBCASE("Generated") {
+    SECTION("Generated") {
         CHECK(&TypeRegistry<UA_AddNodesItem>::getDataType() == &UA_TYPES[UA_TYPES_ADDNODESITEM]);
         CHECK(&getDataType<UA_AddNodesItem>() == &UA_TYPES[UA_TYPES_ADDNODESITEM]);
     }
 
-    SUBCASE("TypeWrapper") {
+    SECTION("TypeWrapper") {
         class Wrapper : public TypeWrapper<float, UA_TYPES_FLOAT> {};
 
         CHECK(&TypeRegistry<Wrapper>::getDataType() == &UA_TYPES[UA_TYPES_FLOAT]);
         CHECK(&getDataType<Wrapper>() == &UA_TYPES[UA_TYPES_FLOAT]);
     }
 
-    SUBCASE("Custom") {
+    SECTION("Custom") {
         CHECK(&TypeRegistry<Custom>::getDataType() == &UA_TYPES[UA_TYPES_STRING]);
         CHECK(&getDataType<Custom>() == &UA_TYPES[UA_TYPES_STRING]);
     }

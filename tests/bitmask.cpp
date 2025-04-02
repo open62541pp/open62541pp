@@ -1,6 +1,6 @@
 #include <type_traits>  // true_type
 
-#include <doctest/doctest.h>
+#include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/bitmask.hpp"
 
@@ -35,26 +35,26 @@ TEST_CASE("Enable bitwise operations (isBitmaskEnum function overload)") {
 }
 
 TEST_CASE("Bitwise operations with enum (enabled with IsBitmaskEnum trait)") {
-    SUBCASE("AND") {
+    SECTION("AND") {
         CHECK(static_cast<int>(Bit::One & Bit::One) == 1);
         CHECK(static_cast<int>(Bit::One & Bit::Two) == 0);
     }
 
-    SUBCASE("OR") {
+    SECTION("OR") {
         CHECK(static_cast<int>(Bit::One | Bit::One) == 1);
         CHECK(static_cast<int>(Bit::One | Bit::Two) == 3);
     }
 
-    SUBCASE("XOR") {
+    SECTION("XOR") {
         CHECK(static_cast<int>(Bit::One ^ Bit::One) == 0);
         CHECK(static_cast<int>(Bit::One ^ Bit::Two) == 3);
     }
 
-    SUBCASE("NOT") {
+    SECTION("NOT") {
         CHECK(static_cast<int>(~Bit::One) == ~1);
     }
 
-    SUBCASE("AND assignment") {
+    SECTION("AND assignment") {
         Bit mask{};
         mask = Bit::One;
         mask &= Bit::One;
@@ -65,7 +65,7 @@ TEST_CASE("Bitwise operations with enum (enabled with IsBitmaskEnum trait)") {
         CHECK(static_cast<int>(mask) == 0);
     }
 
-    SUBCASE("OR assignment") {
+    SECTION("OR assignment") {
         Bit mask{};
         mask = Bit::One;
         mask |= Bit::One;
@@ -76,7 +76,7 @@ TEST_CASE("Bitwise operations with enum (enabled with IsBitmaskEnum trait)") {
         CHECK(static_cast<int>(mask) == 3);
     }
 
-    SUBCASE("XOR assignment") {
+    SECTION("XOR assignment") {
         Bit mask{};
         mask = Bit::One;
         mask ^= Bit::One;
@@ -89,85 +89,84 @@ TEST_CASE("Bitwise operations with enum (enabled with IsBitmaskEnum trait)") {
 }
 
 TEST_CASE("Bitmask") {
-    SUBCASE("Conversion to enum") {
+    SECTION("Conversion to enum") {
         CHECK(static_cast<Bit>(Bitmask(Bit::One)) == Bit::One);
     }
 
-    SUBCASE("Conversion to int") {
+    SECTION("Conversion to int") {
         CHECK(static_cast<int>(Bitmask<Bit>(2)) == 2);
     }
 
-    SUBCASE("get") {
+    SECTION("get") {
         CHECK(Bitmask<Bit>().get() == 0);
         CHECK(Bitmask<Bit>(Bit::One).get() == 1);
         CHECK(Bitmask<Bit>(2).get() == 2);
     }
 
-    SUBCASE("all") {
+    SECTION("all") {
         CHECK(Bitmask<Bit>(0x00000000).all() == false);
         CHECK(Bitmask<Bit>(0xF0F0F0F0).all() == false);
         CHECK(Bitmask<Bit>(0xFFFFFFFF).all());
     }
 
-    SUBCASE("any") {
+    SECTION("any") {
         CHECK(Bitmask<Bit>(0x00000000).any() == false);
         CHECK(Bitmask<Bit>(0xF0F0F0F0).any());
         CHECK(Bitmask<Bit>(0xFFFFFFFF).any());
     }
 
-    SUBCASE("none") {
+    SECTION("none") {
         CHECK(Bitmask<Bit>(0x00000000).none());
         CHECK(Bitmask<Bit>(0xF0F0F0F0).none() == false);
         CHECK(Bitmask<Bit>(0xFFFFFFFF).none() == false);
     }
 
-    SUBCASE("allOf") {
+    SECTION("allOf") {
         CHECK(Bitmask<Bit>(Bit::One).allOf(Bit::One) == true);
         CHECK(Bitmask<Bit>(Bit::One).allOf(Bit::Two) == false);
         CHECK(Bitmask<Bit>(Bit::One).allOf(Bit::One | Bit::Two) == false);
     }
 
-    SUBCASE("anyOf") {
+    SECTION("anyOf") {
         CHECK(Bitmask<Bit>(Bit::One).anyOf(Bit::One) == true);
         CHECK(Bitmask<Bit>(Bit::One).anyOf(Bit::Two) == false);
         CHECK(Bitmask<Bit>(Bit::One).anyOf(Bit::One | Bit::Two) == true);
     }
 
-    SUBCASE("noneOf") {
+    SECTION("noneOf") {
         CHECK(Bitmask<Bit>(Bit::One).noneOf(Bit::One) == false);
         CHECK(Bitmask<Bit>(Bit::One).noneOf(Bit::Two) == true);
         CHECK(Bitmask<Bit>(Bit::One).noneOf(Bit::One | Bit::Two) == false);
     }
 
-    SUBCASE("set") {
-        CHECK_EQ(Bitmask<Bit>().set().get(), 0xFFFFFFFF);
-        CHECK_EQ(Bitmask<Bit>().set(Bit::One).get(), 1);
+    SECTION("set") {
+        CHECK(Bitmask<Bit>().set().get() == 0xFFFFFFFF);
+        CHECK(Bitmask<Bit>().set(Bit::One).get() == 1);
     }
 
-    SUBCASE("reset") {
-        CHECK_EQ(Bitmask<Bit>(Bit::One | Bit::Two).reset().get(), 0);
-        CHECK_EQ(Bitmask<Bit>(Bit::One | Bit::Two).reset(Bit::One).get(), 2);
+    SECTION("reset") {
+        CHECK(Bitmask<Bit>(Bit::One | Bit::Two).reset().get() == 0);
+        CHECK(Bitmask<Bit>(Bit::One | Bit::Two).reset(Bit::One).get() == 2);
     }
 
-    SUBCASE("flip") {
-        CHECK_EQ(Bitmask<Bit>(0).flip().get(), 0xFFFFFFFF);
-        CHECK_EQ(Bitmask<Bit>(1).flip().get(), 0xFFFFFFFF - 1);
+    SECTION("flip") {
+        CHECK(Bitmask<Bit>(0).flip().get() == 0xFFFFFFFF);
+        CHECK(Bitmask<Bit>(1).flip().get() == 0xFFFFFFFF - 1);
     }
 
-    SUBCASE("Equality") {
+    SECTION("Equality") {
         CHECK(Bitmask<Bit>() == Bitmask<Bit>());
+
         CHECK(Bitmask(Bit::One) == Bitmask(Bit::One));
-        CHECK(Bitmask(Bit::One) != Bitmask(Bit::Two));
-
         CHECK(Bitmask(Bit::One) == Bit::One);
+        CHECK(Bit::One == Bitmask(Bit::One));
         CHECK(Bitmask(Bit::One) == 1);
-        CHECK(Bitmask(Bit::One) != Bit::Two);
-        CHECK(Bitmask(Bit::One) != 2);
+        CHECK(1 == Bitmask(Bit::One));
 
-        // ambiguous due to implicit conversion to underlying type
-        // CHECK(Bit::One == Bitmask(Bit::One));
-        // CHECK(1 == Bitmask(Bit::One));
-        // CHECK(Bit::Two != Bitmask(Bit::One));
-        // CHECK(2 != Bitmask(Bit::One));
+        CHECK(Bitmask(Bit::One) != Bitmask(Bit::Two));
+        CHECK(Bitmask(Bit::One) != Bit::Two);
+        CHECK(Bit::Two != Bitmask(Bit::One));
+        CHECK(Bitmask(Bit::One) != 2);
+        CHECK(2 != Bitmask(Bit::One));
     }
 }

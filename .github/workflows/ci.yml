@@ -141,7 +141,6 @@ jobs:
       - name: Configure CMake
         run: >
           cmake -S . -B ./build
-          -DCMAKE_POLICY_VERSION_MINIMUM=3.5
           -DCMAKE_CXX_COMPILER=${{ matrix.config.compiler }}
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
           -DBUILD_SHARED_LIBS=${{ matrix.library_type == 'shared' }}

@@ -1,7 +1,8 @@
 #include <string>
 #include <utility>
 
-#include <doctest/doctest.h>
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/catch_template_test_macros.hpp>
 
 #include "open62541pp/client.hpp"
 #include "open62541pp/datatype.hpp"
@@ -10,28 +11,28 @@
 
 using namespace opcua;
 
-TEST_CASE_TEMPLATE("Config", T, ClientConfig, ServerConfig) {
-    using NativeType = typename T::NativeType;
+TEMPLATE_TEST_CASE("Config", "", ClientConfig, ServerConfig) {
+    using NativeType = typename TestType::NativeType;
 
-    SUBCASE("Default constructor") {
-        T config;
+    SECTION("Default constructor") {
+        TestType config;
     }
-    SUBCASE("Construct from native") {
+    SECTION("Construct from native") {
         NativeType native{};
-        T config(std::move(native));
+        TestType config(std::move(native));
     }
-    SUBCASE("Move constructor") {
-        T other;
-        T config(std::move(other));
+    SECTION("Move constructor") {
+        TestType other;
+        TestType config(std::move(other));
     }
-    SUBCASE("Move assignment") {
-        T other;
-        T config = std::move(other);
+    SECTION("Move assignment") {
+        TestType other;
+        TestType config = std::move(other);
     }
 
-    T config;
+    TestType config;
 
-    SUBCASE("setLogger") {
+    SECTION("setLogger") {
         static size_t counter = 0;
         static LogLevel lastLogLevel{};
         static LogCategory lastLogCategory{};
@@ -54,42 +55,42 @@ TEST_CASE_TEMPLATE("Config", T, ClientConfig, ServerConfig) {
         CHECK(lastMessage == "Message");
     }
 
-    SUBCASE("handle") {
+    SECTION("handle") {
         CHECK(config.handle() != nullptr);
         CHECK(std::as_const(config).handle() != nullptr);
     }
 }
 
-TEST_CASE_TEMPLATE("Connection", T, Client, Server) {
+TEMPLATE_TEST_CASE("Connection", "", Client, Server) {
     // TODO: provide type alias NativeType
-    using NativeType = std::remove_pointer_t<decltype(std::declval<T>().handle())>;
+    using NativeType = std::remove_pointer_t<decltype(std::declval<TestType>().handle())>;
 
-    SUBCASE("Default constructor") {
-        T connection;
+    SECTION("Default constructor") {
+        TestType connection;
     }
-    SUBCASE("Move constructor") {
-        T other;
-        T connection(std::move(other));
+    SECTION("Move constructor") {
+        TestType other;
+        TestType connection(std::move(other));
     }
-    SUBCASE("Move assignment") {
-        T other;
-        T connection = std::move(other);
+    SECTION("Move assignment") {
+        TestType other;
+        TestType connection = std::move(other);
     }
 
-    T connection;
+    TestType connection;
 
-    SUBCASE("config") {
+    SECTION("config") {
         auto* config = detail::getConfig(connection.handle());
         CHECK(connection.config().handle() == config);
         CHECK(std::as_const(connection).config().handle() == config);
     }
 
-    SUBCASE("handle") {
+    SECTION("handle") {
         CHECK(connection.handle() != nullptr);
         CHECK(std::as_const(connection).handle() != nullptr);
     }
 
-    SUBCASE("setCustomDataTypes") {
+    SECTION("setCustomDataTypes") {
         CHECK(connection.config()->customDataTypes == nullptr);
 
         connection.setCustomDataTypes({
@@ -100,18 +101,18 @@ TEST_CASE_TEMPLATE("Connection", T, Client, Server) {
         CHECK(connection.config()->customDataTypes->next == nullptr);
         CHECK(connection.config()->customDataTypes->typesSize == 2);
         CHECK(connection.config()->customDataTypes->types != nullptr);
-        CHECK(connection.config()->customDataTypes->types[0] == UA_TYPES[UA_TYPES_STRING]);
-        CHECK(connection.config()->customDataTypes->types[1] == UA_TYPES[UA_TYPES_INT32]);
+        CHECK((connection.config()->customDataTypes->types[0] == UA_TYPES[UA_TYPES_STRING]));
+        CHECK((connection.config()->customDataTypes->types[1] == UA_TYPES[UA_TYPES_INT32]));
     }
 
-    SUBCASE("Equality operators") {
-        T other;
+    SECTION("Equality operators") {
+        TestType other;
         CHECK(connection == connection);
         CHECK(connection != other);
         CHECK(other == other);
     }
 
-    SUBCASE("Utility functions") {
+    SECTION("Utility functions") {
         NativeType* native = connection.handle();
         NativeType* nativeNull{nullptr};
 
@@ -133,10 +134,10 @@ TEST_CASE_TEMPLATE("Connection", T, Client, Server) {
     }
 }
 
-TEST_CASE_TEMPLATE("Connection asWrapper", T, Client, Server) {
-    using NativeType = std::remove_pointer_t<decltype(std::declval<T>().handle())>;
+TEMPLATE_TEST_CASE("Connection asWrapper", "", Client, Server) {
+    using NativeType = std::remove_pointer_t<decltype(std::declval<TestType>().handle())>;
 
-    T connection;
+    TestType connection;
     NativeType* native = connection.handle();
     NativeType* nativeNull{nullptr};
 
@@ -145,12 +146,12 @@ TEST_CASE_TEMPLATE("Connection asWrapper", T, Client, Server) {
     CHECK(asWrapper(native) == &connection);
     CHECK(asWrapper(native)->handle() == native);
 
-    SUBCASE("Move construct") {
-        T connectionMoved(std::move(connection));
+    SECTION("Move construct") {
+        TestType connectionMoved(std::move(connection));
         CHECK(asWrapper(native) == &connectionMoved);
     }
-    SUBCASE("Move assignment") {
-        T connectionMoved;
+    SECTION("Move assignment") {
+        TestType connectionMoved;
         connectionMoved = std::move(connection);
         CHECK(asWrapper(native) == &connectionMoved);
     }
