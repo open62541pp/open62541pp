@@ -9,6 +9,7 @@
 #include "open62541pp/types.hpp"
 #include "open62541pp/ua/nodeids.hpp"
 
+using Catch::Matchers::ContainsSubstring;
 using Catch::Matchers::Message;
 using namespace opcua;
 
@@ -291,25 +292,6 @@ TEST_CASE("Guid") {
         CHECK(guid->data4[7] == 0xEF);
     }
 #endif
-
-    SECTION("toString") {
-        {
-            const Guid guid{};
-            CHECK(guid.toString() == "00000000-0000-0000-0000-000000000000");
-        }
-        {
-            const Guid guid{
-                0x12345678, 0x1234, 0x5678, {0x12, 0x34, 0x56, 0x78, 0x90, 0xAB, 0xCD, 0xEF}
-            };
-            CHECK(guid.toString() == "12345678-1234-5678-1234-567890ABCDEF");
-        }
-    }
-
-    SECTION("ostream overload") {
-        std::ostringstream ss;
-        ss << Guid{};
-        CHECK(ss.str() == "00000000-0000-0000-0000-000000000000");
-    }
 }
 
 TEST_CASE("DateTime") {
@@ -442,16 +424,6 @@ TEST_CASE("NodeId") {
         CHECK(NodeId(0, 1).hash() != NodeId(1, 1).hash());
     }
 
-    SECTION("toString") {
-        CHECK(NodeId(0, 13).toString() == "i=13");
-        CHECK(NodeId(10, 1).toString() == "ns=10;i=1");
-        CHECK(NodeId(10, "Hello:World").toString() == "ns=10;s=Hello:World");
-        CHECK(NodeId(0, Guid()).toString() == "g=00000000-0000-0000-0000-000000000000");
-#if UAPP_OPEN62541_VER_GE(1, 1)
-        CHECK(NodeId(1, ByteString("test123")).toString() == "ns=1;b=dGVzdDEyMw==");
-#endif
-    }
-
     SECTION("Comparison") {
         CHECK(NodeId(0, 1) == NodeId(0, 1));
         CHECK(NodeId(0, 1) <= NodeId(0, 1));
@@ -492,7 +464,6 @@ TEST_CASE("ExpandedNodeId") {
     CHECK(idLocal == idLocal);
     CHECK(idLocal != idFull);
 
-
 #if UAPP_HAS_PARSING
     SECTION("parse") {
         const auto id = ExpandedNodeId::parse("svr=1;nsu=http://example.org/UA/;i=1234");
@@ -507,18 +478,6 @@ TEST_CASE("ExpandedNodeId") {
         CHECK(ExpandedNodeId().hash() == ExpandedNodeId().hash());
         CHECK(ExpandedNodeId().hash() != idLocal.hash());
         CHECK(ExpandedNodeId().hash() != idFull.hash());
-    }
-
-    SECTION("toString") {
-        CHECK(ExpandedNodeId({2, 10157}).toString() == "ns=2;i=10157");
-        CHECK(
-            ExpandedNodeId({2, 10157}, "http://test.org/UA/Data/", 0).toString() ==
-            "nsu=http://test.org/UA/Data/;ns=2;i=10157"
-        );
-        CHECK(
-            ExpandedNodeId({2, 10157}, "http://test.org/UA/Data/", 1).toString() ==
-            "svr=1;nsu=http://test.org/UA/Data/;ns=2;i=10157"
-        );
     }
 
     SECTION("std::hash specialization") {
@@ -1190,8 +1149,22 @@ TEST_CASE("NumericRange") {
     }
 
     SECTION("toString") {
-        CHECK(NumericRange({{1, 1}}).toString() == "1");
-        CHECK(NumericRange({{1, 2}}).toString() == "1:2");
-        CHECK(NumericRange({{1, 2}, {0, 3}, {5, 5}}).toString() == "1:2,0:3,5");
+        CHECK(toString(NumericRange({{1, 1}})) == "1");
+        CHECK(toString(NumericRange({{1, 2}})) == "1:2");
+        CHECK(toString(NumericRange({{1, 2}, {0, 3}, {5, 5}})) == "1:2,0:3,5");
     }
 }
+
+#if UAPP_HAS_TOSTRING
+TEST_CASE("toString") {
+    const auto toStringStl = [](auto... args) {
+        return std::string{toString(args...)};
+    };
+
+    CHECK_THAT(toStringStl(11), ContainsSubstring("11"));
+    CHECK_THAT(toStringStl(11, UA_TYPES[UA_TYPES_INT32]), ContainsSubstring("11"));
+
+    CHECK_THAT(toStringStl(String("test")), ContainsSubstring("test"));
+    CHECK_THAT(toStringStl(String("test"), UA_TYPES[UA_TYPES_STRING]), ContainsSubstring("test"));
+}
+#endif

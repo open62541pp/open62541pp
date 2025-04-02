@@ -19,6 +19,7 @@
 #include <vector>
 
 #include "open62541pp/common.hpp"  // NamespaceIndex
+#include "open62541pp/config.hpp"
 #include "open62541pp/detail/iterator.hpp"  // TransformIterator
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/detail/string_utils.hpp"  // allocNativeString
@@ -526,6 +527,8 @@ public:
     }
 #endif
 
+    /// @deprecated Use free function opcua::toString(const T&) instead
+    [[deprecated("use free function toString instead")]]
     std::string toString() const;
 };
 
@@ -581,7 +584,7 @@ public:
 
     /// Convert to Base64 encoded string.
     /// @note Supported since open62541 v1.1
-    std::string toBase64() const;
+    String toBase64() const;
 
     /// @deprecated Use conversion with `static_cast` instead
     [[deprecated("use conversion with static_cast instead")]]
@@ -857,8 +860,8 @@ public:
         return getIdentifierAsImpl<E>();
     }
 
-    /// Encode NodeId as a string like `ns=1;s=SomeNode`.
-    /// @see https://reference.opcfoundation.org/Core/Part6/v105/docs/5.3.1.10
+    /// @deprecated Use free function opcua::toString(const T&) instead
+    [[deprecated("use free function toString instead")]]
     std::string toString() const;
 
 private:
@@ -1007,8 +1010,8 @@ public:
         return serverIndex();
     }
 
-    /// Encode ExpandedNodeId as a string like `svr=1;nsu=http://test.org/UA/Data/;ns=2;i=10157`.
-    /// @see https://reference.opcfoundation.org/Core/Part6/v105/docs/5.3.1.11
+    /// @deprecated Use free function opcua::toString(const T&) instead
+    [[deprecated("use free function toString instead")]]
     std::string toString() const;
 };
 
@@ -2536,6 +2539,8 @@ public:
         return {native().dimensions, native().dimensionsSize};
     }
 
+    /// @deprecated Use free function opcua::toString(const T&) instead
+    [[deprecated("use free function toString instead")]]
     std::string toString() const;
 
 private:
@@ -2555,6 +2560,46 @@ private:
         return copy(other.dimensions, other.dimensionsSize);
     }
 };
+
+String toString(const NumericRange& range);
+
+/* --------------------------------------- Free functions --------------------------------------- */
+
+/**
+ * Converts an object to its string representation.
+ *
+ * This function wraps @ref UA_print to generate a string representation of the given object, based
+ * on its data type description.
+ *
+ * @note
+ * Requires open62541 v1.2 or later.
+ * The open62541 library must be compiled with the `UA_ENABLE_TYPEDESCRIPTION` option.
+ * If these conditions are not met, the function returns an empty String.
+ * 
+ * @param object Native or wrapper object.
+ * @param type Data type of `object`.
+ *
+ * @relates TypeWrapper
+ * @ingroup Wrapper
+ */
+template <typename T>
+String toString(const T& object, const UA_DataType& type) {
+    String output;
+    if constexpr (UAPP_HAS_TOSTRING) {
+        throwIfBad(UA_print(&object, &type, output.handle()));
+    }
+    return output;
+}
+
+/**
+ * @overload
+ * @relates TypeWrapper
+ * @ingroup Wrapper
+ */
+template <typename T, typename = std::enable_if_t<detail::IsRegistered<T>::value>>
+String toString(const T& object) {
+    return toString(object, getDataType<T>());
+}
 
 }  // namespace opcua
 
