@@ -1,4 +1,5 @@
-#include <doctest/doctest.h>
+#include <catch2/catch_template_test_macros.hpp>
+#include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/services/nodemanagement.hpp"
 #include "open62541pp/services/view.hpp"
@@ -8,12 +9,12 @@
 
 using namespace opcua;
 
-TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
+TEMPLATE_TEST_CASE("View service set", "", Server, Client, Async<Client>) {
     ServerClientSetup setup;
     setup.client.connect(setup.endpointUrl);
     auto& server = setup.server;
     auto& client = setup.client;
-    auto& connection = setup.instance<T>();
+    auto& connection = setup.instance<TestType>();
 
     // add node to query references
     const NodeId id{1, 1000};
@@ -27,11 +28,11 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
         ReferenceTypeId::HasComponent
     ));
 
-    SUBCASE("browse") {
+    SECTION("browse") {
         const BrowseDescription bd(id, BrowseDirection::Both);
         BrowseResult result;
 
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             auto future = services::browseAsync(connection, bd, 0, useFuture);
             client.runIterate();
             result = future.get();
@@ -56,7 +57,7 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
         CHECK(refs[1].browseName() == QualifiedName(0, "BaseDataVariableType"));
     }
 
-    SUBCASE("browseNext") {
+    SECTION("browseNext") {
         // https://github.com/open62541/open62541/blob/v1.3.5/tests/client/check_client_highlevel.c#L252-L318
         const BrowseDescription bd({0, UA_NS0ID_SERVER}, BrowseDirection::Both);
         BrowseResult result;
@@ -68,7 +69,7 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
         CHECK(result.references().size() == 1);
 
         auto browseNext = [&](bool releaseContinuationPoint) {
-            if constexpr (isAsync<T>) {
+            if constexpr (isAsync<TestType>) {
                 auto future = services::browseNextAsync(
                     connection, releaseContinuationPoint, result.continuationPoint(), useFuture
                 );
@@ -94,14 +95,14 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
         CHECK(result.references().size() == 0);
     }
 
-    SUBCASE("browseAll") {
+    SECTION("browseAll") {
         const BrowseDescription bd(id, BrowseDirection::Both);
         CHECK(services::browseAll(connection, bd).value().size() == 2);
     }
 
-    SUBCASE("browseSimplifiedBrowsePath") {
+    SECTION("browseSimplifiedBrowsePath") {
         BrowsePathResult result;
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             auto future = services::browseSimplifiedBrowsePathAsync(
                 connection, {0, UA_NS0ID_ROOTFOLDER}, {{0, "Objects"}, {1, "Variable"}}, useFuture
             );
@@ -120,11 +121,11 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
         CHECK(result.targets()[0].targetId().nodeId() == id);
     }
 
-    SUBCASE("Register/unregister nodes") {
+    SECTION("Register/unregister nodes") {
         {
             RegisterNodesResponse response;
             RegisterNodesRequest request({}, {{1, 1000}});
-            if constexpr (isAsync<T>) {
+            if constexpr (isAsync<TestType>) {
                 auto future = services::registerNodesAsync(client, request, useFuture);
                 client.runIterate();
                 response = future.get();
@@ -137,7 +138,7 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
         {
             UnregisterNodesResponse response;
             UnregisterNodesRequest request({}, {{1, 1000}});
-            if constexpr (isAsync<T>) {
+            if constexpr (isAsync<TestType>) {
                 auto future = services::unregisterNodesAsync(client, request, useFuture);
                 client.runIterate();
                 response = future.get();

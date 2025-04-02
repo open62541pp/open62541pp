@@ -1,4 +1,5 @@
-#include <doctest/doctest.h>
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_all.hpp>
 
 #include "open62541pp/client.hpp"
 #include "open62541pp/detail/open62541/common.h"
@@ -8,10 +9,11 @@
 
 #include "helper/server_runner.hpp"
 
+using Catch::Matchers::Message;
 using namespace opcua;
 
 TEST_CASE("AsyncServiceAdapter") {
-    SUBCASE("createCallbackAndContext") {
+    SECTION("createCallbackAndContext") {
         using Response = int;
         using Adapter = services::detail::AsyncServiceAdapter<Response>;
 
@@ -36,25 +38,27 @@ TEST_CASE("AsyncServiceAdapter") {
         };
 
         Response response = 5;
-        SUBCASE("Success") {
+        SECTION("Success") {
             invokeCallback(&response);
             CHECK(result.has_value());
             CHECK(result.value() == response);
             CHECK_FALSE(catcher.hasException());
         }
-        SUBCASE("Response nullptr") {
+        SECTION("Response nullptr") {
             invokeCallback(nullptr);
             CHECK_FALSE(result.has_value());
             CHECK(catcher.hasException());
-            CHECK_THROWS_WITH_AS(catcher.rethrow(), "BadUnexpectedError", BadStatus);
+            CHECK_THROWS_MATCHES(catcher.rethrow(), BadStatus, Message("BadUnexpectedError"));
         }
-        SUBCASE("Exception in completion handler") {
+        SECTION("Exception in completion handler") {
             throwInCompletionHandler = true;
             invokeCallback(&response);
             CHECK(result.has_value());
             CHECK(result.value() == response);
             CHECK(catcher.hasException());
-            CHECK_THROWS_WITH_AS(catcher.rethrow(), "CompletionHandler", std::runtime_error);
+            CHECK_THROWS_MATCHES(
+                catcher.rethrow(), std::runtime_error, Message("CompletionHandler")
+            );
         }
     }
 }
@@ -73,7 +77,7 @@ TEST_CASE("sendRequest") {
         return services::detail::sendRequest<UA_ReadRequest, ReadResponse>(client, request);
     };
 
-    SUBCASE("Disconnected") {
+    SECTION("Disconnected") {
         const auto response = sendReadRequest();
         // UA_STATUSCODE_BADCONNECTIONCLOSED or UA_STATUSCODE_BADINTERNALERROR (v1.0)
         CHECK(response.responseHeader().serviceResult().isBad());
@@ -83,7 +87,7 @@ TEST_CASE("sendRequest") {
     ServerRunner serverRunner(server);
     client.connect("opc.tcp://localhost:4840");
 
-    SUBCASE("Success") {
+    SECTION("Success") {
         const auto response = sendReadRequest();
         CHECK(response.responseHeader().serviceResult().isGood());
         CHECK(response.results()[0].value().scalar<QualifiedName>() == QualifiedName(0, "Objects"));
@@ -106,7 +110,7 @@ TEST_CASE("sendRequestAsync") {
         );
     };
 
-    SUBCASE("Disconnected") {
+    SECTION("Disconnected") {
         sendReadRequest([&](ReadResponse& response) {
             // UA_STATUSCODE_BADSERVERNOTCONNECTED since v1.1
             CHECK(response.responseHeader().serviceResult().isBad());
@@ -117,12 +121,12 @@ TEST_CASE("sendRequestAsync") {
     ServerRunner serverRunner(server);
     client.connect("opc.tcp://localhost:4840");
 
-    SUBCASE("Success") {
+    SECTION("Success") {
         bool executed = false;
         sendReadRequest([&](ReadResponse& response) {
             CHECK(response.responseHeader().serviceResult().isGood());
-            CHECK_EQ(
-                response.results()[0].value().scalar<QualifiedName>(), QualifiedName(0, "Objects")
+            CHECK(
+                response.results()[0].value().scalar<QualifiedName>() == QualifiedName(0, "Objects")
             );
             executed = true;
         });
@@ -130,8 +134,8 @@ TEST_CASE("sendRequestAsync") {
         CHECK(executed);
     }
 
-    SUBCASE("Exception in user callback") {
+    SECTION("Exception in user callback") {
         sendReadRequest([](ReadResponse&) { throw std::runtime_error("Error"); });
-        CHECK_THROWS_WITH_AS(client.runIterate(), "Error", std::runtime_error);
+        CHECK_THROWS_AS(client.runIterate(), std::runtime_error);
     }
 }

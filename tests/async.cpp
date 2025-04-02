@@ -2,7 +2,7 @@
 #include <future>
 #include <utility>  // forward
 
-#include <doctest/doctest.h>
+#include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/async.hpp"
 

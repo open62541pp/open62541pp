@@ -1,4 +1,5 @@
-#include <doctest/doctest.h>
+#include <catch2/catch_template_test_macros.hpp>
+#include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/config.hpp"
 #include "open62541pp/detail/client_context.hpp"
@@ -9,16 +10,16 @@
 using namespace opcua;
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
-TEST_CASE_TEMPLATE("Subscription service set", T, Client, Async<Client>) {
+TEMPLATE_TEST_CASE("Subscription service set", "", Client, Async<Client>) {
     ServerClientSetup setup;
     setup.client.connect(setup.endpointUrl);
-    auto& connection = setup.instance<T>();
+    auto& connection = setup.instance<TestType>();
 
     services::SubscriptionParameters parameters{};
 
-    SUBCASE("createSubscription") {
+    SECTION("createSubscription") {
         CreateSubscriptionResponse response;
-        if constexpr (isAsync<T> && UAPP_HAS_ASYNC_SUBSCRIPTIONS) {
+        if constexpr (isAsync<TestType> && UAPP_HAS_ASYNC_SUBSCRIPTIONS) {
 #if UAPP_HAS_ASYNC_SUBSCRIPTIONS
             auto future = services::createSubscriptionAsync(
                 connection, parameters, true, {}, {}, useFuture
@@ -34,13 +35,13 @@ TEST_CASE_TEMPLATE("Subscription service set", T, Client, Async<Client>) {
         CHECK(detail::getContext(connection).subscriptions.contains(response.subscriptionId()));
     }
 
-    SUBCASE("modifySubscription") {
+    SECTION("modifySubscription") {
         const auto subId =
             services::createSubscription(connection, parameters, true, {}, {}).subscriptionId();
 
         parameters.priority = 1;
         ModifySubscriptionResponse response;
-        if constexpr (isAsync<T> && UAPP_HAS_ASYNC_SUBSCRIPTIONS) {
+        if constexpr (isAsync<TestType> && UAPP_HAS_ASYNC_SUBSCRIPTIONS) {
 #if UAPP_HAS_ASYNC_SUBSCRIPTIONS
             auto future = services::modifySubscriptionAsync(
                 connection, subId, parameters, useFuture
@@ -53,7 +54,7 @@ TEST_CASE_TEMPLATE("Subscription service set", T, Client, Async<Client>) {
         }
         CHECK(response.responseHeader().serviceResult().isGood());
 
-        SUBCASE("Invalid subscription id") {
+        SECTION("Invalid subscription id") {
             CHECK(
                 services::modifySubscription(connection, subId + 1, parameters)
                     .responseHeader()
@@ -62,11 +63,11 @@ TEST_CASE_TEMPLATE("Subscription service set", T, Client, Async<Client>) {
         }
     }
 
-    SUBCASE("setPublishingMode") {
+    SECTION("setPublishingMode") {
         const auto subId =
             services::createSubscription(connection, parameters, true, {}, {}).subscriptionId();
 
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             auto future = services::setPublishingModeAsync(connection, subId, false, useFuture);
             setup.client.runIterate();
             CHECK(future.get().isGood());
@@ -75,11 +76,11 @@ TEST_CASE_TEMPLATE("Subscription service set", T, Client, Async<Client>) {
         }
     }
 
-    SUBCASE("deleteSubscription") {
+    SECTION("deleteSubscription") {
         const auto subId =
             services::createSubscription(connection, parameters, true, {}, {}).subscriptionId();
 
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
 #if UAPP_HAS_ASYNC_SUBSCRIPTIONS && UAPP_OPEN62541_VER_LE(1, 3)
             auto future = services::deleteSubscriptionAsync(connection, subId, useFuture);
             setup.client.runIterate();
@@ -90,7 +91,7 @@ TEST_CASE_TEMPLATE("Subscription service set", T, Client, Async<Client>) {
             CHECK(services::deleteSubscription(connection, subId).isGood());
         }
 
-        SUBCASE("Invalid subscription id") {
+        SECTION("Invalid subscription id") {
             CHECK(
                 services::deleteSubscription(connection, subId + 1) ==
                 UA_STATUSCODE_BADSUBSCRIPTIONIDINVALID
@@ -98,7 +99,7 @@ TEST_CASE_TEMPLATE("Subscription service set", T, Client, Async<Client>) {
         }
     }
 
-    SUBCASE("deleteSubscription with callback") {
+    SECTION("deleteSubscription with callback") {
         bool deleted = false;
         const auto deleteCallback = [&](IntegerId) { deleted = true; };
         const auto subId =

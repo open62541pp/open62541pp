@@ -1,13 +1,13 @@
 #include <new>  // bad_alloc
 
-#include <doctest/doctest.h>
+#include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/detail/types_handling.hpp"
 
 using namespace opcua;
 
 TEST_CASE("Types handling") {
-    SUBCASE("IsPointerFree") {
+    SECTION("IsPointerFree") {
         CHECK(detail::IsPointerFree<bool>::value);
         CHECK(detail::IsPointerFree<int>::value);
         CHECK(detail::IsPointerFree<float>::value);
@@ -16,32 +16,32 @@ TEST_CASE("Types handling") {
         CHECK_FALSE(detail::IsPointerFree<UA_NodeId>::value);
     }
 
-    SUBCASE("Allocate / deallocate") {
+    SECTION("Allocate / deallocate") {
         auto* ptr = detail::allocate<UA_String>(UA_TYPES[UA_TYPES_STRING]);
         CHECK(ptr != nullptr);
         detail::deallocate(ptr, UA_TYPES[UA_TYPES_STRING]);
     }
 
-    SUBCASE("Allocate as unique_ptr") {
+    SECTION("Allocate as unique_ptr") {
         auto ptr = detail::allocateUniquePtr<UA_String>(UA_TYPES[UA_TYPES_STRING]);
         CHECK(ptr.get() != nullptr);
     }
 }
 
 TEST_CASE("Array handling") {
-    SUBCASE("Allocate empty array") {
+    SECTION("Allocate empty array") {
         auto* ptr = detail::allocateArray<int>(0);
         CHECK(ptr != nullptr);
         CHECK(ptr == UA_EMPTY_ARRAY_SENTINEL);  // NOLINT
         detail::deallocateArray(ptr);
     }
 
-    SUBCASE("Allocate / deallocate") {
+    SECTION("Allocate / deallocate") {
         auto* ptr = detail::allocateArray<UA_String>(3, UA_TYPES[UA_TYPES_STRING]);
         CHECK(ptr != nullptr);
         detail::deallocateArray(ptr, 3, UA_TYPES[UA_TYPES_STRING]);
 
-        SUBCASE("Exceed memory") {
+        SECTION("Exceed memory") {
             CHECK_THROWS_AS(
                 []() {
                     const auto huge = size_t(-1);
@@ -52,19 +52,19 @@ TEST_CASE("Array handling") {
         }
     }
 
-    SUBCASE("Allocate as unique_ptr") {
+    SECTION("Allocate as unique_ptr") {
         auto ptr = detail::allocateArrayUniquePtr<UA_String>(3, UA_TYPES[UA_TYPES_STRING]);
         CHECK(ptr.get() != nullptr);
     }
 
-    SUBCASE("Copy") {
-        SUBCASE("Empty array") {
+    SECTION("Copy") {
+        SECTION("Empty array") {
             UA_Int32* src = nullptr;
             CHECK(detail::copyArray(src, 0) == UA_EMPTY_ARRAY_SENTINEL);
             CHECK(detail::copyArray(src, 0, UA_TYPES[UA_TYPES_INT32]) == UA_EMPTY_ARRAY_SENTINEL);
         }
 
-        SUBCASE("Without pointers") {
+        SECTION("Without pointers") {
             const size_t size = 2;
             const auto& type = UA_TYPES[UA_TYPES_INT32];
             auto* src = detail::allocateArray<UA_Int32>(size, type);
@@ -79,7 +79,7 @@ TEST_CASE("Array handling") {
             detail::deallocateArray(dst, size, type);
         }
 
-        SUBCASE("With pointers") {
+        SECTION("With pointers") {
             const size_t size = 2;
             const auto& type = UA_TYPES[UA_TYPES_STRING];
             auto* src = detail::allocateArray<UA_String>(size, type);
@@ -95,7 +95,7 @@ TEST_CASE("Array handling") {
         }
     }
 
-    SUBCASE("Resize array") {
+    SECTION("Resize array") {
         size_t size = 3;
         const auto& type = UA_TYPES[UA_TYPES_INT32];
         auto* array = detail::allocateArray<UA_Int32>(size, type);
@@ -105,7 +105,7 @@ TEST_CASE("Array handling") {
 
         const auto* arrayBefore = array;
 
-        SUBCASE("newSize > size") {
+        SECTION("newSize > size") {
             detail::resizeArray(array, size, 4, type);
             CHECK(size == 4);
             CHECK(array[0] == 1);
@@ -114,7 +114,7 @@ TEST_CASE("Array handling") {
             CHECK(array[3] == 0);
         }
 
-        SUBCASE("newSize < size") {
+        SECTION("newSize < size") {
             detail::resizeArray(array, size, 2, type);
             CHECK(size == 2);
             CHECK(array[0] == 1);

@@ -1,4 +1,5 @@
-#include <doctest/doctest.h>
+#include <catch2/catch_template_test_macros.hpp>
+#include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/config.hpp"
 #include "open62541pp/ua/types.hpp"
@@ -19,7 +20,7 @@ TEST_CASE("RequestHeader") {
     CHECK(header.timestamp() == now);
     CHECK(header.requestHandle() == 1);
     CHECK(header.returnDiagnostics() == 2);
-    CHECK(header.auditEntryId() == String("auditEntryId"));
+    CHECK(header.auditEntryId() == "auditEntryId");
     CHECK(header.additionalHeader().empty());
 }
 
@@ -31,11 +32,11 @@ TEST_CASE("UserTokenPolicy") {
         "issuerEndpointUrl",
         "securityPolicyUri"
     );
-    CHECK(token.policyId() == String("policyId"));
+    CHECK(token.policyId() == "policyId");
     CHECK(token.tokenType() == UserTokenType::Username);
-    CHECK(token.issuedTokenType() == String("issuedTokenType"));
-    CHECK(token.issuerEndpointUrl() == String("issuerEndpointUrl"));
-    CHECK(token.securityPolicyUri() == String("securityPolicyUri"));
+    CHECK(token.issuedTokenType() == "issuedTokenType");
+    CHECK(token.issuerEndpointUrl() == "issuerEndpointUrl");
+    CHECK(token.securityPolicyUri() == "securityPolicyUri");
 }
 
 TEST_CASE("NodeAttributes") {
@@ -44,25 +45,25 @@ TEST_CASE("NodeAttributes") {
     VariableAttributes attr;
     CHECK(attr.specifiedAttributes() == UA_NODEATTRIBUTESMASK_NONE);
 
-    SUBCASE("Primitive type") {
+    SECTION("Primitive type") {
         attr.setWriteMask(WriteMask::DataType);
         CHECK(attr.writeMask() == UA_WRITEMASK_DATATYPE);
         CHECK(attr.specifiedAttributes() == UA_NODEATTRIBUTESMASK_WRITEMASK);
     }
 
-    SUBCASE("Cast type") {
+    SECTION("Cast type") {
         attr.setValueRank(ValueRank::TwoDimensions);
         CHECK(attr.valueRank() == ValueRank::TwoDimensions);
         CHECK(attr.specifiedAttributes() == UA_NODEATTRIBUTESMASK_VALUERANK);
     }
 
-    SUBCASE("Wrapper type") {
+    SECTION("Wrapper type") {
         attr.setDisplayName({"", "Name"});
         CHECK(attr.displayName() == LocalizedText{"", "Name"});
         CHECK(attr.specifiedAttributes() == UA_NODEATTRIBUTESMASK_DISPLAYNAME);
     }
 
-    SUBCASE("Array type") {
+    SECTION("Array type") {
         CHECK(attr.arrayDimensions().empty());
         // assign twice to check deallocation
         attr.setArrayDimensions({1});
@@ -78,17 +79,17 @@ TEST_CASE("NodeAttributes fluent interface") {
     CHECK(attr.writeMask() == 0xFFFFFFFF);
 }
 
-TEST_CASE_TEMPLATE("NodeAttributes setDataType", T, VariableAttributes, VariableTypeAttributes) {
-    CHECK(T{}.setDataType(DataTypeId::Boolean).dataType() == NodeId(DataTypeId::Boolean));
-    CHECK(T{}.template setDataType<bool>().dataType() == NodeId(DataTypeId::Boolean));
+TEMPLATE_TEST_CASE("NodeAttributes setDataType", "", VariableAttributes, VariableTypeAttributes) {
+    CHECK(TestType{}.setDataType(DataTypeId::Boolean).dataType() == NodeId(DataTypeId::Boolean));
+    CHECK(TestType{}.template setDataType<bool>().dataType() == NodeId(DataTypeId::Boolean));
 }
 
 TEST_CASE("UserNameIdentityToken") {
     const UserNameIdentityToken token("userName", "password", "encryptionAlgorithm");
     CHECK(token.policyId().empty());
-    CHECK(token.userName() == String("userName"));
+    CHECK(token.userName() == "userName");
     CHECK(token.password() == ByteString("password"));
-    CHECK(token.encryptionAlgorithm() == String("encryptionAlgorithm"));
+    CHECK(token.encryptionAlgorithm() == "encryptionAlgorithm");
 }
 
 TEST_CASE("X509IdentityToken") {
@@ -101,7 +102,7 @@ TEST_CASE("IssuedIdentityToken") {
     const IssuedIdentityToken token(ByteString("tokenData"), "encryptionAlgorithm");
     CHECK(token.policyId().empty());
     CHECK(token.tokenData() == ByteString("tokenData"));
-    CHECK(token.encryptionAlgorithm() == String("encryptionAlgorithm"));
+    CHECK(token.encryptionAlgorithm() == "encryptionAlgorithm");
 }
 
 TEST_CASE("AddNodesItem / AddNodesRequest") {
@@ -324,7 +325,7 @@ TEST_CASE("Argument") {
     const Argument argument(
         "name", {"", "description"}, DataTypeId::Int32, ValueRank::TwoDimensions, {2, 3}
     );
-    CHECK(argument.name() == String("name"));
+    CHECK(argument.name() == "name");
     CHECK(argument.description() == LocalizedText("", "description"));
     CHECK(argument.dataType() == NodeId(DataTypeId::Int32));
     CHECK(argument.valueRank() == ValueRank::TwoDimensions);
@@ -367,7 +368,7 @@ TEST_CASE("AttributeOperand") {
         {}
     );
     CHECK(operand.nodeId() == NodeId(ObjectTypeId::BaseEventType));
-    CHECK(operand.alias() == String("alias"));
+    CHECK(operand.alias() == "alias");
     CHECK(operand.browsePath().elements().size() == 2);
     CHECK(operand.attributeId() == AttributeId::Value);
     CHECK(operand.indexRange().empty());
@@ -430,7 +431,7 @@ TEST_CASE("ContentFilter(Element) operators") {
         return contentFilter.elements()[0].filterOperator();
     };
 
-    SUBCASE("Not") {
+    SECTION("Not") {
         const ContentFilter filterElementNot = !filterElement;
         CHECK(filterElementNot.elements().size() == 2);
         CHECK(firstOperator(filterElementNot) == FilterOperator::Not);
@@ -445,7 +446,7 @@ TEST_CASE("ContentFilter(Element) operators") {
         CHECK(elementOperandIndex(filterNot.elements()[1].filterOperands()[1]) == 3);
     }
 
-    SUBCASE("And") {
+    SECTION("And") {
         CHECK((filterElement && filterElement).elements().size() == 3);
         CHECK((filterElement && filter).elements().size() == 5);
         CHECK((filter && filterElement).elements().size() == 5);
@@ -456,7 +457,7 @@ TEST_CASE("ContentFilter(Element) operators") {
         CHECK(firstOperator(filter && filterElement) == FilterOperator::And);
         CHECK(firstOperator(filter && filter) == FilterOperator::And);
 
-        SUBCASE("Increment operand indexes") {
+        SECTION("Increment operand indexes") {
             const ContentFilter filterAdd = filter && filter;
             CHECK(filterAdd.elements().size() == 7);
             // and
@@ -471,7 +472,7 @@ TEST_CASE("ContentFilter(Element) operators") {
         }
     }
 
-    SUBCASE("Or") {
+    SECTION("Or") {
         CHECK((filterElement || filterElement).elements().size() == 3);
         CHECK((filterElement || filter).elements().size() == 5);
         CHECK((filter || filterElement).elements().size() == 5);

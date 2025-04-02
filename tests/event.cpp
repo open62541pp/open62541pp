@@ -1,6 +1,6 @@
 #include <memory>
 
-#include <doctest/doctest.h>
+#include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/config.hpp"
 #include "open62541pp/event.hpp"
@@ -14,7 +14,7 @@ using namespace opcua;
 TEST_CASE("Event") {
     Server server;
 
-    SUBCASE("Create and remove node representation") {
+    SECTION("Create and remove node representation") {
         auto event = std::make_unique<Event>(server);
 
         const auto id = event->id();
@@ -26,7 +26,7 @@ TEST_CASE("Event") {
         CHECK(services::readNodeId(server, id).code() == UA_STATUSCODE_BADNODEIDUNKNOWN);
     }
 
-    SUBCASE("Create and trigger event") {
+    SECTION("Create and trigger event") {
         Event event(server);
 
         CHECK(&event.connection() == &server);
@@ -41,7 +41,7 @@ TEST_CASE("Event") {
         CHECK(event.trigger() != event.trigger());  // unique event ids
     }
 
-    SUBCASE("Equality") {
+    SECTION("Equality") {
         opcua::Event event1(server);
         opcua::Event event2(server);
         CHECK(event1 == event1);

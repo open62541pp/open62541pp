@@ -2,7 +2,7 @@
 #include <string_view>
 #include <thread>
 
-#include <doctest/doctest.h>
+#include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/client.hpp"
 #include "open62541pp/config.hpp"
@@ -19,12 +19,12 @@ constexpr std::string_view localServerUrl{"opc.tcp://localhost:4840"};
 TEST_CASE("ClientConfig") {
     ClientConfig config;
 
-    SUBCASE("setTimeout") {
+    SECTION("setTimeout") {
         config.setTimeout(333);
         CHECK(config->timeout == 333);
     }
 
-    SUBCASE("setUserIdentityToken") {
+    SECTION("setUserIdentityToken") {
         const auto& token = asWrapper<ExtensionObject>(config->userIdentityToken);
         CHECK(token.empty());
 
@@ -43,20 +43,20 @@ TEST_CASE("ClientConfig") {
         CHECK_FALSE(token.empty());
     }
 
-    SUBCASE("setSecurityMode") {
+    SECTION("setSecurityMode") {
         config.setSecurityMode(MessageSecurityMode::Sign);
         CHECK(config->securityMode == UA_MESSAGESECURITYMODE_SIGN);
     }
 }
 
 TEST_CASE("Client constructors") {
-    SUBCASE("From native") {
+    SECTION("From native") {
         UA_Client* native = UA_Client_new();
         UA_ClientConfig_setDefault(UA_Client_getConfig(native));
         Client client{native};
     }
 
-    SUBCASE("From native (nullptr)") {
+    SECTION("From native (nullptr)") {
         UA_Client* native{nullptr};
         CHECK_THROWS(Client{native});
     }
@@ -67,32 +67,29 @@ TEST_CASE("Client discovery") {
     ServerRunner serverRunner(server);
     Client client;
 
-    SUBCASE("Find servers") {
+    SECTION("Find servers") {
         const auto results = client.findServers(localServerUrl);
         CHECK(results.size() == 1);
 
         const auto& result = results[0];
-        CHECK(result.applicationUri() == String("urn:open62541.server.application"));
-        CHECK(result.productUri() == String("http://open62541.org"));
+        CHECK(result.applicationUri() == "urn:open62541.server.application");
+        CHECK(result.productUri() == "http://open62541.org");
         CHECK(result.applicationType() == UA_APPLICATIONTYPE_SERVER);
         CHECK(result.discoveryUrls().size() >= 1);
     }
 
-    SUBCASE("Get endpoints") {
+    SECTION("Get endpoints") {
         const auto endpoints = client.getEndpoints(localServerUrl);
         CHECK(endpoints.size() == 1);
 
         const auto& endpoint = endpoints[0];
-        CHECK(endpoint.endpointUrl() == String(localServerUrl));
+        CHECK(endpoint.endpointUrl() == localServerUrl);
         CHECK(endpoint.serverCertificate() == ByteString());
         CHECK(endpoint.securityMode() == UA_MESSAGESECURITYMODE_NONE);
-        CHECK(
-            endpoint.securityPolicyUri() ==
-            String("http://opcfoundation.org/UA/SecurityPolicy#None")
-        );
+        CHECK(endpoint.securityPolicyUri() == "http://opcfoundation.org/UA/SecurityPolicy#None");
         CHECK(
             endpoint.transportProfileUri() ==
-            String("http://opcfoundation.org/UA-Profile/Transport/uatcp-uasc-uabinary")
+            "http://opcfoundation.org/UA-Profile/Transport/uatcp-uasc-uabinary"
         );
     }
 }
@@ -102,13 +99,13 @@ TEST_CASE("Client connect with AnonymousIdentityToken") {
     ServerRunner serverRunner(server);
     Client client;
 
-    SUBCASE("Connect with anonymous should succeed") {
+    SECTION("Connect with anonymous should succeed") {
         client.config().setUserIdentityToken(AnonymousIdentityToken{});
         CHECK_NOTHROW(client.connect(localServerUrl));
         CHECK(client.isConnected());
     }
 
-    SUBCASE("Connect with username/password should fail") {
+    SECTION("Connect with username/password should fail") {
         client.config().setUserIdentityToken(UserNameIdentityToken("username", "password"));
         CHECK_THROWS(client.connect(localServerUrl));
     }
@@ -122,11 +119,11 @@ TEST_CASE("Client connect with UserNameIdentityToken") {
     ServerRunner serverRunner(server);
     Client client;
 
-    SUBCASE("Connect with anonymous should fail") {
+    SECTION("Connect with anonymous should fail") {
         CHECK_THROWS(client.connect(localServerUrl));
     }
 
-    SUBCASE("Connect with username/password should succeed") {
+    SECTION("Connect with username/password should succeed") {
         client.config().setUserIdentityToken(UserNameIdentityToken("username", "password"));
         CHECK_NOTHROW(client.connect(localServerUrl));
         CHECK(client.isConnected());
@@ -165,7 +162,7 @@ TEST_CASE("Client connectAsync/disconnectAsync") {
 
 #ifdef UA_ENABLE_ENCRYPTION
 TEST_CASE("Client encryption") {
-    SUBCASE("Connect to unencrypted server") {
+    SECTION("Connect to unencrypted server") {
         Server server;
         ServerRunner serverRunner(server);
         Client client(ClientConfig(ByteString{}, ByteString{}, {}, {}));
@@ -211,7 +208,7 @@ TEST_CASE("Client state callbacks") {
     client.onSessionActivated([&] { states.push_back(State::SessionActivated); });
     client.onSessionClosed([&] { states.push_back(State::SessionClosed); });
 
-    SUBCASE("SecureChannel connect/disconnect") {
+    SECTION("SecureChannel connect/disconnect") {
 #if UAPP_OPEN62541_VER_LE(1, 0)
         client.config()->stateCallback(client.handle(), UA_CLIENTSTATE_CONNECTED);
         client.config()->stateCallback(client.handle(), UA_CLIENTSTATE_DISCONNECTED);
@@ -224,7 +221,7 @@ TEST_CASE("Client state callbacks") {
         CHECK(states.at(1) == State::Disconnected);
     }
 
-    SUBCASE("Session activate/close") {
+    SECTION("Session activate/close") {
 #if UAPP_OPEN62541_VER_LE(1, 0)
         client.config()->stateCallback(client.handle(), UA_CLIENTSTATE_SESSION);
         client.config()->stateCallback(client.handle(), UA_CLIENTSTATE_SESSION_DISCONNECTED);
@@ -237,7 +234,7 @@ TEST_CASE("Client state callbacks") {
         CHECK(states.at(1) == State::SessionClosed);
     }
 
-    SUBCASE("Combined") {
+    SECTION("Combined") {
 #if UAPP_OPEN62541_VER_GE(1, 1)
         client.config()->stateCallback(
             client.handle(), UA_SECURECHANNELSTATE_OPEN, UA_SESSIONSTATE_ACTIVATED, {}
@@ -280,7 +277,7 @@ TEST_CASE("Client methods") {
     Client client;
     client.connect(localServerUrl);
 
-    SUBCASE("getNamespaceArray") {
+    SECTION("getNamespaceArray") {
         const auto namespaces = client.namespaceArray();
         CHECK(namespaces.size() == 2);
         CHECK(namespaces.at(0) == "http://opcfoundation.org/UA/");

@@ -1,6 +1,6 @@
 #include <string>
 
-#include <doctest/doctest.h>
+#include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/services/detail/async_hook.hpp"
 #include "open62541pp/services/detail/async_transform.hpp"
@@ -20,7 +20,7 @@ static auto asyncTest(T result, CompletionToken&& token) {
 }
 
 TEST_CASE("TransformToken") {
-    SUBCASE("Callback") {
+    SECTION("Callback") {
         std::string result;
         asyncTest(
             5,
@@ -32,7 +32,7 @@ TEST_CASE("TransformToken") {
         CHECK(result == "5");
     }
 
-    SUBCASE("Future") {
+    SECTION("Future") {
         std::future<std::string> future = asyncTest(
             5,
             services::detail::TransformToken(
@@ -72,15 +72,15 @@ TEST_CASE("Response handling") {
     response.resultsSize = 1;
     response.results = &result;
 
-    SUBCASE("wrapSingleResultWithStatus") {
-        CHECK_EQ(
-            services::detail::wrapSingleResultWithStatus<AddNodesResult>(response).statusCode(),
+    SECTION("wrapSingleResultWithStatus") {
+        CHECK(
+            services::detail::wrapSingleResultWithStatus<AddNodesResult>(response).statusCode() ==
             UA_STATUSCODE_GOOD
         );
 
         response.responseHeader.serviceResult = UA_STATUSCODE_BADINTERNALERROR;
-        CHECK_EQ(
-            services::detail::wrapSingleResultWithStatus<AddNodesResult>(response).statusCode(),
+        CHECK(
+            services::detail::wrapSingleResultWithStatus<AddNodesResult>(response).statusCode() ==
             UA_STATUSCODE_BADINTERNALERROR
         );
     }

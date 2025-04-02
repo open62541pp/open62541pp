@@ -1,4 +1,5 @@
-#include <doctest/doctest.h>
+#include <catch2/catch_template_test_macros.hpp>
+#include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/config.hpp"
 #include "open62541pp/services/method.hpp"
@@ -9,10 +10,10 @@
 using namespace opcua;
 
 #ifdef UA_ENABLE_METHODCALLS
-TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
+TEMPLATE_TEST_CASE("Method service set", "", Server, Client, Async<Client>) {
     ServerClientSetup setup;
     setup.client.connect(setup.endpointUrl);
-    auto& connection = setup.instance<T>();
+    auto& connection = setup.instance<TestType>();
 
     const NodeId objectsId{ObjectId::ObjectsFolder};
     const NodeId methodId{1, 1000};
@@ -43,7 +44,7 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
     ));
 
     auto call = [&](auto&&... args) {
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             auto future = services::callAsync(args..., useFuture);
             setup.client.runIterate();
             return future.get();
@@ -52,7 +53,7 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
         }
     };
 
-    SUBCASE("Check result") {
+    SECTION("Check result") {
         const CallMethodResult result = call(
             connection,
             objectsId,
@@ -67,7 +68,7 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
         CHECK(result.outputArguments().at(0).scalar<int32_t>() == 3);
     }
 
-    SUBCASE("Propagate exception") {
+    SECTION("Propagate exception") {
         throwException = true;
         const CallMethodResult result = call(
             connection,
@@ -81,7 +82,7 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
         CHECK(result.statusCode() == UA_STATUSCODE_BADUNEXPECTEDERROR);
     }
 
-    SUBCASE("Invalid input arguments") {
+    SECTION("Invalid input arguments") {
         const CallMethodResult result = call(
             connection,
             objectsId,
@@ -94,14 +95,14 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
         CHECK(result.statusCode() == UA_STATUSCODE_BADINVALIDARGUMENT);
     }
 
-    SUBCASE("Missing arguments") {
+    SECTION("Missing arguments") {
         const CallMethodResult result = call(
             connection, objectsId, methodId, Span<const Variant>{}
         );
         CHECK(result.statusCode() == UA_STATUSCODE_BADARGUMENTSMISSING);
     }
 
-    SUBCASE("Too many arguments") {
+    SECTION("Too many arguments") {
         const CallMethodResult result = call(
             connection,
             objectsId,
