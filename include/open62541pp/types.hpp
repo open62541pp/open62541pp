@@ -306,6 +306,16 @@ inline bool operator!=(const UA_String& lhs, const UA_String& rhs) noexcept {
 }
 
 /// @relates String
+inline bool operator==(const String& lhs, const String& rhs) noexcept {
+    return asNative(lhs) == asNative(rhs);
+}
+
+/// @relates String
+inline bool operator!=(const String& lhs, const String& rhs) noexcept {
+    return !(lhs == rhs);
+}
+
+/// @relates String
 inline bool operator==(const String& lhs, std::string_view rhs) noexcept {
     return static_cast<std::string_view>(lhs) == rhs;
 }

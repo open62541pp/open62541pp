@@ -175,19 +175,19 @@ TEMPLATE_TEST_CASE("StringLike constructors", "", String, XmlElement) {
 TEMPLATE_TEST_CASE("StringLike assign const char*", "", String, XmlElement) {
     TestType str;
     str = "test123";
-    // CHECK(str == "test123");
+    CHECK(static_cast<std::string_view>(str) == "test123");
 }
 
 TEMPLATE_TEST_CASE("StringLike assign string_view", "", String, XmlElement) {
     TestType str;
     str = std::string_view{"test123"};
-    // CHECK(str == T{"test123"});
+    CHECK(static_cast<std::string_view>(str) == "test123");
 }
 
 TEMPLATE_TEST_CASE("StringLike implicit conversion to string_view", "", String, XmlElement) {
     TestType str("test123");
     std::string_view view = str;
-    // CHECK(view == "test123");
+    CHECK(view == "test123");
 }
 
 TEMPLATE_TEST_CASE("StringLike explicit conversion to string_view", "", ByteString) {
@@ -196,9 +196,8 @@ TEMPLATE_TEST_CASE("StringLike explicit conversion to string_view", "", ByteStri
 }
 
 TEMPLATE_TEST_CASE("StringLike equality overloads", "", String, ByteString, XmlElement) {
-    // TODO
-    // CHECK((TestType("test") == TestType("test")));
-    // CHECK((TestType("test") != TestType()));
+    CHECK(TestType("test") == TestType("test"));
+    CHECK(TestType("test") != TestType());
 }
 
 TEMPLATE_TEST_CASE("StringLike equality overloads with std::string_view", "", String, ByteString) {
