@@ -36,6 +36,14 @@ TEST_CASE("Alloc UA_String from string_view") {
     UA_clear(&str, &UA_TYPES[UA_TYPES_STRING]);
 }
 
+TEST_CASE("Alloc const char* from string_view") {
+    const char* cstr = detail::allocCString("test123");
+    CHECK(std::strlen(cstr) == 7);
+    CHECK(std::strcmp(cstr, "test123") == 0);
+    CHECK(cstr[7] == '\0');  // NOLINT
+    detail::clear(cstr);
+}
+
 TEST_CASE("Alloc UA_String from non-null-terminated string_view") {
     std::string str("test123");
     std::string_view sv(str.c_str(), 4);
