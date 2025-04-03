@@ -590,26 +590,6 @@ public:
     }
 };
 
-/// @relates ByteString
-inline bool operator==(const ByteString& lhs, std::string_view rhs) noexcept {
-    return (static_cast<std::string_view>(lhs) == rhs);
-}
-
-/// @relates ByteString
-inline bool operator!=(const ByteString& lhs, std::string_view rhs) noexcept {
-    return (static_cast<std::string_view>(lhs) != rhs);
-}
-
-/// @relates ByteString
-inline bool operator==(std::string_view lhs, const ByteString& rhs) noexcept {
-    return (lhs == static_cast<std::string_view>(rhs));
-}
-
-/// @relates ByteString
-inline bool operator!=(std::string_view lhs, const ByteString& rhs) noexcept {
-    return (lhs != static_cast<std::string_view>(rhs));
-}
-
 /* ----------------------------------------- XmlElement ----------------------------------------- */
 
 /**

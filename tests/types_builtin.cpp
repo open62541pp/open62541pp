@@ -201,11 +201,11 @@ TEMPLATE_TEST_CASE("StringLike equality overloads", "", String, ByteString, XmlE
     CHECK(TestType("test") != TestType());
 }
 
-TEMPLATE_TEST_CASE("StringLike equality overloads with std::string_view", "", String, ByteString) {
-    CHECK(TestType("test") == std::string("test"));
-    CHECK(TestType("test") != std::string("abc"));
-    CHECK(std::string("test") == TestType("test"));
-    CHECK(std::string("test") != TestType("abc"));
+TEMPLATE_TEST_CASE("StringLike equality overloads with std::string_view", "", String) {
+    CHECK(TestType("test") == std::string_view("test"));
+    CHECK(TestType("test") != std::string_view("abc"));
+    CHECK(std::string_view("test") == TestType("test"));
+    CHECK(std::string_view("test") != TestType("abc"));
 }
 
 TEMPLATE_TEST_CASE("StringLike ostream overloads", "", String) {
