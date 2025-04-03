@@ -4,6 +4,7 @@
 #include <cassert>
 #include <cstdint>
 #include <iterator>  // prev
+#include <string_view>
 #include <type_traits>
 #include <utility>  // move
 #include <vector>
@@ -11,6 +12,7 @@
 #include "open62541pp/common.hpp"  // TypeIndex
 #include "open62541pp/config.hpp"
 #include "open62541pp/detail/open62541/common.h"
+#include "open62541pp/detail/string_utils.hpp"
 #include "open62541pp/detail/traits.hpp"
 #include "open62541pp/span.hpp"
 #include "open62541pp/typeregistry.hpp"  // getDataType
@@ -41,7 +43,7 @@ public:
     DataType& operator=(const DataType& other);
     DataType& operator=(DataType&& other) noexcept;
 
-    const char* typeName() const noexcept {
+    std::string_view typeName() const noexcept {
 #ifdef UA_ENABLE_TYPEDESCRIPTION
         return handle()->typeName;
 #else
@@ -51,13 +53,14 @@ public:
 
     /// @deprecated Use typeName() instead
     [[deprecated("use typeName() instead")]]
-    const char* getTypeName() const noexcept {
+    std::string_view getTypeName() const noexcept {
         return typeName();
     }
 
-    void setTypeName([[maybe_unused]] const char* typeName) noexcept {
+    void setTypeName([[maybe_unused]] std::string_view typeName) noexcept {
 #ifdef UA_ENABLE_TYPEDESCRIPTION
-        handle()->typeName = typeName;
+        detail::clear(handle()->typeName);
+        handle()->typeName = detail::allocCString(typeName);
 #endif
     }
 

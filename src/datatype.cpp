@@ -15,6 +15,9 @@ static void clearMembers(UA_DataType& native) noexcept {
 }
 
 static void clear(UA_DataType& native) noexcept {
+#ifdef UA_ENABLE_TYPEDESCRIPTION
+    detail::clear(native.typeName);
+#endif
     clearMembers(native);
     native = {};
 }
@@ -27,6 +30,9 @@ static void copyMembers(const DataTypeMember* members, size_t membersSize, UA_Da
 
 [[nodiscard]] static UA_DataType copy(const UA_DataType& other) {
     UA_DataType result{other};
+#ifdef UA_ENABLE_TYPEDESCRIPTION
+    result.typeName = detail::allocCString(other.typeName);
+#endif
     copyMembers(other.members, other.membersSize, result);
     return result;
 }
