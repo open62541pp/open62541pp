@@ -1,6 +1,7 @@
-#include <doctest/doctest.h>
 #include <list>
 #include <vector>
+
+#include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/detail/iterator.hpp"
 
@@ -17,51 +18,51 @@ TEST_CASE("TransformIterator") {
           std::iterator_traits<decltype(first)>::iterator_category,
           std::random_access_iterator_tag>);
 
-    SUBCASE("base") {
+    SECTION("base") {
         CHECK(first.base() == vec.begin());
         CHECK(detail::TransformIterator(vec.begin(), square).base() == vec.begin());
     }
 
-    SUBCASE("operator*") {
+    SECTION("operator*") {
         CHECK(*first == 1);
         CHECK(*last == 9);
     }
 
-    SUBCASE("operator[]") {
+    SECTION("operator[]") {
         CHECK(first[0] == 1);
         CHECK(first[1] == 4);
         CHECK(first[2] == 9);
     }
 
-    SUBCASE("Increment") {
+    SECTION("Increment") {
         auto it = first;
-        SUBCASE("Pre") {
+        SECTION("Pre") {
             ++it;
         }
-        SUBCASE("Post") {
+        SECTION("Post") {
             it++;
         }
-        SUBCASE("Add 1") {
+        SECTION("Add 1") {
             it += 1;
         }
         CHECK(it.base() == (first.base() + 1));
     }
 
-    SUBCASE("Decrement") {
+    SECTION("Decrement") {
         auto it = last;
-        SUBCASE("Pre") {
+        SECTION("Pre") {
             --it;
         }
-        SUBCASE("Post") {
+        SECTION("Post") {
             it--;
         }
-        SUBCASE("Add 1") {
+        SECTION("Add 1") {
             it -= 1;
         }
         CHECK(it.base() == (last.base() - 1));
     }
 
-    SUBCASE("Comparison") {
+    SECTION("Comparison") {
         CHECK(first == first);
         CHECK_FALSE(first == last);
 
@@ -85,7 +86,7 @@ TEST_CASE("TransformIterator") {
         CHECK_FALSE(first >= last);
     }
 
-    SUBCASE("Distance") {
+    SECTION("Distance") {
         CHECK(last - first == 2);
     }
 }

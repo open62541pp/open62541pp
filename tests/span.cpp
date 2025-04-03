@@ -1,21 +1,23 @@
 #include <array>
 #include <vector>
 
-#include <doctest/doctest.h>
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_all.hpp>
 
 #include "open62541pp/span.hpp"
 
+using Catch::Matchers::Message;
 using namespace opcua;
 
 TEST_CASE("Span") {
-    SUBCASE("Empty") {
+    SECTION("Empty") {
         constexpr Span<int> view;
         CHECK(view.size() == 0);
         CHECK(view.empty());
         CHECK(view.data() == nullptr);
     }
 
-    SUBCASE("From array") {
+    SECTION("From array") {
         constexpr std::array<int, 3> arr{0, 1, 2};
         Span view(arr);
         CHECK(view.size() == arr.size());
@@ -23,7 +25,7 @@ TEST_CASE("Span") {
         CHECK(view.data() == arr.data());
     }
 
-    SUBCASE("From vector") {
+    SECTION("From vector") {
         std::vector<int> vec{0, 1, 2};
         Span view(vec);
         CHECK(view.size() == vec.size());
@@ -31,7 +33,7 @@ TEST_CASE("Span") {
         CHECK(view.data() == vec.data());
     }
 
-    SUBCASE("From initializer list") {
+    SECTION("From initializer list") {
         std::initializer_list<int> values{0, 1, 2};
         Span<const int> view(values);
         CHECK(view.size() == values.size());
@@ -39,7 +41,7 @@ TEST_CASE("Span") {
         CHECK(view.data() == values.begin());
     }
 
-    SUBCASE("Element access") {
+    SECTION("Element access") {
         std::vector<int> vec{0, 1, 2};
         Span view(vec);
 
@@ -47,23 +49,23 @@ TEST_CASE("Span") {
         CHECK(view.back() == 2);
         CHECK(view.data() == vec.data());
 
-        SUBCASE("operator[]") {
+        SECTION("operator[]") {
             CHECK(view[2] == 2);
             view[2] = 20;
             CHECK(view[2] == 20);
             CHECK(vec[2] == 20);
         }
 
-        SUBCASE("at (with bounds checking)") {
+        SECTION("at (with bounds checking)") {
             CHECK(view.at(0) == 0);
             CHECK(view.at(1) == 1);
             CHECK(view.at(2) == 2);
-            CHECK_THROWS_WITH_AS((void)view.at(3), "index (3) >= size() (3)", std::out_of_range);
-            CHECK_THROWS_WITH_AS((void)view.at(4), "index (4) >= size() (3)", std::out_of_range);
+            CHECK_THROWS_MATCHES((void)view.at(3), std::out_of_range, Message("index (3) >= size() (3)"));
+            CHECK_THROWS_MATCHES((void)view.at(4), std::out_of_range, Message("index (4) >= size() (3)"));
         }
     }
 
-    SUBCASE("Iterators") {
+    SECTION("Iterators") {
         const std::vector<int> vec{0, 1, 2};
         Span view(vec);
 
@@ -73,7 +75,7 @@ TEST_CASE("Span") {
         CHECK(std::vector<int>(view.crbegin(), view.crend()) == std::vector{2, 1, 0});
     }
 
-    SUBCASE("Subviews") {
+    SECTION("Subviews") {
         const std::vector<int> vec{0, 1, 2};
         Span view(vec);
 
@@ -107,7 +109,7 @@ TEST_CASE("Span") {
 }
 
 TEST_CASE("Span as generic function parameter") {
-    SUBCASE("Const") {
+    SECTION("Const") {
         auto getSize = [](Span<const int> view) { return view.size(); };
 
         const std::vector vec{0, 1, 2};
@@ -123,7 +125,7 @@ TEST_CASE("Span as generic function parameter") {
         CHECK(getSize({0, 1, 2}) == 3);
     }
 
-    SUBCASE("Non-const") {
+    SECTION("Non-const") {
         auto getSize = [](Span<int> view) { return view.size(); };
 
         std::vector vec{0, 1, 2};
@@ -152,14 +154,14 @@ TEST_CASE("Span comparison") {
     CHECK(Span(vec1) != Span(vec2));
     CHECK(Span(vec2) != Span(vec1));
 
-    SUBCASE("Mix non-const/const") {
+    SECTION("Mix non-const/const") {
         CHECK(Span<int>(vec1) == Span<const int>(vec1));
         CHECK(Span<const int>(vec1) == Span<int>(vec1));
         CHECK(Span<int>(vec1) != Span<const int>(vec2));
         CHECK(Span<const int>(vec2) != Span<int>(vec1));
     }
 
-    SUBCASE("Mix comparable types") {
+    SECTION("Mix comparable types") {
         CHECK(Span(vec1) == Span(vec1Double));
         CHECK(Span(vec1Double) == Span(vec1));
         CHECK(Span(vec1) != Span(vec2Double));

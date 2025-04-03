@@ -19,6 +19,7 @@
 #include <vector>
 
 #include "open62541pp/common.hpp"  // NamespaceIndex
+#include "open62541pp/config.hpp"
 #include "open62541pp/detail/iterator.hpp"  // TransformIterator
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/detail/string_utils.hpp"  // allocNativeString
@@ -306,6 +307,16 @@ inline bool operator!=(const UA_String& lhs, const UA_String& rhs) noexcept {
 }
 
 /// @relates String
+inline bool operator==(const String& lhs, const String& rhs) noexcept {
+    return asNative(lhs) == asNative(rhs);
+}
+
+/// @relates String
+inline bool operator!=(const String& lhs, const String& rhs) noexcept {
+    return !(lhs == rhs);
+}
+
+/// @relates String
 inline bool operator==(const String& lhs, std::string_view rhs) noexcept {
     return static_cast<std::string_view>(lhs) == rhs;
 }
@@ -516,6 +527,8 @@ public:
     }
 #endif
 
+    /// @deprecated Use free function opcua::toString(const T&) instead
+    [[deprecated("use free function toString instead")]]
     std::string toString() const;
 };
 
@@ -528,9 +541,6 @@ inline bool operator==(const UA_Guid& lhs, const UA_Guid& rhs) noexcept {
 inline bool operator!=(const UA_Guid& lhs, const UA_Guid& rhs) noexcept {
     return !(lhs == rhs);
 }
-
-/// @relates Guid
-std::ostream& operator<<(std::ostream& os, const Guid& guid);
 
 /* ----------------------------------------- ByteString ----------------------------------------- */
 
@@ -571,7 +581,7 @@ public:
 
     /// Convert to Base64 encoded string.
     /// @note Supported since open62541 v1.1
-    std::string toBase64() const;
+    String toBase64() const;
 
     /// @deprecated Use conversion with `static_cast` instead
     [[deprecated("use conversion with static_cast instead")]]
@@ -579,26 +589,6 @@ public:
         return {reinterpret_cast<const char*>(data()), size()};  // NOLINT
     }
 };
-
-/// @relates ByteString
-inline bool operator==(const ByteString& lhs, std::string_view rhs) noexcept {
-    return (static_cast<std::string_view>(lhs) == rhs);
-}
-
-/// @relates ByteString
-inline bool operator!=(const ByteString& lhs, std::string_view rhs) noexcept {
-    return (static_cast<std::string_view>(lhs) != rhs);
-}
-
-/// @relates ByteString
-inline bool operator==(std::string_view lhs, const ByteString& rhs) noexcept {
-    return (lhs == static_cast<std::string_view>(rhs));
-}
-
-/// @relates ByteString
-inline bool operator!=(std::string_view lhs, const ByteString& rhs) noexcept {
-    return (lhs != static_cast<std::string_view>(rhs));
-}
 
 /* ----------------------------------------- XmlElement ----------------------------------------- */
 
@@ -645,9 +635,6 @@ public:
         return {data(), size()};
     }
 };
-
-/// @relates XmlElement
-std::ostream& operator<<(std::ostream& os, const XmlElement& xmlElement);
 
 /* ------------------------------------------- NodeId ------------------------------------------- */
 
@@ -847,8 +834,8 @@ public:
         return getIdentifierAsImpl<E>();
     }
 
-    /// Encode NodeId as a string like `ns=1;s=SomeNode`.
-    /// @see https://reference.opcfoundation.org/Core/Part6/v105/docs/5.3.1.10
+    /// @deprecated Use free function opcua::toString(const T&) instead
+    [[deprecated("use free function toString instead")]]
     std::string toString() const;
 
 private:
@@ -997,8 +984,8 @@ public:
         return serverIndex();
     }
 
-    /// Encode ExpandedNodeId as a string like `svr=1;nsu=http://test.org/UA/Data/;ns=2;i=10157`.
-    /// @see https://reference.opcfoundation.org/Core/Part6/v105/docs/5.3.1.11
+    /// @deprecated Use free function opcua::toString(const T&) instead
+    [[deprecated("use free function toString instead")]]
     std::string toString() const;
 };
 
@@ -1306,7 +1293,7 @@ public:
     template <typename T, typename = std::enable_if_t<!std::is_const_v<T>>>
     void assign(T* ptr) noexcept {
         if constexpr (isArrayType<T>()) {
-            using ValueType = typename T::value_type;
+            using ValueType = detail::RangeValueT<T>;
             assertIsRegistered<ValueType>();
             assign(ptr, opcua::getDataType<ValueType>());
         } else {
@@ -1341,10 +1328,10 @@ public:
     template <typename T>
     void assign(const T& value) {
         if constexpr (isArrayType<T>()) {
-            assign(value.begin(), value.end());
+            assign(std::begin(value), std::end(value));
         } else {
             assertIsRegisteredOrConvertible<T>();
-            if constexpr (detail::isRegisteredType<T>) {
+            if constexpr (detail::IsRegistered<T>::value) {
                 setScalarCopyImpl(value, opcua::getDataType<T>());
             } else {
                 setScalarCopyConvertImpl(value);
@@ -1363,7 +1350,7 @@ public:
     template <typename T>
     void assign(const T& value, const UA_DataType& type) {
         if constexpr (isArrayType<T>()) {
-            setArrayCopyImpl(value.begin(), value.end(), type);
+            setArrayCopyImpl(std::begin(value), std::end(value), type);
         } else {
             setScalarCopyImpl(value, type);
         }
@@ -1379,7 +1366,7 @@ public:
     void assign(InputIt first, InputIt last) {
         using ValueType = typename std::iterator_traits<InputIt>::value_type;
         assertIsRegisteredOrConvertible<ValueType>();
-        if constexpr (detail::isRegisteredType<ValueType>) {
+        if constexpr (detail::IsRegistered<ValueType>::value) {
             setArrayCopyImpl(first, last, opcua::getDataType<ValueType>());
         } else {
             setArrayCopyConvertImpl(first, last);
@@ -1684,18 +1671,18 @@ public:
 private:
     template <typename T>
     static constexpr bool isScalarType() noexcept {
-        return detail::isRegisteredType<T> || detail::isConvertibleType<T>;
+        return detail::IsRegistered<T>::value || detail::IsConvertible<T>::value;
     }
 
     template <typename T>
     static constexpr bool isArrayType() noexcept {
-        return detail::isContainer<T> && !isScalarType<T>();
+        return detail::IsRange<T>::value && !isScalarType<T>();
     }
 
     template <typename T>
     static constexpr void assertIsRegistered() {
         static_assert(
-            detail::isRegisteredType<T>,
+            detail::IsRegistered<T>::value,
             "Template type must be a native/wrapper type to assign or get scalar/array without copy"
         );
     }
@@ -1703,7 +1690,7 @@ private:
     template <typename T>
     static constexpr void assertIsRegisteredOrConvertible() {
         static_assert(
-            detail::isRegisteredType<T> || detail::isConvertibleType<T>,
+            detail::IsRegistered<T>::value || detail::IsConvertible<T>::value,
             "Template type must be either a native/wrapper type or a convertible type. "
             "If the type is a native type: Provide the type definition (UA_DataType) manually or "
             "register the type with a TypeRegistry template specialization. "
@@ -1762,7 +1749,7 @@ private:
 template <typename T>
 T Variant::toScalarImpl() const {
     assertIsRegisteredOrConvertible<T>();
-    if constexpr (detail::isRegisteredType<T>) {
+    if constexpr (detail::IsRegistered<T>::value) {
         return scalar<T>();
     } else {
         using Native = typename TypeConverter<T>::NativeType;
@@ -1774,7 +1761,7 @@ template <typename T>
 T Variant::toArrayImpl() const {
     using ValueType = typename T::value_type;
     assertIsRegisteredOrConvertible<ValueType>();
-    if constexpr (detail::isRegisteredType<ValueType>) {
+    if constexpr (detail::IsRegistered<ValueType>::value) {
         auto native = array<ValueType>();
         return T(native.begin(), native.end());
     } else {
@@ -2526,6 +2513,8 @@ public:
         return {native().dimensions, native().dimensionsSize};
     }
 
+    /// @deprecated Use free function opcua::toString(const T&) instead
+    [[deprecated("use free function toString instead")]]
     std::string toString() const;
 
 private:
@@ -2545,6 +2534,46 @@ private:
         return copy(other.dimensions, other.dimensionsSize);
     }
 };
+
+String toString(const NumericRange& range);
+
+/* --------------------------------------- Free functions --------------------------------------- */
+
+/**
+ * Converts an object to its string representation.
+ *
+ * This function wraps @ref UA_print to generate a string representation of the given object, based
+ * on its data type description.
+ *
+ * @note
+ * Requires open62541 v1.2 or later.
+ * The open62541 library must be compiled with the `UA_ENABLE_TYPEDESCRIPTION` option.
+ * If these conditions are not met, the function returns an empty String.
+ * 
+ * @param object Native or wrapper object.
+ * @param type Data type of `object`.
+ *
+ * @relates TypeWrapper
+ * @ingroup Wrapper
+ */
+template <typename T>
+String toString(const T& object, const UA_DataType& type) {
+    String output;
+    if constexpr (UAPP_HAS_TOSTRING) {
+        throwIfBad(UA_print(&object, &type, output.handle()));
+    }
+    return output;
+}
+
+/**
+ * @overload
+ * @relates TypeWrapper
+ * @ingroup Wrapper
+ */
+template <typename T, typename = std::enable_if_t<detail::IsRegistered<T>::value>>
+String toString(const T& object) {
+    return toString(object, getDataType<T>());
+}
 
 }  // namespace opcua
 

@@ -1,6 +1,7 @@
 #include <vector>
 
-#include <doctest/doctest.h>
+#include <catch2/catch_template_test_macros.hpp>
+#include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/config.hpp"
 #include "open62541pp/services/attribute.hpp"
@@ -17,7 +18,7 @@ TEST_CASE("Attribute service set (highlevel)") {
     Server server;
     const NodeId objectsId{0, UA_NS0ID_OBJECTSFOLDER};
 
-    SUBCASE("Read initial variable node attributes") {
+    SECTION("Read initial variable node attributes") {
         VariableAttributes attr;
         attr.setDisplayName({"", "TestAttributes"});
         attr.setDescription({"", "..."});
@@ -55,7 +56,7 @@ TEST_CASE("Attribute service set (highlevel)") {
         );
     }
 
-    SUBCASE("Read/write object node attributes") {
+    SECTION("Read/write object node attributes") {
         const NodeId id{1, "TestAttributes"};
         REQUIRE(services::addObject(
             server,
@@ -75,7 +76,7 @@ TEST_CASE("Attribute service set (highlevel)") {
         CHECK(services::readEventNotifier(server, id).value().allOf(eventNotifier));
     }
 
-    SUBCASE("Read/write variable node attributes") {
+    SECTION("Read/write variable node attributes") {
         const NodeId id{1, "TestAttributes"};
         REQUIRE(services::addVariable(
             server,
@@ -115,7 +116,7 @@ TEST_CASE("Attribute service set (highlevel)") {
     }
 
 #ifdef UA_ENABLE_METHODCALLS
-    SUBCASE("Read/write method node attributes") {
+    SECTION("Read/write method node attributes") {
         const NodeId id{1, "TestMethod"};
         REQUIRE(services::addMethod(
             server, objectsId, id, "TestMethod", nullptr, {}, {}, {}, ReferenceTypeId::HasComponent
@@ -130,7 +131,7 @@ TEST_CASE("Attribute service set (highlevel)") {
     }
 #endif
 
-    SUBCASE("Read/write reference type node attributes") {
+    SECTION("Read/write reference type node attributes") {
         const NodeId id{1, "TestReferenceType"};
         REQUIRE(services::addReferenceType(
             server,
@@ -157,7 +158,7 @@ TEST_CASE("Attribute service set (highlevel)") {
         CHECK(services::readInverseName(server, id).value() == LocalizedText({}, "InverseName"));
     }
 
-    SUBCASE("Value rank and array dimension combinations") {
+    SECTION("Value rank and array dimension combinations") {
         const NodeId id{1, "TestDimensions"};
         REQUIRE(services::addVariable(
             server,
@@ -169,7 +170,7 @@ TEST_CASE("Attribute service set (highlevel)") {
             ReferenceTypeId::HasComponent
         ));
 
-        SUBCASE("Unspecified dimension (ValueRank <= 0)") {
+        SECTION("Unspecified dimension (ValueRank <= 0)") {
             const std::vector<ValueRank> valueRanks = {
                 ValueRank::Any,
                 ValueRank::Scalar,
@@ -186,7 +187,7 @@ TEST_CASE("Attribute service set (highlevel)") {
             }
         }
 
-        SUBCASE("OneDimension") {
+        SECTION("OneDimension") {
             CHECK(services::writeValueRank(server, id, ValueRank::OneDimension).isGood());
             CHECK(services::writeArrayDimensions(server, id, {1}).isGood());
             CHECK_FALSE(services::writeArrayDimensions(server, id, {}).isGood());
@@ -194,7 +195,7 @@ TEST_CASE("Attribute service set (highlevel)") {
             CHECK_FALSE(services::writeArrayDimensions(server, id, {1, 2, 3}).isGood());
         }
 
-        SUBCASE("TwoDimensions") {
+        SECTION("TwoDimensions") {
             CHECK(services::writeValueRank(server, id, ValueRank::TwoDimensions).isGood());
             CHECK(services::writeArrayDimensions(server, id, {1, 2}).isGood());
             CHECK_FALSE(services::writeArrayDimensions(server, id, {}).isGood());
@@ -202,7 +203,7 @@ TEST_CASE("Attribute service set (highlevel)") {
             CHECK_FALSE(services::writeArrayDimensions(server, id, {1, 2, 3}).isGood());
         }
 
-        SUBCASE("ThreeDimensions") {
+        SECTION("ThreeDimensions") {
             CHECK(services::writeValueRank(server, id, ValueRank::ThreeDimensions).isGood());
             CHECK(services::writeArrayDimensions(server, id, {1, 2, 3}).isGood());
             CHECK_FALSE(services::writeArrayDimensions(server, id, {}).isGood());
@@ -211,7 +212,7 @@ TEST_CASE("Attribute service set (highlevel)") {
         }
     }
 
-    SUBCASE("Read/write value") {
+    SECTION("Read/write value") {
         const NodeId id{1, "TestValue"};
         REQUIRE(services::addVariable(
             server,
@@ -230,7 +231,7 @@ TEST_CASE("Attribute service set (highlevel)") {
         CHECK(variantRead.scalar<double>() == 11.11);
     }
 
-    SUBCASE("Read/write data value") {
+    SECTION("Read/write data value") {
         const NodeId id{1, "TestDataValue"};
         REQUIRE(services::addVariable(
             server,
@@ -248,12 +249,12 @@ TEST_CASE("Attribute service set (highlevel)") {
 
         DataValue valueRead = services::readDataValue(server, id).value();
 
-        CHECK_EQ(valueRead->hasValue, true);
-        CHECK_EQ(valueRead->hasServerTimestamp, true);
-        CHECK_EQ(valueRead->hasSourceTimestamp, true);
-        // CHECK_EQ(valueRead->hasServerPicoseconds, true);
-        // CHECK_EQ(valueRead->hasSourcePicoseconds, true);
-        CHECK_EQ(valueRead->hasStatus, false);  // doesn't contain error code on success
+        CHECK(valueRead->hasValue == true);
+        CHECK(valueRead->hasServerTimestamp == true);
+        CHECK(valueRead->hasSourceTimestamp == true);
+        // CHECK(valueRead->hasServerPicoseconds == true);
+        // CHECK(valueRead->hasSourcePicoseconds == true);
+        CHECK(valueRead->hasStatus == false);  // doesn't contain error code on success
 
         CHECK(valueRead.value().scalar<int>() == 11);
         CHECK(valueRead->sourceTimestamp == valueWrite->sourceTimestamp);
@@ -262,7 +263,7 @@ TEST_CASE("Attribute service set (highlevel)") {
 
 #ifdef UA_ENABLE_TYPEDESCRIPTION
 
-    SUBCASE("Data type definition (read)") {
+    SECTION("Data type definition (read)") {
         const NodeId id{0, UA_NS0ID_BUILDINFO};
         const Variant variant = services::readDataTypeDefinition(server, id).value();
         CHECK(variant.isScalar());
@@ -275,7 +276,7 @@ TEST_CASE("Attribute service set (highlevel)") {
         CHECK(definition.fields().size() == 6);
     }
 
-    // SUBCASE("Data type definition (write/read EnumDefinition, not supported yet)") {
+    // SECTION("Data type definition (write/read EnumDefinition, not supported yet)") {
     //     const NodeId id{1, "MyEnum"};
     //     services::addDataType(server, {0, UA_NS0ID_ENUMERATION}, id, "MyEnum");
 
@@ -296,7 +297,7 @@ TEST_CASE("Attribute service set (highlevel, async)") {
     auto& client = setup.client;
     const NodeId objectsId{0, UA_NS0ID_OBJECTSFOLDER};
 
-    SUBCASE("Read/write value") {
+    SECTION("Read/write value") {
         // create variable node
         const NodeId id{1, 1000};
         REQUIRE(services::addVariable(
@@ -330,11 +331,11 @@ TEST_CASE("Attribute service set (highlevel, async)") {
     // sync and async functions use the same attribute handlers, so testing one attribute is enough
 }
 
-TEST_CASE_TEMPLATE("Attribute service set write/read", T, Server, Client, Async<Client>) {
+TEMPLATE_TEST_CASE("Attribute service set write/read", "", Server, Client, Async<Client>) {
     ServerClientSetup setup;
     setup.client.connect(setup.endpointUrl);
     auto& client = setup.client;
-    auto& connection = setup.instance<T>();
+    auto& connection = setup.instance<TestType>();
 
     // create variable node
     const NodeId id{1, 1000};
@@ -352,7 +353,7 @@ TEST_CASE_TEMPLATE("Attribute service set write/read", T, Server, Client, Async<
     Result<DataValue> result;
 
     // write
-    if constexpr (isAsync<T>) {
+    if constexpr (isAsync<TestType>) {
         auto future = services::writeAttributeAsync(
             connection, id, AttributeId::Value, DataValue(Variant(value)), useFuture
         );
@@ -364,7 +365,7 @@ TEST_CASE_TEMPLATE("Attribute service set write/read", T, Server, Client, Async<
     }
 
     // read
-    if constexpr (isAsync<T>) {
+    if constexpr (isAsync<TestType>) {
         auto future = services::readAttributeAsync(
             connection, id, AttributeId::Value, TimestampsToReturn::Neither, useFuture
         );
@@ -377,4 +378,34 @@ TEST_CASE_TEMPLATE("Attribute service set write/read", T, Server, Client, Async<
     }
 
     CHECK(result.value().value().scalar<double>() == value);
+}
+
+TEST_CASE("Attribute service set raw") {
+    Client client;
+
+    const std::vector<ReadValueId> nodesToRead{
+        {NodeId{1, 1000}, AttributeId::Value},
+    };
+    const std::vector<WriteValue> nodesToWrite{
+        {NodeId{1, 1000}, AttributeId::Value, {}, DataValue{}},
+    };
+
+    SECTION("read") {
+        const ReadRequest request{{}, {}, TimestampsToReturn{}, nodesToRead};
+        CHECK_NOTHROW(services::read(client, request));
+        CHECK_NOTHROW(services::readAsync(client, request, useFuture));
+    }
+    SECTION("read overload") {
+        CHECK_NOTHROW(services::read(client, nodesToRead, TimestampsToReturn{}));
+        CHECK_NOTHROW(services::readAsync(client, nodesToRead, TimestampsToReturn{}, useFuture));
+    }
+    SECTION("write") {
+        const WriteRequest request{{}, nodesToWrite};
+        CHECK_NOTHROW(services::write(client, request));
+        CHECK_NOTHROW(services::writeAsync(client, request, useFuture));
+    }
+    SECTION("write overload") {
+        CHECK_NOTHROW(services::write(client, nodesToWrite));
+        CHECK_NOTHROW(services::writeAsync(client, nodesToWrite, useFuture));
+    }
 }

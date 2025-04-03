@@ -1,6 +1,8 @@
-#include <doctest/doctest.h>
-
 #include <algorithm>  // any_of
+
+#include <catch2/catch_template_test_macros.hpp>
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_all.hpp>
 
 #include "open62541pp/config.hpp"
 #include "open62541pp/node.hpp"
@@ -9,10 +11,10 @@
 
 using namespace opcua;
 
-TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
+TEMPLATE_TEST_CASE("Node", "", Server, Client, Async<Client>) {
     ServerClientSetup setup;
     setup.client.connect(setup.endpointUrl);
-    auto& connection = setup.instance<T>();
+    auto& connection = setup.instance<TestType>();
 
     [[maybe_unused]] const auto await = [&](auto future) {
         setup.client.runIterate();
@@ -74,23 +76,23 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
     Node methodNode(connection, methodId);
     Node refNode(connection, refId);
 
-    SUBCASE("connection") {
+    SECTION("connection") {
         CHECK(Node(connection, {}).connection() == connection);
     }
 
-    SUBCASE("id") {
+    SECTION("id") {
         const NodeId id{1, 1000};
         CHECK(Node(connection, id).id() == id);
     }
 
-    SUBCASE("exists") {
+    SECTION("exists") {
         CHECK(Node(connection, NodeId(0, UA_NS0ID_OBJECTSFOLDER)).exists());
         CHECK_FALSE(Node(connection, NodeId(0, "DoesNotExist")).exists());
     }
 
-    SUBCASE("addFolder") {
+    SECTION("addFolder") {
         const NodeId id{1, 1000};
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             CHECK_NOTHROW(await(objNode.addFolderAsync(id, "Folder")).value());
         } else {
             CHECK_NOTHROW(objNode.addFolder(id, "Folder"));
@@ -98,9 +100,9 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         CHECK(Node(connection, id).readNodeClass() == NodeClass::Object);
     }
 
-    SUBCASE("addObject") {
+    SECTION("addObject") {
         const NodeId id{1, 1000};
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             CHECK_NOTHROW(await(objNode.addObjectAsync(id, "Object")).value());
         } else {
             CHECK_NOTHROW(objNode.addObject(id, "Object"));
@@ -108,9 +110,9 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         CHECK(Node(connection, id).readNodeClass() == NodeClass::Object);
     }
 
-    SUBCASE("addVariable") {
+    SECTION("addVariable") {
         const NodeId id{1, 1000};
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             CHECK_NOTHROW(await(objNode.addVariableAsync(id, "Variable")).value());
         } else {
             CHECK_NOTHROW(objNode.addVariable(id, "Variable"));
@@ -118,9 +120,9 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         CHECK(Node(connection, id).readNodeClass() == NodeClass::Variable);
     }
 
-    SUBCASE("addProperty") {
+    SECTION("addProperty") {
         const NodeId id{1, 1000};
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             CHECK_NOTHROW(await(objNode.addPropertyAsync(id, "Property")).value());
         } else {
             CHECK_NOTHROW(objNode.addProperty(id, "Property"));
@@ -129,9 +131,9 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
     }
 
 #ifdef UA_ENABLE_METHODCALLS
-    SUBCASE("addMethod") {
+    SECTION("addMethod") {
         const NodeId id{1, 1000};
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             CHECK_NOTHROW(await(objNode.addMethodAsync(id, "Method", {}, {}, {})).value());
         } else {
             CHECK_NOTHROW(objNode.addMethod(id, "Method", {}, {}, {}));
@@ -140,10 +142,10 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
     }
 #endif
 
-    SUBCASE("addObjectType") {
+    SECTION("addObjectType") {
         Node parent(connection, ObjectTypeId::BaseObjectType);
         const NodeId id{1, 1000};
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             CHECK_NOTHROW(await(parent.addObjectTypeAsync(id, "ObjectType")).value());
         } else {
             CHECK_NOTHROW(parent.addObjectType(id, "ObjectType"));
@@ -151,10 +153,10 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         CHECK(Node(connection, id).readNodeClass() == NodeClass::ObjectType);
     }
 
-    SUBCASE("addVariableType") {
+    SECTION("addVariableType") {
         Node parent(connection, VariableTypeId::BaseVariableType);
         const NodeId id{1, 1000};
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             CHECK_NOTHROW(await(parent.addVariableTypeAsync(id, "VariableType")).value());
         } else {
             CHECK_NOTHROW(parent.addVariableType(id, "VariableType"));
@@ -162,10 +164,10 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         CHECK(Node(connection, id).readNodeClass() == NodeClass::VariableType);
     }
 
-    SUBCASE("addReferenceType") {
+    SECTION("addReferenceType") {
         Node parent(connection, ReferenceTypeId::References);
         const NodeId id{1, 1000};
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             CHECK_NOTHROW(await(parent.addReferenceTypeAsync(id, "ReferenceType")).value());
         } else {
             CHECK_NOTHROW(parent.addReferenceType(id, "ReferenceType"));
@@ -173,10 +175,10 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         CHECK(Node(connection, id).readNodeClass() == NodeClass::ReferenceType);
     }
 
-    SUBCASE("addDataType") {
+    SECTION("addDataType") {
         Node parent(connection, DataTypeId::BaseDataType);
         const NodeId id{1, 1000};
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             CHECK_NOTHROW(await(parent.addDataTypeAsync(id, "DataType")).value());
         } else {
             CHECK_NOTHROW(parent.addDataType(id, "DataType"));
@@ -184,10 +186,10 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         CHECK(Node(connection, id).readNodeClass() == NodeClass::DataType);
     }
 
-    SUBCASE("addView") {
+    SECTION("addView") {
         Node parent(connection, ObjectId::ViewsFolder);
         const NodeId id{1, 1000};
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             CHECK_NOTHROW(await(parent.addViewAsync(id, "View")).value());
         } else {
             CHECK_NOTHROW(parent.addView(id, "View"));
@@ -195,35 +197,35 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         CHECK(Node(connection, id).readNodeClass() == NodeClass::View);
     }
 
-    SUBCASE("addReference/deleteReference") {
+    SECTION("addReference/deleteReference") {
         auto folder = objNode.addFolder({1, 1000}, "Folder");
         auto object = objNode.addObject({1, 1001}, "Object");
         const NodeId referenceType(ReferenceTypeId::Organizes);
 
         // add
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             CHECK(await(folder.addReferenceAsync(object.id(), referenceType)).isGood());
         } else {
             CHECK_NOTHROW(folder.addReference(object.id(), referenceType));
         }
 
         // delete
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             CHECK(await(folder.deleteReferenceAsync(object.id(), referenceType)).isGood());
         } else {
             CHECK_NOTHROW(folder.deleteReference(object.id(), referenceType));
         }
     }
 
-    SUBCASE("deleteNode") {
-        if constexpr (isAsync<T>) {
+    SECTION("deleteNode") {
+        if constexpr (isAsync<TestType>) {
             CHECK(await(objNode.deleteNodeAsync()).isGood());
         } else {
             CHECK_NOTHROW(objNode.deleteNode());
         }
     }
 
-    SUBCASE("browseReferences") {
+    SECTION("browseReferences") {
         Node root(connection, ObjectId::RootFolder);
         const auto refs = root.browseReferences();
         CHECK(refs.size() > 0);
@@ -232,7 +234,7 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         }));
     }
 
-    SUBCASE("browseReferencedNodes") {
+    SECTION("browseReferencedNodes") {
         Node root(connection, ObjectId::RootFolder);
         Node child(connection, ObjectId::ObjectsFolder);
         const auto nodes = child.browseReferencedNodes();
@@ -240,7 +242,7 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         CHECK(std::any_of(nodes.begin(), nodes.end(), [&](auto& node) { return node == root; }));
     }
 
-    SUBCASE("browseChildren") {
+    SECTION("browseChildren") {
         Node root(connection, ObjectId::RootFolder);
         Node child(connection, ObjectId::ObjectsFolder);
         CHECK(root.browseChildren(ReferenceTypeId::HasChild).empty());
@@ -249,41 +251,41 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         CHECK(std::any_of(nodes.begin(), nodes.end(), [&](auto& node) { return node == child; }));
     }
 
-    SUBCASE("browseChild") {
+    SECTION("browseChild") {
         Node root(connection, ObjectId::RootFolder);
         CHECK_THROWS_WITH(root.browseChild({{0, "Invalid"}}), "BadNoMatch");
-        CHECK_EQ(root.browseChild({{0, "Objects"}}).id(), NodeId(ObjectId::ObjectsFolder));
-        CHECK_EQ(root.browseChild({{0, "Objects"}, {0, "Server"}}).id(), NodeId(ObjectId::Server));
+        CHECK(root.browseChild({{0, "Objects"}}).id() == NodeId(ObjectId::ObjectsFolder));
+        CHECK(root.browseChild({{0, "Objects"}, {0, "Server"}}).id() == NodeId(ObjectId::Server));
     }
 
-    SUBCASE("browseParent") {
+    SECTION("browseParent") {
         Node root(connection, ObjectId::RootFolder);
         Node child(connection, ObjectId::ObjectsFolder);
         CHECK_THROWS_WITH(root.browseParent(), "BadNotFound");
-        CHECK_EQ(child.browseParent(), root);
+        CHECK(child.browseParent() == root);
     }
 
-    SUBCASE("readNodeClass") {
-        if constexpr (isAsync<T>) {
+    SECTION("readNodeClass") {
+        if constexpr (isAsync<TestType>) {
             CHECK(await(varNode.readNodeClassAsync()).value() == NodeClass::Variable);
         } else {
             CHECK(varNode.readNodeClass() == NodeClass::Variable);
         }
     }
 
-    SUBCASE("readBrowseName") {
+    SECTION("readBrowseName") {
         const QualifiedName browseName(1, "Variable");
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             CHECK(await(varNode.readBrowseNameAsync()).value() == browseName);
         } else {
             CHECK(varNode.readBrowseName() == browseName);
         }
     }
 
-    SUBCASE("writeDisplayName/readDisplayName") {
+    SECTION("writeDisplayName/readDisplayName") {
         // https://github.com/open62541/open62541/issues/6723
         const LocalizedText displayName({}, "DisplayName");
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             CHECK(await(varNode.writeDisplayNameAsync(displayName)).isGood());
             CHECK(await(varNode.readDisplayNameAsync()).value() == displayName);
         } else {
@@ -292,9 +294,9 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         }
     }
 
-    SUBCASE("writeDescription/readDescription") {
+    SECTION("writeDescription/readDescription") {
         const LocalizedText description("en-US", "Description");
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             CHECK(await(varNode.writeDescriptionAsync(description)).isGood());
             CHECK(await(varNode.readDescriptionAsync()).value() == description);
         } else {
@@ -303,9 +305,9 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         }
     }
 
-    SUBCASE("writeWriteMask/readWriteMask") {
+    SECTION("writeWriteMask/readWriteMask") {
         const auto writeMask = 0xFFFFFFFF;
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             CHECK(await(varNode.writeWriteMaskAsync(writeMask)).isGood());
             CHECK(await(varNode.readWriteMaskAsync()).value() == writeMask);
         } else {
@@ -314,17 +316,17 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         }
     }
 
-    SUBCASE("readUserWriteMask") {
-        if constexpr (isAsync<T>) {
+    SECTION("readUserWriteMask") {
+        if constexpr (isAsync<TestType>) {
             CHECK_NOTHROW(await(varNode.readUserWriteMaskAsync()).value());
         } else {
             CHECK_NOTHROW(varNode.readUserWriteMask());
         }
     }
 
-    SUBCASE("writeIsAbstract/readIsAbstract") {
+    SECTION("writeIsAbstract/readIsAbstract") {
         const bool isAbstract = true;
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             CHECK(await(refNode.writeIsAbstractAsync(isAbstract)).isGood());
             CHECK(await(refNode.readIsAbstractAsync()).value() == isAbstract);
         } else {
@@ -333,9 +335,9 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         }
     }
 
-    SUBCASE("writeSymmetric/readSymmetric") {
+    SECTION("writeSymmetric/readSymmetric") {
         const bool symmetric = true;
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             CHECK(await(refNode.writeSymmetricAsync(symmetric)).isGood());
             CHECK(await(refNode.readSymmetricAsync()).value() == symmetric);
         } else {
@@ -344,9 +346,9 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         }
     }
 
-    SUBCASE("writeInverseName/readInverseName") {
+    SECTION("writeInverseName/readInverseName") {
         const LocalizedText inverseName({}, "InverseName");
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             CHECK(await(refNode.writeInverseNameAsync(inverseName)).isGood());
             CHECK(await(refNode.readInverseNameAsync()).value() == inverseName);
         } else {
@@ -355,9 +357,9 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         }
     }
 
-    SUBCASE("writeEventNotifier/readEventNotifier") {
+    SECTION("writeEventNotifier/readEventNotifier") {
         const auto eventNotifier = EventNotifier::HistoryRead | EventNotifier::HistoryWrite;
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             CHECK(await(objNode.writeEventNotifierAsync(eventNotifier)).isGood());
             CHECK(await(objNode.readEventNotifierAsync()).value() == eventNotifier);
         } else {
@@ -366,10 +368,10 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         }
     }
 
-    SUBCASE("writeValue/readValue") {
+    SECTION("writeValue/readValue") {
         const double value = 11.11;
         const auto variant = Variant(value);
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             CHECK(await(varNode.writeValueAsync(variant)).isGood());
             CHECK(await(varNode.readValueAsync()).value().template scalar<double>() == value);
         } else {
@@ -378,8 +380,8 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         }
     }
 
-    SUBCASE("writeValue*/readValue*") {
-        SUBCASE("Scalar") {
+    SECTION("writeValue*/readValue*") {
+        SECTION("Scalar") {
             CHECK_NOTHROW(varNode.writeDataType(DataTypeId::Float));
 
             // write with wrong data type
@@ -392,7 +394,7 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
             CHECK(varNode.template readValueScalar<float>() == value);
         }
 
-        SUBCASE("String") {
+        SECTION("String") {
             CHECK_NOTHROW(varNode.writeDataType(DataTypeId::String));
 
             String str("test");
@@ -400,7 +402,7 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
             CHECK(varNode.template readValueScalar<std::string>() == "test");
         }
 
-        SUBCASE("Array") {
+        SECTION("Array") {
             CHECK_NOTHROW(varNode.writeDataType(DataTypeId::Double));
 
             // write with wrong data type
@@ -410,26 +412,32 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
             // write with correct data type
             std::vector<double> array{11.11, 22.22, 33.33};
 
-            SUBCASE("Write as std::vector") {
+            SECTION("Write as std::vector") {
                 CHECK_NOTHROW(varNode.writeValueArray(array));
                 CHECK(varNode.template readValueArray<double>() == array);
             }
 
-            SUBCASE("Write as raw array") {
+            SECTION("Write as raw array") {
                 CHECK_NOTHROW(varNode.writeValueArray(Span{array.data(), array.size()}));
                 CHECK(varNode.template readValueArray<double>() == array);
             }
 
-            SUBCASE("Write as iterator pair") {
+            SECTION("Write as iterator pair") {
                 CHECK_NOTHROW(varNode.writeValueArray(array.begin(), array.end()));
                 CHECK(varNode.template readValueArray<double>() == array);
             }
         }
+
+        SECTION("Array (std::vector<bool>)") {
+            std::vector<bool> array{true, false, true};
+            CHECK_NOTHROW(varNode.writeValueArray(array));
+            CHECK_NOTHROW(varNode.writeValueArray(array.begin(), array.end()));
+        }
     }
 
-    SUBCASE("writeDataType/readDataType") {
+    SECTION("writeDataType/readDataType") {
         const NodeId dataType(DataTypeId::Float);
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             CHECK(await(varNode.writeDataTypeAsync(dataType)).isGood());
             CHECK(await(varNode.readDataTypeAsync()).value() == dataType);
         } else {
@@ -438,9 +446,9 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         }
     }
 
-    SUBCASE("writeValueRank/readValueRank") {
+    SECTION("writeValueRank/readValueRank") {
         const auto valueRank = ValueRank::Scalar;
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             CHECK(await(varNode.writeValueRankAsync(valueRank)).isGood());
             CHECK(await(varNode.readValueRankAsync()).value() == valueRank);
         } else {
@@ -449,10 +457,10 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         }
     }
 
-    SUBCASE("writeArrayDimensions/readArrayDimensions") {
+    SECTION("writeArrayDimensions/readArrayDimensions") {
         const std::vector<uint32_t> dimensions{11};
         varNode.writeValueRank(ValueRank::OneDimension);
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             CHECK(await(varNode.writeArrayDimensionsAsync(dimensions)).isGood());
             CHECK(await(varNode.readArrayDimensionsAsync()).value().at(0) == 11);
         } else {
@@ -461,25 +469,25 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         }
     }
 
-    SUBCASE("readAccessLevel") {
-        if constexpr (isAsync<T>) {
+    SECTION("readAccessLevel") {
+        if constexpr (isAsync<TestType>) {
             CHECK_NOTHROW(await(varNode.readAccessLevelAsync()).value());
         } else {
             CHECK_NOTHROW(varNode.readAccessLevel());
         }
     }
 
-    SUBCASE("readUserAccessLevel") {
-        if constexpr (isAsync<T>) {
+    SECTION("readUserAccessLevel") {
+        if constexpr (isAsync<TestType>) {
             CHECK_NOTHROW(await(varNode.readUserAccessLevelAsync()).value());
         } else {
             CHECK_NOTHROW(varNode.readUserAccessLevel());
         }
     }
 
-    SUBCASE("writeMinimumSamplingInterval/readMinimumSamplingInterval") {
+    SECTION("writeMinimumSamplingInterval/readMinimumSamplingInterval") {
         const double milliseconds = 11.11;
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             CHECK(await(varNode.writeMinimumSamplingIntervalAsync(milliseconds)).isGood());
             CHECK(await(varNode.readMinimumSamplingIntervalAsync()).value() == milliseconds);
         } else {
@@ -488,9 +496,9 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         }
     }
 
-    SUBCASE("writeHistorizing/readHistorizing") {
+    SECTION("writeHistorizing/readHistorizing") {
         const bool historizing = true;
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             CHECK(await(varNode.writeHistorizingAsync(historizing)).isGood());
             CHECK(await(varNode.readHistorizingAsync()).value() == historizing);
         } else {
@@ -499,9 +507,9 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         }
     }
 
-    SUBCASE("writeExecutable/readExecutable") {
+    SECTION("writeExecutable/readExecutable") {
         const bool executable = true;
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             CHECK(await(methodNode.writeExecutableAsync(executable)).isGood());
             CHECK(await(methodNode.readExecutableAsync()).value() == executable);
         } else {
@@ -510,8 +518,8 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         }
     }
 
-    SUBCASE("readUserExecutable") {
-        if constexpr (isAsync<T>) {
+    SECTION("readUserExecutable") {
+        if constexpr (isAsync<TestType>) {
             CHECK_NOTHROW(await(methodNode.readUserExecutableAsync()).value());
         } else {
             CHECK_NOTHROW(methodNode.readUserExecutable());
@@ -519,9 +527,9 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
     }
 
 #if UAPP_OPEN62541_VER_GE(1, 1)
-    SUBCASE("readDataTypeDefinition") {
+    SECTION("readDataTypeDefinition") {
         Node node(connection, DataTypeId::BuildInfo);
-        if constexpr (isAsync<T>) {
+        if constexpr (isAsync<TestType>) {
             CHECK_NOTHROW(await(node.readDataTypeDefinitionAsync()).value());
         } else {
             CHECK_NOTHROW(node.readDataTypeDefinition());
@@ -529,7 +537,7 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
     }
 #endif
 
-    SUBCASE("writeObjectProperty/readObjectProperty") {
+    SECTION("writeObjectProperty/readObjectProperty") {
         objNode.addProperty(
             {1, 1001},
             "Property",
@@ -544,7 +552,7 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client, Async<Client>) {
         CHECK(objNode.readObjectProperty({1, "Property"}).template scalar<double>() == 22.22);
     }
 
-    SUBCASE("Equality") {
+    SECTION("Equality") {
         const NodeId id1{1, 1000};
         const NodeId id2{1, 1001};
         CHECK(Node(connection, id1) == Node(connection, id1));

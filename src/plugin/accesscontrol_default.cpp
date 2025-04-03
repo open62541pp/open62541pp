@@ -85,7 +85,8 @@ StatusCode AccessControlDefault::activateSession(
         }
         // try to match username / password
         for (const auto& login : logins_) {
-            if ((login.username == token->userName()) && (login.password == token->password())) {
+            if ((login.username == static_cast<std::string_view>(token->userName())) &&
+                (login.password == static_cast<std::string_view>(token->password()))) {
                 return UA_STATUSCODE_GOOD;
             }
         }

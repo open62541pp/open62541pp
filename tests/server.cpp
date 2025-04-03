@@ -1,7 +1,8 @@
 #include <chrono>
 #include <thread>
 
-#include <doctest/doctest.h>
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_all.hpp>
 
 #include "open62541pp/config.hpp"
 #include "open62541pp/detail/open62541/server.h"
@@ -12,19 +13,25 @@
 #include "open62541pp/server.hpp"
 #include "open62541pp/types.hpp"
 
+#ifdef _WIN32
+#include <windows.h>
+#include <winsock2.h>
+#endif
+
+using Catch::Matchers::Message;
 using namespace opcua;
 
 TEST_CASE("ServerConfig") {
-    SUBCASE("Construct with custom port") {
+    SECTION("Construct with custom port") {
         CHECK_NOTHROW(ServerConfig(4850));
     }
 
-    SUBCASE("Construct with custom port and certificate") {
+    SECTION("Construct with custom port and certificate") {
         CHECK_NOTHROW(ServerConfig(4850, ByteString("certificate")));
     }
 
 #ifdef UA_ENABLE_ENCRYPTION
-    SUBCASE("Construct with encryption") {
+    SECTION("Construct with encryption") {
         ServerConfig config(
             4850,
             {},  // certificate, invalid
@@ -40,7 +47,7 @@ TEST_CASE("ServerConfig") {
 
     ServerConfig config;
 
-    SUBCASE("BuildInfo") {
+    SECTION("BuildInfo") {
         config.setBuildInfo(BuildInfo(
             "productUri",
             "manufacturerName",
@@ -53,7 +60,7 @@ TEST_CASE("ServerConfig") {
         // ...
     }
 
-    SUBCASE("ApplicationDescription") {
+    SECTION("ApplicationDescription") {
         config.setApplicationUri("http://app.com");
         CHECK(detail::toString(config->applicationDescription.applicationUri) == "http://app.com");
 
@@ -64,8 +71,8 @@ TEST_CASE("ServerConfig") {
         CHECK(detail::toString(config->applicationDescription.applicationName.text) == "Test App");
     }
 
-    SUBCASE("AccessControl") {
-        SUBCASE("setAccessControl borrow & owning") {
+    SECTION("AccessControl") {
+        SECTION("setAccessControl borrow & owning") {
             AccessControlDefault accessControl;
             config.setAccessControl(accessControl);
             config.setAccessControl(accessControl);
@@ -74,7 +81,7 @@ TEST_CASE("ServerConfig") {
             config.setAccessControl(std::make_unique<AccessControlDefault>());
         }
 
-        SUBCASE("Copy user token policies to endpoints") {
+        SECTION("Copy user token policies to endpoints") {
             CHECK(config->endpointsSize > 0);
 
             // delete endpoint user identity tokens first
@@ -97,7 +104,7 @@ TEST_CASE("ServerConfig") {
             }
         }
 
-        SUBCASE("Use highest security policy to transfer user tokens") {
+        SECTION("Use highest security policy to transfer user tokens") {
             AccessControlDefault accessControl(true, {{"user", "password"}});
             config.setAccessControl(accessControl);
             auto& ac = config->accessControl;
@@ -116,41 +123,92 @@ TEST_CASE("ServerConfig") {
     }
 }
 
+TEST_CASE("Server constructors") {
+    SECTION("From native") {
+        UA_ServerConfig config{};
+        UA_ServerConfig_setDefault(&config);
+        UA_Server* native = UA_Server_newWithConfig(&config);
+        Server server{native};
+    }
+
+    SECTION("From native (nullptr)") {
+        UA_Server* native{nullptr};
+        CHECK_THROWS(Server{native});
+    }
+}
+
 TEST_CASE("Server run/stop/runIterate") {
     Server server;
     CHECK_FALSE(server.isRunning());
 
-    SUBCASE("run/stop") {
+    SECTION("run/stop") {
         auto t = std::thread([&] { server.run(); });
         // wait for thread to execute run method
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
         CHECK(server.isRunning());
         server.stop();
+        server.stop();  // should do nothing
         t.join();  // wait until stopped
     }
 
-    SUBCASE("runIterate") {
+    SECTION("runIterate") {
         const auto waitInterval = server.runIterate();
         CHECK(waitInterval > 0);
         CHECK(waitInterval <= 1000);
         CHECK(server.isRunning());
         server.stop();
+        server.stop();  // should do nothing
     }
 
     CHECK_FALSE(server.isRunning());
 }
 
+#ifdef _WIN32
+static bool isWinsockActive() {
+    SOCKET testSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+    if (testSocket == INVALID_SOCKET) {
+        int error = WSAGetLastError();
+        if (error == WSANOTINITIALISED) {
+            return false;
+        }
+    } else {
+        closesocket(testSocket);  // Close the test socket if it was created successfully
+    }
+    return true;
+}
+
+TEST_CASE("Server with Winsock (Windows only)") {
+    // https://github.com/open62541pp/open62541pp/issues/547
+    WSADATA wsaData;
+    CHECK(WSAStartup(MAKEWORD(2, 2), &wsaData) == NO_ERROR);
+    CHECK(isWinsockActive());
+
+    SECTION("Server was run") {
+        opcua::Server server;
+        server.runIterate();
+    }
+
+    SECTION("Server was not run") {
+        opcua::Server server;
+    }
+
+    CHECK(isWinsockActive());  // should not be affected by the server
+    WSACleanup();
+    CHECK(!isWinsockActive());
+}
+#endif
+
 TEST_CASE("Server methods") {
     Server server;
 
-    SUBCASE("getNamespaceArray") {
+    SECTION("getNamespaceArray") {
         const auto namespaces = server.namespaceArray();
         CHECK(namespaces.size() == 2);
         CHECK(namespaces.at(0) == "http://opcfoundation.org/UA/");
         CHECK(namespaces.at(1) == "urn:open62541.server.application");
     }
 
-    SUBCASE("registerNamespace") {
+    SECTION("registerNamespace") {
         CHECK(server.registerNamespace("test1") == 2);
         CHECK(server.namespaceArray().at(2) == "test1");
 
@@ -198,18 +256,18 @@ TEST_CASE("ValueCallback") {
     auto& callback = *callbackPtr;
     server.setVariableNodeValueCallback(id, callback);
 
-    SUBCASE("move ownership") {
+    SECTION("move ownership") {
         server.setVariableNodeValueCallback(id, std::move(callbackPtr));
     }
 
-    SUBCASE("trigger onRead callback with read operation") {
+    SECTION("trigger onRead callback with read operation") {
         CHECK(node.readValueScalar<int>() == 1);
         CHECK(callback.onReadCalled == true);
         CHECK(callback.onWriteCalled == false);
         CHECK(callback.valueBeforeRead.value().scalar<int>() == 1);
     }
 
-    SUBCASE("trigger onAfterWrite callback with write operation") {
+    SECTION("trigger onAfterWrite callback with write operation") {
         node.writeValueScalar<int>(2);
         CHECK(callback.onReadCalled == false);
         CHECK(callback.onWriteCalled == true);
@@ -262,29 +320,29 @@ TEST_CASE("DataSource") {
     auto sourcePtr = std::make_unique<DataSourceTest>();
     auto& source = *sourcePtr;
     server.setVariableNodeDataSource(id, source);
-    SUBCASE("move ownership") {
+    SECTION("move ownership") {
         server.setVariableNodeDataSource(id, std::move(sourcePtr));
     }
 
-    SUBCASE("read") {
+    SECTION("read") {
         source.data = 1;
         CHECK(node.readValueScalar<int>() == 1);
     }
 
-    SUBCASE("write") {
+    SECTION("write") {
         CHECK_NOTHROW(node.writeValueScalar<int>(2));
         CHECK(source.data == 2);
     }
 
-    SUBCASE("read/write with bad status code") {
+    SECTION("read/write with bad status code") {
         source.code = UA_STATUSCODE_BADINTERNALERROR;
-        CHECK_THROWS_WITH_AS(node.readValueScalar<int>(), "BadInternalError", BadStatus);
-        CHECK_THROWS_WITH_AS(node.writeValueScalar<int>(2), "BadInternalError", BadStatus);
+        CHECK_THROWS_MATCHES(node.readValueScalar<int>(), BadStatus, Message("BadInternalError"));
+        CHECK_THROWS_MATCHES(node.writeValueScalar<int>(2), BadStatus, Message("BadInternalError"));
     }
 
-    SUBCASE("read/write with exception in callback") {
+    SECTION("read/write with exception in callback") {
         source.exception = BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
-        CHECK_THROWS_WITH_AS(node.readValueScalar<int>(), "BadUnexpectedError", BadStatus);
-        CHECK_THROWS_WITH_AS(node.writeValueScalar<int>(2), "BadUnexpectedError", BadStatus);
+        CHECK_THROWS_MATCHES(node.readValueScalar<int>(), BadStatus, Message("BadUnexpectedError"));
+        CHECK_THROWS_MATCHES(node.writeValueScalar<int>(2), BadStatus, Message("BadUnexpectedError"));
     }
 }

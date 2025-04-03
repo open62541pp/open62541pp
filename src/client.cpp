@@ -291,6 +291,15 @@ Client::Client(
     : Client(ClientConfig(certificate, privateKey, trustList, revocationList)) {}
 #endif
 
+Client::Client(UA_Client* native)
+    : context_(std::make_unique<detail::ClientContext>()),
+      client_(native) {
+    if (handle() == nullptr) {
+        throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
+    }
+    setWrapperAsContextPointer(*this);
+}
+
 Client::~Client() = default;
 
 Client::Client(Client&& other) noexcept

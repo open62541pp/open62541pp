@@ -9,13 +9,13 @@
 #include "open62541pp/result.hpp"
 #include "open62541pp/span.hpp"
 #include "open62541pp/types.hpp"  // StatusCode
-#include "open62541pp/wrapper.hpp"  // asNative, asWrapper, isWrapper
+#include "open62541pp/wrapper.hpp"  // asNative, asWrapper, IsWrapper
 
 namespace opcua::services::detail {
 
 template <typename WrapperType>
 struct Wrap {
-    static_assert(opcua::detail::isWrapper<WrapperType>);
+    static_assert(opcua::detail::IsWrapper<WrapperType>::value);
     using NativeType = typename WrapperType::NativeType;
 
     [[nodiscard]] constexpr WrapperType operator()(const NativeType& native) noexcept {
@@ -33,7 +33,7 @@ struct Wrap {
 
 template <typename Response>
 const UA_ResponseHeader& getResponseHeader(const Response& response) noexcept {
-    if constexpr (opcua::detail::isWrapper<Response>) {
+    if constexpr (opcua::detail::IsWrapper<Response>::value) {
         return asNative(response).responseHeader;
     } else {
         return response.responseHeader;
@@ -48,7 +48,7 @@ StatusCode getServiceResult(const Response& response) noexcept {
 template <typename Response>
 auto getSingleResultRef(Response& response) noexcept {
     auto* native = [&] {
-        if constexpr (opcua::detail::isWrapper<Response>) {
+        if constexpr (opcua::detail::IsWrapper<Response>::value) {
             return asNative(&response);
         } else {
             return &response;

@@ -19,27 +19,7 @@ std::ostream& operator<<(std::ostream& os, const String& str) {
 /* -------------------------------------------- Guid -------------------------------------------- */
 
 std::string Guid::toString() const {
-    // <Data1>-<Data2>-<Data3>-<Data4[0:2]>-<Data4[2:8]>
-    // each value is formatted as a hexadecimal number with padded zeros
-    std::ostringstream ss;
-    ss << std::hex << std::uppercase << std::setfill('0');
-
-    ss << std::setw(8) << handle()->data1 << "-";
-    ss << std::setw(4) << handle()->data2 << "-";
-    ss << std::setw(4) << handle()->data3 << "-";
-
-    for (size_t i = 0; i < 8; ++i) {
-        ss << std::setw(2) << static_cast<int>(handle()->data4[i]);  // NOLINT
-        if (i == 1) {
-            ss << "-";
-        }
-    }
-    return ss.str();
-}
-
-std::ostream& operator<<(std::ostream& os, const Guid& guid) {
-    os << guid.toString();
-    return os;
+    return std::string(opcua::toString(*this));
 }
 
 /* ------------------------------------------ DateTime ------------------------------------------ */
@@ -66,61 +46,24 @@ ByteString ByteString::fromBase64([[maybe_unused]] std::string_view encoded) {
 #endif
 }
 
-std::string ByteString::toBase64() const {
 #if UAPP_OPEN62541_VER_GE(1, 1)
+String ByteString::toBase64() const {
     String output;
     UA_ByteString_toBase64(handle(), output.handle());
-    return std::string(output);
-#else
-    return {};
+    return output;
+}
 #endif
-}
-
-/* ----------------------------------------- XmlElement ----------------------------------------- */
-
-std::ostream& operator<<(std::ostream& os, const XmlElement& xmlElement) {
-    os << static_cast<std::string_view>(xmlElement);
-    return os;
-}
 
 /* ------------------------------------------- NodeId ------------------------------------------- */
 
 std::string NodeId::toString() const {
-    std::string result;
-    if (const auto ns = namespaceIndex(); ns > 0) {
-        result.append("ns=").append(std::to_string(ns)).append(";");
-    }
-    switch (identifierType()) {
-    case NodeIdType::Numeric:
-        result.append("i=").append(std::to_string(identifier<uint32_t>()));
-        break;
-    case NodeIdType::String:
-        result.append("s=").append(identifier<String>());
-        break;
-    case NodeIdType::Guid:
-        result.append("g=").append(identifier<Guid>().toString());
-        break;
-    case NodeIdType::ByteString:
-        result.append("b=").append(identifier<ByteString>().toBase64());
-        break;
-    }
-    return result;
+    return std::string{opcua::toString(*this)};
 }
 
 /* --------------------------------------- ExpandedNodeId --------------------------------------- */
 
 std::string ExpandedNodeId::toString() const {
-    std::string result;
-    const auto svr = serverIndex();
-    if (svr > 0) {
-        result.append("svr=").append(std::to_string(svr)).append(";");
-    }
-    const auto nsu = namespaceUri();
-    if (!nsu.empty()) {
-        result.append("nsu=").append(nsu).append(";");
-    }
-    result.append(nodeId().toString());
-    return result;
+    return std::string{opcua::toString(*this)};
 }
 
 /* ---------------------------------------- NumericRange ---------------------------------------- */
@@ -134,9 +77,9 @@ NumericRange::NumericRange(std::string_view encodedRange) {
 #endif
 }
 
-std::string NumericRange::toString() const {
+static std::string toStringImpl(const NumericRange& range) {
     std::ostringstream ss;
-    for (const auto& dimension : dimensions()) {
+    for (const auto& dimension : range.dimensions()) {
         ss << dimension.min;
         if (dimension.min != dimension.max) {
             ss << ':' << dimension.max;
@@ -146,6 +89,14 @@ std::string NumericRange::toString() const {
     auto str = ss.str();
     str.pop_back();  // remove last comma
     return str;
+}
+
+std::string NumericRange::toString() const {
+    return toStringImpl(*this);
+}
+
+String toString(const NumericRange& range) {
+    return String(toStringImpl(range));
 }
 
 }  // namespace opcua

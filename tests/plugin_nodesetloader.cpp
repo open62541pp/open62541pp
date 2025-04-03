@@ -1,6 +1,6 @@
 #include <filesystem>
 
-#include <doctest/doctest.h>
+#include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/config.hpp"
 #include "open62541pp/server.hpp"
@@ -15,11 +15,11 @@ TEST_CASE("loadNodeset") {
     Server server;
     CHECK(server.namespaceArray().size() == 2);
 
-    SUBCASE("Invalid file") {
+    SECTION("Invalid file") {
         CHECK(loadNodeset(server, "invalid.xml").isBad());
     }
 
-    SUBCASE("DI") {
+    SECTION("DI") {
         const auto file = fs::path{UAPP_NODESET_DIR} / "DI" / "Opc.Ua.Di.NodeSet2.xml";
         CAPTURE(file);
         CHECK(fs::exists(file));

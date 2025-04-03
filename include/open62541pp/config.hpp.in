@@ -34,6 +34,12 @@
 #define UAPP_HAS_PARSING 0
 #endif
 
+#ifdef UA_ENABLE_TYPEDESCRIPTION
+#define UAPP_HAS_TOSTRING UAPP_OPEN62541_VER_GE(1, 2)
+#else
+#define UAPP_HAS_TOSTRING 0
+#endif
+
 #ifdef UA_ENABLE_DA
 // types like UA_EUInformation added since v1.1
 #define UAPP_HAS_DATAACCESS UAPP_OPEN62541_VER_GE(1, 1)

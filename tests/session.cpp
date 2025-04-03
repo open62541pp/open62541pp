@@ -1,4 +1,5 @@
-#include <doctest/doctest.h>
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_all.hpp>
 
 #include "open62541pp/client.hpp"
 #include "open62541pp/config.hpp"
@@ -17,7 +18,7 @@ TEST_CASE("Session") {
     ServerRunner serverRunner(server);
     Client client;
 
-    SUBCASE("Construct") {
+    SECTION("Construct") {
         const NodeId sessionId{1, 1000};
         int sessionContext = 11;
         Session session(server, sessionId, &sessionContext);
@@ -32,7 +33,7 @@ TEST_CASE("Session") {
     }
 
 #if UAPP_OPEN62541_VER_GE(1, 3)
-    SUBCASE("Get active session") {
+    SECTION("Get active session") {
         CHECK(server.sessions().empty());
         client.connect(localServerUrl);
         CHECK(server.sessions().size() == 1);
@@ -40,7 +41,7 @@ TEST_CASE("Session") {
         CHECK(server.sessions().empty());
     }
 
-    SUBCASE("Session attributes") {
+    SECTION("Session attributes") {
         client.connect(localServerUrl);
         auto session = server.sessions().at(0);
 
@@ -61,7 +62,7 @@ TEST_CASE("Session") {
 #endif
     }
 
-    SUBCASE("Close session") {
+    SECTION("Close session") {
         // thread sanitizer error in UA_Server_closeSession function despite mutex
         // false? bug in open62541?
 #ifndef UAPP_TSAN_ENABLED
@@ -73,7 +74,7 @@ TEST_CASE("Session") {
     }
 #endif
 
-    SUBCASE("Equality") {
+    SECTION("Equality") {
         CHECK(Session(server, {1, 1000}, nullptr) == Session(server, {1, 1000}, nullptr));
         CHECK(Session(server, {1, 1000}, nullptr) != Session(server, {1, 1001}, nullptr));
     }

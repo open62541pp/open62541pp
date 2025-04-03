@@ -1,8 +1,7 @@
-#include <ostream>  // required by doctest to stringify
 #include <string_view>
 #include <utility>  // move
 
-#include <doctest/doctest.h>
+#include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/config.hpp"
 #include "open62541pp/datatype.hpp"
@@ -60,8 +59,8 @@ static void checkDataTypeEqual(const UA_DataType& dt, const UA_DataType& expecte
 #ifdef UA_ENABLE_TYPEDESCRIPTION
     CHECK(std::string_view(dt.typeName) == std::string_view(expected.typeName));
 #endif
-    CHECK(dt.typeId == expected.typeId);
-    CHECK(dt.binaryEncodingId == expected.binaryEncodingId);
+    CHECK((dt.typeId == expected.typeId));
+    CHECK((dt.binaryEncodingId == expected.binaryEncodingId));
     CHECK(dt.memSize == expected.memSize);
     CHECK(dt.typeKind == expected.typeKind);
     CHECK(dt.pointerFree == expected.pointerFree);
@@ -85,7 +84,7 @@ static void checkDataTypeEqual(const UA_DataType& dt, const UA_DataType& expecte
 }
 
 TEST_CASE("DataType") {
-    SUBCASE("Construct from native") {
+    SECTION("Construct from native") {
         DataType dt(pointType);
         CHECK(dt.handle() != &pointType);
 #ifdef UA_ENABLE_TYPEDESCRIPTION
@@ -98,36 +97,36 @@ TEST_CASE("DataType") {
         CHECK(dt.pointerFree() == true);
         CHECK(dt.overlayable() == false);
         CHECK(dt.members().size() == 3);
-        CHECK(dt.members()[0] == pointMembers[0]);
-        CHECK(dt.members()[1] == pointMembers[1]);
-        CHECK(dt.members()[2] == pointMembers[2]);
+        CHECK((dt.members()[0] == pointMembers[0]));
+        CHECK((dt.members()[1] == pointMembers[1]));
+        CHECK((dt.members()[2] == pointMembers[2]));
     }
 
-    SUBCASE("Construct from type index") {
+    SECTION("Construct from type index") {
         CHECK(DataType(UA_TYPES_ARGUMENT) == UA_TYPES[UA_TYPES_ARGUMENT]);
     }
 
-    SUBCASE("Copy constructor / assignment") {
+    SECTION("Copy constructor / assignment") {
         DataType dt1(pointType);
         DataType dt2(dt1);
         CHECK(dt2 == dt1);
     }
 
-    SUBCASE("Copy assignment") {
+    SECTION("Copy assignment") {
         DataType dt1(pointType);
         DataType dt2;
         dt2 = dt1;
         CHECK(dt2 == dt1);
     }
 
-    SUBCASE("Move constructor") {
+    SECTION("Move constructor") {
         DataType dt1(pointType);
         DataType dt2(std::move(dt1));
         CHECK(dt1 != pointType);
         CHECK(dt2 == pointType);
     }
 
-    SUBCASE("Move assignment") {
+    SECTION("Move assignment") {
         DataType dt1(pointType);
         DataType dt2;
         dt2 = std::move(dt1);
@@ -135,7 +134,7 @@ TEST_CASE("DataType") {
         CHECK(dt2 == pointType);
     }
 
-    SUBCASE("Set methods") {
+    SECTION("Set methods") {
         DataType dt;
         dt.setTypeName("Point");
         dt.setTypeId({1, 1001});
@@ -151,7 +150,7 @@ TEST_CASE("DataType") {
 }
 
 TEST_CASE("DataTypeBuilder") {
-    SUBCASE("Enum") {
+    SECTION("Enum") {
         enum class TestEnum {};
         const auto dt = DataTypeBuilder<TestEnum>::createEnum("TestEnum", {1, 1}, {1, 1}).build();
 
@@ -161,7 +160,7 @@ TEST_CASE("DataTypeBuilder") {
         CHECK(dt.members().empty());
     }
 
-    SUBCASE("Struct") {
+    SECTION("Struct") {
         const auto dt =
             DataTypeBuilder<Point>::createStructure("Point", {1, 1001}, {1, 1})
                 .addField<&Point::x>("x")
@@ -172,7 +171,7 @@ TEST_CASE("DataTypeBuilder") {
         checkDataTypeEqual(dt, pointType);
     }
 
-    SUBCASE("Struct with array") {
+    SECTION("Struct with array") {
         struct Measurements {
             UA_String description;
             size_t measurementsSize;
@@ -207,7 +206,7 @@ TEST_CASE("DataTypeBuilder") {
         checkDataTypeEqual(dt, measurementsType);
     }
 
-    SUBCASE("Struct with optional fields") {
+    SECTION("Struct with optional fields") {
         struct Opt {
             int16_t a;
             float* b;
@@ -260,7 +259,7 @@ TEST_CASE("DataTypeBuilder") {
         checkDataTypeEqual(dt, optType);
     }
 
-    SUBCASE("Union") {
+    SECTION("Union") {
         enum UniSwitch {
             UA_UNISWITCH_NONE = 0,
             UA_UNISWITCH_OPTIONA = 1,
@@ -306,7 +305,7 @@ TEST_CASE("DataTypeBuilder") {
         checkDataTypeEqual(dt, uniType);
     }
 
-    SUBCASE("Struct with wrapper type") {
+    SECTION("Struct with wrapper type") {
         struct SNative {
             UA_Guid guid;
             int value;

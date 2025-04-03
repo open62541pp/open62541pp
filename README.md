@@ -251,7 +251,7 @@ cmake --install .
 ### Dependencies
 
 - [open62541](https://github.com/open62541/open62541) as integrated submodule or external dependency
-- [doctest](https://github.com/doctest/doctest) for tests as integrated submodule
+- [catch2](https://github.com/catchorg/Catch2) for tests
 
 ## 🤝 Contribute
 

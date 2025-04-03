@@ -1,26 +1,26 @@
 #include <cstring>
 
-#include <doctest/doctest.h>
+#include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/detail/string_utils.hpp"
 
 using namespace opcua;
 
 TEST_CASE("UA_String from string_view") {
-    SUBCASE("Test string") {
+    SECTION("Test string") {
         std::string_view sv("test123");
         UA_String str = detail::toNativeString(sv);
         CHECK(str.length == sv.size());
         CHECK((void*)str.data == (void*)sv.data());
     }
 
-    SUBCASE("Null string") {
+    SECTION("Null string") {
         UA_String str = detail::toNativeString({});
         CHECK(str.length == 0);
         CHECK(str.data == nullptr);
     }
 
-    SUBCASE("Empty string") {
+    SECTION("Empty string") {
         UA_String str = detail::toNativeString("");
         CHECK(str.length == 0);
         CHECK(str.data != nullptr);
@@ -46,18 +46,18 @@ TEST_CASE("Alloc UA_String from non-null-terminated string_view") {
 }
 
 TEST_CASE("String conversion UA_String -> string") {
-    SUBCASE("Test string") {
+    SECTION("Test string") {
         UA_String str = UA_STRING_ALLOC("test123");
         CHECK(detail::toString(str) == "test123");
         UA_clear(&str, &UA_TYPES[UA_TYPES_STRING]);
     }
 
-    SUBCASE("Null string") {
+    SECTION("Null string") {
         UA_String str{};
         CHECK(detail::toString(str) == "");
     }
 
-    SUBCASE("Empty string") {
+    SECTION("Empty string") {
         UA_String str = UA_STRING_ALLOC("");
         CHECK(detail::toString(str) == "");
         UA_clear(&str, &UA_TYPES[UA_TYPES_STRING]);

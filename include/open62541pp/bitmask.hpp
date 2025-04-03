@@ -227,27 +227,63 @@ private:
 };
 
 /// @relates Bitmask
-template <typename T, typename U>
-constexpr bool operator==(Bitmask<T> lhs, U rhs) noexcept {
-    return lhs.get() == Bitmask<T>(rhs).get();
+template <typename T>
+constexpr bool operator==(Bitmask<T> lhs, Bitmask<T> rhs) noexcept {
+    return lhs.get() == rhs.get();
 }
 
 /// @relates Bitmask
-template <typename T, typename U>
-constexpr bool operator!=(Bitmask<T> lhs, U rhs) noexcept {
-    return lhs.get() != Bitmask<T>(rhs).get();
+template <typename T>
+constexpr bool operator==(Bitmask<T> lhs, T rhs) noexcept {
+    return static_cast<T>(lhs) == rhs;
 }
 
 /// @relates Bitmask
-template <typename T, typename U>
-constexpr bool operator==(U lhs, Bitmask<T> rhs) noexcept {
-    return Bitmask<T>(lhs).get() == rhs.get();
+template <typename T>
+constexpr bool operator==(T lhs, Bitmask<T> rhs) noexcept {
+    return lhs == static_cast<T>(rhs);
 }
 
 /// @relates Bitmask
-template <typename T, typename U>
-constexpr bool operator!=(U lhs, Bitmask<T> rhs) noexcept {
-    return Bitmask<T>(lhs).get() != rhs.get();
+template <typename T>
+constexpr bool operator==(Bitmask<T> lhs, std::underlying_type_t<T> rhs) noexcept {
+    return lhs.get() == rhs;
+}
+
+/// @relates Bitmask
+template <typename T>
+constexpr bool operator==(std::underlying_type_t<T> lhs, Bitmask<T> rhs) noexcept {
+    return lhs == rhs.get();
+}
+
+/// @relates Bitmask
+template <typename T>
+constexpr bool operator!=(Bitmask<T> lhs, Bitmask<T> rhs) noexcept {
+    return lhs.get() != rhs.get();
+}
+
+/// @relates Bitmask
+template <typename T>
+constexpr bool operator!=(Bitmask<T> lhs, T rhs) noexcept {
+    return static_cast<T>(lhs) != rhs;
+}
+
+/// @relates Bitmask
+template <typename T>
+constexpr bool operator!=(T lhs, Bitmask<T> rhs) noexcept {
+    return lhs != static_cast<T>(rhs);
+}
+
+/// @relates Bitmask
+template <typename T>
+constexpr bool operator!=(Bitmask<T> lhs, std::underlying_type_t<T> rhs) noexcept {
+    return lhs.get() != rhs;
+}
+
+/// @relates Bitmask
+template <typename T>
+constexpr bool operator!=(std::underlying_type_t<T> lhs, Bitmask<T> rhs) noexcept {
+    return lhs != rhs.get();
 }
 
 /**

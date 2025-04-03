@@ -140,6 +140,9 @@ public:
     );
 #endif
 
+    /// Create client from native instance (move ownership to client).
+    explicit Client(UA_Client* native);
+
     ~Client();
 
     Client(const Client&) = delete;

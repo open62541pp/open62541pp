@@ -36,22 +36,19 @@ struct TypeConverter;
 namespace detail {
 
 template <typename T, typename = void>
-struct IsConvertibleType : std::false_type {};
+struct IsConvertible : std::false_type {};
 
 template <typename T>
-struct IsConvertibleType<T, std::void_t<decltype(TypeConverter<T>{})>> : std::true_type {};
+struct IsConvertible<T, std::void_t<decltype(TypeConverter<T>{})>> : std::true_type {};
 
-template <typename T>
-constexpr bool isConvertibleType = IsConvertibleType<T>::value;
-
-template <typename T, typename = std::enable_if_t<detail::isConvertibleType<T>>>
+template <typename T, typename = std::enable_if_t<detail::IsConvertible<T>::value>>
 [[nodiscard]] constexpr T fromNative(const typename TypeConverter<T>::NativeType& src) {
     T dst{};
     TypeConverter<T>::fromNative(src, dst);
     return dst;
 }
 
-template <typename T, typename = std::enable_if_t<detail::isConvertibleType<T>>>
+template <typename T, typename = std::enable_if_t<detail::IsConvertible<T>::value>>
 [[nodiscard]] constexpr auto toNative(const T& src) -> typename TypeConverter<T>::NativeType {
     using NativeType = typename TypeConverter<T>::NativeType;
     NativeType dst{};

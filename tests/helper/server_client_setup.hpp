@@ -5,7 +5,7 @@
 #include <tuple>
 #include <type_traits>
 
-#include <doctest/doctest.h>
+#include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/client.hpp"
 #include "open62541pp/server.hpp"
