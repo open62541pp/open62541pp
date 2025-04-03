@@ -13,17 +13,17 @@ using namespace opcua;
 
 TEST_CASE("loadNodeset") {
     Server server;
-    CHECK(server.namespaceArray().size() == 2);
+    REQUIRE(server.namespaceArray().size() == 2);
 
     SECTION("Invalid file") {
-        CHECK(loadNodeset(server, "invalid.xml").isBad());
+        REQUIRE(loadNodeset(server, "invalid.xml").isBad());
     }
 
     SECTION("DI") {
         const auto file = fs::path{UAPP_NODESET_DIR} / "DI" / "Opc.Ua.Di.NodeSet2.xml";
         CAPTURE(file);
-        CHECK(fs::exists(file));
-        CHECK(loadNodeset(server, file.c_str()).isGood());
+        REQUIRE(fs::exists(file));
+        REQUIRE(loadNodeset(server, file.c_str()).isGood());
 
         const auto ns = server.namespaceArray();
         CHECK(ns.size() == 3);
