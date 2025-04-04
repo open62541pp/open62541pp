@@ -63,8 +63,10 @@ public:
 #if UAPP_OPEN62541_VER_GE(1, 3)
         handle()->memberType = memberType;
 #else
-        handle()->memberTypeIndex = memberType.typeIndex;
-        handle()->namespaceZero = memberType.typeId.namespaceIndex == 0;
+        if (memberType != nullptr) {
+            handle()->memberTypeIndex = memberType->typeIndex;
+            handle()->namespaceZero = memberType->typeId.namespaceIndex == 0;
+        }
 #endif
     }
 
