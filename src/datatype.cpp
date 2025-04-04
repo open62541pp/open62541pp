@@ -112,9 +112,12 @@ UA_DataTypeMember copy(const UA_DataTypeMember& src) {
 static void copyMembers(const UA_DataTypeMember* members, size_t membersSize, UA_DataType& dst) {
     dst.members = detail::allocateArray<UA_DataTypeMember>(membersSize);
     dst.membersSize = membersSize;
-    std::transform(members, std::next(members, membersSize), dst.members, [](const auto& member) {
-        return copy(member);
-    });
+    std::transform(
+        members,
+        members + membersSize,  // NOLINT(*pointer-arithmetic)
+        dst.members,
+        [](const auto& member) { return copy(member); }
+    );
 }
 
 UA_DataType copy(const UA_DataType& src) {
