@@ -21,6 +21,40 @@
 
 namespace opcua {
 
+namespace detail {
+
+[[nodiscard]] UA_DataTypeMember createDataTypeMember(
+    const char* memberName,
+    const UA_DataType& memberType,
+    uint8_t padding,
+    bool isArray,
+    bool isOptional
+) noexcept;
+
+[[nodiscard]] UA_DataType createDataType(
+    const char* typeName,
+    UA_NodeId typeId,
+    UA_NodeId binaryEncodingId,
+    uint16_t memSize,
+    uint8_t typeKind,
+    bool pointerFree,
+    bool overlayable,
+    uint32_t membersSize,
+    UA_DataTypeMember* members
+) noexcept;
+
+[[nodiscard]] UA_DataTypeArray createDataTypeArray(
+    const UA_DataType* types, size_t typesSize, const UA_DataTypeArray* next
+) noexcept;
+
+void clear(UA_DataTypeMember& native) noexcept;
+void clear(UA_DataType& native) noexcept;
+
+[[nodiscard]] UA_DataTypeMember copy(const UA_DataTypeMember& src);
+[[nodiscard]] UA_DataType copy(const UA_DataType& src);
+
+}  // namespace detail
+
 using DataTypeMember = UA_DataTypeMember;
 
 /**
@@ -196,36 +230,6 @@ inline bool operator!=(const UA_DataTypeMember& lhs, const UA_DataTypeMember& rh
     return !(lhs == rhs);
 }
 
-/* ------------------------------------------- Helper ------------------------------------------- */
-
-namespace detail {
-
-[[nodiscard]] UA_DataTypeMember createDataTypeMember(
-    const char* memberName,
-    const UA_DataType& memberType,
-    uint8_t padding,
-    bool isArray,
-    bool isOptional
-) noexcept;
-
-[[nodiscard]] UA_DataType createDataType(
-    const char* typeName,
-    UA_NodeId typeId,
-    UA_NodeId binaryEncodingId,
-    uint16_t memSize,
-    uint8_t typeKind,
-    bool pointerFree,
-    bool overlayable,
-    uint32_t membersSize,
-    DataTypeMember* members
-) noexcept;
-
-[[nodiscard]] UA_DataTypeArray createDataTypeArray(
-    Span<const DataType> types, const UA_DataTypeArray* next = nullptr
-) noexcept;
-
-}  // namespace detail
-
 /* --------------------------------------- DataTypeBuilder -------------------------------------- */
 
 namespace detail {
@@ -238,7 +242,7 @@ const UA_DataType& getMemberDataType() {
 
 // https://gist.github.com/graphitemaster/494f21190bb2c63c5516
 template <typename T, typename TMember>
-size_t offsetOfMember(TMember T::*member) {
+size_t offsetOfMember(TMember T::* member) {
     static T object{};
     return size_t(&(object.*member)) - size_t(&object);
 }
@@ -259,13 +263,24 @@ struct TagDataTypeUnion;
 template <typename T, typename Tag = detail::TagDataTypeAny, typename U = struct DeferT>
 class DataTypeBuilder {
 public:
+    ~DataTypeBuilder() {
+        std::for_each(fields_.begin(), fields_.end(), [](auto& field) {
+            detail::clear(field.dataTypeMember);
+        });
+    }
+
+    DataTypeBuilder(const DataTypeBuilder&) = delete;
+    DataTypeBuilder(DataTypeBuilder&&) = default;
+    DataTypeBuilder& operator=(const DataTypeBuilder&) = delete;
+    DataTypeBuilder& operator=(DataTypeBuilder&&) = default;
+
     /**
      * Build a DataType definition for an enum.
      * @param typeName Human-readable type name
      * @param typeId NodeId of the type
      * @param binaryEncodingId NodeId of data type when encoded as binary
      */
-    static auto createEnum(const char* typeName, NodeId typeId, NodeId binaryEncodingId);
+    static auto createEnum(std::string_view typeName, NodeId typeId, NodeId binaryEncodingId);
 
     /**
      * Build a DataType definition for a structure.
@@ -274,7 +289,7 @@ public:
      * @param typeId NodeId of the type
      * @param binaryEncodingId NodeId of data type when encoded as binary
      */
-    static auto createStructure(const char* typeName, NodeId typeId, NodeId binaryEncodingId);
+    static auto createStructure(std::string_view typeName, NodeId typeId, NodeId binaryEncodingId);
 
     /**
      * Build a DataType definition for an union.
@@ -283,7 +298,7 @@ public:
      * @param typeId NodeId of the type
      * @param binaryEncodingId NodeId of data type when encoded as binary
      */
-    static auto createUnion(const char* typeName, NodeId typeId, NodeId binaryEncodingId);
+    static auto createUnion(std::string_view typeName, NodeId typeId, NodeId binaryEncodingId);
 
     /**
      * Add a structure field.
@@ -291,15 +306,15 @@ public:
      * @param fieldName Human-readable field name
      * @param fieldType Member data type
      */
-    template <auto U::*field>
-    auto& addField(const char* fieldName, const UA_DataType& fieldType);
+    template <auto U::* field>
+    auto& addField(std::string_view fieldName, const UA_DataType& fieldType);
 
     /**
      * Add a structure field (derive DataType from `field`).
      * @overload
      */
-    template <auto U::*field>
-    auto& addField(const char* fieldName) {
+    template <auto U::* field>
+    auto& addField(std::string_view fieldName) {
         return addField<field>(fieldName, detail::getMemberDataType<field>());
     }
 
@@ -312,15 +327,15 @@ public:
      * @param fieldName Human-readable field name
      * @param fieldType Member data type
      */
-    template <auto U::*fieldSize, auto U::*fieldArray>
-    auto& addField(const char* fieldName, const UA_DataType& fieldType);
+    template <auto U::* fieldSize, auto U::* fieldArray>
+    auto& addField(std::string_view fieldName, const UA_DataType& fieldType);
 
     /**
      * Add a structure array field (derive DataType from `fieldArray`).
      * @overload
      */
-    template <auto U::*fieldSize, auto U::*fieldArray>
-    auto& addField(const char* fieldName) {
+    template <auto U::* fieldSize, auto U::* fieldArray>
+    auto& addField(std::string_view fieldName) {
         return addField<fieldSize, fieldArray>(fieldName, detail::getMemberDataType<fieldArray>());
     }
 
@@ -331,15 +346,15 @@ public:
      * @param fieldName Human-readable field name
      * @param fieldType Data type of the union field
      */
-    template <auto U::*memberUnion, typename TField>
-    auto& addUnionField(const char* fieldName, const UA_DataType& fieldType);
+    template <auto U::* memberUnion, typename TField>
+    auto& addUnionField(std::string_view fieldName, const UA_DataType& fieldType);
 
     /**
      * Add a union field (derive DataType from `TField`).
      * @overload
      */
-    template <auto U::*memberUnion, typename TField>
-    auto& addUnionField(const char* fieldName) {
+    template <auto U::* memberUnion, typename TField>
+    auto& addUnionField(std::string_view fieldName) {
         return addUnionField<memberUnion, TField>(fieldName, getDataType<TField>());
     }
 
@@ -369,7 +384,7 @@ private:
 
 template <typename T, typename Tag, typename U>
 auto DataTypeBuilder<T, Tag, U>::createEnum(
-    const char* typeName, NodeId typeId, NodeId binaryEncodingId
+    std::string_view typeName, NodeId typeId, NodeId binaryEncodingId
 ) {
     static_assert(std::is_enum_v<T>, "T must be an enum");
     DataType dt;
@@ -385,7 +400,7 @@ auto DataTypeBuilder<T, Tag, U>::createEnum(
 
 template <typename T, typename Tag, typename U>
 auto DataTypeBuilder<T, Tag, U>::createStructure(
-    const char* typeName, NodeId typeId, NodeId binaryEncodingId
+    std::string_view typeName, NodeId typeId, NodeId binaryEncodingId
 ) {
     static_assert(std::is_class_v<T>, "T must be a struct or class");
     DataType dt;
@@ -401,7 +416,7 @@ auto DataTypeBuilder<T, Tag, U>::createStructure(
 
 template <typename T, typename Tag, typename U>
 auto DataTypeBuilder<T, Tag, U>::createUnion(
-    const char* typeName, NodeId typeId, NodeId binaryEncodingId
+    std::string_view typeName, NodeId typeId, NodeId binaryEncodingId
 ) {
     static_assert(std::is_class_v<T>, "T must be a struct or class");
     DataType dt;
@@ -416,8 +431,10 @@ auto DataTypeBuilder<T, Tag, U>::createUnion(
 }
 
 template <typename T, typename Tag, typename U>
-template <auto U::*field>
-auto& DataTypeBuilder<T, Tag, U>::addField(const char* fieldName, const UA_DataType& fieldType) {
+template <auto U::* field>
+auto& DataTypeBuilder<T, Tag, U>::addField(
+    std::string_view fieldName, const UA_DataType& fieldType
+) {
     using TMember = detail::MemberTypeT<decltype(field)>;
     static_assert(
         std::is_same_v<Tag, detail::TagDataTypeStruct>,
@@ -434,7 +451,7 @@ auto& DataTypeBuilder<T, Tag, U>::addField(const char* fieldName, const UA_DataT
         sizeof(TMember),
         detail::offsetOfMember(field),
         detail::createDataTypeMember(
-            fieldName,
+            detail::allocCString(fieldName),
             fieldType,
             {},  // calculate padding between members later
             false,
@@ -445,8 +462,10 @@ auto& DataTypeBuilder<T, Tag, U>::addField(const char* fieldName, const UA_DataT
 }
 
 template <typename T, typename Tag, typename U>
-template <auto U::*fieldSize, auto U::*fieldArray>
-auto& DataTypeBuilder<T, Tag, U>::addField(const char* fieldName, const UA_DataType& fieldType) {
+template <auto U::* fieldSize, auto U::* fieldArray>
+auto& DataTypeBuilder<T, Tag, U>::addField(
+    std::string_view fieldName, const UA_DataType& fieldType
+) {
     using TSize = detail::MemberTypeT<decltype(fieldSize)>;
     using TArray = detail::MemberTypeT<decltype(fieldArray)>;
     static_assert(
@@ -465,7 +484,7 @@ auto& DataTypeBuilder<T, Tag, U>::addField(const char* fieldName, const UA_DataT
         sizeof(TSize) + sizeof(TArray),
         detail::offsetOfMember(fieldSize),  // offset/padding related to size field
         detail::createDataTypeMember(
-            fieldName,
+            detail::allocCString(fieldName),
             fieldType,
             {},  // calculate padding between members later
             true,
@@ -476,9 +495,9 @@ auto& DataTypeBuilder<T, Tag, U>::addField(const char* fieldName, const UA_DataT
 }
 
 template <typename T, typename Tag, typename U>
-template <auto U::*memberUnion, typename TField>
+template <auto U::* memberUnion, typename TField>
 auto& DataTypeBuilder<T, Tag, U>::addUnionField(
-    const char* fieldName, const UA_DataType& fieldType
+    std::string_view fieldName, const UA_DataType& fieldType
 ) {
     using TUnion = detail::MemberTypeT<decltype(memberUnion)>;
     static_assert(
@@ -497,7 +516,7 @@ auto& DataTypeBuilder<T, Tag, U>::addUnionField(
         sizeof(TField),
         offset,
         detail::createDataTypeMember(
-            fieldName,
+            detail::allocCString(fieldName),
             fieldType,
             static_cast<uint8_t>(offset),  // padding = offset of each field
             false,

@@ -8,78 +8,6 @@
 
 namespace opcua {
 
-static void clearMembers(UA_DataType& native) noexcept {
-    detail::deallocateArray(native.members);
-    native.members = nullptr;
-    native.membersSize = 0;
-}
-
-static void clear(UA_DataType& native) noexcept {
-#ifdef UA_ENABLE_TYPEDESCRIPTION
-    detail::clear(native.typeName);
-#endif
-    clearMembers(native);
-    native = {};
-}
-
-static void copyMembers(const DataTypeMember* members, size_t membersSize, UA_DataType& dst) {
-    dst.members = detail::allocateArray<DataTypeMember>(membersSize);
-    dst.membersSize = membersSize;
-    std::copy_n(members, membersSize, dst.members);
-}
-
-[[nodiscard]] static UA_DataType copy(const UA_DataType& other) {
-    UA_DataType result{other};
-#ifdef UA_ENABLE_TYPEDESCRIPTION
-    result.typeName = detail::allocCString(other.typeName);
-#endif
-    copyMembers(other.members, other.membersSize, result);
-    return result;
-}
-
-DataType::DataType(const UA_DataType& native)
-    : Wrapper(copy(native)) {}
-
-DataType::DataType(UA_DataType&& native)  // NOLINT
-    : Wrapper(std::exchange(native, {})) {}
-
-DataType::DataType(TypeIndex typeIndex)
-    : DataType(UA_TYPES[typeIndex]) {  // NOLINT
-    assert(typeIndex < UA_TYPES_COUNT);
-}
-
-DataType::~DataType() {
-    clear(native());
-}
-
-DataType::DataType(const DataType& other)
-    : Wrapper(copy(other.native())) {}
-
-DataType::DataType(DataType&& other) noexcept
-    : Wrapper(std::exchange(other.native(), {})) {}
-
-DataType& DataType::operator=(const DataType& other) {
-    if (this != &other) {
-        clear(native());
-        native() = copy(other.native());
-    }
-    return *this;
-}
-
-DataType& DataType::operator=(DataType&& other) noexcept {
-    if (this != &other) {
-        clear(native());
-        native() = std::exchange(other.native(), {});
-    }
-    return *this;
-}
-
-void DataType::setMembers(Span<const DataTypeMember> members) {
-    assert(members.size() < (1U << 8U));
-    clearMembers(native());
-    copyMembers(members.data(), members.size(), native());
-}
-
 namespace detail {
 
 DataTypeMember createDataTypeMember(
@@ -139,18 +67,108 @@ UA_DataType createDataType(
 }
 
 UA_DataTypeArray createDataTypeArray(
-    Span<const DataType> types, const UA_DataTypeArray* next
+    const UA_DataType* types, size_t typesSize, const UA_DataTypeArray* next
 ) noexcept {
     return UA_DataTypeArray{
         next,
-        types.size(),
-        asNative(types.data()),
+        typesSize,
+        types,
 #if UAPP_OPEN62541_VER_GE(1, 4)
         false,  // cleanup
 #endif
     };
 }
 
+void clear(UA_DataTypeMember& native) noexcept {
+    detail::clear(native.memberName);
+    native.memberName = nullptr;
+}
+
+static void clearMembers(UA_DataType& native) noexcept {
+#ifdef UA_ENABLE_TYPEDESCRIPTION
+    std::for_each_n(native.members, native.membersSize, [](auto& member) { clear(member); });
+#endif
+    detail::deallocateArray(native.members);
+    native.members = nullptr;
+    native.membersSize = 0;
+}
+
+void clear(UA_DataType& native) noexcept {
+#ifdef UA_ENABLE_TYPEDESCRIPTION
+    detail::clear(native.typeName);
+#endif
+    clearMembers(native);
+    native = {};
+}
+
+UA_DataTypeMember copy(const UA_DataTypeMember& src) {
+    UA_DataTypeMember dst{src};
+#ifdef UA_ENABLE_TYPEDESCRIPTION
+    dst.memberName = detail::allocCString(src.memberName);
+#endif
+    return dst;
+}
+
+static void copyMembers(const UA_DataTypeMember* members, size_t membersSize, UA_DataType& dst) {
+    dst.members = detail::allocateArray<UA_DataTypeMember>(membersSize);
+    dst.membersSize = membersSize;
+    std::transform(members, std::next(members, membersSize), dst.members, [](const auto& member) {
+        return copy(member);
+    });
+}
+
+UA_DataType copy(const UA_DataType& src) {
+    UA_DataType dst{src};
+#ifdef UA_ENABLE_TYPEDESCRIPTION
+    dst.typeName = detail::allocCString(src.typeName);
+#endif
+    copyMembers(src.members, src.membersSize, dst);
+    return dst;
+}
+
 }  // namespace detail
+
+DataType::DataType(const UA_DataType& native)
+    : Wrapper(detail::copy(native)) {}
+
+DataType::DataType(UA_DataType&& native)  // NOLINT
+    : Wrapper(std::exchange(native, {})) {}
+
+DataType::DataType(TypeIndex typeIndex)
+    : DataType(UA_TYPES[typeIndex]) {  // NOLINT
+    assert(typeIndex < UA_TYPES_COUNT);
+}
+
+DataType::~DataType() {
+    detail::clear(native());
+}
+
+DataType::DataType(const DataType& other)
+    : Wrapper(detail::copy(other.native())) {}
+
+DataType::DataType(DataType&& other) noexcept
+    : Wrapper(std::exchange(other.native(), {})) {}
+
+DataType& DataType::operator=(const DataType& other) {
+    if (this != &other) {
+        detail::clear(native());
+        native() = detail::copy(other.native());
+    }
+    return *this;
+}
+
+DataType& DataType::operator=(DataType&& other) noexcept {
+    if (this != &other) {
+        detail::clear(native());
+        native() = std::exchange(other.native(), {});
+    }
+    return *this;
+}
+
+void DataType::setMembers(Span<const DataTypeMember> members) {
+    assert(members.size() < (1U << 8U));
+    detail::clearMembers(native());
+    detail::copyMembers(members.data(), members.size(), native());
+}
 
 }  // namespace opcua
