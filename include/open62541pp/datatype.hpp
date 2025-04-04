@@ -78,7 +78,7 @@ public:
     DataType& operator=(DataType&& other) noexcept;
 
     std::string_view typeName() const noexcept {
-#ifdef UA_ENABLE_TYPEDESCRIPTION
+#if UAPP_HAS_TYPEDESCRIPTION
         return handle()->typeName;
 #else
         return {};
@@ -92,7 +92,7 @@ public:
     }
 
     void setTypeName([[maybe_unused]] std::string_view typeName) noexcept {
-#ifdef UA_ENABLE_TYPEDESCRIPTION
+#if UAPP_HAS_TYPEDESCRIPTION
         detail::clear(handle()->typeName);
         handle()->typeName = detail::allocCString(typeName);
 #endif

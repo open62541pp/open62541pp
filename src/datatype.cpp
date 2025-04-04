@@ -18,7 +18,7 @@ DataTypeMember createDataTypeMember(
     [[maybe_unused]] bool isOptional
 ) noexcept {
     DataTypeMember result{};
-#ifdef UA_ENABLE_TYPEDESCRIPTION
+#if UAPP_HAS_TYPEDESCRIPTION
     result.memberName = memberName;
 #endif
 #if UAPP_OPEN62541_VER_GE(1, 3)
@@ -47,7 +47,7 @@ UA_DataType createDataType(
     DataTypeMember* members
 ) noexcept {
     UA_DataType result{};
-#ifdef UA_ENABLE_TYPEDESCRIPTION
+#if UAPP_HAS_TYPEDESCRIPTION
     result.typeName = typeName;
 #endif
     result.typeId = typeId;
@@ -85,7 +85,7 @@ void clear(UA_DataTypeMember& native) noexcept {
 }
 
 static void clearMembers(UA_DataType& native) noexcept {
-#ifdef UA_ENABLE_TYPEDESCRIPTION
+#if UAPP_HAS_TYPEDESCRIPTION
     std::for_each_n(native.members, native.membersSize, [](auto& member) { clear(member); });
 #endif
     detail::deallocateArray(native.members);
@@ -94,7 +94,7 @@ static void clearMembers(UA_DataType& native) noexcept {
 }
 
 void clear(UA_DataType& native) noexcept {
-#ifdef UA_ENABLE_TYPEDESCRIPTION
+#if UAPP_HAS_TYPEDESCRIPTION
     detail::clear(native.typeName);
 #endif
     clearMembers(native);
@@ -103,7 +103,7 @@ void clear(UA_DataType& native) noexcept {
 
 UA_DataTypeMember copy(const UA_DataTypeMember& src) {
     UA_DataTypeMember dst{src};
-#ifdef UA_ENABLE_TYPEDESCRIPTION
+#if UAPP_HAS_TYPEDESCRIPTION
     dst.memberName = detail::allocCString(src.memberName);
 #endif
     return dst;
@@ -119,7 +119,7 @@ static void copyMembers(const UA_DataTypeMember* members, size_t membersSize, UA
 
 UA_DataType copy(const UA_DataType& src) {
     UA_DataType dst{src};
-#ifdef UA_ENABLE_TYPEDESCRIPTION
+#if UAPP_HAS_TYPEDESCRIPTION
     dst.typeName = detail::allocCString(src.typeName);
 #endif
     copyMembers(src.members, src.membersSize, dst);
