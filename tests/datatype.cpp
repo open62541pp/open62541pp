@@ -116,7 +116,7 @@ static void checkEqual(const UA_DataTypeMember& member, const UA_DataTypeMember&
     CHECK(member.memberType == expected.memberType);  // NOLINT
 #else
     CHECK(member.memberTypeIndex == expected.memberTypeIndex);  // NOLINT
-    CHECK((bool)dt.members[i].namespaceZero == (bool)expected.namespaceZero);  // NOLINT
+    CHECK((bool)member.namespaceZero == (bool)expected.namespaceZero);  // NOLINT
 #endif
     CHECK((uint8_t)member.padding == (uint8_t)expected.padding);  // NOLINT
     CHECK((bool)member.isArray == (bool)expected.isArray);  // NOLINT
