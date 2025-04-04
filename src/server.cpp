@@ -314,9 +314,9 @@ void Server::setCustomHostname([[maybe_unused]] std::string_view hostname) {
 
 void Server::setCustomDataTypes(Span<const DataType> dataTypes) {
     context().dataTypes = {dataTypes.begin(), dataTypes.end()};
-    context().dataTypeArray = std::make_unique<UA_DataTypeArray>(
-        detail::createDataTypeArray(context().dataTypes)
-    );
+    context().dataTypeArray = std::make_unique<UA_DataTypeArray>(detail::createDataTypeArray(
+        asNative(context().dataTypes.data()), context().dataTypes.size(), nullptr
+    ));
     config()->customDataTypes = context().dataTypeArray.get();
 }
 
