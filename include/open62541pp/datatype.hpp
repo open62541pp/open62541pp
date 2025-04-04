@@ -21,41 +21,83 @@
 
 namespace opcua {
 
-namespace detail {
+class DataTypeMember : public Wrapper<UA_DataTypeMember> {
+public:
+    constexpr DataTypeMember() noexcept = default;
 
-[[nodiscard]] UA_DataTypeMember createDataTypeMember(
-    const char* memberName,
-    const UA_DataType& memberType,
-    uint8_t padding,
-    bool isArray,
-    bool isOptional
-) noexcept;
+    explicit DataTypeMember(const UA_DataTypeMember& native);
+    explicit DataTypeMember(UA_DataTypeMember&& native) noexcept;
 
-[[nodiscard]] UA_DataType createDataType(
-    const char* typeName,
-    UA_NodeId typeId,
-    UA_NodeId binaryEncodingId,
-    uint16_t memSize,
-    uint8_t typeKind,
-    bool pointerFree,
-    bool overlayable,
-    uint32_t membersSize,
-    UA_DataTypeMember* members
-) noexcept;
+    ~DataTypeMember();
 
-[[nodiscard]] UA_DataTypeArray createDataTypeArray(
-    const UA_DataType* types, size_t typesSize, const UA_DataTypeArray* next
-) noexcept;
+    DataTypeMember(const DataTypeMember& other);
+    DataTypeMember(DataTypeMember&& other) noexcept;
 
-void clear(UA_DataTypeMember& native) noexcept;
-void clear(UA_DataType& native) noexcept;
+    DataTypeMember& operator=(const DataTypeMember& other);
+    DataTypeMember& operator=(DataTypeMember&& other) noexcept;
 
-[[nodiscard]] UA_DataTypeMember copy(const UA_DataTypeMember& src);
-[[nodiscard]] UA_DataType copy(const UA_DataType& src);
+    std::string_view memberName() const noexcept {
+#if UAPP_HAS_TYPEDESCRIPTION
+        return handle()->memberName;
+#else
+        return {};
+#endif
+    }
 
-}  // namespace detail
+    void setMemberName([[maybe_unused]] std::string_view memberName) {
+#if UAPP_HAS_TYPEDESCRIPTION
+        detail::clear(handle()->memberName);
+        handle()->memberName = detail::allocCString(memberName);
+#endif
+    }
 
-using DataTypeMember = UA_DataTypeMember;
+    const UA_DataType* memberType() const noexcept {
+#if UAPP_OPEN62541_VER_GE(1, 3)
+        return handle()->memberType;
+#else
+        return nullptr;
+#endif
+    }
+
+    void setMemberType(const UA_DataType* memberType) {
+#if UAPP_OPEN62541_VER_GE(1, 3)
+        handle()->memberType = memberType;
+#else
+        handle()->memberTypeIndex = memberType.typeIndex;
+        handle()->namespaceZero = memberType.typeId.namespaceIndex == 0;
+#endif
+    }
+
+    uint8_t padding() const noexcept {
+        return handle()->padding;
+    }
+
+    void setPadding(uint8_t padding) {
+        handle()->padding = padding;
+    }
+
+    bool isArray() const noexcept {
+        return handle()->isArray;
+    }
+
+    void setIsArray(bool isArray) {
+        handle()->isArray = isArray;
+    }
+
+    bool isOptional() const noexcept {
+#if UAPP_OPEN62541_VER_GE(1, 1)
+        return handle()->isOptional;
+#else
+        return false;
+#endif
+    }
+
+    void setIsOptional([[maybe_unused]] bool isOptional) {
+#if UAPP_OPEN62541_VER_GE(1, 1)
+        handle()->isOptional = isOptional;
+#endif
+    }
+};
 
 /**
  * UA_DataType wrapper class.
@@ -63,10 +105,10 @@ using DataTypeMember = UA_DataTypeMember;
  */
 class DataType : public Wrapper<UA_DataType> {
 public:
-    constexpr DataType() = default;
+    constexpr DataType() noexcept = default;
 
     explicit DataType(const UA_DataType& native);
-    explicit DataType(UA_DataType&& native);
+    explicit DataType(UA_DataType&& native) noexcept;
     explicit DataType(TypeIndex typeIndex);
 
     ~DataType();
@@ -191,7 +233,7 @@ public:
     }
 
     Span<const DataTypeMember> members() const noexcept {
-        return {handle()->members, handle()->membersSize};
+        return {asWrapper<DataTypeMember>(handle()->members), handle()->membersSize};
     }
 
     /// @deprecated Use members() instead
@@ -263,17 +305,6 @@ struct TagDataTypeUnion;
 template <typename T, typename Tag = detail::TagDataTypeAny, typename U = struct DeferT>
 class DataTypeBuilder {
 public:
-    ~DataTypeBuilder() {
-        std::for_each(fields_.begin(), fields_.end(), [](auto& field) {
-            detail::clear(field.dataTypeMember);
-        });
-    }
-
-    DataTypeBuilder(const DataTypeBuilder&) = delete;
-    DataTypeBuilder(DataTypeBuilder&&) = default;
-    DataTypeBuilder& operator=(const DataTypeBuilder&) = delete;
-    DataTypeBuilder& operator=(DataTypeBuilder&&) = default;
-
     /**
      * Build a DataType definition for an enum.
      * @param typeName Human-readable type name
@@ -371,8 +402,8 @@ private:
         : dataType_(std::move(dataType)) {}
 
     struct Field {
-        size_t memSize;
-        size_t offset;
+        size_t memSize{};
+        size_t offset{};
         DataTypeMember dataTypeMember;
     };
 
@@ -447,17 +478,13 @@ auto& DataTypeBuilder<T, Tag, U>::addField(
     if (std::is_pointer_v<TMember> || !fieldType.pointerFree) {
         dataType_.setPointerFree(false);
     }
-    fields_.push_back({
-        sizeof(TMember),
-        detail::offsetOfMember(field),
-        detail::createDataTypeMember(
-            detail::allocCString(fieldName),
-            fieldType,
-            {},  // calculate padding between members later
-            false,
-            std::is_pointer_v<TMember>
-        ),
-    });
+    DataTypeMember member;
+    member.setMemberName(fieldName);
+    member.setMemberType(&fieldType);
+    member.setPadding({});  // calculate padding between members later
+    member.setIsArray(false);
+    member.setIsOptional(std::is_pointer_v<TMember>);
+    fields_.push_back({sizeof(TMember), detail::offsetOfMember(field), std::move(member)});
     return *this;
 }
 
@@ -480,16 +507,16 @@ auto& DataTypeBuilder<T, Tag, U>::addField(
     );
     assert(sizeof(std::remove_pointer_t<TArray>) == fieldType.memSize);
     dataType_.setPointerFree(false);
+    DataTypeMember member;
+    member.setMemberName(fieldName);
+    member.setMemberType(&fieldType);
+    member.setPadding({});  // calculate padding between members later
+    member.setIsArray(true);
+    member.setIsOptional(false);
     fields_.push_back({
         sizeof(TSize) + sizeof(TArray),
         detail::offsetOfMember(fieldSize),  // offset/padding related to size field
-        detail::createDataTypeMember(
-            detail::allocCString(fieldName),
-            fieldType,
-            {},  // calculate padding between members later
-            true,
-            false
-        ),
+        std::move(member),
     });
     return *this;
 }
@@ -512,17 +539,13 @@ auto& DataTypeBuilder<T, Tag, U>::addUnionField(
     if (std::is_pointer_v<TField> || !fieldType.pointerFree) {
         dataType_.setPointerFree(false);
     }
-    fields_.push_back({
-        sizeof(TField),
-        offset,
-        detail::createDataTypeMember(
-            detail::allocCString(fieldName),
-            fieldType,
-            static_cast<uint8_t>(offset),  // padding = offset of each field
-            false,
-            std::is_pointer_v<TField>
-        ),
-    });
+    DataTypeMember member;
+    member.setMemberName(fieldName);
+    member.setMemberType(&fieldType);
+    member.setPadding(static_cast<uint8_t>(offset));  // padding = offset of each field
+    member.setIsArray(false);
+    member.setIsOptional(std::is_pointer_v<TField>);
+    fields_.push_back({sizeof(TField), offset, std::move(member)});
     return *this;
 }
 
@@ -537,21 +560,37 @@ template <typename T, typename Tag, typename U>
     if constexpr (std::is_same_v<Tag, detail::TagDataTypeStruct>) {
         for (auto it = fields_.begin(); it < fields_.end(); ++it) {
             if (it == fields_.begin()) {
-                it->dataTypeMember.padding = static_cast<uint8_t>(it->offset);
+                it->dataTypeMember->padding = static_cast<uint8_t>(it->offset);
             } else {
-                it->dataTypeMember.padding = static_cast<uint8_t>(
+                it->dataTypeMember->padding = static_cast<uint8_t>(
                     it->offset - (std::prev(it)->offset + std::prev(it)->memSize)
                 );
             }
         }
     }
     // generate and set members array
-    std::vector<DataTypeMember> dataTypeMembers(fields_.size());
-    std::transform(fields_.cbegin(), fields_.cend(), dataTypeMembers.begin(), [](auto&& m) {
-        return m.dataTypeMember;
+    std::vector<UA_DataTypeMember> members(fields_.size());
+    std::transform(fields_.cbegin(), fields_.cend(), members.begin(), [](const auto& m) {
+        return asNative(m.dataTypeMember);  // shallow copy
     });
-    dataType_.setMembers(dataTypeMembers);
+    dataType_.setMembers({asWrapper<DataTypeMember>(members.data()), members.size()});
     return dataType_;
 }
+
+/* ------------------------------------------- Helper ------------------------------------------- */
+
+namespace detail {
+
+void clear(UA_DataTypeMember& native) noexcept;
+void clear(UA_DataType& native) noexcept;
+
+[[nodiscard]] UA_DataTypeMember copy(const UA_DataTypeMember& src);
+[[nodiscard]] UA_DataType copy(const UA_DataType& src);
+
+[[nodiscard]] UA_DataTypeArray createDataTypeArray(
+    const UA_DataType* types, size_t typesSize, const UA_DataTypeArray* next
+) noexcept;
+
+}  // namespace detail
 
 }  // namespace opcua
