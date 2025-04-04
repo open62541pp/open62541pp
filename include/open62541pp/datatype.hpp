@@ -81,7 +81,7 @@ public:
 #ifdef UA_ENABLE_TYPEDESCRIPTION
         return handle()->typeName;
 #else
-        return nullptr;
+        return {};
 #endif
     }
 
