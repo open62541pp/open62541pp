@@ -585,13 +585,14 @@ namespace detail {
 
 void clear(UA_DataTypeMember& native) noexcept;
 void clear(UA_DataType& native) noexcept;
+void clear(UA_DataTypeArray& native) noexcept;
+
+void deallocate(const UA_DataTypeArray* head) noexcept;
 
 [[nodiscard]] UA_DataTypeMember copy(const UA_DataTypeMember& src);
 [[nodiscard]] UA_DataType copy(const UA_DataType& src);
 
-[[nodiscard]] UA_DataTypeArray createDataTypeArray(
-    const UA_DataType* types, size_t typesSize, const UA_DataTypeArray* next
-) noexcept;
+void addDataTypes(const UA_DataTypeArray*& head, Span<const DataType> types);
 
 }  // namespace detail
 

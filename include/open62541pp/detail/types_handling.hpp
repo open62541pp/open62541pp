@@ -79,13 +79,22 @@ void deallocate(T* native, const UA_DataType& type) noexcept {
 }
 
 template <typename T>
-[[nodiscard]] T* allocate(const UA_DataType& type) {
-    assert(isValidTypeCombination<T>(type));
-    auto* result = static_cast<T*>(UA_new(&type));
-    if (result == nullptr) {
+[[nodiscard]] T* allocate() {
+    auto* ptr = static_cast<T*>(UA_calloc(1, sizeof(T)));  // NOLINT
+    if (ptr == nullptr) {
         throw std::bad_alloc{};
     }
-    return result;
+    return ptr;
+}
+
+template <typename T>
+[[nodiscard]] T* allocate(const UA_DataType& type) {
+    assert(isValidTypeCombination<T>(type));
+    auto* ptr = static_cast<T*>(UA_new(&type));
+    if (ptr == nullptr) {
+        throw std::bad_alloc{};
+    }
+    return ptr;
 }
 
 template <typename T>
@@ -149,11 +158,11 @@ template <typename T>
     if (size == 0) {
         return reinterpret_cast<T*>(emptyArraySentinel);  // NOLINT
     }
-    auto* result = static_cast<T*>(UA_calloc(size, sizeof(T)));  // NOLINT
-    if (result == nullptr) {
+    auto* ptr = static_cast<T*>(UA_calloc(size, sizeof(T)));  // NOLINT
+    if (ptr == nullptr) {
         throw std::bad_alloc{};
     }
-    return result;
+    return ptr;
 }
 
 template <typename T>

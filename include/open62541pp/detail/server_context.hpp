@@ -3,13 +3,10 @@
 #include <atomic>
 #include <functional>
 #include <map>
-#include <memory>
 #include <mutex>
 #include <utility>  // pair
-#include <vector>
 
 #include "open62541pp/config.hpp"
-#include "open62541pp/datatype.hpp"
 #include "open62541pp/detail/contextmap.hpp"
 #include "open62541pp/detail/exceptioncatcher.hpp"
 #include "open62541pp/detail/open62541/common.h"  // UA_AccessControl
@@ -46,9 +43,6 @@ struct ServerContext {
     SessionRegistry sessionRegistry;
     std::atomic<bool> running{false};
     std::mutex mutexRun;
-
-    std::vector<DataType> dataTypes;
-    std::unique_ptr<UA_DataTypeArray> dataTypeArray;
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
     using SubId = IntegerId;  // always 0

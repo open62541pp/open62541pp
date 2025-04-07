@@ -4,12 +4,9 @@
 #include <atomic>
 #include <cstdint>
 #include <functional>
-#include <memory>
 #include <utility>  // pair
-#include <vector>
 
 #include "open62541pp/config.hpp"
-#include "open62541pp/datatype.hpp"
 #include "open62541pp/detail/contextmap.hpp"
 #include "open62541pp/detail/exceptioncatcher.hpp"
 #include "open62541pp/detail/open62541/client.h"  // UA_SessionState, UA_SecureChannelState
@@ -33,9 +30,6 @@ inline constexpr size_t clientStateCount = 4;
 struct ClientContext {
     ExceptionCatcher exceptionCatcher;
     std::atomic<bool> running{false};
-
-    std::vector<DataType> dataTypes;
-    std::unique_ptr<UA_DataTypeArray> dataTypeArray;
 
 #if UAPP_OPEN62541_VER_LE(1, 0)
     UA_ClientState lastClientState{};

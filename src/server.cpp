@@ -60,6 +60,8 @@ ServerConfig::ServerConfig(UA_ServerConfig&& native)
     : Wrapper(std::exchange(native, {})) {}
 
 ServerConfig::~ServerConfig() {
+    detail::deallocate(native().customDataTypes);
+    native().customDataTypes = nullptr;
     UA_ServerConfig_clean(handle());
 }
 
@@ -313,11 +315,7 @@ void Server::setCustomHostname([[maybe_unused]] std::string_view hostname) {
 }
 
 void Server::setCustomDataTypes(Span<const DataType> dataTypes) {
-    context().dataTypes = {dataTypes.begin(), dataTypes.end()};
-    context().dataTypeArray = std::make_unique<UA_DataTypeArray>(detail::createDataTypeArray(
-        asNative(context().dataTypes.data()), context().dataTypes.size(), nullptr
-    ));
-    config()->customDataTypes = context().dataTypeArray.get();
+    detail::addDataTypes(config()->customDataTypes, dataTypes);
 }
 
 std::vector<Session> Server::sessions() {
@@ -475,12 +473,16 @@ const detail::ServerContext& Server::context() const noexcept {
 }
 
 void Server::Deleter::operator()(UA_Server* server) noexcept {
-    if (server != nullptr) {
-        if (detail::getContext(server)->running) {
-            UA_Server_run_shutdown(server);
-        }
-        UA_Server_delete(server);
+    if (server == nullptr) {
+        return;
     }
+    if (detail::getContext(server)->running) {
+        UA_Server_run_shutdown(server);
+    }
+    auto* config = UA_Server_getConfig(server);
+    detail::deallocate(config->customDataTypes);
+    config->customDataTypes = nullptr;
+    UA_Server_delete(server);
 }
 
 Server* asWrapper(UA_Server* server) noexcept {
