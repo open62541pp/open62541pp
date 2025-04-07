@@ -246,8 +246,7 @@ if(UAPP_ENABLE_NODESETLOADER)
             C_VISIBILITY_PRESET hidden
             POSITION_INDEPENDENT_CODE ON  # required for shared library
     )
-    target_link_libraries(open62541pp PRIVATE $<BUILD_INTERFACE:open62541pp_nodesetloader>
-    )
+    target_link_libraries(open62541pp PRIVATE $<BUILD_INTERFACE:open62541pp_nodesetloader>)
 endif()
 
 # tests
