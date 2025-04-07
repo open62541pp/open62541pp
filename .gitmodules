@@ -6,4 +6,4 @@
 	url = https://github.com/jothepro/doxygen-awesome-css.git
 [submodule "3rdparty/open62541-nodeset-loader"]
 	path = 3rdparty/open62541-nodeset-loader
-	url = https://github.com/open62541/open62541-nodeset-loader.git
+	url = https://github.com/open62541pp/open62541-nodeset-loader.git
