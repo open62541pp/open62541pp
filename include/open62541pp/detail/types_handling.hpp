@@ -80,7 +80,7 @@ void deallocate(T* native, const UA_DataType& type) noexcept {
 
 template <typename T>
 [[nodiscard]] T* allocate() {
-    auto* ptr = static_cast<T*>(UA_calloc(sizeof(T), 1));  // NOLINT
+    auto* ptr = static_cast<T*>(UA_calloc(1, sizeof(T)));  // NOLINT
     if (ptr == nullptr) {
         throw std::bad_alloc{};
     }
