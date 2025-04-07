@@ -2,6 +2,7 @@
 
 #include <algorithm>  // copy_n
 #include <cassert>
+#include <new>  // placement new
 #include <utility>  // exchange
 
 #include "open62541pp/detail/types_handling.hpp"
@@ -98,12 +99,14 @@ UA_DataType* copyArray(const UA_DataType* src, size_t size) {
 
 void addDataTypes(const UA_DataTypeArray*& head, Span<const DataType> types) {
     auto* item = allocate<UA_DataTypeArray>();
-    item->next = head;
-    const_cast<size_t&>(item->typesSize) = types.size();  // NOLINT(*const-cast)
-    item->types = copyArray(asNative(types.data()), types.size());
+    new (item) UA_DataTypeArray{
+        head,  // next
+        types.size(),
+        copyArray(asNative(types.data()), types.size()),
 #if UAPP_OPEN62541_VER_GE(1, 4)
-    item->cleanup = true;
+        true,  // cleanup
 #endif
+    };
     head = item;
 }
 
