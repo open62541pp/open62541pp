@@ -10,19 +10,6 @@ namespace opcua {
 
 namespace detail {
 
-UA_DataTypeArray createDataTypeArray(
-    const UA_DataType* types, size_t typesSize, const UA_DataTypeArray* next
-) noexcept {
-    return UA_DataTypeArray{
-        next,
-        typesSize,
-        types,
-#if UAPP_OPEN62541_VER_GE(1, 4)
-        false,  // cleanup
-#endif
-    };
-}
-
 void clear(UA_DataTypeMember& native) noexcept {
     detail::clear(native.memberName);
     native.memberName = nullptr;
@@ -43,6 +30,33 @@ void clear(UA_DataType& native) noexcept {
 #endif
     clearMembers(native);
     native = {};
+}
+
+void clear(UA_DataTypeArray& native) noexcept {
+#if UAPP_OPEN62541_VER_GE(1, 4)
+    const bool cleanup = native.cleanup;
+#else
+    const bool cleanup = true;
+#endif
+    if (cleanup) {
+        std::for_each_n(
+            const_cast<UA_DataType*>(native.types),  // NOLINT
+            native.typesSize,
+            [](auto& type) { clear(type); }
+        );
+    }
+    deallocateArray(const_cast<UA_DataType*>(native.types));  // NOLINT
+    native.types = nullptr;
+}
+
+void deallocate(const UA_DataTypeArray* head) noexcept {
+    while (head != nullptr) {
+        const auto* next = head->next;
+        auto* item = const_cast<UA_DataTypeArray*>(head);  // NOLINT(*const-cast)
+        detail::clear(*item);
+        detail::deallocateArray(item);
+        head = next;
+    }
 }
 
 UA_DataTypeMember copy(const UA_DataTypeMember& src) {
@@ -71,6 +85,29 @@ UA_DataType copy(const UA_DataType& src) {
 #endif
     copyMembers(src.members, src.membersSize, dst);
     return dst;
+}
+
+UA_DataType* copyArray(const UA_DataType* src, size_t size) {
+    auto* dst = allocateArray<UA_DataType>(size);
+    if (src == nullptr) {
+        return dst;
+    }
+    std::transform(src, src + size, dst, [](const auto& type) { return copy(type); });  // NOLINT
+    return dst;
+}
+
+void addDataTypes(const UA_DataTypeArray*& head, Span<const DataType> types) {
+    UA_DataTypeArray tmp{
+        head,
+        types.size(),
+        copyArray(asNative(types.data()), types.size()),
+#if UAPP_OPEN62541_VER_GE(1, 4)
+        cleanup = true,  // cleanup
+#endif
+    };
+    auto* item = detail::allocate<UA_DataTypeArray>();
+    std::memcpy(item, &tmp, sizeof(UA_DataTypeArray));
+    head = item;  // prepend item
 }
 
 }  // namespace detail
