@@ -97,17 +97,14 @@ UA_DataType* copyArray(const UA_DataType* src, size_t size) {
 }
 
 void addDataTypes(const UA_DataTypeArray*& head, Span<const DataType> types) {
-    UA_DataTypeArray tmp{
-        head,
-        types.size(),
-        copyArray(asNative(types.data()), types.size()),
+    auto* item = allocate<UA_DataTypeArray>();
+    item->next = head;
+    const_cast<size_t&>(item->typesSize) = types.size();  // NOLINT(*const-cast)
+    item->types = copyArray(asNative(types.data()), types.size());
 #if UAPP_OPEN62541_VER_GE(1, 4)
-        cleanup = true,  // cleanup
+    item->cleanup = true;
 #endif
-    };
-    auto* item = detail::allocate<UA_DataTypeArray>();
-    std::memcpy(item, &tmp, sizeof(UA_DataTypeArray));
-    head = item;  // prepend item
+    head = item;
 }
 
 }  // namespace detail
