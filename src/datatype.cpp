@@ -55,7 +55,7 @@ void deallocate(const UA_DataTypeArray* head) noexcept {
         const auto* next = head->next;
         auto* item = const_cast<UA_DataTypeArray*>(head);  // NOLINT(*const-cast)
         detail::clear(*item);
-        detail::deallocateArray(item);
+        detail::deallocate(item);
         head = next;
     }
 }
