@@ -35,14 +35,19 @@ static void deleteClient(UA_Client* client) noexcept {
     if (client == nullptr) {
         return;
     }
+    auto* config = UA_Client_getConfig(client);
+    detail::deallocate(config->customDataTypes);
+    config->customDataTypes = nullptr;
 #if UAPP_OPEN62541_VER_LE(1, 0)
     // UA_ClientConfig_deleteMembers won't delete the logger in v1.0
-    detail::clear(UA_Client_getConfig(client)->logger);
+    detail::clear(config->logger);
 #endif
     UA_Client_delete(client);
 }
 
-static void clearConfig(UA_ClientConfig& config) noexcept {
+static void clear(UA_ClientConfig& config) noexcept {
+    detail::deallocate(config.customDataTypes);
+    config.customDataTypes = nullptr;
 #if UAPP_OPEN62541_VER_GE(1, 4)
     UA_ClientConfig_clear(&config);
 #else
@@ -87,7 +92,7 @@ ClientConfig::ClientConfig(UA_ClientConfig&& native)
     : Wrapper(std::exchange(native, {})) {}
 
 ClientConfig::~ClientConfig() {
-    clearConfig(native());
+    clear(native());
 }
 
 // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
@@ -96,7 +101,7 @@ ClientConfig::ClientConfig(ClientConfig&& other) noexcept
 
 ClientConfig& ClientConfig::operator=(ClientConfig&& other) noexcept {
     if (this != &other) {
-        // clearConfig(native());  // TODO
+        // clear(native());  // TODO
         native() = std::exchange(other.native(), {});
     }
     return *this;
@@ -366,11 +371,7 @@ std::vector<EndpointDescription> Client::getEndpoints(std::string_view serverUrl
 }
 
 void Client::setCustomDataTypes(Span<const DataType> dataTypes) {
-    context().dataTypes = {dataTypes.begin(), dataTypes.end()};
-    context().dataTypeArray = std::make_unique<UA_DataTypeArray>(
-        detail::createDataTypeArray(context().dataTypes)
-    );
-    config()->customDataTypes = context().dataTypeArray.get();
+    detail::addDataTypes(config()->customDataTypes, dataTypes);
 }
 
 static void setStateCallback(Client& client, detail::ClientState state, StateCallback&& callback) {

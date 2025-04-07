@@ -9,6 +9,62 @@
 
 using namespace opcua;
 
+static UA_DataTypeMember createDataTypeMember(
+    [[maybe_unused]] const char* memberName,
+    const UA_DataType& memberType,
+    uint8_t padding,
+    bool isArray,
+    [[maybe_unused]] bool isOptional
+) noexcept {
+    UA_DataTypeMember result{};
+#if UAPP_HAS_TYPEDESCRIPTION
+    result.memberName = memberName;
+#endif
+#if UAPP_OPEN62541_VER_GE(1, 3)
+    result.memberType = &memberType;
+#else
+    result.memberTypeIndex = memberType.typeIndex;
+    result.namespaceZero = memberType.typeId.namespaceIndex == 0;
+#endif
+    result.padding = padding;
+    result.isArray = isArray;  // NOLINT
+#if UAPP_OPEN62541_VER_GE(1, 1)
+    result.isOptional = isOptional;  // NOLINT
+#endif
+    return result;
+}
+
+static UA_DataType createDataType(
+    [[maybe_unused]] const char* typeName,
+    UA_NodeId typeId,
+    UA_NodeId binaryEncodingId,
+    uint16_t memSize,
+    uint8_t typeKind,
+    bool pointerFree,
+    bool overlayable,
+    uint32_t membersSize,
+    UA_DataTypeMember* members
+) noexcept {
+    UA_DataType result{};
+#if UAPP_HAS_TYPEDESCRIPTION
+    result.typeName = typeName;
+#endif
+    result.typeId = typeId;
+#if UAPP_OPEN62541_VER_GE(1, 2)
+    result.binaryEncodingId = binaryEncodingId;
+#else
+    assert(binaryEncodingId.identifierType == UA_NODEIDTYPE_NUMERIC);
+    result.binaryEncodingId = binaryEncodingId.identifier.numeric;  // NOLINT
+#endif
+    result.memSize = memSize;
+    result.typeKind = typeKind;
+    result.pointerFree = pointerFree;
+    result.overlayable = overlayable;
+    result.membersSize = membersSize;
+    result.members = members;
+    return result;
+}
+
 /* -------------------------------- Samples data type definition -------------------------------- */
 
 struct Point {
@@ -18,21 +74,21 @@ struct Point {
 };
 
 static UA_DataTypeMember pointMembers[3] = {
-    detail::createDataTypeMember(
+    createDataTypeMember(
         "x",
         UA_TYPES[UA_TYPES_FLOAT],
         0,  // first member
         false,
         false
     ),
-    detail::createDataTypeMember(
+    createDataTypeMember(
         "y",
         UA_TYPES[UA_TYPES_FLOAT],
         offsetof(Point, y) - offsetof(Point, x) - sizeof(float),
         false,
         false
     ),
-    detail::createDataTypeMember(
+    createDataTypeMember(
         "z",
         UA_TYPES[UA_TYPES_FLOAT],
         offsetof(Point, z) - offsetof(Point, y) - sizeof(float),
@@ -41,7 +97,7 @@ static UA_DataTypeMember pointMembers[3] = {
     ),
 };
 
-static const UA_DataType pointType = detail::createDataType(
+static const UA_DataType pointType = createDataType(
     "Point",
     UA_NODEID_NUMERIC(1, 1001),
     UA_NODEID_NUMERIC(1, 1),
@@ -55,8 +111,22 @@ static const UA_DataType pointType = detail::createDataType(
 
 /* ---------------------------------------------------------------------------------------------- */
 
-static void checkDataTypeEqual(const UA_DataType& dt, const UA_DataType& expected) {
-#ifdef UA_ENABLE_TYPEDESCRIPTION
+static void checkEqual(const UA_DataTypeMember& member, const UA_DataTypeMember& expected) {
+#if UAPP_OPEN62541_VER_GE(1, 3)
+    CHECK(member.memberType == expected.memberType);  // NOLINT
+#else
+    CHECK(member.memberTypeIndex == expected.memberTypeIndex);  // NOLINT
+    CHECK((bool)member.namespaceZero == (bool)expected.namespaceZero);  // NOLINT
+#endif
+    CHECK((uint8_t)member.padding == (uint8_t)expected.padding);  // NOLINT
+    CHECK((bool)member.isArray == (bool)expected.isArray);  // NOLINT
+#if UAPP_OPEN62541_VER_GE(1, 1)
+    CHECK((bool)member.isOptional == (bool)expected.isOptional);  // NOLINT
+#endif
+}
+
+static void checkEqual(const UA_DataType& dt, const UA_DataType& expected) {
+#if UAPP_HAS_TYPEDESCRIPTION
     CHECK(std::string_view(dt.typeName) == std::string_view(expected.typeName));
 #endif
     CHECK((dt.typeId == expected.typeId));
@@ -66,20 +136,64 @@ static void checkDataTypeEqual(const UA_DataType& dt, const UA_DataType& expecte
     CHECK(dt.pointerFree == expected.pointerFree);
     CHECK(dt.overlayable == expected.overlayable);
     for (uint8_t i = 0; i < dt.membersSize; ++i) {
-        auto& member = dt.members[i];
-        auto& memberExpected = expected.members[i];
-        CAPTURE(i);
+        checkEqual(dt.members[i], expected.members[i]);
+    }
+}
+
+TEST_CASE("DataTypeMember") {
+    const auto native = createDataTypeMember(
+        "test123", UA_TYPES[UA_TYPES_FLOAT], 11, false, false
+    );
+
+    SECTION("Construct form native") {
+        DataTypeMember member(native);
+#if UAPP_HAS_TYPEDESCRIPTION
+        CHECK(member.memberName() == "test123");
+#endif
 #if UAPP_OPEN62541_VER_GE(1, 3)
-        CHECK(member.memberType == memberExpected.memberType);  // NOLINT
-#else
-        CHECK(member.memberTypeIndex == memberExpected.memberTypeIndex);  // NOLINT
-        CHECK((bool)dt.members[i].namespaceZero == (bool)memberExpected.namespaceZero);  // NOLINT
+        CHECK(member.memberType() == &UA_TYPES[UA_TYPES_FLOAT]);
 #endif
-        CHECK((uint8_t)member.padding == (uint8_t)memberExpected.padding);  // NOLINT
-        CHECK((bool)member.isArray == (bool)memberExpected.isArray);  // NOLINT
-#if UAPP_OPEN62541_VER_GE(1, 1)
-        CHECK((bool)member.isOptional == (bool)memberExpected.isOptional);  // NOLINT
-#endif
+        CHECK(member.padding() == 11);
+        CHECK_FALSE(member.isArray());
+        CHECK_FALSE(member.isOptional());
+    }
+
+    SECTION("Copy constructor") {
+        DataTypeMember m1(native);
+        DataTypeMember m2(m1);
+        checkEqual(m2, native);
+    }
+
+    SECTION("Copy assignment") {
+        DataTypeMember m1(native);
+        DataTypeMember m2;
+        m2 = m1;
+        checkEqual(m2, native);
+    }
+
+    SECTION("Move constructor") {
+        DataTypeMember m1(native);
+        DataTypeMember m2(std::move(m1));
+        checkEqual(m1, {});  // NOLINT
+        checkEqual(m2, native);
+    }
+
+    SECTION("Move assignment") {
+        DataTypeMember m1(native);
+        DataTypeMember m2;
+        m2 = std::move(m1);
+        checkEqual(m1, {});  // NOLINT
+        checkEqual(m2, native);
+    }
+
+    SECTION("Set methods") {
+        DataTypeMember member;
+        member.setMemberName("test123");
+        member.setMemberType(&UA_TYPES[UA_TYPES_FLOAT]);
+        member.setPadding(11);
+        member.setIsArray(false);
+        member.setIsOptional(false);
+        checkEqual(member, native);
     }
 }
 
@@ -87,7 +201,7 @@ TEST_CASE("DataType") {
     SECTION("Construct from native") {
         DataType dt(pointType);
         CHECK(dt.handle() != &pointType);
-#ifdef UA_ENABLE_TYPEDESCRIPTION
+#if UAPP_HAS_TYPEDESCRIPTION
         CHECK(dt.typeName() == pointType.typeName);
 #endif
         CHECK(dt.typeId() == NodeId(1, 1001));
@@ -106,7 +220,7 @@ TEST_CASE("DataType") {
         CHECK(DataType(UA_TYPES_ARGUMENT) == UA_TYPES[UA_TYPES_ARGUMENT]);
     }
 
-    SECTION("Copy constructor / assignment") {
+    SECTION("Copy constructor") {
         DataType dt1(pointType);
         DataType dt2(dt1);
         CHECK(dt2 == dt1);
@@ -143,9 +257,12 @@ TEST_CASE("DataType") {
         dt.setTypeKind(UA_DATATYPEKIND_STRUCTURE);
         dt.setPointerFree(true);
         dt.setOverlayable(false);
-        dt.setMembers({pointMembers[0], pointMembers[1], pointMembers[2]});
-
-        checkDataTypeEqual(dt, pointType);
+        dt.setMembers({
+            asWrapper<DataTypeMember>(pointMembers[0]),
+            asWrapper<DataTypeMember>(pointMembers[1]),
+            asWrapper<DataTypeMember>(pointMembers[2]),
+        });
+        checkEqual(dt, pointType);
     }
 }
 
@@ -168,7 +285,7 @@ TEST_CASE("DataTypeBuilder") {
                 .addField<&Point::z>("z")
                 .build();
 
-        checkDataTypeEqual(dt, pointType);
+        checkEqual(dt, pointType);
     }
 
     SECTION("Struct with array") {
@@ -179,11 +296,11 @@ TEST_CASE("DataTypeBuilder") {
         };
 
         UA_DataTypeMember measurementsMembers[2] = {
-            detail::createDataTypeMember("description", UA_TYPES[UA_TYPES_STRING], 0, false, false),
-            detail::createDataTypeMember("measurements", UA_TYPES[UA_TYPES_FLOAT], 0, true, false),
+            createDataTypeMember("description", UA_TYPES[UA_TYPES_STRING], 0, false, false),
+            createDataTypeMember("measurements", UA_TYPES[UA_TYPES_FLOAT], 0, true, false),
         };
 
-        const UA_DataType measurementsType = detail::createDataType(
+        const UA_DataType measurementsType = createDataType(
             "Measurements",
             UA_NODEID_NUMERIC(1, 1002),
             UA_NODEID_NUMERIC(1, 2),
@@ -203,7 +320,7 @@ TEST_CASE("DataTypeBuilder") {
                 )
                 .build();
 
-        checkDataTypeEqual(dt, measurementsType);
+        checkEqual(dt, measurementsType);
     }
 
     SECTION("Struct with optional fields") {
@@ -214,21 +331,21 @@ TEST_CASE("DataTypeBuilder") {
         };
 
         UA_DataTypeMember optMembers[3] = {
-            detail::createDataTypeMember(
+            createDataTypeMember(
                 "a",
                 UA_TYPES[UA_TYPES_INT16],
                 0,  // first member
                 false,
                 false
             ),
-            detail::createDataTypeMember(
+            createDataTypeMember(
                 "b",
                 UA_TYPES[UA_TYPES_FLOAT],
                 offsetof(Opt, b) - offsetof(Opt, a) - sizeof(int16_t),
                 false,
                 true
             ),
-            detail::createDataTypeMember(
+            createDataTypeMember(
                 "c",
                 UA_TYPES[UA_TYPES_FLOAT],
                 offsetof(Opt, c) - offsetof(Opt, b) - sizeof(float*),
@@ -237,7 +354,7 @@ TEST_CASE("DataTypeBuilder") {
             ),
         };
 
-        const UA_DataType optType = detail::createDataType(
+        const UA_DataType optType = createDataType(
             "Opt",
             UA_NODEID_NUMERIC(1, 1003),
             UA_NODEID_NUMERIC(1, 3),
@@ -256,7 +373,7 @@ TEST_CASE("DataTypeBuilder") {
                 .addField<&Opt::c>("c")
                 .build();
 
-        checkDataTypeEqual(dt, optType);
+        checkEqual(dt, optType);
     }
 
     SECTION("Union") {
@@ -276,15 +393,15 @@ TEST_CASE("DataTypeBuilder") {
         };
 
         static UA_DataTypeMember uniMembers[2] = {
-            detail::createDataTypeMember(
+            createDataTypeMember(
                 "optionA", UA_TYPES[UA_TYPES_DOUBLE], offsetof(Uni, fields.optionA), false, false
             ),
-            detail::createDataTypeMember(
+            createDataTypeMember(
                 "optionB", UA_TYPES[UA_TYPES_STRING], offsetof(Uni, fields.optionB), false, false
             ),
         };
 
-        const UA_DataType uniType = detail::createDataType(
+        const UA_DataType uniType = createDataType(
             "Uni",
             UA_NODEID_NUMERIC(1, 1004),
             UA_NODEID_NUMERIC(1, 4),
@@ -302,7 +419,7 @@ TEST_CASE("DataTypeBuilder") {
                 .addUnionField<&Uni::fields, UA_String>("optionB", UA_TYPES[UA_TYPES_STRING])
                 .build();
 
-        checkDataTypeEqual(dt, uniType);
+        checkEqual(dt, uniType);
     }
 
     SECTION("Struct with wrapper type") {
@@ -328,6 +445,6 @@ TEST_CASE("DataTypeBuilder") {
                 .addField<&SWrapper::value>("value")
                 .build();
 
-        checkDataTypeEqual(dtNative, dtWrapper);
+        checkEqual(dtNative, dtWrapper);
     }
 }

@@ -89,6 +89,7 @@ PREDEFINED             = UA_ENABLE_DA \
                          UA_ENABLE_SUBSCRIPTIONS \
                          UA_ENABLE_SUBSCRIPTIONS_EVENTS \
                          UA_ENABLE_TYPEDESCRIPTION \
+                         UAPP_HAS_TYPEDESCRIPTION=1 \
                          UAPP_HAS_PARSING=1 \
                          UAPP_HAS_TOSTRING=1 \
                          UAPP_HAS_DATAACCESS=1 \
