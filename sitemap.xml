@@ -119,6 +119,9 @@
     <loc>https://open62541pp.github.io/open62541pp/server_8h_source.html</loc>
   </url>
   <url>
+    <loc>https://open62541pp.github.io/open62541pp/ptr_8hpp_source.html</loc>
+  </url>
+  <url>
     <loc>https://open62541pp.github.io/open62541pp/result__utils_8hpp_source.html</loc>
   </url>
   <url>
@@ -149,12 +152,6 @@
     <loc>https://open62541pp.github.io/open62541pp/exception_8hpp_source.html</loc>
   </url>
   <url>
-    <loc>https://open62541pp.github.io/open62541pp/monitoreditem_8hpp_source.html</loc>
-  </url>
-  <url>
-    <loc>https://open62541pp.github.io/open62541pp/services_2monitoreditem_8hpp_source.html</loc>
-  </url>
-  <url>
     <loc>https://open62541pp.github.io/open62541pp/node_8hpp_source.html</loc>
   </url>
   <url>
@@ -174,6 +171,9 @@
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/log__default_8hpp_source.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/nodesetloader_8hpp_source.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/nodestore_8hpp_source.html</loc>
@@ -224,6 +224,12 @@
     <loc>https://open62541pp.github.io/open62541pp/method_8hpp_source.html</loc>
   </url>
   <url>
+    <loc>https://open62541pp.github.io/open62541pp/monitoreditem_8hpp_source.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/services_2monitoreditem_8hpp_source.html</loc>
+  </url>
+  <url>
     <loc>https://open62541pp.github.io/open62541pp/nodemanagement_8hpp_source.html</loc>
   </url>
   <url>
@@ -251,7 +257,7 @@
     <loc>https://open62541pp.github.io/open62541pp/typeregistry_8hpp_source.html</loc>
   </url>
   <url>
-    <loc>https://open62541pp.github.io/open62541pp/typeregistry__generated_8hpp_source.html</loc>
+    <loc>https://open62541pp.github.io/open62541pp/ua_2typeregistry_8hpp_source.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/typewrapper_8hpp_source.html</loc>
@@ -416,6 +422,9 @@
     <loc>https://open62541pp.github.io/open62541pp/server_8h.html</loc>
   </url>
   <url>
+    <loc>https://open62541pp.github.io/open62541pp/ptr_8hpp.html</loc>
+  </url>
+  <url>
     <loc>https://open62541pp.github.io/open62541pp/result__utils_8hpp.html</loc>
   </url>
   <url>
@@ -446,12 +455,6 @@
     <loc>https://open62541pp.github.io/open62541pp/exception_8hpp.html</loc>
   </url>
   <url>
-    <loc>https://open62541pp.github.io/open62541pp/monitoreditem_8hpp.html</loc>
-  </url>
-  <url>
-    <loc>https://open62541pp.github.io/open62541pp/services_2monitoreditem_8hpp.html</loc>
-  </url>
-  <url>
     <loc>https://open62541pp.github.io/open62541pp/node_8hpp.html</loc>
   </url>
   <url>
@@ -471,6 +474,9 @@
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/log__default_8hpp.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/nodesetloader_8hpp.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/nodestore_8hpp.html</loc>
@@ -521,6 +527,12 @@
     <loc>https://open62541pp.github.io/open62541pp/method_8hpp.html</loc>
   </url>
   <url>
+    <loc>https://open62541pp.github.io/open62541pp/monitoreditem_8hpp.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/services_2monitoreditem_8hpp.html</loc>
+  </url>
+  <url>
     <loc>https://open62541pp.github.io/open62541pp/nodemanagement_8hpp.html</loc>
   </url>
   <url>
@@ -548,7 +560,7 @@
     <loc>https://open62541pp.github.io/open62541pp/typeregistry_8hpp.html</loc>
   </url>
   <url>
-    <loc>https://open62541pp.github.io/open62541pp/typeregistry__generated_8hpp.html</loc>
+    <loc>https://open62541pp.github.io/open62541pp/ua_2typeregistry_8hpp.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/typewrapper_8hpp.html</loc>
@@ -794,6 +806,12 @@
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1DataTypeBuilder-members.html</loc>
   </url>
   <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1DataTypeMember.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1DataTypeMember-members.html</loc>
+  </url>
+  <url>
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1DataValue.html</loc>
   </url>
   <url>
@@ -845,13 +863,25 @@
     <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1IsBitmaskEnum_3_01AccessLevel_01_4.html</loc>
   </url>
   <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1IsBitmaskEnum_3_01AccessLevel_01_4-members.html</loc>
+  </url>
+  <url>
     <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1IsBitmaskEnum_3_01EventNotifier_01_4.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1IsBitmaskEnum_3_01EventNotifier_01_4-members.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1IsBitmaskEnum_3_01NodeClass_01_4.html</loc>
   </url>
   <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1IsBitmaskEnum_3_01NodeClass_01_4-members.html</loc>
+  </url>
+  <url>
     <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1IsBitmaskEnum_3_01WriteMask_01_4.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1IsBitmaskEnum_3_01WriteMask_01_4-members.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1LocalizedText.html</loc>
@@ -924,12 +954,6 @@
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1Result-members.html</loc>
-  </url>
-  <url>
-    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1Result_3_01void_01_4.html</loc>
-  </url>
-  <url>
-    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1Result_3_01void_01_4-members.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1Server.html</loc>
@@ -1013,10 +1037,10 @@
     <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1TypeRegistry.html</loc>
   </url>
   <url>
-    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1TypeRegistry_3_01T_00_01std_1_1enable__if__t_3_01detail_1_1isTypeWrapper_3_01T_01_4_01_4_01_4.html</loc>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1TypeRegistry_3_01T_00_01std_1_1enable__if__t_3_01detail_1_1IsTypeWrapper_3_01T_01_4_1_1value_01_4_01_4.html</loc>
   </url>
   <url>
-    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1TypeRegistry_3_01T_00_01std_1_1enable__if__t_3_01detail_1_1isTypeWrapper_3_01T_01_4_01_4_01_4-members.html</loc>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1TypeRegistry_3_01T_00_01std_1_1enable__if__t_3_01detail_1_1IsTypeWrapper_3_01T_01_4_1_1value_01_4_01_4-members.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1TypeWrapper.html</loc>
@@ -1148,6 +1172,12 @@
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1ua_1_1AttributeOperand-members.html</loc>
   </url>
   <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1ua_1_1AxisInformation.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1ua_1_1AxisInformation-members.html</loc>
+  </url>
+  <url>
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1ua_1_1BrowseDescription.html</loc>
   </url>
   <url>
@@ -1230,6 +1260,12 @@
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1ua_1_1CallResponse-members.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1ua_1_1ComplexNumberType.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1ua_1_1ComplexNumberType-members.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1ua_1_1ContentFilter.html</loc>
@@ -1340,6 +1376,12 @@
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1ua_1_1DeleteSubscriptionsResponse-members.html</loc>
   </url>
   <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1ua_1_1DoubleComplexNumberType.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1ua_1_1DoubleComplexNumberType-members.html</loc>
+  </url>
+  <url>
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1ua_1_1ElementOperand.html</loc>
   </url>
   <url>
@@ -1368,6 +1410,12 @@
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1ua_1_1EnumValueType-members.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1ua_1_1EUInformation.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1ua_1_1EUInformation-members.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1ua_1_1EventFilter.html</loc>
@@ -1464,6 +1512,12 @@
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1ua_1_1ObjectTypeAttributes-members.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1ua_1_1Range.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1ua_1_1Range-members.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1ua_1_1ReadRequest.html</loc>
@@ -1682,6 +1736,12 @@
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1ua_1_1X509IdentityToken-members.html</loc>
   </url>
   <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1ua_1_1XVType.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1ua_1_1XVType-members.html</loc>
+  </url>
+  <url>
     <loc>https://open62541pp.github.io/open62541pp/structstd_1_1hash_3_01opcua_1_1ExpandedNodeId_01_4.html</loc>
   </url>
   <url>
@@ -1827,6 +1887,9 @@
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/namespacemembers_func_i.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/namespacemembers_func_l.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/namespacemembers_func_m.html</loc>

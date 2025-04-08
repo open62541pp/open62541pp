@@ -8,7 +8,5 @@ var searchData=
   ['yarrayitemtype_5finstrumentrange_5',['YArrayItemType_InstrumentRange',['../group__NodeIds.html#ggae04f3f37c2a8771449bd1aa3830d8568a2a9b3dc6b52701aacb714976b3ed0882',1,'opcua::ua']]],
   ['yarrayitemtype_5ftitle_6',['YArrayItemType_Title',['../group__NodeIds.html#ggae04f3f37c2a8771449bd1aa3830d8568a89ab8dd20032deb11acc52628f8206b9',1,'opcua::ua']]],
   ['yarrayitemtype_5fvalueprecision_7',['YArrayItemType_ValuePrecision',['../group__NodeIds.html#ggae04f3f37c2a8771449bd1aa3830d8568a77ced2c633b9acfce19b7af2235711ef',1,'opcua::ua']]],
-  ['yarrayitemtype_5fxaxisdefinition_8',['YArrayItemType_XAxisDefinition',['../group__NodeIds.html#ggae04f3f37c2a8771449bd1aa3830d8568aefbdf526066c7aed16c24d4f69326a10',1,'opcua::ua']]],
-  ['year_9',['year',['open62541/structUA__DateTimeStruct.html#a770b483a1e65dfb8c4992e1a79dc35ee',0,'UA_DateTimeStruct']]],
-  ['yield_10',['yield',['open62541/structUA__PubSubChannel.html#aa11aa8fa0db9f1a43a4b1353b67489b4',0,'UA_PubSubChannel']]]
+  ['yarrayitemtype_5fxaxisdefinition_8',['YArrayItemType_XAxisDefinition',['../group__NodeIds.html#ggae04f3f37c2a8771449bd1aa3830d8568aefbdf526066c7aed16c24d4f69326a10',1,'opcua::ua']]]
 ];

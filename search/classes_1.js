@@ -20,5 +20,6 @@ var searchData=
   ['asyncresult_3c_20usedetachedtoken_2c_20t_20_3e_17',['AsyncResult&lt; UseDetachedToken, T &gt;',['../structopcua_1_1AsyncResult_3_01UseDetachedToken_00_01T_01_4.html',1,'opcua']]],
   ['asyncresult_3c_20usefuturetoken_2c_20t_20_3e_18',['AsyncResult&lt; UseFutureToken, T &gt;',['../structopcua_1_1AsyncResult_3_01UseFutureToken_00_01T_01_4.html',1,'opcua']]],
   ['asyncservicecall_19',['AsyncServiceCall',['open62541/structAsyncServiceCall.html',0,'']]],
-  ['attributeoperand_20',['AttributeOperand',['../classopcua_1_1ua_1_1AttributeOperand.html',1,'opcua::AttributeOperand'],['../classopcua_1_1ua_1_1AttributeOperand.html',1,'opcua::ua::AttributeOperand']]]
+  ['attributeoperand_20',['AttributeOperand',['../classopcua_1_1ua_1_1AttributeOperand.html',1,'opcua::AttributeOperand'],['../classopcua_1_1ua_1_1AttributeOperand.html',1,'opcua::ua::AttributeOperand']]],
+  ['axisinformation_21',['AxisInformation',['../classopcua_1_1ua_1_1AxisInformation.html',1,'opcua::AxisInformation'],['../classopcua_1_1ua_1_1AxisInformation.html',1,'opcua::ua::AxisInformation']]]
 ];

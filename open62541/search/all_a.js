@@ -1,7 +1,7 @@
 var searchData=
 [
   ['handle_0',['handle',['../structUA__Connection.html#acc52d6b6984f09739dea63b7a479134a',1,'UA_Connection::handle'],['../structUA__ServerNetworkLayer.html#aa7d84ac7585cb30c0330603e54444833',1,'UA_ServerNetworkLayer::handle'],['../structUA__PubSubChannel.html#a0f994577918a209a1c9b9779ccbb877d',1,'UA_PubSubChannel::handle']]],
-  ['handler_1',['handler',['../structUA__Client__MonitoredItem.html#aa636ca915707bc282b65f4f21a573b06',1,'UA_Client_MonitoredItem']]],
+  ['handler_1',['handler',['../structUA__Client__MonitoredItem.html#ac5200c92667cc98128d27bfe5597a0b2',1,'UA_Client_MonitoredItem']]],
   ['hasadditionalinfo_2',['hasAdditionalInfo',['../structUA__DiagnosticInfo.html#affc1fe6b9121a6c4d9bab755947dcc54',1,'UA_DiagnosticInfo']]],
   ['hasinnerdiagnosticinfo_3',['hasInnerDiagnosticInfo',['../structUA__DiagnosticInfo.html#a061ea36f7f4d488c0ba6ea3be69754ed',1,'UA_DiagnosticInfo']]],
   ['hasinnerstatuscode_4',['hasInnerStatusCode',['../structUA__DiagnosticInfo.html#acb1b8dd7767baee39f4a8726f236046d',1,'UA_DiagnosticInfo']]],
@@ -18,7 +18,7 @@ var searchData=
   ['hasvalue_15',['hasValue',['../structUA__DataValue.html#af7a6da643af31005029ad3759deae136',1,'UA_DataValue']]],
   ['have_5fnodeiter_5fcallback_16',['HAVE_NODEITER_CALLBACK',['../client__highlevel_8h.html#ab3434b1c9a9c80e820354e9af541458c',1,'HAVE_NODEITER_CALLBACK:&#160;client_highlevel.h'],['../server_8h.html#ab3434b1c9a9c80e820354e9af541458c',1,'HAVE_NODEITER_CALLBACK:&#160;server.h']]],
   ['head_17',['head',['../structUA__VariableNode.html#abec9cd4f7715739d585a533491be2954',1,'UA_VariableNode::head'],['../structUA__VariableTypeNode.html#a8aaed72c7124ea789a9f856dd11114eb',1,'UA_VariableTypeNode::head'],['../structUA__MethodNode.html#ad009e6e8960f21710b66746479c6a7e9',1,'UA_MethodNode::head'],['../structUA__ObjectNode.html#a011835645b7866ae648803d333fedcad',1,'UA_ObjectNode::head'],['../structUA__ObjectTypeNode.html#ada2dc46a68801fde112e538da2d6ca0c',1,'UA_ObjectTypeNode::head'],['../structUA__ReferenceTypeNode.html#ae36426ebd25301ada078878fb1faaae4',1,'UA_ReferenceTypeNode::head'],['../structUA__DataTypeNode.html#a423928fd7bb0b273dbf964d8d5c3e9f0',1,'UA_DataTypeNode::head'],['../structUA__ViewNode.html#aedae4777fcd1ff074b42e363eecf248d',1,'UA_ViewNode::head'],['../unionUA__Node.html#aa97d9617a252c8a11790cbf902bcb826',1,'UA_Node::head'],['../structRefTree.html#a03b69e24bd0bfd417850377dc8ef084e',1,'RefTree::head']]],
-  ['header_18',['header',['../structmessage.html#add03eb088d098f5665bc93fe6e95cd8c',1,'message::header'],['../structUA__DataSetMessage.html#a5e7d2eabe32da8144116f251d4b8b018',1,'UA_DataSetMessage::header'],['../structUA__Session.html#a6702280f3e56ac834391635735dbc974',1,'UA_Session::header']]],
+  ['header_18',['header',['../structmessage.html#aca963a4fb563731834a9a6b034b3bc71',1,'message::header'],['../structUA__DataSetMessage.html#a5e7d2eabe32da8144116f251d4b8b018',1,'UA_DataSetMessage::header'],['../structUA__Session.html#a6702280f3e56ac834391635735dbc974',1,'UA_Session::header']]],
   ['hidebytesasym_19',['hideBytesAsym',['../ua__securechannel_8h.html#a6cfd2617ba5fefba6bbecdea3d66cbfc',1,'ua_securechannel.h']]],
   ['high_20',['High',['../struct__OpcUa__Range.html#ae7bbd6c91de0ebe8dc66a933934a5ef3',1,'_OpcUa_Range']]],
   ['high_21',['high',['../structUA__Range.html#aec76af82be50a55169fe13dde9f74037',1,'UA_Range']]],

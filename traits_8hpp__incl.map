@@ -1,5 +1,7 @@
 <map id="/home/runner/work/open62541pp/open62541pp/include/open62541pp/detail/traits.hpp" name="/home/runner/work/open62541pp/open62541pp/include/open62541pp/detail/traits.hpp">
 <area shape="rect" id="Node000001" title=" " alt="" coords="5,5,263,60"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="88,108,180,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="137,60,137,94,131,94,131,60"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="47,108,117,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="120,61,98,98,94,95,116,59"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="141,108,233,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="153,59,175,95,171,98,148,61"/>
 </map>

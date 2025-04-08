@@ -8,7 +8,7 @@ var searchData=
   ['official_20certification_5',['Official Certification',['../index.html#autotoc_md12',1,'']]],
   ['offset_6',['Offset',['../struct__OpcUa__TimeZoneDataType.html#aee015b4de40dd83049b11affdcbb4a47',1,'_OpcUa_TimeZoneDataType']]],
   ['offset_7',['offset',['../structUA__NetworkMessageOffset.html#a7b6fade5b14e433ca749bcc96e5795df',1,'UA_NetworkMessageOffset::offset'],['../structUA__TimeZoneDataType.html#af2335ac398e34df77427a439ca0b6de8',1,'UA_TimeZoneDataType::offset']]],
-  ['offsetdata_8',['offsetData',['../structUA__NetworkMessageOffset.html#a109ca35d20b10e02dbdfca1176d7542c',1,'UA_NetworkMessageOffset']]],
+  ['offsetdata_8',['offsetData',['../structUA__NetworkMessageOffset.html#a8a41e118f46f2f0bf008d10c1d6fa8d6',1,'UA_NetworkMessageOffset']]],
   ['offsets_9',['offsets',['../structUA__NetworkMessageOffsetBuffer.html#a2481b24020f3c04f888ce5817696e484',1,'UA_NetworkMessageOffsetBuffer']]],
   ['offsetssize_10',['offsetsSize',['../structUA__NetworkMessageOffsetBuffer.html#a2ce581edba879deb9a3bab0d1276648b',1,'UA_NetworkMessageOffsetBuffer']]],
   ['oldchannelstate_11',['oldChannelState',['../structUA__Client.html#a4156168e5ea7c0b802b1f8158ed8e5c9',1,'UA_Client']]],

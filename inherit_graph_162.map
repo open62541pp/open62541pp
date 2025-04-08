@@ -1,11 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" title=" " alt="" coords="5,109,117,134"/>
-<area shape="rect" id="Node000001" href="$structopcua_1_1IsBitmaskEnum_3_01AccessLevel_01_4.html" title=" " alt="" coords="165,5,336,45"/>
-<area shape="poly" id="edge251_Node000000_Node000001" title=" " alt="" coords="91,99,164,55,191,43,193,48,167,60,93,103"/>
-<area shape="rect" id="Node000002" href="$structopcua_1_1IsBitmaskEnum_3_01EventNotifier_01_4.html" title=" " alt="" coords="165,69,336,109"/>
-<area shape="poly" id="edge252_Node000000_Node000002" title=" " alt="" coords="131,107,165,101,166,106,131,112"/>
-<area shape="rect" id="Node000003" href="$structopcua_1_1IsBitmaskEnum_3_01NodeClass_01_4.html" title=" " alt="" coords="165,133,336,173"/>
-<area shape="poly" id="edge253_Node000000_Node000003" title=" " alt="" coords="131,130,166,136,165,142,131,136"/>
-<area shape="rect" id="Node000004" href="$structopcua_1_1IsBitmaskEnum_3_01WriteMask_01_4.html" title=" " alt="" coords="165,197,336,237"/>
-<area shape="poly" id="edge254_Node000000_Node000004" title=" " alt="" coords="93,139,167,183,193,195,191,200,164,188,91,144"/>
+<area shape="rect" id="Node000000" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="5,13,169,53"/>
+<area shape="rect" id="Node000001" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="217,5,469,60"/>
+<area shape="poly" id="edge253_Node000000_Node000001" title=" " alt="" coords="183,30,217,30,217,35,183,35"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1ua_1_1X509IdentityToken.html" title="UA_X509IdentityToken wrapper class." alt="" coords="517,20,731,45"/>
+<area shape="poly" id="edge254_Node000001_Node000002" title=" " alt="" coords="483,30,517,30,517,35,483,35"/>
 </map>

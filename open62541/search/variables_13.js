@@ -13,7 +13,7 @@ var searchData=
   ['targetnodeid_10',['TargetNodeId',['../struct__OpcUa__AddReferencesItem.html#adb3a2a32d88dd868495573a78f4e2ca4',1,'_OpcUa_AddReferencesItem::TargetNodeId'],['../struct__OpcUa__DeleteReferencesItem.html#a0369827321342d9ac74d13e7cea25acb',1,'_OpcUa_DeleteReferencesItem::TargetNodeId']]],
   ['targetnodeid_11',['targetNodeId',['../structUA__AddReferencesItem.html#a5201fcad609538d6e56a80c5b5a054d3',1,'UA_AddReferencesItem::targetNodeId'],['../structUA__DeleteReferencesItem.html#af71caa76cd8949548bc3cf7d17cdf5aa',1,'UA_DeleteReferencesItem::targetNodeId']]],
   ['targets_12',['Targets',['../struct__OpcUa__BrowsePathResult.html#ac4979cd4ed053e028812f36e25c10399',1,'_OpcUa_BrowsePathResult']]],
-  ['targets_13',['targets',['../structUA__NodeReferenceKind.html#a7b030a859dc176777492f048156de28f',1,'UA_NodeReferenceKind::targets'],['../structRefTree.html#ac986972ad9ef0edc1c19d644f2e18794',1,'RefTree::targets'],['../structUA__BrowsePathResult.html#a95699c1b9bc5e731870d44be9a9897b7',1,'UA_BrowsePathResult::targets']]],
+  ['targets_13',['targets',['../structUA__NodeReferenceKind.html#afce2bd5a0c5bca7bc78f6536d86ed4c3',1,'UA_NodeReferenceKind::targets'],['../structRefTree.html#ac986972ad9ef0edc1c19d644f2e18794',1,'RefTree::targets'],['../structUA__BrowsePathResult.html#a95699c1b9bc5e731870d44be9a9897b7',1,'UA_BrowsePathResult::targets']]],
   ['targetserveruri_14',['TargetServerUri',['../struct__OpcUa__AddReferencesItem.html#ac86f4cb89d7fdf2f3ecea9a5c93e054c',1,'_OpcUa_AddReferencesItem']]],
   ['targetserveruri_15',['targetServerUri',['../structUA__AddReferencesItem.html#af781db5e7c8e9326af4e6a02c292e68c',1,'UA_AddReferencesItem']]],
   ['targetssize_16',['targetsSize',['../structUA__NodeReferenceKind.html#a25295cd28c8c63f94cad04553596cba7',1,'UA_NodeReferenceKind::targetsSize'],['../structUA__BrowsePathResult.html#aaeddebfa348c60bb07102dd7655344e9',1,'UA_BrowsePathResult::targetsSize']]],
@@ -76,7 +76,7 @@ var searchData=
   ['transportsettings_73',['transportSettings',['../structUA__WriterGroupConfig.html#a93c7981bcaec6028e81851d16e1d2f3d',1,'UA_WriterGroupConfig::transportSettings'],['../structUA__DataSetWriterConfig.html#ac48bbb1325984a4fed1453442b8f5d49',1,'UA_DataSetWriterConfig::transportSettings'],['../structUA__DataSetReaderConfig.html#a1ef68e3ad061dccd89abd9e55c6258eb',1,'UA_DataSetReaderConfig::transportSettings']]],
   ['treatuncertainasbad_74',['TreatUncertainAsBad',['../struct__OpcUa__AggregateConfiguration.html#aeb969c7f865ec30e847ff02e5c217f59',1,'_OpcUa_AggregateConfiguration']]],
   ['treatuncertainasbad_75',['treatUncertainAsBad',['../structUA__AggregateConfiguration.html#a6bc2a0c4e34478f35f54e34f1e70283a',1,'UA_AggregateConfiguration']]],
-  ['tree_76',['tree',['../structUA__NodeReferenceKind.html#a656e2d810280f5bc81161b2c65004315',1,'UA_NodeReferenceKind']]],
+  ['tree_76',['tree',['../structUA__NodeReferenceKind.html#aad193d811707e4c04582d51cd4da604d',1,'UA_NodeReferenceKind']]],
   ['treeentry_77',['treeEntry',['../structUA__TimerEntry.html#a54a7af45bfb01088745f296310fb2b07',1,'UA_TimerEntry']]],
   ['trigger_78',['Trigger',['../struct__OpcUa__DataChangeFilter.html#ad45438c60dd434e240cb7c246aea9672',1,'_OpcUa_DataChangeFilter']]],
   ['trigger_79',['trigger',['../structUA__DataChangeFilter.html#a6a9849293c8e2fc0d84a5fef239197ce',1,'UA_DataChangeFilter']]],
@@ -94,7 +94,8 @@ var searchData=
   ['typedefinitionnode_91',['TypeDefinitionNode',['../struct__OpcUa__NodeTypeDescription.html#af87bab6556ad66c02a25b2567895c920',1,'_OpcUa_NodeTypeDescription::TypeDefinitionNode'],['../struct__OpcUa__QueryDataSet.html#ab0868c4f8cc69fad0d6654307570d7cc',1,'_OpcUa_QueryDataSet::TypeDefinitionNode']]],
   ['typeid_92',['typeId',['../structUA__ExtensionObject.html#aae7bb3e696306431a2cd7bc511bd5c3f',1,'UA_ExtensionObject::typeId'],['../structUA__DataType.html#a600c88a57a9e371cfe1da19f273f441b',1,'UA_DataType::typeId']]],
   ['typekind_93',['typeKind',['../structUA__DataType.html#a11d003b2dcb235d7b3815c5e755bc2c1',1,'UA_DataType']]],
-  ['types_94',['types',['../structUA__DataTypeArray.html#a2b91abac38be738a7ea3ac06f2167e70',1,'UA_DataTypeArray']]],
-  ['typessize_95',['typesSize',['../structUA__DataTypeArray.html#abcd59e48b20e976cdb7f6c41c17d84a7',1,'UA_DataTypeArray']]],
-  ['typical_5fresponse_5ftime_96',['typical_response_time',['../structmqtt__client.html#a4d1f8c7f4c364b07f75efcaf9613150e',1,'mqtt_client']]]
+  ['typename_94',['typeName',['../structUA__DataType.html#a2142068fbf2dfdef925b523f65c71afa',1,'UA_DataType']]],
+  ['types_95',['types',['../structUA__DataTypeArray.html#a2b91abac38be738a7ea3ac06f2167e70',1,'UA_DataTypeArray']]],
+  ['typessize_96',['typesSize',['../structUA__DataTypeArray.html#abcd59e48b20e976cdb7f6c41c17d84a7',1,'UA_DataTypeArray']]],
+  ['typical_5fresponse_5ftime_97',['typical_response_time',['../structmqtt__client.html#a4d1f8c7f4c364b07f75efcaf9613150e',1,'mqtt_client']]]
 ];
