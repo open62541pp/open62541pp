@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.18.0] - 2025-04-08
+
+### Added
+
+- Free `toString` function for all native/wrapper types (#520)
+- Optionally move ownership of `ValueCallback` and `DataSource` to `Server` (#544)
+- `Guid::parse` (#545)
+- `NodeId::parse`, `ExpandedNodeId::parse` (#546)
+- Load nodesets from `NodeSet2.xml` files at runtime 🔥 (#551)
+- Construct `Client`/`Server` from native instances (#558)
+- `DataTypeMember` wrapper (#564)
+- `ApplicationType` enum (#566)
+- `ApplicationDescription` constructor (#566)
+- `ClientConfig::addCustomDataTypes` and `ServerConfig::addCustomDataTypes` (#569)
+
+### Changed
+
+- Remove ostream overloads for `Guid` and `XmlElement` (#560)
+- Remove `ByteString` <-> `std::string_view` equality operator overloads (#561)
+
+### Fixed
+
+- Unreachable code in `NodeId::identifierIf` (#540)
+- Deallocation failure in read/write requests (#552)
+- `Node::writeValueArray` for `std::vector<bool>` (#553)
+- Check if server runs before calling `UA_Server_run_shutdown` (#556)
+- Store `typeName` and `memberName` in `DataType` wrapper (#562, #563)
+
 ## [0.17.0] - 2025-01-18
 
 ### Added
@@ -807,7 +835,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial public release
 
-[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.17.0...HEAD
+[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.18.0...HEAD
+[0.18.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.18.0
 [0.17.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.17.0
 [0.16.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.16.0
 [0.15.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.15.0
