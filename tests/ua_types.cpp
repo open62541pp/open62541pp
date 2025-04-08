@@ -13,6 +13,26 @@ TEST_CASE("EnumValueType") {
     CHECK(enumValueType.description() == LocalizedText("", "Description"));
 }
 
+TEST_CASE("ApplicationDescription") {
+    const ApplicationDescription description(
+        "applicationUri",
+        "productUri",
+        {"", "applicationName"},
+        ApplicationType::ClientAndServer,
+        "gatewayServerUri",
+        "discoveryProfileUri",
+        {String{"discoveryUrl"}}
+    );
+    CHECK(description.applicationUri() == "applicationUri");
+    CHECK(description.productUri() == "productUri");
+    CHECK(description.applicationName() == LocalizedText("", "applicationName"));
+    CHECK(description.applicationType() == ApplicationType::ClientAndServer);
+    CHECK(description.gatewayServerUri() == "gatewayServerUri");
+    CHECK(description.discoveryProfileUri() == "discoveryProfileUri");
+    CHECK(description.discoveryUrls().size() == 1);
+    CHECK(description.discoveryUrls().at(0) == "discoveryUrl");
+}
+
 TEST_CASE("RequestHeader") {
     const auto now = DateTime::now();
     const RequestHeader header({1, 1000}, now, 1, 2, "auditEntryId", 10, {});
