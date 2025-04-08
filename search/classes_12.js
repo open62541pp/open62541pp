@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['translatebrowsepathstonodeidsrequest_0',['TranslateBrowsePathsToNodeIdsRequest',['../classopcua_1_1ua_1_1TranslateBrowsePathsToNodeIdsRequest.html',1,'opcua::TranslateBrowsePathsToNodeIdsRequest'],['../classopcua_1_1ua_1_1TranslateBrowsePathsToNodeIdsRequest.html',1,'opcua::ua::TranslateBrowsePathsToNodeIdsRequest']]],
-  ['translatebrowsepathstonodeidsresponse_1',['TranslateBrowsePathsToNodeIdsResponse',['../classopcua_1_1ua_1_1TranslateBrowsePathsToNodeIdsResponse.html',1,'opcua::TranslateBrowsePathsToNodeIdsResponse'],['../classopcua_1_1ua_1_1TranslateBrowsePathsToNodeIdsResponse.html',1,'opcua::ua::TranslateBrowsePathsToNodeIdsResponse']]],
+  ['translatebrowsepathstonodeidsrequest_0',['translatebrowsepathstonodeidsrequest',['../classopcua_1_1ua_1_1TranslateBrowsePathsToNodeIdsRequest.html',1,'opcua::ua::TranslateBrowsePathsToNodeIdsRequest'],['../classopcua_1_1ua_1_1TranslateBrowsePathsToNodeIdsRequest.html',1,'opcua::TranslateBrowsePathsToNodeIdsRequest']]],
+  ['translatebrowsepathstonodeidsresponse_1',['translatebrowsepathstonodeidsresponse',['../classopcua_1_1ua_1_1TranslateBrowsePathsToNodeIdsResponse.html',1,'opcua::ua::TranslateBrowsePathsToNodeIdsResponse'],['../classopcua_1_1ua_1_1TranslateBrowsePathsToNodeIdsResponse.html',1,'opcua::TranslateBrowsePathsToNodeIdsResponse']]],
   ['typeconverter_2',['TypeConverter',['../structopcua_1_1TypeConverter.html',1,'opcua']]],
   ['typeconverter_3c_20char_5bn_5d_3e_3',['TypeConverter&lt; char[N]&gt;',['../structopcua_1_1TypeConverter_3_01char_0fN_0e_4.html',1,'opcua']]],
   ['typeconverter_3c_20const_20char_20_2a_20_3e_4',['TypeConverter&lt; const char * &gt;',['../structopcua_1_1TypeConverter_3_01const_01char_01_5_01_4.html',1,'opcua']]],

@@ -1,7 +1,7 @@
 var searchData=
 [
   ['ua_2ehpp_0',['ua.hpp',['../ua_8hpp.html',1,'']]],
-  ['ua_5farchitecture_2eh_1',['ua_architecture.h',['open62541/eCos_2ua__architecture_8h.html',0,'(Global Namespace)'],['open62541/freertosLWIP_2ua__architecture_8h.html',0,'(Global Namespace)'],['open62541/posix_2ua__architecture_8h.html',0,'(Global Namespace)'],['open62541/vxworks_2ua__architecture_8h.html',0,'(Global Namespace)'],['open62541/wec7_2ua__architecture_8h.html',0,'(Global Namespace)'],['open62541/win32_2ua__architecture_8h.html',0,'(Global Namespace)']]],
+  ['ua_5farchitecture_2eh_1',['ua_architecture.h',['open62541/win32_2ua__architecture_8h.html',0,'(Global Namespace)'],['open62541/wec7_2ua__architecture_8h.html',0,'(Global Namespace)'],['open62541/vxworks_2ua__architecture_8h.html',0,'(Global Namespace)'],['open62541/posix_2ua__architecture_8h.html',0,'(Global Namespace)'],['open62541/eCos_2ua__architecture_8h.html',0,'(Global Namespace)'],['open62541/freertosLWIP_2ua__architecture_8h.html',0,'(Global Namespace)']]],
   ['ua_5fclient_5finternal_2eh_2',['ua_client_internal.h',['open62541/ua__client__internal_8h.html',0,'']]],
   ['ua_5fconnection_5finternal_2eh_3',['ua_connection_internal.h',['open62541/ua__connection__internal_8h.html',0,'']]],
   ['ua_5fdiscovery_5fmanager_2eh_4',['ua_discovery_manager.h',['open62541/ua__discovery__manager_8h.html',0,'']]],

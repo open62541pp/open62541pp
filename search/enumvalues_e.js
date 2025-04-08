@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['object_0',['Object',['../namespaceopcua.html#a15d78f717a24899cb2ca2af33f5c7c96a497031794414a552435f90151ac3b54b',1,'opcua::Object'],['../group__Wrapper.html#ggab70e6afcb3d7f50b3cff9eb08ef063e1a497031794414a552435f90151ac3b54b',1,'opcua::ua::Object']]],
+  ['object_0',['object',['../group__Wrapper.html#ggab70e6afcb3d7f50b3cff9eb08ef063e1a497031794414a552435f90151ac3b54b',1,'opcua::ua::Object'],['../namespaceopcua.html#a15d78f717a24899cb2ca2af33f5c7c96a497031794414a552435f90151ac3b54b',1,'opcua::Object']]],
   ['objectattributes_1',['ObjectAttributes',['../group__NodeIds.html#ggaedae20be023a8a8fc3c7929a538c36f5a456c9962099992f7105eb34b7490a54c',1,'opcua::ua']]],
   ['objectattributes_5fencoding_5fdefaultbinary_2',['ObjectAttributes_Encoding_DefaultBinary',['../group__NodeIds.html#gga9c34978aaec9cdebeb6452435e27b268a2876c6842a3221b74e2ccc0bb5d51cd3',1,'opcua::ua']]],
   ['objectattributes_5fencoding_5fdefaultjson_3',['ObjectAttributes_Encoding_DefaultJson',['../group__NodeIds.html#gga9c34978aaec9cdebeb6452435e27b268a3a5b2267a92fc03c02c60395876dedfc',1,'opcua::ua']]],
@@ -10,7 +10,7 @@ var searchData=
   ['objectnode_5fencoding_5fdefaultjson_7',['ObjectNode_Encoding_DefaultJson',['../group__NodeIds.html#gga9c34978aaec9cdebeb6452435e27b268aaab962d46319a14799028ef57fa30f22',1,'opcua::ua']]],
   ['objectnode_5fencoding_5fdefaultxml_8',['ObjectNode_Encoding_DefaultXml',['../group__NodeIds.html#gga9c34978aaec9cdebeb6452435e27b268a777334138c955c80bbe0cccc7d112258',1,'opcua::ua']]],
   ['objectsfolder_9',['ObjectsFolder',['../group__NodeIds.html#gga9c34978aaec9cdebeb6452435e27b268a47989e0a5dfb2c0f170a6f77c1a8feba',1,'opcua::ua']]],
-  ['objecttype_10',['ObjectType',['../namespaceopcua.html#a15d78f717a24899cb2ca2af33f5c7c96ab74c375731dc50c662d6ce08befe2db0',1,'opcua::ObjectType'],['../group__Wrapper.html#ggab70e6afcb3d7f50b3cff9eb08ef063e1ab74c375731dc50c662d6ce08befe2db0',1,'opcua::ua::ObjectType']]],
+  ['objecttype_10',['objecttype',['../namespaceopcua.html#a15d78f717a24899cb2ca2af33f5c7c96ab74c375731dc50c662d6ce08befe2db0',1,'opcua::ObjectType'],['../group__Wrapper.html#ggab70e6afcb3d7f50b3cff9eb08ef063e1ab74c375731dc50c662d6ce08befe2db0',1,'opcua::ua::ObjectType']]],
   ['objecttypeattributes_11',['ObjectTypeAttributes',['../group__NodeIds.html#ggaedae20be023a8a8fc3c7929a538c36f5a88560e06ef7d7a51c5ae605053bb965e',1,'opcua::ua']]],
   ['objecttypeattributes_5fencoding_5fdefaultbinary_12',['ObjectTypeAttributes_Encoding_DefaultBinary',['../group__NodeIds.html#gga9c34978aaec9cdebeb6452435e27b268a2d2091c3004213d728b164da73931043',1,'opcua::ua']]],
   ['objecttypeattributes_5fencoding_5fdefaultjson_13',['ObjectTypeAttributes_Encoding_DefaultJson',['../group__NodeIds.html#gga9c34978aaec9cdebeb6452435e27b268a233282201bd221e3594b7b9f0ecd12f1',1,'opcua::ua']]],

@@ -1,7 +1,7 @@
 <map id="opcua::ua::RelativePathElement" name="opcua::ua::RelativePathElement">
-<area shape="rect" id="Node000001" title="UA_RelativePathElement wrapper class." alt="" coords="26,196,255,221"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,93,276,148"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="143,162,143,196,138,196,138,162"/>
-<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="51,5,231,45"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="143,59,143,93,138,93,138,59"/>
+<area shape="rect" id="Node000001" title="UA_RelativePathElement wrapper class." alt="" coords="26,181,255,207"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,79,276,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="143,147,143,181,138,181,138,147"/>
+<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap native objects." alt="" coords="59,5,222,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="143,44,143,79,138,79,138,44"/>
 </map>

@@ -1,7 +1,7 @@
 <map id="opcua::ua::VariableTypeAttributes" name="opcua::ua::VariableTypeAttributes">
-<area shape="rect" id="Node000001" title="UA_VariableAttributes wrapper class." alt="" coords="30,196,270,221"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,93,295,148"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="153,162,153,196,147,196,147,162"/>
-<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="55,5,245,45"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="153,59,153,93,147,93,147,59"/>
+<area shape="rect" id="Node000001" title="UA_VariableAttributes wrapper class." alt="" coords="30,181,270,207"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,79,295,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="153,147,153,181,147,181,147,147"/>
+<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap native objects." alt="" coords="69,5,231,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="153,44,153,79,147,79,147,44"/>
 </map>

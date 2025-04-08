@@ -69,7 +69,7 @@ var searchData=
   ['historicaldataconfigurationtype_5fstartofonlinearchive_66',['HistoricalDataConfigurationType_StartOfOnlineArchive',['../group__NodeIds.html#ggae04f3f37c2a8771449bd1aa3830d8568aaae819790edd918f3f3c2a1260d0e887',1,'opcua::ua']]],
   ['historicaldataconfigurationtype_5fstepped_67',['HistoricalDataConfigurationType_Stepped',['../group__NodeIds.html#ggae04f3f37c2a8771449bd1aa3830d8568ae7494d00f4ded4e8625e16bc341f6264',1,'opcua::ua']]],
   ['historicaleventfilter_68',['HistoricalEventFilter',['../group__NodeIds.html#ggae04f3f37c2a8771449bd1aa3830d8568a6f57f6d4f038124afb615550638519bf',1,'opcua::ua']]],
-  ['historizing_69',['Historizing',['../namespaceopcua.html#ac702b87ae822429bbdde24595a526917a2248cb490d5c8c8f57a12b001a05efb5',1,'opcua::Historizing'],['../namespaceopcua.html#aa348a84f0c1993df6edaea06a949b010a2248cb490d5c8c8f57a12b001a05efb5',1,'opcua::Historizing'],['../group__Wrapper.html#ggab70e6afcb3d7f50b3cff9eb08ef063e1a2248cb490d5c8c8f57a12b001a05efb5',1,'opcua::ua::Historizing']]],
+  ['historizing_69',['historizing',['../namespaceopcua.html#ac702b87ae822429bbdde24595a526917a2248cb490d5c8c8f57a12b001a05efb5',1,'opcua::Historizing'],['../namespaceopcua.html#aa348a84f0c1993df6edaea06a949b010a2248cb490d5c8c8f57a12b001a05efb5',1,'opcua::Historizing'],['../group__Wrapper.html#ggab70e6afcb3d7f50b3cff9eb08ef063e1a2248cb490d5c8c8f57a12b001a05efb5',1,'opcua::ua::Historizing']]],
   ['historydata_70',['HistoryData',['../group__NodeIds.html#ggaedae20be023a8a8fc3c7929a538c36f5a31df8274f4c348fc2968f8c9a0525d8d',1,'opcua::ua']]],
   ['historydata_5fencoding_5fdefaultbinary_71',['HistoryData_Encoding_DefaultBinary',['../group__NodeIds.html#gga9c34978aaec9cdebeb6452435e27b268a0e8060e7e85c6ea95a7af4286cf8efc1',1,'opcua::ua']]],
   ['historydata_5fencoding_5fdefaultjson_72',['HistoryData_Encoding_DefaultJson',['../group__NodeIds.html#gga9c34978aaec9cdebeb6452435e27b268a7343d5b96a92d9bc5acf63f044e4b8c3',1,'opcua::ua']]],
@@ -86,7 +86,7 @@ var searchData=
   ['historymodifieddata_5fencoding_5fdefaultbinary_83',['HistoryModifiedData_Encoding_DefaultBinary',['../group__NodeIds.html#gga9c34978aaec9cdebeb6452435e27b268aaff4b187b9231434a52a848ee75c83ea',1,'opcua::ua']]],
   ['historymodifieddata_5fencoding_5fdefaultjson_84',['HistoryModifiedData_Encoding_DefaultJson',['../group__NodeIds.html#gga9c34978aaec9cdebeb6452435e27b268a62def3686194cf812cd8ee7b18cf5369',1,'opcua::ua']]],
   ['historymodifieddata_5fencoding_5fdefaultxml_85',['HistoryModifiedData_Encoding_DefaultXml',['../group__NodeIds.html#gga9c34978aaec9cdebeb6452435e27b268ac8f90a2a95384a8e5c54ba61b3282885',1,'opcua::ua']]],
-  ['historyread_86',['HistoryRead',['../namespaceopcua.html#a2d9cd3eb90d8ef33ba537879ec42dac7ab5561f28b61342fc8662881bca2a1a65',1,'opcua::HistoryRead'],['../namespaceopcua.html#a3dfe5537e321b9e31e58249b23cbe357ab5561f28b61342fc8662881bca2a1a65',1,'opcua::HistoryRead']]],
+  ['historyread_86',['historyread',['../namespaceopcua.html#a2d9cd3eb90d8ef33ba537879ec42dac7ab5561f28b61342fc8662881bca2a1a65',1,'opcua::HistoryRead'],['../namespaceopcua.html#a3dfe5537e321b9e31e58249b23cbe357ab5561f28b61342fc8662881bca2a1a65',1,'opcua::HistoryRead']]],
   ['historyreaddetails_87',['HistoryReadDetails',['../group__NodeIds.html#ggaedae20be023a8a8fc3c7929a538c36f5aca826e6030bf7e91e22506eca5231924',1,'opcua::ua']]],
   ['historyreaddetails_5fencoding_5fdefaultbinary_88',['HistoryReadDetails_Encoding_DefaultBinary',['../group__NodeIds.html#gga9c34978aaec9cdebeb6452435e27b268a4e1bc18021dc02bb84f486cc7b3eb8fb',1,'opcua::ua']]],
   ['historyreaddetails_5fencoding_5fdefaultjson_89',['HistoryReadDetails_Encoding_DefaultJson',['../group__NodeIds.html#gga9c34978aaec9cdebeb6452435e27b268ac8b9047357cba1dd1f313b1398b2eead',1,'opcua::ua']]],
@@ -159,6 +159,6 @@ var searchData=
   ['historyupdateresult_5fencoding_5fdefaultxml_156',['HistoryUpdateResult_Encoding_DefaultXml',['../group__NodeIds.html#gga9c34978aaec9cdebeb6452435e27b268a6cb85d60e0119b5106565f2aa3373c59',1,'opcua::ua']]],
   ['historyupdatetype_157',['HistoryUpdateType',['../group__NodeIds.html#ggaedae20be023a8a8fc3c7929a538c36f5a631bd9546158bb0c861e484531963707',1,'opcua::ua']]],
   ['historyupdatetype_5fenumvalues_158',['HistoryUpdateType_EnumValues',['../group__NodeIds.html#ggae04f3f37c2a8771449bd1aa3830d8568a949002d6a0d9e33acbb8963cb5be2790',1,'opcua::ua']]],
-  ['historywrite_159',['HistoryWrite',['../namespaceopcua.html#a2d9cd3eb90d8ef33ba537879ec42dac7abc5deb8194f52a1c47763dc6326897e8',1,'opcua::HistoryWrite'],['../namespaceopcua.html#a3dfe5537e321b9e31e58249b23cbe357abc5deb8194f52a1c47763dc6326897e8',1,'opcua::HistoryWrite']]],
+  ['historywrite_159',['historywrite',['../namespaceopcua.html#a2d9cd3eb90d8ef33ba537879ec42dac7abc5deb8194f52a1c47763dc6326897e8',1,'opcua::HistoryWrite'],['../namespaceopcua.html#a3dfe5537e321b9e31e58249b23cbe357abc5deb8194f52a1c47763dc6326897e8',1,'opcua::HistoryWrite']]],
   ['httpscertificatetype_160',['HttpsCertificateType',['../group__NodeIds.html#gga2569007f0057e512722f4e7ba35e7f22af0e994592dfb49cb160c24ab0f2a981a',1,'opcua::ua']]]
 ];

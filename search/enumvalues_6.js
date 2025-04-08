@@ -54,5 +54,5 @@ var searchData=
   ['greaterthan_51',['GreaterThan',['../group__Wrapper.html#ggacfe24a78909ca3a26071086ec1a237c4af6d044fe1f01fb0c956b80099e2a3072',1,'opcua::ua']]],
   ['greaterthanorequal_52',['GreaterThanOrEqual',['../group__Wrapper.html#ggacfe24a78909ca3a26071086ec1a237c4a25c44812e9d75f685d2a0b815dea1ebe',1,'opcua::ua']]],
   ['guardvariabletype_53',['GuardVariableType',['../group__NodeIds.html#gga66506f40bd61f5a83cb287c175e90c5eab447fd5efb65a9b5003e8a0a29123166',1,'opcua::ua']]],
-  ['guid_54',['Guid',['../namespaceopcua.html#a05d617e4c64656fa2ef6baf2af636f90ac195f641dd597766b98e4ffa9e2f0e75',1,'opcua::Guid'],['../group__NodeIds.html#ggaedae20be023a8a8fc3c7929a538c36f5ac195f641dd597766b98e4ffa9e2f0e75',1,'opcua::ua::Guid']]]
+  ['guid_54',['guid',['../namespaceopcua.html#a05d617e4c64656fa2ef6baf2af636f90ac195f641dd597766b98e4ffa9e2f0e75',1,'opcua::Guid'],['../group__NodeIds.html#ggaedae20be023a8a8fc3c7929a538c36f5ac195f641dd597766b98e4ffa9e2f0e75',1,'opcua::ua::Guid']]]
 ];

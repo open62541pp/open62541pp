@@ -1,7 +1,7 @@
 <map id="opcua::LocalizedText" name="opcua::LocalizedText">
-<area shape="rect" id="Node000001" title="UA_LocalizedText wrapper class." alt="" coords="37,196,194,221"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,93,225,148"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="118,162,118,196,113,196,113,162"/>
-<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="36,5,195,45"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="118,59,118,93,113,93,113,59"/>
+<area shape="rect" id="Node000001" title="UA_LocalizedText wrapper class." alt="" coords="37,181,194,207"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,79,225,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="118,147,118,181,113,181,113,147"/>
+<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap native objects." alt="" coords="34,5,197,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="118,44,118,79,113,79,113,44"/>
 </map>

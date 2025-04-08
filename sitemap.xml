@@ -863,25 +863,13 @@
     <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1IsBitmaskEnum_3_01AccessLevel_01_4.html</loc>
   </url>
   <url>
-    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1IsBitmaskEnum_3_01AccessLevel_01_4-members.html</loc>
-  </url>
-  <url>
     <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1IsBitmaskEnum_3_01EventNotifier_01_4.html</loc>
-  </url>
-  <url>
-    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1IsBitmaskEnum_3_01EventNotifier_01_4-members.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1IsBitmaskEnum_3_01NodeClass_01_4.html</loc>
   </url>
   <url>
-    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1IsBitmaskEnum_3_01NodeClass_01_4-members.html</loc>
-  </url>
-  <url>
     <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1IsBitmaskEnum_3_01WriteMask_01_4.html</loc>
-  </url>
-  <url>
-    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1IsBitmaskEnum_3_01WriteMask_01_4-members.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1LocalizedText.html</loc>
@@ -954,6 +942,12 @@
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1Result-members.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1Result_3_01void_01_4.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1Result_3_01void_01_4-members.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1Server.html</loc>
@@ -1794,9 +1788,6 @@
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/index.html</loc>
-  </url>
-  <url>
-    <loc>https://open62541pp.github.io/open62541pp/doxygen_crawl.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/examples.html</loc>

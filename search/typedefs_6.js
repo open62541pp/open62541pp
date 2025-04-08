@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['logfunction_0',['LogFunction',['../namespaceopcua.html#a8a4f4c5caf8085bc41c9a6c9e0f76aec',1,'opcua::LogFunction'],['../namespaceopcua.html#a8a4f4c5caf8085bc41c9a6c9e0f76aec',1,'opcua::LogFunction']]]
+  ['logfunction_0',['LogFunction',['../namespaceopcua.html#a9c79406812e3ed2bb7a6eefee11a43f0',1,'opcua']]],
+  ['logger_1',['Logger',['../namespaceopcua.html#a99b7374652ef62b26466859a7874be31',1,'opcua']]]
 ];

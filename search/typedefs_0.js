@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['aggregateconfiguration_0',['AggregateConfiguration',['../group__Wrapper.html#gae6e58677584ff5c2b56167e4beb0cd7b',1,'opcua::AggregateConfiguration'],['../group__Wrapper.html#gae6e58677584ff5c2b56167e4beb0cd7b',1,'opcua::ua::AggregateConfiguration']]]
+  ['aggregateconfiguration_0',['aggregateconfiguration',['../group__Wrapper.html#ga7c3f688e3137440d1658571b1b9d90a9',1,'opcua::AggregateConfiguration'],['../group__Wrapper.html#ga7c3f688e3137440d1658571b1b9d90a9',1,'opcua::ua::AggregateConfiguration']]]
 ];

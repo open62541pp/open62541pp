@@ -1,7 +1,7 @@
 <map id="opcua::ua::CallMethodRequest" name="opcua::ua::CallMethodRequest">
-<area shape="rect" id="Node000001" title="UA_CallMethodRequest wrapper class." alt="" coords="28,196,248,221"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,93,271,148"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="141,162,141,196,135,196,135,162"/>
-<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="53,5,223,45"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="141,59,141,93,135,93,135,59"/>
+<area shape="rect" id="Node000001" title="UA_CallMethodRequest wrapper class." alt="" coords="28,181,248,207"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,79,271,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="141,147,141,181,135,181,135,147"/>
+<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap native objects." alt="" coords="57,5,219,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="141,44,141,79,135,79,135,44"/>
 </map>

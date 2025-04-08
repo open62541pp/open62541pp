@@ -1,9 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" title=" " alt="" coords="212,5,391,45"/>
-<area shape="rect" id="Node000001" href="$classopcua_1_1String.html" title="UA_String wrapper class." alt="" coords="439,49,545,74"/>
-<area shape="poly" id="edge4_Node000000_Node000001" title=" " alt="" coords="405,42,439,49,438,54,404,47"/>
-<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="5,77,164,117"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="214,70,389,125"/>
-<area shape="poly" id="edge5_Node000003_Node000002" title=" " alt="" coords="178,95,214,95,214,100,178,100"/>
-<area shape="poly" id="edge6_Node000002_Node000001" title=" " alt="" coords="402,76,438,69,439,74,403,81"/>
+<area shape="rect" id="Node000000" href="$classopcua_1_1Event.html" title="Create and trigger events." alt="" coords="5,5,112,31"/>
 </map>

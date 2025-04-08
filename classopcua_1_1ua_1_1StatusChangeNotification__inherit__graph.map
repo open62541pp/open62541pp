@@ -1,7 +1,7 @@
 <map id="opcua::ua::StatusChangeNotification" name="opcua::ua::StatusChangeNotification">
-<area shape="rect" id="Node000001" title="UA_StatusChangeNotification wrapper class." alt="" coords="623,20,881,45"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="263,5,575,60"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="588,30,622,30,622,35,588,35"/>
-<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="5,13,215,53"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="228,30,262,30,262,35,228,35"/>
+<area shape="rect" id="Node000001" title="UA_StatusChangeNotification wrapper class." alt="" coords="576,20,835,45"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="216,5,528,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="542,30,576,30,576,35,542,35"/>
+<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap native objects." alt="" coords="5,20,168,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="182,30,216,30,216,35,182,35"/>
 </map>
