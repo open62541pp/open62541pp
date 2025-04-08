@@ -105,6 +105,10 @@ public:
     /// Set application name, default: `open62541-based OPC UA Application`.
     void setApplicationName(std::string_view name);
 
+    /// Add custom data types.
+    /// All data types provided are automatically considered for decoding of received messages.
+    void addCustomDataTypes(Span<const DataType> types);
+
     /// Set custom access control.
     void setAccessControl(AccessControlBase& accessControl);
     /// Set custom access control (transfer ownership to Server).
@@ -211,9 +215,10 @@ public:
         config().setAccessControl(std::move(accessControl));
     }
 
-    /// Set custom data types.
-    /// All data types provided are automatically considered for decoding of received messages.
-    void setCustomDataTypes(Span<const DataType> dataTypes);
+    [[deprecated("use ServerConfig::addCustomDataTypes via config() or pass config to Server")]]
+    void setCustomDataTypes(Span<const DataType> dataTypes) {
+        config().addCustomDataTypes(dataTypes);
+    }
 
     /// Get active sessions.
     std::vector<Session> sessions();

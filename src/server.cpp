@@ -118,6 +118,10 @@ void ServerConfig::setApplicationName(std::string_view name) {
     copyApplicationDescriptionToEndpoints(native());
 }
 
+void ServerConfig::addCustomDataTypes(Span<const DataType> types) {
+    detail::addDataTypes(native().customDataTypes, types);
+}
+
 static void copyUserTokenPoliciesToEndpoints(UA_ServerConfig& config) {
     // copy config.accessControl.userTokenPolicies -> config.endpoints[i].userIdentityTokens
     auto& ac = config.accessControl;
@@ -312,10 +316,6 @@ void Server::setCustomHostname([[maybe_unused]] std::string_view hostname) {
 #if UAPP_OPEN62541_VER_LE(1, 3)
     asWrapper<String>(config()->customHostname) = String(hostname);
 #endif
-}
-
-void Server::setCustomDataTypes(Span<const DataType> dataTypes) {
-    detail::addDataTypes(config()->customDataTypes, dataTypes);
 }
 
 std::vector<Session> Server::sessions() {
