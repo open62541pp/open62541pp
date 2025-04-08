@@ -177,12 +177,12 @@ public:
         std::string_view discoveryProfileUri,
         Span<const String> discoveryUrls
     ) {
-        handle()->applicationUri = detail::toNative(std::move(applicationUri));
-        handle()->productUri = detail::toNative(std::move(productUri));
+        handle()->applicationUri = detail::toNative(applicationUri);
+        handle()->productUri = detail::toNative(productUri);
         handle()->applicationName = detail::toNative(std::move(applicationName));
         handle()->applicationType = static_cast<UA_ApplicationType>(applicationType);
-        handle()->gatewayServerUri = detail::toNative(std::move(gatewayServerUri));
-        handle()->discoveryProfileUri = detail::toNative(std::move(discoveryProfileUri));
+        handle()->gatewayServerUri = detail::toNative(gatewayServerUri);
+        handle()->discoveryProfileUri = detail::toNative(discoveryProfileUri);
         handle()->discoveryUrlsSize = discoveryUrls.size();
         handle()->discoveryUrls = detail::toNativeArray(discoveryUrls);
     }
