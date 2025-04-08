@@ -8,7 +8,9 @@
 #include "open62541pp/detail/open62541/common.h"
 #else
 #include "open62541pp/detail/open62541/push_options.h"
+
 #include <NodesetLoader/backendOpen62541.h>
+
 #include "open62541pp/detail/open62541/pop_options.h"
 #endif
 
