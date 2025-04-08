@@ -18,7 +18,7 @@ TEST_CASE("ApplicationDescription") {
         "applicationUri",
         "productUri",
         {"", "applicationName"},
-        ApplicationType::ClientAndServer,
+        opcua::ApplicationType::ClientAndServer,
         "gatewayServerUri",
         "discoveryProfileUri",
         {String{"discoveryUrl"}}
@@ -26,7 +26,7 @@ TEST_CASE("ApplicationDescription") {
     CHECK(description.applicationUri() == "applicationUri");
     CHECK(description.productUri() == "productUri");
     CHECK(description.applicationName() == LocalizedText("", "applicationName"));
-    CHECK(description.applicationType() == ApplicationType::ClientAndServer);
+    CHECK(description.applicationType() == opcua::ApplicationType::ClientAndServer);
     CHECK(description.gatewayServerUri() == "gatewayServerUri");
     CHECK(description.discoveryProfileUri() == "discoveryProfileUri");
     CHECK(description.discoveryUrls().size() == 1);

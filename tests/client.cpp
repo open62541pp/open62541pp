@@ -74,7 +74,7 @@ TEST_CASE("Client discovery") {
         const auto& result = results[0];
         CHECK(result.applicationUri() == "urn:open62541.server.application");
         CHECK(result.productUri() == "http://open62541.org");
-        CHECK(result.applicationType() == ApplicationType::Server);
+        CHECK(result.applicationType() == opcua::ApplicationType::Server);
         CHECK(result.discoveryUrls().size() >= 1);
     }
 
