@@ -14,7 +14,7 @@ int main() {
     const auto& dataTypeColor = getColorDataType();
 
     // Provide custom data type definitions to server
-    server.setCustomDataTypes({
+    server.config().addCustomDataTypes({
         dataTypePoint,
         dataTypeMeasurements,
         dataTypeOpt,

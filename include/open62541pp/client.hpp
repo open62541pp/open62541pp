@@ -94,6 +94,10 @@ public:
 
     /// Set message security mode.
     void setSecurityMode(MessageSecurityMode mode) noexcept;
+
+    /// Add custom data types.
+    /// All data types provided are automatically considered for decoding of received messages.
+    void addCustomDataTypes(Span<const DataType> types);
 };
 
 /* ------------------------------------------- Client ------------------------------------------- */
@@ -187,9 +191,10 @@ public:
         config().setSecurityMode(mode);
     }
 
-    /// Set custom data types.
-    /// All data types provided are automatically considered for decoding of received messages.
-    void setCustomDataTypes(Span<const DataType> dataTypes);
+    [[deprecated("use ClientConfig::addCustomDataTypes via config() or pass config to Client")]]
+    void setCustomDataTypes(Span<const DataType> dataTypes) {
+        config().addCustomDataTypes(dataTypes);
+    }
 
     /// Set a state callback that will be called after the client is connected.
     void onConnected(StateCallback callback);

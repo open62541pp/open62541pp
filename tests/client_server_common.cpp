@@ -55,6 +55,21 @@ TEMPLATE_TEST_CASE("Config", "", ClientConfig, ServerConfig) {
         CHECK(lastMessage == "Message");
     }
 
+    SECTION("addCustomDataTypes") {
+        CHECK(config->customDataTypes == nullptr);
+
+        config.addCustomDataTypes({
+            DataType(UA_TYPES[UA_TYPES_STRING]),
+            DataType(UA_TYPES[UA_TYPES_INT32]),
+        });
+        CHECK(config->customDataTypes != nullptr);
+        CHECK(config->customDataTypes->next == nullptr);
+        CHECK(config->customDataTypes->typesSize == 2);
+        CHECK(config->customDataTypes->types != nullptr);
+        CHECK((config->customDataTypes->types[0] == UA_TYPES[UA_TYPES_STRING]));
+        CHECK((config->customDataTypes->types[1] == UA_TYPES[UA_TYPES_INT32]));
+    }
+
     SECTION("handle") {
         CHECK(config.handle() != nullptr);
         CHECK(std::as_const(config).handle() != nullptr);
@@ -88,21 +103,6 @@ TEMPLATE_TEST_CASE("Connection", "", Client, Server) {
     SECTION("handle") {
         CHECK(connection.handle() != nullptr);
         CHECK(std::as_const(connection).handle() != nullptr);
-    }
-
-    SECTION("setCustomDataTypes") {
-        CHECK(connection.config()->customDataTypes == nullptr);
-
-        connection.setCustomDataTypes({
-            DataType(UA_TYPES[UA_TYPES_STRING]),
-            DataType(UA_TYPES[UA_TYPES_INT32]),
-        });
-        CHECK(connection.config()->customDataTypes != nullptr);
-        CHECK(connection.config()->customDataTypes->next == nullptr);
-        CHECK(connection.config()->customDataTypes->typesSize == 2);
-        CHECK(connection.config()->customDataTypes->types != nullptr);
-        CHECK((connection.config()->customDataTypes->types[0] == UA_TYPES[UA_TYPES_STRING]));
-        CHECK((connection.config()->customDataTypes->types[1] == UA_TYPES[UA_TYPES_INT32]));
     }
 
     SECTION("Equality operators") {

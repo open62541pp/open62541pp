@@ -146,6 +146,10 @@ void ClientConfig::setSecurityMode(MessageSecurityMode mode) noexcept {
     native().securityMode = static_cast<UA_MessageSecurityMode>(mode);
 }
 
+void ClientConfig::addCustomDataTypes(Span<const DataType> types) {
+    detail::addDataTypes(native().customDataTypes, types);
+}
+
 /* --------------------------------------- State callbacks -------------------------------------- */
 
 // State changes in open62541.
@@ -368,10 +372,6 @@ std::vector<EndpointDescription> Client::getEndpoints(std::string_view serverUrl
     UA_Array_delete(array, arraySize, &UA_TYPES[UA_TYPES_ENDPOINTDESCRIPTION]);
     throwIfBad(status);
     return result;
-}
-
-void Client::setCustomDataTypes(Span<const DataType> dataTypes) {
-    detail::addDataTypes(config()->customDataTypes, dataTypes);
 }
 
 static void setStateCallback(Client& client, detail::ClientState state, StateCallback&& callback) {

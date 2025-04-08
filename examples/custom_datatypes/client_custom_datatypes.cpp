@@ -17,7 +17,7 @@ int main() {
     const auto& dataTypeColor = getColorDataType();
 
     // Provide custom data type definitions to client
-    client.setCustomDataTypes({
+    client.config().addCustomDataTypes({
         dataTypePoint,
         dataTypeMeasurements,
         dataTypeOpt,
