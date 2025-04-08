@@ -3,30 +3,30 @@
 
 #include <open62541pp/client.hpp>
 
-constexpr std::string_view toString(UA_ApplicationType applicationType) {
+constexpr std::string_view toString(opcua::ApplicationType applicationType) {
     switch (applicationType) {
-    case UA_APPLICATIONTYPE_SERVER:
+    case opcua::ApplicationType::Server:
         return "Server";
-    case UA_APPLICATIONTYPE_CLIENT:
+    case opcua::ApplicationType::Client:
         return "Client";
-    case UA_APPLICATIONTYPE_CLIENTANDSERVER:
+    case opcua::ApplicationType::ClientAndServer:
         return "Client and Server";
-    case UA_APPLICATIONTYPE_DISCOVERYSERVER:
+    case opcua::ApplicationType::DiscoveryServer:
         return "Discovery Server";
     default:
         return "Unknown";
     }
 }
 
-constexpr std::string_view toString(UA_MessageSecurityMode securityMode) {
+constexpr std::string_view toString(opcua::MessageSecurityMode securityMode) {
     switch (securityMode) {
-    case UA_MESSAGESECURITYMODE_INVALID:
+    case opcua::MessageSecurityMode::Invalid:
         return "Invalid";
-    case UA_MESSAGESECURITYMODE_NONE:
+    case opcua::MessageSecurityMode::None:
         return "None";
-    case UA_MESSAGESECURITYMODE_SIGN:
+    case opcua::MessageSecurityMode::Sign:
         return "Sign";
-    case UA_MESSAGESECURITYMODE_SIGNANDENCRYPT:
+    case opcua::MessageSecurityMode::SignAndEncrypt:
         return "Sign and Encrypt";
     default:
         return "No valid security mode";

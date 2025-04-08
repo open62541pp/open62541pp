@@ -148,6 +148,18 @@ public:
 };
 
 /**
+ * Application type.
+ * @see UA_ApplicationType
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.4
+ */
+enum class ApplicationType : int32_t {
+    Server = 0,
+    Client = 1,
+    ClientAndServer = 2,
+    DiscoveryServer = 3,
+};
+
+/**
  * UA_ApplicationDescription wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.2
  */
@@ -156,10 +168,29 @@ class ApplicationDescription
 public:
     using TypeWrapper::TypeWrapper;
 
+    ApplicationDescription(
+        std::string_view applicationUri,
+        std::string_view productUri,
+        LocalizedText applicationName,
+        ApplicationType applicationType,
+        std::string_view gatewayServerUri,
+        std::string_view discoveryProfileUri,
+        Span<const String> discoveryUrls
+    ) {
+        handle()->applicationUri = detail::toNative(applicationUri);
+        handle()->productUri = detail::toNative(productUri);
+        handle()->applicationName = detail::toNative(std::move(applicationName));
+        handle()->applicationType = static_cast<UA_ApplicationType>(applicationType);
+        handle()->gatewayServerUri = detail::toNative(gatewayServerUri);
+        handle()->discoveryProfileUri = detail::toNative(discoveryProfileUri);
+        handle()->discoveryUrlsSize = discoveryUrls.size();
+        handle()->discoveryUrls = detail::toNativeArray(discoveryUrls);
+    }
+
     UAPP_GETTER_WRAPPER(String, getApplicationUri, applicationUri)
     UAPP_GETTER_WRAPPER(String, getProductUri, productUri)
     UAPP_GETTER_WRAPPER(LocalizedText, getApplicationName, applicationName)
-    UAPP_GETTER(UA_ApplicationType, getApplicationType, applicationType)
+    UAPP_GETTER_CAST(ApplicationType, getApplicationType, applicationType)
     UAPP_GETTER_WRAPPER(String, getGatewayServerUri, gatewayServerUri)
     UAPP_GETTER_WRAPPER(String, getDiscoveryProfileUri, discoveryProfileUri)
     UAPP_GETTER_SPAN_WRAPPER(String, getDiscoveryUrls, discoveryUrls, discoveryUrlsSize)
@@ -284,7 +315,7 @@ public:
     UAPP_GETTER_WRAPPER(String, getEndpointUrl, endpointUrl)
     UAPP_GETTER_WRAPPER(ApplicationDescription, getServer, server)
     UAPP_GETTER_WRAPPER(ByteString, getServerCertificate, serverCertificate)
-    UAPP_GETTER(UA_MessageSecurityMode, getSecurityMode, securityMode)
+    UAPP_GETTER_CAST(MessageSecurityMode, getSecurityMode, securityMode)
     UAPP_GETTER_WRAPPER(String, getSecurityPolicyUri, securityPolicyUri)
     UAPP_GETTER_SPAN_WRAPPER(
         UserTokenPolicy, getUserIdentityTokens, userIdentityTokens, userIdentityTokensSize

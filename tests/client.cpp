@@ -74,7 +74,7 @@ TEST_CASE("Client discovery") {
         const auto& result = results[0];
         CHECK(result.applicationUri() == "urn:open62541.server.application");
         CHECK(result.productUri() == "http://open62541.org");
-        CHECK(result.applicationType() == UA_APPLICATIONTYPE_SERVER);
+        CHECK(result.applicationType() == opcua::ApplicationType::Server);
         CHECK(result.discoveryUrls().size() >= 1);
     }
 
@@ -85,7 +85,7 @@ TEST_CASE("Client discovery") {
         const auto& endpoint = endpoints[0];
         CHECK(endpoint.endpointUrl() == localServerUrl);
         CHECK(endpoint.serverCertificate() == ByteString());
-        CHECK(endpoint.securityMode() == UA_MESSAGESECURITYMODE_NONE);
+        CHECK(endpoint.securityMode() == MessageSecurityMode::None);
         CHECK(endpoint.securityPolicyUri() == "http://opcfoundation.org/UA/SecurityPolicy#None");
         CHECK(
             endpoint.transportProfileUri() ==
