@@ -30,6 +30,9 @@
 #if __has_include(<open62541/plugin/create_certificate.h>)  // since v1.3
 #include <open62541/plugin/create_certificate.h>
 #endif
+#if __has_include(<open62541/plugin/nodesetloader.h>)  // since v1.4
+#include <open62541/plugin/nodesetloader.h>
+#endif
 
 #endif
 

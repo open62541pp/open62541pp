@@ -73,6 +73,11 @@ constexpr void clear(T& native, const UA_DataType& type) noexcept {
 }
 
 template <typename T>
+void deallocate(T* native) noexcept {
+    UA_free(native);  // NOLINT
+}
+
+template <typename T>
 void deallocate(T* native, const UA_DataType& type) noexcept {
     assert(isValidTypeCombination<T>(type));
     UA_delete(native, &type);
