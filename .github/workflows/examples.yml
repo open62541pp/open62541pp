@@ -6,15 +6,13 @@ on:
   pull_request:
 
 jobs:
-  linux:
+  examples:
+    name: Examples
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
         with:
           submodules: recursive
-      - uses: aminya/setup-cpp@v1
-        with:
-          ninja: true
       - name: Build
         run: |
           mkdir build

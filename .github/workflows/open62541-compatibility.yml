@@ -38,9 +38,6 @@ jobs:
           ref: ${{ matrix.version }}
           path: open62541
           submodules: recursive
-      - uses: aminya/setup-cpp@v1
-        with:
-          ninja: true
       - name: Build & install open62541
         env:
           CFLAGS: "-Wstrict-overflow=0" # disable strict-overflow error in v1.1
