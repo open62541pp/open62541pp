@@ -1,6 +1,5 @@
 #pragma once
 
-#include "open62541pp/config.hpp"
 #include "open62541pp/detail/open62541/push_options.h"
 
 #if __has_include(<open62541.h>)
@@ -24,11 +23,14 @@
 // plugins
 #include <open62541/plugin/accesscontrol.h>
 #include <open62541/plugin/log.h>
-#if UAPP_OPEN62541_VER_GE(1, 2)  // nodestore plugins defined in server.h before v1.2
+#if __has_include(<open62541/plugin/nodestore.h>)  // nodestore plugins defined in server.h before v1.2
 #include <open62541/plugin/nodestore.h>
 #endif
 #if __has_include(<open62541/plugin/create_certificate.h>)  // since v1.3
 #include <open62541/plugin/create_certificate.h>
+#endif
+#if __has_include(<open62541/plugin/nodesetloader.h>)  // since v1.4
+#include <open62541/plugin/nodesetloader.h>
 #endif
 
 #endif
