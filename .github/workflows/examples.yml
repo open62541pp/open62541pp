@@ -6,7 +6,8 @@ on:
   pull_request:
 
 jobs:
-  linux:
+  examples:
+    name: Examples
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
