@@ -370,9 +370,9 @@ constexpr std::true_type isBitmaskEnum(NodeAttributesMask);
     }
 #define UAPP_NODEATTR_WRAPPER(Type, suffix, member, flag)                                          \
     UAPP_GETTER_WRAPPER_CONST(Type, get##suffix, member)                                           \
-    auto& set##suffix(const Type& member) {                                                        \
+    auto& set##suffix(Type member) {                                                        \
         handle()->specifiedAttributes |= flag;                                                     \
-        asWrapper<Type>(handle()->member) = member;                                                \
+        asWrapper<Type>(handle()->member) = std::move(member);                                                \
         return *this;                                                                              \
     }
 #define UAPP_NODEATTR_ARRAY(Type, suffix, member, memberSize, flag)                                \
