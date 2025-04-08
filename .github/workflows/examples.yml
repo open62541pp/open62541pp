@@ -12,9 +12,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: recursive
-      - uses: aminya/setup-cpp@v1
-        with:
-          ninja: true
       - name: Build
         run: |
           mkdir build
