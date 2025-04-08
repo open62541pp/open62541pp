@@ -7,7 +7,7 @@ on:
 
 jobs:
   test:
-    name: ${{ matrix.config.name }} (${{ matrix.build_type }}, ${{ matrix.library_type }})
+    name: ${{ matrix.config.name }} (${{ matrix.build-type }}, ${{ matrix.library-type }})
     strategy:
       fail-fast: true
       matrix:
@@ -115,11 +115,11 @@ jobs:
             os: windows-2022
             compiler: msvc
 
-        build_type:
+        build-type:
           - Debug
           - Release
 
-        library_type:
+        library-type:
           - static
           - shared
 
@@ -129,8 +129,8 @@ jobs:
               os: ubuntu-24.04
               compiler: clang++
               flags: "-DUAPP_ENABLE_CLANG_TIDY=ON"
-            build_type: Debug
-            library_type: static
+            build-type: Debug
+            library-type: static
 
         exclude:
           # reduce number of jobs
@@ -147,27 +147,27 @@ jobs:
         run: >
           cmake -S . -B ./build
           -DCMAKE_CXX_COMPILER=${{ matrix.config.compiler }}
-          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
-          -DBUILD_SHARED_LIBS=${{ matrix.library_type == 'shared' }}
+          -DCMAKE_BUILD-TYPE=${{ matrix.build-type }}
+          -DBUILD_SHARED_LIBS=${{ matrix.library-type == 'shared' }}
           -DUA_ENABLE_ENCRYPTION=${{ runner.os == 'Windows' && 'OFF' || 'OPENSSL' }}
           -DUA_ENABLE_METHODCALLS=ON
           -DUA_ENABLE_SUBSCRIPTIONS=ON
           -DUA_ENABLE_SUBSCRIPTIONS_EVENTS=ON
           -DUAPP_BUILD_TESTS=ON
           -DUAPP_BUILD_EXAMPLES=ON
-          -DUAPP_ENABLE_COVERAGE=${{ matrix.config.coverage && matrix.build_type == 'Debug' }}
+          -DUAPP_ENABLE_COVERAGE=${{ matrix.config.coverage && matrix.build-type == 'Debug' }}
           -DUAPP_ENABLE_NODESETLOADER=${{ runner.os == 'Windows' && 'OFF' || 'ON' }}
           -DUAPP_WARNINGS_AS_ERRORS=ON
           ${{ matrix.config.flags }}
 
       - name: Build
-        run: cmake --build ./build --config ${{ matrix.build_type }} --parallel
+        run: cmake --build ./build --config ${{ matrix.build-type }} --parallel
 
       - name: Run tests
-        run: ctest --test-dir ./build --build-config ${{ matrix.build_type }} --output-on-failure
+        run: ctest --test-dir ./build --build-config ${{ matrix.build-type }} --output-on-failure
 
       - name: Generate coverage reports
-        if: matrix.config.coverage && matrix.build_type == 'Debug'
+        if: matrix.config.coverage && matrix.build-type == 'Debug'
         env:
           GCOV: ${{ matrix.config.gcov }}
         run: |
@@ -175,7 +175,7 @@ jobs:
           gcovr ./build/ -f "include/" -f "src/" --txt --xml ./build/coverage.xml
 
       - name: Upload coverage reports to Codecov
-        if: matrix.config.coverage && matrix.build_type == 'Debug'
+        if: matrix.config.coverage && matrix.build-type == 'Debug'
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
