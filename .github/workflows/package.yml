@@ -7,13 +7,17 @@ on:
 
 jobs:
   cmake:
-    name: CMake package (${{ matrix.build_type }}, ${{ matrix.library_type }})
+    name: CMake package (${{ matrix.build-type }}, ${{ matrix.library-type }})
     runs-on: ubuntu-24.04
     strategy:
       fail-fast: true
       matrix:
-        build_type: ["Debug", "Release"]
-        library_type: ["static", "shared"]
+        build-type:
+          - Debug
+          - Release
+        library-type:
+          - static
+          - shared
     env:
       CMAKE_GENERATOR: Ninja
     steps:
@@ -25,8 +29,8 @@ jobs:
           mkdir build
           cd build
           cmake -G Ninja \
-            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
-            -DBUILD_SHARED_LIBS=${{ matrix.library_type == 'shared' }} \
+            -DCMAKE_BUILD-TYPE=${{ matrix.build-type }} \
+            -DBUILD_SHARED_LIBS=${{ matrix.library-type == 'shared' }} \
             ..
           cmake --build .
           sudo cmake --install .

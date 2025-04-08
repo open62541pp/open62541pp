@@ -132,6 +132,11 @@ jobs:
             build_type: Debug
             library_type: static
 
+        exclude:
+          # reduce number of jobs
+          - build-type: Debug
+            library-type: shared
+
     runs-on: ${{ matrix.config.os }}
     steps:
       - uses: actions/checkout@v4
