@@ -53,6 +53,15 @@
             }
         },
         {
+            "name": "dev-iwyu",
+            "inherits": [
+                "dev"
+            ],
+            "cacheVariables": {
+                "CMAKE_CXX_INCLUDE_WHAT_YOU_USE": "iwyu;-Xiwyu;--mapping_file=${sourceDir}/.open62541pp.imp"
+            }
+        },
+        {
             "name": "examples",
             "inherits": [
                 "base"
