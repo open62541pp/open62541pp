@@ -21,13 +21,11 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-option(UAPP_ENABLE_COVERAGE "Enable coverage reporting for gcc/clang" OFF)
-option(UAPP_WARNINGS_AS_ERRORS "Treat warnings as errors" OFF)
-
-# interface "library" to set the c++ standard / compile-time options requested
 add_library(open62541pp_project_options INTERFACE)
 target_compile_features(open62541pp_project_options INTERFACE cxx_std_17)
 
+option(UAPP_ENABLE_COVERAGE "Enable coverage reporting for gcc/clang" OFF)
+option(UAPP_WARNINGS_AS_ERRORS "Treat warnings as errors" OFF)
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
     target_compile_options(open62541pp_project_options INTERFACE
         -Wall
