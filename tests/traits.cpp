@@ -1,5 +1,7 @@
 #include <array>
 #include <list>
+#include <string>
+#include <string_view>
 #include <vector>
 
 #include <catch2/catch_template_test_macros.hpp>
@@ -60,4 +62,22 @@ TEMPLATE_TEST_CASE("IsContiguousRange false", "", (std::list<int>), (std::vector
     STATIC_CHECK_FALSE(detail::IsContiguousRange<const TestType>::value);
     STATIC_CHECK_FALSE(detail::IsContiguousRange<const TestType&>::value);
     STATIC_CHECK_FALSE(detail::IsContiguousRange<const TestType&&>::value);
+}
+
+TEMPLATE_TEST_CASE("IsStringLike true", "", (std::string), (std::string_view)) {
+    STATIC_CHECK(detail::IsStringLike<TestType>::value);
+    STATIC_CHECK(detail::IsStringLike<TestType&>::value);
+    STATIC_CHECK(detail::IsStringLike<TestType&&>::value);
+    STATIC_CHECK(detail::IsStringLike<const TestType>::value);
+    STATIC_CHECK(detail::IsStringLike<const TestType&>::value);
+    STATIC_CHECK(detail::IsStringLike<const TestType&&>::value);
+}
+
+TEMPLATE_TEST_CASE("IsStringLike false", "", bool, int, (std::array<char, 3>), (std::vector<char>)) {
+    STATIC_CHECK_FALSE(detail::IsStringLike<TestType>::value);
+    STATIC_CHECK_FALSE(detail::IsStringLike<TestType&>::value);
+    STATIC_CHECK_FALSE(detail::IsStringLike<TestType&&>::value);
+    STATIC_CHECK_FALSE(detail::IsStringLike<const TestType>::value);
+    STATIC_CHECK_FALSE(detail::IsStringLike<const TestType&>::value);
+    STATIC_CHECK_FALSE(detail::IsStringLike<const TestType&&>::value);
 }
