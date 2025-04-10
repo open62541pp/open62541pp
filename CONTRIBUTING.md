@@ -28,7 +28,7 @@ cmake -DCMAKE_BUILD_TYPE=Debug \
       -DUAPP_BUILD_TESTS=ON \
       -DUAPP_ENABLE_CLANG_TIDY=ON \
       -DUAPP_ENABLE_SANITIZER_ADDRESS=ON \
-      -DUAPP_ENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON \
+      -DUAPP_ENABLE_SANITIZER_UNDEFINED=ON \
       -DUAPP_WARNINGS_AS_ERRORS=ON \
       ..
 # or use ccmake/cmake-gui to toggle the project options

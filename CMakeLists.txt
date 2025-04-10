@@ -28,41 +28,51 @@ option(UAPP_WARNINGS_AS_ERRORS "Treat warnings as errors" OFF)
 add_library(open62541pp_project_options INTERFACE)
 target_compile_features(open62541pp_project_options INTERFACE cxx_std_17)
 
-include(cmake/Sanitizers.cmake)
-include(cmake/StaticAnalyzers.cmake)
-
-if(MSVC)
-    set(warnings
-        /permissive-
-        /W4
-        /w14640
-        /wd4127  # conditional expression is constant
-        /wd4661  # explicit template instantiations in cpp files
-        /wd4702  # unreachable code, false positive
-        /wd4996  # deprecation gmtime, localtime
-    )
-    if(UAPP_WARNINGS_AS_ERRORS)
-        list(APPEND warnings /WX)
-    endif()
-    target_compile_options(open62541pp_project_options INTERFACE ${warnings})
-else()
-    set(warnings
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
+    target_compile_options(open62541pp_project_options INTERFACE
         -Wall
         -Wextra
         -Wshadow
         -Wnon-virtual-dtor
         -Wpedantic
+        $<$<BOOL:${UAPP_WARNINGS_AS_ERRORS}>:-Werror>
     )
-    if(UAPP_WARNINGS_AS_ERRORS)
-        list(APPEND warnings -Werror)
-    endif()
-    target_compile_options(open62541pp_project_options INTERFACE ${warnings})
-
     if(UAPP_ENABLE_COVERAGE)
         target_compile_options(open62541pp_project_options INTERFACE --coverage -O0 -g)
         target_link_libraries(open62541pp_project_options INTERFACE --coverage)
     endif()
+elseif(MSVC)
+    target_compile_options(open62541pp_project_options INTERFACE
+        /permissive-
+        /W4
+        /w14640
+        /wd4127   # conditional expression is constant
+        /wd4661   # explicit template instantiations in cpp files
+        /wd4702   # unreachable code, false positive
+        /wd4996   # deprecation gmtime, localtime
+        $<$<BOOL:${UAPP_WARNINGS_AS_ERRORS}>:/WX>
+    )
 endif()
+
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
+    set(sanitizers "")
+    foreach(san IN ITEMS address leak undefined thread)
+        string(TOUPPER ${san} san_upper)
+        option(UAPP_ENABLE_SANITIZER_${san_upper} "Enable ${san} sanitizer" OFF)
+        if(UAPP_ENABLE_SANITIZER_${san_upper})
+            list(APPEND sanitizers ${san})
+        endif()
+    endforeach()
+
+    list(JOIN sanitizers "," sanitizers_joined)
+    if(sanitizers_joined)
+        message(STATUS "Sanitizers enabled: ${sanitizers_joined}")
+        target_compile_options(open62541pp_project_options INTERFACE -fsanitize=${sanitizers_joined})
+        target_link_options(open62541pp_project_options INTERFACE -fsanitize=${sanitizers_joined})
+    endif()
+endif()
+
+include(cmake/StaticAnalyzers.cmake)
 
 # threads
 find_package(Threads REQUIRED)
