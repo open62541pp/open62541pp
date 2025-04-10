@@ -303,19 +303,19 @@ install(
 include(CMakePackageConfigHelpers)
 configure_package_config_file(
     "${PROJECT_SOURCE_DIR}/cmake/open62541ppConfig.cmake.in"
-    "${CMAKE_BINARY_DIR}/open62541ppConfig.cmake"
+    "${PROJECT_BINARY_DIR}/open62541ppConfig.cmake"
     INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/open62541pp
 )
 
 write_basic_package_version_file(
-    "${CMAKE_BINARY_DIR}/open62541ppConfigVersion.cmake"
+    "${PROJECT_BINARY_DIR}/open62541ppConfigVersion.cmake"
     VERSION ${CMAKE_PROJECT_VERSION}
     COMPATIBILITY SameMinorVersion
 )
 
 install(
     FILES
-        "${CMAKE_BINARY_DIR}/open62541ppConfigVersion.cmake"
-        "${CMAKE_BINARY_DIR}/open62541ppConfig.cmake"
+        "${PROJECT_BINARY_DIR}/open62541ppConfigVersion.cmake"
+        "${PROJECT_BINARY_DIR}/open62541ppConfig.cmake"
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/open62541pp
 )
