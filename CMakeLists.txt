@@ -21,46 +21,68 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-option(UAPP_ENABLE_COVERAGE "Enable coverage reporting for gcc/clang" OFF)
-option(UAPP_WARNINGS_AS_ERRORS "Treat warnings as errors" OFF)
-
-# interface "library" to set the c++ standard / compile-time options requested
 add_library(open62541pp_project_options INTERFACE)
 target_compile_features(open62541pp_project_options INTERFACE cxx_std_17)
 
-include(cmake/Sanitizers.cmake)
-include(cmake/StaticAnalyzers.cmake)
-
-if(MSVC)
-    set(warnings
-        /permissive-
-        /W4
-        /w14640
-        /wd4127  # conditional expression is constant
-        /wd4661  # explicit template instantiations in cpp files
-        /wd4702  # unreachable code, false positive
-        /wd4996  # deprecation gmtime, localtime
-    )
-    if(UAPP_WARNINGS_AS_ERRORS)
-        list(APPEND warnings /WX)
-    endif()
-    target_compile_options(open62541pp_project_options INTERFACE ${warnings})
-else()
-    set(warnings
+option(UAPP_ENABLE_COVERAGE "Enable coverage reporting for gcc/clang" OFF)
+option(UAPP_WARNINGS_AS_ERRORS "Treat warnings as errors" OFF)
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
+    target_compile_options(open62541pp_project_options INTERFACE
         -Wall
         -Wextra
         -Wshadow
         -Wnon-virtual-dtor
         -Wpedantic
+        $<$<BOOL:${UAPP_WARNINGS_AS_ERRORS}>:-Werror>
     )
-    if(UAPP_WARNINGS_AS_ERRORS)
-        list(APPEND warnings -Werror)
-    endif()
-    target_compile_options(open62541pp_project_options INTERFACE ${warnings})
-
     if(UAPP_ENABLE_COVERAGE)
         target_compile_options(open62541pp_project_options INTERFACE --coverage -O0 -g)
         target_link_libraries(open62541pp_project_options INTERFACE --coverage)
+    endif()
+elseif(MSVC)
+    target_compile_options(open62541pp_project_options INTERFACE
+        /permissive-
+        /W4
+        /w14640
+        /wd4127   # conditional expression is constant
+        /wd4661   # explicit template instantiations in cpp files
+        /wd4702   # unreachable code, false positive
+        /wd4996   # deprecation gmtime, localtime
+        $<$<BOOL:${UAPP_WARNINGS_AS_ERRORS}>:/WX>
+    )
+endif()
+
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
+    set(sanitizers "")
+    foreach(san IN ITEMS address leak undefined thread)
+        string(TOUPPER ${san} san_upper)
+        option(UAPP_ENABLE_SANITIZER_${san_upper} "Enable ${san} sanitizer" OFF)
+        if(UAPP_ENABLE_SANITIZER_${san_upper})
+            list(APPEND sanitizers ${san})
+        endif()
+    endforeach()
+
+    list(JOIN sanitizers "," sanitizers_joined)
+    if(sanitizers_joined)
+        message(STATUS "Sanitizers enabled: ${sanitizers_joined}")
+        target_compile_options(open62541pp_project_options INTERFACE -fsanitize=${sanitizers_joined})
+        target_link_options(open62541pp_project_options INTERFACE -fsanitize=${sanitizers_joined})
+    endif()
+endif()
+
+option(UAPP_ENABLE_CLANG_TIDY "Enable static analysis with clang-tidy" OFF)
+if(UAPP_ENABLE_CLANG_TIDY)
+    message(STATUS "Static code analysis with clang-tidy enabled")
+    find_program(CLANG_TIDY_EXE NAMES clang-tidy)
+    if(CLANG_TIDY_EXE)
+        message(STATUS "Found clang-tidy: ${CLANG_TIDY_EXE}")
+        if(UAPP_WARNINGS_AS_ERRORS)
+            set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_EXE};-warnings-as-errors=*")
+        else()
+            set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_EXE}")
+        endif()
+    else()
+        message(SEND_ERROR "clang-tidy requested but executable not found")
     endif()
 endif()
 
@@ -303,19 +325,19 @@ install(
 include(CMakePackageConfigHelpers)
 configure_package_config_file(
     "${PROJECT_SOURCE_DIR}/cmake/open62541ppConfig.cmake.in"
-    "${CMAKE_BINARY_DIR}/open62541ppConfig.cmake"
+    "${PROJECT_BINARY_DIR}/open62541ppConfig.cmake"
     INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/open62541pp
 )
 
 write_basic_package_version_file(
-    "${CMAKE_BINARY_DIR}/open62541ppConfigVersion.cmake"
+    "${PROJECT_BINARY_DIR}/open62541ppConfigVersion.cmake"
     VERSION ${CMAKE_PROJECT_VERSION}
     COMPATIBILITY SameMinorVersion
 )
 
 install(
     FILES
-        "${CMAKE_BINARY_DIR}/open62541ppConfigVersion.cmake"
-        "${CMAKE_BINARY_DIR}/open62541ppConfig.cmake"
+        "${PROJECT_BINARY_DIR}/open62541ppConfigVersion.cmake"
+        "${PROJECT_BINARY_DIR}/open62541ppConfig.cmake"
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/open62541pp
 )

@@ -97,7 +97,7 @@ jobs:
           - name: Linux UBSan
             os: ubuntu-24.04
             compiler: clang++-18
-            flags: "-DUAPP_ENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON"
+            flags: "-DUAPP_ENABLE_SANITIZER_UNDEFINED=ON"
 
           - name: macOS AppleClang 15
             os: macos-14
