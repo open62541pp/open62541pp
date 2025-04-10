@@ -92,6 +92,7 @@ PREDEFINED             = UA_ENABLE_DA \
                          UAPP_HAS_TYPEDESCRIPTION=1 \
                          UAPP_HAS_PARSING=1 \
                          UAPP_HAS_TOSTRING=1 \
+                         UAPP_HAS_ORDER=1 \
                          UAPP_HAS_DATAACCESS=1 \
                          UAPP_HAS_ASYNC_SUBSCRIPTIONS=1 \
                          UAPP_HAS_CREATE_CERTIFICATE=1 \

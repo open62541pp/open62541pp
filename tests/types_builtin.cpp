@@ -8,6 +8,7 @@
 #include "open62541pp/detail/string_utils.hpp"  // toNativeString
 #include "open62541pp/types.hpp"
 #include "open62541pp/ua/nodeids.hpp"
+#include "open62541pp/ua/typeregistry.hpp"
 
 using Catch::Matchers::ContainsSubstring;
 using Catch::Matchers::Message;
@@ -1157,14 +1158,44 @@ TEST_CASE("NumericRange") {
 
 #if UAPP_HAS_TOSTRING
 TEST_CASE("toString") {
-    const auto toStringStl = [](auto... args) {
-        return std::string{toString(args...)};
-    };
+    const auto toStringStl = [](auto... args) { return std::string{toString(args...)}; };
 
     CHECK_THAT(toStringStl(11), ContainsSubstring("11"));
     CHECK_THAT(toStringStl(11, UA_TYPES[UA_TYPES_INT32]), ContainsSubstring("11"));
 
     CHECK_THAT(toStringStl(String("test")), ContainsSubstring("test"));
     CHECK_THAT(toStringStl(String("test"), UA_TYPES[UA_TYPES_STRING]), ContainsSubstring("test"));
+}
+#endif
+
+#if UAPP_HAS_ORDER
+TEST_CASE("Comparison operators") {
+    // use simple registered type without custom comparison overloads
+    STATIC_REQUIRE(detail::IsRegistered<UA_Range>::value);
+    const UA_Range r1{1, 2};
+    const UA_Range r2{3, 4};
+    const UA_Range r3{5, 6};
+
+    CHECK((r1 == r1));
+    CHECK_FALSE((r1 == r2));
+
+    CHECK((r1 != r2));
+    CHECK_FALSE((r1 != r1));
+
+    CHECK((r1 < r2));
+    CHECK_FALSE((r2 < r2));
+    CHECK_FALSE((r3 < r2));
+
+    CHECK((r1 <= r2));
+    CHECK((r2 <= r2));
+    CHECK_FALSE((r3 <= r2));
+
+    CHECK((r3 > r2));
+    CHECK_FALSE((r2 > r2));
+    CHECK_FALSE((r1 > r2));
+
+    CHECK((r3 >= r2));
+    CHECK((r2 >= r2));
+    CHECK_FALSE((r1 >= r2));
 }
 #endif
