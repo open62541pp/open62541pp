@@ -2549,7 +2549,7 @@ String toString(const NumericRange& range);
  * Requires open62541 v1.2 or later.
  * The open62541 library must be compiled with the `UA_ENABLE_TYPEDESCRIPTION` option.
  * If these conditions are not met, the function returns an empty String.
- * 
+ *
  * @param object Native or wrapper object.
  * @param type Data type of `object`.
  *
@@ -2574,6 +2574,54 @@ template <typename T, typename = std::enable_if_t<detail::IsRegistered<T>::value
 String toString(const T& object) {
     return toString(object, getDataType<T>());
 }
+
+/* ------------------------------------ Comparison operators ------------------------------------ */
+
+#if UAPP_HAS_ORDER
+
+/// @relates TypeWrapper
+/// @ingroup Wrapper
+template <typename T, typename = std::enable_if_t<detail::IsRegistered<T>::value>>
+inline bool operator==(const T& lhs, const T& rhs) noexcept {
+    return UA_order(&lhs, &rhs, &getDataType<T>()) == UA_ORDER_EQ;
+}
+
+/// @relates TypeWrapper
+/// @ingroup Wrapper
+template <typename T, typename = std::enable_if_t<detail::IsRegistered<T>::value>>
+inline bool operator!=(const T& lhs, const T& rhs) noexcept {
+    return UA_order(&lhs, &rhs, &getDataType<T>()) != UA_ORDER_EQ;
+}
+
+/// @relates TypeWrapper
+/// @ingroup Wrapper
+template <typename T, typename = std::enable_if_t<detail::IsRegistered<T>::value>>
+inline bool operator<(const T& lhs, const T& rhs) noexcept {
+    return UA_order(&lhs, &rhs, &getDataType<T>()) == UA_ORDER_LESS;
+}
+
+/// @relates TypeWrapper
+/// @ingroup Wrapper
+template <typename T, typename = std::enable_if_t<detail::IsRegistered<T>::value>>
+inline bool operator<=(const T& lhs, const T& rhs) noexcept {
+    return UA_order(&lhs, &rhs, &getDataType<T>()) <= UA_ORDER_EQ;
+}
+
+/// @relates TypeWrapper
+/// @ingroup Wrapper
+template <typename T, typename = std::enable_if_t<detail::IsRegistered<T>::value>>
+inline bool operator>(const T& lhs, const T& rhs) noexcept {
+    return UA_order(&lhs, &rhs, &getDataType<T>()) == UA_ORDER_MORE;
+}
+
+/// @relates TypeWrapper
+/// @ingroup Wrapper
+template <typename T, typename = std::enable_if_t<detail::IsRegistered<T>::value>>
+inline bool operator>=(const T& lhs, const T& rhs) noexcept {
+    return UA_order(&lhs, &rhs, &getDataType<T>()) >= UA_ORDER_EQ;
+}
+
+#endif
 
 }  // namespace opcua
 

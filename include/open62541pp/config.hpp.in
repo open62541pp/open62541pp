@@ -51,6 +51,8 @@
 #define UAPP_HAS_TOSTRING 0
 #endif
 
+#define UAPP_HAS_ORDER UAPP_OPEN62541_VER_GE(1, 3)
+
 #ifdef UA_ENABLE_DA
 // types like UA_EUInformation added since v1.1
 #define UAPP_HAS_DATAACCESS UAPP_OPEN62541_VER_GE(1, 1)
