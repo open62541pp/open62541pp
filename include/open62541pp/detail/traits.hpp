@@ -74,4 +74,14 @@ struct IsRange : std::conjunction<HasBegin<T>, HasEnd<T>> {};
 template <typename T>
 struct IsContiguousRange : std::conjunction<IsRange<T>, HasDataPointer<T>, HasSize<T>> {};
 
+template <typename T, typename = void>
+struct IsStringLike : std::false_type {};
+
+template <typename T>
+struct IsStringLike<T, std::enable_if_t<IsRange<T>::value>>
+    : std::conjunction<
+          IsContiguousRange<T>,
+          std::is_same<RangeValueT<T>, char>,
+          std::is_constructible<std::remove_reference_t<T>, const char*>> {};
+
 }  // namespace opcua::detail
