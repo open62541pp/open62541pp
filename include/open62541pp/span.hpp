@@ -7,7 +7,6 @@
 #include <iterator>
 #include <limits>
 #include <stdexcept>  // out_of_range
-#include <string>
 #include <type_traits>
 #include <utility>  // swap
 
@@ -112,10 +111,7 @@ public:
     /// @exception std::out_of_range If `index` >= size()
     [[nodiscard]] constexpr reference at(size_t index) const {
         if (index >= size()) {
-            throw std::out_of_range(
-                std::string("index (") + std::to_string(index) + ") >= size() (" +
-                std::to_string(size()) + ")"
-            );
+            throw std::out_of_range("index >= size()");
         }
         return data()[index];
     }

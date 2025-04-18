@@ -60,8 +60,7 @@ TEST_CASE("Span") {
             CHECK(view.at(0) == 0);
             CHECK(view.at(1) == 1);
             CHECK(view.at(2) == 2);
-            CHECK_THROWS_MATCHES((void)view.at(3), std::out_of_range, Message("index (3) >= size() (3)"));
-            CHECK_THROWS_MATCHES((void)view.at(4), std::out_of_range, Message("index (4) >= size() (3)"));
+            CHECK_THROWS_MATCHES((void)view.at(3), std::out_of_range, Message("index >= size()"));
         }
     }
 
