@@ -18,20 +18,20 @@ std::ostream& operator<<(std::ostream& os, const String& str) {
 
 /* -------------------------------------------- Guid -------------------------------------------- */
 
-std::string Guid::toString() const {
-    return std::string(opcua::toString(*this));
+String Guid::toString() const {
+    return opcua::toString(*this);
 }
 
 /* ------------------------------------------ DateTime ------------------------------------------ */
 
-std::string DateTime::format(std::string_view format, bool localtime) const {
+String DateTime::format(std::string_view format, bool localtime) const {
     const std::time_t unixTime = toUnixTime();
     std::ostringstream ss;
     const auto* timeinfo = localtime ? std::localtime(&unixTime) : std::gmtime(&unixTime);
     if (timeinfo != nullptr) {
         ss << std::put_time(timeinfo, std::string(format).c_str());
     }
-    return ss.str();
+    return String{ss.str()};
 }
 
 /* ----------------------------------------- ByteString ----------------------------------------- */
@@ -56,14 +56,14 @@ String ByteString::toBase64() const {
 
 /* ------------------------------------------- NodeId ------------------------------------------- */
 
-std::string NodeId::toString() const {
-    return std::string{opcua::toString(*this)};
+String NodeId::toString() const {
+    return opcua::toString(*this);
 }
 
 /* --------------------------------------- ExpandedNodeId --------------------------------------- */
 
-std::string ExpandedNodeId::toString() const {
-    return std::string{opcua::toString(*this)};
+String ExpandedNodeId::toString() const {
+    return opcua::toString(*this);
 }
 
 /* ---------------------------------------- NumericRange ---------------------------------------- */
@@ -77,7 +77,7 @@ NumericRange::NumericRange(std::string_view encodedRange) {
 #endif
 }
 
-static std::string toStringImpl(const NumericRange& range) {
+static String toStringImpl(const NumericRange& range) {
     std::ostringstream ss;
     for (const auto& dimension : range.dimensions()) {
         ss << dimension.min;
@@ -88,15 +88,15 @@ static std::string toStringImpl(const NumericRange& range) {
     }
     auto str = ss.str();
     str.pop_back();  // remove last comma
-    return str;
+    return String{str};
 }
 
-std::string NumericRange::toString() const {
+String NumericRange::toString() const {
     return toStringImpl(*this);
 }
 
 String toString(const NumericRange& range) {
-    return String(toStringImpl(range));
+    return toStringImpl(range);
 }
 
 }  // namespace opcua
