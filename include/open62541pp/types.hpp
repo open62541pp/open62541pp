@@ -11,7 +11,6 @@
 #include <iterator>  // reverse_iterator
 #include <optional>
 #include <ratio>
-#include <string>
 #include <string_view>
 #include <type_traits>  // is_same_v
 #include <utility>  // move
@@ -464,7 +463,7 @@ public:
 
     /// Convert to string with given format (same format codes as strftime).
     /// @see https://en.cppreference.com/w/cpp/chrono/c/strftime
-    std::string format(std::string_view format, bool localtime = false) const;
+    String format(std::string_view format, bool localtime = false) const;
 };
 
 template <typename Clock, typename Duration>
@@ -529,7 +528,7 @@ public:
 
     /// @deprecated Use free function opcua::toString(const T&) instead
     [[deprecated("use free function toString instead")]]
-    std::string toString() const;
+    String toString() const;
 };
 
 /// @relates Guid
@@ -836,7 +835,7 @@ public:
 
     /// @deprecated Use free function opcua::toString(const T&) instead
     [[deprecated("use free function toString instead")]]
-    std::string toString() const;
+    String toString() const;
 
 private:
     std::variant<uint32_t, String, Guid, ByteString> getIdentifierImpl() const {
@@ -986,7 +985,7 @@ public:
 
     /// @deprecated Use free function opcua::toString(const T&) instead
     [[deprecated("use free function toString instead")]]
-    std::string toString() const;
+    String toString() const;
 };
 
 /// @relates ExpandedNodeId
@@ -2515,7 +2514,7 @@ public:
 
     /// @deprecated Use free function opcua::toString(const T&) instead
     [[deprecated("use free function toString instead")]]
-    std::string toString() const;
+    String toString() const;
 
 private:
     void clear() noexcept {
