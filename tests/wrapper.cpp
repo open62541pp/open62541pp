@@ -2,7 +2,7 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include "open62541pp/detail/string_utils.hpp"  // detail::toString
+#include "open62541pp/detail/string_utils.hpp"  // detail::toStringView
 #include "open62541pp/typewrapper.hpp"
 
 using namespace opcua;
@@ -129,7 +129,7 @@ TEST_CASE("TypeWrapper") {
         TypeWrapper<UA_String, UA_TYPES_STRING> wrapperConstructor(wrapper);
 
         CHECK(wrapperConstructor.handle()->data != wrapper.handle()->data);
-        CHECK(detail::toString(*wrapperConstructor.handle()) == "test");
+        CHECK(detail::toStringView(*wrapperConstructor.handle()) == "test");
     }
 
     SECTION("Copy constructor with native type") {
@@ -148,7 +148,7 @@ TEST_CASE("TypeWrapper") {
         TypeWrapper<UA_String, UA_TYPES_STRING> wrapperConstructor(std::move(wrapper));
 
         CHECK(wrapper.handle()->data == nullptr);
-        CHECK(detail::toString(*wrapperConstructor.handle()) == "test");
+        CHECK(detail::toStringView(*wrapperConstructor.handle()) == "test");
     }
 
     SECTION("Copy assignment") {
@@ -156,14 +156,14 @@ TEST_CASE("TypeWrapper") {
         TypeWrapper<UA_String, UA_TYPES_STRING> wrapperAssignment = wrapper;
 
         CHECK(wrapperAssignment.handle()->data != wrapper.handle()->data);
-        CHECK(detail::toString(*wrapperAssignment.handle()) == "test");
+        CHECK(detail::toStringView(*wrapperAssignment.handle()) == "test");
     }
 
     SECTION("Copy assignment with native type") {
         TypeWrapper<UA_String, UA_TYPES_STRING> wrapper(UA_STRING_ALLOC("overwrite"));
         UA_String str = UA_STRING_ALLOC("test");
         wrapper = str;
-        CHECK(detail::toString(*wrapper.handle()) == "test");
+        CHECK(detail::toStringView(*wrapper.handle()) == "test");
         UA_clear(&str, &UA_TYPES[UA_TYPES_STRING]);
     }
 
@@ -172,12 +172,12 @@ TEST_CASE("TypeWrapper") {
         TypeWrapper<UA_String, UA_TYPES_STRING> wrapperAssignment = std::move(wrapper);
 
         CHECK(wrapper.handle()->data == nullptr);
-        CHECK(detail::toString(*wrapperAssignment.handle()) == "test");
+        CHECK(detail::toStringView(*wrapperAssignment.handle()) == "test");
     }
 
     SECTION("Move assignment with native type") {
         TypeWrapper<UA_String, UA_TYPES_STRING> wrapper(UA_STRING_ALLOC("overwrite"));
         wrapper = UA_STRING_ALLOC("test");
-        CHECK(detail::toString(*wrapper.handle()) == "test");
+        CHECK(detail::toStringView(*wrapper.handle()) == "test");
     }
 }

@@ -56,24 +56,18 @@ TEST_CASE("Alloc UA_String from non-null-terminated string_view") {
 TEST_CASE("String conversion UA_String -> string") {
     SECTION("Test string") {
         UA_String str = UA_STRING_ALLOC("test123");
-        CHECK(detail::toString(str) == "test123");
+        CHECK(detail::toStringView(str) == "test123");
         UA_clear(&str, &UA_TYPES[UA_TYPES_STRING]);
     }
 
     SECTION("Null string") {
         UA_String str{};
-        CHECK(detail::toString(str) == "");
+        CHECK(detail::toStringView(str) == "");
     }
 
     SECTION("Empty string") {
         UA_String str = UA_STRING_ALLOC("");
-        CHECK(detail::toString(str) == "");
+        CHECK(detail::toStringView(str) == "");
         UA_clear(&str, &UA_TYPES[UA_TYPES_STRING]);
     }
-}
-
-TEST_CASE("String conversion format string and args -> string") {
-    CHECK(detail::toString("test") == "test");
-    CHECK(detail::toString("test %d", 11) == "test 11");
-    CHECK(detail::toString("test %.2f", 11.11) == "test 11.11");
 }

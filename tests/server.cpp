@@ -56,19 +56,19 @@ TEST_CASE("ServerConfig") {
             "buildNumber",
             DateTime(1234)
         ));
-        CHECK(detail::toString(config->buildInfo.productUri) == "productUri");
+        CHECK(String(config->buildInfo.productUri) == "productUri");
         // ...
     }
 
     SECTION("ApplicationDescription") {
         config.setApplicationUri("http://app.com");
-        CHECK(detail::toString(config->applicationDescription.applicationUri) == "http://app.com");
+        CHECK(String(config->applicationDescription.applicationUri) == "http://app.com");
 
         config.setProductUri("http://product.com");
-        CHECK(detail::toString(config->applicationDescription.productUri) == "http://product.com");
+        CHECK(String(config->applicationDescription.productUri) == "http://product.com");
 
         config.setApplicationName("Test App");
-        CHECK(detail::toString(config->applicationDescription.applicationName.text) == "Test App");
+        CHECK(String(config->applicationDescription.applicationName.text) == "Test App");
     }
 
     SECTION("AccessControl") {
