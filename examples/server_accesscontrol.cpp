@@ -49,8 +49,8 @@ int main() {
     AccessControlCustom accessControl(
         true,  // allow anonymous
         {
-            {"admin", "admin"},
-            {"user", "user"},
+            Login{String{"admin"}, String{"admin"}},
+            Login{String{"user"}, String{"user"}},
         }
     );
 
