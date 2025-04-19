@@ -2,6 +2,7 @@
 
 #include <vector>
 
+#include "open62541pp/span.hpp"
 #include "open62541pp/types.hpp"
 #include "open62541pp/plugin/accesscontrol.hpp"
 
@@ -23,7 +24,7 @@ struct Login {
  */
 class AccessControlDefault : public AccessControlBase {
 public:
-    explicit AccessControlDefault(bool allowAnonymous = true, std::vector<Login> logins = {});
+    explicit AccessControlDefault(bool allowAnonymous = true, Span<const Login> logins = {});
 
     Span<UserTokenPolicy> getUserTokenPolicies() override;
 

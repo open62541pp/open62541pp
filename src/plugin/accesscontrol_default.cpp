@@ -10,9 +10,9 @@ namespace opcua {
 constexpr std::string_view policyIdAnonymous = "open62541-anonymous-policy";
 constexpr std::string_view policyIdUsername = "open62541-username-policy";
 
-AccessControlDefault::AccessControlDefault(bool allowAnonymous, std::vector<Login> logins)
+AccessControlDefault::AccessControlDefault(bool allowAnonymous, Span<const Login> logins)
     : allowAnonymous_(allowAnonymous),
-      logins_(std::move(logins)) {
+      logins_(logins.begin(), logins.end()) {
     const std::string_view issuedTokenType{};
     const std::string_view issuerEndpointUrl{};
     const std::string_view securityPolicyUri{};
