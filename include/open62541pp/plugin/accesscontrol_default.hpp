@@ -1,16 +1,16 @@
 #pragma once
 
-#include <string>
 #include <vector>
 
+#include "open62541pp/types.hpp"
 #include "open62541pp/plugin/accesscontrol.hpp"
 
 namespace opcua {
 
 /// Login credentials.
 struct Login {
-    std::string username;
-    std::string password;
+    String username;
+    String password;
 };
 
 /**

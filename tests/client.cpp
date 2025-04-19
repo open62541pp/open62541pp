@@ -113,7 +113,7 @@ TEST_CASE("Client connect with AnonymousIdentityToken") {
 
 #if UAPP_OPEN62541_VER_GE(1, 3)
 TEST_CASE("Client connect with UserNameIdentityToken") {
-    AccessControlDefault accessControl(false, {{"username", "password"}});
+    AccessControlDefault accessControl(false, {Login{String{"username"}, String{"password"}}});
     Server server;
     server.config().setAccessControl(accessControl);
     ServerRunner serverRunner(server);

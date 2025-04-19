@@ -105,7 +105,7 @@ TEST_CASE("ServerConfig") {
         }
 
         SECTION("Use highest security policy to transfer user tokens") {
-            AccessControlDefault accessControl(true, {{"user", "password"}});
+            AccessControlDefault accessControl(true, {Login{String{"user"}, String{"password"}}});
             config.setAccessControl(accessControl);
             auto& ac = config->accessControl;
 

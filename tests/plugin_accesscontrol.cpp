@@ -14,7 +14,7 @@ TEST_CASE("AccessControlDefault") {
     Server server;
 
     SECTION("getUserTokenPolicies") {
-        AccessControlDefault ac(true, {{"username", "password"}});
+        AccessControlDefault ac(true, {Login{String{"username"}, String{"password"}}});
 
         CHECK(ac.getUserTokenPolicies().size() == 2);
         CHECK(ac.getUserTokenPolicies()[0].policyId() == "open62541-anonymous-policy");
@@ -28,7 +28,7 @@ TEST_CASE("AccessControlDefault") {
         for (bool allowAnonymous : {false, true}) {
             CAPTURE(allowAnonymous);
 
-            AccessControlDefault ac(allowAnonymous, {{"username", "password"}});
+            AccessControlDefault ac(allowAnonymous, {Login{String{"username"}, String{"password"}}});
             Session session(server, NodeId{}, nullptr);
             const EndpointDescription endpointDescription{};
             const ByteString secureChannelRemoteCertificate{};
