@@ -477,14 +477,16 @@ public:
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR_WRAPPER(Variant, Value, value, UA_NODEATTRIBUTESMASK_VALUE)
 
-    /// @see Variant::Variant
+    /// @deprecated Use setValue(Variant{...}) instead
     template <typename... Args>
+    [[deprecated("use setValue(Variant{...}) instead")]]
     auto& setValueScalar(Args&&... args) {
         return setValue(Variant(std::forward<Args>(args)...));
     }
 
-    /// @see Variant::Variant
+    /// @deprecated Use setValue(Variant{...}) instead
     template <typename... Args>
+    [[deprecated("use setValue(Variant{...}) instead")]]
     auto& setValueArray(Args&&... args) {
         return setValue(Variant(std::forward<Args>(args)...));
     }
@@ -574,14 +576,16 @@ public:
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR_WRAPPER(Variant, Value, value, UA_NODEATTRIBUTESMASK_VALUE)
 
-    /// @see Variant::Variant
+    /// @deprecated Use setValue(Variant{...}) instead
     template <typename... Args>
+    [[deprecated("use setValue(Variant{...}) instead")]]
     auto& setValueScalar(Args&&... args) {
         return setValue(Variant(std::forward<Args>(args)...));
     }
 
-    /// @see Variant::Variant
+    /// @deprecated Use setValue(Variant{...}) instead
     template <typename... Args>
+    [[deprecated("use setValue(Variant{...}) instead")]]
     auto& setValueArray(Args&&... args) {
         return setValue(Variant(std::forward<Args>(args)...));
     }

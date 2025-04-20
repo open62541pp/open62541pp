@@ -68,7 +68,7 @@ int main() {
                 .setAccessLevel(AccessLevel::CurrentRead | AccessLevel::CurrentWrite)
                 .setDataType(DataTypeId::Int32)
                 .setValueRank(ValueRank::Scalar)
-                .setValueScalar(0)
+                .setValue(opcua::Variant{0})
         );
 
     server.run();
