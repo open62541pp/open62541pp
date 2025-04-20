@@ -16,7 +16,7 @@ class CurrentTimeCallback : public opcua::ValueCallbackBase {
         const auto timeNow = opcua::DateTime::now();
         std::cout << "Time before read: " << timeOld.format("%Y-%m-%d %H:%M:%S") << std::endl;
         std::cout << "Set current time: " << timeNow.format("%Y-%m-%d %H:%M:%S") << std::endl;
-        node.writeValueScalar(timeNow);
+        node.writeValue(opcua::Variant{timeNow});
     }
 
     void onWrite(
@@ -36,7 +36,7 @@ int main() {
         .writeDisplayName({"en-US", "Current time"})
         .writeDescription({"en-US", "Current time"})
         .writeDataType<opcua::DateTime>()
-        .writeValueScalar(opcua::DateTime::now());
+        .writeValue(opcua::Variant{opcua::DateTime::now()});
 
     CurrentTimeCallback currentTimeCallback;
     server.setVariableNodeValueCallback(currentTimeId, currentTimeCallback);

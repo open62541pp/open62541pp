@@ -23,10 +23,10 @@ int main() {
     );
 
     // Write a value (attribute) to the node
-    myIntegerNode.writeValueScalar(42);
+    myIntegerNode.writeValue(opcua::Variant{42});
 
     // Read the value (attribute) from the node
-    std::cout << "The answer is: " << myIntegerNode.readValueScalar<int>() << std::endl;
+    std::cout << "The answer is: " << myIntegerNode.readValue().to<int>() << std::endl;
 
     server.run();
 }

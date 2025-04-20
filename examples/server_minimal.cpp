@@ -8,7 +8,7 @@ int main() {
     opcua::Node parentNode(server, opcua::ObjectId::ObjectsFolder);
     opcua::Node myIntegerNode = parentNode.addVariable({1, 1000}, "TheAnswer");
     // Write value attribute
-    myIntegerNode.writeValueScalar(42);
+    myIntegerNode.writeValue(opcua::Variant{42});
 
     server.run();
 }

@@ -68,7 +68,8 @@ cog.out(Path("examples/server_minimal.cpp").read_text())
 cog.outl("```")
 ]]] -->
 ```cpp
-#include <open62541pp/open62541pp.hpp>
+#include <open62541pp/node.hpp>
+#include <open62541pp/server.hpp>
 
 int main() {
     opcua::Server server;
@@ -77,7 +78,7 @@ int main() {
     opcua::Node parentNode(server, opcua::ObjectId::ObjectsFolder);
     opcua::Node myIntegerNode = parentNode.addVariable({1, 1000}, "TheAnswer");
     // Write value attribute
-    myIntegerNode.writeValueScalar(42);
+    myIntegerNode.writeValue(opcua::Variant{42});
 
     server.run();
 }
@@ -96,14 +97,15 @@ cog.outl("```")
 ```cpp
 #include <iostream>
 
-#include <open62541pp/open62541pp.hpp>
+#include <open62541pp/client.hpp>
+#include <open62541pp/node.hpp>
 
 int main() {
     opcua::Client client;
     client.connect("opc.tcp://localhost:4840");
 
     opcua::Node node(client, opcua::VariableId::Server_ServerStatus_CurrentTime);
-    const auto dt = node.readValueScalar<opcua::DateTime>();
+    const auto dt = node.readValue().to<opcua::DateTime>();
 
     std::cout << "Server date (UTC): " << dt.format("%Y-%m-%d %H:%M:%S") << std::endl;
 }
