@@ -26,7 +26,7 @@ int main() {
             opcua::VariableAttributes{}
                 .setDisplayName({"en-US", "Age"})
                 .setDescription({"en-US", "This mammals age in months"})
-                .setValueScalar(0U)  // default age
+                .setValue(opcua::Variant{0U})  // default age
         )
         .addModellingRule(opcua::ModellingRule::Mandatory);  // create on new instance
 
@@ -45,7 +45,7 @@ int main() {
             opcua::VariableAttributes{}
                 .setDisplayName({"en-US", "Name"})
                 .setDescription({"en-US", "This dogs name"})
-                .setValueScalar("unnamed dog")  // default name
+                .setValue(opcua::Variant{"unnamed dog"})  // default name
         )
         .addModellingRule(opcua::ModellingRule::Mandatory);  // create on new instance
 

@@ -490,7 +490,7 @@ TEMPLATE_TEST_CASE("Node", "", Server, Client, Async<Client>) {
                 .setWriteMask(WriteMask::None)
                 .setAccessLevel(AccessLevel::CurrentRead | AccessLevel::CurrentWrite)
                 .setDataType<double>()
-                .setValueScalar(11.11)
+                .setValue(opcua::Variant{11.11})
         );
         CHECK(objNode.readObjectProperty({1, "Property"}).template scalar<double>() == 11.11);
         CHECK_NOTHROW(objNode.writeObjectProperty({1, "Property"}, Variant(22.22)));
