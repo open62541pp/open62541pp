@@ -380,61 +380,6 @@ TEMPLATE_TEST_CASE("Node", "", Server, Client, Async<Client>) {
         }
     }
 
-    SECTION("writeValue*/readValue*") {
-        SECTION("Scalar") {
-            CHECK_NOTHROW(varNode.writeDataType(DataTypeId::Float));
-
-            // write with wrong data type
-            CHECK_THROWS(varNode.writeValueScalar(bool{}));
-            CHECK_THROWS(varNode.writeValueScalar(int{}));
-
-            // write with correct data type
-            float value = 11.11f;
-            CHECK_NOTHROW(varNode.writeValueScalar(value));
-            CHECK(varNode.template readValueScalar<float>() == value);
-        }
-
-        SECTION("String") {
-            CHECK_NOTHROW(varNode.writeDataType(DataTypeId::String));
-
-            String str("test");
-            CHECK_NOTHROW(varNode.writeValueScalar(str));
-            CHECK(varNode.template readValueScalar<std::string>() == "test");
-        }
-
-        SECTION("Array") {
-            CHECK_NOTHROW(varNode.writeDataType(DataTypeId::Double));
-
-            // write with wrong data type
-            CHECK_THROWS(varNode.writeValueArray(std::vector<int>{}));
-            CHECK_THROWS(varNode.writeValueArray(std::vector<float>{}));
-
-            // write with correct data type
-            std::vector<double> array{11.11, 22.22, 33.33};
-
-            SECTION("Write as std::vector") {
-                CHECK_NOTHROW(varNode.writeValueArray(array));
-                CHECK(varNode.template readValueArray<double>() == array);
-            }
-
-            SECTION("Write as raw array") {
-                CHECK_NOTHROW(varNode.writeValueArray(Span{array.data(), array.size()}));
-                CHECK(varNode.template readValueArray<double>() == array);
-            }
-
-            SECTION("Write as iterator pair") {
-                CHECK_NOTHROW(varNode.writeValueArray(array.begin(), array.end()));
-                CHECK(varNode.template readValueArray<double>() == array);
-            }
-        }
-
-        SECTION("Array (std::vector<bool>)") {
-            std::vector<bool> array{true, false, true};
-            CHECK_NOTHROW(varNode.writeValueArray(array));
-            CHECK_NOTHROW(varNode.writeValueArray(array.begin(), array.end()));
-        }
-    }
-
     SECTION("writeDataType/readDataType") {
         const NodeId dataType(DataTypeId::Float);
         if constexpr (isAsync<TestType>) {

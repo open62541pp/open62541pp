@@ -845,14 +845,16 @@ public:
         return services::readValueAsync(connection(), id(), std::forward<CompletionToken>(token));
     }
 
-    /// Read scalar value from variable node.
+    /// @deprecated Use readValue().to<T>() instead
     template <typename T>
+    [[deprecated("use readValue().to<T>() instead")]]
     T readValueScalar() {
         return readValue().template to<T>();
     }
-
-    /// Read array value from variable node.
+    
+    /// @deprecated Use readValue().to<std::vector<T>>() instead
     template <typename T>
+    [[deprecated("use readValue().to<std::vector<T>>() instead")]]
     std::vector<T> readValueArray() {
         return readValue().template to<std::vector<T>>();
     }
@@ -1163,34 +1165,25 @@ public:
         );
     }
 
-    /// Write scalar to variable node.
+    /// @deprecated Use writeValue(Variant(value)) instead
     template <typename T>
+    [[deprecated("use writeValue(Variant(value)) instead")]]
     Node& writeValueScalar(const T& value) {
-        if constexpr (detail::IsRegistered<T>::value) {
-            // NOLINTNEXTLINE(*-const-cast), variant isn't modified, avoid copy
-            writeValue(Variant(const_cast<T*>(&value)));
-        } else {
-            writeValue(Variant(value));
-        }
-
+        writeValue(Variant(value));
         return *this;
     }
-
-    /// Write array value to variable node.
+    
+    /// @deprecated Use writeValue(Variant(array)) instead
     template <typename ArrayLike>
+    [[deprecated("use writeValue(Variant(array)) instead")]]
     Node& writeValueArray(const ArrayLike& array) {
-        if constexpr (detail::IsContiguousRange<ArrayLike>::value &&
-                      detail::IsRegistered<detail::RangeValueT<ArrayLike>>::value) {
-            // NOLINTNEXTLINE(*-const-cast), variant isn't modified, avoid copy
-            writeValue(Variant(const_cast<ArrayLike*>(&array)));
-        } else {
-            writeValue(Variant(array));
-        }
+        writeValue(Variant(array));
         return *this;
     }
-
-    /// Write range of elements as array value to variable node.
+    
+    /// @deprecated Use writeValue(Variant(first, last)) instead
     template <typename InputIt>
+    [[deprecated("use writeValue(Variant(first, last)) instead")]]
     Node& writeValueArray(InputIt first, InputIt last) {
         writeValue(Variant(first, last));
         return *this;

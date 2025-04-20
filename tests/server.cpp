@@ -250,7 +250,7 @@ TEST_CASE("ValueCallback") {
 
     const NodeId id{1, 1000};
     auto node = Node(server, ObjectId::ObjectsFolder).addVariable(id, "TestVariable");
-    node.writeValueScalar<int>(1);
+    node.writeValue(Variant{1});
 
     auto callbackPtr = std::make_unique<ValueCallbackTest>();
     auto& callback = *callbackPtr;
@@ -261,14 +261,14 @@ TEST_CASE("ValueCallback") {
     }
 
     SECTION("trigger onRead callback with read operation") {
-        CHECK(node.readValueScalar<int>() == 1);
+        CHECK(node.readValue().to<int>() == 1);
         CHECK(callback.onReadCalled == true);
         CHECK(callback.onWriteCalled == false);
         CHECK(callback.valueBeforeRead.value().scalar<int>() == 1);
     }
 
     SECTION("trigger onAfterWrite callback with write operation") {
-        node.writeValueScalar<int>(2);
+        node.writeValue(Variant{2});
         CHECK(callback.onReadCalled == false);
         CHECK(callback.onWriteCalled == true);
         CHECK(callback.valueAfterWrite.value().scalar<int>() == 2);
@@ -326,23 +326,23 @@ TEST_CASE("DataSource") {
 
     SECTION("read") {
         source.data = 1;
-        CHECK(node.readValueScalar<int>() == 1);
+        CHECK(node.readValue().to<int>() == 1);
     }
 
     SECTION("write") {
-        CHECK_NOTHROW(node.writeValueScalar<int>(2));
+        CHECK_NOTHROW(node.writeValue(Variant{2}));
         CHECK(source.data == 2);
     }
 
     SECTION("read/write with bad status code") {
         source.code = UA_STATUSCODE_BADINTERNALERROR;
-        CHECK_THROWS_MATCHES(node.readValueScalar<int>(), BadStatus, Message("BadInternalError"));
-        CHECK_THROWS_MATCHES(node.writeValueScalar<int>(2), BadStatus, Message("BadInternalError"));
+        CHECK_THROWS_MATCHES(node.readValue(), BadStatus, Message("BadInternalError"));
+        CHECK_THROWS_MATCHES(node.writeValue(Variant{2}), BadStatus, Message("BadInternalError"));
     }
 
     SECTION("read/write with exception in callback") {
         source.exception = BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
-        CHECK_THROWS_MATCHES(node.readValueScalar<int>(), BadStatus, Message("BadUnexpectedError"));
-        CHECK_THROWS_MATCHES(node.writeValueScalar<int>(2), BadStatus, Message("BadUnexpectedError"));
+        CHECK_THROWS_MATCHES(node.readValue(), BadStatus, Message("BadUnexpectedError"));
+        CHECK_THROWS_MATCHES(node.writeValue(Variant{2}), BadStatus, Message("BadUnexpectedError"));
     }
 }

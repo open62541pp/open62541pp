@@ -65,8 +65,8 @@ int main() {
     );
 
     // Set variables Age and Name
-    nodeBello.browseChild({{1, "Age"}}).writeValueScalar(3U);
-    nodeBello.browseChild({{1, "Name"}}).writeValueScalar("Bello");
+    nodeBello.browseChild({{1, "Age"}}).writeValue(opcua::Variant{3U});
+    nodeBello.browseChild({{1, "Name"}}).writeValue(opcua::Variant{"Bello"});
 
     server.run();
 }
