@@ -9,10 +9,10 @@ int main() {
     config.setApplicationUri("urn:open62541pp.server.application");
     config.setProductUri("https://open62541pp.github.io");
 
-    opcua::Server server(std::move(config));
+    opcua::Server server{std::move(config)};
 
     // Add a variable node to the Objects node
-    opcua::Node parentNode(server, opcua::ObjectId::ObjectsFolder);
+    opcua::Node parentNode{server, opcua::ObjectId::ObjectsFolder};
     opcua::Node myIntegerNode = parentNode.addVariable(
         {1, "TheAnswer"},
         "The Answer",

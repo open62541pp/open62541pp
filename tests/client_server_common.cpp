@@ -19,11 +19,11 @@ TEMPLATE_TEST_CASE("Config", "", ClientConfig, ServerConfig) {
     }
     SECTION("Construct from native") {
         NativeType native{};
-        TestType config(std::move(native));
+        TestType config{std::move(native)};
     }
     SECTION("Move constructor") {
         TestType other;
-        TestType config(std::move(other));
+        TestType config{std::move(other)};
     }
     SECTION("Move assignment") {
         TestType other;
@@ -85,7 +85,7 @@ TEMPLATE_TEST_CASE("Connection", "", Client, Server) {
     }
     SECTION("Move constructor") {
         TestType other;
-        TestType connection(std::move(other));
+        TestType connection{std::move(other)};
     }
     SECTION("Move assignment") {
         TestType other;
@@ -147,7 +147,7 @@ TEMPLATE_TEST_CASE("Connection asWrapper", "", Client, Server) {
     CHECK(asWrapper(native)->handle() == native);
 
     SECTION("Move construct") {
-        TestType connectionMoved(std::move(connection));
+        TestType connectionMoved{std::move(connection)};
         CHECK(asWrapper(native) == &connectionMoved);
     }
     SECTION("Move assignment") {

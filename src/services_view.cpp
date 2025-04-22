@@ -103,7 +103,7 @@ Result<std::vector<ExpandedNodeId>> browseRecursive(
     );
     UA_free(array);  // NOLINT
     if (status.isBad()) {
-        return BadResult(status);
+        return BadResult{status};
     }
     return result;
 }

@@ -20,7 +20,7 @@ public:
      * Construct a BadResult from a bad StatusCode.
      */
     constexpr explicit BadResult(StatusCode code) noexcept
-        : code_(code) {
+        : code_{code} {
         assert(code_.isBad());
     }
 
@@ -58,7 +58,7 @@ public:
      * Default constructor (default-initialized value and good StatusCode).
      */
     constexpr Result() noexcept(std::is_nothrow_default_constructible_v<T>)
-        : code_(UA_STATUSCODE_GOOD),
+        : code_{UA_STATUSCODE_GOOD},
           maybeValue_({}) {}
 
     // NOLINTBEGIN(hicpp-explicit-conversions)
@@ -69,8 +69,8 @@ public:
     constexpr Result(
         const T& value, StatusCode code = UA_STATUSCODE_GOOD
     ) noexcept(std::is_nothrow_copy_constructible_v<T>)
-        : code_(code),
-          maybeValue_(value) {}
+        : code_{code},
+          maybeValue_{value} {}
 
     /**
      * Construct a Result from a value (rvalue) and a StatusCode.
@@ -78,15 +78,15 @@ public:
     constexpr Result(
         T&& value, StatusCode code = UA_STATUSCODE_GOOD
     ) noexcept(std::is_nothrow_move_constructible_v<T>)
-        : code_(code),
-          maybeValue_(std::move(value)) {}
+        : code_{code},
+          maybeValue_{std::move(value)} {}
 
     /**
      * Construct a Result from a BadResult.
      */
     constexpr Result(BadResult error) noexcept
-        : code_(error.code()),
-          maybeValue_(std::nullopt) {}
+        : code_{error.code()},
+          maybeValue_{std::nullopt} {}
 
     // NOLINTEND(hicpp-explicit-conversions)
 
@@ -345,19 +345,19 @@ public:
      * Create a default Result (good StatusCode).
      */
     constexpr Result() noexcept
-        : code_(UA_STATUSCODE_GOOD) {}
+        : code_{UA_STATUSCODE_GOOD} {}
 
     /**
      * Create a Result with the given StatusCode.
      */
     constexpr Result(StatusCode code) noexcept  // NOLINT(hicpp-explicit-conversions)
-        : code_(code) {}
+        : code_{code} {}
 
     /**
      * Create a Result with the given error.
      */
     constexpr Result(BadResult error) noexcept  // NOLINT(hicpp-explicit-conversions)
-        : code_(error.code()) {}
+        : code_{error.code()} {}
 
     constexpr void operator*() const noexcept {}
 

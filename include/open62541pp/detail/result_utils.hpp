@@ -39,7 +39,7 @@ auto tryInvoke(F&& func, Args&&... args) noexcept ->
             return std::invoke(std::forward<F>(func), std::forward<Args>(args)...);
         }
     } catch (...) {
-        return BadResult(getStatusCode(std::current_exception()));
+        return BadResult{getStatusCode(std::current_exception())};
     }
 }
 

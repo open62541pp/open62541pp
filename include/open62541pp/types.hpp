@@ -49,7 +49,7 @@ public:
     constexpr StatusCode() noexcept = default;
 
     constexpr StatusCode(UA_StatusCode code) noexcept  // NOLINT(hicpp-explicit-conversions)
-        : Wrapper(code) {}
+        : Wrapper{code} {}
 
     /// Explicitly get underlying UA_StatusCode.
     constexpr UA_StatusCode get() const noexcept {
@@ -218,7 +218,7 @@ protected:
         if (length > 0) {
             native.data = static_cast<uint8_t*>(UA_malloc(length));  // NOLINT
             if (data() == nullptr) {
-                throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
+                throw BadStatus{UA_STATUSCODE_BADOUTOFMEMORY};
             }
         }
     }
@@ -258,7 +258,7 @@ public:
     using TypeWrapper::TypeWrapper;
 
     explicit String(std::string_view str)
-        : TypeWrapper(detail::allocNativeString(str)) {}
+        : TypeWrapper{detail::allocNativeString(str)} {}
 
     template <typename InputIt>
     String(InputIt first, InputIt last) {
@@ -406,25 +406,25 @@ public:
 
     template <typename Clock, typename Duration>
     DateTime(std::chrono::time_point<Clock, Duration> timePoint)  // NOLINT(*-explicit-conversions)
-        : DateTime(fromTimePoint(timePoint)) {}
+        : DateTime{fromTimePoint(timePoint)} {}
 
     /// Get current DateTime.
     static DateTime now() noexcept {
-        return DateTime(UA_DateTime_now());  // NOLINT
+        return DateTime{UA_DateTime_now()};  // NOLINT
     }
 
     /// Get DateTime from std::chrono::time_point.
     template <typename Clock, typename Duration>
     static DateTime fromTimePoint(std::chrono::time_point<Clock, Duration> timePoint) {
-        return DateTime(
+        return DateTime{
             int64_t{UA_DATETIME_UNIX_EPOCH} +
             std::chrono::duration_cast<UaDuration>(timePoint.time_since_epoch()).count()
-        );
+        };
     }
 
     /// Get DateTime from Unix time.
     static DateTime fromUnixTime(int64_t unixTime) noexcept {
-        return DateTime(UA_DateTime_fromUnixTime(unixTime));  // NOLINT
+        return DateTime{UA_DateTime_fromUnixTime(unixTime)};  // NOLINT
     }
 
     /// Offset of local time to UTC.
@@ -492,7 +492,7 @@ public:
     using TypeWrapper::TypeWrapper;
 
     explicit Guid(std::array<uint8_t, 16> data) noexcept
-        : Guid(UA_Guid{
+        : Guid{UA_Guid{
               // NOLINTBEGIN(hicpp-signed-bitwise)
               static_cast<uint32_t>(
                   (data[0] << 24U) | (data[1] << 16U) | (data[2] << 8U) | data[3]
@@ -501,15 +501,15 @@ public:
               static_cast<uint16_t>((data[6] << 8U) | data[7]),
               // NOLINTEND(hicpp-signed-bitwise)
               {data[8], data[9], data[10], data[11], data[12], data[13], data[14], data[15]},
-          }) {}
+          }} {}
 
     Guid(uint32_t data1, uint16_t data2, uint16_t data3, std::array<uint8_t, 8> data4) noexcept
-        : Guid(UA_Guid{
+        : Guid{UA_Guid{
               data1,
               data2,
               data3,
               {data4[0], data4[1], data4[2], data4[3], data4[4], data4[5], data4[6], data4[7]},
-          }) {}
+          }} {}
 
     /// Generate random Guid.
     static Guid random() noexcept {
@@ -554,10 +554,10 @@ public:
     using TypeWrapper::TypeWrapper;
 
     explicit ByteString(std::string_view str)
-        : TypeWrapper(detail::allocNativeString(str)) {}
+        : TypeWrapper{detail::allocNativeString(str)} {}
 
     explicit ByteString(const char* str)  // required to avoid ambiguity
-        : ByteString(std::string_view(str)) {}
+        : ByteString{std::string_view{str}} {}
 
     explicit ByteString(Span<const uint8_t> bytes) {
         init(bytes.begin(), bytes.end());
@@ -602,7 +602,7 @@ public:
     using TypeWrapper::TypeWrapper;
 
     explicit XmlElement(std::string_view str)
-        : TypeWrapper(detail::allocNativeString(str)) {}
+        : TypeWrapper{detail::allocNativeString(str)} {}
 
     template <typename InputIt>
     XmlElement(InputIt first, InputIt last) {
@@ -1155,7 +1155,7 @@ public:
  *    Applied in @ref Variant::Variant "constructors", @ref assign, and @ref to functions:
  *
  *    @code
- *    opcua::Variant var(5);                  // set scalar (via constructor)
+ *    opcua::Variant var{5};                  // set scalar (via constructor)
  *    auto value = var.to<int>();             // convert scalar
  *
  *    std::array<int> array{1, 2, 3};
@@ -1167,8 +1167,8 @@ public:
  *    For every registered type `T`, the type definition parameter can be omitted:
  *
  *    @code
- *    opcua::Variant var(5, UA_TYPES[UA_TYPES_INT]);  // explicit type definition
- *    opcua::Variant var(5);                          // auto-detected type definition
+ *    opcua::Variant var{5, UA_TYPES[UA_TYPES_INT]};  // explicit type definition
+ *    opcua::Variant var{5};                          // auto-detected type definition
  *    @endcode
  *
  * 3. **Type conversion**: Convert non-native types using TypeConverter.
@@ -1182,7 +1182,7 @@ public:
  *    the Variant automatically manages the conversion, requiring a copy:
  *
  *    @code
- *    opcua::Variant var(std::string("test"));     // convert to native type (copy)
+ *    opcua::Variant var{std::string{"test"}};     // convert to native type (copy)
  *    auto& native = var.scalar<opcua::String>();  // reference to native type (no copy)
  *    auto str = var.to<std::string>();            // conversion (copy required)
  *    @endcode
@@ -1640,14 +1640,14 @@ public:
      *
      * @code
      * // Scalar
-     * opcua::Variant var(11);
+     * opcua::Variant var{11};
      * const auto value = var.to<int>();
      * @endcode
      *
      * @code
      * // Array
      * std::array<std::string, 3> array{"One", "Two", "Three"};
-     * opcua::Variant var(array);
+     * opcua::Variant var{array};
      * const auto vec = var.to<std::vector<std::string>>();
      * const auto lst = var.to<std::list<opcua::String>>();
      * @endcode
@@ -1861,7 +1861,7 @@ public:
         std::optional<uint16_t> serverPicoseconds,
         std::optional<StatusCode> status
     ) noexcept
-        : DataValue(UA_DataValue{
+        : DataValue{UA_DataValue{
               UA_Variant{},
               sourceTimestamp.value_or(UA_DateTime{}),
               serverTimestamp.value_or(UA_DateTime{}),
@@ -1874,27 +1874,27 @@ public:
               sourcePicoseconds.has_value(),
               serverPicoseconds.has_value(),
               status.has_value(),
-          }) {
+          }} {
         setValue(std::move(value));
     }
 
     /// Create DataValue from scalar value.
     /// @deprecated Use constructor with new universal Variant constructor instead:
-    ///             `opcua::DataValue dv(opcua::Variant(value))`
+    ///             `opcua::DataValue dv(opcua::Variant{value})`
     template <VariantPolicy Policy = VariantPolicy::Copy, typename... Args>
     [[deprecated("use constructor with new universal Variant constructor instead")]] [[nodiscard]]
     static DataValue fromScalar(Args&&... args) {
-        return DataValue(Variant::fromScalar<Policy>(std::forward<Args>(args)...));
+        return DataValue{Variant::fromScalar<Policy>(std::forward<Args>(args)...)};
     }
 
     /// Create DataValue from array.
     /// @see Variant::fromArray
     /// @deprecated Use constructor with new universal Variant constructor instead:
-    ///             `opcua::DataValue dv(opcua::Variant(array))`
+    ///             `opcua::DataValue dv(opcua::Variant{array})`
     template <VariantPolicy Policy = VariantPolicy::Copy, typename... Args>
     [[deprecated("use constructor with new universal Variant constructor instead")]] [[nodiscard]]
     static DataValue fromArray(Args&&... args) {
-        return DataValue(Variant::fromArray<Policy>(std::forward<Args>(args)...));
+        return DataValue{Variant::fromArray<Policy>(std::forward<Args>(args)...)};
     }
 
     /// Set value (copy).
@@ -2009,7 +2009,7 @@ public:
 
     /// Get source timestamp for the value.
     DateTime sourceTimestamp() const noexcept {
-        return DateTime(handle()->sourceTimestamp);  // NOLINT
+        return DateTime{handle()->sourceTimestamp};  // NOLINT
     }
 
     /// @deprecated Use sourceTimestamp() instead
@@ -2020,7 +2020,7 @@ public:
 
     /// Get server timestamp for the value.
     DateTime serverTimestamp() const noexcept {
-        return DateTime(handle()->serverTimestamp);  // NOLINT
+        return DateTime{handle()->serverTimestamp};  // NOLINT
     }
 
     /// @deprecated Use serverTimestamp() instead
@@ -2107,7 +2107,7 @@ public:
      */
     template <typename T>
     explicit ExtensionObject(T* ptr) noexcept
-        : ExtensionObject(ptr, getDataType<T>()) {}
+        : ExtensionObject{ptr, getDataType<T>()} {}
 
     /**
      * Create ExtensionObject from a pointer to a decoded object with a custom data type (no copy).
@@ -2132,7 +2132,7 @@ public:
      */
     template <typename T, typename = std::enable_if_t<!isExtensionObject<T>>>
     explicit ExtensionObject(const T& decoded)
-        : ExtensionObject(decoded, getDataType<T>()) {}
+        : ExtensionObject{decoded, getDataType<T>()} {}
 
     /**
      * Create ExtensionObject from a decoded object with a custom data type (copy).
@@ -2152,14 +2152,14 @@ public:
     template <typename T, typename... Args>
     [[deprecated("use new universal ExtensionObject constructor instead")]] [[nodiscard]]
     static ExtensionObject fromDecoded(T& data, Args&&... args) noexcept {
-        return ExtensionObject(&data, std::forward<Args>(args)...);
+        return ExtensionObject{&data, std::forward<Args>(args)...};
     }
 
     /// @deprecated Use new universal ExtensionObject constructor instead
     template <typename T, typename... Args>
     [[deprecated("use new universal ExtensionObject constructor instead")]] [[nodiscard]]
     static ExtensionObject fromDecodedCopy(const T& data, Args&&... args) {
-        return ExtensionObject(data, std::forward<Args>(args)...);
+        return ExtensionObject{data, std::forward<Args>(args)...};
     }
 
     /// Check if the ExtensionObject is empty
@@ -2464,29 +2464,29 @@ public:
 
     /// @overload
     explicit NumericRange(const char* encodedRange)  // required to avoid ambiguity
-        : NumericRange(std::string_view(encodedRange)) {}
+        : NumericRange{std::string_view{encodedRange}} {}
 
     /// Create a NumericRange from dimensions.
     explicit NumericRange(Span<const NumericRangeDimension> dimensions)
-        : Wrapper(copy(dimensions.data(), dimensions.size())) {}
+        : Wrapper{copy(dimensions.data(), dimensions.size())} {}
 
     /// Create a NumericRange from native object (copy).
     explicit NumericRange(const UA_NumericRange& native)
-        : Wrapper(copy(native)) {}
+        : Wrapper{copy(native)} {}
 
     /// Create a NumericRange from native object (move).
     NumericRange(UA_NumericRange&& native) noexcept  // NOLINT
-        : Wrapper(std::exchange(native, {})) {}
+        : Wrapper{std::exchange(native, {})} {}
 
     ~NumericRange() {
         clear();
     }
 
     NumericRange(const NumericRange& other)
-        : Wrapper(copy(other.native())) {}
+        : Wrapper{copy(other.native())} {}
 
     NumericRange(NumericRange&& other) noexcept
-        : Wrapper(std::exchange(other.native(), {})) {}
+        : Wrapper{std::exchange(other.native(), {})} {}
 
     NumericRange& operator=(const NumericRange& other) {
         if (this != &other) {

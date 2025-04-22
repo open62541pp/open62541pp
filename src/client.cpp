@@ -89,7 +89,7 @@ ClientConfig::ClientConfig(
 
 // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
 ClientConfig::ClientConfig(UA_ClientConfig&& native)
-    : Wrapper(std::exchange(native, {})) {}
+    : Wrapper{std::exchange(native, {})} {}
 
 ClientConfig::~ClientConfig() {
     clear(native());
@@ -97,7 +97,7 @@ ClientConfig::~ClientConfig() {
 
 // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
 ClientConfig::ClientConfig(ClientConfig&& other) noexcept
-    : Wrapper(std::exchange(other.native(), {})) {}
+    : Wrapper{std::exchange(other.native(), {})} {}
 
 ClientConfig& ClientConfig::operator=(ClientConfig&& other) noexcept {
     if (this != &other) {
@@ -275,14 +275,14 @@ static void setWrapperAsContextPointer(Client& client) noexcept {
 }
 
 Client::Client()
-    : Client(ClientConfig()) {}
+    : Client{ClientConfig{}} {}
 
 // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
 Client::Client(ClientConfig&& config)
-    : context_(std::make_unique<detail::ClientContext>()),
-      client_(allocateClient(config)) {
+    : context_{std::make_unique<detail::ClientContext>()},
+      client_{allocateClient(config)} {
     if (handle() == nullptr) {
-        throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
+        throw BadStatus{UA_STATUSCODE_BADOUTOFMEMORY};
     }
     config = {};
     this->config()->stateCallback = stateCallback;
@@ -297,14 +297,14 @@ Client::Client(
     Span<const ByteString> trustList,
     Span<const ByteString> revocationList
 )
-    : Client(ClientConfig(certificate, privateKey, trustList, revocationList)) {}
+    : Client{ClientConfig{certificate, privateKey, trustList, revocationList}} {}
 #endif
 
 Client::Client(UA_Client* native)
-    : context_(std::make_unique<detail::ClientContext>()),
-      client_(native) {
+    : context_{std::make_unique<detail::ClientContext>()},
+      client_{native} {
     if (handle() == nullptr) {
-        throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
+        throw BadStatus{UA_STATUSCODE_BADOUTOFMEMORY};
     }
     setWrapperAsContextPointer(*this);
 }
@@ -312,8 +312,8 @@ Client::Client(UA_Client* native)
 Client::~Client() = default;
 
 Client::Client(Client&& other) noexcept
-    : context_(std::move(other.context_)),
-      client_(std::move(other.client_)) {
+    : context_{std::move(other.context_)},
+      client_{std::move(other.client_)} {
     setWrapperAsContextPointer(*this);
 }
 
@@ -339,7 +339,7 @@ std::vector<ApplicationDescription> Client::findServers(std::string_view serverU
     UA_ApplicationDescription* array{};
     const auto status = UA_Client_findServers(
         handle(),
-        std::string(serverUrl).c_str(),  // serverUrl
+        std::string{serverUrl}.c_str(),  // serverUrl
         0,  // serverUrisSize
         nullptr,  // serverUris
         0,  // localeIdsSize
@@ -361,7 +361,7 @@ std::vector<EndpointDescription> Client::getEndpoints(std::string_view serverUrl
     UA_EndpointDescription* array{};
     const auto status = UA_Client_getEndpoints(
         handle(),
-        std::string(serverUrl).c_str(),  // serverUrl
+        std::string{serverUrl}.c_str(),  // serverUrl
         &arraySize,  // endpointDescriptionsSize,
         &array  // endpointDescriptions
     );
@@ -420,14 +420,14 @@ void Client::onSubscriptionInactive([[maybe_unused]] SubscriptionInactivityCallb
 }
 
 void Client::connect(std::string_view endpointUrl) {
-    throwIfBad(UA_Client_connect(handle(), std::string(endpointUrl).c_str()));
+    throwIfBad(UA_Client_connect(handle(), std::string{endpointUrl}.c_str()));
 }
 
 void Client::connectAsync(std::string_view endpointUrl) {
 #if UAPP_OPEN62541_VER_GE(1, 1)
-    throwIfBad(UA_Client_connectAsync(handle(), std::string(endpointUrl).c_str()));
+    throwIfBad(UA_Client_connectAsync(handle(), std::string{endpointUrl}.c_str()));
 #else
-    throwIfBad(UA_Client_connect_async(handle(), std::string(endpointUrl).c_str(), nullptr, nullptr)
+    throwIfBad(UA_Client_connect_async(handle(), std::string{endpointUrl}.c_str(), nullptr, nullptr)
     );
 #endif
 }

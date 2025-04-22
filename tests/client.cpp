@@ -64,7 +64,7 @@ TEST_CASE("Client constructors") {
 
 TEST_CASE("Client discovery") {
     Server server;
-    ServerRunner serverRunner(server);
+    ServerRunner serverRunner{server};
     Client client;
 
     SECTION("Find servers") {
@@ -84,7 +84,7 @@ TEST_CASE("Client discovery") {
 
         const auto& endpoint = endpoints[0];
         CHECK(endpoint.endpointUrl() == localServerUrl);
-        CHECK(endpoint.serverCertificate() == ByteString());
+        CHECK(endpoint.serverCertificate() == ByteString{});
         CHECK(endpoint.securityMode() == MessageSecurityMode::None);
         CHECK(endpoint.securityPolicyUri() == "http://opcfoundation.org/UA/SecurityPolicy#None");
         CHECK(
@@ -96,7 +96,7 @@ TEST_CASE("Client discovery") {
 
 TEST_CASE("Client connect with AnonymousIdentityToken") {
     Server server;
-    ServerRunner serverRunner(server);
+    ServerRunner serverRunner{server};
     Client client;
 
     SECTION("Connect with anonymous should succeed") {
@@ -106,17 +106,17 @@ TEST_CASE("Client connect with AnonymousIdentityToken") {
     }
 
     SECTION("Connect with username/password should fail") {
-        client.config().setUserIdentityToken(UserNameIdentityToken("username", "password"));
+        client.config().setUserIdentityToken(UserNameIdentityToken{"username", "password"});
         CHECK_THROWS(client.connect(localServerUrl));
     }
 }
 
 #if UAPP_OPEN62541_VER_GE(1, 3)
 TEST_CASE("Client connect with UserNameIdentityToken") {
-    AccessControlDefault accessControl(false, {Login{String{"username"}, String{"password"}}});
+    AccessControlDefault accessControl{false, {Login{String{"username"}, String{"password"}}}};
     Server server;
     server.config().setAccessControl(accessControl);
-    ServerRunner serverRunner(server);
+    ServerRunner serverRunner{server};
     Client client;
 
     SECTION("Connect with anonymous should fail") {
@@ -124,7 +124,7 @@ TEST_CASE("Client connect with UserNameIdentityToken") {
     }
 
     SECTION("Connect with username/password should succeed") {
-        client.config().setUserIdentityToken(UserNameIdentityToken("username", "password"));
+        client.config().setUserIdentityToken(UserNameIdentityToken{"username", "password"});
         CHECK_NOTHROW(client.connect(localServerUrl));
         CHECK(client.isConnected());
     }
@@ -135,7 +135,7 @@ TEST_CASE("Client connect with UserNameIdentityToken") {
 #if UAPP_OPEN62541_VER_GE(1, 1)
 TEST_CASE("Client connectAsync/disconnectAsync") {
     Server server;
-    ServerRunner serverRunner(server);
+    ServerRunner serverRunner{server};
     Client client;
 
     bool connected = false;
@@ -164,7 +164,7 @@ TEST_CASE("Client connectAsync/disconnectAsync") {
 TEST_CASE("Client encryption") {
     SECTION("Connect to unencrypted server") {
         Server server;
-        ServerRunner serverRunner(server);
+        ServerRunner serverRunner{server};
         Client client(ClientConfig(ByteString{}, ByteString{}, {}, {}));
 
         client.config().setSecurityMode(MessageSecurityMode::SignAndEncrypt);
@@ -180,7 +180,7 @@ TEST_CASE("Client encryption") {
 
 TEST_CASE("Client run/stop") {
     Server server;
-    ServerRunner serverRunner(server);
+    ServerRunner serverRunner{server};
     Client client;
     client.connect(localServerUrl);
 
@@ -188,7 +188,7 @@ TEST_CASE("Client run/stop") {
 
     auto t = std::thread([&] { client.run(); });
     // wait for thread to execute run method
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds{100});
 
     CHECK(client.isRunning());
 
@@ -273,7 +273,7 @@ TEST_CASE("Client subscription inactivity callback") {
 
 TEST_CASE("Client methods") {
     Server server;
-    ServerRunner serverRunner(server);
+    ServerRunner serverRunner{server};
     Client client;
     client.connect(localServerUrl);
 

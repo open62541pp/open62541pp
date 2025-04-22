@@ -14,10 +14,10 @@ public:
     constexpr UniqueOrRawPtr() = default;
 
     explicit constexpr UniqueOrRawPtr(std::unique_ptr<T>&& ptr) noexcept
-        : ptr_(std::move(ptr)) {}
+        : ptr_{std::move(ptr)} {}
 
     explicit constexpr UniqueOrRawPtr(T* ptr) noexcept
-        : ptr_(ptr) {}
+        : ptr_{ptr} {}
 
     constexpr UniqueOrRawPtr& operator=(std::unique_ptr<T>&& ptr) noexcept {
         ptr_ = std::move(ptr);

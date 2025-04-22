@@ -454,7 +454,7 @@ public:
 
     /// Construct with default attribute definitions.
     ObjectAttributes()
-        : TypeWrapper(UA_ObjectAttributes_default) {}
+        : TypeWrapper{UA_ObjectAttributes_default} {}
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR_BITMASK(
@@ -472,21 +472,23 @@ public:
 
     /// Construct with default attribute definitions.
     VariableAttributes()
-        : TypeWrapper(UA_VariableAttributes_default) {}
+        : TypeWrapper{UA_VariableAttributes_default} {}
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR_WRAPPER(Variant, Value, value, UA_NODEATTRIBUTESMASK_VALUE)
 
-    /// @see Variant::Variant
+    /// @deprecated Use setValue(Variant{...}) instead
     template <typename... Args>
+    [[deprecated("use setValue(Variant{...}) instead")]]
     auto& setValueScalar(Args&&... args) {
-        return setValue(Variant(std::forward<Args>(args)...));
+        return setValue(Variant{std::forward<Args>(args)...});
     }
 
-    /// @see Variant::Variant
+    /// @deprecated Use setValue(Variant{...}) instead
     template <typename... Args>
+    [[deprecated("use setValue(Variant{...}) instead")]]
     auto& setValueArray(Args&&... args) {
-        return setValue(Variant(std::forward<Args>(args)...));
+        return setValue(Variant{std::forward<Args>(args)...});
     }
 
     UAPP_NODEATTR_WRAPPER(NodeId, DataType, dataType, UA_NODEATTRIBUTESMASK_DATATYPE)
@@ -534,7 +536,7 @@ public:
 
     /// Construct with default attribute definitions.
     MethodAttributes()
-        : TypeWrapper(UA_MethodAttributes_default) {}
+        : TypeWrapper{UA_MethodAttributes_default} {}
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR(bool, Executable, executable, UA_NODEATTRIBUTESMASK_EXECUTABLE)
@@ -552,7 +554,7 @@ public:
 
     /// Construct with default attribute definitions.
     ObjectTypeAttributes()
-        : TypeWrapper(UA_ObjectTypeAttributes_default) {}
+        : TypeWrapper{UA_ObjectTypeAttributes_default} {}
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR(bool, IsAbstract, isAbstract, UA_NODEATTRIBUTESMASK_ISABSTRACT)
@@ -569,21 +571,23 @@ public:
 
     /// Construct with default attribute definitions.
     VariableTypeAttributes()
-        : TypeWrapper(UA_VariableTypeAttributes_default) {}
+        : TypeWrapper{UA_VariableTypeAttributes_default} {}
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR_WRAPPER(Variant, Value, value, UA_NODEATTRIBUTESMASK_VALUE)
 
-    /// @see Variant::Variant
+    /// @deprecated Use setValue(Variant{...}) instead
     template <typename... Args>
+    [[deprecated("use setValue(Variant{...}) instead")]]
     auto& setValueScalar(Args&&... args) {
-        return setValue(Variant(std::forward<Args>(args)...));
+        return setValue(Variant{std::forward<Args>(args)...});
     }
 
-    /// @see Variant::Variant
+    /// @deprecated Use setValue(Variant{...}) instead
     template <typename... Args>
+    [[deprecated("use setValue(Variant{...}) instead")]]
     auto& setValueArray(Args&&... args) {
-        return setValue(Variant(std::forward<Args>(args)...));
+        return setValue(Variant{std::forward<Args>(args)...});
     }
 
     UAPP_NODEATTR_WRAPPER(NodeId, DataType, dataType, UA_NODEATTRIBUTESMASK_DATATYPE)
@@ -617,7 +621,7 @@ public:
 
     /// Construct with default attribute definitions.
     ReferenceTypeAttributes()
-        : TypeWrapper(UA_ReferenceTypeAttributes_default) {}
+        : TypeWrapper{UA_ReferenceTypeAttributes_default} {}
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR(bool, IsAbstract, isAbstract, UA_NODEATTRIBUTESMASK_ISABSTRACT)
@@ -637,7 +641,7 @@ public:
 
     /// Construct with default attribute definitions.
     DataTypeAttributes()
-        : TypeWrapper(UA_DataTypeAttributes_default) {}
+        : TypeWrapper{UA_DataTypeAttributes_default} {}
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR(bool, IsAbstract, isAbstract, UA_NODEATTRIBUTESMASK_ISABSTRACT)
@@ -653,7 +657,7 @@ public:
 
     /// Construct with default attribute definitions.
     ViewAttributes()
-        : TypeWrapper(UA_ViewAttributes_default) {}
+        : TypeWrapper{UA_ViewAttributes_default} {}
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR(bool, IsAbstract, containsNoLoops, UA_NODEATTRIBUTESMASK_CONTAINSNOLOOPS)
@@ -1764,7 +1768,7 @@ public:
 
     template <typename T, typename = EnableIfLiteral<T>>
     explicit LiteralOperand(T&& literal)
-        : LiteralOperand(Variant(std::forward<T>(literal))) {}
+        : LiteralOperand{Variant{std::forward<T>(literal)}} {}
 
     UAPP_GETTER_WRAPPER(Variant, getValue, value)
 };

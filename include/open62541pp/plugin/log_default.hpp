@@ -18,7 +18,7 @@ using Logger [[deprecated("use alias LogFunction instead")]] = LogFunction;
 class LoggerDefault : public LoggerBase {
 public:
     explicit LoggerDefault(LogFunction func)
-        : func_(std::move(func)) {}
+        : func_{std::move(func)} {}
 
     void log(LogLevel level, LogCategory category, std::string_view msg) override {
         if (func_) {

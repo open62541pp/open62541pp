@@ -144,7 +144,7 @@ public:
     /// @copydoc ServerConfig::ServerConfig(uint16_t, const ByteString&)
     [[deprecated("use ServerConfig constructor and construct Server with ServerConfig")]]
     explicit Server(uint16_t port, const ByteString& certificate = {})
-        : Server(ServerConfig(port, certificate)) {}
+        : Server{ServerConfig{port, certificate}} {}
 
 #ifdef UA_ENABLE_ENCRYPTION
     /// @copydoc ServerConfig::ServerConfig(
@@ -164,8 +164,9 @@ public:
         Span<const ByteString> issuerList,
         Span<const ByteString> revocationList = {}
     )
-        : Server(ServerConfig(port, certificate, privateKey, trustList, issuerList, revocationList)
-          ) {}
+        : Server{
+              ServerConfig{port, certificate, privateKey, trustList, issuerList, revocationList}
+          } {}
 #endif
 
     /// Create server from native instance (move ownership to server).
@@ -244,7 +245,9 @@ public:
     /// Set value callback for variable node.
     void setVariableNodeValueCallback(const NodeId& id, ValueCallbackBase& callback);
     /// Set value callback for variable node (move ownership to server).
-    void setVariableNodeValueCallback(const NodeId& id, std::unique_ptr<ValueCallbackBase>&& callback);
+    void setVariableNodeValueCallback(
+        const NodeId& id, std::unique_ptr<ValueCallbackBase>&& callback
+    );
     /// Set data source for variable node.
     void setVariableNodeDataSource(const NodeId& id, DataSourceBase& source);
     /// Set data source for variable node (move ownership to server).

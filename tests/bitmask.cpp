@@ -90,7 +90,7 @@ TEST_CASE("Bitwise operations with enum (enabled with IsBitmaskEnum trait)") {
 
 TEST_CASE("Bitmask") {
     SECTION("Conversion to enum") {
-        CHECK(static_cast<Bit>(Bitmask(Bit::One)) == Bit::One);
+        CHECK(static_cast<Bit>(Bitmask{Bit::One}) == Bit::One);
     }
 
     SECTION("Conversion to int") {
@@ -157,16 +157,16 @@ TEST_CASE("Bitmask") {
     SECTION("Equality") {
         CHECK(Bitmask<Bit>() == Bitmask<Bit>());
 
-        CHECK(Bitmask(Bit::One) == Bitmask(Bit::One));
-        CHECK(Bitmask(Bit::One) == Bit::One);
-        CHECK(Bit::One == Bitmask(Bit::One));
-        CHECK(Bitmask(Bit::One) == 1);
-        CHECK(1 == Bitmask(Bit::One));
+        CHECK(Bitmask{Bit::One} == Bitmask{Bit::One});
+        CHECK(Bitmask{Bit::One} == Bit::One);
+        CHECK(Bit::One == Bitmask{Bit::One});
+        CHECK(Bitmask{Bit::One} == 1);
+        CHECK(1 == Bitmask{Bit::One});
 
-        CHECK(Bitmask(Bit::One) != Bitmask(Bit::Two));
-        CHECK(Bitmask(Bit::One) != Bit::Two);
-        CHECK(Bit::Two != Bitmask(Bit::One));
-        CHECK(Bitmask(Bit::One) != 2);
-        CHECK(2 != Bitmask(Bit::One));
+        CHECK(Bitmask{Bit::One} != Bitmask{Bit::Two});
+        CHECK(Bitmask{Bit::One} != Bit::Two);
+        CHECK(Bit::Two != Bitmask{Bit::One});
+        CHECK(Bitmask{Bit::One} != 2);
+        CHECK(2 != Bitmask{Bit::One});
     }
 }

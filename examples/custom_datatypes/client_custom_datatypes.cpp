@@ -30,7 +30,7 @@ int main() {
     // Read custom variables
     opcua::Variant variant;
 
-    variant = opcua::Node(client, {1, "Point"}).readValue();
+    variant = opcua::Node{client, {1, "Point"}}.readValue();
     if (variant.isType(dataTypePoint)) {
         const auto* p = static_cast<Point*>(variant.data());
         std::cout << "Point:\n";
@@ -39,7 +39,7 @@ int main() {
         std::cout << "- z = " << p->z << "\n";
     }
 
-    variant = opcua::Node(client, {1, "PointVec"}).readValue();
+    variant = opcua::Node{client, {1, "PointVec"}}.readValue();
     // Variants store non-builtin data types as ExtensionObjects. If the data type is known to the
     // client/server, open62541 unwraps scalar objects transparently in the encoding layer:
     // https://www.open62541.org/doc/master/types.html#variant
@@ -57,18 +57,18 @@ int main() {
         }
     }
 
-    variant = opcua::Node(client, {1, "Measurements"}).readValue();
+    variant = opcua::Node{client, {1, "Measurements"}}.readValue();
     if (variant.isType(dataTypeMeasurements)) {
         const auto* m = static_cast<Measurements*>(variant.data());
         std::cout << "Measurements:\n";
         std::cout << "- description = " << m->description << "\n";
         size_t i = 0;
-        for (auto&& value : opcua::Span(m->measurements, m->measurementsSize)) {
+        for (auto&& value : opcua::Span{m->measurements, m->measurementsSize}) {
             std::cout << "- measurements[" << i++ << "] = " << value << "\n";
         }
     }
 
-    variant = opcua::Node(client, {1, "Opt"}).readValue();
+    variant = opcua::Node{client, {1, "Opt"}}.readValue();
     auto formatOptional = [](const auto* ptr) {
         return ptr == nullptr ? "NULL" : std::to_string(*ptr);
     };
@@ -80,7 +80,7 @@ int main() {
         std::cout << "- c = " << formatOptional(opt->c) << "\n";
     }
 
-    variant = opcua::Node(client, {1, "Uni"}).readValue();
+    variant = opcua::Node{client, {1, "Uni"}}.readValue();
     if (variant.isType(dataTypeUni)) {
         const auto* uni = static_cast<Uni*>(variant.data());
         std::cout << "Uni:\n";
@@ -89,11 +89,11 @@ int main() {
             std::cout << "- optionA = " << uni->fields.optionA << "\n";  // NOLINT
         }
         if (uni->switchField == UniSwitch::OptionB) {
-            std::cout << "- optionB = " << opcua::String(uni->fields.optionB) << "\n";  // NOLINT
+            std::cout << "- optionB = " << opcua::String{uni->fields.optionB} << "\n";  // NOLINT
         }
     }
 
-    variant = opcua::Node(client, {1, "Color"}).readValue();
+    variant = opcua::Node{client, {1, "Color"}}.readValue();
     if (variant.isType<int32_t>()) {
         std::cout << "Color: " << variant.scalar<int32_t>() << "\n";
     }

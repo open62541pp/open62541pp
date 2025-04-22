@@ -15,13 +15,13 @@ constexpr std::string_view localServerUrl{"opc.tcp://localhost:4840"};
 
 TEST_CASE("Session") {
     Server server;
-    ServerRunner serverRunner(server);
+    ServerRunner serverRunner{server};
     Client client;
 
     SECTION("Construct") {
         const NodeId sessionId{1, 1000};
         int sessionContext = 11;
-        Session session(server, sessionId, &sessionContext);
+        Session session{server, sessionId, &sessionContext};
 
         CHECK(session.connection() == server);
         CHECK(std::as_const(session).connection() == server);
@@ -45,7 +45,7 @@ TEST_CASE("Session") {
         client.connect(localServerUrl);
         auto session = server.sessions().at(0);
 
-        const QualifiedName key(0, "testAttribute");
+        const QualifiedName key{0, "testAttribute"};
         CHECK_THROWS_WITH(session.getSessionAttribute(key), "BadNotFound");
 
 #if UAPP_OPEN62541_VER_LE(1, 3)

@@ -26,11 +26,11 @@ int main() {
         );
 
         // 2. Browse request of Server object
-        const opcua::BrowseDescription bd(
+        const opcua::BrowseDescription bd{
             opcua::ObjectId::Server,
             opcua::BrowseDirection::Forward,
             opcua::ReferenceTypeId::References
-        );
+        };
         opcua::services::browseAsync(client, bd, 0, [](opcua::BrowseResult& result) {
             std::cout << "Browse result with " << result.references().size() << " references:\n";
             for (const auto& reference : result.references()) {
@@ -57,10 +57,10 @@ int main() {
                 opcua::services::createMonitoredItemDataChangeAsync(
                     client,
                     response.subscriptionId(),
-                    opcua::ReadValueId(
+                    opcua::ReadValueId{
                         opcua::VariableId::Server_ServerStatus_CurrentTime,
                         opcua::AttributeId::Value
-                    ),
+                    },
                     opcua::MonitoringMode::Reporting,
                     opcua::MonitoringParametersEx{},  // default monitoring parameters
                     [](opcua::IntegerId subId, opcua::IntegerId monId, const opcua::DataValue& dv) {

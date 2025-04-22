@@ -15,10 +15,10 @@ namespace opcua::services::detail {
 
 inline Result<Variant> getVariant(DataValue&& dv) noexcept {
     if (dv.status().isBad()) {
-        return BadResult(dv.status());
+        return BadResult{dv.status()};
     }
     if (!dv.hasValue()) {
-        return BadResult(UA_STATUSCODE_BADUNEXPECTEDERROR);
+        return BadResult{UA_STATUSCODE_BADUNEXPECTEDERROR};
     }
     return std::move(dv).value();
 }
@@ -60,7 +60,7 @@ struct AttributeHandlerScalar {
 
     template <typename U>
     static DataValue toDataValue(U&& value) {
-        return DataValue(Variant(std::forward<U>(value)));
+        return DataValue{Variant{std::forward<U>(value)}};
     }
 };
 
@@ -166,7 +166,7 @@ struct AttributeHandler<AttributeId::ArrayDimensions> {
     }
 
     static DataValue toDataValue(Span<const uint32_t> dimensions) {
-        return DataValue(Variant(dimensions));
+        return DataValue{Variant{dimensions}};
     }
 };
 

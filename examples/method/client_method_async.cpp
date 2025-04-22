@@ -11,7 +11,7 @@ int main() {
     client.connect("opc.tcp://localhost:4840");
 
     // Browse method node
-    opcua::Node objectsNode(client, opcua::ObjectId::ObjectsFolder);
+    opcua::Node objectsNode{client, opcua::ObjectId::ObjectsFolder};
     const opcua::Node greetMethodNode = objectsNode.browseChild({{1, "Greet"}});
 
     // Run client event loop in separate thread
@@ -20,7 +20,7 @@ int main() {
     // Asynchronously call method (future variant - default)
     {
         auto future = objectsNode.callMethodAsync(
-            greetMethodNode.id(), {opcua::Variant("Future World")}, opcua::useFuture
+            greetMethodNode.id(), {opcua::Variant{"Future World"}}, opcua::useFuture
         );
         std::cout << "Waiting for asynchronous operation to complete\n";
         future.wait();
@@ -35,7 +35,7 @@ int main() {
     {
         objectsNode.callMethodAsync(
             greetMethodNode.id(),
-            {opcua::Variant("Callback World")},
+            {opcua::Variant{"Callback World"}},
             [](opcua::CallMethodResult& result) {
                 std::cout << "Callback with status code: " << result.statusCode() << std::endl;
                 std::cout << result.outputArguments()[0].scalar<opcua::String>() << std::endl;

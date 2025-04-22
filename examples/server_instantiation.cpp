@@ -10,7 +10,7 @@ int main() {
     //    ├─ (Variable) Age
     //    └─ (ObjectType) DogType
     //       └─ (Variable) Name
-    opcua::Node nodeBaseObjectType(server, opcua::ObjectTypeId::BaseObjectType);
+    opcua::Node nodeBaseObjectType{server, opcua::ObjectTypeId::BaseObjectType};
     auto nodeMammalType = nodeBaseObjectType.addObjectType(
         {1, 10000},
         "MammalType",
@@ -26,7 +26,7 @@ int main() {
             opcua::VariableAttributes{}
                 .setDisplayName({"en-US", "Age"})
                 .setDescription({"en-US", "This mammals age in months"})
-                .setValueScalar(0U)  // default age
+                .setValue(opcua::Variant{0U})  // default age
         )
         .addModellingRule(opcua::ModellingRule::Mandatory);  // create on new instance
 
@@ -45,7 +45,7 @@ int main() {
             opcua::VariableAttributes{}
                 .setDisplayName({"en-US", "Name"})
                 .setDescription({"en-US", "This dogs name"})
-                .setValueScalar("unnamed dog")  // default name
+                .setValue(opcua::Variant{"unnamed dog"})  // default name
         )
         .addModellingRule(opcua::ModellingRule::Mandatory);  // create on new instance
 
@@ -54,7 +54,7 @@ int main() {
     // └─ (Object) Bello <DogType>
     //    ├─ (Variable) Age
     //    └─ (Variable) Name
-    opcua::Node nodeObjects(server, opcua::ObjectId::ObjectsFolder);
+    opcua::Node nodeObjects{server, opcua::ObjectId::ObjectsFolder};
     auto nodeBello = nodeObjects.addObject(
         {1, 20000},
         "Bello",

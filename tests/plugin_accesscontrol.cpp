@@ -57,7 +57,7 @@ TEST_CASE("AccessControlDefault") {
 
             SECTION("Anonymous login") {
                 AnonymousIdentityToken token;
-                token.policyId() = String("open62541-anonymous-policy");
+                token.policyId() = String{"open62541-anonymous-policy"};
                 CHECK(
                     activateSessionWithToken(ExtensionObject(token)) ==
                     (allowAnonymous ? UA_STATUSCODE_GOOD : UA_STATUSCODE_BADIDENTITYTOKENINVALID)
@@ -71,20 +71,20 @@ TEST_CASE("AccessControlDefault") {
                     UA_STATUSCODE_BADIDENTITYTOKENINVALID
                 );
 
-                token.policyId() = String("open62541-username-policy");
+                token.policyId() = String{"open62541-username-policy"};
                 CHECK(
                     activateSessionWithToken(ExtensionObject(token)) ==
                     UA_STATUSCODE_BADIDENTITYTOKENINVALID
                 );
 
-                token.userName() = String("username");
-                token.password() = ByteString("wrongpassword");
+                token.userName() = String{"username"};
+                token.password() = ByteString{"wrongpassword"};
                 CHECK(
                     activateSessionWithToken(ExtensionObject(token)) ==
                     UA_STATUSCODE_BADUSERACCESSDENIED
                 );
 
-                token.password() = ByteString("password");
+                token.password() = ByteString{"password"};
                 CHECK(activateSessionWithToken(ExtensionObject(token)) == UA_STATUSCODE_GOOD);
             }
         }
@@ -116,7 +116,7 @@ public:
     Bitmask<AccessLevel> getUserAccessLevel(
         [[maybe_unused]] Session& session, [[maybe_unused]] const NodeId& nodeId
     ) override {
-        throw std::runtime_error("This exception should result in most restrictive access");
+        throw std::runtime_error{"This exception should result in most restrictive access"};
     }
 
     bool allowDeleteNode(

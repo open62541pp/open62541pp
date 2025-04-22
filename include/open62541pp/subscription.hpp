@@ -49,8 +49,8 @@ public:
     /// Wrap an existing subscription.
     /// The `subscriptionId` is ignored and set to `0U` for servers.
     Subscription(Connection& connection, IntegerId subscriptionId) noexcept
-        : connection_(&connection),
-          subscriptionId_(std::is_same_v<Connection, Server> ? 0U : subscriptionId) {}
+        : connection_{&connection},
+          subscriptionId_{std::is_same_v<Connection, Server> ? 0U : subscriptionId} {}
 
     /// Get the server/client instance.
     Connection& connection() noexcept {

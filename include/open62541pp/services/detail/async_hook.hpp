@@ -15,8 +15,8 @@ namespace opcua::services::detail {
 template <typename HookFunction, typename CompletionToken>
 struct HookToken {
     HookToken(HookFunction&& hookFunction, CompletionToken&& completionToken)
-        : hook(std::move(hookFunction)),
-          token(std::move(completionToken)) {}
+        : hook{std::move(hookFunction)},
+          token{std::move(completionToken)} {}
 
     std::decay_t<HookFunction> hook;
     std::decay_t<CompletionToken> token;

@@ -136,11 +136,11 @@ public:
 
     /// Create a bitmask from the enumeration type.
     constexpr Bitmask(T mask) noexcept  // NOLINT(hicpp-explicit-conversions)
-        : mask_(toUnderlying(mask)) {}
+        : mask_{toUnderlying(mask)} {}
 
     /// Create a bitmask from the underlying type.
     constexpr Bitmask(Underlying mask) noexcept  // NOLINT(hicpp-explicit-conversions)
-        : mask_(mask) {}
+        : mask_{mask} {}
 
     /// Conversion to the enum type.
     constexpr explicit operator T() const noexcept {
@@ -189,7 +189,7 @@ public:
 
     /// Check if all bits are set.
     constexpr bool all() const noexcept {
-        return Underlying(~mask_) == empty;
+        return Underlying{~mask_} == empty;
     }
 
     /// Check if all of the specified bits are set.

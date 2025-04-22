@@ -55,7 +55,7 @@ int main() {
     opcua::Client client;
     client.connect("opc.tcp://localhost:4840");
 
-    opcua::Node nodeRoot(client, opcua::ObjectId::RootFolder);
+    opcua::Node nodeRoot{client, opcua::ObjectId::RootFolder};
 
     // Browse all nodes recursively and print node tree to console
     printNodeTree(nodeRoot, 0);

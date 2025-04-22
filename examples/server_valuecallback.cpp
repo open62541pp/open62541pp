@@ -11,7 +11,7 @@ class CurrentTimeCallback : public opcua::ValueCallbackBase {
         [[maybe_unused]] const opcua::NumericRange* range,
         const opcua::DataValue& value
     ) override {
-        opcua::Node node(session.connection(), id);
+        opcua::Node node{session.connection(), id};
         const auto timeOld = value.value().scalar<opcua::DateTime>();
         const auto timeNow = opcua::DateTime::now();
         std::cout << "Time before read: " << timeOld.format("%Y-%m-%d %H:%M:%S") << std::endl;
@@ -30,8 +30,8 @@ class CurrentTimeCallback : public opcua::ValueCallbackBase {
 int main() {
     opcua::Server server;
 
-    const opcua::NodeId currentTimeId(1, "CurrentTime");
-    opcua::Node(server, opcua::ObjectId::ObjectsFolder)
+    const opcua::NodeId currentTimeId{1, "CurrentTime"};
+    opcua::Node{server, opcua::ObjectId::ObjectsFolder}
         .addVariable(currentTimeId, "CurrentTime")
         .writeDisplayName({"en-US", "Current time"})
         .writeDescription({"en-US", "Current time"})

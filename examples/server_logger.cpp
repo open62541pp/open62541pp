@@ -50,11 +50,11 @@ int main() {
     };
 
     // Create server configuration and set logger
-    opcua::ServerConfig config(4840, {});
+    opcua::ServerConfig config{4840, {}};
     config.setLogger(logger);
 
     // Construct server with config
-    opcua::Server server(std::move(config));
+    opcua::Server server{std::move(config)};
 
     // Alternatively, set logger after construction
     server.config().setLogger(logger);

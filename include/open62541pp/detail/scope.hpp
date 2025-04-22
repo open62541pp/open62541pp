@@ -17,11 +17,11 @@ public:
     static_assert(std::is_invocable_v<Fn>);
 
     explicit ScopeExit(Fn&& fn) noexcept
-        : fn_(std::move(fn)) {}
+        : fn_{std::move(fn)} {}
 
     ScopeExit(ScopeExit&& other) noexcept
-        : fn_(std::move(other.fn_)),
-          active_(other.active_) {
+        : fn_{std::move(other.fn_)},
+          active_{other.active_} {
         other.release();
     }
 

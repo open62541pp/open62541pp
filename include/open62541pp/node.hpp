@@ -46,13 +46,13 @@ class Node {
 public:
     /// Create a Node object.
     Node(Connection& connection, const NodeId& id)
-        : connection_(&connection),
-          id_(id) {}
+        : connection_{&connection},
+          id_{id} {}
 
     /// Create a Node object.
     Node(Connection& connection, NodeId&& id)
-        : connection_(&connection),
-          id_(std::move(id)) {}
+        : connection_{&connection},
+          id_{std::move(id)} {}
 
     /// Get the server/client instance.
     Connection& connection() noexcept {
@@ -99,7 +99,7 @@ public:
         std::string_view browseName,
         const ObjectAttributes& attributes = {},
         const NodeId& referenceType = ReferenceTypeId::HasComponent,
-        CompletionToken&& token = DefaultCompletionToken()
+        CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::addFolderAsync(
             connection(),
@@ -138,7 +138,7 @@ public:
         const ObjectAttributes& attributes = {},
         const NodeId& objectType = ObjectTypeId::BaseObjectType,
         const NodeId& referenceType = ReferenceTypeId::HasComponent,
-        CompletionToken&& token = DefaultCompletionToken()
+        CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::addObjectAsync(
             connection(),
@@ -178,7 +178,7 @@ public:
         const VariableAttributes& attributes = {},
         const NodeId& variableType = VariableTypeId::BaseDataVariableType,
         const NodeId& referenceType = ReferenceTypeId::HasComponent,
-        CompletionToken&& token = DefaultCompletionToken()
+        CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::addVariableAsync(
             connection(),
@@ -210,7 +210,7 @@ public:
         const NodeId& id,
         std::string_view browseName,
         const VariableAttributes& attributes = {},
-        CompletionToken&& token = DefaultCompletionToken()
+        CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::addPropertyAsync(
             connection(),
@@ -261,7 +261,7 @@ public:
         Span<const Argument> outputArguments,
         const MethodAttributes& attributes = {},
         const NodeId& referenceType = ReferenceTypeId::HasComponent,
-        CompletionToken&& token = DefaultCompletionToken()
+        CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::addMethodAsync(
             connection(),
@@ -302,7 +302,7 @@ public:
         std::string_view browseName,
         const ObjectTypeAttributes& attributes = {},
         const NodeId& referenceType = ReferenceTypeId::HasSubtype,
-        CompletionToken&& token = DefaultCompletionToken()
+        CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::addObjectTypeAsync(
             connection(),
@@ -341,7 +341,7 @@ public:
         const VariableTypeAttributes& attributes = {},
         const NodeId& variableType = VariableTypeId::BaseDataVariableType,
         const NodeId& referenceType = ReferenceTypeId::HasSubtype,
-        CompletionToken&& token = DefaultCompletionToken()
+        CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::addVariableTypeAsync(
             connection(),
@@ -379,7 +379,7 @@ public:
         std::string_view browseName,
         const ReferenceTypeAttributes& attributes = {},
         const NodeId& referenceType = ReferenceTypeId::HasSubtype,
-        CompletionToken&& token = DefaultCompletionToken()
+        CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::addReferenceTypeAsync(
             connection(),
@@ -416,7 +416,7 @@ public:
         std::string_view browseName,
         const DataTypeAttributes& attributes = {},
         const NodeId& referenceType = ReferenceTypeId::HasSubtype,
-        CompletionToken&& token = DefaultCompletionToken()
+        CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::addDataTypeAsync(
             connection(),
@@ -451,7 +451,7 @@ public:
         std::string_view browseName,
         const ViewAttributes& attributes = {},
         const NodeId& referenceType = ReferenceTypeId::Organizes,
-        CompletionToken&& token = DefaultCompletionToken()
+        CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::addViewAsync(
             connection(),
@@ -478,7 +478,7 @@ public:
         const NodeId& targetId,
         const NodeId& referenceType,
         bool forward = true,
-        CompletionToken&& token = DefaultCompletionToken()
+        CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::addReferenceAsync(
             connection(),
@@ -501,7 +501,7 @@ public:
     /// @return @asyncresult{StatusCode}
     template <typename CompletionToken = DefaultCompletionToken>
     auto addModellingRuleAsync(
-        ModellingRule rule, CompletionToken&& token = DefaultCompletionToken()
+        ModellingRule rule, CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::addModellingRuleAsync(
             connection(), id(), rule, std::forward<CompletionToken>(token)
@@ -518,7 +518,7 @@ public:
     /// @return @asyncresult{StatusCode}
     template <typename CompletionToken = DefaultCompletionToken>
     auto deleteNodeAsync(
-        bool deleteReferences = true, CompletionToken&& token = DefaultCompletionToken()
+        bool deleteReferences = true, CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::deleteNodeAsync(
             connection(), id(), deleteReferences, std::forward<CompletionToken>(token)
@@ -548,7 +548,7 @@ public:
         const NodeId& referenceType,
         bool isForward = true,
         bool deleteBidirectional = true,
-        CompletionToken&& token = DefaultCompletionToken()
+        CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::deleteReferenceAsync(
             connection(),
@@ -628,7 +628,7 @@ public:
                 return {connection(), std::move(target.targetId().nodeId())};
             }
         }
-        throw BadStatus(UA_STATUSCODE_BADNOMATCH);
+        throw BadStatus{UA_STATUSCODE_BADNOMATCH};
     }
 
     /// Browse parent node.
@@ -646,7 +646,7 @@ public:
         auto result = services::browse(connection(), bd, 1);
         result.statusCode().throwIfBad();
         if (result.references().empty()) {
-            throw BadStatus(UA_STATUSCODE_BADNOTFOUND);
+            throw BadStatus{UA_STATUSCODE_BADNOTFOUND};
         }
         return fromId(connection(), result.references().front().nodeId());
     }
@@ -666,7 +666,7 @@ public:
     auto callMethodAsync(
         const NodeId& methodId,
         Span<const Variant> inputArguments,
-        CompletionToken&& token = DefaultCompletionToken()
+        CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::callAsync(
             connection(), id(), methodId, inputArguments, std::forward<CompletionToken>(token)
@@ -685,7 +685,7 @@ public:
 
     /// @wrapper{services::readNodeClassAsync}
     template <typename CompletionToken = DefaultCompletionToken>
-    auto readNodeClassAsync(CompletionToken&& token = DefaultCompletionToken()) {
+    auto readNodeClassAsync(CompletionToken&& token = DefaultCompletionToken{}) {
         return services::readNodeClassAsync(
             connection(), id(), std::forward<CompletionToken>(token)
         );
@@ -698,7 +698,7 @@ public:
 
     /// @wrapper{services::readBrowseNameAsync}
     template <typename CompletionToken = DefaultCompletionToken>
-    auto readBrowseNameAsync(CompletionToken&& token = DefaultCompletionToken()) {
+    auto readBrowseNameAsync(CompletionToken&& token = DefaultCompletionToken{}) {
         return services::readBrowseNameAsync(
             connection(), id(), std::forward<CompletionToken>(token)
         );
@@ -711,7 +711,7 @@ public:
 
     /// @wrapper{services::readDisplayNameAsync}
     template <typename CompletionToken = DefaultCompletionToken>
-    auto readDisplayNameAsync(CompletionToken&& token = DefaultCompletionToken()) {
+    auto readDisplayNameAsync(CompletionToken&& token = DefaultCompletionToken{}) {
         return services::readDisplayNameAsync(
             connection(), id(), std::forward<CompletionToken>(token)
         );
@@ -724,7 +724,7 @@ public:
 
     /// @wrapper{services::readDescriptionAsync}
     template <typename CompletionToken = DefaultCompletionToken>
-    auto readDescriptionAsync(CompletionToken&& token = DefaultCompletionToken()) {
+    auto readDescriptionAsync(CompletionToken&& token = DefaultCompletionToken{}) {
         return services::readDescriptionAsync(
             connection(), id(), std::forward<CompletionToken>(token)
         );
@@ -737,7 +737,7 @@ public:
 
     /// @wrapper{services::readWriteMaskAsync}
     template <typename CompletionToken = DefaultCompletionToken>
-    auto readWriteMaskAsync(CompletionToken&& token = DefaultCompletionToken()) {
+    auto readWriteMaskAsync(CompletionToken&& token = DefaultCompletionToken{}) {
         return services::readWriteMaskAsync(
             connection(), id(), std::forward<CompletionToken>(token)
         );
@@ -750,7 +750,7 @@ public:
 
     /// @wrapper{services::readUserWriteMaskAsync}
     template <typename CompletionToken = DefaultCompletionToken>
-    auto readUserWriteMaskAsync(CompletionToken&& token = DefaultCompletionToken()) {
+    auto readUserWriteMaskAsync(CompletionToken&& token = DefaultCompletionToken{}) {
         return services::readUserWriteMaskAsync(
             connection(), id(), std::forward<CompletionToken>(token)
         );
@@ -763,7 +763,7 @@ public:
 
     /// @wrapper{services::readIsAbstractAsync}
     template <typename CompletionToken = DefaultCompletionToken>
-    auto readIsAbstractAsync(CompletionToken&& token = DefaultCompletionToken()) {
+    auto readIsAbstractAsync(CompletionToken&& token = DefaultCompletionToken{}) {
         return services::readIsAbstractAsync(
             connection(), id(), std::forward<CompletionToken>(token)
         );
@@ -776,7 +776,7 @@ public:
 
     /// @wrapper{services::readSymmetricAsync}
     template <typename CompletionToken = DefaultCompletionToken>
-    auto readSymmetricAsync(CompletionToken&& token = DefaultCompletionToken()) {
+    auto readSymmetricAsync(CompletionToken&& token = DefaultCompletionToken{}) {
         return services::readSymmetricAsync(
             connection(), id(), std::forward<CompletionToken>(token)
         );
@@ -789,7 +789,7 @@ public:
 
     /// @wrapper{services::readInverseNameAsync}
     template <typename CompletionToken = DefaultCompletionToken>
-    auto readInverseNameAsync(CompletionToken&& token = DefaultCompletionToken()) {
+    auto readInverseNameAsync(CompletionToken&& token = DefaultCompletionToken{}) {
         return services::readInverseNameAsync(
             connection(), id(), std::forward<CompletionToken>(token)
         );
@@ -802,7 +802,7 @@ public:
 
     /// @wrapper{services::readContainsNoLoopsAsync}
     template <typename CompletionToken = DefaultCompletionToken>
-    auto readContainsNoLoopsAsync(CompletionToken&& token = DefaultCompletionToken()) {
+    auto readContainsNoLoopsAsync(CompletionToken&& token = DefaultCompletionToken{}) {
         return services::readContainsNoLoopsAsync(
             connection(), id(), std::forward<CompletionToken>(token)
         );
@@ -815,7 +815,7 @@ public:
 
     /// @wrapper{services::readEventNotifierAsync}
     template <typename CompletionToken = DefaultCompletionToken>
-    auto readEventNotifierAsync(CompletionToken&& token = DefaultCompletionToken()) {
+    auto readEventNotifierAsync(CompletionToken&& token = DefaultCompletionToken{}) {
         return services::readEventNotifierAsync(
             connection(), id(), std::forward<CompletionToken>(token)
         );
@@ -828,7 +828,7 @@ public:
 
     /// @wrapper{services::readDataValueAsync}
     template <typename CompletionToken = DefaultCompletionToken>
-    auto readDataValueAsync(CompletionToken&& token = DefaultCompletionToken()) {
+    auto readDataValueAsync(CompletionToken&& token = DefaultCompletionToken{}) {
         return services::readDataValueAsync(
             connection(), id(), std::forward<CompletionToken>(token)
         );
@@ -841,7 +841,7 @@ public:
 
     /// @wrapper{services::readValueAsync}
     template <typename CompletionToken = DefaultCompletionToken>
-    auto readValueAsync(CompletionToken&& token = DefaultCompletionToken()) {
+    auto readValueAsync(CompletionToken&& token = DefaultCompletionToken{}) {
         return services::readValueAsync(connection(), id(), std::forward<CompletionToken>(token));
     }
 
@@ -866,7 +866,7 @@ public:
 
     /// @wrapper{services::readDataTypeAsync}
     template <typename CompletionToken = DefaultCompletionToken>
-    auto readDataTypeAsync(CompletionToken&& token = DefaultCompletionToken()) {
+    auto readDataTypeAsync(CompletionToken&& token = DefaultCompletionToken{}) {
         return services::readDataTypeAsync(
             connection(), id(), std::forward<CompletionToken>(token)
         );
@@ -879,7 +879,7 @@ public:
 
     /// @wrapper{services::readValueRankAsync}
     template <typename CompletionToken = DefaultCompletionToken>
-    auto readValueRankAsync(CompletionToken&& token = DefaultCompletionToken()) {
+    auto readValueRankAsync(CompletionToken&& token = DefaultCompletionToken{}) {
         return services::readValueRankAsync(
             connection(), id(), std::forward<CompletionToken>(token)
         );
@@ -892,7 +892,7 @@ public:
 
     /// @wrapper{services::readArrayDimensionsAsync}
     template <typename CompletionToken = DefaultCompletionToken>
-    auto readArrayDimensionsAsync(CompletionToken&& token = DefaultCompletionToken()) {
+    auto readArrayDimensionsAsync(CompletionToken&& token = DefaultCompletionToken{}) {
         return services::readArrayDimensionsAsync(
             connection(), id(), std::forward<CompletionToken>(token)
         );
@@ -905,7 +905,7 @@ public:
 
     /// @wrapper{services::readAccessLevelAsync}
     template <typename CompletionToken = DefaultCompletionToken>
-    auto readAccessLevelAsync(CompletionToken&& token = DefaultCompletionToken()) {
+    auto readAccessLevelAsync(CompletionToken&& token = DefaultCompletionToken{}) {
         return services::readAccessLevelAsync(
             connection(), id(), std::forward<CompletionToken>(token)
         );
@@ -918,7 +918,7 @@ public:
 
     /// @wrapper{services::readUserAccessLevelAsync}
     template <typename CompletionToken = DefaultCompletionToken>
-    auto readUserAccessLevelAsync(CompletionToken&& token = DefaultCompletionToken()) {
+    auto readUserAccessLevelAsync(CompletionToken&& token = DefaultCompletionToken{}) {
         return services::readUserAccessLevelAsync(
             connection(), id(), std::forward<CompletionToken>(token)
         );
@@ -931,7 +931,7 @@ public:
 
     /// @wrapper{services::readMinimumSamplingIntervalAsync}
     template <typename CompletionToken = DefaultCompletionToken>
-    auto readMinimumSamplingIntervalAsync(CompletionToken&& token = DefaultCompletionToken()) {
+    auto readMinimumSamplingIntervalAsync(CompletionToken&& token = DefaultCompletionToken{}) {
         return services::readMinimumSamplingIntervalAsync(
             connection(), id(), std::forward<CompletionToken>(token)
         );
@@ -944,7 +944,7 @@ public:
 
     /// @wrapper{services::readHistorizingAsync}
     template <typename CompletionToken = DefaultCompletionToken>
-    auto readHistorizingAsync(CompletionToken&& token = DefaultCompletionToken()) {
+    auto readHistorizingAsync(CompletionToken&& token = DefaultCompletionToken{}) {
         return services::readHistorizingAsync(
             connection(), id(), std::forward<CompletionToken>(token)
         );
@@ -957,7 +957,7 @@ public:
 
     /// @wrapper{services::readExecutableAsync}
     template <typename CompletionToken = DefaultCompletionToken>
-    auto readExecutableAsync(CompletionToken&& token = DefaultCompletionToken()) {
+    auto readExecutableAsync(CompletionToken&& token = DefaultCompletionToken{}) {
         return services::readExecutableAsync(
             connection(), id(), std::forward<CompletionToken>(token)
         );
@@ -970,7 +970,7 @@ public:
 
     /// @wrapper{services::readUserExecutableAsync}
     template <typename CompletionToken = DefaultCompletionToken>
-    auto readUserExecutableAsync(CompletionToken&& token = DefaultCompletionToken()) {
+    auto readUserExecutableAsync(CompletionToken&& token = DefaultCompletionToken{}) {
         return services::readUserExecutableAsync(
             connection(), id(), std::forward<CompletionToken>(token)
         );
@@ -983,7 +983,7 @@ public:
 
     /// @wrapper{services::readDataTypeDefinitionAsync}
     template <typename CompletionToken = DefaultCompletionToken>
-    auto readDataTypeDefinitionAsync(CompletionToken&& token = DefaultCompletionToken()) {
+    auto readDataTypeDefinitionAsync(CompletionToken&& token = DefaultCompletionToken{}) {
         return services::readDataTypeDefinitionAsync(
             connection(), id(), std::forward<CompletionToken>(token)
         );
@@ -1004,7 +1004,7 @@ public:
     /// @wrapper{services::writeDisplayNameAsync}
     template <typename CompletionToken = DefaultCompletionToken>
     auto writeDisplayNameAsync(
-        const LocalizedText& displayName, CompletionToken&& token = DefaultCompletionToken()
+        const LocalizedText& displayName, CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::writeDisplayNameAsync(
             connection(), id(), displayName, std::forward<CompletionToken>(token)
@@ -1020,7 +1020,7 @@ public:
     /// @wrapper{services::writeDescriptionAsync}
     template <typename CompletionToken = DefaultCompletionToken>
     auto writeDescriptionAsync(
-        const LocalizedText& description, CompletionToken&& token = DefaultCompletionToken()
+        const LocalizedText& description, CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::writeDescriptionAsync(
             connection(), id(), description, std::forward<CompletionToken>(token)
@@ -1036,7 +1036,7 @@ public:
     /// @wrapper{services::writeWriteMaskAsync}
     template <typename CompletionToken = DefaultCompletionToken>
     auto writeWriteMaskAsync(
-        Bitmask<WriteMask> writeMask, CompletionToken&& token = DefaultCompletionToken()
+        Bitmask<WriteMask> writeMask, CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::writeWriteMaskAsync(
             connection(), id(), writeMask, std::forward<CompletionToken>(token)
@@ -1052,7 +1052,7 @@ public:
     /// @wrapper{services::writeUserWriteMaskAsync}
     template <typename CompletionToken = DefaultCompletionToken>
     auto writeUserWriteMaskAsync(
-        Bitmask<WriteMask> userWriteMask, CompletionToken&& token = DefaultCompletionToken()
+        Bitmask<WriteMask> userWriteMask, CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::writeUserWriteMaskAsync(
             connection(), id(), userWriteMask, std::forward<CompletionToken>(token)
@@ -1067,7 +1067,7 @@ public:
 
     /// @wrapper{services::writeIsAbstractAsync}
     template <typename CompletionToken = DefaultCompletionToken>
-    auto writeIsAbstractAsync(bool isAbstract, CompletionToken&& token = DefaultCompletionToken()) {
+    auto writeIsAbstractAsync(bool isAbstract, CompletionToken&& token = DefaultCompletionToken{}) {
         return services::writeIsAbstractAsync(
             connection(), id(), isAbstract, std::forward<CompletionToken>(token)
         );
@@ -1081,7 +1081,7 @@ public:
 
     /// @wrapper{services::writeSymmetricAsync}
     template <typename CompletionToken = DefaultCompletionToken>
-    auto writeSymmetricAsync(bool symmetric, CompletionToken&& token = DefaultCompletionToken()) {
+    auto writeSymmetricAsync(bool symmetric, CompletionToken&& token = DefaultCompletionToken{}) {
         return services::writeSymmetricAsync(
             connection(), id(), symmetric, std::forward<CompletionToken>(token)
         );
@@ -1096,7 +1096,7 @@ public:
     /// @wrapper{services::writeInverseNameAsync}
     template <typename CompletionToken = DefaultCompletionToken>
     auto writeInverseNameAsync(
-        const LocalizedText& inverseName, CompletionToken&& token = DefaultCompletionToken()
+        const LocalizedText& inverseName, CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::writeInverseNameAsync(
             connection(), id(), inverseName, std::forward<CompletionToken>(token)
@@ -1112,7 +1112,7 @@ public:
     /// @wrapper{services::writeContainsNoLoopsAsync}
     template <typename CompletionToken = DefaultCompletionToken>
     auto writeContainsNoLoopsAsync(
-        bool containsNoLoops, CompletionToken&& token = DefaultCompletionToken()
+        bool containsNoLoops, CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::writeContainsNoLoopsAsync(
             connection(), id(), containsNoLoops, std::forward<CompletionToken>(token)
@@ -1128,7 +1128,7 @@ public:
     /// @wrapper{services::writeEventNotifierAsync}
     template <typename CompletionToken = DefaultCompletionToken>
     auto writeEventNotifierAsync(
-        Bitmask<EventNotifier> eventNotifier, CompletionToken&& token = DefaultCompletionToken()
+        Bitmask<EventNotifier> eventNotifier, CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::writeEventNotifierAsync(
             connection(), id(), eventNotifier, std::forward<CompletionToken>(token)
@@ -1144,7 +1144,7 @@ public:
     /// @wrapper{services::writeDataValueAsync}
     template <typename CompletionToken = DefaultCompletionToken>
     auto writeDataValueAsync(
-        const DataValue& value, CompletionToken&& token = DefaultCompletionToken()
+        const DataValue& value, CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::writeDataValueAsync(
             connection(), id(), value, std::forward<CompletionToken>(token)
@@ -1159,33 +1159,33 @@ public:
 
     /// @wrapper{services::writeValueAsync}
     template <typename CompletionToken = DefaultCompletionToken>
-    auto writeValueAsync(const Variant& value, CompletionToken&& token = DefaultCompletionToken()) {
+    auto writeValueAsync(const Variant& value, CompletionToken&& token = DefaultCompletionToken{}) {
         return services::writeValueAsync(
             connection(), id(), value, std::forward<CompletionToken>(token)
         );
     }
 
-    /// @deprecated Use writeValue(Variant(value)) instead
+    /// @deprecated Use writeValue(Variant{value}) instead
     template <typename T>
-    [[deprecated("use writeValue(Variant(value)) instead")]]
+    [[deprecated("use writeValue(Variant{value}) instead")]]
     Node& writeValueScalar(const T& value) {
-        writeValue(Variant(value));
+        writeValue(Variant{value});
         return *this;
     }
     
-    /// @deprecated Use writeValue(Variant(array)) instead
+    /// @deprecated Use writeValue(Variant{array}) instead
     template <typename ArrayLike>
-    [[deprecated("use writeValue(Variant(array)) instead")]]
+    [[deprecated("use writeValue(Variant{array}) instead")]]
     Node& writeValueArray(const ArrayLike& array) {
-        writeValue(Variant(array));
+        writeValue(Variant{array});
         return *this;
     }
     
-    /// @deprecated Use writeValue(Variant(first, last)) instead
+    /// @deprecated Use writeValue(Variant{first, last}) instead
     template <typename InputIt>
-    [[deprecated("use writeValue(Variant(first, last)) instead")]]
+    [[deprecated("use writeValue(Variant{first, last}) instead")]]
     Node& writeValueArray(InputIt first, InputIt last) {
-        writeValue(Variant(first, last));
+        writeValue(Variant{first, last});
         return *this;
     }
 
@@ -1205,7 +1205,7 @@ public:
     /// @wrapper{services::writeDataTypeAsync}
     template <typename CompletionToken = DefaultCompletionToken>
     auto writeDataTypeAsync(
-        const NodeId& dataType, CompletionToken&& token = DefaultCompletionToken()
+        const NodeId& dataType, CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::writeDataTypeAsync(
             connection(), id(), dataType, std::forward<CompletionToken>(token)
@@ -1221,7 +1221,7 @@ public:
     /// @wrapper{services::writeValueRankAsync}
     template <typename CompletionToken = DefaultCompletionToken>
     auto writeValueRankAsync(
-        ValueRank valueRank, CompletionToken&& token = DefaultCompletionToken()
+        ValueRank valueRank, CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::writeValueRankAsync(
             connection(), id(), valueRank, std::forward<CompletionToken>(token)
@@ -1237,7 +1237,7 @@ public:
     /// @wrapper{services::writeArrayDimensionsAsync}
     template <typename CompletionToken = DefaultCompletionToken>
     auto writeArrayDimensionsAsync(
-        Span<const uint32_t> dimensions, CompletionToken&& token = DefaultCompletionToken()
+        Span<const uint32_t> dimensions, CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::writeArrayDimensionsAsync(
             connection(), id(), dimensions, std::forward<CompletionToken>(token)
@@ -1253,7 +1253,7 @@ public:
     /// @wrapper{services::writeAccessLevelAsync}
     template <typename CompletionToken = DefaultCompletionToken>
     auto writeAccessLevelAsync(
-        Bitmask<AccessLevel> accessLevel, CompletionToken&& token = DefaultCompletionToken()
+        Bitmask<AccessLevel> accessLevel, CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::writeAccessLevelAsync(
             connection(), id(), accessLevel, std::forward<CompletionToken>(token)
@@ -1269,7 +1269,7 @@ public:
     /// @wrapper{services::writeUserAccessLevelAsync}
     template <typename CompletionToken = DefaultCompletionToken>
     auto writeUserAccessLevelAsync(
-        Bitmask<AccessLevel> userAccessLevel, CompletionToken&& token = DefaultCompletionToken()
+        Bitmask<AccessLevel> userAccessLevel, CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::writeUserAccessLevelAsync(
             connection(), id(), userAccessLevel, std::forward<CompletionToken>(token)
@@ -1285,7 +1285,7 @@ public:
     /// @wrapper{services::writeMinimumSamplingIntervalAsync}
     template <typename CompletionToken = DefaultCompletionToken>
     auto writeMinimumSamplingIntervalAsync(
-        double milliseconds, CompletionToken&& token = DefaultCompletionToken()
+        double milliseconds, CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::writeMinimumSamplingIntervalAsync(
             connection(), id(), milliseconds, std::forward<CompletionToken>(token)
@@ -1301,7 +1301,7 @@ public:
     /// @wrapper{services::writeHistorizingAsync}
     template <typename CompletionToken = DefaultCompletionToken>
     auto writeHistorizingAsync(
-        bool historizing, CompletionToken&& token = DefaultCompletionToken()
+        bool historizing, CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::writeHistorizingAsync(
             connection(), id(), historizing, std::forward<CompletionToken>(token)
@@ -1316,7 +1316,7 @@ public:
 
     /// @wrapper{services::writeExecutableAsync}
     template <typename CompletionToken = DefaultCompletionToken>
-    auto writeExecutableAsync(bool executable, CompletionToken&& token = DefaultCompletionToken()) {
+    auto writeExecutableAsync(bool executable, CompletionToken&& token = DefaultCompletionToken{}) {
         return services::writeExecutableAsync(
             connection(), id(), executable, std::forward<CompletionToken>(token)
         );
@@ -1331,7 +1331,7 @@ public:
     /// @wrapper{services::writeUserExecutableAsync}
     template <typename CompletionToken = DefaultCompletionToken>
     auto writeUserExecutableAsync(
-        bool userExecutable, CompletionToken&& token = DefaultCompletionToken()
+        bool userExecutable, CompletionToken&& token = DefaultCompletionToken{}
     ) {
         return services::writeUserExecutableAsync(
             connection(), id(), userExecutable, std::forward<CompletionToken>(token)
@@ -1355,7 +1355,7 @@ private:
 
     static Node fromId(Connection& connection, ExpandedNodeId& id) {
         if (!id.isLocal()) {
-            throw BadStatus(UA_STATUSCODE_BADNODEIDUNKNOWN);
+            throw BadStatus{UA_STATUSCODE_BADNODEIDUNKNOWN};
         }
         return {connection, std::move(id.nodeId())};
     }
@@ -1383,7 +1383,7 @@ private:
                 return {connection(), std::move(target.targetId().nodeId())};
             }
         }
-        throw BadStatus(UA_STATUSCODE_BADNOTFOUND);
+        throw BadStatus{UA_STATUSCODE_BADNOTFOUND};
     }
 
     Connection* connection_;

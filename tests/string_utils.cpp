@@ -8,7 +8,7 @@ using namespace opcua;
 
 TEST_CASE("UA_String from string_view") {
     SECTION("Test string") {
-        std::string_view sv("test123");
+        std::string_view sv{"test123"};
         UA_String str = detail::toNativeString(sv);
         CHECK(str.length == sv.size());
         CHECK((void*)str.data == (void*)sv.data());
@@ -29,7 +29,7 @@ TEST_CASE("UA_String from string_view") {
 
 TEST_CASE("Alloc UA_String from string_view") {
     const char* cstr = "test123";
-    std::string_view sv(cstr);
+    std::string_view sv{cstr};
     auto str = detail::allocNativeString(sv);
     CHECK(str.length == 7);
     CHECK(std::strncmp((char*)str.data, sv.data(), 7) == 0);  // NOLINT
@@ -45,7 +45,7 @@ TEST_CASE("Alloc const char* from string_view") {
 }
 
 TEST_CASE("Alloc UA_String from non-null-terminated string_view") {
-    std::string str("test123");
+    std::string str{"test123"};
     std::string_view sv(str.c_str(), 4);
     auto uaString = detail::allocNativeString(sv);
     CHECK(uaString.length == 4);

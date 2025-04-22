@@ -26,7 +26,7 @@ public:
         const auto* token = userIdentityToken.decodedData<UserNameIdentityToken>();
         const bool isAdmin = (token != nullptr && token->userName() == "admin");
         std::cout << "User has admin rights: " << isAdmin << std::endl;
-        session.setSessionAttribute({0, "isAdmin"}, Variant(isAdmin));
+        session.setSessionAttribute({0, "isAdmin"}, Variant{isAdmin});
 
         return AccessControlDefault::activateSession(
             session, endpointDescription, secureChannelRemoteCertificate, userIdentityToken
@@ -46,21 +46,21 @@ public:
 int main() {
     // Exchanging usernames/passwords without encryption as plain text is dangerous.
     // We are doing this just for demonstration, don't use it in production!
-    AccessControlCustom accessControl(
+    AccessControlCustom accessControl{
         true,  // allow anonymous
         {
             Login{String{"admin"}, String{"admin"}},
             Login{String{"user"}, String{"user"}},
         }
-    );
+    };
 
     ServerConfig config;
     config.setAccessControl(accessControl);
 
-    Server server(std::move(config));
+    Server server{std::move(config)};
 
     // Add variable node. Try to change its value as a client with different logins.
-    Node(server, ObjectId::ObjectsFolder)
+    Node{server, ObjectId::ObjectsFolder}
         .addVariable(
             {1, 1000},
             "Variable",
@@ -68,7 +68,7 @@ int main() {
                 .setAccessLevel(AccessLevel::CurrentRead | AccessLevel::CurrentWrite)
                 .setDataType(DataTypeId::Int32)
                 .setValueRank(ValueRank::Scalar)
-                .setValueScalar(0)
+                .setValue(opcua::Variant{0})
         );
 
     server.run();

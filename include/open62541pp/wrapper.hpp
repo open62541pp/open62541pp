@@ -40,11 +40,11 @@ public:
 
     /// Copy constructor with native object.
     constexpr explicit Wrapper(const T& native) noexcept
-        : native_(native) {}
+        : native_{native} {}
 
     /// Move constructor with native object.
     constexpr explicit Wrapper(T&& native) noexcept
-        : native_(std::move(native)) {}
+        : native_{std::move(native)} {}
 
     /// Copy assignment with native object.
     constexpr Wrapper& operator=(const T& native) noexcept {

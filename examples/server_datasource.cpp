@@ -14,7 +14,7 @@ struct DataSource : public opcua::DataSourceBase {
         bool timestamp
     ) override {
         std::cout << "Read value from data source: " << data << "\n";
-        dv.setValue(opcua::Variant(data));
+        dv.setValue(opcua::Variant{data});
         if (timestamp) {
             dv.setSourceTimestamp(opcua::DateTime::now());
         }

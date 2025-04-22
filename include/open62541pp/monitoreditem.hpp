@@ -33,9 +33,9 @@ public:
     MonitoredItem(
         Connection& connection, IntegerId subscriptionId, IntegerId monitoredItemId
     ) noexcept
-        : connection_(&connection),
-          subscriptionId_(std::is_same_v<Connection, Server> ? 0U : subscriptionId),
-          monitoredItemId_(monitoredItemId) {}
+        : connection_{&connection},
+          subscriptionId_{std::is_same_v<Connection, Server> ? 0U : subscriptionId},
+          monitoredItemId_{monitoredItemId} {}
 
     /// Get the server/client instance.
     Connection& connection() noexcept {

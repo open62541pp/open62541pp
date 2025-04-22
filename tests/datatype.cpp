@@ -146,7 +146,7 @@ TEST_CASE("DataTypeMember") {
     );
 
     SECTION("Construct form native") {
-        DataTypeMember member(native);
+        DataTypeMember member{native};
 #if UAPP_HAS_TYPEDESCRIPTION
         CHECK(member.memberName() == "test123");
 #endif
@@ -159,27 +159,27 @@ TEST_CASE("DataTypeMember") {
     }
 
     SECTION("Copy constructor") {
-        DataTypeMember m1(native);
-        DataTypeMember m2(m1);
+        DataTypeMember m1{native};
+        DataTypeMember m2{m1};
         checkEqual(m2, native);
     }
 
     SECTION("Copy assignment") {
-        DataTypeMember m1(native);
+        DataTypeMember m1{native};
         DataTypeMember m2;
         m2 = m1;
         checkEqual(m2, native);
     }
 
     SECTION("Move constructor") {
-        DataTypeMember m1(native);
-        DataTypeMember m2(std::move(m1));
+        DataTypeMember m1{native};
+        DataTypeMember m2{std::move(m1)};
         checkEqual(m1, {});  // NOLINT
         checkEqual(m2, native);
     }
 
     SECTION("Move assignment") {
-        DataTypeMember m1(native);
+        DataTypeMember m1{native};
         DataTypeMember m2;
         m2 = std::move(m1);
         checkEqual(m1, {});  // NOLINT
@@ -199,13 +199,13 @@ TEST_CASE("DataTypeMember") {
 
 TEST_CASE("DataType") {
     SECTION("Construct from native") {
-        DataType dt(pointType);
+        DataType dt{pointType};
         CHECK(dt.handle() != &pointType);
 #if UAPP_HAS_TYPEDESCRIPTION
         CHECK(dt.typeName() == pointType.typeName);
 #endif
-        CHECK(dt.typeId() == NodeId(1, 1001));
-        CHECK(dt.binaryEncodingId() == NodeId(1, 1));
+        CHECK(dt.typeId() == NodeId{1, 1001});
+        CHECK(dt.binaryEncodingId() == NodeId{1, 1});
         CHECK(dt.memSize() == sizeof(Point));
         CHECK(dt.typeKind() == UA_DATATYPEKIND_STRUCTURE);
         CHECK(dt.pointerFree() == true);
@@ -221,27 +221,27 @@ TEST_CASE("DataType") {
     }
 
     SECTION("Copy constructor") {
-        DataType dt1(pointType);
-        DataType dt2(dt1);
+        DataType dt1{pointType};
+        DataType dt2{dt1};
         CHECK(dt2 == dt1);
     }
 
     SECTION("Copy assignment") {
-        DataType dt1(pointType);
+        DataType dt1{pointType};
         DataType dt2;
         dt2 = dt1;
         CHECK(dt2 == dt1);
     }
 
     SECTION("Move constructor") {
-        DataType dt1(pointType);
-        DataType dt2(std::move(dt1));
+        DataType dt1{pointType};
+        DataType dt2{std::move(dt1)};
         CHECK(dt1 != pointType);
         CHECK(dt2 == pointType);
     }
 
     SECTION("Move assignment") {
-        DataType dt1(pointType);
+        DataType dt1{pointType};
         DataType dt2;
         dt2 = std::move(dt1);
         CHECK(dt1 != pointType);

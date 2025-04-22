@@ -29,7 +29,7 @@ TEST_CASE("StatusCode") {
 
 #ifdef UA_STATUSCODE_UNCERTAIN
     SECTION("Uncertain") {
-        StatusCode code(UA_STATUSCODE_UNCERTAIN);
+        StatusCode code{UA_STATUSCODE_UNCERTAIN};
         CHECK(code == UA_STATUSCODE_UNCERTAIN);
         CHECK(code.get() == UA_STATUSCODE_UNCERTAIN);
         CHECK(code.name() == "Uncertain");
@@ -41,7 +41,7 @@ TEST_CASE("StatusCode") {
 #endif
 
     SECTION("Bad") {
-        StatusCode code(UA_STATUSCODE_BADTIMEOUT);
+        StatusCode code{UA_STATUSCODE_BADTIMEOUT};
         CHECK(code == UA_STATUSCODE_BADTIMEOUT);
         CHECK(code.get() == UA_STATUSCODE_BADTIMEOUT);
         CHECK(code.name() == "BadTimeout");
@@ -63,7 +63,7 @@ TEMPLATE_TEST_CASE("StringLikeMixin constructors", "", String, const String) {
 
     SECTION("From empty iterator pair") {
         std::string_view sv;
-        TestType str(sv.begin(), sv.end());
+        TestType str{sv.begin(), sv.end()};
         CHECK(str.size() == 0);
         CHECK(str.length() == 0);
         CHECK(str.empty());
@@ -71,8 +71,8 @@ TEMPLATE_TEST_CASE("StringLikeMixin constructors", "", String, const String) {
     }
 
     SECTION("From iterator pair") {
-        std::string_view sv("abc");
-        TestType str(sv.begin(), sv.end());
+        std::string_view sv{"abc"};
+        TestType str{sv.begin(), sv.end()};
         CHECK(str.size() == 3);
         CHECK(str.length() == 3);
         CHECK_FALSE(str.empty());
@@ -83,7 +83,7 @@ TEMPLATE_TEST_CASE("StringLikeMixin constructors", "", String, const String) {
     SECTION("From iterator pair (input iterator, single-pass)") {
         std::istringstream ss("abc");  // allows only single-pass reading
         std::istream_iterator<char> first(ss), last;
-        TestType str(first, last);
+        TestType str{first, last};
         CHECK(str.size() == 3);
         CHECK(str.length() == 3);
         CHECK_FALSE(str.empty());
@@ -148,7 +148,7 @@ TEMPLATE_TEST_CASE("StringLikeMixin iterators", "", String, const String) {
 
 TEMPLATE_TEST_CASE("StringLike constructors", "", String, XmlElement) {
     SECTION("From const char*") {
-        TestType str("hello");
+        TestType str{"hello"};
         CHECK(str.size() == 5);
         CHECK(str.length() == 5);
         CHECK_FALSE(str.empty());
@@ -158,7 +158,7 @@ TEMPLATE_TEST_CASE("StringLike constructors", "", String, XmlElement) {
 
     SECTION("From std::string_view") {
         std::string_view sv = "world";
-        TestType str(sv);
+        TestType str{sv};
         CHECK(str.size() == 5);
         CHECK(str.length() == 5);
         CHECK_FALSE(str.empty());
@@ -167,7 +167,7 @@ TEMPLATE_TEST_CASE("StringLike constructors", "", String, XmlElement) {
     }
 
     SECTION("From empty string") {
-        TestType str("");
+        TestType str{""};
         CHECK(str.size() == 0);
         CHECK(str.length() == 0);
         CHECK(str.empty());
@@ -188,37 +188,37 @@ TEMPLATE_TEST_CASE("StringLike assign string_view", "", String, XmlElement) {
 }
 
 TEMPLATE_TEST_CASE("StringLike implicit conversion to string_view", "", String, XmlElement) {
-    TestType str("test123");
+    TestType str{"test123"};
     std::string_view view = str;
     CHECK(view == "test123");
 }
 
 TEMPLATE_TEST_CASE("StringLike explicit conversion to string_view", "", ByteString) {
-    TestType str("test123");
+    TestType str{"test123"};
     CHECK(static_cast<std::string_view>(str) == "test123");
 }
 
 TEMPLATE_TEST_CASE("StringLike equality overloads", "", String, ByteString, XmlElement) {
-    CHECK(TestType("test") == TestType("test"));
-    CHECK(TestType("test") != TestType());
+    CHECK(TestType{"test"} == TestType{"test"});
+    CHECK(TestType{"test"} != TestType{});
 }
 
 TEMPLATE_TEST_CASE("StringLike equality overloads with std::string_view", "", String) {
-    CHECK(TestType("test") == std::string_view("test"));
-    CHECK(TestType("test") != std::string_view("abc"));
-    CHECK(std::string_view("test") == TestType("test"));
-    CHECK(std::string_view("test") != TestType("abc"));
+    CHECK(TestType{"test"} == std::string_view{"test"});
+    CHECK(TestType{"test"} != std::string_view{"abc"});
+    CHECK(std::string_view{"test"} == TestType{"test"});
+    CHECK(std::string_view{"test"} != TestType{"abc"});
 }
 
 TEMPLATE_TEST_CASE("StringLike ostream overloads", "", String) {
     std::ostringstream ss;
-    ss << TestType("test123");
+    ss << TestType{"test123"};
     CHECK(ss.str() == "test123");
 }
 
 TEST_CASE("ByteString") {
     SECTION("Construct from string") {
-        const ByteString bs("XYZ");
+        const ByteString bs{"XYZ"};
         CHECK(bs->length == 3);
         CHECK(bs->data[0] == 88);
         CHECK(bs->data[1] == 89);
@@ -226,7 +226,7 @@ TEST_CASE("ByteString") {
     }
 
     SECTION("Construct from vector") {
-        const ByteString bs({88, 89, 90});
+        const ByteString bs{{88, 89, 90}};
         CHECK(bs->length == 3);
         CHECK(bs->data[0] == 88);
         CHECK(bs->data[1] == 89);
@@ -235,15 +235,15 @@ TEST_CASE("ByteString") {
 
 #if UAPP_OPEN62541_VER_GE(1, 1)
     SECTION("fromBase64 / to Base64") {
-        CHECK(ByteString::fromBase64("dGVzdDEyMw==") == ByteString("test123"));
-        CHECK(ByteString("test123").toBase64() == "dGVzdDEyMw==");
+        CHECK(ByteString::fromBase64("dGVzdDEyMw==") == ByteString{"test123"});
+        CHECK(ByteString{"test123"}.toBase64() == "dGVzdDEyMw==");
     }
 #endif
 }
 
 TEST_CASE("Guid") {
     SECTION("Construct") {
-        const Guid wrapper(11, 22, 33, {0, 1, 2, 3, 4, 5, 6, 7});
+        const Guid wrapper{11, 22, 33, {0, 1, 2, 3, 4, 5, 6, 7}};
         CHECK(wrapper.handle()->data1 == 11);
         CHECK(wrapper.handle()->data2 == 22);
         CHECK(wrapper.handle()->data3 == 33);
@@ -259,7 +259,7 @@ TEST_CASE("Guid") {
 
     SECTION("Construct from single array") {
         std::array<UA_Byte, 16> data{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
-        const Guid wrapper(data);
+        const Guid wrapper{data};
         CHECK(wrapper.handle()->data1 == 0x00010203);
         CHECK(wrapper.handle()->data2 == 0x0405);
         CHECK(wrapper.handle()->data3 == 0x0607);
@@ -328,17 +328,17 @@ TEST_CASE("DateTime") {
         const int64_t secSinceEpoch = duration_cast<seconds>(now.time_since_epoch()).count();
         const int64_t nsecSinceEpoch = duration_cast<nanoseconds>(now.time_since_epoch()).count();
 
-        const DateTime dt(now);
+        const DateTime dt{now};
         CHECK(dt.get() == (nsecSinceEpoch / 100) + UA_DATETIME_UNIX_EPOCH);
         CHECK(dt.toUnixTime() == secSinceEpoch);
     }
 
     SECTION("Format") {
-        CHECK(DateTime().format("%Y-%m-%d %H:%M:%S") == "1970-01-01 00:00:00");
+        CHECK(DateTime{}.format("%Y-%m-%d %H:%M:%S") == "1970-01-01 00:00:00");
     }
 
     SECTION("Comparison") {
-        const auto zero = DateTime(0);
+        const auto zero = DateTime{0};
         const auto now = DateTime::now();
         CHECK(zero != now);
         CHECK(zero < now);
@@ -347,7 +347,7 @@ TEST_CASE("DateTime") {
 
 TEST_CASE("NodeId") {
     SECTION("Numeric identifier") {
-        NodeId id(1, 123);
+        NodeId id{1, 123};
         CHECK(id.identifierType() == NodeIdType::Numeric);
         CHECK(id.namespaceIndex() == 1);
         CHECK(id.identifier<uint32_t>() == 123);
@@ -356,8 +356,8 @@ TEST_CASE("NodeId") {
     }
 
     SECTION("String identifier") {
-        String str("Test456");
-        NodeId id(2, str);
+        String str{"Test456"};
+        NodeId id{2, str};
         CHECK(id.identifierType() == NodeIdType::String);
         CHECK(id.namespaceIndex() == 2);
         // CHECK(id.identifier<String>() == str);
@@ -367,7 +367,7 @@ TEST_CASE("NodeId") {
 
     SECTION("Guid identifier") {
         Guid guid = Guid::random();
-        NodeId id(3, guid);
+        NodeId id{3, guid};
         CHECK(id.identifierType() == NodeIdType::Guid);
         CHECK(id.namespaceIndex() == 3);
         CHECK(id.identifier<Guid>() == guid);
@@ -376,8 +376,8 @@ TEST_CASE("NodeId") {
     }
 
     SECTION("ByteString identifier") {
-        ByteString byteStr("Test789");
-        NodeId id(4, byteStr);
+        ByteString byteStr{"Test789"};
+        NodeId id{4, byteStr};
         CHECK(id.identifierType() == NodeIdType::ByteString);
         CHECK(id.namespaceIndex() == 4);
         CHECK(id.identifier<ByteString>() == byteStr);
@@ -386,13 +386,13 @@ TEST_CASE("NodeId") {
     }
 
     SECTION("Construct from node id enums") {
-        CHECK(NodeId(DataTypeId::Boolean) == NodeId(0, UA_NS0ID_BOOLEAN));
-        CHECK(NodeId(ReferenceTypeId::References) == NodeId(0, UA_NS0ID_REFERENCES));
-        CHECK(NodeId(ObjectTypeId::BaseObjectType) == NodeId(0, UA_NS0ID_BASEOBJECTTYPE));
-        CHECK(NodeId(VariableTypeId::BaseVariableType) == NodeId(0, UA_NS0ID_BASEVARIABLETYPE));
-        CHECK(NodeId(ObjectId::RootFolder) == NodeId(0, UA_NS0ID_ROOTFOLDER));
-        CHECK(NodeId(VariableId::LocalTime) == NodeId(0, UA_NS0ID_LOCALTIME));
-        CHECK(NodeId(MethodId::AddCommentMethodType) == NodeId(0, UA_NS0ID_ADDCOMMENTMETHODTYPE));
+        CHECK(NodeId{DataTypeId::Boolean} == NodeId{0, UA_NS0ID_BOOLEAN});
+        CHECK(NodeId{ReferenceTypeId::References} == NodeId{0, UA_NS0ID_REFERENCES});
+        CHECK(NodeId{ObjectTypeId::BaseObjectType} == NodeId{0, UA_NS0ID_BASEOBJECTTYPE});
+        CHECK(NodeId{VariableTypeId::BaseVariableType} == NodeId{0, UA_NS0ID_BASEVARIABLETYPE});
+        CHECK(NodeId{ObjectId::RootFolder} == NodeId{0, UA_NS0ID_ROOTFOLDER});
+        CHECK(NodeId{VariableId::LocalTime} == NodeId{0, UA_NS0ID_LOCALTIME});
+        CHECK(NodeId{MethodId::AddCommentMethodType} == NodeId{0, UA_NS0ID_ADDCOMMENTMETHODTYPE});
     }
 
 #if UAPP_HAS_PARSING
@@ -404,7 +404,7 @@ TEST_CASE("NodeId") {
 #endif
 
     SECTION("identifierIf/identifier") {
-        NodeId id(1, 123);
+        NodeId id{1, 123};
         CHECK(id.identifierIf<uint32_t>() != nullptr);
         CHECK(id.identifierIf<String>() == nullptr);
         CHECK(id.identifierIf<Guid>() == nullptr);
@@ -416,49 +416,49 @@ TEST_CASE("NodeId") {
     }
 
     SECTION("isNull") {
-        CHECK(NodeId().isNull());
-        CHECK_FALSE(NodeId(0, 1).isNull());
+        CHECK(NodeId{}.isNull());
+        CHECK_FALSE(NodeId{0, 1}.isNull());
     }
 
     SECTION("hash") {
-        CHECK(NodeId(0, 1).hash() == NodeId(0, 1).hash());
-        CHECK(NodeId(0, 1).hash() != NodeId(0, 2).hash());
-        CHECK(NodeId(0, 1).hash() != NodeId(1, 1).hash());
+        CHECK(NodeId{0, 1}.hash() == NodeId{0, 1}.hash());
+        CHECK(NodeId{0, 1}.hash() != NodeId{0, 2}.hash());
+        CHECK(NodeId{0, 1}.hash() != NodeId{1, 1}.hash());
     }
 
     SECTION("Comparison") {
-        CHECK(NodeId(0, 1) == NodeId(0, 1));
-        CHECK(NodeId(0, 1) <= NodeId(0, 1));
-        CHECK(NodeId(0, 1) >= NodeId(0, 1));
-        CHECK(NodeId(0, 1) != NodeId(0, 2));
-        CHECK(NodeId(0, 1) != NodeId(1, 1));
-        CHECK(NodeId(0, "a") == NodeId(0, "a"));
-        CHECK(NodeId(0, "a") != NodeId(0, "b"));
-        CHECK(NodeId(0, "a") != NodeId(1, "a"));
+        CHECK(NodeId{0, 1} == NodeId{0, 1});
+        CHECK(NodeId{0, 1} <= NodeId{0, 1});
+        CHECK(NodeId{0, 1} >= NodeId{0, 1});
+        CHECK(NodeId{0, 1} != NodeId{0, 2});
+        CHECK(NodeId{0, 1} != NodeId{1, 1});
+        CHECK(NodeId{0, "a"} == NodeId{0, "a"});
+        CHECK(NodeId{0, "a"} != NodeId{0, "b"});
+        CHECK(NodeId{0, "a"} != NodeId{1, "a"});
 
         // namespace index is compared before identifier
-        CHECK(NodeId(0, 1) < NodeId(1, 0));
-        CHECK(NodeId(0, 1) < NodeId(0, 2));
+        CHECK(NodeId{0, 1} < NodeId{1, 0});
+        CHECK(NodeId{0, 1} < NodeId{0, 2});
 
-        CHECK(NodeId(1, "a") < NodeId(1, "b"));
-        CHECK(NodeId(1, "b") > NodeId(1, "a"));
+        CHECK(NodeId{1, "a"} < NodeId{1, "b"});
+        CHECK(NodeId{1, "b"} > NodeId{1, "a"});
     }
 
     SECTION("std::hash specialization") {
-        const NodeId id(1, "Test123");
+        const NodeId id{1, "Test123"};
         CHECK(std::hash<NodeId>{}(id) == id.hash());
     }
 }
 
 TEST_CASE("ExpandedNodeId") {
-    ExpandedNodeId idLocal({1, "local"}, {}, 0);
+    ExpandedNodeId idLocal{{1, "local"}, {}, 0};
     CHECK(idLocal.isLocal());
     CHECK(idLocal.nodeId() == NodeId{1, "local"});
     CHECK(idLocal.nodeId().handle() == &idLocal.handle()->nodeId);  // return ref
     CHECK(idLocal.namespaceUri().empty());
     CHECK(idLocal.serverIndex() == 0);
 
-    ExpandedNodeId idFull({1, "full"}, "namespace", 1);
+    ExpandedNodeId idFull{{1, "full"}, "namespace", 1};
     CHECK(idFull.nodeId() == NodeId{1, "full"});
     CHECK(std::string(idFull.namespaceUri()) == "namespace");
     CHECK(idFull.serverIndex() == 1);
@@ -477,9 +477,9 @@ TEST_CASE("ExpandedNodeId") {
 #endif
 
     SECTION("hash") {
-        CHECK(ExpandedNodeId().hash() == ExpandedNodeId().hash());
-        CHECK(ExpandedNodeId().hash() != idLocal.hash());
-        CHECK(ExpandedNodeId().hash() != idFull.hash());
+        CHECK(ExpandedNodeId{}.hash() == ExpandedNodeId{}.hash());
+        CHECK(ExpandedNodeId{}.hash() != idLocal.hash());
+        CHECK(ExpandedNodeId{}.hash() != idFull.hash());
     }
 
     SECTION("std::hash specialization") {
@@ -511,13 +511,13 @@ TEST_CASE("Variant") {
         native.data = &value;
 
         SECTION("lvalue (copy)") {
-            Variant var(native);
+            Variant var{native};
             CHECK(var.type() == &UA_TYPES[UA_TYPES_FLOAT]);
             CHECK(var.data() != &value);
             CHECK(var.scalar<float>() == value);
         }
         SECTION("rvalue (move)") {
-            Variant var(std::move(native));
+            Variant var{std::move(native)};
             CHECK(var.type() == &UA_TYPES[UA_TYPES_FLOAT]);
             CHECK(var.data() == &value);
         }
@@ -530,10 +530,10 @@ TEST_CASE("Variant") {
 
         SECTION("Pointer") {
             SECTION("Constructor") {
-                var = Variant(&value);
+                var = Variant{&value};
             }
             SECTION("Constructor with type") {
-                var = Variant(&value, type);
+                var = Variant{&value, type};
             }
             CHECK(var.isScalar());
             CHECK(var.type() == &type);
@@ -543,10 +543,10 @@ TEST_CASE("Variant") {
 
         SECTION("Copy") {
             SECTION("Constructor") {
-                var = Variant(value);
+                var = Variant{value};
             }
             SECTION("Constructor with type") {
-                var = Variant(value, type);
+                var = Variant{value, type};
             }
             CHECK(var.isScalar());
             CHECK(var.type() == &type);
@@ -562,10 +562,10 @@ TEST_CASE("Variant") {
 
         SECTION("Pointer") {
             SECTION("Constructor") {
-                var = Variant(&array);
+                var = Variant{&array};
             }
             SECTION("Constructor with type") {
-                var = Variant(&array, type);
+                var = Variant{&array, type};
             }
             CHECK(var.isArray());
             CHECK(var.type() == &type);
@@ -575,10 +575,10 @@ TEST_CASE("Variant") {
 
         SECTION("Copy") {
             SECTION("Constructor") {
-                var = Variant(array);
+                var = Variant{array};
             }
             SECTION("Constructor with type") {
-                var = Variant(array, type);
+                var = Variant{array, type};
             }
             SECTION("Constructor with iterator pair") {
                 var = Variant(array.begin(), array.end());
@@ -644,7 +644,7 @@ TEST_CASE("Variant") {
 
     SECTION("Set/get scalar wrapper (pointer)") {
         Variant var;
-        LocalizedText value("en-US", "text");
+        LocalizedText value{"en-US", "text"};
         SECTION("assign") {
             var.assign(&value);
         }
@@ -834,7 +834,7 @@ TEST_CASE("Variant") {
     }
 
     SECTION("Get scalar ref qualifiers") {
-        Variant var("test");
+        Variant var{"test"};
         void* data = var.scalar<String>()->data;
 
         SECTION("lvalue") {
@@ -858,12 +858,12 @@ TEST_CASE("Variant") {
 
 TEST_CASE("DataValue") {
     SECTION("Create from scalar") {
-        CHECK(DataValue(Variant(5)).value().to<int>() == 5);
+        CHECK(DataValue{Variant{5}}.value().to<int>() == 5);
     }
 
     SECTION("Create from array") {
         std::vector<int> vec{1, 2, 3};
-        CHECK(DataValue(Variant(vec)).value().to<std::vector<int>>() == vec);
+        CHECK(DataValue{Variant{vec}}.value().to<std::vector<int>>() == vec);
     }
 
     SECTION("Empty") {
@@ -877,7 +877,7 @@ TEST_CASE("DataValue") {
     }
 
     SECTION("Constructor with all optional parameter empty") {
-        DataValue dv({}, {}, {}, {}, {}, {});
+        DataValue dv{{}, {}, {}, {}, {}, {}};
         CHECK(dv.hasValue());
         CHECK_FALSE(dv.hasSourceTimestamp());
         CHECK_FALSE(dv.hasServerTimestamp());
@@ -956,7 +956,7 @@ TEST_CASE("DataValue") {
     }
 
     SECTION("getValue (lvalue & rvalue)") {
-        DataValue dv(Variant(11));
+        DataValue dv{Variant{11}};
         void* data = dv.value().data();
 
         Variant var;
@@ -996,13 +996,13 @@ TEST_CASE("ExtensionObject") {
 
     SECTION("From nullptr") {
         int* value{nullptr};
-        ExtensionObject obj(value);
+        ExtensionObject obj{value};
         CHECK(obj.empty());
     }
 
     SECTION("From decoded (pointer)") {
         ExtensionObject obj;
-        String value("test123");
+        String value{"test123"};
         SECTION("Deduce data type") {
             obj = ExtensionObject(&value);
         }
@@ -1036,7 +1036,7 @@ TEST_CASE("ExtensionObject") {
     }
 
     SECTION("Encoded binary") {
-        NodeId typeId(1, 1000);
+        NodeId typeId{1, 1000};
         ExtensionObject obj;
         obj->encoding = UA_EXTENSIONOBJECT_ENCODED_BYTESTRING;
         obj->content.encoded.typeId = typeId;
@@ -1046,12 +1046,12 @@ TEST_CASE("ExtensionObject") {
         CHECK(obj.encodedTypeId() != nullptr);
         CHECK(*obj.encodedTypeId() == typeId);
         CHECK(obj.encodedBinary() != nullptr);
-        CHECK(*obj.encodedBinary() == ByteString("binary"));
+        CHECK(*obj.encodedBinary() == ByteString{"binary"});
         CHECK(obj.encodedXml() == nullptr);
     }
 
     SECTION("Encoded XML") {
-        NodeId typeId(1, 1000);
+        NodeId typeId{1, 1000};
         ExtensionObject obj;
         obj->encoding = UA_EXTENSIONOBJECT_ENCODED_XML;
         obj->content.encoded.typeId = typeId;
@@ -1084,7 +1084,7 @@ TEST_CASE("NumericRange") {
     }
 
     SECTION("From encoded range") {
-        const NumericRange nr("1:2,0:3,5");
+        const NumericRange nr{"1:2,0:3,5"};
         CHECK(nr.dimensions().size() == 3);
         CHECK((nr.dimensions()[0] == NumericRangeDimension{1, 2}));
         CHECK((nr.dimensions()[1] == NumericRangeDimension{0, 3}));
@@ -1093,7 +1093,7 @@ TEST_CASE("NumericRange") {
 
     SECTION("From span") {
         std::vector<NumericRangeDimension> dimensions{{1, 2}, {3, 4}};
-        const NumericRange nr(dimensions);
+        const NumericRange nr{dimensions};
         CHECK_FALSE(nr.empty());
         CHECK(nr.dimensions().size() == 2);
         CHECK((nr.dimensions()[0] == NumericRangeDimension{1, 2}));
@@ -1105,7 +1105,7 @@ TEST_CASE("NumericRange") {
         std::vector<NumericRangeDimension> dimensions{{1, 2}, {3, 4}};
         native.dimensionsSize = dimensions.size();
         native.dimensions = dimensions.data();
-        const NumericRange nr(native);
+        const NumericRange nr{native};
         CHECK_FALSE(nr.empty());
         CHECK(nr.dimensions().size() == 2);
         CHECK((nr.dimensions()[0] == NumericRangeDimension{1, 2}));
@@ -1114,17 +1114,17 @@ TEST_CASE("NumericRange") {
 
     SECTION("Copy & move") {
         std::vector<NumericRangeDimension> dimensions{{1, 2}, {3, 4}};
-        NumericRange src(dimensions);
+        NumericRange src{dimensions};
 
         SECTION("Copy constructor") {
-            const NumericRange dst(src);
+            const NumericRange dst{src};
             CHECK(dst.dimensions().size() == 2);
             CHECK((dst.dimensions()[0] == NumericRangeDimension{1, 2}));
             CHECK((dst.dimensions()[1] == NumericRangeDimension{3, 4}));
         }
 
         SECTION("Move constructor") {
-            const NumericRange dst(std::move(src));
+            const NumericRange dst{std::move(src)};
             CHECK(src.dimensions().size() == 0);
             CHECK(dst.dimensions().size() == 2);
             CHECK((dst.dimensions()[0] == NumericRangeDimension{1, 2}));
@@ -1164,8 +1164,8 @@ TEST_CASE("toString") {
     CHECK_THAT(toStringStl(11), ContainsSubstring("11"));
     CHECK_THAT(toStringStl(11, UA_TYPES[UA_TYPES_INT32]), ContainsSubstring("11"));
 
-    CHECK_THAT(toStringStl(String("test")), ContainsSubstring("test"));
-    CHECK_THAT(toStringStl(String("test"), UA_TYPES[UA_TYPES_STRING]), ContainsSubstring("test"));
+    CHECK_THAT(toStringStl(String{"test"}), ContainsSubstring("test"));
+    CHECK_THAT(toStringStl(String{"test"}, UA_TYPES[UA_TYPES_STRING]), ContainsSubstring("test"));
 }
 #endif
 
