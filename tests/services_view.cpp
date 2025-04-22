@@ -1,6 +1,9 @@
 #include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 
+// force browseNext request in browseAll* functions
+#define UAPP_BROWSE_ALL_MAX_REFERENCES 1U
+
 #include "open62541pp/services/nodemanagement.hpp"
 #include "open62541pp/services/view.hpp"
 #include "open62541pp/ua/nodeids.hpp"
@@ -97,7 +100,15 @@ TEMPLATE_TEST_CASE("View service set", "", Server, Client, Async<Client>) {
 
     SECTION("browseAll") {
         const BrowseDescription bd(id, BrowseDirection::Both);
-        CHECK(services::browseAll(connection, bd).value().size() == 2);
+        if constexpr (isAsync<T>) {
+            auto future = services::browseAllAsync(connection, bd, useFuture);
+            setup.client.runIterate();
+            setup.client.runIterate();
+            auto refs = future.get();
+            CHECK(refs.value().size() == 2);
+        } else {
+            CHECK(services::browseAll(connection, bd).value().size() == 2);
+        }
     }
 
     SECTION("browseSimplifiedBrowsePath") {
