@@ -167,9 +167,9 @@ auto createMonitoredItemsDataChangeAsync(
     auto contexts = detail::createMonitoredItemContexts(
         connection, request, std::move(dataChangeCallback), {}, std::move(deleteCallback)
     );
-    std::vector<detail::MonitoredItemContext*> contextsPtr(contexts.size());
-    std::vector<UA_Client_DataChangeNotificationCallback> dataChangeCallbacks(contexts.size());
-    std::vector<UA_Client_DeleteMonitoredItemCallback> deleteCallbacks(contexts.size());
+    std::vector<detail::MonitoredItemContext*> contextsPtr{contexts.size()};
+    std::vector<UA_Client_DataChangeNotificationCallback> dataChangeCallbacks{contexts.size()};
+    std::vector<UA_Client_DeleteMonitoredItemCallback> deleteCallbacks{contexts.size()};
     detail::convertMonitoredItemContexts(
         contexts, contextsPtr, dataChangeCallbacks, {}, deleteCallbacks
     );
@@ -296,9 +296,9 @@ auto createMonitoredItemsEventAsync(
     auto contexts = detail::createMonitoredItemContexts(
         connection, request, {}, std::move(eventCallback), std::move(deleteCallback)
     );
-    std::vector<detail::MonitoredItemContext*> contextsPtr(contexts.size());
-    std::vector<UA_Client_EventNotificationCallback> eventCallbacks(contexts.size());
-    std::vector<UA_Client_DeleteMonitoredItemCallback> deleteCallbacks(contexts.size());
+    std::vector<detail::MonitoredItemContext*> contextsPtr{contexts.size()};
+    std::vector<UA_Client_EventNotificationCallback> eventCallbacks{contexts.size()};
+    std::vector<UA_Client_DeleteMonitoredItemCallback> deleteCallbacks{contexts.size()};
     detail::convertMonitoredItemContexts(
         contexts, contextsPtr, {}, eventCallbacks, deleteCallbacks
     );

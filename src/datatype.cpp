@@ -113,20 +113,20 @@ void addDataTypes(const UA_DataTypeArray*& head, Span<const DataType> types) {
 }  // namespace detail
 
 DataTypeMember::DataTypeMember(const UA_DataTypeMember& native)
-    : Wrapper(detail::copy(native)) {}
+    : Wrapper{detail::copy(native)} {}
 
 DataTypeMember::DataTypeMember(UA_DataTypeMember&& native) noexcept  // NOLINT
-    : Wrapper(std::exchange(native, {})) {}
+    : Wrapper{std::exchange(native, {})} {}
 
 DataTypeMember::~DataTypeMember() {
     detail::clear(native());
 }
 
 DataTypeMember::DataTypeMember(const DataTypeMember& other)
-    : Wrapper(detail::copy(other.native())) {}
+    : Wrapper{detail::copy(other.native())} {}
 
 DataTypeMember::DataTypeMember(DataTypeMember&& other) noexcept
-    : Wrapper(std::exchange(other.native(), {})) {}
+    : Wrapper{std::exchange(other.native(), {})} {}
 
 DataTypeMember& DataTypeMember::operator=(const DataTypeMember& other) {
     if (this != &other) {
@@ -145,13 +145,13 @@ DataTypeMember& DataTypeMember::operator=(DataTypeMember&& other) noexcept {
 }
 
 DataType::DataType(const UA_DataType& native)
-    : Wrapper(detail::copy(native)) {}
+    : Wrapper{detail::copy(native)} {}
 
 DataType::DataType(UA_DataType&& native) noexcept  // NOLINT
-    : Wrapper(std::exchange(native, {})) {}
+    : Wrapper{std::exchange(native, {})} {}
 
 DataType::DataType(TypeIndex typeIndex)
-    : DataType(UA_TYPES[typeIndex]) {  // NOLINT
+    : DataType{UA_TYPES[typeIndex]} {  // NOLINT
     assert(typeIndex < UA_TYPES_COUNT);
 }
 
@@ -160,10 +160,10 @@ DataType::~DataType() {
 }
 
 DataType::DataType(const DataType& other)
-    : Wrapper(detail::copy(other.native())) {}
+    : Wrapper{detail::copy(other.native())} {}
 
 DataType::DataType(DataType&& other) noexcept
-    : Wrapper(std::exchange(other.native(), {})) {}
+    : Wrapper{std::exchange(other.native(), {})} {}
 
 DataType& DataType::operator=(const DataType& other) {
     if (this != &other) {

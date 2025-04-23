@@ -19,7 +19,7 @@ TEST_CASE("Span") {
 
     SECTION("From array") {
         constexpr std::array<int, 3> arr{0, 1, 2};
-        Span view(arr);
+        Span view{arr};
         CHECK(view.size() == arr.size());
         CHECK(!view.empty());
         CHECK(view.data() == arr.data());
@@ -27,7 +27,7 @@ TEST_CASE("Span") {
 
     SECTION("From vector") {
         std::vector<int> vec{0, 1, 2};
-        Span view(vec);
+        Span view{vec};
         CHECK(view.size() == vec.size());
         CHECK(!view.empty());
         CHECK(view.data() == vec.data());
@@ -35,7 +35,7 @@ TEST_CASE("Span") {
 
     SECTION("From initializer list") {
         std::initializer_list<int> values{0, 1, 2};
-        Span<const int> view(values);
+        Span<const int> view{values};
         CHECK(view.size() == values.size());
         CHECK(!view.empty());
         CHECK(view.data() == values.begin());
@@ -43,7 +43,7 @@ TEST_CASE("Span") {
 
     SECTION("Element access") {
         std::vector<int> vec{0, 1, 2};
-        Span view(vec);
+        Span view{vec};
 
         CHECK(view.front() == 0);
         CHECK(view.back() == 2);
@@ -66,7 +66,7 @@ TEST_CASE("Span") {
 
     SECTION("Iterators") {
         const std::vector<int> vec{0, 1, 2};
-        Span view(vec);
+        Span view{vec};
 
         CHECK(std::vector<int>(view.begin(), view.end()) == std::vector{0, 1, 2});
         CHECK(std::vector<int>(view.cbegin(), view.cend()) == std::vector{0, 1, 2});
@@ -76,7 +76,7 @@ TEST_CASE("Span") {
 
     SECTION("Subviews") {
         const std::vector<int> vec{0, 1, 2};
-        Span view(vec);
+        Span view{vec};
 
         CHECK(view.subview(0).size() == 3);
         CHECK(view.subview(0).data() == view.begin());
@@ -148,22 +148,22 @@ TEST_CASE("Span comparison") {
     std::vector<double> vec1Double{0, 1, 2};
     std::vector<double> vec2Double{3, 4, 5};
 
-    CHECK(Span(vec1) == Span(vec1));
-    CHECK(Span(vec2) == Span(vec2));
-    CHECK(Span(vec1) != Span(vec2));
-    CHECK(Span(vec2) != Span(vec1));
+    CHECK(Span{vec1} == Span{vec1});
+    CHECK(Span{vec2} == Span{vec2});
+    CHECK(Span{vec1} != Span{vec2});
+    CHECK(Span{vec2} != Span{vec1});
 
     SECTION("Mix non-const/const") {
-        CHECK(Span<int>(vec1) == Span<const int>(vec1));
-        CHECK(Span<const int>(vec1) == Span<int>(vec1));
-        CHECK(Span<int>(vec1) != Span<const int>(vec2));
-        CHECK(Span<const int>(vec2) != Span<int>(vec1));
+        CHECK(Span<int>{vec1} == Span<const int>{vec1});
+        CHECK(Span<const int>{vec1} == Span<int>{vec1});
+        CHECK(Span<int>{vec1} != Span<const int>{vec2});
+        CHECK(Span<const int>{vec2} != Span<int>{vec1});
     }
 
     SECTION("Mix comparable types") {
-        CHECK(Span(vec1) == Span(vec1Double));
-        CHECK(Span(vec1Double) == Span(vec1));
-        CHECK(Span(vec1) != Span(vec2Double));
-        CHECK(Span(vec2Double) != Span(vec1));
+        CHECK(Span{vec1} == Span{vec1Double});
+        CHECK(Span{vec1Double} == Span{vec1});
+        CHECK(Span{vec1} != Span{vec2Double});
+        CHECK(Span{vec2Double} != Span{vec1});
     }
 }

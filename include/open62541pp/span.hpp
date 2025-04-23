@@ -51,8 +51,8 @@ public:
     constexpr Span() noexcept = default;
 
     constexpr Span(T* data, size_t size) noexcept
-        : size_(size),
-          data_(data) {}
+        : size_{size},
+          data_{data} {}
 
     /**
      * Implicit constructor from a container like `std::array` or `std::vector`.

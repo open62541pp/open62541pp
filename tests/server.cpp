@@ -23,11 +23,11 @@ using namespace opcua;
 
 TEST_CASE("ServerConfig") {
     SECTION("Construct with custom port") {
-        CHECK_NOTHROW(ServerConfig(4850));
+        CHECK_NOTHROW(ServerConfig{4850});
     }
 
     SECTION("Construct with custom port and certificate") {
-        CHECK_NOTHROW(ServerConfig(4850, ByteString("certificate")));
+        CHECK_NOTHROW(ServerConfig{4850, ByteString{"certificate"}});
     }
 
 #ifdef UA_ENABLE_ENCRYPTION
@@ -48,27 +48,27 @@ TEST_CASE("ServerConfig") {
     ServerConfig config;
 
     SECTION("BuildInfo") {
-        config.setBuildInfo(BuildInfo(
+        config.setBuildInfo(BuildInfo{
             "productUri",
             "manufacturerName",
             "productName",
             "softwareVersion",
             "buildNumber",
-            DateTime(1234)
-        ));
-        CHECK(String(config->buildInfo.productUri) == "productUri");
+            DateTime{1234}
+        });
+        CHECK(String{config->buildInfo.productUri} == "productUri");
         // ...
     }
 
     SECTION("ApplicationDescription") {
         config.setApplicationUri("http://app.com");
-        CHECK(String(config->applicationDescription.applicationUri) == "http://app.com");
+        CHECK(String{config->applicationDescription.applicationUri} == "http://app.com");
 
         config.setProductUri("http://product.com");
-        CHECK(String(config->applicationDescription.productUri) == "http://product.com");
+        CHECK(String{config->applicationDescription.productUri} == "http://product.com");
 
         config.setApplicationName("Test App");
-        CHECK(String(config->applicationDescription.applicationName.text) == "Test App");
+        CHECK(String{config->applicationDescription.applicationName.text} == "Test App");
     }
 
     SECTION("AccessControl") {
@@ -85,7 +85,7 @@ TEST_CASE("ServerConfig") {
             CHECK(config->endpointsSize > 0);
 
             // delete endpoint user identity tokens first
-            for (auto& endpoint : Span(config->endpoints, config->endpointsSize)) {
+            for (auto& endpoint : Span{config->endpoints, config->endpointsSize}) {
                 UA_Array_delete(
                     endpoint.userIdentityTokens,
                     endpoint.userIdentityTokensSize,
@@ -99,13 +99,13 @@ TEST_CASE("ServerConfig") {
             config.setAccessControl(accessControl);
             auto& ac = config->accessControl;
 
-            for (const auto& endpoint : Span(config->endpoints, config->endpointsSize)) {
+            for (const auto& endpoint : Span{config->endpoints, config->endpointsSize}) {
                 CHECK(endpoint.userIdentityTokensSize == ac.userTokenPoliciesSize);
             }
         }
 
         SECTION("Use highest security policy to transfer user tokens") {
-            AccessControlDefault accessControl(true, {Login{String{"user"}, String{"password"}}});
+            AccessControlDefault accessControl{true, {Login{String{"user"}, String{"password"}}}};
             config.setAccessControl(accessControl);
             auto& ac = config->accessControl;
 
@@ -144,7 +144,7 @@ TEST_CASE("Server run/stop/runIterate") {
     SECTION("run/stop") {
         auto t = std::thread([&] { server.run(); });
         // wait for thread to execute run method
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        std::this_thread::sleep_for(std::chrono::milliseconds{100});
         CHECK(server.isRunning());
         server.stop();
         server.stop();  // should do nothing
@@ -249,7 +249,7 @@ TEST_CASE("ValueCallback") {
     Server server;
 
     const NodeId id{1, 1000};
-    auto node = Node(server, ObjectId::ObjectsFolder).addVariable(id, "TestVariable");
+    auto node = Node{server, ObjectId::ObjectsFolder}.addVariable(id, "TestVariable");
     node.writeValue(Variant{1});
 
     auto callbackPtr = std::make_unique<ValueCallbackTest>();
@@ -283,7 +283,7 @@ struct DataSourceTest : public DataSourceBase {
         DataValue& dv,
         bool timestamp
     ) override {
-        dv.setValue(Variant(data));
+        dv.setValue(Variant{data});
         if (timestamp) {
             dv.setSourceTimestamp(DateTime::now());
         }
@@ -315,7 +315,7 @@ TEST_CASE("DataSource") {
     Server server;
 
     const NodeId id{1, 1000};
-    auto node = Node(server, ObjectId::ObjectsFolder).addVariable(id, "TestVariable");
+    auto node = Node{server, ObjectId::ObjectsFolder}.addVariable(id, "TestVariable");
 
     auto sourcePtr = std::make_unique<DataSourceTest>();
     auto& source = *sourcePtr;
@@ -341,7 +341,7 @@ TEST_CASE("DataSource") {
     }
 
     SECTION("read/write with exception in callback") {
-        source.exception = BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
+        source.exception = BadStatus{UA_STATUSCODE_BADUNEXPECTEDERROR};
         CHECK_THROWS_MATCHES(node.readValue(), BadStatus, Message("BadUnexpectedError"));
         CHECK_THROWS_MATCHES(node.writeValue(Variant{2}), BadStatus, Message("BadUnexpectedError"));
     }

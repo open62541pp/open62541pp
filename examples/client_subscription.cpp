@@ -13,7 +13,7 @@ int main() {
     // items are deleted. This approach with the state callback assures, that the subscriptions are
     // recreated whenever the client reconnects to the server.
     client.onSessionActivated([&] {
-        opcua::Subscription sub(client);
+        opcua::Subscription sub{client};
 
         // Modify and delete the subscription via the returned Subscription<T> object
         opcua::SubscriptionParameters subscriptionParameters{};
@@ -27,7 +27,7 @@ int main() {
             opcua::VariableId::Server_ServerStatus_CurrentTime,  // monitored node id
             opcua::AttributeId::Value,  // monitored attribute
             [&](opcua::IntegerId subId, opcua::IntegerId monId, const opcua::DataValue& dv) {
-                opcua::MonitoredItem item(client, subId, monId);
+                opcua::MonitoredItem item{client, subId, monId};
                 std::cout
                     << "Data change notification:\n"
                     << "- subscription id:   " << item.subscriptionId() << "\n"
@@ -58,7 +58,7 @@ int main() {
             // https://github.com/open62541pp/open62541pp/issues/51
             client.disconnect();
             std::cout << "Error: " << e.what() << "\nRetry to connect in 3 seconds\n";
-            std::this_thread::sleep_for(std::chrono::seconds(3));
+            std::this_thread::sleep_for(std::chrono::seconds{3});
         }
     }
 }

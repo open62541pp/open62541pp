@@ -75,7 +75,7 @@ int main() {
     opcua::Server server;
 
     // Add a variable node to the Objects node
-    opcua::Node parentNode(server, opcua::ObjectId::ObjectsFolder);
+    opcua::Node parentNode{server, opcua::ObjectId::ObjectsFolder};
     opcua::Node myIntegerNode = parentNode.addVariable({1, 1000}, "TheAnswer");
     // Write value attribute
     myIntegerNode.writeValue(opcua::Variant{42});
@@ -104,7 +104,7 @@ int main() {
     opcua::Client client;
     client.connect("opc.tcp://localhost:4840");
 
-    opcua::Node node(client, opcua::VariableId::Server_ServerStatus_CurrentTime);
+    opcua::Node node{client, opcua::VariableId::Server_ServerStatus_CurrentTime};
     const auto dt = node.readValue().to<opcua::DateTime>();
 
     std::cout << "Server date (UTC): " << dt.format("%Y-%m-%d %H:%M:%S") << std::endl;

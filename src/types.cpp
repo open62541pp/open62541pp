@@ -29,7 +29,7 @@ String DateTime::format(std::string_view format, bool localtime) const {
     std::ostringstream ss;
     const auto* timeinfo = localtime ? std::localtime(&unixTime) : std::gmtime(&unixTime);
     if (timeinfo != nullptr) {
-        ss << std::put_time(timeinfo, std::string(format).c_str());
+        ss << std::put_time(timeinfo, std::string{format}.c_str());
     }
     return String{ss.str()};
 }
@@ -39,7 +39,7 @@ String DateTime::format(std::string_view format, bool localtime) const {
 ByteString ByteString::fromBase64([[maybe_unused]] std::string_view encoded) {
 #if UAPP_OPEN62541_VER_GE(1, 1)
     ByteString output;
-    UA_ByteString_fromBase64(output.handle(), String(encoded).handle());
+    UA_ByteString_fromBase64(output.handle(), String{encoded}.handle());
     return output;
 #else
     return {};

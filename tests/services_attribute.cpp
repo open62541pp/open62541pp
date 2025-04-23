@@ -102,10 +102,10 @@ TEST_CASE("Attribute service set (highlevel)") {
 
         // read new attributes
         // https://github.com/open62541/open62541/issues/6723
-        CHECK(services::readDisplayName(server, id).value() == LocalizedText({}, "NewDisplayName"));
-        CHECK(services::readDescription(server, id).value() == LocalizedText({}, "NewDescription"));
+        CHECK(services::readDisplayName(server, id).value() == LocalizedText{{}, "NewDisplayName"});
+        CHECK(services::readDescription(server, id).value() == LocalizedText{{}, "NewDescription"});
         CHECK(services::readWriteMask(server, id).value() == UA_WRITEMASK_EXECUTABLE);
-        CHECK(services::readDataType(server, id).value() == NodeId(0, 2));
+        CHECK(services::readDataType(server, id).value() == NodeId{0, 2});
         CHECK(services::readValueRank(server, id).value() == ValueRank::TwoDimensions);
         CHECK(services::readArrayDimensions(server, id).value().size() == 2);
         CHECK(services::readArrayDimensions(server, id).value().at(0) == 3);
@@ -145,17 +145,17 @@ TEST_CASE("Attribute service set (highlevel)") {
         // read default attributes
         CHECK(services::readIsAbstract(server, id).value() == false);
         CHECK(services::readSymmetric(server, id).value() == false);
-        CHECK(services::readInverseName(server, id).value() == LocalizedText({}, {}));
+        CHECK(services::readInverseName(server, id).value() == LocalizedText{{}, {}});
 
         // write new attributes
         CHECK(services::writeIsAbstract(server, id, true).isGood());
         CHECK(services::writeSymmetric(server, id, false).isGood());
-        CHECK(services::writeInverseName(server, id, LocalizedText({}, "InverseName")).isGood());
+        CHECK(services::writeInverseName(server, id, LocalizedText{{}, "InverseName"}).isGood());
 
         // read new attributes
         CHECK(services::readIsAbstract(server, id).value() == true);
         CHECK(services::readSymmetric(server, id).value() == false);
-        CHECK(services::readInverseName(server, id).value() == LocalizedText({}, "InverseName"));
+        CHECK(services::readInverseName(server, id).value() == LocalizedText{{}, "InverseName"});
     }
 
     SECTION("Value rank and array dimension combinations") {
@@ -224,7 +224,7 @@ TEST_CASE("Attribute service set (highlevel)") {
             ReferenceTypeId::HasComponent
         ));
 
-        Variant variantWrite(11.11);
+        Variant variantWrite{11.11};
         services::writeValue(server, id, variantWrite).throwIfBad();
 
         Variant variantRead = services::readValue(server, id).value();
@@ -243,8 +243,8 @@ TEST_CASE("Attribute service set (highlevel)") {
             ReferenceTypeId::HasComponent
         ));
 
-        Variant variant(11);
-        DataValue valueWrite(variant, {}, DateTime::now(), {}, uint16_t{1}, UA_STATUSCODE_GOOD);
+        Variant variant{11};
+        DataValue valueWrite{variant, {}, DateTime::now(), {}, uint16_t{1}, UA_STATUSCODE_GOOD};
         services::writeDataValue(server, id, valueWrite).throwIfBad();
 
         DataValue valueRead = services::readDataValue(server, id).value();
@@ -270,8 +270,8 @@ TEST_CASE("Attribute service set (highlevel)") {
         CHECK(variant.type() == &UA_TYPES[UA_TYPES_STRUCTUREDEFINITION]);
 
         const auto definition = variant.scalar<StructureDefinition>();
-        CHECK(definition.defaultEncodingId() == NodeId(0, 340));
-        CHECK(definition.baseDataType() == NodeId(0, 22));
+        CHECK(definition.defaultEncodingId() == NodeId{0, 340});
+        CHECK(definition.baseDataType() == NodeId{0, 22});
         CHECK(definition.structureType() == StructureType::Structure);
         CHECK(definition.fields().size() == 6);
     }
@@ -281,7 +281,7 @@ TEST_CASE("Attribute service set (highlevel)") {
     //     services::addDataType(server, {0, UA_NS0ID_ENUMERATION}, id, "MyEnum");
 
     //     const EnumDefinition definition{{0, "Zero"}, {1, "One"}};
-    //     services::writeDataTypeDefinition(server, id, Variant(definition)).value();
+    //     services::writeDataTypeDefinition(server, id, Variant{definition}).value();
 
     //     const auto definitionRead = services::readDataTypeDefinition(server, id);
     //     CHECK(definitionRead.value().isType<EnumDefinition>());
@@ -355,12 +355,12 @@ TEMPLATE_TEST_CASE("Attribute service set write/read", "", Server, Client, Async
     // write
     if constexpr (isAsync<TestType>) {
         auto future = services::writeAttributeAsync(
-            connection, id, AttributeId::Value, DataValue(Variant(value)), useFuture
+            connection, id, AttributeId::Value, DataValue{Variant{value}}, useFuture
         );
         client.runIterate();
         future.get().throwIfBad();
     } else {
-        services::writeAttribute(connection, id, AttributeId::Value, DataValue(Variant(value)))
+        services::writeAttribute(connection, id, AttributeId::Value, DataValue{Variant{value}})
             .throwIfBad();
     }
 

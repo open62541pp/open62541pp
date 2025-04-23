@@ -57,7 +57,7 @@ ServerConfig::ServerConfig(
 
 // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
 ServerConfig::ServerConfig(UA_ServerConfig&& native)
-    : Wrapper(std::exchange(native, {})) {}
+    : Wrapper{std::exchange(native, {})} {}
 
 ServerConfig::~ServerConfig() {
     detail::deallocate(native().customDataTypes);
@@ -67,7 +67,7 @@ ServerConfig::~ServerConfig() {
 
 // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
 ServerConfig::ServerConfig(ServerConfig&& other) noexcept
-    : Wrapper(std::exchange(other.native(), {})) {}
+    : Wrapper{std::exchange(other.native(), {})} {}
 
 ServerConfig& ServerConfig::operator=(ServerConfig&& other) noexcept {
     if (this != &other) {
@@ -104,17 +104,17 @@ static void copyApplicationDescriptionToEndpoints(UA_ServerConfig& config) {
 }
 
 void ServerConfig::setApplicationUri(std::string_view uri) {
-    getApplicationDescription(native()).applicationUri() = String(uri);
+    getApplicationDescription(native()).applicationUri() = String{uri};
     copyApplicationDescriptionToEndpoints(native());
 }
 
 void ServerConfig::setProductUri(std::string_view uri) {
-    getApplicationDescription(native()).productUri() = String(uri);
+    getApplicationDescription(native()).productUri() = String{uri};
     copyApplicationDescriptionToEndpoints(native());
 }
 
 void ServerConfig::setApplicationName(std::string_view name) {
-    getApplicationDescription(native()).applicationName() = LocalizedText("", name);
+    getApplicationDescription(native()).applicationName() = LocalizedText{"", name};
     copyApplicationDescriptionToEndpoints(native());
 }
 
@@ -140,7 +140,7 @@ static void copyUserTokenPoliciesToEndpoints(UA_ServerConfig& config) {
 
 static void setHighestSecurityPolicyForUserTokenTransfer(UA_ServerConfig& config) {
     auto& ac = config.accessControl;
-    const Span securityPolicies(config.securityPolicies, config.securityPoliciesSize);
+    const Span securityPolicies{config.securityPolicies, config.securityPoliciesSize};
     Span userTokenPolicies(
         asWrapper<UserTokenPolicy>(ac.userTokenPolicies), ac.userTokenPoliciesSize
     );
@@ -149,7 +149,7 @@ static void setHighestSecurityPolicyForUserTokenTransfer(UA_ServerConfig& config
         for (auto& userTokenPolicy : userTokenPolicies) {
             if (userTokenPolicy.tokenType() != UserTokenType::Anonymous &&
                 userTokenPolicy.securityPolicyUri().empty()) {
-                userTokenPolicy.securityPolicyUri() = String(highestSecurityPoliciyUri);
+                userTokenPolicy.securityPolicyUri() = String{highestSecurityPoliciyUri};
             }
         }
     }
@@ -261,12 +261,12 @@ static void setWrapperAsContextPointer(Server& server) noexcept {
 }
 
 Server::Server()
-    : Server(ServerConfig()) {}
+    : Server{ServerConfig{}} {}
 
 // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
 Server::Server(ServerConfig&& config)
-    : context_(std::make_unique<detail::ServerContext>()),
-      server_(UA_Server_newWithConfig(config.handle())) {
+    : context_{std::make_unique<detail::ServerContext>()},
+      server_{UA_Server_newWithConfig(config.handle())} {
     if (handle() == nullptr) {
         throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
     }
@@ -279,8 +279,8 @@ Server::Server(ServerConfig&& config)
 }
 
 Server::Server(UA_Server* native)
-    : context_(std::make_unique<detail::ServerContext>()),
-      server_(native) {
+    : context_{std::make_unique<detail::ServerContext>()},
+      server_{native} {
     if (handle() == nullptr) {
         throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
     }
@@ -290,8 +290,8 @@ Server::Server(UA_Server* native)
 Server::~Server() = default;
 
 Server::Server(Server&& other) noexcept
-    : context_(std::move(other.context_)),
-      server_(std::move(other.server_)) {
+    : context_{std::move(other.context_)},
+      server_{std::move(other.server_)} {
     setWrapperAsContextPointer(*this);
 }
 
@@ -314,7 +314,7 @@ const ServerConfig& Server::config() const noexcept {
 
 void Server::setCustomHostname([[maybe_unused]] std::string_view hostname) {
 #if UAPP_OPEN62541_VER_LE(1, 3)
-    asWrapper<String>(config()->customHostname) = String(hostname);
+    asWrapper<String>(config()->customHostname) = String{hostname};
 #endif
 }
 
@@ -334,7 +334,7 @@ std::vector<std::string> Server::namespaceArray() {
 }
 
 NamespaceIndex Server::registerNamespace(std::string_view uri) {
-    return UA_Server_addNamespace(handle(), std::string(uri).c_str());
+    return UA_Server_addNamespace(handle(), std::string{uri}.c_str());
 }
 
 static void setVariableNodeValueCallbackImpl(

@@ -56,12 +56,12 @@ auto getSingleResultRef(Response& response) noexcept {
     }();
     using ResultType = Result<decltype(std::ref(*native->results))>;
     if (const StatusCode serviceResult = getServiceResult(response); serviceResult.isBad()) {
-        return ResultType(BadResult(serviceResult));
+        return ResultType{BadResult{serviceResult}};
     }
     if (native->results == nullptr || native->resultsSize != 1) {
-        return ResultType(BadResult(UA_STATUSCODE_BADUNEXPECTEDERROR));
+        return ResultType{BadResult{UA_STATUSCODE_BADUNEXPECTEDERROR}};
     }
-    return ResultType(std::ref(*native->results));
+    return ResultType{std::ref(*native->results)};
 }
 
 template <typename Response>
@@ -87,7 +87,7 @@ WrapperType wrapSingleResultWithStatus(Response& response) noexcept {
 
 inline Result<NodeId> getAddedNodeId(UA_AddNodesResult& result) noexcept {
     if (const StatusCode code = result.statusCode; code.isBad()) {
-        return BadResult(code);
+        return BadResult{code};
     }
     return Wrap<NodeId>{}(result.addedNodeId);
 }

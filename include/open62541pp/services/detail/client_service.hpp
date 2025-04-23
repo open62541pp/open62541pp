@@ -46,7 +46,7 @@ struct AsyncServiceAdapter {
                 assert(context->catcher != nullptr);
                 context->catcher->invoke([context = context.get(), responsePtr] {
                     if (responsePtr == nullptr) {
-                        throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
+                        throw BadStatus{UA_STATUSCODE_BADUNEXPECTEDERROR};
                     }
                     std::invoke(context->handler, *static_cast<Response*>(responsePtr));
                 });

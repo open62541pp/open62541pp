@@ -19,8 +19,8 @@ public:
     using reference = value_type&;
 
     constexpr TransformIterator(Iter it, F func)
-        : it_(std::move(it)),
-          func_(std::move(func)) {}
+        : it_{std::move(it)},
+          func_{std::move(func)} {}
 
     constexpr const Iter& base() const& noexcept {
         return it_;

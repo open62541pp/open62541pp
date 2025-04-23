@@ -285,8 +285,8 @@ static UA_Boolean allowHistoryUpdateDeleteRawModifiedNative(
         return getAdapter(ac).allowHistoryDelete(
             session.value(),
             asWrapperRef<NodeId>(nodeId),
-            DateTime(startTimestamp),
-            DateTime(endTimestamp),
+            DateTime{startTimestamp},
+            DateTime{endTimestamp},
             isDeleteModified
         );
     });

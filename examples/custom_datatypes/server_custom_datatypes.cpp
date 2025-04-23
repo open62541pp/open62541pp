@@ -23,12 +23,12 @@ int main() {
     });
 
     // Add data type nodes
-    opcua::Node structureDataTypeNode(server, opcua::DataTypeId::Structure);
+    opcua::Node structureDataTypeNode{server, opcua::DataTypeId::Structure};
     structureDataTypeNode.addDataType(dataTypePoint.typeId(), "PointDataType");
     structureDataTypeNode.addDataType(dataTypeMeasurements.typeId(), "MeasurementsDataType");
     structureDataTypeNode.addDataType(dataTypeOpt.typeId(), "OptDataType");
     structureDataTypeNode.addDataType(dataTypeUni.typeId(), "UniDataType");
-    opcua::Node enumerationDataTypeNode(server, opcua::DataTypeId::Enumeration);
+    opcua::Node enumerationDataTypeNode{server, opcua::DataTypeId::Enumeration};
     enumerationDataTypeNode.addDataType(dataTypeColor.typeId(), "Color")
         .addProperty(
             {0, 0},  // auto-generate node id
@@ -48,7 +48,7 @@ int main() {
         .addModellingRule(opcua::ModellingRule::Mandatory);
 
     // Add variable type nodes (optional)
-    opcua::Node baseDataVariableTypeNode(server, opcua::VariableTypeId::BaseDataVariableType);
+    opcua::Node baseDataVariableTypeNode{server, opcua::VariableTypeId::BaseDataVariableType};
     auto variableTypePointNode = baseDataVariableTypeNode.addVariableType(
         {1, 4243},
         "PointType",
@@ -83,7 +83,7 @@ int main() {
     );
 
     // Add variable nodes with some values
-    opcua::Node objectsNode(server, opcua::ObjectId::ObjectsFolder);
+    opcua::Node objectsNode{server, opcua::ObjectId::ObjectsFolder};
 
     const Point point{3.0, 4.0, 5.0};
     objectsNode.addVariable(
@@ -110,7 +110,7 @@ int main() {
 
     std::vector<float> measurementsValues{19.1F, 20.2F, 19.7F};
     const Measurements measurements{
-        opcua::String("Test description"),
+        opcua::String{"Test description"},
         measurementsValues.size(),
         measurementsValues.data(),
     };

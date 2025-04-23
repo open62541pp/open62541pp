@@ -27,7 +27,7 @@ TEST_CASE("Event") {
     }
 
     SECTION("Create and trigger event") {
-        Event event(server);
+        Event event{server};
 
         CHECK(&event.connection() == &server);
         CHECK(&std::as_const(event).connection() == &server);

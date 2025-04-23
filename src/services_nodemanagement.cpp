@@ -58,7 +58,7 @@ Result<NodeId> addNode<Server>(
         addedNodeId.handle()
     );
     if (status.isBad()) {
-        return BadResult(status);
+        return BadResult{status};
     }
     return addedNodeId;
 }
@@ -102,11 +102,10 @@ static UA_StatusCode methodCallback(
     const auto& callback = nodeContext->methodCallback;
     if (callback) {
         return opcua::detail::tryInvoke(
-                   callback,
-                   Span<const Variant>{asWrapper<Variant>(input), inputSize},
-                   Span<Variant>{asWrapper<Variant>(output), outputSize}
-        )
-            .code();
+            callback,
+            Span<const Variant>{asWrapper<Variant>(input), inputSize},
+            Span<Variant>{asWrapper<Variant>(output), outputSize}
+        ).code();
     }
     return UA_STATUSCODE_BADINTERNALERROR;
 }

@@ -84,13 +84,13 @@ TEST_CASE("sendRequest") {
     }
 
     Server server;
-    ServerRunner serverRunner(server);
+    ServerRunner serverRunner{server};
     client.connect("opc.tcp://localhost:4840");
 
     SECTION("Success") {
         const auto response = sendReadRequest();
         CHECK(response.responseHeader().serviceResult().isGood());
-        CHECK(response.results()[0].value().scalar<QualifiedName>() == QualifiedName(0, "Objects"));
+        CHECK(response.results()[0].value().scalar<QualifiedName>() == QualifiedName{0, "Objects"});
     }
 }
 
@@ -118,7 +118,7 @@ TEST_CASE("sendRequestAsync") {
     }
 
     Server server;
-    ServerRunner serverRunner(server);
+    ServerRunner serverRunner{server};
     client.connect("opc.tcp://localhost:4840");
 
     SECTION("Success") {
@@ -126,7 +126,7 @@ TEST_CASE("sendRequestAsync") {
         sendReadRequest([&](ReadResponse& response) {
             CHECK(response.responseHeader().serviceResult().isGood());
             CHECK(
-                response.results()[0].value().scalar<QualifiedName>() == QualifiedName(0, "Objects")
+                response.results()[0].value().scalar<QualifiedName>() == QualifiedName{0, "Objects"}
             );
             executed = true;
         });

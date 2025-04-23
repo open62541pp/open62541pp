@@ -10,7 +10,7 @@ int main() {
     //    ├─ (Variable) Age
     //    └─ (ObjectType) DogType
     //       └─ (Variable) Name
-    opcua::Node nodeBaseObjectType(server, opcua::ObjectTypeId::BaseObjectType);
+    opcua::Node nodeBaseObjectType{server, opcua::ObjectTypeId::BaseObjectType};
     auto nodeMammalType = nodeBaseObjectType.addObjectType(
         {1, 10000},
         "MammalType",
@@ -54,7 +54,7 @@ int main() {
     // └─ (Object) Bello <DogType>
     //    ├─ (Variable) Age
     //    └─ (Variable) Name
-    opcua::Node nodeObjects(server, opcua::ObjectId::ObjectsFolder);
+    opcua::Node nodeObjects{server, opcua::ObjectId::ObjectsFolder};
     auto nodeBello = nodeObjects.addObject(
         {1, 20000},
         "Bello",

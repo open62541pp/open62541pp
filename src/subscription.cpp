@@ -17,13 +17,13 @@ static auto createSubscription(Client& connection, const SubscriptionParameters&
 
 template <>
 Subscription<Client>::Subscription(Client& connection, const SubscriptionParameters& parameters)
-    : Subscription(connection, createSubscription(connection, parameters)) {}
+    : Subscription{connection, createSubscription(connection, parameters)} {}
 
 template <>
 Subscription<Server>::Subscription(
     Server& connection, [[maybe_unused]] const SubscriptionParameters& parameters
 )
-    : Subscription(connection, 0U) {}
+    : Subscription{connection, 0U} {}
 
 template <typename T>
 std::vector<MonitoredItem<T>> Subscription<T>::monitoredItems() {

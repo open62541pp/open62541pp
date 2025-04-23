@@ -20,9 +20,9 @@ class Server;
 class Session {
 public:
     Session(Server& connection, NodeId sessionId, void* sessionContext) noexcept
-        : connection_(&connection),
-          id_(std::move(sessionId)),
-          context_(sessionContext) {}
+        : connection_{&connection},
+          id_{std::move(sessionId)},
+          context_{sessionContext} {}
 
     /// Get the server instance.
     Server& connection() noexcept {

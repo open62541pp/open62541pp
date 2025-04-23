@@ -15,7 +15,7 @@ namespace opcua {
 class BadStatus : public std::exception {
 public:
     explicit BadStatus(UA_StatusCode code)
-        : code_(code) {}
+        : code_{code} {}
 
     UA_StatusCode code() const noexcept {
         return code_;
@@ -36,7 +36,7 @@ private:
 class BadDisconnect : public BadStatus {
 public:
     BadDisconnect()
-        : BadStatus(UA_STATUSCODE_BADDISCONNECT) {}
+        : BadStatus{UA_STATUSCODE_BADDISCONNECT} {}
 };
 
 /**
@@ -87,9 +87,9 @@ constexpr void throwIfBad(UA_StatusCode code) {
         // NOLINTNEXTLINE(hicpp-multiway-paths-covered)
         switch (code) {
         case UA_STATUSCODE_BADDISCONNECT:
-            throw BadDisconnect();
+            throw BadDisconnect{};
         default:
-            throw BadStatus(code);
+            throw BadStatus{code};
         }
     }
 }

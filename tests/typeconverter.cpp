@@ -55,13 +55,13 @@ TEST_CASE("TypeConverter helper functions") {
 
 TEMPLATE_TEST_CASE("TypeConverter string", "", std::string, std::string_view) {
     SECTION("fromNative") {
-        const String src("Test123");
+        const String src{"Test123"};
         TestType dst = detail::fromNative<TestType>(src);
-        CHECK(std::string(dst) == "Test123");
+        CHECK(std::string{dst} == "Test123");
     }
 
     SECTION("toNative") {
-        TestType src("Test123");
+        TestType src{"Test123"};
         String dst = detail::toNative(src);
         CHECK(dst == "Test123");
     }

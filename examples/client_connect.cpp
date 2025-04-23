@@ -6,7 +6,7 @@
 #include "helper.hpp"  // CliParser
 
 int main(int argc, char* argv[]) {
-    const CliParser parser(argc, argv);
+    const CliParser parser{argc, argv};
     if (parser.nargs() < 2 || parser.hasFlag("-h") || parser.hasFlag("--help")) {
         std::cout
             << "usage: client_connect [options] opc.tcp://<host>:<port>\n"
@@ -25,12 +25,12 @@ int main(int argc, char* argv[]) {
     opcua::Client client;
     if (username) {
         client.config().setUserIdentityToken(
-            opcua::UserNameIdentityToken(username.value(), password.value_or(""))
+            opcua::UserNameIdentityToken{username.value(), password.value_or("")}
         );
     }
     client.connect(serverUrl);
 
-    opcua::Node node(client, opcua::VariableId::Server_ServerStatus_CurrentTime);
+    opcua::Node node{client, opcua::VariableId::Server_ServerStatus_CurrentTime};
     const auto dt = node.readValue().to<opcua::DateTime>();
     client.disconnect();
 

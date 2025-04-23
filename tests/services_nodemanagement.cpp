@@ -270,12 +270,12 @@ TEMPLATE_TEST_CASE("NodeManagement service set", "", Server, Client, Async<Clien
         };
         CHECK(
             addReference(
-                connection, NodeId(1, 1000), NodeId(1, 1001), ReferenceTypeId::Organizes, true
+                connection, NodeId{1, 1000}, NodeId{1, 1001}, ReferenceTypeId::Organizes, true
             ) == UA_STATUSCODE_GOOD
         );
         CHECK(
             addReference(
-                connection, NodeId(1, 1000), NodeId(1, 1001), ReferenceTypeId::Organizes, true
+                connection, NodeId{1, 1000}, NodeId{1, 1001}, ReferenceTypeId::Organizes, true
             ) == UA_STATUSCODE_BADDUPLICATEREFERENCENOTALLOWED
         );
 
@@ -290,7 +290,7 @@ TEMPLATE_TEST_CASE("NodeManagement service set", "", Server, Client, Async<Clien
         };
         CHECK(
             deleteReference(
-                connection, NodeId(1, 1000), NodeId(1, 1001), ReferenceTypeId::Organizes, true, true
+                connection, NodeId{1, 1000}, NodeId{1, 1001}, ReferenceTypeId::Organizes, true, true
             ) == UA_STATUSCODE_GOOD
         );
     }

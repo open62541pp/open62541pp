@@ -143,7 +143,7 @@ public:
     }
 
     NodeId typeId() const noexcept {
-        return NodeId(handle()->typeId);  // NOLINT
+        return NodeId{handle()->typeId};  // NOLINT
     }
 
     /// @deprecated Use typeId() instead
@@ -158,9 +158,9 @@ public:
 
     NodeId binaryEncodingId() const noexcept {
 #if UAPP_OPEN62541_VER_GE(1, 2)
-        return NodeId(handle()->binaryEncodingId);  // NOLINT
+        return NodeId{handle()->binaryEncodingId};  // NOLINT
 #else
-        return NodeId(handle()->typeId.namespaceIndex, handle()->binaryEncodingId);  // NOLINT
+        return NodeId{handle()->typeId.namespaceIndex, handle()->binaryEncodingId};  // NOLINT
 #endif
     }
 
@@ -401,7 +401,7 @@ private:
     friend class DataTypeBuilder;
 
     explicit DataTypeBuilder(DataType dataType)
-        : dataType_(std::move(dataType)) {}
+        : dataType_{std::move(dataType)} {}
 
     struct Field {
         size_t memSize{};

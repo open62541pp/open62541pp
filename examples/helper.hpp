@@ -8,7 +8,7 @@
 class CliParser {
 public:
     CliParser(int argc, char* argv[])
-        : args_(argv, argv + argc) {}
+        : args_{argv, argv + argc} {}
 
     auto args() const noexcept {
         return args_;

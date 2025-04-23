@@ -139,7 +139,7 @@ TEMPLATE_TEST_CASE("MonitoredItem service set", "", Client, Async<Client>) {
         CHECK(result.statusCode().isGood());
         CAPTURE(result.monitoredItemId());
 
-        Event event(server);
+        Event event{server};
         event.writeTime(DateTime::now());
         event.trigger();
         CHECK(runIterateUntil(setup.client, [&] { return notificationCount == 1; }));
@@ -338,7 +338,7 @@ TEST_CASE("MonitoredItem service set (server)") {
             )
                 .monitoredItemId();
         CAPTURE(monId);
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        std::this_thread::sleep_for(std::chrono::milliseconds{100});
         services::writeValue(server, id, Variant(11.11)).throwIfBad();
         CHECK(runIterateUntil(server, [&] { return notificationCount > 0; }));
     }

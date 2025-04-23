@@ -24,8 +24,8 @@ auto asyncTransform(CompletionHandler&& handler, Transform&& transform) {
 template <typename TransformFunction, typename CompletionToken>
 struct TransformToken {
     TransformToken(TransformFunction&& transformFunction, CompletionToken&& completionToken)
-        : transform(std::move(transformFunction)),
-          token(std::move(completionToken)) {}
+        : transform{std::move(transformFunction)},
+          token{std::move(completionToken)} {}
 
     std::decay_t<TransformFunction> transform;
     std::decay_t<CompletionToken> token;

@@ -49,7 +49,7 @@ TEST_CASE("Encrypted connection server/client") {
     const std::string clientApplicationUri = "urn:localhost:client";
 
     const auto setClientApplicationUri = [](ClientConfig& config, std::string_view applicationUri) {
-        asWrapper<String>(config->clientDescription.applicationUri) = String(applicationUri);
+        asWrapper<String>(config->clientDescription.applicationUri) = String{applicationUri};
     };
 
     // create server certificate
@@ -61,7 +61,7 @@ TEST_CASE("Encrypted connection server/client") {
         },
         {
             String{"DNS:localhost"},
-            String{std::string("URI:").append(serverApplicationUri)},
+            String{std::string{"URI:"}.append(serverApplicationUri)},
         }
     );
 
@@ -74,42 +74,42 @@ TEST_CASE("Encrypted connection server/client") {
         },
         {
             String{"DNS:localhost"},
-            String{std::string("URI:").append(clientApplicationUri)},
+            String{std::string{"URI:"}.append(clientApplicationUri)},
         }
     );
 
     SECTION("Connect without trusting each others certificate") {
-        ServerConfig serverConfig(4840, certServer.certificate, certServer.privateKey, {}, {}, {});
+        ServerConfig serverConfig{4840, certServer.certificate, certServer.privateKey, {}, {}, {}};
         serverConfig.setApplicationUri(serverApplicationUri);
-        Server server(std::move(serverConfig));
+        Server server{std::move(serverConfig)};
 
-        ClientConfig clientConfig(certClient.certificate, certClient.privateKey, {}, {});
+        ClientConfig clientConfig{certClient.certificate, certClient.privateKey, {}, {}};
         clientConfig.setSecurityMode(MessageSecurityMode::SignAndEncrypt);
         setClientApplicationUri(clientConfig, clientApplicationUri);
-        Client client(std::move(clientConfig));
+        Client client{std::move(clientConfig)};
 
         {
-            ServerRunner serverRunner(server);
+            ServerRunner serverRunner{server};
             CHECK_THROWS(client.connect("opc.tcp://localhost:4840"));
         }
     }
 
     SECTION("Connect with trust lists") {
-        ServerConfig serverConfig(
+        ServerConfig serverConfig{
             4840, certServer.certificate, certServer.privateKey, {certClient.certificate}, {}, {}
-        );
+        };
         serverConfig.setApplicationUri(serverApplicationUri);
-        Server server(std::move(serverConfig));
+        Server server{std::move(serverConfig)};
 
-        ClientConfig clientConfig(
+        ClientConfig clientConfig{
             certClient.certificate, certClient.privateKey, {certServer.certificate}, {}
-        );
+        };
         clientConfig.setSecurityMode(MessageSecurityMode::SignAndEncrypt);
         setClientApplicationUri(clientConfig, clientApplicationUri);
-        Client client(std::move(clientConfig));
+        Client client{std::move(clientConfig)};
 
         {
-            ServerRunner serverRunner(server);
+            ServerRunner serverRunner{server};
             CHECK_NOTHROW(client.connect("opc.tcp://localhost:4840"));
         }
     }

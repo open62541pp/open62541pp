@@ -51,7 +51,7 @@ bool runIterateUntil(
         if (predicate()) {
             return true;
         }
-    } while ((now() - startTime) <= std::chrono::milliseconds(timeoutMilliseconds));
+    } while ((now() - startTime) <= std::chrono::milliseconds{timeoutMilliseconds});
 
     INFO("Timeout during runIterateUntil");
     return false;

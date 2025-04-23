@@ -11,7 +11,7 @@ namespace opcua {
 #ifdef UA_ENABLE_SUBSCRIPTIONS_EVENTS
 
 Event::Event(Server& connection, const NodeId& eventType)
-    : connection_(&connection) {
+    : connection_{&connection} {
     throwIfBad(UA_Server_createEvent(connection.handle(), eventType, id_.handle()));
 }
 
@@ -20,19 +20,19 @@ Event::~Event() {
 }
 
 Event& Event::writeSourceName(std::string_view sourceName) {
-    return writeProperty({0, "SourceName"}, Variant(sourceName));
+    return writeProperty({0, "SourceName"}, Variant{sourceName});
 }
 
 Event& Event::writeTime(DateTime time) {  // NOLINT(performance-unnecessary-value-param)
-    return writeProperty({0, "Time"}, Variant(time));
+    return writeProperty({0, "Time"}, Variant{time});
 }
 
 Event& Event::writeSeverity(uint16_t severity) {
-    return writeProperty({0, "Severity"}, Variant(severity));
+    return writeProperty({0, "Severity"}, Variant{severity});
 }
 
 Event& Event::writeMessage(const LocalizedText& message) {
-    return writeProperty({0, "Message"}, Variant(message));
+    return writeProperty({0, "Message"}, Variant{message});
 }
 
 Event& Event::writeProperty(const QualifiedName& propertyName, const Variant& value) {

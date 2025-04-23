@@ -26,7 +26,7 @@ TEMPLATE_TEST_CASE("Method service set", "", Server, Client, Async<Client>) {
         "Add",
         [&](Span<const Variant> inputs, Span<Variant> outputs) {
             if (throwException) {
-                throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
+                throw BadStatus{UA_STATUSCODE_BADUNEXPECTEDERROR};
             }
             const auto a = inputs.at(0).scalar<int32_t>();
             const auto b = inputs.at(1).scalar<int32_t>();
@@ -59,8 +59,8 @@ TEMPLATE_TEST_CASE("Method service set", "", Server, Client, Async<Client>) {
             objectsId,
             methodId,
             Span<const Variant>{
-                Variant(int32_t{1}),
-                Variant(int32_t{2}),
+                Variant{int32_t{1}},
+                Variant{int32_t{2}},
             }
         );
         CHECK(result.statusCode().isGood());
@@ -75,8 +75,8 @@ TEMPLATE_TEST_CASE("Method service set", "", Server, Client, Async<Client>) {
             objectsId,
             methodId,
             Span<const Variant>{
-                Variant(int32_t{1}),
-                Variant(int32_t{2}),
+                Variant{int32_t{1}},
+                Variant{int32_t{2}},
             }
         );
         CHECK(result.statusCode() == UA_STATUSCODE_BADUNEXPECTEDERROR);
@@ -88,7 +88,7 @@ TEMPLATE_TEST_CASE("Method service set", "", Server, Client, Async<Client>) {
             objectsId,
             methodId,
             Span<const Variant>{
-                Variant(true),
+                Variant{true},
                 Variant(11.11f),
             }
         );
@@ -108,9 +108,9 @@ TEMPLATE_TEST_CASE("Method service set", "", Server, Client, Async<Client>) {
             objectsId,
             methodId,
             Span<const Variant>{
-                Variant(int32_t{1}),
-                Variant(int32_t{2}),
-                Variant(int32_t{3}),
+                Variant{int32_t{1}},
+                Variant{int32_t{2}},
+                Variant{int32_t{3}},
             }
         );
         CHECK(result.statusCode() == UA_STATUSCODE_BADTOOMANYARGUMENTS);
