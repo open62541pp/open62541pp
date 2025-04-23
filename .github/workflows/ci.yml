@@ -92,7 +92,7 @@ jobs:
           - name: Linux TSan
             os: ubuntu-24.04
             compiler: clang++-18
-            flags: "-DUA_MULTITHREADING=100 -DUAPP_ENABLE_SANITIZER_THREAD=ON"
+            flags: "-DUAPP_ENABLE_SANITIZER_THREAD=ON"
 
           - name: Linux UBSan
             os: ubuntu-24.04
@@ -153,6 +153,7 @@ jobs:
           -DUA_ENABLE_METHODCALLS=ON
           -DUA_ENABLE_SUBSCRIPTIONS=ON
           -DUA_ENABLE_SUBSCRIPTIONS_EVENTS=ON
+          -DUA_MULTITHREADING=100
           -DUAPP_BUILD_TESTS=ON
           -DUAPP_BUILD_EXAMPLES=ON
           -DUAPP_ENABLE_COVERAGE=${{ matrix.config.coverage && matrix.build-type == 'Debug' }}

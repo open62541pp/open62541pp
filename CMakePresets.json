@@ -19,6 +19,7 @@
             "installDir": "${sourceDir}/install/${presetName}",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
+                "UA_MULTITHREADING": "100",
                 "UAPP_BUILD_TESTS": "ON",
                 "UAPP_WARNINGS_AS_ERRORS": "ON",
                 "UAPP_ENABLE_NODESETLOADER": "ON",
@@ -58,7 +59,7 @@
                 "dev"
             ],
             "cacheVariables": {
-                "CMAKE_CXX_INCLUDE_WHAT_YOU_USE": "iwyu;-Xiwyu;--mapping_file=${sourceDir}/.open62541pp.imp"
+                "CMAKE_CXX_INCLUDE_WHAT_YOU_USE": "iwyu;-Xiwyu;--mapping_file=${sourceDir}/.open62541pp.imp;--no_fwd_decls"
             }
         },
         {
