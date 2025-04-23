@@ -64,6 +64,7 @@ jobs:
             -DUA_ENABLE_SUBSCRIPTIONS=ON \
             -DUA_ENABLE_SUBSCRIPTIONS_EVENTS=ON \
             -DUA_ENABLE_NODESETLOADER=ON \
+            -DUA_MULTITHREADING=100 \
             ..
           cmake --build . --parallel
           sudo cmake --install .
