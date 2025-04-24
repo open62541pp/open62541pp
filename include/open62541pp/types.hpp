@@ -14,7 +14,6 @@
 #include <string_view>
 #include <type_traits>  // is_same_v
 #include <utility>  // move
-#include <variant>
 #include <vector>
 
 #include "open62541pp/common.hpp"  // NamespaceIndex
@@ -792,66 +791,9 @@ public:
         throw TypeError("NodeId identifier type doesn't match the requested type");
     }
 
-    /// Get identifier variant.
-    /// @deprecated Use identifier<T>() or identifierIf<T>() instead
-    [[deprecated("use identifier<T>() or identifierIf<T>() instead")]]
-    std::variant<uint32_t, String, Guid, ByteString> getIdentifier() const {
-        return getIdentifierImpl();
-    }
-
-    /// Get identifier by template type.
-    /// @deprecated Use identifier<T>() or identifierIf<T>() instead
-    template <typename T>
-    [[deprecated("use identifier<T>() or identifierIf<T>() instead")]]
-    auto getIdentifierAs() const {
-        return getIdentifierAsImpl<T>();
-    }
-
-    /// Get identifier by NodeIdType enum.
-    /// @deprecated Use identifier<T>() or identifierIf<T>() instead
-    template <NodeIdType E>
-    [[deprecated("use identifier<T>() or identifierIf<T>() instead")]]
-    auto getIdentifierAs() const {
-        return getIdentifierAsImpl<E>();
-    }
-
     /// @deprecated Use free function opcua::toString(const T&) instead
     [[deprecated("use free function toString instead")]]
     String toString() const;
-
-private:
-    std::variant<uint32_t, String, Guid, ByteString> getIdentifierImpl() const {
-        switch (handle()->identifierType) {
-        case UA_NODEIDTYPE_NUMERIC:
-            return handle()->identifier.numeric;  // NOLINT
-        case UA_NODEIDTYPE_STRING:
-            return String(handle()->identifier.string);  // NOLINT
-        case UA_NODEIDTYPE_GUID:
-            return Guid(handle()->identifier.guid);  // NOLINT
-        case UA_NODEIDTYPE_BYTESTRING:
-            return ByteString(handle()->identifier.byteString);  // NOLINT
-        default:
-            return {};
-        }
-    }
-
-    template <typename T>
-    auto getIdentifierAsImpl() const {
-        return std::get<T>(getIdentifierImpl());
-    }
-
-    template <NodeIdType E>
-    auto getIdentifierAsImpl() const {
-        if constexpr (E == NodeIdType::Numeric) {
-            return getIdentifierAsImpl<uint32_t>();
-        } else if constexpr (E == NodeIdType::String) {
-            return getIdentifierAsImpl<String>();
-        } else if constexpr (E == NodeIdType::Guid) {
-            return getIdentifierAsImpl<Guid>();
-        } else if constexpr (E == NodeIdType::ByteString) {
-            return getIdentifierAsImpl<ByteString>();
-        }
-    }
 };
 
 /// @relates NodeId
