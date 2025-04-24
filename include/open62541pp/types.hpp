@@ -1041,18 +1041,6 @@ inline bool operator!=(const UA_LocalizedText& lhs, const UA_LocalizedText& rhs)
 
 /* ------------------------------------------- Variant ------------------------------------------ */
 
-/**
- * Policies for variant factory methods Variant::fromScalar, Variant::fromArray.
- */
-enum class VariantPolicy {
-    // clang-format off
-    Copy,                 ///< Store copy of scalar/array inside the variant.
-    Reference,            ///< Store reference to scalar/array inside the variant.
-                          ///< Both scalars and arrays must be mutable native/wrapper types.
-                          ///< Arrays must store the elements contiguously in memory.
-    // clang-format on
-};
-
 class BadVariantAccess : public TypeError {
 public:
     using TypeError::TypeError;
@@ -1163,35 +1151,6 @@ public:
     template <typename InputIt>
     Variant(InputIt first, InputIt last, const UA_DataType& type) {
         assign(first, last, type);
-    }
-
-    /// @deprecated Use new universal Variant constructor instead
-    template <VariantPolicy Policy = VariantPolicy::Copy, typename T, typename... Args>
-    [[deprecated("use new universal Variant constructor instead")]] [[nodiscard]]
-    static Variant fromScalar(T&& value, Args&&... args) {
-        if constexpr (Policy == VariantPolicy::Copy) {
-            return Variant{std::forward<T>(value), std::forward<Args>(args)...};
-        } else {
-            return Variant{&value, std::forward<Args>(args)...};
-        }
-    }
-
-    /// @deprecated Use new universal Variant constructor instead
-    template <VariantPolicy Policy = VariantPolicy::Copy, typename T, typename... Args>
-    [[deprecated("use new universal Variant constructor instead")]] [[nodiscard]]
-    static Variant fromArray(T&& array, Args&&... args) {
-        if constexpr (Policy == VariantPolicy::Copy) {
-            return Variant{std::forward<T>(array), std::forward<Args>(args)...};
-        } else {
-            return Variant{&array, std::forward<Args>(args)...};
-        }
-    }
-
-    /// @deprecated Use new universal Variant constructor instead
-    template <VariantPolicy Policy = VariantPolicy::Copy, typename InputIt, typename... Args>
-    [[deprecated("use new universal Variant constructor instead")]] [[nodiscard]]
-    static Variant fromArray(InputIt first, InputIt last, Args&&... args) {
-        return Variant{first, last, std::forward<Args>(args)...};
     }
 
     /**
@@ -1802,25 +1761,6 @@ public:
         setValue(std::move(value));
     }
 
-    /// Create DataValue from scalar value.
-    /// @deprecated Use constructor with new universal Variant constructor instead:
-    ///             `opcua::DataValue dv(opcua::Variant{value})`
-    template <VariantPolicy Policy = VariantPolicy::Copy, typename... Args>
-    [[deprecated("use constructor with new universal Variant constructor instead")]] [[nodiscard]]
-    static DataValue fromScalar(Args&&... args) {
-        return DataValue{Variant::fromScalar<Policy>(std::forward<Args>(args)...)};
-    }
-
-    /// Create DataValue from array.
-    /// @see Variant::fromArray
-    /// @deprecated Use constructor with new universal Variant constructor instead:
-    ///             `opcua::DataValue dv(opcua::Variant{array})`
-    template <VariantPolicy Policy = VariantPolicy::Copy, typename... Args>
-    [[deprecated("use constructor with new universal Variant constructor instead")]] [[nodiscard]]
-    static DataValue fromArray(Args&&... args) {
-        return DataValue{Variant::fromArray<Policy>(std::forward<Args>(args)...)};
-    }
-
     /// Set value (copy).
     void setValue(const Variant& value) {
         asWrapper<Variant>(handle()->value) = value;
@@ -2070,20 +2010,6 @@ public:
         handle()->encoding = UA_EXTENSIONOBJECT_DECODED;
         handle()->content.decoded.type = &type;  // NOLINT
         handle()->content.decoded.data = ptr.release();  // NOLINT
-    }
-
-    /// @deprecated Use new universal ExtensionObject constructor instead
-    template <typename T, typename... Args>
-    [[deprecated("use new universal ExtensionObject constructor instead")]] [[nodiscard]]
-    static ExtensionObject fromDecoded(T& data, Args&&... args) noexcept {
-        return ExtensionObject{&data, std::forward<Args>(args)...};
-    }
-
-    /// @deprecated Use new universal ExtensionObject constructor instead
-    template <typename T, typename... Args>
-    [[deprecated("use new universal ExtensionObject constructor instead")]] [[nodiscard]]
-    static ExtensionObject fromDecodedCopy(const T& data, Args&&... args) {
-        return ExtensionObject{data, std::forward<Args>(args)...};
     }
 
     /// Check if the ExtensionObject is empty
