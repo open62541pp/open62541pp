@@ -12,7 +12,6 @@
 #include "open62541pp/datatype.hpp"
 #include "open62541pp/detail/open62541/server.h"
 #include "open62541pp/detail/server_utils.hpp"
-#include "open62541pp/event.hpp"
 #include "open62541pp/session.hpp"
 #include "open62541pp/span.hpp"
 #include "open62541pp/subscription.hpp"  // TODO: remove with Server::createSubscription
@@ -26,8 +25,6 @@
 #include "open62541pp/plugin/nodestore.hpp"
 
 namespace opcua {
-template <typename Connection>
-class Node;
 
 /* ---------------------------------------- ServerConfig ---------------------------------------- */
 
@@ -260,12 +257,6 @@ public:
     Subscription<Server> createSubscription() noexcept;
 #endif
 
-#ifdef UA_ENABLE_SUBSCRIPTIONS_EVENTS
-    /// Create an event object to generate and trigger events.
-    [[deprecated("use Event constructor")]]
-    Event createEvent(const NodeId& eventType = ObjectTypeId::BaseEventType);
-#endif
-
     /// Run a single iteration of the server's main loop.
     /// @return Maximum wait period until next Server::runIterate call (in ms)
     uint16_t runIterate();
@@ -275,12 +266,6 @@ public:
     void stop();
     /// Check if the server is running.
     bool isRunning() const noexcept;
-
-    [[deprecated("use Node constructor")]] Node<Server> getNode(NodeId id);
-    [[deprecated("use Node constructor")]] Node<Server> getRootNode();
-    [[deprecated("use Node constructor")]] Node<Server> getObjectsNode();
-    [[deprecated("use Node constructor")]] Node<Server> getTypesNode();
-    [[deprecated("use Node constructor")]] Node<Server> getViewsNode();
 
     UA_Server* handle() noexcept;
     const UA_Server* handle() const noexcept;

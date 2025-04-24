@@ -22,9 +22,6 @@
 #include "open62541pp/plugin/log_default.hpp"  // LogFunction
 
 namespace opcua {
-struct Login;
-template <typename Connection>
-class Node;
 
 /* ---------------------------------------- ClientConfig ---------------------------------------- */
 
@@ -229,14 +226,6 @@ public:
     void connectAsync(std::string_view endpointUrl);
 
     /**
-     * Connect to the selected server with the given username and password.
-     * @param endpointUrl Endpoint URL (for example `opc.tcp://localhost:4840/open62541/server/`)
-     * @param login       Login credentials with username and password
-     */
-    [[deprecated("use Client::setUserIdentityToken(UserNameIdentityToken) instead")]]
-    void connect(std::string_view endpointUrl, const Login& login);
-
-    /**
      * Disconnect and close the connection to the server.
      */
     void disconnect();
@@ -288,12 +277,6 @@ public:
     void stop();
     /// Check if the client's main loop is running.
     bool isRunning() const noexcept;
-
-    [[deprecated("use Node constructor")]] Node<Client> getNode(NodeId id);
-    [[deprecated("use Node constructor")]] Node<Client> getRootNode();
-    [[deprecated("use Node constructor")]] Node<Client> getObjectsNode();
-    [[deprecated("use Node constructor")]] Node<Client> getTypesNode();
-    [[deprecated("use Node constructor")]] Node<Client> getViewsNode();
 
     UA_Client* handle() noexcept;
     const UA_Client* handle() const noexcept;
