@@ -26,8 +26,6 @@
 #include "open62541pp/plugin/nodestore.hpp"
 
 namespace opcua {
-template <typename Connection>
-class Node;
 
 /* ---------------------------------------- ServerConfig ---------------------------------------- */
 
@@ -275,12 +273,6 @@ public:
     void stop();
     /// Check if the server is running.
     bool isRunning() const noexcept;
-
-    [[deprecated("use Node constructor")]] Node<Server> getNode(NodeId id);
-    [[deprecated("use Node constructor")]] Node<Server> getRootNode();
-    [[deprecated("use Node constructor")]] Node<Server> getObjectsNode();
-    [[deprecated("use Node constructor")]] Node<Server> getTypesNode();
-    [[deprecated("use Node constructor")]] Node<Server> getViewsNode();
 
     UA_Server* handle() noexcept;
     const UA_Server* handle() const noexcept;

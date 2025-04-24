@@ -436,26 +436,6 @@ bool Server::isRunning() const noexcept {
     return context().running;
 }
 
-Node<Server> Server::getNode(NodeId id) {
-    return {*this, std::move(id)};
-}
-
-Node<Server> Server::getRootNode() {
-    return {*this, {0, UA_NS0ID_ROOTFOLDER}};
-}
-
-Node<Server> Server::getObjectsNode() {
-    return {*this, {0, UA_NS0ID_OBJECTSFOLDER}};
-}
-
-Node<Server> Server::getTypesNode() {
-    return {*this, {0, UA_NS0ID_TYPESFOLDER}};
-}
-
-Node<Server> Server::getViewsNode() {
-    return {*this, {0, UA_NS0ID_VIEWSFOLDER}};
-}
-
 UA_Server* Server::handle() noexcept {
     return server_.get();
 }

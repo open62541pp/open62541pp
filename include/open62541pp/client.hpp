@@ -23,8 +23,6 @@
 
 namespace opcua {
 struct Login;
-template <typename Connection>
-class Node;
 
 /* ---------------------------------------- ClientConfig ---------------------------------------- */
 
@@ -288,12 +286,6 @@ public:
     void stop();
     /// Check if the client's main loop is running.
     bool isRunning() const noexcept;
-
-    [[deprecated("use Node constructor")]] Node<Client> getNode(NodeId id);
-    [[deprecated("use Node constructor")]] Node<Client> getRootNode();
-    [[deprecated("use Node constructor")]] Node<Client> getObjectsNode();
-    [[deprecated("use Node constructor")]] Node<Client> getTypesNode();
-    [[deprecated("use Node constructor")]] Node<Client> getViewsNode();
 
     UA_Client* handle() noexcept;
     const UA_Client* handle() const noexcept;

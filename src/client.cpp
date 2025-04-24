@@ -510,26 +510,6 @@ bool Client::isRunning() const noexcept {
     return context().running;
 }
 
-Node<Client> Client::getNode(NodeId id) {
-    return {*this, std::move(id)};
-}
-
-Node<Client> Client::getRootNode() {
-    return {*this, {0, UA_NS0ID_ROOTFOLDER}};
-}
-
-Node<Client> Client::getObjectsNode() {
-    return {*this, {0, UA_NS0ID_OBJECTSFOLDER}};
-}
-
-Node<Client> Client::getTypesNode() {
-    return {*this, {0, UA_NS0ID_TYPESFOLDER}};
-}
-
-Node<Client> Client::getViewsNode() {
-    return {*this, {0, UA_NS0ID_VIEWSFOLDER}};
-}
-
 UA_Client* Client::handle() noexcept {
     return client_.get();
 }
