@@ -70,12 +70,6 @@ public:
     /// Get all local monitored items.
     std::vector<MonitoredItem<Connection>> monitoredItems();
 
-    /// @deprecated Use monitoredItems() instead
-    [[deprecated("use monitoredItems() instead")]]
-    std::vector<MonitoredItem<Connection>> getMonitoredItems() {
-        return monitoredItems();
-    }
-
     /// Modify this subscription.
     /// @note Not implemented for Server.
     /// @see services::modifySubscription
