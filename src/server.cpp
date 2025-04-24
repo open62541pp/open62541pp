@@ -574,7 +574,9 @@ bool runAsyncOperation(Server& server) {
     }
     switch (type) {
     case UA_ASYNCOPERATIONTYPE_CALL: {
-        CallMethodResult response = UA_Server_call(server.handle(), &request->callMethodRequest);
+        const CallMethodResult response = UA_Server_call(
+            server.handle(), &request->callMethodRequest
+        );
         setAsyncOperationResult(server, response, context);
         return true;
     }
