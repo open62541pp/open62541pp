@@ -1283,41 +1283,6 @@ public:
         return *this;
     }
 
-    /// @deprecated Use assign overload with pointer instead
-    template <typename T, typename... Args>
-    [[deprecated("use assign overload with pointer instead")]]
-    void setScalar(T& value, Args&&... args) noexcept {
-        assign(&value, std::forward<Args>(args)...);
-    }
-
-    /// @deprecated Use assign overload instead
-    template <typename T, typename... Args>
-    [[deprecated("use assign overload instead")]]
-    void setScalarCopy(const T& value, Args&&... args) {
-        assign(value, std::forward<Args>(args)...);
-    }
-
-    /// @deprecated Use assign overload with pointer instead
-    template <typename T, typename... Args>
-    [[deprecated("use assign overload with pointer instead")]]
-    void setArray(T& array, Args&&... args) noexcept {
-        assign(&array, std::forward<Args>(args)...);
-    }
-
-    /// @deprecated Use assign overload instead
-    template <typename T, typename... Args>
-    [[deprecated("use assign overload instead")]]
-    void setArrayCopy(const T& array, Args&&... args) {
-        assign(array, std::forward<Args>(args)...);
-    }
-
-    /// @deprecated Use assign overload instead
-    template <typename InputIt, typename... Args>
-    [[deprecated("use assign overload instead")]]
-    void setArrayCopy(InputIt first, InputIt last, Args&&... args) {
-        assign(first, last, std::forward<Args>(args)...);
-    }
-
     /**
      * @name Observers
      * Check the type category, type definition and array structure of the internal value.
