@@ -383,12 +383,6 @@ Subscription<Server> Server::createSubscription() noexcept {
 }
 #endif
 
-#ifdef UA_ENABLE_SUBSCRIPTIONS_EVENTS
-Event Server::createEvent(const NodeId& eventType) {
-    return Event(*this, eventType);
-}
-#endif
-
 static void runStartup(Server& server, detail::ServerContext& context) {
     applySessionRegistry(server.config(), context);
     throwIfBad(UA_Server_run_startup(server.handle()));
