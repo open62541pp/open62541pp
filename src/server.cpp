@@ -563,20 +563,24 @@ static void setAsyncOperationResult(Server& server, const T& response, void* con
 }
 
 bool runAsyncOperation(Server& server) {
+    UA_AsyncOperationType type = UA_ASYNCOPERATIONTYPE_INVALID;
     const UA_AsyncOperationRequest* request = nullptr;
     void* context = nullptr;
-    UA_AsyncOperationType type = UA_ASYNCOPERATIONTYPE_INVALID;
     const bool hasRequest = UA_Server_getAsyncOperationNonBlocking(
         server.handle(), &type, &request, &context, nullptr
     );
-    if (!hasRequest || request == nullptr || type == UA_ASYNCOPERATIONTYPE_INVALID) {
+    if (!hasRequest || request == nullptr) {
         return false;
     }
-    if (type == UA_ASYNCOPERATIONTYPE_CALL) {
+    switch (type) {
+    case UA_ASYNCOPERATIONTYPE_CALL: {
         CallMethodResult response = UA_Server_call(server.handle(), &request->callMethodRequest);
         setAsyncOperationResult(server, response, context);
+        return true;
     }
-    return true;
+    default:
+        return false;
+    }
 }
 #endif
 
