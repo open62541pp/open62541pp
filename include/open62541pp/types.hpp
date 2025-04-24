@@ -14,7 +14,6 @@
 #include <string_view>
 #include <type_traits>  // is_same_v
 #include <utility>  // move
-#include <variant>
 #include <vector>
 
 #include "open62541pp/common.hpp"  // NamespaceIndex
@@ -707,20 +706,8 @@ public:
         return handle()->namespaceIndex;
     }
 
-    /// @deprecated Use namespaceIndex() instead
-    [[deprecated("use namespaceIndex() instead")]]
-    NamespaceIndex getNamespaceIndex() const noexcept {
-        return namespaceIndex();
-    }
-
     NodeIdType identifierType() const noexcept {
         return static_cast<NodeIdType>(handle()->identifierType);
-    }
-
-    /// @deprecated Use identifierType() instead
-    [[deprecated("use identifierType() instead")]]
-    NodeIdType getIdentifierType() const noexcept {
-        return identifierType();
     }
 
     /**
@@ -792,66 +779,9 @@ public:
         throw TypeError("NodeId identifier type doesn't match the requested type");
     }
 
-    /// Get identifier variant.
-    /// @deprecated Use identifier<T>() or identifierIf<T>() instead
-    [[deprecated("use identifier<T>() or identifierIf<T>() instead")]]
-    std::variant<uint32_t, String, Guid, ByteString> getIdentifier() const {
-        return getIdentifierImpl();
-    }
-
-    /// Get identifier by template type.
-    /// @deprecated Use identifier<T>() or identifierIf<T>() instead
-    template <typename T>
-    [[deprecated("use identifier<T>() or identifierIf<T>() instead")]]
-    auto getIdentifierAs() const {
-        return getIdentifierAsImpl<T>();
-    }
-
-    /// Get identifier by NodeIdType enum.
-    /// @deprecated Use identifier<T>() or identifierIf<T>() instead
-    template <NodeIdType E>
-    [[deprecated("use identifier<T>() or identifierIf<T>() instead")]]
-    auto getIdentifierAs() const {
-        return getIdentifierAsImpl<E>();
-    }
-
     /// @deprecated Use free function opcua::toString(const T&) instead
     [[deprecated("use free function toString instead")]]
     String toString() const;
-
-private:
-    std::variant<uint32_t, String, Guid, ByteString> getIdentifierImpl() const {
-        switch (handle()->identifierType) {
-        case UA_NODEIDTYPE_NUMERIC:
-            return handle()->identifier.numeric;  // NOLINT
-        case UA_NODEIDTYPE_STRING:
-            return String(handle()->identifier.string);  // NOLINT
-        case UA_NODEIDTYPE_GUID:
-            return Guid(handle()->identifier.guid);  // NOLINT
-        case UA_NODEIDTYPE_BYTESTRING:
-            return ByteString(handle()->identifier.byteString);  // NOLINT
-        default:
-            return {};
-        }
-    }
-
-    template <typename T>
-    auto getIdentifierAsImpl() const {
-        return std::get<T>(getIdentifierImpl());
-    }
-
-    template <NodeIdType E>
-    auto getIdentifierAsImpl() const {
-        if constexpr (E == NodeIdType::Numeric) {
-            return getIdentifierAsImpl<uint32_t>();
-        } else if constexpr (E == NodeIdType::String) {
-            return getIdentifierAsImpl<String>();
-        } else if constexpr (E == NodeIdType::Guid) {
-            return getIdentifierAsImpl<Guid>();
-        } else if constexpr (E == NodeIdType::ByteString) {
-            return getIdentifierAsImpl<ByteString>();
-        }
-    }
 };
 
 /// @relates NodeId
@@ -933,36 +863,12 @@ public:
         return asWrapper<NodeId>(handle()->nodeId);
     }
 
-    /// @deprecated Use nodeId() instead
-    [[deprecated("use nodeId() instead")]]
-    NodeId& getNodeId() noexcept {
-        return nodeId();
-    }
-
-    /// @deprecated Use nodeId() instead
-    [[deprecated("use nodeId() instead")]]
-    const NodeId& getNodeId() const noexcept {
-        return nodeId();
-    }
-
     std::string_view namespaceUri() const {
         return detail::toStringView(handle()->namespaceUri);
     }
 
-    /// @deprecated Use namespaceUri() instead
-    [[deprecated("use namespaceUri() instead")]]
-    std::string_view getNamespaceUri() const {
-        return namespaceUri();
-    }
-
     uint32_t serverIndex() const noexcept {
         return handle()->serverIndex;
-    }
-
-    /// @deprecated Use serverIndex() instead
-    [[deprecated("use serverIndex() instead")]]
-    uint32_t getServerIndex() const noexcept {
-        return serverIndex();
     }
 
     /// @deprecated Use free function opcua::toString(const T&) instead
@@ -1019,20 +925,8 @@ public:
         return handle()->namespaceIndex;
     }
 
-    /// @deprecated Use namespaceIndex() instead
-    [[deprecated("use namespaceIndex() instead")]]
-    NamespaceIndex getNamespaceIndex() const noexcept {
-        return namespaceIndex();
-    }
-
     std::string_view name() const noexcept {
         return detail::toStringView(handle()->name);
-    }
-
-    /// @deprecated Use name() instead
-    [[deprecated("use name() instead")]]
-    std::string_view getName() const noexcept {
-        return name();
     }
 };
 
@@ -1070,20 +964,8 @@ public:
         return detail::toStringView(handle()->locale);
     }
 
-    /// @deprecated Use locale() instead
-    [[deprecated("use locale() instead")]]
-    std::string_view getLocale() const noexcept {
-        return locale();
-    }
-
     std::string_view text() const noexcept {
         return detail::toStringView(handle()->text);
-    }
-
-    /// @deprecated Use text() instead
-    [[deprecated("use text() instead")]]
-    std::string_view getText() const noexcept {
-        return text();
     }
 };
 
@@ -1098,18 +980,6 @@ inline bool operator!=(const UA_LocalizedText& lhs, const UA_LocalizedText& rhs)
 }
 
 /* ------------------------------------------- Variant ------------------------------------------ */
-
-/**
- * Policies for variant factory methods Variant::fromScalar, Variant::fromArray.
- */
-enum class VariantPolicy {
-    // clang-format off
-    Copy,                 ///< Store copy of scalar/array inside the variant.
-    Reference,            ///< Store reference to scalar/array inside the variant.
-                          ///< Both scalars and arrays must be mutable native/wrapper types.
-                          ///< Arrays must store the elements contiguously in memory.
-    // clang-format on
-};
 
 class BadVariantAccess : public TypeError {
 public:
@@ -1221,35 +1091,6 @@ public:
     template <typename InputIt>
     Variant(InputIt first, InputIt last, const UA_DataType& type) {
         assign(first, last, type);
-    }
-
-    /// @deprecated Use new universal Variant constructor instead
-    template <VariantPolicy Policy = VariantPolicy::Copy, typename T, typename... Args>
-    [[deprecated("use new universal Variant constructor instead")]] [[nodiscard]]
-    static Variant fromScalar(T&& value, Args&&... args) {
-        if constexpr (Policy == VariantPolicy::Copy) {
-            return Variant{std::forward<T>(value), std::forward<Args>(args)...};
-        } else {
-            return Variant{&value, std::forward<Args>(args)...};
-        }
-    }
-
-    /// @deprecated Use new universal Variant constructor instead
-    template <VariantPolicy Policy = VariantPolicy::Copy, typename T, typename... Args>
-    [[deprecated("use new universal Variant constructor instead")]] [[nodiscard]]
-    static Variant fromArray(T&& array, Args&&... args) {
-        if constexpr (Policy == VariantPolicy::Copy) {
-            return Variant{std::forward<T>(array), std::forward<Args>(args)...};
-        } else {
-            return Variant{&array, std::forward<Args>(args)...};
-        }
-    }
-
-    /// @deprecated Use new universal Variant constructor instead
-    template <VariantPolicy Policy = VariantPolicy::Copy, typename InputIt, typename... Args>
-    [[deprecated("use new universal Variant constructor instead")]] [[nodiscard]]
-    static Variant fromArray(InputIt first, InputIt last, Args&&... args) {
-        return Variant{first, last, std::forward<Args>(args)...};
     }
 
     /**
@@ -1382,41 +1223,6 @@ public:
         return *this;
     }
 
-    /// @deprecated Use assign overload with pointer instead
-    template <typename T, typename... Args>
-    [[deprecated("use assign overload with pointer instead")]]
-    void setScalar(T& value, Args&&... args) noexcept {
-        assign(&value, std::forward<Args>(args)...);
-    }
-
-    /// @deprecated Use assign overload instead
-    template <typename T, typename... Args>
-    [[deprecated("use assign overload instead")]]
-    void setScalarCopy(const T& value, Args&&... args) {
-        assign(value, std::forward<Args>(args)...);
-    }
-
-    /// @deprecated Use assign overload with pointer instead
-    template <typename T, typename... Args>
-    [[deprecated("use assign overload with pointer instead")]]
-    void setArray(T& array, Args&&... args) noexcept {
-        assign(&array, std::forward<Args>(args)...);
-    }
-
-    /// @deprecated Use assign overload instead
-    template <typename T, typename... Args>
-    [[deprecated("use assign overload instead")]]
-    void setArrayCopy(const T& array, Args&&... args) {
-        assign(array, std::forward<Args>(args)...);
-    }
-
-    /// @deprecated Use assign overload instead
-    template <typename InputIt, typename... Args>
-    [[deprecated("use assign overload instead")]]
-    void setArrayCopy(InputIt first, InputIt last, Args&&... args) {
-        assign(first, last, std::forward<Args>(args)...);
-    }
-
     /**
      * @name Observers
      * Check the type category, type definition and array structure of the internal value.
@@ -1425,12 +1231,6 @@ public:
     /// Check if the variant is empty.
     bool empty() const noexcept {
         return handle()->type == nullptr;
-    }
-
-    /// @deprecated Use empty() instead
-    [[deprecated("use empty() instead")]]
-    bool isEmpty() const noexcept {
-        return empty();
     }
 
     /// Check if the variant is a scalar.
@@ -1474,32 +1274,14 @@ public:
         return handle()->type;
     }
 
-    /// @deprecated Use type() instead
-    [[deprecated("use type() instead")]]
-    const UA_DataType* getDataType() const noexcept {
-        return type();
-    }
-
     /// Get array length or 0 if variant is not an array.
     size_t arrayLength() const noexcept {
         return handle()->arrayLength;
     }
 
-    /// @deprecated Use arrayLength() instead
-    [[deprecated("use arrayLength() instead")]]
-    size_t getArrayLength() const noexcept {
-        return arrayLength();
-    }
-
     /// Get array dimensions.
     Span<const uint32_t> arrayDimensions() const noexcept {
         return {handle()->arrayDimensions, handle()->arrayDimensionsSize};
-    }
-
-    /// @deprecated Use arrayDimensions() instead
-    [[deprecated("use arrayDimensions() instead")]]
-    Span<const uint32_t> getArrayDimensions() const noexcept {
-        return arrayDimensions();
     }
 
     /**
@@ -1551,27 +1333,6 @@ public:
         return std::move(scalar<T>());
     }
 
-    /// @deprecated Use scalar() instead
-    template <typename T>
-    [[deprecated("use scalar() instead")]]
-    T& getScalar() {
-        return scalar<T>();
-    }
-
-    /// @deprecated Use scalar() instead
-    template <typename T>
-    [[deprecated("use scalar() instead")]]
-    const T& getScalar() const {
-        return scalar<T>();
-    }
-
-    /// @deprecated Use to<T>() instead
-    template <typename T>
-    [[deprecated("use to<T>() instead")]]
-    T getScalarCopy() const {
-        return to<T>();
-    }
-
     /// Get reference to array with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not an array or not of type `T`.
     template <typename T>
@@ -1590,27 +1351,6 @@ public:
         checkIsArray();
         checkIsType<T>();
         return Span<const T>(static_cast<const T*>(handle()->data), handle()->arrayLength);
-    }
-
-    /// @deprecated Use array() instead
-    template <typename T>
-    [[deprecated("use array() instead")]]
-    Span<T> getArray() {
-        return array<T>();
-    }
-
-    /// @deprecated Use array() instead
-    template <typename T>
-    [[deprecated("use array() instead")]]
-    Span<const T> getArray() const {
-        return array<T>();
-    }
-
-    /// @deprecated Use to<std::vector<T>>() instead
-    template <typename T>
-    [[deprecated("use to<std::vector<T>>() instead")]]
-    std::vector<T> getArrayCopy() const {
-        return to<std::vector<T>>();
     }
 
     /**
@@ -1860,25 +1600,6 @@ public:
         setValue(std::move(value));
     }
 
-    /// Create DataValue from scalar value.
-    /// @deprecated Use constructor with new universal Variant constructor instead:
-    ///             `opcua::DataValue dv(opcua::Variant{value})`
-    template <VariantPolicy Policy = VariantPolicy::Copy, typename... Args>
-    [[deprecated("use constructor with new universal Variant constructor instead")]] [[nodiscard]]
-    static DataValue fromScalar(Args&&... args) {
-        return DataValue{Variant::fromScalar<Policy>(std::forward<Args>(args)...)};
-    }
-
-    /// Create DataValue from array.
-    /// @see Variant::fromArray
-    /// @deprecated Use constructor with new universal Variant constructor instead:
-    ///             `opcua::DataValue dv(opcua::Variant{array})`
-    template <VariantPolicy Policy = VariantPolicy::Copy, typename... Args>
-    [[deprecated("use constructor with new universal Variant constructor instead")]] [[nodiscard]]
-    static DataValue fromArray(Args&&... args) {
-        return DataValue{Variant::fromArray<Policy>(std::forward<Args>(args)...)};
-    }
-
     /// Set value (copy).
     void setValue(const Variant& value) {
         asWrapper<Variant>(handle()->value) = value;
@@ -1965,39 +1686,9 @@ public:
         return std::move(value());  // NOLINT(*move-const-arg)
     }
 
-    /// @deprecated Use value() instead
-    [[deprecated("use value() instead")]]
-    Variant& getValue() & noexcept {
-        return value();
-    }
-
-    /// @deprecated Use value() instead
-    [[deprecated("use value() instead")]]
-    const Variant& getValue() const& noexcept {
-        return value();
-    }
-
-    /// @deprecated Use value() instead
-    [[deprecated("use value() instead")]]
-    Variant&& getValue() && noexcept {
-        return std::move(value());
-    }
-
-    /// @deprecated Use value() instead
-    [[deprecated("use value() instead")]]
-    const Variant&& getValue() const&& noexcept {
-        return std::move(value());  // NOLINT(*move-const-arg)
-    }
-
     /// Get source timestamp for the value.
     DateTime sourceTimestamp() const noexcept {
         return DateTime{handle()->sourceTimestamp};  // NOLINT
-    }
-
-    /// @deprecated Use sourceTimestamp() instead
-    [[deprecated("use sourceTimestamp() instead")]]
-    DateTime getSourceTimestamp() const noexcept {
-        return sourceTimestamp();
     }
 
     /// Get server timestamp for the value.
@@ -2005,21 +1696,9 @@ public:
         return DateTime{handle()->serverTimestamp};  // NOLINT
     }
 
-    /// @deprecated Use serverTimestamp() instead
-    [[deprecated("use serverTimestamp() instead")]]
-    DateTime getServerTimestamp() const noexcept {
-        return serverTimestamp();
-    }
-
     /// Get picoseconds interval added to the source timestamp.
     uint16_t sourcePicoseconds() const noexcept {
         return handle()->sourcePicoseconds;
-    }
-
-    /// @deprecated Use sourcePicoseconds() instead
-    [[deprecated("use sourcePicoseconds() instead")]]
-    uint16_t getSourcePicoseconds() const noexcept {
-        return sourcePicoseconds();
     }
 
     /// Get picoseconds interval added to the server timestamp.
@@ -2027,21 +1706,9 @@ public:
         return handle()->serverPicoseconds;
     }
 
-    /// @deprecated Use serverPicoseconds() instead
-    [[deprecated("use serverPicoseconds() instead")]]
-    uint16_t getServerPicoseconds() const noexcept {
-        return serverPicoseconds();
-    }
-
     /// Get status.
     StatusCode status() const noexcept {
         return handle()->status;
-    }
-
-    /// @deprecated Use status() instead
-    [[deprecated("use status() instead")]]
-    StatusCode getStatus() const noexcept {
-        return status();
     }
 };
 
@@ -2130,29 +1797,9 @@ public:
         handle()->content.decoded.data = ptr.release();  // NOLINT
     }
 
-    /// @deprecated Use new universal ExtensionObject constructor instead
-    template <typename T, typename... Args>
-    [[deprecated("use new universal ExtensionObject constructor instead")]] [[nodiscard]]
-    static ExtensionObject fromDecoded(T& data, Args&&... args) noexcept {
-        return ExtensionObject{&data, std::forward<Args>(args)...};
-    }
-
-    /// @deprecated Use new universal ExtensionObject constructor instead
-    template <typename T, typename... Args>
-    [[deprecated("use new universal ExtensionObject constructor instead")]] [[nodiscard]]
-    static ExtensionObject fromDecodedCopy(const T& data, Args&&... args) {
-        return ExtensionObject{data, std::forward<Args>(args)...};
-    }
-
     /// Check if the ExtensionObject is empty
     bool empty() const noexcept {
         return (handle()->encoding == UA_EXTENSIONOBJECT_ENCODED_NOBODY);
-    }
-
-    /// @deprecated Use empty() instead
-    [[deprecated("use empty() instead")]]
-    bool isEmpty() const noexcept {
-        return empty();
     }
 
     /// Check if the ExtensionObject is encoded (usually if the data type is unknown).
@@ -2172,24 +1819,12 @@ public:
         return static_cast<ExtensionObjectEncoding>(handle()->encoding);
     }
 
-    /// @deprecated Use encoding() instead
-    [[deprecated("use encoding() instead")]]
-    ExtensionObjectEncoding getEncoding() const noexcept {
-        return encoding();
-    }
-
     /// Get the encoded type id.
     /// Returns `nullptr` if ExtensionObject is not encoded.
     const NodeId* encodedTypeId() const noexcept {
         return isEncoded()
             ? asWrapper<NodeId>(&handle()->content.encoded.typeId)  // NOLINT
             : nullptr;
-    }
-
-    /// @deprecated Use encodedTypeId() instead
-    [[deprecated("use encodedTypeId() instead")]]
-    const NodeId* getEncodedTypeId() const noexcept {
-        return encodedTypeId();
     }
 
     /// Get the encoded body in binary format.
@@ -2208,26 +1843,12 @@ public:
             : nullptr;
     }
 
-    /// @deprecated Use encodedBinary() or encodedXml() instead
-    [[deprecated("use encodedBinary() or encodedXml() instead")]]
-    const ByteString* getEncodedBody() const noexcept {
-        return isEncoded()
-            ? asWrapper<ByteString>(&handle()->content.encoded.body)  // NOLINT
-            : nullptr;
-    }
-
     /// Get the decoded data type.
     /// Returns `nullptr` if ExtensionObject is not decoded.
     const UA_DataType* decodedType() const noexcept {
         return isDecoded()
             ? handle()->content.decoded.type  // NOLINT
             : nullptr;
-    }
-
-    /// @deprecated Use decodedType() instead
-    [[deprecated("use decodedType() instead")]]
-    const UA_DataType* getDecodedDataType() const noexcept {
-        return decodedType();
     }
 
     /// Get pointer to the decoded data with given template type.
@@ -2246,20 +1867,6 @@ public:
         return isDecodedType<T>() ? static_cast<const T*>(decodedData()) : nullptr;
     }
 
-    /// @deprecated Use decodedData<T>() instead
-    template <typename T>
-    [[deprecated("use decodedData<T>() instead")]]
-    T* getDecodedData() noexcept {
-        return decodedData<T>();
-    }
-
-    /// @deprecated Use decodedData<T>() instead
-    template <typename T>
-    [[deprecated("use decodedData<T>() instead")]]
-    const T* getDecodedData() const noexcept {
-        return decodedData<T>();
-    }
-
     /// Get pointer to the decoded data.
     /// Returns `nullptr` if the ExtensionObject is not decoded.
     /// @warning Type erased version, use with caution.
@@ -2276,18 +1883,6 @@ public:
         return isDecoded()
             ? handle()->content.decoded.data  // NOLINT
             : nullptr;
-    }
-
-    /// @deprecated Use decodedData() instead
-    [[deprecated("use decodedData() instead")]]
-    void* getDecodedData() noexcept {
-        return decodedData();
-    }
-
-    /// @deprecated Use decodedData() instead
-    [[deprecated("use decodedData() instead")]]
-    const void* getDecodedData() const noexcept {
-        return decodedData();
     }
 
 private:
@@ -2341,70 +1936,28 @@ public:
         return handle()->symbolicId;
     }
 
-    /// @deprecated Use symbolicId() instead
-    [[deprecated("use symbolicId() instead")]]
-    int32_t getSymbolicId() const noexcept {
-        return symbolicId();
-    }
-
     int32_t namespaceUri() const noexcept {
         return handle()->namespaceUri;
-    }
-
-    /// @deprecated Use namespaceUri() instead
-    [[deprecated("use namespaceUri() instead")]]
-    int32_t getNamespaceUri() const noexcept {
-        return namespaceUri();
     }
 
     int32_t localizedText() const noexcept {
         return handle()->localizedText;
     }
 
-    /// @deprecated Use localizedText() instead
-    [[deprecated("use localizedText() instead")]]
-    int32_t getLocalizedText() const noexcept {
-        return localizedText();
-    }
-
     int32_t locale() const noexcept {
         return handle()->locale;
-    }
-
-    /// @deprecated Use locale() instead
-    [[deprecated("use locale() instead")]]
-    int32_t getLocale() const noexcept {
-        return locale();
     }
 
     const String& additionalInfo() const noexcept {
         return asWrapper<String>(handle()->additionalInfo);
     }
 
-    /// @deprecated Use additionalInfo() instead
-    [[deprecated("use additionalInfo() instead")]]
-    const String& getAdditionalInfo() const noexcept {
-        return additionalInfo();
-    }
-
     StatusCode innerStatusCode() const noexcept {
         return handle()->innerStatusCode;
     }
 
-    /// @deprecated Use innerStatusCode() instead
-    [[deprecated("use innerStatusCode() instead")]]
-    StatusCode getInnerStatusCode() const noexcept {
-        return innerStatusCode();
-    }
-
     const DiagnosticInfo* innerDiagnosticInfo() const noexcept {
         return asWrapper<DiagnosticInfo>(handle()->innerDiagnosticInfo);
-    }
-
-    /// @deprecated Use innerDiagnosticInfo() instead
-    [[deprecated("use innerDiagnosticInfo() instead")]]
-    const DiagnosticInfo* getInnerDiagnosticInfo() const noexcept {
-        return innerDiagnosticInfo();
     }
 };
 
