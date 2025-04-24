@@ -15,6 +15,7 @@
 @example client_async.cpp
 
 @example method/server_method.cpp
+@example method/server_method_async.cpp
 @example method/client_method.cpp
 @example method/client_method_async.cpp
 
