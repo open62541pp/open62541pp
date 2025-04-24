@@ -128,19 +128,6 @@ public:
     /// Create client with given configuration (move ownership to client).
     explicit Client(ClientConfig&& config);
 
-#ifdef UA_ENABLE_ENCRYPTION
-    /// @copydoc ClientConfig::ClientConfig(
-    ///     const ByteString&, const ByteString&, Span<const ByteString>, Span<const ByteString>
-    /// )
-    [[deprecated("use ClientConfig constructor and construct Client with ClientConfig")]]
-    Client(
-        const ByteString& certificate,
-        const ByteString& privateKey,
-        Span<const ByteString> trustList,
-        Span<const ByteString> revocationList = {}
-    );
-#endif
-
     /// Create client from native instance (move ownership to client).
     explicit Client(UA_Client* native);
 
@@ -166,27 +153,6 @@ public:
      * @copydetails findServers
      */
     std::vector<EndpointDescription> getEndpoints(std::string_view serverUrl);
-
-    [[deprecated("use ClientConfig::setLogger via config() or pass config to Client")]]
-    void setLogger(LogFunction logger) {
-        config().setLogger(std::move(logger));
-    }
-
-    [[deprecated("use ClientConfig::setTimeout via config() or pass config to Client")]]
-    void setTimeout(uint32_t milliseconds) noexcept {
-        config().setTimeout(milliseconds);
-    }
-
-    template <typename Token>
-    [[deprecated("use ClientConfig::setUserIdentityToken via config() or pass config to Client")]]
-    void setUserIdentityToken(const Token& token) {
-        config().setUserIdentityToken(token);
-    }
-
-    [[deprecated("use ClientConfig::setSecurityMode via config() or pass config to Client")]]
-    void setSecurityMode(MessageSecurityMode mode) noexcept {
-        config().setSecurityMode(mode);
-    }
 
     [[deprecated("use ClientConfig::addCustomDataTypes via config() or pass config to Client")]]
     void setCustomDataTypes(Span<const DataType> dataTypes) {

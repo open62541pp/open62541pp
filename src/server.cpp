@@ -312,12 +312,6 @@ const ServerConfig& Server::config() const noexcept {
     return const_cast<Server*>(this)->config();  // NOLINT
 }
 
-void Server::setCustomHostname([[maybe_unused]] std::string_view hostname) {
-#if UAPP_OPEN62541_VER_LE(1, 3)
-    asWrapper<String>(config()->customHostname) = String{hostname};
-#endif
-}
-
 std::vector<Session> Server::sessions() {
     std::vector<Session> result;
     const std::scoped_lock lock(context().sessionRegistry.mutex);

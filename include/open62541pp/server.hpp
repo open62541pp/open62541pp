@@ -138,34 +138,6 @@ public:
     /// Create server with given configuration (move ownership to server).
     explicit Server(ServerConfig&& config);
 
-    /// @copydoc ServerConfig::ServerConfig(uint16_t, const ByteString&)
-    [[deprecated("use ServerConfig constructor and construct Server with ServerConfig")]]
-    explicit Server(uint16_t port, const ByteString& certificate = {})
-        : Server{ServerConfig{port, certificate}} {}
-
-#ifdef UA_ENABLE_ENCRYPTION
-    /// @copydoc ServerConfig::ServerConfig(
-    ///     uint16_t,
-    ///     const ByteString&,
-    ///     const ByteString&,
-    ///     Span<const ByteString>,
-    ///     Span<const ByteString>,
-    ///     Span<const ByteString>
-    /// )
-    [[deprecated("use ServerConfig constructor and construct Server with ServerConfig")]]
-    Server(
-        uint16_t port,
-        const ByteString& certificate,
-        const ByteString& privateKey,
-        Span<const ByteString> trustList,
-        Span<const ByteString> issuerList,
-        Span<const ByteString> revocationList = {}
-    )
-        : Server{
-              ServerConfig{port, certificate, privateKey, trustList, issuerList, revocationList}
-          } {}
-#endif
-
     /// Create server from native instance (move ownership to server).
     explicit Server(UA_Server* native);
 
@@ -178,40 +150,6 @@ public:
 
     ServerConfig& config() noexcept;
     const ServerConfig& config() const noexcept;
-
-    [[deprecated("use ServerConfig::setLogger via config() or pass config to Server")]]
-    void setLogger(LogFunction logger) {
-        config().setLogger(std::move(logger));
-    }
-
-    [[deprecated("use ServerConfig::setApplicationUri via config() or pass config to Server")]]
-    void setApplicationUri(std::string_view uri) {
-        config().setApplicationUri(uri);
-    }
-
-    [[deprecated("use ServerConfig::setProductUri via config() or pass config to Server")]]
-    void setProductUri(std::string_view uri) {
-        config().setProductUri(uri);
-    }
-
-    [[deprecated("use ServerConfig::setApplicationName via config() or pass config to Server")]]
-    void setApplicationName(std::string_view name) {
-        config().setApplicationName(name);
-    }
-
-    /// Set custom hostname, default: system's host name.
-    [[deprecated("not supported since open62541 v1.4")]]
-    void setCustomHostname(std::string_view hostname);
-
-    [[deprecated("use ServerConfig::setAccessControl via config() or pass config to Server")]]
-    void setAccessControl(AccessControlBase& accessControl) {
-        config().setAccessControl(accessControl);
-    }
-
-    [[deprecated("use ServerConfig::setAccessControl via config() or pass config to Server")]]
-    void setAccessControl(std::unique_ptr<AccessControlBase>&& accessControl) {
-        config().setAccessControl(std::move(accessControl));
-    }
 
     [[deprecated("use ServerConfig::addCustomDataTypes via config() or pass config to Server")]]
     void setCustomDataTypes(Span<const DataType> dataTypes) {

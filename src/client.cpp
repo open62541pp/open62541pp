@@ -289,16 +289,6 @@ Client::Client(ClientConfig&& config)
     setWrapperAsContextPointer(*this);
 }
 
-#ifdef UA_ENABLE_ENCRYPTION
-Client::Client(
-    const ByteString& certificate,
-    const ByteString& privateKey,
-    Span<const ByteString> trustList,
-    Span<const ByteString> revocationList
-)
-    : Client{ClientConfig{certificate, privateKey, trustList, revocationList}} {}
-#endif
-
 Client::Client(UA_Client* native)
     : context_{std::make_unique<detail::ClientContext>()},
       client_{native} {
