@@ -1425,13 +1425,6 @@ public:
         return scalar<T>();
     }
 
-    /// @deprecated Use to<T>() instead
-    template <typename T>
-    [[deprecated("use to<T>() instead")]]
-    T getScalarCopy() const {
-        return to<T>();
-    }
-
     /// Get reference to array with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not an array or not of type `T`.
     template <typename T>
@@ -1464,13 +1457,6 @@ public:
     [[deprecated("use array() instead")]]
     Span<const T> getArray() const {
         return array<T>();
-    }
-
-    /// @deprecated Use to<std::vector<T>>() instead
-    template <typename T>
-    [[deprecated("use to<std::vector<T>>() instead")]]
-    std::vector<T> getArrayCopy() const {
-        return to<std::vector<T>>();
     }
 
     /**
