@@ -52,7 +52,9 @@ The latest stable open62541 release is integrated as a submodule. Depending on t
 All open62541 releases since v1.0 are supported and tested in a [CI pipeline][ci-compatibility] with debug/release builds and as static/dynamic library.
 
 The project is currently in `beta` stage but already used in production.
-Version [`v1.0.0` is planned for 2024](https://github.com/open62541pp/open62541pp/milestone/1). No major breaking changes are expected.
+Version [`v1.0.0` is planned for 2025](https://github.com/open62541pp/open62541pp/milestone/1). No major breaking changes are expected.
+
+While in `v0.x.x`, breaking changes may occur in minor releases. This projects follows the *two-version deprecation path*: when a feature is marked as deprecated in `v0.x.0`, it may be removed as early as `v0.(x+2).0`. Deprecated APIs are declared with the `[[deprecated]]` attribute and noted in the changelog.
 
 ## 📝 Examples
 
