@@ -343,13 +343,6 @@ constexpr std::true_type isBitmaskEnum(NodeAttributesMask);
         handle()->member = member;                                                                 \
         return *this;                                                                              \
     }
-#define UAPP_NODEATTR_BITMASK(Type, suffix, member, flag)                                          \
-    UAPP_GETTER(Type, member)                                                                      \
-    auto& set##suffix(Type member) noexcept {                                                      \
-        handle()->specifiedAttributes |= flag;                                                     \
-        handle()->member = member.get();                                                           \
-        return *this;                                                                              \
-    }
 #define UAPP_NODEATTR_CAST(Type, suffix, member, flag)                                             \
     UAPP_GETTER_CAST(Type, member)                                                                 \
     auto& set##suffix(Type member) noexcept {                                                      \
@@ -382,10 +375,10 @@ constexpr std::true_type isBitmaskEnum(NodeAttributesMask);
     UAPP_NODEATTR_WRAPPER(                                                                         \
         LocalizedText, Description, description, UA_NODEATTRIBUTESMASK_DESCRIPTION                 \
     )                                                                                              \
-    UAPP_NODEATTR_BITMASK(                                                                         \
+    UAPP_NODEATTR_CAST(                                                                         \
         Bitmask<WriteMask>, WriteMask, writeMask, UA_NODEATTRIBUTESMASK_WRITEMASK                  \
     )                                                                                              \
-    UAPP_NODEATTR_BITMASK(                                                                         \
+    UAPP_NODEATTR_CAST(                                                                         \
         Bitmask<WriteMask>, UserWriteMask, userWriteMask, UA_NODEATTRIBUTESMASK_USERWRITEMASK      \
     )
 
@@ -415,7 +408,7 @@ public:
         : TypeWrapper{UA_ObjectAttributes_default} {}
 
     UAPP_NODEATTR_COMMON
-    UAPP_NODEATTR_BITMASK(
+    UAPP_NODEATTR_CAST(
         Bitmask<EventNotifier>, EventNotifier, eventNotifier, UA_NODEATTRIBUTESMASK_EVENTNOTIFIER
     )
 };
@@ -466,10 +459,10 @@ public:
         arrayDimensionsSize,
         UA_NODEATTRIBUTESMASK_ARRAYDIMENSIONS
     )
-    UAPP_NODEATTR_BITMASK(
+    UAPP_NODEATTR_CAST(
         Bitmask<AccessLevel>, AccessLevel, accessLevel, UA_NODEATTRIBUTESMASK_ACCESSLEVEL
     )
-    UAPP_NODEATTR_BITMASK(
+    UAPP_NODEATTR_CAST(
         Bitmask<AccessLevel>,
         UserAccessLevel,
         userAccessLevel,
@@ -619,12 +612,13 @@ public:
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR(bool, IsAbstract, containsNoLoops, UA_NODEATTRIBUTESMASK_CONTAINSNOLOOPS)
-    UAPP_NODEATTR_BITMASK(
+    UAPP_NODEATTR_CAST(
         Bitmask<EventNotifier>, EventNotifier, eventNotifier, UA_NODEATTRIBUTESMASK_EVENTNOTIFIER
     )
 };
 
 #undef UAPP_NODEATTR
+#undef UAPP_NODEATTR_CAST
 #undef UAPP_NODEATTR_WRAPPER
 #undef UAPP_NODEATTR_ARRAY
 #undef UAPP_NODEATTR_COMMON
