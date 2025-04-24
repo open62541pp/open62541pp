@@ -10,7 +10,6 @@
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/exception.hpp"
 #include "open62541pp/node.hpp"
-#include "open62541pp/plugin/accesscontrol_default.hpp"  // Login
 #include "open62541pp/result.hpp"
 #include "open62541pp/services/attribute_highlevel.hpp"  // readValue
 #include "open62541pp/services/subscription.hpp"
@@ -290,16 +289,6 @@ Client::Client(ClientConfig&& config)
     setWrapperAsContextPointer(*this);
 }
 
-#ifdef UA_ENABLE_ENCRYPTION
-Client::Client(
-    const ByteString& certificate,
-    const ByteString& privateKey,
-    Span<const ByteString> trustList,
-    Span<const ByteString> revocationList
-)
-    : Client{ClientConfig{certificate, privateKey, trustList, revocationList}} {}
-#endif
-
 Client::Client(UA_Client* native)
     : context_{std::make_unique<detail::ClientContext>()},
       client_{native} {
@@ -432,11 +421,6 @@ void Client::connectAsync(std::string_view endpointUrl) {
 #endif
 }
 
-void Client::connect(std::string_view endpointUrl, const Login& login) {
-    config().setUserIdentityToken(UserNameIdentityToken(login.username, login.password));
-    connect(endpointUrl);
-}
-
 void Client::disconnect() {
     throwIfBad(UA_Client_disconnect(handle()));
 }
@@ -508,26 +492,6 @@ void Client::stop() {
 
 bool Client::isRunning() const noexcept {
     return context().running;
-}
-
-Node<Client> Client::getNode(NodeId id) {
-    return {*this, std::move(id)};
-}
-
-Node<Client> Client::getRootNode() {
-    return {*this, {0, UA_NS0ID_ROOTFOLDER}};
-}
-
-Node<Client> Client::getObjectsNode() {
-    return {*this, {0, UA_NS0ID_OBJECTSFOLDER}};
-}
-
-Node<Client> Client::getTypesNode() {
-    return {*this, {0, UA_NS0ID_TYPESFOLDER}};
-}
-
-Node<Client> Client::getViewsNode() {
-    return {*this, {0, UA_NS0ID_VIEWSFOLDER}};
 }
 
 UA_Client* Client::handle() noexcept {

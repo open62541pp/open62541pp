@@ -60,20 +60,8 @@ public:
     /// Get the monitored NodeId.
     const NodeId& nodeId();
 
-    /// @deprecated Use nodeId() instead
-    [[deprecated("use nodeId() instead")]]
-    const NodeId& getNodeId() {
-        return nodeId();
-    }
-
     /// Get the monitored AttributeId.
     AttributeId attributeId();
-
-    /// @deprecated Use attributeId() instead
-    [[deprecated("use attributeId() instead")]]
-    AttributeId getAttributeId() {
-        return attributeId();
-    }
 
     /// Modify this monitored item.
     /// @note Not implemented for Server.

@@ -353,27 +353,6 @@ Result<std::vector<ReferenceDescription>> browseAll(T& connection, const BrowseD
 }
 
 /**
- * Discover child nodes recursively (non-standard).
- *
- * Possible loops (that can occur for non-hierarchical references) are handled internally. Every
- * node is added at most once to the results array. Nodes are only added if they match the
- * `nodeClassMask` in the BrowseDescription. However, child nodes are still recursed into if the
- * NodeClass does not match. So it is possible, for example, to get all VariableNodes below a
- * certain ObjectNode, with additional objects in the hierarchy below.
- *
- * @note No implementation for `Client`.
- *
- * @param connection Instance of type Server
- * @param bd Browse description
- * @see UA_Server_browseRecursive
- * @ingroup Browse
- */
-[[deprecated("will be removed in the future, use UA_Server_browseRecursive instead")]]
-Result<std::vector<ExpandedNodeId>> browseRecursive(
-    Server& connection, const BrowseDescription& bd
-);
-
-/**
  * @}
  */
 

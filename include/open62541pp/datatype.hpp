@@ -129,12 +129,6 @@ public:
 #endif
     }
 
-    /// @deprecated Use typeName() instead
-    [[deprecated("use typeName() instead")]]
-    std::string_view getTypeName() const noexcept {
-        return typeName();
-    }
-
     void setTypeName([[maybe_unused]] std::string_view typeName) noexcept {
 #if UAPP_HAS_TYPEDESCRIPTION
         detail::clear(handle()->typeName);
@@ -144,12 +138,6 @@ public:
 
     NodeId typeId() const noexcept {
         return NodeId{handle()->typeId};  // NOLINT
-    }
-
-    /// @deprecated Use typeId() instead
-    [[deprecated("use typeId() instead")]]
-    NodeId getTypeId() const noexcept {
-        return typeId();
     }
 
     void setTypeId(NodeId typeId) {
@@ -164,12 +152,6 @@ public:
 #endif
     }
 
-    /// @deprecated Use binaryEncodingId() instead
-    [[deprecated("use binaryEncodingId() instead")]]
-    NodeId getBinaryEncodingId() const noexcept {
-        return binaryEncodingId();
-    }
-
     void setBinaryEncodingId(NodeId binaryEncodingId) {
 #if UAPP_OPEN62541_VER_GE(1, 2)
         asWrapper<NodeId>(handle()->binaryEncodingId) = std::move(binaryEncodingId);
@@ -182,24 +164,12 @@ public:
         return handle()->memSize;
     }
 
-    /// @deprecated Use memSize() instead
-    [[deprecated("use memSize() instead")]]
-    uint16_t getMemSize() const noexcept {
-        return memSize();
-    }
-
     void setMemSize(uint16_t memSize) noexcept {
         handle()->memSize = memSize;
     }
 
     uint8_t typeKind() const noexcept {
         return handle()->typeKind;
-    }
-
-    /// @deprecated Use typeKind() instead
-    [[deprecated("use typeKind() instead")]]
-    uint8_t getTypeKind() const noexcept {
-        return typeKind();
     }
 
     void setTypeKind(uint8_t typeKind) noexcept {
@@ -210,12 +180,6 @@ public:
         return handle()->pointerFree;
     }
 
-    /// @deprecated Use pointerFree() instead
-    [[deprecated("use pointerFree() instead")]]
-    bool getPointerFree() const noexcept {
-        return pointerFree();
-    }
-
     void setPointerFree(bool pointerFree) noexcept {
         handle()->pointerFree = pointerFree;
     }
@@ -224,24 +188,12 @@ public:
         return handle()->overlayable;
     }
 
-    /// @deprecated Use overlayable() instead
-    [[deprecated("use overlayable() instead")]]
-    bool getOverlayable() const noexcept {
-        return overlayable();
-    }
-
     void setOverlayable(bool overlayable) noexcept {
         handle()->overlayable = overlayable;
     }
 
     Span<const DataTypeMember> members() const noexcept {
         return {asWrapper<DataTypeMember>(handle()->members), handle()->membersSize};
-    }
-
-    /// @deprecated Use members() instead
-    [[deprecated("use members() instead")]]
-    Span<const DataTypeMember> getMembers() const noexcept {
-        return members();
     }
 
     void setMembers(Span<const DataTypeMember> members);

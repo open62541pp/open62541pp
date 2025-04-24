@@ -312,12 +312,6 @@ const ServerConfig& Server::config() const noexcept {
     return const_cast<Server*>(this)->config();  // NOLINT
 }
 
-void Server::setCustomHostname([[maybe_unused]] std::string_view hostname) {
-#if UAPP_OPEN62541_VER_LE(1, 3)
-    asWrapper<String>(config()->customHostname) = String{hostname};
-#endif
-}
-
 std::vector<Session> Server::sessions() {
     std::vector<Session> result;
     const std::scoped_lock lock(context().sessionRegistry.mutex);
@@ -383,12 +377,6 @@ Subscription<Server> Server::createSubscription() noexcept {
 }
 #endif
 
-#ifdef UA_ENABLE_SUBSCRIPTIONS_EVENTS
-Event Server::createEvent(const NodeId& eventType) {
-    return Event(*this, eventType);
-}
-#endif
-
 static void runStartup(Server& server, detail::ServerContext& context) {
     applySessionRegistry(server.config(), context);
     throwIfBad(UA_Server_run_startup(server.handle()));
@@ -434,26 +422,6 @@ void Server::stop() {
 
 bool Server::isRunning() const noexcept {
     return context().running;
-}
-
-Node<Server> Server::getNode(NodeId id) {
-    return {*this, std::move(id)};
-}
-
-Node<Server> Server::getRootNode() {
-    return {*this, {0, UA_NS0ID_ROOTFOLDER}};
-}
-
-Node<Server> Server::getObjectsNode() {
-    return {*this, {0, UA_NS0ID_OBJECTSFOLDER}};
-}
-
-Node<Server> Server::getTypesNode() {
-    return {*this, {0, UA_NS0ID_TYPESFOLDER}};
-}
-
-Node<Server> Server::getViewsNode() {
-    return {*this, {0, UA_NS0ID_VIEWSFOLDER}};
 }
 
 UA_Server* Server::handle() noexcept {
