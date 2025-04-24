@@ -287,12 +287,6 @@ public:
     operator std::basic_string_view<char, Traits>() const noexcept {  // NOLINT(*-conversions)
         return {data(), size()};
     }
-
-    /// @deprecated Use conversion with `static_cast` instead
-    [[deprecated("use conversion with static_cast instead")]]
-    std::string_view get() const noexcept {
-        return {data(), size()};
-    }
 };
 
 /// @relates String
@@ -581,12 +575,6 @@ public:
     /// Convert to Base64 encoded string.
     /// @note Supported since open62541 v1.1
     String toBase64() const;
-
-    /// @deprecated Use conversion with `static_cast` instead
-    [[deprecated("use conversion with static_cast instead")]]
-    std::string_view get() const noexcept {
-        return {reinterpret_cast<const char*>(data()), size()};  // NOLINT
-    }
 };
 
 /* ----------------------------------------- XmlElement ----------------------------------------- */
@@ -625,12 +613,6 @@ public:
     /// Implicit conversion to std::string_view.
     template <typename Traits>
     operator std::basic_string_view<char, Traits>() const noexcept {  // NOLINT(*-conversions)
-        return {data(), size()};
-    }
-
-    /// @deprecated Use conversion with `static_cast` instead
-    [[deprecated("use conversion with static_cast instead")]]
-    std::string_view get() const noexcept {
         return {data(), size()};
     }
 };
