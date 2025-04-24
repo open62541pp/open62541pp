@@ -545,4 +545,39 @@ UA_Server* getHandle(Server& server) noexcept {
 
 }  // namespace detail
 
+/* -------------------------------------- Async operations -------------------------------------- */
+
+#if UAPP_HAS_ASYNC_OPERATIONS
+void useAsyncOperation(Server& server, const NodeId& id, bool enabled) {
+    throwIfBad(UA_Server_setMethodNodeAsync(server.handle(), id, enabled));
+}
+
+template <typename T>
+static void setAsyncOperationResult(Server& server, const T& response, void* context) noexcept {
+    static_assert(sizeof(T) <= sizeof(UA_AsyncOperationResponse));
+    UA_Server_setAsyncOperationResult(
+        server.handle(),
+        reinterpret_cast<const UA_AsyncOperationResponse*>(&response),  // NOLINT
+        context
+    );
+}
+
+bool runAsyncOperation(Server& server) {
+    const UA_AsyncOperationRequest* request = nullptr;
+    void* context = nullptr;
+    UA_AsyncOperationType type = UA_ASYNCOPERATIONTYPE_INVALID;
+    const bool hasRequest = UA_Server_getAsyncOperationNonBlocking(
+        server.handle(), &type, &request, &context, nullptr
+    );
+    if (!hasRequest || request == nullptr || type == UA_ASYNCOPERATIONTYPE_INVALID) {
+        return false;
+    }
+    if (type == UA_ASYNCOPERATIONTYPE_CALL) {
+        CallMethodResult response = UA_Server_call(server.handle(), &request->callMethodRequest);
+        setAsyncOperationResult(server, response, context);
+    }
+    return true;
+}
+#endif
+
 }  // namespace opcua

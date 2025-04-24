@@ -314,4 +314,21 @@ inline bool operator!=(const Server& lhs, const Server& rhs) noexcept {
     return !(lhs == rhs);
 }
 
+/* -------------------------------------- Async operations -------------------------------------- */
+
+#if UAPP_HAS_ASYNC_OPERATIONS
+/// Enable or disable async operations for the specified node.
+/// When enabled, operations on the node are queued and must processed by a worker thread using
+/// @ref runAsyncOperation.
+/// @note Only supported for method nodes.
+/// @relates Server
+void useAsyncOperation(Server& server, const NodeId& id, bool enabled);
+
+/// Run the next queued async operation (in a worker thread).
+/// Async operations are queued by nodes with async operations enabled (see @ref useAsyncOperation).
+/// @return `true` if an async operation was processed, `false` if the queue was empty.
+/// @relates Server
+bool runAsyncOperation(Server& server);
+#endif
+
 }  // namespace opcua

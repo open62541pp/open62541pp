@@ -1,3 +1,6 @@
+#include <functional>  // hash
+#include <thread>
+
 #include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 
@@ -19,29 +22,33 @@ TEMPLATE_TEST_CASE("Method service set", "", Server, Client, Async<Client>) {
     const NodeId methodId{1, 1000};
 
     bool throwException = false;
-    REQUIRE(services::addMethod(
-        setup.server,
-        objectsId,
-        methodId,
-        "Add",
-        [&](Span<const Variant> inputs, Span<Variant> outputs) {
-            if (throwException) {
-                throw BadStatus{UA_STATUSCODE_BADUNEXPECTEDERROR};
-            }
-            const auto a = inputs.at(0).scalar<int32_t>();
-            const auto b = inputs.at(1).scalar<int32_t>();
-            outputs.at(0) = a + b;
-        },
-        {
-            Argument("a", {"en-US", "first number"}, DataTypeId::Int32, ValueRank::Scalar),
-            Argument("b", {"en-US", "second number"}, DataTypeId::Int32, ValueRank::Scalar),
-        },
-        {
-            Argument("sum", {"en-US", "sum of both numbers"}, DataTypeId::Int32, ValueRank::Scalar),
-        },
-        MethodAttributes{},
-        ReferenceTypeId::HasComponent
-    ));
+    REQUIRE(
+        services::addMethod(
+            setup.server,
+            objectsId,
+            methodId,
+            "Add",
+            [&](Span<const Variant> inputs, Span<Variant> outputs) {
+                if (throwException) {
+                    throw BadStatus{UA_STATUSCODE_BADUNEXPECTEDERROR};
+                }
+                const auto a = inputs.at(0).scalar<int32_t>();
+                const auto b = inputs.at(1).scalar<int32_t>();
+                outputs.at(0) = a + b;
+            },
+            {
+                Argument("a", {"en-US", "first number"}, DataTypeId::Int32, ValueRank::Scalar),
+                Argument("b", {"en-US", "second number"}, DataTypeId::Int32, ValueRank::Scalar),
+            },
+            {
+                Argument(
+                    "sum", {"en-US", "sum of both numbers"}, DataTypeId::Int32, ValueRank::Scalar
+                ),
+            },
+            MethodAttributes{},
+            ReferenceTypeId::HasComponent
+        )
+    );
 
     auto call = [&](auto&&... args) {
         if constexpr (isAsync<TestType>) {
@@ -116,4 +123,56 @@ TEMPLATE_TEST_CASE("Method service set", "", Server, Client, Async<Client>) {
         CHECK(result.statusCode() == UA_STATUSCODE_BADTOOMANYARGUMENTS);
     }
 }
+
+#if UAPP_HAS_ASYNC_OPERATIONS
+static size_t getThreadId() {
+    return std::hash<std::thread::id>{}(std::this_thread::get_id());
+}
+
+TEST_CASE("Method calls with async operations") {
+    ServerClientSetup setup;
+    setup.client.connect(setup.endpointUrl);
+
+    const NodeId objectsId{ObjectId::ObjectsFolder};
+    const NodeId methodId{1, 1000};
+
+    REQUIRE(
+        services::addMethod(
+            setup.server,
+            objectsId,
+            methodId,
+            "GetWorkerThreadId",
+            []([[maybe_unused]] Span<const Variant> inputs, Span<Variant> outputs) {
+                outputs.at(0) = static_cast<uint64_t>(getThreadId());
+            },
+            {},
+            {
+                Argument("id", {"en-US", "Thread id"}, DataTypeId::UInt64, ValueRank::Scalar),
+            },
+            MethodAttributes{},
+            ReferenceTypeId::HasComponent
+        )
+    );
+
+    SECTION("Sync operation") {
+        auto future = services::callAsync(setup.client, objectsId, methodId, {}, useFuture);
+        setup.client.runIterate();
+        const auto result = future.get();
+        CHECK(result.statusCode().isGood());
+        CHECK(result.outputArguments().at(0).to<uint64_t>() != getThreadId());
+    }
+    
+    SECTION("Async operation") {
+        useAsyncOperation(setup.server, methodId, true);
+        CHECK_FALSE(runAsyncOperation(setup.server));
+        auto future = services::callAsync(setup.client, objectsId, methodId, {}, useFuture);
+        std::this_thread::sleep_for(std::chrono::milliseconds{100});
+        CHECK(runAsyncOperation(setup.server));
+        setup.client.runIterate();
+        const auto result = future.get();
+        CHECK(result.statusCode().isGood());
+        CHECK(result.outputArguments().at(0).to<uint64_t>() == getThreadId());
+    }
+}
+#endif
 #endif
