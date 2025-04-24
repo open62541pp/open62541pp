@@ -10,7 +10,6 @@
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/exception.hpp"
 #include "open62541pp/node.hpp"
-#include "open62541pp/plugin/accesscontrol_default.hpp"  // Login
 #include "open62541pp/result.hpp"
 #include "open62541pp/services/attribute_highlevel.hpp"  // readValue
 #include "open62541pp/services/subscription.hpp"
@@ -430,11 +429,6 @@ void Client::connectAsync(std::string_view endpointUrl) {
     throwIfBad(UA_Client_connect_async(handle(), std::string{endpointUrl}.c_str(), nullptr, nullptr)
     );
 #endif
-}
-
-void Client::connect(std::string_view endpointUrl, const Login& login) {
-    config().setUserIdentityToken(UserNameIdentityToken(login.username, login.password));
-    connect(endpointUrl);
 }
 
 void Client::disconnect() {
