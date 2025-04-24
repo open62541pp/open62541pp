@@ -10,8 +10,6 @@ namespace opcua {
 /// Log function.
 using LogFunction = std::function<void(LogLevel, LogCategory, std::string_view msg)>;
 
-using Logger [[deprecated("use alias LogFunction instead")]] = LogFunction;
-
 /**
  * Logger class that wraps a `LogFunction`.
  */
