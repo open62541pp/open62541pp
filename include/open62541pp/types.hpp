@@ -257,7 +257,7 @@ public:
     using TypeWrapper::TypeWrapper;
 
     explicit String(std::string_view str)
-        : TypeWrapper{detail::allocNativeString(str)} {}
+        : String{detail::allocNativeString(str)} {}
 
     template <typename InputIt>
     String(InputIt first, InputIt last) {
@@ -533,7 +533,7 @@ public:
     using TypeWrapper::TypeWrapper;
 
     explicit ByteString(std::string_view str)
-        : TypeWrapper{detail::allocNativeString(str)} {}
+        : ByteString{detail::allocNativeString(str)} {}
 
     explicit ByteString(const char* str)  // required to avoid ambiguity
         : ByteString{std::string_view{str}} {}
@@ -575,7 +575,7 @@ public:
     using TypeWrapper::TypeWrapper;
 
     explicit XmlElement(std::string_view str)
-        : TypeWrapper{detail::allocNativeString(str)} {}
+        : XmlElement{detail::allocNativeString(str)} {}
 
     template <typename InputIt>
     XmlElement(InputIt first, InputIt last) {
