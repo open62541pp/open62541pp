@@ -19,7 +19,7 @@ UA_String toNativeString(std::string_view src) noexcept {
     return s;
 }
 
-UA_String allocNativeString(std::string_view src) {
+[[nodiscard]] UA_String allocNativeString(std::string_view src) {
     UA_String s{src.size(), nullptr};
     if (src.data() == nullptr) {
         return s;
@@ -36,7 +36,7 @@ UA_String allocNativeString(std::string_view src) {
     return s;
 }
 
-char* allocCString(std::string_view src) {
+[[nodiscard]] char* allocCString(std::string_view src) {
     char* cstr = static_cast<char*>(UA_malloc(src.size() + 1));  // NOLINT
     if (cstr == nullptr) {
         throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
