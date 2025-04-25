@@ -405,7 +405,7 @@ public:
 
     /// Construct with default attribute definitions.
     ObjectAttributes()
-        : TypeWrapper{UA_ObjectAttributes_default} {}
+        : ObjectAttributes{UA_ObjectAttributes_default} {}
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR_CAST(
@@ -423,7 +423,7 @@ public:
 
     /// Construct with default attribute definitions.
     VariableAttributes()
-        : TypeWrapper{UA_VariableAttributes_default} {}
+        : VariableAttributes{UA_VariableAttributes_default} {}
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR_WRAPPER(Variant, Value, value, UA_NODEATTRIBUTESMASK_VALUE)
@@ -487,7 +487,7 @@ public:
 
     /// Construct with default attribute definitions.
     MethodAttributes()
-        : TypeWrapper{UA_MethodAttributes_default} {}
+        : MethodAttributes{UA_MethodAttributes_default} {}
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR(bool, Executable, executable, UA_NODEATTRIBUTESMASK_EXECUTABLE)
@@ -505,7 +505,7 @@ public:
 
     /// Construct with default attribute definitions.
     ObjectTypeAttributes()
-        : TypeWrapper{UA_ObjectTypeAttributes_default} {}
+        : ObjectTypeAttributes{UA_ObjectTypeAttributes_default} {}
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR(bool, IsAbstract, isAbstract, UA_NODEATTRIBUTESMASK_ISABSTRACT)
@@ -522,7 +522,7 @@ public:
 
     /// Construct with default attribute definitions.
     VariableTypeAttributes()
-        : TypeWrapper{UA_VariableTypeAttributes_default} {}
+        : VariableTypeAttributes{UA_VariableTypeAttributes_default} {}
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR_WRAPPER(Variant, Value, value, UA_NODEATTRIBUTESMASK_VALUE)
@@ -572,7 +572,7 @@ public:
 
     /// Construct with default attribute definitions.
     ReferenceTypeAttributes()
-        : TypeWrapper{UA_ReferenceTypeAttributes_default} {}
+        : ReferenceTypeAttributes{UA_ReferenceTypeAttributes_default} {}
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR(bool, IsAbstract, isAbstract, UA_NODEATTRIBUTESMASK_ISABSTRACT)
@@ -592,7 +592,7 @@ public:
 
     /// Construct with default attribute definitions.
     DataTypeAttributes()
-        : TypeWrapper{UA_DataTypeAttributes_default} {}
+        : DataTypeAttributes{UA_DataTypeAttributes_default} {}
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR(bool, IsAbstract, isAbstract, UA_NODEATTRIBUTESMASK_ISABSTRACT)
@@ -608,7 +608,7 @@ public:
 
     /// Construct with default attribute definitions.
     ViewAttributes()
-        : TypeWrapper{UA_ViewAttributes_default} {}
+        : ViewAttributes{UA_ViewAttributes_default} {}
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR(bool, IsAbstract, containsNoLoops, UA_NODEATTRIBUTESMASK_CONTAINSNOLOOPS)

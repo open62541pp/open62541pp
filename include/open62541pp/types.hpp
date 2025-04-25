@@ -257,7 +257,7 @@ public:
     using TypeWrapper::TypeWrapper;
 
     explicit String(std::string_view str)
-        : TypeWrapper{detail::allocNativeString(str)} {}
+        : String{detail::allocNativeString(str)} {}
 
     template <typename InputIt>
     String(InputIt first, InputIt last) {
@@ -331,23 +331,9 @@ inline bool operator!=(std::string_view lhs, const String& rhs) noexcept {
 /// @relates String
 std::ostream& operator<<(std::ostream& os, const String& str);
 
-template <typename Traits>
-struct TypeConverter<std::basic_string_view<char, Traits>> {
-    using Type = std::basic_string_view<char, Traits>;
-    using NativeType = String;
-
-    static void fromNative(const NativeType& src, Type& dst) {
-        dst = Type{src.data(), src.size()};
-    }
-
-    static void toNative(Type src, NativeType& dst) {
-        dst = NativeType{src};
-    }
-};
-
-template <typename Traits, typename Allocator>
-struct TypeConverter<std::basic_string<char, Traits, Allocator>> {
-    using Type = std::basic_string<char, Traits, Allocator>;
+template <typename T>
+struct TypeConverter<T, std::enable_if_t<detail::IsStringLike<T>::value>> {
+    using Type = T;
     using NativeType = String;
 
     static void fromNative(const NativeType& src, Type& dst) {
@@ -355,7 +341,7 @@ struct TypeConverter<std::basic_string<char, Traits, Allocator>> {
     }
 
     static void toNative(const Type& src, NativeType& dst) {
-        dst = NativeType{src};
+        dst = NativeType{src.begin(), src.end()};
     }
 };
 
@@ -547,7 +533,7 @@ public:
     using TypeWrapper::TypeWrapper;
 
     explicit ByteString(std::string_view str)
-        : TypeWrapper{detail::allocNativeString(str)} {}
+        : ByteString{detail::allocNativeString(str)} {}
 
     explicit ByteString(const char* str)  // required to avoid ambiguity
         : ByteString{std::string_view{str}} {}
@@ -589,7 +575,7 @@ public:
     using TypeWrapper::TypeWrapper;
 
     explicit XmlElement(std::string_view str)
-        : TypeWrapper{detail::allocNativeString(str)} {}
+        : XmlElement{detail::allocNativeString(str)} {}
 
     template <typename InputIt>
     XmlElement(InputIt first, InputIt last) {
