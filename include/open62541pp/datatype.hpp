@@ -287,6 +287,7 @@ public:
 
     /**
      * Add a structure field.
+     * The offset is derived from the member pointer.
      * @tparam field Member pointer, e.g. `&S::value`
      * @param fieldName Human-readable field name
      * @param fieldType Member data type
@@ -307,16 +308,6 @@ public:
     }
 
     /**
-     * Add a structure field with a manual offset (derive DataType from `TMember`).
-     */
-    template <typename TMember>
-    auto& addField(std::string_view fieldName, size_t offset) {
-        return addField<TMember>(
-            fieldName, offset, getDataType<std::remove_pointer_t<TMember>>()
-        );
-    }
-
-    /**
      * Add a structure field with a manual offset.
      * @tparam TMember Type of the member, e.g. `opcua::String`
      * @param fieldName Human-readable field name
@@ -329,9 +320,21 @@ public:
     );
 
     /**
+     * Add a structure field with a manual offset (derive DataType from `TMember`).
+     * @overload
+     */
+    template <typename TMember>
+    auto& addField(std::string_view fieldName, size_t offset) {
+        return addField<TMember>(
+            fieldName, offset, getDataType<std::remove_pointer_t<TMember>>()
+        );
+    }
+
+    /**
      * Add a structure array field.
      * Arrays must consists of two fields: its size (of type `size_t`) and the pointer to the data.
      * No padding allowed between the size field and the array field.
+     * The offset is derived from the member pointer.
      * @tparam fieldSize Member pointer to the size field, e.g. `&S::length`
      * @tparam fieldArray Member pointer to the array field, e.g. `&S::data`
      * @param fieldName Human-readable field name
@@ -358,22 +361,6 @@ public:
     }
 
     /**
-     * Add a structure array field with a manual offset (derive DataType from `TArray`).
-     * @tparam TArray Type of the array field, e.g. `opcua::String`
-     * @param fieldName Human-readable field name
-     * @param offsetSize Offset of the size field in the structure
-     * @param offsetArray Offset of the array field in the structure
-     */
-    template <typename TArray>
-    auto& addField(
-        std::string_view fieldName, size_t offsetSize, size_t offsetArray
-    ) {
-        return addField<TArray>(
-            fieldName, offsetSize, offsetArray, getDataType<std::remove_pointer_t<TArray>>()
-        );
-    }
-
-    /**
      * Add a structure array field with a manual offset.
      * @tparam TArray Type of the array field, e.g. `opcua::String`
      * @param fieldName Human-readable field name
@@ -388,6 +375,19 @@ public:
         size_t offsetArray,
         const UA_DataType& fieldType
     );
+
+    /**
+     * Add a structure array field with a manual offset (derive DataType from `TArray`).
+     * @overload
+     */
+    template <typename TArray>
+    auto& addField(
+        std::string_view fieldName, size_t offsetSize, size_t offsetArray
+    ) {
+        return addField<TArray>(
+            fieldName, offsetSize, offsetArray, getDataType<std::remove_pointer_t<TArray>>()
+        );
+    }
 
     /**
      * Add a union field.
