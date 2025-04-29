@@ -511,7 +511,7 @@ template <typename TArray, typename TSize>
 auto& DataTypeBuilder<T, Tag, U>::addArrayFieldWithOffset(
     const std::string_view fieldName,
     size_t offsetSize,
-    size_t offsetArray,
+    [[maybe_unused]] size_t offsetArray,
     const UA_DataType& fieldType
 ) {
     static_assert(
