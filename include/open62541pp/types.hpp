@@ -361,7 +361,9 @@ struct TypeConverter<char[N]> {  // NOLINT
     using NativeType = String;
 
     static void toNative(const Type& src, NativeType& dst) {
-        dst = NativeType{std::string_view{static_cast<const char*>(src), N}};
+        // string literals are null-terminated, trim null terminator if present
+        const auto length = N > 0 && src[N - 1] == '\0' ? N - 1 : N;
+        dst = NativeType{std::string_view{static_cast<const char*>(src), length}};
     }
 };
 
