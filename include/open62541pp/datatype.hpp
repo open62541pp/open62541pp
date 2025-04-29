@@ -311,7 +311,9 @@ public:
      */
     template <typename TMember>
     auto& addFieldWithOffset(std::string_view fieldName, const size_t offset) {
-        return addFieldWithOffset<TMember>(fieldName, offset, getDataType<std::remove_pointer_t<TMember>>());
+        return addFieldWithOffset<TMember>(
+            fieldName, offset, getDataType<std::remove_pointer_t<TMember>>()
+        );
     }
 
     /**
@@ -322,8 +324,9 @@ public:
      * @param fieldType Member data type
      */
     template <typename TMember>
-    auto& addFieldWithOffset(std::string_view fieldName, size_t offset, const UA_DataType& fieldType);
-
+    auto& addFieldWithOffset(
+        std::string_view fieldName, size_t offset, const UA_DataType& fieldType
+    );
 
     /**
      * Add a structure array field.
@@ -335,12 +338,17 @@ public:
      * @param fieldType Member data type
      */
     template <auto U::* fieldSize, auto U::* fieldArray>
-    auto& addField(std::string_view fieldName, const UA_DataType& fieldType)
-    {
+    auto& addField(std::string_view fieldName, const UA_DataType& fieldType) {
         using TArray = detail::MemberTypeT<decltype(fieldArray)>;
         using TSize = detail::MemberTypeT<decltype(fieldSize)>;
-        return addArrayFieldWithOffset<TArray, TSize>(fieldName, detail::offsetOfMember(fieldSize), detail::offsetOfMember(fieldArray), fieldType);
+        return addArrayFieldWithOffset<TArray, TSize>(
+            fieldName,
+            detail::offsetOfMember(fieldSize),
+            detail::offsetOfMember(fieldArray),
+            fieldType
+        );
     }
+
     /**
      * Add a structure array field (derive DataType from `fieldArray`).
      * @overload
@@ -358,8 +366,12 @@ public:
      * @param fieldType Member data type
      */
     template <typename TArray, typename TSize>
-    auto& addArrayFieldWithOffset(std::string_view fieldName, size_t offsetSize, size_t offsetArray) {
-        return addArrayFieldWithOffset<TArray, TSize>(fieldName, offsetSize, offsetArray, getDataType<std::remove_pointer_t<TArray>>());
+    auto& addArrayFieldWithOffset(
+        std::string_view fieldName, size_t offsetSize, size_t offsetArray
+    ) {
+        return addArrayFieldWithOffset<TArray, TSize>(
+            fieldName, offsetSize, offsetArray, getDataType<std::remove_pointer_t<TArray>>()
+        );
     }
 
     /**
@@ -370,8 +382,12 @@ public:
      * @param fieldType Member data type
      */
     template <typename TArray, typename TSize>
-    auto& addArrayFieldWithOffset(std::string_view fieldName, size_t offsetSize, size_t offsetArray, const UA_DataType& fieldType);
-
+    auto& addArrayFieldWithOffset(
+        std::string_view fieldName,
+        size_t offsetSize,
+        size_t offsetArray,
+        const UA_DataType& fieldType
+    );
 
     /**
      * Add a union field.
@@ -466,7 +482,9 @@ auto DataTypeBuilder<T, Tag, U>::createUnion(
 
 template <typename T, typename Tag, typename U>
 template <typename TMember>
-auto& DataTypeBuilder<T, Tag, U>::addFieldWithOffset(std::string_view fieldName, size_t offset, const UA_DataType& fieldType) {
+auto& DataTypeBuilder<T, Tag, U>::addFieldWithOffset(
+    std::string_view fieldName, size_t offset, const UA_DataType& fieldType
+) {
     static_assert(
         std::is_same_v<Tag, detail::TagDataTypeStruct>,
         "Built type must be a struct or class to add members"
@@ -491,8 +509,10 @@ auto& DataTypeBuilder<T, Tag, U>::addFieldWithOffset(std::string_view fieldName,
 template <typename T, typename Tag, typename U>
 template <typename TArray, typename TSize>
 auto& DataTypeBuilder<T, Tag, U>::addArrayFieldWithOffset(
-    const std::string_view fieldName, size_t offsetSize,
-    const size_t offsetArray, const UA_DataType& fieldType
+    const std::string_view fieldName,
+    size_t offsetSize,
+    const size_t offsetArray,
+    const UA_DataType& fieldType
 ) {
     static_assert(
         std::is_same_v<Tag, detail::TagDataTypeStruct>,
