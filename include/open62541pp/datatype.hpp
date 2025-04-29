@@ -307,7 +307,7 @@ public:
     }
 
     /**
-     *  Add a structure field from an offset (derive DataType from `field).
+     * Add a structure field with a manual offset (derive DataType from `TMember`).
      */
     template <typename TMember>
     auto& addFieldWithOffset(std::string_view fieldName, size_t offset) {
@@ -317,7 +317,7 @@ public:
     }
 
     /**
-     * Add a structure field from an offset.
+     * Add a structure field with a manual offset.
      * @tparam TMember Type of the member, e.g. `opcua::String`
      * @param fieldName Human-readable field name
      * @param offset Offset of the member in the structure
@@ -359,11 +359,11 @@ public:
     }
 
     /**
-     * Add a structure field from an offset.
-     * @tparam TMember Type of the member, e.g. `opcua::String`
+     * Add a structure array field with a manual offset (derive DataType from `TArray`).
+     * @tparam TArray Type of the array field, e.g. `opcua::String`
      * @param fieldName Human-readable field name
-     * @param offset Offset of the member in the structure
-     * @param fieldType Member data type
+     * @param offsetSize Offset of the size field in the structure
+     * @param offsetArray Offset of the array field in the structure
      */
     template <typename TArray, typename TSize>
     auto& addArrayFieldWithOffset(
@@ -375,11 +375,12 @@ public:
     }
 
     /**
-     * Add a structure field from an offset.
-     * @tparam TMember Type of the member, e.g. `opcua::String`
+     * Add a structure array field with a manual offset.
+     * @tparam TArray Type of the array field, e.g. `opcua::String`
      * @param fieldName Human-readable field name
-     * @param offset Offset of the member in the structure
-     * @param fieldType Member data type
+     * @param offsetSize Offset of the size field in the structure
+     * @param offsetArray Offset of the array field in the structure
+     * @param fieldType Array field data type
      */
     template <typename TArray, typename TSize>
     auto& addArrayFieldWithOffset(
