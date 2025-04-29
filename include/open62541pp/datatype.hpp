@@ -287,12 +287,16 @@ public:
 
     /**
      * Add a structure field.
+     * The offset is derived from the member pointer.
      * @tparam field Member pointer, e.g. `&S::value`
      * @param fieldName Human-readable field name
      * @param fieldType Member data type
      */
     template <auto U::* field>
-    auto& addField(std::string_view fieldName, const UA_DataType& fieldType);
+    auto& addField(std::string_view fieldName, const UA_DataType& fieldType) {
+        using TMember = detail::MemberTypeT<decltype(field)>;
+        return addField<TMember>(fieldName, detail::offsetOfMember(field), fieldType);
+    }
 
     /**
      * Add a structure field (derive DataType from `field`).
@@ -304,24 +308,85 @@ public:
     }
 
     /**
+     * Add a structure field with a manual offset.
+     * @tparam TMember Type of the member, e.g. `opcua::String`
+     * @param fieldName Human-readable field name
+     * @param offset Offset of the member in the structure
+     * @param fieldType Member data type
+     */
+    template <typename TMember>
+    auto& addField(
+        std::string_view fieldName, size_t offset, const UA_DataType& fieldType
+    );
+
+    /**
+     * Add a structure field with a manual offset (derive DataType from `TMember`).
+     * @overload
+     */
+    template <typename TMember>
+    auto& addField(std::string_view fieldName, size_t offset) {
+        return addField<TMember>(
+            fieldName, offset, getDataType<std::remove_pointer_t<TMember>>()
+        );
+    }
+
+    /**
      * Add a structure array field.
      * Arrays must consists of two fields: its size (of type `size_t`) and the pointer to the data.
      * No padding allowed between the size field and the array field.
+     * The offset is derived from the member pointer.
      * @tparam fieldSize Member pointer to the size field, e.g. `&S::length`
      * @tparam fieldArray Member pointer to the array field, e.g. `&S::data`
      * @param fieldName Human-readable field name
      * @param fieldType Member data type
      */
-    template <auto U::* fieldSize, auto U::* fieldArray>
-    auto& addField(std::string_view fieldName, const UA_DataType& fieldType);
+    template <size_t U::* fieldSize, auto U::* fieldArray>
+    auto& addField(std::string_view fieldName, const UA_DataType& fieldType) {
+        using TArray = detail::MemberTypeT<decltype(fieldArray)>;
+        return addField<TArray>(
+            fieldName,
+            detail::offsetOfMember(fieldSize),
+            detail::offsetOfMember(fieldArray),
+            fieldType
+        );
+    }
 
     /**
      * Add a structure array field (derive DataType from `fieldArray`).
      * @overload
      */
-    template <auto U::* fieldSize, auto U::* fieldArray>
+    template <size_t U::* fieldSize, auto U::* fieldArray>
     auto& addField(std::string_view fieldName) {
         return addField<fieldSize, fieldArray>(fieldName, detail::getMemberDataType<fieldArray>());
+    }
+
+    /**
+     * Add a structure array field with a manual offset.
+     * @tparam TArray Type of the array field, e.g. `opcua::String`
+     * @param fieldName Human-readable field name
+     * @param offsetSize Offset of the size field in the structure
+     * @param offsetArray Offset of the array field in the structure
+     * @param fieldType Array field data type
+     */
+    template <typename TArray>
+    auto& addField(
+        std::string_view fieldName,
+        size_t offsetSize,
+        size_t offsetArray,
+        const UA_DataType& fieldType
+    );
+
+    /**
+     * Add a structure array field with a manual offset (derive DataType from `TArray`).
+     * @overload
+     */
+    template <typename TArray>
+    auto& addField(
+        std::string_view fieldName, size_t offsetSize, size_t offsetArray
+    ) {
+        return addField<TArray>(
+            fieldName, offsetSize, offsetArray, getDataType<std::remove_pointer_t<TArray>>()
+        );
     }
 
     /**
@@ -416,11 +481,10 @@ auto DataTypeBuilder<T, Tag, U>::createUnion(
 }
 
 template <typename T, typename Tag, typename U>
-template <auto U::* field>
+template <typename TMember>
 auto& DataTypeBuilder<T, Tag, U>::addField(
-    std::string_view fieldName, const UA_DataType& fieldType
+    std::string_view fieldName, size_t offset, const UA_DataType& fieldType
 ) {
-    using TMember = detail::MemberTypeT<decltype(field)>;
     static_assert(
         std::is_same_v<Tag, detail::TagDataTypeStruct>,
         "Built type must be a struct or class to add members"
@@ -438,25 +502,25 @@ auto& DataTypeBuilder<T, Tag, U>::addField(
     member.setPadding({});  // calculate padding between members later
     member.setIsArray(false);
     member.setIsOptional(std::is_pointer_v<TMember>);
-    fields_.push_back({sizeof(TMember), detail::offsetOfMember(field), std::move(member)});
+    fields_.push_back({sizeof(TMember), offset, std::move(member)});
     return *this;
 }
 
 template <typename T, typename Tag, typename U>
-template <auto U::* fieldSize, auto U::* fieldArray>
+template <typename TArray>
 auto& DataTypeBuilder<T, Tag, U>::addField(
-    std::string_view fieldName, const UA_DataType& fieldType
+    const std::string_view fieldName,
+    size_t offsetSize,
+    [[maybe_unused]] size_t offsetArray,
+    const UA_DataType& fieldType
 ) {
-    using TSize = detail::MemberTypeT<decltype(fieldSize)>;
-    using TArray = detail::MemberTypeT<decltype(fieldArray)>;
     static_assert(
         std::is_same_v<Tag, detail::TagDataTypeStruct>,
         "Built type must be a struct or class to add members"
     );
-    static_assert(std::is_integral_v<TSize>, "TSize must be an integral type");
     static_assert(std::is_pointer_v<TArray>, "TArray must be a pointer");
     assert(
-        detail::offsetOfMember(fieldArray) == detail::offsetOfMember(fieldSize) + sizeof(TSize) &&
+        offsetArray == offsetSize + sizeof(size_t) &&
         "No padding between members size and array allowed"
     );
     assert(sizeof(std::remove_pointer_t<TArray>) == fieldType.memSize);
@@ -468,8 +532,8 @@ auto& DataTypeBuilder<T, Tag, U>::addField(
     member.setIsArray(true);
     member.setIsOptional(false);
     fields_.push_back({
-        sizeof(TSize) + sizeof(TArray),
-        detail::offsetOfMember(fieldSize),  // offset/padding related to size field
+        sizeof(size_t) + sizeof(TArray),
+        offsetSize,  // offset/padding related to size field
         std::move(member),
     });
     return *this;
