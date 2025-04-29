@@ -310,7 +310,7 @@ public:
      *  Add a structure field from an offset (derive DataType from `field).
      */
     template <typename TMember>
-    auto& addFieldWithOffset(std::string_view fieldName, const size_t offset) {
+    auto& addFieldWithOffset(std::string_view fieldName, size_t offset) {
         return addFieldWithOffset<TMember>(
             fieldName, offset, getDataType<std::remove_pointer_t<TMember>>()
         );
@@ -511,7 +511,7 @@ template <typename TArray, typename TSize>
 auto& DataTypeBuilder<T, Tag, U>::addArrayFieldWithOffset(
     const std::string_view fieldName,
     size_t offsetSize,
-    const size_t offsetArray,
+    size_t offsetArray,
     const UA_DataType& fieldType
 ) {
     static_assert(
