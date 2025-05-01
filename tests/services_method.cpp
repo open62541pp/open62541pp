@@ -164,10 +164,12 @@ TEST_CASE("Method calls with async operations") {
     
     SECTION("Async operation") {
         useAsyncOperation(setup.server, methodId, true);
-        CHECK_FALSE(runAsyncOperation(setup.server));
+        CHECK_FALSE(getAsyncOperation(setup.server).has_value());
         auto future = services::callAsync(setup.client, objectsId, methodId, {}, useFuture);
         std::this_thread::sleep_for(std::chrono::milliseconds{100});
-        CHECK(runAsyncOperation(setup.server));
+        const auto operation = getAsyncOperation(setup.server);
+        CHECK(operation.has_value());
+        runAsyncOperation(setup.server, operation.value());
         setup.client.runIterate();
         const auto result = future.get();
         CHECK(result.statusCode().isGood());

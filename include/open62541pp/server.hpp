@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <memory>
+#include <optional>
 #include <string>
 #include <string_view>
 #include <utility>  // move
@@ -235,11 +236,21 @@ inline bool operator!=(const Server& lhs, const Server& rhs) noexcept {
 /// @relates Server
 void useAsyncOperation(Server& server, const NodeId& id, bool enabled);
 
-/// Run the next queued async operation (in a worker thread).
+/// Wraps an async operation request.
+struct AsyncOperation {
+    UA_AsyncOperationType type;
+    const UA_AsyncOperationRequest* request;
+    void* context;
+};
+
+/// Get the next queued async operation if available.
 /// Async operations are queued by nodes with async operations enabled (see @ref useAsyncOperation).
-/// @return `true` if an async operation was processed, `false` if the queue was empty.
 /// @relates Server
-bool runAsyncOperation(Server& server);
+std::optional<AsyncOperation> getAsyncOperation(Server& server) noexcept;
+
+/// Run the provided async operation.
+/// @relates Server
+void runAsyncOperation(Server& server, const AsyncOperation& operation);
 #endif
 
 }  // namespace opcua

@@ -36,7 +36,9 @@ int main() {
     std::thread workerThread{
         [&server]() {
             while (true) {
-                if (opcua::runAsyncOperation(server)) {
+                const auto operation = opcua::getAsyncOperation(server);
+                if (operation.has_value()) {
+                    opcua::runAsyncOperation(server, operation.value());
                     std::cout << "Async operation processed\n";
                 } else {
                     std::this_thread::sleep_for(std::chrono::milliseconds{10});
