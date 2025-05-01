@@ -5,6 +5,7 @@
 #include <map>
 #include <mutex>
 #include <utility>  // pair
+#include <variant>
 
 #include "open62541pp/config.hpp"
 #include "open62541pp/detail/contextmap.hpp"
@@ -16,13 +17,28 @@
 #include "open62541pp/types.hpp"  // NodeId, Variant
 #include "open62541pp/ua/types.hpp"  // IntegerId
 
+namespace opcua {
+class Session;
+}  // namespace opcua
+
 namespace opcua::detail {
 
 struct NodeContext {
     UniqueOrRawPtr<ValueCallbackBase> valueCallback;
     UniqueOrRawPtr<DataSourceBase> dataSource;
+
 #ifdef UA_ENABLE_METHODCALLS
-    std::function<void(Span<const Variant> input, Span<Variant> output)> methodCallback;
+    using MethodCallback = std::variant<
+        std::function<void(Span<const Variant> input, Span<Variant> output)>,
+        std::function<StatusCode(
+            Session& session,
+            Span<const Variant> input,
+            Span<Variant> output,
+            const NodeId& methodId,
+            const NodeId& objectId
+        )>>;
+
+    MethodCallback methodCallback;
 #endif
 };
 

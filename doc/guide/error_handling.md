@@ -19,8 +19,8 @@ opcua::BadStatus::what() provides a human-readable name for the status code.
 **Example:**
 
 ```cpp
-const opcua::NodeId id(opcua::VariableId::Server_ServerStatus_CurrentTime);
-opcua::Node node(client, id);
+const opcua::NodeId id{opcua::VariableId::Server_ServerStatus_CurrentTime};
+opcua::Node node{client, id};
 try {
     const auto var = node.readValue();  // may throw opcua::BadStatus
 } catch (const opcua::BadStatus& e) {
@@ -43,7 +43,7 @@ This approach avoids the performance overhead of exceptions and enhances clarity
 **Example:**
 
 ```cpp
-const opcua::NodeId id(opcua::VariableId::Server_ServerStatus_CurrentTime);
+const opcua::NodeId id{opcua::VariableId::Server_ServerStatus_CurrentTime};
 opcua::Result<opcua::Variant> result = opcua::services::readValue(client, id);
 if (result.code().isBad()) {
     std::cerr << "Bad status: " << result.code().get() << ": " << result.code().name() << std::endl;

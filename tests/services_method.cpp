@@ -15,33 +15,37 @@ TEMPLATE_TEST_CASE("Method service set", "", Server, Client, Async<Client>) {
     setup.client.connect(setup.endpointUrl);
     auto& connection = setup.instance<TestType>();
 
-    const NodeId objectsId{ObjectId::ObjectsFolder};
+    const NodeId objectId{ObjectId::ObjectsFolder};
     const NodeId methodId{1, 1000};
 
     bool throwException = false;
-    REQUIRE(services::addMethod(
-        setup.server,
-        objectsId,
-        methodId,
-        "Add",
-        [&](Span<const Variant> inputs, Span<Variant> outputs) {
-            if (throwException) {
-                throw BadStatus{UA_STATUSCODE_BADUNEXPECTEDERROR};
-            }
-            const auto a = inputs.at(0).scalar<int32_t>();
-            const auto b = inputs.at(1).scalar<int32_t>();
-            outputs.at(0) = a + b;
-        },
-        {
-            Argument("a", {"en-US", "first number"}, DataTypeId::Int32, ValueRank::Scalar),
-            Argument("b", {"en-US", "second number"}, DataTypeId::Int32, ValueRank::Scalar),
-        },
-        {
-            Argument("sum", {"en-US", "sum of both numbers"}, DataTypeId::Int32, ValueRank::Scalar),
-        },
-        MethodAttributes{},
-        ReferenceTypeId::HasComponent
-    ));
+    REQUIRE(
+        services::addMethod(
+            setup.server,
+            objectId,
+            methodId,
+            "Add",
+            [&](Span<const Variant> inputs, Span<Variant> outputs) {
+                if (throwException) {
+                    throw BadStatus{UA_STATUSCODE_BADUNEXPECTEDERROR};
+                }
+                const auto a = inputs.at(0).scalar<int32_t>();
+                const auto b = inputs.at(1).scalar<int32_t>();
+                outputs.at(0) = a + b;
+            },
+            {
+                Argument{"a", {"en-US", "first number"}, DataTypeId::Int32, ValueRank::Scalar},
+                Argument{"b", {"en-US", "second number"}, DataTypeId::Int32, ValueRank::Scalar},
+            },
+            {
+                Argument{
+                    "sum", {"en-US", "sum of both numbers"}, DataTypeId::Int32, ValueRank::Scalar
+                },
+            },
+            MethodAttributes{},
+            ReferenceTypeId::HasComponent
+        )
+    );
 
     auto call = [&](auto&&... args) {
         if constexpr (isAsync<TestType>) {
@@ -56,7 +60,7 @@ TEMPLATE_TEST_CASE("Method service set", "", Server, Client, Async<Client>) {
     SECTION("Check result") {
         const CallMethodResult result = call(
             connection,
-            objectsId,
+            objectId,
             methodId,
             Span<const Variant>{
                 Variant{int32_t{1}},
@@ -72,7 +76,7 @@ TEMPLATE_TEST_CASE("Method service set", "", Server, Client, Async<Client>) {
         throwException = true;
         const CallMethodResult result = call(
             connection,
-            objectsId,
+            objectId,
             methodId,
             Span<const Variant>{
                 Variant{int32_t{1}},
@@ -85,7 +89,7 @@ TEMPLATE_TEST_CASE("Method service set", "", Server, Client, Async<Client>) {
     SECTION("Invalid input arguments") {
         const CallMethodResult result = call(
             connection,
-            objectsId,
+            objectId,
             methodId,
             Span<const Variant>{
                 Variant{true},
@@ -96,16 +100,14 @@ TEMPLATE_TEST_CASE("Method service set", "", Server, Client, Async<Client>) {
     }
 
     SECTION("Missing arguments") {
-        const CallMethodResult result = call(
-            connection, objectsId, methodId, Span<const Variant>{}
-        );
+        const CallMethodResult result = call(connection, objectId, methodId, Span<const Variant>{});
         CHECK(result.statusCode() == UA_STATUSCODE_BADARGUMENTSMISSING);
     }
 
     SECTION("Too many arguments") {
         const CallMethodResult result = call(
             connection,
-            objectsId,
+            objectId,
             methodId,
             Span<const Variant>{
                 Variant{int32_t{1}},
@@ -115,5 +117,50 @@ TEMPLATE_TEST_CASE("Method service set", "", Server, Client, Async<Client>) {
         );
         CHECK(result.statusCode() == UA_STATUSCODE_BADTOOMANYARGUMENTS);
     }
+}
+
+TEST_CASE("Method service set (full callback signature)") {
+    Server server;
+    ServerRunner runner{server};
+
+    const NodeId objectId{ObjectId::ObjectsFolder};
+    const NodeId methodId{1, 1000};
+
+    bool executed = false;
+    NodeId callbackSessionId;
+    NodeId callbackMethodId;
+    NodeId callbackObjectId;
+
+    REQUIRE(
+        services::addMethod(
+            server,
+            objectId,
+            methodId,
+            "Method",
+            [&](Session& session,
+                Span<const Variant>,
+                Span<Variant>,
+                const NodeId& methodId_,
+                const NodeId& objectId_) {
+                executed = true;
+                callbackSessionId = session.id();
+                callbackMethodId = methodId_;
+                callbackObjectId = objectId_;
+                return UA_STATUSCODE_GOOD;
+            },
+            {},
+            {},
+            MethodAttributes{},
+            ReferenceTypeId::HasComponent
+        )
+    );
+
+    const auto result = services::call(server, objectId, methodId, {});
+    CHECK(result.statusCode().isGood());
+
+    CHECK(executed);
+    CHECK_FALSE(callbackSessionId.isNull());
+    CHECK(callbackMethodId == methodId);
+    CHECK(callbackObjectId == objectId);
 }
 #endif
