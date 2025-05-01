@@ -140,12 +140,12 @@ TEST_CASE("Method service set (full callback signature)") {
             [&](Session& session,
                 Span<const Variant>,
                 Span<Variant>,
-                const NodeId& methodId,
-                const NodeId& objectId) {
+                const NodeId& methodId_,
+                const NodeId& objectId_) {
                 executed = true;
                 callbackSessionId = session.id();
-                callbackMethodId = methodId;
-                callbackObjectId = objectId;
+                callbackMethodId = methodId_;
+                callbackObjectId = objectId_;
                 return UA_STATUSCODE_GOOD;
             },
             {},
