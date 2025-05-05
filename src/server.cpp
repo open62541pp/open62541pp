@@ -270,7 +270,7 @@ Server::Server(ServerConfig&& config)
     if (handle() == nullptr) {
         throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
     }
-    config = {};
+    *config.handle() = {};
 #if UAPP_OPEN62541_VER_GE(1, 2)
     this->config()->allowEmptyVariables = UA_RULEHANDLING_ACCEPT;  // allow empty variables
 #endif

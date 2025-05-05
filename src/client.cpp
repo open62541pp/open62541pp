@@ -16,7 +16,7 @@
 
 namespace opcua {
 
-static UA_Client* allocateClient(UA_ClientConfig& config) noexcept {
+static UA_Client* allocateClient(const UA_ClientConfig& config) noexcept {
 #if UAPP_OPEN62541_VER_LE(1, 0)
     auto* client = UA_Client_new();
     auto* clientConfig = UA_Client_getConfig(client);
@@ -283,7 +283,7 @@ Client::Client(ClientConfig&& config)
     if (handle() == nullptr) {
         throw BadStatus{UA_STATUSCODE_BADOUTOFMEMORY};
     }
-    config = {};
+    *config.handle() = {};
     this->config()->stateCallback = stateCallback;
     updateLoggerStackPointer(this->config());
     setWrapperAsContextPointer(*this);
