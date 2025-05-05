@@ -114,6 +114,7 @@ def main():
 
     run(path / exe("server_method"), path / exe("client_method"))
     run(path / exe("server_method"), path / exe("client_method_async"))
+    run(path / exe("server_method_async"), path / exe("client_method"))
 
     run(path / exe("server_custom_datatypes"), path / exe("client_custom_datatypes"))
 

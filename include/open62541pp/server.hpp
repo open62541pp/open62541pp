@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <memory>
+#include <optional>
 #include <string>
 #include <string_view>
 #include <utility>  // move
@@ -224,5 +225,32 @@ inline bool operator==(const Server& lhs, const Server& rhs) noexcept {
 inline bool operator!=(const Server& lhs, const Server& rhs) noexcept {
     return !(lhs == rhs);
 }
+
+/* -------------------------------------- Async operations -------------------------------------- */
+
+#if UAPP_HAS_ASYNC_OPERATIONS
+/// Enable or disable async operations for the specified node.
+/// When enabled, operations on the node are queued and must processed by a worker thread using
+/// @ref runAsyncOperation.
+/// @note Only supported for method nodes.
+/// @relates Server
+void useAsyncOperation(Server& server, const NodeId& id, bool enabled);
+
+/// Wraps an async operation request.
+struct AsyncOperation {
+    UA_AsyncOperationType type;
+    const UA_AsyncOperationRequest* request;
+    void* context;
+};
+
+/// Get the next queued async operation if available.
+/// Async operations are queued by nodes with async operations enabled (see @ref useAsyncOperation).
+/// @relates Server
+std::optional<AsyncOperation> getAsyncOperation(Server& server) noexcept;
+
+/// Run the provided async operation.
+/// @relates Server
+void runAsyncOperation(Server& server, const AsyncOperation& operation);
+#endif
 
 }  // namespace opcua

@@ -513,4 +513,42 @@ UA_Server* getHandle(Server& server) noexcept {
 
 }  // namespace detail
 
+/* -------------------------------------- Async operations -------------------------------------- */
+
+#if UAPP_HAS_ASYNC_OPERATIONS
+void useAsyncOperation(Server& server, const NodeId& id, bool enabled) {
+    throwIfBad(UA_Server_setMethodNodeAsync(server.handle(), id, enabled));
+}
+
+template <typename T>
+static void setAsyncOperationResult(Server& server, const T& response, void* context) noexcept {
+    static_assert(sizeof(T) <= sizeof(UA_AsyncOperationResponse));
+    UA_Server_setAsyncOperationResult(
+        server.handle(),
+        reinterpret_cast<const UA_AsyncOperationResponse*>(&response),  // NOLINT
+        context
+    );
+}
+
+std::optional<AsyncOperation> getAsyncOperation(Server& server) noexcept {
+    AsyncOperation operation{};
+    const bool hasRequest = UA_Server_getAsyncOperationNonBlocking(
+        server.handle(), &operation.type, &operation.request, &operation.context, nullptr
+    );
+    return hasRequest ? std::make_optional(operation) : std::nullopt;
+}
+
+void runAsyncOperation(Server& server, const AsyncOperation& operation) {
+    if (operation.request == nullptr) {
+        return;
+    }
+    if (operation.type == UA_ASYNCOPERATIONTYPE_CALL) {
+        const CallMethodResult response = UA_Server_call(
+            server.handle(), &operation.request->callMethodRequest
+        );
+        setAsyncOperationResult(server, response, operation.context);
+    }
+}
+#endif
+
 }  // namespace opcua

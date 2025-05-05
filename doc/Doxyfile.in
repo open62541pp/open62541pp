@@ -94,6 +94,7 @@ PREDEFINED             = UA_ENABLE_DA \
                          UAPP_HAS_TOSTRING=1 \
                          UAPP_HAS_ORDER=1 \
                          UAPP_HAS_DATAACCESS=1 \
+                         UAPP_HAS_ASYNC_OPERATIONS=1 \
                          UAPP_HAS_ASYNC_SUBSCRIPTIONS=1 \
                          UAPP_HAS_CREATE_CERTIFICATE=1 \
                          UAPP_HAS_NODESETLOADER=1
