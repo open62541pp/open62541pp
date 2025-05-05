@@ -283,7 +283,7 @@ Client::Client(ClientConfig&& config)
     if (handle() == nullptr) {
         throw BadStatus{UA_STATUSCODE_BADOUTOFMEMORY};
     }
-    config = {};
+    *config.handle() = {};
     this->config()->stateCallback = stateCallback;
     updateLoggerStackPointer(this->config());
     setWrapperAsContextPointer(*this);
