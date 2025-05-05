@@ -119,7 +119,7 @@ TEMPLATE_TEST_CASE("NodeManagement service set", "", Server, Client, Async<Clien
             objectsId,
             newId,
             "Method",
-            nullptr,  // callback
+            [](Span<const Variant>, Span<Variant>) {},
             opcua::Span<const opcua::Argument>{},  // input
             opcua::Span<const opcua::Argument>{},  // output
             MethodAttributes{},

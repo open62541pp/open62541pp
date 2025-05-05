@@ -4,6 +4,7 @@
 #include <functional>
 #include <string_view>
 #include <utility>  // exchange, forward
+#include <variant>
 
 #include "open62541pp/async.hpp"
 #include "open62541pp/common.hpp"  // ModellingRule
@@ -21,7 +22,8 @@
 
 namespace opcua {
 class Client;
-}
+class Session;
+}  // namespace opcua
 
 namespace opcua::services {
 
@@ -567,10 +569,39 @@ auto addPropertyAsync(
 #ifdef UA_ENABLE_METHODCALLS
 /**
  * Method callback.
- * @param input Input parameters
- * @param output Output parameters
+ * Two function signatures are supported:
+ *
+ * 1. Simple signature with `input` and `output` arguments:
+ *    @code
+ *    void(
+ *        Span<const Variant> input,
+ *        Span<Variant> output
+ *    )
+ *    @endcode
+ *    The method call status code is implicitly set to `UA_STATUSCODE_GOOD`.
+ *    A bad status code can be returned by throwing a BadStatus exception.
+ *
+ * 2. Full signature with `session`, `input`, `output`, `methodId` and `objectId`:
+ *    @code
+ *    StatusCode(
+ *        Session& session,
+ *        Span<const Variant> input,
+ *        Span<Variant> output,
+ *        const NodeId& methodId,
+ *        const NodeId& objectId
+ *    )
+ *    @endcode
+ *    The method call status code is explicitly returned by the function.
  */
-using MethodCallback = std::function<void(Span<const Variant> input, Span<Variant> output)>;
+using MethodCallback = std::variant<
+    std::function<void(Span<const Variant> input, Span<Variant> output)>,
+    std::function<StatusCode(
+        Session& session,
+        Span<const Variant> input,
+        Span<Variant> output,
+        const NodeId& methodId,
+        const NodeId& objectId
+    )>>;
 
 /**
  * Add method.

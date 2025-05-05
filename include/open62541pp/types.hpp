@@ -257,7 +257,7 @@ public:
     using TypeWrapper::TypeWrapper;
 
     explicit String(std::string_view str)
-        : TypeWrapper{detail::allocNativeString(str)} {}
+        : String{detail::allocNativeString(str)} {}
 
     template <typename InputIt>
     String(InputIt first, InputIt last) {
@@ -331,23 +331,9 @@ inline bool operator!=(std::string_view lhs, const String& rhs) noexcept {
 /// @relates String
 std::ostream& operator<<(std::ostream& os, const String& str);
 
-template <typename Traits>
-struct TypeConverter<std::basic_string_view<char, Traits>> {
-    using Type = std::basic_string_view<char, Traits>;
-    using NativeType = String;
-
-    static void fromNative(const NativeType& src, Type& dst) {
-        dst = Type{src.data(), src.size()};
-    }
-
-    static void toNative(Type src, NativeType& dst) {
-        dst = NativeType{src};
-    }
-};
-
-template <typename Traits, typename Allocator>
-struct TypeConverter<std::basic_string<char, Traits, Allocator>> {
-    using Type = std::basic_string<char, Traits, Allocator>;
+template <typename T>
+struct TypeConverter<T, std::enable_if_t<detail::IsStringLike<T>::value>> {
+    using Type = T;
     using NativeType = String;
 
     static void fromNative(const NativeType& src, Type& dst) {
@@ -355,7 +341,7 @@ struct TypeConverter<std::basic_string<char, Traits, Allocator>> {
     }
 
     static void toNative(const Type& src, NativeType& dst) {
-        dst = NativeType{src};
+        dst = NativeType{src.begin(), src.end()};
     }
 };
 
@@ -375,7 +361,9 @@ struct TypeConverter<char[N]> {  // NOLINT
     using NativeType = String;
 
     static void toNative(const Type& src, NativeType& dst) {
-        dst = NativeType{std::string_view{static_cast<const char*>(src), N}};
+        // string literals are null-terminated, trim null terminator if present
+        const auto length = N > 0 && src[N - 1] == '\0' ? N - 1 : N;
+        dst = NativeType{std::string_view{static_cast<const char*>(src), length}};
     }
 };
 
@@ -547,7 +535,7 @@ public:
     using TypeWrapper::TypeWrapper;
 
     explicit ByteString(std::string_view str)
-        : TypeWrapper{detail::allocNativeString(str)} {}
+        : ByteString{detail::allocNativeString(str)} {}
 
     explicit ByteString(const char* str)  // required to avoid ambiguity
         : ByteString{std::string_view{str}} {}
@@ -589,7 +577,7 @@ public:
     using TypeWrapper::TypeWrapper;
 
     explicit XmlElement(std::string_view str)
-        : TypeWrapper{detail::allocNativeString(str)} {}
+        : XmlElement{detail::allocNativeString(str)} {}
 
     template <typename InputIt>
     XmlElement(InputIt first, InputIt last) {
@@ -1445,120 +1433,98 @@ private:
     }
 
     template <typename T>
-    T toScalarImpl() const;
-    template <typename T>
-    T toArrayImpl() const;
+    T toScalarImpl() const {
+        assertIsRegisteredOrConvertible<T>();
+        if constexpr (detail::IsRegistered<T>::value) {
+            return scalar<T>();
+        } else {
+            using Native = typename TypeConverter<T>::NativeType;
+            return detail::fromNative<T>(scalar<Native>());
+        }
+    }
 
     template <typename T>
-    inline void setScalarImpl(
+    T toArrayImpl() const {
+        using ValueType = typename T::value_type;
+        assertIsRegisteredOrConvertible<ValueType>();
+        if constexpr (detail::IsRegistered<ValueType>::value) {
+            auto native = array<ValueType>();
+            return T(native.begin(), native.end());
+        } else {
+            using Native = typename TypeConverter<ValueType>::NativeType;
+            auto native = array<Native>();
+            return T(
+                detail::TransformIterator(native.begin(), detail::fromNative<ValueType>),
+                detail::TransformIterator(native.end(), detail::fromNative<ValueType>)
+            );
+        }
+    }
+
+    template <typename T>
+    void setScalarImpl(
         T* data, const UA_DataType& type, UA_VariantStorageType storageType
-    ) noexcept;
+    ) noexcept {
+        assertNoVariant<T>();
+        assert(sizeof(T) == type.memSize);
+        clear();
+        handle()->type = &type;
+        handle()->storageType = storageType;
+        handle()->data = data;
+    }
+
     template <typename T>
-    inline void setArrayImpl(
+    void setArrayImpl(
         T* data, size_t arrayLength, const UA_DataType& type, UA_VariantStorageType storageType
-    ) noexcept;
-    template <typename T>
-    inline void setScalarCopyImpl(const T& value, const UA_DataType& type);
-    template <typename T>
-    inline void setScalarCopyConvertImpl(const T& value);
-    template <typename InputIt>
-    inline void setArrayCopyImpl(InputIt first, InputIt last, const UA_DataType& type);
-    template <typename InputIt>
-    inline void setArrayCopyConvertImpl(InputIt first, InputIt last);
-};
+    ) noexcept {
+        assertNoVariant<T>();
+        assert(sizeof(T) == type.memSize);
+        clear();
+        handle()->type = &type;
+        handle()->storageType = storageType;
+        handle()->data = data;
+        handle()->arrayLength = arrayLength;
+    }
 
-template <typename T>
-T Variant::toScalarImpl() const {
-    assertIsRegisteredOrConvertible<T>();
-    if constexpr (detail::IsRegistered<T>::value) {
-        return scalar<T>();
-    } else {
+    template <typename T>
+    void setScalarCopyImpl(const T& value, const UA_DataType& type) {
+        auto native = detail::allocateUniquePtr<T>(type);
+        *native = detail::copy(value, type);
+        setScalarImpl(native.release(), type, UA_VARIANT_DATA);  // move ownership
+    }
+
+    template <typename T>
+    void setScalarCopyConvertImpl(const T& value) {
         using Native = typename TypeConverter<T>::NativeType;
-        return detail::fromNative<T>(scalar<Native>());
+        const auto& type = opcua::getDataType<Native>();
+        auto native = detail::allocateUniquePtr<Native>(type);
+        *native = detail::toNative(value);
+        setScalarImpl(native.release(), type, UA_VARIANT_DATA);  // move ownership
     }
-}
 
-template <typename T>
-T Variant::toArrayImpl() const {
-    using ValueType = typename T::value_type;
-    assertIsRegisteredOrConvertible<ValueType>();
-    if constexpr (detail::IsRegistered<ValueType>::value) {
-        auto native = array<ValueType>();
-        return T(native.begin(), native.end());
-    } else {
+    template <typename InputIt>
+    void setArrayCopyImpl(InputIt first, InputIt last, const UA_DataType& type) {
+        using ValueType = typename std::iterator_traits<InputIt>::value_type;
+        const size_t size = std::distance(first, last);
+        auto native = detail::allocateArrayUniquePtr<ValueType>(size, type);
+        std::transform(first, last, native.get(), [&](const ValueType& value) {
+            return detail::copy(value, type);
+        });
+        setArrayImpl(native.release(), size, type, UA_VARIANT_DATA);  // move ownership
+    }
+
+    template <typename InputIt>
+    void setArrayCopyConvertImpl(InputIt first, InputIt last) {
+        using ValueType = typename std::iterator_traits<InputIt>::value_type;
         using Native = typename TypeConverter<ValueType>::NativeType;
-        auto native = array<Native>();
-        return T(
-            detail::TransformIterator(native.begin(), detail::fromNative<ValueType>),
-            detail::TransformIterator(native.end(), detail::fromNative<ValueType>)
-        );
+        const auto& type = opcua::getDataType<Native>();
+        const size_t size = std::distance(first, last);
+        auto native = detail::allocateArrayUniquePtr<Native>(size, type);
+        std::transform(first, last, native.get(), [&](const ValueType& value) {
+            return detail::toNative(value);
+        });
+        setArrayImpl(native.release(), size, type, UA_VARIANT_DATA);  // move ownership
     }
-}
-
-template <typename T>
-void Variant::setScalarImpl(
-    T* data, const UA_DataType& type, UA_VariantStorageType storageType
-) noexcept {
-    assertNoVariant<T>();
-    assert(sizeof(T) == type.memSize);
-    clear();
-    handle()->type = &type;
-    handle()->storageType = storageType;
-    handle()->data = data;
-}
-
-template <typename T>
-void Variant::setArrayImpl(
-    T* data, size_t arrayLength, const UA_DataType& type, UA_VariantStorageType storageType
-) noexcept {
-    assertNoVariant<T>();
-    assert(sizeof(T) == type.memSize);
-    clear();
-    handle()->type = &type;
-    handle()->storageType = storageType;
-    handle()->data = data;
-    handle()->arrayLength = arrayLength;
-}
-
-template <typename T>
-void Variant::setScalarCopyImpl(const T& value, const UA_DataType& type) {
-    auto native = detail::allocateUniquePtr<T>(type);
-    *native = detail::copy(value, type);
-    setScalarImpl(native.release(), type, UA_VARIANT_DATA);  // move ownership
-}
-
-template <typename T>
-void Variant::setScalarCopyConvertImpl(const T& value) {
-    using Native = typename TypeConverter<T>::NativeType;
-    const auto& type = opcua::getDataType<Native>();
-    auto native = detail::allocateUniquePtr<Native>(type);
-    *native = detail::toNative(value);
-    setScalarImpl(native.release(), type, UA_VARIANT_DATA);  // move ownership
-}
-
-template <typename InputIt>
-void Variant::setArrayCopyImpl(InputIt first, InputIt last, const UA_DataType& type) {
-    using ValueType = typename std::iterator_traits<InputIt>::value_type;
-    const size_t size = std::distance(first, last);
-    auto native = detail::allocateArrayUniquePtr<ValueType>(size, type);
-    std::transform(first, last, native.get(), [&](const ValueType& value) {
-        return detail::copy(value, type);
-    });
-    setArrayImpl(native.release(), size, type, UA_VARIANT_DATA);  // move ownership
-}
-
-template <typename InputIt>
-void Variant::setArrayCopyConvertImpl(InputIt first, InputIt last) {
-    using ValueType = typename std::iterator_traits<InputIt>::value_type;
-    using Native = typename TypeConverter<ValueType>::NativeType;
-    const auto& type = opcua::getDataType<Native>();
-    const size_t size = std::distance(first, last);
-    auto native = detail::allocateArrayUniquePtr<Native>(size, type);
-    std::transform(first, last, native.get(), [&](const ValueType& value) {
-        return detail::toNative(value);
-    });
-    setArrayImpl(native.release(), size, type, UA_VARIANT_DATA);  // move ownership
-}
+};
 
 /* ------------------------------------------ DataValue ----------------------------------------- */
 

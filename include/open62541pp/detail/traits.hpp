@@ -82,6 +82,7 @@ struct IsStringLike<T, std::enable_if_t<IsRange<T>::value>>
     : std::conjunction<
           IsContiguousRange<T>,
           std::is_same<RangeValueT<T>, char>,
-          std::is_constructible<std::remove_reference_t<T>, const char*>> {};
+          std::is_constructible<std::remove_reference_t<T>, const char*>,
+          std::is_constructible<std::remove_reference_t<T>, const char*, size_t>> {};
 
 }  // namespace opcua::detail

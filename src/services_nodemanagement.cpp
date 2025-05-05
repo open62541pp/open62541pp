@@ -9,6 +9,7 @@
 #include "open62541pp/detail/string_utils.hpp"  // detail::toNativeString
 #include "open62541pp/exception.hpp"
 #include "open62541pp/server.hpp"
+#include "open62541pp/session.hpp"
 
 namespace opcua::services {
 
@@ -85,12 +86,12 @@ Result<NodeId> addNode<Client>(
 #ifdef UA_ENABLE_METHODCALLS
 
 static UA_StatusCode methodCallback(
-    [[maybe_unused]] UA_Server* server,
-    [[maybe_unused]] const UA_NodeId* sessionId,
-    [[maybe_unused]] void* sessionContext,
-    [[maybe_unused]] const UA_NodeId* methodId,
+    UA_Server* server,
+    const UA_NodeId* sessionId,
+    void* sessionContext,
+    const UA_NodeId* methodId,
     void* methodContext,
-    [[maybe_unused]] const UA_NodeId* objectId,
+    const UA_NodeId* objectId,
     [[maybe_unused]] void* objectContext,
     size_t inputSize,
     const UA_Variant* input,
@@ -99,13 +100,31 @@ static UA_StatusCode methodCallback(
 ) noexcept {
     assert(methodContext != nullptr);
     const auto* nodeContext = static_cast<opcua::detail::NodeContext*>(methodContext);
-    const auto& callback = nodeContext->methodCallback;
-    if (callback) {
-        return opcua::detail::tryInvoke(
-            callback,
+    // simple callback signature with input, output only
+    if (const auto* cb = std::get_if<0>(&nodeContext->methodCallback); cb != nullptr && *cb) {
+        const auto result = opcua::detail::tryInvoke(
+            *cb,
             Span<const Variant>{asWrapper<Variant>(input), inputSize},
             Span<Variant>{asWrapper<Variant>(output), outputSize}
-        ).code();
+        );
+        return result.code();
+    }
+    // full callback signature
+    if (const auto* cb = std::get_if<1>(&nodeContext->methodCallback); cb != nullptr && *cb) {
+        assert(server != nullptr);
+        assert(sessionId != nullptr);
+        assert(methodId != nullptr);
+        assert(objectId != nullptr);
+        Session session{*asWrapper(server), asWrapper<NodeId>(*sessionId), sessionContext};
+        const auto result = opcua::detail::tryInvoke(
+            *cb,
+            session,
+            Span<const Variant>{asWrapper<Variant>(input), inputSize},
+            Span<Variant>{asWrapper<Variant>(output), outputSize},
+            asWrapper<NodeId>(*methodId),
+            asWrapper<NodeId>(*objectId)
+        );
+        return result.code();
     }
     return UA_STATUSCODE_BADINTERNALERROR;
 }

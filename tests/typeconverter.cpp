@@ -77,9 +77,15 @@ TEST_CASE("TypeConverter const char*") {
 
 TEST_CASE("TypeConverter char[N]") {
     SECTION("toNative") {
-        char src[7] = {'T', 'e', 's', 't', '1', '2', '3'};
-        String dst = detail::toNative(src);
-        CHECK(dst == "Test123");
+        SECTION("Runtime buffer") {
+            char src[7] = {'T', 'e', 's', 't', '1', '2', '3'};
+            String dst = detail::toNative(src);
+            CHECK(dst == "Test123");
+        }
+        SECTION("String literal") {
+            String dst = detail::toNative("Test123");
+            CHECK(dst == "Test123");
+        }
     }
 }
 
