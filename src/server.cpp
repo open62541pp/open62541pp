@@ -535,10 +535,7 @@ std::optional<AsyncOperation> getAsyncOperation(Server& server) noexcept {
     const bool hasRequest = UA_Server_getAsyncOperationNonBlocking(
         server.handle(), &operation.type, &operation.request, &operation.context, nullptr
     );
-    if (!hasRequest || operation.request == nullptr) {
-        return std::nullopt;
-    }
-    return operation;
+    return hasRequest ? std::make_optional(operation) : std::nullopt;
 }
 
 void runAsyncOperation(Server& server, const AsyncOperation& operation) {
