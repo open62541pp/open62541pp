@@ -9,7 +9,8 @@
 
 namespace opcua {
 
-static std::string toString(const char* format, va_list args) {
+static void toString(std::string& buffer, const char* format, va_list args) {
+    buffer.clear();
     // NOLINTBEGIN
     va_list argsCopy{};
     va_copy(argsCopy, args);
@@ -17,24 +18,23 @@ static std::string toString(const char* format, va_list args) {
     va_end(argsCopy);
     // NOLINTEND
     if (charsToWrite < 0) {
-        return {};
+        return;
     }
-    std::string buffer(charsToWrite, '\0');
+    buffer.resize(charsToWrite);
     const int charsWritten = std::vsnprintf(buffer.data(), buffer.size() + 1, format, args);
     if (charsWritten < 0 || charsWritten > charsToWrite) {
-        return {};
+        buffer.clear();
     }
-    return buffer;
 }
 
 static void logNative(
     void* context, UA_LogLevel level, UA_LogCategory category, const char* msg, va_list args
 ) {
     assert(context != nullptr);
+    static thread_local std::string buffer(256, '\0');
+    toString(buffer, msg, args);
     static_cast<LoggerBase*>(context)->log(
-        static_cast<LogLevel>(level),
-        static_cast<LogCategory>(category),
-        toString(msg, args)
+        static_cast<LogLevel>(level), static_cast<LogCategory>(category), buffer
     );
 }
 
