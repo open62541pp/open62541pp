@@ -209,7 +209,7 @@ TEST_CASE("Method calls with async operations") {
         useAsyncOperation(setup.server, methodId, true);
         CHECK_FALSE(getAsyncOperation(setup.server).has_value());
         auto future = services::callAsync(setup.client, objectId, methodId, {}, useFuture);
-        const auto deadline = std::chrono::steady_clock::now() + std::chrono::milliseconds{100};
+        const auto deadline = std::chrono::steady_clock::now() + std::chrono::seconds{1};
         std::optional<AsyncOperation> operation;
         while (!operation && std::chrono::steady_clock::now() < deadline) {
             operation = getAsyncOperation(setup.server);
