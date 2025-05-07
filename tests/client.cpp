@@ -24,6 +24,11 @@ TEST_CASE("ClientConfig") {
         CHECK(config->timeout == 333);
     }
 
+    SECTION("setClientDescription") {
+        ApplicationDescription description;
+        config.setClientDescription(description);
+    }
+
     SECTION("setUserIdentityToken") {
         const auto& token = asWrapper<ExtensionObject>(config->userIdentityToken);
         CHECK(token.empty());
