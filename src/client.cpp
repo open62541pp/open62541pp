@@ -44,7 +44,14 @@ static void deleteClient(UA_Client* client) noexcept {
     UA_Client_delete(client);
 }
 
-static void clear(UA_ClientConfig& config) noexcept {
+/* ---------------------------------------- ClientConfig ---------------------------------------- */
+
+// NOLINTNEXTLINE(*param-not-moved)
+UA_ClientConfig TypeHandler<UA_ClientConfig>::move(UA_ClientConfig&& config) noexcept {
+    return std::exchange(config, {});
+}
+
+void TypeHandler<UA_ClientConfig>::clear(UA_ClientConfig& config) noexcept {
     detail::deallocate(config.customDataTypes);
     config.customDataTypes = nullptr;
 #if UAPP_OPEN62541_VER_GE(1, 4)
@@ -59,17 +66,6 @@ static void clear(UA_ClientConfig& config) noexcept {
 #endif
     deleteClient(allocateClient(config));
 #endif
-}
-
-/* ---------------------------------------- ClientConfig ---------------------------------------- */
-
-// NOLINTNEXTLINE(*param-not-moved)
-UA_ClientConfig TypeHandler<UA_ClientConfig>::move(UA_ClientConfig&& native) noexcept {
-    return std::exchange(native, {});
-}
-
-void TypeHandler<UA_ClientConfig>::clear(UA_ClientConfig& native) noexcept {
-    opcua::clear(native);
 }
 
 ClientConfig::ClientConfig() {

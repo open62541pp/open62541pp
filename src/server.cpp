@@ -22,14 +22,14 @@ namespace opcua {
 /* ---------------------------------------- ServerConfig ---------------------------------------- */
 
 // NOLINTNEXTLINE(*param-not-moved)
-UA_ServerConfig TypeHandler<UA_ServerConfig>::move(UA_ServerConfig&& native) noexcept {
-    return std::exchange(native, {});
+UA_ServerConfig TypeHandler<UA_ServerConfig>::move(UA_ServerConfig&& config) noexcept {
+    return std::exchange(config, {});
 }
 
-void TypeHandler<UA_ServerConfig>::clear(UA_ServerConfig& native) noexcept {
-    detail::deallocate(native.customDataTypes);
-    native.customDataTypes = nullptr;
-    UA_ServerConfig_clean(&native);
+void TypeHandler<UA_ServerConfig>::clear(UA_ServerConfig& config) noexcept {
+    detail::deallocate(config.customDataTypes);
+    config.customDataTypes = nullptr;
+    UA_ServerConfig_clean(&config);
 }
 
 ServerConfig::ServerConfig() {

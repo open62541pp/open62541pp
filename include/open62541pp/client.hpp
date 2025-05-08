@@ -27,9 +27,9 @@ namespace opcua {
 
 template <>
 struct TypeHandler<UA_ClientConfig> {
-    static UA_ClientConfig copy(const UA_ClientConfig& native);
-    static UA_ClientConfig move(UA_ClientConfig&& native) noexcept;
-    static void clear(UA_ClientConfig& native) noexcept;
+    static UA_ClientConfig copy(const UA_ClientConfig& config);
+    static UA_ClientConfig move(UA_ClientConfig&& config) noexcept;
+    static void clear(UA_ClientConfig& config) noexcept;
 };
 
 /**
