@@ -20,7 +20,7 @@ public:
      * Construct a BadResult from a bad StatusCode.
      */
     constexpr explicit BadResult(StatusCode code) noexcept
-        : code_{code} {
+        : code_{std::move(code)} {
         assert(code_.isBad());
     }
 
@@ -61,7 +61,7 @@ public:
         : code_{UA_STATUSCODE_GOOD},
           maybeValue_({}) {}
 
-    // NOLINTBEGIN(hicpp-explicit-conversions)
+    // NOLINTBEGIN(*explicit-conversions)
 
     /**
      * Construct a Result from a value (lvalue) and a StatusCode.
@@ -69,7 +69,7 @@ public:
     constexpr Result(
         const T& value, StatusCode code = UA_STATUSCODE_GOOD
     ) noexcept(std::is_nothrow_copy_constructible_v<T>)
-        : code_{code},
+        : code_{std::move(code)},
           maybeValue_{value} {}
 
     /**
@@ -78,17 +78,17 @@ public:
     constexpr Result(
         T&& value, StatusCode code = UA_STATUSCODE_GOOD
     ) noexcept(std::is_nothrow_move_constructible_v<T>)
-        : code_{code},
+        : code_{std::move(code)},
           maybeValue_{std::move(value)} {}
 
     /**
      * Construct a Result from a BadResult.
      */
-    constexpr Result(BadResult error) noexcept
+    constexpr Result(const BadResult& error) noexcept
         : code_{error.code()},
           maybeValue_{std::nullopt} {}
 
-    // NOLINTEND(hicpp-explicit-conversions)
+    // NOLINTEND(*explicit-conversions)
 
     // NOLINTBEGIN(bugprone-unchecked-optional-access)
 
@@ -350,13 +350,13 @@ public:
     /**
      * Create a Result with the given StatusCode.
      */
-    constexpr Result(StatusCode code) noexcept  // NOLINT(hicpp-explicit-conversions)
-        : code_{code} {}
+    constexpr Result(StatusCode code) noexcept  // NOLINT(*explicit-conversions)
+        : code_{std::move(code)} {}
 
     /**
      * Create a Result with the given error.
      */
-    constexpr Result(BadResult error) noexcept  // NOLINT(hicpp-explicit-conversions)
+    constexpr Result(const BadResult& error) noexcept  // NOLINT(*explicit-conversions)
         : code_{error.code()} {}
 
     constexpr void operator*() const noexcept {}

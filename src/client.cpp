@@ -63,6 +63,15 @@ static void clear(UA_ClientConfig& config) noexcept {
 
 /* ---------------------------------------- ClientConfig ---------------------------------------- */
 
+// NOLINTNEXTLINE(*param-not-moved)
+UA_ClientConfig TypeHandler<UA_ClientConfig>::move(UA_ClientConfig&& native) noexcept {
+    return std::exchange(native, {});
+}
+
+void TypeHandler<UA_ClientConfig>::clear(UA_ClientConfig& native) noexcept {
+    opcua::clear(native);
+}
+
 ClientConfig::ClientConfig() {
     throwIfBad(UA_ClientConfig_setDefault(handle()));
 }
@@ -85,26 +94,6 @@ ClientConfig::ClientConfig(
     ));
 }
 #endif
-
-// NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
-ClientConfig::ClientConfig(UA_ClientConfig&& native)
-    : Wrapper{std::exchange(native, {})} {}
-
-ClientConfig::~ClientConfig() {
-    clear(native());
-}
-
-// NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
-ClientConfig::ClientConfig(ClientConfig&& other) noexcept
-    : Wrapper{std::exchange(other.native(), {})} {}
-
-ClientConfig& ClientConfig::operator=(ClientConfig&& other) noexcept {
-    if (this != &other) {
-        // clear(native());  // TODO
-        native() = std::exchange(other.native(), {});
-    }
-    return *this;
-}
 
 void ClientConfig::setLogger(LogFunction func) {
     if (func) {

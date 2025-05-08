@@ -216,10 +216,6 @@ TEST_CASE("DataType") {
         CHECK((dt.members()[2] == pointMembers[2]));
     }
 
-    SECTION("Construct from type index") {
-        CHECK(DataType(UA_TYPES_ARGUMENT) == UA_TYPES[UA_TYPES_ARGUMENT]);
-    }
-
     SECTION("Copy constructor") {
         DataType dt1{pointType};
         DataType dt2{dt1};

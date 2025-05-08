@@ -21,6 +21,17 @@ namespace opcua {
 
 /* ---------------------------------------- ServerConfig ---------------------------------------- */
 
+// NOLINTNEXTLINE(*param-not-moved)
+UA_ServerConfig TypeHandler<UA_ServerConfig>::move(UA_ServerConfig&& native) noexcept {
+    return std::exchange(native, {});
+}
+
+void TypeHandler<UA_ServerConfig>::clear(UA_ServerConfig& native) noexcept {
+    detail::deallocate(native.customDataTypes);
+    native.customDataTypes = nullptr;
+    UA_ServerConfig_clean(&native);
+}
+
 ServerConfig::ServerConfig() {
     throwIfBad(UA_ServerConfig_setDefault(handle()));
 }
@@ -54,28 +65,6 @@ ServerConfig::ServerConfig(
     ));
 }
 #endif
-
-// NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
-ServerConfig::ServerConfig(UA_ServerConfig&& native)
-    : Wrapper{std::exchange(native, {})} {}
-
-ServerConfig::~ServerConfig() {
-    detail::deallocate(native().customDataTypes);
-    native().customDataTypes = nullptr;
-    UA_ServerConfig_clean(handle());
-}
-
-// NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
-ServerConfig::ServerConfig(ServerConfig&& other) noexcept
-    : Wrapper{std::exchange(other.native(), {})} {}
-
-ServerConfig& ServerConfig::operator=(ServerConfig&& other) noexcept {
-    if (this != &other) {
-        // UA_ServerConfig_clean(handle());  // TODO
-        native() = std::exchange(other.native(), {});
-    }
-    return *this;
-}
 
 void ServerConfig::setLogger(LogFunction func) {
     if (func) {

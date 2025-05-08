@@ -1,8 +1,8 @@
 #include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/typeregistry.hpp"
-#include "open62541pp/typewrapper.hpp"
 #include "open62541pp/ua/typeregistry.hpp"
+#include "open62541pp/wrapper.hpp"
 
 using namespace opcua;
 
@@ -38,15 +38,15 @@ TEST_CASE("TypeRegistry") {
         CHECK(&getDataType<UA_AddNodesItem>() == &UA_TYPES[UA_TYPES_ADDNODESITEM]);
     }
 
-    SECTION("TypeWrapper") {
-        class Wrapper : public TypeWrapper<float, UA_TYPES_FLOAT> {};
-
-        CHECK(&TypeRegistry<Wrapper>::getDataType() == &UA_TYPES[UA_TYPES_FLOAT]);
-        CHECK(&getDataType<Wrapper>() == &UA_TYPES[UA_TYPES_FLOAT]);
-    }
-
     SECTION("Custom") {
         CHECK(&TypeRegistry<Custom>::getDataType() == &UA_TYPES[UA_TYPES_STRING]);
         CHECK(&getDataType<Custom>() == &UA_TYPES[UA_TYPES_STRING]);
+    }
+
+    SECTION("Wrapper") {
+        class CustomWrapper : public Wrapper<Custom> {};
+
+        CHECK(&TypeRegistry<CustomWrapper>::getDataType() == &UA_TYPES[UA_TYPES_STRING]);
+        CHECK(&getDataType<CustomWrapper>() == &UA_TYPES[UA_TYPES_STRING]);
     }
 }

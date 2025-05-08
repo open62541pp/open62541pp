@@ -21,20 +21,23 @@
 
 namespace opcua {
 
+template <>
+struct TypeHandler<UA_DataTypeMember> {
+    static UA_DataTypeMember copy(const UA_DataTypeMember& native);
+    static UA_DataTypeMember move(UA_DataTypeMember&& native) noexcept;
+    static void clear(UA_DataTypeMember& native) noexcept;
+};
+
+template <>
+struct TypeHandler<UA_DataType> {
+    static UA_DataType copy(const UA_DataType& native);
+    static UA_DataType move(UA_DataType&& native) noexcept;
+    static void clear(UA_DataType& native) noexcept;
+};
+
 class DataTypeMember : public Wrapper<UA_DataTypeMember> {
 public:
-    constexpr DataTypeMember() noexcept = default;
-
-    explicit DataTypeMember(const UA_DataTypeMember& native);
-    explicit DataTypeMember(UA_DataTypeMember&& native) noexcept;
-
-    ~DataTypeMember();
-
-    DataTypeMember(const DataTypeMember& other);
-    DataTypeMember(DataTypeMember&& other) noexcept;
-
-    DataTypeMember& operator=(const DataTypeMember& other);
-    DataTypeMember& operator=(DataTypeMember&& other) noexcept;
+    using Wrapper::Wrapper;
 
     std::string_view memberName() const noexcept {
 #if UAPP_HAS_TYPEDESCRIPTION
@@ -107,19 +110,7 @@ public:
  */
 class DataType : public Wrapper<UA_DataType> {
 public:
-    constexpr DataType() noexcept = default;
-
-    explicit DataType(const UA_DataType& native);
-    explicit DataType(UA_DataType&& native) noexcept;
-    explicit DataType(TypeIndex typeIndex);
-
-    ~DataType();
-
-    DataType(const DataType& other);
-    DataType(DataType&& other) noexcept;
-
-    DataType& operator=(const DataType& other);
-    DataType& operator=(DataType&& other) noexcept;
+    using Wrapper::Wrapper;
 
     std::string_view typeName() const noexcept {
 #if UAPP_HAS_TYPEDESCRIPTION

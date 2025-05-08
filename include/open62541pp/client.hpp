@@ -25,6 +25,13 @@ namespace opcua {
 
 /* ---------------------------------------- ClientConfig ---------------------------------------- */
 
+template <>
+struct TypeHandler<UA_ClientConfig> {
+    static UA_ClientConfig copy(const UA_ClientConfig& native);
+    static UA_ClientConfig move(UA_ClientConfig&& native) noexcept;
+    static void clear(UA_ClientConfig& native) noexcept;
+};
+
 /**
  * Client configuration.
  * @see UA_ClientConfig
@@ -64,14 +71,15 @@ public:
     );
 #endif
 
-    explicit ClientConfig(UA_ClientConfig&& native);
-
-    ~ClientConfig();
+    explicit ClientConfig(UA_ClientConfig&& native) noexcept
+        : Wrapper{std::move(native)} {}  // NOLINT
 
     ClientConfig(const ClientConfig&) = delete;
-    ClientConfig(ClientConfig&& other) noexcept;
+    ClientConfig(ClientConfig&&) noexcept = default;
     ClientConfig& operator=(const ClientConfig&) = delete;
-    ClientConfig& operator=(ClientConfig&& other) noexcept;
+    ClientConfig& operator=(ClientConfig&&) = default;
+
+    ~ClientConfig() noexcept = default;
 
     /// Set custom log function.
     /// Does nothing if the passed function is empty or a nullptr.
