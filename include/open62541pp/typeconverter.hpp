@@ -14,16 +14,10 @@ namespace opcua {
  * @code
  * namespace ::opcua {
  * template <>
- * struct TypeConverter<MyCustomType> {
- *     using NativeType = Guid;
- *
- *     static void fromNative(const NativeType& src, MyCustomType& dst) {
- *         // ...
- *     }
- *
- *     static void toNative(const MyCustomType& src, NativeType& dst) {
- *         // ...
- *     }
+ * struct TypeConverter<MyGuid> {
+ *     using NativeType = UA_Guid;
+ *     [[nodiscard]] static MyGuid fromNative(const UA_Guid& src) { ... }
+ *     [[nodiscard]] static UA_Guid toNative(const MyGuid& src) { ... }
  * };
  * }
  * @endcode
@@ -43,17 +37,26 @@ struct IsConvertible<T, std::void_t<decltype(TypeConverter<T>{})>> : std::true_t
 
 template <typename T, typename = std::enable_if_t<detail::IsConvertible<T>::value>>
 [[nodiscard]] constexpr T fromNative(const typename TypeConverter<T>::NativeType& src) {
-    T dst{};
-    TypeConverter<T>::fromNative(src, dst);
-    return dst;
+    using NativeType = typename TypeConverter<T>::NativeType;
+    if constexpr (std::is_invocable_r_v<T, decltype(TypeConverter<T>::fromNative), NativeType>) {
+        return TypeConverter<T>::fromNative(src);
+    } else {
+        T dst{};
+        TypeConverter<T>::fromNative(src, dst);
+        return dst;
+    }
 }
 
 template <typename T, typename = std::enable_if_t<detail::IsConvertible<T>::value>>
 [[nodiscard]] constexpr auto toNative(const T& src) -> typename TypeConverter<T>::NativeType {
     using NativeType = typename TypeConverter<T>::NativeType;
-    NativeType dst{};
-    TypeConverter<T>::toNative(src, dst);
-    return dst;
+    if constexpr (std::is_invocable_r_v<NativeType, decltype(TypeConverter<T>::toNative), T>) {
+        return TypeConverter<T>::toNative(src);
+    } else {
+        NativeType dst{};
+        TypeConverter<T>::toNative(src, dst);
+        return dst;
+    }
 }
 
 }  // namespace detail

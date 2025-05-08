@@ -20,13 +20,13 @@ struct TypeConverter<std::byte> {
     using NativeType = UA_Byte;
 
     // use `const NativeType& src` for non-primitive types
-    static void fromNative(UA_Byte src, std::byte& dst) {
-        dst = std::byte(src);
+    [[nodiscard]] static std::byte fromNative(UA_Byte src) noexcept {
+        return std::byte{src};
     }
 
     // use `const ValueType& src` for non-primitive types
-    static void toNative(std::byte src, UA_Byte& dst) {
-        dst = std::to_integer<UA_Byte>(src);
+    [[nodiscard]] static UA_Byte toNative(std::byte src) noexcept {
+        return std::to_integer<UA_Byte>(src);
     }
 };
 

@@ -333,37 +333,34 @@ std::ostream& operator<<(std::ostream& os, const String& str);
 
 template <typename T>
 struct TypeConverter<T, std::enable_if_t<detail::IsStringLike<T>::value>> {
-    using Type = T;
     using NativeType = String;
 
-    static void fromNative(const NativeType& src, Type& dst) {
-        dst = Type{src.data(), src.size()};
+    [[nodiscard]] static T fromNative(const String& src) {
+        return T{src.data(), src.size()};
     }
 
-    static void toNative(const Type& src, NativeType& dst) {
-        dst = NativeType{src.begin(), src.end()};
+    [[nodiscard]] static String toNative(const T& src) {
+        return String{src.begin(), src.end()};
     }
 };
 
 template <>
 struct TypeConverter<const char*> {
-    using Type = const char*;
     using NativeType = String;
 
-    static void toNative(Type src, NativeType& dst) {
-        dst = NativeType{src};
+    [[nodiscard]] static String toNative(const char* src) {
+        return String{src};
     }
 };
 
 template <size_t N>
-struct TypeConverter<char[N]> {  // NOLINT
-    using Type = char[N];  // NOLINT
+struct TypeConverter<char[N]> {  // NOLINT(*c-arrays)
     using NativeType = String;
 
-    static void toNative(const Type& src, NativeType& dst) {
+    [[nodiscard]] static String toNative(const char (&src)[N]) {  // NOLINT(*c-arrays)
         // string literals are null-terminated, trim null terminator if present
         const auto length = N > 0 && src[N - 1] == '\0' ? N - 1 : N;
-        dst = NativeType{std::string_view{static_cast<const char*>(src), length}};
+        return String{std::string_view{static_cast<const char*>(src), length}};
     }
 };
 
@@ -449,15 +446,15 @@ public:
 
 template <typename Clock, typename Duration>
 struct TypeConverter<std::chrono::time_point<Clock, Duration>> {
-    using Type = std::chrono::time_point<Clock, Duration>;
+    using TimePoint = std::chrono::time_point<Clock, Duration>;
     using NativeType = DateTime;
 
-    static void fromNative(const NativeType& src, Type& dst) {
-        dst = src.toTimePoint<Clock, Duration>();
+    [[nodiscard]] static TimePoint fromNative(const DateTime& src) {
+        return src.toTimePoint<Clock, Duration>();
     }
 
-    static void toNative(const Type& src, NativeType& dst) {
-        dst = DateTime::fromTimePoint(src);
+    [[nodiscard]] static DateTime toNative(const TimePoint& src) {
+        return DateTime::fromTimePoint(src);
     }
 };
 
