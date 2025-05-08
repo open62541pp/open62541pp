@@ -143,11 +143,9 @@ namespace opcua {
 
 template <>
 struct TypeConverter<std::byte> {
-    using ValueType = std::byte;
     using NativeType = UA_Byte;
-
-    static void fromNative(const NativeType& src, ValueType& dst) { /* ... */ }
-    static void toNative(const ValueType& src, NativeType& dst) { /* ... */ }
+    [[nodiscard]] static std::byte fromNative(const UA_Byte& src) { /* ... */ }
+    [[nodiscard]] static UA_Byte toNative(const std::byte& src) { /* ... */ }
 };
 
 }  // namespace opcua
