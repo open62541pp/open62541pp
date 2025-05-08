@@ -116,6 +116,7 @@ public:
  *         - `static T copy(const T&)` to copy the wrapped object,
  *         - `static T move(T&&) noexcept` to move the wrapped object,
  *         - `static void clear(T&) noexcept` to clear the wrapped object (optional).
+ *            If clear is not defined, the wrapper does not define a destructor.
  *
  * The default @ref TypeHandler provides standard copy/move behavior.
  * It can be specialized for custom behavior per type.
@@ -267,10 +268,14 @@ template <typename T, TypeIndex Index>
 using WrapperNative = Wrapper<T, TypeHandlerNative<T, Index>>;
 
 template <typename T, TypeIndex Index>
-class TypeWrapper : public WrapperNative<T, Index> {
+class [[deprecated("use WrapperNative instead")]] TypeWrapper : public WrapperNative<T, Index> {
 public:
-    using WrapperNative<T, Index>::Wrapper;
+    using WrapperNative<T, Index>::WrapperNative;
     using WrapperNative<T, Index>::operator=;
+
+    static constexpr TypeIndex typeIndex() {
+        return Index;
+    }
 };
 
 /* -------------------------------------------- Trait ------------------------------------------- */
