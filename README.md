@@ -2,7 +2,7 @@
 [doc-server]: https://open62541pp.github.io/open62541pp/classopcua_1_1Server.html
 [doc-client]: https://open62541pp.github.io/open62541pp/classopcua_1_1Client.html
 [doc-node]: https://open62541pp.github.io/open62541pp/classopcua_1_1Node.html
-[doc-typewrapper]: https://open62541pp.github.io/open62541pp/group__TypeWrapper.html
+[doc-typewrapper]: https://open62541pp.github.io/open62541pp/group__Wrapper.html
 [doc-services]: https://open62541pp.github.io/open62541pp/group__Services.html
 [doc-async-model]: https://open62541pp.github.io/open62541pp/async_model.html
 [ci]: https://github.com/open62541pp/open62541pp/actions/workflows/ci.yml

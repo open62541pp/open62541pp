@@ -28,27 +28,12 @@ wrapper.handle()->statusCode = UA_STATUSCODE_GOOD;
 The template class opcua::Wrapper is *pointer-interconvertible* with the wrapped type.
 
 Pointer interconvertibility enables lightweight casting between wrapper and native types without additional overhead.
-This is achieved by ensuring the wrapper class is a standard-layout type, as required by the C++ standard.
-
-> Two objects `a` and `b` are pointer-interconvertible if:
-> One is a standard-layout class object [wrapper] and the other is the first non-static data
-> member of that object [wrapped native type].
-> Derived classes must fulfill the requirements of standard-layout types to be convertible.
-> @see https://en.cppreference.com/w/cpp/language/static_cast#pointer-interconvertible
+This is achieved by ensuring the wrapper class is a standard-layout type, as required by the [C++ standard](https://en.cppreference.com/w/cpp/language/static_cast#pointer-interconvertible).
 
 Following function allow seamless conversions between wrapper and native objects:
 
-- Convert native objects to wrapper objects using:
-  - opcua::asWrapper(NativeType\*)
-  - opcua::asWrapper(const NativeType\*)
-  - opcua::asWrapper(NativeType&)
-  - opcua::asWrapper(const NativeType&)
-- Convert wrapper objects to native objects using:
-  - opcua::asNative(WrapperType\*)
-  - opcua::asNative(const WrapperType\*)
-  - opcua::asNative(WrapperType&)
-  - opcua::asNative(const WrapperType&)
-
+- Convert native objects to wrapper objects using @ref opcua::asWrapper<T>
+- Convert wrapper objects to native objects using @ref opcua::asNative
 
 ## Implicit conversion
 

@@ -16,10 +16,14 @@ namespace opcua {
  * Native open62541 objects can be accessed using the Wrapper::handle() member function.
  *
  * Wrapper types are pointer-interconvertible to the wrapped native type and vice versa:
- * - Use asWrapper(NativeType*) or asWrapper(const NativeType*) to cast native object pointers to wrapper object pointers.
- * - Use asWrapper(NativeType&) or asWrapper(const NativeType&) to cast native object references to wrapper object references.
- * - Use asNative(WrapperType*) or asNative(const WrapperType*) to cast wrapper object pointers to native object pointers.
- * - Use asNative(WrapperType&) or asNative(const WrapperType&) to cast wrapper object references to native object references.
+ * - Use asNative(T*) or asNative(const T*) to cast wrapper object pointers to
+ * native object pointers.
+ * - Use asNative(T&) or asNative(const T&) to cast wrapper object references to
+ * native object references.
+ * - Use asWrapper<T>(typename T::NativeType*) or asWrapper<T>(const typename T::NativeType*) to cast native object pointers to
+ * wrapper object pointers.
+ * - Use asWrapper<T>(typename T::NativeType&) or asWrapper<T>(const typename T::NativeType&) to cast native object references to
+ * wrapper object references.
  *
  * According to the standard:
  * > Two objects `a` and `b` are pointer-interconvertible if:
@@ -27,6 +31,8 @@ namespace opcua {
  * > member of that object [wrapped native type].
  * Derived classes must fulfill the requirements of standard-layout types to be convertible.
  * @see https://en.cppreference.com/w/cpp/language/static_cast#pointer-interconvertible
+ * 
+ * @{
  */
 
 /**
@@ -41,8 +47,6 @@ namespace opcua {
  *     static constexpr void clear(MyType& obj) noexcept { ... }
  * };
  * @endcode
- *
- * @ingroup Wrapper
  */
 template <typename T>
 struct TypeHandler {
@@ -66,7 +70,6 @@ struct TypeHandler {
  * @tparam Index Type index of the @ref UA_TYPES array, e.g. `UA_TYPES_STRING`
  *
  * @see TypeHandler
- * @ingroup Wrapper
  */
 template <typename T, TypeIndex Index>
 struct TypeHandlerNative {
@@ -124,7 +127,6 @@ public:
  * @ref WrapperNative is a convenience alias for Wrapper using TypeHandlerNative.
  *
  * @warning No virtual constructor is defined; do not implement a destructor in derived classes.
- * @ingroup Wrapper
  */
 template <typename T, typename Handler = TypeHandler<T>>
 class Wrapper
@@ -258,11 +260,9 @@ private:
     T native_{};
 };
 
-
 /**
  * Convenience alias for Wrapper using TypeHandlerNative.
  * @see Wrapper
- * @ingroup Wrapper
  */
 template <typename T, TypeIndex Index>
 using WrapperNative = Wrapper<T, TypeHandlerNative<T, Index>>;
@@ -293,121 +293,81 @@ struct IsWrapper {
     static constexpr bool value = type::value;
 };
 
+template <typename T>
+struct IsPointerInterconvertibleWrapper
+    : std::conjunction<
+          IsWrapper<T>,
+          std::is_standard_layout<T>,
+          std::is_standard_layout<typename T::NativeType>,
+          std::bool_constant<sizeof(T) == sizeof(typename T::NativeType)>> {};
+
 }  // namespace detail
 
 /* ------------------------------ Cast native type to wrapper type ------------------------------ */
 
-namespace detail {
-
-template <typename WrapperType>
-struct WrapperConversion {
-    static_assert(detail::IsWrapper<WrapperType>::value);
-    static_assert(std::is_standard_layout_v<WrapperType>);
-
-    using NativeType = typename WrapperType::NativeType;
-
-    // NOLINTBEGIN(bugprone-casting-through-void)
-    static constexpr WrapperType* asWrapper(NativeType* native) noexcept {
-        return static_cast<WrapperType*>(static_cast<void*>(native));
-    }
-
-    static constexpr const WrapperType* asWrapper(const NativeType* native) noexcept {
-        return static_cast<const WrapperType*>(static_cast<const void*>(native));
-    }
-
-    static constexpr WrapperType& asWrapper(NativeType& native) noexcept {
-        return *asWrapper(&native);
-    }
-
-    static constexpr const WrapperType& asWrapper(const NativeType& native) noexcept {
-        return *asWrapper(&native);
-    }
-
-    static constexpr NativeType* asNative(WrapperType* wrapper) noexcept {
-        return static_cast<NativeType*>(static_cast<void*>(wrapper));
-    }
-
-    static constexpr const NativeType* asNative(const WrapperType* wrapper) noexcept {
-        return static_cast<const NativeType*>(static_cast<const void*>(wrapper));
-    }
-
-    static constexpr NativeType& asNative(WrapperType& wrapper) noexcept {
-        return *asNative(&wrapper);
-    }
-
-    static constexpr const NativeType& asNative(const WrapperType& wrapper) noexcept {
-        return *asNative(&wrapper);
-    }
-
-    // NOLINTEND(bugprone-casting-through-void)
-};
-
-}  // namespace detail
-
-/**
- * @ingroup Wrapper
- * @{
- */
+// NOLINTBEGIN(*casting-through-void)
 
 /// Cast native object pointers to Wrapper object pointers.
-/// This is especially helpful to avoid copies in getter methods of composed types.
-/// @see https://github.com/open62541pp/open62541pp/issues/30
 /// @relatesalso Wrapper
-template <typename WrapperType, typename NativeType = typename WrapperType::NativeType>
-constexpr WrapperType* asWrapper(NativeType* native) noexcept {
-    return detail::WrapperConversion<WrapperType>::asWrapper(native);
+template <typename T>
+constexpr T* asWrapper(typename T::NativeType* native) noexcept {
+    static_assert(detail::IsPointerInterconvertibleWrapper<T>::value);
+    return static_cast<T*>(static_cast<void*>(native));
 }
 
-/// @copydoc asWrapper(NativeType*)
+/// @copydoc asWrapper(typename T::NativeType*)
 /// @relatesalso Wrapper
-template <typename WrapperType, typename NativeType = typename WrapperType::NativeType>
-constexpr const WrapperType* asWrapper(const NativeType* native) noexcept {
-    return detail::WrapperConversion<WrapperType>::asWrapper(native);
+template <typename T>
+constexpr const T* asWrapper(const typename T::NativeType* native) noexcept {
+    static_assert(detail::IsPointerInterconvertibleWrapper<T>::value);
+    return static_cast<const T*>(static_cast<const void*>(native));
 }
 
 /// Cast native object references to Wrapper object references.
-/// @copydetails asWrapper(NativeType*)
 /// @relatesalso Wrapper
-template <typename WrapperType, typename NativeType = typename WrapperType::NativeType>
-constexpr WrapperType& asWrapper(NativeType& native) noexcept {
-    return detail::WrapperConversion<WrapperType>::asWrapper(native);
+template <typename T>
+constexpr T& asWrapper(typename T::NativeType& native) noexcept {
+    return *asWrapper<T>(&native);
 }
 
-/// @copydoc asWrapper(NativeType&)
+/// @copydoc asWrapper(typename T::NativeType&)
 /// @relatesalso Wrapper
-template <typename WrapperType, typename NativeType = typename WrapperType::NativeType>
-constexpr const WrapperType& asWrapper(const NativeType& native) noexcept {
-    return detail::WrapperConversion<WrapperType>::asWrapper(native);
+template <typename T>
+constexpr const T& asWrapper(const typename T::NativeType& native) noexcept {
+    return *asWrapper<T>(&native);
 }
 
 /// Cast Wrapper object pointers to native object pointers.
 /// @relatesalso Wrapper
-template <typename WrapperType, typename NativeType = typename WrapperType::NativeType>
-constexpr NativeType* asNative(WrapperType* wrapper) noexcept {
-    return detail::WrapperConversion<WrapperType>::asNative(wrapper);
+template <typename T>
+constexpr typename T::NativeType* asNative(T* wrapper) noexcept {
+    static_assert(detail::IsPointerInterconvertibleWrapper<T>::value);
+    return static_cast<typename T::NativeType*>(static_cast<void*>(wrapper));
 }
 
-/// @copydoc asNative(WrapperType*)
+/// @copydoc asNative(T*)
 /// @relatesalso Wrapper
-template <typename WrapperType, typename NativeType = typename WrapperType::NativeType>
-constexpr const NativeType* asNative(const WrapperType* wrapper) noexcept {
-    return detail::WrapperConversion<WrapperType>::asNative(wrapper);
+template <typename T>
+constexpr const typename T::NativeType* asNative(const T* wrapper) noexcept {
+    static_assert(detail::IsPointerInterconvertibleWrapper<T>::value);
+    return static_cast<const typename T::NativeType*>(static_cast<const void*>(wrapper));
 }
 
 /// Cast Wrapper object references to native object references.
-/// @copydetails asNative(WrapperType*)
 /// @relatesalso Wrapper
-template <typename WrapperType, typename NativeType = typename WrapperType::NativeType>
-constexpr NativeType& asNative(WrapperType& wrapper) noexcept {
-    return detail::WrapperConversion<WrapperType>::asNative(wrapper);
+template <typename T>
+constexpr typename T::NativeType& asNative(T& wrapper) noexcept {
+    return *asNative(&wrapper);
 }
 
-/// @copydoc asNative(WrapperType&)
+/// @copydoc asNative(T&)
 /// @relatesalso Wrapper
-template <typename WrapperType, typename NativeType = typename WrapperType::NativeType>
-constexpr const NativeType& asNative(const WrapperType& wrapper) noexcept {
-    return detail::WrapperConversion<WrapperType>::asNative(wrapper);
+template <typename T>
+constexpr const typename T::NativeType& asNative(const T& wrapper) noexcept {
+    return *asNative(&wrapper);
 }
+
+// NOLINTEND(*casting-through-void)
 
 /* --------------------------------- TypeRegistry specialization -------------------------------- */
 
