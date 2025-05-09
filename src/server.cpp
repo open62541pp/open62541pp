@@ -1,21 +1,15 @@
 #include "open62541pp/server.hpp"
 
-#include <atomic>
 #include <cassert>
 #include <mutex>
 #include <utility>  // move
 
 #include "open62541pp/datatype.hpp"
-#include "open62541pp/detail/result_utils.hpp"  // tryInvoke
 #include "open62541pp/detail/server_context.hpp"
 #include "open62541pp/event.hpp"
 #include "open62541pp/exception.hpp"
-#include "open62541pp/node.hpp"
 #include "open62541pp/services/attribute_highlevel.hpp"
 #include "open62541pp/session.hpp"
-#include "open62541pp/types.hpp"
-#include "open62541pp/ua/types.hpp"
-#include "open62541pp/wrapper.hpp"  // asWrapper
 
 namespace opcua {
 

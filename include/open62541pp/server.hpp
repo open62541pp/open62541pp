@@ -18,6 +18,7 @@
 #include "open62541pp/subscription.hpp"  // TODO: remove with Server::createSubscription
 #include "open62541pp/types.hpp"
 #include "open62541pp/ua/nodeids.hpp"
+#include "open62541pp/ua/types.hpp"
 #include "open62541pp/wrapper.hpp"
 
 #include "open62541pp/plugin/accesscontrol.hpp"

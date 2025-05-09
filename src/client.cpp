@@ -9,7 +9,6 @@
 #include "open62541pp/detail/client_context.hpp"
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/exception.hpp"
-#include "open62541pp/node.hpp"
 #include "open62541pp/result.hpp"
 #include "open62541pp/services/attribute_highlevel.hpp"  // readValue
 #include "open62541pp/services/subscription.hpp"
