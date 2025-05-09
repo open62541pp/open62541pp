@@ -145,6 +145,7 @@ function(deprecated_header header_old header_new)
 endfunction()
 deprecated_header(nodeids.hpp ua/nodeids.hpp)
 deprecated_header(types_composed.hpp ua/types.hpp)
+deprecated_header(typewrapper.hpp wrapper.hpp)
 
 add_library(
     open62541pp

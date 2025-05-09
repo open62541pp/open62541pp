@@ -9,7 +9,6 @@
 #include "open62541pp/detail/client_context.hpp"
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/exception.hpp"
-#include "open62541pp/node.hpp"
 #include "open62541pp/result.hpp"
 #include "open62541pp/services/attribute_highlevel.hpp"  // readValue
 #include "open62541pp/services/subscription.hpp"
@@ -44,7 +43,14 @@ static void deleteClient(UA_Client* client) noexcept {
     UA_Client_delete(client);
 }
 
-static void clear(UA_ClientConfig& config) noexcept {
+/* ---------------------------------------- ClientConfig ---------------------------------------- */
+
+// NOLINTNEXTLINE(*param-not-moved)
+UA_ClientConfig TypeHandler<UA_ClientConfig>::move(UA_ClientConfig&& config) noexcept {
+    return std::exchange(config, {});
+}
+
+void TypeHandler<UA_ClientConfig>::clear(UA_ClientConfig& config) noexcept {
     detail::deallocate(config.customDataTypes);
     config.customDataTypes = nullptr;
 #if UAPP_OPEN62541_VER_GE(1, 4)
@@ -60,8 +66,6 @@ static void clear(UA_ClientConfig& config) noexcept {
     deleteClient(allocateClient(config));
 #endif
 }
-
-/* ---------------------------------------- ClientConfig ---------------------------------------- */
 
 ClientConfig::ClientConfig() {
     throwIfBad(UA_ClientConfig_setDefault(handle()));
@@ -85,26 +89,6 @@ ClientConfig::ClientConfig(
     ));
 }
 #endif
-
-// NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
-ClientConfig::ClientConfig(UA_ClientConfig&& native)
-    : Wrapper{std::exchange(native, {})} {}
-
-ClientConfig::~ClientConfig() {
-    clear(native());
-}
-
-// NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
-ClientConfig::ClientConfig(ClientConfig&& other) noexcept
-    : Wrapper{std::exchange(other.native(), {})} {}
-
-ClientConfig& ClientConfig::operator=(ClientConfig&& other) noexcept {
-    if (this != &other) {
-        // clear(native());  // TODO
-        native() = std::exchange(other.native(), {});
-    }
-    return *this;
-}
 
 void ClientConfig::setLogger(LogFunction func) {
     if (func) {

@@ -112,73 +112,30 @@ void addDataTypes(const UA_DataTypeArray*& head, Span<const DataType> types) {
 
 }  // namespace detail
 
-DataTypeMember::DataTypeMember(const UA_DataTypeMember& native)
-    : Wrapper{detail::copy(native)} {}
-
-DataTypeMember::DataTypeMember(UA_DataTypeMember&& native) noexcept  // NOLINT
-    : Wrapper{std::exchange(native, {})} {}
-
-DataTypeMember::~DataTypeMember() {
-    detail::clear(native());
+UA_DataTypeMember TypeHandler<UA_DataTypeMember>::copy(const UA_DataTypeMember& native) {
+    return detail::copy(native);
 }
 
-DataTypeMember::DataTypeMember(const DataTypeMember& other)
-    : Wrapper{detail::copy(other.native())} {}
-
-DataTypeMember::DataTypeMember(DataTypeMember&& other) noexcept
-    : Wrapper{std::exchange(other.native(), {})} {}
-
-DataTypeMember& DataTypeMember::operator=(const DataTypeMember& other) {
-    if (this != &other) {
-        detail::clear(native());
-        native() = detail::copy(other.native());
-    }
-    return *this;
+/// NOLINTNEXTLINE(*param-not-moved)
+UA_DataTypeMember TypeHandler<UA_DataTypeMember>::move(UA_DataTypeMember&& native) noexcept {
+    return std::exchange(native, {});
 }
 
-DataTypeMember& DataTypeMember::operator=(DataTypeMember&& other) noexcept {
-    if (this != &other) {
-        detail::clear(native());
-        native() = std::exchange(other.native(), {});
-    }
-    return *this;
+void TypeHandler<UA_DataTypeMember>::clear(UA_DataTypeMember& native) noexcept {
+    detail::clear(native);
 }
 
-DataType::DataType(const UA_DataType& native)
-    : Wrapper{detail::copy(native)} {}
-
-DataType::DataType(UA_DataType&& native) noexcept  // NOLINT
-    : Wrapper{std::exchange(native, {})} {}
-
-DataType::DataType(TypeIndex typeIndex)
-    : DataType{UA_TYPES[typeIndex]} {  // NOLINT
-    assert(typeIndex < UA_TYPES_COUNT);
+UA_DataType TypeHandler<UA_DataType>::copy(const UA_DataType& native) {
+    return detail::copy(native);
 }
 
-DataType::~DataType() {
-    detail::clear(native());
+/// NOLINTNEXTLINE(*param-not-moved)
+UA_DataType TypeHandler<UA_DataType>::move(UA_DataType&& native) noexcept {
+    return std::exchange(native, {});
 }
 
-DataType::DataType(const DataType& other)
-    : Wrapper{detail::copy(other.native())} {}
-
-DataType::DataType(DataType&& other) noexcept
-    : Wrapper{std::exchange(other.native(), {})} {}
-
-DataType& DataType::operator=(const DataType& other) {
-    if (this != &other) {
-        detail::clear(native());
-        native() = detail::copy(other.native());
-    }
-    return *this;
-}
-
-DataType& DataType::operator=(DataType&& other) noexcept {
-    if (this != &other) {
-        detail::clear(native());
-        native() = std::exchange(other.native(), {});
-    }
-    return *this;
+void TypeHandler<UA_DataType>::clear(UA_DataType& native) noexcept {
+    detail::clear(native);
 }
 
 void DataType::setMembers(Span<const DataTypeMember> members) {

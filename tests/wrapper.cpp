@@ -3,7 +3,7 @@
 #include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/detail/string_utils.hpp"  // detail::toStringView
-#include "open62541pp/typewrapper.hpp"
+#include "open62541pp/wrapper.hpp"
 
 using namespace opcua;
 
@@ -75,6 +75,68 @@ TEST_CASE("Wrapper") {
     }
 }
 
+TEST_CASE("Wrapper with native type") {
+    using StringWrapper = Wrapper<UA_String, TypeHandlerNative<UA_String, UA_TYPES_STRING>>;
+    using DoubleWrapper = Wrapper<double, TypeHandlerNative<double, UA_TYPES_DOUBLE>>;
+
+    SECTION("Copy constructor") {
+        StringWrapper wrapper{UA_STRING_ALLOC("test")};
+        StringWrapper wrapperConstructor{wrapper};
+
+        CHECK(wrapperConstructor.handle()->data != wrapper.handle()->data);
+        CHECK(detail::toStringView(*wrapperConstructor.handle()) == "test");
+    }
+
+    SECTION("Copy constructor with native type") {
+        double value = 11.11;
+        DoubleWrapper wrapper{value};
+        CHECK(*wrapper.handle() == 11.11);
+    }
+
+    SECTION("Move Constructor with native type") {
+        DoubleWrapper wrapper{11.11};
+        CHECK(*wrapper.handle() == 11.11);
+    }
+
+    SECTION("Move constructor") {
+        StringWrapper wrapper{UA_STRING_ALLOC("test")};
+        StringWrapper wrapperConstructor{std::move(wrapper)};
+
+        CHECK(wrapper.handle()->data == nullptr);
+        CHECK(detail::toStringView(*wrapperConstructor.handle()) == "test");
+    }
+
+    SECTION("Copy assignment") {
+        StringWrapper wrapper{UA_STRING_ALLOC("test")};
+        StringWrapper wrapperAssignment = wrapper;
+
+        CHECK(wrapperAssignment.handle()->data != wrapper.handle()->data);
+        CHECK(detail::toStringView(*wrapperAssignment.handle()) == "test");
+    }
+
+    SECTION("Copy assignment with native type") {
+        StringWrapper wrapper{UA_STRING_ALLOC("overwrite")};
+        UA_String str = UA_STRING_ALLOC("test");
+        wrapper = str;
+        CHECK(detail::toStringView(*wrapper.handle()) == "test");
+        UA_clear(&str, &UA_TYPES[UA_TYPES_STRING]);
+    }
+
+    SECTION("Move assignment") {
+        StringWrapper wrapper{UA_STRING_ALLOC("test")};
+        StringWrapper wrapperAssignment = std::move(wrapper);
+
+        CHECK(wrapper.handle()->data == nullptr);
+        CHECK(detail::toStringView(*wrapperAssignment.handle()) == "test");
+    }
+
+    SECTION("Move assignment with native type") {
+        StringWrapper wrapper{UA_STRING_ALLOC("overwrite")};
+        wrapper = UA_STRING_ALLOC("test");
+        CHECK(detail::toStringView(*wrapper.handle()) == "test");
+    }
+}
+
 TEST_CASE("asWrapper / asNative") {
     class Int32Wrapper : public Wrapper<int32_t> {
     public:
@@ -120,64 +182,5 @@ TEST_CASE("asWrapper / asNative") {
             const int32_t& native = asNative(wrapper);
             CHECK(native == 1);
         }
-    }
-}
-
-TEST_CASE("TypeWrapper") {
-    SECTION("Copy constructor") {
-        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper{UA_STRING_ALLOC("test")};
-        TypeWrapper<UA_String, UA_TYPES_STRING> wrapperConstructor{wrapper};
-
-        CHECK(wrapperConstructor.handle()->data != wrapper.handle()->data);
-        CHECK(detail::toStringView(*wrapperConstructor.handle()) == "test");
-    }
-
-    SECTION("Copy constructor with native type") {
-        double value = 11.11;
-        TypeWrapper<double, UA_TYPES_DOUBLE> wrapper{value};
-        CHECK(*wrapper.handle() == 11.11);
-    }
-
-    SECTION("Move Constructor with native type") {
-        TypeWrapper<double, UA_TYPES_DOUBLE> wrapper{11.11};
-        CHECK(*wrapper.handle() == 11.11);
-    }
-
-    SECTION("Move constructor") {
-        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper{UA_STRING_ALLOC("test")};
-        TypeWrapper<UA_String, UA_TYPES_STRING> wrapperConstructor{std::move(wrapper)};
-
-        CHECK(wrapper.handle()->data == nullptr);
-        CHECK(detail::toStringView(*wrapperConstructor.handle()) == "test");
-    }
-
-    SECTION("Copy assignment") {
-        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper{UA_STRING_ALLOC("test")};
-        TypeWrapper<UA_String, UA_TYPES_STRING> wrapperAssignment = wrapper;
-
-        CHECK(wrapperAssignment.handle()->data != wrapper.handle()->data);
-        CHECK(detail::toStringView(*wrapperAssignment.handle()) == "test");
-    }
-
-    SECTION("Copy assignment with native type") {
-        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper{UA_STRING_ALLOC("overwrite")};
-        UA_String str = UA_STRING_ALLOC("test");
-        wrapper = str;
-        CHECK(detail::toStringView(*wrapper.handle()) == "test");
-        UA_clear(&str, &UA_TYPES[UA_TYPES_STRING]);
-    }
-
-    SECTION("Move assignment") {
-        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper{UA_STRING_ALLOC("test")};
-        TypeWrapper<UA_String, UA_TYPES_STRING> wrapperAssignment = std::move(wrapper);
-
-        CHECK(wrapper.handle()->data == nullptr);
-        CHECK(detail::toStringView(*wrapperAssignment.handle()) == "test");
-    }
-
-    SECTION("Move assignment with native type") {
-        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper{UA_STRING_ALLOC("overwrite")};
-        wrapper = UA_STRING_ALLOC("test");
-        CHECK(detail::toStringView(*wrapper.handle()) == "test");
     }
 }

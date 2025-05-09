@@ -18,7 +18,6 @@
 #include "open62541pp/typeconverter.hpp"
 #include "open62541pp/typeregistry.hpp"
 #include "open62541pp/types.hpp"
-#include "open62541pp/typewrapper.hpp"
 #include "open62541pp/wrapper.hpp"
 
 #include "open62541pp/plugin/accesscontrol.hpp"

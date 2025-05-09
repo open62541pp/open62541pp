@@ -4,7 +4,7 @@
 
 Wrapper types in **open62541pp** provide a modern C++ interface to native open62541 objects. They maintain full compatibility with native types while adding features like RAII and pointer interconvertibility.
 
-All wrapper classes derive from opcua::Wrapper. The template type opcua::TypeWrapper extends opcua::Wrapper class to safely copy, move and delete native types with heap-allocated memory.
+All wrapper classes are based on opcua::Wrapper.
 
 ## Access native object
 
@@ -25,30 +25,15 @@ wrapper.handle()->statusCode = UA_STATUSCODE_GOOD;
 
 ## Conversion
 
-Both opcua::Wrapper and opcua::TypeWrapper are *pointer-interconvertible* with the wrapped native type.
+The template class opcua::Wrapper is *pointer-interconvertible* with the wrapped type.
 
 Pointer interconvertibility enables lightweight casting between wrapper and native types without additional overhead.
-This is achieved by ensuring the wrapper class is a standard-layout type, as required by the C++ standard.
-
-> Two objects `a` and `b` are pointer-interconvertible if:
-> One is a standard-layout class object [wrapper] and the other is the first non-static data
-> member of that object [wrapped native type].
-> Derived classes must fulfill the requirements of standard-layout types to be convertible.
-> @see https://en.cppreference.com/w/cpp/language/static_cast#pointer-interconvertible
+This is achieved by ensuring the wrapper class is a standard-layout type, as required by the [C++ standard](https://en.cppreference.com/w/cpp/language/static_cast#pointer-interconvertible).
 
 Following function allow seamless conversions between wrapper and native objects:
 
-- Convert native objects to wrapper objects using:
-  - opcua::asWrapper(NativeType\*)
-  - opcua::asWrapper(const NativeType\*)
-  - opcua::asWrapper(NativeType&)
-  - opcua::asWrapper(const NativeType&)
-- Convert wrapper objects to native objects using:
-  - opcua::asNative(WrapperType\*)
-  - opcua::asNative(const WrapperType\*)
-  - opcua::asNative(WrapperType&)
-  - opcua::asNative(const WrapperType&)
-
+- Convert native objects to wrapper objects using @ref opcua::asWrapper<T>
+- Convert wrapper objects to native objects using @ref opcua::asNative
 
 ## Implicit conversion
 
@@ -87,17 +72,18 @@ typedef struct {
 ```
 
 In this case, the struct contains heap-allocated members (`nodeId`, `indexRange`, and `dataEncoding`).
-To manage these members correctly, our wrapper should inherit from opcua::TypeWrapper.
+To manage such members safely, our wrapper should inherit from opcua::Wrapper and use the opcua::TypeHandlerNative policy, which provides appropriate handling for native open62541 types.
+The opcua::WrapperNative alias simplifies this by avoiding the need to repeat template parameters.
 
 ### Minimal wrapper class
 
 A minimal wrapper implementation looks like this:
 
 ```cpp
-class ReadValueId : public TypeWrapper<UA_ReadValueId, UA_TYPES_READVALUEID> {
+class ReadValueId : public opcua::WrapperNative<UA_ReadValueId, UA_TYPES_READVALUEID> {
 public:
     // Inherit constructors
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 };
 ```
 
@@ -111,24 +97,24 @@ rv->attributeId = 1;
 
 ### Adding getters and setters
 
-To handle nested members like `nodeId`, we can use the opcua::asWrapper helper function to access these members as their corresponding wrapper types. Below is the enhanced wrapper class with getter and setter methods:
+To handle nested members like `nodeId`, we can use the @ref opcua::asWrapper helper function to access these members as their corresponding wrapper types. Below is the enhanced wrapper class with getter and setter methods:
 
 ```cpp
-class ReadValueId : public opcua::TypeWrapper<UA_ReadValueId, UA_TYPES_READVALUEID> {
+class ReadValueId : public opcua::WrapperNative<UA_ReadValueId, UA_TYPES_READVALUEID> {
 public:
     // Inherit constructors
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     void setNodeId(opcua::NodeId nodeId) {
-        asWrapper<opcua::NodeId>(handle()->nodeId) = std::move(nodeId);
+        opcua::asWrapper<opcua::NodeId>(handle()->nodeId) = std::move(nodeId);
     }
 
     opcua::NodeId& nodeId() const noexcept {
-        return asWrapper<opcua::NodeId>(handle()->nodeId);
+        return opcua::asWrapper<opcua::NodeId>(handle()->nodeId);
     }
 
     const opcua::NodeId& nodeId() noexcept {
-        return asWrapper<opcua::NodeId>(handle()->nodeId);
+        return opcua::asWrapper<opcua::NodeId>(handle()->nodeId);
     }
 
     uint32_t attributeId() const noexcept {

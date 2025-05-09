@@ -17,9 +17,9 @@
 #include "open62541pp/span.hpp"
 #include "open62541pp/typeregistry.hpp"  // getDataType
 #include "open62541pp/types.hpp"
-#include "open62541pp/typewrapper.hpp"
 #include "open62541pp/ua/nodeids.hpp"  // ReferenceTypeId
 #include "open62541pp/ua/typeregistry.hpp"
+#include "open62541pp/wrapper.hpp"
 
 #ifndef UA_DEFAULT_ATTRIBUTES_DEFINED
 #define UA_DEFAULT_ATTRIBUTES_DEFINED
@@ -92,9 +92,9 @@ using IntegerId = uint32_t;
  * UA_EnumValueType wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.39
  */
-class EnumValueType : public TypeWrapper<UA_EnumValueType, UA_TYPES_ENUMVALUETYPE> {
+class EnumValueType : public WrapperNative<UA_EnumValueType, UA_TYPES_ENUMVALUETYPE> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     EnumValueType(int64_t value, LocalizedText displayName, LocalizedText description) {
         handle()->value = value;
@@ -124,9 +124,9 @@ enum class ApplicationType : int32_t {
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.2
  */
 class ApplicationDescription
-    : public TypeWrapper<UA_ApplicationDescription, UA_TYPES_APPLICATIONDESCRIPTION> {
+    : public WrapperNative<UA_ApplicationDescription, UA_TYPES_APPLICATIONDESCRIPTION> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     ApplicationDescription(
         std::string_view applicationUri,
@@ -160,9 +160,9 @@ public:
  * UA_RequestHeader wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.33
  */
-class RequestHeader : public TypeWrapper<UA_RequestHeader, UA_TYPES_REQUESTHEADER> {
+class RequestHeader : public WrapperNative<UA_RequestHeader, UA_TYPES_REQUESTHEADER> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     RequestHeader(
         NodeId authenticationToken,
@@ -195,9 +195,9 @@ public:
  * UA_ResponseHeader wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.34
  */
-class ResponseHeader : public TypeWrapper<UA_ResponseHeader, UA_TYPES_RESPONSEHEADER> {
+class ResponseHeader : public WrapperNative<UA_ResponseHeader, UA_TYPES_RESPONSEHEADER> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(DateTime, timestamp)
     UAPP_GETTER(IntegerId, requestHandle)
@@ -238,9 +238,9 @@ enum class UserTokenType : int32_t {
  * UA_UserTokenPolicy wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.42
  */
-class UserTokenPolicy : public TypeWrapper<UA_UserTokenPolicy, UA_TYPES_USERTOKENPOLICY> {
+class UserTokenPolicy : public WrapperNative<UA_UserTokenPolicy, UA_TYPES_USERTOKENPOLICY> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UserTokenPolicy(
         std::string_view policyId,
@@ -268,9 +268,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.14
  */
 class EndpointDescription
-    : public TypeWrapper<UA_EndpointDescription, UA_TYPES_ENDPOINTDESCRIPTION> {
+    : public WrapperNative<UA_EndpointDescription, UA_TYPES_ENDPOINTDESCRIPTION> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(String, endpointUrl)
     UAPP_GETTER_WRAPPER(ApplicationDescription, server)
@@ -375,10 +375,8 @@ constexpr std::true_type isBitmaskEnum(NodeAttributesMask);
     UAPP_NODEATTR_WRAPPER(                                                                         \
         LocalizedText, Description, description, UA_NODEATTRIBUTESMASK_DESCRIPTION                 \
     )                                                                                              \
-    UAPP_NODEATTR_CAST(                                                                         \
-        Bitmask<WriteMask>, WriteMask, writeMask, UA_NODEATTRIBUTESMASK_WRITEMASK                  \
-    )                                                                                              \
-    UAPP_NODEATTR_CAST(                                                                         \
+    UAPP_NODEATTR_CAST(Bitmask<WriteMask>, WriteMask, writeMask, UA_NODEATTRIBUTESMASK_WRITEMASK)  \
+    UAPP_NODEATTR_CAST(                                                                            \
         Bitmask<WriteMask>, UserWriteMask, userWriteMask, UA_NODEATTRIBUTESMASK_USERWRITEMASK      \
     )
 
@@ -388,9 +386,9 @@ constexpr std::true_type isBitmaskEnum(NodeAttributesMask);
  * UA_NodeAttributes wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.24
  */
-class NodeAttributes : public TypeWrapper<UA_NodeAttributes, UA_TYPES_NODEATTRIBUTES> {
+class NodeAttributes : public WrapperNative<UA_NodeAttributes, UA_TYPES_NODEATTRIBUTES> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_NODEATTR_COMMON
 };
@@ -399,9 +397,9 @@ public:
  * UA_ObjectAttributes wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.24.2
  */
-class ObjectAttributes : public TypeWrapper<UA_ObjectAttributes, UA_TYPES_OBJECTATTRIBUTES> {
+class ObjectAttributes : public WrapperNative<UA_ObjectAttributes, UA_TYPES_OBJECTATTRIBUTES> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     /// Construct with default attribute definitions.
     ObjectAttributes()
@@ -417,9 +415,10 @@ public:
  * UA_VariableAttributes wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.24.3
  */
-class VariableAttributes : public TypeWrapper<UA_VariableAttributes, UA_TYPES_VARIABLEATTRIBUTES> {
+class VariableAttributes
+    : public WrapperNative<UA_VariableAttributes, UA_TYPES_VARIABLEATTRIBUTES> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     /// Construct with default attribute definitions.
     VariableAttributes()
@@ -481,9 +480,9 @@ public:
  * UA_MethodAttributes wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.24.4
  */
-class MethodAttributes : public TypeWrapper<UA_MethodAttributes, UA_TYPES_METHODATTRIBUTES> {
+class MethodAttributes : public WrapperNative<UA_MethodAttributes, UA_TYPES_METHODATTRIBUTES> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     /// Construct with default attribute definitions.
     MethodAttributes()
@@ -499,9 +498,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.24.5
  */
 class ObjectTypeAttributes
-    : public TypeWrapper<UA_ObjectTypeAttributes, UA_TYPES_OBJECTTYPEATTRIBUTES> {
+    : public WrapperNative<UA_ObjectTypeAttributes, UA_TYPES_OBJECTTYPEATTRIBUTES> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     /// Construct with default attribute definitions.
     ObjectTypeAttributes()
@@ -516,9 +515,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.24.6
  */
 class VariableTypeAttributes
-    : public TypeWrapper<UA_VariableTypeAttributes, UA_TYPES_VARIABLETYPEATTRIBUTES> {
+    : public WrapperNative<UA_VariableTypeAttributes, UA_TYPES_VARIABLETYPEATTRIBUTES> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     /// Construct with default attribute definitions.
     VariableTypeAttributes()
@@ -566,9 +565,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.24.7
  */
 class ReferenceTypeAttributes
-    : public TypeWrapper<UA_ReferenceTypeAttributes, UA_TYPES_REFERENCETYPEATTRIBUTES> {
+    : public WrapperNative<UA_ReferenceTypeAttributes, UA_TYPES_REFERENCETYPEATTRIBUTES> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     /// Construct with default attribute definitions.
     ReferenceTypeAttributes()
@@ -586,9 +585,10 @@ public:
  * UA_DataTypeAttributes wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.24.8
  */
-class DataTypeAttributes : public TypeWrapper<UA_DataTypeAttributes, UA_TYPES_DATATYPEATTRIBUTES> {
+class DataTypeAttributes
+    : public WrapperNative<UA_DataTypeAttributes, UA_TYPES_DATATYPEATTRIBUTES> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     /// Construct with default attribute definitions.
     DataTypeAttributes()
@@ -602,9 +602,9 @@ public:
  * UA_ViewAttributes wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.24.9
  */
-class ViewAttributes : public TypeWrapper<UA_ViewAttributes, UA_TYPES_VIEWATTRIBUTES> {
+class ViewAttributes : public WrapperNative<UA_ViewAttributes, UA_TYPES_VIEWATTRIBUTES> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     /// Construct with default attribute definitions.
     ViewAttributes()
@@ -629,9 +629,9 @@ public:
  * UA_UserIdentityToken wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.41
  */
-class UserIdentityToken : public TypeWrapper<UA_UserIdentityToken, UA_TYPES_USERIDENTITYTOKEN> {
+class UserIdentityToken : public WrapperNative<UA_UserIdentityToken, UA_TYPES_USERIDENTITYTOKEN> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(String, policyId)
 };
@@ -641,9 +641,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.41.3
  */
 class AnonymousIdentityToken
-    : public TypeWrapper<UA_AnonymousIdentityToken, UA_TYPES_ANONYMOUSIDENTITYTOKEN> {
+    : public WrapperNative<UA_AnonymousIdentityToken, UA_TYPES_ANONYMOUSIDENTITYTOKEN> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(String, policyId)
 };
@@ -653,9 +653,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.41.4
  */
 class UserNameIdentityToken
-    : public TypeWrapper<UA_UserNameIdentityToken, UA_TYPES_USERNAMEIDENTITYTOKEN> {
+    : public WrapperNative<UA_UserNameIdentityToken, UA_TYPES_USERNAMEIDENTITYTOKEN> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UserNameIdentityToken(
         std::string_view userName,
@@ -677,9 +677,9 @@ public:
  * UA_X509IdentityToken wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.41.5
  */
-class X509IdentityToken : public TypeWrapper<UA_X509IdentityToken, UA_TYPES_X509IDENTITYTOKEN> {
+class X509IdentityToken : public WrapperNative<UA_X509IdentityToken, UA_TYPES_X509IDENTITYTOKEN> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     explicit X509IdentityToken(ByteString certificateData) {
         handle()->certificateData = detail::toNative(std::move(certificateData));
@@ -694,9 +694,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.41.6
  */
 class IssuedIdentityToken
-    : public TypeWrapper<UA_IssuedIdentityToken, UA_TYPES_ISSUEDIDENTITYTOKEN> {
+    : public WrapperNative<UA_IssuedIdentityToken, UA_TYPES_ISSUEDIDENTITYTOKEN> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     explicit IssuedIdentityToken(ByteString tokenData, std::string_view encryptionAlgorithm = {}) {
         handle()->tokenData = detail::toNative(std::move(tokenData));
@@ -712,9 +712,9 @@ public:
  * UA_AddNodesItem wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.2
  */
-class AddNodesItem : public TypeWrapper<UA_AddNodesItem, UA_TYPES_ADDNODESITEM> {
+class AddNodesItem : public WrapperNative<UA_AddNodesItem, UA_TYPES_ADDNODESITEM> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     AddNodesItem(
         ExpandedNodeId parentNodeId,
@@ -747,9 +747,9 @@ public:
  * UA_AddNodesResult wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.2
  */
-class AddNodesResult : public TypeWrapper<UA_AddNodesResult, UA_TYPES_ADDNODESRESULT> {
+class AddNodesResult : public WrapperNative<UA_AddNodesResult, UA_TYPES_ADDNODESRESULT> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER(StatusCode, statusCode)
     UAPP_GETTER_WRAPPER(NodeId, addedNodeId)
@@ -759,9 +759,9 @@ public:
  * UA_AddNodesRequest wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.2
  */
-class AddNodesRequest : public TypeWrapper<UA_AddNodesRequest, UA_TYPES_ADDNODESREQUEST> {
+class AddNodesRequest : public WrapperNative<UA_AddNodesRequest, UA_TYPES_ADDNODESREQUEST> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     AddNodesRequest(RequestHeader requestHeader, Span<const AddNodesItem> nodesToAdd) {
         handle()->requestHeader = detail::toNative(std::move(requestHeader));
@@ -777,9 +777,9 @@ public:
  * UA_AddNodesResponse wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.2
  */
-class AddNodesResponse : public TypeWrapper<UA_AddNodesResponse, UA_TYPES_ADDNODESRESPONSE> {
+class AddNodesResponse : public WrapperNative<UA_AddNodesResponse, UA_TYPES_ADDNODESRESPONSE> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(ResponseHeader, responseHeader)
     UAPP_GETTER_SPAN_WRAPPER(AddNodesResult, results, resultsSize)
@@ -790,9 +790,9 @@ public:
  * UA_AddReferencesItem wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.3
  */
-class AddReferencesItem : public TypeWrapper<UA_AddReferencesItem, UA_TYPES_ADDREFERENCESITEM> {
+class AddReferencesItem : public WrapperNative<UA_AddReferencesItem, UA_TYPES_ADDREFERENCESITEM> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     AddReferencesItem(
         NodeId sourceNodeId,
@@ -823,9 +823,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.3
  */
 class AddReferencesRequest
-    : public TypeWrapper<UA_AddReferencesRequest, UA_TYPES_ADDREFERENCESREQUEST> {
+    : public WrapperNative<UA_AddReferencesRequest, UA_TYPES_ADDREFERENCESREQUEST> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     AddReferencesRequest(
         RequestHeader requestHeader, Span<const AddReferencesItem> referencesToAdd
@@ -844,9 +844,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.3
  */
 class AddReferencesResponse
-    : public TypeWrapper<UA_AddReferencesResponse, UA_TYPES_ADDREFERENCESRESPONSE> {
+    : public WrapperNative<UA_AddReferencesResponse, UA_TYPES_ADDREFERENCESRESPONSE> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(ResponseHeader, responseHeader)
     UAPP_GETTER_SPAN_WRAPPER(StatusCode, results, resultsSize)
@@ -857,9 +857,9 @@ public:
  * UA_DeleteNodesItem wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.4
  */
-class DeleteNodesItem : public TypeWrapper<UA_DeleteNodesItem, UA_TYPES_DELETENODESITEM> {
+class DeleteNodesItem : public WrapperNative<UA_DeleteNodesItem, UA_TYPES_DELETENODESITEM> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     DeleteNodesItem(NodeId nodeId, bool deleteTargetReferences) {
         handle()->nodeId = detail::toNative(std::move(nodeId));
@@ -874,9 +874,10 @@ public:
  * UA_DeleteNodesRequest wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.4
  */
-class DeleteNodesRequest : public TypeWrapper<UA_DeleteNodesRequest, UA_TYPES_DELETENODESREQUEST> {
+class DeleteNodesRequest
+    : public WrapperNative<UA_DeleteNodesRequest, UA_TYPES_DELETENODESREQUEST> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     DeleteNodesRequest(RequestHeader requestHeader, Span<const DeleteNodesItem> nodesToDelete) {
         handle()->requestHeader = detail::toNative(std::move(requestHeader));
@@ -893,9 +894,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.4
  */
 class DeleteNodesResponse
-    : public TypeWrapper<UA_DeleteNodesResponse, UA_TYPES_DELETENODESRESPONSE> {
+    : public WrapperNative<UA_DeleteNodesResponse, UA_TYPES_DELETENODESRESPONSE> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(ResponseHeader, responseHeader)
     UAPP_GETTER_SPAN_WRAPPER(StatusCode, results, resultsSize)
@@ -907,9 +908,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.5
  */
 class DeleteReferencesItem
-    : public TypeWrapper<UA_DeleteReferencesItem, UA_TYPES_DELETEREFERENCESITEM> {
+    : public WrapperNative<UA_DeleteReferencesItem, UA_TYPES_DELETEREFERENCESITEM> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     DeleteReferencesItem(
         NodeId sourceNodeId,
@@ -937,9 +938,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.5
  */
 class DeleteReferencesRequest
-    : public TypeWrapper<UA_DeleteReferencesRequest, UA_TYPES_DELETEREFERENCESREQUEST> {
+    : public WrapperNative<UA_DeleteReferencesRequest, UA_TYPES_DELETEREFERENCESREQUEST> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     DeleteReferencesRequest(
         RequestHeader requestHeader, Span<const DeleteReferencesItem> referencesToDelete
@@ -958,9 +959,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.5
  */
 class DeleteReferencesResponse
-    : public TypeWrapper<UA_DeleteReferencesResponse, UA_TYPES_DELETEREFERENCESRESPONSE> {
+    : public WrapperNative<UA_DeleteReferencesResponse, UA_TYPES_DELETEREFERENCESRESPONSE> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(ResponseHeader, responseHeader)
     UAPP_GETTER_SPAN_WRAPPER(StatusCode, results, resultsSize)
@@ -970,9 +971,9 @@ public:
 /**
  * UA_ViewDescription wrapper class.
  */
-class ViewDescription : public TypeWrapper<UA_ViewDescription, UA_TYPES_VIEWDESCRIPTION> {
+class ViewDescription : public WrapperNative<UA_ViewDescription, UA_TYPES_VIEWDESCRIPTION> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     ViewDescription(NodeId viewId, DateTime timestamp, uint32_t viewVersion) {
         handle()->viewId = detail::toNative(std::move(viewId));
@@ -1032,9 +1033,9 @@ constexpr std::true_type isBitmaskEnum(BrowseResultMask);
  * UA_BrowseDescription wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.2
  */
-class BrowseDescription : public TypeWrapper<UA_BrowseDescription, UA_TYPES_BROWSEDESCRIPTION> {
+class BrowseDescription : public WrapperNative<UA_BrowseDescription, UA_TYPES_BROWSEDESCRIPTION> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     BrowseDescription(
         NodeId nodeId,
@@ -1063,9 +1064,9 @@ public:
 /**
  * UA_BrowseRequest wrapper class.
  */
-class BrowseRequest : public TypeWrapper<UA_BrowseRequest, UA_TYPES_BROWSEREQUEST> {
+class BrowseRequest : public WrapperNative<UA_BrowseRequest, UA_TYPES_BROWSEREQUEST> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     BrowseRequest(
         RequestHeader requestHeader,
@@ -1091,9 +1092,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.30
  */
 class ReferenceDescription
-    : public TypeWrapper<UA_ReferenceDescription, UA_TYPES_REFERENCEDESCRIPTION> {
+    : public WrapperNative<UA_ReferenceDescription, UA_TYPES_REFERENCEDESCRIPTION> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(NodeId, referenceTypeId)
     UAPP_GETTER(bool, isForward)
@@ -1108,9 +1109,9 @@ public:
  * UA_BrowseResult wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.6
  */
-class BrowseResult : public TypeWrapper<UA_BrowseResult, UA_TYPES_BROWSERESULT> {
+class BrowseResult : public WrapperNative<UA_BrowseResult, UA_TYPES_BROWSERESULT> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER(StatusCode, statusCode)
     UAPP_GETTER_WRAPPER(ByteString, continuationPoint)
@@ -1120,9 +1121,9 @@ public:
 /**
  * UA_BrowseResponse wrapper class.
  */
-class BrowseResponse : public TypeWrapper<UA_BrowseResponse, UA_TYPES_BROWSERESPONSE> {
+class BrowseResponse : public WrapperNative<UA_BrowseResponse, UA_TYPES_BROWSERESPONSE> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(ResponseHeader, responseHeader)
     UAPP_GETTER_SPAN_WRAPPER(BrowseResult, results, resultsSize)
@@ -1132,9 +1133,9 @@ public:
 /**
  * UA_BrowseNextRequest wrapper class.
  */
-class BrowseNextRequest : public TypeWrapper<UA_BrowseNextRequest, UA_TYPES_BROWSENEXTREQUEST> {
+class BrowseNextRequest : public WrapperNative<UA_BrowseNextRequest, UA_TYPES_BROWSENEXTREQUEST> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     BrowseNextRequest(
         RequestHeader requestHeader,
@@ -1155,9 +1156,10 @@ public:
 /**
  * UA_BrowseNextResponse wrapper class.
  */
-class BrowseNextResponse : public TypeWrapper<UA_BrowseNextResponse, UA_TYPES_BROWSENEXTRESPONSE> {
+class BrowseNextResponse
+    : public WrapperNative<UA_BrowseNextResponse, UA_TYPES_BROWSENEXTRESPONSE> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(ResponseHeader, responseHeader)
     UAPP_GETTER_SPAN_WRAPPER(BrowseResult, results, resultsSize)
@@ -1168,9 +1170,9 @@ public:
  * UA_RelativePathElement wrapper class.
  */
 class RelativePathElement
-    : public TypeWrapper<UA_RelativePathElement, UA_TYPES_RELATIVEPATHELEMENT> {
+    : public WrapperNative<UA_RelativePathElement, UA_TYPES_RELATIVEPATHELEMENT> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     RelativePathElement(
         NodeId referenceTypeId, bool isInverse, bool includeSubtypes, QualifiedName targetName
@@ -1190,9 +1192,9 @@ public:
 /**
  * UA_RelativePath wrapper class.
  */
-class RelativePath : public TypeWrapper<UA_RelativePath, UA_TYPES_RELATIVEPATH> {
+class RelativePath : public WrapperNative<UA_RelativePath, UA_TYPES_RELATIVEPATH> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     RelativePath(std::initializer_list<RelativePathElement> elements)
         : RelativePath({elements.begin(), elements.size()}) {}
@@ -1208,9 +1210,9 @@ public:
 /**
  * UA_BrowsePath wrapper class.
  */
-class BrowsePath : public TypeWrapper<UA_BrowsePath, UA_TYPES_BROWSEPATH> {
+class BrowsePath : public WrapperNative<UA_BrowsePath, UA_TYPES_BROWSEPATH> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     BrowsePath(NodeId startingNode, RelativePath relativePath) {
         handle()->startingNode = detail::toNative(std::move(startingNode));
@@ -1224,9 +1226,9 @@ public:
 /**
  * UA_BrowsePathTarget wrapper class.
  */
-class BrowsePathTarget : public TypeWrapper<UA_BrowsePathTarget, UA_TYPES_BROWSEPATHTARGET> {
+class BrowsePathTarget : public WrapperNative<UA_BrowsePathTarget, UA_TYPES_BROWSEPATHTARGET> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(ExpandedNodeId, targetId)
     UAPP_GETTER(uint32_t, remainingPathIndex)
@@ -1235,9 +1237,9 @@ public:
 /**
  * UA_BrowsePathResult wrapper class.
  */
-class BrowsePathResult : public TypeWrapper<UA_BrowsePathResult, UA_TYPES_BROWSEPATHRESULT> {
+class BrowsePathResult : public WrapperNative<UA_BrowsePathResult, UA_TYPES_BROWSEPATHRESULT> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER(StatusCode, statusCode)
     UAPP_GETTER_SPAN_WRAPPER(BrowsePathTarget, targets, targetsSize)
@@ -1247,11 +1249,11 @@ public:
  * UA_TranslateBrowsePathsToNodeIdsRequest wrapper class.
  */
 class TranslateBrowsePathsToNodeIdsRequest
-    : public TypeWrapper<
+    : public WrapperNative<
           UA_TranslateBrowsePathsToNodeIdsRequest,
           UA_TYPES_TRANSLATEBROWSEPATHSTONODEIDSREQUEST> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     TranslateBrowsePathsToNodeIdsRequest(
         RequestHeader requestHeader, Span<const BrowsePath> browsePaths
@@ -1269,11 +1271,11 @@ public:
  * UA_TranslateBrowsePathsToNodeIdsResponse wrapper class.
  */
 class TranslateBrowsePathsToNodeIdsResponse
-    : public TypeWrapper<
+    : public WrapperNative<
           UA_TranslateBrowsePathsToNodeIdsResponse,
           UA_TYPES_TRANSLATEBROWSEPATHSTONODEIDSRESPONSE> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(ResponseHeader, responseHeader)
     UAPP_GETTER_SPAN_WRAPPER(BrowsePathResult, results, resultsSize)
@@ -1284,9 +1286,9 @@ public:
  * UA_RegisterNodesRequest wrapper class.
  */
 class RegisterNodesRequest
-    : public TypeWrapper<UA_RegisterNodesRequest, UA_TYPES_REGISTERNODESREQUEST> {
+    : public WrapperNative<UA_RegisterNodesRequest, UA_TYPES_REGISTERNODESREQUEST> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     RegisterNodesRequest(RequestHeader requestHeader, Span<const NodeId> nodesToRegister) {
         handle()->requestHeader = detail::toNative(std::move(requestHeader));
@@ -1302,9 +1304,9 @@ public:
  * UA_RegisterNodesResponse wrapper class.
  */
 class RegisterNodesResponse
-    : public TypeWrapper<UA_RegisterNodesResponse, UA_TYPES_REGISTERNODESRESPONSE> {
+    : public WrapperNative<UA_RegisterNodesResponse, UA_TYPES_REGISTERNODESRESPONSE> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(ResponseHeader, responseHeader)
     UAPP_GETTER_SPAN_WRAPPER(NodeId, registeredNodeIds, registeredNodeIdsSize)
@@ -1314,9 +1316,9 @@ public:
  * UA_UnregisterNodesRequest wrapper class.
  */
 class UnregisterNodesRequest
-    : public TypeWrapper<UA_UnregisterNodesRequest, UA_TYPES_UNREGISTERNODESREQUEST> {
+    : public WrapperNative<UA_UnregisterNodesRequest, UA_TYPES_UNREGISTERNODESREQUEST> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UnregisterNodesRequest(RequestHeader requestHeader, Span<const NodeId> nodesToUnregister) {
         handle()->requestHeader = detail::toNative(std::move(requestHeader));
@@ -1332,9 +1334,9 @@ public:
  * UA_UnregisterNodesResponse wrapper class.
  */
 class UnregisterNodesResponse
-    : public TypeWrapper<UA_UnregisterNodesResponse, UA_TYPES_UNREGISTERNODESRESPONSE> {
+    : public WrapperNative<UA_UnregisterNodesResponse, UA_TYPES_UNREGISTERNODESRESPONSE> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(ResponseHeader, responseHeader)
 };
@@ -1358,9 +1360,9 @@ enum class TimestampsToReturn : int32_t {
  * UA_ReadValueId wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.29
  */
-class ReadValueId : public TypeWrapper<UA_ReadValueId, UA_TYPES_READVALUEID> {
+class ReadValueId : public WrapperNative<UA_ReadValueId, UA_TYPES_READVALUEID> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     ReadValueId(
         NodeId nodeId,
@@ -1384,9 +1386,9 @@ public:
  * UA_ReadRequest wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.10.2
  */
-class ReadRequest : public TypeWrapper<UA_ReadRequest, UA_TYPES_READREQUEST> {
+class ReadRequest : public WrapperNative<UA_ReadRequest, UA_TYPES_READREQUEST> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     ReadRequest(
         RequestHeader requestHeader,
@@ -1411,9 +1413,9 @@ public:
  * UA_ReadResponse wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.10.2
  */
-class ReadResponse : public TypeWrapper<UA_ReadResponse, UA_TYPES_READRESPONSE> {
+class ReadResponse : public WrapperNative<UA_ReadResponse, UA_TYPES_READRESPONSE> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(ResponseHeader, responseHeader)
     UAPP_GETTER_SPAN_WRAPPER(DataValue, results, resultsSize)
@@ -1424,9 +1426,9 @@ public:
  * UA_WriteValue wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.10.4
  */
-class WriteValue : public TypeWrapper<UA_WriteValue, UA_TYPES_WRITEVALUE> {
+class WriteValue : public WrapperNative<UA_WriteValue, UA_TYPES_WRITEVALUE> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     WriteValue(
         NodeId nodeId, AttributeId attributeId, std::string_view indexRange, DataValue value
@@ -1447,9 +1449,9 @@ public:
  * UA_WriteRequest wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.10.4
  */
-class WriteRequest : public TypeWrapper<UA_WriteRequest, UA_TYPES_WRITEREQUEST> {
+class WriteRequest : public WrapperNative<UA_WriteRequest, UA_TYPES_WRITEREQUEST> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     WriteRequest(RequestHeader requestHeader, Span<const WriteValue> nodesToWrite) {
         handle()->requestHeader = detail::toNative(std::move(requestHeader));
@@ -1465,9 +1467,9 @@ public:
  * UA_WriteResponse wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.10.4
  */
-class WriteResponse : public TypeWrapper<UA_WriteResponse, UA_TYPES_WRITERESPONSE> {
+class WriteResponse : public WrapperNative<UA_WriteResponse, UA_TYPES_WRITERESPONSE> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(ResponseHeader, responseHeader)
     UAPP_GETTER_SPAN_WRAPPER(StatusCode, results, resultsSize)
@@ -1478,9 +1480,9 @@ public:
  * UA_BuildInfo wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part5/v105/docs/12.4
  */
-class BuildInfo : public TypeWrapper<UA_BuildInfo, UA_TYPES_BUILDINFO> {
+class BuildInfo : public WrapperNative<UA_BuildInfo, UA_TYPES_BUILDINFO> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     BuildInfo(
         std::string_view productUri,
@@ -1514,9 +1516,9 @@ public:
  * UA_Argument wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.6
  */
-class Argument : public TypeWrapper<UA_Argument, UA_TYPES_ARGUMENT> {
+class Argument : public WrapperNative<UA_Argument, UA_TYPES_ARGUMENT> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     Argument(
         std::string_view name,
@@ -1544,9 +1546,9 @@ public:
  * UA_CallMethodRequest wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.11.2
  */
-class CallMethodRequest : public TypeWrapper<UA_CallMethodRequest, UA_TYPES_CALLMETHODREQUEST> {
+class CallMethodRequest : public WrapperNative<UA_CallMethodRequest, UA_TYPES_CALLMETHODREQUEST> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     CallMethodRequest(NodeId objectId, NodeId methodId, Span<const Variant> inputArguments) {
         handle()->objectId = detail::toNative(std::move(objectId));
@@ -1564,9 +1566,9 @@ public:
  * UA_CallMethodResult wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.11.2
  */
-class CallMethodResult : public TypeWrapper<UA_CallMethodResult, UA_TYPES_CALLMETHODRESULT> {
+class CallMethodResult : public WrapperNative<UA_CallMethodResult, UA_TYPES_CALLMETHODRESULT> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(StatusCode, statusCode)
     UAPP_GETTER_SPAN_WRAPPER(StatusCode, inputArgumentResults, inputArgumentResultsSize)
@@ -1580,9 +1582,9 @@ public:
  * UA_CallRequest wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.11.2
  */
-class CallRequest : public TypeWrapper<UA_CallRequest, UA_TYPES_CALLREQUEST> {
+class CallRequest : public WrapperNative<UA_CallRequest, UA_TYPES_CALLREQUEST> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     CallRequest(RequestHeader requestHeader, Span<const CallMethodRequest> methodsToCall) {
         handle()->requestHeader = detail::toNative(std::move(requestHeader));
@@ -1598,9 +1600,9 @@ public:
  * UA_CallResponse wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.11.2
  */
-class CallResponse : public TypeWrapper<UA_CallResponse, UA_TYPES_CALLRESPONSE> {
+class CallResponse : public WrapperNative<UA_CallResponse, UA_TYPES_CALLRESPONSE> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(ResponseHeader, responseHeader)
     UAPP_GETTER_SPAN_WRAPPER(CallMethodResult, results, resultsSize)
@@ -1659,9 +1661,9 @@ enum class FilterOperator : int32_t {
  * The index must be greater than the element index it is part of.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.7.4.2
  */
-class ElementOperand : public TypeWrapper<UA_ElementOperand, UA_TYPES_ELEMENTOPERAND> {
+class ElementOperand : public WrapperNative<UA_ElementOperand, UA_TYPES_ELEMENTOPERAND> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     explicit ElementOperand(uint32_t index) {
         handle()->index = index;
@@ -1674,14 +1676,14 @@ public:
  * UA_LiteralOperand wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.7.4.3
  */
-class LiteralOperand : public TypeWrapper<UA_LiteralOperand, UA_TYPES_LITERALOPERAND> {
+class LiteralOperand : public WrapperNative<UA_LiteralOperand, UA_TYPES_LITERALOPERAND> {
 private:
     template <typename T>
     using EnableIfLiteral =
         std::enable_if_t<!detail::IsOneOf<T, Variant, UA_LiteralOperand, LiteralOperand>::value>;
 
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     explicit LiteralOperand(Variant value) {
         handle()->value = detail::toNative(std::move(value));
@@ -1698,9 +1700,9 @@ public:
  * UA_AttributeOperand wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.7.4.4
  */
-class AttributeOperand : public TypeWrapper<UA_AttributeOperand, UA_TYPES_ATTRIBUTEOPERAND> {
+class AttributeOperand : public WrapperNative<UA_AttributeOperand, UA_TYPES_ATTRIBUTEOPERAND> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     AttributeOperand(
         NodeId nodeId,
@@ -1728,9 +1730,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.7.4.5
  */
 class SimpleAttributeOperand
-    : public TypeWrapper<UA_SimpleAttributeOperand, UA_TYPES_SIMPLEATTRIBUTEOPERAND> {
+    : public WrapperNative<UA_SimpleAttributeOperand, UA_TYPES_SIMPLEATTRIBUTEOPERAND> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     SimpleAttributeOperand(
         NodeId typeDefinitionId,
@@ -1781,9 +1783,9 @@ using FilterOperand = std::variant<
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/B.1
  */
 class ContentFilterElement
-    : public TypeWrapper<UA_ContentFilterElement, UA_TYPES_CONTENTFILTERELEMENT> {
+    : public WrapperNative<UA_ContentFilterElement, UA_TYPES_CONTENTFILTERELEMENT> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     ContentFilterElement(FilterOperator filterOperator, Span<const FilterOperand> operands);
 
@@ -1802,9 +1804,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.7.1
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/B.1
  */
-class ContentFilter : public TypeWrapper<UA_ContentFilter, UA_TYPES_CONTENTFILTER> {
+class ContentFilter : public WrapperNative<UA_ContentFilter, UA_TYPES_CONTENTFILTER> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     ContentFilter(std::initializer_list<ContentFilterElement> elements);
     explicit ContentFilter(Span<const ContentFilterElement> elements);
@@ -1867,9 +1869,9 @@ enum class DeadbandType : int32_t {
  * UA_DataChangeFilter wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.22.2
  */
-class DataChangeFilter : public TypeWrapper<UA_DataChangeFilter, UA_TYPES_DATACHANGEFILTER> {
+class DataChangeFilter : public WrapperNative<UA_DataChangeFilter, UA_TYPES_DATACHANGEFILTER> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     DataChangeFilter(DataChangeTrigger trigger, DeadbandType deadbandType, double deadbandValue) {
         handle()->trigger = static_cast<UA_DataChangeTrigger>(trigger);
@@ -1886,9 +1888,9 @@ public:
  * UA_EventFilter wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.22.3
  */
-class EventFilter : public TypeWrapper<UA_EventFilter, UA_TYPES_EVENTFILTER> {
+class EventFilter : public WrapperNative<UA_EventFilter, UA_TYPES_EVENTFILTER> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     EventFilter(Span<const SimpleAttributeOperand> selectClauses, ContentFilter whereClause) {
         handle()->selectClausesSize = selectClauses.size();
@@ -1906,9 +1908,9 @@ using AggregateConfiguration = UA_AggregateConfiguration;
  * UA_AggregateFilter wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.22.4
  */
-class AggregateFilter : public TypeWrapper<UA_AggregateFilter, UA_TYPES_AGGREGATEFILTER> {
+class AggregateFilter : public WrapperNative<UA_AggregateFilter, UA_TYPES_AGGREGATEFILTER> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     AggregateFilter(
         DateTime startTime,
@@ -1933,9 +1935,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.21
  */
 class MonitoringParameters
-    : public TypeWrapper<UA_MonitoringParameters, UA_TYPES_MONITORINGPARAMETERS> {
+    : public WrapperNative<UA_MonitoringParameters, UA_TYPES_MONITORINGPARAMETERS> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     /// Construct with default values from open62541.
     /// The `clientHandle` parameter cannot be set by the user, any value will be replaced by the
@@ -1964,9 +1966,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.2
  */
 class MonitoredItemCreateRequest
-    : public TypeWrapper<UA_MonitoredItemCreateRequest, UA_TYPES_MONITOREDITEMCREATEREQUEST> {
+    : public WrapperNative<UA_MonitoredItemCreateRequest, UA_TYPES_MONITOREDITEMCREATEREQUEST> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     explicit MonitoredItemCreateRequest(
         ReadValueId itemToMonitor,
@@ -1988,9 +1990,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.2
  */
 class MonitoredItemCreateResult
-    : public TypeWrapper<UA_MonitoredItemCreateResult, UA_TYPES_MONITOREDITEMCREATERESULT> {
+    : public WrapperNative<UA_MonitoredItemCreateResult, UA_TYPES_MONITOREDITEMCREATERESULT> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(StatusCode, statusCode);
     UAPP_GETTER(IntegerId, monitoredItemId);
@@ -2004,9 +2006,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.2
  */
 class CreateMonitoredItemsRequest
-    : public TypeWrapper<UA_CreateMonitoredItemsRequest, UA_TYPES_CREATEMONITOREDITEMSREQUEST> {
+    : public WrapperNative<UA_CreateMonitoredItemsRequest, UA_TYPES_CREATEMONITOREDITEMSREQUEST> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     CreateMonitoredItemsRequest(
         RequestHeader requestHeader,
@@ -2032,9 +2034,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.2
  */
 class CreateMonitoredItemsResponse
-    : public TypeWrapper<UA_CreateMonitoredItemsResponse, UA_TYPES_CREATEMONITOREDITEMSRESPONSE> {
+    : public WrapperNative<UA_CreateMonitoredItemsResponse, UA_TYPES_CREATEMONITOREDITEMSRESPONSE> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(ResponseHeader, responseHeader)
     UAPP_GETTER_SPAN_WRAPPER(MonitoredItemCreateResult, results, resultsSize);
@@ -2046,9 +2048,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.3
  */
 class MonitoredItemModifyRequest
-    : public TypeWrapper<UA_MonitoredItemModifyRequest, UA_TYPES_MONITOREDITEMMODIFYREQUEST> {
+    : public WrapperNative<UA_MonitoredItemModifyRequest, UA_TYPES_MONITOREDITEMMODIFYREQUEST> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     MonitoredItemModifyRequest(
         IntegerId monitoredItemId, MonitoringParameters requestedParameters
@@ -2066,9 +2068,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.3
  */
 class MonitoredItemModifyResult
-    : public TypeWrapper<UA_MonitoredItemModifyResult, UA_TYPES_MONITOREDITEMMODIFYRESULT> {
+    : public WrapperNative<UA_MonitoredItemModifyResult, UA_TYPES_MONITOREDITEMMODIFYRESULT> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(StatusCode, statusCode);
     UAPP_GETTER(double, revisedSamplingInterval);
@@ -2081,9 +2083,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.3
  */
 class ModifyMonitoredItemsRequest
-    : public TypeWrapper<UA_ModifyMonitoredItemsRequest, UA_TYPES_MODIFYMONITOREDITEMSREQUEST> {
+    : public WrapperNative<UA_ModifyMonitoredItemsRequest, UA_TYPES_MODIFYMONITOREDITEMSREQUEST> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     ModifyMonitoredItemsRequest(
         RequestHeader requestHeader,
@@ -2109,9 +2111,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.3
  */
 class ModifyMonitoredItemsResponse
-    : public TypeWrapper<UA_ModifyMonitoredItemsResponse, UA_TYPES_MODIFYMONITOREDITEMSRESPONSE> {
+    : public WrapperNative<UA_ModifyMonitoredItemsResponse, UA_TYPES_MODIFYMONITOREDITEMSRESPONSE> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(ResponseHeader, responseHeader)
     UAPP_GETTER_SPAN_WRAPPER(MonitoredItemModifyResult, results, resultsSize);
@@ -2123,9 +2125,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.4
  */
 class SetMonitoringModeRequest
-    : public TypeWrapper<UA_SetMonitoringModeRequest, UA_TYPES_SETMONITORINGMODEREQUEST> {
+    : public WrapperNative<UA_SetMonitoringModeRequest, UA_TYPES_SETMONITORINGMODEREQUEST> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     SetMonitoringModeRequest(
         RequestHeader requestHeader,
@@ -2151,9 +2153,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.4
  */
 class SetMonitoringModeResponse
-    : public TypeWrapper<UA_SetMonitoringModeResponse, UA_TYPES_SETMONITORINGMODERESPONSE> {
+    : public WrapperNative<UA_SetMonitoringModeResponse, UA_TYPES_SETMONITORINGMODERESPONSE> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(ResponseHeader, responseHeader)
     UAPP_GETTER_SPAN_WRAPPER(StatusCode, results, resultsSize);
@@ -2165,9 +2167,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.5
  */
 class SetTriggeringRequest
-    : public TypeWrapper<UA_SetTriggeringRequest, UA_TYPES_SETTRIGGERINGREQUEST> {
+    : public WrapperNative<UA_SetTriggeringRequest, UA_TYPES_SETTRIGGERINGREQUEST> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     SetTriggeringRequest(
         RequestHeader requestHeader,
@@ -2197,9 +2199,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.5
  */
 class SetTriggeringResponse
-    : public TypeWrapper<UA_SetTriggeringResponse, UA_TYPES_SETTRIGGERINGRESPONSE> {
+    : public WrapperNative<UA_SetTriggeringResponse, UA_TYPES_SETTRIGGERINGRESPONSE> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(ResponseHeader, responseHeader)
     UAPP_GETTER_SPAN_WRAPPER(StatusCode, addResults, addResultsSize);
@@ -2213,9 +2215,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.6
  */
 class DeleteMonitoredItemsRequest
-    : public TypeWrapper<UA_DeleteMonitoredItemsRequest, UA_TYPES_DELETEMONITOREDITEMSREQUEST> {
+    : public WrapperNative<UA_DeleteMonitoredItemsRequest, UA_TYPES_DELETEMONITOREDITEMSREQUEST> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     DeleteMonitoredItemsRequest(
         RequestHeader requestHeader,
@@ -2238,9 +2240,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.6
  */
 class DeleteMonitoredItemsResponse
-    : public TypeWrapper<UA_DeleteMonitoredItemsResponse, UA_TYPES_DELETEMONITOREDITEMSRESPONSE> {
+    : public WrapperNative<UA_DeleteMonitoredItemsResponse, UA_TYPES_DELETEMONITOREDITEMSRESPONSE> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(ResponseHeader, responseHeader)
     UAPP_GETTER_SPAN_WRAPPER(StatusCode, results, resultsSize);
@@ -2252,9 +2254,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.2
  */
 class CreateSubscriptionRequest
-    : public TypeWrapper<UA_CreateSubscriptionRequest, UA_TYPES_CREATESUBSCRIPTIONREQUEST> {
+    : public WrapperNative<UA_CreateSubscriptionRequest, UA_TYPES_CREATESUBSCRIPTIONREQUEST> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     CreateSubscriptionRequest(
         RequestHeader requestHeader,
@@ -2288,9 +2290,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.2
  */
 class CreateSubscriptionResponse
-    : public TypeWrapper<UA_CreateSubscriptionResponse, UA_TYPES_CREATESUBSCRIPTIONRESPONSE> {
+    : public WrapperNative<UA_CreateSubscriptionResponse, UA_TYPES_CREATESUBSCRIPTIONRESPONSE> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(ResponseHeader, responseHeader)
     UAPP_GETTER(IntegerId, subscriptionId)
@@ -2304,9 +2306,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.3
  */
 class ModifySubscriptionRequest
-    : public TypeWrapper<UA_ModifySubscriptionRequest, UA_TYPES_MODIFYSUBSCRIPTIONREQUEST> {
+    : public WrapperNative<UA_ModifySubscriptionRequest, UA_TYPES_MODIFYSUBSCRIPTIONREQUEST> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     ModifySubscriptionRequest(
         RequestHeader requestHeader,
@@ -2340,9 +2342,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.3
  */
 class ModifySubscriptionResponse
-    : public TypeWrapper<UA_ModifySubscriptionResponse, UA_TYPES_MODIFYSUBSCRIPTIONRESPONSE> {
+    : public WrapperNative<UA_ModifySubscriptionResponse, UA_TYPES_MODIFYSUBSCRIPTIONRESPONSE> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(ResponseHeader, responseHeader)
     UAPP_GETTER(bool, revisedPublishingInterval)
@@ -2355,9 +2357,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.4
  */
 class SetPublishingModeRequest
-    : public TypeWrapper<UA_SetPublishingModeRequest, UA_TYPES_SETPUBLISHINGMODEREQUEST> {
+    : public WrapperNative<UA_SetPublishingModeRequest, UA_TYPES_SETPUBLISHINGMODEREQUEST> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     SetPublishingModeRequest(
         RequestHeader requestHeader, bool publishingEnabled, Span<const IntegerId> subscriptionIds
@@ -2378,9 +2380,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.4
  */
 class SetPublishingModeResponse
-    : public TypeWrapper<UA_SetPublishingModeResponse, UA_TYPES_SETPUBLISHINGMODERESPONSE> {
+    : public WrapperNative<UA_SetPublishingModeResponse, UA_TYPES_SETPUBLISHINGMODERESPONSE> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(ResponseHeader, responseHeader)
     UAPP_GETTER_SPAN_WRAPPER(StatusCode, results, resultsSize)
@@ -2392,9 +2394,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.25.4
  */
 class StatusChangeNotification
-    : public TypeWrapper<UA_StatusChangeNotification, UA_TYPES_STATUSCHANGENOTIFICATION> {
+    : public WrapperNative<UA_StatusChangeNotification, UA_TYPES_STATUSCHANGENOTIFICATION> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(StatusCode, status)
     UAPP_GETTER_WRAPPER(DiagnosticInfo, diagnosticInfo)
@@ -2405,9 +2407,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.8
  */
 class DeleteSubscriptionsRequest
-    : public TypeWrapper<UA_DeleteSubscriptionsRequest, UA_TYPES_DELETESUBSCRIPTIONSREQUEST> {
+    : public WrapperNative<UA_DeleteSubscriptionsRequest, UA_TYPES_DELETESUBSCRIPTIONSREQUEST> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     DeleteSubscriptionsRequest(RequestHeader requestHeader, Span<const IntegerId> subscriptionIds) {
         handle()->requestHeader = detail::toNative(std::move(requestHeader));
@@ -2424,9 +2426,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.8
  */
 class DeleteSubscriptionsResponse
-    : public TypeWrapper<UA_DeleteSubscriptionsResponse, UA_TYPES_DELETESUBSCRIPTIONSRESPONSE> {
+    : public WrapperNative<UA_DeleteSubscriptionsResponse, UA_TYPES_DELETESUBSCRIPTIONSRESPONSE> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(ResponseHeader, responseHeader)
     UAPP_GETTER_SPAN_WRAPPER(StatusCode, results, resultsSize)
@@ -2459,9 +2461,9 @@ enum class PerformUpdateType : int32_t {
  * UA_Range wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part8/v105/docs/5.6.2
  */
-class Range : public TypeWrapper<UA_Range, UA_TYPES_RANGE> {
+class Range : public WrapperNative<UA_Range, UA_TYPES_RANGE> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     Range(double low, double high) noexcept {
         handle()->low = low;
@@ -2476,9 +2478,9 @@ public:
  * UA_EUInformation wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part8/v105/docs/5.6.3
  */
-class EUInformation : public TypeWrapper<UA_EUInformation, UA_TYPES_EUINFORMATION> {
+class EUInformation : public WrapperNative<UA_EUInformation, UA_TYPES_EUINFORMATION> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     EUInformation(
         std::string_view namespaceUri,
@@ -2502,9 +2504,9 @@ public:
  * UA_ComplexNumberType wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part8/v105/docs/5.6.4
  */
-class ComplexNumberType : public TypeWrapper<UA_ComplexNumberType, UA_TYPES_COMPLEXNUMBERTYPE> {
+class ComplexNumberType : public WrapperNative<UA_ComplexNumberType, UA_TYPES_COMPLEXNUMBERTYPE> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     ComplexNumberType(float real, float imaginary) noexcept {
         handle()->real = real;
@@ -2520,9 +2522,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part8/v105/docs/5.6.5
  */
 class DoubleComplexNumberType
-    : public TypeWrapper<UA_DoubleComplexNumberType, UA_TYPES_DOUBLECOMPLEXNUMBERTYPE> {
+    : public WrapperNative<UA_DoubleComplexNumberType, UA_TYPES_DOUBLECOMPLEXNUMBERTYPE> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     DoubleComplexNumberType(double real, double imaginary) noexcept {
         handle()->real = real;
@@ -2547,9 +2549,9 @@ enum class AxisScaleEnumeration : int32_t {
  * UA_AxisInformation wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part8/v105/docs/5.6.6
  */
-class AxisInformation : public TypeWrapper<UA_AxisInformation, UA_TYPES_AXISINFORMATION> {
+class AxisInformation : public WrapperNative<UA_AxisInformation, UA_TYPES_AXISINFORMATION> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     AxisInformation(
         EUInformation engineeringUnits,
@@ -2577,9 +2579,9 @@ public:
  * UA_XVType wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part8/v105/docs/5.6.8
  */
-class XVType : public TypeWrapper<UA_XVType, UA_TYPES_XVTYPE> {
+class XVType : public WrapperNative<UA_XVType, UA_TYPES_XVTYPE> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     XVType(double x, float value) noexcept {
         handle()->x = x;
@@ -2612,9 +2614,9 @@ enum class StructureType : int32_t {
  * UA_StructureField wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.51
  */
-class StructureField : public TypeWrapper<UA_StructureField, UA_TYPES_STRUCTUREFIELD> {
+class StructureField : public WrapperNative<UA_StructureField, UA_TYPES_STRUCTUREFIELD> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(String, name)
     UAPP_GETTER_WRAPPER(LocalizedText, description)
@@ -2630,9 +2632,9 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.48
  */
 class StructureDefinition
-    : public TypeWrapper<UA_StructureDefinition, UA_TYPES_STRUCTUREDEFINITION> {
+    : public WrapperNative<UA_StructureDefinition, UA_TYPES_STRUCTUREDEFINITION> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(NodeId, defaultEncodingId)
     UAPP_GETTER_WRAPPER(NodeId, baseDataType)
@@ -2644,9 +2646,9 @@ public:
  * UA_EnumField wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.52
  */
-class EnumField : public TypeWrapper<UA_EnumField, UA_TYPES_ENUMFIELD> {
+class EnumField : public WrapperNative<UA_EnumField, UA_TYPES_ENUMFIELD> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     EnumField(int64_t value, std::string_view name)
         : EnumField(value, {"", name}, {}, name) {}
@@ -2670,9 +2672,9 @@ public:
  * UA_EnumDefinition wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.50
  */
-class EnumDefinition : public TypeWrapper<UA_EnumDefinition, UA_TYPES_ENUMDEFINITION> {
+class EnumDefinition : public WrapperNative<UA_EnumDefinition, UA_TYPES_ENUMDEFINITION> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     EnumDefinition(std::initializer_list<EnumField> fields)
         : EnumDefinition({fields.begin(), fields.size()}) {}

@@ -18,6 +18,7 @@
 #include "open62541pp/subscription.hpp"  // TODO: remove with Server::createSubscription
 #include "open62541pp/types.hpp"
 #include "open62541pp/ua/nodeids.hpp"
+#include "open62541pp/ua/types.hpp"
 #include "open62541pp/wrapper.hpp"
 
 #include "open62541pp/plugin/accesscontrol.hpp"
@@ -28,6 +29,13 @@
 namespace opcua {
 
 /* ---------------------------------------- ServerConfig ---------------------------------------- */
+
+template <>
+struct TypeHandler<UA_ServerConfig> {
+    static UA_ServerConfig copy(const UA_ServerConfig& config);
+    static UA_ServerConfig move(UA_ServerConfig&& config) noexcept;
+    static void clear(UA_ServerConfig& config) noexcept;
+};
 
 /**
  * Server configuration.
@@ -83,14 +91,15 @@ public:
     );
 #endif
 
-    explicit ServerConfig(UA_ServerConfig&& native);
-
-    ~ServerConfig();
+    explicit ServerConfig(UA_ServerConfig&& native)
+        : Wrapper{std::move(native)} {}  // NOLINT
 
     ServerConfig(const ServerConfig&) = delete;
-    ServerConfig(ServerConfig&& other) noexcept;
+    ServerConfig(ServerConfig&&) noexcept = default;
     ServerConfig& operator=(const ServerConfig&) = delete;
-    ServerConfig& operator=(ServerConfig&& other) noexcept;
+    ServerConfig& operator=(ServerConfig&&) noexcept = default;
+
+    ~ServerConfig() noexcept = default;
 
     void setLogger(LogFunction func);
 

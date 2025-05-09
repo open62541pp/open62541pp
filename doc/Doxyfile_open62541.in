@@ -19,7 +19,7 @@ ALIASES               += "endrst=\endverbatim"
 EXTRACT_ALL            = YES
 SHOW_FILES             = YES
 SHOW_NAMESPACES        = YES
-SORT_MEMBER_DOCS       = NO
+SORT_MEMBER_DOCS       = YES
 LAYOUT_FILE            = "${CMAKE_CURRENT_SOURCE_DIR}/DoxygenLayout_open62541.xml"
 QUIET                  = YES
 

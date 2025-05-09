@@ -27,7 +27,6 @@
 #include "open62541pp/span.hpp"
 #include "open62541pp/typeconverter.hpp"
 #include "open62541pp/typeregistry.hpp"
-#include "open62541pp/typewrapper.hpp"
 #include "open62541pp/wrapper.hpp"
 
 namespace opcua {
@@ -84,6 +83,8 @@ public:
         opcua::throwIfBad(native());
     }
 };
+
+UAPP_TYPEREGISTRY_NATIVE(StatusCode, UA_TYPES_STATUSCODE)
 
 /* --------------------------------------- StringLikeMixin -------------------------------------- */
 
@@ -251,10 +252,10 @@ protected:
  * @ingroup Wrapper
  */
 class String
-    : public TypeWrapper<UA_String, UA_TYPES_STRING>,
+    : public WrapperNative<UA_String, UA_TYPES_STRING>,
       public detail::StringLikeMixin<String, char> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     explicit String(std::string_view str)
         : String{detail::allocNativeString(str)} {}
@@ -364,6 +365,8 @@ struct TypeConverter<char[N]> {  // NOLINT(*c-arrays)
     }
 };
 
+UAPP_TYPEREGISTRY_NATIVE(String, UA_TYPES_STRING)
+
 /* ------------------------------------------ DateTime ------------------------------------------ */
 
 /**
@@ -375,12 +378,12 @@ struct TypeConverter<char[N]> {  // NOLINT(*c-arrays)
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/5.2.2.5
  * @ingroup Wrapper
  */
-class DateTime : public TypeWrapper<UA_DateTime, UA_TYPES_DATETIME> {
+class DateTime : public Wrapper<UA_DateTime> {
 public:
     using DefaultClock = std::chrono::system_clock;
     using UaDuration = std::chrono::duration<int64_t, std::ratio<1, 10'000'000>>;
 
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     template <typename Clock, typename Duration>
     DateTime(std::chrono::time_point<Clock, Duration> timePoint)  // NOLINT(*-explicit-conversions)
@@ -458,6 +461,8 @@ struct TypeConverter<std::chrono::time_point<Clock, Duration>> {
     }
 };
 
+UAPP_TYPEREGISTRY_NATIVE(DateTime, UA_TYPES_DATETIME)
+
 /* -------------------------------------------- Guid -------------------------------------------- */
 
 /**
@@ -465,9 +470,9 @@ struct TypeConverter<std::chrono::time_point<Clock, Duration>> {
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/5.1.3
  * @ingroup Wrapper
  */
-class Guid : public TypeWrapper<UA_Guid, UA_TYPES_GUID> {
+class Guid : public Wrapper<UA_Guid> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     explicit Guid(std::array<uint8_t, 16> data) noexcept
         : Guid{UA_Guid{
@@ -519,6 +524,8 @@ inline bool operator!=(const UA_Guid& lhs, const UA_Guid& rhs) noexcept {
     return !(lhs == rhs);
 }
 
+UAPP_TYPEREGISTRY_NATIVE(Guid, UA_TYPES_GUID)
+
 /* ----------------------------------------- ByteString ----------------------------------------- */
 
 /**
@@ -526,10 +533,10 @@ inline bool operator!=(const UA_Guid& lhs, const UA_Guid& rhs) noexcept {
  * @ingroup Wrapper
  */
 class ByteString
-    : public TypeWrapper<UA_ByteString, UA_TYPES_BYTESTRING>,
+    : public WrapperNative<UA_ByteString, UA_TYPES_BYTESTRING>,
       public detail::StringLikeMixin<ByteString, uint8_t> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     explicit ByteString(std::string_view str)
         : ByteString{detail::allocNativeString(str)} {}
@@ -561,6 +568,8 @@ public:
     String toBase64() const;
 };
 
+UAPP_TYPEREGISTRY_NATIVE(ByteString, UA_TYPES_BYTESTRING)
+
 /* ----------------------------------------- XmlElement ----------------------------------------- */
 
 /**
@@ -568,10 +577,10 @@ public:
  * @ingroup Wrapper
  */
 class XmlElement
-    : public TypeWrapper<UA_XmlElement, UA_TYPES_XMLELEMENT>,
+    : public WrapperNative<UA_XmlElement, UA_TYPES_XMLELEMENT>,
       public detail::StringLikeMixin<XmlElement, char> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     explicit XmlElement(std::string_view str)
         : XmlElement{detail::allocNativeString(str)} {}
@@ -601,6 +610,8 @@ public:
     }
 };
 
+UAPP_TYPEREGISTRY_NATIVE(XmlElement, UA_TYPES_XMLELEMENT)
+
 /* ------------------------------------------- NodeId ------------------------------------------- */
 
 namespace detail {
@@ -627,9 +638,9 @@ enum class NodeIdType : uint8_t {
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.2
  * @ingroup Wrapper
  */
-class NodeId : public TypeWrapper<UA_NodeId, UA_TYPES_NODEID> {
+class NodeId : public WrapperNative<UA_NodeId, UA_TYPES_NODEID> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     /// Create NodeId with numeric identifier.
     NodeId(NamespaceIndex namespaceIndex, uint32_t identifier) noexcept {
@@ -799,6 +810,8 @@ inline bool operator>=(const UA_NodeId& lhs, const UA_NodeId& rhs) noexcept {
     return (lhs > rhs) || (lhs == rhs);
 }
 
+UAPP_TYPEREGISTRY_NATIVE(NodeId, UA_TYPES_NODEID)
+
 /* --------------------------------------- ExpandedNodeId --------------------------------------- */
 
 /**
@@ -806,9 +819,9 @@ inline bool operator>=(const UA_NodeId& lhs, const UA_NodeId& rhs) noexcept {
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.16
  * @ingroup Wrapper
  */
-class ExpandedNodeId : public TypeWrapper<UA_ExpandedNodeId, UA_TYPES_EXPANDEDNODEID> {
+class ExpandedNodeId : public WrapperNative<UA_ExpandedNodeId, UA_TYPES_EXPANDEDNODEID> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     explicit ExpandedNodeId(NodeId id) noexcept {
         asWrapper<NodeId>(handle()->nodeId) = std::move(id);
@@ -891,15 +904,17 @@ inline bool operator>=(const UA_ExpandedNodeId& lhs, const UA_ExpandedNodeId& rh
     return (lhs > rhs) || (lhs == rhs);
 }
 
+UAPP_TYPEREGISTRY_NATIVE(ExpandedNodeId, UA_TYPES_EXPANDEDNODEID)
+
 /* ---------------------------------------- QualifiedName --------------------------------------- */
 
 /**
  * UA_QualifiedName wrapper class.
  * @ingroup Wrapper
  */
-class QualifiedName : public TypeWrapper<UA_QualifiedName, UA_TYPES_QUALIFIEDNAME> {
+class QualifiedName : public WrapperNative<UA_QualifiedName, UA_TYPES_QUALIFIEDNAME> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     QualifiedName(NamespaceIndex namespaceIndex, std::string_view name) {
         handle()->namespaceIndex = namespaceIndex;
@@ -925,6 +940,8 @@ inline bool operator!=(const UA_QualifiedName& lhs, const UA_QualifiedName& rhs)
     return !(lhs == rhs);
 }
 
+UAPP_TYPEREGISTRY_NATIVE(QualifiedName, UA_TYPES_QUALIFIEDNAME)
+
 /* ---------------------------------------- LocalizedText --------------------------------------- */
 
 /**
@@ -936,9 +953,9 @@ inline bool operator!=(const UA_QualifiedName& lhs, const UA_QualifiedName& rhs)
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.4/
  * @ingroup Wrapper
  */
-class LocalizedText : public TypeWrapper<UA_LocalizedText, UA_TYPES_LOCALIZEDTEXT> {
+class LocalizedText : public WrapperNative<UA_LocalizedText, UA_TYPES_LOCALIZEDTEXT> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     LocalizedText(std::string_view locale, std::string_view text) {
         handle()->locale = detail::allocNativeString(locale);
@@ -963,6 +980,8 @@ inline bool operator==(const UA_LocalizedText& lhs, const UA_LocalizedText& rhs)
 inline bool operator!=(const UA_LocalizedText& lhs, const UA_LocalizedText& rhs) noexcept {
     return !(lhs == rhs);
 }
+
+UAPP_TYPEREGISTRY_NATIVE(LocalizedText, UA_TYPES_LOCALIZEDTEXT)
 
 /* ------------------------------------------- Variant ------------------------------------------ */
 
@@ -1026,7 +1045,7 @@ public:
  *
  * @ingroup Wrapper
  */
-class Variant : public TypeWrapper<UA_Variant, UA_TYPES_VARIANT> {
+class Variant : public WrapperNative<UA_Variant, UA_TYPES_VARIANT> {
 private:
     template <typename T>
     static constexpr bool isVariant =
@@ -1034,7 +1053,7 @@ private:
         std::is_same_v<std::remove_cv_t<std::remove_reference_t<T>>, UA_Variant>;
 
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     /// Create Variant from a pointer to a scalar/array (no copy).
     /// @see assign(T*)
@@ -1523,6 +1542,8 @@ private:
     }
 };
 
+UAPP_TYPEREGISTRY_NATIVE(Variant, UA_TYPES_VARIANT)
+
 /* ------------------------------------------ DataValue ----------------------------------------- */
 
 /**
@@ -1530,9 +1551,9 @@ private:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.11
  * @ingroup Wrapper
  */
-class DataValue : public TypeWrapper<UA_DataValue, UA_TYPES_DATAVALUE> {
+class DataValue : public WrapperNative<UA_DataValue, UA_TYPES_DATAVALUE> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     explicit DataValue(Variant value) noexcept {
         setValue(std::move(value));
@@ -1540,11 +1561,11 @@ public:
 
     DataValue(
         Variant value,
-        std::optional<DateTime> sourceTimestamp,  // NOLINT
-        std::optional<DateTime> serverTimestamp,  // NOLINT
+        std::optional<DateTime> sourceTimestamp,  // NOLINT(*value-param)
+        std::optional<DateTime> serverTimestamp,  // NOLINT(*value-param)
         std::optional<uint16_t> sourcePicoseconds,
         std::optional<uint16_t> serverPicoseconds,
-        std::optional<StatusCode> status
+        std::optional<StatusCode> status  // NOLINT(*value-param)
     ) noexcept
         : DataValue{UA_DataValue{
               UA_Variant{},
@@ -1675,6 +1696,8 @@ public:
     }
 };
 
+UAPP_TYPEREGISTRY_NATIVE(DataValue, UA_TYPES_DATAVALUE)
+
 /* --------------------------------------- ExtensionObject -------------------------------------- */
 
 /**
@@ -1702,7 +1725,7 @@ enum class ExtensionObjectEncoding {
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/5.2.2.15
  * @ingroup Wrapper
  */
-class ExtensionObject : public TypeWrapper<UA_ExtensionObject, UA_TYPES_EXTENSIONOBJECT> {
+class ExtensionObject : public WrapperNative<UA_ExtensionObject, UA_TYPES_EXTENSIONOBJECT> {
 private:
     template <typename T>
     static constexpr bool isExtensionObject =
@@ -1710,7 +1733,7 @@ private:
         std::is_same_v<std::remove_cv_t<std::remove_reference_t<T>>, UA_ExtensionObject>;
 
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     /**
      * Create ExtensionObject from a pointer to a decoded object (no copy).
@@ -1856,6 +1879,8 @@ private:
     }
 };
 
+UAPP_TYPEREGISTRY_NATIVE(ExtensionObject, UA_TYPES_EXTENSIONOBJECT)
+
 /* --------------------------------------- DiagnosticInfo --------------------------------------- */
 
 /**
@@ -1863,9 +1888,9 @@ private:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.12
  * @ingroup Wrapper
  */
-class DiagnosticInfo : public TypeWrapper<UA_DiagnosticInfo, UA_TYPES_DIAGNOSTICINFO> {
+class DiagnosticInfo : public WrapperNative<UA_DiagnosticInfo, UA_TYPES_DIAGNOSTICINFO> {
 public:
-    using TypeWrapper::TypeWrapper;
+    using Wrapper::Wrapper;
 
     bool hasSymbolicId() const noexcept {
         return handle()->hasSymbolicId;
@@ -1923,6 +1948,8 @@ public:
         return asWrapper<DiagnosticInfo>(handle()->innerDiagnosticInfo);
     }
 };
+
+UAPP_TYPEREGISTRY_NATIVE(DiagnosticInfo, UA_TYPES_DIAGNOSTICINFO)
 
 /* ---------------------------------------- NumericRange ---------------------------------------- */
 

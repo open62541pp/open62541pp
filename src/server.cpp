@@ -1,25 +1,30 @@
 #include "open62541pp/server.hpp"
 
-#include <atomic>
 #include <cassert>
 #include <mutex>
 #include <utility>  // move
 
 #include "open62541pp/datatype.hpp"
-#include "open62541pp/detail/result_utils.hpp"  // tryInvoke
 #include "open62541pp/detail/server_context.hpp"
 #include "open62541pp/event.hpp"
 #include "open62541pp/exception.hpp"
-#include "open62541pp/node.hpp"
 #include "open62541pp/services/attribute_highlevel.hpp"
 #include "open62541pp/session.hpp"
-#include "open62541pp/types.hpp"
-#include "open62541pp/ua/types.hpp"
-#include "open62541pp/wrapper.hpp"  // asWrapper
 
 namespace opcua {
 
 /* ---------------------------------------- ServerConfig ---------------------------------------- */
+
+// NOLINTNEXTLINE(*param-not-moved)
+UA_ServerConfig TypeHandler<UA_ServerConfig>::move(UA_ServerConfig&& config) noexcept {
+    return std::exchange(config, {});
+}
+
+void TypeHandler<UA_ServerConfig>::clear(UA_ServerConfig& config) noexcept {
+    detail::deallocate(config.customDataTypes);
+    config.customDataTypes = nullptr;
+    UA_ServerConfig_clean(&config);
+}
 
 ServerConfig::ServerConfig() {
     throwIfBad(UA_ServerConfig_setDefault(handle()));
@@ -54,28 +59,6 @@ ServerConfig::ServerConfig(
     ));
 }
 #endif
-
-// NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
-ServerConfig::ServerConfig(UA_ServerConfig&& native)
-    : Wrapper{std::exchange(native, {})} {}
-
-ServerConfig::~ServerConfig() {
-    detail::deallocate(native().customDataTypes);
-    native().customDataTypes = nullptr;
-    UA_ServerConfig_clean(handle());
-}
-
-// NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
-ServerConfig::ServerConfig(ServerConfig&& other) noexcept
-    : Wrapper{std::exchange(other.native(), {})} {}
-
-ServerConfig& ServerConfig::operator=(ServerConfig&& other) noexcept {
-    if (this != &other) {
-        // UA_ServerConfig_clean(handle());  // TODO
-        native() = std::exchange(other.native(), {});
-    }
-    return *this;
-}
 
 void ServerConfig::setLogger(LogFunction func) {
     if (func) {
