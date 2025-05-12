@@ -104,6 +104,10 @@ void ClientConfig::setTimeout(uint32_t milliseconds) noexcept {
     native().timeout = milliseconds;
 }
 
+void ClientConfig::setClientDescription(ApplicationDescription description) noexcept {
+    native().clientDescription = std::move(description);
+}
+
 template <typename T>
 static void setUserIdentityTokenHelper(UA_ClientConfig& config, const T& token) {
     asWrapper<ExtensionObject>(config.userIdentityToken) = ExtensionObject(token);
