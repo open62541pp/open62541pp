@@ -1,5 +1,6 @@
 #include "open62541pp/plugin/accesscontrol.hpp"
 
+#include <any>
 #include <cassert>
 #include <exception>
 #include <functional>  // invoke
@@ -29,10 +30,11 @@ static std::optional<Session> getSession(
     UA_Server* server, const UA_NodeId* sessionId, void* sessionContext
 ) noexcept {
     auto* wrapper = asWrapper(server);
-    if (wrapper == nullptr) {
+    if (wrapper == nullptr|| sessionId == nullptr) {
         return std::nullopt;
     }
-    return Session(*wrapper, asWrapperRef<NodeId>(sessionId), sessionContext);
+
+    return Session(*wrapper, asWrapperRef<NodeId>(sessionId), static_cast<std::any*>(sessionContext));
 }
 
 static void logException(
@@ -69,11 +71,19 @@ static UA_StatusCode activateSessionNative(
     const UA_ByteString* secureChannelRemoteCertificate,
     const UA_NodeId* sessionId,
     const UA_ExtensionObject* userIdentityToken,
-    [[maybe_unused]] void** sessionContext
+    void** sessionContext
 ) {
+    // make sessionContext point to a std::any
+    *sessionContext = new std::any{};
+
+    // make sure to delete the context in closeSession
+    if (*sessionContext == nullptr) {
+        return UA_STATUSCODE_BADOUTOFMEMORY;
+    }
+
     return invokeAccessCallback(server, "activateSession", UA_STATUSCODE_BADINTERNALERROR, [&] {
         // TODO: allow user to set sessionContext
-        auto session = getSession(server, sessionId, nullptr);
+        auto session = getSession(server, sessionId, *sessionContext);
         return getAdapter(ac)
             .activateSession(
                 session.value(),
@@ -91,6 +101,10 @@ static void closeSessionNative(
     invokeAccessCallback(server, "activateSession", UA_STATUSCODE_GOOD, [&] {
         auto session = getSession(server, sessionId, sessionContext);
         getAdapter(ac).closeSession(session.value());  // NOLINT(bugprone-unchecked-optional-access)
+
+        const auto any_ptr = static_cast<std::any*>(sessionContext);
+        delete any_ptr;
+
         return UA_STATUSCODE_GOOD;
     });
 }
