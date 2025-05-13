@@ -20,7 +20,7 @@ TEST_CASE("Session") {
 
     SECTION("Construct") {
         const NodeId sessionId{1, 1000};
-        int sessionContext = 11;
+        std::any sessionContext = int{11};
         Session session{server, sessionId, &sessionContext};
 
         CHECK(session.connection() == server);
@@ -28,8 +28,11 @@ TEST_CASE("Session") {
 
         CHECK(session.id() == sessionId);
 
-        CHECK(session.context() == &sessionContext);
-        CHECK(std::as_const(session).context() == &sessionContext);
+        CHECK(&session.context().value().get() == &sessionContext);
+        CHECK(&std::as_const(session).context().value().get() == &sessionContext);
+
+        CHECK(session.context_as<int>().value().get() == 11);
+        CHECK(std::as_const(session).context_as<int>().value().get() == 11);
     }
 
 #if UAPP_OPEN62541_VER_GE(1, 3)
