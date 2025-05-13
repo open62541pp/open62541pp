@@ -18,7 +18,8 @@ static std::optional<Session> getSession(
     if (wrapper == nullptr || sessionId == nullptr) {
         return std::nullopt;
     }
-    return Session(*wrapper, asWrapper<NodeId>(*sessionId), sessionContext);
+
+    return Session(*wrapper, asWrapper<NodeId>(*sessionId), static_cast<std::any*>(sessionContext));
 }
 
 static void onReadNative(

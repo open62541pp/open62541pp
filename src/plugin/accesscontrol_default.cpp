@@ -9,6 +9,7 @@ namespace opcua {
 
 constexpr std::string_view policyIdAnonymous = "open62541-anonymous-policy";
 constexpr std::string_view policyIdUsername = "open62541-username-policy";
+// constexpr std::string_view noSecurityPolicy = "http://opcfoundation.org/UA/SecurityPolicy#None";
 
 AccessControlDefault::AccessControlDefault(bool allowAnonymous, Span<const Login> logins)
     : allowAnonymous_{allowAnonymous},
@@ -16,6 +17,7 @@ AccessControlDefault::AccessControlDefault(bool allowAnonymous, Span<const Login
     const std::string_view issuedTokenType{};
     const std::string_view issuerEndpointUrl{};
     const std::string_view securityPolicyUri{};
+
     if (allowAnonymous_) {
         userTokenPolicies_.emplace_back(
             policyIdAnonymous,
@@ -67,9 +69,23 @@ StatusCode AccessControlDefault::activateSession(
         if (!allowAnonymous_) {
             return UA_STATUSCODE_BADIDENTITYTOKENINVALID;
         }
-        if (token->policyId().empty() || token->policyId() == policyIdAnonymous) {
+
+        /* Match the beginnig of the PolicyId.
+         * Compatibility notice: Siemens OPC Scout v10 provides an empty
+         * policyId. This is not compliant. For compatibility, assume that empty
+         * policyId == ANONYMOUS_POLICY */
+        if (token->policyId().empty()) {
             return UA_STATUSCODE_GOOD;
         }
+
+        if (token->policyId().size() < policyIdAnonymous.size()) {
+            return UA_STATUSCODE_BADIDENTITYTOKENINVALID;
+        }
+
+        if (std::string_view{token->policyId()}.substr(0, policyIdAnonymous.size()) == policyIdAnonymous) {
+            return UA_STATUSCODE_GOOD;
+        }
+
         return UA_STATUSCODE_BADIDENTITYTOKENINVALID;
     }
 
