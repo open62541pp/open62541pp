@@ -1,5 +1,6 @@
 #pragma once
 
+#include <any> // std::any
 #include <utility>  // move
 
 #include "open62541pp/types.hpp"
@@ -19,10 +20,12 @@ class Server;
  */
 class Session {
 public:
-    Session(Server& connection, NodeId sessionId, void* sessionContext) noexcept
+    Session(Server& connection, NodeId sessionId, std::any* sessionContext) noexcept
         : connection_{&connection},
           id_{std::move(sessionId)},
-          context_{sessionContext} {}
+          context_{sessionContext} {
+
+    }
 
     /// Get the server instance.
     Server& connection() noexcept {
@@ -39,14 +42,37 @@ public:
         return id_;
     }
 
-    /// Get the session context.
-    void* context() noexcept {
-        return context_;
+
+    std::optional<std::reference_wrapper<std::any>> context() noexcept {
+        if (context_) {
+            return {*context_};
+        }
+        return std::nullopt;
+    }
+
+    std::optional<std::reference_wrapper<const std::any>> context() const noexcept {
+        if (context_) {
+            return {*context_};
+        }
+        return std::nullopt;
+    }
+
+    /// Get the session context
+    template<typename ContextType>
+    std::optional<std::reference_wrapper<ContextType>> context_as() {
+        if (auto* result =  std::any_cast<ContextType>(context_)) {
+            return {*result};
+        }
+        return std::nullopt;
     }
 
     /// Get the session context.
-    const void* context() const noexcept {
-        return context_;
+    template<typename ContextType>
+    std::optional<std::reference_wrapper<const ContextType>> context_as() const {
+        if (auto* result =  std::any_cast<ContextType>(context_)) {
+            return {*result};
+        }
+        return std::nullopt;
     }
 
     /// Get a session attribute by its key.
@@ -68,7 +94,7 @@ public:
 private:
     Server* connection_;
     NodeId id_;
-    void* context_;
+    std::any* context_;
 };
 
 /// @relates Session

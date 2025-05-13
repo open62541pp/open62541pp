@@ -6,6 +6,11 @@
 
 using namespace opcua;
 
+struct MySessionContext {
+    bool isAdmin = false;
+};
+
+
 // Custom access control based on AccessControlDefault.
 // If a user logs in with the username "admin", a session attribute "isAdmin" is stored. As an
 // example, the user "admin" has write access level to the created variable node. So admins can
@@ -25,8 +30,11 @@ public:
         // Store attribute "isAdmin" as session attribute to use it in access callbacks
         const auto* token = userIdentityToken.decodedData<UserNameIdentityToken>();
         const bool isAdmin = (token != nullptr && token->userName() == "admin");
-        std::cout << "User has admin rights: " << isAdmin << std::endl;
-        session.setSessionAttribute({0, "isAdmin"}, Variant{isAdmin});
+        std::cout << std::boolalpha << "User has admin rights: " << isAdmin << std::endl;
+
+        // Initialize the context
+        session.context().value().get() = MySessionContext{isAdmin};
+
 
         return AccessControlDefault::activateSession(
             session, endpointDescription, secureChannelRemoteCertificate, userIdentityToken
@@ -34,7 +42,8 @@ public:
     }
 
     Bitmask<AccessLevel> getUserAccessLevel(Session& session, const NodeId& nodeId) override {
-        const bool isAdmin = session.getSessionAttribute({0, "isAdmin"}).scalar<bool>();
+        const bool isAdmin = session.context_as<MySessionContext>().value().get().isAdmin;
+
         std::cout << "Get user access level of node id " << opcua::toString(nodeId) << std::endl;
         std::cout << "Admin rights granted: " << isAdmin << std::endl;
         return isAdmin
