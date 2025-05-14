@@ -188,27 +188,27 @@ public:
     }
 
     reverse_iterator rbegin() noexcept {
-        return reverse_iterator(end());
+        return reverse_iterator{end()};
     }
 
     const_reverse_iterator rbegin() const noexcept {
-        return const_reverse_iterator(end());
+        return const_reverse_iterator{end()};
     }
 
     const_reverse_iterator crbegin() const noexcept {
-        return const_reverse_iterator(cend());
+        return const_reverse_iterator{cend()};
     }
 
     reverse_iterator rend() noexcept {
-        return reverse_iterator(begin());
+        return reverse_iterator{begin()};
     }
 
     const_reverse_iterator rend() const noexcept {
-        return const_reverse_iterator(begin());
+        return const_reverse_iterator{begin()};
     }
 
     const_reverse_iterator crend() const noexcept {
-        return const_reverse_iterator(cbegin());
+        return const_reverse_iterator{cbegin()};
     }
 
 protected:
@@ -237,7 +237,7 @@ protected:
     template <typename InputIt>
     void init(InputIt first, InputIt last, std::input_iterator_tag /* unused */) {
         // input iterator can only be read once -> buffer data in vector
-        std::vector<uint8_t> buffer(first, last);
+        std::vector<CharT> buffer(first, last);
         init(buffer.size());
         std::copy(buffer.begin(), buffer.end(), data());
     }

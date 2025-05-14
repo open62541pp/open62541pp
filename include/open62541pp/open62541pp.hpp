@@ -1,5 +1,6 @@
 #pragma once
 
+#include "open62541pp/array.hpp"
 #include "open62541pp/async.hpp"
 #include "open62541pp/bitmask.hpp"
 #include "open62541pp/client.hpp"

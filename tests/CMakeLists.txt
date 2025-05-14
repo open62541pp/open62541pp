@@ -16,6 +16,7 @@ endif()
 
 add_executable(
     open62541pp_tests
+    array.cpp
     async.cpp
     bitmask.cpp
     client_server_common.cpp

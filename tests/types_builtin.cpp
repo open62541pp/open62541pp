@@ -77,18 +77,18 @@ TEMPLATE_TEST_CASE("StringLikeMixin constructors", "", String, const String) {
         CHECK(str.length() == 3);
         CHECK_FALSE(str.empty());
         CHECK(str.data() != nullptr);
-        CHECK(std::string_view(str.data(), str.size()) == sv);
+        CHECK(std::string_view{str.data(), str.size()} == sv);
     }
 
     SECTION("From iterator pair (input iterator, single-pass)") {
         std::istringstream ss("abc");  // allows only single-pass reading
-        std::istream_iterator<char> first(ss), last;
+        std::istream_iterator<char> first{ss}, last;
         TestType str{first, last};
         CHECK(str.size() == 3);
         CHECK(str.length() == 3);
         CHECK_FALSE(str.empty());
         CHECK(str.data() != nullptr);
-        CHECK(std::string_view(str.data(), str.size()) == "abc");
+        CHECK(std::string_view{str.data(), str.size()} == "abc");
     }
 
     SECTION("From initializer list") {
@@ -97,7 +97,7 @@ TEMPLATE_TEST_CASE("StringLikeMixin constructors", "", String, const String) {
         CHECK(str.length() == 3);
         CHECK_FALSE(str.empty());
         CHECK(str.data() != nullptr);
-        CHECK(std::string_view(str.data(), str.size()) == "abc");
+        CHECK(std::string_view{str.data(), str.size()} == "abc");
     }
 }
 
@@ -153,7 +153,7 @@ TEMPLATE_TEST_CASE("StringLike constructors", "", String, XmlElement) {
         CHECK(str.length() == 5);
         CHECK_FALSE(str.empty());
         CHECK(str.data() != nullptr);
-        CHECK(std::string_view(str.data(), str.size()) == "hello");
+        CHECK(std::string_view{str.data(), str.size()} == "hello");
     }
 
     SECTION("From std::string_view") {
@@ -163,7 +163,7 @@ TEMPLATE_TEST_CASE("StringLike constructors", "", String, XmlElement) {
         CHECK(str.length() == 5);
         CHECK_FALSE(str.empty());
         CHECK(str.data() != nullptr);
-        CHECK(std::string_view(str.data(), str.size()) == "world");
+        CHECK(std::string_view{str.data(), str.size()} == "world");
     }
 
     SECTION("From empty string") {

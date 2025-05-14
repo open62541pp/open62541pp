@@ -28,6 +28,15 @@ TEST_CASE("RangeValueT") {
     STATIC_CHECK(std::is_same_v<detail::RangeValueT<std::vector<bool>>, bool>);
 }
 
+TEMPLATE_TEST_CASE("IsIterator true", "", (std::vector<int>), (std::array<int, 3>), (Span<int>), (Span<const int>)) {
+    STATIC_CHECK(detail::IsIterator<typename TestType::iterator>::value);
+    STATIC_CHECK(detail::IsIterator<typename TestType::const_iterator>::value);
+}
+
+TEMPLATE_TEST_CASE("IsIterator false", "", int, size_t, std::ptrdiff_t) {
+    STATIC_CHECK_FALSE(detail::IsIterator<TestType>::value);
+}
+
 TEMPLATE_TEST_CASE("IsRange true", "", (std::vector<int>), (std::array<int, 3>), (Span<int>), (Span<const int>)) {
     STATIC_CHECK(detail::IsRange<TestType>::value);
     STATIC_CHECK(detail::IsRange<TestType&>::value);

@@ -68,6 +68,13 @@ struct HasSize : std::false_type {};
 template <typename T>
 struct HasSize<T, std::void_t<decltype(std::size(std::declval<T&>()))>> : std::true_type {};
 
+template <typename T, typename = void>
+struct IsIterator : std::false_type {};
+
+template <typename T>
+struct IsIterator<T, std::void_t<typename std::iterator_traits<T>::iterator_category>>
+    : std::true_type {};
+
 template <typename T>
 struct IsRange : std::conjunction<HasBegin<T>, HasEnd<T>> {};
 

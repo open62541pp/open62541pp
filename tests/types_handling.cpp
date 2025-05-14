@@ -94,36 +94,4 @@ TEST_CASE("Array handling") {
             detail::deallocateArray(dst, size, type);
         }
     }
-
-    SECTION("Resize array") {
-        size_t size = 3;
-        const auto& type = UA_TYPES[UA_TYPES_INT32];
-        auto* array = detail::allocateArray<UA_Int32>(size, type);
-        array[0] = 1;
-        array[1] = 2;
-        array[2] = 3;
-
-        const auto* arrayBefore = array;
-
-        SECTION("newSize > size") {
-            detail::resizeArray(array, size, 4, type);
-            CHECK(size == 4);
-            CHECK(array[0] == 1);
-            CHECK(array[1] == 2);
-            CHECK(array[2] == 3);
-            CHECK(array[3] == 0);
-        }
-
-        SECTION("newSize < size") {
-            detail::resizeArray(array, size, 2, type);
-            CHECK(size == 2);
-            CHECK(array[0] == 1);
-            CHECK(array[1] == 2);
-        }
-
-        CHECK(array != nullptr);
-        CHECK(array != arrayBefore);
-
-        detail::deallocateArray(array, size, type);
-    }
 }

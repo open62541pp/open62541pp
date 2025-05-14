@@ -207,19 +207,4 @@ template <typename T>
     return dst;
 }
 
-template <typename T>
-void resizeArray(T*& array, size_t& size, size_t newSize, const UA_DataType& type) {
-    if (array == nullptr || newSize == size) {
-        return;
-    }
-    T* newArray = allocateArray<T>(newSize, type);
-    std::memcpy(newArray, array, std::min(size, newSize) * sizeof(T));
-    if (newSize > size) {
-        std::memset(newArray + size, 0, newSize - size);  // NOLINT
-    }
-    deallocateArray<T>(array, size, type);
-    array = newArray;
-    size = newSize;
-}
-
 }  // namespace opcua::detail
