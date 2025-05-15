@@ -116,6 +116,9 @@ TEST_CASE("Client connect with UserNameIdentityToken") {
     AccessControlDefault accessControl{false, {Login{String{"username"}, String{"password"}}}};
     Server server;
     server.config().setAccessControl(accessControl);
+#if UAPP_OPEN62541_VER_GE(1, 4)
+    server.config()->allowNonePolicyPassword = true;
+#endif
     ServerRunner serverRunner{server};
     Client client;
 
@@ -138,7 +141,7 @@ TEST_CASE("Client connectAsync/disconnectAsync") {
     ServerRunner serverRunner{server};
     Client client;
 
-    bool connected = false;
+    static bool connected = false;  // use static to extend lifetime
     client.onConnected([&] { connected = true; });
     client.onDisconnected([&] { connected = false; });
 
