@@ -32,7 +32,7 @@ jobs:
           - false
           - true
         exclude:
-          - version: "v1.4.6"
+          - version: "v1.4.11"
             amalgamation: true # installation with UA_ENABLE_AMALGAMATION=ON is not possible in v1.4
           # reduce number of jobs
           - library-type: static
