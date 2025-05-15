@@ -105,22 +105,6 @@ void ServerConfig::addCustomDataTypes(Span<const DataType> types) {
     detail::addDataTypes(native().customDataTypes, types);
 }
 
-static void copyUserTokenPoliciesToEndpoints(UA_ServerConfig& config) {
-    // copy config.accessControl.userTokenPolicies -> config.endpoints[i].userIdentityTokens
-    auto& ac = config.accessControl;
-    for (auto& endpoint : Span(config.endpoints, config.endpointsSize)) {
-        detail::deallocateArray(
-            endpoint.userIdentityTokens,
-            endpoint.userIdentityTokensSize,
-            UA_TYPES[UA_TYPES_USERTOKENPOLICY]
-        );
-        endpoint.userIdentityTokens = detail::copyArray(
-            ac.userTokenPolicies, ac.userTokenPoliciesSize, UA_TYPES[UA_TYPES_USERTOKENPOLICY]
-        );
-        endpoint.userIdentityTokensSize = ac.userTokenPoliciesSize;
-    }
-}
-
 static void setHighestSecurityPolicyForUserTokenTransfer(UA_ServerConfig& config) {
     auto& ac = config.accessControl;
     const Span securityPolicies{config.securityPolicies, config.securityPoliciesSize};
@@ -142,7 +126,6 @@ void ServerConfig::setAccessControl(AccessControlBase& accessControl) {
     detail::clear(native().accessControl);
     native().accessControl = accessControl.create(false);
     setHighestSecurityPolicyForUserTokenTransfer(native());
-    copyUserTokenPoliciesToEndpoints(native());
 }
 
 // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
@@ -151,7 +134,6 @@ void ServerConfig::setAccessControl(std::unique_ptr<AccessControlBase>&& accessC
         detail::clear(native().accessControl);
         native().accessControl = accessControl.release()->create(true);
         setHighestSecurityPolicyForUserTokenTransfer(native());
-        copyUserTokenPoliciesToEndpoints(native());
     }
 }
 
