@@ -12,8 +12,7 @@ constexpr std::string_view policyIdAnonymous = "open62541-anonymous-policy";
 constexpr std::string_view policyIdUsername = "open62541-username-policy";
 
 static constexpr bool startsWith(std::string_view str, std::string_view prefix) noexcept {
-    const auto common = std::min(str.size(), prefix.size());
-    return str.substr(0, common) == prefix.substr(0, common);
+    return str.size() >= prefix.size() && str.substr(0, prefix.size()) == prefix;
 }
 
 AccessControlDefault::AccessControlDefault(bool allowAnonymous, Span<const Login> logins)
