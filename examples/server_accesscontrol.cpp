@@ -56,6 +56,9 @@ int main() {
 
     ServerConfig config;
     config.setAccessControl(accessControl);
+#if UAPP_OPEN62541_VER_GE(1, 4)
+    config->allowNonePolicyPassword = true;
+#endif
 
     Server server{std::move(config)};
 

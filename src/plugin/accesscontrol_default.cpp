@@ -1,5 +1,6 @@
 #include "open62541pp/plugin/accesscontrol_default.hpp"
 
+#include <cmath>
 #include <string_view>
 #include <utility>  // move
 
@@ -9,6 +10,10 @@ namespace opcua {
 
 constexpr std::string_view policyIdAnonymous = "open62541-anonymous-policy";
 constexpr std::string_view policyIdUsername = "open62541-username-policy";
+
+static constexpr bool startsWith(std::string_view str, std::string_view prefix) noexcept {
+    return str.size() >= prefix.size() && str.substr(0, prefix.size()) == prefix;
+}
 
 AccessControlDefault::AccessControlDefault(bool allowAnonymous, Span<const Login> logins)
     : allowAnonymous_{allowAnonymous},
@@ -67,7 +72,7 @@ StatusCode AccessControlDefault::activateSession(
         if (!allowAnonymous_) {
             return UA_STATUSCODE_BADIDENTITYTOKENINVALID;
         }
-        if (token->policyId().empty() || token->policyId() == policyIdAnonymous) {
+        if (token->policyId().empty() || startsWith(token->policyId(), policyIdAnonymous)) {
             return UA_STATUSCODE_GOOD;
         }
         return UA_STATUSCODE_BADIDENTITYTOKENINVALID;
@@ -76,7 +81,7 @@ StatusCode AccessControlDefault::activateSession(
     // username and password
     if (const auto* token = userIdentityToken.decodedData<UserNameIdentityToken>();
         token != nullptr) {
-        if (token->policyId() != policyIdUsername) {
+        if (!startsWith(token->policyId(), policyIdUsername)) {
             return UA_STATUSCODE_BADIDENTITYTOKENINVALID;
         }
         // empty username and password

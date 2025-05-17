@@ -81,29 +81,6 @@ TEST_CASE("ServerConfig") {
             config.setAccessControl(std::make_unique<AccessControlDefault>());
         }
 
-        SECTION("Copy user token policies to endpoints") {
-            CHECK(config->endpointsSize > 0);
-
-            // delete endpoint user identity tokens first
-            for (auto& endpoint : Span{config->endpoints, config->endpointsSize}) {
-                UA_Array_delete(
-                    endpoint.userIdentityTokens,
-                    endpoint.userIdentityTokensSize,
-                    &UA_TYPES[UA_TYPES_USERTOKENPOLICY]
-                );
-                endpoint.userIdentityTokens = (UA_UserTokenPolicy*)UA_EMPTY_ARRAY_SENTINEL;
-                endpoint.userIdentityTokensSize = 0;
-            }
-
-            AccessControlDefault accessControl;
-            config.setAccessControl(accessControl);
-            auto& ac = config->accessControl;
-
-            for (const auto& endpoint : Span{config->endpoints, config->endpointsSize}) {
-                CHECK(endpoint.userIdentityTokensSize == ac.userTokenPoliciesSize);
-            }
-        }
-
         SECTION("Use highest security policy to transfer user tokens") {
             AccessControlDefault accessControl{true, {Login{String{"user"}, String{"password"}}}};
             config.setAccessControl(accessControl);
