@@ -64,12 +64,13 @@ TEST_CASE("Array") {
     }
 
     SECTION("From iterator pair (input iterator, single-pass)") {
-        std::istringstream ss("abc");  // allows only single-pass reading
+        std::string src{"abcdefghijklmnopqrstuvwxyz"};
+        std::istringstream ss(src);  // allows only single-pass reading
         std::istream_iterator<char> first{ss}, last;
         const Array<char> arr{first, last};
-        CHECK(arr.size() == 3);
+        CHECK(arr.size() == 26);
         CHECK(arr.data() != nullptr);
-        CHECK(std::string_view{arr.data(), arr.size()} == "abc");
+        CHECK(std::string_view{arr.data(), arr.size()} == src);
     }
 
     SECTION("Copy constructor") {
