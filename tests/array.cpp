@@ -25,6 +25,10 @@ TEST_CASE("Array") {
         CHECK(arr.data() != nullptr);
         CHECK(*arr.data() == 0);
     }
+    
+    SECTION("From size > UA_INT32_MAX") {
+        CHECK_THROWS_AS(Array<int>(size_t{UA_INT32_MAX} + 1), std::bad_alloc);
+    }
 
     SECTION("From count and value") {
         const Array<int> arr(3, 11);
