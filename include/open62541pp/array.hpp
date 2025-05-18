@@ -42,13 +42,23 @@ public:
     using const_reverse_iterator = std::reverse_iterator<const_iterator>;
     // clang-format on
 
+    struct Storage {
+        size_t size;
+        T* data;
+    };
+
     struct Deleter {
-        void operator()(T* ptr, size_t size) {
+        void operator()(T* data, size_t size) noexcept {
             if constexpr (detail::HasClear<Handler, T>::value) {
-                std::for_each_n(ptr, size, Handler::clear);
+                std::for_each_n(data, size, Handler::clear);
             }
-            std::destroy_n(ptr, size);
-            UA_free(ptr);
+            std::destroy_n(data, size);
+            UA_free(data);
+        }
+
+        void operator()(Storage& storage) noexcept {
+            operator()(storage.data, storage.size);
+            storage = {};
         }
     };
 
@@ -81,8 +91,7 @@ public:
 
     /// Move constructor.
     Array(Array&& other) noexcept
-        : size_{std::exchange(other.size_, 0)},
-          data_{std::exchange(other.data_, nullptr)} {}
+        : storage_{std::exchange(other.storage_, {})} {}
 
     ~Array() noexcept {
         clear();
@@ -101,8 +110,7 @@ public:
     Array& operator=(Array&& other) noexcept {
         if (this != &other) {
             clear();
-            size_ = std::exchange(other.size_, 0);
-            data_ = std::exchange(other.data_, nullptr);
+            storage_ = std::exchange(other.storage_, {});
         }
         return *this;
     }
@@ -113,7 +121,7 @@ public:
     }
 
     size_t size() const noexcept {
-        return size_;
+        return storage_.size;
     }
 
     bool empty() const noexcept {
@@ -121,11 +129,11 @@ public:
     }
 
     T* data() noexcept {
-        return data_;
+        return storage_.data;
     }
 
     const T* data() const noexcept {
-        return data_;
+        return storage_.data;
     }
 
     /// Access element by index.
@@ -227,9 +235,7 @@ public:
 
     /// Erase all elements from array.
     void clear() noexcept {
-        Deleter{}(data(), size());
-        size_ = 0;
-        data_ = nullptr;
+        Deleter{}(storage_);
     }
 
     /// Resize array.
@@ -299,23 +305,18 @@ public:
 
     /// Swap arrays.
     void swap(Array& other) noexcept {
-        std::swap(size_, other.size_);
-        std::swap(data_, other.data_);
+        std::swap(storage_, other.storage_);
     }
 
     /// Release the ownership of the array.
     /// @note The returned array must be deleted manually with @ref Deleter.
-    [[nodiscard]] T* release() noexcept {
-        T* ptr = data();
-        size_ = 0;
-        data_ = nullptr;
-        return ptr;
+    [[nodiscard]] Storage release() noexcept {
+        return std::exchange(storage_, {});
     }
 
 private:
     Array(T* data, size_t size) noexcept
-        : size_{size},
-          data_{data} {}
+        : storage_{size, data} {}
 
     [[nodiscard]] static T* allocate(size_t size) {
         if (size == 0) {
@@ -333,8 +334,8 @@ private:
     }
 
     void init(size_t size) {
-        size_ = size;
-        data_ = allocate(size);
+        storage_.size = size;
+        storage_.data = allocate(size);
     }
 
     template <typename InputIt>
@@ -453,8 +454,7 @@ private:
         return begin() + index;
     }
 
-    size_t size_{0};
-    T* data_{nullptr};
+    Storage storage_{};
 };
 
 /* ----------------------------------------- Comparison ----------------------------------------- */

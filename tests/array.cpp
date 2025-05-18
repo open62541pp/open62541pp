@@ -150,11 +150,12 @@ TEST_CASE("Array") {
 
     SECTION("release") {
         Array<int> arr{1, 2, 3};
-        int* ptr = arr.release();
-        CHECK(ptr != nullptr);
+        auto storage = arr.release();
+        CHECK(storage.size == 3);
+        CHECK(storage.data != nullptr);
         CHECK(arr.size() == 0);
         CHECK(arr.data() == nullptr);
-        UA_free(ptr);
+        Array<int>::Deleter{}(storage);
     }
 }
 
