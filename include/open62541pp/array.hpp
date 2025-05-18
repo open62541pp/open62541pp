@@ -308,6 +308,17 @@ public:
         std::swap(storage_, other.storage_);
     }
 
+    /// Return pointer to underlying storage.
+    /// @warning Unsafe if misused. Use only for interoperability with C APIs.
+    Storage* handle() noexcept {
+        return &storage_;
+    }
+
+    /// Return pointer to underlying storage.
+    const Storage* handle() const noexcept {
+        return &storage_;
+    }
+
     /// Release the ownership of the array.
     /// @note The returned array must be deleted manually with @ref Deleter.
     [[nodiscard]] Storage release() noexcept {

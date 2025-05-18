@@ -148,6 +148,21 @@ TEST_CASE("Array") {
         CHECK(arrSwap.data() != nullptr);
     }
 
+    SECTION("handle") {
+        int value = 5;
+        Array<int> arr;
+
+        arr.handle()->size = 1;
+        arr.handle()->data = &value;
+        CHECK(arr.size() == 1);
+        CHECK(arr.data() == &value);
+        
+        arr.handle()->size = 0;
+        arr.handle()->data = nullptr;
+        CHECK(arr.size() == 0);
+        CHECK(arr.data() == nullptr);
+    }
+
     SECTION("release") {
         Array<int> arr{1, 2, 3};
         auto storage = arr.release();
