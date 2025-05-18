@@ -89,6 +89,14 @@ TEST_CASE("Array") {
         CHECK(arrMove.data() != nullptr);
     }
 
+    SECTION("adopt") {
+        const size_t size = 3;
+        auto* ptr = static_cast<int*>(UA_calloc(size, sizeof(int)));  // NOLINT
+        const auto arr = Array<int>::adopt(ptr, size);
+        CHECK(arr.size() == 3);
+        CHECK(arr.data() == ptr);
+    }
+
     SECTION("operator[]") {
         Array<int> arr(2);
         arr[1] = 1;
