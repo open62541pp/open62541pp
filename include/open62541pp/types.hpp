@@ -1456,8 +1456,8 @@ private:
         if constexpr (detail::IsRegistered<T>::value) {
             return scalar<T>();
         } else {
-            using NativeType = typename TypeConverter<T>::NativeType;
-            return detail::fromNative<T>(scalar<NativeType>());
+            using Native = typename TypeConverter<T>::NativeType;
+            return detail::fromNative<T>(scalar<Native>());
         }
     }
 
@@ -1469,8 +1469,8 @@ private:
             auto native = array<ValueType>();
             return T(native.begin(), native.end());
         } else {
-            using NativeType = typename TypeConverter<ValueType>::NativeType;
-            auto native = array<NativeType>();
+            using Native = typename TypeConverter<ValueType>::NativeType;
+            auto native = array<Native>();
             return T(
                 detail::TransformIterator(native.begin(), detail::fromNative<ValueType>),
                 detail::TransformIterator(native.end(), detail::fromNative<ValueType>)
@@ -1509,9 +1509,9 @@ private:
     template <typename T>
     void setScalarCopyConvertImpl(T&& value) {
         using ValueType = std::remove_cv_t<std::remove_reference_t<T>>;
-        using NativeType = typename TypeConverter<ValueType>::NativeType;
-        const auto& type = opcua::getDataType<NativeType>();
-        auto native = detail::allocateUniquePtr<NativeType>(type);
+        using Native = typename TypeConverter<ValueType>::NativeType;
+        const auto& type = opcua::getDataType<Native>();
+        auto native = detail::allocateUniquePtr<Native>(type);
         *native = detail::toNative<ValueType>(std::forward<T>(value));
         setScalarImpl(native.release(), type, UA_VARIANT_DATA);  // move ownership
     }
@@ -1530,10 +1530,10 @@ private:
     template <typename InputIt>
     void setArrayCopyConvertImpl(InputIt first, InputIt last) {
         using ValueType = typename std::iterator_traits<InputIt>::value_type;
-        using NativeType = typename TypeConverter<ValueType>::NativeType;
-        const auto& type = opcua::getDataType<NativeType>();
+        using Native = typename TypeConverter<ValueType>::NativeType;
+        const auto& type = opcua::getDataType<Native>();
         const size_t size = std::distance(first, last);
-        auto native = detail::allocateArrayUniquePtr<NativeType>(size, type);
+        auto native = detail::allocateArrayUniquePtr<Native>(size, type);
         std::transform(first, last, native.get(), detail::toNative<ValueType>);
         setArrayImpl(native.release(), size, type, UA_VARIANT_DATA);  // move ownership
     }
