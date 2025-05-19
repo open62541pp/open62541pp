@@ -1069,18 +1069,18 @@ public:
         assign(ptr, type);
     }
 
-    /// Create Variant from a scalar/array (copy).
-    /// @see assign(const T&)
+    /// Create Variant from a scalar/array (copy/move).
+    /// @see assign(T&&)
     template <typename T, typename = std::enable_if_t<!isVariant<T>>>
-    explicit Variant(const T& value) {
-        assign(value);
+    explicit Variant(T&& value) {
+        assign(std::forward<T>(value));
     }
 
-    /// Create Variant from a scalar/array with a custom data type (copy).
-    /// @see assign(const T&, const UA_DataType&)
+    /// Create Variant from a scalar/array with a custom data type (copy/move).
+    /// @see assign(T&&, const UA_DataType&)
     template <typename T>
-    Variant(const T& value, const UA_DataType& type) {
-        assign(value, type);
+    Variant(T&& value, const UA_DataType& type) {
+        assign(std::forward<T>(value), type);
     }
 
     /// Create Variant from a range of elements (copy).
@@ -1145,28 +1145,29 @@ public:
     }
 
     /**
-     * Assign scalar/array to variant (copy and convert if required).
+     * Assign scalar/array to variant (copy/move and convert if required).
      * @param value Value to copy to the variant. It can be:
      *              - A scalar native, wrapper or convertible value.
      *              - A container with native, wrapper or convertible elements.
      *                The container must implement `begin()` and `end()`.
      */
     template <typename T>
-    void assign(const T& value) {
-        if constexpr (isArrayType<T>()) {
+    void assign(T&& value) {
+        using ValueType = std::remove_cv_t<std::remove_reference_t<T>>;
+        if constexpr (isArrayType<ValueType>()) {
             assign(std::begin(value), std::end(value));
         } else {
-            assertIsRegisteredOrConvertible<T>();
-            if constexpr (detail::IsRegistered<T>::value) {
-                setScalarCopyImpl(value, opcua::getDataType<T>());
+            assertIsRegisteredOrConvertible<ValueType>();
+            if constexpr (detail::IsRegistered<ValueType>::value) {
+                setScalarCopyImpl(std::forward<T>(value), opcua::getDataType<ValueType>());
             } else {
-                setScalarCopyConvertImpl(value);
+                setScalarCopyConvertImpl(std::forward<T>(value));
             }
         }
     }
 
     /**
-     * Assign scalar/array to variant with custom data type (copy).
+     * Assign scalar/array to variant with custom data type (copy/move).
      * @param value Value to copy to the variant. It can be:
      *              - A scalar native or wrapper value.
      *              - A container with native or wrapper elements.
@@ -1174,11 +1175,12 @@ public:
      * @param type Custom data type.
      */
     template <typename T>
-    void assign(const T& value, const UA_DataType& type) {
-        if constexpr (isArrayType<T>()) {
+    void assign(T&& value, const UA_DataType& type) {
+        using ValueType = std::remove_cv_t<std::remove_reference_t<T>>;
+        if constexpr (isArrayType<ValueType>()) {
             setArrayCopyImpl(std::begin(value), std::end(value), type);
         } else {
-            setScalarCopyImpl(value, type);
+            setScalarCopyImpl(std::forward<T>(value), type);
         }
     }
 
@@ -1220,10 +1222,10 @@ public:
     }
 
     /// Assign scalar/array to variant (copy and convert if required).
-    /// @see assign(const T&)
+    /// @see assign(T&&)
     template <typename T, typename = std::enable_if_t<!isVariant<T>>>
-    Variant& operator=(const T& value) {
-        assign(value);
+    Variant& operator=(T&& value) {
+        assign(std::forward<T>(value));
         return *this;
     }
 
@@ -1454,8 +1456,8 @@ private:
         if constexpr (detail::IsRegistered<T>::value) {
             return scalar<T>();
         } else {
-            using Native = typename TypeConverter<T>::NativeType;
-            return detail::fromNative<T>(scalar<Native>());
+            using NativeType = typename TypeConverter<T>::NativeType;
+            return detail::fromNative<T>(scalar<NativeType>());
         }
     }
 
@@ -1467,8 +1469,8 @@ private:
             auto native = array<ValueType>();
             return T(native.begin(), native.end());
         } else {
-            using Native = typename TypeConverter<ValueType>::NativeType;
-            auto native = array<Native>();
+            using NativeType = typename TypeConverter<ValueType>::NativeType;
+            auto native = array<NativeType>();
             return T(
                 detail::TransformIterator(native.begin(), detail::fromNative<ValueType>),
                 detail::TransformIterator(native.end(), detail::fromNative<ValueType>)
@@ -1480,12 +1482,7 @@ private:
     void setScalarImpl(
         T* data, const UA_DataType& type, UA_VariantStorageType storageType
     ) noexcept {
-        assertNoVariant<T>();
-        assert(sizeof(T) == type.memSize);
-        clear();
-        handle()->type = &type;
-        handle()->storageType = storageType;
-        handle()->data = data;
+        setArrayImpl(data, 0, type, storageType);
     }
 
     template <typename T>
@@ -1502,18 +1499,20 @@ private:
     }
 
     template <typename T>
-    void setScalarCopyImpl(const T& value, const UA_DataType& type) {
-        auto native = detail::allocateUniquePtr<T>(type);
-        *native = detail::copy(value, type);
+    void setScalarCopyImpl(T&& value, const UA_DataType& type) {
+        using ValueType = std::remove_cv_t<std::remove_reference_t<T>>;
+        auto native = detail::allocateUniquePtr<ValueType>(type);
+        *native = detail::copy<ValueType>(std::forward<T>(value), type);
         setScalarImpl(native.release(), type, UA_VARIANT_DATA);  // move ownership
     }
 
     template <typename T>
-    void setScalarCopyConvertImpl(const T& value) {
-        using Native = typename TypeConverter<T>::NativeType;
-        const auto& type = opcua::getDataType<Native>();
-        auto native = detail::allocateUniquePtr<Native>(type);
-        *native = detail::toNative(value);
+    void setScalarCopyConvertImpl(T&& value) {
+        using ValueType = std::remove_cv_t<std::remove_reference_t<T>>;
+        using NativeType = typename TypeConverter<ValueType>::NativeType;
+        const auto& type = opcua::getDataType<NativeType>();
+        auto native = detail::allocateUniquePtr<NativeType>(type);
+        *native = detail::toNative<ValueType>(std::forward<T>(value));
         setScalarImpl(native.release(), type, UA_VARIANT_DATA);  // move ownership
     }
 
@@ -1522,8 +1521,8 @@ private:
         using ValueType = typename std::iterator_traits<InputIt>::value_type;
         const size_t size = std::distance(first, last);
         auto native = detail::allocateArrayUniquePtr<ValueType>(size, type);
-        std::transform(first, last, native.get(), [&](const ValueType& value) {
-            return detail::copy(value, type);
+        std::transform(first, last, native.get(), [&](auto&& value) {
+            return detail::copy<ValueType>(std::forward<decltype(value)>(value), type);
         });
         setArrayImpl(native.release(), size, type, UA_VARIANT_DATA);  // move ownership
     }
@@ -1531,13 +1530,11 @@ private:
     template <typename InputIt>
     void setArrayCopyConvertImpl(InputIt first, InputIt last) {
         using ValueType = typename std::iterator_traits<InputIt>::value_type;
-        using Native = typename TypeConverter<ValueType>::NativeType;
-        const auto& type = opcua::getDataType<Native>();
+        using NativeType = typename TypeConverter<ValueType>::NativeType;
+        const auto& type = opcua::getDataType<NativeType>();
         const size_t size = std::distance(first, last);
-        auto native = detail::allocateArrayUniquePtr<Native>(size, type);
-        std::transform(first, last, native.get(), [&](const ValueType& value) {
-            return detail::toNative(value);
-        });
+        auto native = detail::allocateArrayUniquePtr<NativeType>(size, type);
+        std::transform(first, last, native.get(), detail::toNative<ValueType>);
         setArrayImpl(native.release(), size, type, UA_VARIANT_DATA);  // move ownership
     }
 };
