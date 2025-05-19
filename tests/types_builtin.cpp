@@ -542,11 +542,17 @@ TEST_CASE("Variant") {
         }
 
         SECTION("Copy") {
-            SECTION("Constructor") {
+            SECTION("Constructor lvalue") {
                 var = Variant{value};
             }
-            SECTION("Constructor with type") {
+            SECTION("Constructor rvalue") {
+                var = Variant{std::move(value)};
+            }
+            SECTION("Constructor lvalue with type") {
                 var = Variant{value, type};
+            }
+            SECTION("Constructor rvalue with type") {
+                var = Variant{std::move(value), type};
             }
             CHECK(var.isScalar());
             CHECK(var.type() == &type);
@@ -581,10 +587,10 @@ TEST_CASE("Variant") {
                 var = Variant{array, type};
             }
             SECTION("Constructor with iterator pair") {
-                var = Variant(array.begin(), array.end());
+                var = Variant{array.begin(), array.end()};
             }
             SECTION("Constructor with iterator pair and type") {
-                var = Variant(array.begin(), array.end(), type);
+                var = Variant{array.begin(), array.end(), type};
             }
             CHECK(var.isArray());
             CHECK(var.type() == &type);
@@ -669,6 +675,21 @@ TEST_CASE("Variant") {
         CHECK(&var.scalar<double>() != &value);
         CHECK(var.scalar<double>() == value);
         CHECK(var.to<double>() == value);
+    }
+
+    SECTION("Set/get scalar (move)") {
+        Variant var;
+        String value{"test"};
+        auto* data = value->data;
+        SECTION("assign") {
+            var.assign(std::move(value));
+        }
+        SECTION("assignment operator") {
+            var = std::move(value);
+        }
+        CHECK(var.scalar<String>()->data == data);
+        CHECK(var.scalar<String>() == "test");
+        CHECK(var.to<String>() == "test");
     }
 
     SECTION("Set/get array (pointer)") {

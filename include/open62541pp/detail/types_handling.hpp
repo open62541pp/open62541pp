@@ -5,6 +5,8 @@
 #include <cstring>  // memcpy, memset
 #include <memory>
 #include <new>  // bad_alloc
+#include <type_traits>
+#include <utility>  // forward
 
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/detail/traits.hpp"  // IsOneOf
@@ -109,16 +111,23 @@ template <typename T>
 }
 
 template <typename T>
-[[nodiscard]] constexpr T copy(const T& src, const UA_DataType& type) noexcept(
-    IsPointerFree<T>::value
-) {
+[[nodiscard]] constexpr T copy(const T& src, const UA_DataType& type) {
     assert(isValidTypeCombination<T>(type));
-    if constexpr (!IsPointerFree<T>::value) {
+    if constexpr (IsPointerFree<T>::value) {
+        return src;
+    } else {
         T dst;  // NOLINT, initialized in UA_copy function
         throwIfBad(UA_copy(&src, &dst, &type));
         return dst;
+    }
+}
+
+template <typename T>
+[[nodiscard]] constexpr auto copy(T&& src, const UA_DataType& type) {
+    if constexpr (std::is_rvalue_reference_v<decltype(src)>) {
+        return std::forward<T>(src);
     } else {
-        return src;
+        return copy(std::as_const(src), type);
     }
 }
 
