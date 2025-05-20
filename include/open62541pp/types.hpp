@@ -1371,15 +1371,17 @@ public:
      * const auto lst = var.to<std::list<opcua::String>>();
      * @endcode
      *
-     *  @exception BadVariantAccess If the variant is not convertible to `T`.
+     * @exception BadVariantAccess If the variant is not convertible to `T`.
      */
     template <typename T>
-    [[nodiscard]] T to() const {
-        if constexpr (isArrayType<T>()) {
-            return toArrayImpl<T>();
-        } else {
-            return toScalarImpl<T>();
-        }
+    [[nodiscard]] T to() const& {
+        return toImpl<T>(*this);
+    }
+
+    /// @copydoc to()const&
+    template <typename T>
+    [[nodiscard]] T to() && {
+        return toImpl<T>(std::move(*this));
     }
 
     /**
@@ -1460,34 +1462,6 @@ private:
     }
 
     template <typename T>
-    T toScalarImpl() const {
-        assertIsRegisteredOrConvertible<T>();
-        if constexpr (detail::IsRegistered<T>::value) {
-            return scalar<T>();
-        } else {
-            using Native = typename TypeConverter<T>::NativeType;
-            return detail::fromNative<T>(scalar<Native>());
-        }
-    }
-
-    template <typename T>
-    T toArrayImpl() const {
-        using ValueType = typename T::value_type;
-        assertIsRegisteredOrConvertible<ValueType>();
-        if constexpr (detail::IsRegistered<ValueType>::value) {
-            auto native = array<ValueType>();
-            return T(native.begin(), native.end());
-        } else {
-            using Native = typename TypeConverter<ValueType>::NativeType;
-            auto native = array<Native>();
-            return T(
-                detail::TransformIterator(native.begin(), detail::fromNative<ValueType>),
-                detail::TransformIterator(native.end(), detail::fromNative<ValueType>)
-            );
-        }
-    }
-
-    template <typename T>
     void setScalarImpl(
         T* data, const UA_DataType& type, UA_VariantStorageType storageType
     ) noexcept {
@@ -1545,6 +1519,43 @@ private:
         auto native = detail::allocateArrayUniquePtr<Native>(size, type);
         std::transform(first, last, native.get(), detail::toNative<ValueType>);
         setArrayImpl(native.release(), size, type, UA_VARIANT_DATA);  // move ownership
+    }
+
+    template <typename T, typename Self>
+    static T toImpl(Self&& self) {
+        if constexpr (isArrayType<T>()) {
+            return toArrayImpl<T>(std::forward<Self>(self));
+        } else {
+            return toScalarImpl<T>(std::forward<Self>(self));
+        }
+    }
+
+    template <typename T, typename Self>
+    static T toScalarImpl(Self&& self) {
+        assertIsRegisteredOrConvertible<T>();
+        if constexpr (detail::IsRegistered<T>::value) {
+            return std::forward<Self>(self).template scalar<T>();
+        } else {
+            using Native = typename TypeConverter<T>::NativeType;
+            return detail::fromNative<T>(std::forward<Self>(self).template scalar<Native>());
+        }
+    }
+
+    template <typename T, typename Self>
+    static T toArrayImpl(Self&& self) {
+        using ValueType = detail::RangeValueT<T>;
+        assertIsRegisteredOrConvertible<ValueType>();
+        if constexpr (detail::IsRegistered<ValueType>::value) {
+            auto native = std::forward<Self>(self).template array<ValueType>();
+            return T(native.begin(), native.end());
+        } else {
+            using Native = typename TypeConverter<ValueType>::NativeType;
+            auto native = std::forward<Self>(self).template array<Native>();
+            return T(
+                detail::TransformIterator(native.begin(), detail::fromNative<ValueType>),
+                detail::TransformIterator(native.end(), detail::fromNative<ValueType>)
+            );
+        }
     }
 };
 

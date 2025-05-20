@@ -888,6 +888,20 @@ TEST_CASE("Variant") {
 
         CHECK(str == "test");
     }
+
+    SECTION("to ref qualifiers") {
+        Variant var{"test"};
+        void* data = var.scalar<String>()->data;
+
+        SECTION("lvalue") {
+            const auto dst = var.to<String>();
+            CHECK(dst->data != data);  // copy
+        }
+        SECTION("rvalue") {
+            const auto dst = std::move(var).to<String>();
+            CHECK(dst->data == data);  // move
+        }
+    }
 }
 
 TEST_CASE("DataValue") {
