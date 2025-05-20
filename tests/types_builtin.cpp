@@ -692,6 +692,20 @@ TEST_CASE("Variant") {
         CHECK(var.to<String>() == "test");
     }
 
+    SECTION("Set/get std::string (copy & convert)") {
+        Variant var;
+        std::string value{"test"};
+        SECTION("assign") {
+            var.assign(value);
+        }
+        SECTION("assignment operator") {
+            var = value;
+        }
+        CHECK(var.scalar<String>().data() != value.data());
+        CHECK(var.scalar<String>() == value);
+        CHECK(var.to<std::string>() == value);
+    }
+
     SECTION("Set/get array (pointer)") {
         Variant var;
         std::vector<float> array{0, 1, 2};
@@ -734,7 +748,7 @@ TEST_CASE("Variant") {
         CHECK(var.array<String>().data() == array.data());
     }
 
-    SECTION("Set/get array of std::string (copy & conversion)") {
+    SECTION("Set/get array of std::string (copy & convert)") {
         Variant var;
         std::vector<std::string> array{"a", "b", "c"};
         SECTION("assign") {
