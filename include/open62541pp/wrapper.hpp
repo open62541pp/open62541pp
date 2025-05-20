@@ -126,7 +126,7 @@ public:
  * Use @ref TypeHandlerNative for native open62541 types.
  * @ref WrapperNative is a convenience alias for Wrapper using TypeHandlerNative.
  *
- * @warning No virtual constructor is defined; do not implement a destructor in derived classes.
+ * @warning No virtual destructor is defined; do not implement a destructor in derived classes.
  */
 template <typename T, typename Handler = TypeHandler<T>>
 class Wrapper
