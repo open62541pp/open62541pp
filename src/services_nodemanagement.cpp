@@ -115,7 +115,7 @@ static UA_StatusCode methodCallback(
         assert(sessionId != nullptr);
         assert(methodId != nullptr);
         assert(objectId != nullptr);
-        Session session{*asWrapper(server), asWrapper<NodeId>(*sessionId), sessionContext};
+        Session session{*asWrapper(server), asWrapper<NodeId>(*sessionId), static_cast<std::any*>(sessionContext)};
         const auto result = opcua::detail::tryInvoke(
             *cb,
             session,
