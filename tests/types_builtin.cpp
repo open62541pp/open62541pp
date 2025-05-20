@@ -854,26 +854,39 @@ TEST_CASE("Variant") {
         }
     }
 
-    SECTION("Get scalar ref qualifiers") {
+    SECTION("scalar ref qualifiers") {
         Variant var{"test"};
-        void* data = var.scalar<String>()->data;
+        const void* data = var.scalar<String>()->data;
 
         SECTION("lvalue") {
-            auto dst = var.scalar<String>();
+            const auto dst = var.scalar<String>();
             CHECK(dst->data != data);  // copy
         }
         SECTION("const lvalue") {
-            auto dst = std::as_const(var).scalar<String>();
+            const auto dst = std::as_const(var).scalar<String>();
             CHECK(dst->data != data);  // copy
         }
         SECTION("rvalue") {
-            auto dst = std::move(var).scalar<String>();
+            const auto dst = std::move(var).scalar<String>();
             CHECK(dst->data == data);  // move
         }
         SECTION("const rvalue") {
-            auto dst = std::move(std::as_const(var)).scalar<String>();
+            const auto dst = std::move(std::as_const(var)).scalar<String>();
             CHECK(dst->data != data);  // can not move const -> copy
         }
+    }
+
+    SECTION("scalar ref qualifiers with borrowed value") {
+        String str{"test"};
+        Variant var{&str};
+        const void* data = var.scalar<String>()->data;
+
+        SECTION("rvalue") {
+            const auto dst = std::move(var).scalar<String>();
+            CHECK(dst->data != data);  // copy
+        }
+
+        CHECK(str == "test");
     }
 }
 

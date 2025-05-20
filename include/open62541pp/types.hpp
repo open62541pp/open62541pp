@@ -1308,54 +1308,45 @@ public:
         return handle()->data;
     }
 
-    /// Get reference to scalar value with given template type (only native or wrapper types).
+    /// Get scalar value with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not a scalar or not of type `T`.
     template <typename T>
     T& scalar() & {
-        assertIsRegistered<T>();
-        checkIsScalar();
-        checkIsType<T>();
+        checkIsScalarType<T>();
         return *static_cast<T*>(handle()->data);
     }
 
     /// @copydoc scalar()&
     template <typename T>
     const T& scalar() const& {
-        assertIsRegistered<T>();
-        checkIsScalar();
-        checkIsType<T>();
+        checkIsScalarType<T>();
         return *static_cast<const T*>(handle()->data);
     }
 
     /// @copydoc scalar()&
     template <typename T>
-    T&& scalar() && {
-        return std::move(scalar<T>());
+    [[nodiscard]] T scalar() && {
+        return isBorrowed() ? scalar<T>() : std::move(scalar<T>());
     }
 
     /// @copydoc scalar()&
     template <typename T>
-    const T&& scalar() const&& {
-        return std::move(scalar<T>());
+    [[nodiscard]] T scalar() const&& {
+        return isBorrowed() ? scalar<T>() : std::move(scalar<T>());
     }
 
-    /// Get reference to array with given template type (only native or wrapper types).
+    /// Get array with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not an array or not of type `T`.
     template <typename T>
     Span<T> array() {
-        assertIsRegistered<T>();
-        checkIsArray();
-        checkIsType<T>();
+        checkIsArrayType<T>();
         return Span<T>(static_cast<T*>(handle()->data), handle()->arrayLength);
     }
 
-    /// Get reference to array with given template type (only native or wrapper types).
-    /// @exception BadVariantAccess If the variant is not an array or not of type `T`.
+    /// @copydoc array()
     template <typename T>
     Span<const T> array() const {
-        assertIsRegistered<T>();
-        checkIsArray();
-        checkIsType<T>();
+        checkIsArrayType<T>();
         return Span<const T>(static_cast<const T*>(handle()->data), handle()->arrayLength);
     }
 
@@ -1448,6 +1439,24 @@ private:
         if (dt == nullptr || dt->typeId != opcua::getDataType<T>().typeId) {
             throw BadVariantAccess("Variant does not contain a value convertible to template type");
         }
+    }
+
+    template <typename T>
+    void checkIsScalarType() const {
+        assertIsRegistered<T>();
+        checkIsScalar();
+        checkIsType<T>();
+    }
+
+    template <typename T>
+    void checkIsArrayType() const {
+        assertIsRegistered<T>();
+        checkIsArray();
+        checkIsType<T>();
+    }
+
+    bool isBorrowed() const noexcept {
+        return handle()->storageType == UA_VARIANT_DATA_NODELETE;
     }
 
     template <typename T>
