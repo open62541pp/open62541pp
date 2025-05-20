@@ -89,23 +89,4 @@ UnregisterNodesResponse unregisterNodes(
     return UA_Client_Service_unregisterNodes(connection.handle(), request);
 }
 
-Result<std::vector<ExpandedNodeId>> browseRecursive(
-    Server& connection, const BrowseDescription& bd
-) {
-    size_t arraySize{};
-    UA_ExpandedNodeId* array{};
-    const StatusCode status = UA_Server_browseRecursive(
-        connection.handle(), bd.handle(), &arraySize, &array
-    );
-    std::vector<ExpandedNodeId> result(
-        std::make_move_iterator(array),
-        std::make_move_iterator(array + arraySize)  // NOLINT
-    );
-    UA_free(array);  // NOLINT
-    if (status.isBad()) {
-        return BadResult{status};
-    }
-    return result;
-}
-
 }  // namespace opcua::services
