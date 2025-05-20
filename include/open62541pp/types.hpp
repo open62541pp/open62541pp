@@ -1236,15 +1236,12 @@ public:
 
     /// Check if the variant is empty.
     bool empty() const noexcept {
-        return handle()->type == nullptr;
+        return UA_Variant_isEmpty(handle());
     }
 
     /// Check if the variant is a scalar.
     bool isScalar() const noexcept {
-        return (
-            !empty() && handle()->arrayLength == 0 &&
-            handle()->data > UA_EMPTY_ARRAY_SENTINEL  // NOLINT
-        );
+        return UA_Variant_isScalar(handle());
     }
 
     /// Check if the variant is an array.
@@ -1254,9 +1251,7 @@ public:
 
     /// Check if the variant type is equal to the provided data type.
     bool isType(const UA_DataType* type) const noexcept {
-        return (
-            handle()->type != nullptr && type != nullptr && handle()->type->typeId == type->typeId
-        );
+        return type != nullptr && isType(asWrapper<NodeId>(type->typeId));
     }
 
     /// Check if the variant type is equal to the provided data type.
@@ -1264,9 +1259,9 @@ public:
         return isType(&type);
     }
 
-    /// Check if the variant type is equal to the provided data type node id.
+    /// Check if the variant type is equal to the provided data type id.
     bool isType(const NodeId& id) const noexcept {
-        return (handle()->type != nullptr) && (handle()->type->typeId == id);
+        return type() != nullptr && type()->typeId == id;
     }
 
     /// Check if the variant type is equal to the provided template type.
@@ -1299,13 +1294,15 @@ public:
     /// Get pointer to the underlying data.
     /// Check the properties and data type before casting it to the actual type.
     /// Use the methods @ref isScalar, @ref isArray, @ref isType / @ref type.
+    /// @note The @ref UA_EMPTY_ARRAY_SENTINEL sentinel, used to indicate an empty array, is
+    ///       stripped from the returned pointer.
     void* data() noexcept {
-        return handle()->data;
+        return detail::stripEmptyArraySentinel(handle()->data);
     }
 
     /// @copydoc data
     const void* data() const noexcept {
-        return handle()->data;
+        return detail::stripEmptyArraySentinel(handle()->data);
     }
 
     /// Get scalar value with given template type (only native or wrapper types).
@@ -1313,14 +1310,14 @@ public:
     template <typename T>
     T& scalar() & {
         checkIsScalarType<T>();
-        return *static_cast<T*>(handle()->data);
+        return *static_cast<T*>(data());
     }
 
     /// @copydoc scalar()&
     template <typename T>
     const T& scalar() const& {
         checkIsScalarType<T>();
-        return *static_cast<const T*>(handle()->data);
+        return *static_cast<const T*>(data());
     }
 
     /// @copydoc scalar()&
@@ -1340,14 +1337,14 @@ public:
     template <typename T>
     Span<T> array() {
         checkIsArrayType<T>();
-        return Span<T>(static_cast<T*>(handle()->data), handle()->arrayLength);
+        return Span<T>(static_cast<T*>(data()), arrayLength());
     }
 
     /// @copydoc array()
     template <typename T>
     Span<const T> array() const {
         checkIsArrayType<T>();
-        return Span<const T>(static_cast<const T*>(handle()->data), handle()->arrayLength);
+        return Span<const T>(static_cast<const T*>(data()), arrayLength());
     }
 
     /**

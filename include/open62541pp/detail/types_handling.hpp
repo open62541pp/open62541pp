@@ -36,23 +36,6 @@ struct IsPointerFree
           UA_StatusCode> {};
 
 template <typename T>
-constexpr bool isBorrowed(const T& /* unused */) noexcept {
-    return false;
-}
-
-constexpr bool isBorrowed(const UA_Variant& native) noexcept {
-    return native.storageType == UA_VARIANT_DATA_NODELETE;
-}
-
-constexpr bool isBorrowed(const UA_DataValue& native) noexcept {
-    return native.value.storageType == UA_VARIANT_DATA_NODELETE;
-}
-
-constexpr bool isBorrowed(const UA_ExtensionObject& native) noexcept {
-    return native.encoding == UA_EXTENSIONOBJECT_DECODED_NODELETE;
-}
-
-template <typename T>
 constexpr bool isValidTypeCombination(const UA_DataType& type) {
     if constexpr (std::is_void_v<T>) {
         return true;  // allow type-erasure
@@ -64,10 +47,7 @@ constexpr bool isValidTypeCombination(const UA_DataType& type) {
 template <typename T>
 constexpr void clear(T& native, const UA_DataType& type) noexcept {
     assert(isValidTypeCombination<T>(type));
-    // NOLINTNEXTLINE(bugprone-branch-clone)
     if constexpr (IsPointerFree<T>::value) {
-        native = {};
-    } else if (isBorrowed(native)) {
         native = {};
     } else {
         UA_clear(&native, &type);
@@ -147,7 +127,7 @@ template <typename T>
 inline constexpr uintptr_t emptyArraySentinel = 0x01;
 
 template <typename T>
-T* stripEmptyArraySentinel(T* array) noexcept {
+[[nodiscard]] T* stripEmptyArraySentinel(T* array) noexcept {
     // NOLINTNEXTLINE
     return reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(array) & ~emptyArraySentinel);
 }
