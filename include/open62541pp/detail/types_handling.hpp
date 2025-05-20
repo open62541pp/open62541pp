@@ -147,7 +147,7 @@ template <typename T>
 inline constexpr uintptr_t emptyArraySentinel = 0x01;
 
 template <typename T>
-T* stripEmptyArraySentinel(T* array) noexcept {
+[[nodiscard]] T* stripEmptyArraySentinel(T* array) noexcept {
     // NOLINTNEXTLINE
     return reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(array) & ~emptyArraySentinel);
 }

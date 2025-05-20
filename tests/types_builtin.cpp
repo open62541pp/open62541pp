@@ -748,9 +748,9 @@ TEST_CASE("Variant") {
         CHECK(var.array<String>().data() == array.data());
     }
 
-    SECTION("Set/get array of std::string (copy & convert)") {
+    SECTION("Set/get empty array (copy)") {
         Variant var;
-        std::vector<std::string> array{"a", "b", "c"};
+        std::vector<float> array;
         SECTION("assign") {
             var.assign(array);
         }
@@ -761,10 +761,10 @@ TEST_CASE("Variant") {
             var = array;
         }
         CHECK(var.isArray());
-        CHECK(var.type() == &UA_TYPES[UA_TYPES_STRING]);
-        CHECK(var.arrayLength() == array.size());
-        CHECK_NOTHROW(var.array<String>());
-        CHECK(var.to<std::vector<std::string>>() == array);
+        CHECK(var.type() == &UA_TYPES[UA_TYPES_FLOAT]);
+        CHECK(var.data() == nullptr);
+        CHECK(var.arrayLength() == 0);
+        CHECK(var.array<float>().data() == nullptr);
     }
 
     SECTION("Set/get array (copy)") {
@@ -792,6 +792,25 @@ TEST_CASE("Variant") {
         CHECK(var.isArray());
         CHECK(var.type() == &UA_TYPES[UA_TYPES_INT32]);
         CHECK(var.arrayLength() == 3);
+    }
+
+    SECTION("Set/get array of std::string (copy & convert)") {
+        Variant var;
+        std::vector<std::string> array{"a", "b", "c"};
+        SECTION("assign") {
+            var.assign(array);
+        }
+        SECTION("assign with iterator pair") {
+            var.assign(array.begin(), array.end());
+        }
+        SECTION("assignment operator") {
+            var = array;
+        }
+        CHECK(var.isArray());
+        CHECK(var.type() == &UA_TYPES[UA_TYPES_STRING]);
+        CHECK(var.arrayLength() == array.size());
+        CHECK_NOTHROW(var.array<String>());
+        CHECK(var.to<std::vector<std::string>>() == array);
     }
 
     SECTION("Set/get array with std::vector<bool> (copy)") {

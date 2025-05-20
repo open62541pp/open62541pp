@@ -1299,13 +1299,15 @@ public:
     /// Get pointer to the underlying data.
     /// Check the properties and data type before casting it to the actual type.
     /// Use the methods @ref isScalar, @ref isArray, @ref isType / @ref type.
+    /// @note The @ref UA_EMPTY_ARRAY_SENTINEL sentinel, used to indicate an empty array, is
+    ///       stripped from the returned pointer.
     void* data() noexcept {
-        return handle()->data;
+        return detail::stripEmptyArraySentinel(handle()->data);
     }
 
     /// @copydoc data
     const void* data() const noexcept {
-        return handle()->data;
+        return detail::stripEmptyArraySentinel(handle()->data);
     }
 
     /// Get scalar value with given template type (only native or wrapper types).
@@ -1313,14 +1315,14 @@ public:
     template <typename T>
     T& scalar() & {
         checkIsScalarType<T>();
-        return *static_cast<T*>(handle()->data);
+        return *static_cast<T*>(data());
     }
 
     /// @copydoc scalar()&
     template <typename T>
     const T& scalar() const& {
         checkIsScalarType<T>();
-        return *static_cast<const T*>(handle()->data);
+        return *static_cast<const T*>(data());
     }
 
     /// @copydoc scalar()&
@@ -1340,14 +1342,14 @@ public:
     template <typename T>
     Span<T> array() {
         checkIsArrayType<T>();
-        return Span<T>(static_cast<T*>(handle()->data), handle()->arrayLength);
+        return Span<T>(static_cast<T*>(data()), arrayLength());
     }
 
     /// @copydoc array()
     template <typename T>
     Span<const T> array() const {
         checkIsArrayType<T>();
-        return Span<const T>(static_cast<const T*>(handle()->data), handle()->arrayLength);
+        return Span<const T>(static_cast<const T*>(data()), arrayLength());
     }
 
     /**
