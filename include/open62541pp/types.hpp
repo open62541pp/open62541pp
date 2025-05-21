@@ -1388,7 +1388,7 @@ public:
 private:
     template <typename T>
     static constexpr bool isScalarType() noexcept {
-        return IsRegistered<T>::value || detail::IsConvertible<T>::value;
+        return IsRegistered<T>::value || IsConvertible<T>::value;
     }
 
     template <typename T>
@@ -1407,7 +1407,7 @@ private:
     template <typename T>
     static constexpr void assertIsRegisteredOrConvertible() {
         static_assert(
-            IsRegistered<T>::value || detail::IsConvertible<T>::value,
+            IsRegistered<T>::value || IsConvertible<T>::value,
             "Template type must be either a native/wrapper type or a convertible type. "
             "If the type is a native type: Provide the type definition (UA_DataType) manually or "
             "register the type with a TypeRegistry template specialization. "
