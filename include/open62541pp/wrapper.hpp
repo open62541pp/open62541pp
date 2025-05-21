@@ -16,14 +16,14 @@ namespace opcua {
  * Native open62541 objects can be accessed using the Wrapper::handle() member function.
  *
  * Wrapper types are pointer-interconvertible to the wrapped native type and vice versa:
- * - Use asNative(T*) or asNative(const T*) to cast wrapper object pointers to
- * native object pointers.
- * - Use asNative(T&) or asNative(const T&) to cast wrapper object references to
- * native object references.
- * - Use asWrapper<T>(typename T::NativeType*) or asWrapper<T>(const typename T::NativeType*) to cast native object pointers to
- * wrapper object pointers.
- * - Use asWrapper<T>(typename T::NativeType&) or asWrapper<T>(const typename T::NativeType&) to cast native object references to
- * wrapper object references.
+ * - Use asNative(T*) or asNative(const T*)
+ *   to cast wrapper object pointers to native object pointers.
+ * - Use asNative(T&) or asNative(const T&)
+ *   to cast wrapper object references to native object references.
+ * - Use asWrapper<T>(typename T::NativeType*) or asWrapper<T>(const typename T::NativeType*)
+ *   to cast native object pointers to wrapper object pointers.
+ * - Use asWrapper<T>(typename T::NativeType&) or asWrapper<T>(const typename T::NativeType&)
+ *   to cast native object references to wrapper object references.
  *
  * According to the standard:
  * > Two objects `a` and `b` are pointer-interconvertible if:
@@ -31,7 +31,7 @@ namespace opcua {
  * > member of that object [wrapped native type].
  * Derived classes must fulfill the requirements of standard-layout types to be convertible.
  * @see https://en.cppreference.com/w/cpp/language/static_cast#pointer-interconvertible
- * 
+ *
  * @{
  */
 
@@ -280,8 +280,6 @@ public:
 
 /* -------------------------------------------- Trait ------------------------------------------- */
 
-namespace detail {
-
 template <typename T>
 struct IsWrapper {
     // https://stackoverflow.com/a/51910887
@@ -293,17 +291,18 @@ struct IsWrapper {
     static constexpr bool value = type::value;
 };
 
+/* ------------------------------ Cast native type to wrapper type ------------------------------ */
+
+namespace detail {
+
 template <typename T>
-struct IsPointerInterconvertibleWrapper
-    : std::conjunction<
-          IsWrapper<T>,
-          std::is_standard_layout<T>,
-          std::is_standard_layout<typename T::NativeType>,
-          std::bool_constant<sizeof(T) == sizeof(typename T::NativeType)>> {};
+using IsPointerInterconvertibleWrapper = std::conjunction<
+    IsWrapper<T>,
+    std::is_standard_layout<T>,
+    std::is_standard_layout<typename T::NativeType>,
+    std::bool_constant<sizeof(T) == sizeof(typename T::NativeType)>>;
 
 }  // namespace detail
-
-/* ------------------------------ Cast native type to wrapper type ------------------------------ */
 
 // NOLINTBEGIN(*casting-through-void)
 
@@ -374,8 +373,7 @@ constexpr const typename T::NativeType& asNative(const T& wrapper) noexcept {
 template <typename T>
 struct TypeRegistry<
     T,
-    std::enable_if_t<
-        detail::IsWrapper<T>::value && detail::IsRegistered<typename T::NativeType>::value>> {
+    std::enable_if_t<IsWrapper<T>::value && IsRegistered<typename T::NativeType>::value>> {
     static const UA_DataType& getDataType() noexcept {
         return TypeRegistry<typename T::NativeType>::getDataType();
     }

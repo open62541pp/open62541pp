@@ -27,15 +27,15 @@ struct TypeConverter;
 
 /* -------------------------------------- Traits and helper ------------------------------------- */
 
-namespace detail {
-
 template <typename T, typename = void>
 struct IsConvertible : std::false_type {};
 
 template <typename T>
 struct IsConvertible<T, std::void_t<decltype(TypeConverter<T>{})>> : std::true_type {};
 
-template <typename T, typename = std::enable_if_t<detail::IsConvertible<T>::value>>
+namespace detail {
+
+template <typename T, typename = std::enable_if_t<IsConvertible<T>::value>>
 [[nodiscard]] constexpr T fromNative(const typename TypeConverter<T>::NativeType& src) {
     using NativeType = typename TypeConverter<T>::NativeType;
     if constexpr (std::is_invocable_r_v<T, decltype(TypeConverter<T>::fromNative), NativeType>) {
@@ -47,7 +47,7 @@ template <typename T, typename = std::enable_if_t<detail::IsConvertible<T>::valu
     }
 }
 
-template <typename T, typename = std::enable_if_t<detail::IsConvertible<T>::value>>
+template <typename T, typename = std::enable_if_t<IsConvertible<T>::value>>
 [[nodiscard]] constexpr auto toNative(const T& src) -> typename TypeConverter<T>::NativeType {
     using NativeType = typename TypeConverter<T>::NativeType;
     if constexpr (std::is_invocable_r_v<NativeType, decltype(TypeConverter<T>::toNative), T>) {
