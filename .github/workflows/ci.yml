@@ -177,10 +177,10 @@ jobs:
 
       - name: Upload coverage reports to Codecov
         if: matrix.config.coverage && matrix.build-type == 'Debug'
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./build/coverage.xml
+          files: ./build/coverage.xml
           disable_search: true
           flags: ${{ runner.os }}
           name: ${{ matrix.config.name }}
