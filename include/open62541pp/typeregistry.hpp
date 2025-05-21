@@ -29,21 +29,17 @@ struct TypeRegistry;
 
 /* -------------------------------------- Traits and helper ------------------------------------- */
 
-namespace detail {
-
 template <typename T, typename = void>
 struct IsRegistered : std::false_type {};
 
 template <typename T>
 struct IsRegistered<T, std::void_t<decltype(TypeRegistry<T>{})>> : std::true_type {};
 
-}  // namespace detail
-
 template <typename T>
 const UA_DataType& getDataType() noexcept {
     using ValueType = typename std::remove_cv_t<T>;
     static_assert(
-        detail::IsRegistered<ValueType>::value,
+        IsRegistered<ValueType>::value,
         "The provided template type is not registered. "
         "Specify the data type manually or add a template specialization for TypeRegistry."
     );

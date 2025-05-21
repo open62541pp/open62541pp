@@ -373,7 +373,7 @@ constexpr const typename T::NativeType& asNative(const T& wrapper) noexcept {
 template <typename T>
 struct TypeRegistry<
     T,
-    std::enable_if_t<IsWrapper<T>::value && detail::IsRegistered<typename T::NativeType>::value>> {
+    std::enable_if_t<IsWrapper<T>::value && IsRegistered<typename T::NativeType>::value>> {
     static const UA_DataType& getDataType() noexcept {
         return TypeRegistry<typename T::NativeType>::getDataType();
     }

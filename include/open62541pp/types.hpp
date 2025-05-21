@@ -1158,7 +1158,7 @@ public:
             assign(std::begin(value), std::end(value));
         } else {
             assertIsRegisteredOrConvertible<ValueType>();
-            if constexpr (detail::IsRegistered<ValueType>::value) {
+            if constexpr (IsRegistered<ValueType>::value) {
                 setScalarCopyImpl(std::forward<T>(value), opcua::getDataType<ValueType>());
             } else {
                 setScalarCopyConvertImpl(std::forward<T>(value));
@@ -1194,7 +1194,7 @@ public:
     void assign(InputIt first, InputIt last) {
         using ValueType = typename std::iterator_traits<InputIt>::value_type;
         assertIsRegisteredOrConvertible<ValueType>();
-        if constexpr (detail::IsRegistered<ValueType>::value) {
+        if constexpr (IsRegistered<ValueType>::value) {
             setArrayCopyImpl(first, last, opcua::getDataType<ValueType>());
         } else {
             setArrayCopyConvertImpl(first, last);
@@ -1388,7 +1388,7 @@ public:
 private:
     template <typename T>
     static constexpr bool isScalarType() noexcept {
-        return detail::IsRegistered<T>::value || detail::IsConvertible<T>::value;
+        return IsRegistered<T>::value || detail::IsConvertible<T>::value;
     }
 
     template <typename T>
@@ -1399,7 +1399,7 @@ private:
     template <typename T>
     static constexpr void assertIsRegistered() {
         static_assert(
-            detail::IsRegistered<T>::value,
+            IsRegistered<T>::value,
             "Template type must be a native/wrapper type to assign or get scalar/array without copy"
         );
     }
@@ -1407,7 +1407,7 @@ private:
     template <typename T>
     static constexpr void assertIsRegisteredOrConvertible() {
         static_assert(
-            detail::IsRegistered<T>::value || detail::IsConvertible<T>::value,
+            IsRegistered<T>::value || detail::IsConvertible<T>::value,
             "Template type must be either a native/wrapper type or a convertible type. "
             "If the type is a native type: Provide the type definition (UA_DataType) manually or "
             "register the type with a TypeRegistry template specialization. "
@@ -1530,7 +1530,7 @@ private:
     template <typename T, typename Self>
     static T toScalarImpl(Self&& self) {
         assertIsRegisteredOrConvertible<T>();
-        if constexpr (detail::IsRegistered<T>::value) {
+        if constexpr (IsRegistered<T>::value) {
             return std::forward<Self>(self).template scalar<T>();
         } else {
             using Native = typename TypeConverter<T>::NativeType;
@@ -1542,7 +1542,7 @@ private:
     static T toArrayImpl(Self&& self) {
         using ValueType = detail::RangeValueT<T>;
         assertIsRegisteredOrConvertible<ValueType>();
-        if constexpr (detail::IsRegistered<ValueType>::value) {
+        if constexpr (IsRegistered<ValueType>::value) {
             auto native = std::forward<Self>(self).template array<ValueType>();
             return T(native.begin(), native.end());
         } else {
@@ -2108,7 +2108,7 @@ String toString(const T& object, const UA_DataType& type) {
  * @relates TypeWrapper
  * @ingroup Wrapper
  */
-template <typename T, typename = std::enable_if_t<detail::IsRegistered<T>::value>>
+template <typename T, typename = std::enable_if_t<IsRegistered<T>::value>>
 String toString(const T& object) {
     return toString(object, getDataType<T>());
 }
@@ -2119,42 +2119,42 @@ String toString(const T& object) {
 
 /// @relates TypeWrapper
 /// @ingroup Wrapper
-template <typename T, typename = std::enable_if_t<detail::IsRegistered<T>::value>>
+template <typename T, typename = std::enable_if_t<IsRegistered<T>::value>>
 inline bool operator==(const T& lhs, const T& rhs) noexcept {
     return UA_order(&lhs, &rhs, &getDataType<T>()) == UA_ORDER_EQ;
 }
 
 /// @relates TypeWrapper
 /// @ingroup Wrapper
-template <typename T, typename = std::enable_if_t<detail::IsRegistered<T>::value>>
+template <typename T, typename = std::enable_if_t<IsRegistered<T>::value>>
 inline bool operator!=(const T& lhs, const T& rhs) noexcept {
     return UA_order(&lhs, &rhs, &getDataType<T>()) != UA_ORDER_EQ;
 }
 
 /// @relates TypeWrapper
 /// @ingroup Wrapper
-template <typename T, typename = std::enable_if_t<detail::IsRegistered<T>::value>>
+template <typename T, typename = std::enable_if_t<IsRegistered<T>::value>>
 inline bool operator<(const T& lhs, const T& rhs) noexcept {
     return UA_order(&lhs, &rhs, &getDataType<T>()) == UA_ORDER_LESS;
 }
 
 /// @relates TypeWrapper
 /// @ingroup Wrapper
-template <typename T, typename = std::enable_if_t<detail::IsRegistered<T>::value>>
+template <typename T, typename = std::enable_if_t<IsRegistered<T>::value>>
 inline bool operator<=(const T& lhs, const T& rhs) noexcept {
     return UA_order(&lhs, &rhs, &getDataType<T>()) <= UA_ORDER_EQ;
 }
 
 /// @relates TypeWrapper
 /// @ingroup Wrapper
-template <typename T, typename = std::enable_if_t<detail::IsRegistered<T>::value>>
+template <typename T, typename = std::enable_if_t<IsRegistered<T>::value>>
 inline bool operator>(const T& lhs, const T& rhs) noexcept {
     return UA_order(&lhs, &rhs, &getDataType<T>()) == UA_ORDER_MORE;
 }
 
 /// @relates TypeWrapper
 /// @ingroup Wrapper
-template <typename T, typename = std::enable_if_t<detail::IsRegistered<T>::value>>
+template <typename T, typename = std::enable_if_t<IsRegistered<T>::value>>
 inline bool operator>=(const T& lhs, const T& rhs) noexcept {
     return UA_order(&lhs, &rhs, &getDataType<T>()) >= UA_ORDER_EQ;
 }

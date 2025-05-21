@@ -1253,7 +1253,7 @@ TEST_CASE("toString") {
 #if UAPP_HAS_ORDER
 TEST_CASE("Comparison operators") {
     // use simple registered type without custom comparison overloads
-    STATIC_REQUIRE(detail::IsRegistered<UA_Range>::value);
+    STATIC_REQUIRE(IsRegistered<UA_Range>::value);
     const UA_Range r1{1, 2};
     const UA_Range r2{3, 4};
     const UA_Range r3{5, 6};
