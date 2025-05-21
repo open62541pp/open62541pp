@@ -27,7 +27,7 @@ jobs:
           cmake --build . --target open62541pp_doc
       - name: Deploy
         if: (github.event_name == 'release' || github.event_name == 'workflow_dispatch')
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: build/doc_html
