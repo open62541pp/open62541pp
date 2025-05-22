@@ -16,7 +16,7 @@ namespace opcua::services {
 namespace detail {
 
 template <typename T>
-static auto createMonitoredItemContext(
+static auto makeMonitoredItemContext(
     T& connection,
     const ReadValueId& itemToMonitor,
     DataChangeNotificationCallback dataChangeCallback,
@@ -32,7 +32,7 @@ static auto createMonitoredItemContext(
     return context;
 }
 
-std::vector<std::unique_ptr<MonitoredItemContext>> createMonitoredItemContexts(
+std::vector<std::unique_ptr<MonitoredItemContext>> makeMonitoredItemContexts(
     Client& connection,
     const CreateMonitoredItemsRequest& request,
     // NOLINTBEGIN(performance-unnecessary-value-param)
@@ -45,7 +45,7 @@ std::vector<std::unique_ptr<MonitoredItemContext>> createMonitoredItemContexts(
     const auto items = request.itemsToCreate();
     std::vector<std::unique_ptr<MonitoredItemContext>> contexts(items.size());
     std::transform(items.begin(), items.end(), contexts.begin(), [&](const auto& item) {
-        return createMonitoredItemContext(
+        return makeMonitoredItemContext(
             connection, item.itemToMonitor(), dataChangeCallback, eventCallback, deleteCallback
         );
     });
@@ -130,7 +130,7 @@ CreateMonitoredItemsResponse createMonitoredItemsDataChange(
     DeleteMonitoredItemCallback deleteCallback
 ) {
     // TODO: avoid heap allocations for single item?
-    auto contexts = detail::createMonitoredItemContexts(
+    auto contexts = detail::makeMonitoredItemContexts(
         connection, request, std::move(dataChangeCallback), {}, std::move(deleteCallback)
     );
     std::vector<detail::MonitoredItemContext*> contextsPtr(contexts.size());
@@ -160,8 +160,8 @@ MonitoredItemCreateResult createMonitoredItemDataChange<Client>(
     DataChangeNotificationCallback dataChangeCallback,
     DeleteMonitoredItemCallback deleteCallback
 ) {
-    auto item = detail::createMonitoredItemCreateRequest(itemToMonitor, monitoringMode, parameters);
-    const auto request = detail::createCreateMonitoredItemsRequest(
+    auto item = detail::makeMonitoredItemCreateRequest(itemToMonitor, monitoringMode, parameters);
+    const auto request = detail::makeCreateMonitoredItemsRequest(
         subscriptionId, parameters.timestamps, {&item, 1}
     );
     auto response = createMonitoredItemsDataChange(
@@ -183,13 +183,13 @@ MonitoredItemCreateResult createMonitoredItemDataChange<Server>(
     DataChangeNotificationCallback dataChangeCallback,
     DeleteMonitoredItemCallback deleteCallback
 ) {
-    auto context = detail::createMonitoredItemContext(
+    auto context = detail::makeMonitoredItemContext(
         connection, itemToMonitor, std::move(dataChangeCallback), {}, std::move(deleteCallback)
     );
     MonitoredItemCreateResult result = UA_Server_createDataChangeMonitoredItem(
         connection.handle(),
         static_cast<UA_TimestampsToReturn>(parameters.timestamps),
-        detail::createMonitoredItemCreateRequest(itemToMonitor, monitoringMode, parameters),
+        detail::makeMonitoredItemCreateRequest(itemToMonitor, monitoringMode, parameters),
         context.get(),
         detail::MonitoredItemContext::dataChangeCallbackNativeServer
     );
@@ -204,7 +204,7 @@ CreateMonitoredItemsResponse createMonitoredItemsEvent(
     DeleteMonitoredItemCallback deleteCallback
 ) {
     // TODO: avoid heap allocations for single item?
-    auto contexts = detail::createMonitoredItemContexts(
+    auto contexts = detail::makeMonitoredItemContexts(
         connection, request, {}, std::move(eventCallback), std::move(deleteCallback)
     );
     std::vector<detail::MonitoredItemContext*> contextsPtr(contexts.size());
@@ -233,8 +233,8 @@ MonitoredItemCreateResult createMonitoredItemEvent(
     EventNotificationCallback eventCallback,
     DeleteMonitoredItemCallback deleteCallback
 ) {
-    auto item = detail::createMonitoredItemCreateRequest(itemToMonitor, monitoringMode, parameters);
-    const auto request = detail::createCreateMonitoredItemsRequest(
+    auto item = detail::makeMonitoredItemCreateRequest(itemToMonitor, monitoringMode, parameters);
+    const auto request = detail::makeCreateMonitoredItemsRequest(
         subscriptionId, parameters.timestamps, {&item, 1}
     );
     auto response = createMonitoredItemsEvent(
@@ -274,7 +274,7 @@ template <>
 StatusCode deleteMonitoredItem<Client>(
     Client& connection, IntegerId subscriptionId, IntegerId monitoredItemId
 ) {
-    const auto request = detail::createDeleteMonitoredItemsRequest(
+    const auto request = detail::makeDeleteMonitoredItemsRequest(
         subscriptionId, {&monitoredItemId, 1}
     );
     return detail::getSingleStatus(

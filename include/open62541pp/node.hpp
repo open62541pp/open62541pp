@@ -851,7 +851,7 @@ public:
     T readValueScalar() {
         return readValue().template to<T>();
     }
-    
+
     /// @deprecated Use readValue().to<std::vector<T>>() instead
     template <typename T>
     [[deprecated("use readValue().to<std::vector<T>>() instead")]]
@@ -1172,7 +1172,7 @@ public:
         writeValue(Variant{value});
         return *this;
     }
-    
+
     /// @deprecated Use writeValue(Variant{array}) instead
     template <typename ArrayLike>
     [[deprecated("use writeValue(Variant{array}) instead")]]
@@ -1180,7 +1180,7 @@ public:
         writeValue(Variant{array});
         return *this;
     }
-    
+
     /// @deprecated Use writeValue(Variant{first, last}) instead
     template <typename InputIt>
     [[deprecated("use writeValue(Variant{first, last}) instead")]]

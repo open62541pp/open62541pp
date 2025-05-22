@@ -82,8 +82,8 @@ auto callAsync(
     Span<const Variant> inputArguments,
     CompletionToken&& token
 ) {
-    auto item = detail::createCallMethodRequest(objectId, methodId, inputArguments);
-    const auto request = detail::createCallRequest(item);
+    auto item = detail::makeCallMethodRequest(objectId, methodId, inputArguments);
+    const auto request = detail::makeCallRequest(item);
     return callAsync(
         connection,
         asWrapper<CallRequest>(request),

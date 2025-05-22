@@ -75,10 +75,10 @@ Result<NodeId> addNode<Client>(
     const NodeId& typeDefinition,
     const NodeId& referenceType
 ) noexcept {
-    auto item = detail::createAddNodesItem(
+    auto item = detail::makeAddNodesItem(
         parentId, referenceType, id, browseName, nodeClass, nodeAttributes, typeDefinition
     );
-    const auto request = detail::createAddNodesRequest(item);
+    const auto request = detail::makeAddNodesRequest(item);
     auto response = addNodes(connection, asWrapper<AddNodesRequest>(request));
     return detail::getSingleResultRef(response).andThen(detail::getAddedNodeId);
 }
@@ -214,8 +214,8 @@ StatusCode addReference<Client>(
     const NodeId& referenceType,
     bool forward
 ) noexcept {
-    auto item = detail::createAddReferencesItem(sourceId, referenceType, forward, targetId);
-    const auto request = detail::createAddReferencesRequest(item);
+    auto item = detail::makeAddReferencesItem(sourceId, referenceType, forward, targetId);
+    const auto request = detail::makeAddReferencesRequest(item);
     return detail::getSingleStatus(
         addReferences(connection, asWrapper<AddReferencesRequest>(request))
     );
@@ -232,8 +232,8 @@ template <>
 StatusCode deleteNode<Client>(
     Client& connection, const NodeId& id, bool deleteReferences
 ) noexcept {
-    auto item = detail::createDeleteNodesItem(id, deleteReferences);
-    const auto request = detail::createDeleteNodesRequest(item);
+    auto item = detail::makeDeleteNodesItem(id, deleteReferences);
+    const auto request = detail::makeDeleteNodesRequest(item);
     return detail::getSingleStatus(deleteNodes(connection, asWrapper<DeleteNodesRequest>(request)));
 }
 
@@ -265,10 +265,10 @@ StatusCode deleteReference<Client>(
     bool isForward,
     bool deleteBidirectional
 ) noexcept {
-    auto item = detail::createDeleteReferencesItem(
+    auto item = detail::makeDeleteReferencesItem(
         sourceId, referenceType, isForward, targetId, deleteBidirectional
     );
-    const auto request = detail::createDeleteReferencesRequest(item);
+    const auto request = detail::makeDeleteReferencesRequest(item);
     return detail::getSingleStatus(
         deleteReferences(connection, asWrapper<DeleteReferencesRequest>(request))
     );

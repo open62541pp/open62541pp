@@ -76,7 +76,7 @@ template <typename CompletionToken>
 auto browseAsync(
     Client& connection, const BrowseDescription& bd, uint32_t maxReferences, CompletionToken&& token
 ) {
-    const auto request = detail::createBrowseRequest(bd, maxReferences);
+    const auto request = detail::makeBrowseRequest(bd, maxReferences);
     return browseAsync(
         connection,
         asWrapper<BrowseRequest>(request),
@@ -141,9 +141,7 @@ auto browseNextAsync(
     const ByteString& continuationPoint,
     CompletionToken&& token
 ) {
-    const auto request = detail::createBrowseNextRequest(
-        releaseContinuationPoint, continuationPoint
-    );
+    const auto request = detail::makeBrowseNextRequest(releaseContinuationPoint, continuationPoint);
     return browseNextAsync(
         connection,
         asWrapper<BrowseNextRequest>(request),
@@ -204,7 +202,7 @@ template <typename CompletionToken>
 auto translateBrowsePathToNodeIdsAsync(
     Client& connection, const BrowsePath& browsePath, CompletionToken&& token
 ) {
-    const auto request = detail::createTranslateBrowsePathsToNodeIdsRequest(browsePath);
+    const auto request = detail::makeTranslateBrowsePathsToNodeIdsRequest(browsePath);
     return translateBrowsePathsToNodeIdsAsync(
         connection,
         asWrapper<TranslateBrowsePathsToNodeIdsRequest>(request),
@@ -232,7 +230,7 @@ template <typename T>
 BrowsePathResult browseSimplifiedBrowsePath(
     T& connection, const NodeId& origin, Span<const QualifiedName> browsePath
 ) {
-    return translateBrowsePathToNodeIds(connection, detail::createBrowsePath(origin, browsePath));
+    return translateBrowsePathToNodeIds(connection, detail::makeBrowsePath(origin, browsePath));
 }
 
 /**
@@ -248,9 +246,7 @@ auto browseSimplifiedBrowsePathAsync(
     CompletionToken&& token
 ) {
     return translateBrowsePathToNodeIdsAsync(
-        connection,
-        detail::createBrowsePath(origin, browsePath),
-        std::forward<CompletionToken>(token)
+        connection, detail::makeBrowsePath(origin, browsePath), std::forward<CompletionToken>(token)
     );
 }
 

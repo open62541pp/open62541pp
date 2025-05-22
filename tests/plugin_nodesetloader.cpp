@@ -3,8 +3,8 @@
 #include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/config.hpp"
-#include "open62541pp/server.hpp"
 #include "open62541pp/plugin/nodesetloader.hpp"
+#include "open62541pp/server.hpp"
 
 #if UAPP_HAS_NODESETLOADER
 

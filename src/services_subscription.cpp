@@ -65,7 +65,7 @@ CreateSubscriptionResponse createSubscription(
     StatusChangeNotificationCallback statusChangeCallback,
     DeleteSubscriptionCallback deleteCallback
 ) noexcept {
-    const auto request = detail::createCreateSubscriptionRequest(parameters, publishingEnabled);
+    const auto request = detail::makeCreateSubscriptionRequest(parameters, publishingEnabled);
     return createSubscription(
         connection,
         asWrapper<CreateSubscriptionRequest>(request),

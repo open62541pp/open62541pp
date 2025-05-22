@@ -24,7 +24,7 @@ template <>
 BrowseResult browse<Client>(
     Client& connection, const BrowseDescription& bd, uint32_t maxReferences
 ) noexcept {
-    const auto request = detail::createBrowseRequest(bd, maxReferences);
+    const auto request = detail::makeBrowseRequest(bd, maxReferences);
     auto response = browse(connection, asWrapper<BrowseRequest>(request));
     return detail::wrapSingleResultWithStatus<BrowseResult>(response);
 }
@@ -46,9 +46,7 @@ template <>
 BrowseResult browseNext<Client>(
     Client& connection, bool releaseContinuationPoint, const ByteString& continuationPoint
 ) noexcept {
-    const auto request = detail::createBrowseNextRequest(
-        releaseContinuationPoint, continuationPoint
-    );
+    const auto request = detail::makeBrowseNextRequest(releaseContinuationPoint, continuationPoint);
     auto response = browseNext(connection, asWrapper<BrowseNextRequest>(request));
     return detail::wrapSingleResultWithStatus<BrowseResult>(response);
 }
@@ -70,7 +68,7 @@ template <>
 BrowsePathResult translateBrowsePathToNodeIds<Client>(
     Client& connection, const BrowsePath& browsePath
 ) noexcept {
-    const auto request = detail::createTranslateBrowsePathsToNodeIdsRequest(browsePath);
+    const auto request = detail::makeTranslateBrowsePathsToNodeIdsRequest(browsePath);
     auto response = translateBrowsePathsToNodeIds(
         connection, asWrapper<TranslateBrowsePathsToNodeIdsRequest>(request)
     );

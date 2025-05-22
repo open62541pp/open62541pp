@@ -168,7 +168,7 @@ auto createSubscriptionAsync(
     DeleteSubscriptionCallback deleteCallback,
     CompletionToken&& token
 ) {
-    const auto request = detail::createCreateSubscriptionRequest(parameters, publishingEnabled);
+    const auto request = detail::makeCreateSubscriptionRequest(parameters, publishingEnabled);
     return createSubscriptionAsync(
         connection,
         asWrapper<CreateSubscriptionRequest>(request),
@@ -200,7 +200,7 @@ ModifySubscriptionResponse modifySubscription(
 inline ModifySubscriptionResponse modifySubscription(
     Client& connection, IntegerId subscriptionId, const SubscriptionParameters& parameters
 ) noexcept {
-    const auto request = detail::createModifySubscriptionRequest(subscriptionId, parameters);
+    const auto request = detail::makeModifySubscriptionRequest(subscriptionId, parameters);
     return modifySubscription(connection, asWrapper<ModifySubscriptionRequest>(request));
 }
 
@@ -233,7 +233,7 @@ auto modifySubscriptionAsync(
     const SubscriptionParameters& parameters,
     CompletionToken&& token
 ) {
-    const auto request = detail::createModifySubscriptionRequest(subscriptionId, parameters);
+    const auto request = detail::makeModifySubscriptionRequest(subscriptionId, parameters);
     return modifySubscriptionAsync(
         connection,
         asWrapper<ModifySubscriptionRequest>(request),
@@ -284,7 +284,7 @@ auto setPublishingModeAsync(
 inline StatusCode setPublishingMode(
     Client& connection, IntegerId subscriptionId, bool publishing
 ) noexcept {
-    const auto request = detail::createSetPublishingModeRequest(publishing, {&subscriptionId, 1});
+    const auto request = detail::makeSetPublishingModeRequest(publishing, {&subscriptionId, 1});
     return detail::getSingleStatus(
         setPublishingMode(connection, asWrapper<SetPublishingModeRequest>(request))
     );
@@ -299,7 +299,7 @@ template <typename CompletionToken>
 auto setPublishingModeAsync(
     Client& connection, IntegerId subscriptionId, bool publishing, CompletionToken&& token
 ) {
-    const auto request = detail::createSetPublishingModeRequest(publishing, {&subscriptionId, 1});
+    const auto request = detail::makeSetPublishingModeRequest(publishing, {&subscriptionId, 1});
     return setPublishingModeAsync(
         connection,
         asWrapper<SetPublishingModeRequest>(request),
@@ -355,7 +355,7 @@ auto deleteSubscriptionsAsync(
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  */
 inline StatusCode deleteSubscription(Client& connection, IntegerId subscriptionId) noexcept {
-    const auto request = detail::createDeleteSubscriptionsRequest(subscriptionId);
+    const auto request = detail::makeDeleteSubscriptionsRequest(subscriptionId);
     return detail::getSingleStatus(
         deleteSubscriptions(connection, asWrapper<DeleteSubscriptionsRequest>(request))
     );
@@ -371,7 +371,7 @@ template <typename CompletionToken>
 auto deleteSubscriptionAsync(
     Client& connection, IntegerId subscriptionId, CompletionToken&& token
 ) {
-    const auto request = detail::createDeleteSubscriptionsRequest(subscriptionId);
+    const auto request = detail::makeDeleteSubscriptionsRequest(subscriptionId);
     return deleteSubscriptionsAsync(
         connection,
         asWrapper<DeleteSubscriptionsRequest>(request),

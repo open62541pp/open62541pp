@@ -229,7 +229,7 @@ const UA_DataType& getMemberDataType() {
 
 // https://gist.github.com/graphitemaster/494f21190bb2c63c5516
 template <typename T, typename TMember>
-size_t offsetOfMember(TMember T::* member) {
+size_t offsetOfMember(TMember T::*member) {
     static T object{};
     return size_t(&(object.*member)) - size_t(&object);
 }
@@ -283,7 +283,7 @@ public:
      * @param fieldName Human-readable field name
      * @param fieldType Member data type
      */
-    template <auto U::* field>
+    template <auto U::*field>
     auto& addField(std::string_view fieldName, const UA_DataType& fieldType) {
         using TMember = detail::MemberTypeT<decltype(field)>;
         return addField<TMember>(fieldName, detail::offsetOfMember(field), fieldType);
@@ -293,7 +293,7 @@ public:
      * Add a structure field (derive DataType from `field`).
      * @overload
      */
-    template <auto U::* field>
+    template <auto U::*field>
     auto& addField(std::string_view fieldName) {
         return addField<field>(fieldName, detail::getMemberDataType<field>());
     }
@@ -306,9 +306,7 @@ public:
      * @param fieldType Member data type
      */
     template <typename TMember>
-    auto& addField(
-        std::string_view fieldName, size_t offset, const UA_DataType& fieldType
-    );
+    auto& addField(std::string_view fieldName, size_t offset, const UA_DataType& fieldType);
 
     /**
      * Add a structure field with a manual offset (derive DataType from `TMember`).
@@ -316,9 +314,7 @@ public:
      */
     template <typename TMember>
     auto& addField(std::string_view fieldName, size_t offset) {
-        return addField<TMember>(
-            fieldName, offset, getDataType<std::remove_pointer_t<TMember>>()
-        );
+        return addField<TMember>(fieldName, offset, getDataType<std::remove_pointer_t<TMember>>());
     }
 
     /**
@@ -331,7 +327,7 @@ public:
      * @param fieldName Human-readable field name
      * @param fieldType Member data type
      */
-    template <size_t U::* fieldSize, auto U::* fieldArray>
+    template <size_t U::*fieldSize, auto U::*fieldArray>
     auto& addField(std::string_view fieldName, const UA_DataType& fieldType) {
         using TArray = detail::MemberTypeT<decltype(fieldArray)>;
         return addField<TArray>(
@@ -346,7 +342,7 @@ public:
      * Add a structure array field (derive DataType from `fieldArray`).
      * @overload
      */
-    template <size_t U::* fieldSize, auto U::* fieldArray>
+    template <size_t U::*fieldSize, auto U::*fieldArray>
     auto& addField(std::string_view fieldName) {
         return addField<fieldSize, fieldArray>(fieldName, detail::getMemberDataType<fieldArray>());
     }
@@ -372,9 +368,7 @@ public:
      * @overload
      */
     template <typename TArray>
-    auto& addField(
-        std::string_view fieldName, size_t offsetSize, size_t offsetArray
-    ) {
+    auto& addField(std::string_view fieldName, size_t offsetSize, size_t offsetArray) {
         return addField<TArray>(
             fieldName, offsetSize, offsetArray, getDataType<std::remove_pointer_t<TArray>>()
         );
@@ -387,14 +381,14 @@ public:
      * @param fieldName Human-readable field name
      * @param fieldType Data type of the union field
      */
-    template <auto U::* memberUnion, typename TField>
+    template <auto U::*memberUnion, typename TField>
     auto& addUnionField(std::string_view fieldName, const UA_DataType& fieldType);
 
     /**
      * Add a union field (derive DataType from `TField`).
      * @overload
      */
-    template <auto U::* memberUnion, typename TField>
+    template <auto U::*memberUnion, typename TField>
     auto& addUnionField(std::string_view fieldName) {
         return addUnionField<memberUnion, TField>(fieldName, getDataType<TField>());
     }
@@ -531,7 +525,7 @@ auto& DataTypeBuilder<T, Tag, U>::addField(
 }
 
 template <typename T, typename Tag, typename U>
-template <auto U::* memberUnion, typename TField>
+template <auto U::*memberUnion, typename TField>
 auto& DataTypeBuilder<T, Tag, U>::addUnionField(
     std::string_view fieldName, const UA_DataType& fieldType
 ) {

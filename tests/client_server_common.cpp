@@ -1,8 +1,8 @@
 #include <string>
 #include <utility>
 
-#include <catch2/catch_test_macros.hpp>
 #include <catch2/catch_template_test_macros.hpp>
+#include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/client.hpp"
 #include "open62541pp/datatype.hpp"

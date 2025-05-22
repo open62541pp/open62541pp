@@ -28,7 +28,9 @@ TEST_CASE("AccessControlDefault") {
         for (bool allowAnonymous : {false, true}) {
             CAPTURE(allowAnonymous);
 
-            AccessControlDefault ac(allowAnonymous, {Login{String{"username"}, String{"password"}}});
+            AccessControlDefault ac(
+                allowAnonymous, {Login{String{"username"}, String{"password"}}}
+            );
             Session session(server, NodeId{}, nullptr);
             const EndpointDescription endpointDescription{};
             const ByteString secureChannelRemoteCertificate{};

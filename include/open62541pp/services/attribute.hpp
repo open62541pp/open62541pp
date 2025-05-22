@@ -48,7 +48,7 @@ ReadResponse read(Client& connection, const ReadRequest& request) noexcept;
 inline ReadResponse read(
     Client& connection, Span<const ReadValueId> nodesToRead, TimestampsToReturn timestamps
 ) noexcept {
-    const auto request = detail::createReadRequest(timestamps, nodesToRead);
+    const auto request = detail::makeReadRequest(timestamps, nodesToRead);
     return read(connection, asWrapper<ReadRequest>(request));
 }
 
@@ -72,7 +72,7 @@ auto readAsync(
     TimestampsToReturn timestamps,
     CompletionToken&& token
 ) {
-    const auto request = detail::createReadRequest(timestamps, nodesToRead);
+    const auto request = detail::makeReadRequest(timestamps, nodesToRead);
     return readAsync(
         connection, asWrapper<ReadRequest>(request), std::forward<CompletionToken>(token)
     );
@@ -103,8 +103,8 @@ auto readAttributeAsync(
     TimestampsToReturn timestamps,
     CompletionToken&& token
 ) {
-    auto item = detail::createReadValueId(id, attributeId);
-    const auto request = detail::createReadRequest(timestamps, item);
+    auto item = detail::makeReadValueId(id, attributeId);
+    const auto request = detail::makeReadRequest(timestamps, item);
     return readAsync(
         connection,
         asWrapper<ReadRequest>(request),
@@ -145,7 +145,7 @@ WriteResponse write(Client& connection, const WriteRequest& request) noexcept;
 
 /// @overload
 inline WriteResponse write(Client& connection, Span<const WriteValue> nodesToWrite) noexcept {
-    const auto request = detail::createWriteRequest(nodesToWrite);
+    const auto request = detail::makeWriteRequest(nodesToWrite);
     return write(connection, asWrapper<WriteRequest>(request));
 }
 
@@ -164,7 +164,7 @@ auto writeAsync(Client& connection, const WriteRequest& request, CompletionToken
 /// @overload
 template <typename CompletionToken>
 auto writeAsync(Client& connection, Span<const WriteValue> nodesToWrite, CompletionToken&& token) {
-    const auto request = detail::createWriteRequest(nodesToWrite);
+    const auto request = detail::makeWriteRequest(nodesToWrite);
     return writeAsync(
         connection, asWrapper<WriteRequest>(request), std::forward<CompletionToken>(token)
     );
@@ -195,8 +195,8 @@ auto writeAttributeAsync(
     const DataValue& value,
     CompletionToken&& token
 ) {
-    auto item = detail::createWriteValue(id, attributeId, value);
-    const auto request = detail::createWriteRequest(item);
+    auto item = detail::makeWriteValue(id, attributeId, value);
+    const auto request = detail::makeWriteRequest(item);
     return writeAsync(
         connection,
         asWrapper<WriteRequest>(request),

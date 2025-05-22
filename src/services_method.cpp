@@ -19,7 +19,7 @@ CallMethodResult call(
     const NodeId& methodId,
     Span<const Variant> inputArguments
 ) noexcept {
-    const auto item = detail::createCallMethodRequest(objectId, methodId, inputArguments);
+    const auto item = detail::makeCallMethodRequest(objectId, methodId, inputArguments);
     return UA_Server_call(connection.handle(), &item);
 }
 
@@ -30,8 +30,8 @@ CallMethodResult call(
     const NodeId& methodId,
     Span<const Variant> inputArguments
 ) noexcept {
-    auto item = detail::createCallMethodRequest(objectId, methodId, inputArguments);
-    const auto request = detail::createCallRequest(item);
+    auto item = detail::makeCallMethodRequest(objectId, methodId, inputArguments);
+    const auto request = detail::makeCallRequest(item);
     auto response = call(connection, asWrapper<CallRequest>(request));
     return detail::wrapSingleResultWithStatus<CallMethodResult>(response);
 }

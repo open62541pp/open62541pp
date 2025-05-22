@@ -30,17 +30,15 @@ TEST_CASE("Attribute service set (highlevel)") {
         attr.setMinimumSamplingInterval(11.11);
 
         const NodeId id{1, "TestAttributes"};
-        REQUIRE(
-            services::addVariable(
-                server,
-                objectsId,
-                id,
-                "TestAttributes",
-                attr,
-                VariableTypeId::BaseDataVariableType,
-                ReferenceTypeId::HasComponent
-            )
-        );
+        REQUIRE(services::addVariable(
+            server,
+            objectsId,
+            id,
+            "TestAttributes",
+            attr,
+            VariableTypeId::BaseDataVariableType,
+            ReferenceTypeId::HasComponent
+        ));
 
         CHECK(services::readDisplayName(server, id).value() == attr.displayName());
         CHECK(services::readDescription(server, id).value() == attr.description());
@@ -60,17 +58,15 @@ TEST_CASE("Attribute service set (highlevel)") {
 
     SECTION("Read/write object node attributes") {
         const NodeId id{1, "TestAttributes"};
-        REQUIRE(
-            services::addObject(
-                server,
-                objectsId,
-                id,
-                "TestAttributes",
-                {},
-                ObjectTypeId::BaseObjectType,
-                ReferenceTypeId::HasComponent
-            )
-        );
+        REQUIRE(services::addObject(
+            server,
+            objectsId,
+            id,
+            "TestAttributes",
+            {},
+            ObjectTypeId::BaseObjectType,
+            ReferenceTypeId::HasComponent
+        ));
 
         // write new attributes
         const auto eventNotifier = EventNotifier::HistoryRead | EventNotifier::HistoryWrite;
@@ -82,17 +78,15 @@ TEST_CASE("Attribute service set (highlevel)") {
 
     SECTION("Read/write variable node attributes") {
         const NodeId id{1, "TestAttributes"};
-        REQUIRE(
-            services::addVariable(
-                server,
-                objectsId,
-                id,
-                "TestAttributes",
-                {},
-                VariableTypeId::BaseDataVariableType,
-                ReferenceTypeId::HasComponent
-            )
-        );
+        REQUIRE(services::addVariable(
+            server,
+            objectsId,
+            id,
+            "TestAttributes",
+            {},
+            VariableTypeId::BaseDataVariableType,
+            ReferenceTypeId::HasComponent
+        ));
 
         // write new attributes
         CHECK(services::writeDisplayName(server, id, {{}, "NewDisplayName"}).isGood());
@@ -124,19 +118,17 @@ TEST_CASE("Attribute service set (highlevel)") {
 #ifdef UA_ENABLE_METHODCALLS
     SECTION("Read/write method node attributes") {
         const NodeId id{1, "TestMethod"};
-        REQUIRE(
-            services::addMethod(
-                server,
-                objectsId,
-                id,
-                "TestMethod",
-                [](Span<const Variant>, Span<Variant>) {},
-                {},
-                {},
-                {},
-                ReferenceTypeId::HasComponent
-            )
-        );
+        REQUIRE(services::addMethod(
+            server,
+            objectsId,
+            id,
+            "TestMethod",
+            [](Span<const Variant>, Span<Variant>) {},
+            {},
+            {},
+            {},
+            ReferenceTypeId::HasComponent
+        ));
 
         // write new attributes
         CHECK(services::writeExecutable(server, id, true).isGood());
@@ -149,16 +141,14 @@ TEST_CASE("Attribute service set (highlevel)") {
 
     SECTION("Read/write reference type node attributes") {
         const NodeId id{1, "TestReferenceType"};
-        REQUIRE(
-            services::addReferenceType(
-                server,
-                {0, UA_NS0ID_ORGANIZES},
-                id,
-                "TestReferenceType",
-                {},
-                ReferenceTypeId::HasSubtype
-            )
-        );
+        REQUIRE(services::addReferenceType(
+            server,
+            {0, UA_NS0ID_ORGANIZES},
+            id,
+            "TestReferenceType",
+            {},
+            ReferenceTypeId::HasSubtype
+        ));
 
         // read default attributes
         CHECK(services::readIsAbstract(server, id).value() == false);
@@ -178,17 +168,15 @@ TEST_CASE("Attribute service set (highlevel)") {
 
     SECTION("Value rank and array dimension combinations") {
         const NodeId id{1, "TestDimensions"};
-        REQUIRE(
-            services::addVariable(
-                server,
-                objectsId,
-                id,
-                "TestDimensions",
-                {},
-                VariableTypeId::BaseDataVariableType,
-                ReferenceTypeId::HasComponent
-            )
-        );
+        REQUIRE(services::addVariable(
+            server,
+            objectsId,
+            id,
+            "TestDimensions",
+            {},
+            VariableTypeId::BaseDataVariableType,
+            ReferenceTypeId::HasComponent
+        ));
 
         SECTION("Unspecified dimension (ValueRank <= 0)") {
             const std::vector<ValueRank> valueRanks = {
@@ -234,17 +222,15 @@ TEST_CASE("Attribute service set (highlevel)") {
 
     SECTION("Read/write value") {
         const NodeId id{1, "TestValue"};
-        REQUIRE(
-            services::addVariable(
-                server,
-                objectsId,
-                id,
-                "TestValue",
-                {},
-                VariableTypeId::BaseDataVariableType,
-                ReferenceTypeId::HasComponent
-            )
-        );
+        REQUIRE(services::addVariable(
+            server,
+            objectsId,
+            id,
+            "TestValue",
+            {},
+            VariableTypeId::BaseDataVariableType,
+            ReferenceTypeId::HasComponent
+        ));
 
         Variant variantWrite{11.11};
         services::writeValue(server, id, variantWrite).throwIfBad();
@@ -255,17 +241,15 @@ TEST_CASE("Attribute service set (highlevel)") {
 
     SECTION("Read/write data value") {
         const NodeId id{1, "TestDataValue"};
-        REQUIRE(
-            services::addVariable(
-                server,
-                objectsId,
-                id,
-                "TestDataValue",
-                {},
-                VariableTypeId::BaseDataVariableType,
-                ReferenceTypeId::HasComponent
-            )
-        );
+        REQUIRE(services::addVariable(
+            server,
+            objectsId,
+            id,
+            "TestDataValue",
+            {},
+            VariableTypeId::BaseDataVariableType,
+            ReferenceTypeId::HasComponent
+        ));
 
         Variant variant{11};
         DataValue valueWrite{variant, {}, DateTime::now(), {}, uint16_t{1}, UA_STATUSCODE_GOOD};
@@ -324,18 +308,17 @@ TEST_CASE("Attribute service set (highlevel, async)") {
     SECTION("Read/write value") {
         // create variable node
         const NodeId id{1, 1000};
-        REQUIRE(
-            services::addVariable(
-                server,
-                objectsId,
-                id,
-                "Variable",
-                VariableAttributes{}
-                    .setAccessLevel(AccessLevel::CurrentRead | AccessLevel::CurrentWrite),
-                VariableTypeId::BaseDataVariableType,
-                ReferenceTypeId::HasComponent
-            )
-        );
+        REQUIRE(services::addVariable(
+            server,
+            objectsId,
+            id,
+            "Variable",
+            VariableAttributes{}.setAccessLevel(
+                AccessLevel::CurrentRead | AccessLevel::CurrentWrite
+            ),
+            VariableTypeId::BaseDataVariableType,
+            ReferenceTypeId::HasComponent
+        ));
 
         // write
         {
@@ -364,18 +347,15 @@ TEMPLATE_TEST_CASE("Attribute service set write/read", "", Server, Client, Async
 
     // create variable node
     const NodeId id{1, 1000};
-    REQUIRE(
-        services::addVariable(
-            setup.server,
-            {0, UA_NS0ID_OBJECTSFOLDER},
-            id,
-            "Variable",
-            VariableAttributes{}
-                .setAccessLevel(AccessLevel::CurrentRead | AccessLevel::CurrentWrite),
-            VariableTypeId::BaseDataVariableType,
-            ReferenceTypeId::HasComponent
-        )
-    );
+    REQUIRE(services::addVariable(
+        setup.server,
+        {0, UA_NS0ID_OBJECTSFOLDER},
+        id,
+        "Variable",
+        VariableAttributes{}.setAccessLevel(AccessLevel::CurrentRead | AccessLevel::CurrentWrite),
+        VariableTypeId::BaseDataVariableType,
+        ReferenceTypeId::HasComponent
+    ));
 
     const double value = 11.11;
     Result<DataValue> result;

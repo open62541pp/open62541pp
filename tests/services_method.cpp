@@ -22,33 +22,29 @@ TEMPLATE_TEST_CASE("Method service set", "", Server, Client, Async<Client>) {
     const NodeId methodId{1, 1000};
 
     bool throwException = false;
-    REQUIRE(
-        services::addMethod(
-            setup.server,
-            objectId,
-            methodId,
-            "Add",
-            [&](Span<const Variant> inputs, Span<Variant> outputs) {
-                if (throwException) {
-                    throw BadStatus{UA_STATUSCODE_BADUNEXPECTEDERROR};
-                }
-                const auto a = inputs.at(0).scalar<int32_t>();
-                const auto b = inputs.at(1).scalar<int32_t>();
-                outputs.at(0) = a + b;
-            },
-            {
-                Argument{"a", {"en-US", "first number"}, DataTypeId::Int32, ValueRank::Scalar},
-                Argument{"b", {"en-US", "second number"}, DataTypeId::Int32, ValueRank::Scalar},
-            },
-            {
-                Argument{
-                    "sum", {"en-US", "sum of both numbers"}, DataTypeId::Int32, ValueRank::Scalar
-                },
-            },
-            MethodAttributes{},
-            ReferenceTypeId::HasComponent
-        )
-    );
+    REQUIRE(services::addMethod(
+        setup.server,
+        objectId,
+        methodId,
+        "Add",
+        [&](Span<const Variant> inputs, Span<Variant> outputs) {
+            if (throwException) {
+                throw BadStatus{UA_STATUSCODE_BADUNEXPECTEDERROR};
+            }
+            const auto a = inputs.at(0).scalar<int32_t>();
+            const auto b = inputs.at(1).scalar<int32_t>();
+            outputs.at(0) = a + b;
+        },
+        {
+            Argument{"a", {"en-US", "first number"}, DataTypeId::Int32, ValueRank::Scalar},
+            Argument{"b", {"en-US", "second number"}, DataTypeId::Int32, ValueRank::Scalar},
+        },
+        {
+            Argument{"sum", {"en-US", "sum of both numbers"}, DataTypeId::Int32, ValueRank::Scalar},
+        },
+        MethodAttributes{},
+        ReferenceTypeId::HasComponent
+    ));
 
     auto call = [&](auto&&... args) {
         if constexpr (isAsync<TestType>) {
@@ -134,29 +130,27 @@ TEST_CASE("Method service set (full callback signature)") {
     NodeId callbackMethodId;
     NodeId callbackObjectId;
 
-    REQUIRE(
-        services::addMethod(
-            server,
-            objectId,
-            methodId,
-            "Method",
-            [&](Session& session,
-                Span<const Variant>,
-                Span<Variant>,
-                const NodeId& methodId_,
-                const NodeId& objectId_) {
-                executed = true;
-                callbackSessionId = session.id();
-                callbackMethodId = methodId_;
-                callbackObjectId = objectId_;
-                return UA_STATUSCODE_GOOD;
-            },
-            {},
-            {},
-            MethodAttributes{},
-            ReferenceTypeId::HasComponent
-        )
-    );
+    REQUIRE(services::addMethod(
+        server,
+        objectId,
+        methodId,
+        "Method",
+        [&](Session& session,
+            Span<const Variant>,
+            Span<Variant>,
+            const NodeId& methodId_,
+            const NodeId& objectId_) {
+            executed = true;
+            callbackSessionId = session.id();
+            callbackMethodId = methodId_;
+            callbackObjectId = objectId_;
+            return UA_STATUSCODE_GOOD;
+        },
+        {},
+        {},
+        MethodAttributes{},
+        ReferenceTypeId::HasComponent
+    ));
 
     const auto result = services::call(server, objectId, methodId, {});
     CHECK(result.statusCode().isGood());
@@ -179,23 +173,21 @@ TEST_CASE("Method calls with async operations") {
     const NodeId objectId{ObjectId::ObjectsFolder};
     const NodeId methodId{1, 1000};
 
-    REQUIRE(
-        services::addMethod(
-            setup.server,
-            objectId,
-            methodId,
-            "GetWorkerThreadId",
-            []([[maybe_unused]] Span<const Variant> inputs, Span<Variant> outputs) {
-                outputs.at(0) = static_cast<uint64_t>(getThreadId());
-            },
-            {},
-            {
-                Argument("id", {"en-US", "Thread id"}, DataTypeId::UInt64, ValueRank::Scalar),
-            },
-            MethodAttributes{},
-            ReferenceTypeId::HasComponent
-        )
-    );
+    REQUIRE(services::addMethod(
+        setup.server,
+        objectId,
+        methodId,
+        "GetWorkerThreadId",
+        []([[maybe_unused]] Span<const Variant> inputs, Span<Variant> outputs) {
+            outputs.at(0) = static_cast<uint64_t>(getThreadId());
+        },
+        {},
+        {
+            Argument("id", {"en-US", "Thread id"}, DataTypeId::UInt64, ValueRank::Scalar),
+        },
+        MethodAttributes{},
+        ReferenceTypeId::HasComponent
+    ));
 
     SECTION("Sync operation") {
         auto future = services::callAsync(setup.client, objectId, methodId, {}, useFuture);

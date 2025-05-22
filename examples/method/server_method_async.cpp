@@ -33,19 +33,17 @@ int main() {
     opcua::useAsyncOperation(server, methodId, true);
 
     // Process async operations in a separate worker thread
-    std::thread workerThread{
-        [&server]() {
-            while (true) {
-                const auto operation = opcua::getAsyncOperation(server);
-                if (operation.has_value()) {
-                    opcua::runAsyncOperation(server, operation.value());
-                    std::cout << "Async operation processed\n";
-                } else {
-                    std::this_thread::sleep_for(std::chrono::milliseconds{10});
-                }
+    std::thread workerThread{[&server]() {
+        while (true) {
+            const auto operation = opcua::getAsyncOperation(server);
+            if (operation.has_value()) {
+                opcua::runAsyncOperation(server, operation.value());
+                std::cout << "Async operation processed\n";
+            } else {
+                std::this_thread::sleep_for(std::chrono::milliseconds{10});
             }
         }
-    };
+    }};
 
     server.run();
     workerThread.join();

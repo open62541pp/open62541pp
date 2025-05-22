@@ -12,7 +12,7 @@
 #include "open62541pp/config.hpp"
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/detail/traits.hpp"  // IsOneOf
-#include "open62541pp/detail/types_conversion.hpp"  // toNative, toNativeArray
+#include "open62541pp/detail/types_conversion.hpp"  // makeNative, makeNativeArray
 #include "open62541pp/detail/types_handling.hpp"  // deallocateArray, copyArray
 #include "open62541pp/span.hpp"
 #include "open62541pp/typeregistry.hpp"  // getDataType
@@ -98,8 +98,8 @@ public:
 
     EnumValueType(int64_t value, LocalizedText displayName, LocalizedText description) {
         handle()->value = value;
-        handle()->displayName = detail::toNative(std::move(displayName));
-        handle()->description = detail::toNative(std::move(description));
+        handle()->displayName = detail::makeNative(std::move(displayName));
+        handle()->description = detail::makeNative(std::move(description));
     }
 
     UAPP_GETTER(int64_t, value)
@@ -137,14 +137,14 @@ public:
         std::string_view discoveryProfileUri,
         Span<const String> discoveryUrls
     ) {
-        handle()->applicationUri = detail::toNative(applicationUri);
-        handle()->productUri = detail::toNative(productUri);
-        handle()->applicationName = detail::toNative(std::move(applicationName));
+        handle()->applicationUri = detail::makeNative(applicationUri);
+        handle()->productUri = detail::makeNative(productUri);
+        handle()->applicationName = detail::makeNative(std::move(applicationName));
         handle()->applicationType = static_cast<UA_ApplicationType>(applicationType);
-        handle()->gatewayServerUri = detail::toNative(gatewayServerUri);
-        handle()->discoveryProfileUri = detail::toNative(discoveryProfileUri);
+        handle()->gatewayServerUri = detail::makeNative(gatewayServerUri);
+        handle()->discoveryProfileUri = detail::makeNative(discoveryProfileUri);
         handle()->discoveryUrlsSize = discoveryUrls.size();
-        handle()->discoveryUrls = detail::toNativeArray(discoveryUrls);
+        handle()->discoveryUrls = detail::makeNativeArray(discoveryUrls);
     }
 
     UAPP_GETTER_WRAPPER(String, applicationUri)
@@ -173,13 +173,13 @@ public:
         uint32_t timeoutHint,
         ExtensionObject additionalHeader
     ) {
-        handle()->authenticationToken = detail::toNative(std::move(authenticationToken));
+        handle()->authenticationToken = detail::makeNative(std::move(authenticationToken));
         handle()->timestamp = timestamp;
         handle()->requestHandle = requestHandle;
         handle()->returnDiagnostics = returnDiagnostics;
-        handle()->auditEntryId = detail::toNative(auditEntryId);
+        handle()->auditEntryId = detail::makeNative(auditEntryId);
         handle()->timeoutHint = timeoutHint;
-        handle()->additionalHeader = detail::toNative(std::move(additionalHeader));
+        handle()->additionalHeader = detail::makeNative(std::move(additionalHeader));
     }
 
     UAPP_GETTER_WRAPPER(NodeId, authenticationToken)
@@ -249,11 +249,11 @@ public:
         std::string_view issuerEndpointUrl,
         std::string_view securityPolicyUri
     ) {
-        handle()->policyId = detail::toNative(policyId);
+        handle()->policyId = detail::makeNative(policyId);
         handle()->tokenType = static_cast<UA_UserTokenType>(tokenType);
-        handle()->issuedTokenType = detail::toNative(issuedTokenType);
-        handle()->issuerEndpointUrl = detail::toNative(issuerEndpointUrl);
-        handle()->securityPolicyUri = detail::toNative(securityPolicyUri);
+        handle()->issuedTokenType = detail::makeNative(issuedTokenType);
+        handle()->issuerEndpointUrl = detail::makeNative(issuerEndpointUrl);
+        handle()->securityPolicyUri = detail::makeNative(securityPolicyUri);
     }
 
     UAPP_GETTER_WRAPPER(String, policyId)
@@ -662,9 +662,9 @@ public:
         std::string_view password,
         std::string_view encryptionAlgorithm = {}
     ) {
-        handle()->userName = detail::toNative(userName);
-        handle()->password = detail::toNative(password);
-        handle()->encryptionAlgorithm = detail::toNative(encryptionAlgorithm);
+        handle()->userName = detail::makeNative(userName);
+        handle()->password = detail::makeNative(password);
+        handle()->encryptionAlgorithm = detail::makeNative(encryptionAlgorithm);
     }
 
     UAPP_GETTER_WRAPPER(String, policyId)
@@ -682,7 +682,7 @@ public:
     using Wrapper::Wrapper;
 
     explicit X509IdentityToken(ByteString certificateData) {
-        handle()->certificateData = detail::toNative(std::move(certificateData));
+        handle()->certificateData = detail::makeNative(std::move(certificateData));
     }
 
     UAPP_GETTER_WRAPPER(String, policyId)
@@ -699,8 +699,8 @@ public:
     using Wrapper::Wrapper;
 
     explicit IssuedIdentityToken(ByteString tokenData, std::string_view encryptionAlgorithm = {}) {
-        handle()->tokenData = detail::toNative(std::move(tokenData));
-        handle()->encryptionAlgorithm = detail::toNative(encryptionAlgorithm);
+        handle()->tokenData = detail::makeNative(std::move(tokenData));
+        handle()->encryptionAlgorithm = detail::makeNative(encryptionAlgorithm);
     }
 
     UAPP_GETTER_WRAPPER(String, policyId)
@@ -725,13 +725,13 @@ public:
         ExtensionObject nodeAttributes,
         ExpandedNodeId typeDefinition
     ) {
-        handle()->parentNodeId = detail::toNative(std::move(parentNodeId));
-        handle()->referenceTypeId = detail::toNative(std::move(referenceTypeId));
-        handle()->requestedNewNodeId = detail::toNative(std::move(requestedNewNodeId));
-        handle()->browseName = detail::toNative(std::move(browseName));
+        handle()->parentNodeId = detail::makeNative(std::move(parentNodeId));
+        handle()->referenceTypeId = detail::makeNative(std::move(referenceTypeId));
+        handle()->requestedNewNodeId = detail::makeNative(std::move(requestedNewNodeId));
+        handle()->browseName = detail::makeNative(std::move(browseName));
         handle()->nodeClass = static_cast<UA_NodeClass>(nodeClass);
-        handle()->nodeAttributes = detail::toNative(std::move(nodeAttributes));
-        handle()->typeDefinition = detail::toNative(std::move(typeDefinition));
+        handle()->nodeAttributes = detail::makeNative(std::move(nodeAttributes));
+        handle()->typeDefinition = detail::makeNative(std::move(typeDefinition));
     }
 
     UAPP_GETTER_WRAPPER(ExpandedNodeId, parentNodeId)
@@ -764,9 +764,9 @@ public:
     using Wrapper::Wrapper;
 
     AddNodesRequest(RequestHeader requestHeader, Span<const AddNodesItem> nodesToAdd) {
-        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->requestHeader = detail::makeNative(std::move(requestHeader));
         handle()->nodesToAddSize = nodesToAdd.size();
-        handle()->nodesToAdd = detail::toNativeArray(nodesToAdd);
+        handle()->nodesToAdd = detail::makeNativeArray(nodesToAdd);
     }
 
     UAPP_GETTER_WRAPPER(RequestHeader, requestHeader)
@@ -802,11 +802,11 @@ public:
         ExpandedNodeId targetNodeId,
         NodeClass targetNodeClass
     ) {
-        handle()->sourceNodeId = detail::toNative(std::move(sourceNodeId));
-        handle()->referenceTypeId = detail::toNative(std::move(referenceTypeId));
+        handle()->sourceNodeId = detail::makeNative(std::move(sourceNodeId));
+        handle()->referenceTypeId = detail::makeNative(std::move(referenceTypeId));
         handle()->isForward = isForward;
-        handle()->targetServerUri = detail::toNative(targetServerUri);
-        handle()->targetNodeId = detail::toNative(std::move(targetNodeId));
+        handle()->targetServerUri = detail::makeNative(targetServerUri);
+        handle()->targetNodeId = detail::makeNative(std::move(targetNodeId));
         handle()->targetNodeClass = static_cast<UA_NodeClass>(targetNodeClass);
     }
 
@@ -830,9 +830,9 @@ public:
     AddReferencesRequest(
         RequestHeader requestHeader, Span<const AddReferencesItem> referencesToAdd
     ) {
-        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->requestHeader = detail::makeNative(std::move(requestHeader));
         handle()->referencesToAddSize = referencesToAdd.size();
-        handle()->referencesToAdd = detail::toNativeArray(referencesToAdd);
+        handle()->referencesToAdd = detail::makeNativeArray(referencesToAdd);
     }
 
     UAPP_GETTER_WRAPPER(RequestHeader, requestHeader)
@@ -862,7 +862,7 @@ public:
     using Wrapper::Wrapper;
 
     DeleteNodesItem(NodeId nodeId, bool deleteTargetReferences) {
-        handle()->nodeId = detail::toNative(std::move(nodeId));
+        handle()->nodeId = detail::makeNative(std::move(nodeId));
         handle()->deleteTargetReferences = deleteTargetReferences;
     }
 
@@ -880,9 +880,9 @@ public:
     using Wrapper::Wrapper;
 
     DeleteNodesRequest(RequestHeader requestHeader, Span<const DeleteNodesItem> nodesToDelete) {
-        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->requestHeader = detail::makeNative(std::move(requestHeader));
         handle()->nodesToDeleteSize = nodesToDelete.size();
-        handle()->nodesToDelete = detail::toNativeArray(nodesToDelete);
+        handle()->nodesToDelete = detail::makeNativeArray(nodesToDelete);
     }
 
     UAPP_GETTER_WRAPPER(RequestHeader, requestHeader)
@@ -919,10 +919,10 @@ public:
         ExpandedNodeId targetNodeId,
         bool deleteBidirectional
     ) {
-        handle()->sourceNodeId = detail::toNative(std::move(sourceNodeId));
-        handle()->referenceTypeId = detail::toNative(std::move(referenceTypeId));
+        handle()->sourceNodeId = detail::makeNative(std::move(sourceNodeId));
+        handle()->referenceTypeId = detail::makeNative(std::move(referenceTypeId));
         handle()->isForward = isForward;
-        handle()->targetNodeId = detail::toNative(std::move(targetNodeId));
+        handle()->targetNodeId = detail::makeNative(std::move(targetNodeId));
         handle()->deleteBidirectional = deleteBidirectional;
     }
 
@@ -945,9 +945,9 @@ public:
     DeleteReferencesRequest(
         RequestHeader requestHeader, Span<const DeleteReferencesItem> referencesToDelete
     ) {
-        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->requestHeader = detail::makeNative(std::move(requestHeader));
         handle()->referencesToDeleteSize = referencesToDelete.size();
-        handle()->referencesToDelete = detail::toNativeArray(referencesToDelete);
+        handle()->referencesToDelete = detail::makeNativeArray(referencesToDelete);
     }
 
     UAPP_GETTER_WRAPPER(RequestHeader, requestHeader)
@@ -976,7 +976,7 @@ public:
     using Wrapper::Wrapper;
 
     ViewDescription(NodeId viewId, DateTime timestamp, uint32_t viewVersion) {
-        handle()->viewId = detail::toNative(std::move(viewId));
+        handle()->viewId = detail::makeNative(std::move(viewId));
         handle()->timestamp = timestamp;
         handle()->viewVersion = viewVersion;
     }
@@ -1045,9 +1045,9 @@ public:
         Bitmask<NodeClass> nodeClassMask = NodeClass::Unspecified,
         Bitmask<BrowseResultMask> resultMask = BrowseResultMask::All
     ) {
-        handle()->nodeId = detail::toNative(std::move(nodeId));
+        handle()->nodeId = detail::makeNative(std::move(nodeId));
         handle()->browseDirection = static_cast<UA_BrowseDirection>(browseDirection);
-        handle()->referenceTypeId = detail::toNative(std::move(referenceTypeId));
+        handle()->referenceTypeId = detail::makeNative(std::move(referenceTypeId));
         handle()->includeSubtypes = includeSubtypes;
         handle()->nodeClassMask = nodeClassMask.get();
         handle()->resultMask = resultMask.get();
@@ -1074,11 +1074,11 @@ public:
         uint32_t requestedMaxReferencesPerNode,
         Span<const BrowseDescription> nodesToBrowse
     ) {
-        handle()->requestHeader = detail::toNative(std::move(requestHeader));
-        handle()->view = detail::toNative(std::move(view));
+        handle()->requestHeader = detail::makeNative(std::move(requestHeader));
+        handle()->view = detail::makeNative(std::move(view));
         handle()->requestedMaxReferencesPerNode = requestedMaxReferencesPerNode;
         handle()->nodesToBrowseSize = nodesToBrowse.size();
-        handle()->nodesToBrowse = detail::toNativeArray(nodesToBrowse);
+        handle()->nodesToBrowse = detail::makeNativeArray(nodesToBrowse);
     }
 
     UAPP_GETTER_WRAPPER(RequestHeader, requestHeader)
@@ -1142,10 +1142,10 @@ public:
         bool releaseContinuationPoints,
         Span<const ByteString> continuationPoints
     ) {
-        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->requestHeader = detail::makeNative(std::move(requestHeader));
         handle()->releaseContinuationPoints = releaseContinuationPoints;
         handle()->continuationPointsSize = continuationPoints.size();
-        handle()->continuationPoints = detail::toNativeArray(continuationPoints);
+        handle()->continuationPoints = detail::makeNativeArray(continuationPoints);
     }
 
     UAPP_GETTER_WRAPPER(RequestHeader, requestHeader)
@@ -1177,10 +1177,10 @@ public:
     RelativePathElement(
         NodeId referenceTypeId, bool isInverse, bool includeSubtypes, QualifiedName targetName
     ) {
-        handle()->referenceTypeId = detail::toNative(std::move(referenceTypeId));
+        handle()->referenceTypeId = detail::makeNative(std::move(referenceTypeId));
         handle()->isInverse = isInverse;
         handle()->includeSubtypes = includeSubtypes;
-        handle()->targetName = detail::toNative(std::move(targetName));
+        handle()->targetName = detail::makeNative(std::move(targetName));
     }
 
     UAPP_GETTER_WRAPPER(NodeId, referenceTypeId)
@@ -1201,7 +1201,7 @@ public:
 
     explicit RelativePath(Span<const RelativePathElement> elements) {
         handle()->elementsSize = elements.size();
-        handle()->elements = detail::toNativeArray(elements);
+        handle()->elements = detail::makeNativeArray(elements);
     }
 
     UAPP_GETTER_SPAN_WRAPPER(RelativePathElement, elements, elementsSize)
@@ -1215,8 +1215,8 @@ public:
     using Wrapper::Wrapper;
 
     BrowsePath(NodeId startingNode, RelativePath relativePath) {
-        handle()->startingNode = detail::toNative(std::move(startingNode));
-        handle()->relativePath = detail::toNative(std::move(relativePath));
+        handle()->startingNode = detail::makeNative(std::move(startingNode));
+        handle()->relativePath = detail::makeNative(std::move(relativePath));
     }
 
     UAPP_GETTER_WRAPPER(NodeId, startingNode)
@@ -1258,9 +1258,9 @@ public:
     TranslateBrowsePathsToNodeIdsRequest(
         RequestHeader requestHeader, Span<const BrowsePath> browsePaths
     ) {
-        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->requestHeader = detail::makeNative(std::move(requestHeader));
         handle()->browsePathsSize = browsePaths.size();
-        handle()->browsePaths = detail::toNativeArray(browsePaths);
+        handle()->browsePaths = detail::makeNativeArray(browsePaths);
     }
 
     UAPP_GETTER_WRAPPER(RequestHeader, requestHeader)
@@ -1291,9 +1291,9 @@ public:
     using Wrapper::Wrapper;
 
     RegisterNodesRequest(RequestHeader requestHeader, Span<const NodeId> nodesToRegister) {
-        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->requestHeader = detail::makeNative(std::move(requestHeader));
         handle()->nodesToRegisterSize = nodesToRegister.size();
-        handle()->nodesToRegister = detail::toNativeArray(nodesToRegister);
+        handle()->nodesToRegister = detail::makeNativeArray(nodesToRegister);
     }
 
     UAPP_GETTER_WRAPPER(RequestHeader, requestHeader)
@@ -1321,9 +1321,9 @@ public:
     using Wrapper::Wrapper;
 
     UnregisterNodesRequest(RequestHeader requestHeader, Span<const NodeId> nodesToUnregister) {
-        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->requestHeader = detail::makeNative(std::move(requestHeader));
         handle()->nodesToUnregisterSize = nodesToUnregister.size();
-        handle()->nodesToUnregister = detail::toNativeArray(nodesToUnregister);
+        handle()->nodesToUnregister = detail::makeNativeArray(nodesToUnregister);
     }
 
     UAPP_GETTER_WRAPPER(RequestHeader, requestHeader)
@@ -1370,10 +1370,10 @@ public:
         std::string_view indexRange = {},
         QualifiedName dataEncoding = {}
     ) {
-        handle()->nodeId = detail::toNative(std::move(nodeId));
-        handle()->attributeId = detail::toNative(attributeId);
-        handle()->indexRange = detail::toNative(indexRange);
-        handle()->dataEncoding = detail::toNative(std::move(dataEncoding));
+        handle()->nodeId = detail::makeNative(std::move(nodeId));
+        handle()->attributeId = detail::makeNative(attributeId);
+        handle()->indexRange = detail::makeNative(indexRange);
+        handle()->dataEncoding = detail::makeNative(std::move(dataEncoding));
     }
 
     UAPP_GETTER_WRAPPER(NodeId, nodeId)
@@ -1396,11 +1396,11 @@ public:
         TimestampsToReturn timestampsToReturn,
         Span<const ReadValueId> nodesToRead
     ) {
-        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->requestHeader = detail::makeNative(std::move(requestHeader));
         handle()->maxAge = maxAge;
         handle()->timestampsToReturn = static_cast<UA_TimestampsToReturn>(timestampsToReturn);
         handle()->nodesToReadSize = nodesToRead.size();
-        handle()->nodesToRead = detail::toNativeArray(nodesToRead);
+        handle()->nodesToRead = detail::makeNativeArray(nodesToRead);
     }
 
     UAPP_GETTER_WRAPPER(RequestHeader, requestHeader)
@@ -1433,10 +1433,10 @@ public:
     WriteValue(
         NodeId nodeId, AttributeId attributeId, std::string_view indexRange, DataValue value
     ) {
-        handle()->nodeId = detail::toNative(std::move(nodeId));
-        handle()->attributeId = detail::toNative(attributeId);
-        handle()->indexRange = detail::toNative(indexRange);
-        handle()->value = detail::toNative(std::move(value));
+        handle()->nodeId = detail::makeNative(std::move(nodeId));
+        handle()->attributeId = detail::makeNative(attributeId);
+        handle()->indexRange = detail::makeNative(indexRange);
+        handle()->value = detail::makeNative(std::move(value));
     }
 
     UAPP_GETTER_WRAPPER(NodeId, nodeId)
@@ -1454,9 +1454,9 @@ public:
     using Wrapper::Wrapper;
 
     WriteRequest(RequestHeader requestHeader, Span<const WriteValue> nodesToWrite) {
-        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->requestHeader = detail::makeNative(std::move(requestHeader));
         handle()->nodesToWriteSize = nodesToWrite.size();
-        handle()->nodesToWrite = detail::toNativeArray(nodesToWrite);
+        handle()->nodesToWrite = detail::makeNativeArray(nodesToWrite);
     }
 
     UAPP_GETTER_WRAPPER(RequestHeader, requestHeader)
@@ -1492,12 +1492,12 @@ public:
         std::string_view buildNumber,
         DateTime buildDate
     ) {
-        handle()->productUri = detail::toNative(productUri);
-        handle()->manufacturerName = detail::toNative(manufacturerName);
-        handle()->productName = detail::toNative(productName);
-        handle()->softwareVersion = detail::toNative(softwareVersion);
-        handle()->buildNumber = detail::toNative(buildNumber);
-        handle()->buildDate = detail::toNative(std::move(buildDate));
+        handle()->productUri = detail::makeNative(productUri);
+        handle()->manufacturerName = detail::makeNative(manufacturerName);
+        handle()->productName = detail::makeNative(productName);
+        handle()->softwareVersion = detail::makeNative(softwareVersion);
+        handle()->buildNumber = detail::makeNative(buildNumber);
+        handle()->buildDate = detail::makeNative(std::move(buildDate));
     }
 
     UAPP_GETTER_WRAPPER(String, productUri);
@@ -1527,12 +1527,12 @@ public:
         ValueRank valueRank = {},
         Span<const uint32_t> arrayDimensions = {}
     ) {
-        handle()->name = detail::toNative(name);
-        handle()->description = detail::toNative(std::move(description));
-        handle()->dataType = detail::toNative(std::move(dataType));
-        handle()->valueRank = detail::toNative(valueRank);
+        handle()->name = detail::makeNative(name);
+        handle()->description = detail::makeNative(std::move(description));
+        handle()->dataType = detail::makeNative(std::move(dataType));
+        handle()->valueRank = detail::makeNative(valueRank);
         handle()->arrayDimensionsSize = arrayDimensions.size();
-        handle()->arrayDimensions = detail::toNativeArray(arrayDimensions);
+        handle()->arrayDimensions = detail::makeNativeArray(arrayDimensions);
     }
 
     UAPP_GETTER_WRAPPER(String, name)
@@ -1551,10 +1551,10 @@ public:
     using Wrapper::Wrapper;
 
     CallMethodRequest(NodeId objectId, NodeId methodId, Span<const Variant> inputArguments) {
-        handle()->objectId = detail::toNative(std::move(objectId));
-        handle()->methodId = detail::toNative(std::move(methodId));
+        handle()->objectId = detail::makeNative(std::move(objectId));
+        handle()->methodId = detail::makeNative(std::move(methodId));
         handle()->inputArgumentsSize = inputArguments.size();
-        handle()->inputArguments = detail::toNativeArray(inputArguments);
+        handle()->inputArguments = detail::makeNativeArray(inputArguments);
     }
 
     UAPP_GETTER_WRAPPER(NodeId, objectId)
@@ -1587,9 +1587,9 @@ public:
     using Wrapper::Wrapper;
 
     CallRequest(RequestHeader requestHeader, Span<const CallMethodRequest> methodsToCall) {
-        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->requestHeader = detail::makeNative(std::move(requestHeader));
         handle()->methodsToCallSize = methodsToCall.size();
-        handle()->methodsToCall = detail::toNativeArray(methodsToCall);
+        handle()->methodsToCall = detail::makeNativeArray(methodsToCall);
     }
 
     UAPP_GETTER_WRAPPER(RequestHeader, requestHeader)
@@ -1686,7 +1686,7 @@ public:
     using Wrapper::Wrapper;
 
     explicit LiteralOperand(Variant value) {
-        handle()->value = detail::toNative(std::move(value));
+        handle()->value = detail::makeNative(std::move(value));
     }
 
     template <typename T, typename = EnableIfLiteral<T>>
@@ -1711,11 +1711,11 @@ public:
         AttributeId attributeId,
         std::string_view indexRange = {}
     ) {
-        handle()->nodeId = detail::toNative(std::move(nodeId));
-        handle()->alias = detail::toNative(alias);
-        handle()->browsePath = detail::toNative(std::move(browsePath));
-        handle()->attributeId = detail::toNative(attributeId);
-        handle()->indexRange = detail::toNative(indexRange);
+        handle()->nodeId = detail::makeNative(std::move(nodeId));
+        handle()->alias = detail::makeNative(alias);
+        handle()->browsePath = detail::makeNative(std::move(browsePath));
+        handle()->attributeId = detail::makeNative(attributeId);
+        handle()->indexRange = detail::makeNative(indexRange);
     }
 
     UAPP_GETTER_WRAPPER(NodeId, nodeId)
@@ -1740,11 +1740,11 @@ public:
         AttributeId attributeId,
         std::string_view indexRange = {}
     ) {
-        handle()->typeDefinitionId = detail::toNative(std::move(typeDefinitionId));
+        handle()->typeDefinitionId = detail::makeNative(std::move(typeDefinitionId));
         handle()->browsePathSize = browsePath.size();
-        handle()->browsePath = detail::toNativeArray(browsePath);
-        handle()->attributeId = detail::toNative(attributeId);
-        handle()->indexRange = detail::toNative(indexRange);
+        handle()->browsePath = detail::makeNativeArray(browsePath);
+        handle()->attributeId = detail::makeNative(attributeId);
+        handle()->indexRange = detail::makeNative(indexRange);
     }
 
     UAPP_GETTER_WRAPPER(NodeId, typeDefinitionId)
@@ -1875,7 +1875,7 @@ public:
 
     DataChangeFilter(DataChangeTrigger trigger, DeadbandType deadbandType, double deadbandValue) {
         handle()->trigger = static_cast<UA_DataChangeTrigger>(trigger);
-        handle()->deadbandType = detail::toNative(deadbandType);
+        handle()->deadbandType = detail::makeNative(deadbandType);
         handle()->deadbandValue = deadbandValue;
     }
 
@@ -1894,8 +1894,8 @@ public:
 
     EventFilter(Span<const SimpleAttributeOperand> selectClauses, ContentFilter whereClause) {
         handle()->selectClausesSize = selectClauses.size();
-        handle()->selectClauses = detail::toNativeArray(selectClauses);
-        handle()->whereClause = detail::toNative(std::move(whereClause));
+        handle()->selectClauses = detail::makeNativeArray(selectClauses);
+        handle()->whereClause = detail::makeNative(std::move(whereClause));
     }
 
     UAPP_GETTER_SPAN_WRAPPER(SimpleAttributeOperand, selectClauses, selectClausesSize)
@@ -1918,8 +1918,8 @@ public:
         double processingInterval,
         AggregateConfiguration aggregateConfiguration
     ) {
-        handle()->startTime = detail::toNative(std::move(startTime));
-        handle()->aggregateType = detail::toNative(std::move(aggregateType));
+        handle()->startTime = detail::makeNative(std::move(startTime));
+        handle()->aggregateType = detail::makeNative(std::move(aggregateType));
         handle()->processingInterval = processingInterval;
         handle()->aggregateConfiguration = aggregateConfiguration;  // TODO: make wrapper?
     }
@@ -1950,7 +1950,7 @@ public:
         bool discardOldest = true
     ) {
         handle()->samplingInterval = samplingInterval;
-        handle()->filter = detail::toNative(std::move(filter));
+        handle()->filter = detail::makeNative(std::move(filter));
         handle()->queueSize = queueSize;
         handle()->discardOldest = discardOldest;
     }
@@ -1975,9 +1975,9 @@ public:
         MonitoringMode monitoringMode = MonitoringMode::Reporting,
         MonitoringParameters requestedParameters = {}
     ) {
-        handle()->itemToMonitor = detail::toNative(std::move(itemToMonitor));
+        handle()->itemToMonitor = detail::makeNative(std::move(itemToMonitor));
         handle()->monitoringMode = static_cast<UA_MonitoringMode>(monitoringMode);
-        handle()->requestedParameters = detail::toNative(std::move(requestedParameters));
+        handle()->requestedParameters = detail::makeNative(std::move(requestedParameters));
     }
 
     UAPP_GETTER_WRAPPER(ReadValueId, itemToMonitor)
@@ -2016,11 +2016,11 @@ public:
         TimestampsToReturn timestampsToReturn,
         Span<const MonitoredItemCreateRequest> itemsToCreate
     ) {
-        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->requestHeader = detail::makeNative(std::move(requestHeader));
         handle()->subscriptionId = subscriptionId;
         handle()->timestampsToReturn = static_cast<UA_TimestampsToReturn>(timestampsToReturn);
         handle()->itemsToCreateSize = itemsToCreate.size();
-        handle()->itemsToCreate = detail::toNativeArray(itemsToCreate);
+        handle()->itemsToCreate = detail::makeNativeArray(itemsToCreate);
     }
 
     UAPP_GETTER_WRAPPER(RequestHeader, requestHeader)
@@ -2056,7 +2056,7 @@ public:
         IntegerId monitoredItemId, MonitoringParameters requestedParameters
     ) {
         handle()->monitoredItemId = monitoredItemId;
-        handle()->requestedParameters = detail::toNative(std::move(requestedParameters));
+        handle()->requestedParameters = detail::makeNative(std::move(requestedParameters));
     }
 
     UAPP_GETTER(IntegerId, monitoredItemId);
@@ -2093,11 +2093,11 @@ public:
         TimestampsToReturn timestampsToReturn,
         Span<const MonitoredItemModifyRequest> itemsToModify
     ) {
-        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->requestHeader = detail::makeNative(std::move(requestHeader));
         handle()->subscriptionId = subscriptionId;
         handle()->timestampsToReturn = static_cast<UA_TimestampsToReturn>(timestampsToReturn);
         handle()->itemsToModifySize = itemsToModify.size();
-        handle()->itemsToModify = detail::toNativeArray(itemsToModify);
+        handle()->itemsToModify = detail::makeNativeArray(itemsToModify);
     }
 
     UAPP_GETTER_WRAPPER(RequestHeader, requestHeader)
@@ -2135,11 +2135,11 @@ public:
         MonitoringMode monitoringMode,
         Span<const IntegerId> monitoredItemIds
     ) {
-        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->requestHeader = detail::makeNative(std::move(requestHeader));
         handle()->subscriptionId = subscriptionId;
         handle()->monitoringMode = static_cast<UA_MonitoringMode>(monitoringMode);
         handle()->monitoredItemIdsSize = monitoredItemIds.size();
-        handle()->monitoredItemIds = detail::toNativeArray(monitoredItemIds);
+        handle()->monitoredItemIds = detail::makeNativeArray(monitoredItemIds);
     }
 
     UAPP_GETTER_WRAPPER(RequestHeader, requestHeader)
@@ -2178,13 +2178,13 @@ public:
         Span<const IntegerId> linksToAdd,
         Span<const IntegerId> linksToRemove
     ) {
-        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->requestHeader = detail::makeNative(std::move(requestHeader));
         handle()->subscriptionId = subscriptionId;
         handle()->triggeringItemId = triggeringItemId;
         handle()->linksToAddSize = linksToAdd.size();
-        handle()->linksToAdd = detail::toNativeArray(linksToAdd);
+        handle()->linksToAdd = detail::makeNativeArray(linksToAdd);
         handle()->linksToRemoveSize = linksToRemove.size();
-        handle()->linksToRemove = detail::toNativeArray(linksToRemove);
+        handle()->linksToRemove = detail::makeNativeArray(linksToRemove);
     }
 
     UAPP_GETTER_WRAPPER(RequestHeader, requestHeader)
@@ -2224,10 +2224,10 @@ public:
         IntegerId subscriptionId,
         Span<const IntegerId> monitoredItemIds
     ) {
-        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->requestHeader = detail::makeNative(std::move(requestHeader));
         handle()->subscriptionId = subscriptionId;
         handle()->monitoredItemIdsSize = monitoredItemIds.size();
-        handle()->monitoredItemIds = detail::toNativeArray(monitoredItemIds);
+        handle()->monitoredItemIds = detail::makeNativeArray(monitoredItemIds);
     }
 
     UAPP_GETTER_WRAPPER(RequestHeader, requestHeader)
@@ -2267,7 +2267,7 @@ public:
         bool publishingEnabled,
         uint8_t priority
     ) {
-        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->requestHeader = detail::makeNative(std::move(requestHeader));
         handle()->requestedPublishingInterval = requestedPublishingInterval;
         handle()->requestedLifetimeCount = requestedLifetimeCount;
         handle()->requestedMaxKeepAliveCount = requestedMaxKeepAliveCount;
@@ -2319,7 +2319,7 @@ public:
         uint32_t maxNotificationsPerPublish,
         uint8_t priority
     ) {
-        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->requestHeader = detail::makeNative(std::move(requestHeader));
         handle()->subscriptionId = subscriptionId;
         handle()->requestedPublishingInterval = requestedPublishingInterval;
         handle()->requestedLifetimeCount = requestedLifetimeCount;
@@ -2364,10 +2364,10 @@ public:
     SetPublishingModeRequest(
         RequestHeader requestHeader, bool publishingEnabled, Span<const IntegerId> subscriptionIds
     ) {
-        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->requestHeader = detail::makeNative(std::move(requestHeader));
         handle()->publishingEnabled = publishingEnabled;
         handle()->subscriptionIdsSize = subscriptionIds.size();
-        handle()->subscriptionIds = detail::toNativeArray(subscriptionIds);
+        handle()->subscriptionIds = detail::makeNativeArray(subscriptionIds);
     }
 
     UAPP_GETTER_WRAPPER(RequestHeader, requestHeader)
@@ -2412,9 +2412,9 @@ public:
     using Wrapper::Wrapper;
 
     DeleteSubscriptionsRequest(RequestHeader requestHeader, Span<const IntegerId> subscriptionIds) {
-        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->requestHeader = detail::makeNative(std::move(requestHeader));
         handle()->subscriptionIdsSize = subscriptionIds.size();
-        handle()->subscriptionIds = detail::toNativeArray(subscriptionIds);
+        handle()->subscriptionIds = detail::makeNativeArray(subscriptionIds);
     }
 
     UAPP_GETTER_WRAPPER(RequestHeader, requestHeader)
@@ -2488,10 +2488,10 @@ public:
         LocalizedText displayName,
         LocalizedText description
     ) {
-        handle()->namespaceUri = detail::toNative(namespaceUri);
+        handle()->namespaceUri = detail::makeNative(namespaceUri);
         handle()->unitId = unitId;
-        handle()->displayName = detail::toNative(std::move(displayName));
-        handle()->description = detail::toNative(std::move(description));
+        handle()->displayName = detail::makeNative(std::move(displayName));
+        handle()->description = detail::makeNative(std::move(description));
     }
 
     UAPP_GETTER_WRAPPER(String, namespaceUri)
@@ -2560,12 +2560,12 @@ public:
         AxisScaleEnumeration axisScaleType,
         Span<const double> axisSteps
     ) {
-        handle()->engineeringUnits = detail::toNative(std::move(engineeringUnits));
-        handle()->eURange = detail::toNative(std::move(eURange));
-        handle()->title = detail::toNative(std::move(title));
+        handle()->engineeringUnits = detail::makeNative(std::move(engineeringUnits));
+        handle()->eURange = detail::makeNative(std::move(eURange));
+        handle()->title = detail::makeNative(std::move(title));
         handle()->axisScaleType = static_cast<UA_AxisScaleEnumeration>(axisScaleType);
         handle()->axisStepsSize = axisSteps.size();
-        handle()->axisSteps = detail::toNativeArray(axisSteps);
+        handle()->axisSteps = detail::makeNativeArray(axisSteps);
     }
 
     UAPP_GETTER_WRAPPER(EUInformation, engineeringUnits)
@@ -2657,9 +2657,9 @@ public:
         int64_t value, LocalizedText displayName, LocalizedText description, std::string_view name
     ) {
         handle()->value = value;
-        handle()->displayName = detail::toNative(std::move(displayName));
-        handle()->description = detail::toNative(std::move(description));
-        handle()->name = detail::toNative(name);
+        handle()->displayName = detail::makeNative(std::move(displayName));
+        handle()->description = detail::makeNative(std::move(description));
+        handle()->name = detail::makeNative(name);
     }
 
     UAPP_GETTER(int64_t, value)
@@ -2681,7 +2681,7 @@ public:
 
     explicit EnumDefinition(Span<const EnumField> fields) {
         handle()->fieldsSize = fields.size();
-        handle()->fields = detail::toNativeArray(fields);
+        handle()->fields = detail::makeNativeArray(fields);
     }
 
     UAPP_GETTER_SPAN_WRAPPER(EnumField, fields, fieldsSize)

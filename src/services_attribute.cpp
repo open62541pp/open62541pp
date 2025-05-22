@@ -13,7 +13,7 @@ template <>
 Result<DataValue> readAttribute<Server>(
     Server& connection, const NodeId& id, AttributeId attributeId, TimestampsToReturn timestamps
 ) noexcept {
-    const auto item = detail::createReadValueId(id, attributeId);
+    const auto item = detail::makeReadValueId(id, attributeId);
     return DataValue(
         UA_Server_read(connection.handle(), &item, static_cast<UA_TimestampsToReturn>(timestamps))
     );
@@ -23,8 +23,8 @@ template <>
 Result<DataValue> readAttribute<Client>(
     Client& connection, const NodeId& id, AttributeId attributeId, TimestampsToReturn timestamps
 ) noexcept {
-    auto item = detail::createReadValueId(id, attributeId);
-    const auto request = detail::createReadRequest(timestamps, item);
+    auto item = detail::makeReadValueId(id, attributeId);
+    const auto request = detail::makeReadRequest(timestamps, item);
     auto response = read(connection, asWrapper<ReadRequest>(request));
     return detail::wrapSingleResult<DataValue>(response);
 }
@@ -37,7 +37,7 @@ template <>
 StatusCode writeAttribute<Server>(
     Server& connection, const NodeId& id, AttributeId attributeId, const DataValue& value
 ) noexcept {
-    const auto item = detail::createWriteValue(id, attributeId, value);
+    const auto item = detail::makeWriteValue(id, attributeId, value);
     return UA_Server_write(connection.handle(), &item);
 }
 
@@ -45,8 +45,8 @@ template <>
 StatusCode writeAttribute<Client>(
     Client& connection, const NodeId& id, AttributeId attributeId, const DataValue& value
 ) noexcept {
-    auto item = detail::createWriteValue(id, attributeId, value);
-    const auto request = detail::createWriteRequest(item);
+    auto item = detail::makeWriteValue(id, attributeId, value);
+    const auto request = detail::makeWriteRequest(item);
     return detail::getSingleStatus(write(connection, asWrapper<WriteRequest>(request)));
 }
 

@@ -32,7 +32,7 @@ ContentFilter::ContentFilter(std::initializer_list<ContentFilterElement> element
 
 ContentFilter::ContentFilter(Span<const ContentFilterElement> elements) {
     handle()->elementsSize = elements.size();
-    handle()->elements = detail::toNativeArray(elements);
+    handle()->elements = detail::makeNativeArray(elements);
 }
 
 /* ----------------------------------- ContentFilter operators ---------------------------------- */

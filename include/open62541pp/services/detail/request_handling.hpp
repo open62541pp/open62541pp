@@ -42,7 +42,7 @@ ExtensionObject wrapNodeAttributes(const T& attributes) noexcept {
     return ExtensionObject(const_cast<T*>(&attributes));
 }
 
-inline UA_AddNodesItem createAddNodesItem(
+inline UA_AddNodesItem makeAddNodesItem(
     const NodeId& parentId,
     const NodeId& referenceType,
     const NodeId& id,
@@ -63,14 +63,14 @@ inline UA_AddNodesItem createAddNodesItem(
     return item;
 }
 
-inline UA_AddNodesRequest createAddNodesRequest(UA_AddNodesItem& item) noexcept {
+inline UA_AddNodesRequest makeAddNodesRequest(UA_AddNodesItem& item) noexcept {
     UA_AddNodesRequest request{};
     request.nodesToAddSize = 1;
     request.nodesToAdd = &item;
     return request;
 }
 
-inline UA_AddReferencesItem createAddReferencesItem(
+inline UA_AddReferencesItem makeAddReferencesItem(
     const NodeId& sourceId, const NodeId& referenceType, bool forward, const NodeId& targetId
 ) noexcept {
     UA_AddReferencesItem item{};
@@ -81,28 +81,28 @@ inline UA_AddReferencesItem createAddReferencesItem(
     return item;
 }
 
-inline UA_AddReferencesRequest createAddReferencesRequest(UA_AddReferencesItem& item) noexcept {
+inline UA_AddReferencesRequest makeAddReferencesRequest(UA_AddReferencesItem& item) noexcept {
     UA_AddReferencesRequest request{};
     request.referencesToAddSize = 1;
     request.referencesToAdd = &item;
     return request;
 }
 
-inline UA_DeleteNodesItem createDeleteNodesItem(const NodeId& id, bool deleteReferences) noexcept {
+inline UA_DeleteNodesItem makeDeleteNodesItem(const NodeId& id, bool deleteReferences) noexcept {
     UA_DeleteNodesItem item{};
     item.nodeId = id;
     item.deleteTargetReferences = deleteReferences;
     return item;
 }
 
-inline UA_DeleteNodesRequest createDeleteNodesRequest(UA_DeleteNodesItem& item) noexcept {
+inline UA_DeleteNodesRequest makeDeleteNodesRequest(UA_DeleteNodesItem& item) noexcept {
     UA_DeleteNodesRequest request{};
     request.nodesToDeleteSize = 1;
     request.nodesToDelete = &item;
     return request;
 }
 
-inline UA_DeleteReferencesItem createDeleteReferencesItem(
+inline UA_DeleteReferencesItem makeDeleteReferencesItem(
     const NodeId& sourceId,
     const NodeId& referenceType,
     bool isForward,
@@ -118,7 +118,7 @@ inline UA_DeleteReferencesItem createDeleteReferencesItem(
     return item;
 }
 
-inline UA_DeleteReferencesRequest createDeleteReferencesRequest(UA_DeleteReferencesItem& item
+inline UA_DeleteReferencesRequest makeDeleteReferencesRequest(UA_DeleteReferencesItem& item
 ) noexcept {
     UA_DeleteReferencesRequest request{};
     request.referencesToDeleteSize = 1;
@@ -126,14 +126,14 @@ inline UA_DeleteReferencesRequest createDeleteReferencesRequest(UA_DeleteReferen
     return request;
 }
 
-inline UA_ReadValueId createReadValueId(const NodeId& id, AttributeId attributeId) noexcept {
+inline UA_ReadValueId makeReadValueId(const NodeId& id, AttributeId attributeId) noexcept {
     UA_ReadValueId item{};
     item.nodeId = *id.handle();
     item.attributeId = static_cast<uint32_t>(attributeId);
     return item;
 }
 
-inline UA_ReadRequest createReadRequest(
+inline UA_ReadRequest makeReadRequest(
     TimestampsToReturn timestamps, UA_ReadValueId& item
 ) noexcept {
     UA_ReadRequest request{};
@@ -143,7 +143,7 @@ inline UA_ReadRequest createReadRequest(
     return request;
 }
 
-inline UA_ReadRequest createReadRequest(
+inline UA_ReadRequest makeReadRequest(
     TimestampsToReturn timestamps, Span<const ReadValueId> nodesToRead
 ) noexcept {
     UA_ReadRequest request{};
@@ -153,7 +153,7 @@ inline UA_ReadRequest createReadRequest(
     return request;
 }
 
-inline UA_WriteValue createWriteValue(
+inline UA_WriteValue makeWriteValue(
     const NodeId& id, AttributeId attributeId, const DataValue& value
 ) noexcept {
     UA_WriteValue item{};
@@ -164,14 +164,14 @@ inline UA_WriteValue createWriteValue(
     return item;
 }
 
-inline UA_WriteRequest createWriteRequest(UA_WriteValue& item) noexcept {
+inline UA_WriteRequest makeWriteRequest(UA_WriteValue& item) noexcept {
     UA_WriteRequest request{};
     request.nodesToWriteSize = 1;
     request.nodesToWrite = &item;
     return request;
 }
 
-inline UA_WriteRequest createWriteRequest(Span<const WriteValue> nodesToWrite) noexcept {
+inline UA_WriteRequest makeWriteRequest(Span<const WriteValue> nodesToWrite) noexcept {
     UA_WriteRequest request{};
     request.nodesToWriteSize = nodesToWrite.size();
     request.nodesToWrite = getNativePointer(nodesToWrite);
@@ -180,7 +180,7 @@ inline UA_WriteRequest createWriteRequest(Span<const WriteValue> nodesToWrite) n
 
 #ifdef UA_ENABLE_METHODCALLS
 
-inline UA_CallMethodRequest createCallMethodRequest(
+inline UA_CallMethodRequest makeCallMethodRequest(
     const NodeId& objectId, const NodeId& methodId, Span<const Variant> inputArguments
 ) noexcept {
     UA_CallMethodRequest request{};
@@ -191,7 +191,7 @@ inline UA_CallMethodRequest createCallMethodRequest(
     return request;
 }
 
-inline UA_CallRequest createCallRequest(UA_CallMethodRequest& item) noexcept {
+inline UA_CallRequest makeCallRequest(UA_CallMethodRequest& item) noexcept {
     UA_CallRequest request{};
     request.methodsToCall = &item;
     request.methodsToCallSize = 1;
@@ -200,7 +200,7 @@ inline UA_CallRequest createCallRequest(UA_CallMethodRequest& item) noexcept {
 
 #endif  // UA_ENABLE_METHODCALLS
 
-inline UA_BrowseRequest createBrowseRequest(
+inline UA_BrowseRequest makeBrowseRequest(
     const BrowseDescription& bd, uint32_t maxReferences
 ) noexcept {
     UA_BrowseRequest request{};
@@ -210,7 +210,7 @@ inline UA_BrowseRequest createBrowseRequest(
     return request;
 }
 
-inline UA_BrowseNextRequest createBrowseNextRequest(
+inline UA_BrowseNextRequest makeBrowseNextRequest(
     bool releaseContinuationPoint, const ByteString& continuationPoint
 ) noexcept {
     UA_BrowseNextRequest request{};
@@ -220,7 +220,7 @@ inline UA_BrowseNextRequest createBrowseNextRequest(
     return request;
 }
 
-inline UA_TranslateBrowsePathsToNodeIdsRequest createTranslateBrowsePathsToNodeIdsRequest(
+inline UA_TranslateBrowsePathsToNodeIdsRequest makeTranslateBrowsePathsToNodeIdsRequest(
     const BrowsePath& browsePath
 ) noexcept {
     UA_TranslateBrowsePathsToNodeIdsRequest request{};
@@ -229,7 +229,7 @@ inline UA_TranslateBrowsePathsToNodeIdsRequest createTranslateBrowsePathsToNodeI
     return request;
 }
 
-inline BrowsePath createBrowsePath(const NodeId& origin, Span<const QualifiedName> browsePath) {
+inline BrowsePath makeBrowsePath(const NodeId& origin, Span<const QualifiedName> browsePath) {
     std::vector<RelativePathElement> relativePathElements(browsePath.size());
     std::transform(
         browsePath.begin(),
@@ -245,7 +245,7 @@ inline BrowsePath createBrowsePath(const NodeId& origin, Span<const QualifiedNam
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 
 template <typename SubscriptionParameters>
-UA_CreateSubscriptionRequest createCreateSubscriptionRequest(
+UA_CreateSubscriptionRequest makeCreateSubscriptionRequest(
     const SubscriptionParameters& parameters, bool publishingEnabled
 ) noexcept {
     UA_CreateSubscriptionRequest request{};
@@ -259,7 +259,7 @@ UA_CreateSubscriptionRequest createCreateSubscriptionRequest(
 }
 
 template <typename SubscriptionParameters>
-UA_ModifySubscriptionRequest createModifySubscriptionRequest(
+UA_ModifySubscriptionRequest makeModifySubscriptionRequest(
     IntegerId subscriptionId, const SubscriptionParameters& parameters
 ) noexcept {
     UA_ModifySubscriptionRequest request{};
@@ -272,7 +272,7 @@ UA_ModifySubscriptionRequest createModifySubscriptionRequest(
     return request;
 }
 
-inline UA_SetPublishingModeRequest createSetPublishingModeRequest(
+inline UA_SetPublishingModeRequest makeSetPublishingModeRequest(
     bool publishing, Span<const IntegerId> subscriptionIds
 ) noexcept {
     UA_SetPublishingModeRequest request{};
@@ -282,7 +282,7 @@ inline UA_SetPublishingModeRequest createSetPublishingModeRequest(
     return request;
 }
 
-inline UA_DeleteSubscriptionsRequest createDeleteSubscriptionsRequest(IntegerId& subscriptionId
+inline UA_DeleteSubscriptionsRequest makeDeleteSubscriptionsRequest(IntegerId& subscriptionId
 ) noexcept {
     UA_DeleteSubscriptionsRequest request{};
     request.subscriptionIdsSize = 1;
@@ -291,7 +291,7 @@ inline UA_DeleteSubscriptionsRequest createDeleteSubscriptionsRequest(IntegerId&
 }
 
 template <typename MonitoringParameters>
-inline void copyMonitoringParametersToNative(
+inline void makeMonitoringParametersToNative(
     const MonitoringParameters& parameters, UA_MonitoringParameters& native
 ) noexcept {
     native.samplingInterval = parameters.samplingInterval;
@@ -301,7 +301,7 @@ inline void copyMonitoringParametersToNative(
 }
 
 template <typename MonitoringParameters>
-UA_MonitoredItemCreateRequest createMonitoredItemCreateRequest(
+UA_MonitoredItemCreateRequest makeMonitoredItemCreateRequest(
     const ReadValueId& itemToMonitor,
     MonitoringMode monitoringMode,
     MonitoringParameters& parameters
@@ -309,11 +309,11 @@ UA_MonitoredItemCreateRequest createMonitoredItemCreateRequest(
     UA_MonitoredItemCreateRequest request{};
     request.itemToMonitor = itemToMonitor;
     request.monitoringMode = static_cast<UA_MonitoringMode>(monitoringMode);
-    copyMonitoringParametersToNative(parameters, request.requestedParameters);
+    makeMonitoringParametersToNative(parameters, request.requestedParameters);
     return request;
 }
 
-inline UA_CreateMonitoredItemsRequest createCreateMonitoredItemsRequest(
+inline UA_CreateMonitoredItemsRequest makeCreateMonitoredItemsRequest(
     IntegerId subscriptionId,
     TimestampsToReturn timestampsToReturn,
     Span<const UA_MonitoredItemCreateRequest> itemsToCreate
@@ -327,17 +327,17 @@ inline UA_CreateMonitoredItemsRequest createCreateMonitoredItemsRequest(
 }
 
 template <typename MonitoringParameters>
-UA_MonitoredItemModifyRequest createMonitoredItemModifyRequest(
+UA_MonitoredItemModifyRequest makeMonitoredItemModifyRequest(
     IntegerId monitoredItemId, MonitoringParameters& parameters
 ) noexcept {
     UA_MonitoredItemModifyRequest item{};
     item.monitoredItemId = monitoredItemId;
-    copyMonitoringParametersToNative(parameters, item.requestedParameters);
+    makeMonitoringParametersToNative(parameters, item.requestedParameters);
     return item;
 }
 
 template <typename MonitoringParameters>
-UA_ModifyMonitoredItemsRequest createModifyMonitoredItemsRequest(
+UA_ModifyMonitoredItemsRequest makeModifyMonitoredItemsRequest(
     IntegerId subscriptionId, MonitoringParameters& parameters, UA_MonitoredItemModifyRequest& item
 ) noexcept {
     UA_ModifyMonitoredItemsRequest request{};
@@ -348,7 +348,7 @@ UA_ModifyMonitoredItemsRequest createModifyMonitoredItemsRequest(
     return request;
 }
 
-inline UA_SetMonitoringModeRequest createSetMonitoringModeRequest(
+inline UA_SetMonitoringModeRequest makeSetMonitoringModeRequest(
     IntegerId subscriptionId, Span<const IntegerId> monitoredItemIds, MonitoringMode monitoringMode
 ) noexcept {
     UA_SetMonitoringModeRequest request{};
@@ -359,7 +359,7 @@ inline UA_SetMonitoringModeRequest createSetMonitoringModeRequest(
     return request;
 }
 
-inline UA_SetTriggeringRequest createSetTriggeringRequest(
+inline UA_SetTriggeringRequest makeSetTriggeringRequest(
     IntegerId subscriptionId,
     IntegerId triggeringItemId,
     Span<const IntegerId> linksToAdd,
@@ -375,7 +375,7 @@ inline UA_SetTriggeringRequest createSetTriggeringRequest(
     return request;
 }
 
-inline UA_DeleteMonitoredItemsRequest createDeleteMonitoredItemsRequest(
+inline UA_DeleteMonitoredItemsRequest makeDeleteMonitoredItemsRequest(
     IntegerId subscriptionId, Span<const IntegerId> monitoredItemIds
 ) noexcept {
     UA_DeleteMonitoredItemsRequest request{};

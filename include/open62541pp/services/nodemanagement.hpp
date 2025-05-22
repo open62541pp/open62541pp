@@ -102,10 +102,10 @@ auto addNodeAsync(
     const NodeId& referenceType,
     CompletionToken&& token
 ) {
-    auto item = detail::createAddNodesItem(
+    auto item = detail::makeAddNodesItem(
         parentId, referenceType, id, browseName, nodeClass, nodeAttributes, typeDefinition
     );
-    const auto request = detail::createAddNodesRequest(item);
+    const auto request = detail::makeAddNodesRequest(item);
     return addNodesAsync(
         connection,
         asWrapper<AddNodesRequest>(request),
@@ -180,8 +180,8 @@ auto addReferenceAsync(
     bool forward,
     CompletionToken&& token
 ) {
-    auto item = detail::createAddReferencesItem(sourceId, referenceType, forward, targetId);
-    const auto request = detail::createAddReferencesRequest(item);
+    auto item = detail::makeAddReferencesItem(sourceId, referenceType, forward, targetId);
+    const auto request = detail::makeAddReferencesRequest(item);
     return addReferencesAsync(
         connection,
         asWrapper<AddReferencesRequest>(request),
@@ -238,8 +238,8 @@ template <typename CompletionToken>
 auto deleteNodeAsync(
     Client& connection, const NodeId& id, bool deleteReferences, CompletionToken&& token
 ) {
-    auto item = detail::createDeleteNodesItem(id, deleteReferences);
-    const auto request = detail::createDeleteNodesRequest(item);
+    auto item = detail::makeDeleteNodesItem(id, deleteReferences);
+    const auto request = detail::makeDeleteNodesRequest(item);
     return deleteNodesAsync(
         connection,
         asWrapper<DeleteNodesRequest>(request),
@@ -314,10 +314,10 @@ auto deleteReferenceAsync(
     bool deleteBidirectional,
     CompletionToken&& token
 ) {
-    auto item = detail::createDeleteReferencesItem(
+    auto item = detail::makeDeleteReferencesItem(
         sourceId, referenceType, isForward, targetId, deleteBidirectional
     );
-    const auto request = detail::createDeleteReferencesRequest(item);
+    const auto request = detail::makeDeleteReferencesRequest(item);
     return deleteReferencesAsync(
         connection,
         asWrapper<DeleteReferencesRequest>(request),
