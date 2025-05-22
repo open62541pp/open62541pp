@@ -286,10 +286,10 @@ std::vector<Session> Server::sessions() {
     return result;
 }
 
-std::vector<std::string> Server::namespaceArray() {
+std::vector<String> Server::namespaceArray() {
     return services::readValue(*this, {0, UA_NS0ID_SERVER_NAMESPACEARRAY})
         .value()
-        .to<std::vector<std::string>>();
+        .to<std::vector<String>>();
 }
 
 NamespaceIndex Server::registerNamespace(std::string_view uri) {

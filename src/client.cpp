@@ -427,10 +427,10 @@ bool Client::isConnected() noexcept {
 #endif
 }
 
-std::vector<std::string> Client::namespaceArray() {
+std::vector<String> Client::namespaceArray() {
     return services::readValue(*this, {0, UA_NS0ID_SERVER_NAMESPACEARRAY})
         .value()
-        .to<std::vector<std::string>>();
+        .to<std::vector<String>>();
 }
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS

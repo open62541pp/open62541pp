@@ -3,7 +3,6 @@
 #include <cstdint>
 #include <memory>
 #include <optional>
-#include <string>
 #include <string_view>
 #include <utility>  // move
 #include <vector>
@@ -170,7 +169,7 @@ public:
     std::vector<Session> sessions();
 
     /// Get all defined namespaces.
-    std::vector<std::string> namespaceArray();
+    std::vector<String> namespaceArray();
 
     /// Register namespace. The new namespace index will be returned.
     [[nodiscard]] NamespaceIndex registerNamespace(std::string_view uri);

@@ -3,7 +3,6 @@
 #include <cstdint>
 #include <functional>
 #include <memory>
-#include <string>
 #include <string_view>
 #include <utility>  // move
 #include <vector>
@@ -214,7 +213,7 @@ public:
     bool isConnected() noexcept;
 
     /// Get all defined namespaces.
-    std::vector<std::string> namespaceArray();
+    std::vector<String> namespaceArray();
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
     /// Create a subscription to monitor data changes and events.
