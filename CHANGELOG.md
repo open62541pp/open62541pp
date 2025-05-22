@@ -7,6 +7,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.19.0] - 2025-05-22
+
+### Added
+
+- Comparison overloads for registered types (#577)
+- Async operations to offload method calls to worker thread (#590)
+- `String` conversion for all string-like types (#595)
+- `DataTypeBuilder::addField` with manual offsets (#597)
+- `MethodCallback` with session, methodId and objectId (#601)
+- Policy-based type handling within `Wrapper` (#607)
+- Support return-by-value overloads in `TypeConverter` (#608)
+- Traits `IsWrapper`, `IsRegistered`, `IsConvertible` (#621)
+- Performance optimizations:
+  - Reuse log buffer (#604)
+  - Move-aware `Variant` construction and assignment (#614)
+  - Ref-qualified `Variant::to` (#616)
+
+### Changed
+
+- Use `String` instead of `std::string`, avoid `<string>` include (#581, #583, #623)
+- Deprecate specialized `Node::readValue*` and `Node::writeValue*` functions (#584)
+- Deprecate specialized `VariableAttributes::setValue` functions (#585)
+- Remove deprecations ≤ v0.17.0 (#591, #592, #593, #594)
+- Deprecate `TypeWrapper`, use `WrapperNative` alias instead (#607)
+
+### Fixed
+
+- Trim null terminator of string literals in `char[N]` `TypeConverter` (#599)
+- Confusing log output when creating `Client`/`Server` with non-default config (#603)
+- Access control with v1.4 (#612)
+- Move only owned scalars from `Variant` (#615)
+- Strip empty array sentinel from `Variant` data pointer (#617)
+
 ## [0.18.0] - 2025-04-08
 
 ### Added
@@ -54,10 +87,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Simplified `Variant` interface:
+
   - Universal `Variant` constructor for scalars/arrays (#384, #495, #497)
   - Universal `Variant::assign` function for scalars/arrays, replacing `Variant::setScalar*`/`Variant::setArray*` functions (#496, #510)
   - Assignment operator for scalars/arrays (#503)
   - `Variant::to<T>` function to retrieve/convert scalars/arrays replacing `Variant::getScalar*`/`Variant::getArray*` functions (#492)
+
   ```cpp
   int value = 11;
 
@@ -72,6 +107,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   int& valueRef = var.scalar<int>();
   int valueCopy = var.to<int>();
   ```
+
 - Remove `crypto` namespace (#445)
 - Move types and NodeIds of http://opcfoundation.org/UA/ (namespace zero) into inline namespace `ua` (#454)
 - Remove `maxReferences` parameter from `services::browseAll` (#457)
@@ -540,6 +576,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Return `Variant`/`DataValue` by value from read functions (no performance penalty), deprecate old functions (#94):
+
   - `void services::readDataValue(T&, const NodeId&, DataValue&)` -> `DataValue services::readDataValue(T&, const NodeId&)`
   - `void services::readValue(T&, const NodeId&, Variant&)` -> `Variant services::readValue(T&, const NodeId&)`
   - `void Node::readDataValue(DataValue&)` -> `DataValue Node::readDataValue()`
@@ -835,7 +872,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial public release
 
-[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.18.0...HEAD
+[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.19.0...HEAD
+[0.19.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.19.0
 [0.18.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.18.0
 [0.17.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.17.0
 [0.16.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.16.0
