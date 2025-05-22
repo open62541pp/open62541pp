@@ -12,7 +12,7 @@
 #include "open62541pp/detail/client_utils.hpp"
 #include "open62541pp/detail/open62541/client.h"
 #include "open62541pp/span.hpp"
-#include "open62541pp/subscription.hpp"  // TODO: remove with Client::createSubscription
+#include "open62541pp/subscription.hpp"
 #include "open62541pp/types.hpp"
 #include "open62541pp/ua/types.hpp"
 #include "open62541pp/wrapper.hpp"
@@ -216,11 +216,6 @@ public:
     std::vector<String> namespaceArray();
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
-    /// Create a subscription to monitor data changes and events.
-    /// @deprecated Use Subscription constructor
-    [[deprecated("use Subscription constructor")]]
-    Subscription<Client> createSubscription(const SubscriptionParameters& parameters = {});
-
     /// Get all active subscriptions
     std::vector<Subscription<Client>> subscriptions();
 #endif
