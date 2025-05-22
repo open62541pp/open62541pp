@@ -434,12 +434,6 @@ std::vector<String> Client::namespaceArray() {
 }
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
-Subscription<Client> Client::createSubscription(const SubscriptionParameters& parameters) {
-    const auto response = services::createSubscription(*this, parameters, true, {}, {});
-    response.responseHeader().serviceResult().throwIfBad();
-    return {*this, response.subscriptionId()};
-}
-
 std::vector<Subscription<Client>> Client::subscriptions() {
     std::vector<Subscription<Client>> result;
     auto& subscriptions = context().subscriptions;

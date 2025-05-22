@@ -336,12 +336,6 @@ void Server::setVariableNodeDataSource(const NodeId& id, std::unique_ptr<DataSou
     setVariableNodeDataSourceImpl(*this, id, detail::UniqueOrRawPtr{std::move(source)});
 }
 
-#ifdef UA_ENABLE_SUBSCRIPTIONS
-Subscription<Server> Server::createSubscription() noexcept {
-    return {*this, 0U};
-}
-#endif
-
 static void runStartup(Server& server, detail::ServerContext& context) {
     applySessionRegistry(server.config(), context);
     throwIfBad(UA_Server_run_startup(server.handle()));

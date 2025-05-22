@@ -14,7 +14,6 @@
 #include "open62541pp/detail/server_utils.hpp"
 #include "open62541pp/session.hpp"
 #include "open62541pp/span.hpp"
-#include "open62541pp/subscription.hpp"  // TODO: remove with Server::createSubscription
 #include "open62541pp/types.hpp"
 #include "open62541pp/ua/nodeids.hpp"
 #include "open62541pp/ua/types.hpp"
@@ -184,13 +183,6 @@ public:
     void setVariableNodeDataSource(const NodeId& id, DataSourceBase& source);
     /// Set data source for variable node (move ownership to server).
     void setVariableNodeDataSource(const NodeId& id, std::unique_ptr<DataSourceBase>&& source);
-
-#ifdef UA_ENABLE_SUBSCRIPTIONS
-    /// Create a (pseudo) subscription to monitor local data changes and events.
-    /// @deprecated Use Subscription constructor
-    [[deprecated("use Subscription constructor")]]
-    Subscription<Server> createSubscription() noexcept;
-#endif
 
     /// Run a single iteration of the server's main loop.
     /// @return Maximum wait period until next Server::runIterate call (in ms)
