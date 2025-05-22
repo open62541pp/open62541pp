@@ -242,22 +242,18 @@ TEMPLATE_TEST_CASE("NodeManagement service set", "", Server, Client, Async<Clien
     }
 
     SECTION("Add/delete reference") {
-        REQUIRE(
-            services::addFolder(
-                connection, objectsId, {1, 1000}, "Folder", {}, ReferenceTypeId::HasComponent
-            )
-        );
-        REQUIRE(
-            services::addObject(
-                connection,
-                objectsId,
-                {1, 1001},
-                "Object",
-                {},
-                ObjectTypeId::BaseObjectType,
-                ReferenceTypeId::HasComponent
-            )
-        );
+        REQUIRE(services::addFolder(
+            connection, objectsId, {1, 1000}, "Folder", {}, ReferenceTypeId::HasComponent
+        ));
+        REQUIRE(services::addObject(
+            connection,
+            objectsId,
+            {1, 1001},
+            "Object",
+            {},
+            ObjectTypeId::BaseObjectType,
+            ReferenceTypeId::HasComponent
+        ));
 
         const auto addReference = [&](auto&&... args) {
             if constexpr (isAsync<TestType>) {
@@ -296,17 +292,15 @@ TEMPLATE_TEST_CASE("NodeManagement service set", "", Server, Client, Async<Clien
     }
 
     SECTION("Delete node") {
-        REQUIRE(
-            services::addObject(
-                connection,
-                objectsId,
-                {1, 1000},
-                "Object",
-                {},
-                ObjectTypeId::BaseObjectType,
-                ReferenceTypeId::HasComponent
-            )
-        );
+        REQUIRE(services::addObject(
+            connection,
+            objectsId,
+            {1, 1000},
+            "Object",
+            {},
+            ObjectTypeId::BaseObjectType,
+            ReferenceTypeId::HasComponent
+        ));
 
         const auto deleteNode = [&](auto&&... args) {
             if constexpr (isAsync<TestType>) {

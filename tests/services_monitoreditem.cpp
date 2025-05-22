@@ -4,7 +4,6 @@
 #include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 
-
 #include "open62541pp/config.hpp"
 #include "open62541pp/event.hpp"
 #include "open62541pp/services/attribute_highlevel.hpp"  // writeValue

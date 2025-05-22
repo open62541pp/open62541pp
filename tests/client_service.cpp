@@ -13,7 +13,7 @@ using Catch::Matchers::Message;
 using namespace opcua;
 
 TEST_CASE("AsyncServiceAdapter") {
-    SECTION("createCallbackAndContext") {
+    SECTION("makeCallbackAndContext") {
         using Response = int;
         using Adapter = services::detail::AsyncServiceAdapter<Response>;
 
@@ -21,7 +21,7 @@ TEST_CASE("AsyncServiceAdapter") {
         bool throwInCompletionHandler = false;
         detail::ExceptionCatcher catcher;
 
-        auto callbackAndContext = Adapter::createCallbackAndContext(catcher, [&](Response res) {
+        auto callbackAndContext = Adapter::makeCallbackAndContext(catcher, [&](Response res) {
             result = res;
             if (throwInCompletionHandler) {
                 throw std::runtime_error("CompletionHandler");

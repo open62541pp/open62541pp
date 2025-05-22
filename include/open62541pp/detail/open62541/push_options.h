@@ -13,7 +13,7 @@
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 #elif defined(_MSC_VER) && !defined(__clang__)
 #pragma warning(push)
-#pragma warning(disable: 4100)  // unreferenced formal parameter
+#pragma warning(disable : 4100)  // unreferenced formal parameter
 #endif
 
 #if defined(_WIN32) && !defined(NOMINMAX)

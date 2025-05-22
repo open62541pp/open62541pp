@@ -28,9 +28,7 @@ namespace opcua {
 template <typename T>
 class Span {
 private:
-    using HasSizeAndData = std::conjunction<
-        detail::HasSize<T>,
-        detail::HasData<T>>;
+    using HasSizeAndData = std::conjunction<detail::HasSize<T>, detail::HasData<T>>;
 
     template <typename C>
     using EnableIfHasSizeAndData =

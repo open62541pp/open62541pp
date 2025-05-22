@@ -9,7 +9,7 @@
 
 using namespace opcua;
 
-static UA_DataTypeMember createDataTypeMember(
+static UA_DataTypeMember makeDataTypeMember(
     [[maybe_unused]] const char* memberName,
     const UA_DataType& memberType,
     uint8_t padding,
@@ -34,7 +34,7 @@ static UA_DataTypeMember createDataTypeMember(
     return result;
 }
 
-static UA_DataType createDataType(
+static UA_DataType makeDataType(
     [[maybe_unused]] const char* typeName,
     UA_NodeId typeId,
     UA_NodeId binaryEncodingId,
@@ -74,21 +74,21 @@ struct Point {
 };
 
 static UA_DataTypeMember pointMembers[3] = {
-    createDataTypeMember(
+    makeDataTypeMember(
         "x",
         UA_TYPES[UA_TYPES_FLOAT],
         0,  // first member
         false,
         false
     ),
-    createDataTypeMember(
+    makeDataTypeMember(
         "y",
         UA_TYPES[UA_TYPES_FLOAT],
         offsetof(Point, y) - offsetof(Point, x) - sizeof(float),
         false,
         false
     ),
-    createDataTypeMember(
+    makeDataTypeMember(
         "z",
         UA_TYPES[UA_TYPES_FLOAT],
         offsetof(Point, z) - offsetof(Point, y) - sizeof(float),
@@ -97,7 +97,7 @@ static UA_DataTypeMember pointMembers[3] = {
     ),
 };
 
-static const UA_DataType pointType = createDataType(
+static const UA_DataType pointType = makeDataType(
     "Point",
     UA_NODEID_NUMERIC(1, 1001),
     UA_NODEID_NUMERIC(1, 1),
@@ -141,9 +141,7 @@ static void checkEqual(const UA_DataType& dt, const UA_DataType& expected) {
 }
 
 TEST_CASE("DataTypeMember") {
-    const auto native = createDataTypeMember(
-        "test123", UA_TYPES[UA_TYPES_FLOAT], 11, false, false
-    );
+    const auto native = makeDataTypeMember("test123", UA_TYPES[UA_TYPES_FLOAT], 11, false, false);
 
     SECTION("Construct form native") {
         DataTypeMember member{native};
@@ -292,11 +290,11 @@ TEST_CASE("DataTypeBuilder") {
         };
 
         UA_DataTypeMember measurementsMembers[2] = {
-            createDataTypeMember("description", UA_TYPES[UA_TYPES_STRING], 0, false, false),
-            createDataTypeMember("measurements", UA_TYPES[UA_TYPES_FLOAT], 0, true, false),
+            makeDataTypeMember("description", UA_TYPES[UA_TYPES_STRING], 0, false, false),
+            makeDataTypeMember("measurements", UA_TYPES[UA_TYPES_FLOAT], 0, true, false),
         };
 
-        const UA_DataType measurementsType = createDataType(
+        const UA_DataType measurementsType = makeDataType(
             "Measurements",
             UA_NODEID_NUMERIC(1, 1002),
             UA_NODEID_NUMERIC(1, 2),
@@ -327,21 +325,21 @@ TEST_CASE("DataTypeBuilder") {
         };
 
         UA_DataTypeMember optMembers[3] = {
-            createDataTypeMember(
+            makeDataTypeMember(
                 "a",
                 UA_TYPES[UA_TYPES_INT16],
                 0,  // first member
                 false,
                 false
             ),
-            createDataTypeMember(
+            makeDataTypeMember(
                 "b",
                 UA_TYPES[UA_TYPES_FLOAT],
                 offsetof(Opt, b) - offsetof(Opt, a) - sizeof(int16_t),
                 false,
                 true
             ),
-            createDataTypeMember(
+            makeDataTypeMember(
                 "c",
                 UA_TYPES[UA_TYPES_FLOAT],
                 offsetof(Opt, c) - offsetof(Opt, b) - sizeof(float*),
@@ -350,7 +348,7 @@ TEST_CASE("DataTypeBuilder") {
             ),
         };
 
-        const UA_DataType optType = createDataType(
+        const UA_DataType optType = makeDataType(
             "Opt",
             UA_NODEID_NUMERIC(1, 1003),
             UA_NODEID_NUMERIC(1, 3),
@@ -389,15 +387,15 @@ TEST_CASE("DataTypeBuilder") {
         };
 
         static UA_DataTypeMember uniMembers[2] = {
-            createDataTypeMember(
+            makeDataTypeMember(
                 "optionA", UA_TYPES[UA_TYPES_DOUBLE], offsetof(Uni, fields.optionA), false, false
             ),
-            createDataTypeMember(
+            makeDataTypeMember(
                 "optionB", UA_TYPES[UA_TYPES_STRING], offsetof(Uni, fields.optionB), false, false
             ),
         };
 
-        const UA_DataType uniType = createDataType(
+        const UA_DataType uniType = makeDataType(
             "Uni",
             UA_NODEID_NUMERIC(1, 1004),
             UA_NODEID_NUMERIC(1, 4),

@@ -29,7 +29,7 @@ struct AsyncServiceAdapter {
     };
 
     template <typename CompletionHandler>
-    static auto createCallbackAndContext(
+    static auto makeCallbackAndContext(
         ExceptionCatcher& exceptionCatcher, CompletionHandler&& handler
     ) {
         static_assert(std::is_invocable_v<CompletionHandler, Response&>);
@@ -76,7 +76,7 @@ struct AsyncServiceAdapter {
                 auto& catcher = opcua::detail::getExceptionCatcher(client);
                 try {
                     // NOLINTNEXTLINE(clang-analyzer-cplusplus.NewDeleteLeaks), false positive?
-                    auto callbackAndContext = createCallbackAndContext(
+                    auto callbackAndContext = makeCallbackAndContext(
                         catcher, std::forward<decltype(handler)>(handler)
                     );
                     std::invoke(

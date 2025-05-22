@@ -86,10 +86,7 @@ static UA_StatusCode activateSessionNative(
 }
 
 static void closeSessionNative(
-    UA_Server* server,
-    UA_AccessControl* ac,
-    const UA_NodeId* sessionId,
-    void* sessionContext
+    UA_Server* server, UA_AccessControl* ac, const UA_NodeId* sessionId, void* sessionContext
 ) {
     invokeAccessCallback(server, "activateSession", UA_STATUSCODE_GOOD, [&] {
         auto session = getSession(server, sessionId, sessionContext);

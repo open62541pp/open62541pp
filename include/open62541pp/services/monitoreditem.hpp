@@ -108,7 +108,7 @@ using EventNotificationCallback =
     std::function<void(IntegerId subId, IntegerId monId, Span<const Variant> eventFields)>;
 
 namespace detail {
-std::vector<std::unique_ptr<MonitoredItemContext>> createMonitoredItemContexts(
+std::vector<std::unique_ptr<MonitoredItemContext>> makeMonitoredItemContexts(
     Client& connection,
     const CreateMonitoredItemsRequest& request,
     DataChangeNotificationCallback dataChangeCallback,
@@ -164,7 +164,7 @@ auto createMonitoredItemsDataChangeAsync(
     DeleteMonitoredItemCallback deleteCallback,
     CompletionToken&& token
 ) {
-    auto contexts = detail::createMonitoredItemContexts(
+    auto contexts = detail::makeMonitoredItemContexts(
         connection, request, std::move(dataChangeCallback), {}, std::move(deleteCallback)
     );
     std::vector<detail::MonitoredItemContext*> contextsPtr{contexts.size()};
@@ -243,8 +243,8 @@ auto createMonitoredItemDataChangeAsync(
     DeleteMonitoredItemCallback deleteCallback,
     CompletionToken&& token
 ) {
-    auto item = detail::createMonitoredItemCreateRequest(itemToMonitor, monitoringMode, parameters);
-    const auto request = detail::createCreateMonitoredItemsRequest(
+    auto item = detail::makeMonitoredItemCreateRequest(itemToMonitor, monitoringMode, parameters);
+    const auto request = detail::makeCreateMonitoredItemsRequest(
         subscriptionId, parameters.timestamps, {&item, 1}
     );
     return createMonitoredItemsDataChangeAsync(
@@ -293,7 +293,7 @@ auto createMonitoredItemsEventAsync(
     DeleteMonitoredItemCallback deleteCallback,
     CompletionToken&& token
 ) {
-    auto contexts = detail::createMonitoredItemContexts(
+    auto contexts = detail::makeMonitoredItemContexts(
         connection, request, {}, std::move(eventCallback), std::move(deleteCallback)
     );
     std::vector<detail::MonitoredItemContext*> contextsPtr{contexts.size()};
@@ -368,8 +368,8 @@ auto createMonitoredItemEventAsync(
     DeleteMonitoredItemCallback deleteCallback,
     CompletionToken&& token
 ) {
-    auto item = detail::createMonitoredItemCreateRequest(itemToMonitor, monitoringMode, parameters);
-    const auto request = detail::createCreateMonitoredItemsRequest(
+    auto item = detail::makeMonitoredItemCreateRequest(itemToMonitor, monitoringMode, parameters);
+    const auto request = detail::makeCreateMonitoredItemsRequest(
         subscriptionId, parameters.timestamps, {&item, 1}
     );
     return createMonitoredItemsEventAsync(
@@ -441,8 +441,8 @@ inline MonitoredItemModifyResult modifyMonitoredItem(
     IntegerId monitoredItemId,
     const MonitoringParametersEx& parameters
 ) noexcept {
-    auto item = detail::createMonitoredItemModifyRequest(monitoredItemId, parameters);
-    auto request = detail::createModifyMonitoredItemsRequest(subscriptionId, parameters, item);
+    auto item = detail::makeMonitoredItemModifyRequest(monitoredItemId, parameters);
+    auto request = detail::makeModifyMonitoredItemsRequest(subscriptionId, parameters, item);
     auto response = modifyMonitoredItems(
         connection, asWrapper<ModifyMonitoredItemsRequest>(request)
     );
@@ -463,8 +463,8 @@ auto modifyMonitoredItemAsync(
     const MonitoringParametersEx& parameters,
     CompletionToken&& token
 ) {
-    auto item = detail::createMonitoredItemModifyRequest(monitoredItemId, parameters);
-    auto request = detail::createModifyMonitoredItemsRequest(subscriptionId, parameters, item);
+    auto item = detail::makeMonitoredItemModifyRequest(monitoredItemId, parameters);
+    auto request = detail::makeModifyMonitoredItemsRequest(subscriptionId, parameters, item);
     return modifyMonitoredItemsAsync(
         connection,
         asWrapper<ModifyMonitoredItemsRequest>(request),
@@ -524,7 +524,7 @@ inline StatusCode setMonitoringMode(
     IntegerId monitoredItemId,
     MonitoringMode monitoringMode
 ) noexcept {
-    const auto request = detail::createSetMonitoringModeRequest(
+    const auto request = detail::makeSetMonitoringModeRequest(
         subscriptionId, {&monitoredItemId, 1}, monitoringMode
     );
     return detail::getSingleStatus(
@@ -545,7 +545,7 @@ auto setMonitoringModeAsync(
     MonitoringMode monitoringMode,
     CompletionToken&& token
 ) {
-    const auto request = detail::createSetMonitoringModeRequest(
+    const auto request = detail::makeSetMonitoringModeRequest(
         subscriptionId, {&monitoredItemId, 1}, monitoringMode
     );
     return setMonitoringModeAsync(
@@ -653,7 +653,7 @@ template <typename CompletionToken>
 auto deleteMonitoredItemAsync(
     Client& connection, IntegerId subscriptionId, IntegerId monitoredItemId, CompletionToken&& token
 ) {
-    const auto request = detail::createDeleteMonitoredItemsRequest(
+    const auto request = detail::makeDeleteMonitoredItemsRequest(
         subscriptionId, {&monitoredItemId, 1}
     );
     return deleteMonitoredItemsAsync(
