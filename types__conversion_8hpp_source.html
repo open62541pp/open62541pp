@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -99,43 +99,47 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;string_view&gt;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="string__utils_8hpp.html">open62541pp/detail/string_utils.hpp</a>&quot;</span>  <span class="comment">// allocNativeString</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="types__handling_8hpp.html">open62541pp/detail/types_handling.hpp</a>&quot;</span>  <span class="comment">// copyArray</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="span_8hpp.html">open62541pp/span.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="types__handling_8hpp.html">open62541pp/detail/types_handling.hpp</a>&quot;</span>  <span class="comment">// copyArray</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="span_8hpp.html">open62541pp/span.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="string__utils_8hpp.html">open62541pp/detail/string_utils.hpp</a>&quot;</span>  <span class="comment">// allocNativeString</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="typeregistry_8hpp.html">open62541pp/typeregistry.hpp</a>&quot;</span>  <span class="comment">// getDataType</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="wrapper_8hpp.html">open62541pp/wrapper.hpp</a>&quot;</span>  <span class="comment">// asNative, asWrapper</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="wrapper_8hpp.html">open62541pp/wrapper.hpp</a>&quot;</span>  <span class="comment">// asNative, asWrapper, IsWrapper</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span>opcua::detail {</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> = std::enable_if_t&lt;std::is_enum_v&lt;T&gt;&gt;&gt;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>[[nodiscard]] <span class="keyword">auto</span> toNative(T value) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>std::underlying_type_t&lt;T&gt;<span class="keyword">&gt;</span>(value);</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>}</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>[[nodiscard]] <span class="keyword">inline</span> <span class="keyword">auto</span> toNative(std::string_view value) {</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordflow">return</span> allocNativeString(value);</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>}</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>template &lt;typename T, typename = std::enable_if_t&lt;IsWrapper&lt;T&gt;::value&gt;&gt;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>[[nodiscard]] <span class="keyword">auto</span> toNative(T&amp;&amp; value) {</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keyword">using </span>NativeType = <span class="keyword">typename</span> T::NativeType;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    NativeType native{};</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    asWrapper&lt;T&gt;(native) = std::forward&lt;T&gt;(value);</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordflow">return</span> native;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>}</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>[[nodiscard]] <span class="keyword">auto</span>* toNativeArray(Span&lt;const T&gt; array) {</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (IsWrapper&lt;T&gt;::value) {</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <span class="keywordflow">return</span> copyArray(asNative(array.data()), array.size(), getDataType&lt;T&gt;());</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keywordflow">return</span> copyArray(array.data(), array.size(), getDataType&lt;T&gt;());</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    }</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>}</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>}  <span class="comment">// namespace opcua::detail</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>[[nodiscard]] <span class="keyword">inline</span> <span class="keyword">auto</span> makeNative(std::string_view value) {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keywordflow">return</span> detail::allocNativeString(value);</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>}</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>[[nodiscard]] <span class="keyword">auto</span> makeNative(T value) <span class="keyword">noexcept</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    -&gt; std::enable_if_t&lt;std::is_enum_v&lt;T&gt;, std::underlying_type_t&lt;T&gt;&gt; {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>std::underlying_type_t&lt;T&gt;<span class="keyword">&gt;</span>(value);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>}</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U = std::remove_cv_t&lt;std::remove_reference_t&lt;T&gt;&gt;&gt;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>[[nodiscard]] <span class="keyword">auto</span> makeNative(T&amp;&amp; value)</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    -&gt; std::enable_if_t&lt;IsWrapper&lt;U&gt;::value, <span class="keyword">typename</span> U::NativeType&gt; {</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keyword">using </span>NativeType = <span class="keyword">typename</span> U::NativeType;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    NativeType native{};</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    asWrapper&lt;U&gt;(native) = std::forward&lt;T&gt;(value);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordflow">return</span> native;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>}</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>[[nodiscard]] <span class="keyword">auto</span>* makeNativeArray(Span&lt;const T&gt; array) {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_variable" href="structopcua_1_1IsWrapper.html#a7c9352e27c92d6ef379628f145d86ce9">IsWrapper&lt;T&gt;::value</a>) {</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keywordflow">return</span> copyArray(<a class="code hl_function" href="group__Wrapper.html#ga50b605af15e16113ff43aa58efc24e45">asNative</a>(array.data()), array.size(), getDataType&lt;T&gt;());</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <span class="keywordflow">return</span> copyArray(array.data(), array.size(), getDataType&lt;T&gt;());</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    }</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>}</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>}  <span class="comment">// namespace opcua::detail</span></div>
+<div class="ttc" id="agroup__Wrapper_html_ga50b605af15e16113ff43aa58efc24e45"><div class="ttname"><a href="group__Wrapper.html#ga50b605af15e16113ff43aa58efc24e45">opcua::asNative</a></div><div class="ttdeci">constexpr T::NativeType * asNative(T *wrapper) noexcept</div><div class="ttdoc">Cast Wrapper object pointers to native object pointers.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00342">wrapper.hpp:342</a></div></div>
 <div class="ttc" id="aspan_8hpp_html"><div class="ttname"><a href="span_8hpp.html">span.hpp</a></div></div>
 <div class="ttc" id="astring__utils_8hpp_html"><div class="ttname"><a href="string__utils_8hpp.html">string_utils.hpp</a></div></div>
+<div class="ttc" id="astructopcua_1_1IsWrapper_html_a7c9352e27c92d6ef379628f145d86ce9"><div class="ttname"><a href="structopcua_1_1IsWrapper.html#a7c9352e27c92d6ef379628f145d86ce9">opcua::IsWrapper::value</a></div><div class="ttdeci">static constexpr bool value</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00291">wrapper.hpp:291</a></div></div>
 <div class="ttc" id="atyperegistry_8hpp_html"><div class="ttname"><a href="typeregistry_8hpp.html">typeregistry.hpp</a></div></div>
 <div class="ttc" id="atypes__handling_8hpp_html"><div class="ttname"><a href="types__handling_8hpp.html">types_handling.hpp</a></div></div>
 <div class="ttc" id="awrapper_8hpp_html"><div class="ttname"><a href="wrapper_8hpp.html">wrapper.hpp</a></div></div>

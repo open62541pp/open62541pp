@@ -1,7 +1,7 @@
 <map id="opcua::ua::SetMonitoringModeRequest" name="opcua::ua::SetMonitoringModeRequest">
-<area shape="rect" id="Node000001" title="UA_SetMonitoringModeRequest wrapper class." alt="" coords="591,13,775,53"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="216,5,543,60"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="556,30,591,30,591,35,556,35"/>
-<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap native objects." alt="" coords="5,20,168,45"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="181,30,216,30,216,35,181,35"/>
+<area shape="rect" id="Node000001" title="UA_SetMonitoringModeRequest wrapper class." alt="" coords="123,181,307,221"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap (native) objects." alt="" coords="5,93,424,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="217,147,217,181,212,181,212,147"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="96,5,333,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="217,59,217,93,212,93,212,59"/>
 </map>

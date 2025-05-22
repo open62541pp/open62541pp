@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -99,8 +99,8 @@ Collaboration diagram for AddNodes service:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:ga0dce1b14793b144bbafe4124c77dde5e" id="r_ga0dce1b14793b144bbafe4124c77dde5e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__AddNodes.html#ga0dce1b14793b144bbafe4124c77dde5e">opcua::services::MethodCallback</a> = std::function&lt; void(<a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1Variant.html">Variant</a> &gt; input, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; <a class="el" href="classopcua_1_1Variant.html">Variant</a> &gt; output)&gt;</td></tr>
-<tr class="separator:ga0dce1b14793b144bbafe4124c77dde5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2c4f77963cea649c5ed497c73ee24529" id="r_ga2c4f77963cea649c5ed497c73ee24529"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__AddNodes.html#ga2c4f77963cea649c5ed497c73ee24529">opcua::services::MethodCallback</a> = std::variant&lt; std::function&lt; void(<a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1Variant.html">Variant</a> &gt; input, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; <a class="el" href="classopcua_1_1Variant.html">Variant</a> &gt; output)&gt;, std::function&lt; <a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a>(<a class="el" href="classopcua_1_1Session.html">Session</a> &amp;session, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1Variant.html">Variant</a> &gt; input, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; <a class="el" href="classopcua_1_1Variant.html">Variant</a> &gt; output, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;methodId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;objectId)&gt; &gt;</td></tr>
+<tr class="separator:ga2c4f77963cea649c5ed497c73ee24529"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -140,10 +140,10 @@ Functions</h2></td></tr>
 <tr class="memitem:ga11c606bc88583229e562d94b5822d05a"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__AddNodes.html#ga11c606bc88583229e562d94b5822d05a">opcua::services::addPropertyAsync</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;parentId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::string_view browseName, const <a class="el" href="classopcua_1_1ua_1_1VariableAttributes.html">VariableAttributes</a> &amp;attributes, CompletionToken &amp;&amp;token)</td></tr>
 <tr class="separator:ga11c606bc88583229e562d94b5822d05a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3f9d0de3b9e7552a6585078b00ca0586" id="r_ga3f9d0de3b9e7552a6585078b00ca0586"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ga3f9d0de3b9e7552a6585078b00ca0586"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__AddNodes.html#ga3f9d0de3b9e7552a6585078b00ca0586">opcua::services::addMethod</a> (T &amp;connection, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;parentId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::string_view browseName, <a class="el" href="group__AddNodes.html#ga0dce1b14793b144bbafe4124c77dde5e">MethodCallback</a> callback, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1ua_1_1Argument.html">Argument</a> &gt; inputArguments, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1ua_1_1Argument.html">Argument</a> &gt; outputArguments, const <a class="el" href="classopcua_1_1ua_1_1MethodAttributes.html">MethodAttributes</a> &amp;attributes, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;referenceType) noexcept</td></tr>
+<tr class="memitem:ga3f9d0de3b9e7552a6585078b00ca0586"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__AddNodes.html#ga3f9d0de3b9e7552a6585078b00ca0586">opcua::services::addMethod</a> (T &amp;connection, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;parentId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::string_view browseName, <a class="el" href="group__AddNodes.html#ga2c4f77963cea649c5ed497c73ee24529">MethodCallback</a> callback, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1ua_1_1Argument.html">Argument</a> &gt; inputArguments, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1ua_1_1Argument.html">Argument</a> &gt; outputArguments, const <a class="el" href="classopcua_1_1ua_1_1MethodAttributes.html">MethodAttributes</a> &amp;attributes, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;referenceType) noexcept</td></tr>
 <tr class="separator:ga3f9d0de3b9e7552a6585078b00ca0586"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga2a74289fb75d9f667eb29a43322bc038" id="r_ga2a74289fb75d9f667eb29a43322bc038"><td class="memTemplParams" colspan="2">template&lt;typename CompletionToken &gt; </td></tr>
-<tr class="memitem:ga2a74289fb75d9f667eb29a43322bc038"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__AddNodes.html#ga2a74289fb75d9f667eb29a43322bc038">opcua::services::addMethodAsync</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;parentId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::string_view browseName, <a class="el" href="group__AddNodes.html#ga0dce1b14793b144bbafe4124c77dde5e">MethodCallback</a> callback, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1ua_1_1Argument.html">Argument</a> &gt; inputArguments, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1ua_1_1Argument.html">Argument</a> &gt; outputArguments, const <a class="el" href="classopcua_1_1ua_1_1MethodAttributes.html">MethodAttributes</a> &amp;attributes, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;referenceType, CompletionToken &amp;&amp;token)</td></tr>
+<tr class="memitem:ga2a74289fb75d9f667eb29a43322bc038"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__AddNodes.html#ga2a74289fb75d9f667eb29a43322bc038">opcua::services::addMethodAsync</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;parentId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::string_view browseName, <a class="el" href="group__AddNodes.html#ga2c4f77963cea649c5ed497c73ee24529">MethodCallback</a> callback, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1ua_1_1Argument.html">Argument</a> &gt; inputArguments, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1ua_1_1Argument.html">Argument</a> &gt; outputArguments, const <a class="el" href="classopcua_1_1ua_1_1MethodAttributes.html">MethodAttributes</a> &amp;attributes, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;referenceType, CompletionToken &amp;&amp;token)</td></tr>
 <tr class="separator:ga2a74289fb75d9f667eb29a43322bc038"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3477aabfcd69d2c2578578159fc41315" id="r_ga3477aabfcd69d2c2578578159fc41315"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ga3477aabfcd69d2c2578578159fc41315"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__AddNodes.html#ga3477aabfcd69d2c2578578159fc41315">opcua::services::addObjectType</a> (T &amp;connection, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;parentId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::string_view browseName, const <a class="el" href="classopcua_1_1ua_1_1ObjectTypeAttributes.html">ObjectTypeAttributes</a> &amp;attributes, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;referenceType) noexcept</td></tr>
@@ -177,52 +177,91 @@ Functions</h2></td></tr>
 <tr class="separator:gaebb1e6a68e143bf1b6637ad5b07132cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
-<a id="ga0dce1b14793b144bbafe4124c77dde5e" name="ga0dce1b14793b144bbafe4124c77dde5e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga0dce1b14793b144bbafe4124c77dde5e">&#9670;&#160;</a></span>MethodCallback</h2>
+<a id="ga2c4f77963cea649c5ed497c73ee24529" name="ga2c4f77963cea649c5ed497c73ee24529"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2c4f77963cea649c5ed497c73ee24529">&#9670;&#160;</a></span>MethodCallback</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="group__AddNodes.html#ga0dce1b14793b144bbafe4124c77dde5e">opcua::services::MethodCallback</a> = typedef std::function&lt;void(<a class="el" href="classopcua_1_1Span.html">Span</a>&lt;const <a class="el" href="classopcua_1_1Variant.html">Variant</a>&gt; input, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt;<a class="el" href="classopcua_1_1Variant.html">Variant</a>&gt; output)&gt;</td>
+          <td class="memname">using <a class="el" href="group__AddNodes.html#ga2c4f77963cea649c5ed497c73ee24529">opcua::services::MethodCallback</a> = typedef std::variant&lt; std::function&lt;void(<a class="el" href="classopcua_1_1Span.html">Span</a>&lt;const <a class="el" href="classopcua_1_1Variant.html">Variant</a>&gt; input, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt;<a class="el" href="classopcua_1_1Variant.html">Variant</a>&gt; output)&gt;, std::function&lt;<a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a>( <a class="el" href="classopcua_1_1Session.html">Session</a>&amp; session, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt;const <a class="el" href="classopcua_1_1Variant.html">Variant</a>&gt; input, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt;<a class="el" href="classopcua_1_1Variant.html">Variant</a>&gt; output, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a>&amp; methodId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a>&amp; objectId )&gt; &gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Method callback. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">input</td><td>Input parameters </td></tr>
-    <tr><td class="paramname">output</td><td>Output parameters </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Two function signatures are supported:</p>
+<ol type="1">
+<li>Simple signature with <code>input</code> and <code>output</code> arguments: <div class="fragment"><div class="line">void(</div>
+<div class="line">    <a class="code hl_class" href="classopcua_1_1Span.html">Span&lt;const Variant&gt;</a> input,</div>
+<div class="line">    <a class="code hl_class" href="classopcua_1_1Span.html">Span&lt;Variant&gt;</a> output</div>
+<div class="line">)</div>
+<div class="ttc" id="aclassopcua_1_1Span_html"><div class="ttname"><a href="classopcua_1_1Span.html">opcua::Span</a></div><div class="ttdoc">View to a contiguous sequence of objects, similar to std::span in C++20.</div><div class="ttdef"><b>Definition</b> <a href="span_8hpp_source.html#l00029">span.hpp:29</a></div></div>
+</div><!-- fragment --> The method call status code is implicitly set to <code>UA_STATUSCODE_GOOD</code>. A bad status code can be returned by throwing a <a class="el" href="classopcua_1_1BadStatus.html" title="Exception for bad status codes from open62541 UA_STATUSCODE_*.">BadStatus</a> exception.</li>
+<li>Full signature with <code>session</code>, <code>input</code>, <code>output</code>, <code>methodId</code> and <code>objectId</code>: <div class="fragment"><div class="line"><a class="code hl_class" href="classopcua_1_1StatusCode.html">StatusCode</a>(</div>
+<div class="line">    <a class="code hl_class" href="classopcua_1_1Session.html">Session</a>&amp; session,</div>
+<div class="line">    <a class="code hl_class" href="classopcua_1_1Span.html">Span&lt;const Variant&gt;</a> input,</div>
+<div class="line">    <a class="code hl_class" href="classopcua_1_1Span.html">Span&lt;Variant&gt;</a> output,</div>
+<div class="line">    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; methodId,</div>
+<div class="line">    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; objectId</div>
+<div class="line">)</div>
+<div class="ttc" id="aclassopcua_1_1NodeId_html"><div class="ttname"><a href="classopcua_1_1NodeId.html">opcua::NodeId</a></div><div class="ttdoc">UA_NodeId wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00641">types.hpp:641</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Session_html"><div class="ttname"><a href="classopcua_1_1Session.html">opcua::Session</a></div><div class="ttdoc">High-level session class to manage client sessions.</div><div class="ttdef"><b>Definition</b> <a href="session_8hpp_source.html#l00020">session.hpp:20</a></div></div>
+<div class="ttc" id="aclassopcua_1_1StatusCode_html"><div class="ttname"><a href="classopcua_1_1StatusCode.html">opcua::StatusCode</a></div><div class="ttdoc">UA_StatusCode wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00044">types.hpp:44</a></div></div>
+</div><!-- fragment --> The method call status code is explicitly returned by the function. </li>
+</ol>
 
-<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00573">573</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00596">596</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="gacf95c91c699ec111eb35330d183f9733" name="gacf95c91c699ec111eb35330d183f9733"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gacf95c91c699ec111eb35330d183f9733">&#9670;&#160;</a></span>addNodes()</h2>
+<a id="ga566f4d11f933995f00d845bd3a50a99b" name="ga566f4d11f933995f00d845bd3a50a99b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga566f4d11f933995f00d845bd3a50a99b">&#9670;&#160;</a></span>addDataType()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1ua_1_1AddNodesResponse.html">AddNodesResponse</a> opcua::services::addNodes </td>
+          <td class="memname"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &gt; opcua::services::addDataType </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
+          <td class="paramtype">T &amp;&#160;</td>
           <td class="paramname"><em>connection</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1AddNodesRequest.html">AddNodesRequest</a> &amp;&#160;</td>
-          <td class="paramname"><em>request</em>&#160;</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>parentId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>browseName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1DataTypeAttributes.html">DataTypeAttributes</a> &amp;&#160;</td>
+          <td class="paramname"><em>attributes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>referenceType</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -237,19 +276,25 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Add one or more nodes (client only). </p>
+<p>Add data type. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
-    <tr><td class="paramname">request</td><td>Add nodes request </td></tr>
+    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> (or <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>) </td></tr>
+    <tr><td class="paramname">parentId</td><td>Parent node </td></tr>
+    <tr><td class="paramname">id</td><td>Requested <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> of the node to add </td></tr>
+    <tr><td class="paramname">browseName</td><td>Browse name </td></tr>
+    <tr><td class="paramname">attributes</td><td>Data type attributes </td></tr>
+    <tr><td class="paramname">referenceType</td><td>Hierarchical reference type from the parent node to the new node, e.g. ReferenceTypeId::HasSubtype </td></tr>
   </table>
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00856">856</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
+
 </div>
 </div>
-<a id="ga401bfe2131943c409a4381929c0bdee2" name="ga401bfe2131943c409a4381929c0bdee2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga401bfe2131943c409a4381929c0bdee2">&#9670;&#160;</a></span>addNodesAsync()</h2>
+<a id="ga8bd16c0a0a21dd9e1e93f58231926f5d" name="ga8bd16c0a0a21dd9e1e93f58231926f5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8bd16c0a0a21dd9e1e93f58231926f5d">&#9670;&#160;</a></span>addDataTypeAsync()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -257,7 +302,7 @@ Functions</h2></td></tr>
 template&lt;typename CompletionToken &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">auto opcua::services::addNodesAsync </td>
+          <td class="memname">auto opcua::services::addDataTypeAsync </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
           <td class="paramname"><em>connection</em>, </td>
@@ -265,8 +310,32 @@ template&lt;typename CompletionToken &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1AddNodesRequest.html">AddNodesRequest</a> &amp;&#160;</td>
-          <td class="paramname"><em>request</em>, </td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>parentId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>browseName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1DataTypeAttributes.html">DataTypeAttributes</a> &amp;&#160;</td>
+          <td class="paramname"><em>attributes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>referenceType</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -282,28 +351,394 @@ template&lt;typename CompletionToken &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Add one or more nodes (client only).   </p>
+<p>Add data type.   </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
-    <tr><td class="paramname">request</td><td>Add nodes request   </td></tr>
-    <tr><td class="paramname">token</td><td>The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be: <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1ua_1_1AddNodesResponse.html">AddNodesResponse</a>&amp;) </div>
-<div class="ttc" id="aclassopcua_1_1ua_1_1AddNodesResponse_html"><div class="ttname"><a href="classopcua_1_1ua_1_1AddNodesResponse.html">opcua::AddNodesResponse</a></div><div class="ttdoc">UA_AddNodesResponse wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l00824">types.hpp:824</a></div></div>
+    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> (or <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>) </td></tr>
+    <tr><td class="paramname">parentId</td><td>Parent node </td></tr>
+    <tr><td class="paramname">id</td><td>Requested <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> of the node to add </td></tr>
+    <tr><td class="paramname">browseName</td><td>Browse name </td></tr>
+    <tr><td class="paramname">attributes</td><td>Data type attributes </td></tr>
+    <tr><td class="paramname">referenceType</td><td>Hierarchical reference type from the parent node to the new node, e.g. ReferenceTypeId::HasSubtype   </td></tr>
+    <tr><td class="paramname">token</td><td>The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be: <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1Result.html">Result&lt;NodeId&gt;</a>&amp;) </div>
+<div class="ttc" id="aclassopcua_1_1Result_html"><div class="ttname"><a href="classopcua_1_1Result.html">opcua::Result</a></div><div class="ttdoc">The template class Result encapsulates a StatusCode and optionally a value.</div><div class="ttdef"><b>Definition</b> <a href="result_8hpp_source.html#l00053">result.hpp:53</a></div></div>
 </div><!-- fragment --> </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><ul>
 <li><code>void</code> if <code>token</code> is a callback function (object)</li>
-<li><code>std::future&lt;<a class="el" href="classopcua_1_1ua_1_1AddNodesResponse.html" title="UA_AddNodesResponse wrapper class.">AddNodesResponse</a>&gt;</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseFutureToken.html" title="Future completion token type.">UseFutureToken</a></li>
+<li><code>std::future&lt;<a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;<a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a>&gt;&gt;</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseFutureToken.html" title="Future completion token type.">UseFutureToken</a></li>
 <li><code>auto(auto&amp;&amp; token)</code> callable for deferred execution if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDeferredToken.html" title="Deferred completion token type.">UseDeferredToken</a></li>
 <li><code>void</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDetachedToken.html" title="Detached completion token type.">UseDetachedToken</a> </li>
 </ul>
 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00057">57</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00882">882</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00092">opcua::services::addNodeAsync()</a>.</p>
+</div>
+</div>
+<a id="ga55b7b3cb0a3064fb4017663acc5c8406" name="ga55b7b3cb0a3064fb4017663acc5c8406"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga55b7b3cb0a3064fb4017663acc5c8406">&#9670;&#160;</a></span>addFolder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &gt; opcua::services::addFolder </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>connection</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>parentId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>browseName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1ObjectAttributes.html">ObjectAttributes</a> &amp;&#160;</td>
+          <td class="paramname"><em>attributes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>referenceType</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add folder. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> (or <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>) </td></tr>
+    <tr><td class="paramname">parentId</td><td>Parent node </td></tr>
+    <tr><td class="paramname">id</td><td>Requested <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> of the node to add </td></tr>
+    <tr><td class="paramname">browseName</td><td>Browse name </td></tr>
+    <tr><td class="paramname">attributes</td><td>Object attributes </td></tr>
+    <tr><td class="paramname">referenceType</td><td>Hierarchical reference type from the parent node to the new node, e.g. ReferenceTypeId::HasComponent </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00414">414</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ga45f0d4196f94981b4e986d3a38e98525" name="ga45f0d4196f94981b4e986d3a38e98525"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga45f0d4196f94981b4e986d3a38e98525">&#9670;&#160;</a></span>addFolderAsync()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionToken &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto opcua::services::addFolderAsync </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
+          <td class="paramname"><em>connection</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>parentId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>browseName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1ObjectAttributes.html">ObjectAttributes</a> &amp;&#160;</td>
+          <td class="paramname"><em>attributes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>referenceType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CompletionToken &amp;&amp;&#160;</td>
+          <td class="paramname"><em>token</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add folder.   </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> (or <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>) </td></tr>
+    <tr><td class="paramname">parentId</td><td>Parent node </td></tr>
+    <tr><td class="paramname">id</td><td>Requested <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> of the node to add </td></tr>
+    <tr><td class="paramname">browseName</td><td>Browse name </td></tr>
+    <tr><td class="paramname">attributes</td><td>Object attributes </td></tr>
+    <tr><td class="paramname">referenceType</td><td>Hierarchical reference type from the parent node to the new node, e.g. ReferenceTypeId::HasComponent   </td></tr>
+    <tr><td class="paramname">token</td><td>The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be: <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1Result.html">Result&lt;NodeId&gt;</a>&amp;) </div>
+</div><!-- fragment --> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><ul>
+<li><code>void</code> if <code>token</code> is a callback function (object)</li>
+<li><code>std::future&lt;<a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;<a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a>&gt;&gt;</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseFutureToken.html" title="Future completion token type.">UseFutureToken</a></li>
+<li><code>auto(auto&amp;&amp; token)</code> callable for deferred execution if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDeferredToken.html" title="Deferred completion token type.">UseDeferredToken</a></li>
+<li><code>void</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDetachedToken.html" title="Detached completion token type.">UseDetachedToken</a> </li>
+</ul>
+</dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00433">433</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ga3f9d0de3b9e7552a6585078b00ca0586" name="ga3f9d0de3b9e7552a6585078b00ca0586"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3f9d0de3b9e7552a6585078b00ca0586">&#9670;&#160;</a></span>addMethod()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &gt; opcua::services::addMethod </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>connection</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>parentId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>browseName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__AddNodes.html#ga2c4f77963cea649c5ed497c73ee24529">MethodCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1ua_1_1Argument.html">Argument</a> &gt;&#160;</td>
+          <td class="paramname"><em>inputArguments</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1ua_1_1Argument.html">Argument</a> &gt;&#160;</td>
+          <td class="paramname"><em>outputArguments</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1MethodAttributes.html">MethodAttributes</a> &amp;&#160;</td>
+          <td class="paramname"><em>attributes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>referenceType</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add method. </p>
+<p>Callbacks can not be set by clients. Servers can assign callbacks to method nodes afterwards. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> (or <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>) </td></tr>
+    <tr><td class="paramname">parentId</td><td>Parent node </td></tr>
+    <tr><td class="paramname">id</td><td>Requested <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> of the node to add </td></tr>
+    <tr><td class="paramname">browseName</td><td>Browse name </td></tr>
+    <tr><td class="paramname">callback</td><td>Method callback </td></tr>
+    <tr><td class="paramname">inputArguments</td><td>Input arguments </td></tr>
+    <tr><td class="paramname">outputArguments</td><td>Output arguments </td></tr>
+    <tr><td class="paramname">attributes</td><td>Method attributes </td></tr>
+    <tr><td class="paramname">referenceType</td><td>Hierarchical reference type from the parent node to the new node, e.g. ReferenceTypeId::HasComponent </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="method_2server_method_async_8cpp-example.html#a2">method/server_method_async.cpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="ga2a74289fb75d9f667eb29a43322bc038" name="ga2a74289fb75d9f667eb29a43322bc038"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2a74289fb75d9f667eb29a43322bc038">&#9670;&#160;</a></span>addMethodAsync()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionToken &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto opcua::services::addMethodAsync </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
+          <td class="paramname"><em>connection</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>parentId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>browseName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__AddNodes.html#ga2c4f77963cea649c5ed497c73ee24529">MethodCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1ua_1_1Argument.html">Argument</a> &gt;&#160;</td>
+          <td class="paramname"><em>inputArguments</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1ua_1_1Argument.html">Argument</a> &gt;&#160;</td>
+          <td class="paramname"><em>outputArguments</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1MethodAttributes.html">MethodAttributes</a> &amp;&#160;</td>
+          <td class="paramname"><em>attributes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>referenceType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CompletionToken &amp;&amp;&#160;</td>
+          <td class="paramname"><em>token</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add method.   </p>
+<p>Callbacks can not be set by clients. Servers can assign callbacks to method nodes afterwards. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> (or <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>) </td></tr>
+    <tr><td class="paramname">parentId</td><td>Parent node </td></tr>
+    <tr><td class="paramname">id</td><td>Requested <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> of the node to add </td></tr>
+    <tr><td class="paramname">browseName</td><td>Browse name </td></tr>
+    <tr><td class="paramname">callback</td><td>Method callback </td></tr>
+    <tr><td class="paramname">inputArguments</td><td>Input arguments </td></tr>
+    <tr><td class="paramname">outputArguments</td><td>Output arguments </td></tr>
+    <tr><td class="paramname">attributes</td><td>Method attributes </td></tr>
+    <tr><td class="paramname">referenceType</td><td>Hierarchical reference type from the parent node to the new node, e.g. ReferenceTypeId::HasComponent   </td></tr>
+    <tr><td class="paramname">token</td><td>The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be: <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1Result.html">Result&lt;NodeId&gt;</a>&amp;) </div>
+</div><!-- fragment --> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><ul>
+<li><code>void</code> if <code>token</code> is a callback function (object)</li>
+<li><code>std::future&lt;<a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;<a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a>&gt;&gt;</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseFutureToken.html" title="Future completion token type.">UseFutureToken</a></li>
+<li><code>auto(auto&amp;&amp; token)</code> callable for deferred execution if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDeferredToken.html" title="Deferred completion token type.">UseDeferredToken</a></li>
+<li><code>void</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDetachedToken.html" title="Detached completion token type.">UseDetachedToken</a> </li>
+</ul>
+</dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00639">639</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
 
 </div>
 </div>
@@ -394,7 +829,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00825">opcua::services::addDataType()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00351">opcua::services::addObject()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00645">opcua::services::addObjectType()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00766">opcua::services::addReferenceType()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00464">opcua::services::addVariable()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00705">opcua::services::addVariableType()</a>, and <a class="el" href="nodemanagement_8hpp_source.html#l00884">opcua::services::addView()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00856">opcua::services::addDataType()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00353">opcua::services::addObject()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00676">opcua::services::addObjectType()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00797">opcua::services::addReferenceType()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00466">opcua::services::addVariable()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00736">opcua::services::addVariableType()</a>, and <a class="el" href="nodemanagement_8hpp_source.html#l00915">opcua::services::addView()</a>.</p>
 
 </div>
 </div>
@@ -480,7 +915,6 @@ template&lt;typename CompletionToken &gt; </div>
     <tr><td class="paramname">typeDefinition</td><td><a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> of the type </td></tr>
     <tr><td class="paramname">referenceType</td><td>Hierarchical reference type from the parent node to the new node   </td></tr>
     <tr><td class="paramname">token</td><td>The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be: <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1Result.html">Result&lt;NodeId&gt;</a>&amp;) </div>
-<div class="ttc" id="aclassopcua_1_1Result_html"><div class="ttname"><a href="classopcua_1_1Result.html">opcua::Result</a></div><div class="ttdoc">The template class Result encapsulates a StatusCode and optionally a value.</div><div class="ttdef"><b>Definition</b> <a href="result_8hpp_source.html#l00053">result.hpp:53</a></div></div>
 </div><!-- fragment --> </td></tr>
   </table>
   </dd>
@@ -493,9 +927,113 @@ template&lt;typename CompletionToken &gt; </div>
 </ul>
 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00092">92</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00094">94</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00851">opcua::services::addDataTypeAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00608">opcua::services::addMethodAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00378">opcua::services::addObjectAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00671">opcua::services::addObjectTypeAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00792">opcua::services::addReferenceTypeAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00491">opcua::services::addVariableAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00732">opcua::services::addVariableTypeAsync()</a>, and <a class="el" href="nodemanagement_8hpp_source.html#l00910">opcua::services::addViewAsync()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00882">opcua::services::addDataTypeAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00639">opcua::services::addMethodAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00380">opcua::services::addObjectAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00702">opcua::services::addObjectTypeAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00823">opcua::services::addReferenceTypeAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00493">opcua::services::addVariableAsync()</a>, <a class="el" href="nodemanagement_8hpp_source.html#l00763">opcua::services::addVariableTypeAsync()</a>, and <a class="el" href="nodemanagement_8hpp_source.html#l00941">opcua::services::addViewAsync()</a>.</p>
+
+</div>
+</div>
+<a id="gacf95c91c699ec111eb35330d183f9733" name="gacf95c91c699ec111eb35330d183f9733"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gacf95c91c699ec111eb35330d183f9733">&#9670;&#160;</a></span>addNodes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1ua_1_1AddNodesResponse.html">AddNodesResponse</a> opcua::services::addNodes </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
+          <td class="paramname"><em>connection</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1AddNodesRequest.html">AddNodesRequest</a> &amp;&#160;</td>
+          <td class="paramname"><em>request</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add one or more nodes (client only). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
+    <tr><td class="paramname">request</td><td>Add nodes request </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga401bfe2131943c409a4381929c0bdee2" name="ga401bfe2131943c409a4381929c0bdee2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga401bfe2131943c409a4381929c0bdee2">&#9670;&#160;</a></span>addNodesAsync()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionToken &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto opcua::services::addNodesAsync </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
+          <td class="paramname"><em>connection</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1AddNodesRequest.html">AddNodesRequest</a> &amp;&#160;</td>
+          <td class="paramname"><em>request</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CompletionToken &amp;&amp;&#160;</td>
+          <td class="paramname"><em>token</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add one or more nodes (client only).   </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
+    <tr><td class="paramname">request</td><td>Add nodes request   </td></tr>
+    <tr><td class="paramname">token</td><td>The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be: <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1ua_1_1AddNodesResponse.html">AddNodesResponse</a>&amp;) </div>
+<div class="ttc" id="aclassopcua_1_1ua_1_1AddNodesResponse_html"><div class="ttname"><a href="classopcua_1_1ua_1_1AddNodesResponse.html">opcua::AddNodesResponse</a></div><div class="ttdoc">UA_AddNodesResponse wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l00780">types.hpp:780</a></div></div>
+</div><!-- fragment --> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><ul>
+<li><code>void</code> if <code>token</code> is a callback function (object)</li>
+<li><code>std::future&lt;<a class="el" href="classopcua_1_1ua_1_1AddNodesResponse.html" title="UA_AddNodesResponse wrapper class.">AddNodesResponse</a>&gt;</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseFutureToken.html" title="Future completion token type.">UseFutureToken</a></li>
+<li><code>auto(auto&amp;&amp; token)</code> callable for deferred execution if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDeferredToken.html" title="Deferred completion token type.">UseDeferredToken</a></li>
+<li><code>void</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDetachedToken.html" title="Detached completion token type.">UseDetachedToken</a> </li>
+</ul>
+</dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00059">59</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00094">opcua::services::addNodeAsync()</a>.</p>
 
 </div>
 </div>
@@ -579,9 +1117,9 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00351">351</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00353">353</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00412">opcua::services::addFolder()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00414">opcua::services::addFolder()</a>.</p>
 
 </div>
 </div>
@@ -672,14 +1210,14 @@ template&lt;typename CompletionToken &gt; </div>
 </ul>
 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00378">378</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00380">380</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00431">opcua::services::addFolderAsync()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00433">opcua::services::addFolderAsync()</a>.</p>
 
 </div>
 </div>
-<a id="ga55b7b3cb0a3064fb4017663acc5c8406" name="ga55b7b3cb0a3064fb4017663acc5c8406"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga55b7b3cb0a3064fb4017663acc5c8406">&#9670;&#160;</a></span>addFolder()</h2>
+<a id="ga3477aabfcd69d2c2578578159fc41315" name="ga3477aabfcd69d2c2578578159fc41315"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3477aabfcd69d2c2578578159fc41315">&#9670;&#160;</a></span>addObjectType()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -690,7 +1228,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &gt; opcua::services::addFolder </td>
+          <td class="memname"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &gt; opcua::services::addObjectType </td>
           <td>(</td>
           <td class="paramtype">T &amp;&#160;</td>
           <td class="paramname"><em>connection</em>, </td>
@@ -716,7 +1254,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1ObjectAttributes.html">ObjectAttributes</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1ObjectTypeAttributes.html">ObjectTypeAttributes</a> &amp;&#160;</td>
           <td class="paramname"><em>attributes</em>, </td>
         </tr>
         <tr>
@@ -738,25 +1276,25 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Add folder. </p>
+<p>Add object type. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> (or <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>) </td></tr>
     <tr><td class="paramname">parentId</td><td>Parent node </td></tr>
     <tr><td class="paramname">id</td><td>Requested <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> of the node to add </td></tr>
     <tr><td class="paramname">browseName</td><td>Browse name </td></tr>
-    <tr><td class="paramname">attributes</td><td>Object attributes </td></tr>
-    <tr><td class="paramname">referenceType</td><td>Hierarchical reference type from the parent node to the new node, e.g. ReferenceTypeId::HasComponent </td></tr>
+    <tr><td class="paramname">attributes</td><td>Object type attributes </td></tr>
+    <tr><td class="paramname">referenceType</td><td>Hierarchical reference type from the parent node to the new node, e.g. ReferenceTypeId::HasSubtype </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00412">412</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00676">676</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ga45f0d4196f94981b4e986d3a38e98525" name="ga45f0d4196f94981b4e986d3a38e98525"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga45f0d4196f94981b4e986d3a38e98525">&#9670;&#160;</a></span>addFolderAsync()</h2>
+<a id="ga0be223c925047ea5087481202369b649" name="ga0be223c925047ea5087481202369b649"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0be223c925047ea5087481202369b649">&#9670;&#160;</a></span>addObjectTypeAsync()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -764,7 +1302,7 @@ template&lt;typename T &gt; </div>
 template&lt;typename CompletionToken &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">auto opcua::services::addFolderAsync </td>
+          <td class="memname">auto opcua::services::addObjectTypeAsync </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
           <td class="paramname"><em>connection</em>, </td>
@@ -790,7 +1328,7 @@ template&lt;typename CompletionToken &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1ObjectAttributes.html">ObjectAttributes</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1ObjectTypeAttributes.html">ObjectTypeAttributes</a> &amp;&#160;</td>
           <td class="paramname"><em>attributes</em>, </td>
         </tr>
         <tr>
@@ -813,15 +1351,15 @@ template&lt;typename CompletionToken &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Add folder.   </p>
+<p>Add object type.   </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> (or <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>) </td></tr>
     <tr><td class="paramname">parentId</td><td>Parent node </td></tr>
     <tr><td class="paramname">id</td><td>Requested <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> of the node to add </td></tr>
     <tr><td class="paramname">browseName</td><td>Browse name </td></tr>
-    <tr><td class="paramname">attributes</td><td>Object attributes </td></tr>
-    <tr><td class="paramname">referenceType</td><td>Hierarchical reference type from the parent node to the new node, e.g. ReferenceTypeId::HasComponent   </td></tr>
+    <tr><td class="paramname">attributes</td><td>Object type attributes </td></tr>
+    <tr><td class="paramname">referenceType</td><td>Hierarchical reference type from the parent node to the new node, e.g. ReferenceTypeId::HasSubtype   </td></tr>
     <tr><td class="paramname">token</td><td>The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be: <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1Result.html">Result&lt;NodeId&gt;</a>&amp;) </div>
 </div><!-- fragment --> </td></tr>
   </table>
@@ -835,7 +1373,315 @@ template&lt;typename CompletionToken &gt; </div>
 </ul>
 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00431">431</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00702">702</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
+
+</div>
+</div>
+<a id="gabde92e8ddf3e551650b3efac6c16eaac" name="gabde92e8ddf3e551650b3efac6c16eaac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabde92e8ddf3e551650b3efac6c16eaac">&#9670;&#160;</a></span>addProperty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &gt; opcua::services::addProperty </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>connection</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>parentId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>browseName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1VariableAttributes.html">VariableAttributes</a> &amp;&#160;</td>
+          <td class="paramname"><em>attributes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add property. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> (or <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>) </td></tr>
+    <tr><td class="paramname">parentId</td><td>Parent node </td></tr>
+    <tr><td class="paramname">id</td><td>Requested <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> of the node to add </td></tr>
+    <tr><td class="paramname">browseName</td><td>Browse name </td></tr>
+    <tr><td class="paramname">attributes</td><td>Property attributes </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00525">525</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ga11c606bc88583229e562d94b5822d05a" name="ga11c606bc88583229e562d94b5822d05a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga11c606bc88583229e562d94b5822d05a">&#9670;&#160;</a></span>addPropertyAsync()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionToken &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto opcua::services::addPropertyAsync </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
+          <td class="paramname"><em>connection</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>parentId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>browseName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1VariableAttributes.html">VariableAttributes</a> &amp;&#160;</td>
+          <td class="paramname"><em>attributes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CompletionToken &amp;&amp;&#160;</td>
+          <td class="paramname"><em>token</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add property.   </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> (or <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>) </td></tr>
+    <tr><td class="paramname">parentId</td><td>Parent node </td></tr>
+    <tr><td class="paramname">id</td><td>Requested <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> of the node to add </td></tr>
+    <tr><td class="paramname">browseName</td><td>Browse name </td></tr>
+    <tr><td class="paramname">attributes</td><td>Property attributes   </td></tr>
+    <tr><td class="paramname">token</td><td>The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be: <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1Result.html">Result&lt;NodeId&gt;</a>&amp;) </div>
+</div><!-- fragment --> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><ul>
+<li><code>void</code> if <code>token</code> is a callback function (object)</li>
+<li><code>std::future&lt;<a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;<a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a>&gt;&gt;</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseFutureToken.html" title="Future completion token type.">UseFutureToken</a></li>
+<li><code>auto(auto&amp;&amp; token)</code> callable for deferred execution if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDeferredToken.html" title="Deferred completion token type.">UseDeferredToken</a></li>
+<li><code>void</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDetachedToken.html" title="Detached completion token type.">UseDetachedToken</a> </li>
+</ul>
+</dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00549">549</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ga9aa3bf2d77f1c17faab60a7f074b9a3f" name="ga9aa3bf2d77f1c17faab60a7f074b9a3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9aa3bf2d77f1c17faab60a7f074b9a3f">&#9670;&#160;</a></span>addReferenceType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &gt; opcua::services::addReferenceType </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>connection</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>parentId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>browseName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1ReferenceTypeAttributes.html">ReferenceTypeAttributes</a> &amp;&#160;</td>
+          <td class="paramname"><em>attributes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>referenceType</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add reference type. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> (or <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>) </td></tr>
+    <tr><td class="paramname">parentId</td><td>Parent node </td></tr>
+    <tr><td class="paramname">id</td><td>Requested <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> of the node to add </td></tr>
+    <tr><td class="paramname">browseName</td><td>Browse name </td></tr>
+    <tr><td class="paramname">attributes</td><td>Reference type attributes </td></tr>
+    <tr><td class="paramname">referenceType</td><td>Hierarchical reference type from the parent node to the new node, e.g. ReferenceTypeId::HasSubtype </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00797">797</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ga7fb51aee9b95602f14626ceefaf3f457" name="ga7fb51aee9b95602f14626ceefaf3f457"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7fb51aee9b95602f14626ceefaf3f457">&#9670;&#160;</a></span>addReferenceTypeAsync()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionToken &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto opcua::services::addReferenceTypeAsync </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
+          <td class="paramname"><em>connection</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>parentId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>browseName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1ReferenceTypeAttributes.html">ReferenceTypeAttributes</a> &amp;&#160;</td>
+          <td class="paramname"><em>attributes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>referenceType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CompletionToken &amp;&amp;&#160;</td>
+          <td class="paramname"><em>token</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add reference type.   </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> (or <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>) </td></tr>
+    <tr><td class="paramname">parentId</td><td>Parent node </td></tr>
+    <tr><td class="paramname">id</td><td>Requested <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> of the node to add </td></tr>
+    <tr><td class="paramname">browseName</td><td>Browse name </td></tr>
+    <tr><td class="paramname">attributes</td><td>Reference type attributes </td></tr>
+    <tr><td class="paramname">referenceType</td><td>Hierarchical reference type from the parent node to the new node, e.g. ReferenceTypeId::HasSubtype   </td></tr>
+    <tr><td class="paramname">token</td><td>The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be: <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1Result.html">Result&lt;NodeId&gt;</a>&amp;) </div>
+</div><!-- fragment --> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><ul>
+<li><code>void</code> if <code>token</code> is a callback function (object)</li>
+<li><code>std::future&lt;<a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;<a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a>&gt;&gt;</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseFutureToken.html" title="Future completion token type.">UseFutureToken</a></li>
+<li><code>auto(auto&amp;&amp; token)</code> callable for deferred execution if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDeferredToken.html" title="Deferred completion token type.">UseDeferredToken</a></li>
+<li><code>void</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDetachedToken.html" title="Detached completion token type.">UseDetachedToken</a> </li>
+</ul>
+</dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00823">823</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
 
 </div>
 </div>
@@ -921,9 +1767,9 @@ template&lt;typename T &gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_datasource_8cpp-example.html#a16">server_datasource.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00464">464</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00466">466</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00523">opcua::services::addProperty()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00525">opcua::services::addProperty()</a>.</p>
 
 </div>
 </div>
@@ -1014,518 +1860,9 @@ template&lt;typename CompletionToken &gt; </div>
 </ul>
 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00491">491</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00493">493</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00547">opcua::services::addPropertyAsync()</a>.</p>
-
-</div>
-</div>
-<a id="gabde92e8ddf3e551650b3efac6c16eaac" name="gabde92e8ddf3e551650b3efac6c16eaac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gabde92e8ddf3e551650b3efac6c16eaac">&#9670;&#160;</a></span>addProperty()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &gt; opcua::services::addProperty </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>connection</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>parentId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>browseName</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1VariableAttributes.html">VariableAttributes</a> &amp;&#160;</td>
-          <td class="paramname"><em>attributes</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Add property. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> (or <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>) </td></tr>
-    <tr><td class="paramname">parentId</td><td>Parent node </td></tr>
-    <tr><td class="paramname">id</td><td>Requested <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> of the node to add </td></tr>
-    <tr><td class="paramname">browseName</td><td>Browse name </td></tr>
-    <tr><td class="paramname">attributes</td><td>Property attributes </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00523">523</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ga11c606bc88583229e562d94b5822d05a" name="ga11c606bc88583229e562d94b5822d05a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga11c606bc88583229e562d94b5822d05a">&#9670;&#160;</a></span>addPropertyAsync()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename CompletionToken &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">auto opcua::services::addPropertyAsync </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
-          <td class="paramname"><em>connection</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>parentId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>browseName</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1VariableAttributes.html">VariableAttributes</a> &amp;&#160;</td>
-          <td class="paramname"><em>attributes</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">CompletionToken &amp;&amp;&#160;</td>
-          <td class="paramname"><em>token</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Add property.   </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> (or <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>) </td></tr>
-    <tr><td class="paramname">parentId</td><td>Parent node </td></tr>
-    <tr><td class="paramname">id</td><td>Requested <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> of the node to add </td></tr>
-    <tr><td class="paramname">browseName</td><td>Browse name </td></tr>
-    <tr><td class="paramname">attributes</td><td>Property attributes   </td></tr>
-    <tr><td class="paramname">token</td><td>The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be: <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1Result.html">Result&lt;NodeId&gt;</a>&amp;) </div>
-</div><!-- fragment --> </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd><ul>
-<li><code>void</code> if <code>token</code> is a callback function (object)</li>
-<li><code>std::future&lt;<a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;<a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a>&gt;&gt;</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseFutureToken.html" title="Future completion token type.">UseFutureToken</a></li>
-<li><code>auto(auto&amp;&amp; token)</code> callable for deferred execution if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDeferredToken.html" title="Deferred completion token type.">UseDeferredToken</a></li>
-<li><code>void</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDetachedToken.html" title="Detached completion token type.">UseDetachedToken</a> </li>
-</ul>
-</dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00547">547</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ga3f9d0de3b9e7552a6585078b00ca0586" name="ga3f9d0de3b9e7552a6585078b00ca0586"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga3f9d0de3b9e7552a6585078b00ca0586">&#9670;&#160;</a></span>addMethod()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &gt; opcua::services::addMethod </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>connection</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>parentId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>browseName</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__AddNodes.html#ga0dce1b14793b144bbafe4124c77dde5e">MethodCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1ua_1_1Argument.html">Argument</a> &gt;&#160;</td>
-          <td class="paramname"><em>inputArguments</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1ua_1_1Argument.html">Argument</a> &gt;&#160;</td>
-          <td class="paramname"><em>outputArguments</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1MethodAttributes.html">MethodAttributes</a> &amp;&#160;</td>
-          <td class="paramname"><em>attributes</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>referenceType</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Add method. </p>
-<p>Callbacks can not be set by clients. Servers can assign callbacks to method nodes afterwards. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> (or <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>) </td></tr>
-    <tr><td class="paramname">parentId</td><td>Parent node </td></tr>
-    <tr><td class="paramname">id</td><td>Requested <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> of the node to add </td></tr>
-    <tr><td class="paramname">browseName</td><td>Browse name </td></tr>
-    <tr><td class="paramname">callback</td><td>Method callback </td></tr>
-    <tr><td class="paramname">inputArguments</td><td>Input arguments </td></tr>
-    <tr><td class="paramname">outputArguments</td><td>Output arguments </td></tr>
-    <tr><td class="paramname">attributes</td><td>Method attributes </td></tr>
-    <tr><td class="paramname">referenceType</td><td>Hierarchical reference type from the parent node to the new node, e.g. ReferenceTypeId::HasComponent </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ga2a74289fb75d9f667eb29a43322bc038" name="ga2a74289fb75d9f667eb29a43322bc038"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga2a74289fb75d9f667eb29a43322bc038">&#9670;&#160;</a></span>addMethodAsync()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename CompletionToken &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">auto opcua::services::addMethodAsync </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
-          <td class="paramname"><em>connection</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>parentId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>browseName</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__AddNodes.html#ga0dce1b14793b144bbafe4124c77dde5e">MethodCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1ua_1_1Argument.html">Argument</a> &gt;&#160;</td>
-          <td class="paramname"><em>inputArguments</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1ua_1_1Argument.html">Argument</a> &gt;&#160;</td>
-          <td class="paramname"><em>outputArguments</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1MethodAttributes.html">MethodAttributes</a> &amp;&#160;</td>
-          <td class="paramname"><em>attributes</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>referenceType</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">CompletionToken &amp;&amp;&#160;</td>
-          <td class="paramname"><em>token</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Add method.   </p>
-<p>Callbacks can not be set by clients. Servers can assign callbacks to method nodes afterwards. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> (or <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>) </td></tr>
-    <tr><td class="paramname">parentId</td><td>Parent node </td></tr>
-    <tr><td class="paramname">id</td><td>Requested <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> of the node to add </td></tr>
-    <tr><td class="paramname">browseName</td><td>Browse name </td></tr>
-    <tr><td class="paramname">callback</td><td>Method callback </td></tr>
-    <tr><td class="paramname">inputArguments</td><td>Input arguments </td></tr>
-    <tr><td class="paramname">outputArguments</td><td>Output arguments </td></tr>
-    <tr><td class="paramname">attributes</td><td>Method attributes </td></tr>
-    <tr><td class="paramname">referenceType</td><td>Hierarchical reference type from the parent node to the new node, e.g. ReferenceTypeId::HasComponent   </td></tr>
-    <tr><td class="paramname">token</td><td>The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be: <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1Result.html">Result&lt;NodeId&gt;</a>&amp;) </div>
-</div><!-- fragment --> </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd><ul>
-<li><code>void</code> if <code>token</code> is a callback function (object)</li>
-<li><code>std::future&lt;<a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;<a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a>&gt;&gt;</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseFutureToken.html" title="Future completion token type.">UseFutureToken</a></li>
-<li><code>auto(auto&amp;&amp; token)</code> callable for deferred execution if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDeferredToken.html" title="Deferred completion token type.">UseDeferredToken</a></li>
-<li><code>void</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDetachedToken.html" title="Detached completion token type.">UseDetachedToken</a> </li>
-</ul>
-</dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00608">608</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ga3477aabfcd69d2c2578578159fc41315" name="ga3477aabfcd69d2c2578578159fc41315"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga3477aabfcd69d2c2578578159fc41315">&#9670;&#160;</a></span>addObjectType()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &gt; opcua::services::addObjectType </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>connection</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>parentId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>browseName</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1ObjectTypeAttributes.html">ObjectTypeAttributes</a> &amp;&#160;</td>
-          <td class="paramname"><em>attributes</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>referenceType</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Add object type. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> (or <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>) </td></tr>
-    <tr><td class="paramname">parentId</td><td>Parent node </td></tr>
-    <tr><td class="paramname">id</td><td>Requested <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> of the node to add </td></tr>
-    <tr><td class="paramname">browseName</td><td>Browse name </td></tr>
-    <tr><td class="paramname">attributes</td><td>Object type attributes </td></tr>
-    <tr><td class="paramname">referenceType</td><td>Hierarchical reference type from the parent node to the new node, e.g. ReferenceTypeId::HasSubtype </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00645">645</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ga0be223c925047ea5087481202369b649" name="ga0be223c925047ea5087481202369b649"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga0be223c925047ea5087481202369b649">&#9670;&#160;</a></span>addObjectTypeAsync()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename CompletionToken &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">auto opcua::services::addObjectTypeAsync </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
-          <td class="paramname"><em>connection</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>parentId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>browseName</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1ObjectTypeAttributes.html">ObjectTypeAttributes</a> &amp;&#160;</td>
-          <td class="paramname"><em>attributes</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>referenceType</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">CompletionToken &amp;&amp;&#160;</td>
-          <td class="paramname"><em>token</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Add object type.   </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> (or <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>) </td></tr>
-    <tr><td class="paramname">parentId</td><td>Parent node </td></tr>
-    <tr><td class="paramname">id</td><td>Requested <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> of the node to add </td></tr>
-    <tr><td class="paramname">browseName</td><td>Browse name </td></tr>
-    <tr><td class="paramname">attributes</td><td>Object type attributes </td></tr>
-    <tr><td class="paramname">referenceType</td><td>Hierarchical reference type from the parent node to the new node, e.g. ReferenceTypeId::HasSubtype   </td></tr>
-    <tr><td class="paramname">token</td><td>The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be: <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1Result.html">Result&lt;NodeId&gt;</a>&amp;) </div>
-</div><!-- fragment --> </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd><ul>
-<li><code>void</code> if <code>token</code> is a callback function (object)</li>
-<li><code>std::future&lt;<a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;<a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a>&gt;&gt;</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseFutureToken.html" title="Future completion token type.">UseFutureToken</a></li>
-<li><code>auto(auto&amp;&amp; token)</code> callable for deferred execution if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDeferredToken.html" title="Deferred completion token type.">UseDeferredToken</a></li>
-<li><code>void</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDetachedToken.html" title="Detached completion token type.">UseDetachedToken</a> </li>
-</ul>
-</dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00671">671</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
+<p class="reference">Referenced by <a class="el" href="nodemanagement_8hpp_source.html#l00549">opcua::services::addPropertyAsync()</a>.</p>
 
 </div>
 </div>
@@ -1609,7 +1946,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00705">705</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00736">736</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
 
 </div>
 </div>
@@ -1700,329 +2037,7 @@ template&lt;typename CompletionToken &gt; </div>
 </ul>
 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00732">732</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ga9aa3bf2d77f1c17faab60a7f074b9a3f" name="ga9aa3bf2d77f1c17faab60a7f074b9a3f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga9aa3bf2d77f1c17faab60a7f074b9a3f">&#9670;&#160;</a></span>addReferenceType()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &gt; opcua::services::addReferenceType </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>connection</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>parentId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>browseName</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1ReferenceTypeAttributes.html">ReferenceTypeAttributes</a> &amp;&#160;</td>
-          <td class="paramname"><em>attributes</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>referenceType</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Add reference type. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> (or <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>) </td></tr>
-    <tr><td class="paramname">parentId</td><td>Parent node </td></tr>
-    <tr><td class="paramname">id</td><td>Requested <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> of the node to add </td></tr>
-    <tr><td class="paramname">browseName</td><td>Browse name </td></tr>
-    <tr><td class="paramname">attributes</td><td>Reference type attributes </td></tr>
-    <tr><td class="paramname">referenceType</td><td>Hierarchical reference type from the parent node to the new node, e.g. ReferenceTypeId::HasSubtype </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00766">766</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ga7fb51aee9b95602f14626ceefaf3f457" name="ga7fb51aee9b95602f14626ceefaf3f457"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga7fb51aee9b95602f14626ceefaf3f457">&#9670;&#160;</a></span>addReferenceTypeAsync()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename CompletionToken &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">auto opcua::services::addReferenceTypeAsync </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
-          <td class="paramname"><em>connection</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>parentId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>browseName</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1ReferenceTypeAttributes.html">ReferenceTypeAttributes</a> &amp;&#160;</td>
-          <td class="paramname"><em>attributes</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>referenceType</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">CompletionToken &amp;&amp;&#160;</td>
-          <td class="paramname"><em>token</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Add reference type.   </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> (or <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>) </td></tr>
-    <tr><td class="paramname">parentId</td><td>Parent node </td></tr>
-    <tr><td class="paramname">id</td><td>Requested <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> of the node to add </td></tr>
-    <tr><td class="paramname">browseName</td><td>Browse name </td></tr>
-    <tr><td class="paramname">attributes</td><td>Reference type attributes </td></tr>
-    <tr><td class="paramname">referenceType</td><td>Hierarchical reference type from the parent node to the new node, e.g. ReferenceTypeId::HasSubtype   </td></tr>
-    <tr><td class="paramname">token</td><td>The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be: <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1Result.html">Result&lt;NodeId&gt;</a>&amp;) </div>
-</div><!-- fragment --> </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd><ul>
-<li><code>void</code> if <code>token</code> is a callback function (object)</li>
-<li><code>std::future&lt;<a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;<a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a>&gt;&gt;</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseFutureToken.html" title="Future completion token type.">UseFutureToken</a></li>
-<li><code>auto(auto&amp;&amp; token)</code> callable for deferred execution if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDeferredToken.html" title="Deferred completion token type.">UseDeferredToken</a></li>
-<li><code>void</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDetachedToken.html" title="Detached completion token type.">UseDetachedToken</a> </li>
-</ul>
-</dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00792">792</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ga566f4d11f933995f00d845bd3a50a99b" name="ga566f4d11f933995f00d845bd3a50a99b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga566f4d11f933995f00d845bd3a50a99b">&#9670;&#160;</a></span>addDataType()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &gt; opcua::services::addDataType </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>connection</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>parentId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>browseName</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1DataTypeAttributes.html">DataTypeAttributes</a> &amp;&#160;</td>
-          <td class="paramname"><em>attributes</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>referenceType</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Add data type. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> (or <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>) </td></tr>
-    <tr><td class="paramname">parentId</td><td>Parent node </td></tr>
-    <tr><td class="paramname">id</td><td>Requested <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> of the node to add </td></tr>
-    <tr><td class="paramname">browseName</td><td>Browse name </td></tr>
-    <tr><td class="paramname">attributes</td><td>Data type attributes </td></tr>
-    <tr><td class="paramname">referenceType</td><td>Hierarchical reference type from the parent node to the new node, e.g. ReferenceTypeId::HasSubtype </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00825">825</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ga8bd16c0a0a21dd9e1e93f58231926f5d" name="ga8bd16c0a0a21dd9e1e93f58231926f5d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga8bd16c0a0a21dd9e1e93f58231926f5d">&#9670;&#160;</a></span>addDataTypeAsync()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename CompletionToken &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">auto opcua::services::addDataTypeAsync </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
-          <td class="paramname"><em>connection</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>parentId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>browseName</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1DataTypeAttributes.html">DataTypeAttributes</a> &amp;&#160;</td>
-          <td class="paramname"><em>attributes</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>referenceType</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">CompletionToken &amp;&amp;&#160;</td>
-          <td class="paramname"><em>token</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Add data type.   </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> (or <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>) </td></tr>
-    <tr><td class="paramname">parentId</td><td>Parent node </td></tr>
-    <tr><td class="paramname">id</td><td>Requested <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> of the node to add </td></tr>
-    <tr><td class="paramname">browseName</td><td>Browse name </td></tr>
-    <tr><td class="paramname">attributes</td><td>Data type attributes </td></tr>
-    <tr><td class="paramname">referenceType</td><td>Hierarchical reference type from the parent node to the new node, e.g. ReferenceTypeId::HasSubtype   </td></tr>
-    <tr><td class="paramname">token</td><td>The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be: <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1Result.html">Result&lt;NodeId&gt;</a>&amp;) </div>
-</div><!-- fragment --> </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd><ul>
-<li><code>void</code> if <code>token</code> is a callback function (object)</li>
-<li><code>std::future&lt;<a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;<a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a>&gt;&gt;</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseFutureToken.html" title="Future completion token type.">UseFutureToken</a></li>
-<li><code>auto(auto&amp;&amp; token)</code> callable for deferred execution if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDeferredToken.html" title="Deferred completion token type.">UseDeferredToken</a></li>
-<li><code>void</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDetachedToken.html" title="Detached completion token type.">UseDetachedToken</a> </li>
-</ul>
-</dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00851">851</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00763">763</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
 
 </div>
 </div>
@@ -2099,7 +2114,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00884">884</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00915">915</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
 
 </div>
 </div>
@@ -2183,7 +2198,7 @@ template&lt;typename CompletionToken &gt; </div>
 </ul>
 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00910">910</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodemanagement_8hpp_source.html#l00941">941</a> of file <a class="el" href="nodemanagement_8hpp_source.html">nodemanagement.hpp</a>.</p>
 
 </div>
 </div>

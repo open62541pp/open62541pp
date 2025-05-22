@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -95,22 +95,16 @@ struct opcua::TypeConverter&lt; T, Enable &gt;</div><p>Type conversion from and 
 <p>Native types can be both <code>UA_*</code> types and wrapper classes (like <code><a class="elRef" target="_blank" href="open62541/structUA__Guid.html">UA_Guid</a></code> and <code><a class="el" href="classopcua_1_1Guid.html" title="UA_Guid wrapper class.">Guid</a></code>). The <code><a class="el" href="structopcua_1_1TypeConverter.html" title="Type conversion from and to native types.">TypeConverter</a></code> is mainly used within the <code><a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a></code> class to set/get non-native types.</p>
 <p>Template specializations can be added for conversions of arbitrary types: </p><div class="fragment"><div class="line">namespace ::opcua {</div>
 <div class="line"><span class="keyword">template</span> &lt;&gt;</div>
-<div class="line"><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1TypeConverter.html">TypeConverter</a>&lt;MyCustomType&gt; {</div>
-<div class="line">    <span class="keyword">using </span>NativeType = <a class="code hl_class" href="classopcua_1_1Guid.html">Guid</a>;</div>
-<div class="line"> </div>
-<div class="line">    <span class="keyword">static</span> <span class="keywordtype">void</span> fromNative(<span class="keyword">const</span> NativeType&amp; src, MyCustomType&amp; dst) {</div>
-<div class="line">        <span class="comment">// ...</span></div>
-<div class="line">    }</div>
-<div class="line"> </div>
-<div class="line">    <span class="keyword">static</span> <span class="keywordtype">void</span> toNative(<span class="keyword">const</span> MyCustomType&amp; src, NativeType&amp; dst) {</div>
-<div class="line">        <span class="comment">// ...</span></div>
-<div class="line">    }</div>
+<div class="line"><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1TypeConverter.html">TypeConverter</a>&lt;MyGuid&gt; {</div>
+<div class="line">    <span class="keyword">using </span>NativeType = <a class="code hl_structRef" target="_blank" href="open62541/structUA__Guid.html">UA_Guid</a>;</div>
+<div class="line">    [[nodiscard]] <span class="keyword">static</span> MyGuid fromNative(<span class="keyword">const</span> <a class="code hl_structRef" target="_blank" href="open62541/structUA__Guid.html">UA_Guid</a>&amp; src) { ... }</div>
+<div class="line">    [[nodiscard]] <span class="keyword">static</span> <a class="code hl_structRef" target="_blank" href="open62541/structUA__Guid.html">UA_Guid</a> toNative(<span class="keyword">const</span> MyGuid&amp; src) { ... }</div>
 <div class="line">};</div>
 <div class="line">}</div>
-<div class="ttc" id="aclassopcua_1_1Guid_html"><div class="ttname"><a href="classopcua_1_1Guid.html">opcua::Guid</a></div><div class="ttdoc">UA_Guid wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00491">types.hpp:491</a></div></div>
-<div class="ttc" id="astructopcua_1_1TypeConverter_html"><div class="ttname"><a href="structopcua_1_1TypeConverter.html">opcua::TypeConverter</a></div><div class="ttdoc">Type conversion from and to native types.</div><div class="ttdef"><b>Definition</b> <a href="typeconverter_8hpp_source.html#l00032">typeconverter.hpp:32</a></div></div>
+<div class="ttc" id="astructUA__Guid_html"><div class="ttname"><a href="open62541/structUA__Guid.html">UA_Guid</a></div></div>
+<div class="ttc" id="astructopcua_1_1TypeConverter_html"><div class="ttname"><a href="structopcua_1_1TypeConverter.html">opcua::TypeConverter</a></div><div class="ttdoc">Type conversion from and to native types.</div><div class="ttdef"><b>Definition</b> <a href="typeconverter_8hpp_source.html#l00026">typeconverter.hpp:26</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="typeconverter_8hpp_source.html#l00032">32</a> of file <a class="el" href="typeconverter_8hpp_source.html">typeconverter.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="typeconverter_8hpp_source.html#l00026">26</a> of file <a class="el" href="typeconverter_8hpp_source.html">typeconverter.hpp</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

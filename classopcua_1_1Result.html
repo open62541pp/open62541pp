@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -126,8 +126,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a94f59987874ed2fa1b2078d2f4f29cb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8dd22a9c3980cecc36f7d01cd3b656e" id="r_af8dd22a9c3980cecc36f7d01cd3b656e"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Result.html#af8dd22a9c3980cecc36f7d01cd3b656e">Result</a> (T &amp;&amp;<a class="el" href="classopcua_1_1Result.html#ad8906b4a4e26406476f3f5f38816a62b">value</a>, <a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a> <a class="el" href="classopcua_1_1Result.html#af8c52372741a4af137d3600d9e9e77e0">code</a>=<a class="elRef" target="_blank" href="open62541/statuscodes_8h.html#a3c68d30bc6f32228aa43be75fdc9d5aa">UA_STATUSCODE_GOOD</a>) noexcept(std::is_nothrow_move_constructible_v&lt; T &gt;)</td></tr>
 <tr class="separator:af8dd22a9c3980cecc36f7d01cd3b656e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3c43b48134cb4288c5d6e29ce9540da" id="r_aa3c43b48134cb4288c5d6e29ce9540da"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Result.html#aa3c43b48134cb4288c5d6e29ce9540da">Result</a> (<a class="el" href="classopcua_1_1BadResult.html">BadResult</a> error) noexcept</td></tr>
-<tr class="separator:aa3c43b48134cb4288c5d6e29ce9540da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79b471843a0396b30976320cd7c5043c" id="r_a79b471843a0396b30976320cd7c5043c"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Result.html#a79b471843a0396b30976320cd7c5043c">Result</a> (const <a class="el" href="classopcua_1_1BadResult.html">BadResult</a> &amp;error) noexcept</td></tr>
+<tr class="separator:a79b471843a0396b30976320cd7c5043c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad355a09e198ccd7e360a110c681fa970" id="r_ad355a09e198ccd7e360a110c681fa970"><td class="memItemLeft" align="right" valign="top">constexpr T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Result.html#ad355a09e198ccd7e360a110c681fa970">operator-&gt;</a> () noexcept</td></tr>
 <tr class="separator:ad355a09e198ccd7e360a110c681fa970"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada802df99831687a672ab03e1d51531c" id="r_ada802df99831687a672ab03e1d51531c"><td class="memItemLeft" align="right" valign="top">constexpr const T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Result.html#ada802df99831687a672ab03e1d51531c">operator-&gt;</a> () const noexcept</td></tr>
@@ -332,8 +332,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="aa3c43b48134cb4288c5d6e29ce9540da" name="aa3c43b48134cb4288c5d6e29ce9540da"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa3c43b48134cb4288c5d6e29ce9540da">&#9670;&#160;</a></span>Result() <span class="overload">[4/4]</span></h2>
+<a id="a79b471843a0396b30976320cd7c5043c" name="a79b471843a0396b30976320cd7c5043c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79b471843a0396b30976320cd7c5043c">&#9670;&#160;</a></span>Result() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -346,7 +346,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="memname">constexpr <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::Result </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1BadResult.html">BadResult</a>&lt; T &gt;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1BadResult.html">BadResult</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>error</em></td><td>)</td>
           <td></td>
         </tr>
@@ -365,673 +365,6 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ad355a09e198ccd7e360a110c681fa970" name="ad355a09e198ccd7e360a110c681fa970"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad355a09e198ccd7e360a110c681fa970">&#9670;&#160;</a></span>operator-&gt;() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr T * <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::operator-&gt; </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>. </p>
-<p>Accessing a <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> without a value leads to undefined behavior. </p>
-
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00099">99</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ada802df99831687a672ab03e1d51531c" name="ada802df99831687a672ab03e1d51531c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ada802df99831687a672ab03e1d51531c">&#9670;&#160;</a></span>operator-&gt;() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const T * <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::operator-&gt; </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>.   </p>
-<p>Accessing a <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> without a value leads to undefined behavior.   </p>
-
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00104">104</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a3fc9a904031bd350b87b0fc046a77040" name="a3fc9a904031bd350b87b0fc046a77040"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3fc9a904031bd350b87b0fc046a77040">&#9670;&#160;</a></span>operator*() <span class="overload">[1/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr T &amp; <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::operator* </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> &amp;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>. </p>
-<p>Accessing a <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> without a value leads to undefined behavior. </p>
-
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00112">112</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a5b3b9c1e15faa188dd466beb622b90ba" name="a5b3b9c1e15faa188dd466beb622b90ba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5b3b9c1e15faa188dd466beb622b90ba">&#9670;&#160;</a></span>operator*() <span class="overload">[2/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const T &amp; <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::operator* </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const &amp;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>.   </p>
-<p>Accessing a <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> without a value leads to undefined behavior.   </p>
-
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00117">117</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a5604e1053d0596d91585539ddd2a577f" name="a5604e1053d0596d91585539ddd2a577f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5604e1053d0596d91585539ddd2a577f">&#9670;&#160;</a></span>operator*() <span class="overload">[3/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr T &amp;&amp; <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::operator* </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> &amp;&amp;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>.   </p>
-<p>Accessing a <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> without a value leads to undefined behavior.   </p>
-
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00122">122</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a8a5859a980e422bc867920f7c0976c2f" name="a8a5859a980e422bc867920f7c0976c2f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8a5859a980e422bc867920f7c0976c2f">&#9670;&#160;</a></span>operator*() <span class="overload">[4/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const T &amp;&amp; <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::operator* </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const &amp;&amp;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>.   </p>
-<p>Accessing a <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> without a value leads to undefined behavior.   </p>
-
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00127">127</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
-
-</div>
-</div>
-<a id="af8c52372741a4af137d3600d9e9e77e0" name="af8c52372741a4af137d3600d9e9e77e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af8c52372741a4af137d3600d9e9e77e0">&#9670;&#160;</a></span>code()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr <a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a> <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::code </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a> of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_async_8cpp-example.html#a5">client_async.cpp</a>.</dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00136">136</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a3ebdc2ba1506eb8de1ab76dbd23dab30" name="a3ebdc2ba1506eb8de1ab76dbd23dab30"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ebdc2ba1506eb8de1ab76dbd23dab30">&#9670;&#160;</a></span>operator bool()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::operator bool </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Check if the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> has a value. </p>
-
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00143">143</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a65122b158d953d915db6946e198f48dd" name="a65122b158d953d915db6946e198f48dd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65122b158d953d915db6946e198f48dd">&#9670;&#160;</a></span>hasValue()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr bool <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::hasValue </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Check if the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> has a value. </p>
-
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00150">150</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ad8906b4a4e26406476f3f5f38816a62b" name="ad8906b4a4e26406476f3f5f38816a62b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad8906b4a4e26406476f3f5f38816a62b">&#9670;&#160;</a></span>value() <span class="overload">[1/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr T &amp; <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::value </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> &amp;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>. </p>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html" title="Exception for bad status codes from open62541 UA_STATUSCODE_*.">BadStatus</a></td><td>If the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> does not have a value (bad <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a>). </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_async_8cpp-example.html#a6">client_async.cpp</a>.</dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00158">158</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a44082b8f795f8b0a93fd7b5c478e78ab" name="a44082b8f795f8b0a93fd7b5c478e78ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a44082b8f795f8b0a93fd7b5c478e78ab">&#9670;&#160;</a></span>value() <span class="overload">[2/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const T &amp; <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::value </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const &amp;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>.   </p>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html" title="Exception for bad status codes from open62541 UA_STATUSCODE_*.">BadStatus</a></td><td>If the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> does not have a value (bad <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a>).   </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00164">164</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a5973e37b20c92cdd2938b1a02bcf3a93" name="a5973e37b20c92cdd2938b1a02bcf3a93"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5973e37b20c92cdd2938b1a02bcf3a93">&#9670;&#160;</a></span>value() <span class="overload">[3/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr T &amp;&amp; <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::value </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> &amp;&amp;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>.   </p>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html" title="Exception for bad status codes from open62541 UA_STATUSCODE_*.">BadStatus</a></td><td>If the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> does not have a value (bad <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a>).   </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00170">170</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a9ee49094be8ea4a9a1f0d77716abda76" name="a9ee49094be8ea4a9a1f0d77716abda76"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9ee49094be8ea4a9a1f0d77716abda76">&#9670;&#160;</a></span>value() <span class="overload">[4/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const T &amp;&amp; <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::value </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const &amp;&amp;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>.   </p>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html" title="Exception for bad status codes from open62541 UA_STATUSCODE_*.">BadStatus</a></td><td>If the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> does not have a value (bad <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a>).   </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00176">176</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a44ab2194ce7b95f6d54396829619d423" name="a44ab2194ce7b95f6d54396829619d423"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a44ab2194ce7b95f6d54396829619d423">&#9670;&#160;</a></span>valueOr() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<div class="memtemplate">
-template&lt;typename U &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr T <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::valueOr </td>
-          <td>(</td>
-          <td class="paramtype">U &amp;&amp;&#160;</td>
-          <td class="paramname"><em>defaultValue</em></td><td>)</td>
-          <td> const &amp;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> or a default value. </p>
-<p>The default value is returned in case of an bad <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a>. </p>
-
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00186">186</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a3aac0c3b71efd5fa880eefd89614f341" name="a3aac0c3b71efd5fa880eefd89614f341"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3aac0c3b71efd5fa880eefd89614f341">&#9670;&#160;</a></span>valueOr() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<div class="memtemplate">
-template&lt;typename U &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr T <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::valueOr </td>
-          <td>(</td>
-          <td class="paramtype">U &amp;&amp;&#160;</td>
-          <td class="paramname"><em>defaultValue</em></td><td>)</td>
-          <td> &amp;&amp;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> or a default value.   </p>
-<p>The default value is returned in case of an bad <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a>.   </p>
-
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00192">192</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a5856d75f69b1137594e79d87bcf7657c" name="a5856d75f69b1137594e79d87bcf7657c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5856d75f69b1137594e79d87bcf7657c">&#9670;&#160;</a></span>transform() <span class="overload">[1/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<div class="memtemplate">
-template&lt;typename F &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::transform </td>
-          <td>(</td>
-          <td class="paramtype">F &amp;&amp;&#160;</td>
-          <td class="paramname"><em>func</em></td><td>)</td>
-          <td> &amp;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Transforms <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;T&gt;</code> to <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;U&gt;</code> using the given value transformation function. </p>
-<p>The function is only applied if the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> has a value. Otherwise <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;U&gt;</code> with the same bad <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a> is returned. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">func</td><td>Callable with the signature <code>U(T&amp;&amp;)</code> </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00203">203</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ab5dc254eb2f60349c21fd6e6ff3ec48a" name="ab5dc254eb2f60349c21fd6e6ff3ec48a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab5dc254eb2f60349c21fd6e6ff3ec48a">&#9670;&#160;</a></span>transform() <span class="overload">[2/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<div class="memtemplate">
-template&lt;typename F &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::transform </td>
-          <td>(</td>
-          <td class="paramtype">F &amp;&amp;&#160;</td>
-          <td class="paramname"><em>func</em></td><td>)</td>
-          <td> const &amp;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Transforms <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;T&gt;</code> to <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;U&gt;</code> using the given value transformation function.   </p>
-<p>The function is only applied if the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> has a value. Otherwise <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;U&gt;</code> with the same bad <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a> is returned. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">func</td><td>Callable with the signature <code>U(T&amp;&amp;)</code>   </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00209">209</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
-
-</div>
-</div>
-<a id="aa2875c9c9905cc693789decf4ff5a39f" name="aa2875c9c9905cc693789decf4ff5a39f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa2875c9c9905cc693789decf4ff5a39f">&#9670;&#160;</a></span>transform() <span class="overload">[3/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<div class="memtemplate">
-template&lt;typename F &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::transform </td>
-          <td>(</td>
-          <td class="paramtype">F &amp;&amp;&#160;</td>
-          <td class="paramname"><em>func</em></td><td>)</td>
-          <td> &amp;&amp;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Transforms <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;T&gt;</code> to <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;U&gt;</code> using the given value transformation function.   </p>
-<p>The function is only applied if the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> has a value. Otherwise <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;U&gt;</code> with the same bad <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a> is returned. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">func</td><td>Callable with the signature <code>U(T&amp;&amp;)</code>   </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00215">215</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a7276e909ef5d04f83f2374c1b8774aea" name="a7276e909ef5d04f83f2374c1b8774aea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7276e909ef5d04f83f2374c1b8774aea">&#9670;&#160;</a></span>transform() <span class="overload">[4/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<div class="memtemplate">
-template&lt;typename F &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::transform </td>
-          <td>(</td>
-          <td class="paramtype">F &amp;&amp;&#160;</td>
-          <td class="paramname"><em>func</em></td><td>)</td>
-          <td> const &amp;&amp;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Transforms <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;T&gt;</code> to <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;U&gt;</code> using the given value transformation function.   </p>
-<p>The function is only applied if the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> has a value. Otherwise <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;U&gt;</code> with the same bad <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a> is returned. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">func</td><td>Callable with the signature <code>U(T&amp;&amp;)</code>   </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00221">221</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
-
-</div>
-</div>
 <a id="ac85696af38e1c6d58565f9d2b5f8b45b" name="ac85696af38e1c6d58565f9d2b5f8b45b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac85696af38e1c6d58565f9d2b5f8b45b">&#9670;&#160;</a></span>andThen() <span class="overload">[1/4]</span></h2>
 
@@ -1072,48 +405,8 @@ template&lt;typename F &gt; </div>
 
 </div>
 </div>
-<a id="abe818a2cf079380571b55782180439ab" name="abe818a2cf079380571b55782180439ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abe818a2cf079380571b55782180439ab">&#9670;&#160;</a></span>andThen() <span class="overload">[2/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<div class="memtemplate">
-template&lt;typename F &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::andThen </td>
-          <td>(</td>
-          <td class="paramtype">F &amp;&amp;&#160;</td>
-          <td class="paramname"><em>func</em></td><td>)</td>
-          <td> const &amp;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Transforms <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;T&gt;</code> to <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;U&gt;</code> using the given function.   </p>
-<p>The function is only applied if the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> has a value. Otherwise <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;U&gt;</code> with the same bad <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a> is returned. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">func</td><td>Callable with the signature <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;U&gt;(T&amp;&amp;)</code> or <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;U&gt;(T&amp;&amp;, <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a>)</code>   </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00238">238</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
-
-</div>
-</div>
 <a id="a6f285b872fce75618ac661ae5d03c6ca" name="a6f285b872fce75618ac661ae5d03c6ca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f285b872fce75618ac661ae5d03c6ca">&#9670;&#160;</a></span>andThen() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f285b872fce75618ac661ae5d03c6ca">&#9670;&#160;</a></span>andThen() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1149,6 +442,46 @@ template&lt;typename F &gt; </div>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00244">244</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+
+</div>
+</div>
+<a id="abe818a2cf079380571b55782180439ab" name="abe818a2cf079380571b55782180439ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe818a2cf079380571b55782180439ab">&#9670;&#160;</a></span>andThen() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<div class="memtemplate">
+template&lt;typename F &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::andThen </td>
+          <td>(</td>
+          <td class="paramtype">F &amp;&amp;&#160;</td>
+          <td class="paramname"><em>func</em></td><td>)</td>
+          <td> const &amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Transforms <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;T&gt;</code> to <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;U&gt;</code> using the given function.   </p>
+<p>The function is only applied if the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> has a value. Otherwise <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;U&gt;</code> with the same bad <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a> is returned. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">func</td><td>Callable with the signature <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;U&gt;(T&amp;&amp;)</code> or <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;U&gt;(T&amp;&amp;, <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a>)</code>   </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00238">238</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -1192,6 +525,293 @@ template&lt;typename F &gt; </div>
 
 </div>
 </div>
+<a id="af8c52372741a4af137d3600d9e9e77e0" name="af8c52372741a4af137d3600d9e9e77e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8c52372741a4af137d3600d9e9e77e0">&#9670;&#160;</a></span>code()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a> <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::code </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a> of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_async_8cpp-example.html#a5">client_async.cpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00136">136</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a65122b158d953d915db6946e198f48dd" name="a65122b158d953d915db6946e198f48dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65122b158d953d915db6946e198f48dd">&#9670;&#160;</a></span>hasValue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::hasValue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> has a value. </p>
+
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00150">150</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a3ebdc2ba1506eb8de1ab76dbd23dab30" name="a3ebdc2ba1506eb8de1ab76dbd23dab30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ebdc2ba1506eb8de1ab76dbd23dab30">&#9670;&#160;</a></span>operator bool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::operator bool </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> has a value. </p>
+
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00143">143</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a5604e1053d0596d91585539ddd2a577f" name="a5604e1053d0596d91585539ddd2a577f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5604e1053d0596d91585539ddd2a577f">&#9670;&#160;</a></span>operator*() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr T &amp;&amp; <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::operator* </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> &amp;&amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>.   </p>
+<p>Accessing a <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> without a value leads to undefined behavior.   </p>
+
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00122">122</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a3fc9a904031bd350b87b0fc046a77040" name="a3fc9a904031bd350b87b0fc046a77040"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fc9a904031bd350b87b0fc046a77040">&#9670;&#160;</a></span>operator*() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr T &amp; <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::operator* </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> &amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>. </p>
+<p>Accessing a <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> without a value leads to undefined behavior. </p>
+
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00112">112</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a8a5859a980e422bc867920f7c0976c2f" name="a8a5859a980e422bc867920f7c0976c2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a5859a980e422bc867920f7c0976c2f">&#9670;&#160;</a></span>operator*() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr const T &amp;&amp; <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::operator* </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const &amp;&amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>.   </p>
+<p>Accessing a <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> without a value leads to undefined behavior.   </p>
+
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00127">127</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a5b3b9c1e15faa188dd466beb622b90ba" name="a5b3b9c1e15faa188dd466beb622b90ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b3b9c1e15faa188dd466beb622b90ba">&#9670;&#160;</a></span>operator*() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr const T &amp; <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::operator* </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const &amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>.   </p>
+<p>Accessing a <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> without a value leads to undefined behavior.   </p>
+
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00117">117</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ada802df99831687a672ab03e1d51531c" name="ada802df99831687a672ab03e1d51531c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada802df99831687a672ab03e1d51531c">&#9670;&#160;</a></span>operator-&gt;() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr const T * <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>.   </p>
+<p>Accessing a <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> without a value leads to undefined behavior.   </p>
+
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00104">104</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ad355a09e198ccd7e360a110c681fa970" name="ad355a09e198ccd7e360a110c681fa970"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad355a09e198ccd7e360a110c681fa970">&#9670;&#160;</a></span>operator-&gt;() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr T * <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>. </p>
+<p>Accessing a <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> without a value leads to undefined behavior. </p>
+
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00099">99</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+
+</div>
+</div>
 <a id="aa2dc7fe4600375ddfdbff74e5ac79be5" name="aa2dc7fe4600375ddfdbff74e5ac79be5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa2dc7fe4600375ddfdbff74e5ac79be5">&#9670;&#160;</a></span>orElse() <span class="overload">[1/4]</span></h2>
 
@@ -1232,48 +852,8 @@ template&lt;typename F &gt; </div>
 
 </div>
 </div>
-<a id="a83886b6cf7d70549db49f96482e2eda6" name="a83886b6cf7d70549db49f96482e2eda6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a83886b6cf7d70549db49f96482e2eda6">&#9670;&#160;</a></span>orElse() <span class="overload">[2/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<div class="memtemplate">
-template&lt;typename F &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::orElse </td>
-          <td>(</td>
-          <td class="paramtype">F &amp;&amp;&#160;</td>
-          <td class="paramname"><em>func</em></td><td>)</td>
-          <td> const &amp;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Transforms <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;T&gt;</code> with a bad <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a> to <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;T&gt;</code> using the given function.   </p>
-<p>The function is only applied if the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> has <b>no</b> value. Otherwise the same <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;T&gt;</code> is returned. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">func</td><td>Callable with the signature <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;T&gt;(<a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a>)</code>   </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00267">267</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
-
-</div>
-</div>
 <a id="a5d8b2de31f8bf78b24834a26446ae551" name="a5d8b2de31f8bf78b24834a26446ae551"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d8b2de31f8bf78b24834a26446ae551">&#9670;&#160;</a></span>orElse() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d8b2de31f8bf78b24834a26446ae551">&#9670;&#160;</a></span>orElse() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1309,6 +889,46 @@ template&lt;typename F &gt; </div>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00273">273</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a83886b6cf7d70549db49f96482e2eda6" name="a83886b6cf7d70549db49f96482e2eda6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83886b6cf7d70549db49f96482e2eda6">&#9670;&#160;</a></span>orElse() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<div class="memtemplate">
+template&lt;typename F &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::orElse </td>
+          <td>(</td>
+          <td class="paramtype">F &amp;&amp;&#160;</td>
+          <td class="paramname"><em>func</em></td><td>)</td>
+          <td> const &amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Transforms <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;T&gt;</code> with a bad <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a> to <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;T&gt;</code> using the given function.   </p>
+<p>The function is only applied if the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> has <b>no</b> value. Otherwise the same <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;T&gt;</code> is returned. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">func</td><td>Callable with the signature <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;T&gt;(<a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a>)</code>   </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00267">267</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -1349,6 +969,386 @@ template&lt;typename F &gt; </div>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00279">279</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a5856d75f69b1137594e79d87bcf7657c" name="a5856d75f69b1137594e79d87bcf7657c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5856d75f69b1137594e79d87bcf7657c">&#9670;&#160;</a></span>transform() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<div class="memtemplate">
+template&lt;typename F &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::transform </td>
+          <td>(</td>
+          <td class="paramtype">F &amp;&amp;&#160;</td>
+          <td class="paramname"><em>func</em></td><td>)</td>
+          <td> &amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Transforms <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;T&gt;</code> to <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;U&gt;</code> using the given value transformation function. </p>
+<p>The function is only applied if the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> has a value. Otherwise <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;U&gt;</code> with the same bad <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a> is returned. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">func</td><td>Callable with the signature <code>U(T&amp;&amp;)</code> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00203">203</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aa2875c9c9905cc693789decf4ff5a39f" name="aa2875c9c9905cc693789decf4ff5a39f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2875c9c9905cc693789decf4ff5a39f">&#9670;&#160;</a></span>transform() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<div class="memtemplate">
+template&lt;typename F &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::transform </td>
+          <td>(</td>
+          <td class="paramtype">F &amp;&amp;&#160;</td>
+          <td class="paramname"><em>func</em></td><td>)</td>
+          <td> &amp;&amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Transforms <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;T&gt;</code> to <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;U&gt;</code> using the given value transformation function.   </p>
+<p>The function is only applied if the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> has a value. Otherwise <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;U&gt;</code> with the same bad <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a> is returned. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">func</td><td>Callable with the signature <code>U(T&amp;&amp;)</code>   </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00215">215</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ab5dc254eb2f60349c21fd6e6ff3ec48a" name="ab5dc254eb2f60349c21fd6e6ff3ec48a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5dc254eb2f60349c21fd6e6ff3ec48a">&#9670;&#160;</a></span>transform() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<div class="memtemplate">
+template&lt;typename F &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::transform </td>
+          <td>(</td>
+          <td class="paramtype">F &amp;&amp;&#160;</td>
+          <td class="paramname"><em>func</em></td><td>)</td>
+          <td> const &amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Transforms <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;T&gt;</code> to <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;U&gt;</code> using the given value transformation function.   </p>
+<p>The function is only applied if the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> has a value. Otherwise <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;U&gt;</code> with the same bad <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a> is returned. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">func</td><td>Callable with the signature <code>U(T&amp;&amp;)</code>   </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00209">209</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a7276e909ef5d04f83f2374c1b8774aea" name="a7276e909ef5d04f83f2374c1b8774aea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7276e909ef5d04f83f2374c1b8774aea">&#9670;&#160;</a></span>transform() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<div class="memtemplate">
+template&lt;typename F &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::transform </td>
+          <td>(</td>
+          <td class="paramtype">F &amp;&amp;&#160;</td>
+          <td class="paramname"><em>func</em></td><td>)</td>
+          <td> const &amp;&amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Transforms <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;T&gt;</code> to <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;U&gt;</code> using the given value transformation function.   </p>
+<p>The function is only applied if the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> has a value. Otherwise <code><a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>&lt;U&gt;</code> with the same bad <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a> is returned. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">func</td><td>Callable with the signature <code>U(T&amp;&amp;)</code>   </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00221">221</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ad8906b4a4e26406476f3f5f38816a62b" name="ad8906b4a4e26406476f3f5f38816a62b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8906b4a4e26406476f3f5f38816a62b">&#9670;&#160;</a></span>value() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr T &amp; <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::value </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> &amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>. </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html" title="Exception for bad status codes from open62541 UA_STATUSCODE_*.">BadStatus</a></td><td>If the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> does not have a value (bad <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a>). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_async_8cpp-example.html#a6">client_async.cpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00158">158</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a5973e37b20c92cdd2938b1a02bcf3a93" name="a5973e37b20c92cdd2938b1a02bcf3a93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5973e37b20c92cdd2938b1a02bcf3a93">&#9670;&#160;</a></span>value() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr T &amp;&amp; <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::value </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> &amp;&amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>.   </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html" title="Exception for bad status codes from open62541 UA_STATUSCODE_*.">BadStatus</a></td><td>If the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> does not have a value (bad <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a>).   </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00170">170</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a44082b8f795f8b0a93fd7b5c478e78ab" name="a44082b8f795f8b0a93fd7b5c478e78ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44082b8f795f8b0a93fd7b5c478e78ab">&#9670;&#160;</a></span>value() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr const T &amp; <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::value </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const &amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>.   </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html" title="Exception for bad status codes from open62541 UA_STATUSCODE_*.">BadStatus</a></td><td>If the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> does not have a value (bad <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a>).   </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00164">164</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9ee49094be8ea4a9a1f0d77716abda76" name="a9ee49094be8ea4a9a1f0d77716abda76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ee49094be8ea4a9a1f0d77716abda76">&#9670;&#160;</a></span>value() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr const T &amp;&amp; <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::value </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const &amp;&amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>.   </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html" title="Exception for bad status codes from open62541 UA_STATUSCODE_*.">BadStatus</a></td><td>If the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> does not have a value (bad <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a>).   </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00176">176</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a3aac0c3b71efd5fa880eefd89614f341" name="a3aac0c3b71efd5fa880eefd89614f341"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3aac0c3b71efd5fa880eefd89614f341">&#9670;&#160;</a></span>valueOr() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<div class="memtemplate">
+template&lt;typename U &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr T <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::valueOr </td>
+          <td>(</td>
+          <td class="paramtype">U &amp;&amp;&#160;</td>
+          <td class="paramname"><em>defaultValue</em></td><td>)</td>
+          <td> &amp;&amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> or a default value.   </p>
+<p>The default value is returned in case of an bad <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a>.   </p>
+
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00192">192</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a44ab2194ce7b95f6d54396829619d423" name="a44ab2194ce7b95f6d54396829619d423"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44ab2194ce7b95f6d54396829619d423">&#9670;&#160;</a></span>valueOr() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<div class="memtemplate">
+template&lt;typename U &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr T <a class="el" href="classopcua_1_1Result.html">opcua::Result</a>&lt; T &gt;::valueOr </td>
+          <td>(</td>
+          <td class="paramtype">U &amp;&amp;&#160;</td>
+          <td class="paramname"><em>defaultValue</em></td><td>)</td>
+          <td> const &amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> or a default value. </p>
+<p>The default value is returned in case of an bad <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00186">186</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>

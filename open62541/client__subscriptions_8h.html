@@ -151,19 +151,21 @@ Variables</h2></td></tr>
 <tr class="separator:a862767e5ef40da10b7d6d54c48f8647a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
-<a id="a65e21acba47802cff3cd33fe78ed0228" name="a65e21acba47802cff3cd33fe78ed0228"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65e21acba47802cff3cd33fe78ed0228">&#9670;&#160;</a></span>UA_Client_StatusChangeNotificationCallback</h2>
+<a id="a9899bb6e9665889aceb6309dea1789c0" name="a9899bb6e9665889aceb6309dea1789c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9899bb6e9665889aceb6309dea1789c0">&#9670;&#160;</a></span>UA_Client_DataChangeNotificationCallback</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef void(* UA_Client_StatusChangeNotificationCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> subId, void *subContext, <a class="el" href="structUA__StatusChangeNotification.html">UA_StatusChangeNotification</a> *notification)</td>
+          <td class="memname">typedef void(* UA_Client_DataChangeNotificationCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> subId, void *subContext, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> monId, void *monContext, <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *value)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="client__subscriptions_8h_source.html#l00020">20</a> of file <a class="el" href="client__subscriptions_8h_source.html">client_subscriptions.h</a>.</p>
+<p>Callback for DataChange notifications. </p>
+
+<p class="definition">Definition at line <a class="el" href="client__subscriptions_8h_source.html#l00120">120</a> of file <a class="el" href="client__subscriptions_8h_source.html">client_subscriptions.h</a>.</p>
 
 </div>
 </div>
@@ -185,24 +187,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a9899bb6e9665889aceb6309dea1789c0" name="a9899bb6e9665889aceb6309dea1789c0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9899bb6e9665889aceb6309dea1789c0">&#9670;&#160;</a></span>UA_Client_DataChangeNotificationCallback</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* UA_Client_DataChangeNotificationCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> subId, void *subContext, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> monId, void *monContext, <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *value)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Callback for DataChange notifications. </p>
-
-<p class="definition">Definition at line <a class="el" href="client__subscriptions_8h_source.html#l00120">120</a> of file <a class="el" href="client__subscriptions_8h_source.html">client_subscriptions.h</a>.</p>
-
-</div>
-</div>
 <a id="a2565ae31fb3bc75132ef88c68daa5a9c" name="a2565ae31fb3bc75132ef88c68daa5a9c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2565ae31fb3bc75132ef88c68daa5a9c">&#9670;&#160;</a></span>UA_Client_EventNotificationCallback</h2>
 
@@ -221,15 +205,31 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="aa9e53e1db4eea0f1e89756a5d38435ef" name="aa9e53e1db4eea0f1e89756a5d38435ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa9e53e1db4eea0f1e89756a5d38435ef">&#9670;&#160;</a></span>UA_Client_Subscriptions_create()</h2>
+<a id="a65e21acba47802cff3cd33fe78ed0228" name="a65e21acba47802cff3cd33fe78ed0228"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65e21acba47802cff3cd33fe78ed0228">&#9670;&#160;</a></span>UA_Client_StatusChangeNotificationCallback</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structUA__CreateSubscriptionResponse.html">UA_CreateSubscriptionResponse</a> UA_Client_Subscriptions_create </td>
+          <td class="memname">typedef void(* UA_Client_StatusChangeNotificationCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> subId, void *subContext, <a class="el" href="structUA__StatusChangeNotification.html">UA_StatusChangeNotification</a> *notification)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="client__subscriptions_8h_source.html#l00020">20</a> of file <a class="el" href="client__subscriptions_8h_source.html">client_subscriptions.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ad486fbdcdb5586431c767479c1c5966a" name="ad486fbdcdb5586431c767479c1c5966a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad486fbdcdb5586431c767479c1c5966a">&#9670;&#160;</a></span>UA_Client_MonitoredItems_createDataChange()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUA__MonitoredItemCreateResult.html">UA_MonitoredItemCreateResult</a> UA_Client_MonitoredItems_createDataChange </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
           <td class="paramname"><em>client</em>, </td>
@@ -237,25 +237,37 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__CreateSubscriptionRequest.html">UA_CreateSubscriptionRequest</a>&#160;</td>
-          <td class="paramname"><em>request</em>, </td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td>
+          <td class="paramname"><em>subscriptionId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types__generated_8h.html#ab298c4ff5eb700437114d0dc2db97ead">UA_TimestampsToReturn</a>&#160;</td>
+          <td class="paramname"><em>timestampsToReturn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__MonitoredItemCreateRequest.html">UA_MonitoredItemCreateRequest</a>&#160;</td>
+          <td class="paramname"><em>item</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>subscriptionContext</em>, </td>
+          <td class="paramname"><em>context</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="client__subscriptions_8h.html#a65e21acba47802cff3cd33fe78ed0228">UA_Client_StatusChangeNotificationCallback</a>&#160;</td>
-          <td class="paramname"><em>statusChangeCallback</em>, </td>
+          <td class="paramtype"><a class="el" href="client__subscriptions_8h.html#a9899bb6e9665889aceb6309dea1789c0">UA_Client_DataChangeNotificationCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="client__subscriptions_8h.html#a862767e5ef40da10b7d6d54c48f8647a">UA_Client_DeleteSubscriptionCallback</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="client__subscriptions_8h.html#a351ee8bd9d3d3acf59951235fcf83c8e">UA_Client_DeleteMonitoredItemCallback</a>&#160;</td>
           <td class="paramname"><em>deleteCallback</em>&#160;</td>
         </tr>
         <tr>
@@ -265,248 +277,6 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a id="a13a0c89ee99b824b4834c63755d4e661" name="a13a0c89ee99b824b4834c63755d4e661"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a13a0c89ee99b824b4834c63755d4e661">&#9670;&#160;</a></span>UA_Client_Subscriptions_create_async()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_Subscriptions_create_async </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__CreateSubscriptionRequest.html">UA_CreateSubscriptionRequest</a>&#160;</td>
-          <td class="paramname"><em>request</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>subscriptionContext</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client__subscriptions_8h.html#a65e21acba47802cff3cd33fe78ed0228">UA_Client_StatusChangeNotificationCallback</a>&#160;</td>
-          <td class="paramname"><em>statusChangeCallback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client__subscriptions_8h.html#a862767e5ef40da10b7d6d54c48f8647a">UA_Client_DeleteSubscriptionCallback</a>&#160;</td>
-          <td class="paramname"><em>deleteCallback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client_8h.html#a0798176d568f4a010e2b76430a81529f">UA_ClientAsyncServiceCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>userdata</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
-          <td class="paramname"><em>requestId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a9f7c58937d22301be002cc44246734de" name="a9f7c58937d22301be002cc44246734de"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f7c58937d22301be002cc44246734de">&#9670;&#160;</a></span>UA_Client_Subscriptions_modify()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structUA__ModifySubscriptionResponse.html">UA_ModifySubscriptionResponse</a> UA_Client_Subscriptions_modify </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__ModifySubscriptionRequest.html">UA_ModifySubscriptionRequest</a>&#160;</td>
-          <td class="paramname"><em>request</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ae461fdef752e28909736eb06588b7ec6" name="ae461fdef752e28909736eb06588b7ec6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae461fdef752e28909736eb06588b7ec6">&#9670;&#160;</a></span>UA_Client_Subscriptions_modify_async()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_Subscriptions_modify_async </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__ModifySubscriptionRequest.html">UA_ModifySubscriptionRequest</a>&#160;</td>
-          <td class="paramname"><em>request</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client_8h.html#a0798176d568f4a010e2b76430a81529f">UA_ClientAsyncServiceCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>userdata</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
-          <td class="paramname"><em>requestId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a35e11c4c9535d961bbc027f52adcc457" name="a35e11c4c9535d961bbc027f52adcc457"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a35e11c4c9535d961bbc027f52adcc457">&#9670;&#160;</a></span>UA_Client_Subscriptions_delete()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structUA__DeleteSubscriptionsResponse.html">UA_DeleteSubscriptionsResponse</a> UA_Client_Subscriptions_delete </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DeleteSubscriptionsRequest.html">UA_DeleteSubscriptionsRequest</a>&#160;</td>
-          <td class="paramname"><em>request</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aa44268651193938c26d868523d751121" name="aa44268651193938c26d868523d751121"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa44268651193938c26d868523d751121">&#9670;&#160;</a></span>UA_Client_Subscriptions_delete_async()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_Subscriptions_delete_async </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DeleteSubscriptionsRequest.html">UA_DeleteSubscriptionsRequest</a>&#160;</td>
-          <td class="paramname"><em>request</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client_8h.html#a0798176d568f4a010e2b76430a81529f">UA_ClientAsyncServiceCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>userdata</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
-          <td class="paramname"><em>requestId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a1dee69f5f7f9f39f5cfff2f7b6e20d28" name="a1dee69f5f7f9f39f5cfff2f7b6e20d28"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1dee69f5f7f9f39f5cfff2f7b6e20d28">&#9670;&#160;</a></span>UA_Client_Subscriptions_deleteSingle()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_Subscriptions_deleteSingle </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td>
-          <td class="paramname"><em>subscriptionId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Delete a single subscription. </p>
 
 </div>
 </div>
@@ -622,14 +392,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ad486fbdcdb5586431c767479c1c5966a" name="ad486fbdcdb5586431c767479c1c5966a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad486fbdcdb5586431c767479c1c5966a">&#9670;&#160;</a></span>UA_Client_MonitoredItems_createDataChange()</h2>
+<a id="a184afd84dd0e50385ca808c6f1cea800" name="a184afd84dd0e50385ca808c6f1cea800"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a184afd84dd0e50385ca808c6f1cea800">&#9670;&#160;</a></span>UA_Client_MonitoredItems_createEvent()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structUA__MonitoredItemCreateResult.html">UA_MonitoredItemCreateResult</a> UA_Client_MonitoredItems_createDataChange </td>
+          <td class="memname"><a class="el" href="structUA__MonitoredItemCreateResult.html">UA_MonitoredItemCreateResult</a> UA_Client_MonitoredItems_createEvent </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
           <td class="paramname"><em>client</em>, </td>
@@ -661,7 +431,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="client__subscriptions_8h.html#a9899bb6e9665889aceb6309dea1789c0">UA_Client_DataChangeNotificationCallback</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="client__subscriptions_8h.html#a2565ae31fb3bc75132ef88c68daa5a9c">UA_Client_EventNotificationCallback</a>&#160;</td>
           <td class="paramname"><em>callback</em>, </td>
         </tr>
         <tr>
@@ -791,64 +561,6 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Monitor the EventNotifier attribute only. </p>
-
-</div>
-</div>
-<a id="a184afd84dd0e50385ca808c6f1cea800" name="a184afd84dd0e50385ca808c6f1cea800"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a184afd84dd0e50385ca808c6f1cea800">&#9670;&#160;</a></span>UA_Client_MonitoredItems_createEvent()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structUA__MonitoredItemCreateResult.html">UA_MonitoredItemCreateResult</a> UA_Client_MonitoredItems_createEvent </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td>
-          <td class="paramname"><em>subscriptionId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types__generated_8h.html#ab298c4ff5eb700437114d0dc2db97ead">UA_TimestampsToReturn</a>&#160;</td>
-          <td class="paramname"><em>timestampsToReturn</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__MonitoredItemCreateRequest.html">UA_MonitoredItemCreateRequest</a>&#160;</td>
-          <td class="paramname"><em>item</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>context</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client__subscriptions_8h.html#a2565ae31fb3bc75132ef88c68daa5a9c">UA_Client_EventNotificationCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client__subscriptions_8h.html#a351ee8bd9d3d3acf59951235fcf83c8e">UA_Client_DeleteMonitoredItemCallback</a>&#160;</td>
-          <td class="paramname"><em>deleteCallback</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
 
 </div>
 </div>
@@ -987,6 +699,294 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The clientHandle parameter will be filled automatically. </p>
+
+</div>
+</div>
+<a id="aa9e53e1db4eea0f1e89756a5d38435ef" name="aa9e53e1db4eea0f1e89756a5d38435ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9e53e1db4eea0f1e89756a5d38435ef">&#9670;&#160;</a></span>UA_Client_Subscriptions_create()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUA__CreateSubscriptionResponse.html">UA_CreateSubscriptionResponse</a> UA_Client_Subscriptions_create </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__CreateSubscriptionRequest.html">UA_CreateSubscriptionRequest</a>&#160;</td>
+          <td class="paramname"><em>request</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>subscriptionContext</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client__subscriptions_8h.html#a65e21acba47802cff3cd33fe78ed0228">UA_Client_StatusChangeNotificationCallback</a>&#160;</td>
+          <td class="paramname"><em>statusChangeCallback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client__subscriptions_8h.html#a862767e5ef40da10b7d6d54c48f8647a">UA_Client_DeleteSubscriptionCallback</a>&#160;</td>
+          <td class="paramname"><em>deleteCallback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a13a0c89ee99b824b4834c63755d4e661" name="a13a0c89ee99b824b4834c63755d4e661"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13a0c89ee99b824b4834c63755d4e661">&#9670;&#160;</a></span>UA_Client_Subscriptions_create_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_Subscriptions_create_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__CreateSubscriptionRequest.html">UA_CreateSubscriptionRequest</a>&#160;</td>
+          <td class="paramname"><em>request</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>subscriptionContext</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client__subscriptions_8h.html#a65e21acba47802cff3cd33fe78ed0228">UA_Client_StatusChangeNotificationCallback</a>&#160;</td>
+          <td class="paramname"><em>statusChangeCallback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client__subscriptions_8h.html#a862767e5ef40da10b7d6d54c48f8647a">UA_Client_DeleteSubscriptionCallback</a>&#160;</td>
+          <td class="paramname"><em>deleteCallback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client_8h.html#a0798176d568f4a010e2b76430a81529f">UA_ClientAsyncServiceCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
+          <td class="paramname"><em>requestId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a35e11c4c9535d961bbc027f52adcc457" name="a35e11c4c9535d961bbc027f52adcc457"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35e11c4c9535d961bbc027f52adcc457">&#9670;&#160;</a></span>UA_Client_Subscriptions_delete()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUA__DeleteSubscriptionsResponse.html">UA_DeleteSubscriptionsResponse</a> UA_Client_Subscriptions_delete </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__DeleteSubscriptionsRequest.html">UA_DeleteSubscriptionsRequest</a>&#160;</td>
+          <td class="paramname"><em>request</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa44268651193938c26d868523d751121" name="aa44268651193938c26d868523d751121"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa44268651193938c26d868523d751121">&#9670;&#160;</a></span>UA_Client_Subscriptions_delete_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_Subscriptions_delete_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__DeleteSubscriptionsRequest.html">UA_DeleteSubscriptionsRequest</a>&#160;</td>
+          <td class="paramname"><em>request</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client_8h.html#a0798176d568f4a010e2b76430a81529f">UA_ClientAsyncServiceCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
+          <td class="paramname"><em>requestId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1dee69f5f7f9f39f5cfff2f7b6e20d28" name="a1dee69f5f7f9f39f5cfff2f7b6e20d28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1dee69f5f7f9f39f5cfff2f7b6e20d28">&#9670;&#160;</a></span>UA_Client_Subscriptions_deleteSingle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_Subscriptions_deleteSingle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td>
+          <td class="paramname"><em>subscriptionId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Delete a single subscription. </p>
+
+</div>
+</div>
+<a id="a9f7c58937d22301be002cc44246734de" name="a9f7c58937d22301be002cc44246734de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f7c58937d22301be002cc44246734de">&#9670;&#160;</a></span>UA_Client_Subscriptions_modify()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUA__ModifySubscriptionResponse.html">UA_ModifySubscriptionResponse</a> UA_Client_Subscriptions_modify </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__ModifySubscriptionRequest.html">UA_ModifySubscriptionRequest</a>&#160;</td>
+          <td class="paramname"><em>request</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae461fdef752e28909736eb06588b7ec6" name="ae461fdef752e28909736eb06588b7ec6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae461fdef752e28909736eb06588b7ec6">&#9670;&#160;</a></span>UA_Client_Subscriptions_modify_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_Subscriptions_modify_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__ModifySubscriptionRequest.html">UA_ModifySubscriptionRequest</a>&#160;</td>
+          <td class="paramname"><em>request</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client_8h.html#a0798176d568f4a010e2b76430a81529f">UA_ClientAsyncServiceCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
+          <td class="paramname"><em>requestId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

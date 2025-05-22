@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -88,34 +88,82 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">wrapper.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;type_traits&gt;</code><br />
 <code>#include &lt;utility&gt;</code><br />
+<code>#include &quot;<a class="el" href="common_8hpp_source.html">open62541pp/common.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="types__handling_8hpp_source.html">open62541pp/detail/types_handling.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="typeregistry_8hpp_source.html">open62541pp/typeregistry.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for wrapper.hpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="wrapper_8hpp__incl.svg" width="268" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="wrapper_8hpp__incl.svg" width="2326" height="564"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="wrapper_8hpp__dep__incl.svg" width="4964" height="1107"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="wrapper_8hpp__dep__incl.svg" width="5194" height="1004"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="wrapper_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper&lt; T &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1TypeHandler.html">opcua::TypeHandler&lt; T &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1TypeHandlerNative.html">opcua::TypeHandlerNative&lt; T, Index &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper&lt; T, Handler &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; T, Index &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1IsWrapper.html">opcua::IsWrapper&lt; T &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1TypeRegistry_3_01T_00_01std_1_1enable__if__t_3_01IsWrapper_3_01T_01_4_1_1value_013bd4a4e727f50ce7a641278c61d6edb5.html">opcua::TypeRegistry&lt; T, std::enable_if_t&lt; IsWrapper&lt; T &gt;::value &amp;&amp;IsRegistered&lt; typename T::NativeType &gt;::value &gt; &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespaceopcua" id="r_namespaceopcua"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html">opcua</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:gab7f556806093b8bee70fd9a6727aaab9" id="r_gab7f556806093b8bee70fd9a6727aaab9"><td class="memTemplParams" colspan="2">template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> Index&gt; </td></tr>
+<tr class="memitem:gab7f556806093b8bee70fd9a6727aaab9"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#gab7f556806093b8bee70fd9a6727aaab9">opcua::WrapperNative</a> = <a class="el" href="classopcua_1_1Wrapper.html">Wrapper</a>&lt; T, <a class="el" href="structopcua_1_1TypeHandlerNative.html">TypeHandlerNative</a>&lt; T, Index &gt; &gt;</td></tr>
+<tr class="separator:gab7f556806093b8bee70fd9a6727aaab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:gac28a131007f1160ae702aa5124f8a9ea" id="r_gac28a131007f1160ae702aa5124f8a9ea"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:gac28a131007f1160ae702aa5124f8a9ea"><td class="memTemplItemLeft" align="right" valign="top">constexpr T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#gac28a131007f1160ae702aa5124f8a9ea">opcua::asWrapper</a> (typename T::NativeType *native) noexcept</td></tr>
+<tr class="separator:gac28a131007f1160ae702aa5124f8a9ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga196e92fb2542d79b3e6d9d43112d826e" id="r_ga196e92fb2542d79b3e6d9d43112d826e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ga196e92fb2542d79b3e6d9d43112d826e"><td class="memTemplItemLeft" align="right" valign="top">constexpr const T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#ga196e92fb2542d79b3e6d9d43112d826e">opcua::asWrapper</a> (const typename T::NativeType *native) noexcept</td></tr>
+<tr class="separator:ga196e92fb2542d79b3e6d9d43112d826e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga00a9bab173a14faab93999c820247716" id="r_ga00a9bab173a14faab93999c820247716"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ga00a9bab173a14faab93999c820247716"><td class="memTemplItemLeft" align="right" valign="top">constexpr T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#ga00a9bab173a14faab93999c820247716">opcua::asWrapper</a> (typename T::NativeType &amp;native) noexcept</td></tr>
+<tr class="separator:ga00a9bab173a14faab93999c820247716"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4f5890abbe0d6b9fd6cbff051137f0d6" id="r_ga4f5890abbe0d6b9fd6cbff051137f0d6"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ga4f5890abbe0d6b9fd6cbff051137f0d6"><td class="memTemplItemLeft" align="right" valign="top">constexpr const T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#ga4f5890abbe0d6b9fd6cbff051137f0d6">opcua::asWrapper</a> (const typename T::NativeType &amp;native) noexcept</td></tr>
+<tr class="separator:ga4f5890abbe0d6b9fd6cbff051137f0d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga50b605af15e16113ff43aa58efc24e45" id="r_ga50b605af15e16113ff43aa58efc24e45"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ga50b605af15e16113ff43aa58efc24e45"><td class="memTemplItemLeft" align="right" valign="top">constexpr T::NativeType *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#ga50b605af15e16113ff43aa58efc24e45">opcua::asNative</a> (T *wrapper) noexcept</td></tr>
+<tr class="separator:ga50b605af15e16113ff43aa58efc24e45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadcda7d3bfbcf6d894e0c6daf635a3cf8" id="r_gadcda7d3bfbcf6d894e0c6daf635a3cf8"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:gadcda7d3bfbcf6d894e0c6daf635a3cf8"><td class="memTemplItemLeft" align="right" valign="top">constexpr const T::NativeType *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#gadcda7d3bfbcf6d894e0c6daf635a3cf8">opcua::asNative</a> (const T *wrapper) noexcept</td></tr>
+<tr class="separator:gadcda7d3bfbcf6d894e0c6daf635a3cf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae3a5281e6a400e5764608745da73ceb9" id="r_gae3a5281e6a400e5764608745da73ceb9"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:gae3a5281e6a400e5764608745da73ceb9"><td class="memTemplItemLeft" align="right" valign="top">constexpr T::NativeType &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#gae3a5281e6a400e5764608745da73ceb9">opcua::asNative</a> (T &amp;wrapper) noexcept</td></tr>
+<tr class="separator:gae3a5281e6a400e5764608745da73ceb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaeaf45806bd42f6c64271653a838c2a55" id="r_gaeaf45806bd42f6c64271653a838c2a55"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:gaeaf45806bd42f6c64271653a838c2a55"><td class="memTemplItemLeft" align="right" valign="top">constexpr const T::NativeType &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#gaeaf45806bd42f6c64271653a838c2a55">opcua::asNative</a> (const T &amp;wrapper) noexcept</td></tr>
+<tr class="separator:gaeaf45806bd42f6c64271653a838c2a55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

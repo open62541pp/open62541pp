@@ -1,7 +1,7 @@
 <map id="opcua::ua::UserIdentityToken" name="opcua::ua::UserIdentityToken">
-<area shape="rect" id="Node000001" title="UA_UserIdentityToken wrapper class." alt="" coords="27,181,238,207"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,79,260,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="135,147,135,181,130,181,130,147"/>
-<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap native objects." alt="" coords="51,5,214,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="135,44,135,79,130,79,130,44"/>
+<area shape="rect" id="Node000001" title="UA_UserIdentityToken wrapper class." alt="" coords="47,181,258,207"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap (native) objects." alt="" coords="5,93,300,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="155,147,155,181,150,181,150,147"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="34,5,271,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="155,59,155,93,150,93,150,59"/>
 </map>

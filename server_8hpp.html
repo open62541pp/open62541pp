@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -94,7 +94,7 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &lt;cstdint&gt;</code><br />
 <code>#include &lt;memory&gt;</code><br />
-<code>#include &lt;string&gt;</code><br />
+<code>#include &lt;optional&gt;</code><br />
 <code>#include &lt;string_view&gt;</code><br />
 <code>#include &lt;utility&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
@@ -103,12 +103,12 @@ $(function() {
 <code>#include &quot;<a class="el" href="datatype_8hpp_source.html">open62541pp/datatype.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="server_8h_source.html">open62541pp/detail/open62541/server.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="server__utils_8hpp_source.html">open62541pp/detail/server_utils.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="event_8hpp_source.html">open62541pp/event.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="session_8hpp_source.html">open62541pp/session.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="span_8hpp_source.html">open62541pp/span.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="subscription_8hpp_source.html">open62541pp/subscription.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="types_8hpp_source.html">open62541pp/types.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="nodeids_8hpp_source.html">open62541pp/ua/nodeids.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="ua_2types_8hpp_source.html">open62541pp/ua/types.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="wrapper_8hpp_source.html">open62541pp/wrapper.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="accesscontrol_8hpp_source.html">open62541pp/plugin/accesscontrol.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="log_8hpp_source.html">open62541pp/plugin/log.hpp</a>&quot;</code><br />
@@ -117,7 +117,7 @@ $(function() {
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for server.hpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="server_8hpp__incl.svg" width="5343" height="755"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="server_8hpp__incl.svg" width="5504" height="931"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
@@ -129,9 +129,13 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1TypeHandler_3_01UA__ServerConfig_01_4.html">opcua::TypeHandler&lt; UA_ServerConfig &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1ServerConfig.html">opcua::ServerConfig</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html">opcua::Server</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1AsyncOperation.html">opcua::AsyncOperation</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>

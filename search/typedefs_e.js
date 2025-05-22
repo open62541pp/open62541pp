@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['value_5ftype_0',['value_type',['../classopcua_1_1Span.html#a092ad24a0cfe22fe585529fad3cbd52b',1,'opcua::Span']]],
-  ['valuetype_1',['ValueType',['../classopcua_1_1Result.html#aad2a89be4121b750070236ad9e9eae8e',1,'opcua::Result']]]
+  ['uaduration_0',['UaDuration',['../classopcua_1_1DateTime.html#acb96457b8f19d74ccfaa720fdc7c9aa2',1,'opcua::DateTime']]],
+  ['underlying_1',['Underlying',['../classopcua_1_1Bitmask.html#a08d8accdd8d7b311fa048c3607dccb45',1,'opcua::Bitmask']]]
 ];

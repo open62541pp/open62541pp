@@ -10,6 +10,5 @@ var searchData=
   ['types_5fconversion_2ehpp_7',['types_conversion.hpp',['../types__conversion_8hpp.html',1,'']]],
   ['types_5fgenerated_2eh_8',['types_generated.h',['open62541/types__generated_8h.html',0,'']]],
   ['types_5fgenerated_5fhandling_2eh_9',['types_generated_handling.h',['open62541/types__generated__handling_8h.html',0,'']]],
-  ['types_5fhandling_2ehpp_10',['types_handling.hpp',['../types__handling_8hpp.html',1,'']]],
-  ['typewrapper_2ehpp_11',['typewrapper.hpp',['../typewrapper_8hpp.html',1,'']]]
+  ['types_5fhandling_2ehpp_10',['types_handling.hpp',['../types__handling_8hpp.html',1,'']]]
 ];

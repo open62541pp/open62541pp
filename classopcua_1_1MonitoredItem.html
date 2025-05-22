@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -108,7 +108,7 @@ class opcua::MonitoredItem&lt; Connection &gt;</div><p>High-level monitored item
 <p>Use the free functions in the <a class="el" href="namespaceopcua_1_1services.html" title="OPC UA services as free functions.">opcua::services</a> namespace for more advanced usage:</p><ul>
 <li><a class="el" href="group__MonitoredItem.html">MonitoredItem service set</a> </li>
 </ul>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_subscription_8cpp-example.html#_a10">client_subscription.cpp</a>, and <a class="el" href="events_2client_eventfilter_8cpp-example.html#_a6">events/client_eventfilter.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_subscription_8cpp-example.html#_a7">client_subscription.cpp</a>, and <a class="el" href="events_2client_eventfilter_8cpp-example.html#_a6">events/client_eventfilter.cpp</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="monitoreditem_8hpp_source.html#l00029">29</a> of file <a class="el" href="monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
@@ -127,12 +127,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad6f2aae9c99eaacb3cea4d107c95a4ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb3a419c80996d1c730c50bbff489954" id="r_abb3a419c80996d1c730c50bbff489954"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1MonitoredItem.html#abb3a419c80996d1c730c50bbff489954">nodeId</a> ()</td></tr>
 <tr class="separator:abb3a419c80996d1c730c50bbff489954"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa81cc8bb858e14825359ade61894efa0" id="r_aa81cc8bb858e14825359ade61894efa0"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1MonitoredItem.html#aa81cc8bb858e14825359ade61894efa0">getNodeId</a> ()</td></tr>
-<tr class="separator:aa81cc8bb858e14825359ade61894efa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adaafa03bddb4fc01115ac002318705be" id="r_adaafa03bddb4fc01115ac002318705be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917">AttributeId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1MonitoredItem.html#adaafa03bddb4fc01115ac002318705be">attributeId</a> ()</td></tr>
 <tr class="separator:adaafa03bddb4fc01115ac002318705be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea74f7f40800367beb81b0dd0ba86360" id="r_aea74f7f40800367beb81b0dd0ba86360"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917">AttributeId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1MonitoredItem.html#aea74f7f40800367beb81b0dd0ba86360">getAttributeId</a> ()</td></tr>
-<tr class="separator:aea74f7f40800367beb81b0dd0ba86360"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab44748df37ba5a441e2d19c1fc55c032" id="r_ab44748df37ba5a441e2d19c1fc55c032"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1MonitoredItem.html#ab44748df37ba5a441e2d19c1fc55c032">setMonitoringParameters</a> (const <a class="el" href="namespaceopcua.html#a6a90d28e94f7dedce6d000248cf79f54">MonitoringParametersEx</a> &amp;parameters)</td></tr>
 <tr class="separator:ab44748df37ba5a441e2d19c1fc55c032"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a670b64da11d8f5e9d23bd511129f55a9" id="r_a670b64da11d8f5e9d23bd511129f55a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1MonitoredItem.html#a670b64da11d8f5e9d23bd511129f55a9">setMonitoringMode</a> (<a class="el" href="group__Wrapper.html#ga6c225fe0e557508a74bec61177a1d1a5">MonitoringMode</a> monitoringMode)</td></tr>
@@ -202,41 +198,29 @@ template&lt;typename Connection &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a99e4c44590dfd1c300099d987f5ff9de" name="a99e4c44590dfd1c300099d987f5ff9de"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99e4c44590dfd1c300099d987f5ff9de">&#9670;&#160;</a></span>connection() <span class="overload">[1/2]</span></h2>
+<a id="adaafa03bddb4fc01115ac002318705be" name="adaafa03bddb4fc01115ac002318705be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adaafa03bddb4fc01115ac002318705be">&#9670;&#160;</a></span>attributeId()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Connection &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Connection &amp; <a class="el" href="classopcua_1_1MonitoredItem.html">opcua::MonitoredItem</a>&lt; Connection &gt;::connection </td>
+          <td class="memname"><a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917">AttributeId</a> <a class="el" href="classopcua_1_1MonitoredItem.html">opcua::MonitoredItem</a>&lt; Connection &gt;::attributeId </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>Get the server/client instance. </p>
-
-<p class="definition">Definition at line <a class="el" href="monitoreditem_8hpp_source.html#l00041">41</a> of file <a class="el" href="monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="monitoreditem_8hpp_source.html#l00099">opcua::MonitoredItem&lt; Connection &gt;::deleteMonitoredItem()</a>, <a class="el" href="monitoreditem_8hpp_source.html#l00090">opcua::MonitoredItem&lt; Connection &gt;::setMonitoringMode()</a>, and <a class="el" href="monitoreditem_8hpp_source.html#l00081">opcua::MonitoredItem&lt; Connection &gt;::setMonitoringParameters()</a>.</p>
+<p>Get the monitored AttributeId. </p>
 
 </div>
 </div>
 <a id="a0f1fd2496637162d0e719c9b7f5f0307" name="a0f1fd2496637162d0e719c9b7f5f0307"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0f1fd2496637162d0e719c9b7f5f0307">&#9670;&#160;</a></span>connection() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f1fd2496637162d0e719c9b7f5f0307">&#9670;&#160;</a></span>connection() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -266,8 +250,8 @@ template&lt;typename Connection &gt; </div>
 
 </div>
 </div>
-<a id="a03a1cbf8fd8339b14e975415c69e272f" name="a03a1cbf8fd8339b14e975415c69e272f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a03a1cbf8fd8339b14e975415c69e272f">&#9670;&#160;</a></span>subscriptionId()</h2>
+<a id="a99e4c44590dfd1c300099d987f5ff9de" name="a99e4c44590dfd1c300099d987f5ff9de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99e4c44590dfd1c300099d987f5ff9de">&#9670;&#160;</a></span>connection() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -278,10 +262,10 @@ template&lt;typename Connection &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">IntegerId</a> <a class="el" href="classopcua_1_1MonitoredItem.html">opcua::MonitoredItem</a>&lt; Connection &gt;::subscriptionId </td>
+          <td class="memname">Connection &amp; <a class="el" href="classopcua_1_1MonitoredItem.html">opcua::MonitoredItem</a>&lt; Connection &gt;::connection </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> const</td>
+          <td></td>
         </tr>
       </table>
   </td>
@@ -291,13 +275,43 @@ template&lt;typename Connection &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Get the server-assigned identifier of the underlying subscription. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_subscription_8cpp-example.html#a11">client_subscription.cpp</a>, and <a class="el" href="events_2client_eventfilter_8cpp-example.html#a7">events/client_eventfilter.cpp</a>.</dd>
-</dl>
+<p>Get the server/client instance. </p>
 
-<p class="definition">Definition at line <a class="el" href="monitoreditem_8hpp_source.html#l00051">51</a> of file <a class="el" href="monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="monitoreditem_8hpp_source.html#l00041">41</a> of file <a class="el" href="monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="monitoreditem_8hpp_source.html#l00099">opcua::MonitoredItem&lt; Connection &gt;::deleteMonitoredItem()</a>, <a class="el" href="monitoreditem_8hpp_source.html#l00090">opcua::MonitoredItem&lt; Connection &gt;::setMonitoringMode()</a>, and <a class="el" href="monitoreditem_8hpp_source.html#l00081">opcua::MonitoredItem&lt; Connection &gt;::setMonitoringParameters()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="monitoreditem_8hpp_source.html#l00087">opcua::MonitoredItem&lt; Connection &gt;::deleteMonitoredItem()</a>, <a class="el" href="monitoreditem_8hpp_source.html#l00033">opcua::MonitoredItem&lt; Connection &gt;::MonitoredItem()</a>, <a class="el" href="monitoreditem_8hpp_source.html#l00078">opcua::MonitoredItem&lt; Connection &gt;::setMonitoringMode()</a>, and <a class="el" href="monitoreditem_8hpp_source.html#l00069">opcua::MonitoredItem&lt; Connection &gt;::setMonitoringParameters()</a>.</p>
+
+</div>
+</div>
+<a id="a604297e1c7c549f17da7338a02f03b22" name="a604297e1c7c549f17da7338a02f03b22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a604297e1c7c549f17da7338a02f03b22">&#9670;&#160;</a></span>deleteMonitoredItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Connection &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classopcua_1_1MonitoredItem.html">opcua::MonitoredItem</a>&lt; Connection &gt;::deleteMonitoredItem </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Delete this monitored item. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__DeleteMonitoredItems.html#ga4fbdcb84c7246fe368cc885766beab74" title="Delete a monitored item from a subscription.">services::deleteMonitoredItem</a> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="monitoreditem_8hpp_source.html#l00087">87</a> of file <a class="el" href="monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
 
 </div>
 </div>
@@ -327,12 +341,10 @@ template&lt;typename Connection &gt; </div>
 </div><div class="memdoc">
 
 <p>Get the server-assigned identifier of this monitored item. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_subscription_8cpp-example.html#a12">client_subscription.cpp</a>, and <a class="el" href="events_2client_eventfilter_8cpp-example.html#a8">events/client_eventfilter.cpp</a>.</dd>
-</dl>
 
 <p class="definition">Definition at line <a class="el" href="monitoreditem_8hpp_source.html#l00056">56</a> of file <a class="el" href="monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="monitoreditem_8hpp_source.html#l00099">opcua::MonitoredItem&lt; Connection &gt;::deleteMonitoredItem()</a>, <a class="el" href="monitoreditem_8hpp_source.html#l00090">opcua::MonitoredItem&lt; Connection &gt;::setMonitoringMode()</a>, and <a class="el" href="monitoreditem_8hpp_source.html#l00081">opcua::MonitoredItem&lt; Connection &gt;::setMonitoringParameters()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="monitoreditem_8hpp_source.html#l00087">opcua::MonitoredItem&lt; Connection &gt;::deleteMonitoredItem()</a>, <a class="el" href="monitoreditem_8hpp_source.html#l00078">opcua::MonitoredItem&lt; Connection &gt;::setMonitoringMode()</a>, and <a class="el" href="monitoreditem_8hpp_source.html#l00069">opcua::MonitoredItem&lt; Connection &gt;::setMonitoringParameters()</a>.</p>
 
 </div>
 </div>
@@ -354,129 +366,6 @@ template&lt;typename Connection &gt; </div>
 </div><div class="memdoc">
 
 <p>Get the monitored <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a>. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_subscription_8cpp-example.html#a14">client_subscription.cpp</a>, and <a class="el" href="events_2client_eventfilter_8cpp-example.html#a10">events/client_eventfilter.cpp</a>.</dd>
-</dl>
-
-<p class="reference">Referenced by <a class="el" href="monitoreditem_8hpp_source.html#l00065">opcua::MonitoredItem&lt; Connection &gt;::getNodeId()</a>.</p>
-
-</div>
-</div>
-<a id="aa81cc8bb858e14825359ade61894efa0" name="aa81cc8bb858e14825359ade61894efa0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa81cc8bb858e14825359ade61894efa0">&#9670;&#160;</a></span>getNodeId()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Connection &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp; <a class="el" href="classopcua_1_1MonitoredItem.html">opcua::MonitoredItem</a>&lt; Connection &gt;::getNodeId </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000012">Deprecated:</a></b></dt><dd>Use <a class="el" href="classopcua_1_1MonitoredItem.html#abb3a419c80996d1c730c50bbff489954" title="Get the monitored NodeId.">nodeId()</a> instead </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="monitoreditem_8hpp_source.html#l00065">65</a> of file <a class="el" href="monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
-
-</div>
-</div>
-<a id="adaafa03bddb4fc01115ac002318705be" name="adaafa03bddb4fc01115ac002318705be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adaafa03bddb4fc01115ac002318705be">&#9670;&#160;</a></span>attributeId()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Connection &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917">AttributeId</a> <a class="el" href="classopcua_1_1MonitoredItem.html">opcua::MonitoredItem</a>&lt; Connection &gt;::attributeId </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get the monitored AttributeId. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_subscription_8cpp-example.html#a15">client_subscription.cpp</a>, and <a class="el" href="events_2client_eventfilter_8cpp-example.html#a11">events/client_eventfilter.cpp</a>.</dd>
-</dl>
-
-<p class="reference">Referenced by <a class="el" href="monitoreditem_8hpp_source.html#l00074">opcua::MonitoredItem&lt; Connection &gt;::getAttributeId()</a>.</p>
-
-</div>
-</div>
-<a id="aea74f7f40800367beb81b0dd0ba86360" name="aea74f7f40800367beb81b0dd0ba86360"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea74f7f40800367beb81b0dd0ba86360">&#9670;&#160;</a></span>getAttributeId()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Connection &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917">AttributeId</a> <a class="el" href="classopcua_1_1MonitoredItem.html">opcua::MonitoredItem</a>&lt; Connection &gt;::getAttributeId </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000013">Deprecated:</a></b></dt><dd>Use <a class="el" href="classopcua_1_1MonitoredItem.html#adaafa03bddb4fc01115ac002318705be" title="Get the monitored AttributeId.">attributeId()</a> instead </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="monitoreditem_8hpp_source.html#l00074">74</a> of file <a class="el" href="monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ab44748df37ba5a441e2d19c1fc55c032" name="ab44748df37ba5a441e2d19c1fc55c032"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab44748df37ba5a441e2d19c1fc55c032">&#9670;&#160;</a></span>setMonitoringParameters()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Connection &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classopcua_1_1MonitoredItem.html">opcua::MonitoredItem</a>&lt; Connection &gt;::setMonitoringParameters </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="namespaceopcua.html#a6a90d28e94f7dedce6d000248cf79f54">MonitoringParametersEx</a> &amp;&#160;</td>
-          <td class="paramname"><em>parameters</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Modify this monitored item. </p>
-<dl class="section note"><dt>Note</dt><dd>Not implemented for <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>. </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__ModifyMonitoredItems.html#ga1e497bd2e27c61d4943a19edd6bd51da" title="Modify a monitored item of a subscription.">services::modifyMonitoredItem</a> </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="monitoreditem_8hpp_source.html#l00081">81</a> of file <a class="el" href="monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
 
 </div>
 </div>
@@ -510,12 +399,12 @@ template&lt;typename Connection &gt; </div>
 <dl class="section note"><dt>Note</dt><dd>Not implemented for <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="group__SetMonitoringMode.html#ga7ddcfa42c4123ef59db013586f4f49c0" title="Set the monitoring mode of monitored items.">services::setMonitoringMode</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="monitoreditem_8hpp_source.html#l00090">90</a> of file <a class="el" href="monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="monitoreditem_8hpp_source.html#l00078">78</a> of file <a class="el" href="monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a604297e1c7c549f17da7338a02f03b22" name="a604297e1c7c549f17da7338a02f03b22"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a604297e1c7c549f17da7338a02f03b22">&#9670;&#160;</a></span>deleteMonitoredItem()</h2>
+<a id="ab44748df37ba5a441e2d19c1fc55c032" name="ab44748df37ba5a441e2d19c1fc55c032"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab44748df37ba5a441e2d19c1fc55c032">&#9670;&#160;</a></span>setMonitoringParameters()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -526,9 +415,10 @@ template&lt;typename Connection &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classopcua_1_1MonitoredItem.html">opcua::MonitoredItem</a>&lt; Connection &gt;::deleteMonitoredItem </td>
+          <td class="memname">void <a class="el" href="classopcua_1_1MonitoredItem.html">opcua::MonitoredItem</a>&lt; Connection &gt;::setMonitoringParameters </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="namespaceopcua.html#a6a90d28e94f7dedce6d000248cf79f54">MonitoringParametersEx</a> &amp;&#160;</td>
+          <td class="paramname"><em>parameters</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -539,54 +429,48 @@ template&lt;typename Connection &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Delete this monitored item. </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__DeleteMonitoredItems.html#ga4fbdcb84c7246fe368cc885766beab74" title="Delete a monitored item from a subscription.">services::deleteMonitoredItem</a> </dd></dl>
+<p>Modify this monitored item. </p>
+<dl class="section note"><dt>Note</dt><dd>Not implemented for <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>. </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__ModifyMonitoredItems.html#ga1e497bd2e27c61d4943a19edd6bd51da" title="Modify a monitored item of a subscription.">services::modifyMonitoredItem</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="monitoreditem_8hpp_source.html#l00099">99</a> of file <a class="el" href="monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="monitoreditem_8hpp_source.html#l00069">69</a> of file <a class="el" href="monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
 
 </div>
 </div>
-<h2 class="groupheader">Friends And Related Symbol Documentation</h2>
-<a id="a81c4c1f619b473a2d1017520617cf8de" name="a81c4c1f619b473a2d1017520617cf8de"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a81c4c1f619b473a2d1017520617cf8de">&#9670;&#160;</a></span>operator==()</h2>
+<a id="a03a1cbf8fd8339b14e975415c69e272f" name="a03a1cbf8fd8339b14e975415c69e272f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03a1cbf8fd8339b14e975415c69e272f">&#9670;&#160;</a></span>subscriptionId()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename Connection &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool operator== </td>
+          <td class="memname"><a class="el" href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">IntegerId</a> <a class="el" href="classopcua_1_1MonitoredItem.html">opcua::MonitoredItem</a>&lt; Connection &gt;::subscriptionId </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; T &gt; &amp;&#160;</td>
-          <td class="paramname"><em>lhs</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; T &gt; &amp;&#160;</td>
-          <td class="paramname"><em>rhs</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="monitoreditem_8hpp_source.html#l00114">114</a> of file <a class="el" href="monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
+<p>Get the server-assigned identifier of the underlying subscription. </p>
+
+<p class="definition">Definition at line <a class="el" href="monitoreditem_8hpp_source.html#l00051">51</a> of file <a class="el" href="monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="monitoreditem_8hpp_source.html#l00087">opcua::MonitoredItem&lt; Connection &gt;::deleteMonitoredItem()</a>, <a class="el" href="monitoreditem_8hpp_source.html#l00078">opcua::MonitoredItem&lt; Connection &gt;::setMonitoringMode()</a>, and <a class="el" href="monitoreditem_8hpp_source.html#l00069">opcua::MonitoredItem&lt; Connection &gt;::setMonitoringParameters()</a>.</p>
 
 </div>
 </div>
+<h2 class="groupheader">Friends And Related Symbol Documentation</h2>
 <a id="ad6959717253eb62bd2b4b3a80e9819c9" name="ad6959717253eb62bd2b4b3a80e9819c9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad6959717253eb62bd2b4b3a80e9819c9">&#9670;&#160;</a></span>operator!=()</h2>
 
@@ -623,7 +507,47 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="monitoreditem_8hpp_source.html#l00122">122</a> of file <a class="el" href="monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="monitoreditem_8hpp_source.html#l00110">110</a> of file <a class="el" href="monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a81c4c1f619b473a2d1017520617cf8de" name="a81c4c1f619b473a2d1017520617cf8de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81c4c1f619b473a2d1017520617cf8de">&#9670;&#160;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="monitoreditem_8hpp_source.html#l00102">102</a> of file <a class="el" href="monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
 
 </div>
 </div>

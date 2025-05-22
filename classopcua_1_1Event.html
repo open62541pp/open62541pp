@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -100,7 +100,7 @@ $(function() {
 <dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/Core/Part3/v105/docs/4.7">https://reference.opcfoundation.org/Core/Part3/v105/docs/4.7</a> </dd>
 <dd>
 <a href="https://reference.opcfoundation.org/Core/Part5/v105/docs/6.4.2">https://reference.opcfoundation.org/Core/Part5/v105/docs/6.4.2</a> </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="events_2server_events_8cpp-example.html#_a4">events/server_events.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="events_2server_events_8cpp-example.html#_a3">events/server_events.cpp</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="event_8hpp_source.html#l00019">19</a> of file <a class="el" href="event_8hpp_source.html">event.hpp</a>.</p>
@@ -258,6 +258,93 @@ Related Symbols</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a1fd145fe55cfe4b22895803a11685741" name="a1fd145fe55cfe4b22895803a11685741"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fd145fe55cfe4b22895803a11685741">&#9670;&#160;</a></span>connection() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classopcua_1_1Server.html">Server</a> &amp; opcua::Event::connection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the server instance. </p>
+
+<p class="definition">Definition at line <a class="el" href="event_8hpp_source.html#l00039">39</a> of file <a class="el" href="event_8hpp_source.html">event.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a7756cc69a32f4c7a0876cf9ff24d4dab" name="a7756cc69a32f4c7a0876cf9ff24d4dab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7756cc69a32f4c7a0876cf9ff24d4dab">&#9670;&#160;</a></span>connection() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1Server.html">Server</a> &amp; opcua::Event::connection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the server instance. </p>
+
+<p class="definition">Definition at line <a class="el" href="event_8hpp_source.html#l00034">34</a> of file <a class="el" href="event_8hpp_source.html">event.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a72d585bc3272af0a786a59567005e642" name="a72d585bc3272af0a786a59567005e642"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72d585bc3272af0a786a59567005e642">&#9670;&#160;</a></span>id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp; opcua::Event::id </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> of the underlying node representation. </p>
+
+<p class="definition">Definition at line <a class="el" href="event_8hpp_source.html#l00044">44</a> of file <a class="el" href="event_8hpp_source.html">event.hpp</a>.</p>
+
+</div>
+</div>
 <a id="a0c6e0e324db902a31fc14cd5961d3f4d" name="a0c6e0e324db902a31fc14cd5961d3f4d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0c6e0e324db902a31fc14cd5961d3f4d">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
@@ -310,150 +397,30 @@ Related Symbols</h2></td></tr>
 
 </div>
 </div>
-<a id="a7756cc69a32f4c7a0876cf9ff24d4dab" name="a7756cc69a32f4c7a0876cf9ff24d4dab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7756cc69a32f4c7a0876cf9ff24d4dab">&#9670;&#160;</a></span>connection() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Server.html">Server</a> &amp; opcua::Event::connection </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the server instance. </p>
-
-<p class="definition">Definition at line <a class="el" href="event_8hpp_source.html#l00034">34</a> of file <a class="el" href="event_8hpp_source.html">event.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a1fd145fe55cfe4b22895803a11685741" name="a1fd145fe55cfe4b22895803a11685741"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1fd145fe55cfe4b22895803a11685741">&#9670;&#160;</a></span>connection() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="classopcua_1_1Server.html">Server</a> &amp; opcua::Event::connection </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the server instance. </p>
-
-<p class="definition">Definition at line <a class="el" href="event_8hpp_source.html#l00039">39</a> of file <a class="el" href="event_8hpp_source.html">event.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a72d585bc3272af0a786a59567005e642" name="a72d585bc3272af0a786a59567005e642"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a72d585bc3272af0a786a59567005e642">&#9670;&#160;</a></span>id()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp; opcua::Event::id </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> of the underlying node representation. </p>
-
-<p class="definition">Definition at line <a class="el" href="event_8hpp_source.html#l00044">44</a> of file <a class="el" href="event_8hpp_source.html">event.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a05d721b75dc0a56e54d7313fe815a2ca" name="a05d721b75dc0a56e54d7313fe815a2ca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05d721b75dc0a56e54d7313fe815a2ca">&#9670;&#160;</a></span>writeSourceName()</h2>
+<a id="af007f5771dbe022ee167e7d37f09bba8" name="af007f5771dbe022ee167e7d37f09bba8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af007f5771dbe022ee167e7d37f09bba8">&#9670;&#160;</a></span>trigger()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Event.html">Event</a> &amp; opcua::Event::writeSourceName </td>
+          <td class="memname"><a class="el" href="classopcua_1_1ByteString.html">ByteString</a> opcua::Event::trigger </td>
           <td>(</td>
-          <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>sourceName</em></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>originId</em> = <code>ObjectId::Server</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Set the source name (optional). </p>
-
-</div>
-</div>
-<a id="af531d9da3f851dc5c07c1ec3147cee9a" name="af531d9da3f851dc5c07c1ec3147cee9a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af531d9da3f851dc5c07c1ec3147cee9a">&#9670;&#160;</a></span>writeTime()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Event.html">Event</a> &amp; opcua::Event::writeTime </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1DateTime.html">DateTime</a>&#160;</td>
-          <td class="paramname"><em>time</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Set the time of the event (UTC). </p>
-
-</div>
-</div>
-<a id="a06587e1b6fc473d29c684bc5d8a79d0a" name="a06587e1b6fc473d29c684bc5d8a79d0a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a06587e1b6fc473d29c684bc5d8a79d0a">&#9670;&#160;</a></span>writeSeverity()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Event.html">Event</a> &amp; opcua::Event::writeSeverity </td>
-          <td>(</td>
-          <td class="paramtype">uint16_t&#160;</td>
-          <td class="paramname"><em>severity</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Set the urgency/priority of the event from 1 (lowest) to 1000 (highest). </p>
+<p>Trigger the event. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">originId</td><td>Origin node of the event (requires <code>EventNotifier</code> attribute) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Unique <code>EventId</code> generated by server </dd></dl>
 
 </div>
 </div>
@@ -507,36 +474,69 @@ Related Symbols</h2></td></tr>
 
 </div>
 </div>
-<a id="af007f5771dbe022ee167e7d37f09bba8" name="af007f5771dbe022ee167e7d37f09bba8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af007f5771dbe022ee167e7d37f09bba8">&#9670;&#160;</a></span>trigger()</h2>
+<a id="a06587e1b6fc473d29c684bc5d8a79d0a" name="a06587e1b6fc473d29c684bc5d8a79d0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06587e1b6fc473d29c684bc5d8a79d0a">&#9670;&#160;</a></span>writeSeverity()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1ByteString.html">ByteString</a> opcua::Event::trigger </td>
+          <td class="memname"><a class="el" href="classopcua_1_1Event.html">Event</a> &amp; opcua::Event::writeSeverity </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>originId</em> = <code>ObjectId::Server</code></td><td>)</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>severity</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Trigger the event. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">originId</td><td>Origin node of the event (requires <code>EventNotifier</code> attribute) </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Unique <code>EventId</code> generated by server </dd></dl>
+<p>Set the urgency/priority of the event from 1 (lowest) to 1000 (highest). </p>
+
+</div>
+</div>
+<a id="a05d721b75dc0a56e54d7313fe815a2ca" name="a05d721b75dc0a56e54d7313fe815a2ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05d721b75dc0a56e54d7313fe815a2ca">&#9670;&#160;</a></span>writeSourceName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1Event.html">Event</a> &amp; opcua::Event::writeSourceName </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>sourceName</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the source name (optional). </p>
+
+</div>
+</div>
+<a id="af531d9da3f851dc5c07c1ec3147cee9a" name="af531d9da3f851dc5c07c1ec3147cee9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af531d9da3f851dc5c07c1ec3147cee9a">&#9670;&#160;</a></span>writeTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1Event.html">Event</a> &amp; opcua::Event::writeTime </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1DateTime.html">DateTime</a>&#160;</td>
+          <td class="paramname"><em>time</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the time of the event (UTC). </p>
 
 </div>
 </div>
 <h2 class="groupheader">Friends And Related Symbol Documentation</h2>
-<a id="a9c6fb153f9ebdaea402bb4e4bac63068" name="a9c6fb153f9ebdaea402bb4e4bac63068"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9c6fb153f9ebdaea402bb4e4bac63068">&#9670;&#160;</a></span>operator==()</h2>
+<a id="a8f4c33e1e5a84b4b1342f8f405542aef" name="a8f4c33e1e5a84b4b1342f8f405542aef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f4c33e1e5a84b4b1342f8f405542aef">&#9670;&#160;</a></span>operator!=()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -545,7 +545,7 @@ Related Symbols</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool operator== </td>
+          <td class="memname">bool operator!= </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classopcua_1_1Event.html">Event</a> &amp;&#160;</td>
           <td class="paramname"><em>lhs</em>, </td>
@@ -571,8 +571,8 @@ Related Symbols</h2></td></tr>
 
 </div>
 </div>
-<a id="a8f4c33e1e5a84b4b1342f8f405542aef" name="a8f4c33e1e5a84b4b1342f8f405542aef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f4c33e1e5a84b4b1342f8f405542aef">&#9670;&#160;</a></span>operator!=()</h2>
+<a id="a9c6fb153f9ebdaea402bb4e4bac63068" name="a9c6fb153f9ebdaea402bb4e4bac63068"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c6fb153f9ebdaea402bb4e4bac63068">&#9670;&#160;</a></span>operator==()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -581,7 +581,7 @@ Related Symbols</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool operator!= </td>
+          <td class="memname">bool operator== </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classopcua_1_1Event.html">Event</a> &amp;&#160;</td>
           <td class="paramname"><em>lhs</em>, </td>

@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -106,11 +106,9 @@ $(function() {
 <code>#include &lt;iterator&gt;</code><br />
 <code>#include &lt;optional&gt;</code><br />
 <code>#include &lt;ratio&gt;</code><br />
-<code>#include &lt;string&gt;</code><br />
 <code>#include &lt;string_view&gt;</code><br />
 <code>#include &lt;type_traits&gt;</code><br />
 <code>#include &lt;utility&gt;</code><br />
-<code>#include &lt;variant&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 <code>#include &quot;<a class="el" href="common_8hpp_source.html">open62541pp/common.hpp</a>&quot;</code><br />
 <code>#include &quot;open62541pp/config.hpp&quot;</code><br />
@@ -123,12 +121,11 @@ $(function() {
 <code>#include &quot;<a class="el" href="span_8hpp_source.html">open62541pp/span.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="typeconverter_8hpp_source.html">open62541pp/typeconverter.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="typeregistry_8hpp_source.html">open62541pp/typeregistry.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="typewrapper_8hpp_source.html">open62541pp/typewrapper.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="wrapper_8hpp_source.html">open62541pp/wrapper.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for types.hpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="types_8hpp__incl.svg" width="3647" height="638"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="types_8hpp__incl.svg" width="3360" height="638"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
@@ -144,9 +141,7 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1String.html">opcua::String</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1TypeConverter_3_01std_1_1basic__string__view_3_01char_00_01Traits_01_4_01_4.html">opcua::TypeConverter&lt; std::basic_string_view&lt; char, Traits &gt; &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1TypeConverter_3_01std_1_1basic__string_3_01char_00_01Traits_00_01Allocator_01_4_01_4.html">opcua::TypeConverter&lt; std::basic_string&lt; char, Traits, Allocator &gt; &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1TypeConverter_3_01T_00_01std_1_1enable__if__t_3_01detail_1_1IsStringLike_3_01T_01_4_1_1value_01_4_01_4.html">opcua::TypeConverter&lt; T, std::enable_if_t&lt; detail::IsStringLike&lt; T &gt;::value &gt; &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1TypeConverter_3_01const_01char_01_5_01_4.html">opcua::TypeConverter&lt; const char * &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -201,8 +196,6 @@ Typedefs</h2></td></tr>
 Enumerations</h2></td></tr>
 <tr class="memitem:a05d617e4c64656fa2ef6baf2af636f90" id="r_a05d617e4c64656fa2ef6baf2af636f90"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a05d617e4c64656fa2ef6baf2af636f90">opcua::NodeIdType</a> : uint8_t </td></tr>
 <tr class="separator:a05d617e4c64656fa2ef6baf2af636f90"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e5d6c3d23b95bdcb5fe678277ab6ffa" id="r_a2e5d6c3d23b95bdcb5fe678277ab6ffa"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a2e5d6c3d23b95bdcb5fe678277ab6ffa">opcua::VariantPolicy</a> </td></tr>
-<tr class="separator:a2e5d6c3d23b95bdcb5fe678277ab6ffa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12f473c742c5dee093677093bd19ab12" id="r_a12f473c742c5dee093677093bd19ab12"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a12f473c742c5dee093677093bd19ab12">opcua::ExtensionObjectEncoding</a> </td></tr>
 <tr class="separator:a12f473c742c5dee093677093bd19ab12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">

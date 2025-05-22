@@ -1,3 +1,15 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="5,5,164,45"/>
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,173,117,198"/>
+<area shape="rect" id="Node000001" href="$structopcua_1_1IsBitmaskEnum_3_01AccessLevel_01_4.html" title=" " alt="" coords="183,5,354,45"/>
+<area shape="poly" id="edge155_Node000000_Node000001" title=" " alt="" coords="74,159,110,107,135,79,164,55,186,43,188,48,167,60,139,83,114,110,79,162"/>
+<area shape="rect" id="Node000002" href="$structopcua_1_1IsBitmaskEnum_3_01EventNotifier_01_4.html" title=" " alt="" coords="183,69,354,109"/>
+<area shape="poly" id="edge156_Node000000_Node000002" title=" " alt="" coords="90,162,125,140,164,119,194,107,196,112,166,124,127,145,93,167"/>
+<area shape="rect" id="Node000003" href="$structopcua_1_1IsBitmaskEnum_3_01NodeClass_01_4.html" title=" " alt="" coords="183,133,354,173"/>
+<area shape="poly" id="edge157_Node000000_Node000003" title=" " alt="" coords="131,172,183,164,183,169,132,177"/>
+<area shape="rect" id="Node000004" href="$structopcua_1_1IsBitmaskEnum_3_01WriteMask_01_4.html" title=" " alt="" coords="183,197,354,237"/>
+<area shape="poly" id="edge158_Node000000_Node000004" title=" " alt="" coords="132,193,183,202,183,207,131,199"/>
+<area shape="rect" id="Node000005" href="$structopcua_1_1IsConvertible_3_01T_00_01std_1_1void__t_3_01decltype_07TypeConverter_3_01T_01_4_02_03_08_4_01_4.html" title=" " alt="" coords="165,262,372,317"/>
+<area shape="poly" id="edge159_Node000000_Node000005" title=" " alt="" coords="94,204,167,247,194,259,191,264,164,252,91,208"/>
+<area shape="rect" id="Node000006" href="$structopcua_1_1IsRegistered_3_01T_00_01std_1_1void__t_3_01decltype_07TypeRegistry_3_01T_01_4_02_03_08_4_01_4.html" title=" " alt="" coords="171,341,367,395"/>
+<area shape="poly" id="edge160_Node000000_Node000006" title=" " alt="" coords="77,209,113,267,138,299,167,326,186,338,183,343,164,330,134,302,108,270,73,212"/>
 </map>

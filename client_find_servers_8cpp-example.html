@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -133,7 +133,7 @@ $(function() {
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot;\tName:             &quot;</span> &lt;&lt; server.applicationName().text() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot;\tApplication URI:  &quot;</span> &lt;&lt; server.applicationUri() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot;\tProduct URI:      &quot;</span> &lt;&lt; server.productUri() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
-<div class="line">            &lt;&lt; <span class="stringliteral">&quot;\tApplication type: &quot;</span> &lt;&lt; toString(server.applicationType()) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;\tApplication type: &quot;</span> &lt;&lt; <a class="code hl_function" href="namespaceopcua.html#a3d1494b8f3ef24a9c3a5c8ecc0724361">toString</a>(server.applicationType()) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot;\tDiscovery URLs:\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">const</span> <span class="keyword">auto</span> discoveryUrls = server.discoveryUrls();</div>
@@ -151,7 +151,7 @@ $(function() {
 <div class="line">                    &lt;&lt; <span class="stringliteral">&quot;\tEndpoint[&quot;</span> &lt;&lt; endpointIndex++ &lt;&lt; <span class="stringliteral">&quot;]:\n&quot;</span></div>
 <div class="line">                    &lt;&lt; <span class="stringliteral">&quot;\t- Endpoint URL:      &quot;</span> &lt;&lt; endpoint.endpointUrl() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
 <div class="line">                    &lt;&lt; <span class="stringliteral">&quot;\t- Transport profile: &quot;</span> &lt;&lt; endpoint.transportProfileUri() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
-<div class="line">                    &lt;&lt; <span class="stringliteral">&quot;\t- Security mode:     &quot;</span> &lt;&lt; toString(endpoint.securityMode()) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
+<div class="line">                    &lt;&lt; <span class="stringliteral">&quot;\t- Security mode:     &quot;</span> &lt;&lt; <a class="code hl_function" href="namespaceopcua.html#a3d1494b8f3ef24a9c3a5c8ecc0724361">toString</a>(endpoint.securityMode()) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
 <div class="line">                    &lt;&lt; <span class="stringliteral">&quot;\t- Security profile:  &quot;</span> &lt;&lt; endpoint.securityPolicyUri() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
 <div class="line">                    &lt;&lt; <span class="stringliteral">&quot;\t- Security level:    &quot;</span> &lt;&lt; endpoint.securityLevel() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
 <div class="line">                    &lt;&lt; <span class="stringliteral">&quot;\t- User identity token:\n&quot;</span>;</div>
@@ -164,12 +164,13 @@ $(function() {
 <div class="line">    }</div>
 <div class="line">}</div>
 <div class="ttc" id="aclassopcua_1_1ClientConfig_html_aa20a0b1269f25e53dd7d34a51ce7aff5"><div class="ttname"><a href="classopcua_1_1ClientConfig.html#aa20a0b1269f25e53dd7d34a51ce7aff5">opcua::ClientConfig::setLogger</a></div><div class="ttdeci">void setLogger(LogFunction func)</div><div class="ttdoc">Set custom log function.</div></div>
-<div class="ttc" id="aclassopcua_1_1Client_html"><div class="ttname"><a href="classopcua_1_1Client.html">opcua::Client</a></div><div class="ttdoc">High-level client class.</div><div class="ttdef"><b>Definition</b> <a href="client_8hpp_source.html#l00126">client.hpp:126</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Client_html"><div class="ttname"><a href="classopcua_1_1Client.html">opcua::Client</a></div><div class="ttdoc">High-level client class.</div><div class="ttdef"><b>Definition</b> <a href="client_8hpp_source.html#l00130">client.hpp:130</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Client_html_a877a6d6e546a11560eff3f4442520e3f"><div class="ttname"><a href="classopcua_1_1Client.html#a877a6d6e546a11560eff3f4442520e3f">opcua::Client::config</a></div><div class="ttdeci">ClientConfig &amp; config() noexcept</div></div>
 <div class="ttc" id="aclassopcua_1_1Client_html_ad8a9d4f6aad75f6dca79c13f856ae9d8"><div class="ttname"><a href="classopcua_1_1Client.html#ad8a9d4f6aad75f6dca79c13f856ae9d8">opcua::Client::findServers</a></div><div class="ttdeci">std::vector&lt; ApplicationDescription &gt; findServers(std::string_view serverUrl)</div><div class="ttdoc">Gets a list of all registered servers at the given server.</div></div>
 <div class="ttc" id="aclient_8hpp_html"><div class="ttname"><a href="client_8hpp.html">client.hpp</a></div></div>
-<div class="ttc" id="agroup__Wrapper_html_ga6a89265e72bcab5596a1f486b7cfe8b3"><div class="ttname"><a href="group__Wrapper.html#ga6a89265e72bcab5596a1f486b7cfe8b3">opcua::ua::ApplicationType</a></div><div class="ttdeci">ApplicationType</div><div class="ttdoc">Application type.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l00155">types.hpp:155</a></div></div>
-<div class="ttc" id="agroup__Wrapper_html_ga8747da9421645210ff2d7a76d84d0a14"><div class="ttname"><a href="group__Wrapper.html#ga8747da9421645210ff2d7a76d84d0a14">opcua::ua::MessageSecurityMode</a></div><div class="ttdeci">MessageSecurityMode</div><div class="ttdoc">Message security mode.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l00255">types.hpp:255</a></div></div>
+<div class="ttc" id="agroup__Wrapper_html_ga6a89265e72bcab5596a1f486b7cfe8b3"><div class="ttname"><a href="group__Wrapper.html#ga6a89265e72bcab5596a1f486b7cfe8b3">opcua::ua::ApplicationType</a></div><div class="ttdeci">ApplicationType</div><div class="ttdoc">Application type.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l00115">types.hpp:115</a></div></div>
+<div class="ttc" id="agroup__Wrapper_html_ga8747da9421645210ff2d7a76d84d0a14"><div class="ttname"><a href="group__Wrapper.html#ga8747da9421645210ff2d7a76d84d0a14">opcua::ua::MessageSecurityMode</a></div><div class="ttdeci">MessageSecurityMode</div><div class="ttdoc">Message security mode.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l00215">types.hpp:215</a></div></div>
+<div class="ttc" id="anamespaceopcua_html_a3d1494b8f3ef24a9c3a5c8ecc0724361"><div class="ttname"><a href="namespaceopcua.html#a3d1494b8f3ef24a9c3a5c8ecc0724361">opcua::toString</a></div><div class="ttdeci">String toString(const NumericRange &amp;range)</div></div>
 </div><!-- fragment --> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

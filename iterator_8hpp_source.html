@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -115,8 +115,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keyword">using </span>reference = value_type&amp;;</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keyword">constexpr</span> TransformIterator(Iter it, F func)</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        : it_(std::move(it)),</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>          func_(std::move(func)) {}</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        : it_{std::move(it)},</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>          func_{std::move(func)} {}</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keyword">constexpr</span> <span class="keyword">const</span> Iter&amp; base() const&amp; noexcept {</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="keywordflow">return</span> it_;</div>

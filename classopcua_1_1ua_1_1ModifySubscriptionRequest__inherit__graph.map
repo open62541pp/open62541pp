@@ -1,7 +1,7 @@
 <map id="opcua::ua::ModifySubscriptionRequest" name="opcua::ua::ModifySubscriptionRequest">
-<area shape="rect" id="Node000001" title="UA_ModifySubscriptionRequest wrapper class." alt="" coords="588,13,805,53"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="216,5,540,60"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="554,30,588,30,588,35,554,35"/>
-<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap native objects." alt="" coords="5,20,168,45"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="182,30,216,30,216,35,182,35"/>
+<area shape="rect" id="Node000001" title="UA_ModifySubscriptionRequest wrapper class." alt="" coords="640,13,857,53"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap (native) objects." alt="" coords="291,5,592,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="606,30,640,30,640,35,606,35"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,13,243,53"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="257,30,291,30,291,35,257,35"/>
 </map>

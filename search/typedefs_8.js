@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['namespaceindex_0',['NamespaceIndex',['../namespaceopcua.html#a00e58ea3436dae57a589fc7b44a348f8',1,'opcua']]],
-  ['nativetype_1',['nativetype',['../structopcua_1_1TypeConverter_3_01std_1_1basic__string__view_3_01char_00_01Traits_01_4_01_4.html#a9c0432184b26c428a4920322686e6df9',1,'opcua::TypeConverter&lt; std::basic_string_view&lt; char, Traits &gt; &gt;::NativeType'],['../structopcua_1_1TypeConverter_3_01std_1_1basic__string_3_01char_00_01Traits_00_01Allocator_01_4_01_4.html#a1ef60e5ad64a1bf963e802aa0bef7d07',1,'opcua::TypeConverter&lt; std::basic_string&lt; char, Traits, Allocator &gt; &gt;::NativeType'],['../structopcua_1_1TypeConverter_3_01const_01char_01_5_01_4.html#a702b05a1d1782f8ba50672280cbaf3cc',1,'opcua::TypeConverter&lt; const char * &gt;::NativeType'],['../structopcua_1_1TypeConverter_3_01char_0fN_0e_4.html#a65454b7a00ded95df56fc059eafa1365',1,'opcua::TypeConverter&lt; char[N]&gt;::NativeType'],['../structopcua_1_1TypeConverter_3_01std_1_1chrono_1_1time__point_3_01Clock_00_01Duration_01_4_01_4.html#a6a95915f2b4516d0afd706f8ccbdcbe7',1,'opcua::TypeConverter&lt; std::chrono::time_point&lt; Clock, Duration &gt; &gt;::NativeType'],['../classopcua_1_1Wrapper.html#abe09db5fb8ab2aded84e0f8e85e5bc99',1,'opcua::Wrapper::NativeType']]],
-  ['numericrangedimension_2',['NumericRangeDimension',['../namespaceopcua.html#a8482df382d1d7a2fe9d7c1d1e79a5bfa',1,'opcua']]]
+  ['methodcallback_0',['MethodCallback',['../group__AddNodes.html#ga2c4f77963cea649c5ed497c73ee24529',1,'opcua::services']]],
+  ['monitoringparametersex_1',['MonitoringParametersEx',['../namespaceopcua.html#a6a90d28e94f7dedce6d000248cf79f54',1,'opcua']]]
 ];

@@ -159,36 +159,6 @@ Functions</h2></td></tr>
 <tr class="separator:abd673b2c493dccd3ff2200f1b5a74a3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a56ce863d5095b5d60fcec7601fdc16b8" name="a56ce863d5095b5d60fcec7601fdc16b8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a56ce863d5095b5d60fcec7601fdc16b8">&#9670;&#160;</a></span>UA_MIN</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_MIN</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">A, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">B&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;((A) &gt; (B) ? (B) : (A))</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="util_8h_source.html#l00130">130</a> of file <a class="el" href="util_8h_source.html">util.h</a>.</p>
-
-</div>
-</div>
 <a id="af72c502d2e07ea2d435a96bb342cdb25" name="af72c502d2e07ea2d435a96bb342cdb25"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af72c502d2e07ea2d435a96bb342cdb25">&#9670;&#160;</a></span>UA_MAX</h2>
 
@@ -219,21 +189,33 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a96837c44d225f62809cf4d536ad2daf1" name="a96837c44d225f62809cf4d536ad2daf1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a96837c44d225f62809cf4d536ad2daf1">&#9670;&#160;</a></span>UA_PRINTF_GUID_FORMAT</h2>
+<a id="a56ce863d5095b5d60fcec7601fdc16b8" name="a56ce863d5095b5d60fcec7601fdc16b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56ce863d5095b5d60fcec7601fdc16b8">&#9670;&#160;</a></span>UA_MIN</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define UA_PRINTF_GUID_FORMAT</td>
+          <td class="memname">#define UA_MIN</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">A, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">B&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((A) &gt; (B) ? (B) : (A))</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="stringliteral">&quot;%08&quot;</span> PRIx32 <span class="stringliteral">&quot;-%04&quot;</span> PRIx16 <span class="stringliteral">&quot;-%04&quot;</span> PRIx16 \</div>
-<div class="line">    <span class="stringliteral">&quot;-%02&quot;</span> PRIx8 <span class="stringliteral">&quot;%02&quot;</span> PRIx8 <span class="stringliteral">&quot;-%02&quot;</span> PRIx8 <span class="stringliteral">&quot;%02&quot;</span> PRIx8 <span class="stringliteral">&quot;%02&quot;</span> PRIx8 <span class="stringliteral">&quot;%02&quot;</span> PRIx8 <span class="stringliteral">&quot;%02&quot;</span> PRIx8 <span class="stringliteral">&quot;%02&quot;</span> PRIx8</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="util_8h_source.html#l00144">144</a> of file <a class="el" href="util_8h_source.html">util.h</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="util_8h_source.html#l00130">130</a> of file <a class="el" href="util_8h_source.html">util.h</a>.</p>
 
 </div>
 </div>
@@ -260,19 +242,21 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="af777aeb3a5393bad0cfa2dbd89e2e8de" name="af777aeb3a5393bad0cfa2dbd89e2e8de"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af777aeb3a5393bad0cfa2dbd89e2e8de">&#9670;&#160;</a></span>UA_PRINTF_STRING_FORMAT</h2>
+<a id="a96837c44d225f62809cf4d536ad2daf1" name="a96837c44d225f62809cf4d536ad2daf1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96837c44d225f62809cf4d536ad2daf1">&#9670;&#160;</a></span>UA_PRINTF_GUID_FORMAT</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define UA_PRINTF_STRING_FORMAT&#160;&#160;&#160;&quot;\&quot;%.*s\&quot;&quot;</td>
+          <td class="memname">#define UA_PRINTF_GUID_FORMAT</td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="util_8h_source.html#l00150">150</a> of file <a class="el" href="util_8h_source.html">util.h</a>.</p>
+<b>Value:</b><div class="fragment"><div class="line">    <span class="stringliteral">&quot;%08&quot;</span> PRIx32 <span class="stringliteral">&quot;-%04&quot;</span> PRIx16 <span class="stringliteral">&quot;-%04&quot;</span> PRIx16 \</div>
+<div class="line">    <span class="stringliteral">&quot;-%02&quot;</span> PRIx8 <span class="stringliteral">&quot;%02&quot;</span> PRIx8 <span class="stringliteral">&quot;-%02&quot;</span> PRIx8 <span class="stringliteral">&quot;%02&quot;</span> PRIx8 <span class="stringliteral">&quot;%02&quot;</span> PRIx8 <span class="stringliteral">&quot;%02&quot;</span> PRIx8 <span class="stringliteral">&quot;%02&quot;</span> PRIx8 <span class="stringliteral">&quot;%02&quot;</span> PRIx8</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="util_8h_source.html#l00144">144</a> of file <a class="el" href="util_8h_source.html">util.h</a>.</p>
 
 </div>
 </div>
@@ -296,7 +280,39 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="af777aeb3a5393bad0cfa2dbd89e2e8de" name="af777aeb3a5393bad0cfa2dbd89e2e8de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af777aeb3a5393bad0cfa2dbd89e2e8de">&#9670;&#160;</a></span>UA_PRINTF_STRING_FORMAT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_PRINTF_STRING_FORMAT&#160;&#160;&#160;&quot;\&quot;%.*s\&quot;&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="util_8h_source.html#l00150">150</a> of file <a class="el" href="util_8h_source.html">util.h</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Typedef Documentation</h2>
+<a id="a2bd5a2265eb4146ce3d95897f7c51aae" name="a2bd5a2265eb4146ce3d95897f7c51aae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bd5a2265eb4146ce3d95897f7c51aae">&#9670;&#160;</a></span>UA_Client</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structUA__Client.html">UA_Client</a> <a class="el" href="structUA__Client.html">UA_Client</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="util_8h_source.html#l00028">28</a> of file <a class="el" href="util_8h_source.html">util.h</a>.</p>
+
+</div>
+</div>
 <a id="a9975d7f7819bd5b03521cf8a388eecda" name="a9975d7f7819bd5b03521cf8a388eecda"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9975d7f7819bd5b03521cf8a388eecda">&#9670;&#160;</a></span>UA_Server</h2>
 
@@ -310,22 +326,6 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="util_8h_source.html#l00020">20</a> of file <a class="el" href="util_8h_source.html">util.h</a>.</p>
-
-</div>
-</div>
-<a id="aae96a8a45ba7fe0ce7072e7ca33fc0c7" name="aae96a8a45ba7fe0ce7072e7ca33fc0c7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aae96a8a45ba7fe0ce7072e7ca33fc0c7">&#9670;&#160;</a></span>UA_ServerConfig</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef struct <a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> <a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="util_8h_source.html#l00023">23</a> of file <a class="el" href="util_8h_source.html">util.h</a>.</p>
 
 </div>
 </div>
@@ -345,19 +345,19 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a2bd5a2265eb4146ce3d95897f7c51aae" name="a2bd5a2265eb4146ce3d95897f7c51aae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2bd5a2265eb4146ce3d95897f7c51aae">&#9670;&#160;</a></span>UA_Client</h2>
+<a id="aae96a8a45ba7fe0ce7072e7ca33fc0c7" name="aae96a8a45ba7fe0ce7072e7ca33fc0c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae96a8a45ba7fe0ce7072e7ca33fc0c7">&#9670;&#160;</a></span>UA_ServerConfig</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef struct <a class="el" href="structUA__Client.html">UA_Client</a> <a class="el" href="structUA__Client.html">UA_Client</a></td>
+          <td class="memname">typedef struct <a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> <a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="util_8h_source.html#l00028">28</a> of file <a class="el" href="util_8h_source.html">util.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="util_8h_source.html#l00023">23</a> of file <a class="el" href="util_8h_source.html">util.h</a>.</p>
 
 </div>
 </div>
@@ -385,57 +385,14 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ad2b1090cb1d8383f7a596d838b8d1c74" name="ad2b1090cb1d8383f7a596d838b8d1c74"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad2b1090cb1d8383f7a596d838b8d1c74">&#9670;&#160;</a></span>UA_KeyValueMap_setQualified()</h2>
+<a id="af2325fe2c5a276441d645f110b13daf5" name="af2325fe2c5a276441d645f110b13daf5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2325fe2c5a276441d645f110b13daf5">&#9670;&#160;</a></span>UA_KeyValueMap_delete()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_KeyValueMap_setQualified </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__KeyValuePair.html">UA_KeyValuePair</a> **&#160;</td>
-          <td class="paramname"><em>map</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t *&#160;</td>
-          <td class="paramname"><em>mapSize</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__QualifiedName.html">UA_QualifiedName</a> *&#160;</td>
-          <td class="paramname"><em>key</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__Variant.html">UA_Variant</a> *&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Makes a copy of the value. </p>
-<p>Can reallocate the underlying array. This invalidates pointers into the previous array. If the key exists already, the value is overwritten. </p>
-
-</div>
-</div>
-<a id="a3dbce9c4b1cbffd8ba5f44071eee8ed9" name="a3dbce9c4b1cbffd8ba5f44071eee8ed9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3dbce9c4b1cbffd8ba5f44071eee8ed9">&#9670;&#160;</a></span>UA_KeyValueMap_set()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_KeyValueMap_set </td>
+          <td class="memname">UA_EXPORT void UA_KeyValueMap_delete </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structUA__KeyValuePair.html">UA_KeyValuePair</a> **&#160;</td>
           <td class="paramname"><em>map</em>, </td>
@@ -450,13 +407,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>key</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__Variant.html">UA_Variant</a> *&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
+          <td class="paramname"><em>key</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -470,22 +421,22 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a0dc9f1b67fd67c0b73b3a4405a7bbfda" name="a0dc9f1b67fd67c0b73b3a4405a7bbfda"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0dc9f1b67fd67c0b73b3a4405a7bbfda">&#9670;&#160;</a></span>UA_KeyValueMap_getQualified()</h2>
+<a id="ab9a437e5a04733f74de83bfa4a2bbd13" name="ab9a437e5a04733f74de83bfa4a2bbd13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9a437e5a04733f74de83bfa4a2bbd13">&#9670;&#160;</a></span>UA_KeyValueMap_deleteQualified()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">UA_EXPORT const <a class="el" href="structUA__Variant.html">UA_Variant</a> * UA_KeyValueMap_getQualified </td>
+          <td class="memname">UA_EXPORT void UA_KeyValueMap_deleteQualified </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__KeyValuePair.html">UA_KeyValuePair</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structUA__KeyValuePair.html">UA_KeyValuePair</a> **&#160;</td>
           <td class="paramname"><em>map</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype">size_t *&#160;</td>
           <td class="paramname"><em>mapSize</em>, </td>
         </tr>
         <tr>
@@ -502,7 +453,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Returns a pointer into underlying array or NULL if the key is not found. </p>
+<p>Remove a single entry. </p>
+<p>To delete the entire map, use UA_Array_delete. </p>
 
 </div>
 </div>
@@ -539,6 +491,82 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Simplified version that assumes the key is in namespace 0. </p>
+
+</div>
+</div>
+<a id="ab9c9dd402bdfd421eefbac43c038215a" name="ab9c9dd402bdfd421eefbac43c038215a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9c9dd402bdfd421eefbac43c038215a">&#9670;&#160;</a></span>UA_KeyValueMap_getArray()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT const <a class="el" href="structUA__Variant.html">UA_Variant</a> * UA_KeyValueMap_getArray </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__KeyValuePair.html">UA_KeyValuePair</a> *&#160;</td>
+          <td class="paramname"><em>map</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>mapSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0dc9f1b67fd67c0b73b3a4405a7bbfda" name="a0dc9f1b67fd67c0b73b3a4405a7bbfda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0dc9f1b67fd67c0b73b3a4405a7bbfda">&#9670;&#160;</a></span>UA_KeyValueMap_getQualified()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT const <a class="el" href="structUA__Variant.html">UA_Variant</a> * UA_KeyValueMap_getQualified </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__KeyValuePair.html">UA_KeyValuePair</a> *&#160;</td>
+          <td class="paramname"><em>map</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>mapSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__QualifiedName.html">UA_QualifiedName</a> *&#160;</td>
+          <td class="paramname"><em>key</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns a pointer into underlying array or NULL if the key is not found. </p>
 
 </div>
 </div>
@@ -584,22 +612,22 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ab9c9dd402bdfd421eefbac43c038215a" name="ab9c9dd402bdfd421eefbac43c038215a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab9c9dd402bdfd421eefbac43c038215a">&#9670;&#160;</a></span>UA_KeyValueMap_getArray()</h2>
+<a id="a3dbce9c4b1cbffd8ba5f44071eee8ed9" name="a3dbce9c4b1cbffd8ba5f44071eee8ed9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3dbce9c4b1cbffd8ba5f44071eee8ed9">&#9670;&#160;</a></span>UA_KeyValueMap_set()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">UA_EXPORT const <a class="el" href="structUA__Variant.html">UA_Variant</a> * UA_KeyValueMap_getArray </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_KeyValueMap_set </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__KeyValuePair.html">UA_KeyValuePair</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structUA__KeyValuePair.html">UA_KeyValuePair</a> **&#160;</td>
           <td class="paramname"><em>map</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype">size_t *&#160;</td>
           <td class="paramname"><em>mapSize</em>, </td>
         </tr>
         <tr>
@@ -611,8 +639,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>type</em>&#160;</td>
+          <td class="paramtype">const <a class="el" href="structUA__Variant.html">UA_Variant</a> *&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -622,16 +650,18 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Simplified version that assumes the key is in namespace 0. </p>
+
 </div>
 </div>
-<a id="ab9a437e5a04733f74de83bfa4a2bbd13" name="ab9a437e5a04733f74de83bfa4a2bbd13"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab9a437e5a04733f74de83bfa4a2bbd13">&#9670;&#160;</a></span>UA_KeyValueMap_deleteQualified()</h2>
+<a id="ad2b1090cb1d8383f7a596d838b8d1c74" name="ad2b1090cb1d8383f7a596d838b8d1c74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2b1090cb1d8383f7a596d838b8d1c74">&#9670;&#160;</a></span>UA_KeyValueMap_setQualified()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">UA_EXPORT void UA_KeyValueMap_deleteQualified </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_KeyValueMap_setQualified </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structUA__KeyValuePair.html">UA_KeyValuePair</a> **&#160;</td>
           <td class="paramname"><em>map</em>, </td>
@@ -646,7 +676,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="structUA__QualifiedName.html">UA_QualifiedName</a> *&#160;</td>
-          <td class="paramname"><em>key</em>&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__Variant.html">UA_Variant</a> *&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -656,44 +692,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Remove a single entry. </p>
-<p>To delete the entire map, use UA_Array_delete. </p>
-
-</div>
-</div>
-<a id="af2325fe2c5a276441d645f110b13daf5" name="af2325fe2c5a276441d645f110b13daf5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af2325fe2c5a276441d645f110b13daf5">&#9670;&#160;</a></span>UA_KeyValueMap_delete()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">UA_EXPORT void UA_KeyValueMap_delete </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__KeyValuePair.html">UA_KeyValuePair</a> **&#160;</td>
-          <td class="paramname"><em>map</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t *&#160;</td>
-          <td class="paramname"><em>mapSize</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>key</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Simplified version that assumes the key is in namespace 0. </p>
+<p>Makes a copy of the value. </p>
+<p>Can reallocate the underlying array. This invalidates pointers into the previous array. If the key exists already, the value is overwritten. </p>
 
 </div>
 </div>

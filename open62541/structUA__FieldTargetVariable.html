@@ -107,51 +107,19 @@ Data Fields</h2></td></tr>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="server__pubsub_8h_source.html#l00425">425</a> of file <a class="el" href="server__pubsub_8h_source.html">server_pubsub.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
-<a id="ab568723bedffdb8c6ef71e562cf1cef6" name="ab568723bedffdb8c6ef71e562cf1cef6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab568723bedffdb8c6ef71e562cf1cef6">&#9670;&#160;</a></span>targetVariable</h2>
+<a id="a97bf57e07c20ac1a158bf6c67c40827f" name="a97bf57e07c20ac1a158bf6c67c40827f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97bf57e07c20ac1a158bf6c67c40827f">&#9670;&#160;</a></span>afterWrite</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">UA_FieldTargetDataType UA_FieldTargetVariable::targetVariable</td>
+          <td class="memname">void(* UA_FieldTargetVariable::afterWrite) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *readerIdentifier, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *readerGroupIdentifier, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *targetVariableIdentifier, void *<a class="el" href="structUA__FieldTargetVariable.html#ad05f8447ee644d873bd0411b32e214f9">targetVariableContext</a>, <a class="el" href="structUA__DataValue.html">UA_DataValue</a> **<a class="el" href="structUA__FieldTargetVariable.html#abfc2915b0f1181bf193cc3987257d2e6">externalDataValue</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server__pubsub_8h_source.html#l00427">427</a> of file <a class="el" href="server__pubsub_8h_source.html">server_pubsub.h</a>.</p>
-
-</div>
-</div>
-<a id="abfc2915b0f1181bf193cc3987257d2e6" name="abfc2915b0f1181bf193cc3987257d2e6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abfc2915b0f1181bf193cc3987257d2e6">&#9670;&#160;</a></span>externalDataValue</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structUA__DataValue.html">UA_DataValue</a>** UA_FieldTargetVariable::externalDataValue</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="server__pubsub_8h_source.html#l00435">435</a> of file <a class="el" href="server__pubsub_8h_source.html">server_pubsub.h</a>.</p>
-
-</div>
-</div>
-<a id="ad05f8447ee644d873bd0411b32e214f9" name="ad05f8447ee644d873bd0411b32e214f9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad05f8447ee644d873bd0411b32e214f9">&#9670;&#160;</a></span>targetVariableContext</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void* UA_FieldTargetVariable::targetVariableContext</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="server__pubsub_8h_source.html#l00436">436</a> of file <a class="el" href="server__pubsub_8h_source.html">server_pubsub.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server__pubsub_8h_source.html#l00443">443</a> of file <a class="el" href="server__pubsub_8h_source.html">server_pubsub.h</a>.</p>
 
 </div>
 </div>
@@ -171,19 +139,51 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="a97bf57e07c20ac1a158bf6c67c40827f" name="a97bf57e07c20ac1a158bf6c67c40827f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a97bf57e07c20ac1a158bf6c67c40827f">&#9670;&#160;</a></span>afterWrite</h2>
+<a id="abfc2915b0f1181bf193cc3987257d2e6" name="abfc2915b0f1181bf193cc3987257d2e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abfc2915b0f1181bf193cc3987257d2e6">&#9670;&#160;</a></span>externalDataValue</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void(* UA_FieldTargetVariable::afterWrite) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *readerIdentifier, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *readerGroupIdentifier, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *targetVariableIdentifier, void *<a class="el" href="structUA__FieldTargetVariable.html#ad05f8447ee644d873bd0411b32e214f9">targetVariableContext</a>, <a class="el" href="structUA__DataValue.html">UA_DataValue</a> **<a class="el" href="structUA__FieldTargetVariable.html#abfc2915b0f1181bf193cc3987257d2e6">externalDataValue</a>)</td>
+          <td class="memname"><a class="el" href="structUA__DataValue.html">UA_DataValue</a>** UA_FieldTargetVariable::externalDataValue</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server__pubsub_8h_source.html#l00443">443</a> of file <a class="el" href="server__pubsub_8h_source.html">server_pubsub.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server__pubsub_8h_source.html#l00435">435</a> of file <a class="el" href="server__pubsub_8h_source.html">server_pubsub.h</a>.</p>
+
+</div>
+</div>
+<a id="ab568723bedffdb8c6ef71e562cf1cef6" name="ab568723bedffdb8c6ef71e562cf1cef6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab568723bedffdb8c6ef71e562cf1cef6">&#9670;&#160;</a></span>targetVariable</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_FieldTargetDataType UA_FieldTargetVariable::targetVariable</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="server__pubsub_8h_source.html#l00427">427</a> of file <a class="el" href="server__pubsub_8h_source.html">server_pubsub.h</a>.</p>
+
+</div>
+</div>
+<a id="ad05f8447ee644d873bd0411b32e214f9" name="ad05f8447ee644d873bd0411b32e214f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad05f8447ee644d873bd0411b32e214f9">&#9670;&#160;</a></span>targetVariableContext</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* UA_FieldTargetVariable::targetVariableContext</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="server__pubsub_8h_source.html#l00436">436</a> of file <a class="el" href="server__pubsub_8h_source.html">server_pubsub.h</a>.</p>
 
 </div>
 </div>

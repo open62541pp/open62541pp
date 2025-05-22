@@ -119,22 +119,6 @@ Data Fields</h2></td></tr>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="historydatabase_8h_source.html#l00017">17</a> of file <a class="el" href="historydatabase_8h_source.html">historydatabase.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
-<a id="adf45befb223c1a1968bd1933e41e2937" name="adf45befb223c1a1968bd1933e41e2937"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf45befb223c1a1968bd1933e41e2937">&#9670;&#160;</a></span>context</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void* UA_HistoryDatabase::context</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="historydatabase_8h_source.html#l00018">18</a> of file <a class="el" href="historydatabase_8h_source.html">historydatabase.h</a>.</p>
-
-</div>
-</div>
 <a id="a0812688488a2974713b3f2b8fb84f0bb" name="a0812688488a2974713b3f2b8fb84f0bb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0812688488a2974713b3f2b8fb84f0bb">&#9670;&#160;</a></span>clear</h2>
 
@@ -151,99 +135,35 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="a6d4969627e6d3c6b378d1276bf736b9e" name="a6d4969627e6d3c6b378d1276bf736b9e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6d4969627e6d3c6b378d1276bf736b9e">&#9670;&#160;</a></span>setValue</h2>
+<a id="adf45befb223c1a1968bd1933e41e2937" name="adf45befb223c1a1968bd1933e41e2937"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf45befb223c1a1968bd1933e41e2937">&#9670;&#160;</a></span>context</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void(* UA_HistoryDatabase::setValue) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdbContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> historizing, const <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *value)</td>
+          <td class="memname">void* UA_HistoryDatabase::context</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="historydatabase_8h_source.html#l00033">33</a> of file <a class="el" href="historydatabase_8h_source.html">historydatabase.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="historydatabase_8h_source.html#l00018">18</a> of file <a class="el" href="historydatabase_8h_source.html">historydatabase.h</a>.</p>
 
 </div>
 </div>
-<a id="a3c7b4be8826d592c74868fbc42cbdfe8" name="a3c7b4be8826d592c74868fbc42cbdfe8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3c7b4be8826d592c74868fbc42cbdfe8">&#9670;&#160;</a></span>setEvent</h2>
+<a id="ab2cb2fb1299cb8a1c911ab99b4fa23d4" name="ab2cb2fb1299cb8a1c911ab99b4fa23d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2cb2fb1299cb8a1c911ab99b4fa23d4">&#9670;&#160;</a></span>deleteRawModified</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void(* UA_HistoryDatabase::setEvent) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdbContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *originId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *emitterId, const <a class="el" href="structUA__EventFilter.html">UA_EventFilter</a> *historicalEventFilter, <a class="el" href="structUA__EventFieldList.html">UA_EventFieldList</a> *fieldList)</td>
+          <td class="memname">void(* UA_HistoryDatabase::deleteRawModified) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdbContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__RequestHeader.html">UA_RequestHeader</a> *requestHeader, const UA_DeleteRawModifiedDetails *details, UA_HistoryUpdateResult *result)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="historydatabase_8h_source.html#l00055">55</a> of file <a class="el" href="historydatabase_8h_source.html">historydatabase.h</a>.</p>
-
-</div>
-</div>
-<a id="ad23155932b0da262c49957470e00e3fd" name="ad23155932b0da262c49957470e00e3fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad23155932b0da262c49957470e00e3fd">&#9670;&#160;</a></span>readRaw</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void(* UA_HistoryDatabase::readRaw) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdbContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__RequestHeader.html">UA_RequestHeader</a> *requestHeader, const UA_ReadRawModifiedDetails *historyReadDetails, <a class="el" href="types__generated_8h.html#ab298c4ff5eb700437114d0dc2db97ead">UA_TimestampsToReturn</a> timestampsToReturn, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> releaseContinuationPoints, size_t nodesToReadSize, const UA_HistoryReadValueId *nodesToRead, UA_HistoryReadResponse *response, UA_HistoryData *const *const historyData)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="historydatabase_8h_source.html#l00085">85</a> of file <a class="el" href="historydatabase_8h_source.html">historydatabase.h</a>.</p>
-
-</div>
-</div>
-<a id="ad2b57fce5da556abf74d39f012114327" name="ad2b57fce5da556abf74d39f012114327"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad2b57fce5da556abf74d39f012114327">&#9670;&#160;</a></span>readModified</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void(* UA_HistoryDatabase::readModified) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdbContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__RequestHeader.html">UA_RequestHeader</a> *requestHeader, const UA_ReadRawModifiedDetails *historyReadDetails, <a class="el" href="types__generated_8h.html#ab298c4ff5eb700437114d0dc2db97ead">UA_TimestampsToReturn</a> timestampsToReturn, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> releaseContinuationPoints, size_t nodesToReadSize, const UA_HistoryReadValueId *nodesToRead, UA_HistoryReadResponse *response, UA_HistoryModifiedData *const *const historyData)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="historydatabase_8h_source.html#l00101">101</a> of file <a class="el" href="historydatabase_8h_source.html">historydatabase.h</a>.</p>
-
-</div>
-</div>
-<a id="a9a819a6928eee0577790c96742310aaf" name="a9a819a6928eee0577790c96742310aaf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9a819a6928eee0577790c96742310aaf">&#9670;&#160;</a></span>readEvent</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void(* UA_HistoryDatabase::readEvent) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdbContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__RequestHeader.html">UA_RequestHeader</a> *requestHeader, const UA_ReadEventDetails *historyReadDetails, <a class="el" href="types__generated_8h.html#ab298c4ff5eb700437114d0dc2db97ead">UA_TimestampsToReturn</a> timestampsToReturn, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> releaseContinuationPoints, size_t nodesToReadSize, const UA_HistoryReadValueId *nodesToRead, UA_HistoryReadResponse *response, UA_HistoryEvent *const *const historyData)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="historydatabase_8h_source.html#l00117">117</a> of file <a class="el" href="historydatabase_8h_source.html">historydatabase.h</a>.</p>
-
-</div>
-</div>
-<a id="aadaf7952faf2d5e132744fc851760b76" name="aadaf7952faf2d5e132744fc851760b76"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aadaf7952faf2d5e132744fc851760b76">&#9670;&#160;</a></span>readProcessed</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void(* UA_HistoryDatabase::readProcessed) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdbContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__RequestHeader.html">UA_RequestHeader</a> *requestHeader, const UA_ReadProcessedDetails *historyReadDetails, <a class="el" href="types__generated_8h.html#ab298c4ff5eb700437114d0dc2db97ead">UA_TimestampsToReturn</a> timestampsToReturn, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> releaseContinuationPoints, size_t nodesToReadSize, const UA_HistoryReadValueId *nodesToRead, UA_HistoryReadResponse *response, UA_HistoryData *const *const historyData)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="historydatabase_8h_source.html#l00133">133</a> of file <a class="el" href="historydatabase_8h_source.html">historydatabase.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="historydatabase_8h_source.html#l00172">172</a> of file <a class="el" href="historydatabase_8h_source.html">historydatabase.h</a>.</p>
 
 </div>
 </div>
@@ -263,6 +183,102 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
+<a id="a9a819a6928eee0577790c96742310aaf" name="a9a819a6928eee0577790c96742310aaf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a819a6928eee0577790c96742310aaf">&#9670;&#160;</a></span>readEvent</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* UA_HistoryDatabase::readEvent) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdbContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__RequestHeader.html">UA_RequestHeader</a> *requestHeader, const UA_ReadEventDetails *historyReadDetails, <a class="el" href="types__generated_8h.html#ab298c4ff5eb700437114d0dc2db97ead">UA_TimestampsToReturn</a> timestampsToReturn, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> releaseContinuationPoints, size_t nodesToReadSize, const UA_HistoryReadValueId *nodesToRead, UA_HistoryReadResponse *response, UA_HistoryEvent *const *const historyData)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="historydatabase_8h_source.html#l00117">117</a> of file <a class="el" href="historydatabase_8h_source.html">historydatabase.h</a>.</p>
+
+</div>
+</div>
+<a id="ad2b57fce5da556abf74d39f012114327" name="ad2b57fce5da556abf74d39f012114327"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2b57fce5da556abf74d39f012114327">&#9670;&#160;</a></span>readModified</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* UA_HistoryDatabase::readModified) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdbContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__RequestHeader.html">UA_RequestHeader</a> *requestHeader, const UA_ReadRawModifiedDetails *historyReadDetails, <a class="el" href="types__generated_8h.html#ab298c4ff5eb700437114d0dc2db97ead">UA_TimestampsToReturn</a> timestampsToReturn, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> releaseContinuationPoints, size_t nodesToReadSize, const UA_HistoryReadValueId *nodesToRead, UA_HistoryReadResponse *response, UA_HistoryModifiedData *const *const historyData)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="historydatabase_8h_source.html#l00101">101</a> of file <a class="el" href="historydatabase_8h_source.html">historydatabase.h</a>.</p>
+
+</div>
+</div>
+<a id="aadaf7952faf2d5e132744fc851760b76" name="aadaf7952faf2d5e132744fc851760b76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadaf7952faf2d5e132744fc851760b76">&#9670;&#160;</a></span>readProcessed</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* UA_HistoryDatabase::readProcessed) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdbContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__RequestHeader.html">UA_RequestHeader</a> *requestHeader, const UA_ReadProcessedDetails *historyReadDetails, <a class="el" href="types__generated_8h.html#ab298c4ff5eb700437114d0dc2db97ead">UA_TimestampsToReturn</a> timestampsToReturn, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> releaseContinuationPoints, size_t nodesToReadSize, const UA_HistoryReadValueId *nodesToRead, UA_HistoryReadResponse *response, UA_HistoryData *const *const historyData)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="historydatabase_8h_source.html#l00133">133</a> of file <a class="el" href="historydatabase_8h_source.html">historydatabase.h</a>.</p>
+
+</div>
+</div>
+<a id="ad23155932b0da262c49957470e00e3fd" name="ad23155932b0da262c49957470e00e3fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad23155932b0da262c49957470e00e3fd">&#9670;&#160;</a></span>readRaw</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* UA_HistoryDatabase::readRaw) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdbContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__RequestHeader.html">UA_RequestHeader</a> *requestHeader, const UA_ReadRawModifiedDetails *historyReadDetails, <a class="el" href="types__generated_8h.html#ab298c4ff5eb700437114d0dc2db97ead">UA_TimestampsToReturn</a> timestampsToReturn, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> releaseContinuationPoints, size_t nodesToReadSize, const UA_HistoryReadValueId *nodesToRead, UA_HistoryReadResponse *response, UA_HistoryData *const *const historyData)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="historydatabase_8h_source.html#l00085">85</a> of file <a class="el" href="historydatabase_8h_source.html">historydatabase.h</a>.</p>
+
+</div>
+</div>
+<a id="a3c7b4be8826d592c74868fbc42cbdfe8" name="a3c7b4be8826d592c74868fbc42cbdfe8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c7b4be8826d592c74868fbc42cbdfe8">&#9670;&#160;</a></span>setEvent</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* UA_HistoryDatabase::setEvent) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdbContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *originId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *emitterId, const <a class="el" href="structUA__EventFilter.html">UA_EventFilter</a> *historicalEventFilter, <a class="el" href="structUA__EventFieldList.html">UA_EventFieldList</a> *fieldList)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="historydatabase_8h_source.html#l00055">55</a> of file <a class="el" href="historydatabase_8h_source.html">historydatabase.h</a>.</p>
+
+</div>
+</div>
+<a id="a6d4969627e6d3c6b378d1276bf736b9e" name="a6d4969627e6d3c6b378d1276bf736b9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d4969627e6d3c6b378d1276bf736b9e">&#9670;&#160;</a></span>setValue</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* UA_HistoryDatabase::setValue) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdbContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> historizing, const <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *value)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="historydatabase_8h_source.html#l00033">33</a> of file <a class="el" href="historydatabase_8h_source.html">historydatabase.h</a>.</p>
+
+</div>
+</div>
 <a id="a04e30bd402c85ceecdc8c2fde6f77aaa" name="a04e30bd402c85ceecdc8c2fde6f77aaa"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a04e30bd402c85ceecdc8c2fde6f77aaa">&#9670;&#160;</a></span>updateData</h2>
 
@@ -276,22 +292,6 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="historydatabase_8h_source.html#l00163">163</a> of file <a class="el" href="historydatabase_8h_source.html">historydatabase.h</a>.</p>
-
-</div>
-</div>
-<a id="ab2cb2fb1299cb8a1c911ab99b4fa23d4" name="ab2cb2fb1299cb8a1c911ab99b4fa23d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab2cb2fb1299cb8a1c911ab99b4fa23d4">&#9670;&#160;</a></span>deleteRawModified</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void(* UA_HistoryDatabase::deleteRawModified) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdbContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__RequestHeader.html">UA_RequestHeader</a> *requestHeader, const UA_DeleteRawModifiedDetails *details, UA_HistoryUpdateResult *result)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="historydatabase_8h_source.html#l00172">172</a> of file <a class="el" href="historydatabase_8h_source.html">historydatabase.h</a>.</p>
 
 </div>
 </div>

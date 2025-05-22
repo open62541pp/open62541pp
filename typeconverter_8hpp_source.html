@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -110,53 +110,57 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"> * @code</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"> * namespace ::opcua {</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"> * template &lt;&gt;</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"> * struct TypeConverter&lt;MyCustomType&gt; {</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"> *     using NativeType = Guid;</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"> *     static void fromNative(const NativeType&amp; src, MyCustomType&amp; dst) {</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"> *         // ...</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"> *     }</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"> *     static void toNative(const MyCustomType&amp; src, NativeType&amp; dst) {</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"> *         // ...</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"> *     }</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment"> * };</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment"> * }</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment"> * @endcode</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Enable = <span class="keywordtype">void</span>&gt;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="structopcua_1_1TypeConverter.html">   32</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1TypeConverter.html">TypeConverter</a>;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">/* -------------------------------------- Traits and helper ------------------------------------- */</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"> * struct TypeConverter&lt;MyGuid&gt; {</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"> *     using NativeType = UA_Guid;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"> *     [[nodiscard]] static MyGuid fromNative(const UA_Guid&amp; src) { ... }</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"> *     [[nodiscard]] static UA_Guid toNative(const MyGuid&amp; src) { ... }</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"> * };</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"> * }</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> * @endcode</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Enable = <span class="keywordtype">void</span>&gt;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="structopcua_1_1TypeConverter.html">   26</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1TypeConverter.html">TypeConverter</a>;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">/* -------------------------------------- Traits and helper ------------------------------------- */</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> = <span class="keywordtype">void</span>&gt;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="structopcua_1_1IsConvertible.html">   31</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1IsConvertible.html">IsConvertible</a> : std::false_type {};</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="structopcua_1_1IsConvertible_3_01T_00_01std_1_1void__t_3_01decltype_07TypeConverter_3_01T_01_4_02_03_08_4_01_4.html">   34</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1IsConvertible.html">IsConvertible</a>&lt;T, std::void_t&lt;decltype(TypeConverter&lt;T&gt;{})&gt;&gt; : std::true_type {};</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">namespace </span>detail {</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> = <span class="keywordtype">void</span>&gt;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">struct </span>IsConvertible : std::false_type {};</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keyword">struct </span>IsConvertible&lt;T, std::void_t&lt;decltype(TypeConverter&lt;T&gt;{})&gt;&gt; : std::true_type {};</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>template &lt;typename T, typename = std::enable_if_t&lt;detail::IsConvertible&lt;T&gt;::value&gt;&gt;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>[[nodiscard]] <span class="keyword">constexpr</span> T fromNative(<span class="keyword">const</span> <span class="keyword">typename</span> TypeConverter&lt;T&gt;::NativeType&amp; src) {</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    T dst{};</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    TypeConverter&lt;T&gt;::fromNative(src, dst);</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordflow">return</span> dst;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>}</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>template &lt;typename T, typename = std::enable_if_t&lt;detail::IsConvertible&lt;T&gt;::value&gt;&gt;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>[[nodiscard]] <span class="keyword">constexpr</span> <span class="keyword">auto</span> toNative(<span class="keyword">const</span> T&amp; src) -&gt; <span class="keyword">typename</span> TypeConverter&lt;T&gt;::NativeType {</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keyword">using </span>NativeType = <span class="keyword">typename</span> TypeConverter&lt;T&gt;::NativeType;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    NativeType dst{};</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    TypeConverter&lt;T&gt;::toNative(src, dst);</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordflow">return</span> dst;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>}</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>}  <span class="comment">// namespace detail</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>}  <span class="comment">// namespace opcua</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>template &lt;typename T, typename = std::enable_if_t&lt;IsConvertible&lt;T&gt;::value&gt;&gt;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>[[nodiscard]] <span class="keyword">constexpr</span> T fromNative(<span class="keyword">const</span> <span class="keyword">typename</span> <a class="code hl_struct" href="structopcua_1_1TypeConverter.html">TypeConverter&lt;T&gt;::NativeType</a>&amp; src) {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keyword">using </span>NativeType = <span class="keyword">typename</span> <a class="code hl_struct" href="structopcua_1_1TypeConverter.html">TypeConverter&lt;T&gt;::NativeType</a>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_invocable_r_v&lt;T, <span class="keyword">decltype</span>(<a class="code hl_struct" href="structopcua_1_1TypeConverter.html">TypeConverter&lt;T&gt;::fromNative</a>), NativeType&gt;) {</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordflow">return</span> <a class="code hl_struct" href="structopcua_1_1TypeConverter.html">TypeConverter&lt;T&gt;::fromNative</a>(src);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        T dst{};</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        TypeConverter&lt;T&gt;::fromNative(src, dst);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keywordflow">return</span> dst;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    }</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>}</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>template &lt;typename T, typename = std::enable_if_t&lt;IsConvertible&lt;T&gt;::value&gt;&gt;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>[[nodiscard]] <span class="keyword">constexpr</span> <span class="keyword">auto</span> toNative(<span class="keyword">const</span> T&amp; src) -&gt; <span class="keyword">typename</span> TypeConverter&lt;T&gt;::NativeType {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keyword">using </span>NativeType = <span class="keyword">typename</span> TypeConverter&lt;T&gt;::NativeType;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_invocable_r_v&lt;NativeType, <span class="keyword">decltype</span>(TypeConverter&lt;T&gt;::toNative), T&gt;) {</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <span class="keywordflow">return</span> TypeConverter&lt;T&gt;::toNative(src);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        NativeType dst{};</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        TypeConverter&lt;T&gt;::toNative(src, dst);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordflow">return</span> dst;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    }</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>}</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>}  <span class="comment">// namespace detail</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>}  <span class="comment">// namespace opcua</span></div>
 <div class="ttc" id="anamespaceopcua_html"><div class="ttname"><a href="namespaceopcua.html">opcua</a></div><div class="ttdef"><b>Definition</b> <a href="async_8hpp_source.html#l00011">async.hpp:11</a></div></div>
-<div class="ttc" id="astructopcua_1_1TypeConverter_html"><div class="ttname"><a href="structopcua_1_1TypeConverter.html">opcua::TypeConverter</a></div><div class="ttdoc">Type conversion from and to native types.</div><div class="ttdef"><b>Definition</b> <a href="typeconverter_8hpp_source.html#l00032">typeconverter.hpp:32</a></div></div>
+<div class="ttc" id="astructopcua_1_1IsConvertible_html"><div class="ttname"><a href="structopcua_1_1IsConvertible.html">opcua::IsConvertible</a></div><div class="ttdef"><b>Definition</b> <a href="typeconverter_8hpp_source.html#l00031">typeconverter.hpp:31</a></div></div>
+<div class="ttc" id="astructopcua_1_1TypeConverter_html"><div class="ttname"><a href="structopcua_1_1TypeConverter.html">opcua::TypeConverter</a></div><div class="ttdoc">Type conversion from and to native types.</div><div class="ttdef"><b>Definition</b> <a href="typeconverter_8hpp_source.html#l00026">typeconverter.hpp:26</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

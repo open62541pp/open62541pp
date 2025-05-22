@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -170,7 +170,18 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="keyword">struct </span>IsContiguousRange : std::conjunction&lt;IsRange&lt;T&gt;, HasDataPointer&lt;T&gt;, HasSize&lt;T&gt;&gt; {};</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>}  <span class="comment">// namespace opcua::detail</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> = <span class="keywordtype">void</span>&gt;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="keyword">struct </span>IsStringLike : std::false_type {};</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="keyword">struct </span>IsStringLike&lt;T, std::enable_if_t&lt;IsRange&lt;T&gt;::value&gt;&gt;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    : std::conjunction&lt;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>          IsContiguousRange&lt;T&gt;,</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>          std::is_same&lt;RangeValueT&lt;T&gt;, char&gt;,</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>          std::is_constructible&lt;std::remove_reference_t&lt;T&gt;, const char*&gt;,</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>          std::is_constructible&lt;std::remove_reference_t&lt;T&gt;, const char*, size_t&gt;&gt; {};</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>}  <span class="comment">// namespace opcua::detail</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

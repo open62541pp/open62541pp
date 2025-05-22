@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -99,27 +99,27 @@ $(function() {
 <div class="line">    client.<a id="a1" name="a1"></a><a class="code hl_function" href="classopcua_1_1Client.html#a6dbd84c74a6214369470379a355555ab">connect</a>(<span class="stringliteral">&quot;opc.tcp://localhost:4840&quot;</span>);</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Define filter elements</span></div>
-<div class="line">    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1ua_1_1ContentFilterElement.html">opcua::ContentFilterElement</a> filterBaseEventType(</div>
+<div class="line">    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1ua_1_1ContentFilterElement.html">opcua::ContentFilterElement</a> filterBaseEventType{</div>
 <div class="line">        opcua::FilterOperator::OfType,</div>
 <div class="line">        {</div>
-<div class="line">            <a class="code hl_class" href="classopcua_1_1ua_1_1LiteralOperand.html">opcua::LiteralOperand</a>(<a id="_a2" name="_a2"></a><a class="code hl_class" href="classopcua_1_1NodeId.html">opcua::NodeId</a>(opcua::ObjectTypeId::BaseEventType)),</div>
+<div class="line">            <a class="code hl_class" href="classopcua_1_1ua_1_1LiteralOperand.html">opcua::LiteralOperand</a>{<a id="_a2" name="_a2"></a><a class="code hl_class" href="classopcua_1_1NodeId.html">opcua::NodeId</a>{opcua::ObjectTypeId::BaseEventType}},</div>
 <div class="line">        }</div>
-<div class="line">    );</div>
-<div class="line">    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1ua_1_1ContentFilterElement.html">opcua::ContentFilterElement</a> filterLowSeverity(</div>
+<div class="line">    };</div>
+<div class="line">    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1ua_1_1ContentFilterElement.html">opcua::ContentFilterElement</a> filterLowSeverity{</div>
 <div class="line">        opcua::FilterOperator::LessThan,</div>
 <div class="line">        {</div>
 <div class="line">            <a class="code hl_class" href="classopcua_1_1ua_1_1SimpleAttributeOperand.html">opcua::SimpleAttributeOperand</a>(</div>
 <div class="line">                opcua::ObjectTypeId::BaseEventType, {{0, <span class="stringliteral">&quot;Severity&quot;</span>}}, <a id="a3" name="a3"></a><a class="code hl_enumvalue" href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917a689202409e48743b914713f96d93947c">opcua::AttributeId::Value</a></div>
 <div class="line">            ),</div>
-<div class="line">            <a class="code hl_class" href="classopcua_1_1ua_1_1LiteralOperand.html">opcua::LiteralOperand</a>(200),</div>
+<div class="line">            <a class="code hl_class" href="classopcua_1_1ua_1_1LiteralOperand.html">opcua::LiteralOperand</a>{200},</div>
 <div class="line">        }</div>
-<div class="line">    );</div>
+<div class="line">    };</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Combine filter with unary operators (!) and binary operators (&amp;&amp;, ||).</span></div>
 <div class="line">    <span class="comment">// The resulting filter will filter events of type BaseEventType with severity &gt;= 200.</span></div>
 <div class="line">    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1ua_1_1ContentFilter.html">opcua::ContentFilter</a> filterCombined = filterBaseEventType &amp;&amp; !filterLowSeverity;</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1ua_1_1EventFilter.html">opcua::EventFilter</a> eventFilter(</div>
+<div class="line">    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1ua_1_1EventFilter.html">opcua::EventFilter</a> eventFilter{</div>
 <div class="line">        <span class="comment">// Select clause</span></div>
 <div class="line">        {</div>
 <div class="line">            {opcua::ObjectTypeId::BaseEventType, {{0, <span class="stringliteral">&quot;Time&quot;</span>}}, <a class="code hl_enumvalue" href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917a689202409e48743b914713f96d93947c">opcua::AttributeId::Value</a>},</div>
@@ -128,26 +128,26 @@ $(function() {
 <div class="line">        },</div>
 <div class="line">        <span class="comment">// Where clause</span></div>
 <div class="line">        filterCombined</div>
-<div class="line">    );</div>
+<div class="line">    };</div>
 <div class="line"> </div>
-<div class="line">    <a id="_a4" name="_a4"></a><a class="code hl_class" href="classopcua_1_1Subscription.html">opcua::Subscription</a> sub(client);</div>
+<div class="line">    <a id="_a4" name="_a4"></a><a class="code hl_class" href="classopcua_1_1Subscription.html">opcua::Subscription</a> sub{client};</div>
 <div class="line">    sub.subscribeEvent(</div>
 <div class="line">        opcua::ObjectId::Server,</div>
 <div class="line">        eventFilter,</div>
 <div class="line">        [&amp;](<a class="code hl_typedef" href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">opcua::IntegerId</a> subId,</div>
 <div class="line">            <a class="code hl_typedef" href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">opcua::IntegerId</a> monId,</div>
 <div class="line">            <a id="_a5" name="_a5"></a><a class="code hl_class" href="classopcua_1_1Span.html">opcua::Span&lt;const opcua::Variant&gt;</a> eventFields) {</div>
-<div class="line">            <a id="_a6" name="_a6"></a><a class="code hl_class" href="classopcua_1_1MonitoredItem.html">opcua::MonitoredItem</a> item(client, subId, monId);</div>
+<div class="line">            <a id="_a6" name="_a6"></a><a class="code hl_class" href="classopcua_1_1MonitoredItem.html">opcua::MonitoredItem</a> item{client, subId, monId};</div>
 <div class="line">            std::cout</div>
 <div class="line">                &lt;&lt; <span class="stringliteral">&quot;Event notification:\n&quot;</span></div>
-<div class="line">                &lt;&lt; <span class="stringliteral">&quot;- subscription id:   &quot;</span> &lt;&lt; item.<a id="a7" name="a7"></a><a class="code hl_function" href="classopcua_1_1MonitoredItem.html#a03a1cbf8fd8339b14e975415c69e272f">subscriptionId</a>() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
-<div class="line">                &lt;&lt; <span class="stringliteral">&quot;- monitored item id: &quot;</span> &lt;&lt; item.<a id="a8" name="a8"></a><a class="code hl_function" href="classopcua_1_1MonitoredItem.html#ad6f2aae9c99eaacb3cea4d107c95a4ec">monitoredItemId</a>() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
-<div class="line">                &lt;&lt; <span class="stringliteral">&quot;- node id:           &quot;</span> &lt;&lt; <a id="a9" name="a9"></a><a class="code hl_function" href="namespaceopcua.html#a3d1494b8f3ef24a9c3a5c8ecc0724361">opcua::toString</a>(item.<a id="a10" name="a10"></a><a class="code hl_function" href="classopcua_1_1MonitoredItem.html#abb3a419c80996d1c730c50bbff489954">nodeId</a>()) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
-<div class="line">                &lt;&lt; <span class="stringliteral">&quot;- attribute id:      &quot;</span> &lt;&lt; <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(item.<a id="a11" name="a11"></a><a class="code hl_function" href="classopcua_1_1MonitoredItem.html#adaafa03bddb4fc01115ac002318705be">attributeId</a>()) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">                &lt;&lt; <span class="stringliteral">&quot;- subscription id:   &quot;</span> &lt;&lt; item.subscriptionId() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
+<div class="line">                &lt;&lt; <span class="stringliteral">&quot;- monitored item id: &quot;</span> &lt;&lt; item.monitoredItemId() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
+<div class="line">                &lt;&lt; <span class="stringliteral">&quot;- node id:           &quot;</span> &lt;&lt; <a id="a7" name="a7"></a><a class="code hl_function" href="namespaceopcua.html#a3d1494b8f3ef24a9c3a5c8ecc0724361">opcua::toString</a>(item.nodeId()) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
+<div class="line">                &lt;&lt; <span class="stringliteral">&quot;- attribute id:      &quot;</span> &lt;&lt; <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(item.attributeId()) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">            <span class="keyword">const</span> <span class="keyword">auto</span>&amp; time = eventFields.<a id="a12" name="a12"></a><a class="code hl_function" href="classopcua_1_1Span.html#a2f10197bb78b8d1e0a2cd9964d9d70a5">at</a>(0).scalar&lt;<a id="_a13" name="_a13"></a><a class="code hl_class" href="classopcua_1_1DateTime.html">opcua::DateTime</a>&gt;();</div>
+<div class="line">            <span class="keyword">const</span> <span class="keyword">auto</span>&amp; time = eventFields.<a id="a8" name="a8"></a><a class="code hl_function" href="classopcua_1_1Span.html#a2f10197bb78b8d1e0a2cd9964d9d70a5">at</a>(0).scalar&lt;<a id="_a9" name="_a9"></a><a class="code hl_class" href="classopcua_1_1DateTime.html">opcua::DateTime</a>&gt;();</div>
 <div class="line">            <span class="keyword">const</span> <span class="keyword">auto</span>&amp; severity = eventFields.<a class="code hl_function" href="classopcua_1_1Span.html#a2f10197bb78b8d1e0a2cd9964d9d70a5">at</a>(1).scalar&lt;uint16_t&gt;();</div>
-<div class="line">            <span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a id="_a14" name="_a14"></a><a class="code hl_structRef" target="_blank" href="open62541/structmessage.html">message</a> = eventFields.<a class="code hl_function" href="classopcua_1_1Span.html#a2f10197bb78b8d1e0a2cd9964d9d70a5">at</a>(2).scalar&lt;<a id="_a15" name="_a15"></a><a class="code hl_class" href="classopcua_1_1LocalizedText.html">opcua::LocalizedText</a>&gt;();</div>
+<div class="line">            <span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a id="_a10" name="_a10"></a><a class="code hl_structRef" target="_blank" href="open62541/structmessage.html">message</a> = eventFields.<a class="code hl_function" href="classopcua_1_1Span.html#a2f10197bb78b8d1e0a2cd9964d9d70a5">at</a>(2).scalar&lt;<a id="_a11" name="_a11"></a><a class="code hl_class" href="classopcua_1_1LocalizedText.html">opcua::LocalizedText</a>&gt;();</div>
 <div class="line"> </div>
 <div class="line">            std::cout &lt;&lt; <span class="stringliteral">&quot;Time:     &quot;</span> &lt;&lt; time.format(<span class="stringliteral">&quot;%Y-%m-%d %H:%M:%S&quot;</span>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">            std::cout &lt;&lt; <span class="stringliteral">&quot;Severity: &quot;</span> &lt;&lt; severity &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
@@ -157,29 +157,25 @@ $(function() {
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Run the client&#39;s main loop to process callbacks and events.</span></div>
 <div class="line">    <span class="comment">// This will block until client.stop() is called or an exception is thrown.</span></div>
-<div class="line">    client.<a id="a16" name="a16"></a><a class="code hl_function" href="classopcua_1_1Client.html#a8b1a8e65b22a27b245dd478170e4922d">run</a>();</div>
+<div class="line">    client.<a id="a12" name="a12"></a><a class="code hl_function" href="classopcua_1_1Client.html#a8b1a8e65b22a27b245dd478170e4922d">run</a>();</div>
 <div class="line">}</div>
-<div class="ttc" id="aclassopcua_1_1Client_html"><div class="ttname"><a href="classopcua_1_1Client.html">opcua::Client</a></div><div class="ttdoc">High-level client class.</div><div class="ttdef"><b>Definition</b> <a href="client_8hpp_source.html#l00126">client.hpp:126</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Client_html"><div class="ttname"><a href="classopcua_1_1Client.html">opcua::Client</a></div><div class="ttdoc">High-level client class.</div><div class="ttdef"><b>Definition</b> <a href="client_8hpp_source.html#l00130">client.hpp:130</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Client_html_a6dbd84c74a6214369470379a355555ab"><div class="ttname"><a href="classopcua_1_1Client.html#a6dbd84c74a6214369470379a355555ab">opcua::Client::connect</a></div><div class="ttdeci">void connect(std::string_view endpointUrl)</div><div class="ttdoc">Connect to the selected server.</div></div>
 <div class="ttc" id="aclassopcua_1_1Client_html_a8b1a8e65b22a27b245dd478170e4922d"><div class="ttname"><a href="classopcua_1_1Client.html#a8b1a8e65b22a27b245dd478170e4922d">opcua::Client::run</a></div><div class="ttdeci">void run()</div><div class="ttdoc">Run the client's main loop by. This method will block until Client::stop is called.</div></div>
-<div class="ttc" id="aclassopcua_1_1DateTime_html"><div class="ttname"><a href="classopcua_1_1DateTime.html">opcua::DateTime</a></div><div class="ttdoc">UA_DateTime wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00401">types.hpp:401</a></div></div>
-<div class="ttc" id="aclassopcua_1_1LocalizedText_html"><div class="ttname"><a href="classopcua_1_1LocalizedText.html">opcua::LocalizedText</a></div><div class="ttdoc">UA_LocalizedText wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l01079">types.hpp:1079</a></div></div>
+<div class="ttc" id="aclassopcua_1_1DateTime_html"><div class="ttname"><a href="classopcua_1_1DateTime.html">opcua::DateTime</a></div><div class="ttdoc">UA_DateTime wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00381">types.hpp:381</a></div></div>
+<div class="ttc" id="aclassopcua_1_1LocalizedText_html"><div class="ttname"><a href="classopcua_1_1LocalizedText.html">opcua::LocalizedText</a></div><div class="ttdoc">UA_LocalizedText wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00956">types.hpp:956</a></div></div>
 <div class="ttc" id="aclassopcua_1_1MonitoredItem_html"><div class="ttname"><a href="classopcua_1_1MonitoredItem.html">opcua::MonitoredItem</a></div><div class="ttdoc">High-level monitored item class.</div><div class="ttdef"><b>Definition</b> <a href="monitoreditem_8hpp_source.html#l00029">monitoreditem.hpp:29</a></div></div>
-<div class="ttc" id="aclassopcua_1_1MonitoredItem_html_a03a1cbf8fd8339b14e975415c69e272f"><div class="ttname"><a href="classopcua_1_1MonitoredItem.html#a03a1cbf8fd8339b14e975415c69e272f">opcua::MonitoredItem::subscriptionId</a></div><div class="ttdeci">IntegerId subscriptionId() const noexcept</div><div class="ttdoc">Get the server-assigned identifier of the underlying subscription.</div><div class="ttdef"><b>Definition</b> <a href="monitoreditem_8hpp_source.html#l00051">monitoreditem.hpp:51</a></div></div>
-<div class="ttc" id="aclassopcua_1_1MonitoredItem_html_abb3a419c80996d1c730c50bbff489954"><div class="ttname"><a href="classopcua_1_1MonitoredItem.html#abb3a419c80996d1c730c50bbff489954">opcua::MonitoredItem::nodeId</a></div><div class="ttdeci">const NodeId &amp; nodeId()</div><div class="ttdoc">Get the monitored NodeId.</div></div>
-<div class="ttc" id="aclassopcua_1_1MonitoredItem_html_ad6f2aae9c99eaacb3cea4d107c95a4ec"><div class="ttname"><a href="classopcua_1_1MonitoredItem.html#ad6f2aae9c99eaacb3cea4d107c95a4ec">opcua::MonitoredItem::monitoredItemId</a></div><div class="ttdeci">IntegerId monitoredItemId() const noexcept</div><div class="ttdoc">Get the server-assigned identifier of this monitored item.</div><div class="ttdef"><b>Definition</b> <a href="monitoreditem_8hpp_source.html#l00056">monitoreditem.hpp:56</a></div></div>
-<div class="ttc" id="aclassopcua_1_1MonitoredItem_html_adaafa03bddb4fc01115ac002318705be"><div class="ttname"><a href="classopcua_1_1MonitoredItem.html#adaafa03bddb4fc01115ac002318705be">opcua::MonitoredItem::attributeId</a></div><div class="ttdeci">AttributeId attributeId()</div><div class="ttdoc">Get the monitored AttributeId.</div></div>
-<div class="ttc" id="aclassopcua_1_1NodeId_html"><div class="ttname"><a href="classopcua_1_1NodeId.html">opcua::NodeId</a></div><div class="ttdoc">UA_NodeId wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00665">types.hpp:665</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Span_html"><div class="ttname"><a href="classopcua_1_1Span.html">opcua::Span</a></div><div class="ttdoc">View to a contiguous sequence of objects, similar to std::span in C++20.</div><div class="ttdef"><b>Definition</b> <a href="span_8hpp_source.html#l00030">span.hpp:30</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Span_html_a2f10197bb78b8d1e0a2cd9964d9d70a5"><div class="ttname"><a href="classopcua_1_1Span.html#a2f10197bb78b8d1e0a2cd9964d9d70a5">opcua::Span::at</a></div><div class="ttdeci">constexpr reference at(size_t index) const</div><div class="ttdoc">Access element by index with bounds checking.</div><div class="ttdef"><b>Definition</b> <a href="span_8hpp_source.html#l00113">span.hpp:113</a></div></div>
+<div class="ttc" id="aclassopcua_1_1NodeId_html"><div class="ttname"><a href="classopcua_1_1NodeId.html">opcua::NodeId</a></div><div class="ttdoc">UA_NodeId wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00641">types.hpp:641</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Span_html"><div class="ttname"><a href="classopcua_1_1Span.html">opcua::Span</a></div><div class="ttdoc">View to a contiguous sequence of objects, similar to std::span in C++20.</div><div class="ttdef"><b>Definition</b> <a href="span_8hpp_source.html#l00029">span.hpp:29</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Span_html_a2f10197bb78b8d1e0a2cd9964d9d70a5"><div class="ttname"><a href="classopcua_1_1Span.html#a2f10197bb78b8d1e0a2cd9964d9d70a5">opcua::Span::at</a></div><div class="ttdeci">constexpr reference at(size_t index) const</div><div class="ttdoc">Access element by index with bounds checking.</div><div class="ttdef"><b>Definition</b> <a href="span_8hpp_source.html#l00114">span.hpp:114</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Subscription_html"><div class="ttname"><a href="classopcua_1_1Subscription.html">opcua::Subscription</a></div><div class="ttdoc">High-level subscription class.</div><div class="ttdef"><b>Definition</b> <a href="subscription_8hpp_source.html#l00042">subscription.hpp:42</a></div></div>
-<div class="ttc" id="aclassopcua_1_1ua_1_1ContentFilterElement_html"><div class="ttname"><a href="classopcua_1_1ua_1_1ContentFilterElement.html">opcua::ContentFilterElement</a></div><div class="ttdoc">UA_ContentFilterElement wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l01858">types.hpp:1859</a></div></div>
-<div class="ttc" id="aclassopcua_1_1ua_1_1ContentFilter_html"><div class="ttname"><a href="classopcua_1_1ua_1_1ContentFilter.html">opcua::ContentFilter</a></div><div class="ttdoc">UA_ContentFilter wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l01880">types.hpp:1880</a></div></div>
-<div class="ttc" id="aclassopcua_1_1ua_1_1EventFilter_html"><div class="ttname"><a href="classopcua_1_1ua_1_1EventFilter.html">opcua::EventFilter</a></div><div class="ttdoc">UA_EventFilter wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l01964">types.hpp:1964</a></div></div>
-<div class="ttc" id="aclassopcua_1_1ua_1_1LiteralOperand_html"><div class="ttname"><a href="classopcua_1_1ua_1_1LiteralOperand.html">opcua::LiteralOperand</a></div><div class="ttdoc">UA_LiteralOperand wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l01752">types.hpp:1752</a></div></div>
-<div class="ttc" id="aclassopcua_1_1ua_1_1SimpleAttributeOperand_html"><div class="ttname"><a href="classopcua_1_1ua_1_1SimpleAttributeOperand.html">opcua::SimpleAttributeOperand</a></div><div class="ttdoc">UA_SimpleAttributeOperand wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l01805">types.hpp:1806</a></div></div>
+<div class="ttc" id="aclassopcua_1_1ua_1_1ContentFilterElement_html"><div class="ttname"><a href="classopcua_1_1ua_1_1ContentFilterElement.html">opcua::ContentFilterElement</a></div><div class="ttdoc">UA_ContentFilterElement wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l01785">types.hpp:1786</a></div></div>
+<div class="ttc" id="aclassopcua_1_1ua_1_1ContentFilter_html"><div class="ttname"><a href="classopcua_1_1ua_1_1ContentFilter.html">opcua::ContentFilter</a></div><div class="ttdoc">UA_ContentFilter wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l01807">types.hpp:1807</a></div></div>
+<div class="ttc" id="aclassopcua_1_1ua_1_1EventFilter_html"><div class="ttname"><a href="classopcua_1_1ua_1_1EventFilter.html">opcua::EventFilter</a></div><div class="ttdoc">UA_EventFilter wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l01891">types.hpp:1891</a></div></div>
+<div class="ttc" id="aclassopcua_1_1ua_1_1LiteralOperand_html"><div class="ttname"><a href="classopcua_1_1ua_1_1LiteralOperand.html">opcua::LiteralOperand</a></div><div class="ttdoc">UA_LiteralOperand wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l01679">types.hpp:1679</a></div></div>
+<div class="ttc" id="aclassopcua_1_1ua_1_1SimpleAttributeOperand_html"><div class="ttname"><a href="classopcua_1_1ua_1_1SimpleAttributeOperand.html">opcua::SimpleAttributeOperand</a></div><div class="ttdoc">UA_SimpleAttributeOperand wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l01732">types.hpp:1733</a></div></div>
 <div class="ttc" id="aclient_8hpp_html"><div class="ttname"><a href="client_8hpp.html">client.hpp</a></div></div>
-<div class="ttc" id="anamespaceopcua_1_1ua_html_aa524820a7bb38acc346adadcf6dc0025"><div class="ttname"><a href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">opcua::ua::IntegerId</a></div><div class="ttdeci">uint32_t IntegerId</div><div class="ttdoc">IntegerId.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l00124">types.hpp:124</a></div></div>
+<div class="ttc" id="anamespaceopcua_1_1ua_html_aa524820a7bb38acc346adadcf6dc0025"><div class="ttname"><a href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">opcua::ua::IntegerId</a></div><div class="ttdeci">uint32_t IntegerId</div><div class="ttdoc">IntegerId.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l00084">types.hpp:84</a></div></div>
 <div class="ttc" id="anamespaceopcua_html_a3d1494b8f3ef24a9c3a5c8ecc0724361"><div class="ttname"><a href="namespaceopcua.html#a3d1494b8f3ef24a9c3a5c8ecc0724361">opcua::toString</a></div><div class="ttdeci">String toString(const NumericRange &amp;range)</div></div>
 <div class="ttc" id="anamespaceopcua_html_ac702b87ae822429bbdde24595a526917a689202409e48743b914713f96d93947c"><div class="ttname"><a href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917a689202409e48743b914713f96d93947c">opcua::AttributeId::Value</a></div><div class="ttdeci">@ Value</div></div>
 <div class="ttc" id="anode_8hpp_html"><div class="ttname"><a href="node_8hpp.html">node.hpp</a></div></div>

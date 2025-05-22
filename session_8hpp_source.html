@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -118,9 +118,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">public</span>:</div>
 <div class="foldopen" id="foldopen00022" data-start="{" data-end="}">
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classopcua_1_1Session.html#a0125bfb989ed37d3898a87982cfd0874">   22</a></span>    <a class="code hl_function" href="classopcua_1_1Session.html#a0125bfb989ed37d3898a87982cfd0874">Session</a>(<a class="code hl_class" href="classopcua_1_1Server.html">Server</a>&amp; <a class="code hl_function" href="classopcua_1_1Session.html#a8922af144f9d49c2544be8cbf325e34a">connection</a>, <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a> sessionId, <span class="keywordtype">void</span>* sessionContext) noexcept</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        : connection_(&amp;<a class="code hl_function" href="classopcua_1_1Session.html#a8922af144f9d49c2544be8cbf325e34a">connection</a>),</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>          id_(std::move(sessionId)),</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>          context_(sessionContext) {}</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        : connection_{&amp;<a class="code hl_function" href="classopcua_1_1Session.html#a8922af144f9d49c2544be8cbf325e34a">connection</a>},</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>          id_{std::move(sessionId)},</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>          context_{sessionContext} {}</div>
 </div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"></span> </div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">    /// Get the server instance.</span></div>
@@ -188,9 +188,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="classopcua_1_1Session.html#a926ee85a870edadc1bafd5890e999a4b">   78</a></span><span class="comment"></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classopcua_1_1Session.html#a926ee85a870edadc1bafd5890e999a4b">operator!=</a>(<span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1Session.html">Session</a>&amp; lhs, <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1Session.html">Session</a>&amp; rhs) <span class="keyword">noexcept</span>;</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>}  <span class="comment">// namespace opcua</span></div>
-<div class="ttc" id="aclassopcua_1_1NodeId_html"><div class="ttname"><a href="classopcua_1_1NodeId.html">opcua::NodeId</a></div><div class="ttdoc">UA_NodeId wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00665">types.hpp:665</a></div></div>
-<div class="ttc" id="aclassopcua_1_1QualifiedName_html"><div class="ttname"><a href="classopcua_1_1QualifiedName.html">opcua::QualifiedName</a></div><div class="ttdoc">UA_QualifiedName wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l01028">types.hpp:1028</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Server_html"><div class="ttname"><a href="classopcua_1_1Server.html">opcua::Server</a></div><div class="ttdoc">High-level server class.</div><div class="ttdef"><b>Definition</b> <a href="server_8hpp_source.html#l00136">server.hpp:136</a></div></div>
+<div class="ttc" id="aclassopcua_1_1NodeId_html"><div class="ttname"><a href="classopcua_1_1NodeId.html">opcua::NodeId</a></div><div class="ttdoc">UA_NodeId wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00641">types.hpp:641</a></div></div>
+<div class="ttc" id="aclassopcua_1_1QualifiedName_html"><div class="ttname"><a href="classopcua_1_1QualifiedName.html">opcua::QualifiedName</a></div><div class="ttdoc">UA_QualifiedName wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00915">types.hpp:915</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Server_html"><div class="ttname"><a href="classopcua_1_1Server.html">opcua::Server</a></div><div class="ttdoc">High-level server class.</div><div class="ttdef"><b>Definition</b> <a href="server_8hpp_source.html#l00142">server.hpp:142</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Session_html"><div class="ttname"><a href="classopcua_1_1Session.html">opcua::Session</a></div><div class="ttdoc">High-level session class to manage client sessions.</div><div class="ttdef"><b>Definition</b> <a href="session_8hpp_source.html#l00020">session.hpp:20</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Session_html_a0125bfb989ed37d3898a87982cfd0874"><div class="ttname"><a href="classopcua_1_1Session.html#a0125bfb989ed37d3898a87982cfd0874">opcua::Session::Session</a></div><div class="ttdeci">Session(Server &amp;connection, NodeId sessionId, void *sessionContext) noexcept</div><div class="ttdef"><b>Definition</b> <a href="session_8hpp_source.html#l00022">session.hpp:22</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Session_html_a39106e290ce13536e6f36a129109ce0c"><div class="ttname"><a href="classopcua_1_1Session.html#a39106e290ce13536e6f36a129109ce0c">opcua::Session::setSessionAttribute</a></div><div class="ttdeci">void setSessionAttribute(const QualifiedName &amp;key, const Variant &amp;value)</div><div class="ttdoc">Attach a session attribute as a key-value pair.</div></div>
@@ -204,7 +204,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassopcua_1_1Session_html_ae39b29659ac821354ce4bb24233f2b87"><div class="ttname"><a href="classopcua_1_1Session.html#ae39b29659ac821354ce4bb24233f2b87">opcua::Session::deleteSessionAttribute</a></div><div class="ttdeci">void deleteSessionAttribute(const QualifiedName &amp;key)</div><div class="ttdoc">Delete a session attribute by its key.</div></div>
 <div class="ttc" id="aclassopcua_1_1Session_html_aeea89829f6d8592bde3b06bb53a43e05"><div class="ttname"><a href="classopcua_1_1Session.html#aeea89829f6d8592bde3b06bb53a43e05">opcua::Session::operator==</a></div><div class="ttdeci">bool operator==(const Session &amp;lhs, const Session &amp;rhs) noexcept</div></div>
 <div class="ttc" id="aclassopcua_1_1Session_html_afd9d7e5a43d84245204b3137d190a31a"><div class="ttname"><a href="classopcua_1_1Session.html#afd9d7e5a43d84245204b3137d190a31a">opcua::Session::context</a></div><div class="ttdeci">const void * context() const noexcept</div><div class="ttdoc">Get the session context.</div><div class="ttdef"><b>Definition</b> <a href="session_8hpp_source.html#l00048">session.hpp:48</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Variant_html"><div class="ttname"><a href="classopcua_1_1Variant.html">opcua::Variant</a></div><div class="ttdoc">UA_Variant wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l01193">types.hpp:1193</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html"><div class="ttname"><a href="classopcua_1_1Variant.html">opcua::Variant</a></div><div class="ttdoc">UA_Variant wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l01048">types.hpp:1048</a></div></div>
 <div class="ttc" id="anamespaceopcua_html"><div class="ttname"><a href="namespaceopcua.html">opcua</a></div><div class="ttdef"><b>Definition</b> <a href="async_8hpp_source.html#l00011">async.hpp:11</a></div></div>
 <div class="ttc" id="anamespaceopcua_html_a82c59334b1772f47ada395785f5bf70aa9aa1b03934893d7134a660af4204f2a9"><div class="ttname"><a href="namespaceopcua.html#a82c59334b1772f47ada395785f5bf70aa9aa1b03934893d7134a660af4204f2a9">opcua::LogCategory::Server</a></div><div class="ttdeci">@ Server</div></div>
 <div class="ttc" id="atypes_8hpp_html"><div class="ttname"><a href="types_8hpp.html">types.hpp</a></div></div>

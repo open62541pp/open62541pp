@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['type_0',['type',['../structopcua_1_1TypeConverter_3_01std_1_1basic__string__view_3_01char_00_01Traits_01_4_01_4.html#a6f0c2862d71db2dfc15017729c9f8d5b',1,'opcua::TypeConverter&lt; std::basic_string_view&lt; char, Traits &gt; &gt;::Type'],['../structopcua_1_1TypeConverter_3_01std_1_1basic__string_3_01char_00_01Traits_00_01Allocator_01_4_01_4.html#a228f2b38c0f7e87b90c27812c188ad19',1,'opcua::TypeConverter&lt; std::basic_string&lt; char, Traits, Allocator &gt; &gt;::Type'],['../structopcua_1_1TypeConverter_3_01const_01char_01_5_01_4.html#a213804091d3bdbcb38a6c1a4df8bda2b',1,'opcua::TypeConverter&lt; const char * &gt;::Type'],['../structopcua_1_1TypeConverter_3_01char_0fN_0e_4.html#a405feaf7d10159974b56072b8df1df19',1,'opcua::TypeConverter&lt; char[N]&gt;::Type'],['../structopcua_1_1TypeConverter_3_01std_1_1chrono_1_1time__point_3_01Clock_00_01Duration_01_4_01_4.html#a61541b0af2d323bfaec00ae355130c26',1,'opcua::TypeConverter&lt; std::chrono::time_point&lt; Clock, Duration &gt; &gt;::Type']]],
-  ['typeindex_1',['TypeIndex',['../namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb',1,'opcua']]]
+  ['size_5ftype_0',['size_type',['../classopcua_1_1Span.html#acb660bb484b34f06100da3c8fe00d535',1,'opcua::Span']]],
+  ['statecallback_1',['StateCallback',['../namespaceopcua.html#a9378c706cc284e1cfca58dcb0af4cdb2',1,'opcua']]],
+  ['statuschangenotificationcallback_2',['StatusChangeNotificationCallback',['../group__CreateSubscription.html#ga6036b813b9e31a2a66a94c1c21dd721d',1,'opcua::services']]],
+  ['subscriptioninactivitycallback_3',['SubscriptionInactivityCallback',['../namespaceopcua.html#a56fdf060b652eefc8742b220c03ec56b',1,'opcua']]],
+  ['subscriptionparameters_4',['SubscriptionParameters',['../namespaceopcua.html#a26c94e4458518c4f9f72e77e2446f6db',1,'opcua']]]
 ];

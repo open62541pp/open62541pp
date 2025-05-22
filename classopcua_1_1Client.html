@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -109,7 +109,7 @@ $(function() {
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_async_8cpp-example.html#_a0">client_async.cpp</a>, <a class="el" href="client_browse_8cpp-example.html#_a9">client_browse.cpp</a>, <a class="el" href="client_connect_8cpp-example.html#_a0">client_connect.cpp</a>, <a class="el" href="client_find_servers_8cpp-example.html#_a0">client_find_servers.cpp</a>, <a class="el" href="client_minimal_8cpp-example.html#_a0">client_minimal.cpp</a>, <a class="el" href="client_subscription_8cpp-example.html#_a0">client_subscription.cpp</a>, <a class="el" href="custom_datatypes_2client_custom_datatypes_8cpp-example.html#_a0">custom_datatypes/client_custom_datatypes.cpp</a>, <a class="el" href="events_2client_eventfilter_8cpp-example.html#_a0">events/client_eventfilter.cpp</a>, <a class="el" href="method_2client_method_8cpp-example.html#_a0">method/client_method.cpp</a>, and <a class="el" href="method_2client_method_async_8cpp-example.html#_a0">method/client_method_async.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="client_8hpp_source.html#l00126">126</a> of file <a class="el" href="client_8hpp_source.html">client.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="client_8hpp_source.html#l00130">130</a> of file <a class="el" href="client_8hpp_source.html">client.hpp</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -117,8 +117,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a7fae9429a17e213b112fcfce046f2748"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57b8aa2012bd8975894f053eb03c9774" id="r_a57b8aa2012bd8975894f053eb03c9774"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a57b8aa2012bd8975894f053eb03c9774">Client</a> (<a class="el" href="classopcua_1_1ClientConfig.html">ClientConfig</a> &amp;&amp;<a class="el" href="classopcua_1_1Client.html#a877a6d6e546a11560eff3f4442520e3f">config</a>)</td></tr>
 <tr class="separator:a57b8aa2012bd8975894f053eb03c9774"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa385abcc00551f09bbec8619cb6cc398" id="r_aa385abcc00551f09bbec8619cb6cc398"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#aa385abcc00551f09bbec8619cb6cc398">Client</a> (const <a class="el" href="classopcua_1_1ByteString.html">ByteString</a> &amp;certificate, const <a class="el" href="classopcua_1_1ByteString.html">ByteString</a> &amp;privateKey, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1ByteString.html">ByteString</a> &gt; trustList, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1ByteString.html">ByteString</a> &gt; revocationList={})</td></tr>
-<tr class="separator:aa385abcc00551f09bbec8619cb6cc398"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5354a57346a1410acdd6690c73e28dd8" id="r_a5354a57346a1410acdd6690c73e28dd8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a5354a57346a1410acdd6690c73e28dd8">Client</a> (<a class="elRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a> *native)</td></tr>
 <tr class="separator:a5354a57346a1410acdd6690c73e28dd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f4b2485b698a07a46b912a6798a0c6c" id="r_a8f4b2485b698a07a46b912a6798a0c6c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a8f4b2485b698a07a46b912a6798a0c6c">~Client</a> ()</td></tr>
@@ -139,15 +137,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad8a9d4f6aad75f6dca79c13f856ae9d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7309d29187b722cdd72955154ad1e10c" id="r_a7309d29187b722cdd72955154ad1e10c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classopcua_1_1ua_1_1EndpointDescription.html">EndpointDescription</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a7309d29187b722cdd72955154ad1e10c">getEndpoints</a> (std::string_view serverUrl)</td></tr>
 <tr class="separator:a7309d29187b722cdd72955154ad1e10c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d046bb4da3765c0f628e329f7c82002" id="r_a8d046bb4da3765c0f628e329f7c82002"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a8d046bb4da3765c0f628e329f7c82002">setLogger</a> (<a class="el" href="namespaceopcua.html#a9c79406812e3ed2bb7a6eefee11a43f0">LogFunction</a> logger)</td></tr>
-<tr class="separator:a8d046bb4da3765c0f628e329f7c82002"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a678b3534b2f7007c7b1e77427b6a0042" id="r_a678b3534b2f7007c7b1e77427b6a0042"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a678b3534b2f7007c7b1e77427b6a0042">setTimeout</a> (uint32_t milliseconds) noexcept</td></tr>
-<tr class="separator:a678b3534b2f7007c7b1e77427b6a0042"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29f5b9d13227a130024aa9b0bb5663e5" id="r_a29f5b9d13227a130024aa9b0bb5663e5"><td class="memTemplParams" colspan="2">template&lt;typename Token &gt; </td></tr>
-<tr class="memitem:a29f5b9d13227a130024aa9b0bb5663e5"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a29f5b9d13227a130024aa9b0bb5663e5">setUserIdentityToken</a> (const Token &amp;token)</td></tr>
-<tr class="separator:a29f5b9d13227a130024aa9b0bb5663e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18b98fd72da170e96024c7950385aa26" id="r_a18b98fd72da170e96024c7950385aa26"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a18b98fd72da170e96024c7950385aa26">setSecurityMode</a> (<a class="el" href="group__Wrapper.html#ga8747da9421645210ff2d7a76d84d0a14">MessageSecurityMode</a> mode) noexcept</td></tr>
-<tr class="separator:a18b98fd72da170e96024c7950385aa26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98a9afac08af216155b722146985d15a" id="r_a98a9afac08af216155b722146985d15a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a98a9afac08af216155b722146985d15a">setCustomDataTypes</a> (<a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1DataType.html">DataType</a> &gt; dataTypes)</td></tr>
 <tr class="separator:a98a9afac08af216155b722146985d15a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53f8f042ce80f247ba9ea9883a5e797f" id="r_a53f8f042ce80f247ba9ea9883a5e797f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a53f8f042ce80f247ba9ea9883a5e797f">onConnected</a> (<a class="el" href="namespaceopcua.html#a9378c706cc284e1cfca58dcb0af4cdb2">StateCallback</a> callback)</td></tr>
@@ -166,24 +155,18 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a6dbd84c74a6214369470379a355555ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc74892b871003ed5235492ad3aaec34" id="r_acc74892b871003ed5235492ad3aaec34"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#acc74892b871003ed5235492ad3aaec34">connectAsync</a> (std::string_view endpointUrl)</td></tr>
 <tr class="separator:acc74892b871003ed5235492ad3aaec34"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f981ab18457ca97cac9f4410637a186" id="r_a4f981ab18457ca97cac9f4410637a186"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a4f981ab18457ca97cac9f4410637a186">connect</a> (std::string_view endpointUrl, const <a class="el" href="structopcua_1_1Login.html">Login</a> &amp;login)</td></tr>
-<tr class="separator:a4f981ab18457ca97cac9f4410637a186"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a012374e064a1f030d560d73490bcc431" id="r_a012374e064a1f030d560d73490bcc431"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a012374e064a1f030d560d73490bcc431">disconnect</a> ()</td></tr>
 <tr class="separator:a012374e064a1f030d560d73490bcc431"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa023216372c0abbf9a130aec01b23969" id="r_aa023216372c0abbf9a130aec01b23969"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#aa023216372c0abbf9a130aec01b23969">disconnectAsync</a> ()</td></tr>
 <tr class="separator:aa023216372c0abbf9a130aec01b23969"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab108e1958016a09090d13f495e1cfc02" id="r_ab108e1958016a09090d13f495e1cfc02"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#ab108e1958016a09090d13f495e1cfc02">isConnected</a> () noexcept</td></tr>
 <tr class="separator:ab108e1958016a09090d13f495e1cfc02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a693c3f8a65859ebb0fa9040c936cbedd" id="r_a693c3f8a65859ebb0fa9040c936cbedd"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a693c3f8a65859ebb0fa9040c936cbedd">namespaceArray</a> ()</td></tr>
-<tr class="separator:a693c3f8a65859ebb0fa9040c936cbedd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55d167a624c3520696f994e9194e39e4" id="r_a55d167a624c3520696f994e9194e39e4"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a55d167a624c3520696f994e9194e39e4">getNamespaceArray</a> ()</td></tr>
-<tr class="separator:a55d167a624c3520696f994e9194e39e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed91a764686ba8c0c6fe2c508af702d7" id="r_aed91a764686ba8c0c6fe2c508af702d7"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classopcua_1_1String.html">String</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#aed91a764686ba8c0c6fe2c508af702d7">namespaceArray</a> ()</td></tr>
+<tr class="separator:aed91a764686ba8c0c6fe2c508af702d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab947d3cdc2ba81898e4fbe7fbf83bfe8" id="r_ab947d3cdc2ba81898e4fbe7fbf83bfe8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Subscription.html">Subscription</a>&lt; <a class="el" href="classopcua_1_1Client.html">Client</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#ab947d3cdc2ba81898e4fbe7fbf83bfe8">createSubscription</a> (const <a class="el" href="namespaceopcua.html#a26c94e4458518c4f9f72e77e2446f6db">SubscriptionParameters</a> &amp;parameters={})</td></tr>
 <tr class="separator:ab947d3cdc2ba81898e4fbe7fbf83bfe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ccedaf3fd2ee9d115ed036ca9e55536" id="r_a8ccedaf3fd2ee9d115ed036ca9e55536"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classopcua_1_1Subscription.html">Subscription</a>&lt; <a class="el" href="classopcua_1_1Client.html">Client</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a8ccedaf3fd2ee9d115ed036ca9e55536">subscriptions</a> ()</td></tr>
 <tr class="separator:a8ccedaf3fd2ee9d115ed036ca9e55536"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3103a3a0cdc46177fb9177b1f7dac361" id="r_a3103a3a0cdc46177fb9177b1f7dac361"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classopcua_1_1Subscription.html">Subscription</a>&lt; <a class="el" href="classopcua_1_1Client.html">Client</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a3103a3a0cdc46177fb9177b1f7dac361">getSubscriptions</a> ()</td></tr>
-<tr class="separator:a3103a3a0cdc46177fb9177b1f7dac361"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf983173379812dfaa4adecb214f34b0" id="r_acf983173379812dfaa4adecb214f34b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#acf983173379812dfaa4adecb214f34b0">runIterate</a> (uint16_t timeoutMilliseconds=1000)</td></tr>
 <tr class="separator:acf983173379812dfaa4adecb214f34b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b1a8e65b22a27b245dd478170e4922d" id="r_a8b1a8e65b22a27b245dd478170e4922d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a8b1a8e65b22a27b245dd478170e4922d">run</a> ()</td></tr>
@@ -192,16 +175,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aeb5c2fc7a5d9590be1b9166e1a107d42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb9de7ae0bf847a54674c3bd064f0229" id="r_afb9de7ae0bf847a54674c3bd064f0229"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#afb9de7ae0bf847a54674c3bd064f0229">isRunning</a> () const noexcept</td></tr>
 <tr class="separator:afb9de7ae0bf847a54674c3bd064f0229"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7bef4f1e154507040d175ca40f317ff8" id="r_a7bef4f1e154507040d175ca40f317ff8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a>&lt; <a class="el" href="classopcua_1_1Client.html">Client</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a7bef4f1e154507040d175ca40f317ff8">getNode</a> (<a class="el" href="classopcua_1_1NodeId.html">NodeId</a> id)</td></tr>
-<tr class="separator:a7bef4f1e154507040d175ca40f317ff8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee9da81906e76f0b1af0831137117b56" id="r_aee9da81906e76f0b1af0831137117b56"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a>&lt; <a class="el" href="classopcua_1_1Client.html">Client</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#aee9da81906e76f0b1af0831137117b56">getRootNode</a> ()</td></tr>
-<tr class="separator:aee9da81906e76f0b1af0831137117b56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2ccd5dffa568fec0c5914bb14e5facf" id="r_ad2ccd5dffa568fec0c5914bb14e5facf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a>&lt; <a class="el" href="classopcua_1_1Client.html">Client</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#ad2ccd5dffa568fec0c5914bb14e5facf">getObjectsNode</a> ()</td></tr>
-<tr class="separator:ad2ccd5dffa568fec0c5914bb14e5facf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2e22c308030b353f02d09d087a339d8" id="r_ab2e22c308030b353f02d09d087a339d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a>&lt; <a class="el" href="classopcua_1_1Client.html">Client</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#ab2e22c308030b353f02d09d087a339d8">getTypesNode</a> ()</td></tr>
-<tr class="separator:ab2e22c308030b353f02d09d087a339d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a218bc1b8c2ffe979b554c033d3480f87" id="r_a218bc1b8c2ffe979b554c033d3480f87"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a>&lt; <a class="el" href="classopcua_1_1Client.html">Client</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a218bc1b8c2ffe979b554c033d3480f87">getViewsNode</a> ()</td></tr>
-<tr class="separator:a218bc1b8c2ffe979b554c033d3480f87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20b757a4e2e59e3f383164f22c4596f5" id="r_a20b757a4e2e59e3f383164f22c4596f5"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a20b757a4e2e59e3f383164f22c4596f5">handle</a> () noexcept</td></tr>
 <tr class="separator:a20b757a4e2e59e3f383164f22c4596f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7939ad6206a1b78a2efdd9685fd07b95" id="r_a7939ad6206a1b78a2efdd9685fd07b95"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a7939ad6206a1b78a2efdd9685fd07b95">handle</a> () const noexcept</td></tr>
@@ -225,7 +198,7 @@ Related Symbols</h2></td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a7fae9429a17e213b112fcfce046f2748" name="a7fae9429a17e213b112fcfce046f2748"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7fae9429a17e213b112fcfce046f2748">&#9670;&#160;</a></span>Client() <span class="overload">[1/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fae9429a17e213b112fcfce046f2748">&#9670;&#160;</a></span>Client() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -244,7 +217,7 @@ Related Symbols</h2></td></tr>
 </div>
 </div>
 <a id="a57b8aa2012bd8975894f053eb03c9774" name="a57b8aa2012bd8975894f053eb03c9774"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a57b8aa2012bd8975894f053eb03c9774">&#9670;&#160;</a></span>Client() <span class="overload">[2/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a57b8aa2012bd8975894f053eb03c9774">&#9670;&#160;</a></span>Client() <span class="overload">[2/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -271,69 +244,8 @@ Related Symbols</h2></td></tr>
 
 </div>
 </div>
-<a id="aa385abcc00551f09bbec8619cb6cc398" name="aa385abcc00551f09bbec8619cb6cc398"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa385abcc00551f09bbec8619cb6cc398">&#9670;&#160;</a></span>Client() <span class="overload">[3/6]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">opcua::Client::Client </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1ByteString.html">ByteString</a> &amp;&#160;</td>
-          <td class="paramname"><em>certificate</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1ByteString.html">ByteString</a> &amp;&#160;</td>
-          <td class="paramname"><em>privateKey</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1ByteString.html">ByteString</a> &gt;&#160;</td>
-          <td class="paramname"><em>trustList</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1ByteString.html">ByteString</a> &gt;&#160;</td>
-          <td class="paramname"><em>revocationList</em> = <code>{}</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Create client config with encryption enabled (PKI).   </p>
-<p>Security policies:</p><ul>
-<li><a href="http://opcfoundation.org/UA/SecurityPolicy#None" target="_blank">None</a></li>
-<li><a href="http://opcfoundation.org/UA/SecurityPolicy#Basic128Rsa15" target="_blank">Basic128Rsa15</a></li>
-<li><a href="http://opcfoundation.org/UA/SecurityPolicy#Basic256" target="_blank">Basic256</a></li>
-<li><a href="http://opcfoundation.org/UA/SecurityPolicy#Basic256Sha256" target="_blank">Basic256Sha256</a></li>
-<li><a href="http://opcfoundation.org/UA/SecurityPolicy#Aes128_Sha256_RsaOaep" target="_blank">Aes128_Sha256_RsaOaep</a></li>
-</ul>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">certificate</td><td>X.509 v3 certificate in <code>DER</code> encoded format </td></tr>
-    <tr><td class="paramname">privateKey</td><td>Private key in <code>PEM</code> encoded format </td></tr>
-    <tr><td class="paramname">trustList</td><td>List of trusted certificates in <code>DER</code> encoded format </td></tr>
-    <tr><td class="paramname">revocationList</td><td>Certificate revocation lists (CRL) in <code>DER</code> encoded format</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/Core/Part2/v105/docs/9">https://reference.opcfoundation.org/Core/Part2/v105/docs/9</a> </dd>
-<dd>
-<a href="https://reference.opcfoundation.org/Core/Part6/v105/docs/6.2">https://reference.opcfoundation.org/Core/Part6/v105/docs/6.2</a>   </dd></dl>
-
-</div>
-</div>
 <a id="a5354a57346a1410acdd6690c73e28dd8" name="a5354a57346a1410acdd6690c73e28dd8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5354a57346a1410acdd6690c73e28dd8">&#9670;&#160;</a></span>Client() <span class="overload">[4/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a5354a57346a1410acdd6690c73e28dd8">&#9670;&#160;</a></span>Client() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -378,7 +290,7 @@ Related Symbols</h2></td></tr>
 </div>
 </div>
 <a id="a498878205391ac2b7224e0a5ca4bee72" name="a498878205391ac2b7224e0a5ca4bee72"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a498878205391ac2b7224e0a5ca4bee72">&#9670;&#160;</a></span>Client() <span class="overload">[5/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a498878205391ac2b7224e0a5ca4bee72">&#9670;&#160;</a></span>Client() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -404,7 +316,7 @@ Related Symbols</h2></td></tr>
 </div>
 </div>
 <a id="a1fa80b394921ae78de3fe422eb1ab109" name="a1fa80b394921ae78de3fe422eb1ab109"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1fa80b394921ae78de3fe422eb1ab109">&#9670;&#160;</a></span>Client() <span class="overload">[6/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fa80b394921ae78de3fe422eb1ab109">&#9670;&#160;</a></span>Client() <span class="overload">[5/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -430,8 +342,8 @@ Related Symbols</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a3632d7feb7122eaafe108913b21315ef" name="a3632d7feb7122eaafe108913b21315ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3632d7feb7122eaafe108913b21315ef">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+<a id="a319bb29c72ef4502491c4768ad067198" name="a319bb29c72ef4502491c4768ad067198"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a319bb29c72ef4502491c4768ad067198">&#9670;&#160;</a></span>config() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -440,37 +352,10 @@ Related Symbols</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp; opcua::Client::operator= </td>
+          <td class="memname">const <a class="el" href="classopcua_1_1ClientConfig.html">ClientConfig</a> &amp; opcua::Client::config </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a493d6fbe9fe474f7c18d8c44b449830d" name="a493d6fbe9fe474f7c18d8c44b449830d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a493d6fbe9fe474f7c18d8c44b449830d">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp; opcua::Client::operator= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -483,7 +368,7 @@ Related Symbols</h2></td></tr>
 </div>
 </div>
 <a id="a877a6d6e546a11560eff3f4442520e3f" name="a877a6d6e546a11560eff3f4442520e3f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a877a6d6e546a11560eff3f4442520e3f">&#9670;&#160;</a></span>config() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a877a6d6e546a11560eff3f4442520e3f">&#9670;&#160;</a></span>config() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -507,32 +392,124 @@ Related Symbols</h2></td></tr>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_connect_8cpp-example.html#a1">client_connect.cpp</a>, <a class="el" href="client_find_servers_8cpp-example.html#a1">client_find_servers.cpp</a>, and <a class="el" href="custom_datatypes_2client_custom_datatypes_8cpp-example.html#a1">custom_datatypes/client_custom_datatypes.cpp</a>.</dd>
 </dl>
 
-<p class="reference">Referenced by <a class="el" href="client_8hpp_source.html#l00195">setCustomDataTypes()</a>, <a class="el" href="client_8hpp_source.html#l00174">setLogger()</a>, <a class="el" href="client_8hpp_source.html#l00190">setSecurityMode()</a>, <a class="el" href="client_8hpp_source.html#l00179">setTimeout()</a>, and <a class="el" href="client_8hpp_source.html#l00185">setUserIdentityToken()</a>.</p>
-
 </div>
 </div>
-<a id="a319bb29c72ef4502491c4768ad067198" name="a319bb29c72ef4502491c4768ad067198"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a319bb29c72ef4502491c4768ad067198">&#9670;&#160;</a></span>config() <span class="overload">[2/2]</span></h2>
+<a id="a6dbd84c74a6214369470379a355555ab" name="a6dbd84c74a6214369470379a355555ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6dbd84c74a6214369470379a355555ab">&#9670;&#160;</a></span>connect()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="classopcua_1_1ClientConfig.html">ClientConfig</a> &amp; opcua::Client::config </td>
+          <td class="memname">void opcua::Client::connect </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>endpointUrl</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
+
+<p>Connect to the selected server. </p>
+<p>The session authentification method is defined by the <a class="el" href="classopcua_1_1ua_1_1UserIdentityToken.html" title="UA_UserIdentityToken wrapper class.">UserIdentityToken</a> and is set with Client::setUserIdentityToken. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">endpointUrl</td><td>Endpoint URL (for example <code>opc.tcp://localhost:4840/open62541/server/</code>) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_browse_8cpp-example.html#a10">client_browse.cpp</a>, <a class="el" href="client_connect_8cpp-example.html#a3">client_connect.cpp</a>, <a class="el" href="client_minimal_8cpp-example.html#a1">client_minimal.cpp</a>, <a class="el" href="client_subscription_8cpp-example.html#a11">client_subscription.cpp</a>, <a class="el" href="custom_datatypes_2client_custom_datatypes_8cpp-example.html#a3">custom_datatypes/client_custom_datatypes.cpp</a>, <a class="el" href="events_2client_eventfilter_8cpp-example.html#a1">events/client_eventfilter.cpp</a>, <a class="el" href="method_2client_method_8cpp-example.html#a1">method/client_method.cpp</a>, and <a class="el" href="method_2client_method_async_8cpp-example.html#a1">method/client_method_async.cpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="acc74892b871003ed5235492ad3aaec34" name="acc74892b871003ed5235492ad3aaec34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc74892b871003ed5235492ad3aaec34">&#9670;&#160;</a></span>connectAsync()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::Client::connectAsync </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>endpointUrl</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Asynchronously connect to the selected server. </p>
+<p>Set a state callback, e.g. onConnected, to be notified when the connection status changes.</p>
+<p>The session authentification method is defined by the <a class="el" href="classopcua_1_1ua_1_1UserIdentityToken.html" title="UA_UserIdentityToken wrapper class.">UserIdentityToken</a> and is set with Client::setUserIdentityToken. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">endpointUrl</td><td>Endpoint URL (for example <code>opc.tcp://localhost:4840/open62541/server/</code>)   </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_async_8cpp-example.html#a15">client_async.cpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="ab947d3cdc2ba81898e4fbe7fbf83bfe8" name="ab947d3cdc2ba81898e4fbe7fbf83bfe8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab947d3cdc2ba81898e4fbe7fbf83bfe8">&#9670;&#160;</a></span>createSubscription()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1Subscription.html">Subscription</a>&lt; <a class="el" href="classopcua_1_1Client.html">Client</a> &gt; opcua::Client::createSubscription </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="namespaceopcua.html#a26c94e4458518c4f9f72e77e2446f6db">SubscriptionParameters</a> &amp;&#160;</td>
+          <td class="paramname"><em>parameters</em> = <code>{}</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a subscription to monitor data changes and events. </p>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000001">Deprecated:</a></b></dt><dd>Use <a class="el" href="classopcua_1_1Subscription.html" title="High-level subscription class.">Subscription</a> constructor </dd></dl>
+
+</div>
+</div>
+<a id="a012374e064a1f030d560d73490bcc431" name="a012374e064a1f030d560d73490bcc431"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a012374e064a1f030d560d73490bcc431">&#9670;&#160;</a></span>disconnect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::Client::disconnect </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Disconnect and close the connection to the server. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_connect_8cpp-example.html#a6">client_connect.cpp</a>, and <a class="el" href="client_subscription_8cpp-example.html#a14">client_subscription.cpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="aa023216372c0abbf9a130aec01b23969" name="aa023216372c0abbf9a130aec01b23969"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa023216372c0abbf9a130aec01b23969">&#9670;&#160;</a></span>disconnectAsync()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::Client::disconnectAsync </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Asynchronously disconnect and close the connection to the server. </p>
+<p>Set a state callback, e.g. onDisconnected, to be notified when the connection status changes. </p>
 
 </div>
 </div>
@@ -592,8 +569,8 @@ Related Symbols</h2></td></tr>
 
 </div>
 </div>
-<a id="a8d046bb4da3765c0f628e329f7c82002" name="a8d046bb4da3765c0f628e329f7c82002"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8d046bb4da3765c0f628e329f7c82002">&#9670;&#160;</a></span>setLogger()</h2>
+<a id="a7939ad6206a1b78a2efdd9685fd07b95" name="a7939ad6206a1b78a2efdd9685fd07b95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7939ad6206a1b78a2efdd9685fd07b95">&#9670;&#160;</a></span>handle() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -602,26 +579,23 @@ Related Symbols</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::Client::setLogger </td>
+          <td class="memname">const <a class="elRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a> * opcua::Client::handle </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceopcua.html#a9c79406812e3ed2bb7a6eefee11a43f0">LogFunction</a>&#160;</td>
-          <td class="paramname"><em>logger</em></td><td>)</td>
-          <td></td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="client_8hpp_source.html#l00174">174</a> of file <a class="el" href="client_8hpp_source.html">client.hpp</a>.</p>
-
 </div>
 </div>
-<a id="a678b3534b2f7007c7b1e77427b6a0042" name="a678b3534b2f7007c7b1e77427b6a0042"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a678b3534b2f7007c7b1e77427b6a0042">&#9670;&#160;</a></span>setTimeout()</h2>
+<a id="a20b757a4e2e59e3f383164f22c4596f5" name="a20b757a4e2e59e3f383164f22c4596f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20b757a4e2e59e3f383164f22c4596f5">&#9670;&#160;</a></span>handle() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -630,56 +604,23 @@ Related Symbols</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::Client::setTimeout </td>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a> * opcua::Client::handle </td>
           <td>(</td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>milliseconds</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="client_8hpp_source.html#l00179">179</a> of file <a class="el" href="client_8hpp_source.html">client.hpp</a>.</p>
-
 </div>
 </div>
-<a id="a29f5b9d13227a130024aa9b0bb5663e5" name="a29f5b9d13227a130024aa9b0bb5663e5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a29f5b9d13227a130024aa9b0bb5663e5">&#9670;&#160;</a></span>setUserIdentityToken()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Token &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void opcua::Client::setUserIdentityToken </td>
-          <td>(</td>
-          <td class="paramtype">const Token &amp;&#160;</td>
-          <td class="paramname"><em>token</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="client_8hpp_source.html#l00185">185</a> of file <a class="el" href="client_8hpp_source.html">client.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a18b98fd72da170e96024c7950385aa26" name="a18b98fd72da170e96024c7950385aa26"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a18b98fd72da170e96024c7950385aa26">&#9670;&#160;</a></span>setSecurityMode()</h2>
+<a id="ab108e1958016a09090d13f495e1cfc02" name="ab108e1958016a09090d13f495e1cfc02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab108e1958016a09090d13f495e1cfc02">&#9670;&#160;</a></span>isConnected()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -688,26 +629,25 @@ template&lt;typename Token &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::Client::setSecurityMode </td>
+          <td class="memname">bool opcua::Client::isConnected </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__Wrapper.html#ga8747da9421645210ff2d7a76d84d0a14">MessageSecurityMode</a>&#160;</td>
-          <td class="paramname"><em>mode</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="client_8hpp_source.html#l00190">190</a> of file <a class="el" href="client_8hpp_source.html">client.hpp</a>.</p>
+<p>Check if client is connected (secure channel open). </p>
 
 </div>
 </div>
-<a id="a98a9afac08af216155b722146985d15a" name="a98a9afac08af216155b722146985d15a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a98a9afac08af216155b722146985d15a">&#9670;&#160;</a></span>setCustomDataTypes()</h2>
+<a id="afb9de7ae0bf847a54674c3bd064f0229" name="afb9de7ae0bf847a54674c3bd064f0229"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb9de7ae0bf847a54674c3bd064f0229">&#9670;&#160;</a></span>isRunning()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -716,21 +656,39 @@ template&lt;typename Token &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::Client::setCustomDataTypes </td>
+          <td class="memname">bool opcua::Client::isRunning </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1DataType.html">DataType</a> &gt;&#160;</td>
-          <td class="paramname"><em>dataTypes</em></td><td>)</td>
-          <td></td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="client_8hpp_source.html#l00195">195</a> of file <a class="el" href="client_8hpp_source.html">client.hpp</a>.</p>
+<p>Check if the client's main loop is running. </p>
+
+</div>
+</div>
+<a id="aed91a764686ba8c0c6fe2c508af702d7" name="aed91a764686ba8c0c6fe2c508af702d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed91a764686ba8c0c6fe2c508af702d7">&#9670;&#160;</a></span>namespaceArray()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="classopcua_1_1String.html">String</a> &gt; opcua::Client::namespaceArray </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get all defined namespaces. </p>
 
 </div>
 </div>
@@ -773,8 +731,29 @@ template&lt;typename Token &gt; </div>
 </div><div class="memdoc">
 
 <p>Set a state callback that will be called after the client is disconnected. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_async_8cpp-example.html#a15">client_async.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_async_8cpp-example.html#a14">client_async.cpp</a>.</dd>
 </dl>
+
+</div>
+</div>
+<a id="a96c15021aaf19bc42c6d88a2675f0c75" name="a96c15021aaf19bc42c6d88a2675f0c75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96c15021aaf19bc42c6d88a2675f0c75">&#9670;&#160;</a></span>onInactive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::Client::onInactive </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#ab676408d873dde132201449501d3a98e">InactivityCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set an inactivity callback. </p>
+<p>Every <a class="elRef" target="_blank" href="open62541/structUA__ClientConfig.html#abb2dd125ec3f721cb8bd499ae1c1080d">UA_ClientConfig::connectivityCheckInterval</a> (in ms), an async read request is performed on the server. The callback is called when the client receives no response for this request. </p>
 
 </div>
 </div>
@@ -817,29 +796,8 @@ template&lt;typename Token &gt; </div>
 </div><div class="memdoc">
 
 <p>Set a state callback that will be called after the session is closed. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_async_8cpp-example.html#a14">client_async.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_async_8cpp-example.html#a13">client_async.cpp</a>.</dd>
 </dl>
-
-</div>
-</div>
-<a id="a96c15021aaf19bc42c6d88a2675f0c75" name="a96c15021aaf19bc42c6d88a2675f0c75"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a96c15021aaf19bc42c6d88a2675f0c75">&#9670;&#160;</a></span>onInactive()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void opcua::Client::onInactive </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceopcua.html#ab676408d873dde132201449501d3a98e">InactivityCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Set an inactivity callback. </p>
-<p>Every <a class="elRef" target="_blank" href="open62541/structUA__ClientConfig.html#abb2dd125ec3f721cb8bd499ae1c1080d">UA_ClientConfig::connectivityCheckInterval</a> (in ms), an async read request is performed on the server. The callback is called when the client receives no response for this request. </p>
 
 </div>
 </div>
@@ -864,143 +822,8 @@ template&lt;typename Token &gt; </div>
 
 </div>
 </div>
-<a id="a6dbd84c74a6214369470379a355555ab" name="a6dbd84c74a6214369470379a355555ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6dbd84c74a6214369470379a355555ab">&#9670;&#160;</a></span>connect() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void opcua::Client::connect </td>
-          <td>(</td>
-          <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>endpointUrl</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Connect to the selected server. </p>
-<p>The session authentification method is defined by the <a class="el" href="classopcua_1_1ua_1_1UserIdentityToken.html" title="UA_UserIdentityToken wrapper class.">UserIdentityToken</a> and is set with <a class="el" href="classopcua_1_1Client.html#a29f5b9d13227a130024aa9b0bb5663e5">Client::setUserIdentityToken</a>. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">endpointUrl</td><td>Endpoint URL (for example <code>opc.tcp://localhost:4840/open62541/server/</code>) </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_browse_8cpp-example.html#a10">client_browse.cpp</a>, <a class="el" href="client_connect_8cpp-example.html#a3">client_connect.cpp</a>, <a class="el" href="client_minimal_8cpp-example.html#a1">client_minimal.cpp</a>, <a class="el" href="client_subscription_8cpp-example.html#a18">client_subscription.cpp</a>, <a class="el" href="custom_datatypes_2client_custom_datatypes_8cpp-example.html#a3">custom_datatypes/client_custom_datatypes.cpp</a>, <a class="el" href="events_2client_eventfilter_8cpp-example.html#a1">events/client_eventfilter.cpp</a>, <a class="el" href="method_2client_method_8cpp-example.html#a1">method/client_method.cpp</a>, and <a class="el" href="method_2client_method_async_8cpp-example.html#a1">method/client_method_async.cpp</a>.</dd>
-</dl>
-
-</div>
-</div>
-<a id="acc74892b871003ed5235492ad3aaec34" name="acc74892b871003ed5235492ad3aaec34"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acc74892b871003ed5235492ad3aaec34">&#9670;&#160;</a></span>connectAsync()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void opcua::Client::connectAsync </td>
-          <td>(</td>
-          <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>endpointUrl</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Asynchronously connect to the selected server. </p>
-<p>Set a state callback, e.g. onConnected, to be notified when the connection status changes.</p>
-<p>The session authentification method is defined by the <a class="el" href="classopcua_1_1ua_1_1UserIdentityToken.html" title="UA_UserIdentityToken wrapper class.">UserIdentityToken</a> and is set with <a class="el" href="classopcua_1_1Client.html#a29f5b9d13227a130024aa9b0bb5663e5">Client::setUserIdentityToken</a>. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">endpointUrl</td><td>Endpoint URL (for example <code>opc.tcp://localhost:4840/open62541/server/</code>)   </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_async_8cpp-example.html#a16">client_async.cpp</a>.</dd>
-</dl>
-
-</div>
-</div>
-<a id="a4f981ab18457ca97cac9f4410637a186" name="a4f981ab18457ca97cac9f4410637a186"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4f981ab18457ca97cac9f4410637a186">&#9670;&#160;</a></span>connect() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void opcua::Client::connect </td>
-          <td>(</td>
-          <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>endpointUrl</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structopcua_1_1Login.html">Login</a> &amp;&#160;</td>
-          <td class="paramname"><em>login</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Connect to the selected server with the given username and password. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">endpointUrl</td><td>Endpoint URL (for example <code>opc.tcp://localhost:4840/open62541/server/</code>) </td></tr>
-    <tr><td class="paramname">login</td><td><a class="el" href="structopcua_1_1Login.html" title="Login credentials.">Login</a> credentials with username and password </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a012374e064a1f030d560d73490bcc431" name="a012374e064a1f030d560d73490bcc431"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a012374e064a1f030d560d73490bcc431">&#9670;&#160;</a></span>disconnect()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void opcua::Client::disconnect </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Disconnect and close the connection to the server. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_connect_8cpp-example.html#a7">client_connect.cpp</a>, and <a class="el" href="client_subscription_8cpp-example.html#a21">client_subscription.cpp</a>.</dd>
-</dl>
-
-</div>
-</div>
-<a id="aa023216372c0abbf9a130aec01b23969" name="aa023216372c0abbf9a130aec01b23969"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa023216372c0abbf9a130aec01b23969">&#9670;&#160;</a></span>disconnectAsync()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void opcua::Client::disconnectAsync </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Asynchronously disconnect and close the connection to the server. </p>
-<p>Set a state callback, e.g. onDisconnected, to be notified when the connection status changes. </p>
-
-</div>
-</div>
-<a id="ab108e1958016a09090d13f495e1cfc02" name="ab108e1958016a09090d13f495e1cfc02"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab108e1958016a09090d13f495e1cfc02">&#9670;&#160;</a></span>isConnected()</h2>
+<a id="a493d6fbe9fe474f7c18d8c44b449830d" name="a493d6fbe9fe474f7c18d8c44b449830d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a493d6fbe9fe474f7c18d8c44b449830d">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1009,9 +832,10 @@ template&lt;typename Token &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool opcua::Client::isConnected </td>
+          <td class="memname"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp; opcua::Client::operator= </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1022,33 +846,10 @@ template&lt;typename Token &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Check if client is connected (secure channel open). </p>
-
 </div>
 </div>
-<a id="a693c3f8a65859ebb0fa9040c936cbedd" name="a693c3f8a65859ebb0fa9040c936cbedd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a693c3f8a65859ebb0fa9040c936cbedd">&#9670;&#160;</a></span>namespaceArray()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt; std::string &gt; opcua::Client::namespaceArray </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get all defined namespaces. </p>
-
-<p class="reference">Referenced by <a class="el" href="client_8hpp_source.html#l00258">getNamespaceArray()</a>.</p>
-
-</div>
-</div>
-<a id="a55d167a624c3520696f994e9194e39e4" name="a55d167a624c3520696f994e9194e39e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a55d167a624c3520696f994e9194e39e4">&#9670;&#160;</a></span>getNamespaceArray()</h2>
+<a id="a3632d7feb7122eaafe108913b21315ef" name="a3632d7feb7122eaafe108913b21315ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3632d7feb7122eaafe108913b21315ef">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1057,53 +858,30 @@ template&lt;typename Token &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; std::string &gt; opcua::Client::getNamespaceArray </td>
+          <td class="memname"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp; opcua::Client::operator= </td>
           <td>(</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000001">Deprecated:</a></b></dt><dd>Use <a class="el" href="classopcua_1_1Client.html#a693c3f8a65859ebb0fa9040c936cbedd" title="Get all defined namespaces.">namespaceArray()</a> instead </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="client_8hpp_source.html#l00258">258</a> of file <a class="el" href="client_8hpp_source.html">client.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ab947d3cdc2ba81898e4fbe7fbf83bfe8" name="ab947d3cdc2ba81898e4fbe7fbf83bfe8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab947d3cdc2ba81898e4fbe7fbf83bfe8">&#9670;&#160;</a></span>createSubscription()</h2>
+<a id="a8b1a8e65b22a27b245dd478170e4922d" name="a8b1a8e65b22a27b245dd478170e4922d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b1a8e65b22a27b245dd478170e4922d">&#9670;&#160;</a></span>run()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Subscription.html">Subscription</a>&lt; <a class="el" href="classopcua_1_1Client.html">Client</a> &gt; opcua::Client::createSubscription </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="namespaceopcua.html#a26c94e4458518c4f9f72e77e2446f6db">SubscriptionParameters</a> &amp;&#160;</td>
-          <td class="paramname"><em>parameters</em> = <code>{}</code></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Create a subscription to monitor data changes and events. </p>
-<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000002">Deprecated:</a></b></dt><dd>Use <a class="el" href="classopcua_1_1Subscription.html" title="High-level subscription class.">Subscription</a> constructor </dd></dl>
-
-</div>
-</div>
-<a id="a8ccedaf3fd2ee9d115ed036ca9e55536" name="a8ccedaf3fd2ee9d115ed036ca9e55536"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8ccedaf3fd2ee9d115ed036ca9e55536">&#9670;&#160;</a></span>subscriptions()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt; <a class="el" href="classopcua_1_1Subscription.html">Subscription</a>&lt; <a class="el" href="classopcua_1_1Client.html">Client</a> &gt; &gt; opcua::Client::subscriptions </td>
+          <td class="memname">void opcua::Client::run </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1111,37 +889,9 @@ template&lt;typename Token &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Get all active subscriptions. </p>
-
-<p class="reference">Referenced by <a class="el" href="client_8hpp_source.html#l00273">getSubscriptions()</a>.</p>
-
-</div>
-</div>
-<a id="a3103a3a0cdc46177fb9177b1f7dac361" name="a3103a3a0cdc46177fb9177b1f7dac361"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3103a3a0cdc46177fb9177b1f7dac361">&#9670;&#160;</a></span>getSubscriptions()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt; <a class="el" href="classopcua_1_1Subscription.html">Subscription</a>&lt; <a class="el" href="classopcua_1_1Client.html">Client</a> &gt; &gt; opcua::Client::getSubscriptions </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000003">Deprecated:</a></b></dt><dd>Use <a class="el" href="classopcua_1_1Client.html#a8ccedaf3fd2ee9d115ed036ca9e55536" title="Get all active subscriptions.">subscriptions()</a> instead </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="client_8hpp_source.html#l00273">273</a> of file <a class="el" href="client_8hpp_source.html">client.hpp</a>.</p>
+<p>Run the client's main loop by. This method will block until <a class="el" href="classopcua_1_1Client.html#aeb5c2fc7a5d9590be1b9166e1a107d42" title="Stop the client&#39;s main loop.">Client::stop</a> is called. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_async_8cpp-example.html#a16">client_async.cpp</a>, <a class="el" href="client_subscription_8cpp-example.html#a12">client_subscription.cpp</a>, <a class="el" href="events_2client_eventfilter_8cpp-example.html#a12">events/client_eventfilter.cpp</a>, and <a class="el" href="method_2client_method_async_8cpp-example.html#a4">method/client_method_async.cpp</a>.</dd>
+</dl>
 
 </div>
 </div>
@@ -1171,24 +921,31 @@ template&lt;typename Token &gt; </div>
 
 </div>
 </div>
-<a id="a8b1a8e65b22a27b245dd478170e4922d" name="a8b1a8e65b22a27b245dd478170e4922d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8b1a8e65b22a27b245dd478170e4922d">&#9670;&#160;</a></span>run()</h2>
+<a id="a98a9afac08af216155b722146985d15a" name="a98a9afac08af216155b722146985d15a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98a9afac08af216155b722146985d15a">&#9670;&#160;</a></span>setCustomDataTypes()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::Client::run </td>
+          <td class="memname">void opcua::Client::setCustomDataTypes </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1DataType.html">DataType</a> &gt;&#160;</td>
+          <td class="paramname"><em>dataTypes</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Run the client's main loop by. This method will block until <a class="el" href="classopcua_1_1Client.html#aeb5c2fc7a5d9590be1b9166e1a107d42" title="Stop the client&#39;s main loop.">Client::stop</a> is called. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_async_8cpp-example.html#a17">client_async.cpp</a>, <a class="el" href="client_subscription_8cpp-example.html#a19">client_subscription.cpp</a>, <a class="el" href="events_2client_eventfilter_8cpp-example.html#a16">events/client_eventfilter.cpp</a>, and <a class="el" href="method_2client_method_async_8cpp-example.html#a4">method/client_method_async.cpp</a>.</dd>
-</dl>
+<p class="definition">Definition at line <a class="el" href="client_8hpp_source.html#l00165">165</a> of file <a class="el" href="client_8hpp_source.html">client.hpp</a>.</p>
 
 </div>
 </div>
@@ -1208,64 +965,17 @@ template&lt;typename Token &gt; </div>
 </div><div class="memdoc">
 
 <p>Stop the client's main loop. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="method_2client_method_async_8cpp-example.html#a11">method/client_method_async.cpp</a>.</dd>
-</dl>
 
 </div>
 </div>
-<a id="afb9de7ae0bf847a54674c3bd064f0229" name="afb9de7ae0bf847a54674c3bd064f0229"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afb9de7ae0bf847a54674c3bd064f0229">&#9670;&#160;</a></span>isRunning()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool opcua::Client::isRunning </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Check if the client's main loop is running. </p>
-
-</div>
-</div>
-<a id="a7bef4f1e154507040d175ca40f317ff8" name="a7bef4f1e154507040d175ca40f317ff8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7bef4f1e154507040d175ca40f317ff8">&#9670;&#160;</a></span>getNode()</h2>
+<a id="a8ccedaf3fd2ee9d115ed036ca9e55536" name="a8ccedaf3fd2ee9d115ed036ca9e55536"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ccedaf3fd2ee9d115ed036ca9e55536">&#9670;&#160;</a></span>subscriptions()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a>&lt; <a class="el" href="classopcua_1_1Client.html">Client</a> &gt; opcua::Client::getNode </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1NodeId.html">NodeId</a>&#160;</td>
-          <td class="paramname"><em>id</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aee9da81906e76f0b1af0831137117b56" name="aee9da81906e76f0b1af0831137117b56"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aee9da81906e76f0b1af0831137117b56">&#9670;&#160;</a></span>getRootNode()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a>&lt; <a class="el" href="classopcua_1_1Client.html">Client</a> &gt; opcua::Client::getRootNode </td>
+          <td class="memname">std::vector&lt; <a class="el" href="classopcua_1_1Subscription.html">Subscription</a>&lt; <a class="el" href="classopcua_1_1Client.html">Client</a> &gt; &gt; opcua::Client::subscriptions </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1273,136 +983,11 @@ template&lt;typename Token &gt; </div>
       </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="ad2ccd5dffa568fec0c5914bb14e5facf" name="ad2ccd5dffa568fec0c5914bb14e5facf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad2ccd5dffa568fec0c5914bb14e5facf">&#9670;&#160;</a></span>getObjectsNode()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a>&lt; <a class="el" href="classopcua_1_1Client.html">Client</a> &gt; opcua::Client::getObjectsNode </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ab2e22c308030b353f02d09d087a339d8" name="ab2e22c308030b353f02d09d087a339d8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab2e22c308030b353f02d09d087a339d8">&#9670;&#160;</a></span>getTypesNode()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a>&lt; <a class="el" href="classopcua_1_1Client.html">Client</a> &gt; opcua::Client::getTypesNode </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a218bc1b8c2ffe979b554c033d3480f87" name="a218bc1b8c2ffe979b554c033d3480f87"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a218bc1b8c2ffe979b554c033d3480f87">&#9670;&#160;</a></span>getViewsNode()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a>&lt; <a class="el" href="classopcua_1_1Client.html">Client</a> &gt; opcua::Client::getViewsNode </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a20b757a4e2e59e3f383164f22c4596f5" name="a20b757a4e2e59e3f383164f22c4596f5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a20b757a4e2e59e3f383164f22c4596f5">&#9670;&#160;</a></span>handle() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a> * opcua::Client::handle </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a7939ad6206a1b78a2efdd9685fd07b95" name="a7939ad6206a1b78a2efdd9685fd07b95"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7939ad6206a1b78a2efdd9685fd07b95">&#9670;&#160;</a></span>handle() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="elRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a> * opcua::Client::handle </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
+<p>Get all active subscriptions. </p>
 
 </div>
 </div>
 <h2 class="groupheader">Friends And Related Symbol Documentation</h2>
-<a id="a0a96cab312749ac9cb732f1705fbff06" name="a0a96cab312749ac9cb732f1705fbff06"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0a96cab312749ac9cb732f1705fbff06">&#9670;&#160;</a></span>detail::getContext</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">detail::ClientContext &amp; detail::getContext </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
-          <td class="paramname"><em>client</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a7fa8a2b5bc962d6dcc68a76f6f9c0070" name="a7fa8a2b5bc962d6dcc68a76f6f9c0070"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7fa8a2b5bc962d6dcc68a76f6f9c0070">&#9670;&#160;</a></span>asWrapper()</h2>
 
@@ -1432,8 +1017,8 @@ template&lt;typename Token &gt; </div>
 
 </div>
 </div>
-<a id="a664b27dba06b871c4ae5a6de06a3659a" name="a664b27dba06b871c4ae5a6de06a3659a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a664b27dba06b871c4ae5a6de06a3659a">&#9670;&#160;</a></span>operator==()</h2>
+<a id="a0a96cab312749ac9cb732f1705fbff06" name="a0a96cab312749ac9cb732f1705fbff06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a96cab312749ac9cb732f1705fbff06">&#9670;&#160;</a></span>detail::getContext</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1442,31 +1027,19 @@ template&lt;typename Token &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool operator== </td>
+          <td class="memname">detail::ClientContext &amp; detail::getContext </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
-          <td class="paramname"><em>lhs</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
+          <td class="paramname"><em>client</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
-          <td class="paramname"><em>rhs</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="client_8hpp_source.html#l00321">321</a> of file <a class="el" href="client_8hpp_source.html">client.hpp</a>.</p>
 
 </div>
 </div>
@@ -1504,7 +1077,45 @@ template&lt;typename Token &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="client_8hpp_source.html#l00326">326</a> of file <a class="el" href="client_8hpp_source.html">client.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="client_8hpp_source.html#l00270">270</a> of file <a class="el" href="client_8hpp_source.html">client.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a664b27dba06b871c4ae5a6de06a3659a" name="a664b27dba06b871c4ae5a6de06a3659a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a664b27dba06b871c4ae5a6de06a3659a">&#9670;&#160;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="client_8hpp_source.html#l00265">265</a> of file <a class="el" href="client_8hpp_source.html">client.hpp</a>.</p>
 
 </div>
 </div>

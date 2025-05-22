@@ -1,5 +1,7 @@
 <map id="opcua::TypeWrapper&lt; T, Index &gt;" name="opcua::TypeWrapper&lt; T, Index &gt;">
-<area shape="rect" id="Node000001" title="Template base class to wrap UA_* type objects that require manual memory management." alt="" coords="9,79,164,119"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap native objects." alt="" coords="5,5,168,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="89,44,89,79,84,79,84,44"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="47,167,201,207"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap (native) objects." alt="" coords="23,93,225,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,132,127,167,121,167,121,132"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,5,243,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="127,59,127,93,121,93,121,59"/>
 </map>

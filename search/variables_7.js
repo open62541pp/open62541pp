@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['gatewayserveruri_0',['gatewayserveruri',['open62541/struct__OpcUa__RegisteredServer.html#a2516ea4a2a7fa2456e12c9c1a741e86d',0,'_OpcUa_RegisteredServer::GatewayServerUri'],['open62541/struct__OpcUa__ApplicationDescription.html#a5f969bf513fe8e3e5cf8b917447e2485',0,'_OpcUa_ApplicationDescription::GatewayServerUri'],['open62541/structUA__ApplicationDescription.html#abfe87af61cffc29acc02250bc5dd8a9f',0,'UA_ApplicationDescription::gatewayServerUri']]],
+  ['gatewayserveruri_0',['gatewayserveruri',['open62541/struct__OpcUa__ApplicationDescription.html#a5f969bf513fe8e3e5cf8b917447e2485',0,'_OpcUa_ApplicationDescription::GatewayServerUri'],['open62541/structUA__ApplicationDescription.html#abfe87af61cffc29acc02250bc5dd8a9f',0,'UA_ApplicationDescription::gatewayServerUri'],['open62541/struct__OpcUa__RegisteredServer.html#a2516ea4a2a7fa2456e12c9c1a741e86d',0,'_OpcUa_RegisteredServer::GatewayServerUri']]],
   ['generatechildnodeid_1',['generateChildNodeId',['open62541/structUA__GlobalNodeLifecycle.html#a26391b7989881b79a7fbaeb474096645',0,'UA_GlobalNodeLifecycle']]],
   ['generatekey_2',['generateKey',['open62541/structUA__SecurityPolicySymmetricModule.html#abcaceb4ea226d6521c8ae113c8099f11',0,'UA_SecurityPolicySymmetricModule']]],
   ['generatenonce_3',['generateNonce',['open62541/structUA__SecurityPolicySymmetricModule.html#a3b3cf8ec7f5f327114335952dcabff9e',0,'UA_SecurityPolicySymmetricModule']]],

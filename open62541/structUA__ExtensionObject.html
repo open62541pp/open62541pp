@@ -119,38 +119,6 @@ Data Fields</h2></td></tr>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00701">701</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
-<a id="a12f4e0212831d9948cde30506ae08a7f" name="a12f4e0212831d9948cde30506ae08a7f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a12f4e0212831d9948cde30506ae08a7f">&#9670;&#160;</a></span>encoding</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a1d9cb3b91e317874b51be6471cb370dc">UA_ExtensionObjectEncoding</a> UA_ExtensionObject::encoding</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00702">702</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
-
-</div>
-</div>
-<a id="aae7bb3e696306431a2cd7bc511bd5c3f" name="aae7bb3e696306431a2cd7bc511bd5c3f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aae7bb3e696306431a2cd7bc511bd5c3f">&#9670;&#160;</a></span>typeId</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structUA__NodeId.html">UA_NodeId</a> UA_ExtensionObject::typeId</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00705">705</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
-
-</div>
-</div>
 <a id="ac1af8afdad7bb507bf0e25c93527c645" name="ac1af8afdad7bb507bf0e25c93527c645"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac1af8afdad7bb507bf0e25c93527c645">&#9670;&#160;</a></span>body</h2>
 
@@ -167,33 +135,17 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="a59e04ee4fcb665a8c63da6f36047bf00" name="a59e04ee4fcb665a8c63da6f36047bf00"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a59e04ee4fcb665a8c63da6f36047bf00">&#9670;&#160;</a></span>[struct]</h2>
+<a id="a5e917ece86f695dccb530e01bfc35518" name="a5e917ece86f695dccb530e01bfc35518"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e917ece86f695dccb530e01bfc35518">&#9670;&#160;</a></span>[union]</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">struct  { ... }  UA_ExtensionObject::encoded</td>
+          <td class="memname">union  { ... }  UA_ExtensionObject::content</td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a id="a779308659bff83a4a572e6436c1b2c98" name="a779308659bff83a4a572e6436c1b2c98"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a779308659bff83a4a572e6436c1b2c98">&#9670;&#160;</a></span>type</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="structUA__DataType.html">UA_DataType</a>* UA_ExtensionObject::type</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00709">709</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
 
 </div>
 </div>
@@ -227,17 +179,65 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="a5e917ece86f695dccb530e01bfc35518" name="a5e917ece86f695dccb530e01bfc35518"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e917ece86f695dccb530e01bfc35518">&#9670;&#160;</a></span>[union]</h2>
+<a id="a59e04ee4fcb665a8c63da6f36047bf00" name="a59e04ee4fcb665a8c63da6f36047bf00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59e04ee4fcb665a8c63da6f36047bf00">&#9670;&#160;</a></span>[struct]</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">union  { ... }  UA_ExtensionObject::content</td>
+          <td class="memname">struct  { ... }  UA_ExtensionObject::encoded</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a12f4e0212831d9948cde30506ae08a7f" name="a12f4e0212831d9948cde30506ae08a7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12f4e0212831d9948cde30506ae08a7f">&#9670;&#160;</a></span>encoding</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a1d9cb3b91e317874b51be6471cb370dc">UA_ExtensionObjectEncoding</a> UA_ExtensionObject::encoding</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00702">702</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="a779308659bff83a4a572e6436c1b2c98" name="a779308659bff83a4a572e6436c1b2c98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a779308659bff83a4a572e6436c1b2c98">&#9670;&#160;</a></span>type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structUA__DataType.html">UA_DataType</a>* UA_ExtensionObject::type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00709">709</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="aae7bb3e696306431a2cd7bc511bd5c3f" name="aae7bb3e696306431a2cd7bc511bd5c3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae7bb3e696306431a2cd7bc511bd5c3f">&#9670;&#160;</a></span>typeId</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUA__NodeId.html">UA_NodeId</a> UA_ExtensionObject::typeId</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00705">705</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
 
 </div>
 </div>

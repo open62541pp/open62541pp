@@ -145,6 +145,22 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
+<a id="a1c356d2dd57d6dc82d86c14057fa5dbc" name="a1c356d2dd57d6dc82d86c14057fa5dbc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c356d2dd57d6dc82d86c14057fa5dbc">&#9670;&#160;</a></span>getHistorizingSetting</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structUA__HistorizingNodeIdSettings.html">UA_HistorizingNodeIdSettings</a> *(* UA_HistoryDataGathering::getHistorizingSetting) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdgContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="history__data__gathering_8h_source.html#l00095">95</a> of file <a class="el" href="history__data__gathering_8h_source.html">history_data_gathering.h</a>.</p>
+
+</div>
+</div>
 <a id="af86943b7d67a9344e3398de21ad17143" name="af86943b7d67a9344e3398de21ad17143"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af86943b7d67a9344e3398de21ad17143">&#9670;&#160;</a></span>registerNodeId</h2>
 
@@ -161,19 +177,19 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="a9843ddec974377659bd840201ddb2b6f" name="a9843ddec974377659bd840201ddb2b6f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9843ddec974377659bd840201ddb2b6f">&#9670;&#160;</a></span>stopPoll</h2>
+<a id="a215b7e30c011ca62f8fe30c936691010" name="a215b7e30c011ca62f8fe30c936691010"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a215b7e30c011ca62f8fe30c936691010">&#9670;&#160;</a></span>setValue</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_HistoryDataGathering::stopPoll) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdgContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId)</td>
+          <td class="memname">void(* UA_HistoryDataGathering::setValue) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdgContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> historizing, const <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *value)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="history__data__gathering_8h_source.html#l00062">62</a> of file <a class="el" href="history__data__gathering_8h_source.html">history_data_gathering.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="history__data__gathering_8h_source.html#l00108">108</a> of file <a class="el" href="history__data__gathering_8h_source.html">history_data_gathering.h</a>.</p>
 
 </div>
 </div>
@@ -193,6 +209,22 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
+<a id="a9843ddec974377659bd840201ddb2b6f" name="a9843ddec974377659bd840201ddb2b6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9843ddec974377659bd840201ddb2b6f">&#9670;&#160;</a></span>stopPoll</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_HistoryDataGathering::stopPoll) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdgContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="history__data__gathering_8h_source.html#l00062">62</a> of file <a class="el" href="history__data__gathering_8h_source.html">history_data_gathering.h</a>.</p>
+
+</div>
+</div>
 <a id="a21dadea199835ef9b20b422e2fb88ecb" name="a21dadea199835ef9b20b422e2fb88ecb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a21dadea199835ef9b20b422e2fb88ecb">&#9670;&#160;</a></span>updateNodeIdSetting</h2>
 
@@ -206,38 +238,6 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="history__data__gathering_8h_source.html#l00083">83</a> of file <a class="el" href="history__data__gathering_8h_source.html">history_data_gathering.h</a>.</p>
-
-</div>
-</div>
-<a id="a1c356d2dd57d6dc82d86c14057fa5dbc" name="a1c356d2dd57d6dc82d86c14057fa5dbc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1c356d2dd57d6dc82d86c14057fa5dbc">&#9670;&#160;</a></span>getHistorizingSetting</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="structUA__HistorizingNodeIdSettings.html">UA_HistorizingNodeIdSettings</a> *(* UA_HistoryDataGathering::getHistorizingSetting) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdgContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="history__data__gathering_8h_source.html#l00095">95</a> of file <a class="el" href="history__data__gathering_8h_source.html">history_data_gathering.h</a>.</p>
-
-</div>
-</div>
-<a id="a215b7e30c011ca62f8fe30c936691010" name="a215b7e30c011ca62f8fe30c936691010"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a215b7e30c011ca62f8fe30c936691010">&#9670;&#160;</a></span>setValue</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void(* UA_HistoryDataGathering::setValue) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdgContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> historizing, const <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *value)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="history__data__gathering_8h_source.html#l00108">108</a> of file <a class="el" href="history__data__gathering_8h_source.html">history_data_gathering.h</a>.</p>
 
 </div>
 </div>

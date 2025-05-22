@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -158,65 +158,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="gaaebec2adfeaf4046215f77f6bdca5724" name="gaaebec2adfeaf4046215f77f6bdca5724"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaaebec2adfeaf4046215f77f6bdca5724">&#9670;&#160;</a></span>callAsync() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename CompletionToken &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">auto opcua::services::callAsync </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
-          <td class="paramname"><em>connection</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1CallRequest.html">CallRequest</a> &amp;&#160;</td>
-          <td class="paramname"><em>request</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">CompletionToken &amp;&amp;&#160;</td>
-          <td class="paramname"><em>token</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Call server methods.   </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
-    <tr><td class="paramname">request</td><td>Call request   </td></tr>
-    <tr><td class="paramname">token</td><td>The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be: <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1ua_1_1CallResponse.html">CallResponse</a>&amp;) </div>
-<div class="ttc" id="aclassopcua_1_1ua_1_1CallResponse_html"><div class="ttname"><a href="classopcua_1_1ua_1_1CallResponse.html">opcua::CallResponse</a></div><div class="ttdoc">UA_CallResponse wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l01674">types.hpp:1674</a></div></div>
-</div><!-- fragment --> </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd><ul>
-<li><code>void</code> if <code>token</code> is a callback function (object)</li>
-<li><code>std::future&lt;<a class="el" href="classopcua_1_1ua_1_1CallResponse.html" title="UA_CallResponse wrapper class.">CallResponse</a>&gt;</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseFutureToken.html" title="Future completion token type.">UseFutureToken</a></li>
-<li><code>auto(auto&amp;&amp; token)</code> callable for deferred execution if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDeferredToken.html" title="Deferred completion token type.">UseDeferredToken</a></li>
-<li><code>void</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDetachedToken.html" title="Detached completion token type.">UseDetachedToken</a> </li>
-</ul>
-</dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="method_8hpp_source.html#l00049">49</a> of file <a class="el" href="method_8hpp_source.html">method.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="method_8hpp_source.html#l00078">opcua::services::callAsync()</a>, and <a class="el" href="node_8hpp_source.html#l00666">opcua::Node&lt; Connection &gt;::callMethodAsync()</a>.</p>
-
-</div>
-</div>
 <a id="ga968eab3588d151ae096794d32f9ac154" name="ga968eab3588d151ae096794d32f9ac154"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga968eab3588d151ae096794d32f9ac154">&#9670;&#160;</a></span>call() <span class="overload">[2/2]</span></h2>
 
@@ -279,6 +220,65 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="gaaebec2adfeaf4046215f77f6bdca5724" name="gaaebec2adfeaf4046215f77f6bdca5724"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaaebec2adfeaf4046215f77f6bdca5724">&#9670;&#160;</a></span>callAsync() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionToken &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto opcua::services::callAsync </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
+          <td class="paramname"><em>connection</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1CallRequest.html">CallRequest</a> &amp;&#160;</td>
+          <td class="paramname"><em>request</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CompletionToken &amp;&amp;&#160;</td>
+          <td class="paramname"><em>token</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Call server methods.   </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
+    <tr><td class="paramname">request</td><td>Call request   </td></tr>
+    <tr><td class="paramname">token</td><td>The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be: <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1ua_1_1CallResponse.html">CallResponse</a>&amp;) </div>
+<div class="ttc" id="aclassopcua_1_1ua_1_1CallResponse_html"><div class="ttname"><a href="classopcua_1_1ua_1_1CallResponse.html">opcua::CallResponse</a></div><div class="ttdoc">UA_CallResponse wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l01603">types.hpp:1603</a></div></div>
+</div><!-- fragment --> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><ul>
+<li><code>void</code> if <code>token</code> is a callback function (object)</li>
+<li><code>std::future&lt;<a class="el" href="classopcua_1_1ua_1_1CallResponse.html" title="UA_CallResponse wrapper class.">CallResponse</a>&gt;</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseFutureToken.html" title="Future completion token type.">UseFutureToken</a></li>
+<li><code>auto(auto&amp;&amp; token)</code> callable for deferred execution if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDeferredToken.html" title="Deferred completion token type.">UseDeferredToken</a></li>
+<li><code>void</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDetachedToken.html" title="Detached completion token type.">UseDetachedToken</a> </li>
+</ul>
+</dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="method_8hpp_source.html#l00049">49</a> of file <a class="el" href="method_8hpp_source.html">method.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="method_8hpp_source.html#l00078">opcua::services::callAsync()</a>.</p>
+
+</div>
+</div>
 <a id="gac8e054fcc339439b8a1c25d91414fce7" name="gac8e054fcc339439b8a1c25d91414fce7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gac8e054fcc339439b8a1c25d91414fce7">&#9670;&#160;</a></span>callAsync() <span class="overload">[2/2]</span></h2>
 
@@ -334,7 +334,7 @@ template&lt;typename CompletionToken &gt; </div>
     <tr><td class="paramname">methodId</td><td><a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> of the method to invoke </td></tr>
     <tr><td class="paramname">inputArguments</td><td>Input argument values   </td></tr>
     <tr><td class="paramname">token</td><td>The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be: <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1ua_1_1CallMethodResult.html">CallMethodResult</a>&amp;) </div>
-<div class="ttc" id="aclassopcua_1_1ua_1_1CallMethodResult_html"><div class="ttname"><a href="classopcua_1_1ua_1_1CallMethodResult.html">opcua::CallMethodResult</a></div><div class="ttdoc">UA_CallMethodResult wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l01635">types.hpp:1635</a></div></div>
+<div class="ttc" id="aclassopcua_1_1ua_1_1CallMethodResult_html"><div class="ttname"><a href="classopcua_1_1ua_1_1CallMethodResult.html">opcua::CallMethodResult</a></div><div class="ttdoc">UA_CallMethodResult wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l01569">types.hpp:1569</a></div></div>
 </div><!-- fragment --> </td></tr>
   </table>
   </dd>

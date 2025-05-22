@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -110,6 +110,114 @@ Functions</h2></td></tr>
 <tr class="separator:gaa8a4198f42ef78fd84629ded2b551dd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="ga4a6f122352c9f51e29271587954b66d1" name="ga4a6f122352c9f51e29271587954b66d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4a6f122352c9f51e29271587954b66d1">&#9670;&#160;</a></span>deleteSubscription()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a> opcua::services::deleteSubscription </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
+          <td class="paramname"><em>connection</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">IntegerId</a>&#160;</td>
+          <td class="paramname"><em>subscriptionId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Delete a single subscription. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
+    <tr><td class="paramname">subscriptionId</td><td>Identifier of the subscription returned by <a class="el" href="group__CreateSubscription.html#gab21e45d9ee9c919cbab006c942be79ff">createSubscription</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="services_2subscription_8hpp_source.html#l00357">357</a> of file <a class="el" href="services_2subscription_8hpp_source.html">subscription.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="subscription_8hpp_source.html#l00157">opcua::Subscription&lt; Connection &gt;::deleteSubscription()</a>, and <a class="el" href="services_2subscription_8hpp_source.html#l00357">opcua::services::deleteSubscription()</a>.</p>
+
+</div>
+</div>
+<a id="gaa8a4198f42ef78fd84629ded2b551dd6" name="gaa8a4198f42ef78fd84629ded2b551dd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa8a4198f42ef78fd84629ded2b551dd6">&#9670;&#160;</a></span>deleteSubscriptionAsync()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionToken &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto opcua::services::deleteSubscriptionAsync </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
+          <td class="paramname"><em>connection</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">IntegerId</a>&#160;</td>
+          <td class="paramname"><em>subscriptionId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CompletionToken &amp;&amp;&#160;</td>
+          <td class="paramname"><em>token</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Delete a single subscription.   </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
+    <tr><td class="paramname">subscriptionId</td><td>Identifier of the subscription returned by <a class="el" href="group__CreateSubscription.html#gab21e45d9ee9c919cbab006c942be79ff">createSubscription</a>   </td></tr>
+    <tr><td class="paramname">token</td><td>The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be: <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1StatusCode.html">StatusCode</a>) </div>
+<div class="ttc" id="aclassopcua_1_1StatusCode_html"><div class="ttname"><a href="classopcua_1_1StatusCode.html">opcua::StatusCode</a></div><div class="ttdoc">UA_StatusCode wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00044">types.hpp:44</a></div></div>
+</div><!-- fragment --> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><ul>
+<li><code>void</code> if <code>token</code> is a callback function (object)</li>
+<li><code>std::future&lt;<a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a>&gt;</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseFutureToken.html" title="Future completion token type.">UseFutureToken</a></li>
+<li><code>auto(auto&amp;&amp; token)</code> callable for deferred execution if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDeferredToken.html" title="Deferred completion token type.">UseDeferredToken</a></li>
+<li><code>void</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDetachedToken.html" title="Detached completion token type.">UseDetachedToken</a> </li>
+</ul>
+</dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="services_2subscription_8hpp_source.html#l00371">371</a> of file <a class="el" href="services_2subscription_8hpp_source.html">subscription.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="services_2subscription_8hpp_source.html#l00371">opcua::services::deleteSubscriptionAsync()</a>.</p>
+
+</div>
+</div>
 <a id="ga15b4d04ea9aecd2ef818eda33f2cfa55" name="ga15b4d04ea9aecd2ef818eda33f2cfa55"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga15b4d04ea9aecd2ef818eda33f2cfa55">&#9670;&#160;</a></span>deleteSubscriptions()</h2>
 
@@ -197,7 +305,7 @@ template&lt;typename CompletionToken &gt; </div>
     <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
     <tr><td class="paramname">request</td><td>Delete subscriptions request   </td></tr>
     <tr><td class="paramname">token</td><td>The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be: <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1ua_1_1DeleteSubscriptionsResponse.html">DeleteSubscriptionsResponse</a>&amp;) </div>
-<div class="ttc" id="aclassopcua_1_1ua_1_1DeleteSubscriptionsResponse_html"><div class="ttname"><a href="classopcua_1_1ua_1_1DeleteSubscriptionsResponse.html">opcua::DeleteSubscriptionsResponse</a></div><div class="ttdoc">UA_DeleteSubscriptionsResponse wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l02521">types.hpp:2522</a></div></div>
+<div class="ttc" id="aclassopcua_1_1ua_1_1DeleteSubscriptionsResponse_html"><div class="ttname"><a href="classopcua_1_1ua_1_1DeleteSubscriptionsResponse.html">opcua::DeleteSubscriptionsResponse</a></div><div class="ttdoc">UA_DeleteSubscriptionsResponse wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l02428">types.hpp:2429</a></div></div>
 </div><!-- fragment --> </td></tr>
   </table>
   </dd>
@@ -213,114 +321,6 @@ template&lt;typename CompletionToken &gt; </div>
 <p class="definition">Definition at line <a class="el" href="services_2subscription_8hpp_source.html#l00337">337</a> of file <a class="el" href="services_2subscription_8hpp_source.html">subscription.hpp</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="services_2subscription_8hpp_source.html#l00371">opcua::services::deleteSubscriptionAsync()</a>, and <a class="el" href="services_2subscription_8hpp_source.html#l00337">opcua::services::deleteSubscriptionsAsync()</a>.</p>
-
-</div>
-</div>
-<a id="ga4a6f122352c9f51e29271587954b66d1" name="ga4a6f122352c9f51e29271587954b66d1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga4a6f122352c9f51e29271587954b66d1">&#9670;&#160;</a></span>deleteSubscription()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a> opcua::services::deleteSubscription </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
-          <td class="paramname"><em>connection</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">IntegerId</a>&#160;</td>
-          <td class="paramname"><em>subscriptionId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Delete a single subscription. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
-    <tr><td class="paramname">subscriptionId</td><td>Identifier of the subscription returned by <a class="el" href="group__CreateSubscription.html#gab21e45d9ee9c919cbab006c942be79ff">createSubscription</a> </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="services_2subscription_8hpp_source.html#l00357">357</a> of file <a class="el" href="services_2subscription_8hpp_source.html">subscription.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="subscription_8hpp_source.html#l00163">opcua::Subscription&lt; Connection &gt;::deleteSubscription()</a>, and <a class="el" href="services_2subscription_8hpp_source.html#l00357">opcua::services::deleteSubscription()</a>.</p>
-
-</div>
-</div>
-<a id="gaa8a4198f42ef78fd84629ded2b551dd6" name="gaa8a4198f42ef78fd84629ded2b551dd6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaa8a4198f42ef78fd84629ded2b551dd6">&#9670;&#160;</a></span>deleteSubscriptionAsync()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename CompletionToken &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">auto opcua::services::deleteSubscriptionAsync </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
-          <td class="paramname"><em>connection</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">IntegerId</a>&#160;</td>
-          <td class="paramname"><em>subscriptionId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">CompletionToken &amp;&amp;&#160;</td>
-          <td class="paramname"><em>token</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Delete a single subscription.   </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
-    <tr><td class="paramname">subscriptionId</td><td>Identifier of the subscription returned by <a class="el" href="group__CreateSubscription.html#gab21e45d9ee9c919cbab006c942be79ff">createSubscription</a>   </td></tr>
-    <tr><td class="paramname">token</td><td>The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be: <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1StatusCode.html">StatusCode</a>) </div>
-<div class="ttc" id="aclassopcua_1_1StatusCode_html"><div class="ttname"><a href="classopcua_1_1StatusCode.html">opcua::StatusCode</a></div><div class="ttdoc">UA_StatusCode wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00047">types.hpp:47</a></div></div>
-</div><!-- fragment --> </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd><ul>
-<li><code>void</code> if <code>token</code> is a callback function (object)</li>
-<li><code>std::future&lt;<a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a>&gt;</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseFutureToken.html" title="Future completion token type.">UseFutureToken</a></li>
-<li><code>auto(auto&amp;&amp; token)</code> callable for deferred execution if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDeferredToken.html" title="Deferred completion token type.">UseDeferredToken</a></li>
-<li><code>void</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDetachedToken.html" title="Detached completion token type.">UseDetachedToken</a> </li>
-</ul>
-</dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="services_2subscription_8hpp_source.html#l00371">371</a> of file <a class="el" href="services_2subscription_8hpp_source.html">subscription.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="services_2subscription_8hpp_source.html#l00371">opcua::services::deleteSubscriptionAsync()</a>.</p>
 
 </div>
 </div>

@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -111,8 +111,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> HookFunction, <span class="keyword">typename</span> CompletionToken&gt;</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">struct </span>HookToken {</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    HookToken(HookFunction&amp;&amp; hookFunction, CompletionToken&amp;&amp; completionToken)</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        : hook(std::move(hookFunction)),</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>          token(std::move(completionToken)) {}</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        : hook{std::move(hookFunction)},</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>          token{std::move(completionToken)} {}</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    std::decay_t&lt;HookFunction&gt; hook;</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    std::decay_t&lt;CompletionToken&gt; token;</div>

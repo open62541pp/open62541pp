@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -111,6 +111,118 @@ Functions</h2></td></tr>
 <tr class="separator:ga54f7adb0167eeeb319011b62c83dc29d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="ga4fbdcb84c7246fe368cc885766beab74" name="ga4fbdcb84c7246fe368cc885766beab74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4fbdcb84c7246fe368cc885766beab74">&#9670;&#160;</a></span>deleteMonitoredItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a> opcua::services::deleteMonitoredItem </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>connection</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">IntegerId</a>&#160;</td>
+          <td class="paramname"><em>subscriptionId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">IntegerId</a>&#160;</td>
+          <td class="paramname"><em>monitoredItemId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Delete a monitored item from a subscription. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a> or <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
+    <tr><td class="paramname">subscriptionId</td><td>Identifier of the subscription returned by <a class="el" href="group__CreateSubscription.html#gab21e45d9ee9c919cbab006c942be79ff">createSubscription</a>. Use <code>0U</code> for a local server-side monitored item. </td></tr>
+    <tr><td class="paramname">monitoredItemId</td><td>Identifier of the monitored item </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">Referenced by <a class="el" href="monitoreditem_8hpp_source.html#l00087">opcua::MonitoredItem&lt; Connection &gt;::deleteMonitoredItem()</a>.</p>
+
+</div>
+</div>
+<a id="ga54f7adb0167eeeb319011b62c83dc29d" name="ga54f7adb0167eeeb319011b62c83dc29d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga54f7adb0167eeeb319011b62c83dc29d">&#9670;&#160;</a></span>deleteMonitoredItemAsync()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionToken &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto opcua::services::deleteMonitoredItemAsync </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
+          <td class="paramname"><em>connection</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">IntegerId</a>&#160;</td>
+          <td class="paramname"><em>subscriptionId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">IntegerId</a>&#160;</td>
+          <td class="paramname"><em>monitoredItemId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CompletionToken &amp;&amp;&#160;</td>
+          <td class="paramname"><em>token</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Delete a monitored item from a subscription.   </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a> or <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
+    <tr><td class="paramname">subscriptionId</td><td>Identifier of the subscription returned by <a class="el" href="group__CreateSubscription.html#gab21e45d9ee9c919cbab006c942be79ff">createSubscription</a>. Use <code>0U</code> for a local server-side monitored item. </td></tr>
+    <tr><td class="paramname">monitoredItemId</td><td>Identifier of the monitored item   </td></tr>
+    <tr><td class="paramname">token</td><td>The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be: <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1StatusCode.html">StatusCode</a>) </div>
+<div class="ttc" id="aclassopcua_1_1StatusCode_html"><div class="ttname"><a href="classopcua_1_1StatusCode.html">opcua::StatusCode</a></div><div class="ttdoc">UA_StatusCode wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00044">types.hpp:44</a></div></div>
+</div><!-- fragment --> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><ul>
+<li><code>void</code> if <code>token</code> is a callback function (object)</li>
+<li><code>std::future&lt;<a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a>&gt;</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseFutureToken.html" title="Future completion token type.">UseFutureToken</a></li>
+<li><code>auto(auto&amp;&amp; token)</code> callable for deferred execution if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDeferredToken.html" title="Deferred completion token type.">UseDeferredToken</a></li>
+<li><code>void</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDetachedToken.html" title="Detached completion token type.">UseDetachedToken</a> </li>
+</ul>
+</dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="services_2monitoreditem_8hpp_source.html#l00653">653</a> of file <a class="el" href="services_2monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
+
+</div>
+</div>
 <a id="ga6e5627195854b40eb1b84f8f5acca3d2" name="ga6e5627195854b40eb1b84f8f5acca3d2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga6e5627195854b40eb1b84f8f5acca3d2">&#9670;&#160;</a></span>deleteMonitoredItems()</h2>
 
@@ -196,7 +308,7 @@ template&lt;typename CompletionToken &gt; </div>
     <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
     <tr><td class="paramname">request</td><td>Delete monitored items request   </td></tr>
     <tr><td class="paramname">token</td><td>The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be: <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1ua_1_1DeleteMonitoredItemsResponse.html">DeleteMonitoredItemsResponse</a>&amp;) </div>
-<div class="ttc" id="aclassopcua_1_1ua_1_1DeleteMonitoredItemsResponse_html"><div class="ttname"><a href="classopcua_1_1ua_1_1DeleteMonitoredItemsResponse.html">opcua::DeleteMonitoredItemsResponse</a></div><div class="ttdoc">UA_DeleteMonitoredItemsResponse wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l02331">types.hpp:2332</a></div></div>
+<div class="ttc" id="aclassopcua_1_1ua_1_1DeleteMonitoredItemsResponse_html"><div class="ttname"><a href="classopcua_1_1ua_1_1DeleteMonitoredItemsResponse.html">opcua::DeleteMonitoredItemsResponse</a></div><div class="ttdoc">UA_DeleteMonitoredItemsResponse wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l02242">types.hpp:2243</a></div></div>
 </div><!-- fragment --> </td></tr>
   </table>
   </dd>
@@ -212,118 +324,6 @@ template&lt;typename CompletionToken &gt; </div>
 <p class="definition">Definition at line <a class="el" href="services_2monitoreditem_8hpp_source.html#l00620">620</a> of file <a class="el" href="services_2monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="services_2monitoreditem_8hpp_source.html#l00653">opcua::services::deleteMonitoredItemAsync()</a>.</p>
-
-</div>
-</div>
-<a id="ga4fbdcb84c7246fe368cc885766beab74" name="ga4fbdcb84c7246fe368cc885766beab74"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga4fbdcb84c7246fe368cc885766beab74">&#9670;&#160;</a></span>deleteMonitoredItem()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a> opcua::services::deleteMonitoredItem </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>connection</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">IntegerId</a>&#160;</td>
-          <td class="paramname"><em>subscriptionId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">IntegerId</a>&#160;</td>
-          <td class="paramname"><em>monitoredItemId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Delete a monitored item from a subscription. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a> or <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
-    <tr><td class="paramname">subscriptionId</td><td>Identifier of the subscription returned by <a class="el" href="group__CreateSubscription.html#gab21e45d9ee9c919cbab006c942be79ff">createSubscription</a>. Use <code>0U</code> for a local server-side monitored item. </td></tr>
-    <tr><td class="paramname">monitoredItemId</td><td>Identifier of the monitored item </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="reference">Referenced by <a class="el" href="monitoreditem_8hpp_source.html#l00099">opcua::MonitoredItem&lt; Connection &gt;::deleteMonitoredItem()</a>.</p>
-
-</div>
-</div>
-<a id="ga54f7adb0167eeeb319011b62c83dc29d" name="ga54f7adb0167eeeb319011b62c83dc29d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga54f7adb0167eeeb319011b62c83dc29d">&#9670;&#160;</a></span>deleteMonitoredItemAsync()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename CompletionToken &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">auto opcua::services::deleteMonitoredItemAsync </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
-          <td class="paramname"><em>connection</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">IntegerId</a>&#160;</td>
-          <td class="paramname"><em>subscriptionId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">IntegerId</a>&#160;</td>
-          <td class="paramname"><em>monitoredItemId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">CompletionToken &amp;&amp;&#160;</td>
-          <td class="paramname"><em>token</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Delete a monitored item from a subscription.   </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a> or <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
-    <tr><td class="paramname">subscriptionId</td><td>Identifier of the subscription returned by <a class="el" href="group__CreateSubscription.html#gab21e45d9ee9c919cbab006c942be79ff">createSubscription</a>. Use <code>0U</code> for a local server-side monitored item. </td></tr>
-    <tr><td class="paramname">monitoredItemId</td><td>Identifier of the monitored item   </td></tr>
-    <tr><td class="paramname">token</td><td>The <a class="el" href="async_model.html">completion token</a> that will be used to produce a completion handler, which will be called when the operation completes. Potential completion tokens include <a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">useFuture</a>, <a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">useDeferred</a>, <a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">useDetached</a>, or a function (object) with the correct completion signature. The function signature of the completion handler must be: <div class="fragment"><div class="line">void(<a class="code hl_class" href="classopcua_1_1StatusCode.html">StatusCode</a>) </div>
-<div class="ttc" id="aclassopcua_1_1StatusCode_html"><div class="ttname"><a href="classopcua_1_1StatusCode.html">opcua::StatusCode</a></div><div class="ttdoc">UA_StatusCode wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00047">types.hpp:47</a></div></div>
-</div><!-- fragment --> </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd><ul>
-<li><code>void</code> if <code>token</code> is a callback function (object)</li>
-<li><code>std::future&lt;<a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a>&gt;</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseFutureToken.html" title="Future completion token type.">UseFutureToken</a></li>
-<li><code>auto(auto&amp;&amp; token)</code> callable for deferred execution if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDeferredToken.html" title="Deferred completion token type.">UseDeferredToken</a></li>
-<li><code>void</code> if <code>token</code> is of type <a class="el" href="structopcua_1_1UseDetachedToken.html" title="Detached completion token type.">UseDetachedToken</a> </li>
-</ul>
-</dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="services_2monitoreditem_8hpp_source.html#l00653">653</a> of file <a class="el" href="services_2monitoreditem_8hpp_source.html">monitoreditem.hpp</a>.</p>
 
 </div>
 </div>

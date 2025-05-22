@@ -1,7 +1,7 @@
 <map id="opcua::DiagnosticInfo" name="opcua::DiagnosticInfo">
-<area shape="rect" id="Node000001" title="UA_DiagnosticInfo wrapper class." alt="" coords="38,181,201,207"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,79,233,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="122,147,122,181,117,181,117,147"/>
-<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap native objects." alt="" coords="38,5,201,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="122,44,122,79,117,79,117,44"/>
+<area shape="rect" id="Node000001" title="UA_DiagnosticInfo wrapper class." alt="" coords="53,181,215,207"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap (native) objects." alt="" coords="5,93,263,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="137,147,137,181,131,181,131,147"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="15,5,253,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="137,59,137,93,131,93,131,59"/>
 </map>

@@ -113,35 +113,19 @@ Data Fields</h2></td></tr>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00119">119</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
-<a id="aa7d84ac7585cb30c0330603e54444833" name="aa7d84ac7585cb30c0330603e54444833"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa7d84ac7585cb30c0330603e54444833">&#9670;&#160;</a></span>handle</h2>
+<a id="a01ec2589d43cb43baa3f85ed0a542626" name="a01ec2589d43cb43baa3f85ed0a542626"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01ec2589d43cb43baa3f85ed0a542626">&#9670;&#160;</a></span>clear</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void* UA_ServerNetworkLayer::handle</td>
+          <td class="memname">void(* UA_ServerNetworkLayer::clear) (<a class="el" href="structUA__ServerNetworkLayer.html">UA_ServerNetworkLayer</a> *nl)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00120">120</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
-
-</div>
-</div>
-<a id="afd0fb836955a0e30ceedf6ed3eaf2f39" name="afd0fb836955a0e30ceedf6ed3eaf2f39"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afd0fb836955a0e30ceedf6ed3eaf2f39">&#9670;&#160;</a></span>statistics</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structUA__NetworkStatistics.html">UA_NetworkStatistics</a>* UA_ServerNetworkLayer::statistics</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00123">123</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00160">160</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
@@ -158,6 +142,38 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00125">125</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="aa7d84ac7585cb30c0330603e54444833" name="aa7d84ac7585cb30c0330603e54444833"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7d84ac7585cb30c0330603e54444833">&#9670;&#160;</a></span>handle</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* UA_ServerNetworkLayer::handle</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00120">120</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="a8dae8d230ac84c5c6bc6300357ad4466" name="a8dae8d230ac84c5c6bc6300357ad4466"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8dae8d230ac84c5c6bc6300357ad4466">&#9670;&#160;</a></span>listen</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_ServerNetworkLayer::listen) (<a class="el" href="structUA__ServerNetworkLayer.html">UA_ServerNetworkLayer</a> *nl, <a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a> timeout)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00147">147</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
@@ -193,19 +209,19 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="a8dae8d230ac84c5c6bc6300357ad4466" name="a8dae8d230ac84c5c6bc6300357ad4466"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8dae8d230ac84c5c6bc6300357ad4466">&#9670;&#160;</a></span>listen</h2>
+<a id="afd0fb836955a0e30ceedf6ed3eaf2f39" name="afd0fb836955a0e30ceedf6ed3eaf2f39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd0fb836955a0e30ceedf6ed3eaf2f39">&#9670;&#160;</a></span>statistics</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_ServerNetworkLayer::listen) (<a class="el" href="structUA__ServerNetworkLayer.html">UA_ServerNetworkLayer</a> *nl, <a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a> timeout)</td>
+          <td class="memname"><a class="el" href="structUA__NetworkStatistics.html">UA_NetworkStatistics</a>* UA_ServerNetworkLayer::statistics</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00147">147</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00123">123</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
@@ -222,22 +238,6 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00157">157</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
-
-</div>
-</div>
-<a id="a01ec2589d43cb43baa3f85ed0a542626" name="a01ec2589d43cb43baa3f85ed0a542626"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a01ec2589d43cb43baa3f85ed0a542626">&#9670;&#160;</a></span>clear</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void(* UA_ServerNetworkLayer::clear) (<a class="el" href="structUA__ServerNetworkLayer.html">UA_ServerNetworkLayer</a> *nl)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00160">160</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>

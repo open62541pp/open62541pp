@@ -1,5 +1,7 @@
 <map id="opcua::DataType" name="opcua::DataType">
-<area shape="rect" id="Node000001" title="UA_DataType wrapper class." alt="" coords="19,93,150,119"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="5,5,164,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,59,87,93,82,93,82,59"/>
+<area shape="rect" id="Node000001" title="UA_DataType wrapper class." alt="" coords="59,181,189,207"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="45,93,203,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,147,127,181,121,181,121,147"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,5,243,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="127,59,127,93,121,93,121,59"/>
 </map>

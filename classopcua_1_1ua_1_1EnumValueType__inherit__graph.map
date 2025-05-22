@@ -1,7 +1,7 @@
 <map id="opcua::ua::EnumValueType" name="opcua::ua::EnumValueType">
-<area shape="rect" id="Node000001" title="UA_EnumValueType wrapper class." alt="" coords="21,181,217,207"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,79,233,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="122,147,122,181,117,181,117,147"/>
-<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap native objects." alt="" coords="38,5,201,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="122,44,122,79,117,79,117,44"/>
+<area shape="rect" id="Node000001" title="UA_EnumValueType wrapper class." alt="" coords="39,181,235,207"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap (native) objects." alt="" coords="5,93,268,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="139,147,139,181,134,181,134,147"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="18,5,255,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="139,59,139,93,134,93,134,59"/>
 </map>

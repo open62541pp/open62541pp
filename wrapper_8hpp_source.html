@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -97,322 +97,521 @@ $(document).ready(function() { init_codefold(0); });
 <a href="wrapper_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;utility&gt;</span>  <span class="comment">// move</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;utility&gt;</span>  <span class="comment">// exchange, move</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceopcua.html">opcua</a> {</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"></span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"> * @defgroup Wrapper Wrapper classes</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment"> * All wrapper classes inherit from Wrapper.</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"> * Native open62541 objects can be accessed using the Wrapper::handle() member function.</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"> * Wrapper types are pointer-interconvertible to the wrapped native type and vice versa:</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"> * - Use asWrapper(NativeType*) to cast native object pointers to wrapper object pointers.</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"> * - Use asWrapper(NativeType&amp;) to cast native object references to wrapper object references.</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"> * - Use asNative(WrapperType*) to cast wrapper object pointers to native object pointers.</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"> * - Use asNative(WrapperType&amp;) to cast wrapper object references to native object references.</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"> *</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"> * According to the standard:</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"> * &gt; Two objects `a` and `b` are pointer-interconvertible if:</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"> * &gt; One is a standard-layout class object [wrapper] and the other is the first non-static data</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> * &gt; member of that object [wrapped native type].</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"> * Derived classes must fulfill the requirements of standard-layout types to be convertible.</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"> * @see https://en.cppreference.com/w/cpp/language/static_cast#pointer-interconvertible</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment"></span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment"> * Template base class to wrap native objects.</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment"> * @ingroup Wrapper</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00033" data-start="{" data-end="};">
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html">   33</a></span><span class="keyword">class </span><a class="code hl_class" href="classopcua_1_1Wrapper.html">Wrapper</a> {</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keyword">static_assert</span>(std::is_trivial_v&lt;T&gt;);</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#abe09db5fb8ab2aded84e0f8e85e5bc99">   37</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classopcua_1_1Wrapper.html#abe09db5fb8ab2aded84e0f8e85e5bc99">NativeType</a> = T;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#adfa9bcbbbc5f81f1fac810771fd69007">   39</a></span>    <span class="keyword">constexpr</span> <a class="code hl_function" href="classopcua_1_1Wrapper.html#adfa9bcbbbc5f81f1fac810771fd69007">Wrapper</a>() noexcept = default;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment"></span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">    /// Copy constructor with native object.</span></div>
-<div class="foldopen" id="foldopen00042" data-start="{" data-end="}">
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#ad48ac1eba6304bd65aafb5886f954e9b">   42</a></span><span class="comment"></span>    constexpr explicit <a class="code hl_class" href="classopcua_1_1Wrapper.html">Wrapper</a>(const T&amp; <a class="code hl_function" href="classopcua_1_1Wrapper.html#a92e11d213ccb567b47eb94271095ee15">native</a>) noexcept</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        : native_(<a class="code hl_function" href="classopcua_1_1Wrapper.html#a92e11d213ccb567b47eb94271095ee15">native</a>) {}</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="common_8hpp.html">open62541pp/common.hpp</a>&quot;</span>  <span class="comment">// TypeIndex</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="types__handling_8hpp.html">open62541pp/detail/types_handling.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="typeregistry_8hpp.html">open62541pp/typeregistry.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceopcua.html">opcua</a> {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment"></span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment"> * @defgroup Wrapper Wrapper classes</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"> * All wrapper classes inherit from Wrapper.</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"> * Native open62541 objects can be accessed using the Wrapper::handle() member function.</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"> * Wrapper types are pointer-interconvertible to the wrapped native type and vice versa:</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"> * - Use asNative(T*) or asNative(const T*)</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"> *   to cast wrapper object pointers to native object pointers.</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"> * - Use asNative(T&amp;) or asNative(const T&amp;)</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"> *   to cast wrapper object references to native object references.</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> * - Use asWrapper&lt;T&gt;(typename T::NativeType*) or asWrapper&lt;T&gt;(const typename T::NativeType*)</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"> *   to cast native object pointers to wrapper object pointers.</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"> * - Use asWrapper&lt;T&gt;(typename T::NativeType&amp;) or asWrapper&lt;T&gt;(const typename T::NativeType&amp;)</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"> *   to cast native object references to wrapper object references.</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment"> * According to the standard:</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment"> * &gt; Two objects `a` and `b` are pointer-interconvertible if:</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment"> * &gt; One is a standard-layout class object [wrapper] and the other is the first non-static data</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment"> * &gt; member of that object [wrapped native type].</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment"> * Derived classes must fulfill the requirements of standard-layout types to be convertible.</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment"> * @see https://en.cppreference.com/w/cpp/language/static_cast#pointer-interconvertible</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment"> * @{</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment"></span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment"> * Default type handler providing standard copy and move operations.</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment"> * You can specialize it for custom types to override default behavior. For example:</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment"> * @code</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment"> * template &lt;&gt;</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment"> * struct TypeHandler&lt;MyType&gt; {</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment"> *     static constexpr MyType copy(const MyType&amp; obj) { ... }</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment"> *     static constexpr MyType move(MyType&amp;&amp; obj) noexcept { ... }</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment"> *     static constexpr void clear(MyType&amp; obj) noexcept { ... }</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment"> * };</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment"> * @endcode</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00052" data-start="{" data-end="};">
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="structopcua_1_1TypeHandler.html">   52</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1TypeHandler.html">TypeHandler</a> {</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keyword">static_assert</span>(std::is_copy_constructible_v&lt;T&gt;);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keyword">static_assert</span>(std::is_nothrow_move_constructible_v&lt;T&gt;);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keyword">static_assert</span>(std::is_nothrow_default_constructible_v&lt;T&gt;);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="foldopen" id="foldopen00057" data-start="{" data-end="}">
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="structopcua_1_1TypeHandler.html#a1aa3d59b70a33f9fae100b75c66c1f49">   57</a></span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> T <a class="code hl_function" href="structopcua_1_1TypeHandler.html#a1aa3d59b70a33f9fae100b75c66c1f49">copy</a>(<span class="keyword">const</span> T&amp; <span class="keywordtype">object</span>) {</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordflow">return</span> object;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    };</div>
 </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment"></span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">    /// Move constructor with native object.</span></div>
-<div class="foldopen" id="foldopen00046" data-start="{" data-end="}">
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#abeb4d5b00ad4a6d3ff7df4cf70163671">   46</a></span><span class="comment"></span>    <span class="keyword">constexpr</span> <span class="keyword">explicit</span> <a class="code hl_function" href="classopcua_1_1Wrapper.html#abeb4d5b00ad4a6d3ff7df4cf70163671">Wrapper</a>(T&amp;&amp; <a class="code hl_function" href="classopcua_1_1Wrapper.html#a92e11d213ccb567b47eb94271095ee15">native</a>) noexcept</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        : native_(std::move(<a class="code hl_function" href="classopcua_1_1Wrapper.html#a92e11d213ccb567b47eb94271095ee15">native</a>)) {}</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="foldopen" id="foldopen00061" data-start="{" data-end="}">
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="structopcua_1_1TypeHandler.html#abf8aeeee99619e1e70626b77b4e4a7ac">   61</a></span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> T <a class="code hl_function" href="structopcua_1_1TypeHandler.html#abf8aeeee99619e1e70626b77b4e4a7ac">move</a>(T&amp;&amp; <span class="keywordtype">object</span>) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordflow">return</span> std::move(<span class="keywordtype">object</span>);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    };</div>
 </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment"></span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">    /// Copy assignment with native object.</span></div>
-<div class="foldopen" id="foldopen00050" data-start="{" data-end="}">
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#a10ab20309bd7993c24fb482a21897f5b">   50</a></span><span class="comment"></span>    <span class="keyword">constexpr</span> <a class="code hl_class" href="classopcua_1_1Wrapper.html">Wrapper</a>&amp; <a class="code hl_function" href="classopcua_1_1Wrapper.html#a10ab20309bd7993c24fb482a21897f5b">operator=</a>(<span class="keyword">const</span> T&amp; <a class="code hl_function" href="classopcua_1_1Wrapper.html#a92e11d213ccb567b47eb94271095ee15">native</a>) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        this-&gt;<a class="code hl_function" href="classopcua_1_1Wrapper.html#a92e11d213ccb567b47eb94271095ee15">native</a>() = <a class="code hl_function" href="classopcua_1_1Wrapper.html#a92e11d213ccb567b47eb94271095ee15">native</a>;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    }</div>
-</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment"></span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">    /// Move assignment with native object.</span></div>
-<div class="foldopen" id="foldopen00056" data-start="{" data-end="}">
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#afa4856f12b0f477bcddf91ee87876b0c">   56</a></span><span class="comment"></span>    <span class="keyword">constexpr</span> <a class="code hl_class" href="classopcua_1_1Wrapper.html">Wrapper</a>&amp; <a class="code hl_function" href="classopcua_1_1Wrapper.html#afa4856f12b0f477bcddf91ee87876b0c">operator=</a>(T&amp;&amp; <a class="code hl_function" href="classopcua_1_1Wrapper.html#a92e11d213ccb567b47eb94271095ee15">native</a>) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        this-&gt;<a class="code hl_function" href="classopcua_1_1Wrapper.html#a92e11d213ccb567b47eb94271095ee15">native</a>() = std::move(<a class="code hl_function" href="classopcua_1_1Wrapper.html#a92e11d213ccb567b47eb94271095ee15">native</a>);</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    }</div>
-</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment"></span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">    /// Implicit conversion to native object.</span></div>
-<div class="foldopen" id="foldopen00062" data-start="{" data-end="}">
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#a13d9ca3204e1d86b8a964528ae64eb83">   62</a></span><span class="comment"></span>    <span class="keyword">constexpr</span> <span class="keyword">operator</span> T&amp;() <span class="keyword">noexcept</span> {  <span class="comment">// NOLINT(hicpp-explicit-conversions)</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordflow">return</span> native_;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    }</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>};</div>
 </div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment"></span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">    /// Implicit conversion to native object.</span></div>
-<div class="foldopen" id="foldopen00067" data-start="{" data-end="}">
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#a0627028f7f1cbd3ad7cf7af54f0e4398">   67</a></span><span class="comment"></span>    <span class="keyword">constexpr</span> <span class="keyword">operator</span> <span class="keyword">const</span> T&amp;() <span class="keyword">const</span> <span class="keyword">noexcept</span> {  <span class="comment">// NOLINT(hicpp-explicit-conversions)</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="keywordflow">return</span> native_;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    }</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment"> * Specialized type handler for native types.</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment"> * @tparam T Native type, e.g. @ref UA_String</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment"> * @tparam Index Type index of the @ref UA_TYPES array, e.g. `UA_TYPES_STRING`</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment"> * @see TypeHandler</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, TypeIndex Index&gt;</div>
+<div class="foldopen" id="foldopen00075" data-start="{" data-end="};">
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="structopcua_1_1TypeHandlerNative.html">   75</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1TypeHandlerNative.html">TypeHandlerNative</a> {</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keyword">static_assert</span>(Index &lt; <a class="code hl_defineRef" target="_blank" href="open62541/types__generated_8h.html#ac9c453774b0045ce3fee7acaf01b1223">UA_TYPES_COUNT</a>);</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="foldopen" id="foldopen00078" data-start="{" data-end="}">
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="structopcua_1_1TypeHandlerNative.html#a23f55e4e208811fd19d28bcdfb16a903">   78</a></span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> T <a class="code hl_function" href="structopcua_1_1TypeHandlerNative.html#a23f55e4e208811fd19d28bcdfb16a903">copy</a>(<span class="keyword">const</span> T&amp; native) {</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <span class="keywordflow">return</span> detail::copy(native, <a class="code hl_variableRef" target="_blank" href="open62541/types__generated_8h.html#aba037b86f18a7b7bceef5c098910c2c7">UA_TYPES</a>[Index]);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    };</div>
 </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment"></span> </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">    /// Member access to native object.</span></div>
-<div class="foldopen" id="foldopen00072" data-start="{" data-end="}">
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#a69fc9b6017ae88c2dc64bf094efff806">   72</a></span><span class="comment"></span>    <span class="keyword">constexpr</span> T* <a class="code hl_function" href="classopcua_1_1Wrapper.html#a69fc9b6017ae88c2dc64bf094efff806">operator-&gt;</a>() noexcept {</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="keywordflow">return</span> &amp;native_;</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    }</div>
-</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment"></span> </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">    /// Member access to native object.</span></div>
-<div class="foldopen" id="foldopen00077" data-start="{" data-end="}">
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#a27cc17f5103dadb0bb35eeafde062cc0">   77</a></span><span class="comment"></span>    <span class="keyword">constexpr</span> <span class="keyword">const</span> T* <a class="code hl_function" href="classopcua_1_1Wrapper.html#a27cc17f5103dadb0bb35eeafde062cc0">operator-&gt;</a>() const noexcept {</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <span class="keywordflow">return</span> &amp;native_;</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    }</div>
-</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment"></span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">    /// Return pointer to native object.</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
 <div class="foldopen" id="foldopen00082" data-start="{" data-end="}">
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#aaa0b3bd9c7b644f3c99f7bf841565faa">   82</a></span><span class="comment"></span>    <span class="keyword">constexpr</span> T* <a class="code hl_function" href="classopcua_1_1Wrapper.html#aaa0b3bd9c7b644f3c99f7bf841565faa">handle</a>() noexcept {</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        <span class="keywordflow">return</span> &amp;native_;</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    }</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="structopcua_1_1TypeHandlerNative.html#ae5a26b8768869e2d4dd00d2d5e0ad827">   82</a></span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> T <a class="code hl_function" href="structopcua_1_1TypeHandlerNative.html#ae5a26b8768869e2d4dd00d2d5e0ad827">move</a>(T&amp;&amp; native) <span class="keyword">noexcept</span> {  <span class="comment">// NOLINT(*not-moved)</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        <span class="keywordflow">return</span> std::exchange(native, {});</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    };</div>
 </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment"></span> </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">    /// Return pointer to native object.</span></div>
-<div class="foldopen" id="foldopen00087" data-start="{" data-end="}">
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#a9bc89b771edb05d95fc9b23a5abd23e2">   87</a></span><span class="comment"></span>    <span class="keyword">constexpr</span> <span class="keyword">const</span> T* <a class="code hl_function" href="classopcua_1_1Wrapper.html#a9bc89b771edb05d95fc9b23a5abd23e2">handle</a>() const noexcept {</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <span class="keywordflow">return</span> &amp;native_;</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    }</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="foldopen" id="foldopen00086" data-start="{" data-end="}">
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="structopcua_1_1TypeHandlerNative.html#a3ea78242666babe73ca4292625887773">   86</a></span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keywordtype">void</span> <a class="code hl_function" href="structopcua_1_1TypeHandlerNative.html#a3ea78242666babe73ca4292625887773">clear</a>(T&amp; native) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        detail::clear(native, <a class="code hl_variableRef" target="_blank" href="open62541/types__generated_8h.html#aba037b86f18a7b7bceef5c098910c2c7">UA_TYPES</a>[Index]);</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    };</div>
 </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment"></span> </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">    /// Swap with wrapper object.</span></div>
-<div class="foldopen" id="foldopen00092" data-start="{" data-end="}">
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#a1f32ca32e122a070b3154326d6610b27">   92</a></span><span class="comment"></span>    <span class="keyword">constexpr</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classopcua_1_1Wrapper.html#a1f32ca32e122a070b3154326d6610b27">swap</a>(<a class="code hl_class" href="classopcua_1_1Wrapper.html">Wrapper</a>&amp; other) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        std::swap(this-&gt;<a class="code hl_function" href="classopcua_1_1Wrapper.html#a92e11d213ccb567b47eb94271095ee15">native</a>(), other.native());</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    }</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>};</div>
 </div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment"></span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment">    /// Swap with native object.</span></div>
-<div class="foldopen" id="foldopen00097" data-start="{" data-end="}">
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#abc65cc70d4669aef5b0adcb7640b521f">   97</a></span><span class="comment"></span>    <span class="keyword">constexpr</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classopcua_1_1Wrapper.html#abc65cc70d4669aef5b0adcb7640b521f">swap</a>(T&amp; <a class="code hl_function" href="classopcua_1_1Wrapper.html#a92e11d213ccb567b47eb94271095ee15">native</a>) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        std::swap(this-&gt;<a class="code hl_function" href="classopcua_1_1Wrapper.html#a92e11d213ccb567b47eb94271095ee15">native</a>(), <a class="code hl_function" href="classopcua_1_1Wrapper.html#a92e11d213ccb567b47eb94271095ee15">native</a>);</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    }</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="keyword">namespace </span>detail {</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Handler, <span class="keyword">typename</span> T, <span class="keyword">typename</span> = <span class="keywordtype">void</span>&gt;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="keyword">struct </span>HasClear : std::false_type {};</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Handler, <span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="keyword">struct </span>HasClear&lt;Handler, T, std::void_t&lt;decltype(Handler::clear(std::declval&lt;T&amp;&gt;()))&gt;&gt;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    : std::true_type {};</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> WrapperType, <span class="keywordtype">bool</span> Clear&gt;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="keyword">class </span>WrapperDestructorMixin {};</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> WrapperType&gt;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="keyword">class </span>WrapperDestructorMixin&lt;WrapperType, true&gt; {  <span class="comment">// NOLINT(*special-member-functions)</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    ~WrapperDestructorMixin() noexcept {</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <span class="keyword">auto</span>&amp; native = *<span class="keyword">static_cast&lt;</span>WrapperType*<span class="keyword">&gt;</span>(<span class="keyword">this</span>)-&gt;handle();</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        WrapperType::HandlerType::clear(native);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    }</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>};</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>}  <span class="comment">// namespace detail</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment"></span> </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="comment"> * Template base class to wrap (native) objects.</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="comment"> * @tparam T Type of the native object.</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="comment"> * @tparam Handler Policy type that defines object operations. It must define:</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="comment"> *         - `static T copy(const T&amp;)` to copy the wrapped object,</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="comment"> *         - `static T move(T&amp;&amp;) noexcept` to move the wrapped object,</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="comment"> *         - `static void clear(T&amp;) noexcept` to clear the wrapped object (optional).</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="comment"> *            If clear is not defined, the wrapper does not define a destructor.</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="comment"> * The default @ref TypeHandler provides standard copy/move behavior.</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="comment"> * It can be specialized for custom behavior per type.</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="comment"> * Use @ref TypeHandlerNative for native open62541 types.</span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="comment"> * @ref WrapperNative is a convenience alias for Wrapper using TypeHandlerNative.</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="comment"> * @warning No virtual destructor is defined; do not implement a destructor in derived classes.</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> Handler = TypeHandler&lt;T&gt;&gt;</div>
+<div class="foldopen" id="foldopen00132" data-start="{" data-end="};">
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html">  132</a></span><span class="keyword">class </span><a class="code hl_class" href="classopcua_1_1Wrapper.html">Wrapper</a></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    : <span class="keyword">public</span> detail::WrapperDestructorMixin&lt;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>          Wrapper&lt;T, Handler&gt;,</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>          detail::HasClear&lt;Handler, T&gt;::value&gt; {</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    <span class="keyword">static_assert</span>(std::is_nothrow_default_constructible_v&lt;T&gt;);</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <span class="keyword">static_assert</span>(std::is_invocable_v&lt;<span class="keyword">decltype</span>(Handler::copy), <span class="keyword">const</span> T&amp;&gt;);</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <span class="keyword">static_assert</span>(std::is_nothrow_invocable_v&lt;<span class="keyword">decltype</span>(Handler::move), T&amp;&amp;&gt;);</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#ab2d8c6254361dc3930901802d060feff">  141</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classopcua_1_1Wrapper.html#ab2d8c6254361dc3930901802d060feff">NativeType</a> = T;</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#aba233c36b2aa1e8afd6b150685ee86f6">  142</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classopcua_1_1Wrapper.html#aba233c36b2aa1e8afd6b150685ee86f6">HandlerType</a> = Handler;</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#a5ae4187c8217bcc57b39428d3034c5ab">  144</a></span>    <span class="keyword">constexpr</span> <a class="code hl_function" href="classopcua_1_1Wrapper.html#a5ae4187c8217bcc57b39428d3034c5ab">Wrapper</a>() noexcept = default;</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span><span class="comment"></span> </div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><span class="comment">    /// Copy constructor.</span></div>
+<div class="foldopen" id="foldopen00147" data-start="{" data-end="}">
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#a336d069e7279489d1a153682bb604684">  147</a></span><span class="comment"></span>    constexpr <a class="code hl_class" href="classopcua_1_1Wrapper.html">Wrapper</a>(const <a class="code hl_class" href="classopcua_1_1Wrapper.html">Wrapper</a>&amp; other)</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        : native_{Handler::copy(other.native())} {}</div>
 </div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="keyword">protected</span>:</div>
-<div class="foldopen" id="foldopen00102" data-start="{" data-end="}">
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#a92e11d213ccb567b47eb94271095ee15">  102</a></span>    <span class="keyword">constexpr</span> <span class="keyword">const</span> T&amp; <a class="code hl_function" href="classopcua_1_1Wrapper.html#a92e11d213ccb567b47eb94271095ee15">native</a>() const noexcept {</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <span class="keywordflow">return</span> native_;</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    }</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><span class="comment"></span> </div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><span class="comment">    /// Copy constructor with native object.</span></div>
+<div class="foldopen" id="foldopen00151" data-start="{" data-end="}">
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#a936835b207eeb371b1bf0c30d7569425">  151</a></span><span class="comment"></span>    <span class="keyword">constexpr</span> <span class="keyword">explicit</span> <a class="code hl_function" href="classopcua_1_1Wrapper.html#a936835b207eeb371b1bf0c30d7569425">Wrapper</a>(<span class="keyword">const</span> T&amp; <a class="code hl_function" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>)</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        : native_{Handler::copy(<a class="code hl_function" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>)} {}</div>
 </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
-<div class="foldopen" id="foldopen00106" data-start="{" data-end="}">
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#aa23e4e3653dea15d1ca32bb8c5ec88c0">  106</a></span>    <span class="keyword">constexpr</span> T&amp; <a class="code hl_function" href="classopcua_1_1Wrapper.html#aa23e4e3653dea15d1ca32bb8c5ec88c0">native</a>() noexcept {</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <span class="keywordflow">return</span> native_;</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    }</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="comment"></span> </div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="comment">    /// Move constructor.</span></div>
+<div class="foldopen" id="foldopen00155" data-start="{" data-end="}">
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#acbd0a79eb0f2ae0bac9cb90892c1ad46">  155</a></span><span class="comment"></span>    <span class="keyword">constexpr</span> <a class="code hl_function" href="classopcua_1_1Wrapper.html#acbd0a79eb0f2ae0bac9cb90892c1ad46">Wrapper</a>(<a class="code hl_class" href="classopcua_1_1Wrapper.html">Wrapper</a>&amp;&amp; other) noexcept</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        : native_{Handler::move(std::move(other.native()))} {}</div>
 </div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    T native_{};</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>};</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span><span class="comment"></span> </div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="comment">    /// Move constructor with native object.</span></div>
+<div class="foldopen" id="foldopen00159" data-start="{" data-end="}">
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#a43f6e9b2539d0931153cab2566037d21">  159</a></span><span class="comment"></span>    <span class="keyword">constexpr</span> <a class="code hl_function" href="classopcua_1_1Wrapper.html#a43f6e9b2539d0931153cab2566037d21">Wrapper</a>(T&amp;&amp; <a class="code hl_function" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>) <span class="keyword">noexcept</span>  <span class="comment">// NOLINT(*explicit-conversions)</span></div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        : native_{Handler::move(std::move(<a class="code hl_function" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>))} {}</div>
 </div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="comment">/* -------------------------------------------- Trait ------------------------------------------- */</span></div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="keyword">namespace </span>detail {</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="keyword">struct </span>IsWrapper {</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <span class="comment">// https://stackoverflow.com/a/51910887</span></div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U&gt;</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <span class="keyword">static</span> std::true_type check(<span class="keyword">const</span> Wrapper&lt;U&gt;&amp;);</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="keyword">static</span> std::false_type check(...);</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <span class="keyword">using </span>type = <span class="keyword">decltype</span>(check(std::declval&lt;T&amp;&gt;()));</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> value = type::value;</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>};</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>}  <span class="comment">// namespace detail</span></div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="comment">/* ------------------------------ Cast native type to wrapper type ------------------------------ */</span></div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="keyword">namespace </span>detail {</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> WrapperType&gt;</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span><span class="keyword">struct </span>WrapperConversion {</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    <span class="keyword">static_assert</span>(detail::IsWrapper&lt;WrapperType&gt;::value);</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <span class="keyword">static_assert</span>(std::is_standard_layout_v&lt;WrapperType&gt;);</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <span class="keyword">using </span>NativeType = <span class="keyword">typename</span> WrapperType::NativeType;</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <span class="comment">// NOLINTBEGIN(bugprone-casting-through-void)</span></div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> WrapperType* asWrapper(NativeType* native) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>WrapperType*<span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(native));</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    }</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> WrapperType* asWrapper(<span class="keyword">const</span> NativeType* native) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>WrapperType*<span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span><span class="keyword">const </span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(native));</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    }</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> WrapperType&amp; asWrapper(NativeType&amp; native) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        <span class="keywordflow">return</span> *asWrapper(&amp;native);</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    }</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> WrapperType&amp; asWrapper(<span class="keyword">const</span> NativeType&amp; native) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        <span class="keywordflow">return</span> *asWrapper(&amp;native);</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    }</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> NativeType* asNative(WrapperType* wrapper) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>NativeType*<span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(wrapper));</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    }</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> NativeType* asNative(<span class="keyword">const</span> WrapperType* wrapper) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>NativeType*<span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span><span class="keyword">const </span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(wrapper));</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    }</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> NativeType&amp; asNative(WrapperType&amp; wrapper) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        <span class="keywordflow">return</span> *asNative(&amp;wrapper);</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    }</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> NativeType&amp; asNative(<span class="keyword">const</span> WrapperType&amp; wrapper) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        <span class="keywordflow">return</span> *asNative(&amp;wrapper);</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    }</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    <span class="comment">// NOLINTEND(bugprone-casting-through-void)</span></div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>};</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span> </div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>}  <span class="comment">// namespace detail</span></div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><span class="comment"></span> </div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="comment"> * @ingroup Wrapper</span></div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><span class="comment"> * @{</span></div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span><span class="comment"></span> </div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><span class="comment">/// Cast native object pointers to Wrapper object pointers.</span></div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span><span class="comment">/// This is especially helpful to avoid copies in getter methods of composed types.</span></div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span><span class="comment">/// @see https://github.com/open62541pp/open62541pp/issues/30</span></div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span><span class="comment">/// @relates Wrapper</span></div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> WrapperType, <span class="keyword">typename</span> NativeType = <span class="keyword">typename</span> WrapperType::NativeType&gt;</div>
-<div class="foldopen" id="foldopen00190" data-start="{" data-end="}">
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno"><a class="line" href="group__Wrapper.html#ga589f68cd36562d9d2218535817c26dfe">  190</a></span><span class="keyword">constexpr</span> WrapperType* <a class="code hl_function" href="group__Wrapper.html#ga589f68cd36562d9d2218535817c26dfe">asWrapper</a>(<a class="code hl_typedef" href="classopcua_1_1Wrapper.html#abe09db5fb8ab2aded84e0f8e85e5bc99">NativeType</a>* native) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    <span class="keywordflow">return</span> detail::WrapperConversion&lt;WrapperType&gt;::asWrapper(native);</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>}</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#a2c901505812438da1b8c868cd8611e3e">  162</a></span>    <a class="code hl_function" href="classopcua_1_1Wrapper.html#a2c901505812438da1b8c868cd8611e3e">~Wrapper</a>() noexcept = default;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><span class="comment"></span> </div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span><span class="comment">    /// Copy assignment.</span></div>
+<div class="foldopen" id="foldopen00165" data-start="{" data-end="}">
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#a6615ada0924da6c55c3f5ab35287f92a">  165</a></span><span class="comment"></span>    constexpr <a class="code hl_class" href="classopcua_1_1Wrapper.html">Wrapper</a>&amp; operator=(const <a class="code hl_class" href="classopcua_1_1Wrapper.html">Wrapper</a>&amp; other) {</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other) {</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>            <a class="code hl_function" href="classopcua_1_1Wrapper.html#a7de21fbc3cff233c7677d4ceac7faf3d">clear</a>();</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>            this-&gt;<a class="code hl_function" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>() = Handler::copy(other.native());</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        }</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    }</div>
 </div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="comment"></span> </div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="comment">/// @copydoc asWrapper(NativeType*)</span></div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span><span class="comment">/// @relates Wrapper</span></div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span><span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> WrapperType, <span class="keyword">typename</span> NativeType = <span class="keyword">typename</span> WrapperType::NativeType&gt;</div>
-<div class="foldopen" id="foldopen00197" data-start="{" data-end="}">
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno"><a class="line" href="group__Wrapper.html#ga8acec8c7b8dbbbc422ab496b7b552b30">  197</a></span><span class="keyword">constexpr</span> <span class="keyword">const</span> WrapperType* <a class="code hl_function" href="group__Wrapper.html#ga8acec8c7b8dbbbc422ab496b7b552b30">asWrapper</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="classopcua_1_1Wrapper.html#abe09db5fb8ab2aded84e0f8e85e5bc99">NativeType</a>* native) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    <span class="keywordflow">return</span> detail::WrapperConversion&lt;WrapperType&gt;::asWrapper(native);</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>}</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="comment"></span> </div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="comment">    /// Copy assignment with native object.</span></div>
+<div class="foldopen" id="foldopen00174" data-start="{" data-end="}">
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#a2908144b4211b3e9b581c34ff01ac4f3">  174</a></span><span class="comment"></span>    <span class="keyword">constexpr</span> <a class="code hl_class" href="classopcua_1_1Wrapper.html">Wrapper</a>&amp; <a class="code hl_function" href="classopcua_1_1Wrapper.html#a2908144b4211b3e9b581c34ff01ac4f3">operator=</a>(<span class="keyword">const</span> T&amp; <a class="code hl_function" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>) {</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>        <span class="keywordflow">if</span> (&amp;this-&gt;<a class="code hl_function" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>() != &amp;native) {</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>            <a class="code hl_function" href="classopcua_1_1Wrapper.html#a7de21fbc3cff233c7677d4ceac7faf3d">clear</a>();</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>            this-&gt;<a class="code hl_function" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>() = Handler::copy(<a class="code hl_function" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>);</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        }</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    }</div>
 </div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span><span class="comment"></span> </div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span><span class="comment">/// Cast native object references to Wrapper object references.</span></div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span><span class="comment">/// @copydetails asWrapper(NativeType*)</span></div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span><span class="comment">/// @relates Wrapper</span></div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> WrapperType, <span class="keyword">typename</span> NativeType = <span class="keyword">typename</span> WrapperType::NativeType&gt;</div>
-<div class="foldopen" id="foldopen00205" data-start="{" data-end="}">
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno"><a class="line" href="group__Wrapper.html#ga1bd3cc01e80648e5fc98fbb9181971d4">  205</a></span><span class="keyword">constexpr</span> WrapperType&amp; <a class="code hl_function" href="group__Wrapper.html#ga1bd3cc01e80648e5fc98fbb9181971d4">asWrapper</a>(<a class="code hl_typedef" href="classopcua_1_1Wrapper.html#abe09db5fb8ab2aded84e0f8e85e5bc99">NativeType</a>&amp; native) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    <span class="keywordflow">return</span> detail::WrapperConversion&lt;WrapperType&gt;::asWrapper(native);</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>}</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="comment"></span> </div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><span class="comment">    /// Move assignment.</span></div>
+<div class="foldopen" id="foldopen00183" data-start="{" data-end="}">
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#aea8d70822ba9b2212448e0fe375d034d">  183</a></span><span class="comment"></span>    <span class="keyword">constexpr</span> <a class="code hl_class" href="classopcua_1_1Wrapper.html">Wrapper</a>&amp; <a class="code hl_function" href="classopcua_1_1Wrapper.html#aea8d70822ba9b2212448e0fe375d034d">operator=</a>(<a class="code hl_class" href="classopcua_1_1Wrapper.html">Wrapper</a>&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other) {</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>            <a class="code hl_function" href="classopcua_1_1Wrapper.html#a7de21fbc3cff233c7677d4ceac7faf3d">clear</a>();</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>            this-&gt;<a class="code hl_function" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>() = Handler::move(std::move(other.native()));</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        }</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    }</div>
 </div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span><span class="comment"></span> </div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><span class="comment">/// @copydoc asWrapper(NativeType&amp;)</span></div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="comment">/// @relates Wrapper</span></div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span><span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> WrapperType, <span class="keyword">typename</span> NativeType = <span class="keyword">typename</span> WrapperType::NativeType&gt;</div>
-<div class="foldopen" id="foldopen00212" data-start="{" data-end="}">
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno"><a class="line" href="group__Wrapper.html#ga4f0f5f23f09e2e42f08c7b05b6140e8b">  212</a></span><span class="keyword">constexpr</span> <span class="keyword">const</span> WrapperType&amp; <a class="code hl_function" href="group__Wrapper.html#ga4f0f5f23f09e2e42f08c7b05b6140e8b">asWrapper</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="classopcua_1_1Wrapper.html#abe09db5fb8ab2aded84e0f8e85e5bc99">NativeType</a>&amp; native) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    <span class="keywordflow">return</span> detail::WrapperConversion&lt;WrapperType&gt;::asWrapper(native);</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>}</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="comment"></span> </div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span><span class="comment">    /// Move assignment with native object.</span></div>
+<div class="foldopen" id="foldopen00192" data-start="{" data-end="}">
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#a269edac2dda653f541d2f985e60e8300">  192</a></span><span class="comment"></span>    <span class="keyword">constexpr</span> <a class="code hl_class" href="classopcua_1_1Wrapper.html">Wrapper</a>&amp; <a class="code hl_function" href="classopcua_1_1Wrapper.html#a269edac2dda653f541d2f985e60e8300">operator=</a>(T&amp;&amp; <a class="code hl_function" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        <span class="keywordflow">if</span> (&amp;this-&gt;<a class="code hl_function" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>() != &amp;<a class="code hl_function" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>) {</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>            <a class="code hl_function" href="classopcua_1_1Wrapper.html#a7de21fbc3cff233c7677d4ceac7faf3d">clear</a>();</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>            this-&gt;<a class="code hl_function" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>() = Handler::move(std::move(<a class="code hl_function" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>));</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        }</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    }</div>
 </div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span><span class="comment"></span> </div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span><span class="comment">/// Cast Wrapper object pointers to native object pointers.</span></div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span><span class="comment">/// @copydoc detail::WrapperConversion</span></div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span><span class="comment">/// @relates Wrapper</span></div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span><span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> WrapperType, <span class="keyword">typename</span> NativeType = <span class="keyword">typename</span> WrapperType::NativeType&gt;</div>
-<div class="foldopen" id="foldopen00220" data-start="{" data-end="}">
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno"><a class="line" href="group__Wrapper.html#ga4a1031854a8b19c30e4a9a23f1ab1b88">  220</a></span><span class="keyword">constexpr</span> <a class="code hl_typedef" href="classopcua_1_1Wrapper.html#abe09db5fb8ab2aded84e0f8e85e5bc99">NativeType</a>* <a class="code hl_function" href="group__Wrapper.html#ga4a1031854a8b19c30e4a9a23f1ab1b88">asNative</a>(WrapperType* wrapper) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    <span class="keywordflow">return</span> detail::WrapperConversion&lt;WrapperType&gt;::asNative(wrapper);</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>}</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span><span class="comment"></span> </div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span><span class="comment">    /// Implicit conversion to native object.</span></div>
+<div class="foldopen" id="foldopen00201" data-start="{" data-end="}">
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#a6079a04f9992ac57cd911769e2ddf5b8">  201</a></span><span class="comment"></span>    <span class="keyword">constexpr</span> <span class="keyword">operator</span> T&amp;() <span class="keyword">noexcept</span> {  <span class="comment">// NOLINT(*explicit-conversions)</span></div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        <span class="keywordflow">return</span> native_;</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    }</div>
 </div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span><span class="comment"></span> </div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span><span class="comment">/// @copydoc asNative(WrapperType*)</span></div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span><span class="comment">/// @relates Wrapper</span></div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span><span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> WrapperType, <span class="keyword">typename</span> NativeType = <span class="keyword">typename</span> WrapperType::NativeType&gt;</div>
-<div class="foldopen" id="foldopen00227" data-start="{" data-end="}">
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno"><a class="line" href="group__Wrapper.html#gafd010404aac6fe48d126d4e2ea2e126e">  227</a></span><span class="keyword">constexpr</span> <span class="keyword">const</span> <a class="code hl_typedef" href="classopcua_1_1Wrapper.html#abe09db5fb8ab2aded84e0f8e85e5bc99">NativeType</a>* <a class="code hl_function" href="group__Wrapper.html#gafd010404aac6fe48d126d4e2ea2e126e">asNative</a>(<span class="keyword">const</span> WrapperType* wrapper) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    <span class="keywordflow">return</span> detail::WrapperConversion&lt;WrapperType&gt;::asNative(wrapper);</div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>}</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><span class="comment"></span> </div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span><span class="comment">    /// Implicit conversion to native object.</span></div>
+<div class="foldopen" id="foldopen00206" data-start="{" data-end="}">
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#a10948898750d3adb06e2ef7debc32529">  206</a></span><span class="comment"></span>    <span class="keyword">constexpr</span> <span class="keyword">operator</span> <span class="keyword">const</span> T&amp;() <span class="keyword">const</span> <span class="keyword">noexcept</span> {  <span class="comment">// NOLINT(*explicit-conversions)</span></div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>        <span class="keywordflow">return</span> native_;</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    }</div>
 </div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span><span class="comment"></span> </div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span><span class="comment">/// Cast Wrapper object references to native object references.</span></div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span><span class="comment">/// @copydetails asNative(WrapperType*)</span></div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span><span class="comment">/// @relates Wrapper</span></div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span><span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> WrapperType, <span class="keyword">typename</span> NativeType = <span class="keyword">typename</span> WrapperType::NativeType&gt;</div>
-<div class="foldopen" id="foldopen00235" data-start="{" data-end="}">
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno"><a class="line" href="group__Wrapper.html#ga766175df3bc943fa64e988f7961c1324">  235</a></span><span class="keyword">constexpr</span> <a class="code hl_typedef" href="classopcua_1_1Wrapper.html#abe09db5fb8ab2aded84e0f8e85e5bc99">NativeType</a>&amp; <a class="code hl_function" href="group__Wrapper.html#ga766175df3bc943fa64e988f7961c1324">asNative</a>(WrapperType&amp; wrapper) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    <span class="keywordflow">return</span> detail::WrapperConversion&lt;WrapperType&gt;::asNative(wrapper);</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>}</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><span class="comment"></span> </div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="comment">    /// Member access to native object.</span></div>
+<div class="foldopen" id="foldopen00211" data-start="{" data-end="}">
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#aef233ceb40fcb95ead0c8703c11b28e9">  211</a></span><span class="comment"></span>    <span class="keyword">constexpr</span> T* <a class="code hl_function" href="classopcua_1_1Wrapper.html#aef233ceb40fcb95ead0c8703c11b28e9">operator-&gt;</a>() noexcept {</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        <span class="keywordflow">return</span> &amp;native_;</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    }</div>
 </div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span><span class="comment"></span> </div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span><span class="comment">/// @copydoc asNative(WrapperType&amp;)</span></div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span><span class="comment">/// @relates Wrapper</span></div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span><span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> WrapperType, <span class="keyword">typename</span> NativeType = <span class="keyword">typename</span> WrapperType::NativeType&gt;</div>
-<div class="foldopen" id="foldopen00242" data-start="{" data-end="}">
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno"><a class="line" href="group__Wrapper.html#ga8fa7c9559ee6cc6584ecaac9f52087d5">  242</a></span><span class="keyword">constexpr</span> <span class="keyword">const</span> <a class="code hl_typedef" href="classopcua_1_1Wrapper.html#abe09db5fb8ab2aded84e0f8e85e5bc99">NativeType</a>&amp; <a class="code hl_function" href="group__Wrapper.html#ga8fa7c9559ee6cc6584ecaac9f52087d5">asNative</a>(<span class="keyword">const</span> WrapperType&amp; wrapper) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    <span class="keywordflow">return</span> detail::WrapperConversion&lt;WrapperType&gt;::asNative(wrapper);</div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>}</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span><span class="comment"></span> </div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span><span class="comment">    /// Member access to native object.</span></div>
+<div class="foldopen" id="foldopen00216" data-start="{" data-end="}">
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#af702af0eaeb490f77f80174a17b78c43">  216</a></span><span class="comment"></span>    <span class="keyword">constexpr</span> <span class="keyword">const</span> T* <a class="code hl_function" href="classopcua_1_1Wrapper.html#af702af0eaeb490f77f80174a17b78c43">operator-&gt;</a>() const noexcept {</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>        <span class="keywordflow">return</span> &amp;native_;</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    }</div>
 </div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span><span class="comment"></span> </div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span><span class="comment"> * @}</span></div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span> </div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>}  <span class="comment">// namespace opcua</span></div>
-<div class="ttc" id="aclassopcua_1_1Wrapper_html"><div class="ttname"><a href="classopcua_1_1Wrapper.html">opcua::Wrapper</a></div><div class="ttdoc">Template base class to wrap native objects.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00033">wrapper.hpp:33</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Wrapper_html_a10ab20309bd7993c24fb482a21897f5b"><div class="ttname"><a href="classopcua_1_1Wrapper.html#a10ab20309bd7993c24fb482a21897f5b">opcua::Wrapper::operator=</a></div><div class="ttdeci">constexpr Wrapper &amp; operator=(const T &amp;native) noexcept</div><div class="ttdoc">Copy assignment with native object.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00050">wrapper.hpp:50</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Wrapper_html_a1f32ca32e122a070b3154326d6610b27"><div class="ttname"><a href="classopcua_1_1Wrapper.html#a1f32ca32e122a070b3154326d6610b27">opcua::Wrapper::swap</a></div><div class="ttdeci">constexpr void swap(Wrapper &amp;other) noexcept</div><div class="ttdoc">Swap with wrapper object.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00092">wrapper.hpp:92</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Wrapper_html_a27cc17f5103dadb0bb35eeafde062cc0"><div class="ttname"><a href="classopcua_1_1Wrapper.html#a27cc17f5103dadb0bb35eeafde062cc0">opcua::Wrapper::operator-&gt;</a></div><div class="ttdeci">constexpr const T * operator-&gt;() const noexcept</div><div class="ttdoc">Member access to native object.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00077">wrapper.hpp:77</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Wrapper_html_a69fc9b6017ae88c2dc64bf094efff806"><div class="ttname"><a href="classopcua_1_1Wrapper.html#a69fc9b6017ae88c2dc64bf094efff806">opcua::Wrapper::operator-&gt;</a></div><div class="ttdeci">constexpr T * operator-&gt;() noexcept</div><div class="ttdoc">Member access to native object.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00072">wrapper.hpp:72</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Wrapper_html_a92e11d213ccb567b47eb94271095ee15"><div class="ttname"><a href="classopcua_1_1Wrapper.html#a92e11d213ccb567b47eb94271095ee15">opcua::Wrapper::native</a></div><div class="ttdeci">constexpr const T &amp; native() const noexcept</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00102">wrapper.hpp:102</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Wrapper_html_a9bc89b771edb05d95fc9b23a5abd23e2"><div class="ttname"><a href="classopcua_1_1Wrapper.html#a9bc89b771edb05d95fc9b23a5abd23e2">opcua::Wrapper::handle</a></div><div class="ttdeci">constexpr const T * handle() const noexcept</div><div class="ttdoc">Return pointer to native object.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00087">wrapper.hpp:87</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Wrapper_html_aa23e4e3653dea15d1ca32bb8c5ec88c0"><div class="ttname"><a href="classopcua_1_1Wrapper.html#aa23e4e3653dea15d1ca32bb8c5ec88c0">opcua::Wrapper::native</a></div><div class="ttdeci">constexpr T &amp; native() noexcept</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00106">wrapper.hpp:106</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Wrapper_html_aaa0b3bd9c7b644f3c99f7bf841565faa"><div class="ttname"><a href="classopcua_1_1Wrapper.html#aaa0b3bd9c7b644f3c99f7bf841565faa">opcua::Wrapper::handle</a></div><div class="ttdeci">constexpr T * handle() noexcept</div><div class="ttdoc">Return pointer to native object.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00082">wrapper.hpp:82</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Wrapper_html_abc65cc70d4669aef5b0adcb7640b521f"><div class="ttname"><a href="classopcua_1_1Wrapper.html#abc65cc70d4669aef5b0adcb7640b521f">opcua::Wrapper::swap</a></div><div class="ttdeci">constexpr void swap(T &amp;native) noexcept</div><div class="ttdoc">Swap with native object.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00097">wrapper.hpp:97</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Wrapper_html_abe09db5fb8ab2aded84e0f8e85e5bc99"><div class="ttname"><a href="classopcua_1_1Wrapper.html#abe09db5fb8ab2aded84e0f8e85e5bc99">opcua::Wrapper::NativeType</a></div><div class="ttdeci">T NativeType</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00037">wrapper.hpp:37</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Wrapper_html_abeb4d5b00ad4a6d3ff7df4cf70163671"><div class="ttname"><a href="classopcua_1_1Wrapper.html#abeb4d5b00ad4a6d3ff7df4cf70163671">opcua::Wrapper::Wrapper</a></div><div class="ttdeci">constexpr Wrapper(T &amp;&amp;native) noexcept</div><div class="ttdoc">Move constructor with native object.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00046">wrapper.hpp:46</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Wrapper_html_adfa9bcbbbc5f81f1fac810771fd69007"><div class="ttname"><a href="classopcua_1_1Wrapper.html#adfa9bcbbbc5f81f1fac810771fd69007">opcua::Wrapper::Wrapper</a></div><div class="ttdeci">constexpr Wrapper() noexcept=default</div></div>
-<div class="ttc" id="aclassopcua_1_1Wrapper_html_afa4856f12b0f477bcddf91ee87876b0c"><div class="ttname"><a href="classopcua_1_1Wrapper.html#afa4856f12b0f477bcddf91ee87876b0c">opcua::Wrapper::operator=</a></div><div class="ttdeci">constexpr Wrapper &amp; operator=(T &amp;&amp;native) noexcept</div><div class="ttdoc">Move assignment with native object.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00056">wrapper.hpp:56</a></div></div>
-<div class="ttc" id="agroup__Wrapper_html_ga1bd3cc01e80648e5fc98fbb9181971d4"><div class="ttname"><a href="group__Wrapper.html#ga1bd3cc01e80648e5fc98fbb9181971d4">opcua::Wrapper::asWrapper</a></div><div class="ttdeci">constexpr WrapperType &amp; asWrapper(NativeType &amp;native) noexcept</div><div class="ttdoc">Cast native object references to Wrapper object references.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00205">wrapper.hpp:205</a></div></div>
-<div class="ttc" id="agroup__Wrapper_html_ga4a1031854a8b19c30e4a9a23f1ab1b88"><div class="ttname"><a href="group__Wrapper.html#ga4a1031854a8b19c30e4a9a23f1ab1b88">opcua::Wrapper::asNative</a></div><div class="ttdeci">constexpr NativeType * asNative(WrapperType *wrapper) noexcept</div><div class="ttdoc">Cast Wrapper object pointers to native object pointers.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00220">wrapper.hpp:220</a></div></div>
-<div class="ttc" id="agroup__Wrapper_html_ga4f0f5f23f09e2e42f08c7b05b6140e8b"><div class="ttname"><a href="group__Wrapper.html#ga4f0f5f23f09e2e42f08c7b05b6140e8b">opcua::Wrapper::asWrapper</a></div><div class="ttdeci">constexpr const WrapperType &amp; asWrapper(const NativeType &amp;native) noexcept</div><div class="ttdoc">Cast native object references to Wrapper object references.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00212">wrapper.hpp:212</a></div></div>
-<div class="ttc" id="agroup__Wrapper_html_ga589f68cd36562d9d2218535817c26dfe"><div class="ttname"><a href="group__Wrapper.html#ga589f68cd36562d9d2218535817c26dfe">opcua::Wrapper::asWrapper</a></div><div class="ttdeci">constexpr WrapperType * asWrapper(NativeType *native) noexcept</div><div class="ttdoc">Cast native object pointers to Wrapper object pointers.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00190">wrapper.hpp:190</a></div></div>
-<div class="ttc" id="agroup__Wrapper_html_ga766175df3bc943fa64e988f7961c1324"><div class="ttname"><a href="group__Wrapper.html#ga766175df3bc943fa64e988f7961c1324">opcua::Wrapper::asNative</a></div><div class="ttdeci">constexpr NativeType &amp; asNative(WrapperType &amp;wrapper) noexcept</div><div class="ttdoc">Cast Wrapper object references to native object references.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00235">wrapper.hpp:235</a></div></div>
-<div class="ttc" id="agroup__Wrapper_html_ga8acec8c7b8dbbbc422ab496b7b552b30"><div class="ttname"><a href="group__Wrapper.html#ga8acec8c7b8dbbbc422ab496b7b552b30">opcua::Wrapper::asWrapper</a></div><div class="ttdeci">constexpr const WrapperType * asWrapper(const NativeType *native) noexcept</div><div class="ttdoc">Cast native object pointers to Wrapper object pointers.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00197">wrapper.hpp:197</a></div></div>
-<div class="ttc" id="agroup__Wrapper_html_ga8fa7c9559ee6cc6584ecaac9f52087d5"><div class="ttname"><a href="group__Wrapper.html#ga8fa7c9559ee6cc6584ecaac9f52087d5">opcua::Wrapper::asNative</a></div><div class="ttdeci">constexpr const NativeType &amp; asNative(const WrapperType &amp;wrapper) noexcept</div><div class="ttdoc">Cast Wrapper object references to native object references.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00242">wrapper.hpp:242</a></div></div>
-<div class="ttc" id="agroup__Wrapper_html_gafd010404aac6fe48d126d4e2ea2e126e"><div class="ttname"><a href="group__Wrapper.html#gafd010404aac6fe48d126d4e2ea2e126e">opcua::Wrapper::asNative</a></div><div class="ttdeci">constexpr const NativeType * asNative(const WrapperType *wrapper) noexcept</div><div class="ttdoc">Cast Wrapper object pointers to native object pointers.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00227">wrapper.hpp:227</a></div></div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span><span class="comment"></span> </div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span><span class="comment">    /// Return pointer to native object.</span></div>
+<div class="foldopen" id="foldopen00221" data-start="{" data-end="}">
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#a340615392827f2f54e03ee8f27b67eb9">  221</a></span><span class="comment"></span>    <span class="keyword">constexpr</span> T* <a class="code hl_function" href="classopcua_1_1Wrapper.html#a340615392827f2f54e03ee8f27b67eb9">handle</a>() noexcept {</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>        <span class="keywordflow">return</span> &amp;native_;</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    }</div>
+</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span><span class="comment"></span> </div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span><span class="comment">    /// Return pointer to native object.</span></div>
+<div class="foldopen" id="foldopen00226" data-start="{" data-end="}">
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#aa5db128ab43200c32e9b6a3fa243120b">  226</a></span><span class="comment"></span>    <span class="keyword">constexpr</span> <span class="keyword">const</span> T* <a class="code hl_function" href="classopcua_1_1Wrapper.html#aa5db128ab43200c32e9b6a3fa243120b">handle</a>() const noexcept {</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>        <span class="keywordflow">return</span> &amp;native_;</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    }</div>
+</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span><span class="comment"></span> </div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span><span class="comment">    /// Swap with wrapper object.</span></div>
+<div class="foldopen" id="foldopen00231" data-start="{" data-end="}">
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#ae88205f67fdd76e7955c7cd0190b23db">  231</a></span><span class="comment"></span>    <span class="keyword">constexpr</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classopcua_1_1Wrapper.html#ae88205f67fdd76e7955c7cd0190b23db">swap</a>(<a class="code hl_class" href="classopcua_1_1Wrapper.html">Wrapper</a>&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        <span class="keyword">using </span>std::swap;</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>        <a class="code hl_function" href="classopcua_1_1Wrapper.html#ae88205f67fdd76e7955c7cd0190b23db">swap</a>(this-&gt;<a class="code hl_function" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>(), other.native());</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    }</div>
+</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span><span class="comment"></span> </div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span><span class="comment">    /// Swap with native object.</span></div>
+<div class="foldopen" id="foldopen00237" data-start="{" data-end="}">
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#adafe39123a7811290fd163cff14409c8">  237</a></span><span class="comment"></span>    <span class="keyword">constexpr</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classopcua_1_1Wrapper.html#adafe39123a7811290fd163cff14409c8">swap</a>(T&amp; <a class="code hl_function" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>        <span class="keyword">using </span>std::swap;</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>        <a class="code hl_function" href="classopcua_1_1Wrapper.html#ae88205f67fdd76e7955c7cd0190b23db">swap</a>(this-&gt;<a class="code hl_function" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>(), <a class="code hl_function" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>);</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>    }</div>
+</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span> </div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span><span class="keyword">protected</span>:</div>
+<div class="foldopen" id="foldopen00243" data-start="{" data-end="}">
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">  243</a></span>    <span class="keyword">constexpr</span> <span class="keyword">const</span> T&amp; <a class="code hl_function" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>() const noexcept {</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>        <span class="keywordflow">return</span> native_;</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    }</div>
+</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span> </div>
+<div class="foldopen" id="foldopen00247" data-start="{" data-end="}">
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#af1b6b948a5c49962e0edeecdaf6d49c4">  247</a></span>    <span class="keyword">constexpr</span> T&amp; <a class="code hl_function" href="classopcua_1_1Wrapper.html#af1b6b948a5c49962e0edeecdaf6d49c4">native</a>() noexcept {</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>        <span class="keywordflow">return</span> native_;</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>    }</div>
+</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span> </div>
+<div class="foldopen" id="foldopen00251" data-start="{" data-end="}">
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno"><a class="line" href="classopcua_1_1Wrapper.html#a7de21fbc3cff233c7677d4ceac7faf3d">  251</a></span>    <span class="keyword">constexpr</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classopcua_1_1Wrapper.html#a7de21fbc3cff233c7677d4ceac7faf3d">clear</a>() noexcept {</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (detail::HasClear&lt;Handler, T&gt;::value) {</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>            Handler::clear(native_);</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>            native_ = {};</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>        }</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>    }</div>
+</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span> </div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    T native_{};</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>};</div>
+</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span><span class="comment"></span> </div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span><span class="comment"> * Convenience alias for Wrapper using TypeHandlerNative.</span></div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span><span class="comment"> * @see Wrapper</span></div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, TypeIndex Index&gt;</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno"><a class="line" href="group__Wrapper.html#gab7f556806093b8bee70fd9a6727aaab9">  268</a></span><span class="keyword">using </span><a class="code hl_class" href="classopcua_1_1Wrapper.html">WrapperNative</a> = <a class="code hl_class" href="classopcua_1_1Wrapper.html">Wrapper&lt;T, TypeHandlerNative&lt;T, Index&gt;</a>&gt;;</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span> </div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, TypeIndex Index&gt;</div>
+<div class="foldopen" id="foldopen00271" data-start="{" data-end="};">
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno"><a class="line" href="classopcua_1_1TypeWrapper.html">  271</a></span><span class="keyword">class </span>[[deprecated(<span class="stringliteral">&quot;use WrapperNative instead&quot;</span>)]] <a class="code hl_class" href="classopcua_1_1TypeWrapper.html">TypeWrapper</a> : <span class="keyword">public</span> <a class="code hl_class" href="classopcua_1_1Wrapper.html">WrapperNative</a>&lt;T, Index&gt; {</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>    <span class="keyword">using </span><a class="code hl_class" href="classopcua_1_1Wrapper.html">WrapperNative</a>&lt;T, Index&gt;::WrapperNative;</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    <span class="keyword">using </span><a class="code hl_class" href="classopcua_1_1Wrapper.html">WrapperNative</a>&lt;T, Index&gt;::operator=;</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span> </div>
+<div class="foldopen" id="foldopen00276" data-start="{" data-end="}">
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno"><a class="line" href="classopcua_1_1TypeWrapper.html#ac51daeb9dcbf73e471ea0435a0a866f1">  276</a></span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <a class="code hl_typedef" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> <a class="code hl_function" href="classopcua_1_1TypeWrapper.html#ac51daeb9dcbf73e471ea0435a0a866f1">typeIndex</a>() {</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>        <span class="keywordflow">return</span> Index;</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>    }</div>
+</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>};</div>
+</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span> </div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span><span class="comment">/* -------------------------------------------- Trait ------------------------------------------- */</span></div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span> </div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00284" data-start="{" data-end="};">
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno"><a class="line" href="structopcua_1_1IsWrapper.html">  284</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1IsWrapper.html">IsWrapper</a> {</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>    <span class="comment">// https://stackoverflow.com/a/51910887</span></div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U, <span class="keyword">typename</span> Handler&gt;</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno"><a class="line" href="structopcua_1_1IsWrapper.html#aa49a2a8ad745ae761a3283bcb9586a61">  287</a></span>    <span class="keyword">static</span> std::true_type <a class="code hl_function" href="structopcua_1_1IsWrapper.html#aa49a2a8ad745ae761a3283bcb9586a61">check</a>(<span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1Wrapper.html">Wrapper&lt;U, Handler&gt;</a>&amp;);</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno"><a class="line" href="structopcua_1_1IsWrapper.html#a4488f406e51c9336279012e4caf3992b">  288</a></span>    <span class="keyword">static</span> std::false_type <a class="code hl_function" href="structopcua_1_1IsWrapper.html#a4488f406e51c9336279012e4caf3992b">check</a>(...);</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span> </div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno"><a class="line" href="structopcua_1_1IsWrapper.html#a06eddb2765fb0153c898654d21099313">  290</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="structopcua_1_1IsWrapper.html#a06eddb2765fb0153c898654d21099313">type</a> = <span class="keyword">decltype</span>(<a class="code hl_function" href="structopcua_1_1IsWrapper.html#aa49a2a8ad745ae761a3283bcb9586a61">check</a>(std::declval&lt;T&amp;&gt;()));  <span class="comment">// NOLINT</span></div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno"><a class="line" href="structopcua_1_1IsWrapper.html#a7c9352e27c92d6ef379628f145d86ce9">  291</a></span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_variable" href="structopcua_1_1IsWrapper.html#a7c9352e27c92d6ef379628f145d86ce9">value</a> = type::value;</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>};</div>
+</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span> </div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span><span class="comment">/* ------------------------------ Cast native type to wrapper type ------------------------------ */</span></div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span> </div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span><span class="keyword">namespace </span>detail {</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span> </div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span><span class="keyword">using </span>IsPointerInterconvertibleWrapper = std::conjunction&lt;</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    <a class="code hl_struct" href="structopcua_1_1IsWrapper.html">IsWrapper&lt;T&gt;</a>,</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>    std::is_standard_layout&lt;T&gt;,</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>    std::is_standard_layout&lt;typename T::NativeType&gt;,</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>    std::bool_constant&lt;<span class="keyword">sizeof</span>(T) == <span class="keyword">sizeof</span>(<span class="keyword">typename</span> T::NativeType)&gt;&gt;;</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span> </div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>}  <span class="comment">// namespace detail</span></div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span> </div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span><span class="comment">// NOLINTBEGIN(*casting-through-void)</span></div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span><span class="comment"></span> </div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span><span class="comment">/// Cast native object pointers to Wrapper object pointers.</span></div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span><span class="comment">/// @relatesalso Wrapper</span></div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span><span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00312" data-start="{" data-end="}">
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno"><a class="line" href="group__Wrapper.html#gac28a131007f1160ae702aa5124f8a9ea">  312</a></span><span class="keyword">constexpr</span> T* <a class="code hl_function" href="group__Wrapper.html#gac28a131007f1160ae702aa5124f8a9ea">asWrapper</a>(<span class="keyword">typename</span> T::NativeType* native) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>    <span class="keyword">static_assert</span>(detail::IsPointerInterconvertibleWrapper&lt;T&gt;::value);</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(native));</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>}</div>
+</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span><span class="comment"></span> </div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span><span class="comment">/// @copydoc asWrapper(typename T::NativeType*)</span></div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span><span class="comment">/// @relatesalso Wrapper</span></div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span><span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00320" data-start="{" data-end="}">
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno"><a class="line" href="group__Wrapper.html#ga196e92fb2542d79b3e6d9d43112d826e">  320</a></span><span class="keyword">constexpr</span> <span class="keyword">const</span> T* <a class="code hl_function" href="group__Wrapper.html#ga196e92fb2542d79b3e6d9d43112d826e">asWrapper</a>(<span class="keyword">const</span> <span class="keyword">typename</span> T::NativeType* native) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>    <span class="keyword">static_assert</span>(detail::IsPointerInterconvertibleWrapper&lt;T&gt;::value);</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>T*<span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span><span class="keyword">const </span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(native));</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>}</div>
+</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span><span class="comment"></span> </div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span><span class="comment">/// Cast native object references to Wrapper object references.</span></div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span><span class="comment">/// @relatesalso Wrapper</span></div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span><span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00328" data-start="{" data-end="}">
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno"><a class="line" href="group__Wrapper.html#ga00a9bab173a14faab93999c820247716">  328</a></span><span class="keyword">constexpr</span> T&amp; <a class="code hl_function" href="group__Wrapper.html#ga00a9bab173a14faab93999c820247716">asWrapper</a>(<span class="keyword">typename</span> T::NativeType&amp; native) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>    <span class="keywordflow">return</span> *asWrapper&lt;T&gt;(&amp;native);</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>}</div>
+</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span><span class="comment"></span> </div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span><span class="comment">/// @copydoc asWrapper(typename T::NativeType&amp;)</span></div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span><span class="comment">/// @relatesalso Wrapper</span></div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span><span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00335" data-start="{" data-end="}">
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno"><a class="line" href="group__Wrapper.html#ga4f5890abbe0d6b9fd6cbff051137f0d6">  335</a></span><span class="keyword">constexpr</span> <span class="keyword">const</span> T&amp; <a class="code hl_function" href="group__Wrapper.html#ga4f5890abbe0d6b9fd6cbff051137f0d6">asWrapper</a>(<span class="keyword">const</span> <span class="keyword">typename</span> T::NativeType&amp; native) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>    <span class="keywordflow">return</span> *asWrapper&lt;T&gt;(&amp;native);</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>}</div>
+</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span><span class="comment"></span> </div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span><span class="comment">/// Cast Wrapper object pointers to native object pointers.</span></div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span><span class="comment">/// @relatesalso Wrapper</span></div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span><span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00342" data-start="{" data-end="}">
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno"><a class="line" href="group__Wrapper.html#ga50b605af15e16113ff43aa58efc24e45">  342</a></span><span class="keyword">constexpr</span> <span class="keyword">typename</span> T::NativeType* <a class="code hl_function" href="group__Wrapper.html#ga50b605af15e16113ff43aa58efc24e45">asNative</a>(T* wrapper) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>    <span class="keyword">static_assert</span>(detail::IsPointerInterconvertibleWrapper&lt;T&gt;::value);</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>typename T::NativeType*<span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(wrapper));</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>}</div>
+</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span><span class="comment"></span> </div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span><span class="comment">/// @copydoc asNative(T*)</span></div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span><span class="comment">/// @relatesalso Wrapper</span></div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span><span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00350" data-start="{" data-end="}">
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno"><a class="line" href="group__Wrapper.html#gadcda7d3bfbcf6d894e0c6daf635a3cf8">  350</a></span><span class="keyword">constexpr</span> <span class="keyword">const</span> <span class="keyword">typename</span> T::NativeType* <a class="code hl_function" href="group__Wrapper.html#gadcda7d3bfbcf6d894e0c6daf635a3cf8">asNative</a>(<span class="keyword">const</span> T* wrapper) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>    <span class="keyword">static_assert</span>(detail::IsPointerInterconvertibleWrapper&lt;T&gt;::value);</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>typename T::NativeType*<span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span><span class="keyword">const </span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(wrapper));</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>}</div>
+</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span><span class="comment"></span> </div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span><span class="comment">/// Cast Wrapper object references to native object references.</span></div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span><span class="comment">/// @relatesalso Wrapper</span></div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span><span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00358" data-start="{" data-end="}">
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno"><a class="line" href="group__Wrapper.html#gae3a5281e6a400e5764608745da73ceb9">  358</a></span><span class="keyword">constexpr</span> <span class="keyword">typename</span> T::NativeType&amp; <a class="code hl_function" href="group__Wrapper.html#gae3a5281e6a400e5764608745da73ceb9">asNative</a>(T&amp; wrapper) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>    <span class="keywordflow">return</span> *<a class="code hl_function" href="group__Wrapper.html#ga50b605af15e16113ff43aa58efc24e45">asNative</a>(&amp;wrapper);</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>}</div>
+</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span><span class="comment"></span> </div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span><span class="comment">/// @copydoc asNative(T&amp;)</span></div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span><span class="comment">/// @relatesalso Wrapper</span></div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span><span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00365" data-start="{" data-end="}">
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno"><a class="line" href="group__Wrapper.html#gaeaf45806bd42f6c64271653a838c2a55">  365</a></span><span class="keyword">constexpr</span> <span class="keyword">const</span> <span class="keyword">typename</span> T::NativeType&amp; <a class="code hl_function" href="group__Wrapper.html#gaeaf45806bd42f6c64271653a838c2a55">asNative</a>(<span class="keyword">const</span> T&amp; wrapper) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>    <span class="keywordflow">return</span> *<a class="code hl_function" href="group__Wrapper.html#ga50b605af15e16113ff43aa58efc24e45">asNative</a>(&amp;wrapper);</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>}</div>
+</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span> </div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span><span class="comment">// NOLINTEND(*casting-through-void)</span></div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span> </div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span><span class="comment">/* --------------------------------- TypeRegistry specialization -------------------------------- */</span></div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span> </div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00374" data-start="{" data-end="};">
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno"><a class="line" href="structopcua_1_1TypeRegistry_3_01T_00_01std_1_1enable__if__t_3_01IsWrapper_3_01T_01_4_1_1value_013bd4a4e727f50ce7a641278c61d6edb5.html">  374</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1TypeRegistry.html">TypeRegistry</a>&lt;</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>    T,</div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>    std::enable_if_t&lt;IsWrapper&lt;T&gt;::value &amp;&amp; IsRegistered&lt;typename T::NativeType&gt;::value&gt;&gt; {</div>
+<div class="foldopen" id="foldopen00377" data-start="{" data-end="}">
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno"><a class="line" href="structopcua_1_1TypeRegistry_3_01T_00_01std_1_1enable__if__t_3_01IsWrapper_3_01T_01_4_1_1value_013bd4a4e727f50ce7a641278c61d6edb5.html#ae962888ba386d4532eb58d7eb54c9bc6">  377</a></span>    <span class="keyword">static</span> <span class="keyword">const</span> <a class="code hl_structRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>&amp; <a class="code hl_function" href="structopcua_1_1TypeRegistry_3_01T_00_01std_1_1enable__if__t_3_01IsWrapper_3_01T_01_4_1_1value_013bd4a4e727f50ce7a641278c61d6edb5.html#ae962888ba386d4532eb58d7eb54c9bc6">getDataType</a>() noexcept {</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>        <span class="keywordflow">return</span> <a class="code hl_struct" href="structopcua_1_1TypeRegistry.html">TypeRegistry&lt;typename T::NativeType&gt;::getDataType</a>();</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>    }</div>
+</div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>};</div>
+</div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span><span class="comment"></span> </div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span><span class="comment"> * @}</span></div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span> </div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>}  <span class="comment">// namespace opcua</span></div>
+<div class="ttc" id="aclassopcua_1_1TypeWrapper_html"><div class="ttname"><a href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a></div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00271">wrapper.hpp:271</a></div></div>
+<div class="ttc" id="aclassopcua_1_1TypeWrapper_html_ac51daeb9dcbf73e471ea0435a0a866f1"><div class="ttname"><a href="classopcua_1_1TypeWrapper.html#ac51daeb9dcbf73e471ea0435a0a866f1">opcua::TypeWrapper::typeIndex</a></div><div class="ttdeci">static constexpr TypeIndex typeIndex()</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00276">wrapper.hpp:276</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Wrapper_html"><div class="ttname"><a href="classopcua_1_1Wrapper.html">opcua::Wrapper</a></div><div class="ttdoc">Template base class to wrap (native) objects.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00132">wrapper.hpp:135</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Wrapper_html_a269edac2dda653f541d2f985e60e8300"><div class="ttname"><a href="classopcua_1_1Wrapper.html#a269edac2dda653f541d2f985e60e8300">opcua::Wrapper::operator=</a></div><div class="ttdeci">constexpr Wrapper &amp; operator=(T &amp;&amp;native) noexcept</div><div class="ttdoc">Move assignment with native object.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00192">wrapper.hpp:192</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Wrapper_html_a2908144b4211b3e9b581c34ff01ac4f3"><div class="ttname"><a href="classopcua_1_1Wrapper.html#a2908144b4211b3e9b581c34ff01ac4f3">opcua::Wrapper::operator=</a></div><div class="ttdeci">constexpr Wrapper &amp; operator=(const T &amp;native)</div><div class="ttdoc">Copy assignment with native object.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00174">wrapper.hpp:174</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Wrapper_html_a2c901505812438da1b8c868cd8611e3e"><div class="ttname"><a href="classopcua_1_1Wrapper.html#a2c901505812438da1b8c868cd8611e3e">opcua::Wrapper::~Wrapper</a></div><div class="ttdeci">~Wrapper() noexcept=default</div></div>
+<div class="ttc" id="aclassopcua_1_1Wrapper_html_a340615392827f2f54e03ee8f27b67eb9"><div class="ttname"><a href="classopcua_1_1Wrapper.html#a340615392827f2f54e03ee8f27b67eb9">opcua::Wrapper::handle</a></div><div class="ttdeci">constexpr T * handle() noexcept</div><div class="ttdoc">Return pointer to native object.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00221">wrapper.hpp:221</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Wrapper_html_a43f6e9b2539d0931153cab2566037d21"><div class="ttname"><a href="classopcua_1_1Wrapper.html#a43f6e9b2539d0931153cab2566037d21">opcua::Wrapper::Wrapper</a></div><div class="ttdeci">constexpr Wrapper(T &amp;&amp;native) noexcept</div><div class="ttdoc">Move constructor with native object.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00159">wrapper.hpp:159</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Wrapper_html_a50cca18d937510c1118613d75385448f"><div class="ttname"><a href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">opcua::Wrapper::native</a></div><div class="ttdeci">constexpr const T &amp; native() const noexcept</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00243">wrapper.hpp:243</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Wrapper_html_a5ae4187c8217bcc57b39428d3034c5ab"><div class="ttname"><a href="classopcua_1_1Wrapper.html#a5ae4187c8217bcc57b39428d3034c5ab">opcua::Wrapper::Wrapper</a></div><div class="ttdeci">constexpr Wrapper() noexcept=default</div></div>
+<div class="ttc" id="aclassopcua_1_1Wrapper_html_a7de21fbc3cff233c7677d4ceac7faf3d"><div class="ttname"><a href="classopcua_1_1Wrapper.html#a7de21fbc3cff233c7677d4ceac7faf3d">opcua::Wrapper::clear</a></div><div class="ttdeci">constexpr void clear() noexcept</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00251">wrapper.hpp:251</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Wrapper_html_a936835b207eeb371b1bf0c30d7569425"><div class="ttname"><a href="classopcua_1_1Wrapper.html#a936835b207eeb371b1bf0c30d7569425">opcua::Wrapper::Wrapper</a></div><div class="ttdeci">constexpr Wrapper(const T &amp;native)</div><div class="ttdoc">Copy constructor with native object.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00151">wrapper.hpp:151</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Wrapper_html_aa5db128ab43200c32e9b6a3fa243120b"><div class="ttname"><a href="classopcua_1_1Wrapper.html#aa5db128ab43200c32e9b6a3fa243120b">opcua::Wrapper::handle</a></div><div class="ttdeci">constexpr const T * handle() const noexcept</div><div class="ttdoc">Return pointer to native object.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00226">wrapper.hpp:226</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Wrapper_html_ab2d8c6254361dc3930901802d060feff"><div class="ttname"><a href="classopcua_1_1Wrapper.html#ab2d8c6254361dc3930901802d060feff">opcua::Wrapper::NativeType</a></div><div class="ttdeci">T NativeType</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00141">wrapper.hpp:141</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Wrapper_html_aba233c36b2aa1e8afd6b150685ee86f6"><div class="ttname"><a href="classopcua_1_1Wrapper.html#aba233c36b2aa1e8afd6b150685ee86f6">opcua::Wrapper::HandlerType</a></div><div class="ttdeci">Handler HandlerType</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00142">wrapper.hpp:142</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Wrapper_html_acbd0a79eb0f2ae0bac9cb90892c1ad46"><div class="ttname"><a href="classopcua_1_1Wrapper.html#acbd0a79eb0f2ae0bac9cb90892c1ad46">opcua::Wrapper::Wrapper</a></div><div class="ttdeci">constexpr Wrapper(Wrapper &amp;&amp;other) noexcept</div><div class="ttdoc">Move constructor.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00155">wrapper.hpp:155</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Wrapper_html_adafe39123a7811290fd163cff14409c8"><div class="ttname"><a href="classopcua_1_1Wrapper.html#adafe39123a7811290fd163cff14409c8">opcua::Wrapper::swap</a></div><div class="ttdeci">constexpr void swap(T &amp;native) noexcept</div><div class="ttdoc">Swap with native object.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00237">wrapper.hpp:237</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Wrapper_html_ae88205f67fdd76e7955c7cd0190b23db"><div class="ttname"><a href="classopcua_1_1Wrapper.html#ae88205f67fdd76e7955c7cd0190b23db">opcua::Wrapper::swap</a></div><div class="ttdeci">constexpr void swap(Wrapper &amp;other) noexcept</div><div class="ttdoc">Swap with wrapper object.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00231">wrapper.hpp:231</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Wrapper_html_aea8d70822ba9b2212448e0fe375d034d"><div class="ttname"><a href="classopcua_1_1Wrapper.html#aea8d70822ba9b2212448e0fe375d034d">opcua::Wrapper::operator=</a></div><div class="ttdeci">constexpr Wrapper &amp; operator=(Wrapper &amp;&amp;other) noexcept</div><div class="ttdoc">Move assignment.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00183">wrapper.hpp:183</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Wrapper_html_aef233ceb40fcb95ead0c8703c11b28e9"><div class="ttname"><a href="classopcua_1_1Wrapper.html#aef233ceb40fcb95ead0c8703c11b28e9">opcua::Wrapper::operator-&gt;</a></div><div class="ttdeci">constexpr T * operator-&gt;() noexcept</div><div class="ttdoc">Member access to native object.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00211">wrapper.hpp:211</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Wrapper_html_af1b6b948a5c49962e0edeecdaf6d49c4"><div class="ttname"><a href="classopcua_1_1Wrapper.html#af1b6b948a5c49962e0edeecdaf6d49c4">opcua::Wrapper::native</a></div><div class="ttdeci">constexpr T &amp; native() noexcept</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00247">wrapper.hpp:247</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Wrapper_html_af702af0eaeb490f77f80174a17b78c43"><div class="ttname"><a href="classopcua_1_1Wrapper.html#af702af0eaeb490f77f80174a17b78c43">opcua::Wrapper::operator-&gt;</a></div><div class="ttdeci">constexpr const T * operator-&gt;() const noexcept</div><div class="ttdoc">Member access to native object.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00216">wrapper.hpp:216</a></div></div>
+<div class="ttc" id="acommon_8hpp_html"><div class="ttname"><a href="common_8hpp.html">common.hpp</a></div></div>
+<div class="ttc" id="agroup__Wrapper_html_ga00a9bab173a14faab93999c820247716"><div class="ttname"><a href="group__Wrapper.html#ga00a9bab173a14faab93999c820247716">opcua::Wrapper::asWrapper</a></div><div class="ttdeci">constexpr T &amp; asWrapper(typename T::NativeType &amp;native) noexcept</div><div class="ttdoc">Cast native object references to Wrapper object references.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00328">wrapper.hpp:328</a></div></div>
+<div class="ttc" id="agroup__Wrapper_html_ga196e92fb2542d79b3e6d9d43112d826e"><div class="ttname"><a href="group__Wrapper.html#ga196e92fb2542d79b3e6d9d43112d826e">opcua::Wrapper::asWrapper</a></div><div class="ttdeci">constexpr const T * asWrapper(const typename T::NativeType *native) noexcept</div><div class="ttdoc">Cast native object pointers to Wrapper object pointers.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00320">wrapper.hpp:320</a></div></div>
+<div class="ttc" id="agroup__Wrapper_html_ga4f5890abbe0d6b9fd6cbff051137f0d6"><div class="ttname"><a href="group__Wrapper.html#ga4f5890abbe0d6b9fd6cbff051137f0d6">opcua::Wrapper::asWrapper</a></div><div class="ttdeci">constexpr const T &amp; asWrapper(const typename T::NativeType &amp;native) noexcept</div><div class="ttdoc">Cast native object references to Wrapper object references.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00335">wrapper.hpp:335</a></div></div>
+<div class="ttc" id="agroup__Wrapper_html_ga50b605af15e16113ff43aa58efc24e45"><div class="ttname"><a href="group__Wrapper.html#ga50b605af15e16113ff43aa58efc24e45">opcua::Wrapper::asNative</a></div><div class="ttdeci">constexpr T::NativeType * asNative(T *wrapper) noexcept</div><div class="ttdoc">Cast Wrapper object pointers to native object pointers.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00342">wrapper.hpp:342</a></div></div>
+<div class="ttc" id="agroup__Wrapper_html_gac28a131007f1160ae702aa5124f8a9ea"><div class="ttname"><a href="group__Wrapper.html#gac28a131007f1160ae702aa5124f8a9ea">opcua::Wrapper::asWrapper</a></div><div class="ttdeci">constexpr T * asWrapper(typename T::NativeType *native) noexcept</div><div class="ttdoc">Cast native object pointers to Wrapper object pointers.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00312">wrapper.hpp:312</a></div></div>
+<div class="ttc" id="agroup__Wrapper_html_gadcda7d3bfbcf6d894e0c6daf635a3cf8"><div class="ttname"><a href="group__Wrapper.html#gadcda7d3bfbcf6d894e0c6daf635a3cf8">opcua::Wrapper::asNative</a></div><div class="ttdeci">constexpr const T::NativeType * asNative(const T *wrapper) noexcept</div><div class="ttdoc">Cast Wrapper object pointers to native object pointers.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00350">wrapper.hpp:350</a></div></div>
+<div class="ttc" id="agroup__Wrapper_html_gae3a5281e6a400e5764608745da73ceb9"><div class="ttname"><a href="group__Wrapper.html#gae3a5281e6a400e5764608745da73ceb9">opcua::Wrapper::asNative</a></div><div class="ttdeci">constexpr T::NativeType &amp; asNative(T &amp;wrapper) noexcept</div><div class="ttdoc">Cast Wrapper object references to native object references.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00358">wrapper.hpp:358</a></div></div>
+<div class="ttc" id="agroup__Wrapper_html_gaeaf45806bd42f6c64271653a838c2a55"><div class="ttname"><a href="group__Wrapper.html#gaeaf45806bd42f6c64271653a838c2a55">opcua::Wrapper::asNative</a></div><div class="ttdeci">constexpr const T::NativeType &amp; asNative(const T &amp;wrapper) noexcept</div><div class="ttdoc">Cast Wrapper object references to native object references.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00365">wrapper.hpp:365</a></div></div>
 <div class="ttc" id="anamespaceopcua_html"><div class="ttname"><a href="namespaceopcua.html">opcua</a></div><div class="ttdef"><b>Definition</b> <a href="async_8hpp_source.html#l00011">async.hpp:11</a></div></div>
+<div class="ttc" id="anamespaceopcua_html_a74df74679bebeab23f76d25d97fa80bb"><div class="ttname"><a href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">opcua::TypeIndex</a></div><div class="ttdeci">uint16_t TypeIndex</div><div class="ttdoc">Type index of the UA_TYPES array.</div><div class="ttdef"><b>Definition</b> <a href="common_8hpp_source.html#l00021">common.hpp:21</a></div></div>
+<div class="ttc" id="astructUA__DataType_html"><div class="ttname"><a href="open62541/structUA__DataType.html">UA_DataType</a></div></div>
+<div class="ttc" id="astructopcua_1_1IsWrapper_html"><div class="ttname"><a href="structopcua_1_1IsWrapper.html">opcua::IsWrapper</a></div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00284">wrapper.hpp:284</a></div></div>
+<div class="ttc" id="astructopcua_1_1IsWrapper_html_a06eddb2765fb0153c898654d21099313"><div class="ttname"><a href="structopcua_1_1IsWrapper.html#a06eddb2765fb0153c898654d21099313">opcua::IsWrapper::type</a></div><div class="ttdeci">decltype(check(std::declval&lt; T &amp; &gt;())) type</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00290">wrapper.hpp:290</a></div></div>
+<div class="ttc" id="astructopcua_1_1IsWrapper_html_a4488f406e51c9336279012e4caf3992b"><div class="ttname"><a href="structopcua_1_1IsWrapper.html#a4488f406e51c9336279012e4caf3992b">opcua::IsWrapper::check</a></div><div class="ttdeci">static std::false_type check(...)</div></div>
+<div class="ttc" id="astructopcua_1_1IsWrapper_html_a7c9352e27c92d6ef379628f145d86ce9"><div class="ttname"><a href="structopcua_1_1IsWrapper.html#a7c9352e27c92d6ef379628f145d86ce9">opcua::IsWrapper::value</a></div><div class="ttdeci">static constexpr bool value</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00291">wrapper.hpp:291</a></div></div>
+<div class="ttc" id="astructopcua_1_1IsWrapper_html_aa49a2a8ad745ae761a3283bcb9586a61"><div class="ttname"><a href="structopcua_1_1IsWrapper.html#aa49a2a8ad745ae761a3283bcb9586a61">opcua::IsWrapper::check</a></div><div class="ttdeci">static std::true_type check(const Wrapper&lt; U, Handler &gt; &amp;)</div></div>
+<div class="ttc" id="astructopcua_1_1TypeHandlerNative_html"><div class="ttname"><a href="structopcua_1_1TypeHandlerNative.html">opcua::TypeHandlerNative</a></div><div class="ttdoc">Specialized type handler for native types.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00075">wrapper.hpp:75</a></div></div>
+<div class="ttc" id="astructopcua_1_1TypeHandlerNative_html_a23f55e4e208811fd19d28bcdfb16a903"><div class="ttname"><a href="structopcua_1_1TypeHandlerNative.html#a23f55e4e208811fd19d28bcdfb16a903">opcua::TypeHandlerNative::copy</a></div><div class="ttdeci">static constexpr T copy(const T &amp;native)</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00078">wrapper.hpp:78</a></div></div>
+<div class="ttc" id="astructopcua_1_1TypeHandlerNative_html_a3ea78242666babe73ca4292625887773"><div class="ttname"><a href="structopcua_1_1TypeHandlerNative.html#a3ea78242666babe73ca4292625887773">opcua::TypeHandlerNative::clear</a></div><div class="ttdeci">static constexpr void clear(T &amp;native) noexcept</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00086">wrapper.hpp:86</a></div></div>
+<div class="ttc" id="astructopcua_1_1TypeHandlerNative_html_ae5a26b8768869e2d4dd00d2d5e0ad827"><div class="ttname"><a href="structopcua_1_1TypeHandlerNative.html#ae5a26b8768869e2d4dd00d2d5e0ad827">opcua::TypeHandlerNative::move</a></div><div class="ttdeci">static constexpr T move(T &amp;&amp;native) noexcept</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00082">wrapper.hpp:82</a></div></div>
+<div class="ttc" id="astructopcua_1_1TypeHandler_html"><div class="ttname"><a href="structopcua_1_1TypeHandler.html">opcua::TypeHandler</a></div><div class="ttdoc">Default type handler providing standard copy and move operations.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00052">wrapper.hpp:52</a></div></div>
+<div class="ttc" id="astructopcua_1_1TypeHandler_html_a1aa3d59b70a33f9fae100b75c66c1f49"><div class="ttname"><a href="structopcua_1_1TypeHandler.html#a1aa3d59b70a33f9fae100b75c66c1f49">opcua::TypeHandler::copy</a></div><div class="ttdeci">static constexpr T copy(const T &amp;object)</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00057">wrapper.hpp:57</a></div></div>
+<div class="ttc" id="astructopcua_1_1TypeHandler_html_abf8aeeee99619e1e70626b77b4e4a7ac"><div class="ttname"><a href="structopcua_1_1TypeHandler.html#abf8aeeee99619e1e70626b77b4e4a7ac">opcua::TypeHandler::move</a></div><div class="ttdeci">static constexpr T move(T &amp;&amp;object) noexcept</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00061">wrapper.hpp:61</a></div></div>
+<div class="ttc" id="astructopcua_1_1TypeRegistry_3_01T_00_01std_1_1enable__if__t_3_01IsWrapper_3_01T_01_4_1_1value_013bd4a4e727f50ce7a641278c61d6edb5_html_ae962888ba386d4532eb58d7eb54c9bc6"><div class="ttname"><a href="structopcua_1_1TypeRegistry_3_01T_00_01std_1_1enable__if__t_3_01IsWrapper_3_01T_01_4_1_1value_013bd4a4e727f50ce7a641278c61d6edb5.html#ae962888ba386d4532eb58d7eb54c9bc6">opcua::TypeRegistry&lt; T, std::enable_if_t&lt; IsWrapper&lt; T &gt;::value &amp;&amp;IsRegistered&lt; typename T::NativeType &gt;::value &gt; &gt;::getDataType</a></div><div class="ttdeci">static const UA_DataType &amp; getDataType() noexcept</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00377">wrapper.hpp:377</a></div></div>
+<div class="ttc" id="astructopcua_1_1TypeRegistry_html"><div class="ttname"><a href="structopcua_1_1TypeRegistry.html">opcua::TypeRegistry</a></div><div class="ttdoc">Type registry.</div><div class="ttdef"><b>Definition</b> <a href="typeregistry_8hpp_source.html#l00028">typeregistry.hpp:28</a></div></div>
+<div class="ttc" id="atyperegistry_8hpp_html"><div class="ttname"><a href="typeregistry_8hpp.html">typeregistry.hpp</a></div></div>
+<div class="ttc" id="atypes__generated_8h_html_aba037b86f18a7b7bceef5c098910c2c7"><div class="ttname"><a href="open62541/types__generated_8h.html#aba037b86f18a7b7bceef5c098910c2c7">UA_TYPES</a></div><div class="ttdeci">const UA_DataType UA_TYPES[191]</div></div>
+<div class="ttc" id="atypes__generated_8h_html_ac9c453774b0045ce3fee7acaf01b1223"><div class="ttname"><a href="open62541/types__generated_8h.html#ac9c453774b0045ce3fee7acaf01b1223">UA_TYPES_COUNT</a></div><div class="ttdeci">#define UA_TYPES_COUNT</div></div>
+<div class="ttc" id="atypes__handling_8hpp_html"><div class="ttname"><a href="types__handling_8hpp.html">types_handling.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

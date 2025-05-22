@@ -381,67 +381,19 @@ Variables</h2></td></tr>
 <tr class="separator:a9847c237a152919a69c050f5934903d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a7e76336d5d660d0224183d32b0ca559a" name="a7e76336d5d660d0224183d32b0ca559a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e76336d5d660d0224183d32b0ca559a">&#9670;&#160;</a></span>UA_TRUE</h2>
+<a id="a61a09d12d05995b104b0852f3f73959c" name="a61a09d12d05995b104b0852f3f73959c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61a09d12d05995b104b0852f3f73959c">&#9670;&#160;</a></span>UA_BYTE_MAX</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define UA_TRUE&#160;&#160;&#160;true <a class="el" href="architecture__definitions_8h.html#ad614e30b8af6ed7b30c9a11c3005de88">UA_INTERNAL_DEPRECATED</a></td>
+          <td class="memname">#define UA_BYTE_MAX&#160;&#160;&#160;255</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00027">27</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
-
-</div>
-</div>
-<a id="a7bfe97197c3f262b7c1c6937a81023c4" name="a7bfe97197c3f262b7c1c6937a81023c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7bfe97197c3f262b7c1c6937a81023c4">&#9670;&#160;</a></span>UA_FALSE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_FALSE&#160;&#160;&#160;false <a class="el" href="architecture__definitions_8h.html#ad614e30b8af6ed7b30c9a11c3005de88">UA_INTERNAL_DEPRECATED</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00028">28</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
-
-</div>
-</div>
-<a id="adfc1151ad0d7855d82629faeb6bc439a" name="adfc1151ad0d7855d82629faeb6bc439a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adfc1151ad0d7855d82629faeb6bc439a">&#9670;&#160;</a></span>UA_SBYTE_MIN</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_SBYTE_MIN&#160;&#160;&#160;(-128)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00032">32</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
-
-</div>
-</div>
-<a id="a83baebcdf1ef7011b677fff041ad71a3" name="a83baebcdf1ef7011b677fff041ad71a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a83baebcdf1ef7011b677fff041ad71a3">&#9670;&#160;</a></span>UA_SBYTE_MAX</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_SBYTE_MAX&#160;&#160;&#160;127</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00033">33</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00038">38</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
 
 </div>
 </div>
@@ -461,271 +413,22 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a61a09d12d05995b104b0852f3f73959c" name="a61a09d12d05995b104b0852f3f73959c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a61a09d12d05995b104b0852f3f73959c">&#9670;&#160;</a></span>UA_BYTE_MAX</h2>
+<a id="a2ce8ca747ea530a1f413d9cfd14eb2c6" name="a2ce8ca747ea530a1f413d9cfd14eb2c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ce8ca747ea530a1f413d9cfd14eb2c6">&#9670;&#160;</a></span>UA_DATATYPEKINDS</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define UA_BYTE_MAX&#160;&#160;&#160;255</td>
+          <td class="memname">#define UA_DATATYPEKINDS&#160;&#160;&#160;31</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00038">38</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+<p>The DataType "kind" is an internal type classification. </p>
+<p>It is used to dispatch handling to the correct routines. </p>
 
-</div>
-</div>
-<a id="a2aa0e5da4fb5056fb47550c344b9fd04" name="a2aa0e5da4fb5056fb47550c344b9fd04"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2aa0e5da4fb5056fb47550c344b9fd04">&#9670;&#160;</a></span>UA_INT16_MIN</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_INT16_MIN&#160;&#160;&#160;(-32768)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00042">42</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
-
-</div>
-</div>
-<a id="a43f40153e9213bcb5144b124df9af021" name="a43f40153e9213bcb5144b124df9af021"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a43f40153e9213bcb5144b124df9af021">&#9670;&#160;</a></span>UA_INT16_MAX</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_INT16_MAX&#160;&#160;&#160;32767</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00043">43</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
-
-</div>
-</div>
-<a id="a2e444ffd9ed10697af0af7a787b88a19" name="a2e444ffd9ed10697af0af7a787b88a19"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2e444ffd9ed10697af0af7a787b88a19">&#9670;&#160;</a></span>UA_UINT16_MIN</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_UINT16_MIN&#160;&#160;&#160;0</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00047">47</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
-
-</div>
-</div>
-<a id="a5137682801ab30ee56d5f3fbed0efb09" name="a5137682801ab30ee56d5f3fbed0efb09"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5137682801ab30ee56d5f3fbed0efb09">&#9670;&#160;</a></span>UA_UINT16_MAX</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_UINT16_MAX&#160;&#160;&#160;65535</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00048">48</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
-
-</div>
-</div>
-<a id="a4440bf06091efde0d75f2cac1f0b1a08" name="a4440bf06091efde0d75f2cac1f0b1a08"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4440bf06091efde0d75f2cac1f0b1a08">&#9670;&#160;</a></span>UA_INT32_MIN</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_INT32_MIN&#160;&#160;&#160;(-2147483648)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00052">52</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
-
-</div>
-</div>
-<a id="a93959a11f36b29df18901abf654dc92e" name="a93959a11f36b29df18901abf654dc92e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a93959a11f36b29df18901abf654dc92e">&#9670;&#160;</a></span>UA_INT32_MAX</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_INT32_MAX&#160;&#160;&#160;2147483647</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00053">53</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
-
-</div>
-</div>
-<a id="a5162643183222d2614935d0d45b54d14" name="a5162643183222d2614935d0d45b54d14"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5162643183222d2614935d0d45b54d14">&#9670;&#160;</a></span>UA_UINT32_MIN</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_UINT32_MIN&#160;&#160;&#160;0</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00057">57</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
-
-</div>
-</div>
-<a id="a1b6ce97466ade7a0a672eb37c1249ab8" name="a1b6ce97466ade7a0a672eb37c1249ab8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1b6ce97466ade7a0a672eb37c1249ab8">&#9670;&#160;</a></span>UA_UINT32_MAX</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_UINT32_MAX&#160;&#160;&#160;4294967295</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00058">58</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
-
-</div>
-</div>
-<a id="a148526b07573a1e43e9af575166f762e" name="a148526b07573a1e43e9af575166f762e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a148526b07573a1e43e9af575166f762e">&#9670;&#160;</a></span>UA_INT64_MAX</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_INT64_MAX&#160;&#160;&#160;(int64_t)9223372036854775807LL</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00062">62</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
-
-</div>
-</div>
-<a id="aeff6f6263daba8099f343fbbd1b51be2" name="aeff6f6263daba8099f343fbbd1b51be2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeff6f6263daba8099f343fbbd1b51be2">&#9670;&#160;</a></span>UA_INT64_MIN</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_INT64_MIN&#160;&#160;&#160;((int64_t)-<a class="el" href="types_8h.html#a148526b07573a1e43e9af575166f762e">UA_INT64_MAX</a>-1LL)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00063">63</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
-
-</div>
-</div>
-<a id="a96fb8bea1846ee7cca6d60396270e09b" name="a96fb8bea1846ee7cca6d60396270e09b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a96fb8bea1846ee7cca6d60396270e09b">&#9670;&#160;</a></span>UA_UINT64_MIN</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_UINT64_MIN&#160;&#160;&#160;(uint64_t)0</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00067">67</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
-
-</div>
-</div>
-<a id="ac5ba5d30b237ef175a2ff5a0c2197810" name="ac5ba5d30b237ef175a2ff5a0c2197810"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5ba5d30b237ef175a2ff5a0c2197810">&#9670;&#160;</a></span>UA_UINT64_MAX</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_UINT64_MAX&#160;&#160;&#160;(uint64_t)18446744073709551615ULL</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00068">68</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
-
-</div>
-</div>
-<a id="ac6f19951777419d520d469d5130acae4" name="ac6f19951777419d520d469d5130acae4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac6f19951777419d520d469d5130acae4">&#9670;&#160;</a></span>UA_STRING_ALLOC</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_STRING_ALLOC</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">CHARS</td><td>)</td>
-          <td>&#160;&#160;&#160;<a class="el" href="types_8h.html#ae87c3eb1ffcd3b4a36eb0ba444222888">UA_String_fromChars</a>(CHARS)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00137">137</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
-
-</div>
-</div>
-<a id="ae7812e33f125938e3af06b396298fbb3" name="ae7812e33f125938e3af06b396298fbb3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7812e33f125938e3af06b396298fbb3">&#9670;&#160;</a></span>UA_STRING_STATIC</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_STRING_STATIC</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">CHARS</td><td>)</td>
-          <td>&#160;&#160;&#160;{sizeof(CHARS)-1, (<a class="el" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a>*)CHARS}</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Define strings at compile time (in ROM) </p>
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00140">140</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
-
-</div>
-</div>
-<a id="ad25e26d74551e9e85ecf321eb5013297" name="ad25e26d74551e9e85ecf321eb5013297"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad25e26d74551e9e85ecf321eb5013297">&#9670;&#160;</a></span>UA_DATETIME_USEC</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_DATETIME_USEC&#160;&#160;&#160;10LL</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Multiples to convert durations to DateTime. </p>
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00147">147</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00805">805</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
 
 </div>
 </div>
@@ -780,38 +483,21 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a2cd952b4e4fae65bd5bbc1b90499ab5b" name="a2cd952b4e4fae65bd5bbc1b90499ab5b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2cd952b4e4fae65bd5bbc1b90499ab5b">&#9670;&#160;</a></span>UA_EMPTY_ARRAY_SENTINEL</h2>
+<a id="ad25e26d74551e9e85ecf321eb5013297" name="ad25e26d74551e9e85ecf321eb5013297"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad25e26d74551e9e85ecf321eb5013297">&#9670;&#160;</a></span>UA_DATETIME_USEC</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define UA_EMPTY_ARRAY_SENTINEL&#160;&#160;&#160;((void*)0x01)</td>
+          <td class="memname">#define UA_DATETIME_USEC&#160;&#160;&#160;10LL</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00553">553</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+<p>Multiples to convert durations to DateTime. </p>
 
-</div>
-</div>
-<a id="a2ce8ca747ea530a1f413d9cfd14eb2c6" name="a2ce8ca747ea530a1f413d9cfd14eb2c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2ce8ca747ea530a1f413d9cfd14eb2c6">&#9670;&#160;</a></span>UA_DATATYPEKINDS</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_DATATYPEKINDS&#160;&#160;&#160;31</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The DataType "kind" is an internal type classification. </p>
-<p>It is used to dispatch handling to the correct routines. </p>
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00805">805</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00147">147</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
 
 </div>
 </div>
@@ -845,6 +531,224 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a2cd952b4e4fae65bd5bbc1b90499ab5b" name="a2cd952b4e4fae65bd5bbc1b90499ab5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cd952b4e4fae65bd5bbc1b90499ab5b">&#9670;&#160;</a></span>UA_EMPTY_ARRAY_SENTINEL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_EMPTY_ARRAY_SENTINEL&#160;&#160;&#160;((void*)0x01)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00553">553</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="a7bfe97197c3f262b7c1c6937a81023c4" name="a7bfe97197c3f262b7c1c6937a81023c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bfe97197c3f262b7c1c6937a81023c4">&#9670;&#160;</a></span>UA_FALSE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_FALSE&#160;&#160;&#160;false <a class="el" href="architecture__definitions_8h.html#ad614e30b8af6ed7b30c9a11c3005de88">UA_INTERNAL_DEPRECATED</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00028">28</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="a43f40153e9213bcb5144b124df9af021" name="a43f40153e9213bcb5144b124df9af021"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43f40153e9213bcb5144b124df9af021">&#9670;&#160;</a></span>UA_INT16_MAX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_INT16_MAX&#160;&#160;&#160;32767</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00043">43</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="a2aa0e5da4fb5056fb47550c344b9fd04" name="a2aa0e5da4fb5056fb47550c344b9fd04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2aa0e5da4fb5056fb47550c344b9fd04">&#9670;&#160;</a></span>UA_INT16_MIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_INT16_MIN&#160;&#160;&#160;(-32768)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00042">42</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="a93959a11f36b29df18901abf654dc92e" name="a93959a11f36b29df18901abf654dc92e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93959a11f36b29df18901abf654dc92e">&#9670;&#160;</a></span>UA_INT32_MAX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_INT32_MAX&#160;&#160;&#160;2147483647</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00053">53</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="a4440bf06091efde0d75f2cac1f0b1a08" name="a4440bf06091efde0d75f2cac1f0b1a08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4440bf06091efde0d75f2cac1f0b1a08">&#9670;&#160;</a></span>UA_INT32_MIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_INT32_MIN&#160;&#160;&#160;(-2147483648)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00052">52</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="a148526b07573a1e43e9af575166f762e" name="a148526b07573a1e43e9af575166f762e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a148526b07573a1e43e9af575166f762e">&#9670;&#160;</a></span>UA_INT64_MAX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_INT64_MAX&#160;&#160;&#160;(int64_t)9223372036854775807LL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00062">62</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="aeff6f6263daba8099f343fbbd1b51be2" name="aeff6f6263daba8099f343fbbd1b51be2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeff6f6263daba8099f343fbbd1b51be2">&#9670;&#160;</a></span>UA_INT64_MIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_INT64_MIN&#160;&#160;&#160;((int64_t)-<a class="el" href="types_8h.html#a148526b07573a1e43e9af575166f762e">UA_INT64_MAX</a>-1LL)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00063">63</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="a83baebcdf1ef7011b677fff041ad71a3" name="a83baebcdf1ef7011b677fff041ad71a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83baebcdf1ef7011b677fff041ad71a3">&#9670;&#160;</a></span>UA_SBYTE_MAX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_SBYTE_MAX&#160;&#160;&#160;127</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00033">33</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="adfc1151ad0d7855d82629faeb6bc439a" name="adfc1151ad0d7855d82629faeb6bc439a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfc1151ad0d7855d82629faeb6bc439a">&#9670;&#160;</a></span>UA_SBYTE_MIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_SBYTE_MIN&#160;&#160;&#160;(-128)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00032">32</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="ac6f19951777419d520d469d5130acae4" name="ac6f19951777419d520d469d5130acae4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6f19951777419d520d469d5130acae4">&#9670;&#160;</a></span>UA_STRING_ALLOC</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_STRING_ALLOC</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">CHARS</td><td>)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="types_8h.html#ae87c3eb1ffcd3b4a36eb0ba444222888">UA_String_fromChars</a>(CHARS)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00137">137</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="ae7812e33f125938e3af06b396298fbb3" name="ae7812e33f125938e3af06b396298fbb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7812e33f125938e3af06b396298fbb3">&#9670;&#160;</a></span>UA_STRING_STATIC</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_STRING_STATIC</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">CHARS</td><td>)</td>
+          <td>&#160;&#160;&#160;{sizeof(CHARS)-1, (<a class="el" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a>*)CHARS}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Define strings at compile time (in ROM) </p>
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00140">140</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="a7e76336d5d660d0224183d32b0ca559a" name="a7e76336d5d660d0224183d32b0ca559a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e76336d5d660d0224183d32b0ca559a">&#9670;&#160;</a></span>UA_TRUE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_TRUE&#160;&#160;&#160;true <a class="el" href="architecture__definitions_8h.html#ad614e30b8af6ed7b30c9a11c3005de88">UA_INTERNAL_DEPRECATED</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00027">27</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
 <a id="a655d48986e1c170aed5ca1a32ae13a96" name="a655d48986e1c170aed5ca1a32ae13a96"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a655d48986e1c170aed5ca1a32ae13a96">&#9670;&#160;</a></span>UA_TYPENAME</h2>
 
@@ -867,23 +771,103 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Typedef Documentation</h2>
-<a id="a4ba04733a2525e207fa5ea5337ad17f3" name="a4ba04733a2525e207fa5ea5337ad17f3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4ba04733a2525e207fa5ea5337ad17f3">&#9670;&#160;</a></span>UA_SByte</h2>
+<a id="a5137682801ab30ee56d5f3fbed0efb09" name="a5137682801ab30ee56d5f3fbed0efb09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5137682801ab30ee56d5f3fbed0efb09">&#9670;&#160;</a></span>UA_UINT16_MAX</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef int8_t <a class="el" href="types_8h.html#a4ba04733a2525e207fa5ea5337ad17f3">UA_SByte</a></td>
+          <td class="memname">#define UA_UINT16_MAX&#160;&#160;&#160;65535</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00031">31</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00048">48</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
 
 </div>
 </div>
+<a id="a2e444ffd9ed10697af0af7a787b88a19" name="a2e444ffd9ed10697af0af7a787b88a19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e444ffd9ed10697af0af7a787b88a19">&#9670;&#160;</a></span>UA_UINT16_MIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_UINT16_MIN&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00047">47</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="a1b6ce97466ade7a0a672eb37c1249ab8" name="a1b6ce97466ade7a0a672eb37c1249ab8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b6ce97466ade7a0a672eb37c1249ab8">&#9670;&#160;</a></span>UA_UINT32_MAX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_UINT32_MAX&#160;&#160;&#160;4294967295</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00058">58</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="a5162643183222d2614935d0d45b54d14" name="a5162643183222d2614935d0d45b54d14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5162643183222d2614935d0d45b54d14">&#9670;&#160;</a></span>UA_UINT32_MIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_UINT32_MIN&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00057">57</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="ac5ba5d30b237ef175a2ff5a0c2197810" name="ac5ba5d30b237ef175a2ff5a0c2197810"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5ba5d30b237ef175a2ff5a0c2197810">&#9670;&#160;</a></span>UA_UINT64_MAX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_UINT64_MAX&#160;&#160;&#160;(uint64_t)18446744073709551615ULL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00068">68</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="a96fb8bea1846ee7cca6d60396270e09b" name="a96fb8bea1846ee7cca6d60396270e09b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96fb8bea1846ee7cca6d60396270e09b">&#9670;&#160;</a></span>UA_UINT64_MIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_UINT64_MIN&#160;&#160;&#160;(uint64_t)0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00067">67</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Typedef Documentation</h2>
 <a id="ac31865e6fcb9a042b5eaf5a5bd4ed30d" name="ac31865e6fcb9a042b5eaf5a5bd4ed30d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac31865e6fcb9a042b5eaf5a5bd4ed30d">&#9670;&#160;</a></span>UA_Byte</h2>
 
@@ -900,147 +884,51 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a2dfa954c25e6984956ab6fa8e8fd73db" name="a2dfa954c25e6984956ab6fa8e8fd73db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2dfa954c25e6984956ab6fa8e8fd73db">&#9670;&#160;</a></span>UA_Int16</h2>
+<a id="a05a19615d5da9f034fabefd3d02225ee" name="a05a19615d5da9f034fabefd3d02225ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05a19615d5da9f034fabefd3d02225ee">&#9670;&#160;</a></span>UA_ByteString</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef int16_t <a class="el" href="types_8h.html#a2dfa954c25e6984956ab6fa8e8fd73db">UA_Int16</a></td>
+          <td class="memname">typedef <a class="el" href="structUA__String.html">UA_String</a> <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00041">41</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00224">224</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
 
 </div>
 </div>
-<a id="a0a5ff540581b2a3ca4757de792c68f05" name="a0a5ff540581b2a3ca4757de792c68f05"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0a5ff540581b2a3ca4757de792c68f05">&#9670;&#160;</a></span>UA_UInt16</h2>
+<a id="a400f969e2e062f52d3cb7f060c9d9b44" name="a400f969e2e062f52d3cb7f060c9d9b44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a400f969e2e062f52d3cb7f060c9d9b44">&#9670;&#160;</a></span>UA_DataType</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef uint16_t <a class="el" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a></td>
+          <td class="memname">typedef struct <a class="el" href="structUA__DataType.html">UA_DataType</a> <a class="el" href="structUA__DataType.html">UA_DataType</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00046">46</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00551">551</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
 
 </div>
 </div>
-<a id="a01ce3c3b2fb34ef81c97c313f516004e" name="a01ce3c3b2fb34ef81c97c313f516004e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a01ce3c3b2fb34ef81c97c313f516004e">&#9670;&#160;</a></span>UA_Int32</h2>
+<a id="a0caa5432a7286ba7a30710952ee236dc" name="a0caa5432a7286ba7a30710952ee236dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0caa5432a7286ba7a30710952ee236dc">&#9670;&#160;</a></span>UA_DataTypeArray</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef int32_t <a class="el" href="types_8h.html#a01ce3c3b2fb34ef81c97c313f516004e">UA_Int32</a></td>
+          <td class="memname">typedef struct <a class="el" href="structUA__DataTypeArray.html">UA_DataTypeArray</a> <a class="el" href="structUA__DataTypeArray.html">UA_DataTypeArray</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00051">51</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
-
-</div>
-</div>
-<a id="a5f0721b034e4c44a7f81589b15ba1baf" name="a5f0721b034e4c44a7f81589b15ba1baf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5f0721b034e4c44a7f81589b15ba1baf">&#9670;&#160;</a></span>UA_UInt32</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef uint32_t <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00056">56</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
-
-</div>
-</div>
-<a id="ae5c13df54009d7a3e374bfc594af8059" name="ae5c13df54009d7a3e374bfc594af8059"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae5c13df54009d7a3e374bfc594af8059">&#9670;&#160;</a></span>UA_Int64</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef int64_t <a class="el" href="types_8h.html#ae5c13df54009d7a3e374bfc594af8059">UA_Int64</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00061">61</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
-
-</div>
-</div>
-<a id="ad0d8e52a357b7fbe50a0b93a2b688b51" name="ad0d8e52a357b7fbe50a0b93a2b688b51"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad0d8e52a357b7fbe50a0b93a2b688b51">&#9670;&#160;</a></span>UA_UInt64</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef uint64_t <a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00066">66</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
-
-</div>
-</div>
-<a id="a899228311700e99d006f1ba5bcfcbd02" name="a899228311700e99d006f1ba5bcfcbd02"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a899228311700e99d006f1ba5bcfcbd02">&#9670;&#160;</a></span>UA_Float</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef float <a class="el" href="types_8h.html#a899228311700e99d006f1ba5bcfcbd02">UA_Float</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00071">71</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
-
-</div>
-</div>
-<a id="aac69e6c4659bdcafdb30498200a0ab07" name="aac69e6c4659bdcafdb30498200a0ab07"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aac69e6c4659bdcafdb30498200a0ab07">&#9670;&#160;</a></span>UA_Double</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef double <a class="el" href="types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00074">74</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
-
-</div>
-</div>
-<a id="a8beaefc7873465d6baa54a21634b6ea7" name="a8beaefc7873465d6baa54a21634b6ea7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8beaefc7873465d6baa54a21634b6ea7">&#9670;&#160;</a></span>UA_StatusCode</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef uint32_t <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00077">77</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+<p>Datatype arrays with custom type definitions can be added in a linked list to the client or server configuration. </p>
 
 </div>
 </div>
@@ -1076,19 +964,177 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a05a19615d5da9f034fabefd3d02225ee" name="a05a19615d5da9f034fabefd3d02225ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05a19615d5da9f034fabefd3d02225ee">&#9670;&#160;</a></span>UA_ByteString</h2>
+<a id="a92dc1440d3365035c204be5ec4a1f0e1" name="a92dc1440d3365035c204be5ec4a1f0e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92dc1440d3365035c204be5ec4a1f0e1">&#9670;&#160;</a></span>UA_DiagnosticInfo</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="structUA__String.html">UA_String</a> <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a></td>
+          <td class="memname">typedef struct <a class="el" href="structUA__DiagnosticInfo.html">UA_DiagnosticInfo</a> <a class="el" href="structUA__DiagnosticInfo.html">UA_DiagnosticInfo</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00224">224</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+</div>
+</div>
+<a id="aac69e6c4659bdcafdb30498200a0ab07" name="aac69e6c4659bdcafdb30498200a0ab07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac69e6c4659bdcafdb30498200a0ab07">&#9670;&#160;</a></span>UA_Double</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef double <a class="el" href="types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00074">74</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="a899228311700e99d006f1ba5bcfcbd02" name="a899228311700e99d006f1ba5bcfcbd02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a899228311700e99d006f1ba5bcfcbd02">&#9670;&#160;</a></span>UA_Float</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef float <a class="el" href="types_8h.html#a899228311700e99d006f1ba5bcfcbd02">UA_Float</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00071">71</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="a2dfa954c25e6984956ab6fa8e8fd73db" name="a2dfa954c25e6984956ab6fa8e8fd73db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2dfa954c25e6984956ab6fa8e8fd73db">&#9670;&#160;</a></span>UA_Int16</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef int16_t <a class="el" href="types_8h.html#a2dfa954c25e6984956ab6fa8e8fd73db">UA_Int16</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00041">41</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="a01ce3c3b2fb34ef81c97c313f516004e" name="a01ce3c3b2fb34ef81c97c313f516004e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01ce3c3b2fb34ef81c97c313f516004e">&#9670;&#160;</a></span>UA_Int32</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef int32_t <a class="el" href="types_8h.html#a01ce3c3b2fb34ef81c97c313f516004e">UA_Int32</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00051">51</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="ae5c13df54009d7a3e374bfc594af8059" name="ae5c13df54009d7a3e374bfc594af8059"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5c13df54009d7a3e374bfc594af8059">&#9670;&#160;</a></span>UA_Int64</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef int64_t <a class="el" href="types_8h.html#ae5c13df54009d7a3e374bfc594af8059">UA_Int64</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00061">61</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="a4ba04733a2525e207fa5ea5337ad17f3" name="a4ba04733a2525e207fa5ea5337ad17f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ba04733a2525e207fa5ea5337ad17f3">&#9670;&#160;</a></span>UA_SByte</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef int8_t <a class="el" href="types_8h.html#a4ba04733a2525e207fa5ea5337ad17f3">UA_SByte</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00031">31</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="a8beaefc7873465d6baa54a21634b6ea7" name="a8beaefc7873465d6baa54a21634b6ea7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8beaefc7873465d6baa54a21634b6ea7">&#9670;&#160;</a></span>UA_StatusCode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef uint32_t <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00077">77</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="a0a5ff540581b2a3ca4757de792c68f05" name="a0a5ff540581b2a3ca4757de792c68f05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a5ff540581b2a3ca4757de792c68f05">&#9670;&#160;</a></span>UA_UInt16</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef uint16_t <a class="el" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00046">46</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="a5f0721b034e4c44a7f81589b15ba1baf" name="a5f0721b034e4c44a7f81589b15ba1baf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f0721b034e4c44a7f81589b15ba1baf">&#9670;&#160;</a></span>UA_UInt32</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef uint32_t <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00056">56</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="ad0d8e52a357b7fbe50a0b93a2b688b51" name="ad0d8e52a357b7fbe50a0b93a2b688b51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0d8e52a357b7fbe50a0b93a2b688b51">&#9670;&#160;</a></span>UA_UInt64</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef uint64_t <a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00066">66</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
 
 </div>
 </div>
@@ -1108,118 +1154,7 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a400f969e2e062f52d3cb7f060c9d9b44" name="a400f969e2e062f52d3cb7f060c9d9b44"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a400f969e2e062f52d3cb7f060c9d9b44">&#9670;&#160;</a></span>UA_DataType</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef struct <a class="el" href="structUA__DataType.html">UA_DataType</a> <a class="el" href="structUA__DataType.html">UA_DataType</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00551">551</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
-
-</div>
-</div>
-<a id="a92dc1440d3365035c204be5ec4a1f0e1" name="a92dc1440d3365035c204be5ec4a1f0e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a92dc1440d3365035c204be5ec4a1f0e1">&#9670;&#160;</a></span>UA_DiagnosticInfo</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef struct <a class="el" href="structUA__DiagnosticInfo.html">UA_DiagnosticInfo</a> <a class="el" href="structUA__DiagnosticInfo.html">UA_DiagnosticInfo</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a0caa5432a7286ba7a30710952ee236dc" name="a0caa5432a7286ba7a30710952ee236dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0caa5432a7286ba7a30710952ee236dc">&#9670;&#160;</a></span>UA_DataTypeArray</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef struct <a class="el" href="structUA__DataTypeArray.html">UA_DataTypeArray</a> <a class="el" href="structUA__DataTypeArray.html">UA_DataTypeArray</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Datatype arrays with custom type definitions can be added in a linked list to the client or server configuration. </p>
-
-</div>
-</div>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="a026f31872abc03d18b81763d94f18904" name="a026f31872abc03d18b81763d94f18904"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a026f31872abc03d18b81763d94f18904">&#9670;&#160;</a></span>UA_NodeIdType</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="types_8h.html#a026f31872abc03d18b81763d94f18904">UA_NodeIdType</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a026f31872abc03d18b81763d94f18904aa842614726f18dd53d866e4ade15b3df" name="a026f31872abc03d18b81763d94f18904aa842614726f18dd53d866e4ade15b3df"></a>UA_NODEIDTYPE_NUMERIC&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a026f31872abc03d18b81763d94f18904a460b2afbbc0ad49d6c05bed068e3d647" name="a026f31872abc03d18b81763d94f18904a460b2afbbc0ad49d6c05bed068e3d647"></a>UA_NODEIDTYPE_STRING&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a026f31872abc03d18b81763d94f18904a67b9f69597de533c8e20cad99923a558" name="a026f31872abc03d18b81763d94f18904a67b9f69597de533c8e20cad99923a558"></a>UA_NODEIDTYPE_GUID&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a026f31872abc03d18b81763d94f18904a914531b4b38f0a4812f08bcc2e39ab3e" name="a026f31872abc03d18b81763d94f18904a914531b4b38f0a4812f08bcc2e39ab3e"></a>UA_NODEIDTYPE_BYTESTRING&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00274">274</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
-
-</div>
-</div>
-<a id="aa1478e00bedf1421f5f5462e8263c522" name="aa1478e00bedf1421f5f5462e8263c522"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa1478e00bedf1421f5f5462e8263c522">&#9670;&#160;</a></span>UA_VariantStorageType</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="types_8h.html#aa1478e00bedf1421f5f5462e8263c522">UA_VariantStorageType</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa1478e00bedf1421f5f5462e8263c522a2b3eb8fafea49ba7e9b24ee4eaced395" name="aa1478e00bedf1421f5f5462e8263c522a2b3eb8fafea49ba7e9b24ee4eaced395"></a>UA_VARIANT_DATA&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aa1478e00bedf1421f5f5462e8263c522ae8998cef426fb827da4c155c6791bc16" name="aa1478e00bedf1421f5f5462e8263c522ae8998cef426fb827da4c155c6791bc16"></a>UA_VARIANT_DATA_NODELETE&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00555">555</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
-
-</div>
-</div>
-<a id="a1d9cb3b91e317874b51be6471cb370dc" name="a1d9cb3b91e317874b51be6471cb370dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1d9cb3b91e317874b51be6471cb370dc">&#9670;&#160;</a></span>UA_ExtensionObjectEncoding</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="types_8h.html#a1d9cb3b91e317874b51be6471cb370dc">UA_ExtensionObjectEncoding</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a1d9cb3b91e317874b51be6471cb370dca5f0aec282d3fd04b2e8b15adb5509169" name="a1d9cb3b91e317874b51be6471cb370dca5f0aec282d3fd04b2e8b15adb5509169"></a>UA_EXTENSIONOBJECT_ENCODED_NOBODY&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a1d9cb3b91e317874b51be6471cb370dca5893c791c370e8fb289be71482cd9120" name="a1d9cb3b91e317874b51be6471cb370dca5893c791c370e8fb289be71482cd9120"></a>UA_EXTENSIONOBJECT_ENCODED_BYTESTRING&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a1d9cb3b91e317874b51be6471cb370dca4a68350b94c821cc55422ec8657d03b7" name="a1d9cb3b91e317874b51be6471cb370dca4a68350b94c821cc55422ec8657d03b7"></a>UA_EXTENSIONOBJECT_ENCODED_XML&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a1d9cb3b91e317874b51be6471cb370dca948c275d7d1207c9d4c71811022300f9" name="a1d9cb3b91e317874b51be6471cb370dca948c275d7d1207c9d4c71811022300f9"></a>UA_EXTENSIONOBJECT_DECODED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a1d9cb3b91e317874b51be6471cb370dcad72826b08914adc05ad6fb4e500dd322" name="a1d9cb3b91e317874b51be6471cb370dcad72826b08914adc05ad6fb4e500dd322"></a>UA_EXTENSIONOBJECT_DECODED_NODELETE&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00691">691</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
-
-</div>
-</div>
 <a id="a7684800c6442e92c5b2495fc2abc2ada" name="a7684800c6442e92c5b2495fc2abc2ada"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7684800c6442e92c5b2495fc2abc2ada">&#9670;&#160;</a></span>UA_DataTypeKind</h2>
 
@@ -1269,66 +1204,101 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a1d9cb3b91e317874b51be6471cb370dc" name="a1d9cb3b91e317874b51be6471cb370dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d9cb3b91e317874b51be6471cb370dc">&#9670;&#160;</a></span>UA_ExtensionObjectEncoding</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="types_8h.html#a1d9cb3b91e317874b51be6471cb370dc">UA_ExtensionObjectEncoding</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a1d9cb3b91e317874b51be6471cb370dca5f0aec282d3fd04b2e8b15adb5509169" name="a1d9cb3b91e317874b51be6471cb370dca5f0aec282d3fd04b2e8b15adb5509169"></a>UA_EXTENSIONOBJECT_ENCODED_NOBODY&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1d9cb3b91e317874b51be6471cb370dca5893c791c370e8fb289be71482cd9120" name="a1d9cb3b91e317874b51be6471cb370dca5893c791c370e8fb289be71482cd9120"></a>UA_EXTENSIONOBJECT_ENCODED_BYTESTRING&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1d9cb3b91e317874b51be6471cb370dca4a68350b94c821cc55422ec8657d03b7" name="a1d9cb3b91e317874b51be6471cb370dca4a68350b94c821cc55422ec8657d03b7"></a>UA_EXTENSIONOBJECT_ENCODED_XML&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1d9cb3b91e317874b51be6471cb370dca948c275d7d1207c9d4c71811022300f9" name="a1d9cb3b91e317874b51be6471cb370dca948c275d7d1207c9d4c71811022300f9"></a>UA_EXTENSIONOBJECT_DECODED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1d9cb3b91e317874b51be6471cb370dcad72826b08914adc05ad6fb4e500dd322" name="a1d9cb3b91e317874b51be6471cb370dcad72826b08914adc05ad6fb4e500dd322"></a>UA_EXTENSIONOBJECT_DECODED_NODELETE&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00691">691</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="a026f31872abc03d18b81763d94f18904" name="a026f31872abc03d18b81763d94f18904"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a026f31872abc03d18b81763d94f18904">&#9670;&#160;</a></span>UA_NodeIdType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="types_8h.html#a026f31872abc03d18b81763d94f18904">UA_NodeIdType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a026f31872abc03d18b81763d94f18904aa842614726f18dd53d866e4ade15b3df" name="a026f31872abc03d18b81763d94f18904aa842614726f18dd53d866e4ade15b3df"></a>UA_NODEIDTYPE_NUMERIC&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a026f31872abc03d18b81763d94f18904a460b2afbbc0ad49d6c05bed068e3d647" name="a026f31872abc03d18b81763d94f18904a460b2afbbc0ad49d6c05bed068e3d647"></a>UA_NODEIDTYPE_STRING&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a026f31872abc03d18b81763d94f18904a67b9f69597de533c8e20cad99923a558" name="a026f31872abc03d18b81763d94f18904a67b9f69597de533c8e20cad99923a558"></a>UA_NODEIDTYPE_GUID&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a026f31872abc03d18b81763d94f18904a914531b4b38f0a4812f08bcc2e39ab3e" name="a026f31872abc03d18b81763d94f18904a914531b4b38f0a4812f08bcc2e39ab3e"></a>UA_NODEIDTYPE_BYTESTRING&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00274">274</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="aa1478e00bedf1421f5f5462e8263c522" name="aa1478e00bedf1421f5f5462e8263c522"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1478e00bedf1421f5f5462e8263c522">&#9670;&#160;</a></span>UA_VariantStorageType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="types_8h.html#aa1478e00bedf1421f5f5462e8263c522">UA_VariantStorageType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa1478e00bedf1421f5f5462e8263c522a2b3eb8fafea49ba7e9b24ee4eaced395" name="aa1478e00bedf1421f5f5462e8263c522a2b3eb8fafea49ba7e9b24ee4eaced395"></a>UA_VARIANT_DATA&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aa1478e00bedf1421f5f5462e8263c522ae8998cef426fb827da4c155c6791bc16" name="aa1478e00bedf1421f5f5462e8263c522ae8998cef426fb827da4c155c6791bc16"></a>UA_VARIANT_DATA_NODELETE&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00555">555</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a6f4095449612683166455cb8ef8d2399" name="a6f4095449612683166455cb8ef8d2399"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f4095449612683166455cb8ef8d2399">&#9670;&#160;</a></span>UA_StatusCode_name()</h2>
+<a id="ac342ed5f629d31e5079f4bf91953d139" name="ac342ed5f629d31e5079f4bf91953d139"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac342ed5f629d31e5079f4bf91953d139">&#9670;&#160;</a></span>UA_Array_append()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">UA_EXPORT const char * UA_StatusCode_name </td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Array_append </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td>
-          <td class="paramname"><em>code</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Returns the human-readable name of the StatusCode. </p>
-<p>If no matching StatusCode is found, a default string for "Unknown" is returned. This feature might be disabled to create a smaller binary with the UA_ENABLE_STATUSCODE_DESCRIPTIONS build-flag. Then the function returns an empty string for every StatusCode. </p>
-
-</div>
-</div>
-<a id="ae87c3eb1ffcd3b4a36eb0ba444222888" name="ae87c3eb1ffcd3b4a36eb0ba444222888"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae87c3eb1ffcd3b4a36eb0ba444222888">&#9670;&#160;</a></span>UA_String_fromChars()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structUA__String.html">UA_String</a> UA_String_fromChars </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>src</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Copies the content on the heap. </p>
-<p>Returns a null-string when alloc fails </p>
-
-</div>
-</div>
-<a id="a1eae0133787497837706d72ad647b39d" name="a1eae0133787497837706d72ad647b39d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1eae0133787497837706d72ad647b39d">&#9670;&#160;</a></span>UA_String_equal()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> UA_String_equal </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structUA__String.html">UA_String</a> *&#160;</td>
-          <td class="paramname"><em>s1</em>, </td>
+          <td class="paramtype">void **&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__String.html">UA_String</a> *&#160;</td>
-          <td class="paramname"><em>s2</em>&#160;</td>
+          <td class="paramtype">size_t *&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>newElem</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1338,122 +1308,50 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Append the given element at the end of the array. </p>
+<p>The content is moved (shallow copy) and the original memory is _init'ed if appending is successful.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>Double pointer to the array memory. Can be overwritten by the result of a realloc. </td></tr>
+    <tr><td class="paramname">size</td><td>The current size of the array. Overwritten in case of success. </td></tr>
+    <tr><td class="paramname">newElem</td><td>The element to be appended. The memory is reset upon success. </td></tr>
+    <tr><td class="paramname">type</td><td>The datatype of the array members </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns UA_STATUSCODE_GOOD or UA_STATUSCODE_BADOUTOFMEMORY. The original array is left untouched in the failure case. </dd></dl>
+
 </div>
 </div>
-<a id="ae56238574ba35e88e91f4c264c452284" name="ae56238574ba35e88e91f4c264c452284"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae56238574ba35e88e91f4c264c452284">&#9670;&#160;</a></span>UA_DateTime_now()</h2>
+<a id="a8f93398b32d6fc0845cd7d4c35030bc1" name="a8f93398b32d6fc0845cd7d4c35030bc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f93398b32d6fc0845cd7d4c35030bc1">&#9670;&#160;</a></span>UA_Array_appendCopy()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> UA_DateTime_now </td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Array_appendCopy </td>
           <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The current time in UTC time. </p>
-
-</div>
-</div>
-<a id="af9ca7a434892ec25c948b7025752798d" name="af9ca7a434892ec25c948b7025752798d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af9ca7a434892ec25c948b7025752798d">&#9670;&#160;</a></span>UA_DateTime_localTimeUtcOffset()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#ae5c13df54009d7a3e374bfc594af8059">UA_Int64</a> UA_DateTime_localTimeUtcOffset </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Offset between local time and UTC time. </p>
-
-</div>
-</div>
-<a id="add827094c515e557adfe2a50fd7ddafc" name="add827094c515e557adfe2a50fd7ddafc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add827094c515e557adfe2a50fd7ddafc">&#9670;&#160;</a></span>UA_DateTime_nowMonotonic()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> UA_DateTime_nowMonotonic </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>CPU clock invariant to system time changes. </p>
-<p>Use only to measure durations, not absolute time. </p>
-
-</div>
-</div>
-<a id="a4d3d3375ba6c8deb2ba04449cfc6c61a" name="a4d3d3375ba6c8deb2ba04449cfc6c61a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4d3d3375ba6c8deb2ba04449cfc6c61a">&#9670;&#160;</a></span>UA_DateTime_toStruct()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structUA__DateTimeStruct.html">UA_DateTimeStruct</a> UA_DateTime_toStruct </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a>&#160;</td>
-          <td class="paramname"><em>t</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a42238d6ff579539e356922533266982a" name="a42238d6ff579539e356922533266982a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a42238d6ff579539e356922533266982a">&#9670;&#160;</a></span>UA_DateTime_fromStruct()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> UA_DateTime_fromStruct </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__DateTimeStruct.html">UA_DateTimeStruct</a>&#160;</td>
-          <td class="paramname"><em>ts</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aeadb12f99531c38134d0ad28a8dd3186" name="aeadb12f99531c38134d0ad28a8dd3186"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeadb12f99531c38134d0ad28a8dd3186">&#9670;&#160;</a></span>UA_Guid_equal()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> UA_Guid_equal </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structUA__Guid.html">UA_Guid</a> *&#160;</td>
-          <td class="paramname"><em>g1</em>, </td>
+          <td class="paramtype">void **&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__Guid.html">UA_Guid</a> *&#160;</td>
-          <td class="paramname"><em>g2</em>&#160;</td>
+          <td class="paramtype">size_t *&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>newElem</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1462,6 +1360,205 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Append a copy of the given element at the end of the array. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>Double pointer to the array memory. Can be overwritten by the result of a realloc. </td></tr>
+    <tr><td class="paramname">size</td><td>The current size of the array. Overwritten in case of success. </td></tr>
+    <tr><td class="paramname">newElem</td><td>The element to be appended. </td></tr>
+    <tr><td class="paramname">type</td><td>The datatype of the array members </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns UA_STATUSCODE_GOOD or UA_STATUSCODE_BADOUTOFMEMORY. The original array is left untouched in the failure case. </dd></dl>
+
+</div>
+</div>
+<a id="af27a32f7f16ce2676dfadc56f15282a5" name="af27a32f7f16ce2676dfadc56f15282a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af27a32f7f16ce2676dfadc56f15282a5">&#9670;&#160;</a></span>UA_Array_copy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Array_copy </td>
+          <td>(</td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void **&#160;</td>
+          <td class="paramname"><em>dst</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Allocates and copies an array. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">src</td><td>The memory location of the source array </td></tr>
+    <tr><td class="paramname">size</td><td>The size of the array </td></tr>
+    <tr><td class="paramname">dst</td><td>The location of the pointer to the new array </td></tr>
+    <tr><td class="paramname">type</td><td>The datatype of the array members </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns UA_STATUSCODE_GOOD or UA_STATUSCODE_BADOUTOFMEMORY </dd></dl>
+
+</div>
+</div>
+<a id="a05af722df9c9a11fd6b497a7a35b8cdb" name="a05af722df9c9a11fd6b497a7a35b8cdb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05af722df9c9a11fd6b497a7a35b8cdb">&#9670;&#160;</a></span>UA_Array_delete()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UA_Array_delete </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Deletes an array. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The memory location of the array </td></tr>
+    <tr><td class="paramname">size</td><td>The size of the array </td></tr>
+    <tr><td class="paramname">type</td><td>The datatype of the array members </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab49966aa2cff36fe08c3052db3b51dd3" name="ab49966aa2cff36fe08c3052db3b51dd3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab49966aa2cff36fe08c3052db3b51dd3">&#9670;&#160;</a></span>UA_Array_new()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * UA_Array_new </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Allocates and initializes an array of variables of a specific type. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>The requested array length </td></tr>
+    <tr><td class="paramname">type</td><td>The datatype description </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the memory location of the variable or NULL if no memory could be allocated </dd></dl>
+
+</div>
+</div>
+<a id="a36d905479fc599f3ef5d0cf96d7bcb9e" name="a36d905479fc599f3ef5d0cf96d7bcb9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36d905479fc599f3ef5d0cf96d7bcb9e">&#9670;&#160;</a></span>UA_Array_resize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Array_resize </td>
+          <td>(</td>
+          <td class="paramtype">void **&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t *&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>newSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Resizes (and reallocates) an array. </p>
+<p>The last entries are initialized to zero if the array length is increased. If the array length is decreased, the last entries are removed if the size is decreased.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>Double pointer to the array memory. Can be overwritten by the result of a realloc. </td></tr>
+    <tr><td class="paramname">size</td><td>The current size of the array. Overwritten in case of success. </td></tr>
+    <tr><td class="paramname">newSize</td><td>The new size of the array </td></tr>
+    <tr><td class="paramname">type</td><td>The datatype of the array members </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns UA_STATUSCODE_GOOD or UA_STATUSCODE_BADOUTOFMEMORY. The original array is left untouched in the failure case. </dd></dl>
 
 </div>
 </div>
@@ -1493,36 +1590,6 @@ Variables</h2></td></tr>
 
 <p>Allocates memory of size length for the bytestring. </p>
 <p>The content is not set to zero. </p>
-
-</div>
-</div>
-<a id="a79a3f03f01edb1c980c022443761d98f" name="a79a3f03f01edb1c980c022443761d98f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a79a3f03f01edb1c980c022443761d98f">&#9670;&#160;</a></span>UA_ByteString_toBase64()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_ByteString_toBase64 </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
-          <td class="paramname"><em>bs</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structUA__String.html">UA_String</a> *&#160;</td>
-          <td class="paramname"><em>output</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Converts a ByteString to the corresponding base64 representation. </p>
 
 </div>
 </div>
@@ -1592,35 +1659,17 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a5d5eb7e9d541654965cdd0e43efadb73" name="a5d5eb7e9d541654965cdd0e43efadb73"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d5eb7e9d541654965cdd0e43efadb73">&#9670;&#160;</a></span>UA_NodeId_isNull()</h2>
+<a id="a79a3f03f01edb1c980c022443761d98f" name="a79a3f03f01edb1c980c022443761d98f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79a3f03f01edb1c980c022443761d98f">&#9670;&#160;</a></span>UA_ByteString_toBase64()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> UA_NodeId_isNull </td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_ByteString_toBase64 </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a5fa03347b6292541b4cc01ff3b0dc8df" name="a5fa03347b6292541b4cc01ff3b0dc8df"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5fa03347b6292541b4cc01ff3b0dc8df">&#9670;&#160;</a></span>UA_NodeId_print()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_NodeId_print </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
+          <td class="paramtype">const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
+          <td class="paramname"><em>bs</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -1636,28 +1685,27 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Print the NodeId in the human-readable format defined in Part 6, 5.3.1.10. </p>
-<p>Examples: UA_NODEID("i=13") UA_NODEID("ns=10;i=1") UA_NODEID("ns=10;s=Hello:World") UA_NODEID("g=09087e75-8e5e-499b-954f-f2a9603db28a") UA_NODEID("ns=1;b=b3BlbjYyNTQxIQ==") // base64 </p>
+<p>Converts a ByteString to the corresponding base64 representation. </p>
 
 </div>
 </div>
-<a id="a41a1e13672bb42319a1eefa4eacf0f6a" name="a41a1e13672bb42319a1eefa4eacf0f6a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a41a1e13672bb42319a1eefa4eacf0f6a">&#9670;&#160;</a></span>UA_NodeId_order()</h2>
+<a id="a01c682f8a091957ce7aaf517f87a2134" name="a01c682f8a091957ce7aaf517f87a2134"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01c682f8a091957ce7aaf517f87a2134">&#9670;&#160;</a></span>UA_calcSizeBinary()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="common_8h.html#adeb58a592483258f220c845c47622b15">UA_Order</a> UA_NodeId_order </td>
+          <td class="memname">UA_EXPORT size_t UA_calcSizeBinary </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
-          <td class="paramname"><em>n1</em>, </td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
-          <td class="paramname"><em>n2</em>&#160;</td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1667,55 +1715,465 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Total ordering of NodeId. </p>
+<p>Returns the number of bytes the value p takes in binary encoding. </p>
+<p>Returns zero if an error occurs. </p>
 
 </div>
 </div>
-<a id="a0ffe513ad3f755b8de55d06e22666cb6" name="a0ffe513ad3f755b8de55d06e22666cb6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0ffe513ad3f755b8de55d06e22666cb6">&#9670;&#160;</a></span>UA_NodeId_hash()</h2>
+<a id="ab615e6928fa544fb7caf34c9e241fd4b" name="ab615e6928fa544fb7caf34c9e241fd4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab615e6928fa544fb7caf34c9e241fd4b">&#9670;&#160;</a></span>UA_clear()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> UA_NodeId_hash </td>
+          <td class="memname">void UA_clear </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Deletes the dynamically allocated content of a variable (e.g. </p>
+<p>resets all arrays to undefined arrays). Afterwards, the variable can be safely deleted without causing memory leaks. But the variable is not initialized and may contain old data that is not memory-relevant.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The memory location of the variable </td></tr>
+    <tr><td class="paramname">type</td><td>The datatype description of the variable </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a06dc3ec388f93ee9aab177e3b50ca7e4" name="a06dc3ec388f93ee9aab177e3b50ca7e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06dc3ec388f93ee9aab177e3b50ca7e4">&#9670;&#160;</a></span>UA_copy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_copy </td>
+          <td>(</td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>dst</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Copies the content of two variables. </p>
+<p>If copying fails (e.g. because no memory was available for an array), then dst is emptied and initialized to prevent memory leaks.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">src</td><td>The memory location of the source variable </td></tr>
+    <tr><td class="paramname">dst</td><td>The memory location of the destination variable </td></tr>
+    <tr><td class="paramname">type</td><td>The datatype description </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Indicates whether the operation succeeded or returns an error code </dd></dl>
+
+</div>
+</div>
+<a id="a5c121c383d0958129f7a765e85b16859" name="a5c121c383d0958129f7a765e85b16859"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c121c383d0958129f7a765e85b16859">&#9670;&#160;</a></span>UA_DataType_getPrecedence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a2dfa954c25e6984956ab6fa8e8fd73db">UA_Int16</a> UA_DataType_getPrecedence </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return the Data Type Precedence-Rank defined in Part 4. </p>
+<p>If there is no Precedence-Rank assigned with the type -1 is returned. </p>
+
+</div>
+</div>
+<a id="a6812411c795773e9bcbc34892a0b872d" name="a6812411c795773e9bcbc34892a0b872d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6812411c795773e9bcbc34892a0b872d">&#9670;&#160;</a></span>UA_DataType_getStructMember()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> UA_DataType_getStructMember </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>memberName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t *&#160;</td>
+          <td class="paramname"><em>outOffset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> **&#160;</td>
+          <td class="paramname"><em>outMemberType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> *&#160;</td>
+          <td class="paramname"><em>outIsArray</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the offset and type of a structure member. </p>
+<p>The return value is false if the member was not found.</p>
+<p>If the member is an array, the offset points to the (size_t) length field. (The array pointer comes after the length field without any padding.) </p>
+
+</div>
+</div>
+<a id="ab9faa940eb88b05ab723fad65a1a49e4" name="ab9faa940eb88b05ab723fad65a1a49e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9faa940eb88b05ab723fad65a1a49e4">&#9670;&#160;</a></span>UA_DataType_isNumeric()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> UA_DataType_isNumeric </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Test if the data type is a numeric builtin data type (via the typeKind field of <a class="el" href="structUA__DataType.html">UA_DataType</a>). </p>
+<p>This includes integers and floating point numbers. Not included are Boolean, DateTime, StatusCode and Enums. </p>
+
+</div>
+</div>
+<a id="abaff7ed599c86bb7891504e5d63df3d3" name="abaff7ed599c86bb7891504e5d63df3d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abaff7ed599c86bb7891504e5d63df3d3">&#9670;&#160;</a></span>UA_DataValue_copyVariantRange()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_DataValue_copyVariantRange </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structUA__DataValue.html">UA_DataValue</a> *&#160;</td>
+          <td class="paramname"><em>dst</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NumericRange.html">UA_NumericRange</a>&#160;</td>
+          <td class="paramname"><em>range</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Copy the DataValue, but use only a subset of the (multidimensional) array of of the variant of the source DataValue. </p>
+<p>Returns an error code if the variant of the DataValue is not an array or if the indicated range does not fit.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">src</td><td>The source DataValue </td></tr>
+    <tr><td class="paramname">dst</td><td>The target DataValue </td></tr>
+    <tr><td class="paramname">range</td><td>The range of the variant of the DataValue to copy </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns UA_STATUSCODE_GOOD or an error code </dd></dl>
+
+</div>
+</div>
+<a id="a42238d6ff579539e356922533266982a" name="a42238d6ff579539e356922533266982a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42238d6ff579539e356922533266982a">&#9670;&#160;</a></span>UA_DateTime_fromStruct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> UA_DateTime_fromStruct </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__DateTimeStruct.html">UA_DateTimeStruct</a>&#160;</td>
+          <td class="paramname"><em>ts</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af9ca7a434892ec25c948b7025752798d" name="af9ca7a434892ec25c948b7025752798d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9ca7a434892ec25c948b7025752798d">&#9670;&#160;</a></span>UA_DateTime_localTimeUtcOffset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#ae5c13df54009d7a3e374bfc594af8059">UA_Int64</a> UA_DateTime_localTimeUtcOffset </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Offset between local time and UTC time. </p>
+
+</div>
+</div>
+<a id="ae56238574ba35e88e91f4c264c452284" name="ae56238574ba35e88e91f4c264c452284"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae56238574ba35e88e91f4c264c452284">&#9670;&#160;</a></span>UA_DateTime_now()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> UA_DateTime_now </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The current time in UTC time. </p>
+
+</div>
+</div>
+<a id="add827094c515e557adfe2a50fd7ddafc" name="add827094c515e557adfe2a50fd7ddafc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add827094c515e557adfe2a50fd7ddafc">&#9670;&#160;</a></span>UA_DateTime_nowMonotonic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> UA_DateTime_nowMonotonic </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>CPU clock invariant to system time changes. </p>
+<p>Use only to measure durations, not absolute time. </p>
+
+</div>
+</div>
+<a id="a4d3d3375ba6c8deb2ba04449cfc6c61a" name="a4d3d3375ba6c8deb2ba04449cfc6c61a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d3d3375ba6c8deb2ba04449cfc6c61a">&#9670;&#160;</a></span>UA_DateTime_toStruct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUA__DateTimeStruct.html">UA_DateTimeStruct</a> UA_DateTime_toStruct </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a>&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab8d429a855d956f989b57e5486cd8fc3" name="ab8d429a855d956f989b57e5486cd8fc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8d429a855d956f989b57e5486cd8fc3">&#9670;&#160;</a></span>UA_decodeBinary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_decodeBinary </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
+          <td class="paramname"><em>inBuf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__DecodeBinaryOptions.html">UA_DecodeBinaryOptions</a> *&#160;</td>
+          <td class="paramname"><em>options</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Decodes a data structure from the input buffer in the binary format. </p>
+<p>It is assumed that <code>p</code> points to valid memory (not necessarily zeroed out). The options can be NULL and will be disregarded in that case. </p>
+
+</div>
+</div>
+<a id="ac1fe49fb8120e59038e6f4d276ffa1ec" name="ac1fe49fb8120e59038e6f4d276ffa1ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1fe49fb8120e59038e6f4d276ffa1ec">&#9670;&#160;</a></span>UA_delete()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UA_delete </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Frees a variable and all of its content. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The memory location of the variable </td></tr>
+    <tr><td class="paramname">type</td><td>The datatype description of the variable </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="adaff9c45e3b54d87ece28f5e71086b7a" name="adaff9c45e3b54d87ece28f5e71086b7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adaff9c45e3b54d87ece28f5e71086b7a">&#9670;&#160;</a></span>UA_encodeBinary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_encodeBinary </td>
+          <td>(</td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
+          <td class="paramname"><em>outBuf</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Encodes a data-structure in the binary format. </p>
+<p>If outBuf has a length of zero, a buffer of the required size is allocated. Otherwise, encoding into the existing outBuf is attempted (and may fail if the buffer is too small). </p>
+
+</div>
+</div>
+<a id="a3b346c7682df0b269f3d7c5f5a115ca6" name="a3b346c7682df0b269f3d7c5f5a115ca6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b346c7682df0b269f3d7c5f5a115ca6">&#9670;&#160;</a></span>UA_ExpandedNodeId_hash()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> UA_ExpandedNodeId_hash </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> *&#160;</td>
           <td class="paramname"><em>n</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Returns a non-cryptographic hash for NodeId. </p>
-
-</div>
-</div>
-<a id="a25c1439d3794dba263e398aac36bc744" name="a25c1439d3794dba263e398aac36bc744"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a25c1439d3794dba263e398aac36bc744">&#9670;&#160;</a></span>UA_ExpandedNodeId_print()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_ExpandedNodeId_print </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> *&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structUA__String.html">UA_String</a> *&#160;</td>
-          <td class="paramname"><em>output</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Returns a non-cryptographic hash for ExpandedNodeId. </p>
+<p>The hash of an ExpandedNodeId is identical to the hash of the embedded (simple) NodeId if the ServerIndex is zero and no NamespaceUri is set. </p>
 
 </div>
 </div>
@@ -1769,64 +2227,23 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a3b346c7682df0b269f3d7c5f5a115ca6" name="a3b346c7682df0b269f3d7c5f5a115ca6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3b346c7682df0b269f3d7c5f5a115ca6">&#9670;&#160;</a></span>UA_ExpandedNodeId_hash()</h2>
+<a id="a25c1439d3794dba263e398aac36bc744" name="a25c1439d3794dba263e398aac36bc744"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25c1439d3794dba263e398aac36bc744">&#9670;&#160;</a></span>UA_ExpandedNodeId_print()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> UA_ExpandedNodeId_hash </td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_ExpandedNodeId_print </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> *&#160;</td>
-          <td class="paramname"><em>n</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Returns a non-cryptographic hash for ExpandedNodeId. </p>
-<p>The hash of an ExpandedNodeId is identical to the hash of the embedded (simple) NodeId if the ServerIndex is zero and no NamespaceUri is set. </p>
-
-</div>
-</div>
-<a id="a8b418953628080bbe6b09ee0f82ea242" name="a8b418953628080bbe6b09ee0f82ea242"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8b418953628080bbe6b09ee0f82ea242">&#9670;&#160;</a></span>UA_QualifiedName_hash()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> UA_QualifiedName_hash </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structUA__QualifiedName.html">UA_QualifiedName</a> *&#160;</td>
-          <td class="paramname"><em>q</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Returns a non-cryptographic hash for QualifiedName. </p>
-
-</div>
-</div>
-<a id="a8e7262bf97d9ad2082c2df385f9ae4b4" name="a8e7262bf97d9ad2082c2df385f9ae4b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e7262bf97d9ad2082c2df385f9ae4b4">&#9670;&#160;</a></span>UA_QualifiedName_equal()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> UA_QualifiedName_equal </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structUA__QualifiedName.html">UA_QualifiedName</a> *&#160;</td>
-          <td class="paramname"><em>qn1</em>, </td>
+          <td class="paramname"><em>id</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__QualifiedName.html">UA_QualifiedName</a> *&#160;</td>
-          <td class="paramname"><em>qn2</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="structUA__String.html">UA_String</a> *&#160;</td>
+          <td class="paramname"><em>output</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1835,6 +2252,309 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a02f7d34a62eeb65f8954ac8e68c5fd3d" name="a02f7d34a62eeb65f8954ac8e68c5fd3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02f7d34a62eeb65f8954ac8e68c5fd3d">&#9670;&#160;</a></span>UA_ExtensionObject_setValue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UA_ExtensionObject_setValue </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__ExtensionObject.html">UA_ExtensionObject</a> *&#160;</td>
+          <td class="paramname"><em>eo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize the ExtensionObject and set the "decoded" value to the given pointer. </p>
+<p>The value will be deleted when the ExtensionObject is cleared. </p>
+
+</div>
+</div>
+<a id="a1d95dc7b7846e234ed73bc04d795085a" name="a1d95dc7b7846e234ed73bc04d795085a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d95dc7b7846e234ed73bc04d795085a">&#9670;&#160;</a></span>UA_ExtensionObject_setValueCopy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_ExtensionObject_setValueCopy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__ExtensionObject.html">UA_ExtensionObject</a> *&#160;</td>
+          <td class="paramname"><em>eo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize the ExtensionObject and set the "decoded" value to a fresh copy of the given value pointer. </p>
+<p>The value will be deleted when the ExtensionObject is cleared. </p>
+
+</div>
+</div>
+<a id="a5fb122d28efefff273b8ea8a84f9782f" name="a5fb122d28efefff273b8ea8a84f9782f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fb122d28efefff273b8ea8a84f9782f">&#9670;&#160;</a></span>UA_ExtensionObject_setValueNoDelete()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UA_ExtensionObject_setValueNoDelete </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__ExtensionObject.html">UA_ExtensionObject</a> *&#160;</td>
+          <td class="paramname"><em>eo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize the ExtensionObject and set the "decoded" value to the given pointer. </p>
+<p>The value will <em>not</em> be deleted when the ExtensionObject is cleared. </p>
+
+</div>
+</div>
+<a id="af02c29570c8fe2dd5d6e5df5189f474a" name="af02c29570c8fe2dd5d6e5df5189f474a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af02c29570c8fe2dd5d6e5df5189f474a">&#9670;&#160;</a></span>UA_findDataType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structUA__DataType.html">UA_DataType</a> * UA_findDataType </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
+          <td class="paramname"><em>typeId</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the data type description for the type's identifier or NULL if no matching data type was found. </p>
+
+</div>
+</div>
+<a id="aeadb12f99531c38134d0ad28a8dd3186" name="aeadb12f99531c38134d0ad28a8dd3186"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeadb12f99531c38134d0ad28a8dd3186">&#9670;&#160;</a></span>UA_Guid_equal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> UA_Guid_equal </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structUA__Guid.html">UA_Guid</a> *&#160;</td>
+          <td class="paramname"><em>g1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__Guid.html">UA_Guid</a> *&#160;</td>
+          <td class="paramname"><em>g2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a312ed9d2d196f380d439ab7dadb4005c" name="a312ed9d2d196f380d439ab7dadb4005c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a312ed9d2d196f380d439ab7dadb4005c">&#9670;&#160;</a></span>UA_Guid_random()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUA__Guid.html">UA_Guid</a> UA_Guid_random </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a921a4b0f6b27972f427493106673050e" name="a921a4b0f6b27972f427493106673050e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a921a4b0f6b27972f427493106673050e">&#9670;&#160;</a></span>UA_new()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * UA_new </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Allocates and initializes a variable of type dataType. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>The datatype description </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the memory location of the variable or NULL if no memory could be allocated </dd></dl>
+
+</div>
+</div>
+<a id="a0ffe513ad3f755b8de55d06e22666cb6" name="a0ffe513ad3f755b8de55d06e22666cb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ffe513ad3f755b8de55d06e22666cb6">&#9670;&#160;</a></span>UA_NodeId_hash()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> UA_NodeId_hash </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns a non-cryptographic hash for NodeId. </p>
+
+</div>
+</div>
+<a id="a5d5eb7e9d541654965cdd0e43efadb73" name="a5d5eb7e9d541654965cdd0e43efadb73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d5eb7e9d541654965cdd0e43efadb73">&#9670;&#160;</a></span>UA_NodeId_isNull()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> UA_NodeId_isNull </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a41a1e13672bb42319a1eefa4eacf0f6a" name="a41a1e13672bb42319a1eefa4eacf0f6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41a1e13672bb42319a1eefa4eacf0f6a">&#9670;&#160;</a></span>UA_NodeId_order()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="common_8h.html#adeb58a592483258f220c845c47622b15">UA_Order</a> UA_NodeId_order </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
+          <td class="paramname"><em>n1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
+          <td class="paramname"><em>n2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Total ordering of NodeId. </p>
+
+</div>
+</div>
+<a id="a5fa03347b6292541b4cc01ff3b0dc8df" name="a5fa03347b6292541b4cc01ff3b0dc8df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fa03347b6292541b4cc01ff3b0dc8df">&#9670;&#160;</a></span>UA_NodeId_print()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_NodeId_print </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structUA__String.html">UA_String</a> *&#160;</td>
+          <td class="paramname"><em>output</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Print the NodeId in the human-readable format defined in Part 6, 5.3.1.10. </p>
+<p>Examples: UA_NODEID("i=13") UA_NODEID("ns=10;i=1") UA_NODEID("ns=10;s=Hello:World") UA_NODEID("g=09087e75-8e5e-499b-954f-f2a9603db28a") UA_NODEID("ns=1;b=b3BlbjYyNTQxIQ==") // base64 </p>
 
 </div>
 </div>
@@ -1866,23 +2586,23 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="aa5aea265c55455c36ec6385b27c87b2d" name="aa5aea265c55455c36ec6385b27c87b2d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa5aea265c55455c36ec6385b27c87b2d">&#9670;&#160;</a></span>UA_Variant_setScalar()</h2>
+<a id="a4e7a92f078dc587b4a364ed8cc6299c9" name="a4e7a92f078dc587b4a364ed8cc6299c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e7a92f078dc587b4a364ed8cc6299c9">&#9670;&#160;</a></span>UA_order()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void UA_Variant_setScalar </td>
+          <td class="memname"><a class="el" href="common_8h.html#adeb58a592483258f220c845c47622b15">UA_Order</a> UA_order </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Variant.html">UA_Variant</a> *&#160;</td>
-          <td class="paramname"><em>v</em>, </td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>p1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>p2</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -1898,34 +2618,32 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Set the variant to a scalar value that already resides in memory. </p>
-<p>The value takes on the lifecycle of the variant and is deleted with it.</p>
+<p>Compare two variables and return their order. </p>
+<p>This can also be used to test for equality of two values.</p>
+<p>For numerical types (including StatusCodes and Enums), their natural order is used. NaN is the "smallest" value for floating point values. Different bit representations of NaN are considered identical.</p>
+<p>All other types have <em>some</em> absolute ordering so that a &lt; b, b &lt; c -&gt; a &lt; c.</p>
+<p>The ordering of arrays (also strings) is in "shortlex": A shorter array is always smaller than a longer array. Otherwise the first different element defines the order.</p>
+<p>When members of different types are permitted (in Variants and ExtensionObjects), the memory address in the "UA_DataType*" pointer determines which variable is smaller.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">v</td><td>The variant </td></tr>
-    <tr><td class="paramname">p</td><td>A pointer to the value data </td></tr>
-    <tr><td class="paramname">type</td><td>The datatype of the value in question </td></tr>
+    <tr><td class="paramname">p1</td><td>The memory location of the first value </td></tr>
+    <tr><td class="paramname">p2</td><td>The memory location of the first value </td></tr>
+    <tr><td class="paramname">type</td><td>The datatype description of both values </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="ab40084675fc8efaa4af30a5c6a1399e4" name="ab40084675fc8efaa4af30a5c6a1399e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab40084675fc8efaa4af30a5c6a1399e4">&#9670;&#160;</a></span>UA_Variant_setScalarCopy()</h2>
+<a id="a4528cd5a5ead15915e15e00ee4e946e5" name="a4528cd5a5ead15915e15e00ee4e946e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4528cd5a5ead15915e15e00ee4e946e5">&#9670;&#160;</a></span>UA_print()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Variant_setScalarCopy </td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_print </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Variant.html">UA_Variant</a> *&#160;</td>
-          <td class="paramname"><em>v</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">const void *&#160;</td>
           <td class="paramname"><em>p</em>, </td>
         </tr>
@@ -1933,7 +2651,13 @@ Variables</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>type</em>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structUA__String.html">UA_String</a> *&#160;</td>
+          <td class="paramname"><em>output</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1943,16 +2667,216 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Set the variant to a scalar value that is copied from an existing variable. </p>
+<p>Pretty-print the value from the datatype. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">v</td><td>The variant </td></tr>
-    <tr><td class="paramname">p</td><td>A pointer to the value data </td></tr>
-    <tr><td class="paramname">type</td><td>The datatype of the value </td></tr>
+    <tr><td class="paramname">p</td><td>The memory location of the variable </td></tr>
+    <tr><td class="paramname">type</td><td>The datatype description of the variable </td></tr>
+    <tr><td class="paramname">output</td><td>A string that is memory-allocated for the pretty-printed output </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Indicates whether the operation succeeded or returns an error code </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Indicates whether the operation succeeded </dd></dl>
+
+</div>
+</div>
+<a id="a8e7262bf97d9ad2082c2df385f9ae4b4" name="a8e7262bf97d9ad2082c2df385f9ae4b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e7262bf97d9ad2082c2df385f9ae4b4">&#9670;&#160;</a></span>UA_QualifiedName_equal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> UA_QualifiedName_equal </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structUA__QualifiedName.html">UA_QualifiedName</a> *&#160;</td>
+          <td class="paramname"><em>qn1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__QualifiedName.html">UA_QualifiedName</a> *&#160;</td>
+          <td class="paramname"><em>qn2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8b418953628080bbe6b09ee0f82ea242" name="a8b418953628080bbe6b09ee0f82ea242"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b418953628080bbe6b09ee0f82ea242">&#9670;&#160;</a></span>UA_QualifiedName_hash()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> UA_QualifiedName_hash </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structUA__QualifiedName.html">UA_QualifiedName</a> *&#160;</td>
+          <td class="paramname"><em>q</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns a non-cryptographic hash for QualifiedName. </p>
+
+</div>
+</div>
+<a id="a6d625256bae8fe323e15ed49f3797b81" name="a6d625256bae8fe323e15ed49f3797b81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d625256bae8fe323e15ed49f3797b81">&#9670;&#160;</a></span>UA_random_seed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UA_random_seed </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a>&#160;</td>
+          <td class="paramname"><em>seed</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6f4095449612683166455cb8ef8d2399" name="a6f4095449612683166455cb8ef8d2399"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f4095449612683166455cb8ef8d2399">&#9670;&#160;</a></span>UA_StatusCode_name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT const char * UA_StatusCode_name </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the human-readable name of the StatusCode. </p>
+<p>If no matching StatusCode is found, a default string for "Unknown" is returned. This feature might be disabled to create a smaller binary with the UA_ENABLE_STATUSCODE_DESCRIPTIONS build-flag. Then the function returns an empty string for every StatusCode. </p>
+
+</div>
+</div>
+<a id="a1eae0133787497837706d72ad647b39d" name="a1eae0133787497837706d72ad647b39d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1eae0133787497837706d72ad647b39d">&#9670;&#160;</a></span>UA_String_equal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> UA_String_equal </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structUA__String.html">UA_String</a> *&#160;</td>
+          <td class="paramname"><em>s1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__String.html">UA_String</a> *&#160;</td>
+          <td class="paramname"><em>s2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae87c3eb1ffcd3b4a36eb0ba444222888" name="ae87c3eb1ffcd3b4a36eb0ba444222888"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae87c3eb1ffcd3b4a36eb0ba444222888">&#9670;&#160;</a></span>UA_String_fromChars()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUA__String.html">UA_String</a> UA_String_fromChars </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>src</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Copies the content on the heap. </p>
+<p>Returns a null-string when alloc fails </p>
+
+</div>
+</div>
+<a id="a38c9e844e489221eab179bef05c1b18d" name="a38c9e844e489221eab179bef05c1b18d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38c9e844e489221eab179bef05c1b18d">&#9670;&#160;</a></span>UA_UInt32_random()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> UA_UInt32_random </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afab08742473e57ff7b61f07b4fec099d" name="afab08742473e57ff7b61f07b4fec099d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afab08742473e57ff7b61f07b4fec099d">&#9670;&#160;</a></span>UA_Variant_copyRange()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Variant_copyRange </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structUA__Variant.html">UA_Variant</a> *&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structUA__Variant.html">UA_Variant</a> *&#160;</td>
+          <td class="paramname"><em>dst</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NumericRange.html">UA_NumericRange</a>&#160;</td>
+          <td class="paramname"><em>range</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Copy the variant, but use only a subset of the (multidimensional) array into a variant. </p>
+<p>Returns an error code if the variant is not an array or if the indicated range does not fit.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">src</td><td>The source variant </td></tr>
+    <tr><td class="paramname">dst</td><td>The target variant </td></tr>
+    <tr><td class="paramname">range</td><td>The range of the copied data </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns UA_STATUSCODE_GOOD or an error code </dd></dl>
 
 </div>
 </div>
@@ -2057,52 +2981,6 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Indicates whether the operation succeeded or returns an error code </dd></dl>
-
-</div>
-</div>
-<a id="afab08742473e57ff7b61f07b4fec099d" name="afab08742473e57ff7b61f07b4fec099d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afab08742473e57ff7b61f07b4fec099d">&#9670;&#160;</a></span>UA_Variant_copyRange()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Variant_copyRange </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structUA__Variant.html">UA_Variant</a> *&#160;</td>
-          <td class="paramname"><em>src</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structUA__Variant.html">UA_Variant</a> *&#160;</td>
-          <td class="paramname"><em>dst</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NumericRange.html">UA_NumericRange</a>&#160;</td>
-          <td class="paramname"><em>range</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Copy the variant, but use only a subset of the (multidimensional) array into a variant. </p>
-<p>Returns an error code if the variant is not an array or if the indicated range does not fit.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">src</td><td>The source variant </td></tr>
-    <tr><td class="paramname">dst</td><td>The target variant </td></tr>
-    <tr><td class="paramname">range</td><td>The range of the copied data </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns UA_STATUSCODE_GOOD or an error code </dd></dl>
 
 </div>
 </div>
@@ -2211,17 +3089,17 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a02f7d34a62eeb65f8954ac8e68c5fd3d" name="a02f7d34a62eeb65f8954ac8e68c5fd3d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a02f7d34a62eeb65f8954ac8e68c5fd3d">&#9670;&#160;</a></span>UA_ExtensionObject_setValue()</h2>
+<a id="aa5aea265c55455c36ec6385b27c87b2d" name="aa5aea265c55455c36ec6385b27c87b2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5aea265c55455c36ec6385b27c87b2d">&#9670;&#160;</a></span>UA_Variant_setScalar()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void UA_ExtensionObject_setValue </td>
+          <td class="memname">void UA_Variant_setScalar </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__ExtensionObject.html">UA_ExtensionObject</a> *&#160;</td>
-          <td class="paramname"><em>eo</em>, </td>
+          <td class="paramtype"><a class="el" href="structUA__Variant.html">UA_Variant</a> *&#160;</td>
+          <td class="paramname"><em>v</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -2243,287 +3121,36 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Initialize the ExtensionObject and set the "decoded" value to the given pointer. </p>
-<p>The value will be deleted when the ExtensionObject is cleared. </p>
-
-</div>
-</div>
-<a id="a5fb122d28efefff273b8ea8a84f9782f" name="a5fb122d28efefff273b8ea8a84f9782f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5fb122d28efefff273b8ea8a84f9782f">&#9670;&#160;</a></span>UA_ExtensionObject_setValueNoDelete()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void UA_ExtensionObject_setValueNoDelete </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__ExtensionObject.html">UA_ExtensionObject</a> *&#160;</td>
-          <td class="paramname"><em>eo</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>type</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Initialize the ExtensionObject and set the "decoded" value to the given pointer. </p>
-<p>The value will <em>not</em> be deleted when the ExtensionObject is cleared. </p>
-
-</div>
-</div>
-<a id="a1d95dc7b7846e234ed73bc04d795085a" name="a1d95dc7b7846e234ed73bc04d795085a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1d95dc7b7846e234ed73bc04d795085a">&#9670;&#160;</a></span>UA_ExtensionObject_setValueCopy()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_ExtensionObject_setValueCopy </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__ExtensionObject.html">UA_ExtensionObject</a> *&#160;</td>
-          <td class="paramname"><em>eo</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>type</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Initialize the ExtensionObject and set the "decoded" value to a fresh copy of the given value pointer. </p>
-<p>The value will be deleted when the ExtensionObject is cleared. </p>
-
-</div>
-</div>
-<a id="abaff7ed599c86bb7891504e5d63df3d3" name="abaff7ed599c86bb7891504e5d63df3d3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abaff7ed599c86bb7891504e5d63df3d3">&#9670;&#160;</a></span>UA_DataValue_copyVariantRange()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_DataValue_copyVariantRange </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *&#160;</td>
-          <td class="paramname"><em>src</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structUA__DataValue.html">UA_DataValue</a> *&#160;</td>
-          <td class="paramname"><em>dst</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NumericRange.html">UA_NumericRange</a>&#160;</td>
-          <td class="paramname"><em>range</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Copy the DataValue, but use only a subset of the (multidimensional) array of of the variant of the source DataValue. </p>
-<p>Returns an error code if the variant of the DataValue is not an array or if the indicated range does not fit.</p>
+<p>Set the variant to a scalar value that already resides in memory. </p>
+<p>The value takes on the lifecycle of the variant and is deleted with it.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">src</td><td>The source DataValue </td></tr>
-    <tr><td class="paramname">dst</td><td>The target DataValue </td></tr>
-    <tr><td class="paramname">range</td><td>The range of the variant of the DataValue to copy </td></tr>
+    <tr><td class="paramname">v</td><td>The variant </td></tr>
+    <tr><td class="paramname">p</td><td>A pointer to the value data </td></tr>
+    <tr><td class="paramname">type</td><td>The datatype of the value in question </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns UA_STATUSCODE_GOOD or an error code </dd></dl>
 
 </div>
 </div>
-<a id="a6812411c795773e9bcbc34892a0b872d" name="a6812411c795773e9bcbc34892a0b872d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6812411c795773e9bcbc34892a0b872d">&#9670;&#160;</a></span>UA_DataType_getStructMember()</h2>
+<a id="ab40084675fc8efaa4af30a5c6a1399e4" name="ab40084675fc8efaa4af30a5c6a1399e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab40084675fc8efaa4af30a5c6a1399e4">&#9670;&#160;</a></span>UA_Variant_setScalarCopy()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> UA_DataType_getStructMember </td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Variant_setScalarCopy </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>type</em>, </td>
+          <td class="paramtype"><a class="el" href="structUA__Variant.html">UA_Variant</a> *&#160;</td>
+          <td class="paramname"><em>v</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>memberName</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t *&#160;</td>
-          <td class="paramname"><em>outOffset</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> **&#160;</td>
-          <td class="paramname"><em>outMemberType</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> *&#160;</td>
-          <td class="paramname"><em>outIsArray</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Returns the offset and type of a structure member. </p>
-<p>The return value is false if the member was not found.</p>
-<p>If the member is an array, the offset points to the (size_t) length field. (The array pointer comes after the length field without any padding.) </p>
-
-</div>
-</div>
-<a id="ab9faa940eb88b05ab723fad65a1a49e4" name="ab9faa940eb88b05ab723fad65a1a49e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab9faa940eb88b05ab723fad65a1a49e4">&#9670;&#160;</a></span>UA_DataType_isNumeric()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> UA_DataType_isNumeric </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>type</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Test if the data type is a numeric builtin data type (via the typeKind field of <a class="el" href="structUA__DataType.html">UA_DataType</a>). </p>
-<p>This includes integers and floating point numbers. Not included are Boolean, DateTime, StatusCode and Enums. </p>
-
-</div>
-</div>
-<a id="a5c121c383d0958129f7a765e85b16859" name="a5c121c383d0958129f7a765e85b16859"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5c121c383d0958129f7a765e85b16859">&#9670;&#160;</a></span>UA_DataType_getPrecedence()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a2dfa954c25e6984956ab6fa8e8fd73db">UA_Int16</a> UA_DataType_getPrecedence </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>type</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Return the Data Type Precedence-Rank defined in Part 4. </p>
-<p>If there is no Precedence-Rank assigned with the type -1 is returned. </p>
-
-</div>
-</div>
-<a id="af02c29570c8fe2dd5d6e5df5189f474a" name="af02c29570c8fe2dd5d6e5df5189f474a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af02c29570c8fe2dd5d6e5df5189f474a">&#9670;&#160;</a></span>UA_findDataType()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="structUA__DataType.html">UA_DataType</a> * UA_findDataType </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
-          <td class="paramname"><em>typeId</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Returns the data type description for the type's identifier or NULL if no matching data type was found. </p>
-
-</div>
-</div>
-<a id="a921a4b0f6b27972f427493106673050e" name="a921a4b0f6b27972f427493106673050e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a921a4b0f6b27972f427493106673050e">&#9670;&#160;</a></span>UA_new()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void * UA_new </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>type</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Allocates and initializes a variable of type dataType. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">type</td><td>The datatype description </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns the memory location of the variable or NULL if no memory could be allocated </dd></dl>
-
-</div>
-</div>
-<a id="a06dc3ec388f93ee9aab177e3b50ca7e4" name="a06dc3ec388f93ee9aab177e3b50ca7e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a06dc3ec388f93ee9aab177e3b50ca7e4">&#9670;&#160;</a></span>UA_copy()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_copy </td>
-          <td>(</td>
           <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>src</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>dst</em>, </td>
+          <td class="paramname"><em>p</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -2539,643 +3166,16 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Copies the content of two variables. </p>
-<p>If copying fails (e.g. because no memory was available for an array), then dst is emptied and initialized to prevent memory leaks.</p>
+<p>Set the variant to a scalar value that is copied from an existing variable. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">src</td><td>The memory location of the source variable </td></tr>
-    <tr><td class="paramname">dst</td><td>The memory location of the destination variable </td></tr>
-    <tr><td class="paramname">type</td><td>The datatype description </td></tr>
+    <tr><td class="paramname">v</td><td>The variant </td></tr>
+    <tr><td class="paramname">p</td><td>A pointer to the value data </td></tr>
+    <tr><td class="paramname">type</td><td>The datatype of the value </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Indicates whether the operation succeeded or returns an error code </dd></dl>
-
-</div>
-</div>
-<a id="ab615e6928fa544fb7caf34c9e241fd4b" name="ab615e6928fa544fb7caf34c9e241fd4b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab615e6928fa544fb7caf34c9e241fd4b">&#9670;&#160;</a></span>UA_clear()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void UA_clear </td>
-          <td>(</td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>type</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Deletes the dynamically allocated content of a variable (e.g. </p>
-<p>resets all arrays to undefined arrays). Afterwards, the variable can be safely deleted without causing memory leaks. But the variable is not initialized and may contain old data that is not memory-relevant.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The memory location of the variable </td></tr>
-    <tr><td class="paramname">type</td><td>The datatype description of the variable </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ac1fe49fb8120e59038e6f4d276ffa1ec" name="ac1fe49fb8120e59038e6f4d276ffa1ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac1fe49fb8120e59038e6f4d276ffa1ec">&#9670;&#160;</a></span>UA_delete()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void UA_delete </td>
-          <td>(</td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>type</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Frees a variable and all of its content. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The memory location of the variable </td></tr>
-    <tr><td class="paramname">type</td><td>The datatype description of the variable </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a4528cd5a5ead15915e15e00ee4e946e5" name="a4528cd5a5ead15915e15e00ee4e946e5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4528cd5a5ead15915e15e00ee4e946e5">&#9670;&#160;</a></span>UA_print()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_print </td>
-          <td>(</td>
-          <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structUA__String.html">UA_String</a> *&#160;</td>
-          <td class="paramname"><em>output</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Pretty-print the value from the datatype. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The memory location of the variable </td></tr>
-    <tr><td class="paramname">type</td><td>The datatype description of the variable </td></tr>
-    <tr><td class="paramname">output</td><td>A string that is memory-allocated for the pretty-printed output </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Indicates whether the operation succeeded </dd></dl>
-
-</div>
-</div>
-<a id="a4e7a92f078dc587b4a364ed8cc6299c9" name="a4e7a92f078dc587b4a364ed8cc6299c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4e7a92f078dc587b4a364ed8cc6299c9">&#9670;&#160;</a></span>UA_order()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="common_8h.html#adeb58a592483258f220c845c47622b15">UA_Order</a> UA_order </td>
-          <td>(</td>
-          <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>p1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>p2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>type</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Compare two variables and return their order. </p>
-<p>This can also be used to test for equality of two values.</p>
-<p>For numerical types (including StatusCodes and Enums), their natural order is used. NaN is the "smallest" value for floating point values. Different bit representations of NaN are considered identical.</p>
-<p>All other types have <em>some</em> absolute ordering so that a &lt; b, b &lt; c -&gt; a &lt; c.</p>
-<p>The ordering of arrays (also strings) is in "shortlex": A shorter array is always smaller than a longer array. Otherwise the first different element defines the order.</p>
-<p>When members of different types are permitted (in Variants and ExtensionObjects), the memory address in the "UA_DataType*" pointer determines which variable is smaller.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p1</td><td>The memory location of the first value </td></tr>
-    <tr><td class="paramname">p2</td><td>The memory location of the first value </td></tr>
-    <tr><td class="paramname">type</td><td>The datatype description of both values </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a01c682f8a091957ce7aaf517f87a2134" name="a01c682f8a091957ce7aaf517f87a2134"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a01c682f8a091957ce7aaf517f87a2134">&#9670;&#160;</a></span>UA_calcSizeBinary()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">UA_EXPORT size_t UA_calcSizeBinary </td>
-          <td>(</td>
-          <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>type</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Returns the number of bytes the value p takes in binary encoding. </p>
-<p>Returns zero if an error occurs. </p>
-
-</div>
-</div>
-<a id="adaff9c45e3b54d87ece28f5e71086b7a" name="adaff9c45e3b54d87ece28f5e71086b7a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adaff9c45e3b54d87ece28f5e71086b7a">&#9670;&#160;</a></span>UA_encodeBinary()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_encodeBinary </td>
-          <td>(</td>
-          <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
-          <td class="paramname"><em>outBuf</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Encodes a data-structure in the binary format. </p>
-<p>If outBuf has a length of zero, a buffer of the required size is allocated. Otherwise, encoding into the existing outBuf is attempted (and may fail if the buffer is too small). </p>
-
-</div>
-</div>
-<a id="ab8d429a855d956f989b57e5486cd8fc3" name="ab8d429a855d956f989b57e5486cd8fc3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8d429a855d956f989b57e5486cd8fc3">&#9670;&#160;</a></span>UA_decodeBinary()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_decodeBinary </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
-          <td class="paramname"><em>inBuf</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DecodeBinaryOptions.html">UA_DecodeBinaryOptions</a> *&#160;</td>
-          <td class="paramname"><em>options</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Decodes a data structure from the input buffer in the binary format. </p>
-<p>It is assumed that <code>p</code> points to valid memory (not necessarily zeroed out). The options can be NULL and will be disregarded in that case. </p>
-
-</div>
-</div>
-<a id="ab49966aa2cff36fe08c3052db3b51dd3" name="ab49966aa2cff36fe08c3052db3b51dd3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab49966aa2cff36fe08c3052db3b51dd3">&#9670;&#160;</a></span>UA_Array_new()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void * UA_Array_new </td>
-          <td>(</td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>type</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Allocates and initializes an array of variables of a specific type. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">size</td><td>The requested array length </td></tr>
-    <tr><td class="paramname">type</td><td>The datatype description </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns the memory location of the variable or NULL if no memory could be allocated </dd></dl>
-
-</div>
-</div>
-<a id="af27a32f7f16ce2676dfadc56f15282a5" name="af27a32f7f16ce2676dfadc56f15282a5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af27a32f7f16ce2676dfadc56f15282a5">&#9670;&#160;</a></span>UA_Array_copy()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Array_copy </td>
-          <td>(</td>
-          <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>src</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void **&#160;</td>
-          <td class="paramname"><em>dst</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>type</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Allocates and copies an array. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">src</td><td>The memory location of the source array </td></tr>
-    <tr><td class="paramname">size</td><td>The size of the array </td></tr>
-    <tr><td class="paramname">dst</td><td>The location of the pointer to the new array </td></tr>
-    <tr><td class="paramname">type</td><td>The datatype of the array members </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns UA_STATUSCODE_GOOD or UA_STATUSCODE_BADOUTOFMEMORY </dd></dl>
-
-</div>
-</div>
-<a id="a36d905479fc599f3ef5d0cf96d7bcb9e" name="a36d905479fc599f3ef5d0cf96d7bcb9e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a36d905479fc599f3ef5d0cf96d7bcb9e">&#9670;&#160;</a></span>UA_Array_resize()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Array_resize </td>
-          <td>(</td>
-          <td class="paramtype">void **&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t *&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>newSize</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>type</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Resizes (and reallocates) an array. </p>
-<p>The last entries are initialized to zero if the array length is increased. If the array length is decreased, the last entries are removed if the size is decreased.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>Double pointer to the array memory. Can be overwritten by the result of a realloc. </td></tr>
-    <tr><td class="paramname">size</td><td>The current size of the array. Overwritten in case of success. </td></tr>
-    <tr><td class="paramname">newSize</td><td>The new size of the array </td></tr>
-    <tr><td class="paramname">type</td><td>The datatype of the array members </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns UA_STATUSCODE_GOOD or UA_STATUSCODE_BADOUTOFMEMORY. The original array is left untouched in the failure case. </dd></dl>
-
-</div>
-</div>
-<a id="ac342ed5f629d31e5079f4bf91953d139" name="ac342ed5f629d31e5079f4bf91953d139"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac342ed5f629d31e5079f4bf91953d139">&#9670;&#160;</a></span>UA_Array_append()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Array_append </td>
-          <td>(</td>
-          <td class="paramtype">void **&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t *&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>newElem</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>type</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Append the given element at the end of the array. </p>
-<p>The content is moved (shallow copy) and the original memory is _init'ed if appending is successful.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>Double pointer to the array memory. Can be overwritten by the result of a realloc. </td></tr>
-    <tr><td class="paramname">size</td><td>The current size of the array. Overwritten in case of success. </td></tr>
-    <tr><td class="paramname">newElem</td><td>The element to be appended. The memory is reset upon success. </td></tr>
-    <tr><td class="paramname">type</td><td>The datatype of the array members </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns UA_STATUSCODE_GOOD or UA_STATUSCODE_BADOUTOFMEMORY. The original array is left untouched in the failure case. </dd></dl>
-
-</div>
-</div>
-<a id="a8f93398b32d6fc0845cd7d4c35030bc1" name="a8f93398b32d6fc0845cd7d4c35030bc1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f93398b32d6fc0845cd7d4c35030bc1">&#9670;&#160;</a></span>UA_Array_appendCopy()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Array_appendCopy </td>
-          <td>(</td>
-          <td class="paramtype">void **&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t *&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>newElem</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>type</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Append a copy of the given element at the end of the array. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>Double pointer to the array memory. Can be overwritten by the result of a realloc. </td></tr>
-    <tr><td class="paramname">size</td><td>The current size of the array. Overwritten in case of success. </td></tr>
-    <tr><td class="paramname">newElem</td><td>The element to be appended. </td></tr>
-    <tr><td class="paramname">type</td><td>The datatype of the array members </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns UA_STATUSCODE_GOOD or UA_STATUSCODE_BADOUTOFMEMORY. The original array is left untouched in the failure case. </dd></dl>
-
-</div>
-</div>
-<a id="a05af722df9c9a11fd6b497a7a35b8cdb" name="a05af722df9c9a11fd6b497a7a35b8cdb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05af722df9c9a11fd6b497a7a35b8cdb">&#9670;&#160;</a></span>UA_Array_delete()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void UA_Array_delete </td>
-          <td>(</td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>type</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Deletes an array. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>The memory location of the array </td></tr>
-    <tr><td class="paramname">size</td><td>The size of the array </td></tr>
-    <tr><td class="paramname">type</td><td>The datatype of the array members </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a6d625256bae8fe323e15ed49f3797b81" name="a6d625256bae8fe323e15ed49f3797b81"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6d625256bae8fe323e15ed49f3797b81">&#9670;&#160;</a></span>UA_random_seed()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void UA_random_seed </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a>&#160;</td>
-          <td class="paramname"><em>seed</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a38c9e844e489221eab179bef05c1b18d" name="a38c9e844e489221eab179bef05c1b18d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a38c9e844e489221eab179bef05c1b18d">&#9670;&#160;</a></span>UA_UInt32_random()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> UA_UInt32_random </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a312ed9d2d196f380d439ab7dadb4005c" name="a312ed9d2d196f380d439ab7dadb4005c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a312ed9d2d196f380d439ab7dadb4005c">&#9670;&#160;</a></span>UA_Guid_random()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structUA__Guid.html">UA_Guid</a> UA_Guid_random </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
 
 </div>
 </div>
@@ -3200,8 +3200,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="add6877cdf12368c808b31e46e2c01df7" name="add6877cdf12368c808b31e46e2c01df7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add6877cdf12368c808b31e46e2c01df7">&#9670;&#160;</a></span>UA_STRING_NULL</h2>
+<a id="afa6e863144bb3d0e7cd92cb5ce6c1ea7" name="afa6e863144bb3d0e7cd92cb5ce6c1ea7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa6e863144bb3d0e7cd92cb5ce6c1ea7">&#9670;&#160;</a></span>UA_BYTESTRING_NULL</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3210,7 +3210,29 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UA_EXPORT const <a class="el" href="structUA__String.html">UA_String</a> UA_STRING_NULL</td>
+          <td class="memname">UA_EXPORT const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> UA_BYTESTRING_NULL</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9847c237a152919a69c050f5934903d6" name="a9847c237a152919a69c050f5934903d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9847c237a152919a69c050f5934903d6">&#9670;&#160;</a></span>UA_EXPANDEDNODEID_NULL</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT const <a class="el" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> UA_EXPANDEDNODEID_NULL</td>
         </tr>
       </table>
   </td>
@@ -3244,28 +3266,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="afa6e863144bb3d0e7cd92cb5ce6c1ea7" name="afa6e863144bb3d0e7cd92cb5ce6c1ea7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afa6e863144bb3d0e7cd92cb5ce6c1ea7">&#9670;&#160;</a></span>UA_BYTESTRING_NULL</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">UA_EXPORT const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> UA_BYTESTRING_NULL</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a3c44491bc9a6be7fd37f27caffdfab6a" name="a3c44491bc9a6be7fd37f27caffdfab6a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3c44491bc9a6be7fd37f27caffdfab6a">&#9670;&#160;</a></span>UA_NODEID_NULL</h2>
 
@@ -3288,8 +3288,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a9847c237a152919a69c050f5934903d6" name="a9847c237a152919a69c050f5934903d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9847c237a152919a69c050f5934903d6">&#9670;&#160;</a></span>UA_EXPANDEDNODEID_NULL</h2>
+<a id="add6877cdf12368c808b31e46e2c01df7" name="add6877cdf12368c808b31e46e2c01df7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add6877cdf12368c808b31e46e2c01df7">&#9670;&#160;</a></span>UA_STRING_NULL</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3298,7 +3298,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UA_EXPORT const <a class="el" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> UA_EXPANDEDNODEID_NULL</td>
+          <td class="memname">UA_EXPORT const <a class="el" href="structUA__String.html">UA_String</a> UA_STRING_NULL</td>
         </tr>
       </table>
   </td>

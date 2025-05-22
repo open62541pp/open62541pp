@@ -1,7 +1,7 @@
 <map id="opcua::ua::AttributeOperand" name="opcua::ua::AttributeOperand">
-<area shape="rect" id="Node000001" title="UA_AttributeOperand wrapper class." alt="" coords="28,181,233,207"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,79,256,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="133,147,133,181,128,181,128,147"/>
-<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap native objects." alt="" coords="49,5,212,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="133,44,133,79,128,79,128,44"/>
+<area shape="rect" id="Node000001" title="UA_AttributeOperand wrapper class." alt="" coords="57,181,263,207"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap (native) objects." alt="" coords="5,93,315,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="163,147,163,181,157,181,157,147"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="41,5,279,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="163,59,163,93,157,93,157,59"/>
 </map>

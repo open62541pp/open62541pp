@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -182,8 +182,57 @@ Related Symbols</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="aaabe21d666a063b2b4a753fd2831b60e" name="aaabe21d666a063b2b4a753fd2831b60e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaabe21d666a063b2b4a753fd2831b60e">&#9670;&#160;</a></span>close()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::Session::close </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Manually close this session. </p>
+<dl class="section note"><dt>Note</dt><dd>Supported since open62541 v1.3 </dd></dl>
+
+</div>
+</div>
+<a id="a6ca3e1e75f0d8e54e629fdfc6c34ae83" name="a6ca3e1e75f0d8e54e629fdfc6c34ae83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ca3e1e75f0d8e54e629fdfc6c34ae83">&#9670;&#160;</a></span>connection() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classopcua_1_1Server.html">Server</a> &amp; opcua::Session::connection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the server instance. </p>
+
+<p class="definition">Definition at line <a class="el" href="session_8hpp_source.html#l00033">33</a> of file <a class="el" href="session_8hpp_source.html">session.hpp</a>.</p>
+
+</div>
+</div>
 <a id="a8922af144f9d49c2544be8cbf325e34a" name="a8922af144f9d49c2544be8cbf325e34a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8922af144f9d49c2544be8cbf325e34a">&#9670;&#160;</a></span>connection() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8922af144f9d49c2544be8cbf325e34a">&#9670;&#160;</a></span>connection() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -211,10 +260,12 @@ Related Symbols</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="session_8hpp_source.html#l00028">28</a> of file <a class="el" href="session_8hpp_source.html">session.hpp</a>.</p>
 
+<p class="reference">Referenced by <a class="el" href="session_8hpp_source.html#l00022">Session()</a>.</p>
+
 </div>
 </div>
-<a id="a6ca3e1e75f0d8e54e629fdfc6c34ae83" name="a6ca3e1e75f0d8e54e629fdfc6c34ae83"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6ca3e1e75f0d8e54e629fdfc6c34ae83">&#9670;&#160;</a></span>connection() <span class="overload">[2/2]</span></h2>
+<a id="afd9d7e5a43d84245204b3137d190a31a" name="afd9d7e5a43d84245204b3137d190a31a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd9d7e5a43d84245204b3137d190a31a">&#9670;&#160;</a></span>context() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -223,7 +274,7 @@ Related Symbols</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="classopcua_1_1Server.html">Server</a> &amp; opcua::Session::connection </td>
+          <td class="memname">const void * opcua::Session::context </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -236,9 +287,82 @@ Related Symbols</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get the server instance. </p>
+<p>Get the session context. </p>
 
-<p class="definition">Definition at line <a class="el" href="session_8hpp_source.html#l00033">33</a> of file <a class="el" href="session_8hpp_source.html">session.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="session_8hpp_source.html#l00048">48</a> of file <a class="el" href="session_8hpp_source.html">session.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a4fad731dac7eaa0043313da84107f918" name="a4fad731dac7eaa0043313da84107f918"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fad731dac7eaa0043313da84107f918">&#9670;&#160;</a></span>context() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * opcua::Session::context </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the session context. </p>
+
+<p class="definition">Definition at line <a class="el" href="session_8hpp_source.html#l00043">43</a> of file <a class="el" href="session_8hpp_source.html">session.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ae39b29659ac821354ce4bb24233f2b87" name="ae39b29659ac821354ce4bb24233f2b87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae39b29659ac821354ce4bb24233f2b87">&#9670;&#160;</a></span>deleteSessionAttribute()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::Session::deleteSessionAttribute </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1QualifiedName.html">QualifiedName</a> &amp;&#160;</td>
+          <td class="paramname"><em>key</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Delete a session attribute by its key. </p>
+<dl class="section note"><dt>Note</dt><dd>Supported since open62541 v1.3 </dd></dl>
+
+</div>
+</div>
+<a id="a72211283db8536005f89cfdf06d39402" name="a72211283db8536005f89cfdf06d39402"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72211283db8536005f89cfdf06d39402">&#9670;&#160;</a></span>getSessionAttribute()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1Variant.html">Variant</a> opcua::Session::getSessionAttribute </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1QualifiedName.html">QualifiedName</a> &amp;&#160;</td>
+          <td class="paramname"><em>key</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get a session attribute by its key. </p>
+<dl class="section note"><dt>Note</dt><dd>Supported since open62541 v1.3 </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_accesscontrol_8cpp-example.html#a10">server_accesscontrol.cpp</a>.</dd>
+</dl>
 
 </div>
 </div>
@@ -268,87 +392,6 @@ Related Symbols</h2></td></tr>
 <p>Get the session identifier. </p>
 
 <p class="definition">Definition at line <a class="el" href="session_8hpp_source.html#l00038">38</a> of file <a class="el" href="session_8hpp_source.html">session.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a4fad731dac7eaa0043313da84107f918" name="a4fad731dac7eaa0043313da84107f918"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4fad731dac7eaa0043313da84107f918">&#9670;&#160;</a></span>context() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void * opcua::Session::context </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the session context. </p>
-
-<p class="definition">Definition at line <a class="el" href="session_8hpp_source.html#l00043">43</a> of file <a class="el" href="session_8hpp_source.html">session.hpp</a>.</p>
-
-</div>
-</div>
-<a id="afd9d7e5a43d84245204b3137d190a31a" name="afd9d7e5a43d84245204b3137d190a31a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afd9d7e5a43d84245204b3137d190a31a">&#9670;&#160;</a></span>context() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const void * opcua::Session::context </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the session context. </p>
-
-<p class="definition">Definition at line <a class="el" href="session_8hpp_source.html#l00048">48</a> of file <a class="el" href="session_8hpp_source.html">session.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a72211283db8536005f89cfdf06d39402" name="a72211283db8536005f89cfdf06d39402"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a72211283db8536005f89cfdf06d39402">&#9670;&#160;</a></span>getSessionAttribute()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Variant.html">Variant</a> opcua::Session::getSessionAttribute </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1QualifiedName.html">QualifiedName</a> &amp;&#160;</td>
-          <td class="paramname"><em>key</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get a session attribute by its key. </p>
-<dl class="section note"><dt>Note</dt><dd>Supported since open62541 v1.3 </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_accesscontrol_8cpp-example.html#a10">server_accesscontrol.cpp</a>.</dd>
-</dl>
 
 </div>
 </div>
@@ -385,50 +428,9 @@ Related Symbols</h2></td></tr>
 
 </div>
 </div>
-<a id="ae39b29659ac821354ce4bb24233f2b87" name="ae39b29659ac821354ce4bb24233f2b87"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae39b29659ac821354ce4bb24233f2b87">&#9670;&#160;</a></span>deleteSessionAttribute()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void opcua::Session::deleteSessionAttribute </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1QualifiedName.html">QualifiedName</a> &amp;&#160;</td>
-          <td class="paramname"><em>key</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Delete a session attribute by its key. </p>
-<dl class="section note"><dt>Note</dt><dd>Supported since open62541 v1.3 </dd></dl>
-
-</div>
-</div>
-<a id="aaabe21d666a063b2b4a753fd2831b60e" name="aaabe21d666a063b2b4a753fd2831b60e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaabe21d666a063b2b4a753fd2831b60e">&#9670;&#160;</a></span>close()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void opcua::Session::close </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Manually close this session. </p>
-<dl class="section note"><dt>Note</dt><dd>Supported since open62541 v1.3 </dd></dl>
-
-</div>
-</div>
 <h2 class="groupheader">Friends And Related Symbol Documentation</h2>
-<a id="aeea89829f6d8592bde3b06bb53a43e05" name="aeea89829f6d8592bde3b06bb53a43e05"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeea89829f6d8592bde3b06bb53a43e05">&#9670;&#160;</a></span>operator==()</h2>
+<a id="a926ee85a870edadc1bafd5890e999a4b" name="a926ee85a870edadc1bafd5890e999a4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a926ee85a870edadc1bafd5890e999a4b">&#9670;&#160;</a></span>operator!=()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -437,7 +439,7 @@ Related Symbols</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool operator== </td>
+          <td class="memname">bool operator!= </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classopcua_1_1Session.html">Session</a> &amp;&#160;</td>
           <td class="paramname"><em>lhs</em>, </td>
@@ -463,8 +465,8 @@ Related Symbols</h2></td></tr>
 
 </div>
 </div>
-<a id="a926ee85a870edadc1bafd5890e999a4b" name="a926ee85a870edadc1bafd5890e999a4b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a926ee85a870edadc1bafd5890e999a4b">&#9670;&#160;</a></span>operator!=()</h2>
+<a id="aeea89829f6d8592bde3b06bb53a43e05" name="aeea89829f6d8592bde3b06bb53a43e05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeea89829f6d8592bde3b06bb53a43e05">&#9670;&#160;</a></span>operator==()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -473,7 +475,7 @@ Related Symbols</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool operator!= </td>
+          <td class="memname">bool operator== </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classopcua_1_1Session.html">Session</a> &amp;&#160;</td>
           <td class="paramname"><em>lhs</em>, </td>

@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -165,36 +165,6 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:aa13e9d5e1cd9e693b93941736c579b2a inherit pub_types_classopcua_1_1PluginAdapter"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a03da04d3ccf909c6708b7c0d7280c106" name="a03da04d3ccf909c6708b7c0d7280c106"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a03da04d3ccf909c6708b7c0d7280c106">&#9670;&#160;</a></span>getUserTokenPolicies()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; <a class="el" href="classopcua_1_1ua_1_1UserTokenPolicy.html">UserTokenPolicy</a> &gt; opcua::AccessControlBase::getUserTokenPolicies </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get available user token policies. </p>
-<p>If the <code>securityPolicyUri</code> is empty, the highest available security policy will be used to transfer user tokens. </p><dl class="section note"><dt>Note</dt><dd>The returned span must be valid throughout the lifetime of the instance. </dd></dl>
-
-<p>Implemented in <a class="el" href="classopcua_1_1AccessControlDefault.html#a60538ca9fd97f7dcd9937197c5b4d2e6">opcua::AccessControlDefault</a>.</p>
-
-</div>
-</div>
 <a id="ac06ab167970ca005002aaf5ec0e9f12e" name="ac06ab167970ca005002aaf5ec0e9f12e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac06ab167970ca005002aaf5ec0e9f12e">&#9670;&#160;</a></span>activateSession()</h2>
 
@@ -248,6 +218,356 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a7682706a92e9d28cf3218d27a64c3e24" name="a7682706a92e9d28cf3218d27a64c3e24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7682706a92e9d28cf3218d27a64c3e24">&#9670;&#160;</a></span>allowAddNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool opcua::AccessControlBase::allowAddNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Session.html">Session</a> &amp;&#160;</td>
+          <td class="paramname"><em>session</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1AddNodesItem.html">AddNodesItem</a> &amp;&#160;</td>
+          <td class="paramname"><em>item</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Allow adding a node. </p>
+
+<p>Implemented in <a class="el" href="classopcua_1_1AccessControlDefault.html#a019b3db4468a2b58529bc1e157f3aede">opcua::AccessControlDefault</a>.</p>
+
+</div>
+</div>
+<a id="af90de7f73f777048f4461fd6f1227981" name="af90de7f73f777048f4461fd6f1227981"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af90de7f73f777048f4461fd6f1227981">&#9670;&#160;</a></span>allowAddReference()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool opcua::AccessControlBase::allowAddReference </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Session.html">Session</a> &amp;&#160;</td>
+          <td class="paramname"><em>session</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1AddReferencesItem.html">AddReferencesItem</a> &amp;&#160;</td>
+          <td class="paramname"><em>item</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Allow adding a reference. </p>
+
+<p>Implemented in <a class="el" href="classopcua_1_1AccessControlDefault.html#a2773ea21bc9e729024ebd65b9721a7ce">opcua::AccessControlDefault</a>.</p>
+
+</div>
+</div>
+<a id="a908e3047183ebef1ed369e7dcb6c7e93" name="a908e3047183ebef1ed369e7dcb6c7e93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a908e3047183ebef1ed369e7dcb6c7e93">&#9670;&#160;</a></span>allowBrowseNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool opcua::AccessControlBase::allowBrowseNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Session.html">Session</a> &amp;&#160;</td>
+          <td class="paramname"><em>session</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>nodeId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Allow browsing a node. </p>
+
+<p>Implemented in <a class="el" href="classopcua_1_1AccessControlDefault.html#aa43e3e25d14841a008a8b3e7b908e424">opcua::AccessControlDefault</a>.</p>
+
+</div>
+</div>
+<a id="a914105028e4db63a54fa486636cfad11" name="a914105028e4db63a54fa486636cfad11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a914105028e4db63a54fa486636cfad11">&#9670;&#160;</a></span>allowDeleteNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool opcua::AccessControlBase::allowDeleteNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Session.html">Session</a> &amp;&#160;</td>
+          <td class="paramname"><em>session</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1DeleteNodesItem.html">DeleteNodesItem</a> &amp;&#160;</td>
+          <td class="paramname"><em>item</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Allow deleting a node. </p>
+
+<p>Implemented in <a class="el" href="classopcua_1_1AccessControlDefault.html#a61808454264773791e03ebbf09310cb5">opcua::AccessControlDefault</a>.</p>
+
+</div>
+</div>
+<a id="a3271b5142809efe82dc319f5a2c43569" name="a3271b5142809efe82dc319f5a2c43569"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3271b5142809efe82dc319f5a2c43569">&#9670;&#160;</a></span>allowDeleteReference()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool opcua::AccessControlBase::allowDeleteReference </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Session.html">Session</a> &amp;&#160;</td>
+          <td class="paramname"><em>session</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1DeleteReferencesItem.html">DeleteReferencesItem</a> &amp;&#160;</td>
+          <td class="paramname"><em>item</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Allow deleting a reference. </p>
+
+<p>Implemented in <a class="el" href="classopcua_1_1AccessControlDefault.html#ae5a2079a241db410775d02e0ac771a92">opcua::AccessControlDefault</a>.</p>
+
+</div>
+</div>
+<a id="a385130ee1c59032ba747332e70750500" name="a385130ee1c59032ba747332e70750500"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a385130ee1c59032ba747332e70750500">&#9670;&#160;</a></span>allowHistoryDelete()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool opcua::AccessControlBase::allowHistoryDelete </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Session.html">Session</a> &amp;&#160;</td>
+          <td class="paramname"><em>session</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1DateTime.html">DateTime</a>&#160;</td>
+          <td class="paramname"><em>startTimestamp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1DateTime.html">DateTime</a>&#160;</td>
+          <td class="paramname"><em>endTimestamp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isDeleteModified</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Allow delete of historical data. </p>
+
+<p>Implemented in <a class="el" href="classopcua_1_1AccessControlDefault.html#aca1c3ec38efcd875b1a27fbc5e2b6775">opcua::AccessControlDefault</a>.</p>
+
+</div>
+</div>
+<a id="aedb08b1a04530b9e9c3ac768b112cc34" name="aedb08b1a04530b9e9c3ac768b112cc34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedb08b1a04530b9e9c3ac768b112cc34">&#9670;&#160;</a></span>allowHistoryUpdate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool opcua::AccessControlBase::allowHistoryUpdate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Session.html">Session</a> &amp;&#160;</td>
+          <td class="paramname"><em>session</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__Wrapper.html#ga49a6b5697e9eeed97793c451e9c278cd">PerformUpdateType</a>&#160;</td>
+          <td class="paramname"><em>performInsertReplace</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1DataValue.html">DataValue</a> &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Allow insert, replace, update of historical data. </p>
+
+<p>Implemented in <a class="el" href="classopcua_1_1AccessControlDefault.html#ad258605b5561f43485cceaf043b2f3f7">opcua::AccessControlDefault</a>.</p>
+
+</div>
+</div>
+<a id="aed0e1174d749993b0381ac3d66dbe0d8" name="aed0e1174d749993b0381ac3d66dbe0d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed0e1174d749993b0381ac3d66dbe0d8">&#9670;&#160;</a></span>allowTransferSubscription()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool opcua::AccessControlBase::allowTransferSubscription </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Session.html">Session</a> &amp;&#160;</td>
+          <td class="paramname"><em>oldSession</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Session.html">Session</a> &amp;&#160;</td>
+          <td class="paramname"><em>newSession</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Allow transfer of a subscription to another session. </p>
+
+<p>Implemented in <a class="el" href="classopcua_1_1AccessControlDefault.html#a727f81494f5e7aa67fb4df0086c5d7c5">opcua::AccessControlDefault</a>.</p>
+
+</div>
+</div>
 <a id="af035b0dca438f1d71591fa50493bb70c" name="af035b0dca438f1d71591fa50493bb70c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af035b0dca438f1d71591fa50493bb70c">&#9670;&#160;</a></span>closeSession()</h2>
 
@@ -278,8 +598,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="ab0bf2d5955b374898e4a82757ff632dc" name="ab0bf2d5955b374898e4a82757ff632dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab0bf2d5955b374898e4a82757ff632dc">&#9670;&#160;</a></span>getUserRightsMask()</h2>
+<a id="aaa15bed5cdf49aec7383adc86edea03b" name="aaa15bed5cdf49aec7383adc86edea03b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa15bed5cdf49aec7383adc86edea03b">&#9670;&#160;</a></span>create()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -288,33 +608,21 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="classopcua_1_1Bitmask.html">Bitmask</a>&lt; <a class="el" href="namespaceopcua.html#aa348a84f0c1993df6edaea06a949b010">WriteMask</a> &gt; opcua::AccessControlBase::getUserRightsMask </td>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__AccessControl.html">UA_AccessControl</a> opcua::AccessControlBase::create </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Session.html">Session</a> &amp;&#160;</td>
-          <td class="paramname"><em>session</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>ownsAdapter</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>nodeId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Access control for all nodes. </p>
-
-<p>Implemented in <a class="el" href="classopcua_1_1AccessControlDefault.html#a03c8f495aa0240a968307a43b0687c68">opcua::AccessControlDefault</a>.</p>
+<p>Implements <a class="el" href="classopcua_1_1PluginAdapter.html#a89c0771409b5f62dd46a1d14046a46b8">opcua::PluginAdapter&lt; UA_AccessControl &gt;</a>.</p>
 
 </div>
 </div>
@@ -444,8 +752,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a7682706a92e9d28cf3218d27a64c3e24" name="a7682706a92e9d28cf3218d27a64c3e24"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7682706a92e9d28cf3218d27a64c3e24">&#9670;&#160;</a></span>allowAddNode()</h2>
+<a id="ab0bf2d5955b374898e4a82757ff632dc" name="ab0bf2d5955b374898e4a82757ff632dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0bf2d5955b374898e4a82757ff632dc">&#9670;&#160;</a></span>getUserRightsMask()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -454,167 +762,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool opcua::AccessControlBase::allowAddNode </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Session.html">Session</a> &amp;&#160;</td>
-          <td class="paramname"><em>session</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1AddNodesItem.html">AddNodesItem</a> &amp;&#160;</td>
-          <td class="paramname"><em>item</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Allow adding a node. </p>
-
-<p>Implemented in <a class="el" href="classopcua_1_1AccessControlDefault.html#a019b3db4468a2b58529bc1e157f3aede">opcua::AccessControlDefault</a>.</p>
-
-</div>
-</div>
-<a id="af90de7f73f777048f4461fd6f1227981" name="af90de7f73f777048f4461fd6f1227981"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af90de7f73f777048f4461fd6f1227981">&#9670;&#160;</a></span>allowAddReference()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual bool opcua::AccessControlBase::allowAddReference </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Session.html">Session</a> &amp;&#160;</td>
-          <td class="paramname"><em>session</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1AddReferencesItem.html">AddReferencesItem</a> &amp;&#160;</td>
-          <td class="paramname"><em>item</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Allow adding a reference. </p>
-
-<p>Implemented in <a class="el" href="classopcua_1_1AccessControlDefault.html#a2773ea21bc9e729024ebd65b9721a7ce">opcua::AccessControlDefault</a>.</p>
-
-</div>
-</div>
-<a id="a914105028e4db63a54fa486636cfad11" name="a914105028e4db63a54fa486636cfad11"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a914105028e4db63a54fa486636cfad11">&#9670;&#160;</a></span>allowDeleteNode()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual bool opcua::AccessControlBase::allowDeleteNode </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Session.html">Session</a> &amp;&#160;</td>
-          <td class="paramname"><em>session</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1DeleteNodesItem.html">DeleteNodesItem</a> &amp;&#160;</td>
-          <td class="paramname"><em>item</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Allow deleting a node. </p>
-
-<p>Implemented in <a class="el" href="classopcua_1_1AccessControlDefault.html#a61808454264773791e03ebbf09310cb5">opcua::AccessControlDefault</a>.</p>
-
-</div>
-</div>
-<a id="a3271b5142809efe82dc319f5a2c43569" name="a3271b5142809efe82dc319f5a2c43569"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3271b5142809efe82dc319f5a2c43569">&#9670;&#160;</a></span>allowDeleteReference()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual bool opcua::AccessControlBase::allowDeleteReference </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Session.html">Session</a> &amp;&#160;</td>
-          <td class="paramname"><em>session</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1ua_1_1DeleteReferencesItem.html">DeleteReferencesItem</a> &amp;&#160;</td>
-          <td class="paramname"><em>item</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Allow deleting a reference. </p>
-
-<p>Implemented in <a class="el" href="classopcua_1_1AccessControlDefault.html#ae5a2079a241db410775d02e0ac771a92">opcua::AccessControlDefault</a>.</p>
-
-</div>
-</div>
-<a id="a908e3047183ebef1ed369e7dcb6c7e93" name="a908e3047183ebef1ed369e7dcb6c7e93"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a908e3047183ebef1ed369e7dcb6c7e93">&#9670;&#160;</a></span>allowBrowseNode()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual bool opcua::AccessControlBase::allowBrowseNode </td>
+          <td class="memname">virtual <a class="el" href="classopcua_1_1Bitmask.html">Bitmask</a>&lt; <a class="el" href="namespaceopcua.html#aa348a84f0c1993df6edaea06a949b010">WriteMask</a> &gt; opcua::AccessControlBase::getUserRightsMask </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classopcua_1_1Session.html">Session</a> &amp;&#160;</td>
           <td class="paramname"><em>session</em>, </td>
@@ -638,14 +786,14 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Allow browsing a node. </p>
+<p>Access control for all nodes. </p>
 
-<p>Implemented in <a class="el" href="classopcua_1_1AccessControlDefault.html#aa43e3e25d14841a008a8b3e7b908e424">opcua::AccessControlDefault</a>.</p>
+<p>Implemented in <a class="el" href="classopcua_1_1AccessControlDefault.html#a03c8f495aa0240a968307a43b0687c68">opcua::AccessControlDefault</a>.</p>
 
 </div>
 </div>
-<a id="aed0e1174d749993b0381ac3d66dbe0d8" name="aed0e1174d749993b0381ac3d66dbe0d8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed0e1174d749993b0381ac3d66dbe0d8">&#9670;&#160;</a></span>allowTransferSubscription()</h2>
+<a id="a03da04d3ccf909c6708b7c0d7280c106" name="a03da04d3ccf909c6708b7c0d7280c106"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03da04d3ccf909c6708b7c0d7280c106">&#9670;&#160;</a></span>getUserTokenPolicies()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -654,21 +802,10 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool opcua::AccessControlBase::allowTransferSubscription </td>
+          <td class="memname">virtual <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; <a class="el" href="classopcua_1_1ua_1_1UserTokenPolicy.html">UserTokenPolicy</a> &gt; opcua::AccessControlBase::getUserTokenPolicies </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Session.html">Session</a> &amp;&#160;</td>
-          <td class="paramname"><em>oldSession</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Session.html">Session</a> &amp;&#160;</td>
-          <td class="paramname"><em>newSession</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -678,147 +815,10 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Allow transfer of a subscription to another session. </p>
+<p>Get available user token policies. </p>
+<p>If the <code>securityPolicyUri</code> is empty, the highest available security policy will be used to transfer user tokens. </p><dl class="section note"><dt>Note</dt><dd>The returned span must be valid throughout the lifetime of the instance. </dd></dl>
 
-<p>Implemented in <a class="el" href="classopcua_1_1AccessControlDefault.html#a727f81494f5e7aa67fb4df0086c5d7c5">opcua::AccessControlDefault</a>.</p>
-
-</div>
-</div>
-<a id="aedb08b1a04530b9e9c3ac768b112cc34" name="aedb08b1a04530b9e9c3ac768b112cc34"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aedb08b1a04530b9e9c3ac768b112cc34">&#9670;&#160;</a></span>allowHistoryUpdate()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual bool opcua::AccessControlBase::allowHistoryUpdate </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Session.html">Session</a> &amp;&#160;</td>
-          <td class="paramname"><em>session</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__Wrapper.html#ga49a6b5697e9eeed97793c451e9c278cd">PerformUpdateType</a>&#160;</td>
-          <td class="paramname"><em>performInsertReplace</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1DataValue.html">DataValue</a> &amp;&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Allow insert, replace, update of historical data. </p>
-
-<p>Implemented in <a class="el" href="classopcua_1_1AccessControlDefault.html#ad258605b5561f43485cceaf043b2f3f7">opcua::AccessControlDefault</a>.</p>
-
-</div>
-</div>
-<a id="a385130ee1c59032ba747332e70750500" name="a385130ee1c59032ba747332e70750500"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a385130ee1c59032ba747332e70750500">&#9670;&#160;</a></span>allowHistoryDelete()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual bool opcua::AccessControlBase::allowHistoryDelete </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Session.html">Session</a> &amp;&#160;</td>
-          <td class="paramname"><em>session</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1DateTime.html">DateTime</a>&#160;</td>
-          <td class="paramname"><em>startTimestamp</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1DateTime.html">DateTime</a>&#160;</td>
-          <td class="paramname"><em>endTimestamp</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>isDeleteModified</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Allow delete of historical data. </p>
-
-<p>Implemented in <a class="el" href="classopcua_1_1AccessControlDefault.html#aca1c3ec38efcd875b1a27fbc5e2b6775">opcua::AccessControlDefault</a>.</p>
-
-</div>
-</div>
-<a id="aaa15bed5cdf49aec7383adc86edea03b" name="aaa15bed5cdf49aec7383adc86edea03b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa15bed5cdf49aec7383adc86edea03b">&#9670;&#160;</a></span>create()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__AccessControl.html">UA_AccessControl</a> opcua::AccessControlBase::create </td>
-          <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>ownsAdapter</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="classopcua_1_1PluginAdapter.html#a89c0771409b5f62dd46a1d14046a46b8">opcua::PluginAdapter&lt; UA_AccessControl &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classopcua_1_1AccessControlDefault.html#a60538ca9fd97f7dcd9937197c5b4d2e6">opcua::AccessControlDefault</a>.</p>
 
 </div>
 </div>

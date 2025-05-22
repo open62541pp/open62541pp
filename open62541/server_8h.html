@@ -301,6 +301,40 @@ Variables</h2></td></tr>
 <tr class="separator:a7131a62f970d6656d88ce2191304e637"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ab3434b1c9a9c80e820354e9af541458c" name="ab3434b1c9a9c80e820354e9af541458c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3434b1c9a9c80e820354e9af541458c">&#9670;&#160;</a></span>HAVE_NODEITER_CALLBACK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HAVE_NODEITER_CALLBACK</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00731">731</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+
+</div>
+</div>
+<a id="a5e392fbc10912c390e230cbb0b1def54" name="a5e392fbc10912c390e230cbb0b1def54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e392fbc10912c390e230cbb0b1def54">&#9670;&#160;</a></span>UA_DEFAULT_ATTRIBUTES_DEFINED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_DEFAULT_ATTRIBUTES_DEFINED</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Protect against redundant definitions for server/client. </p>
+
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00998">998</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+
+</div>
+</div>
 <a id="aca83203a365c00cef64c9a19f7d9d298" name="aca83203a365c00cef64c9a19f7d9d298"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aca83203a365c00cef64c9a19f7d9d298">&#9670;&#160;</a></span>UA_Server_removeRepeatedCallback</h2>
 
@@ -328,22 +362,6 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00354">354</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
-
-</div>
-</div>
-<a id="ab3434b1c9a9c80e820354e9af541458c" name="ab3434b1c9a9c80e820354e9af541458c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab3434b1c9a9c80e820354e9af541458c">&#9670;&#160;</a></span>HAVE_NODEITER_CALLBACK</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define HAVE_NODEITER_CALLBACK</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00731">731</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -385,25 +403,25 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a5e392fbc10912c390e230cbb0b1def54" name="a5e392fbc10912c390e230cbb0b1def54"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e392fbc10912c390e230cbb0b1def54">&#9670;&#160;</a></span>UA_DEFAULT_ATTRIBUTES_DEFINED</h2>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a0fd3dfee2e93e99b09030830a8c23dc4" name="a0fd3dfee2e93e99b09030830a8c23dc4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fd3dfee2e93e99b09030830a8c23dc4">&#9670;&#160;</a></span>UA_NodeIteratorCallback</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define UA_DEFAULT_ATTRIBUTES_DEFINED</td>
+          <td class="memname">typedef <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_NodeIteratorCallback) (<a class="el" href="structUA__NodeId.html">UA_NodeId</a> childId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> isInverse, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> referenceTypeId, void *handle)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Protect against redundant definitions for server/client. </p>
+<p>Iterate over all nodes referenced by parentNodeId by calling the callback function for each child node (in ifdef because GCC/CLANG handle include order differently) </p>
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00998">998</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00735">735</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
-<h2 class="groupheader">Typedef Documentation</h2>
 <a id="ae2ed50a9331a27c13b38b9c86ad938f8" name="ae2ed50a9331a27c13b38b9c86ad938f8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae2ed50a9331a27c13b38b9c86ad938f8">&#9670;&#160;</a></span>UA_PubSubConfiguration</h2>
 
@@ -433,43 +451,6 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00049">49</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
-
-</div>
-</div>
-<a id="a0fd3dfee2e93e99b09030830a8c23dc4" name="a0fd3dfee2e93e99b09030830a8c23dc4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0fd3dfee2e93e99b09030830a8c23dc4">&#9670;&#160;</a></span>UA_NodeIteratorCallback</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_NodeIteratorCallback) (<a class="el" href="structUA__NodeId.html">UA_NodeId</a> childId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> isInverse, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> referenceTypeId, void *handle)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Iterate over all nodes referenced by parentNodeId by calling the callback function for each child node (in ifdef because GCC/CLANG handle include order differently) </p>
-
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00735">735</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
-
-</div>
-</div>
-<a id="aaf624905bd0e4e793fabc7ccd171eb29" name="aaf624905bd0e4e793fabc7ccd171eb29"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaf624905bd0e4e793fabc7ccd171eb29">&#9670;&#160;</a></span>UA_Server_registerServerCallback</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* UA_Server_registerServerCallback) (const UA_RegisteredServer *registeredServer, void *data)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Callback for RegisterServer. </p>
-<p>Data is passed from the register call </p>
-
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00806">806</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -505,1791 +486,26 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="aaf624905bd0e4e793fabc7ccd171eb29" name="aaf624905bd0e4e793fabc7ccd171eb29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf624905bd0e4e793fabc7ccd171eb29">&#9670;&#160;</a></span>UA_Server_registerServerCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* UA_Server_registerServerCallback) (const UA_RegisteredServer *registeredServer, void *data)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Callback for RegisterServer. </p>
+<p>Data is passed from the register call </p>
+
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00806">806</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a50ecfc7d692ce3ea9d7e330c5d8d8f6a" name="a50ecfc7d692ce3ea9d7e330c5d8d8f6a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a50ecfc7d692ce3ea9d7e330c5d8d8f6a">&#9670;&#160;</a></span>UA_ServerConfig_clean()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void UA_ServerConfig_clean </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> *&#160;</td>
-          <td class="paramname"><em>config</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aedf92b95ae1b1d5f135185fe655e3736" name="aedf92b95ae1b1d5f135185fe655e3736"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aedf92b95ae1b1d5f135185fe655e3736">&#9670;&#160;</a></span>UA_Server_newWithConfig()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structUA__Server.html">UA_Server</a> * UA_Server_newWithConfig </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> *&#160;</td>
-          <td class="paramname"><em>config</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The method UA_Server_new is defined in <a class="el" href="server__config__default_8h.html">server_config_default.h</a>. </p>
-<p>So default plugins outside of the core library (for logging, etc) are already available during the initialization.</p>
-<p><a class="el" href="structUA__Server.html">UA_Server</a> * <a class="el" href="server__config__default_8h.html#a5406fde7353bf9e3a0f60cbbf0cdb36d" title="This work is licensed under a Creative Commons CCZero 1.0 Universal License.">UA_Server_new(void)</a>; Creates a new server. Moves the config into the server with a shallow copy. The config content is cleared together with the server. </p>
-
-</div>
-</div>
-<a id="af9f93708ee6222bd30942de5219f55fb" name="af9f93708ee6222bd30942de5219f55fb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af9f93708ee6222bd30942de5219f55fb">&#9670;&#160;</a></span>UA_Server_delete()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void UA_Server_delete </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aec38dd84c99d95695ae4fe329ba6d3d4" name="aec38dd84c99d95695ae4fe329ba6d3d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aec38dd84c99d95695ae4fe329ba6d3d4">&#9670;&#160;</a></span>UA_Server_getConfig()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> * UA_Server_getConfig </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a6be5a9340b6752f7e1711956e224e19d" name="a6be5a9340b6752f7e1711956e224e19d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6be5a9340b6752f7e1711956e224e19d">&#9670;&#160;</a></span>UA_Server_run()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_run </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const volatile <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> *&#160;</td>
-          <td class="paramname"><em>running</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Runs the main loop of the server. </p>
-<p>In each iteration, this calls into the networklayers to see if messages have arrived.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">server</td><td>The server object. </td></tr>
-    <tr><td class="paramname">running</td><td>The loop is run as long as *running is true. Otherwise, the server shuts down. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns the statuscode of the UA_Server_run_shutdown method </dd></dl>
-
-</div>
-</div>
-<a id="a767faf174cf7aa918272dc6f38f4e25f" name="a767faf174cf7aa918272dc6f38f4e25f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a767faf174cf7aa918272dc6f38f4e25f">&#9670;&#160;</a></span>UA_Server_run_startup()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_run_startup </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The prologue part of UA_Server_run (no need to use if you call UA_Server_run) </p>
-
-</div>
-</div>
-<a id="a62fd8109b0c25ba3554cdef16a2bc252" name="a62fd8109b0c25ba3554cdef16a2bc252"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a62fd8109b0c25ba3554cdef16a2bc252">&#9670;&#160;</a></span>UA_Server_run_iterate()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a> UA_Server_run_iterate </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td>
-          <td class="paramname"><em>waitInternal</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Executes a single iteration of the server's main loop. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">server</td><td>The server object. </td></tr>
-    <tr><td class="paramname">waitInternal</td><td>Should we wait for messages in the networklayer? Otherwise, the timouts for the networklayers are set to zero. The default max wait time is 50millisec. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns how long we can wait until the next scheduled callback (in ms) </dd></dl>
-
-</div>
-</div>
-<a id="a7a30d86f92ca61213a24d9c43dbae826" name="a7a30d86f92ca61213a24d9c43dbae826"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7a30d86f92ca61213a24d9c43dbae826">&#9670;&#160;</a></span>UA_Server_run_shutdown()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_run_shutdown </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The epilogue part of UA_Server_run (no need to use if you call UA_Server_run) </p>
-
-</div>
-</div>
-<a id="a79c2a96e2c3876ffe097c8e97c3f4e9d" name="a79c2a96e2c3876ffe097c8e97c3f4e9d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a79c2a96e2c3876ffe097c8e97c3f4e9d">&#9670;&#160;</a></span>UA_Server_addTimedCallback()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_addTimedCallback </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="util_8h.html#a68b1f0efce215c6832edde8745bb5215">UA_ServerCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>data</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a>&#160;</td>
-          <td class="paramname"><em>date</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a> *&#160;</td>
-          <td class="paramname"><em>callbackId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Add a callback for execution at a specified time. </p>
-<p>If the indicated time lies in the past, then the callback is executed at the next iteration of the server's main loop.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">server</td><td>The server object. </td></tr>
-    <tr><td class="paramname">callback</td><td>The callback that shall be added. </td></tr>
-    <tr><td class="paramname">data</td><td>Data that is forwarded to the callback. </td></tr>
-    <tr><td class="paramname">date</td><td>The timestamp for the execution time. </td></tr>
-    <tr><td class="paramname">callbackId</td><td>Set to the identifier of the repeated callback . This can be used to cancel the callback later on. If the pointer is null, the identifier is not set. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Upon success, <code>UA_STATUSCODE_GOOD</code> is returned. An error code otherwise. </dd></dl>
-
-</div>
-</div>
-<a id="a75ddc25ef9593699d4c31403addae626" name="a75ddc25ef9593699d4c31403addae626"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a75ddc25ef9593699d4c31403addae626">&#9670;&#160;</a></span>UA_Server_addRepeatedCallback()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_addRepeatedCallback </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="util_8h.html#a68b1f0efce215c6832edde8745bb5215">UA_ServerCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>data</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a>&#160;</td>
-          <td class="paramname"><em>interval_ms</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a> *&#160;</td>
-          <td class="paramname"><em>callbackId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Add a callback for cyclic repetition to the server. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">server</td><td>The server object. </td></tr>
-    <tr><td class="paramname">callback</td><td>The callback that shall be added. </td></tr>
-    <tr><td class="paramname">data</td><td>Data that is forwarded to the callback. </td></tr>
-    <tr><td class="paramname">interval_ms</td><td>The callback shall be repeatedly executed with the given interval (in ms). The interval must be positive. The first execution occurs at now() + interval at the latest. </td></tr>
-    <tr><td class="paramname">callbackId</td><td>Set to the identifier of the repeated callback . This can be used to cancel the callback later on. If the pointer is null, the identifier is not set. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Upon success, <code>UA_STATUSCODE_GOOD</code> is returned. An error code otherwise. </dd></dl>
-
-</div>
-</div>
-<a id="aaa20960e3fece0563ab7d587d9f8f713" name="aaa20960e3fece0563ab7d587d9f8f713"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa20960e3fece0563ab7d587d9f8f713">&#9670;&#160;</a></span>UA_Server_changeRepeatedCallbackInterval()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_changeRepeatedCallbackInterval </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a>&#160;</td>
-          <td class="paramname"><em>callbackId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a>&#160;</td>
-          <td class="paramname"><em>interval_ms</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a6f6854ed6d105163a7584aef005d7312" name="a6f6854ed6d105163a7584aef005d7312"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f6854ed6d105163a7584aef005d7312">&#9670;&#160;</a></span>UA_Server_removeCallback()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_removeCallback </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a>&#160;</td>
-          <td class="paramname"><em>callbackId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Remove a repeated callback. </p>
-<p>Does nothing if the callback is not found.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">server</td><td>The server object. </td></tr>
-    <tr><td class="paramname">callbackId</td><td>The id of the callback </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ae2f4373d3051d9fafc45455f13274069" name="ae2f4373d3051d9fafc45455f13274069"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae2f4373d3051d9fafc45455f13274069">&#9670;&#160;</a></span>UA_Server_closeSession()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_closeSession </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
-          <td class="paramname"><em>sessionId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Manually close a session. </p>
-
-</div>
-</div>
-<a id="ada6648d0226a6ad96fc7a0d9cfadb299" name="ada6648d0226a6ad96fc7a0d9cfadb299"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ada6648d0226a6ad96fc7a0d9cfadb299">&#9670;&#160;</a></span>UA_Server_setSessionParameter()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_setSessionParameter </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
-          <td class="paramname"><em>sessionId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__Variant.html">UA_Variant</a> *&#160;</td>
-          <td class="paramname"><em>parameter</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Session Parameters: Besides the user-definable session context pointer, so-called session parameters are a way to attach key-value parameters to a session. </p>
-<p>This enables "plugins" to attach data to a session without impacting the user-definedable session context pointer. </p>
-
-</div>
-</div>
-<a id="af44ff79b8d91c56bcf02abf8556e8241" name="af44ff79b8d91c56bcf02abf8556e8241"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af44ff79b8d91c56bcf02abf8556e8241">&#9670;&#160;</a></span>UA_Server_deleteSessionParameter()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">UA_EXPORT void <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_deleteSessionParameter </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
-          <td class="paramname"><em>sessionId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>name</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="af8b9ae84ebd565280bfec6ee75f97799" name="af8b9ae84ebd565280bfec6ee75f97799"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af8b9ae84ebd565280bfec6ee75f97799">&#9670;&#160;</a></span>UA_Server_getSessionParameter()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_getSessionParameter </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
-          <td class="paramname"><em>sessionId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structUA__Variant.html">UA_Variant</a> *&#160;</td>
-          <td class="paramname"><em>outParameter</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Returns NULL if the session or the parameter are not defined. </p>
-<p>Returns a deep copy otherwise </p>
-
-</div>
-</div>
-<a id="a4dd573b2293aa5764d3aeac54e33cb36" name="a4dd573b2293aa5764d3aeac54e33cb36"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4dd573b2293aa5764d3aeac54e33cb36">&#9670;&#160;</a></span>UA_Server_getSessionScalarParameter()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_getSessionScalarParameter </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
-          <td class="paramname"><em>sessionId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structUA__Variant.html">UA_Variant</a> *&#160;</td>
-          <td class="paramname"><em>outParameter</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Returns NULL if the parameter is not defined or not of the right datatype. </p>
-
-</div>
-</div>
-<a id="a6ab4f473e178334c38b1cbff59335eac" name="a6ab4f473e178334c38b1cbff59335eac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6ab4f473e178334c38b1cbff59335eac">&#9670;&#160;</a></span>UA_Server_getSessionArrayParameter()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_getSessionArrayParameter </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
-          <td class="paramname"><em>sessionId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structUA__Variant.html">UA_Variant</a> *&#160;</td>
-          <td class="paramname"><em>outParameter</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a3acef185d3bf01c8e599058351f27911" name="a3acef185d3bf01c8e599058351f27911"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3acef185d3bf01c8e599058351f27911">&#9670;&#160;</a></span>UA_Server_read()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structUA__DataValue.html">UA_DataValue</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_read </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__ReadValueId.html">UA_ReadValueId</a> *&#160;</td>
-          <td class="paramname"><em>item</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types__generated_8h.html#ab298c4ff5eb700437114d0dc2db97ead">UA_TimestampsToReturn</a>&#160;</td>
-          <td class="paramname"><em>timestamps</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Read an attribute of a node. </p>
-<p>The specialized functions below provide a more concise syntax.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">server</td><td>The server object. </td></tr>
-    <tr><td class="paramname">item</td><td>ReadValueIds contain the NodeId of the target node, the id of the attribute to read and (optionally) an index range to read parts of an array only. See the section on NumericRange for the format used for array ranges. </td></tr>
-    <tr><td class="paramname">timestamps</td><td>Which timestamps to return for the attribute. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns a DataValue that contains either an error code, or a variant with the attribute value and the timestamps. </dd></dl>
-
-</div>
-</div>
-<a id="a60dad2ef2cb83be040ce6e9119d74e15" name="a60dad2ef2cb83be040ce6e9119d74e15"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a60dad2ef2cb83be040ce6e9119d74e15">&#9670;&#160;</a></span>__UA_Server_read()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> __UA_Server_read </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="common_8h.html#a4dc96c31672814d54f24409617bdbbe2">UA_AttributeId</a>&#160;</td>
-          <td class="paramname"><em>attributeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>v</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Don't use this function. </p>
-<p>There are typed versions for every supported attribute. </p>
-
-</div>
-</div>
-<a id="a8e34d1ddfcc733865e7d60d6cc4714b7" name="a8e34d1ddfcc733865e7d60d6cc4714b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e34d1ddfcc733865e7d60d6cc4714b7">&#9670;&#160;</a></span>UA_Server_write()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_write </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__WriteValue.html">UA_WriteValue</a> *&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Overwrite an attribute of a node. </p>
-<p>The specialized functions below provide a more concise syntax.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">server</td><td>The server object. </td></tr>
-    <tr><td class="paramname">value</td><td>WriteValues contain the NodeId of the target node, the id of the attribute to overwritten, the actual value and (optionally) an index range to replace parts of an array only. of an array only. See the section on NumericRange for the format used for array ranges. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns a status code. </dd></dl>
-
-</div>
-</div>
-<a id="ab696b713a02b94bae1e09d72c3f1bce5" name="ab696b713a02b94bae1e09d72c3f1bce5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab696b713a02b94bae1e09d72c3f1bce5">&#9670;&#160;</a></span>__UA_Server_write()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> __UA_Server_write </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="common_8h.html#a4dc96c31672814d54f24409617bdbbe2">UA_AttributeId</a>&#160;</td>
-          <td class="paramname"><em>attributeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>attr_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>attr</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Don't use this function. </p>
-<p>There are typed versions with no additional overhead. </p>
-
-</div>
-</div>
-<a id="aa14007f7d0f88580072e63ae8615a4ec" name="aa14007f7d0f88580072e63ae8615a4ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa14007f7d0f88580072e63ae8615a4ec">&#9670;&#160;</a></span>UA_Server_browse()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structUA__BrowseResult.html">UA_BrowseResult</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_browse </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td>
-          <td class="paramname"><em>maxReferences</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__BrowseDescription.html">UA_BrowseDescription</a> *&#160;</td>
-          <td class="paramname"><em>bd</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Browse the references of a particular node. </p>
-<p>See the definition of BrowseDescription structure for details. </p>
-
-</div>
-</div>
-<a id="a2d71eb893556470cbddbb06ae6fe6db9" name="a2d71eb893556470cbddbb06ae6fe6db9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2d71eb893556470cbddbb06ae6fe6db9">&#9670;&#160;</a></span>UA_Server_browseNext()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structUA__BrowseResult.html">UA_BrowseResult</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_browseNext </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td>
-          <td class="paramname"><em>releaseContinuationPoint</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
-          <td class="paramname"><em>continuationPoint</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="abd91488c4120e25e8bfe0ecb67ef7487" name="abd91488c4120e25e8bfe0ecb67ef7487"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abd91488c4120e25e8bfe0ecb67ef7487">&#9670;&#160;</a></span>UA_Server_browseRecursive()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_browseRecursive </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__BrowseDescription.html">UA_BrowseDescription</a> *&#160;</td>
-          <td class="paramname"><em>bd</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t *&#160;</td>
-          <td class="paramname"><em>resultsSize</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> **&#160;</td>
-          <td class="paramname"><em>results</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Non-standard version of the Browse service that recurses into child nodes. </p>
-<p>Possible loops (that can occur for non-hierarchical references) are handled internally. Every node is added at most once to the results array.</p>
-<p>Nodes are only added if they match the NodeClassMask in the BrowseDescription. However, child nodes are still recursed into if the NodeClass does not match. So it is possible, for example, to get all VariableNodes below a certain ObjectNode, with additional objects in the hierarchy below. </p>
-
-</div>
-</div>
-<a id="aec3bca07e74b12ef9c44a33d1b9d6f15" name="aec3bca07e74b12ef9c44a33d1b9d6f15"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aec3bca07e74b12ef9c44a33d1b9d6f15">&#9670;&#160;</a></span>UA_Server_translateBrowsePathToNodeIds()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structUA__BrowsePathResult.html">UA_BrowsePathResult</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_translateBrowsePathToNodeIds </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__BrowsePath.html">UA_BrowsePath</a> *&#160;</td>
-          <td class="paramname"><em>browsePath</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a635aa8c4249ac0fb66a968e7493843b4" name="a635aa8c4249ac0fb66a968e7493843b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a635aa8c4249ac0fb66a968e7493843b4">&#9670;&#160;</a></span>UA_Server_browseSimplifiedBrowsePath()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structUA__BrowsePathResult.html">UA_BrowsePathResult</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_browseSimplifiedBrowsePath </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>origin</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>browsePathSize</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__QualifiedName.html">UA_QualifiedName</a> *&#160;</td>
-          <td class="paramname"><em>browsePath</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>A simplified TranslateBrowsePathsToNodeIds based on the SimpleAttributeOperand type (Part 4, 7.4.4.5). </p>
-<p>This specifies a relative path using a list of BrowseNames instead of the RelativePath structure. The list of BrowseNames is equivalent to a RelativePath that specifies forward references which are subtypes of the HierarchicalReferences ReferenceType. All Nodes followed by the browsePath shall be of the NodeClass Object or Variable. </p>
-
-</div>
-</div>
-<a id="a021b423a6112364d2bff9cacb9bd987e" name="a021b423a6112364d2bff9cacb9bd987e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a021b423a6112364d2bff9cacb9bd987e">&#9670;&#160;</a></span>UA_Server_forEachChildNodeCall()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_forEachChildNodeCall </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>parentNodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client__highlevel_8h.html#a0fd3dfee2e93e99b09030830a8c23dc4">UA_NodeIteratorCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>handle</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a17d345e182df58b5299b87b3f4daf8c8" name="a17d345e182df58b5299b87b3f4daf8c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a17d345e182df58b5299b87b3f4daf8c8">&#9670;&#160;</a></span>UA_Server_register_discovery()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_register_discovery </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">struct <a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>semaphoreFilePath</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Register the given server instance at the discovery server. </p>
-<p>This should be called periodically. The semaphoreFilePath is optional. If the given file is deleted, the server will automatically be unregistered. This could be for example a pid file which is deleted if the server crashes.</p>
-<p>When the server shuts down you need to call unregister.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">server</td><td></td></tr>
-    <tr><td class="paramname">client</td><td>the client which is used to call the RegisterServer. It must already be connected to the correct endpoint </td></tr>
-    <tr><td class="paramname">semaphoreFilePath</td><td>optional parameter pointing to semaphore file. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ab60111d60791929c83d01f3f63cdd2e4" name="ab60111d60791929c83d01f3f63cdd2e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab60111d60791929c83d01f3f63cdd2e4">&#9670;&#160;</a></span>UA_Server_unregister_discovery()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_unregister_discovery </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">struct <a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Unregister the given server instance from the discovery server. </p>
-<p>This should only be called when the server is shutting down. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">server</td><td></td></tr>
-    <tr><td class="paramname">client</td><td>the client which is used to call the RegisterServer. It must already be connected to the correct endpoint </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ad37e8e81be718fcdf8a8c486e6146d23" name="ad37e8e81be718fcdf8a8c486e6146d23"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad37e8e81be718fcdf8a8c486e6146d23">&#9670;&#160;</a></span>UA_Server_addPeriodicServerRegisterCallback()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_addPeriodicServerRegisterCallback </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">struct <a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>discoveryServerUrl</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a>&#160;</td>
-          <td class="paramname"><em>intervalMs</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a>&#160;</td>
-          <td class="paramname"><em>delayFirstRegisterMs</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a> *&#160;</td>
-          <td class="paramname"><em>periodicCallbackId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="abb5109d687ae3f1a7fc9cfc032edad27" name="abb5109d687ae3f1a7fc9cfc032edad27"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abb5109d687ae3f1a7fc9cfc032edad27">&#9670;&#160;</a></span>UA_Server_setRegisterServerCallback()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_setRegisterServerCallback </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="server_8h.html#aaf624905bd0e4e793fabc7ccd171eb29">UA_Server_registerServerCallback</a>&#160;</td>
-          <td class="paramname"><em>cb</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>data</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Set the callback which is called if another server registeres or unregisters with this instance. </p>
-<p>This callback is called every time the server gets a register call. This especially means that for every periodic server register the callback will be called.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">server</td><td></td></tr>
-    <tr><td class="paramname">cb</td><td>the callback </td></tr>
-    <tr><td class="paramname">data</td><td>data passed to the callback </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd><code>UA_STATUSCODE_SUCCESS</code> on success </dd></dl>
-
-</div>
-</div>
-<a id="a4d7906ae789c009e0758c9fe41f15286" name="a4d7906ae789c009e0758c9fe41f15286"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4d7906ae789c009e0758c9fe41f15286">&#9670;&#160;</a></span>UA_Server_setAdminSessionContext()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void UA_Server_setAdminSessionContext </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>context</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ab6cfde97a80d8a88b46c1866d27dea41" name="ab6cfde97a80d8a88b46c1866d27dea41"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab6cfde97a80d8a88b46c1866d27dea41">&#9670;&#160;</a></span>UA_Server_setNodeTypeLifecycle()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_setNodeTypeLifecycle </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structUA__NodeTypeLifecycle.html">UA_NodeTypeLifecycle</a>&#160;</td>
-          <td class="paramname"><em>lifecycle</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a16d51f58a6896c390c716989e2bf4abb" name="a16d51f58a6896c390c716989e2bf4abb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a16d51f58a6896c390c716989e2bf4abb">&#9670;&#160;</a></span>UA_Server_getNodeContext()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_getNodeContext </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void **&#160;</td>
-          <td class="paramname"><em>nodeContext</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a4cd06e1874bef5829f16644cd3831ef9" name="a4cd06e1874bef5829f16644cd3831ef9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4cd06e1874bef5829f16644cd3831ef9">&#9670;&#160;</a></span>UA_Server_setNodeContext()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_setNodeContext </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>nodeContext</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Careful! The user has to ensure that the destructor callbacks still work. </p>
-
-</div>
-</div>
-<a id="ac447e96cd118c28cc28f2f45f799578b" name="ac447e96cd118c28cc28f2f45f799578b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac447e96cd118c28cc28f2f45f799578b">&#9670;&#160;</a></span>UA_Server_setVariableNode_dataSource()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_setVariableNode_dataSource </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataSource.html">UA_DataSource</a>&#160;</td>
-          <td class="paramname"><em>dataSource</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ae3d7988389da5c5280b2c902f61d589b" name="ae3d7988389da5c5280b2c902f61d589b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae3d7988389da5c5280b2c902f61d589b">&#9670;&#160;</a></span>UA_Server_setVariableNode_valueCallback()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_setVariableNode_valueCallback </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__ValueCallback.html">UA_ValueCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a1883b062877472fc395170e519d43926" name="a1883b062877472fc395170e519d43926"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1883b062877472fc395170e519d43926">&#9670;&#160;</a></span>UA_Server_setVariableNode_valueBackend()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_setVariableNode_valueBackend </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__ValueBackend.html">UA_ValueBackend</a>&#160;</td>
-          <td class="paramname"><em>valueBackend</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a9808ff6a502d4f5d53efacf1b719ddee" name="a9808ff6a502d4f5d53efacf1b719ddee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9808ff6a502d4f5d53efacf1b719ddee">&#9670;&#160;</a></span>UA_Server_createDataChangeMonitoredItem()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structUA__MonitoredItemCreateResult.html">UA_MonitoredItemCreateResult</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_createDataChangeMonitoredItem </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types__generated_8h.html#ab298c4ff5eb700437114d0dc2db97ead">UA_TimestampsToReturn</a>&#160;</td>
-          <td class="paramname"><em>timestampsToReturn</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__MonitoredItemCreateRequest.html">UA_MonitoredItemCreateRequest</a>&#160;</td>
-          <td class="paramname"><em>item</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>monitoredItemContext</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="server_8h.html#abb3397f10e13032db6b80fb923d81cf5">UA_Server_DataChangeNotificationCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Create a local MonitoredItem with a sampling interval that detects data changes. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">server</td><td>The server executing the MonitoredItem @timestampsToReturn Shall timestamps be added to the value for the callback? @item The parameters of the new MonitoredItem. Note that the attribute of the ReadValueId (the node that is monitored) can not be <code>UA_ATTRIBUTEID_EVENTNOTIFIER</code>. A different callback type needs to be registered for event notifications. @monitoredItemContext A pointer that is forwarded with the callback @callback The callback that is executed on detected data changes</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns a description of the created MonitoredItem. The structure also contains a StatusCode (in case of an error) and the identifier of the new MonitoredItem. </dd></dl>
-
-</div>
-</div>
-<a id="ae4c3660289d5f8b60ee6ee3377fcfbb4" name="ae4c3660289d5f8b60ee6ee3377fcfbb4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4c3660289d5f8b60ee6ee3377fcfbb4">&#9670;&#160;</a></span>UA_Server_deleteMonitoredItem()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_deleteMonitoredItem </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td>
-          <td class="paramname"><em>monitoredItemId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><a class="el" href="structUA__MonitoredItemCreateResult.html">UA_MonitoredItemCreateResult</a>. </p>
-<p>UA_Server_createEventMonitoredItem(UA_Server *server, 
-UA_TimestampsToReturn timestampsToReturn, 
-const UA_MonitoredItemCreateRequest item, void *context, 
-UA_Server_EventNotificationCallback callback); </p>
-
-</div>
-</div>
-<a id="a02814463781ba6f418f65cf98eb12eca" name="a02814463781ba6f418f65cf98eb12eca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a02814463781ba6f418f65cf98eb12eca">&#9670;&#160;</a></span>UA_Server_setMethodNodeCallback()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_setMethodNodeCallback </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>methodNodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="nodestore_8h.html#a943f95365533842bb0938f2c6609a216">UA_MethodCallback</a>&#160;</td>
-          <td class="paramname"><em>methodCallback</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ab07f9eeba5c34cfc00d32ee5b65f0921" name="ab07f9eeba5c34cfc00d32ee5b65f0921"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab07f9eeba5c34cfc00d32ee5b65f0921">&#9670;&#160;</a></span>UA_Server_getMethodNodeCallback()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_getMethodNodeCallback </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>methodNodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="nodestore_8h.html#a943f95365533842bb0938f2c6609a216">UA_MethodCallback</a> *&#160;</td>
-          <td class="paramname"><em>outMethodCallback</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a0773d97b10c0f2c3c1d72723e3196b9e" name="a0773d97b10c0f2c3c1d72723e3196b9e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0773d97b10c0f2c3c1d72723e3196b9e">&#9670;&#160;</a></span>UA_Server_call()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structUA__CallMethodResult.html">UA_CallMethodResult</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_call </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__CallMethodRequest.html">UA_CallMethodRequest</a> *&#160;</td>
-          <td class="paramname"><em>request</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ae773bd3edd3438d60e0aed3ba4c96ffc" name="ae773bd3edd3438d60e0aed3ba4c96ffc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae773bd3edd3438d60e0aed3ba4c96ffc">&#9670;&#160;</a></span>UA_Server_writeObjectProperty()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_writeObjectProperty </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>objectId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__QualifiedName.html">UA_QualifiedName</a>&#160;</td>
-          <td class="paramname"><em>propertyName</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__Variant.html">UA_Variant</a>&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Write an object property. </p>
-<p>The property is represented as a VariableNode with a <code>HasProperty</code> reference from the ObjectNode. The VariableNode is identified by its BrowseName. Writing the property sets the value attribute of the VariableNode.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">server</td><td>The server object </td></tr>
-    <tr><td class="paramname">objectId</td><td>The identifier of the object (node) </td></tr>
-    <tr><td class="paramname">propertyName</td><td>The name of the property </td></tr>
-    <tr><td class="paramname">value</td><td>The value to be set for the event attribute </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The StatusCode for setting the event attribute </dd></dl>
-
-</div>
-</div>
-<a id="a97a0964cdf7db0eccaf6430ea2106b89" name="a97a0964cdf7db0eccaf6430ea2106b89"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a97a0964cdf7db0eccaf6430ea2106b89">&#9670;&#160;</a></span>UA_Server_writeObjectProperty_scalar()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_writeObjectProperty_scalar </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>objectId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__QualifiedName.html">UA_QualifiedName</a>&#160;</td>
-          <td class="paramname"><em>propertyName</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>value</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>type</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Directly point to the scalar value instead of a variant. </p>
-
-</div>
-</div>
-<a id="a4a422af852b108a6e77145da251f887a" name="a4a422af852b108a6e77145da251f887a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4a422af852b108a6e77145da251f887a">&#9670;&#160;</a></span>UA_Server_readObjectProperty()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_readObjectProperty </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>objectId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__QualifiedName.html">UA_QualifiedName</a>&#160;</td>
-          <td class="paramname"><em>propertyName</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structUA__Variant.html">UA_Variant</a> *&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Read an object property. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">server</td><td>The server object </td></tr>
-    <tr><td class="paramname">objectId</td><td>The identifier of the object (node) </td></tr>
-    <tr><td class="paramname">propertyName</td><td>The name of the property </td></tr>
-    <tr><td class="paramname">value</td><td>Contains the property value after reading. Must not be NULL. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The StatusCode for setting the event attribute </dd></dl>
-
-</div>
-</div>
 <a id="ad0fe5329158a70e354662a84f5cb0607" name="ad0fe5329158a70e354662a84f5cb0607"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad0fe5329158a70e354662a84f5cb0607">&#9670;&#160;</a></span>__UA_Server_addNode()</h2>
 
@@ -2375,6 +591,98 @@ UA_Server_EventNotificationCallback callback); </p>
 
 </div>
 </div>
+<a id="a60dad2ef2cb83be040ce6e9119d74e15" name="a60dad2ef2cb83be040ce6e9119d74e15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60dad2ef2cb83be040ce6e9119d74e15">&#9670;&#160;</a></span>__UA_Server_read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> __UA_Server_read </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a4dc96c31672814d54f24409617bdbbe2">UA_AttributeId</a>&#160;</td>
+          <td class="paramname"><em>attributeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>v</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Don't use this function. </p>
+<p>There are typed versions for every supported attribute. </p>
+
+</div>
+</div>
+<a id="ab696b713a02b94bae1e09d72c3f1bce5" name="ab696b713a02b94bae1e09d72c3f1bce5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab696b713a02b94bae1e09d72c3f1bce5">&#9670;&#160;</a></span>__UA_Server_write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> __UA_Server_write </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="common_8h.html#a4dc96c31672814d54f24409617bdbbe2">UA_AttributeId</a>&#160;</td>
+          <td class="paramname"><em>attributeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>attr_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>attr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Don't use this function. </p>
+<p>There are typed versions with no additional overhead. </p>
+
+</div>
+</div>
 <a id="a705cfeb7b66ffe5a02fd747b7231ee87" name="a705cfeb7b66ffe5a02fd747b7231ee87"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a705cfeb7b66ffe5a02fd747b7231ee87">&#9670;&#160;</a></span>UA_Server_addDataSourceVariableNode()</h2>
 
@@ -2440,6 +748,64 @@ UA_Server_EventNotificationCallback callback); </p>
           <td></td>
           <td class="paramtype"><a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
           <td class="paramname"><em>outNewNodeId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a24f288fc807e554bf69919261577ad31" name="a24f288fc807e554bf69919261577ad31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24f288fc807e554bf69919261577ad31">&#9670;&#160;</a></span>UA_Server_addMethodNode_finish()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_addMethodNode_finish </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="nodestore_8h.html#a943f95365533842bb0938f2c6609a216">UA_MethodCallback</a>&#160;</td>
+          <td class="paramname"><em>method</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>inputArgumentsSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__Argument.html">UA_Argument</a> *&#160;</td>
+          <td class="paramname"><em>inputArguments</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>outputArgumentsSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__Argument.html">UA_Argument</a> *&#160;</td>
+          <td class="paramname"><em>outputArguments</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -2569,6 +935,37 @@ UA_Server_EventNotificationCallback callback); </p>
 
 </div>
 </div>
+<a id="abfe6669d1ebaa10ec43c43af817cdd14" name="abfe6669d1ebaa10ec43c43af817cdd14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abfe6669d1ebaa10ec43c43af817cdd14">&#9670;&#160;</a></span>UA_Server_addNamespace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_addNamespace </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add a new namespace to the server. </p>
+<p>Returns the index of the new namespace </p>
+
+</div>
+</div>
 <a id="a86226272f0517524fad603d6ea3826c5" name="a86226272f0517524fad603d6ea3826c5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a86226272f0517524fad603d6ea3826c5">&#9670;&#160;</a></span>UA_Server_addNode_begin()</h2>
 
@@ -2682,14 +1079,14 @@ UA_Server_EventNotificationCallback callback); </p>
 
 </div>
 </div>
-<a id="a24f288fc807e554bf69919261577ad31" name="a24f288fc807e554bf69919261577ad31"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a24f288fc807e554bf69919261577ad31">&#9670;&#160;</a></span>UA_Server_addMethodNode_finish()</h2>
+<a id="ad37e8e81be718fcdf8a8c486e6146d23" name="ad37e8e81be718fcdf8a8c486e6146d23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad37e8e81be718fcdf8a8c486e6146d23">&#9670;&#160;</a></span>UA_Server_addPeriodicServerRegisterCallback()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_addMethodNode_finish </td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_addPeriodicServerRegisterCallback </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
@@ -2697,38 +1094,32 @@ UA_Server_EventNotificationCallback callback); </p>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
+          <td class="paramtype">struct <a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="nodestore_8h.html#a943f95365533842bb0938f2c6609a216">UA_MethodCallback</a>&#160;</td>
-          <td class="paramname"><em>method</em>, </td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>discoveryServerUrl</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>inputArgumentsSize</em>, </td>
+          <td class="paramtype"><a class="el" href="types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a>&#160;</td>
+          <td class="paramname"><em>intervalMs</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__Argument.html">UA_Argument</a> *&#160;</td>
-          <td class="paramname"><em>inputArguments</em>, </td>
+          <td class="paramtype"><a class="el" href="types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a>&#160;</td>
+          <td class="paramname"><em>delayFirstRegisterMs</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>outputArgumentsSize</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__Argument.html">UA_Argument</a> *&#160;</td>
-          <td class="paramname"><em>outputArguments</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a> *&#160;</td>
+          <td class="paramname"><em>periodicCallbackId</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -2737,42 +1128,6 @@ UA_Server_EventNotificationCallback callback); </p>
         </tr>
       </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a id="a2f52737db0f19ad3c90b1da571e794c6" name="a2f52737db0f19ad3c90b1da571e794c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2f52737db0f19ad3c90b1da571e794c6">&#9670;&#160;</a></span>UA_Server_deleteNode()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_deleteNode </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td>
-          <td class="paramname"><em>deleteReferences</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Deletes a node and optionally all references leading to the node. </p>
 
 </div>
 </div>
@@ -2819,6 +1174,563 @@ UA_Server_EventNotificationCallback callback); </p>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a75ddc25ef9593699d4c31403addae626" name="a75ddc25ef9593699d4c31403addae626"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75ddc25ef9593699d4c31403addae626">&#9670;&#160;</a></span>UA_Server_addRepeatedCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_addRepeatedCallback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="util_8h.html#a68b1f0efce215c6832edde8745bb5215">UA_ServerCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a>&#160;</td>
+          <td class="paramname"><em>interval_ms</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a> *&#160;</td>
+          <td class="paramname"><em>callbackId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add a callback for cyclic repetition to the server. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">server</td><td>The server object. </td></tr>
+    <tr><td class="paramname">callback</td><td>The callback that shall be added. </td></tr>
+    <tr><td class="paramname">data</td><td>Data that is forwarded to the callback. </td></tr>
+    <tr><td class="paramname">interval_ms</td><td>The callback shall be repeatedly executed with the given interval (in ms). The interval must be positive. The first execution occurs at now() + interval at the latest. </td></tr>
+    <tr><td class="paramname">callbackId</td><td>Set to the identifier of the repeated callback . This can be used to cancel the callback later on. If the pointer is null, the identifier is not set. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Upon success, <code>UA_STATUSCODE_GOOD</code> is returned. An error code otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a79c2a96e2c3876ffe097c8e97c3f4e9d" name="a79c2a96e2c3876ffe097c8e97c3f4e9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79c2a96e2c3876ffe097c8e97c3f4e9d">&#9670;&#160;</a></span>UA_Server_addTimedCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_addTimedCallback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="util_8h.html#a68b1f0efce215c6832edde8745bb5215">UA_ServerCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a>&#160;</td>
+          <td class="paramname"><em>date</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a> *&#160;</td>
+          <td class="paramname"><em>callbackId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add a callback for execution at a specified time. </p>
+<p>If the indicated time lies in the past, then the callback is executed at the next iteration of the server's main loop.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">server</td><td>The server object. </td></tr>
+    <tr><td class="paramname">callback</td><td>The callback that shall be added. </td></tr>
+    <tr><td class="paramname">data</td><td>Data that is forwarded to the callback. </td></tr>
+    <tr><td class="paramname">date</td><td>The timestamp for the execution time. </td></tr>
+    <tr><td class="paramname">callbackId</td><td>Set to the identifier of the repeated callback . This can be used to cancel the callback later on. If the pointer is null, the identifier is not set. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Upon success, <code>UA_STATUSCODE_GOOD</code> is returned. An error code otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="aa14007f7d0f88580072e63ae8615a4ec" name="aa14007f7d0f88580072e63ae8615a4ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa14007f7d0f88580072e63ae8615a4ec">&#9670;&#160;</a></span>UA_Server_browse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUA__BrowseResult.html">UA_BrowseResult</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_browse </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td>
+          <td class="paramname"><em>maxReferences</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__BrowseDescription.html">UA_BrowseDescription</a> *&#160;</td>
+          <td class="paramname"><em>bd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Browse the references of a particular node. </p>
+<p>See the definition of BrowseDescription structure for details. </p>
+
+</div>
+</div>
+<a id="a2d71eb893556470cbddbb06ae6fe6db9" name="a2d71eb893556470cbddbb06ae6fe6db9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d71eb893556470cbddbb06ae6fe6db9">&#9670;&#160;</a></span>UA_Server_browseNext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUA__BrowseResult.html">UA_BrowseResult</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_browseNext </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td>
+          <td class="paramname"><em>releaseContinuationPoint</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
+          <td class="paramname"><em>continuationPoint</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abd91488c4120e25e8bfe0ecb67ef7487" name="abd91488c4120e25e8bfe0ecb67ef7487"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd91488c4120e25e8bfe0ecb67ef7487">&#9670;&#160;</a></span>UA_Server_browseRecursive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_browseRecursive </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__BrowseDescription.html">UA_BrowseDescription</a> *&#160;</td>
+          <td class="paramname"><em>bd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t *&#160;</td>
+          <td class="paramname"><em>resultsSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> **&#160;</td>
+          <td class="paramname"><em>results</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Non-standard version of the Browse service that recurses into child nodes. </p>
+<p>Possible loops (that can occur for non-hierarchical references) are handled internally. Every node is added at most once to the results array.</p>
+<p>Nodes are only added if they match the NodeClassMask in the BrowseDescription. However, child nodes are still recursed into if the NodeClass does not match. So it is possible, for example, to get all VariableNodes below a certain ObjectNode, with additional objects in the hierarchy below. </p>
+
+</div>
+</div>
+<a id="a635aa8c4249ac0fb66a968e7493843b4" name="a635aa8c4249ac0fb66a968e7493843b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a635aa8c4249ac0fb66a968e7493843b4">&#9670;&#160;</a></span>UA_Server_browseSimplifiedBrowsePath()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUA__BrowsePathResult.html">UA_BrowsePathResult</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_browseSimplifiedBrowsePath </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>origin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>browsePathSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__QualifiedName.html">UA_QualifiedName</a> *&#160;</td>
+          <td class="paramname"><em>browsePath</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A simplified TranslateBrowsePathsToNodeIds based on the SimpleAttributeOperand type (Part 4, 7.4.4.5). </p>
+<p>This specifies a relative path using a list of BrowseNames instead of the RelativePath structure. The list of BrowseNames is equivalent to a RelativePath that specifies forward references which are subtypes of the HierarchicalReferences ReferenceType. All Nodes followed by the browsePath shall be of the NodeClass Object or Variable. </p>
+
+</div>
+</div>
+<a id="a0773d97b10c0f2c3c1d72723e3196b9e" name="a0773d97b10c0f2c3c1d72723e3196b9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0773d97b10c0f2c3c1d72723e3196b9e">&#9670;&#160;</a></span>UA_Server_call()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUA__CallMethodResult.html">UA_CallMethodResult</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_call </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__CallMethodRequest.html">UA_CallMethodRequest</a> *&#160;</td>
+          <td class="paramname"><em>request</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaa20960e3fece0563ab7d587d9f8f713" name="aaa20960e3fece0563ab7d587d9f8f713"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa20960e3fece0563ab7d587d9f8f713">&#9670;&#160;</a></span>UA_Server_changeRepeatedCallbackInterval()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_changeRepeatedCallbackInterval </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a>&#160;</td>
+          <td class="paramname"><em>callbackId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a>&#160;</td>
+          <td class="paramname"><em>interval_ms</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae2f4373d3051d9fafc45455f13274069" name="ae2f4373d3051d9fafc45455f13274069"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2f4373d3051d9fafc45455f13274069">&#9670;&#160;</a></span>UA_Server_closeSession()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_closeSession </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
+          <td class="paramname"><em>sessionId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Manually close a session. </p>
+
+</div>
+</div>
+<a id="a9808ff6a502d4f5d53efacf1b719ddee" name="a9808ff6a502d4f5d53efacf1b719ddee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9808ff6a502d4f5d53efacf1b719ddee">&#9670;&#160;</a></span>UA_Server_createDataChangeMonitoredItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUA__MonitoredItemCreateResult.html">UA_MonitoredItemCreateResult</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_createDataChangeMonitoredItem </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types__generated_8h.html#ab298c4ff5eb700437114d0dc2db97ead">UA_TimestampsToReturn</a>&#160;</td>
+          <td class="paramname"><em>timestampsToReturn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__MonitoredItemCreateRequest.html">UA_MonitoredItemCreateRequest</a>&#160;</td>
+          <td class="paramname"><em>item</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>monitoredItemContext</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="server_8h.html#abb3397f10e13032db6b80fb923d81cf5">UA_Server_DataChangeNotificationCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a local MonitoredItem with a sampling interval that detects data changes. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">server</td><td>The server executing the MonitoredItem @timestampsToReturn Shall timestamps be added to the value for the callback? @item The parameters of the new MonitoredItem. Note that the attribute of the ReadValueId (the node that is monitored) can not be <code>UA_ATTRIBUTEID_EVENTNOTIFIER</code>. A different callback type needs to be registered for event notifications. @monitoredItemContext A pointer that is forwarded with the callback @callback The callback that is executed on detected data changes</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns a description of the created MonitoredItem. The structure also contains a StatusCode (in case of an error) and the identifier of the new MonitoredItem. </dd></dl>
+
+</div>
+</div>
+<a id="a9cc4f304f645297ec5372cc813efaa41" name="a9cc4f304f645297ec5372cc813efaa41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cc4f304f645297ec5372cc813efaa41">&#9670;&#160;</a></span>UA_Server_createEvent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_createEvent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>eventType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
+          <td class="paramname"><em>outNodeId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates a node representation of an event. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">server</td><td>The server object </td></tr>
+    <tr><td class="paramname">eventType</td><td>The type of the event for which a node should be created </td></tr>
+    <tr><td class="paramname">outNodeId</td><td>The NodeId of the newly created node for the event </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The StatusCode of the UA_Server_createEvent method </dd></dl>
+
+</div>
+</div>
+<a id="af9f93708ee6222bd30942de5219f55fb" name="af9f93708ee6222bd30942de5219f55fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9f93708ee6222bd30942de5219f55fb">&#9670;&#160;</a></span>UA_Server_delete()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UA_Server_delete </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae4c3660289d5f8b60ee6ee3377fcfbb4" name="ae4c3660289d5f8b60ee6ee3377fcfbb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4c3660289d5f8b60ee6ee3377fcfbb4">&#9670;&#160;</a></span>UA_Server_deleteMonitoredItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_deleteMonitoredItem </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td>
+          <td class="paramname"><em>monitoredItemId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><a class="el" href="structUA__MonitoredItemCreateResult.html">UA_MonitoredItemCreateResult</a>. </p>
+<p>UA_Server_createEventMonitoredItem(UA_Server *server, 
+UA_TimestampsToReturn timestampsToReturn, 
+const UA_MonitoredItemCreateRequest item, void *context, 
+UA_Server_EventNotificationCallback callback); </p>
+
+</div>
+</div>
+<a id="a2f52737db0f19ad3c90b1da571e794c6" name="a2f52737db0f19ad3c90b1da571e794c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f52737db0f19ad3c90b1da571e794c6">&#9670;&#160;</a></span>UA_Server_deleteNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_deleteNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td>
+          <td class="paramname"><em>deleteReferences</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Deletes a node and optionally all references leading to the node. </p>
 
 </div>
 </div>
@@ -2874,14 +1786,14 @@ UA_Server_EventNotificationCallback callback); </p>
 
 </div>
 </div>
-<a id="a9cc4f304f645297ec5372cc813efaa41" name="a9cc4f304f645297ec5372cc813efaa41"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9cc4f304f645297ec5372cc813efaa41">&#9670;&#160;</a></span>UA_Server_createEvent()</h2>
+<a id="af44ff79b8d91c56bcf02abf8556e8241" name="af44ff79b8d91c56bcf02abf8556e8241"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af44ff79b8d91c56bcf02abf8556e8241">&#9670;&#160;</a></span>UA_Server_deleteSessionParameter()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_createEvent </td>
+          <td class="memname">UA_EXPORT void <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_deleteSessionParameter </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
@@ -2889,14 +1801,14 @@ UA_Server_EventNotificationCallback callback); </p>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>eventType</em>, </td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
+          <td class="paramname"><em>sessionId</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
-          <td class="paramname"><em>outNodeId</em>&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -2906,16 +1818,1061 @@ UA_Server_EventNotificationCallback callback); </p>
       </table>
 </div><div class="memdoc">
 
-<p>Creates a node representation of an event. </p>
+</div>
+</div>
+<a id="a22980eb808d903244e077b84f70388ec" name="a22980eb808d903244e077b84f70388ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22980eb808d903244e077b84f70388ec">&#9670;&#160;</a></span>UA_Server_findDataType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT const <a class="el" href="structUA__DataType.html">UA_DataType</a> * UA_Server_findDataType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
+          <td class="paramname"><em>typeId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Lookup a datatype by its NodeId. </p>
+<p>Takes the custom types in the server configuration into account. Return NULL if none found. </p>
+
+</div>
+</div>
+<a id="a021b423a6112364d2bff9cacb9bd987e" name="a021b423a6112364d2bff9cacb9bd987e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a021b423a6112364d2bff9cacb9bd987e">&#9670;&#160;</a></span>UA_Server_forEachChildNodeCall()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_forEachChildNodeCall </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>parentNodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client__highlevel_8h.html#a0fd3dfee2e93e99b09030830a8c23dc4">UA_NodeIteratorCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>handle</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aec38dd84c99d95695ae4fe329ba6d3d4" name="aec38dd84c99d95695ae4fe329ba6d3d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec38dd84c99d95695ae4fe329ba6d3d4">&#9670;&#160;</a></span>UA_Server_getConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> * UA_Server_getConfig </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab07f9eeba5c34cfc00d32ee5b65f0921" name="ab07f9eeba5c34cfc00d32ee5b65f0921"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab07f9eeba5c34cfc00d32ee5b65f0921">&#9670;&#160;</a></span>UA_Server_getMethodNodeCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_getMethodNodeCallback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>methodNodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="nodestore_8h.html#a943f95365533842bb0938f2c6609a216">UA_MethodCallback</a> *&#160;</td>
+          <td class="paramname"><em>outMethodCallback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa358d3727b4981f1ccbece9cc6981c85" name="aa358d3727b4981f1ccbece9cc6981c85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa358d3727b4981f1ccbece9cc6981c85">&#9670;&#160;</a></span>UA_Server_getNamespaceByIndex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_getNamespaceByIndex </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramname"><em>namespaceIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structUA__String.html">UA_String</a> *&#160;</td>
+          <td class="paramname"><em>foundUri</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get namespace by id from the server. </p>
+
+</div>
+</div>
+<a id="ae94b3e2c7a61e546d7953467b2dd56a8" name="ae94b3e2c7a61e546d7953467b2dd56a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae94b3e2c7a61e546d7953467b2dd56a8">&#9670;&#160;</a></span>UA_Server_getNamespaceByName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_getNamespaceByName </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__String.html">UA_String</a>&#160;</td>
+          <td class="paramname"><em>namespaceUri</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t *&#160;</td>
+          <td class="paramname"><em>foundIndex</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get namespace by name from the server. </p>
+
+</div>
+</div>
+<a id="a16d51f58a6896c390c716989e2bf4abb" name="a16d51f58a6896c390c716989e2bf4abb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16d51f58a6896c390c716989e2bf4abb">&#9670;&#160;</a></span>UA_Server_getNodeContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_getNodeContext </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void **&#160;</td>
+          <td class="paramname"><em>nodeContext</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6ab4f473e178334c38b1cbff59335eac" name="a6ab4f473e178334c38b1cbff59335eac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ab4f473e178334c38b1cbff59335eac">&#9670;&#160;</a></span>UA_Server_getSessionArrayParameter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_getSessionArrayParameter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
+          <td class="paramname"><em>sessionId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structUA__Variant.html">UA_Variant</a> *&#160;</td>
+          <td class="paramname"><em>outParameter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af8b9ae84ebd565280bfec6ee75f97799" name="af8b9ae84ebd565280bfec6ee75f97799"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8b9ae84ebd565280bfec6ee75f97799">&#9670;&#160;</a></span>UA_Server_getSessionParameter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_getSessionParameter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
+          <td class="paramname"><em>sessionId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structUA__Variant.html">UA_Variant</a> *&#160;</td>
+          <td class="paramname"><em>outParameter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns NULL if the session or the parameter are not defined. </p>
+<p>Returns a deep copy otherwise </p>
+
+</div>
+</div>
+<a id="a4dd573b2293aa5764d3aeac54e33cb36" name="a4dd573b2293aa5764d3aeac54e33cb36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4dd573b2293aa5764d3aeac54e33cb36">&#9670;&#160;</a></span>UA_Server_getSessionScalarParameter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_getSessionScalarParameter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
+          <td class="paramname"><em>sessionId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structUA__Variant.html">UA_Variant</a> *&#160;</td>
+          <td class="paramname"><em>outParameter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns NULL if the parameter is not defined or not of the right datatype. </p>
+
+</div>
+</div>
+<a id="ad0cf4150cbf60e7b7d5c49bbb32436fa" name="ad0cf4150cbf60e7b7d5c49bbb32436fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0cf4150cbf60e7b7d5c49bbb32436fa">&#9670;&#160;</a></span>UA_Server_getStatistics()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUA__ServerStatistics.html">UA_ServerStatistics</a> UA_Server_getStatistics </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aedf92b95ae1b1d5f135185fe655e3736" name="aedf92b95ae1b1d5f135185fe655e3736"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedf92b95ae1b1d5f135185fe655e3736">&#9670;&#160;</a></span>UA_Server_newWithConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUA__Server.html">UA_Server</a> * UA_Server_newWithConfig </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> *&#160;</td>
+          <td class="paramname"><em>config</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The method UA_Server_new is defined in <a class="el" href="server__config__default_8h.html">server_config_default.h</a>. </p>
+<p>So default plugins outside of the core library (for logging, etc) are already available during the initialization.</p>
+<p><a class="el" href="structUA__Server.html">UA_Server</a> * <a class="el" href="server__config__default_8h.html#a5406fde7353bf9e3a0f60cbbf0cdb36d" title="This work is licensed under a Creative Commons CCZero 1.0 Universal License.">UA_Server_new(void)</a>; Creates a new server. Moves the config into the server with a shallow copy. The config content is cleared together with the server. </p>
+
+</div>
+</div>
+<a id="a3acef185d3bf01c8e599058351f27911" name="a3acef185d3bf01c8e599058351f27911"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3acef185d3bf01c8e599058351f27911">&#9670;&#160;</a></span>UA_Server_read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUA__DataValue.html">UA_DataValue</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_read </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__ReadValueId.html">UA_ReadValueId</a> *&#160;</td>
+          <td class="paramname"><em>item</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types__generated_8h.html#ab298c4ff5eb700437114d0dc2db97ead">UA_TimestampsToReturn</a>&#160;</td>
+          <td class="paramname"><em>timestamps</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read an attribute of a node. </p>
+<p>The specialized functions below provide a more concise syntax.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">server</td><td>The server object </td></tr>
-    <tr><td class="paramname">eventType</td><td>The type of the event for which a node should be created </td></tr>
-    <tr><td class="paramname">outNodeId</td><td>The NodeId of the newly created node for the event </td></tr>
+    <tr><td class="paramname">server</td><td>The server object. </td></tr>
+    <tr><td class="paramname">item</td><td>ReadValueIds contain the NodeId of the target node, the id of the attribute to read and (optionally) an index range to read parts of an array only. See the section on NumericRange for the format used for array ranges. </td></tr>
+    <tr><td class="paramname">timestamps</td><td>Which timestamps to return for the attribute. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The StatusCode of the UA_Server_createEvent method </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns a DataValue that contains either an error code, or a variant with the attribute value and the timestamps. </dd></dl>
+
+</div>
+</div>
+<a id="a4a422af852b108a6e77145da251f887a" name="a4a422af852b108a6e77145da251f887a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a422af852b108a6e77145da251f887a">&#9670;&#160;</a></span>UA_Server_readObjectProperty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_readObjectProperty </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>objectId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__QualifiedName.html">UA_QualifiedName</a>&#160;</td>
+          <td class="paramname"><em>propertyName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structUA__Variant.html">UA_Variant</a> *&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read an object property. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">server</td><td>The server object </td></tr>
+    <tr><td class="paramname">objectId</td><td>The identifier of the object (node) </td></tr>
+    <tr><td class="paramname">propertyName</td><td>The name of the property </td></tr>
+    <tr><td class="paramname">value</td><td>Contains the property value after reading. Must not be NULL. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The StatusCode for setting the event attribute </dd></dl>
+
+</div>
+</div>
+<a id="a17d345e182df58b5299b87b3f4daf8c8" name="a17d345e182df58b5299b87b3f4daf8c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17d345e182df58b5299b87b3f4daf8c8">&#9670;&#160;</a></span>UA_Server_register_discovery()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_register_discovery </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>semaphoreFilePath</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Register the given server instance at the discovery server. </p>
+<p>This should be called periodically. The semaphoreFilePath is optional. If the given file is deleted, the server will automatically be unregistered. This could be for example a pid file which is deleted if the server crashes.</p>
+<p>When the server shuts down you need to call unregister.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">server</td><td></td></tr>
+    <tr><td class="paramname">client</td><td>the client which is used to call the RegisterServer. It must already be connected to the correct endpoint </td></tr>
+    <tr><td class="paramname">semaphoreFilePath</td><td>optional parameter pointing to semaphore file. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6f6854ed6d105163a7584aef005d7312" name="a6f6854ed6d105163a7584aef005d7312"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f6854ed6d105163a7584aef005d7312">&#9670;&#160;</a></span>UA_Server_removeCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_removeCallback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a>&#160;</td>
+          <td class="paramname"><em>callbackId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Remove a repeated callback. </p>
+<p>Does nothing if the callback is not found.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">server</td><td>The server object. </td></tr>
+    <tr><td class="paramname">callbackId</td><td>The id of the callback </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6be5a9340b6752f7e1711956e224e19d" name="a6be5a9340b6752f7e1711956e224e19d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6be5a9340b6752f7e1711956e224e19d">&#9670;&#160;</a></span>UA_Server_run()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_run </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const volatile <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> *&#160;</td>
+          <td class="paramname"><em>running</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Runs the main loop of the server. </p>
+<p>In each iteration, this calls into the networklayers to see if messages have arrived.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">server</td><td>The server object. </td></tr>
+    <tr><td class="paramname">running</td><td>The loop is run as long as *running is true. Otherwise, the server shuts down. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the statuscode of the UA_Server_run_shutdown method </dd></dl>
+
+</div>
+</div>
+<a id="a62fd8109b0c25ba3554cdef16a2bc252" name="a62fd8109b0c25ba3554cdef16a2bc252"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62fd8109b0c25ba3554cdef16a2bc252">&#9670;&#160;</a></span>UA_Server_run_iterate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a> UA_Server_run_iterate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td>
+          <td class="paramname"><em>waitInternal</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Executes a single iteration of the server's main loop. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">server</td><td>The server object. </td></tr>
+    <tr><td class="paramname">waitInternal</td><td>Should we wait for messages in the networklayer? Otherwise, the timouts for the networklayers are set to zero. The default max wait time is 50millisec. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns how long we can wait until the next scheduled callback (in ms) </dd></dl>
+
+</div>
+</div>
+<a id="a7a30d86f92ca61213a24d9c43dbae826" name="a7a30d86f92ca61213a24d9c43dbae826"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a30d86f92ca61213a24d9c43dbae826">&#9670;&#160;</a></span>UA_Server_run_shutdown()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_run_shutdown </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The epilogue part of UA_Server_run (no need to use if you call UA_Server_run) </p>
+
+</div>
+</div>
+<a id="a767faf174cf7aa918272dc6f38f4e25f" name="a767faf174cf7aa918272dc6f38f4e25f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a767faf174cf7aa918272dc6f38f4e25f">&#9670;&#160;</a></span>UA_Server_run_startup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_run_startup </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The prologue part of UA_Server_run (no need to use if you call UA_Server_run) </p>
+
+</div>
+</div>
+<a id="a4d7906ae789c009e0758c9fe41f15286" name="a4d7906ae789c009e0758c9fe41f15286"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d7906ae789c009e0758c9fe41f15286">&#9670;&#160;</a></span>UA_Server_setAdminSessionContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UA_Server_setAdminSessionContext </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>context</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a02814463781ba6f418f65cf98eb12eca" name="a02814463781ba6f418f65cf98eb12eca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02814463781ba6f418f65cf98eb12eca">&#9670;&#160;</a></span>UA_Server_setMethodNodeCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_setMethodNodeCallback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>methodNodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="nodestore_8h.html#a943f95365533842bb0938f2c6609a216">UA_MethodCallback</a>&#160;</td>
+          <td class="paramname"><em>methodCallback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4cd06e1874bef5829f16644cd3831ef9" name="a4cd06e1874bef5829f16644cd3831ef9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cd06e1874bef5829f16644cd3831ef9">&#9670;&#160;</a></span>UA_Server_setNodeContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_setNodeContext </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>nodeContext</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Careful! The user has to ensure that the destructor callbacks still work. </p>
+
+</div>
+</div>
+<a id="ab6cfde97a80d8a88b46c1866d27dea41" name="ab6cfde97a80d8a88b46c1866d27dea41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6cfde97a80d8a88b46c1866d27dea41">&#9670;&#160;</a></span>UA_Server_setNodeTypeLifecycle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_setNodeTypeLifecycle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structUA__NodeTypeLifecycle.html">UA_NodeTypeLifecycle</a>&#160;</td>
+          <td class="paramname"><em>lifecycle</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abb5109d687ae3f1a7fc9cfc032edad27" name="abb5109d687ae3f1a7fc9cfc032edad27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb5109d687ae3f1a7fc9cfc032edad27">&#9670;&#160;</a></span>UA_Server_setRegisterServerCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_setRegisterServerCallback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="server_8h.html#aaf624905bd0e4e793fabc7ccd171eb29">UA_Server_registerServerCallback</a>&#160;</td>
+          <td class="paramname"><em>cb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the callback which is called if another server registeres or unregisters with this instance. </p>
+<p>This callback is called every time the server gets a register call. This especially means that for every periodic server register the callback will be called.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">server</td><td></td></tr>
+    <tr><td class="paramname">cb</td><td>the callback </td></tr>
+    <tr><td class="paramname">data</td><td>data passed to the callback </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>UA_STATUSCODE_SUCCESS</code> on success </dd></dl>
+
+</div>
+</div>
+<a id="ada6648d0226a6ad96fc7a0d9cfadb299" name="ada6648d0226a6ad96fc7a0d9cfadb299"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada6648d0226a6ad96fc7a0d9cfadb299">&#9670;&#160;</a></span>UA_Server_setSessionParameter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_setSessionParameter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
+          <td class="paramname"><em>sessionId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__Variant.html">UA_Variant</a> *&#160;</td>
+          <td class="paramname"><em>parameter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Session Parameters: Besides the user-definable session context pointer, so-called session parameters are a way to attach key-value parameters to a session. </p>
+<p>This enables "plugins" to attach data to a session without impacting the user-definedable session context pointer. </p>
+
+</div>
+</div>
+<a id="ac447e96cd118c28cc28f2f45f799578b" name="ac447e96cd118c28cc28f2f45f799578b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac447e96cd118c28cc28f2f45f799578b">&#9670;&#160;</a></span>UA_Server_setVariableNode_dataSource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_setVariableNode_dataSource </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__DataSource.html">UA_DataSource</a>&#160;</td>
+          <td class="paramname"><em>dataSource</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1883b062877472fc395170e519d43926" name="a1883b062877472fc395170e519d43926"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1883b062877472fc395170e519d43926">&#9670;&#160;</a></span>UA_Server_setVariableNode_valueBackend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_setVariableNode_valueBackend </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__ValueBackend.html">UA_ValueBackend</a>&#160;</td>
+          <td class="paramname"><em>valueBackend</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae3d7988389da5c5280b2c902f61d589b" name="ae3d7988389da5c5280b2c902f61d589b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3d7988389da5c5280b2c902f61d589b">&#9670;&#160;</a></span>UA_Server_setVariableNode_valueCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_setVariableNode_valueCallback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__ValueCallback.html">UA_ValueCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aec3bca07e74b12ef9c44a33d1b9d6f15" name="aec3bca07e74b12ef9c44a33d1b9d6f15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec3bca07e74b12ef9c44a33d1b9d6f15">&#9670;&#160;</a></span>UA_Server_translateBrowsePathToNodeIds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUA__BrowsePathResult.html">UA_BrowsePathResult</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_translateBrowsePathToNodeIds </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__BrowsePath.html">UA_BrowsePath</a> *&#160;</td>
+          <td class="paramname"><em>browsePath</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -2977,6 +2934,43 @@ UA_Server_EventNotificationCallback callback); </p>
 
 </div>
 </div>
+<a id="ab60111d60791929c83d01f3f63cdd2e4" name="ab60111d60791929c83d01f3f63cdd2e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab60111d60791929c83d01f3f63cdd2e4">&#9670;&#160;</a></span>UA_Server_unregister_discovery()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_unregister_discovery </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Unregister the given server instance from the discovery server. </p>
+<p>This should only be called when the server is shutting down. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">server</td><td></td></tr>
+    <tr><td class="paramname">client</td><td>the client which is used to call the RegisterServer. It must already be connected to the correct endpoint </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a51b42b19b706629bcd06a1e5d6be8644" name="a51b42b19b706629bcd06a1e5d6be8644"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a51b42b19b706629bcd06a1e5d6be8644">&#9670;&#160;</a></span>UA_Server_updateCertificate()</h2>
 
@@ -3029,14 +3023,14 @@ UA_Server_EventNotificationCallback callback); </p>
 
 </div>
 </div>
-<a id="a22980eb808d903244e077b84f70388ec" name="a22980eb808d903244e077b84f70388ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a22980eb808d903244e077b84f70388ec">&#9670;&#160;</a></span>UA_Server_findDataType()</h2>
+<a id="a8e34d1ddfcc733865e7d60d6cc4714b7" name="a8e34d1ddfcc733865e7d60d6cc4714b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e34d1ddfcc733865e7d60d6cc4714b7">&#9670;&#160;</a></span>UA_Server_write()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">UA_EXPORT const <a class="el" href="structUA__DataType.html">UA_DataType</a> * UA_Server_findDataType </td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_write </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
@@ -3044,8 +3038,8 @@ UA_Server_EventNotificationCallback callback); </p>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
-          <td class="paramname"><em>typeId</em>&#160;</td>
+          <td class="paramtype">const <a class="el" href="structUA__WriteValue.html">UA_WriteValue</a> *&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -3055,19 +3049,27 @@ UA_Server_EventNotificationCallback callback); </p>
       </table>
 </div><div class="memdoc">
 
-<p>Lookup a datatype by its NodeId. </p>
-<p>Takes the custom types in the server configuration into account. Return NULL if none found. </p>
+<p>Overwrite an attribute of a node. </p>
+<p>The specialized functions below provide a more concise syntax.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">server</td><td>The server object. </td></tr>
+    <tr><td class="paramname">value</td><td>WriteValues contain the NodeId of the target node, the id of the attribute to overwritten, the actual value and (optionally) an index range to replace parts of an array only. of an array only. See the section on NumericRange for the format used for array ranges. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns a status code. </dd></dl>
 
 </div>
 </div>
-<a id="abfe6669d1ebaa10ec43c43af817cdd14" name="abfe6669d1ebaa10ec43c43af817cdd14"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abfe6669d1ebaa10ec43c43af817cdd14">&#9670;&#160;</a></span>UA_Server_addNamespace()</h2>
+<a id="ae773bd3edd3438d60e0aed3ba4c96ffc" name="ae773bd3edd3438d60e0aed3ba4c96ffc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae773bd3edd3438d60e0aed3ba4c96ffc">&#9670;&#160;</a></span>UA_Server_writeObjectProperty()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_addNamespace </td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_writeObjectProperty </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
@@ -3075,8 +3077,20 @@ UA_Server_EventNotificationCallback callback); </p>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>name</em>&#160;</td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>objectId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__QualifiedName.html">UA_QualifiedName</a>&#160;</td>
+          <td class="paramname"><em>propertyName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__Variant.html">UA_Variant</a>&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -3086,19 +3100,29 @@ UA_Server_EventNotificationCallback callback); </p>
       </table>
 </div><div class="memdoc">
 
-<p>Add a new namespace to the server. </p>
-<p>Returns the index of the new namespace </p>
+<p>Write an object property. </p>
+<p>The property is represented as a VariableNode with a <code>HasProperty</code> reference from the ObjectNode. The VariableNode is identified by its BrowseName. Writing the property sets the value attribute of the VariableNode.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">server</td><td>The server object </td></tr>
+    <tr><td class="paramname">objectId</td><td>The identifier of the object (node) </td></tr>
+    <tr><td class="paramname">propertyName</td><td>The name of the property </td></tr>
+    <tr><td class="paramname">value</td><td>The value to be set for the event attribute </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The StatusCode for setting the event attribute </dd></dl>
 
 </div>
 </div>
-<a id="ae94b3e2c7a61e546d7953467b2dd56a8" name="ae94b3e2c7a61e546d7953467b2dd56a8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae94b3e2c7a61e546d7953467b2dd56a8">&#9670;&#160;</a></span>UA_Server_getNamespaceByName()</h2>
+<a id="a97a0964cdf7db0eccaf6430ea2106b89" name="a97a0964cdf7db0eccaf6430ea2106b89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97a0964cdf7db0eccaf6430ea2106b89">&#9670;&#160;</a></span>UA_Server_writeObjectProperty_scalar()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_getNamespaceByName </td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_writeObjectProperty_scalar </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
@@ -3106,14 +3130,26 @@ UA_Server_EventNotificationCallback callback); </p>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__String.html">UA_String</a>&#160;</td>
-          <td class="paramname"><em>namespaceUri</em>, </td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>objectId</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t *&#160;</td>
-          <td class="paramname"><em>foundIndex</em>&#160;</td>
+          <td class="paramtype">const <a class="el" href="structUA__QualifiedName.html">UA_QualifiedName</a>&#160;</td>
+          <td class="paramname"><em>propertyName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -3123,57 +3159,21 @@ UA_Server_EventNotificationCallback callback); </p>
       </table>
 </div><div class="memdoc">
 
-<p>Get namespace by name from the server. </p>
+<p>Directly point to the scalar value instead of a variant. </p>
 
 </div>
 </div>
-<a id="aa358d3727b4981f1ccbece9cc6981c85" name="aa358d3727b4981f1ccbece9cc6981c85"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa358d3727b4981f1ccbece9cc6981c85">&#9670;&#160;</a></span>UA_Server_getNamespaceByIndex()</h2>
+<a id="a50ecfc7d692ce3ea9d7e330c5d8d8f6a" name="a50ecfc7d692ce3ea9d7e330c5d8d8f6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50ecfc7d692ce3ea9d7e330c5d8d8f6a">&#9670;&#160;</a></span>UA_ServerConfig_clean()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="architecture__definitions_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_getNamespaceByIndex </td>
+          <td class="memname">void UA_ServerConfig_clean </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const size_t&#160;</td>
-          <td class="paramname"><em>namespaceIndex</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structUA__String.html">UA_String</a> *&#160;</td>
-          <td class="paramname"><em>foundUri</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get namespace by id from the server. </p>
-
-</div>
-</div>
-<a id="ad0cf4150cbf60e7b7d5c49bbb32436fa" name="ad0cf4150cbf60e7b7d5c49bbb32436fa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad0cf4150cbf60e7b7d5c49bbb32436fa">&#9670;&#160;</a></span>UA_Server_getStatistics()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structUA__ServerStatistics.html">UA_ServerStatistics</a> UA_Server_getStatistics </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
-          <td class="paramname"><em>server</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> *&#160;</td>
+          <td class="paramname"><em>config</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -3182,8 +3182,8 @@ UA_Server_EventNotificationCallback callback); </p>
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="a09e5e63d313c3f91ff05131ee74a203a" name="a09e5e63d313c3f91ff05131ee74a203a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a09e5e63d313c3f91ff05131ee74a203a">&#9670;&#160;</a></span>UA_VariableAttributes_default</h2>
+<a id="a40d45880be0e44703e5ff7927750ab8e" name="a40d45880be0e44703e5ff7927750ab8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40d45880be0e44703e5ff7927750ab8e">&#9670;&#160;</a></span>UA_DataTypeAttributes_default</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3192,31 +3192,7 @@ UA_Server_EventNotificationCallback callback); </p>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UA_EXPORT const <a class="el" href="structUA__VariableAttributes.html">UA_VariableAttributes</a> UA_VariableAttributes_default</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>The default for variables is "BaseDataType" for the datatype, -2 for the valuerank and a read-accesslevel. </p>
-
-</div>
-</div>
-<a id="aa4e68cd81af56191a49713afa70f660f" name="aa4e68cd81af56191a49713afa70f660f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa4e68cd81af56191a49713afa70f660f">&#9670;&#160;</a></span>UA_VariableTypeAttributes_default</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">UA_EXPORT const <a class="el" href="structUA__VariableTypeAttributes.html">UA_VariableTypeAttributes</a> UA_VariableTypeAttributes_default</td>
+          <td class="memname">UA_EXPORT const <a class="el" href="structUA__DataTypeAttributes.html">UA_DataTypeAttributes</a> UA_DataTypeAttributes_default</td>
         </tr>
       </table>
   </td>
@@ -3320,8 +3296,8 @@ UA_Server_EventNotificationCallback callback); </p>
 
 </div>
 </div>
-<a id="a40d45880be0e44703e5ff7927750ab8e" name="a40d45880be0e44703e5ff7927750ab8e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a40d45880be0e44703e5ff7927750ab8e">&#9670;&#160;</a></span>UA_DataTypeAttributes_default</h2>
+<a id="a09e5e63d313c3f91ff05131ee74a203a" name="a09e5e63d313c3f91ff05131ee74a203a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09e5e63d313c3f91ff05131ee74a203a">&#9670;&#160;</a></span>UA_VariableAttributes_default</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3330,7 +3306,31 @@ UA_Server_EventNotificationCallback callback); </p>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UA_EXPORT const <a class="el" href="structUA__DataTypeAttributes.html">UA_DataTypeAttributes</a> UA_DataTypeAttributes_default</td>
+          <td class="memname">UA_EXPORT const <a class="el" href="structUA__VariableAttributes.html">UA_VariableAttributes</a> UA_VariableAttributes_default</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The default for variables is "BaseDataType" for the datatype, -2 for the valuerank and a read-accesslevel. </p>
+
+</div>
+</div>
+<a id="aa4e68cd81af56191a49713afa70f660f" name="aa4e68cd81af56191a49713afa70f660f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4e68cd81af56191a49713afa70f660f">&#9670;&#160;</a></span>UA_VariableTypeAttributes_default</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT const <a class="el" href="structUA__VariableTypeAttributes.html">UA_VariableTypeAttributes</a> UA_VariableTypeAttributes_default</td>
         </tr>
       </table>
   </td>

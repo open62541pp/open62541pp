@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>open62541pp: opcua::Wrapper&lt; T &gt; Class Template Reference</title>
+<title>open62541pp: opcua::Wrapper&lt; T, Handler &gt; Class Template Reference</title>
 <!--BEGIN PROJECT_ICON-->
 <!-- <link rel="icon" href="$projecticon" type="image/x-icon" /> -->
 <!--END PROJECT_ICON-->
@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -90,124 +90,172 @@ $(function() {
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#related">Related Symbols</a> &#124;
 <a href="classopcua_1_1Wrapper-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">opcua::Wrapper&lt; T &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__Wrapper.html">Wrapper classes</a></div></div></div>
+  <div class="headertitle"><div class="title">opcua::Wrapper&lt; T, Handler &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__Wrapper.html">Wrapper classes</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p><code>#include &lt;<a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>&gt;</code></p>
 
-<p>Inherited by <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_ByteString, UA_TYPES_BYTESTRING &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_DataValue, UA_TYPES_DATAVALUE &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_DateTime, UA_TYPES_DATETIME &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_DiagnosticInfo, UA_TYPES_DIAGNOSTICINFO &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_ExpandedNodeId, UA_TYPES_EXPANDEDNODEID &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_ExtensionObject, UA_TYPES_EXTENSIONOBJECT &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_Guid, UA_TYPES_GUID &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_LocalizedText, UA_TYPES_LOCALIZEDTEXT &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_NodeId, UA_TYPES_NODEID &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_QualifiedName, UA_TYPES_QUALIFIEDNAME &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_String, UA_TYPES_STRING &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_Variant, UA_TYPES_VARIANT &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_XmlElement, UA_TYPES_XMLELEMENT &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_AddNodesItem, UA_TYPES_ADDNODESITEM &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_AddNodesRequest, UA_TYPES_ADDNODESREQUEST &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_AddNodesResponse, UA_TYPES_ADDNODESRESPONSE &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_AddNodesResult, UA_TYPES_ADDNODESRESULT &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_AddReferencesItem, UA_TYPES_ADDREFERENCESITEM &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_AddReferencesRequest, UA_TYPES_ADDREFERENCESREQUEST &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_AddReferencesResponse, UA_TYPES_ADDREFERENCESRESPONSE &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_AggregateFilter, UA_TYPES_AGGREGATEFILTER &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_AnonymousIdentityToken, UA_TYPES_ANONYMOUSIDENTITYTOKEN &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_ApplicationDescription, UA_TYPES_APPLICATIONDESCRIPTION &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_Argument, UA_TYPES_ARGUMENT &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_AttributeOperand, UA_TYPES_ATTRIBUTEOPERAND &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_AxisInformation, UA_TYPES_AXISINFORMATION &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_BrowseDescription, UA_TYPES_BROWSEDESCRIPTION &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_BrowseNextRequest, UA_TYPES_BROWSENEXTREQUEST &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_BrowseNextResponse, UA_TYPES_BROWSENEXTRESPONSE &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_BrowsePath, UA_TYPES_BROWSEPATH &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_BrowsePathResult, UA_TYPES_BROWSEPATHRESULT &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_BrowsePathTarget, UA_TYPES_BROWSEPATHTARGET &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_BrowseRequest, UA_TYPES_BROWSEREQUEST &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_BrowseResponse, UA_TYPES_BROWSERESPONSE &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_BrowseResult, UA_TYPES_BROWSERESULT &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_BuildInfo, UA_TYPES_BUILDINFO &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_CallMethodRequest, UA_TYPES_CALLMETHODREQUEST &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_CallMethodResult, UA_TYPES_CALLMETHODRESULT &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_CallRequest, UA_TYPES_CALLREQUEST &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_CallResponse, UA_TYPES_CALLRESPONSE &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_ComplexNumberType, UA_TYPES_COMPLEXNUMBERTYPE &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_ContentFilter, UA_TYPES_CONTENTFILTER &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_ContentFilterElement, UA_TYPES_CONTENTFILTERELEMENT &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_CreateMonitoredItemsRequest, UA_TYPES_CREATEMONITOREDITEMSREQUEST &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_CreateMonitoredItemsResponse, UA_TYPES_CREATEMONITOREDITEMSRESPONSE &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_CreateSubscriptionRequest, UA_TYPES_CREATESUBSCRIPTIONREQUEST &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_CreateSubscriptionResponse, UA_TYPES_CREATESUBSCRIPTIONRESPONSE &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_DataChangeFilter, UA_TYPES_DATACHANGEFILTER &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_DataTypeAttributes, UA_TYPES_DATATYPEATTRIBUTES &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_DeleteMonitoredItemsRequest, UA_TYPES_DELETEMONITOREDITEMSREQUEST &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_DeleteMonitoredItemsResponse, UA_TYPES_DELETEMONITOREDITEMSRESPONSE &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_DeleteNodesItem, UA_TYPES_DELETENODESITEM &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_DeleteNodesRequest, UA_TYPES_DELETENODESREQUEST &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_DeleteNodesResponse, UA_TYPES_DELETENODESRESPONSE &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_DeleteReferencesItem, UA_TYPES_DELETEREFERENCESITEM &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_DeleteReferencesRequest, UA_TYPES_DELETEREFERENCESREQUEST &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_DeleteReferencesResponse, UA_TYPES_DELETEREFERENCESRESPONSE &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_DeleteSubscriptionsRequest, UA_TYPES_DELETESUBSCRIPTIONSREQUEST &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_DeleteSubscriptionsResponse, UA_TYPES_DELETESUBSCRIPTIONSRESPONSE &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_DoubleComplexNumberType, UA_TYPES_DOUBLECOMPLEXNUMBERTYPE &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_EUInformation, UA_TYPES_EUINFORMATION &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_ElementOperand, UA_TYPES_ELEMENTOPERAND &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_EndpointDescription, UA_TYPES_ENDPOINTDESCRIPTION &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_EnumDefinition, UA_TYPES_ENUMDEFINITION &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_EnumField, UA_TYPES_ENUMFIELD &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_EnumValueType, UA_TYPES_ENUMVALUETYPE &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_EventFilter, UA_TYPES_EVENTFILTER &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_IssuedIdentityToken, UA_TYPES_ISSUEDIDENTITYTOKEN &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_LiteralOperand, UA_TYPES_LITERALOPERAND &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_MethodAttributes, UA_TYPES_METHODATTRIBUTES &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_ModifyMonitoredItemsRequest, UA_TYPES_MODIFYMONITOREDITEMSREQUEST &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_ModifyMonitoredItemsResponse, UA_TYPES_MODIFYMONITOREDITEMSRESPONSE &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_ModifySubscriptionRequest, UA_TYPES_MODIFYSUBSCRIPTIONREQUEST &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_ModifySubscriptionResponse, UA_TYPES_MODIFYSUBSCRIPTIONRESPONSE &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_MonitoredItemCreateRequest, UA_TYPES_MONITOREDITEMCREATEREQUEST &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_MonitoredItemCreateResult, UA_TYPES_MONITOREDITEMCREATERESULT &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_MonitoredItemModifyRequest, UA_TYPES_MONITOREDITEMMODIFYREQUEST &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_MonitoredItemModifyResult, UA_TYPES_MONITOREDITEMMODIFYRESULT &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_MonitoringParameters, UA_TYPES_MONITORINGPARAMETERS &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_NodeAttributes, UA_TYPES_NODEATTRIBUTES &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_ObjectAttributes, UA_TYPES_OBJECTATTRIBUTES &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_ObjectTypeAttributes, UA_TYPES_OBJECTTYPEATTRIBUTES &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_Range, UA_TYPES_RANGE &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_ReadRequest, UA_TYPES_READREQUEST &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_ReadResponse, UA_TYPES_READRESPONSE &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_ReadValueId, UA_TYPES_READVALUEID &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_ReferenceDescription, UA_TYPES_REFERENCEDESCRIPTION &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_ReferenceTypeAttributes, UA_TYPES_REFERENCETYPEATTRIBUTES &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_RegisterNodesRequest, UA_TYPES_REGISTERNODESREQUEST &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_RegisterNodesResponse, UA_TYPES_REGISTERNODESRESPONSE &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_RelativePath, UA_TYPES_RELATIVEPATH &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_RelativePathElement, UA_TYPES_RELATIVEPATHELEMENT &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_RequestHeader, UA_TYPES_REQUESTHEADER &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_ResponseHeader, UA_TYPES_RESPONSEHEADER &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_SetMonitoringModeRequest, UA_TYPES_SETMONITORINGMODEREQUEST &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_SetMonitoringModeResponse, UA_TYPES_SETMONITORINGMODERESPONSE &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_SetPublishingModeRequest, UA_TYPES_SETPUBLISHINGMODEREQUEST &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_SetPublishingModeResponse, UA_TYPES_SETPUBLISHINGMODERESPONSE &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_SetTriggeringRequest, UA_TYPES_SETTRIGGERINGREQUEST &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_SetTriggeringResponse, UA_TYPES_SETTRIGGERINGRESPONSE &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_SimpleAttributeOperand, UA_TYPES_SIMPLEATTRIBUTEOPERAND &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_StatusChangeNotification, UA_TYPES_STATUSCHANGENOTIFICATION &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_StructureDefinition, UA_TYPES_STRUCTUREDEFINITION &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_StructureField, UA_TYPES_STRUCTUREFIELD &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_TranslateBrowsePathsToNodeIdsRequest, UA_TYPES_TRANSLATEBROWSEPATHSTONODEIDSREQUEST &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_TranslateBrowsePathsToNodeIdsResponse, UA_TYPES_TRANSLATEBROWSEPATHSTONODEIDSRESPONSE &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_UnregisterNodesRequest, UA_TYPES_UNREGISTERNODESREQUEST &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_UnregisterNodesResponse, UA_TYPES_UNREGISTERNODESRESPONSE &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_UserIdentityToken, UA_TYPES_USERIDENTITYTOKEN &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_UserNameIdentityToken, UA_TYPES_USERNAMEIDENTITYTOKEN &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_UserTokenPolicy, UA_TYPES_USERTOKENPOLICY &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_VariableAttributes, UA_TYPES_VARIABLEATTRIBUTES &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_VariableTypeAttributes, UA_TYPES_VARIABLETYPEATTRIBUTES &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_ViewAttributes, UA_TYPES_VIEWATTRIBUTES &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_ViewDescription, UA_TYPES_VIEWDESCRIPTION &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_WriteRequest, UA_TYPES_WRITEREQUEST &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_WriteResponse, UA_TYPES_WRITERESPONSE &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_WriteValue, UA_TYPES_WRITEVALUE &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_X509IdentityToken, UA_TYPES_X509IDENTITYTOKEN &gt;</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_XVType, UA_TYPES_XVTYPE &gt;</a>, and <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; T, Index &gt;</a>.</p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
-class opcua::Wrapper&lt; T &gt;</div><p>Template base class to wrap native objects. </p>
+<p>Inherits opcua::detail::WrapperDestructorMixin&lt; WrapperType, Clear &gt;.</p>
 
-<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00033">33</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
+<p>Inherited by <a class="el" href="classopcua_1_1ByteString.html">opcua::ByteString</a>, <a class="el" href="classopcua_1_1DataValue.html">opcua::DataValue</a>, <a class="el" href="classopcua_1_1DiagnosticInfo.html">opcua::DiagnosticInfo</a>, <a class="el" href="classopcua_1_1ExpandedNodeId.html">opcua::ExpandedNodeId</a>, <a class="el" href="classopcua_1_1ExtensionObject.html">opcua::ExtensionObject</a>, <a class="el" href="classopcua_1_1LocalizedText.html">opcua::LocalizedText</a>, <a class="el" href="classopcua_1_1NodeId.html">opcua::NodeId</a>, <a class="el" href="classopcua_1_1QualifiedName.html">opcua::QualifiedName</a>, <a class="el" href="classopcua_1_1String.html">opcua::String</a>, <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; T, Index &gt;</a>, <a class="el" href="classopcua_1_1Variant.html">opcua::Variant</a>, <a class="el" href="classopcua_1_1XmlElement.html">opcua::XmlElement</a>, <a class="el" href="classopcua_1_1ua_1_1AddNodesItem.html">opcua::ua::AddNodesItem</a>, <a class="el" href="classopcua_1_1ua_1_1AddNodesRequest.html">opcua::ua::AddNodesRequest</a>, <a class="el" href="classopcua_1_1ua_1_1AddNodesResponse.html">opcua::ua::AddNodesResponse</a>, <a class="el" href="classopcua_1_1ua_1_1AddNodesResult.html">opcua::ua::AddNodesResult</a>, <a class="el" href="classopcua_1_1ua_1_1AddReferencesItem.html">opcua::ua::AddReferencesItem</a>, <a class="el" href="classopcua_1_1ua_1_1AddReferencesRequest.html">opcua::ua::AddReferencesRequest</a>, <a class="el" href="classopcua_1_1ua_1_1AddReferencesResponse.html">opcua::ua::AddReferencesResponse</a>, <a class="el" href="classopcua_1_1ua_1_1AggregateFilter.html">opcua::ua::AggregateFilter</a>, <a class="el" href="classopcua_1_1ua_1_1AnonymousIdentityToken.html">opcua::ua::AnonymousIdentityToken</a>, <a class="el" href="classopcua_1_1ua_1_1ApplicationDescription.html">opcua::ua::ApplicationDescription</a>, <a class="el" href="classopcua_1_1ua_1_1Argument.html">opcua::ua::Argument</a>, <a class="el" href="classopcua_1_1ua_1_1AttributeOperand.html">opcua::ua::AttributeOperand</a>, <a class="el" href="classopcua_1_1ua_1_1AxisInformation.html">opcua::ua::AxisInformation</a>, <a class="el" href="classopcua_1_1ua_1_1BrowseDescription.html">opcua::ua::BrowseDescription</a>, <a class="el" href="classopcua_1_1ua_1_1BrowseNextRequest.html">opcua::ua::BrowseNextRequest</a>, <a class="el" href="classopcua_1_1ua_1_1BrowseNextResponse.html">opcua::ua::BrowseNextResponse</a>, <a class="el" href="classopcua_1_1ua_1_1BrowsePath.html">opcua::ua::BrowsePath</a>, <a class="el" href="classopcua_1_1ua_1_1BrowsePathResult.html">opcua::ua::BrowsePathResult</a>, <a class="el" href="classopcua_1_1ua_1_1BrowsePathTarget.html">opcua::ua::BrowsePathTarget</a>, <a class="el" href="classopcua_1_1ua_1_1BrowseRequest.html">opcua::ua::BrowseRequest</a>, <a class="el" href="classopcua_1_1ua_1_1BrowseResponse.html">opcua::ua::BrowseResponse</a>, <a class="el" href="classopcua_1_1ua_1_1BrowseResult.html">opcua::ua::BrowseResult</a>, <a class="el" href="classopcua_1_1ua_1_1BuildInfo.html">opcua::ua::BuildInfo</a>, <a class="el" href="classopcua_1_1ua_1_1CallMethodRequest.html">opcua::ua::CallMethodRequest</a>, <a class="el" href="classopcua_1_1ua_1_1CallMethodResult.html">opcua::ua::CallMethodResult</a>, <a class="el" href="classopcua_1_1ua_1_1CallRequest.html">opcua::ua::CallRequest</a>, <a class="el" href="classopcua_1_1ua_1_1CallResponse.html">opcua::ua::CallResponse</a>, <a class="el" href="classopcua_1_1ua_1_1ComplexNumberType.html">opcua::ua::ComplexNumberType</a>, <a class="el" href="classopcua_1_1ua_1_1ContentFilter.html">opcua::ua::ContentFilter</a>, <a class="el" href="classopcua_1_1ua_1_1ContentFilterElement.html">opcua::ua::ContentFilterElement</a>, <a class="el" href="classopcua_1_1ua_1_1CreateMonitoredItemsRequest.html">opcua::ua::CreateMonitoredItemsRequest</a>, <a class="el" href="classopcua_1_1ua_1_1CreateMonitoredItemsResponse.html">opcua::ua::CreateMonitoredItemsResponse</a>, <a class="el" href="classopcua_1_1ua_1_1CreateSubscriptionRequest.html">opcua::ua::CreateSubscriptionRequest</a>, <a class="el" href="classopcua_1_1ua_1_1CreateSubscriptionResponse.html">opcua::ua::CreateSubscriptionResponse</a>, <a class="el" href="classopcua_1_1ua_1_1DataChangeFilter.html">opcua::ua::DataChangeFilter</a>, <a class="el" href="classopcua_1_1ua_1_1DataTypeAttributes.html">opcua::ua::DataTypeAttributes</a>, <a class="el" href="classopcua_1_1ua_1_1DeleteMonitoredItemsRequest.html">opcua::ua::DeleteMonitoredItemsRequest</a>, <a class="el" href="classopcua_1_1ua_1_1DeleteMonitoredItemsResponse.html">opcua::ua::DeleteMonitoredItemsResponse</a>, <a class="el" href="classopcua_1_1ua_1_1DeleteNodesItem.html">opcua::ua::DeleteNodesItem</a>, <a class="el" href="classopcua_1_1ua_1_1DeleteNodesRequest.html">opcua::ua::DeleteNodesRequest</a>, <a class="el" href="classopcua_1_1ua_1_1DeleteNodesResponse.html">opcua::ua::DeleteNodesResponse</a>, <a class="el" href="classopcua_1_1ua_1_1DeleteReferencesItem.html">opcua::ua::DeleteReferencesItem</a>, <a class="el" href="classopcua_1_1ua_1_1DeleteReferencesRequest.html">opcua::ua::DeleteReferencesRequest</a>, <a class="el" href="classopcua_1_1ua_1_1DeleteReferencesResponse.html">opcua::ua::DeleteReferencesResponse</a>, <a class="el" href="classopcua_1_1ua_1_1DeleteSubscriptionsRequest.html">opcua::ua::DeleteSubscriptionsRequest</a>, <a class="el" href="classopcua_1_1ua_1_1DeleteSubscriptionsResponse.html">opcua::ua::DeleteSubscriptionsResponse</a>, <a class="el" href="classopcua_1_1ua_1_1DoubleComplexNumberType.html">opcua::ua::DoubleComplexNumberType</a>, <a class="el" href="classopcua_1_1ua_1_1EUInformation.html">opcua::ua::EUInformation</a>, <a class="el" href="classopcua_1_1ua_1_1ElementOperand.html">opcua::ua::ElementOperand</a>, <a class="el" href="classopcua_1_1ua_1_1EndpointDescription.html">opcua::ua::EndpointDescription</a>, <a class="el" href="classopcua_1_1ua_1_1EnumDefinition.html">opcua::ua::EnumDefinition</a>, <a class="el" href="classopcua_1_1ua_1_1EnumField.html">opcua::ua::EnumField</a>, <a class="el" href="classopcua_1_1ua_1_1EnumValueType.html">opcua::ua::EnumValueType</a>, <a class="el" href="classopcua_1_1ua_1_1EventFilter.html">opcua::ua::EventFilter</a>, <a class="el" href="classopcua_1_1ua_1_1IssuedIdentityToken.html">opcua::ua::IssuedIdentityToken</a>, <a class="el" href="classopcua_1_1ua_1_1LiteralOperand.html">opcua::ua::LiteralOperand</a>, <a class="el" href="classopcua_1_1ua_1_1MethodAttributes.html">opcua::ua::MethodAttributes</a>, <a class="el" href="classopcua_1_1ua_1_1ModifyMonitoredItemsRequest.html">opcua::ua::ModifyMonitoredItemsRequest</a>, <a class="el" href="classopcua_1_1ua_1_1ModifyMonitoredItemsResponse.html">opcua::ua::ModifyMonitoredItemsResponse</a>, <a class="el" href="classopcua_1_1ua_1_1ModifySubscriptionRequest.html">opcua::ua::ModifySubscriptionRequest</a>, <a class="el" href="classopcua_1_1ua_1_1ModifySubscriptionResponse.html">opcua::ua::ModifySubscriptionResponse</a>, <a class="el" href="classopcua_1_1ua_1_1MonitoredItemCreateRequest.html">opcua::ua::MonitoredItemCreateRequest</a>, <a class="el" href="classopcua_1_1ua_1_1MonitoredItemCreateResult.html">opcua::ua::MonitoredItemCreateResult</a>, <a class="el" href="classopcua_1_1ua_1_1MonitoredItemModifyRequest.html">opcua::ua::MonitoredItemModifyRequest</a>, <a class="el" href="classopcua_1_1ua_1_1MonitoredItemModifyResult.html">opcua::ua::MonitoredItemModifyResult</a>, <a class="el" href="classopcua_1_1ua_1_1MonitoringParameters.html">opcua::ua::MonitoringParameters</a>, <a class="el" href="classopcua_1_1ua_1_1NodeAttributes.html">opcua::ua::NodeAttributes</a>, <a class="el" href="classopcua_1_1ua_1_1ObjectAttributes.html">opcua::ua::ObjectAttributes</a>, <a class="el" href="classopcua_1_1ua_1_1ObjectTypeAttributes.html">opcua::ua::ObjectTypeAttributes</a>, <a class="el" href="classopcua_1_1ua_1_1Range.html">opcua::ua::Range</a>, <a class="el" href="classopcua_1_1ua_1_1ReadRequest.html">opcua::ua::ReadRequest</a>, <a class="el" href="classopcua_1_1ua_1_1ReadResponse.html">opcua::ua::ReadResponse</a>, <a class="el" href="classopcua_1_1ua_1_1ReadValueId.html">opcua::ua::ReadValueId</a>, <a class="el" href="classopcua_1_1ua_1_1ReferenceDescription.html">opcua::ua::ReferenceDescription</a>, <a class="el" href="classopcua_1_1ua_1_1ReferenceTypeAttributes.html">opcua::ua::ReferenceTypeAttributes</a>, <a class="el" href="classopcua_1_1ua_1_1RegisterNodesRequest.html">opcua::ua::RegisterNodesRequest</a>, <a class="el" href="classopcua_1_1ua_1_1RegisterNodesResponse.html">opcua::ua::RegisterNodesResponse</a>, <a class="el" href="classopcua_1_1ua_1_1RelativePath.html">opcua::ua::RelativePath</a>, <a class="el" href="classopcua_1_1ua_1_1RelativePathElement.html">opcua::ua::RelativePathElement</a>, <a class="el" href="classopcua_1_1ua_1_1RequestHeader.html">opcua::ua::RequestHeader</a>, <a class="el" href="classopcua_1_1ua_1_1ResponseHeader.html">opcua::ua::ResponseHeader</a>, <a class="el" href="classopcua_1_1ua_1_1SetMonitoringModeRequest.html">opcua::ua::SetMonitoringModeRequest</a>, <a class="el" href="classopcua_1_1ua_1_1SetMonitoringModeResponse.html">opcua::ua::SetMonitoringModeResponse</a>, <a class="el" href="classopcua_1_1ua_1_1SetPublishingModeRequest.html">opcua::ua::SetPublishingModeRequest</a>, <a class="el" href="classopcua_1_1ua_1_1SetPublishingModeResponse.html">opcua::ua::SetPublishingModeResponse</a>, <a class="el" href="classopcua_1_1ua_1_1SetTriggeringRequest.html">opcua::ua::SetTriggeringRequest</a>, <a class="el" href="classopcua_1_1ua_1_1SetTriggeringResponse.html">opcua::ua::SetTriggeringResponse</a>, <a class="el" href="classopcua_1_1ua_1_1SimpleAttributeOperand.html">opcua::ua::SimpleAttributeOperand</a>, <a class="el" href="classopcua_1_1ua_1_1StatusChangeNotification.html">opcua::ua::StatusChangeNotification</a>, <a class="el" href="classopcua_1_1ua_1_1StructureDefinition.html">opcua::ua::StructureDefinition</a>, <a class="el" href="classopcua_1_1ua_1_1StructureField.html">opcua::ua::StructureField</a>, <a class="el" href="classopcua_1_1ua_1_1TranslateBrowsePathsToNodeIdsRequest.html">opcua::ua::TranslateBrowsePathsToNodeIdsRequest</a>, <a class="el" href="classopcua_1_1ua_1_1TranslateBrowsePathsToNodeIdsResponse.html">opcua::ua::TranslateBrowsePathsToNodeIdsResponse</a>, <a class="el" href="classopcua_1_1ua_1_1UnregisterNodesRequest.html">opcua::ua::UnregisterNodesRequest</a>, <a class="el" href="classopcua_1_1ua_1_1UnregisterNodesResponse.html">opcua::ua::UnregisterNodesResponse</a>, <a class="el" href="classopcua_1_1ua_1_1UserIdentityToken.html">opcua::ua::UserIdentityToken</a>, <a class="el" href="classopcua_1_1ua_1_1UserNameIdentityToken.html">opcua::ua::UserNameIdentityToken</a>, <a class="el" href="classopcua_1_1ua_1_1UserTokenPolicy.html">opcua::ua::UserTokenPolicy</a>, <a class="el" href="classopcua_1_1ua_1_1VariableAttributes.html">opcua::ua::VariableAttributes</a>, <a class="el" href="classopcua_1_1ua_1_1VariableTypeAttributes.html">opcua::ua::VariableTypeAttributes</a>, <a class="el" href="classopcua_1_1ua_1_1ViewAttributes.html">opcua::ua::ViewAttributes</a>, <a class="el" href="classopcua_1_1ua_1_1ViewDescription.html">opcua::ua::ViewDescription</a>, <a class="el" href="classopcua_1_1ua_1_1WriteRequest.html">opcua::ua::WriteRequest</a>, <a class="el" href="classopcua_1_1ua_1_1WriteResponse.html">opcua::ua::WriteResponse</a>, <a class="el" href="classopcua_1_1ua_1_1WriteValue.html">opcua::ua::WriteValue</a>, <a class="el" href="classopcua_1_1ua_1_1X509IdentityToken.html">opcua::ua::X509IdentityToken</a>, and <a class="el" href="classopcua_1_1ua_1_1XVType.html">opcua::ua::XVType</a>.</p>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T, typename Handler = TypeHandler&lt;T&gt;&gt;<br />
+class opcua::Wrapper&lt; T, Handler &gt;</div><p>Template base class to wrap (native) objects. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Type of the native object. </td></tr>
+    <tr><td class="paramname">Handler</td><td>Policy type that defines object operations. It must define:<ul>
+<li><code>static T copy(const T&amp;)</code> to copy the wrapped object,</li>
+<li><code>static T move(T&amp;&amp;) noexcept</code> to move the wrapped object,</li>
+<li><code>static void clear(T&amp;) noexcept</code> to clear the wrapped object (optional). If clear is not defined, the wrapper does not define a destructor.</li>
+</ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>The default <a class="el" href="structopcua_1_1TypeHandler.html">TypeHandler</a> provides standard copy/move behavior. It can be specialized for custom behavior per type. Use <a class="el" href="structopcua_1_1TypeHandlerNative.html">TypeHandlerNative</a> for native open62541 types. <a class="el" href="group__Wrapper.html#gab7f556806093b8bee70fd9a6727aaab9">WrapperNative</a> is a convenience alias for <a class="el" href="classopcua_1_1Wrapper.html" title="Template base class to wrap (native) objects.">Wrapper</a> using <a class="el" href="structopcua_1_1TypeHandlerNative.html" title="Specialized type handler for native types.">TypeHandlerNative</a>.</p>
+<dl class="section warning"><dt>Warning</dt><dd>No virtual destructor is defined; do not implement a destructor in derived classes. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00132">132</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:abe09db5fb8ab2aded84e0f8e85e5bc99" id="r_abe09db5fb8ab2aded84e0f8e85e5bc99"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#abe09db5fb8ab2aded84e0f8e85e5bc99">NativeType</a> = T</td></tr>
-<tr class="separator:abe09db5fb8ab2aded84e0f8e85e5bc99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2d8c6254361dc3930901802d060feff" id="r_ab2d8c6254361dc3930901802d060feff"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#ab2d8c6254361dc3930901802d060feff">NativeType</a> = T</td></tr>
+<tr class="separator:ab2d8c6254361dc3930901802d060feff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba233c36b2aa1e8afd6b150685ee86f6" id="r_aba233c36b2aa1e8afd6b150685ee86f6"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#aba233c36b2aa1e8afd6b150685ee86f6">HandlerType</a> = Handler</td></tr>
+<tr class="separator:aba233c36b2aa1e8afd6b150685ee86f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:adfa9bcbbbc5f81f1fac810771fd69007" id="r_adfa9bcbbbc5f81f1fac810771fd69007"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#adfa9bcbbbc5f81f1fac810771fd69007">Wrapper</a> () noexcept=default</td></tr>
-<tr class="separator:adfa9bcbbbc5f81f1fac810771fd69007"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad48ac1eba6304bd65aafb5886f954e9b" id="r_ad48ac1eba6304bd65aafb5886f954e9b"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#ad48ac1eba6304bd65aafb5886f954e9b">Wrapper</a> (const T &amp;<a class="el" href="classopcua_1_1Wrapper.html#a92e11d213ccb567b47eb94271095ee15">native</a>) noexcept</td></tr>
-<tr class="separator:ad48ac1eba6304bd65aafb5886f954e9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abeb4d5b00ad4a6d3ff7df4cf70163671" id="r_abeb4d5b00ad4a6d3ff7df4cf70163671"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#abeb4d5b00ad4a6d3ff7df4cf70163671">Wrapper</a> (T &amp;&amp;<a class="el" href="classopcua_1_1Wrapper.html#a92e11d213ccb567b47eb94271095ee15">native</a>) noexcept</td></tr>
-<tr class="separator:abeb4d5b00ad4a6d3ff7df4cf70163671"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10ab20309bd7993c24fb482a21897f5b" id="r_a10ab20309bd7993c24fb482a21897f5b"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classopcua_1_1Wrapper.html">Wrapper</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#a10ab20309bd7993c24fb482a21897f5b">operator=</a> (const T &amp;<a class="el" href="classopcua_1_1Wrapper.html#a92e11d213ccb567b47eb94271095ee15">native</a>) noexcept</td></tr>
-<tr class="separator:a10ab20309bd7993c24fb482a21897f5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa4856f12b0f477bcddf91ee87876b0c" id="r_afa4856f12b0f477bcddf91ee87876b0c"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classopcua_1_1Wrapper.html">Wrapper</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#afa4856f12b0f477bcddf91ee87876b0c">operator=</a> (T &amp;&amp;<a class="el" href="classopcua_1_1Wrapper.html#a92e11d213ccb567b47eb94271095ee15">native</a>) noexcept</td></tr>
-<tr class="separator:afa4856f12b0f477bcddf91ee87876b0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a13d9ca3204e1d86b8a964528ae64eb83" id="r_a13d9ca3204e1d86b8a964528ae64eb83"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#a13d9ca3204e1d86b8a964528ae64eb83">operator T&amp;</a> () noexcept</td></tr>
-<tr class="separator:a13d9ca3204e1d86b8a964528ae64eb83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0627028f7f1cbd3ad7cf7af54f0e4398" id="r_a0627028f7f1cbd3ad7cf7af54f0e4398"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#a0627028f7f1cbd3ad7cf7af54f0e4398">operator const T &amp;</a> () const noexcept</td></tr>
-<tr class="separator:a0627028f7f1cbd3ad7cf7af54f0e4398"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69fc9b6017ae88c2dc64bf094efff806" id="r_a69fc9b6017ae88c2dc64bf094efff806"><td class="memItemLeft" align="right" valign="top">constexpr T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#a69fc9b6017ae88c2dc64bf094efff806">operator-&gt;</a> () noexcept</td></tr>
-<tr class="separator:a69fc9b6017ae88c2dc64bf094efff806"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27cc17f5103dadb0bb35eeafde062cc0" id="r_a27cc17f5103dadb0bb35eeafde062cc0"><td class="memItemLeft" align="right" valign="top">constexpr const T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#a27cc17f5103dadb0bb35eeafde062cc0">operator-&gt;</a> () const noexcept</td></tr>
-<tr class="separator:a27cc17f5103dadb0bb35eeafde062cc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa0b3bd9c7b644f3c99f7bf841565faa" id="r_aaa0b3bd9c7b644f3c99f7bf841565faa"><td class="memItemLeft" align="right" valign="top">constexpr T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#aaa0b3bd9c7b644f3c99f7bf841565faa">handle</a> () noexcept</td></tr>
-<tr class="separator:aaa0b3bd9c7b644f3c99f7bf841565faa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9bc89b771edb05d95fc9b23a5abd23e2" id="r_a9bc89b771edb05d95fc9b23a5abd23e2"><td class="memItemLeft" align="right" valign="top">constexpr const T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#a9bc89b771edb05d95fc9b23a5abd23e2">handle</a> () const noexcept</td></tr>
-<tr class="separator:a9bc89b771edb05d95fc9b23a5abd23e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f32ca32e122a070b3154326d6610b27" id="r_a1f32ca32e122a070b3154326d6610b27"><td class="memItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#a1f32ca32e122a070b3154326d6610b27">swap</a> (<a class="el" href="classopcua_1_1Wrapper.html">Wrapper</a> &amp;other) noexcept</td></tr>
-<tr class="separator:a1f32ca32e122a070b3154326d6610b27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc65cc70d4669aef5b0adcb7640b521f" id="r_abc65cc70d4669aef5b0adcb7640b521f"><td class="memItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#abc65cc70d4669aef5b0adcb7640b521f">swap</a> (T &amp;<a class="el" href="classopcua_1_1Wrapper.html#a92e11d213ccb567b47eb94271095ee15">native</a>) noexcept</td></tr>
-<tr class="separator:abc65cc70d4669aef5b0adcb7640b521f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ae4187c8217bcc57b39428d3034c5ab" id="r_a5ae4187c8217bcc57b39428d3034c5ab"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#a5ae4187c8217bcc57b39428d3034c5ab">Wrapper</a> () noexcept=default</td></tr>
+<tr class="separator:a5ae4187c8217bcc57b39428d3034c5ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a336d069e7279489d1a153682bb604684" id="r_a336d069e7279489d1a153682bb604684"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#a336d069e7279489d1a153682bb604684">Wrapper</a> (const <a class="el" href="classopcua_1_1Wrapper.html">Wrapper</a> &amp;other)</td></tr>
+<tr class="separator:a336d069e7279489d1a153682bb604684"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a936835b207eeb371b1bf0c30d7569425" id="r_a936835b207eeb371b1bf0c30d7569425"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#a936835b207eeb371b1bf0c30d7569425">Wrapper</a> (const T &amp;<a class="el" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>)</td></tr>
+<tr class="separator:a936835b207eeb371b1bf0c30d7569425"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbd0a79eb0f2ae0bac9cb90892c1ad46" id="r_acbd0a79eb0f2ae0bac9cb90892c1ad46"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#acbd0a79eb0f2ae0bac9cb90892c1ad46">Wrapper</a> (<a class="el" href="classopcua_1_1Wrapper.html">Wrapper</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="separator:acbd0a79eb0f2ae0bac9cb90892c1ad46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43f6e9b2539d0931153cab2566037d21" id="r_a43f6e9b2539d0931153cab2566037d21"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#a43f6e9b2539d0931153cab2566037d21">Wrapper</a> (T &amp;&amp;<a class="el" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>) noexcept</td></tr>
+<tr class="separator:a43f6e9b2539d0931153cab2566037d21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c901505812438da1b8c868cd8611e3e" id="r_a2c901505812438da1b8c868cd8611e3e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#a2c901505812438da1b8c868cd8611e3e">~Wrapper</a> () noexcept=default</td></tr>
+<tr class="separator:a2c901505812438da1b8c868cd8611e3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6615ada0924da6c55c3f5ab35287f92a" id="r_a6615ada0924da6c55c3f5ab35287f92a"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classopcua_1_1Wrapper.html">Wrapper</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#a6615ada0924da6c55c3f5ab35287f92a">operator=</a> (const <a class="el" href="classopcua_1_1Wrapper.html">Wrapper</a> &amp;other)</td></tr>
+<tr class="separator:a6615ada0924da6c55c3f5ab35287f92a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2908144b4211b3e9b581c34ff01ac4f3" id="r_a2908144b4211b3e9b581c34ff01ac4f3"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classopcua_1_1Wrapper.html">Wrapper</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#a2908144b4211b3e9b581c34ff01ac4f3">operator=</a> (const T &amp;<a class="el" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>)</td></tr>
+<tr class="separator:a2908144b4211b3e9b581c34ff01ac4f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea8d70822ba9b2212448e0fe375d034d" id="r_aea8d70822ba9b2212448e0fe375d034d"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classopcua_1_1Wrapper.html">Wrapper</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#aea8d70822ba9b2212448e0fe375d034d">operator=</a> (<a class="el" href="classopcua_1_1Wrapper.html">Wrapper</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="separator:aea8d70822ba9b2212448e0fe375d034d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a269edac2dda653f541d2f985e60e8300" id="r_a269edac2dda653f541d2f985e60e8300"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classopcua_1_1Wrapper.html">Wrapper</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#a269edac2dda653f541d2f985e60e8300">operator=</a> (T &amp;&amp;<a class="el" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>) noexcept</td></tr>
+<tr class="separator:a269edac2dda653f541d2f985e60e8300"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6079a04f9992ac57cd911769e2ddf5b8" id="r_a6079a04f9992ac57cd911769e2ddf5b8"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#a6079a04f9992ac57cd911769e2ddf5b8">operator T&amp;</a> () noexcept</td></tr>
+<tr class="separator:a6079a04f9992ac57cd911769e2ddf5b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10948898750d3adb06e2ef7debc32529" id="r_a10948898750d3adb06e2ef7debc32529"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#a10948898750d3adb06e2ef7debc32529">operator const T &amp;</a> () const noexcept</td></tr>
+<tr class="separator:a10948898750d3adb06e2ef7debc32529"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef233ceb40fcb95ead0c8703c11b28e9" id="r_aef233ceb40fcb95ead0c8703c11b28e9"><td class="memItemLeft" align="right" valign="top">constexpr T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#aef233ceb40fcb95ead0c8703c11b28e9">operator-&gt;</a> () noexcept</td></tr>
+<tr class="separator:aef233ceb40fcb95ead0c8703c11b28e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af702af0eaeb490f77f80174a17b78c43" id="r_af702af0eaeb490f77f80174a17b78c43"><td class="memItemLeft" align="right" valign="top">constexpr const T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#af702af0eaeb490f77f80174a17b78c43">operator-&gt;</a> () const noexcept</td></tr>
+<tr class="separator:af702af0eaeb490f77f80174a17b78c43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a340615392827f2f54e03ee8f27b67eb9" id="r_a340615392827f2f54e03ee8f27b67eb9"><td class="memItemLeft" align="right" valign="top">constexpr T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#a340615392827f2f54e03ee8f27b67eb9">handle</a> () noexcept</td></tr>
+<tr class="separator:a340615392827f2f54e03ee8f27b67eb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5db128ab43200c32e9b6a3fa243120b" id="r_aa5db128ab43200c32e9b6a3fa243120b"><td class="memItemLeft" align="right" valign="top">constexpr const T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#aa5db128ab43200c32e9b6a3fa243120b">handle</a> () const noexcept</td></tr>
+<tr class="separator:aa5db128ab43200c32e9b6a3fa243120b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae88205f67fdd76e7955c7cd0190b23db" id="r_ae88205f67fdd76e7955c7cd0190b23db"><td class="memItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#ae88205f67fdd76e7955c7cd0190b23db">swap</a> (<a class="el" href="classopcua_1_1Wrapper.html">Wrapper</a> &amp;other) noexcept</td></tr>
+<tr class="separator:ae88205f67fdd76e7955c7cd0190b23db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adafe39123a7811290fd163cff14409c8" id="r_adafe39123a7811290fd163cff14409c8"><td class="memItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#adafe39123a7811290fd163cff14409c8">swap</a> (T &amp;<a class="el" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>) noexcept</td></tr>
+<tr class="separator:adafe39123a7811290fd163cff14409c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a92e11d213ccb567b47eb94271095ee15" id="r_a92e11d213ccb567b47eb94271095ee15"><td class="memItemLeft" align="right" valign="top">constexpr const T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#a92e11d213ccb567b47eb94271095ee15">native</a> () const noexcept</td></tr>
-<tr class="separator:a92e11d213ccb567b47eb94271095ee15"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa23e4e3653dea15d1ca32bb8c5ec88c0" id="r_aa23e4e3653dea15d1ca32bb8c5ec88c0"><td class="memItemLeft" align="right" valign="top">constexpr T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#aa23e4e3653dea15d1ca32bb8c5ec88c0">native</a> () noexcept</td></tr>
-<tr class="separator:aa23e4e3653dea15d1ca32bb8c5ec88c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50cca18d937510c1118613d75385448f" id="r_a50cca18d937510c1118613d75385448f"><td class="memItemLeft" align="right" valign="top">constexpr const T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a> () const noexcept</td></tr>
+<tr class="separator:a50cca18d937510c1118613d75385448f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1b6b948a5c49962e0edeecdaf6d49c4" id="r_af1b6b948a5c49962e0edeecdaf6d49c4"><td class="memItemLeft" align="right" valign="top">constexpr T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#af1b6b948a5c49962e0edeecdaf6d49c4">native</a> () noexcept</td></tr>
+<tr class="separator:af1b6b948a5c49962e0edeecdaf6d49c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7de21fbc3cff233c7677d4ceac7faf3d" id="r_a7de21fbc3cff233c7677d4ceac7faf3d"><td class="memItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#a7de21fbc3cff233c7677d4ceac7faf3d">clear</a> () noexcept</td></tr>
+<tr class="separator:a7de21fbc3cff233c7677d4ceac7faf3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="related" name="related"></a>
 Related Symbols</h2></td></tr>
 <tr><td class="ititle" colspan="2"><p>(Note that these are not member symbols.) </p>
 </td></tr>
-<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
-<tr class="memitem:ga589f68cd36562d9d2218535817c26dfe" id="r_ga589f68cd36562d9d2218535817c26dfe"><td class="memTemplParams" colspan="2">template&lt;typename WrapperType , typename <a class="el" href="classopcua_1_1Wrapper.html#abe09db5fb8ab2aded84e0f8e85e5bc99">NativeType</a>  = typename WrapperType::NativeType&gt; </td></tr>
-<tr class="memitem:ga589f68cd36562d9d2218535817c26dfe"><td class="memTemplItemLeft" align="right" valign="top">constexpr WrapperType *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#ga589f68cd36562d9d2218535817c26dfe">asWrapper</a> (<a class="el" href="classopcua_1_1Wrapper.html#abe09db5fb8ab2aded84e0f8e85e5bc99">NativeType</a> *<a class="el" href="classopcua_1_1Wrapper.html#a92e11d213ccb567b47eb94271095ee15">native</a>) noexcept</td></tr>
-<tr class="separator:ga589f68cd36562d9d2218535817c26dfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8acec8c7b8dbbbc422ab496b7b552b30" id="r_ga8acec8c7b8dbbbc422ab496b7b552b30"><td class="memTemplParams" colspan="2">template&lt;typename WrapperType , typename <a class="el" href="classopcua_1_1Wrapper.html#abe09db5fb8ab2aded84e0f8e85e5bc99">NativeType</a>  = typename WrapperType::NativeType&gt; </td></tr>
-<tr class="memitem:ga8acec8c7b8dbbbc422ab496b7b552b30"><td class="memTemplItemLeft" align="right" valign="top">constexpr const WrapperType *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#ga8acec8c7b8dbbbc422ab496b7b552b30">asWrapper</a> (const <a class="el" href="classopcua_1_1Wrapper.html#abe09db5fb8ab2aded84e0f8e85e5bc99">NativeType</a> *<a class="el" href="classopcua_1_1Wrapper.html#a92e11d213ccb567b47eb94271095ee15">native</a>) noexcept</td></tr>
-<tr class="separator:ga8acec8c7b8dbbbc422ab496b7b552b30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1bd3cc01e80648e5fc98fbb9181971d4" id="r_ga1bd3cc01e80648e5fc98fbb9181971d4"><td class="memTemplParams" colspan="2">template&lt;typename WrapperType , typename <a class="el" href="classopcua_1_1Wrapper.html#abe09db5fb8ab2aded84e0f8e85e5bc99">NativeType</a>  = typename WrapperType::NativeType&gt; </td></tr>
-<tr class="memitem:ga1bd3cc01e80648e5fc98fbb9181971d4"><td class="memTemplItemLeft" align="right" valign="top">constexpr WrapperType &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#ga1bd3cc01e80648e5fc98fbb9181971d4">asWrapper</a> (<a class="el" href="classopcua_1_1Wrapper.html#abe09db5fb8ab2aded84e0f8e85e5bc99">NativeType</a> &amp;<a class="el" href="classopcua_1_1Wrapper.html#a92e11d213ccb567b47eb94271095ee15">native</a>) noexcept</td></tr>
-<tr class="separator:ga1bd3cc01e80648e5fc98fbb9181971d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4f0f5f23f09e2e42f08c7b05b6140e8b" id="r_ga4f0f5f23f09e2e42f08c7b05b6140e8b"><td class="memTemplParams" colspan="2">template&lt;typename WrapperType , typename <a class="el" href="classopcua_1_1Wrapper.html#abe09db5fb8ab2aded84e0f8e85e5bc99">NativeType</a>  = typename WrapperType::NativeType&gt; </td></tr>
-<tr class="memitem:ga4f0f5f23f09e2e42f08c7b05b6140e8b"><td class="memTemplItemLeft" align="right" valign="top">constexpr const WrapperType &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#ga4f0f5f23f09e2e42f08c7b05b6140e8b">asWrapper</a> (const <a class="el" href="classopcua_1_1Wrapper.html#abe09db5fb8ab2aded84e0f8e85e5bc99">NativeType</a> &amp;<a class="el" href="classopcua_1_1Wrapper.html#a92e11d213ccb567b47eb94271095ee15">native</a>) noexcept</td></tr>
-<tr class="separator:ga4f0f5f23f09e2e42f08c7b05b6140e8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4a1031854a8b19c30e4a9a23f1ab1b88" id="r_ga4a1031854a8b19c30e4a9a23f1ab1b88"><td class="memTemplParams" colspan="2">template&lt;typename WrapperType , typename <a class="el" href="classopcua_1_1Wrapper.html#abe09db5fb8ab2aded84e0f8e85e5bc99">NativeType</a>  = typename WrapperType::NativeType&gt; </td></tr>
-<tr class="memitem:ga4a1031854a8b19c30e4a9a23f1ab1b88"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="classopcua_1_1Wrapper.html#abe09db5fb8ab2aded84e0f8e85e5bc99">NativeType</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#ga4a1031854a8b19c30e4a9a23f1ab1b88">asNative</a> (WrapperType *wrapper) noexcept</td></tr>
-<tr class="separator:ga4a1031854a8b19c30e4a9a23f1ab1b88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gafd010404aac6fe48d126d4e2ea2e126e" id="r_gafd010404aac6fe48d126d4e2ea2e126e"><td class="memTemplParams" colspan="2">template&lt;typename WrapperType , typename <a class="el" href="classopcua_1_1Wrapper.html#abe09db5fb8ab2aded84e0f8e85e5bc99">NativeType</a>  = typename WrapperType::NativeType&gt; </td></tr>
-<tr class="memitem:gafd010404aac6fe48d126d4e2ea2e126e"><td class="memTemplItemLeft" align="right" valign="top">constexpr const <a class="el" href="classopcua_1_1Wrapper.html#abe09db5fb8ab2aded84e0f8e85e5bc99">NativeType</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#gafd010404aac6fe48d126d4e2ea2e126e">asNative</a> (const WrapperType *wrapper) noexcept</td></tr>
-<tr class="separator:gafd010404aac6fe48d126d4e2ea2e126e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga766175df3bc943fa64e988f7961c1324" id="r_ga766175df3bc943fa64e988f7961c1324"><td class="memTemplParams" colspan="2">template&lt;typename WrapperType , typename <a class="el" href="classopcua_1_1Wrapper.html#abe09db5fb8ab2aded84e0f8e85e5bc99">NativeType</a>  = typename WrapperType::NativeType&gt; </td></tr>
-<tr class="memitem:ga766175df3bc943fa64e988f7961c1324"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="classopcua_1_1Wrapper.html#abe09db5fb8ab2aded84e0f8e85e5bc99">NativeType</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#ga766175df3bc943fa64e988f7961c1324">asNative</a> (WrapperType &amp;wrapper) noexcept</td></tr>
-<tr class="separator:ga766175df3bc943fa64e988f7961c1324"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8fa7c9559ee6cc6584ecaac9f52087d5" id="r_ga8fa7c9559ee6cc6584ecaac9f52087d5"><td class="memTemplParams" colspan="2">template&lt;typename WrapperType , typename <a class="el" href="classopcua_1_1Wrapper.html#abe09db5fb8ab2aded84e0f8e85e5bc99">NativeType</a>  = typename WrapperType::NativeType&gt; </td></tr>
-<tr class="memitem:ga8fa7c9559ee6cc6584ecaac9f52087d5"><td class="memTemplItemLeft" align="right" valign="top">constexpr const <a class="el" href="classopcua_1_1Wrapper.html#abe09db5fb8ab2aded84e0f8e85e5bc99">NativeType</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#ga8fa7c9559ee6cc6584ecaac9f52087d5">asNative</a> (const WrapperType &amp;wrapper) noexcept</td></tr>
-<tr class="separator:ga8fa7c9559ee6cc6584ecaac9f52087d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac28a131007f1160ae702aa5124f8a9ea" id="r_gac28a131007f1160ae702aa5124f8a9ea"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:gac28a131007f1160ae702aa5124f8a9ea"><td class="memTemplItemLeft" align="right" valign="top">constexpr T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#gac28a131007f1160ae702aa5124f8a9ea">asWrapper</a> (typename T::NativeType *<a class="el" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>) noexcept</td></tr>
+<tr class="separator:gac28a131007f1160ae702aa5124f8a9ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga196e92fb2542d79b3e6d9d43112d826e" id="r_ga196e92fb2542d79b3e6d9d43112d826e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ga196e92fb2542d79b3e6d9d43112d826e"><td class="memTemplItemLeft" align="right" valign="top">constexpr const T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#ga196e92fb2542d79b3e6d9d43112d826e">asWrapper</a> (const typename T::NativeType *<a class="el" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>) noexcept</td></tr>
+<tr class="separator:ga196e92fb2542d79b3e6d9d43112d826e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga00a9bab173a14faab93999c820247716" id="r_ga00a9bab173a14faab93999c820247716"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ga00a9bab173a14faab93999c820247716"><td class="memTemplItemLeft" align="right" valign="top">constexpr T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#ga00a9bab173a14faab93999c820247716">asWrapper</a> (typename T::NativeType &amp;<a class="el" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>) noexcept</td></tr>
+<tr class="separator:ga00a9bab173a14faab93999c820247716"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4f5890abbe0d6b9fd6cbff051137f0d6" id="r_ga4f5890abbe0d6b9fd6cbff051137f0d6"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ga4f5890abbe0d6b9fd6cbff051137f0d6"><td class="memTemplItemLeft" align="right" valign="top">constexpr const T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#ga4f5890abbe0d6b9fd6cbff051137f0d6">asWrapper</a> (const typename T::NativeType &amp;<a class="el" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>) noexcept</td></tr>
+<tr class="separator:ga4f5890abbe0d6b9fd6cbff051137f0d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga50b605af15e16113ff43aa58efc24e45" id="r_ga50b605af15e16113ff43aa58efc24e45"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ga50b605af15e16113ff43aa58efc24e45"><td class="memTemplItemLeft" align="right" valign="top">constexpr T::NativeType *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#ga50b605af15e16113ff43aa58efc24e45">asNative</a> (T *wrapper) noexcept</td></tr>
+<tr class="separator:ga50b605af15e16113ff43aa58efc24e45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadcda7d3bfbcf6d894e0c6daf635a3cf8" id="r_gadcda7d3bfbcf6d894e0c6daf635a3cf8"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:gadcda7d3bfbcf6d894e0c6daf635a3cf8"><td class="memTemplItemLeft" align="right" valign="top">constexpr const T::NativeType *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#gadcda7d3bfbcf6d894e0c6daf635a3cf8">asNative</a> (const T *wrapper) noexcept</td></tr>
+<tr class="separator:gadcda7d3bfbcf6d894e0c6daf635a3cf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae3a5281e6a400e5764608745da73ceb9" id="r_gae3a5281e6a400e5764608745da73ceb9"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:gae3a5281e6a400e5764608745da73ceb9"><td class="memTemplItemLeft" align="right" valign="top">constexpr T::NativeType &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#gae3a5281e6a400e5764608745da73ceb9">asNative</a> (T &amp;wrapper) noexcept</td></tr>
+<tr class="separator:gae3a5281e6a400e5764608745da73ceb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaeaf45806bd42f6c64271653a838c2a55" id="r_gaeaf45806bd42f6c64271653a838c2a55"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:gaeaf45806bd42f6c64271653a838c2a55"><td class="memTemplItemLeft" align="right" valign="top">constexpr const T::NativeType &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#gaeaf45806bd42f6c64271653a838c2a55">asNative</a> (const T &amp;wrapper) noexcept</td></tr>
+<tr class="separator:gaeaf45806bd42f6c64271653a838c2a55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="abe09db5fb8ab2aded84e0f8e85e5bc99" name="abe09db5fb8ab2aded84e0f8e85e5bc99"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abe09db5fb8ab2aded84e0f8e85e5bc99">&#9670;&#160;</a></span>NativeType</h2>
+<a id="aba233c36b2aa1e8afd6b150685ee86f6" name="aba233c36b2aa1e8afd6b150685ee86f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba233c36b2aa1e8afd6b150685ee86f6">&#9670;&#160;</a></span>HandlerType</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T , typename Handler  = TypeHandler&lt;T&gt;&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T &gt;::NativeType =  T</td>
+          <td class="memname">using <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T, Handler &gt;::HandlerType =  Handler</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00037">37</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00142">142</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
 
 </div>
 </div>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="adfa9bcbbbc5f81f1fac810771fd69007" name="adfa9bcbbbc5f81f1fac810771fd69007"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adfa9bcbbbc5f81f1fac810771fd69007">&#9670;&#160;</a></span>Wrapper() <span class="overload">[1/3]</span></h2>
+<a id="ab2d8c6254361dc3930901802d060feff" name="ab2d8c6254361dc3930901802d060feff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2d8c6254361dc3930901802d060feff">&#9670;&#160;</a></span>NativeType</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T , typename Handler  = TypeHandler&lt;T&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T, Handler &gt;::NativeType =  T</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00141">141</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a5ae4187c8217bcc57b39428d3034c5ab" name="a5ae4187c8217bcc57b39428d3034c5ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ae4187c8217bcc57b39428d3034c5ab">&#9670;&#160;</a></span>Wrapper() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Handler  = TypeHandler&lt;T&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T &gt;::Wrapper </td>
+          <td class="memname">constexpr <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T, Handler &gt;::Wrapper </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -222,19 +270,51 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="ad48ac1eba6304bd65aafb5886f954e9b" name="ad48ac1eba6304bd65aafb5886f954e9b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad48ac1eba6304bd65aafb5886f954e9b">&#9670;&#160;</a></span>Wrapper() <span class="overload">[2/3]</span></h2>
+<a id="a336d069e7279489d1a153682bb604684" name="a336d069e7279489d1a153682bb604684"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a336d069e7279489d1a153682bb604684">&#9670;&#160;</a></span>Wrapper() <span class="overload">[2/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T , typename Handler  = TypeHandler&lt;T&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T &gt;::Wrapper </td>
+          <td class="memname">constexpr <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T, Handler &gt;::Wrapper </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1Wrapper.html">Wrapper</a>&lt; T, Handler &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00147">147</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a936835b207eeb371b1bf0c30d7569425" name="a936835b207eeb371b1bf0c30d7569425"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a936835b207eeb371b1bf0c30d7569425">&#9670;&#160;</a></span>Wrapper() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Handler  = TypeHandler&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T, Handler &gt;::Wrapper </td>
           <td>(</td>
           <td class="paramtype">const T &amp;&#160;</td>
           <td class="paramname"><em>native</em></td><td>)</td>
@@ -243,65 +323,64 @@ template&lt;typename T &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Copy constructor with native object. </p>
 
-<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00042">42</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00151">151</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
 
 </div>
 </div>
-<a id="abeb4d5b00ad4a6d3ff7df4cf70163671" name="abeb4d5b00ad4a6d3ff7df4cf70163671"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abeb4d5b00ad4a6d3ff7df4cf70163671">&#9670;&#160;</a></span>Wrapper() <span class="overload">[3/3]</span></h2>
+<a id="acbd0a79eb0f2ae0bac9cb90892c1ad46" name="acbd0a79eb0f2ae0bac9cb90892c1ad46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbd0a79eb0f2ae0bac9cb90892c1ad46">&#9670;&#160;</a></span>Wrapper() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T , typename Handler  = TypeHandler&lt;T&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T &gt;::Wrapper </td>
+          <td class="memname">constexpr <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T, Handler &gt;::Wrapper </td>
           <td>(</td>
-          <td class="paramtype">T &amp;&amp;&#160;</td>
-          <td class="paramname"><em>native</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Wrapper.html">Wrapper</a>&lt; T, Handler &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Move constructor with native object. </p>
+<p>Move constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00046">46</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00155">155</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
 
 </div>
 </div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="a10ab20309bd7993c24fb482a21897f5b" name="a10ab20309bd7993c24fb482a21897f5b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a10ab20309bd7993c24fb482a21897f5b">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+<a id="a43f6e9b2539d0931153cab2566037d21" name="a43f6e9b2539d0931153cab2566037d21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43f6e9b2539d0931153cab2566037d21">&#9670;&#160;</a></span>Wrapper() <span class="overload">[5/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T , typename Handler  = TypeHandler&lt;T&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="classopcua_1_1Wrapper.html">Wrapper</a> &amp; <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T &gt;::operator= </td>
+          <td class="memname">constexpr <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T, Handler &gt;::Wrapper </td>
           <td>(</td>
-          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
           <td class="paramname"><em>native</em></td><td>)</td>
           <td></td>
         </tr>
@@ -313,25 +392,396 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Copy assignment with native object. </p>
+<p>Move constructor with native object. </p>
 
-<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00050">50</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00159">159</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
 
 </div>
 </div>
-<a id="afa4856f12b0f477bcddf91ee87876b0c" name="afa4856f12b0f477bcddf91ee87876b0c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afa4856f12b0f477bcddf91ee87876b0c">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+<a id="a2c901505812438da1b8c868cd8611e3e" name="a2c901505812438da1b8c868cd8611e3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c901505812438da1b8c868cd8611e3e">&#9670;&#160;</a></span>~Wrapper()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T , typename Handler  = TypeHandler&lt;T&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="classopcua_1_1Wrapper.html">Wrapper</a> &amp; <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T &gt;::operator= </td>
+          <td class="memname"><a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T, Handler &gt;::~<a class="el" href="classopcua_1_1Wrapper.html">Wrapper</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a7de21fbc3cff233c7677d4ceac7faf3d" name="a7de21fbc3cff233c7677d4ceac7faf3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7de21fbc3cff233c7677d4ceac7faf3d">&#9670;&#160;</a></span>clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Handler  = TypeHandler&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr void <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T, Handler &gt;::clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00251">251</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="types_8hpp_source.html#l01137">opcua::Variant::assign()</a>, <a class="el" href="wrapper_8hpp_source.html#l00174">opcua::Wrapper&lt; T, Handler &gt;::operator=()</a>, <a class="el" href="wrapper_8hpp_source.html#l00165">opcua::Wrapper&lt; T, Handler &gt;::operator=()</a>, <a class="el" href="wrapper_8hpp_source.html#l00192">opcua::Wrapper&lt; T, Handler &gt;::operator=()</a>, and <a class="el" href="wrapper_8hpp_source.html#l00183">opcua::Wrapper&lt; T, Handler &gt;::operator=()</a>.</p>
+
+</div>
+</div>
+<a id="aa5db128ab43200c32e9b6a3fa243120b" name="aa5db128ab43200c32e9b6a3fa243120b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5db128ab43200c32e9b6a3fa243120b">&#9670;&#160;</a></span>handle() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Handler  = TypeHandler&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr const T * <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T, Handler &gt;::handle </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return pointer to native object. </p>
+
+<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00226">226</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a340615392827f2f54e03ee8f27b67eb9" name="a340615392827f2f54e03ee8f27b67eb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a340615392827f2f54e03ee8f27b67eb9">&#9670;&#160;</a></span>handle() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Handler  = TypeHandler&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr T * <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T, Handler &gt;::handle </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return pointer to native object. </p>
+
+<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00221">221</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="types_8hpp_source.html#l01284">opcua::Variant::arrayDimensions()</a>, <a class="el" href="types_8hpp_source.html#l01279">opcua::Variant::arrayLength()</a>, <a class="el" href="types_8hpp_source.html#l01304">opcua::Variant::data()</a>, <a class="el" href="types_8hpp_source.html#l01299">opcua::Variant::data()</a>, <a class="el" href="types_8hpp_source.html#l01882">opcua::ExtensionObject::decodedData()</a>, <a class="el" href="types_8hpp_source.html#l01873">opcua::ExtensionObject::decodedData()</a>, <a class="el" href="types_8hpp_source.html#l01848">opcua::ExtensionObject::decodedType()</a>, <a class="el" href="types_8hpp_source.html#l01238">opcua::Variant::empty()</a>, <a class="el" href="types_8hpp_source.html#l01801">opcua::ExtensionObject::empty()</a>, <a class="el" href="types_8hpp_source.html#l01832">opcua::ExtensionObject::encodedBinary()</a>, <a class="el" href="types_8hpp_source.html#l01824">opcua::ExtensionObject::encodedTypeId()</a>, <a class="el" href="types_8hpp_source.html#l01840">opcua::ExtensionObject::encodedXml()</a>, <a class="el" href="types_8hpp_source.html#l01818">opcua::ExtensionObject::encoding()</a>, <a class="el" href="ua_2types_8hpp_source.html#l00099">opcua::ua::EnumValueType::EnumValueType()</a>, <a class="el" href="types_8hpp_source.html#l01792">opcua::ExtensionObject::ExtensionObject()</a>, <a class="el" href="types_8hpp_source.html#l01768">opcua::ExtensionObject::ExtensionObject()</a>, <a class="el" href="types_8hpp_source.html#l00697">opcua::NodeId::hash()</a>, <a class="el" href="types_8hpp_source.html#l00726">opcua::NodeId::identifierIf()</a>, <a class="el" href="types_8hpp_source.html#l00705">opcua::NodeId::identifierType()</a>, <a class="el" href="types_8hpp_source.html#l01812">opcua::ExtensionObject::isDecoded()</a>, <a class="el" href="types_8hpp_source.html#l01806">opcua::ExtensionObject::isEncoded()</a>, <a class="el" href="types_8hpp_source.html#l00693">opcua::NodeId::isNull()</a>, <a class="el" href="types_8hpp_source.html#l01243">opcua::Variant::isScalar()</a>, <a class="el" href="types_8hpp_source.html#l00701">opcua::NodeId::namespaceIndex()</a>, <a class="el" href="types_8hpp_source.html#l00667">opcua::NodeId::NodeId()</a>, <a class="el" href="types_8hpp_source.html#l00660">opcua::NodeId::NodeId()</a>, <a class="el" href="types_8hpp_source.html#l00653">opcua::NodeId::NodeId()</a>, <a class="el" href="types_8hpp_source.html#l00646">opcua::NodeId::NodeId()</a>, <a class="el" href="types_8hpp_source.html#l00505">opcua::Guid::parse()</a>, <a class="el" href="types_8hpp_source.html#l00686">opcua::NodeId::parse()</a>, <a class="el" href="types_8hpp_source.html#l02098">opcua::TypeWrapper&lt; T, Index &gt;::toString()</a>, and <a class="el" href="types_8hpp_source.html#l01274">opcua::Variant::type()</a>.</p>
+
+</div>
+</div>
+<a id="a50cca18d937510c1118613d75385448f" name="a50cca18d937510c1118613d75385448f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50cca18d937510c1118613d75385448f">&#9670;&#160;</a></span>native() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Handler  = TypeHandler&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr const T &amp; <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T, Handler &gt;::native </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00243">243</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="types_8hpp_source.html#l02030">opcua::NumericRange::operator=()</a>, <a class="el" href="wrapper_8hpp_source.html#l00174">opcua::Wrapper&lt; T, Handler &gt;::operator=()</a>, <a class="el" href="wrapper_8hpp_source.html#l00165">opcua::Wrapper&lt; T, Handler &gt;::operator=()</a>, <a class="el" href="wrapper_8hpp_source.html#l00192">opcua::Wrapper&lt; T, Handler &gt;::operator=()</a>, <a class="el" href="wrapper_8hpp_source.html#l00183">opcua::Wrapper&lt; T, Handler &gt;::operator=()</a>, <a class="el" href="wrapper_8hpp_source.html#l00237">opcua::Wrapper&lt; T, Handler &gt;::swap()</a>, <a class="el" href="wrapper_8hpp_source.html#l00231">opcua::Wrapper&lt; T, Handler &gt;::swap()</a>, and <a class="el" href="wrapper_8hpp_source.html#l00159">opcua::Wrapper&lt; T, Handler &gt;::Wrapper()</a>.</p>
+
+</div>
+</div>
+<a id="af1b6b948a5c49962e0edeecdaf6d49c4" name="af1b6b948a5c49962e0edeecdaf6d49c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1b6b948a5c49962e0edeecdaf6d49c4">&#9670;&#160;</a></span>native() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Handler  = TypeHandler&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr T &amp; <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T, Handler &gt;::native </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00247">247</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a10948898750d3adb06e2ef7debc32529" name="a10948898750d3adb06e2ef7debc32529"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10948898750d3adb06e2ef7debc32529">&#9670;&#160;</a></span>operator const T &amp;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Handler  = TypeHandler&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T, Handler &gt;::operator const T &amp; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implicit conversion to native object. </p>
+
+<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00206">206</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a6079a04f9992ac57cd911769e2ddf5b8" name="a6079a04f9992ac57cd911769e2ddf5b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6079a04f9992ac57cd911769e2ddf5b8">&#9670;&#160;</a></span>operator T&amp;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Handler  = TypeHandler&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T, Handler &gt;::operator T&amp; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implicit conversion to native object. </p>
+
+<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00201">201</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
+
+</div>
+</div>
+<a id="af702af0eaeb490f77f80174a17b78c43" name="af702af0eaeb490f77f80174a17b78c43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af702af0eaeb490f77f80174a17b78c43">&#9670;&#160;</a></span>operator-&gt;() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Handler  = TypeHandler&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr const T * <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T, Handler &gt;::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Member access to native object. </p>
+
+<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00216">216</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aef233ceb40fcb95ead0c8703c11b28e9" name="aef233ceb40fcb95ead0c8703c11b28e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef233ceb40fcb95ead0c8703c11b28e9">&#9670;&#160;</a></span>operator-&gt;() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Handler  = TypeHandler&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr T * <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T, Handler &gt;::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Member access to native object. </p>
+
+<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00211">211</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a2908144b4211b3e9b581c34ff01ac4f3" name="a2908144b4211b3e9b581c34ff01ac4f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2908144b4211b3e9b581c34ff01ac4f3">&#9670;&#160;</a></span>operator=() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Handler  = TypeHandler&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classopcua_1_1Wrapper.html">Wrapper</a> &amp; <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T, Handler &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>native</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy assignment with native object. </p>
+
+<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00174">174</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a6615ada0924da6c55c3f5ab35287f92a" name="a6615ada0924da6c55c3f5ab35287f92a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6615ada0924da6c55c3f5ab35287f92a">&#9670;&#160;</a></span>operator=() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Handler  = TypeHandler&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classopcua_1_1Wrapper.html">Wrapper</a> &amp; <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T, Handler &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1Wrapper.html">Wrapper</a>&lt; T, Handler &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy assignment. </p>
+
+<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00165">165</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a269edac2dda653f541d2f985e60e8300" name="a269edac2dda653f541d2f985e60e8300"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a269edac2dda653f541d2f985e60e8300">&#9670;&#160;</a></span>operator=() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Handler  = TypeHandler&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classopcua_1_1Wrapper.html">Wrapper</a> &amp; <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T, Handler &gt;::operator= </td>
           <td>(</td>
           <td class="paramtype">T &amp;&amp;&#160;</td>
           <td class="paramname"><em>native</em></td><td>)</td>
@@ -347,213 +797,25 @@ template&lt;typename T &gt; </div>
 
 <p>Move assignment with native object. </p>
 
-<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00056">56</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00192">192</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a13d9ca3204e1d86b8a964528ae64eb83" name="a13d9ca3204e1d86b8a964528ae64eb83"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a13d9ca3204e1d86b8a964528ae64eb83">&#9670;&#160;</a></span>operator T&amp;()</h2>
+<a id="aea8d70822ba9b2212448e0fe375d034d" name="aea8d70822ba9b2212448e0fe375d034d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea8d70822ba9b2212448e0fe375d034d">&#9670;&#160;</a></span>operator=() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T , typename Handler  = TypeHandler&lt;T&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T &gt;::operator T&amp; </td>
+          <td class="memname">constexpr <a class="el" href="classopcua_1_1Wrapper.html">Wrapper</a> &amp; <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T, Handler &gt;::operator= </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implicit conversion to native object. </p>
-
-<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00062">62</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a0627028f7f1cbd3ad7cf7af54f0e4398" name="a0627028f7f1cbd3ad7cf7af54f0e4398"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0627028f7f1cbd3ad7cf7af54f0e4398">&#9670;&#160;</a></span>operator const T &amp;()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T &gt;::operator const T &amp; </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implicit conversion to native object. </p>
-
-<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00067">67</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a69fc9b6017ae88c2dc64bf094efff806" name="a69fc9b6017ae88c2dc64bf094efff806"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a69fc9b6017ae88c2dc64bf094efff806">&#9670;&#160;</a></span>operator-&gt;() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr T * <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T &gt;::operator-&gt; </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Member access to native object. </p>
-
-<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00072">72</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a27cc17f5103dadb0bb35eeafde062cc0" name="a27cc17f5103dadb0bb35eeafde062cc0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a27cc17f5103dadb0bb35eeafde062cc0">&#9670;&#160;</a></span>operator-&gt;() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const T * <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T &gt;::operator-&gt; </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Member access to native object. </p>
-
-<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00077">77</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
-
-</div>
-</div>
-<a id="aaa0b3bd9c7b644f3c99f7bf841565faa" name="aaa0b3bd9c7b644f3c99f7bf841565faa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa0b3bd9c7b644f3c99f7bf841565faa">&#9670;&#160;</a></span>handle() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr T * <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T &gt;::handle </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Return pointer to native object. </p>
-
-<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00082">82</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="types_8hpp_source.html#l02399">opcua::DiagnosticInfo::additionalInfo()</a>, <a class="el" href="types_8hpp_source.html#l01597">opcua::Variant::array()</a>, <a class="el" href="types_8hpp_source.html#l01607">opcua::Variant::array()</a>, <a class="el" href="types_8hpp_source.html#l01514">opcua::Variant::arrayDimensions()</a>, <a class="el" href="types_8hpp_source.html#l01503">opcua::Variant::arrayLength()</a>, <a class="el" href="types_8hpp_source.html#l01538">opcua::Variant::data()</a>, <a class="el" href="types_8hpp_source.html#l01533">opcua::Variant::data()</a>, <a class="el" href="types_8hpp_source.html#l02294">opcua::ExtensionObject::decodedData()</a>, <a class="el" href="types_8hpp_source.html#l02285">opcua::ExtensionObject::decodedData()</a>, <a class="el" href="types_8hpp_source.html#l02240">opcua::ExtensionObject::decodedType()</a>, <a class="el" href="types_8hpp_source.html#l01445">opcua::Variant::empty()</a>, <a class="el" href="types_8hpp_source.html#l02167">opcua::ExtensionObject::empty()</a>, <a class="el" href="types_8hpp_source.html#l02216">opcua::ExtensionObject::encodedBinary()</a>, <a class="el" href="types_8hpp_source.html#l02202">opcua::ExtensionObject::encodedTypeId()</a>, <a class="el" href="types_8hpp_source.html#l02224">opcua::ExtensionObject::encodedXml()</a>, <a class="el" href="types_8hpp_source.html#l02190">opcua::ExtensionObject::encoding()</a>, <a class="el" href="ua_2types_8hpp_source.html#l00139">opcua::ua::EnumValueType::EnumValueType()</a>, <a class="el" href="types_8hpp_source.html#l00917">opcua::ExpandedNodeId::ExpandedNodeId()</a>, <a class="el" href="types_8hpp_source.html#l00921">opcua::ExpandedNodeId::ExpandedNodeId()</a>, <a class="el" href="types_8hpp_source.html#l02144">opcua::ExtensionObject::ExtensionObject()</a>, <a class="el" href="types_8hpp_source.html#l02120">opcua::ExtensionObject::ExtensionObject()</a>, <a class="el" href="types_8hpp_source.html#l00461">opcua::DateTime::get()</a>, <a class="el" href="types_8hpp_source.html#l02232">opcua::ExtensionObject::getEncodedBody()</a>, <a class="el" href="types_8hpp_source.html#l02347">opcua::DiagnosticInfo::hasAdditionalInfo()</a>, <a class="el" href="types_8hpp_source.html#l00721">opcua::NodeId::hash()</a>, <a class="el" href="types_8hpp_source.html#l00943">opcua::ExpandedNodeId::hash()</a>, <a class="el" href="types_8hpp_source.html#l02355">opcua::DiagnosticInfo::hasInnerDiagnosticInfo()</a>, <a class="el" href="types_8hpp_source.html#l02351">opcua::DiagnosticInfo::hasInnerStatusCode()</a>, <a class="el" href="types_8hpp_source.html#l02343">opcua::DiagnosticInfo::hasLocale()</a>, <a class="el" href="types_8hpp_source.html#l02339">opcua::DiagnosticInfo::hasLocalizedText()</a>, <a class="el" href="types_8hpp_source.html#l02335">opcua::DiagnosticInfo::hasNamespaceUri()</a>, <a class="el" href="types_8hpp_source.html#l01959">opcua::DataValue::hasServerPicoseconds()</a>, <a class="el" href="types_8hpp_source.html#l01951">opcua::DataValue::hasServerTimestamp()</a>, <a class="el" href="types_8hpp_source.html#l01955">opcua::DataValue::hasSourcePicoseconds()</a>, <a class="el" href="types_8hpp_source.html#l01947">opcua::DataValue::hasSourceTimestamp()</a>, <a class="el" href="types_8hpp_source.html#l01963">opcua::DataValue::hasStatus()</a>, <a class="el" href="types_8hpp_source.html#l02331">opcua::DiagnosticInfo::hasSymbolicId()</a>, <a class="el" href="types_8hpp_source.html#l01943">opcua::DataValue::hasValue()</a>, <a class="el" href="types_8hpp_source.html#l00762">opcua::NodeId::identifierIf()</a>, <a class="el" href="types_8hpp_source.html#l00735">opcua::NodeId::identifierType()</a>, <a class="el" href="types_8hpp_source.html#l02419">opcua::DiagnosticInfo::innerDiagnosticInfo()</a>, <a class="el" href="types_8hpp_source.html#l02409">opcua::DiagnosticInfo::innerStatusCode()</a>, <a class="el" href="types_8hpp_source.html#l02184">opcua::ExtensionObject::isDecoded()</a>, <a class="el" href="types_8hpp_source.html#l02178">opcua::ExtensionObject::isEncoded()</a>, <a class="el" href="types_8hpp_source.html#l00939">opcua::ExpandedNodeId::isLocal()</a>, <a class="el" href="types_8hpp_source.html#l00717">opcua::NodeId::isNull()</a>, <a class="el" href="types_8hpp_source.html#l01456">opcua::Variant::isScalar()</a>, <a class="el" href="types_8hpp_source.html#l01481">opcua::Variant::isType()</a>, <a class="el" href="types_8hpp_source.html#l01469">opcua::Variant::isType()</a>, <a class="el" href="types_8hpp_source.html#l01088">opcua::LocalizedText::locale()</a>, <a class="el" href="types_8hpp_source.html#l02389">opcua::DiagnosticInfo::locale()</a>, <a class="el" href="types_8hpp_source.html#l02379">opcua::DiagnosticInfo::localizedText()</a>, <a class="el" href="types_8hpp_source.html#l01083">opcua::LocalizedText::LocalizedText()</a>, <a class="el" href="types_8hpp_source.html#l01047">opcua::QualifiedName::name()</a>, <a class="el" href="types_8hpp_source.html#l00725">opcua::NodeId::namespaceIndex()</a>, <a class="el" href="types_8hpp_source.html#l01037">opcua::QualifiedName::namespaceIndex()</a>, <a class="el" href="types_8hpp_source.html#l00967">opcua::ExpandedNodeId::namespaceUri()</a>, <a class="el" href="types_8hpp_source.html#l02369">opcua::DiagnosticInfo::namespaceUri()</a>, <a class="el" href="types_8hpp_source.html#l00951">opcua::ExpandedNodeId::nodeId()</a>, <a class="el" href="types_8hpp_source.html#l00947">opcua::ExpandedNodeId::nodeId()</a>, <a class="el" href="types_8hpp_source.html#l00691">opcua::NodeId::NodeId()</a>, <a class="el" href="types_8hpp_source.html#l00684">opcua::NodeId::NodeId()</a>, <a class="el" href="types_8hpp_source.html#l00677">opcua::NodeId::NodeId()</a>, <a class="el" href="types_8hpp_source.html#l00670">opcua::NodeId::NodeId()</a>, <a class="el" href="types_8hpp_source.html#l00523">opcua::Guid::parse()</a>, <a class="el" href="types_8hpp_source.html#l00710">opcua::NodeId::parse()</a>, <a class="el" href="types_8hpp_source.html#l00932">opcua::ExpandedNodeId::parse()</a>, <a class="el" href="types_8hpp_source.html#l01032">opcua::QualifiedName::QualifiedName()</a>, <a class="el" href="types_8hpp_source.html#l01545">opcua::Variant::scalar()</a>, <a class="el" href="types_8hpp_source.html#l01554">opcua::Variant::scalar()</a>, <a class="el" href="types_8hpp_source.html#l00977">opcua::ExpandedNodeId::serverIndex()</a>, <a class="el" href="types_8hpp_source.html#l02045">opcua::DataValue::serverPicoseconds()</a>, <a class="el" href="types_8hpp_source.html#l02023">opcua::DataValue::serverTimestamp()</a>, <a class="el" href="types_8hpp_source.html#l01932">opcua::DataValue::setServerPicoseconds()</a>, <a class="el" href="types_8hpp_source.html#l01920">opcua::DataValue::setServerTimestamp()</a>, <a class="el" href="types_8hpp_source.html#l01926">opcua::DataValue::setSourcePicoseconds()</a>, <a class="el" href="types_8hpp_source.html#l01914">opcua::DataValue::setSourceTimestamp()</a>, <a class="el" href="types_8hpp_source.html#l01938">opcua::DataValue::setStatus()</a>, <a class="el" href="types_8hpp_source.html#l01902">opcua::DataValue::setValue()</a>, <a class="el" href="types_8hpp_source.html#l01908">opcua::DataValue::setValue()</a>, <a class="el" href="types_8hpp_source.html#l02034">opcua::DataValue::sourcePicoseconds()</a>, <a class="el" href="types_8hpp_source.html#l02012">opcua::DataValue::sourceTimestamp()</a>, <a class="el" href="types_8hpp_source.html#l02056">opcua::DataValue::status()</a>, <a class="el" href="types_8hpp_source.html#l02359">opcua::DiagnosticInfo::symbolicId()</a>, <a class="el" href="types_8hpp_source.html#l01098">opcua::LocalizedText::text()</a>, <a class="el" href="types_8hpp_source.html#l02560">opcua::TypeWrapper&lt; T, Index &gt;::toString()</a>, <a class="el" href="types_8hpp_source.html#l01492">opcua::Variant::type()</a>, <a class="el" href="types_8hpp_source.html#l01968">opcua::DataValue::value()</a>, and <a class="el" href="types_8hpp_source.html#l01973">opcua::DataValue::value()</a>.</p>
-
-</div>
-</div>
-<a id="a9bc89b771edb05d95fc9b23a5abd23e2" name="a9bc89b771edb05d95fc9b23a5abd23e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9bc89b771edb05d95fc9b23a5abd23e2">&#9670;&#160;</a></span>handle() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const T * <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T &gt;::handle </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Return pointer to native object. </p>
-
-<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00087">87</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a1f32ca32e122a070b3154326d6610b27" name="a1f32ca32e122a070b3154326d6610b27"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f32ca32e122a070b3154326d6610b27">&#9670;&#160;</a></span>swap() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr void <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T &gt;::swap </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Wrapper.html">Wrapper</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Wrapper.html">Wrapper</a>&lt; T, Handler &gt; &amp;&amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
@@ -565,25 +827,25 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Swap with wrapper object. </p>
+<p>Move assignment. </p>
 
-<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00092">92</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00183">183</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
 
 </div>
 </div>
-<a id="abc65cc70d4669aef5b0adcb7640b521f" name="abc65cc70d4669aef5b0adcb7640b521f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abc65cc70d4669aef5b0adcb7640b521f">&#9670;&#160;</a></span>swap() <span class="overload">[2/2]</span></h2>
+<a id="adafe39123a7811290fd163cff14409c8" name="adafe39123a7811290fd163cff14409c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adafe39123a7811290fd163cff14409c8">&#9670;&#160;</a></span>swap() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T , typename Handler  = TypeHandler&lt;T&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr void <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T &gt;::swap </td>
+          <td class="memname">constexpr void <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T, Handler &gt;::swap </td>
           <td>(</td>
           <td class="paramtype">T &amp;&#160;</td>
           <td class="paramname"><em>native</em></td><td>)</td>
@@ -599,67 +861,41 @@ template&lt;typename T &gt; </div>
 
 <p>Swap with native object. </p>
 
-<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00097">97</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00237">237</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a92e11d213ccb567b47eb94271095ee15" name="a92e11d213ccb567b47eb94271095ee15"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a92e11d213ccb567b47eb94271095ee15">&#9670;&#160;</a></span>native() <span class="overload">[1/2]</span></h2>
+<a id="ae88205f67fdd76e7955c7cd0190b23db" name="ae88205f67fdd76e7955c7cd0190b23db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae88205f67fdd76e7955c7cd0190b23db">&#9670;&#160;</a></span>swap() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T , typename Handler  = TypeHandler&lt;T&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr const T &amp; <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T &gt;::native </td>
+          <td class="memname">constexpr void <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T, Handler &gt;::swap </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00102">102</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="typewrapper_8hpp_source.html#l00092">opcua::TypeWrapper&lt; T, Index &gt;::clear()</a>, <a class="el" href="types_8hpp_source.html#l02492">opcua::NumericRange::operator=()</a>, <a class="el" href="typewrapper_8hpp_source.html#l00060">opcua::TypeWrapper&lt; T, Index &gt;::operator=()</a>, <a class="el" href="wrapper_8hpp_source.html#l00050">opcua::Wrapper&lt; T &gt;::operator=()</a>, <a class="el" href="typewrapper_8hpp_source.html#l00051">opcua::TypeWrapper&lt; T, Index &gt;::operator=()</a>, <a class="el" href="typewrapper_8hpp_source.html#l00078">opcua::TypeWrapper&lt; T, Index &gt;::operator=()</a>, <a class="el" href="wrapper_8hpp_source.html#l00056">opcua::Wrapper&lt; T &gt;::operator=()</a>, <a class="el" href="typewrapper_8hpp_source.html#l00069">opcua::TypeWrapper&lt; T, Index &gt;::operator=()</a>, <a class="el" href="wrapper_8hpp_source.html#l00097">opcua::Wrapper&lt; T &gt;::swap()</a>, and <a class="el" href="wrapper_8hpp_source.html#l00092">opcua::Wrapper&lt; T &gt;::swap()</a>.</p>
-
-</div>
-</div>
-<a id="aa23e4e3653dea15d1ca32bb8c5ec88c0" name="aa23e4e3653dea15d1ca32bb8c5ec88c0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa23e4e3653dea15d1ca32bb8c5ec88c0">&#9670;&#160;</a></span>native() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr T &amp; <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper</a>&lt; T &gt;::native </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Wrapper.html">Wrapper</a>&lt; T, Handler &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00106">106</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
+<p>Swap with wrapper object. </p>
+
+<p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00231">231</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="wrapper_8hpp_source.html#l00237">opcua::Wrapper&lt; T, Handler &gt;::swap()</a>, and <a class="el" href="wrapper_8hpp_source.html#l00231">opcua::Wrapper&lt; T, Handler &gt;::swap()</a>.</p>
 
 </div>
 </div>

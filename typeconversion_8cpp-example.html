@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -107,13 +107,13 @@ $(function() {
 <div class="line">    <span class="keyword">using </span>NativeType = <a id="a0" name="a0"></a><a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a>;</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// use `const NativeType&amp; src` for non-primitive types</span></div>
-<div class="line">    <span class="keyword">static</span> <span class="keywordtype">void</span> fromNative(<a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a> src, std::byte&amp; dst) {</div>
-<div class="line">        dst = std::byte(src);</div>
+<div class="line">    [[nodiscard]] <span class="keyword">static</span> std::byte fromNative(<a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a> src) <span class="keyword">noexcept</span> {</div>
+<div class="line">        <span class="keywordflow">return</span> std::byte{src};</div>
 <div class="line">    }</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// use `const ValueType&amp; src` for non-primitive types</span></div>
-<div class="line">    <span class="keyword">static</span> <span class="keywordtype">void</span> toNative(std::byte src, <a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a>&amp; dst) {</div>
-<div class="line">        dst = std::to_integer&lt;UA_Byte&gt;(src);</div>
+<div class="line">    [[nodiscard]] <span class="keyword">static</span> <a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a> toNative(std::byte src) <span class="keyword">noexcept</span> {</div>
+<div class="line">        <span class="keywordflow">return</span> std::to_integer&lt;UA_Byte&gt;(src);</div>
 <div class="line">    }</div>
 <div class="line">};</div>
 <div class="line"> </div>
@@ -132,7 +132,7 @@ $(function() {
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Byte value: &quot;</span> &lt;&lt; <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(valueNative) &lt;&lt; std::endl;</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Read std::byte from variant (copy and conversion required)</span></div>
-<div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> value = variant.<a id="a4" name="a4"></a><a class="code hl_function" href="classopcua_1_1Variant.html#a7a8d6e72e3c49143d6a447bfd0143f3a">to</a>&lt;std::byte&gt;();</div>
+<div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> value = variant.<a id="a4" name="a4"></a><a class="code hl_function" href="classopcua_1_1Variant.html#a4808e41aa0efe6fec911570ccf94763c">to</a>&lt;std::byte&gt;();</div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Byte value: &quot;</span> &lt;&lt; std::to_integer&lt;int&gt;(value) &lt;&lt; std::endl;</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Write array of bytes to variant</span></div>
@@ -143,12 +143,12 @@ $(function() {
 <div class="line"> </div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Array size: &quot;</span> &lt;&lt; variant.<a id="a7" name="a7"></a><a class="code hl_function" href="classopcua_1_1Variant.html#a9445f0b8223e3e30146346fdd11120b7">arrayLength</a>() &lt;&lt; std::endl;</div>
 <div class="line">}</div>
-<div class="ttc" id="aclassopcua_1_1Span_html"><div class="ttname"><a href="classopcua_1_1Span.html">opcua::Span</a></div><div class="ttdoc">View to a contiguous sequence of objects, similar to std::span in C++20.</div><div class="ttdef"><b>Definition</b> <a href="span_8hpp_source.html#l00030">span.hpp:30</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Span_html_aea56eccbf59d0064d08f6a3c1f914179"><div class="ttname"><a href="classopcua_1_1Span.html#aea56eccbf59d0064d08f6a3c1f914179">opcua::Span::data</a></div><div class="ttdeci">constexpr pointer data() const noexcept</div><div class="ttdef"><b>Definition</b> <a href="span_8hpp_source.html#l00101">span.hpp:101</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Variant_html"><div class="ttname"><a href="classopcua_1_1Variant.html">opcua::Variant</a></div><div class="ttdoc">UA_Variant wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l01193">types.hpp:1193</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Variant_html_a7338abca386e569175fb864c3195c031"><div class="ttname"><a href="classopcua_1_1Variant.html#a7338abca386e569175fb864c3195c031">opcua::Variant::scalar</a></div><div class="ttdeci">T &amp; scalar() &amp;</div><div class="ttdoc">Get reference to scalar value with given template type (only native or wrapper types).</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l01545">types.hpp:1545</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Variant_html_a7a8d6e72e3c49143d6a447bfd0143f3a"><div class="ttname"><a href="classopcua_1_1Variant.html#a7a8d6e72e3c49143d6a447bfd0143f3a">opcua::Variant::to</a></div><div class="ttdeci">T to() const</div><div class="ttdoc">Converts the variant to the specified type T with automatic conversion if required.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l01659">types.hpp:1659</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Variant_html_a9445f0b8223e3e30146346fdd11120b7"><div class="ttname"><a href="classopcua_1_1Variant.html#a9445f0b8223e3e30146346fdd11120b7">opcua::Variant::arrayLength</a></div><div class="ttdeci">size_t arrayLength() const noexcept</div><div class="ttdoc">Get array length or 0 if variant is not an array.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l01503">types.hpp:1503</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Span_html"><div class="ttname"><a href="classopcua_1_1Span.html">opcua::Span</a></div><div class="ttdoc">View to a contiguous sequence of objects, similar to std::span in C++20.</div><div class="ttdef"><b>Definition</b> <a href="span_8hpp_source.html#l00029">span.hpp:29</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Span_html_aea56eccbf59d0064d08f6a3c1f914179"><div class="ttname"><a href="classopcua_1_1Span.html#aea56eccbf59d0064d08f6a3c1f914179">opcua::Span::data</a></div><div class="ttdeci">constexpr pointer data() const noexcept</div><div class="ttdef"><b>Definition</b> <a href="span_8hpp_source.html#l00102">span.hpp:102</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html"><div class="ttname"><a href="classopcua_1_1Variant.html">opcua::Variant</a></div><div class="ttdoc">UA_Variant wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l01048">types.hpp:1048</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html_a4808e41aa0efe6fec911570ccf94763c"><div class="ttname"><a href="classopcua_1_1Variant.html#a4808e41aa0efe6fec911570ccf94763c">opcua::Variant::to</a></div><div class="ttdeci">T to() const &amp;</div><div class="ttdoc">Converts the variant to the specified type T with automatic conversion if required.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l01374">types.hpp:1374</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html_a7338abca386e569175fb864c3195c031"><div class="ttname"><a href="classopcua_1_1Variant.html#a7338abca386e569175fb864c3195c031">opcua::Variant::scalar</a></div><div class="ttdeci">T &amp; scalar() &amp;</div><div class="ttdoc">Get scalar value with given template type (only native or wrapper types).</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l01311">types.hpp:1311</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html_a9445f0b8223e3e30146346fdd11120b7"><div class="ttname"><a href="classopcua_1_1Variant.html#a9445f0b8223e3e30146346fdd11120b7">opcua::Variant::arrayLength</a></div><div class="ttdeci">size_t arrayLength() const noexcept</div><div class="ttdoc">Get array length or 0 if variant is not an array.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l01279">types.hpp:1279</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Variant_html_ad747102bcb7a1c77d807bee4d31ccc4e"><div class="ttname"><a href="classopcua_1_1Variant.html#ad747102bcb7a1c77d807bee4d31ccc4e">opcua::Variant::assign</a></div><div class="ttdeci">void assign(std::nullptr_t ptr) noexcept=delete</div></div>
 <div class="ttc" id="anamespaceopcua_html"><div class="ttname"><a href="namespaceopcua.html">opcua</a></div><div class="ttdef"><b>Definition</b> <a href="async_8hpp_source.html#l00011">async.hpp:11</a></div></div>
 <div class="ttc" id="atypeconverter_8hpp_html"><div class="ttname"><a href="typeconverter_8hpp.html">typeconverter.hpp</a></div></div>

@@ -1,7 +1,7 @@
 <map id="opcua::DataValue" name="opcua::DataValue">
-<area shape="rect" id="Node000001" title="UA_DataValue wrapper class." alt="" coords="39,181,175,207"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,79,209,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="110,147,110,181,105,181,105,147"/>
-<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap native objects." alt="" coords="26,5,189,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="110,44,110,79,105,79,105,44"/>
+<area shape="rect" id="Node000001" title="UA_DataValue wrapper class." alt="" coords="56,181,192,207"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap (native) objects." alt="" coords="8,93,240,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,147,127,181,121,181,121,147"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,5,243,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="127,59,127,93,121,93,121,59"/>
 </map>

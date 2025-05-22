@@ -120,35 +120,19 @@ Data Fields</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="pubsub_8h_source.html#l00041">41</a> of file <a class="el" href="pubsub_8h_source.html">pubsub.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
-<a id="a08b66ef2e4a44e2ea33af8f7e90d9df6" name="a08b66ef2e4a44e2ea33af8f7e90d9df6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a08b66ef2e4a44e2ea33af8f7e90d9df6">&#9670;&#160;</a></span>publisherId</h2>
+<a id="a76bbe331a31592b8d84d027dde4a0ad0" name="a76bbe331a31592b8d84d027dde4a0ad0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76bbe331a31592b8d84d027dde4a0ad0">&#9670;&#160;</a></span>close</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> UA_PubSubChannel::publisherId</td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_PubSubChannel::close) (<a class="el" href="structUA__PubSubChannel.html">UA_PubSubChannel</a> *channel)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pubsub_8h_source.html#l00042">42</a> of file <a class="el" href="pubsub_8h_source.html">pubsub.h</a>.</p>
-
-</div>
-</div>
-<a id="aede7ee4ae432e7f638620e2dad6b3209" name="aede7ee4ae432e7f638620e2dad6b3209"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aede7ee4ae432e7f638620e2dad6b3209">&#9670;&#160;</a></span>state</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="pubsub_8h.html#acc235956ae4a42acec899f33129b43c3">UA_PubSubChannelState</a> UA_PubSubChannel::state</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="pubsub_8h_source.html#l00043">43</a> of file <a class="el" href="pubsub_8h_source.html">pubsub.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pubsub_8h_source.html#l00070">70</a> of file <a class="el" href="pubsub_8h_source.html">pubsub.h</a>.</p>
 
 </div>
 </div>
@@ -168,22 +152,6 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="a47a61ee3701b9821c1c139097398074c" name="a47a61ee3701b9821c1c139097398074c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a47a61ee3701b9821c1c139097398074c">&#9670;&#160;</a></span>sockfd</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a> UA_PubSubChannel::sockfd</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="pubsub_8h_source.html#l00045">45</a> of file <a class="el" href="pubsub_8h_source.html">pubsub.h</a>.</p>
-
-</div>
-</div>
 <a id="a0f994577918a209a1c9b9779ccbb877d" name="a0f994577918a209a1c9b9779ccbb877d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0f994577918a209a1c9b9779ccbb877d">&#9670;&#160;</a></span>handle</h2>
 
@@ -200,51 +168,19 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="ae1af647ff9c775d3678d107ce50575ff" name="ae1af647ff9c775d3678d107ce50575ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae1af647ff9c775d3678d107ce50575ff">&#9670;&#160;</a></span>send</h2>
+<a id="a08b66ef2e4a44e2ea33af8f7e90d9df6" name="a08b66ef2e4a44e2ea33af8f7e90d9df6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08b66ef2e4a44e2ea33af8f7e90d9df6">&#9670;&#160;</a></span>publisherId</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_PubSubChannel::send) (<a class="el" href="structUA__PubSubChannel.html">UA_PubSubChannel</a> *channel, <a class="el" href="structUA__ExtensionObject.html">UA_ExtensionObject</a> *transportSettings, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *buf)</td>
+          <td class="memname"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> UA_PubSubChannel::publisherId</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pubsub_8h_source.html#l00052">52</a> of file <a class="el" href="pubsub_8h_source.html">pubsub.h</a>.</p>
-
-</div>
-</div>
-<a id="aa7564ac19cece81dd8bab3458de5b74a" name="aa7564ac19cece81dd8bab3458de5b74a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa7564ac19cece81dd8bab3458de5b74a">&#9670;&#160;</a></span>regist</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_PubSubChannel::regist) (<a class="el" href="structUA__PubSubChannel.html">UA_PubSubChannel</a> *channel, <a class="el" href="structUA__ExtensionObject.html">UA_ExtensionObject</a> *transportSettings, void(*callback)(<a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *encodedBuffer, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *topic))</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="pubsub_8h_source.html#l00056">56</a> of file <a class="el" href="pubsub_8h_source.html">pubsub.h</a>.</p>
-
-</div>
-</div>
-<a id="ac6f8f6d76be1f911a9d4df3eb89e2904" name="ac6f8f6d76be1f911a9d4df3eb89e2904"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac6f8f6d76be1f911a9d4df3eb89e2904">&#9670;&#160;</a></span>unregist</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_PubSubChannel::unregist) (<a class="el" href="structUA__PubSubChannel.html">UA_PubSubChannel</a> *channel, <a class="el" href="structUA__ExtensionObject.html">UA_ExtensionObject</a> *transportSettings)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="pubsub_8h_source.html#l00060">60</a> of file <a class="el" href="pubsub_8h_source.html">pubsub.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pubsub_8h_source.html#l00042">42</a> of file <a class="el" href="pubsub_8h_source.html">pubsub.h</a>.</p>
 
 </div>
 </div>
@@ -264,19 +200,83 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="a76bbe331a31592b8d84d027dde4a0ad0" name="a76bbe331a31592b8d84d027dde4a0ad0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76bbe331a31592b8d84d027dde4a0ad0">&#9670;&#160;</a></span>close</h2>
+<a id="aa7564ac19cece81dd8bab3458de5b74a" name="aa7564ac19cece81dd8bab3458de5b74a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7564ac19cece81dd8bab3458de5b74a">&#9670;&#160;</a></span>regist</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_PubSubChannel::close) (<a class="el" href="structUA__PubSubChannel.html">UA_PubSubChannel</a> *channel)</td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_PubSubChannel::regist) (<a class="el" href="structUA__PubSubChannel.html">UA_PubSubChannel</a> *channel, <a class="el" href="structUA__ExtensionObject.html">UA_ExtensionObject</a> *transportSettings, void(*callback)(<a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *encodedBuffer, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *topic))</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pubsub_8h_source.html#l00070">70</a> of file <a class="el" href="pubsub_8h_source.html">pubsub.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pubsub_8h_source.html#l00056">56</a> of file <a class="el" href="pubsub_8h_source.html">pubsub.h</a>.</p>
+
+</div>
+</div>
+<a id="ae1af647ff9c775d3678d107ce50575ff" name="ae1af647ff9c775d3678d107ce50575ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1af647ff9c775d3678d107ce50575ff">&#9670;&#160;</a></span>send</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_PubSubChannel::send) (<a class="el" href="structUA__PubSubChannel.html">UA_PubSubChannel</a> *channel, <a class="el" href="structUA__ExtensionObject.html">UA_ExtensionObject</a> *transportSettings, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *buf)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="pubsub_8h_source.html#l00052">52</a> of file <a class="el" href="pubsub_8h_source.html">pubsub.h</a>.</p>
+
+</div>
+</div>
+<a id="a47a61ee3701b9821c1c139097398074c" name="a47a61ee3701b9821c1c139097398074c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47a61ee3701b9821c1c139097398074c">&#9670;&#160;</a></span>sockfd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a> UA_PubSubChannel::sockfd</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="pubsub_8h_source.html#l00045">45</a> of file <a class="el" href="pubsub_8h_source.html">pubsub.h</a>.</p>
+
+</div>
+</div>
+<a id="aede7ee4ae432e7f638620e2dad6b3209" name="aede7ee4ae432e7f638620e2dad6b3209"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aede7ee4ae432e7f638620e2dad6b3209">&#9670;&#160;</a></span>state</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="pubsub_8h.html#acc235956ae4a42acec899f33129b43c3">UA_PubSubChannelState</a> UA_PubSubChannel::state</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="pubsub_8h_source.html#l00043">43</a> of file <a class="el" href="pubsub_8h_source.html">pubsub.h</a>.</p>
+
+</div>
+</div>
+<a id="ac6f8f6d76be1f911a9d4df3eb89e2904" name="ac6f8f6d76be1f911a9d4df3eb89e2904"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6f8f6d76be1f911a9d4df3eb89e2904">&#9670;&#160;</a></span>unregist</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_PubSubChannel::unregist) (<a class="el" href="structUA__PubSubChannel.html">UA_PubSubChannel</a> *channel, <a class="el" href="structUA__ExtensionObject.html">UA_ExtensionObject</a> *transportSettings)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="pubsub_8h_source.html#l00060">60</a> of file <a class="el" href="pubsub_8h_source.html">pubsub.h</a>.</p>
 
 </div>
 </div>

@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -110,158 +110,156 @@ $(function() {
 <div class="line">    });</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Add data type nodes</span></div>
-<div class="line">    <a id="_a3" name="_a3"></a><a class="code hl_class" href="classopcua_1_1Node.html">opcua::Node</a> structureDataTypeNode(server, opcua::DataTypeId::Structure);</div>
-<div class="line">    structureDataTypeNode.<a id="a4" name="a4"></a><a class="code hl_function" href="classopcua_1_1Node.html#a7cc64b6959a1354a46390d9a3be4bf78">addDataType</a>(dataTypePoint.typeId(), <span class="stringliteral">&quot;PointDataType&quot;</span>);</div>
-<div class="line">    structureDataTypeNode.<a class="code hl_function" href="classopcua_1_1Node.html#a7cc64b6959a1354a46390d9a3be4bf78">addDataType</a>(dataTypeMeasurements.typeId(), <span class="stringliteral">&quot;MeasurementsDataType&quot;</span>);</div>
-<div class="line">    structureDataTypeNode.<a class="code hl_function" href="classopcua_1_1Node.html#a7cc64b6959a1354a46390d9a3be4bf78">addDataType</a>(dataTypeOpt.typeId(), <span class="stringliteral">&quot;OptDataType&quot;</span>);</div>
-<div class="line">    structureDataTypeNode.<a class="code hl_function" href="classopcua_1_1Node.html#a7cc64b6959a1354a46390d9a3be4bf78">addDataType</a>(dataTypeUni.typeId(), <span class="stringliteral">&quot;UniDataType&quot;</span>);</div>
-<div class="line">    <a class="code hl_class" href="classopcua_1_1Node.html">opcua::Node</a> enumerationDataTypeNode(server, opcua::DataTypeId::Enumeration);</div>
-<div class="line">    enumerationDataTypeNode.<a class="code hl_function" href="classopcua_1_1Node.html#a7cc64b6959a1354a46390d9a3be4bf78">addDataType</a>(dataTypeColor.typeId(), <span class="stringliteral">&quot;Color&quot;</span>)</div>
-<div class="line">        .<a id="a5" name="a5"></a><a class="code hl_function" href="classopcua_1_1Node.html#a4877c0f230a77a4241b7411b44de624b">addProperty</a>(</div>
+<div class="line">    <a id="_a3" name="_a3"></a><a class="code hl_class" href="classopcua_1_1Node.html">opcua::Node</a> structureDataTypeNode{server, opcua::DataTypeId::Structure};</div>
+<div class="line">    structureDataTypeNode.addDataType(dataTypePoint.typeId(), <span class="stringliteral">&quot;PointDataType&quot;</span>);</div>
+<div class="line">    structureDataTypeNode.addDataType(dataTypeMeasurements.typeId(), <span class="stringliteral">&quot;MeasurementsDataType&quot;</span>);</div>
+<div class="line">    structureDataTypeNode.addDataType(dataTypeOpt.typeId(), <span class="stringliteral">&quot;OptDataType&quot;</span>);</div>
+<div class="line">    structureDataTypeNode.addDataType(dataTypeUni.typeId(), <span class="stringliteral">&quot;UniDataType&quot;</span>);</div>
+<div class="line">    <a class="code hl_class" href="classopcua_1_1Node.html">opcua::Node</a> enumerationDataTypeNode{server, opcua::DataTypeId::Enumeration};</div>
+<div class="line">    enumerationDataTypeNode.addDataType(dataTypeColor.typeId(), <span class="stringliteral">&quot;Color&quot;</span>)</div>
+<div class="line">        .addProperty(</div>
 <div class="line">            {0, 0},  <span class="comment">// auto-generate node id</span></div>
 <div class="line">            <span class="stringliteral">&quot;EnumValues&quot;</span>,</div>
 <div class="line">            <a class="code hl_class" href="classopcua_1_1ua_1_1VariableAttributes.html">opcua::VariableAttributes</a>{}</div>
-<div class="line">                .<a id="a6" name="a6"></a><a class="code hl_function" href="classopcua_1_1ua_1_1VariableAttributes.html#a1fbef6f569f1852bd7a2f3a42c8b58a4">setDataType</a>&lt;<a class="code hl_class" href="classopcua_1_1ua_1_1EnumValueType.html">opcua::EnumValueType</a>&gt;()</div>
-<div class="line">                .setValueRank(<a id="a7" name="a7"></a><a class="code hl_enumvalue" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383a00ecfca66bf806bceb72de9c8d740696">opcua::ValueRank::OneDimension</a>)</div>
+<div class="line">                .<a id="a4" name="a4"></a><a class="code hl_function" href="classopcua_1_1ua_1_1VariableAttributes.html#a1fbef6f569f1852bd7a2f3a42c8b58a4">setDataType</a>&lt;<a class="code hl_class" href="classopcua_1_1ua_1_1EnumValueType.html">opcua::EnumValueType</a>&gt;()</div>
+<div class="line">                .setValueRank(<a id="a5" name="a5"></a><a class="code hl_enumvalue" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383a00ecfca66bf806bceb72de9c8d740696">opcua::ValueRank::OneDimension</a>)</div>
 <div class="line">                .setArrayDimensions({0})</div>
-<div class="line">                .setValueArray(<a id="_a8" name="_a8"></a><a class="code hl_class" href="classopcua_1_1Span.html">opcua::Span&lt;const opcua::EnumValueType&gt;</a>{</div>
-<div class="line">                    {0, {<span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;Red&quot;</span>}, {}},</div>
-<div class="line">                    {1, {<span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;Green&quot;</span>}, {}},</div>
-<div class="line">                    {2, {<span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;Yellow&quot;</span>}, {}},</div>
-<div class="line">                })</div>
+<div class="line">                .setValue(</div>
+<div class="line">                    <a id="_a6" name="_a6"></a><a class="code hl_class" href="classopcua_1_1Variant.html">opcua::Variant</a>{<a id="_a7" name="_a7"></a><a class="code hl_class" href="classopcua_1_1Span.html">opcua::Span&lt;const opcua::EnumValueType&gt;</a>{</div>
+<div class="line">                        {0, {<span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;Red&quot;</span>}, {}},</div>
+<div class="line">                        {1, {<span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;Green&quot;</span>}, {}},</div>
+<div class="line">                        {2, {<span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;Yellow&quot;</span>}, {}},</div>
+<div class="line">                    }}</div>
+<div class="line">                )</div>
 <div class="line">        )</div>
-<div class="line">        .<a id="a9" name="a9"></a><a class="code hl_function" href="classopcua_1_1Node.html#a3c7ee951576bb63a1e086910fc632156">addModellingRule</a>(<a id="a10" name="a10"></a><a class="code hl_enumvalue" href="namespaceopcua.html#ad32e0c353b427fd8b7788a85a78335aaae89ab59baea830bd940c300886c50efe">opcua::ModellingRule::Mandatory</a>);</div>
+<div class="line">        .addModellingRule(<a id="a8" name="a8"></a><a class="code hl_enumvalue" href="namespaceopcua.html#ad32e0c353b427fd8b7788a85a78335aaae89ab59baea830bd940c300886c50efe">opcua::ModellingRule::Mandatory</a>);</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Add variable type nodes (optional)</span></div>
-<div class="line">    <a class="code hl_class" href="classopcua_1_1Node.html">opcua::Node</a> baseDataVariableTypeNode(server, opcua::VariableTypeId::BaseDataVariableType);</div>
-<div class="line">    <span class="keyword">auto</span> variableTypePointNode = baseDataVariableTypeNode.<a id="a11" name="a11"></a><a class="code hl_function" href="classopcua_1_1Node.html#aa6f285ddc4e6cd1f2266023bc0fbc7b1">addVariableType</a>(</div>
+<div class="line">    <a class="code hl_class" href="classopcua_1_1Node.html">opcua::Node</a> baseDataVariableTypeNode{server, opcua::VariableTypeId::BaseDataVariableType};</div>
+<div class="line">    <span class="keyword">auto</span> variableTypePointNode = baseDataVariableTypeNode.addVariableType(</div>
 <div class="line">        {1, 4243},</div>
 <div class="line">        <span class="stringliteral">&quot;PointType&quot;</span>,</div>
 <div class="line">        <a class="code hl_class" href="classopcua_1_1ua_1_1VariableTypeAttributes.html">opcua::VariableTypeAttributes</a>{}</div>
-<div class="line">            .<a id="a12" name="a12"></a><a class="code hl_function" href="classopcua_1_1ua_1_1VariableTypeAttributes.html#a2eb931c4c0d89be9c82704c0a4808609">setDataType</a>(dataTypePoint.typeId())</div>
-<div class="line">            .setValueRank(<a id="a13" name="a13"></a><a class="code hl_enumvalue" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383abc975004cfa0419c12cf23c09de61693">opcua::ValueRank::ScalarOrOneDimension</a>)</div>
-<div class="line">            .setValueScalar(Point{1, 2, 3}, dataTypePoint)</div>
+<div class="line">            .<a id="a9" name="a9"></a><a class="code hl_function" href="classopcua_1_1ua_1_1VariableTypeAttributes.html#a2eb931c4c0d89be9c82704c0a4808609">setDataType</a>(dataTypePoint.typeId())</div>
+<div class="line">            .setValueRank(<a id="a10" name="a10"></a><a class="code hl_enumvalue" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383abc975004cfa0419c12cf23c09de61693">opcua::ValueRank::ScalarOrOneDimension</a>)</div>
+<div class="line">            .setValue(<a class="code hl_class" href="classopcua_1_1Variant.html">opcua::Variant</a>{Point{1, 2, 3}, dataTypePoint})</div>
 <div class="line">    );</div>
-<div class="line">    <span class="keyword">auto</span> variableTypeMeasurementNode = baseDataVariableTypeNode.<a class="code hl_function" href="classopcua_1_1Node.html#aa6f285ddc4e6cd1f2266023bc0fbc7b1">addVariableType</a>(</div>
+<div class="line">    <span class="keyword">auto</span> variableTypeMeasurementNode = baseDataVariableTypeNode.addVariableType(</div>
 <div class="line">        {1, 4444},</div>
 <div class="line">        <span class="stringliteral">&quot;MeasurementsType&quot;</span>,</div>
 <div class="line">        <a class="code hl_class" href="classopcua_1_1ua_1_1VariableTypeAttributes.html">opcua::VariableTypeAttributes</a>{}</div>
 <div class="line">            .<a class="code hl_function" href="classopcua_1_1ua_1_1VariableTypeAttributes.html#a2eb931c4c0d89be9c82704c0a4808609">setDataType</a>(dataTypeMeasurements.typeId())</div>
-<div class="line">            .setValueRank(<a id="a14" name="a14"></a><a class="code hl_enumvalue" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383af60357a8d17e45793298323f1b372a74">opcua::ValueRank::Scalar</a>)</div>
-<div class="line">            .setValueScalar(Measurements{}, dataTypeMeasurements)</div>
+<div class="line">            .setValueRank(<a id="a11" name="a11"></a><a class="code hl_enumvalue" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383af60357a8d17e45793298323f1b372a74">opcua::ValueRank::Scalar</a>)</div>
+<div class="line">            .setValue(<a class="code hl_class" href="classopcua_1_1Variant.html">opcua::Variant</a>{Measurements{}, dataTypeMeasurements})</div>
 <div class="line">    );</div>
-<div class="line">    <span class="keyword">auto</span> variableTypeOptNode = baseDataVariableTypeNode.<a class="code hl_function" href="classopcua_1_1Node.html#aa6f285ddc4e6cd1f2266023bc0fbc7b1">addVariableType</a>(</div>
+<div class="line">    <span class="keyword">auto</span> variableTypeOptNode = baseDataVariableTypeNode.addVariableType(</div>
 <div class="line">        {1, 4645},</div>
 <div class="line">        <span class="stringliteral">&quot;OptType&quot;</span>,</div>
 <div class="line">        <a class="code hl_class" href="classopcua_1_1ua_1_1VariableTypeAttributes.html">opcua::VariableTypeAttributes</a>{}</div>
 <div class="line">            .<a class="code hl_function" href="classopcua_1_1ua_1_1VariableTypeAttributes.html#a2eb931c4c0d89be9c82704c0a4808609">setDataType</a>(dataTypeOpt.typeId())</div>
 <div class="line">            .setValueRank(<a class="code hl_enumvalue" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383af60357a8d17e45793298323f1b372a74">opcua::ValueRank::Scalar</a>)</div>
-<div class="line">            .setValueScalar(Opt{}, dataTypeOpt)</div>
+<div class="line">            .setValue(<a class="code hl_class" href="classopcua_1_1Variant.html">opcua::Variant</a>{Opt{}, dataTypeOpt})</div>
 <div class="line">    );</div>
-<div class="line">    <span class="keyword">auto</span> variableTypeUniNode = baseDataVariableTypeNode.<a class="code hl_function" href="classopcua_1_1Node.html#aa6f285ddc4e6cd1f2266023bc0fbc7b1">addVariableType</a>(</div>
+<div class="line">    <span class="keyword">auto</span> variableTypeUniNode = baseDataVariableTypeNode.addVariableType(</div>
 <div class="line">        {1, 4846},</div>
 <div class="line">        <span class="stringliteral">&quot;UniType&quot;</span>,</div>
 <div class="line">        <a class="code hl_class" href="classopcua_1_1ua_1_1VariableTypeAttributes.html">opcua::VariableTypeAttributes</a>{}</div>
 <div class="line">            .<a class="code hl_function" href="classopcua_1_1ua_1_1VariableTypeAttributes.html#a2eb931c4c0d89be9c82704c0a4808609">setDataType</a>(dataTypeUni.typeId())</div>
 <div class="line">            .setValueRank(<a class="code hl_enumvalue" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383af60357a8d17e45793298323f1b372a74">opcua::ValueRank::Scalar</a>)</div>
-<div class="line">            .setValueScalar(Uni{}, dataTypeUni)</div>
+<div class="line">            .setValue(<a class="code hl_class" href="classopcua_1_1Variant.html">opcua::Variant</a>{Uni{}, dataTypeUni})</div>
 <div class="line">    );</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Add variable nodes with some values</span></div>
-<div class="line">    <a class="code hl_class" href="classopcua_1_1Node.html">opcua::Node</a> objectsNode(server, opcua::ObjectId::ObjectsFolder);</div>
+<div class="line">    <a class="code hl_class" href="classopcua_1_1Node.html">opcua::Node</a> objectsNode{server, opcua::ObjectId::ObjectsFolder};</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">const</span> Point point{3.0, 4.0, 5.0};</div>
-<div class="line">    objectsNode.<a id="a15" name="a15"></a><a class="code hl_function" href="classopcua_1_1Node.html#ad7fab8b5a5060a46b62efcfb3980910a">addVariable</a>(</div>
+<div class="line">    objectsNode.addVariable(</div>
 <div class="line">        {1, <span class="stringliteral">&quot;Point&quot;</span>},</div>
 <div class="line">        <span class="stringliteral">&quot;Point&quot;</span>,</div>
 <div class="line">        <a class="code hl_class" href="classopcua_1_1ua_1_1VariableAttributes.html">opcua::VariableAttributes</a>{}</div>
 <div class="line">            .<a class="code hl_function" href="classopcua_1_1ua_1_1VariableAttributes.html#a1fbef6f569f1852bd7a2f3a42c8b58a4">setDataType</a>(dataTypePoint.typeId())</div>
 <div class="line">            .setValueRank(<a class="code hl_enumvalue" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383af60357a8d17e45793298323f1b372a74">opcua::ValueRank::Scalar</a>)</div>
-<div class="line">            .setValueScalar(point, dataTypePoint),</div>
+<div class="line">            .setValue(<a class="code hl_class" href="classopcua_1_1Variant.html">opcua::Variant</a>{point, dataTypePoint}),</div>
 <div class="line">        variableTypePointNode.id()</div>
 <div class="line">    );</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">const</span> std::vector&lt;Point&gt; pointVec{{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}};</div>
-<div class="line">    objectsNode.<a class="code hl_function" href="classopcua_1_1Node.html#ad7fab8b5a5060a46b62efcfb3980910a">addVariable</a>(</div>
+<div class="line">    objectsNode.addVariable(</div>
 <div class="line">        {1, <span class="stringliteral">&quot;PointVec&quot;</span>},</div>
 <div class="line">        <span class="stringliteral">&quot;PointVec&quot;</span>,</div>
 <div class="line">        <a class="code hl_class" href="classopcua_1_1ua_1_1VariableAttributes.html">opcua::VariableAttributes</a>{}</div>
 <div class="line">            .<a class="code hl_function" href="classopcua_1_1ua_1_1VariableAttributes.html#a1fbef6f569f1852bd7a2f3a42c8b58a4">setDataType</a>(dataTypePoint.typeId())</div>
 <div class="line">            .setArrayDimensions({0})  <span class="comment">// single dimension but unknown in size</span></div>
 <div class="line">            .setValueRank(<a class="code hl_enumvalue" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383a00ecfca66bf806bceb72de9c8d740696">opcua::ValueRank::OneDimension</a>)</div>
-<div class="line">            .setValueArray(pointVec, dataTypePoint),</div>
+<div class="line">            .setValue(<a class="code hl_class" href="classopcua_1_1Variant.html">opcua::Variant</a>{pointVec, dataTypePoint}),</div>
 <div class="line">        variableTypePointNode.id()</div>
 <div class="line">    );</div>
 <div class="line"> </div>
 <div class="line">    std::vector&lt;float&gt; measurementsValues{19.1F, 20.2F, 19.7F};</div>
 <div class="line">    <span class="keyword">const</span> Measurements measurements{</div>
-<div class="line">        <a id="_a16" name="_a16"></a><a class="code hl_class" href="classopcua_1_1String.html">opcua::String</a>(<span class="stringliteral">&quot;Test description&quot;</span>),</div>
+<div class="line">        <a id="_a12" name="_a12"></a><a class="code hl_class" href="classopcua_1_1String.html">opcua::String</a>{<span class="stringliteral">&quot;Test description&quot;</span>},</div>
 <div class="line">        measurementsValues.size(),</div>
 <div class="line">        measurementsValues.data(),</div>
 <div class="line">    };</div>
-<div class="line">    objectsNode.<a class="code hl_function" href="classopcua_1_1Node.html#ad7fab8b5a5060a46b62efcfb3980910a">addVariable</a>(</div>
+<div class="line">    objectsNode.addVariable(</div>
 <div class="line">        {1, <span class="stringliteral">&quot;Measurements&quot;</span>},</div>
 <div class="line">        <span class="stringliteral">&quot;Measurements&quot;</span>,</div>
 <div class="line">        <a class="code hl_class" href="classopcua_1_1ua_1_1VariableAttributes.html">opcua::VariableAttributes</a>{}</div>
 <div class="line">            .<a class="code hl_function" href="classopcua_1_1ua_1_1VariableAttributes.html#a1fbef6f569f1852bd7a2f3a42c8b58a4">setDataType</a>(dataTypeMeasurements.typeId())</div>
 <div class="line">            .setValueRank(<a class="code hl_enumvalue" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383af60357a8d17e45793298323f1b372a74">opcua::ValueRank::Scalar</a>)</div>
-<div class="line">            .setValueScalar(measurements, dataTypeMeasurements),</div>
+<div class="line">            .setValue(<a class="code hl_class" href="classopcua_1_1Variant.html">opcua::Variant</a>{measurements, dataTypeMeasurements}),</div>
 <div class="line">        variableTypeMeasurementNode.id()</div>
 <div class="line">    );</div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordtype">float</span> optC = 10.10F;</div>
 <div class="line">    <span class="keyword">const</span> Opt opt{3, <span class="keyword">nullptr</span>, &amp;optC};</div>
-<div class="line">    objectsNode.<a class="code hl_function" href="classopcua_1_1Node.html#ad7fab8b5a5060a46b62efcfb3980910a">addVariable</a>(</div>
+<div class="line">    objectsNode.addVariable(</div>
 <div class="line">        {1, <span class="stringliteral">&quot;Opt&quot;</span>},</div>
 <div class="line">        <span class="stringliteral">&quot;Opt&quot;</span>,</div>
 <div class="line">        <a class="code hl_class" href="classopcua_1_1ua_1_1VariableAttributes.html">opcua::VariableAttributes</a>{}</div>
 <div class="line">            .<a class="code hl_function" href="classopcua_1_1ua_1_1VariableAttributes.html#a1fbef6f569f1852bd7a2f3a42c8b58a4">setDataType</a>(dataTypeOpt.typeId())</div>
 <div class="line">            .setValueRank(<a class="code hl_enumvalue" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383af60357a8d17e45793298323f1b372a74">opcua::ValueRank::Scalar</a>)</div>
-<div class="line">            .setValueScalar(opt, dataTypeOpt),</div>
+<div class="line">            .setValue(<a class="code hl_class" href="classopcua_1_1Variant.html">opcua::Variant</a>{opt, dataTypeOpt}),</div>
 <div class="line">        variableTypeOptNode.id()</div>
 <div class="line">    );</div>
 <div class="line"> </div>
 <div class="line">    Uni uni{};</div>
 <div class="line">    uni.switchField = UniSwitch::OptionB;</div>
-<div class="line">    uni.fields.optionB = <a id="a17" name="a17"></a><a class="code hl_defineRef" target="_blank" href="open62541/types_8h.html#ae7812e33f125938e3af06b396298fbb3">UA_STRING_STATIC</a>(<span class="stringliteral">&quot;test string&quot;</span>);  <span class="comment">// NOLINT</span></div>
-<div class="line">    objectsNode.<a class="code hl_function" href="classopcua_1_1Node.html#ad7fab8b5a5060a46b62efcfb3980910a">addVariable</a>(</div>
+<div class="line">    uni.fields.optionB = <a id="a13" name="a13"></a><a class="code hl_defineRef" target="_blank" href="open62541/types_8h.html#ae7812e33f125938e3af06b396298fbb3">UA_STRING_STATIC</a>(<span class="stringliteral">&quot;test string&quot;</span>);  <span class="comment">// NOLINT</span></div>
+<div class="line">    objectsNode.addVariable(</div>
 <div class="line">        {1, <span class="stringliteral">&quot;Uni&quot;</span>},</div>
 <div class="line">        <span class="stringliteral">&quot;Uni&quot;</span>,</div>
 <div class="line">        <a class="code hl_class" href="classopcua_1_1ua_1_1VariableAttributes.html">opcua::VariableAttributes</a>{}</div>
 <div class="line">            .<a class="code hl_function" href="classopcua_1_1ua_1_1VariableAttributes.html#a1fbef6f569f1852bd7a2f3a42c8b58a4">setDataType</a>(dataTypeUni.typeId())</div>
 <div class="line">            .setValueRank(<a class="code hl_enumvalue" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383af60357a8d17e45793298323f1b372a74">opcua::ValueRank::Scalar</a>)</div>
-<div class="line">            .setValueScalar(uni, dataTypeUni),</div>
+<div class="line">            .setValue(<a class="code hl_class" href="classopcua_1_1Variant.html">opcua::Variant</a>{uni, dataTypeUni}),</div>
 <div class="line">        variableTypeUniNode.id()</div>
 <div class="line">    );</div>
 <div class="line"> </div>
-<div class="line">    objectsNode.<a class="code hl_function" href="classopcua_1_1Node.html#ad7fab8b5a5060a46b62efcfb3980910a">addVariable</a>(</div>
+<div class="line">    objectsNode.addVariable(</div>
 <div class="line">        {1, <span class="stringliteral">&quot;Color&quot;</span>},</div>
 <div class="line">        <span class="stringliteral">&quot;Color&quot;</span>,</div>
 <div class="line">        <a class="code hl_class" href="classopcua_1_1ua_1_1VariableAttributes.html">opcua::VariableAttributes</a>{}</div>
 <div class="line">            .<a class="code hl_function" href="classopcua_1_1ua_1_1VariableAttributes.html#a1fbef6f569f1852bd7a2f3a42c8b58a4">setDataType</a>(dataTypeColor.typeId())</div>
 <div class="line">            .setValueRank(<a class="code hl_enumvalue" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383af60357a8d17e45793298323f1b372a74">opcua::ValueRank::Scalar</a>)</div>
-<div class="line">            .setValueScalar(Color::Green, dataTypeColor)</div>
+<div class="line">            .setValue(<a class="code hl_class" href="classopcua_1_1Variant.html">opcua::Variant</a>{Color::Green, dataTypeColor})</div>
 <div class="line">    );</div>
 <div class="line"> </div>
-<div class="line">    server.<a id="a18" name="a18"></a><a class="code hl_function" href="classopcua_1_1Server.html#a7346a714c85e2d99fc8bc9fd1dd31d6d">run</a>();</div>
+<div class="line">    server.<a id="a14" name="a14"></a><a class="code hl_function" href="classopcua_1_1Server.html#a7346a714c85e2d99fc8bc9fd1dd31d6d">run</a>();</div>
 <div class="line">}</div>
 <div class="ttc" id="aclassopcua_1_1Node_html"><div class="ttname"><a href="classopcua_1_1Node.html">opcua::Node</a></div><div class="ttdoc">High-level node class to access node attribute, browse and populate address space.</div><div class="ttdef"><b>Definition</b> <a href="node_8hpp_source.html#l00045">node.hpp:45</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Node_html_a3c7ee951576bb63a1e086910fc632156"><div class="ttname"><a href="classopcua_1_1Node.html#a3c7ee951576bb63a1e086910fc632156">opcua::Node::addModellingRule</a></div><div class="ttdeci">Node &amp; addModellingRule(ModellingRule rule)</div><div class="ttdoc">Add modelling rule.</div><div class="ttdef"><b>Definition</b> <a href="node_8hpp_source.html#l00494">node.hpp:494</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Node_html_a4877c0f230a77a4241b7411b44de624b"><div class="ttname"><a href="classopcua_1_1Node.html#a4877c0f230a77a4241b7411b44de624b">opcua::Node::addProperty</a></div><div class="ttdeci">Node addProperty(const NodeId &amp;id, std::string_view browseName, const VariableAttributes &amp;attributes={})</div><div class="ttdoc">Add property.</div><div class="ttdef"><b>Definition</b> <a href="node_8hpp_source.html#l00196">node.hpp:196</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Node_html_a7cc64b6959a1354a46390d9a3be4bf78"><div class="ttname"><a href="classopcua_1_1Node.html#a7cc64b6959a1354a46390d9a3be4bf78">opcua::Node::addDataType</a></div><div class="ttdeci">Node addDataType(const NodeId &amp;id, std::string_view browseName, const DataTypeAttributes &amp;attributes={}, const NodeId &amp;referenceType=ReferenceTypeId::HasSubtype)</div><div class="ttdoc">Add data type.</div><div class="ttdef"><b>Definition</b> <a href="node_8hpp_source.html#l00396">node.hpp:396</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Node_html_aa6f285ddc4e6cd1f2266023bc0fbc7b1"><div class="ttname"><a href="classopcua_1_1Node.html#aa6f285ddc4e6cd1f2266023bc0fbc7b1">opcua::Node::addVariableType</a></div><div class="ttdeci">Node addVariableType(const NodeId &amp;id, std::string_view browseName, const VariableTypeAttributes &amp;attributes={}, const NodeId &amp;variableType=VariableTypeId::BaseDataVariableType, const NodeId &amp;referenceType=ReferenceTypeId::HasSubtype)</div><div class="ttdoc">Add variable type.</div><div class="ttdef"><b>Definition</b> <a href="node_8hpp_source.html#l00319">node.hpp:319</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Node_html_ad7fab8b5a5060a46b62efcfb3980910a"><div class="ttname"><a href="classopcua_1_1Node.html#ad7fab8b5a5060a46b62efcfb3980910a">opcua::Node::addVariable</a></div><div class="ttdeci">Node addVariable(const NodeId &amp;id, std::string_view browseName, const VariableAttributes &amp;attributes={}, const NodeId &amp;variableType=VariableTypeId::BaseDataVariableType, const NodeId &amp;referenceType=ReferenceTypeId::HasComponent)</div><div class="ttdoc">Add variable.</div><div class="ttdef"><b>Definition</b> <a href="node_8hpp_source.html#l00156">node.hpp:156</a></div></div>
 <div class="ttc" id="aclassopcua_1_1ServerConfig_html_accd100f47b13248e4c95f6f3ac5f11f4"><div class="ttname"><a href="classopcua_1_1ServerConfig.html#accd100f47b13248e4c95f6f3ac5f11f4">opcua::ServerConfig::addCustomDataTypes</a></div><div class="ttdeci">void addCustomDataTypes(Span&lt; const DataType &gt; types)</div><div class="ttdoc">Add custom data types.</div></div>
-<div class="ttc" id="aclassopcua_1_1Server_html"><div class="ttname"><a href="classopcua_1_1Server.html">opcua::Server</a></div><div class="ttdoc">High-level server class.</div><div class="ttdef"><b>Definition</b> <a href="server_8hpp_source.html#l00136">server.hpp:136</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Server_html"><div class="ttname"><a href="classopcua_1_1Server.html">opcua::Server</a></div><div class="ttdoc">High-level server class.</div><div class="ttdef"><b>Definition</b> <a href="server_8hpp_source.html#l00142">server.hpp:142</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Server_html_a7346a714c85e2d99fc8bc9fd1dd31d6d"><div class="ttname"><a href="classopcua_1_1Server.html#a7346a714c85e2d99fc8bc9fd1dd31d6d">opcua::Server::run</a></div><div class="ttdeci">void run()</div><div class="ttdoc">Run the server's main loop. This method will block until Server::stop is called.</div></div>
 <div class="ttc" id="aclassopcua_1_1Server_html_a8c96ae4799072325bce34be6c7fd81cc"><div class="ttname"><a href="classopcua_1_1Server.html#a8c96ae4799072325bce34be6c7fd81cc">opcua::Server::config</a></div><div class="ttdeci">ServerConfig &amp; config() noexcept</div></div>
-<div class="ttc" id="aclassopcua_1_1Span_html"><div class="ttname"><a href="classopcua_1_1Span.html">opcua::Span</a></div><div class="ttdoc">View to a contiguous sequence of objects, similar to std::span in C++20.</div><div class="ttdef"><b>Definition</b> <a href="span_8hpp_source.html#l00030">span.hpp:30</a></div></div>
-<div class="ttc" id="aclassopcua_1_1String_html"><div class="ttname"><a href="classopcua_1_1String.html">opcua::String</a></div><div class="ttdoc">UA_String wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00255">types.hpp:257</a></div></div>
-<div class="ttc" id="aclassopcua_1_1ua_1_1EnumValueType_html"><div class="ttname"><a href="classopcua_1_1ua_1_1EnumValueType.html">opcua::EnumValueType</a></div><div class="ttdoc">UA_EnumValueType wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l00135">types.hpp:135</a></div></div>
-<div class="ttc" id="aclassopcua_1_1ua_1_1VariableAttributes_html"><div class="ttname"><a href="classopcua_1_1ua_1_1VariableAttributes.html">opcua::VariableAttributes</a></div><div class="ttdoc">UA_VariableAttributes wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l00469">types.hpp:469</a></div></div>
-<div class="ttc" id="aclassopcua_1_1ua_1_1VariableAttributes_html_a1fbef6f569f1852bd7a2f3a42c8b58a4"><div class="ttname"><a href="classopcua_1_1ua_1_1VariableAttributes.html#a1fbef6f569f1852bd7a2f3a42c8b58a4">opcua::ua::VariableAttributes::setDataType</a></div><div class="ttdeci">auto &amp; setDataType(NodeId dataType)</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l00492">types.hpp:492</a></div></div>
-<div class="ttc" id="aclassopcua_1_1ua_1_1VariableTypeAttributes_html"><div class="ttname"><a href="classopcua_1_1ua_1_1VariableTypeAttributes.html">opcua::VariableTypeAttributes</a></div><div class="ttdoc">UA_VariableAttributes wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l00565">types.hpp:566</a></div></div>
-<div class="ttc" id="aclassopcua_1_1ua_1_1VariableTypeAttributes_html_a2eb931c4c0d89be9c82704c0a4808609"><div class="ttname"><a href="classopcua_1_1ua_1_1VariableTypeAttributes.html#a2eb931c4c0d89be9c82704c0a4808609">opcua::ua::VariableTypeAttributes::setDataType</a></div><div class="ttdeci">auto &amp; setDataType(NodeId dataType)</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l00589">types.hpp:589</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Span_html"><div class="ttname"><a href="classopcua_1_1Span.html">opcua::Span</a></div><div class="ttdoc">View to a contiguous sequence of objects, similar to std::span in C++20.</div><div class="ttdef"><b>Definition</b> <a href="span_8hpp_source.html#l00029">span.hpp:29</a></div></div>
+<div class="ttc" id="aclassopcua_1_1String_html"><div class="ttname"><a href="classopcua_1_1String.html">opcua::String</a></div><div class="ttdoc">UA_String wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00254">types.hpp:256</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html"><div class="ttname"><a href="classopcua_1_1Variant.html">opcua::Variant</a></div><div class="ttdoc">UA_Variant wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l01048">types.hpp:1048</a></div></div>
+<div class="ttc" id="aclassopcua_1_1ua_1_1EnumValueType_html"><div class="ttname"><a href="classopcua_1_1ua_1_1EnumValueType.html">opcua::EnumValueType</a></div><div class="ttdoc">UA_EnumValueType wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l00095">types.hpp:95</a></div></div>
+<div class="ttc" id="aclassopcua_1_1ua_1_1VariableAttributes_html"><div class="ttname"><a href="classopcua_1_1ua_1_1VariableAttributes.html">opcua::VariableAttributes</a></div><div class="ttdoc">UA_VariableAttributes wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l00418">types.hpp:419</a></div></div>
+<div class="ttc" id="aclassopcua_1_1ua_1_1VariableAttributes_html_a1fbef6f569f1852bd7a2f3a42c8b58a4"><div class="ttname"><a href="classopcua_1_1ua_1_1VariableAttributes.html#a1fbef6f569f1852bd7a2f3a42c8b58a4">opcua::ua::VariableAttributes::setDataType</a></div><div class="ttdeci">auto &amp; setDataType(NodeId dataType)</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l00444">types.hpp:444</a></div></div>
+<div class="ttc" id="aclassopcua_1_1ua_1_1VariableTypeAttributes_html"><div class="ttname"><a href="classopcua_1_1ua_1_1VariableTypeAttributes.html">opcua::VariableTypeAttributes</a></div><div class="ttdoc">UA_VariableAttributes wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l00517">types.hpp:518</a></div></div>
+<div class="ttc" id="aclassopcua_1_1ua_1_1VariableTypeAttributes_html_a2eb931c4c0d89be9c82704c0a4808609"><div class="ttname"><a href="classopcua_1_1ua_1_1VariableTypeAttributes.html#a2eb931c4c0d89be9c82704c0a4808609">opcua::ua::VariableTypeAttributes::setDataType</a></div><div class="ttdeci">auto &amp; setDataType(NodeId dataType)</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l00543">types.hpp:543</a></div></div>
 <div class="ttc" id="anamespaceopcua_html_a41f8481e3c1494130327dca210329383a00ecfca66bf806bceb72de9c8d740696"><div class="ttname"><a href="namespaceopcua.html#a41f8481e3c1494130327dca210329383a00ecfca66bf806bceb72de9c8d740696">opcua::ValueRank::OneDimension</a></div><div class="ttdeci">@ OneDimension</div></div>
 <div class="ttc" id="anamespaceopcua_html_a41f8481e3c1494130327dca210329383abc975004cfa0419c12cf23c09de61693"><div class="ttname"><a href="namespaceopcua.html#a41f8481e3c1494130327dca210329383abc975004cfa0419c12cf23c09de61693">opcua::ValueRank::ScalarOrOneDimension</a></div><div class="ttdeci">@ ScalarOrOneDimension</div></div>
 <div class="ttc" id="anamespaceopcua_html_a41f8481e3c1494130327dca210329383af60357a8d17e45793298323f1b372a74"><div class="ttname"><a href="namespaceopcua.html#a41f8481e3c1494130327dca210329383af60357a8d17e45793298323f1b372a74">opcua::ValueRank::Scalar</a></div><div class="ttdeci">@ Scalar</div></div>

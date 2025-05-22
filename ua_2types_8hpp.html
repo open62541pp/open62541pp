@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -113,18 +113,18 @@ $(function() {
 <code>#include &quot;<a class="el" href="span_8hpp_source.html">open62541pp/span.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="typeregistry_8hpp_source.html">open62541pp/typeregistry.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="types_8hpp_source.html">open62541pp/types.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="typewrapper_8hpp_source.html">open62541pp/typewrapper.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="nodeids_8hpp_source.html">open62541pp/ua/nodeids.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="ua_2typeregistry_8hpp_source.html">open62541pp/ua/typeregistry.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="wrapper_8hpp_source.html">open62541pp/wrapper.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for types.hpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="ua_2types_8hpp__incl.svg" width="4475" height="579"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="ua_2types_8hpp__incl.svg" width="3515" height="726"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="ua_2types_8hpp__dep__incl.svg" width="2571" height="696"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="ua_2types_8hpp__dep__incl.svg" width="2635" height="696"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="ua_2types_8hpp_source.html">Go to the source code of this file.</a></p>
@@ -357,24 +357,22 @@ Namespaces</h2></td></tr>
 Macros</h2></td></tr>
 <tr class="memitem:a5e392fbc10912c390e230cbb0b1def54" id="r_a5e392fbc10912c390e230cbb0b1def54"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua_2types_8hpp.html#a5e392fbc10912c390e230cbb0b1def54">UA_DEFAULT_ATTRIBUTES_DEFINED</a></td></tr>
 <tr class="separator:a5e392fbc10912c390e230cbb0b1def54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a98b8c8c6ecb5b384ac60071fc7a38444" id="r_a98b8c8c6ecb5b384ac60071fc7a38444"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua_2types_8hpp.html#a98b8c8c6ecb5b384ac60071fc7a38444">UAPP_GETTER</a>(Type,  getterName,  member)</td></tr>
-<tr class="separator:a98b8c8c6ecb5b384ac60071fc7a38444"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8785fcd757a8e72057a2f96c4bfd7bfe" id="r_a8785fcd757a8e72057a2f96c4bfd7bfe"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua_2types_8hpp.html#a8785fcd757a8e72057a2f96c4bfd7bfe">UAPP_GETTER_CAST</a>(Type,  getterName,  member)</td></tr>
-<tr class="separator:a8785fcd757a8e72057a2f96c4bfd7bfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a236857d294fb078c52a458f443aa3062" id="r_a236857d294fb078c52a458f443aa3062"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua_2types_8hpp.html#a236857d294fb078c52a458f443aa3062">UAPP_GETTER_WRAPPER_CONST</a>(Type,  getterName,  member)</td></tr>
-<tr class="separator:a236857d294fb078c52a458f443aa3062"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8d427ccd5d4efa6e8a1febf487f3130" id="r_ae8d427ccd5d4efa6e8a1febf487f3130"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua_2types_8hpp.html#ae8d427ccd5d4efa6e8a1febf487f3130">UAPP_GETTER_WRAPPER_NONCONST</a>(Type,  getterName,  member)</td></tr>
-<tr class="separator:ae8d427ccd5d4efa6e8a1febf487f3130"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a820a0ef0faa744f020d4fd26dd3fe941" id="r_a820a0ef0faa744f020d4fd26dd3fe941"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua_2types_8hpp.html#a820a0ef0faa744f020d4fd26dd3fe941">UAPP_GETTER_WRAPPER</a>(Type,  getterName,  member)</td></tr>
-<tr class="separator:a820a0ef0faa744f020d4fd26dd3fe941"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01f6619eff9aefd20bfc4f449f67e3ac" id="r_a01f6619eff9aefd20bfc4f449f67e3ac"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua_2types_8hpp.html#a01f6619eff9aefd20bfc4f449f67e3ac">UAPP_GETTER_SPAN</a>(Type,  getterName,  memberArray,  memberSize)</td></tr>
-<tr class="separator:a01f6619eff9aefd20bfc4f449f67e3ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ae17486d33dea6271e465cf99a5ccc8" id="r_a8ae17486d33dea6271e465cf99a5ccc8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua_2types_8hpp.html#a8ae17486d33dea6271e465cf99a5ccc8">UAPP_GETTER_SPAN_WRAPPER</a>(Type,  getterName,  memberArray,  memberSize)</td></tr>
-<tr class="separator:a8ae17486d33dea6271e465cf99a5ccc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1b56fbb2a8e0f1882faea90b341414c" id="r_ac1b56fbb2a8e0f1882faea90b341414c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua_2types_8hpp.html#ac1b56fbb2a8e0f1882faea90b341414c">UAPP_GETTER</a>(Type,  member)</td></tr>
+<tr class="separator:ac1b56fbb2a8e0f1882faea90b341414c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab38cc7aad46ec4c1c159a05d8c57eb59" id="r_ab38cc7aad46ec4c1c159a05d8c57eb59"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua_2types_8hpp.html#ab38cc7aad46ec4c1c159a05d8c57eb59">UAPP_GETTER_CAST</a>(Type,  member)</td></tr>
+<tr class="separator:ab38cc7aad46ec4c1c159a05d8c57eb59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a479b35eb17ba02b72e807ee864cf72b2" id="r_a479b35eb17ba02b72e807ee864cf72b2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua_2types_8hpp.html#a479b35eb17ba02b72e807ee864cf72b2">UAPP_GETTER_WRAPPER_CONST</a>(Type,  member)</td></tr>
+<tr class="separator:a479b35eb17ba02b72e807ee864cf72b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa73813caffb9fa1ecb9205f23c3f05a" id="r_afa73813caffb9fa1ecb9205f23c3f05a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua_2types_8hpp.html#afa73813caffb9fa1ecb9205f23c3f05a">UAPP_GETTER_WRAPPER_NONCONST</a>(Type,  member)</td></tr>
+<tr class="separator:afa73813caffb9fa1ecb9205f23c3f05a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb1f9ee4f5f3b328d73698e9c711f94b" id="r_aeb1f9ee4f5f3b328d73698e9c711f94b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua_2types_8hpp.html#aeb1f9ee4f5f3b328d73698e9c711f94b">UAPP_GETTER_WRAPPER</a>(Type,  member)</td></tr>
+<tr class="separator:aeb1f9ee4f5f3b328d73698e9c711f94b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b517683eabeb49a91a653561703157e" id="r_a1b517683eabeb49a91a653561703157e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua_2types_8hpp.html#a1b517683eabeb49a91a653561703157e">UAPP_GETTER_SPAN</a>(Type,  memberArray,  memberSize)</td></tr>
+<tr class="separator:a1b517683eabeb49a91a653561703157e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25de50aa2389bf9b73942e6dd8956d15" id="r_a25de50aa2389bf9b73942e6dd8956d15"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua_2types_8hpp.html#a25de50aa2389bf9b73942e6dd8956d15">UAPP_GETTER_SPAN_WRAPPER</a>(Type,  memberArray,  memberSize)</td></tr>
+<tr class="separator:a25de50aa2389bf9b73942e6dd8956d15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gadb335a3027b1c038557c57b11dbc7335" id="r_gadb335a3027b1c038557c57b11dbc7335"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#gadb335a3027b1c038557c57b11dbc7335">UAPP_NODEATTR</a>(Type,  suffix,  member,  flag)</td></tr>
 <tr class="separator:gadb335a3027b1c038557c57b11dbc7335"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7d37a6f090adb0dfdc73055de0f54fac" id="r_ga7d37a6f090adb0dfdc73055de0f54fac"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#ga7d37a6f090adb0dfdc73055de0f54fac">UAPP_NODEATTR_BITMASK</a>(Type,  suffix,  member,  flag)</td></tr>
-<tr class="separator:ga7d37a6f090adb0dfdc73055de0f54fac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad5b9ce4868d585199a9341222bc6b165" id="r_gad5b9ce4868d585199a9341222bc6b165"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#gad5b9ce4868d585199a9341222bc6b165">UAPP_NODEATTR_CAST</a>(Type,  suffix,  member,  flag)</td></tr>
 <tr class="separator:gad5b9ce4868d585199a9341222bc6b165"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga2f6a2f64d699dc21c19f2ced65434107" id="r_ga2f6a2f64d699dc21c19f2ced65434107"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#ga2f6a2f64d699dc21c19f2ced65434107">UAPP_NODEATTR_WRAPPER</a>(Type,  suffix,  member,  flag)</td></tr>
@@ -475,8 +473,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a98b8c8c6ecb5b384ac60071fc7a38444" name="a98b8c8c6ecb5b384ac60071fc7a38444"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a98b8c8c6ecb5b384ac60071fc7a38444">&#9670;&#160;</a></span>UAPP_GETTER</h2>
+<a id="ac1b56fbb2a8e0f1882faea90b341414c" name="ac1b56fbb2a8e0f1882faea90b341414c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1b56fbb2a8e0f1882faea90b341414c">&#9670;&#160;</a></span>UAPP_GETTER</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -491,12 +489,6 @@ Variables</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">getterName, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
           <td class="paramname">member&#160;</td>
         </tr>
         <tr>
@@ -508,19 +500,14 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    Type member() const noexcept {                                                                 \</div>
 <div class="line">        <span class="keywordflow">return</span> handle()-&gt;member;                                                                   \</div>
-<div class="line">    }                                                                                              \<span class="comment"></span></div>
-<div class="line"><span class="comment">    /** @deprecated Use @ref member instead */</span>                                                     \</div>
-<div class="line">    [[deprecated(<span class="stringliteral">&quot;use &quot;</span> #member <span class="stringliteral">&quot; instead&quot;</span>)]]                                                      \</div>
-<div class="line">    Type getterName() const noexcept {                                                             \</div>
-<div class="line">        <span class="keywordflow">return</span> handle()-&gt;member;                                                                   \</div>
 <div class="line">    }</div>
 </div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="ua_2types_8hpp_source.html#l00039">39</a> of file <a class="el" href="ua_2types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a8785fcd757a8e72057a2f96c4bfd7bfe" name="a8785fcd757a8e72057a2f96c4bfd7bfe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8785fcd757a8e72057a2f96c4bfd7bfe">&#9670;&#160;</a></span>UAPP_GETTER_CAST</h2>
+<a id="ab38cc7aad46ec4c1c159a05d8c57eb59" name="ab38cc7aad46ec4c1c159a05d8c57eb59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab38cc7aad46ec4c1c159a05d8c57eb59">&#9670;&#160;</a></span>UAPP_GETTER_CAST</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -535,7 +522,118 @@ Variables</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">getterName, </td>
+          <td class="paramname">member&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    Type member() const noexcept {                                                                 \</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>Type<span class="keyword">&gt;</span>(handle()-&gt;member);                                                \</div>
+<div class="line">    }</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="ua_2types_8hpp_source.html#l00044">44</a> of file <a class="el" href="ua_2types_8hpp_source.html">types.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a1b517683eabeb49a91a653561703157e" name="a1b517683eabeb49a91a653561703157e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b517683eabeb49a91a653561703157e">&#9670;&#160;</a></span>UAPP_GETTER_SPAN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UAPP_GETTER_SPAN</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Type, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">memberArray, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">memberSize&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    Span&lt;const Type&gt; memberArray() const noexcept {                                                \</div>
+<div class="line">        <span class="keywordflow">return</span> {handle()-&gt;memberArray, handle()-&gt;memberSize};                                      \</div>
+<div class="line">    }                                                                                              \</div>
+<div class="line">    Span&lt;Type&gt; memberArray() noexcept {                                                            \</div>
+<div class="line">        <span class="keywordflow">return</span> {handle()-&gt;memberArray, handle()-&gt;memberSize};                                      \</div>
+<div class="line">    }</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="ua_2types_8hpp_source.html#l00061">61</a> of file <a class="el" href="ua_2types_8hpp_source.html">types.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a25de50aa2389bf9b73942e6dd8956d15" name="a25de50aa2389bf9b73942e6dd8956d15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25de50aa2389bf9b73942e6dd8956d15">&#9670;&#160;</a></span>UAPP_GETTER_SPAN_WRAPPER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UAPP_GETTER_SPAN_WRAPPER</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Type, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">memberArray, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">memberSize&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    Span&lt;const Type&gt; memberArray() const noexcept {                                                \</div>
+<div class="line">        <span class="keywordflow">return</span> {asWrapper&lt;Type&gt;(handle()-&gt;memberArray), handle()-&gt;memberSize};                     \</div>
+<div class="line">    }                                                                                              \</div>
+<div class="line">    Span&lt;Type&gt; memberArray() noexcept {                                                            \</div>
+<div class="line">        <span class="keywordflow">return</span> {asWrapper&lt;Type&gt;(handle()-&gt;memberArray), handle()-&gt;memberSize};                     \</div>
+<div class="line">    }</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="ua_2types_8hpp_source.html#l00069">69</a> of file <a class="el" href="ua_2types_8hpp_source.html">types.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aeb1f9ee4f5f3b328d73698e9c711f94b" name="aeb1f9ee4f5f3b328d73698e9c711f94b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb1f9ee4f5f3b328d73698e9c711f94b">&#9670;&#160;</a></span>UAPP_GETTER_WRAPPER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UAPP_GETTER_WRAPPER</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Type, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -550,21 +648,16 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    Type member() const noexcept {                                                                 \</div>
-<div class="line">        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>Type<span class="keyword">&gt;</span>(handle()-&gt;member);                                                \</div>
-<div class="line">    }                                                                                              \<span class="comment"></span></div>
-<div class="line"><span class="comment">    /** @deprecated Use @ref member instead */</span>                                                     \</div>
-<div class="line">    [[deprecated(<span class="stringliteral">&quot;use &quot;</span> #member <span class="stringliteral">&quot; instead&quot;</span>)]]                                                      \</div>
-<div class="line">    Type getterName() const noexcept {                                                             \</div>
-<div class="line">        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>Type<span class="keyword">&gt;</span>(handle()-&gt;member);                                                \</div>
-<div class="line">    }</div>
+<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="ua_2types_8hpp.html#a479b35eb17ba02b72e807ee864cf72b2">UAPP_GETTER_WRAPPER_CONST</a>(Type, member)                                                        \</div>
+<div class="line">    UAPP_GETTER_WRAPPER_NONCONST(Type, member)</div>
+<div class="ttc" id="aua_2types_8hpp_html_a479b35eb17ba02b72e807ee864cf72b2"><div class="ttname"><a href="ua_2types_8hpp.html#a479b35eb17ba02b72e807ee864cf72b2">UAPP_GETTER_WRAPPER_CONST</a></div><div class="ttdeci">#define UAPP_GETTER_WRAPPER_CONST(Type, member)</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l00049">types.hpp:49</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="ua_2types_8hpp_source.html#l00049">49</a> of file <a class="el" href="ua_2types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua_2types_8hpp_source.html#l00057">57</a> of file <a class="el" href="ua_2types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a236857d294fb078c52a458f443aa3062" name="a236857d294fb078c52a458f443aa3062"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a236857d294fb078c52a458f443aa3062">&#9670;&#160;</a></span>UAPP_GETTER_WRAPPER_CONST</h2>
+<a id="a479b35eb17ba02b72e807ee864cf72b2" name="a479b35eb17ba02b72e807ee864cf72b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a479b35eb17ba02b72e807ee864cf72b2">&#9670;&#160;</a></span>UAPP_GETTER_WRAPPER_CONST</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -574,12 +667,6 @@ Variables</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">Type, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">getterName, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -596,19 +683,14 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">const</span> Type&amp; member() const noexcept {                                                          \</div>
 <div class="line">        <span class="keywordflow">return</span> asWrapper&lt;Type&gt;(handle()-&gt;member);                                                  \</div>
-<div class="line">    }                                                                                              \<span class="comment"></span></div>
-<div class="line"><span class="comment">    /** @deprecated Use @ref member instead */</span>                                                     \</div>
-<div class="line">    [[deprecated(<span class="stringliteral">&quot;use &quot;</span> #member <span class="stringliteral">&quot; instead&quot;</span>)]]                                                      \</div>
-<div class="line">    <span class="keyword">const</span> Type&amp; getterName() const noexcept {                                                      \</div>
-<div class="line">        <span class="keywordflow">return</span> asWrapper&lt;Type&gt;(handle()-&gt;member);                                                  \</div>
 <div class="line">    }</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="ua_2types_8hpp_source.html#l00059">59</a> of file <a class="el" href="ua_2types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua_2types_8hpp_source.html#l00049">49</a> of file <a class="el" href="ua_2types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ae8d427ccd5d4efa6e8a1febf487f3130" name="ae8d427ccd5d4efa6e8a1febf487f3130"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae8d427ccd5d4efa6e8a1febf487f3130">&#9670;&#160;</a></span>UAPP_GETTER_WRAPPER_NONCONST</h2>
+<a id="afa73813caffb9fa1ecb9205f23c3f05a" name="afa73813caffb9fa1ecb9205f23c3f05a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa73813caffb9fa1ecb9205f23c3f05a">&#9670;&#160;</a></span>UAPP_GETTER_WRAPPER_NONCONST</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -618,12 +700,6 @@ Variables</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">Type, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">getterName, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -640,175 +716,15 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    Type&amp; member() noexcept {                                                                      \</div>
 <div class="line">        <span class="keywordflow">return</span> asWrapper&lt;Type&gt;(handle()-&gt;member);                                                  \</div>
-<div class="line">    }                                                                                              \<span class="comment"></span></div>
-<div class="line"><span class="comment">    /** @deprecated Use @ref member instead */</span>                                                     \</div>
-<div class="line">    [[deprecated(<span class="stringliteral">&quot;use &quot;</span> #member <span class="stringliteral">&quot; instead&quot;</span>)]]                                                      \</div>
-<div class="line">    Type&amp; getterName() noexcept {                                                                  \</div>
-<div class="line">        <span class="keywordflow">return</span> asWrapper&lt;Type&gt;(handle()-&gt;member);                                                  \</div>
 <div class="line">    }</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="ua_2types_8hpp_source.html#l00068">68</a> of file <a class="el" href="ua_2types_8hpp_source.html">types.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a820a0ef0faa744f020d4fd26dd3fe941" name="a820a0ef0faa744f020d4fd26dd3fe941"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a820a0ef0faa744f020d4fd26dd3fe941">&#9670;&#160;</a></span>UAPP_GETTER_WRAPPER</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UAPP_GETTER_WRAPPER</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">Type, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">getterName, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">member&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="ua_2types_8hpp.html#a236857d294fb078c52a458f443aa3062">UAPP_GETTER_WRAPPER_CONST</a>(Type, getterName, member)                                            \</div>
-<div class="line">    UAPP_GETTER_WRAPPER_NONCONST(Type, getterName, member)</div>
-<div class="ttc" id="aua_2types_8hpp_html_a236857d294fb078c52a458f443aa3062"><div class="ttname"><a href="ua_2types_8hpp.html#a236857d294fb078c52a458f443aa3062">UAPP_GETTER_WRAPPER_CONST</a></div><div class="ttdeci">#define UAPP_GETTER_WRAPPER_CONST(Type, getterName, member)</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l00059">types.hpp:59</a></div></div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="ua_2types_8hpp_source.html#l00077">77</a> of file <a class="el" href="ua_2types_8hpp_source.html">types.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a01f6619eff9aefd20bfc4f449f67e3ac" name="a01f6619eff9aefd20bfc4f449f67e3ac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a01f6619eff9aefd20bfc4f449f67e3ac">&#9670;&#160;</a></span>UAPP_GETTER_SPAN</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UAPP_GETTER_SPAN</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">Type, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">getterName, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">memberArray, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">memberSize&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    Span&lt;const Type&gt; memberArray() const noexcept {                                                \</div>
-<div class="line">        <span class="keywordflow">return</span> {handle()-&gt;memberArray, handle()-&gt;memberSize};                                      \</div>
-<div class="line">    }                                                                                              \</div>
-<div class="line">    Span&lt;Type&gt; memberArray() noexcept {                                                            \</div>
-<div class="line">        <span class="keywordflow">return</span> {handle()-&gt;memberArray, handle()-&gt;memberSize};                                      \</div>
-<div class="line">    }                                                                                              \<span class="comment"></span></div>
-<div class="line"><span class="comment">    /** @deprecated Use @ref memberArray instead */</span>                                                \</div>
-<div class="line">    [[deprecated(<span class="stringliteral">&quot;use &quot;</span> #memberArray <span class="stringliteral">&quot; instead&quot;</span>)]]                                                 \</div>
-<div class="line">    Span&lt;const Type&gt; getterName() const noexcept {                                                 \</div>
-<div class="line">        <span class="keywordflow">return</span> {handle()-&gt;memberArray, handle()-&gt;memberSize};                                      \</div>
-<div class="line">    }                                                                                              \<span class="comment"></span></div>
-<div class="line"><span class="comment">    /** @deprecated Use @ref memberArray instead */</span>                                                \</div>
-<div class="line">    [[deprecated(<span class="stringliteral">&quot;use &quot;</span> #memberArray <span class="stringliteral">&quot; instead&quot;</span>)]]                                                 \</div>
-<div class="line">    Span&lt;Type&gt; getterName() noexcept {                                                             \</div>
-<div class="line">        <span class="keywordflow">return</span> {handle()-&gt;memberArray, handle()-&gt;memberSize};                                      \</div>
-<div class="line">    }</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="ua_2types_8hpp_source.html#l00081">81</a> of file <a class="el" href="ua_2types_8hpp_source.html">types.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a8ae17486d33dea6271e465cf99a5ccc8" name="a8ae17486d33dea6271e465cf99a5ccc8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8ae17486d33dea6271e465cf99a5ccc8">&#9670;&#160;</a></span>UAPP_GETTER_SPAN_WRAPPER</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UAPP_GETTER_SPAN_WRAPPER</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">Type, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">getterName, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">memberArray, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">memberSize&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    Span&lt;const Type&gt; memberArray() const noexcept {                                                \</div>
-<div class="line">        <span class="keywordflow">return</span> {asWrapper&lt;Type&gt;(handle()-&gt;memberArray), handle()-&gt;memberSize};                     \</div>
-<div class="line">    }                                                                                              \</div>
-<div class="line">    Span&lt;Type&gt; memberArray() noexcept {                                                            \</div>
-<div class="line">        <span class="keywordflow">return</span> {asWrapper&lt;Type&gt;(handle()-&gt;memberArray), handle()-&gt;memberSize};                     \</div>
-<div class="line">    }                                                                                              \<span class="comment"></span></div>
-<div class="line"><span class="comment">    /** @deprecated Use @ref memberArray instead */</span>                                                \</div>
-<div class="line">    [[deprecated(<span class="stringliteral">&quot;use &quot;</span> #memberArray <span class="stringliteral">&quot; instead&quot;</span>)]]                                                 \</div>
-<div class="line">    Span&lt;const Type&gt; getterName() const noexcept {                                                 \</div>
-<div class="line">        <span class="keywordflow">return</span> {asWrapper&lt;Type&gt;(handle()-&gt;memberArray), handle()-&gt;memberSize};                     \</div>
-<div class="line">    }                                                                                              \<span class="comment"></span></div>
-<div class="line"><span class="comment">    /** @deprecated Use @ref memberArray instead */</span>                                                \</div>
-<div class="line">    [[deprecated(<span class="stringliteral">&quot;use &quot;</span> #memberArray <span class="stringliteral">&quot; instead&quot;</span>)]]                                                 \</div>
-<div class="line">    Span&lt;Type&gt; getterName() noexcept {                                                             \</div>
-<div class="line">        <span class="keywordflow">return</span> {asWrapper&lt;Type&gt;(handle()-&gt;memberArray), handle()-&gt;memberSize};                     \</div>
-<div class="line">    }</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="ua_2types_8hpp_source.html#l00099">99</a> of file <a class="el" href="ua_2types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua_2types_8hpp_source.html#l00053">53</a> of file <a class="el" href="ua_2types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="a09e5e63d313c3f91ff05131ee74a203a" name="a09e5e63d313c3f91ff05131ee74a203a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a09e5e63d313c3f91ff05131ee74a203a">&#9670;&#160;</a></span>UA_VariableAttributes_default</h2>
+<a id="a40d45880be0e44703e5ff7927750ab8e" name="a40d45880be0e44703e5ff7927750ab8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40d45880be0e44703e5ff7927750ab8e">&#9670;&#160;</a></span>UA_DataTypeAttributes_default</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -817,7 +733,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UA_EXPORT const <a class="elRef" target="_blank" href="open62541/structUA__VariableAttributes.html">UA_VariableAttributes</a> UA_VariableAttributes_default</td>
+          <td class="memname">UA_EXPORT const <a class="elRef" target="_blank" href="open62541/structUA__DataTypeAttributes.html">UA_DataTypeAttributes</a> UA_DataTypeAttributes_default</td>
         </tr>
       </table>
   </td>
@@ -827,31 +743,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="ua_2types_8hpp_source.html#l00474">opcua::ua::VariableAttributes::VariableAttributes()</a>.</p>
-
-</div>
-</div>
-<a id="aa4e68cd81af56191a49713afa70f660f" name="aa4e68cd81af56191a49713afa70f660f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa4e68cd81af56191a49713afa70f660f">&#9670;&#160;</a></span>UA_VariableTypeAttributes_default</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">UA_EXPORT const <a class="elRef" target="_blank" href="open62541/structUA__VariableTypeAttributes.html">UA_VariableTypeAttributes</a> UA_VariableTypeAttributes_default</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="reference">Referenced by <a class="el" href="ua_2types_8hpp_source.html#l00571">opcua::ua::VariableTypeAttributes::VariableTypeAttributes()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="ua_2types_8hpp_source.html#l00594">opcua::ua::DataTypeAttributes::DataTypeAttributes()</a>.</p>
 
 </div>
 </div>
@@ -875,7 +767,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="ua_2types_8hpp_source.html#l00536">opcua::ua::MethodAttributes::MethodAttributes()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="ua_2types_8hpp_source.html#l00488">opcua::ua::MethodAttributes::MethodAttributes()</a>.</p>
 
 </div>
 </div>
@@ -899,7 +791,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="ua_2types_8hpp_source.html#l00456">opcua::ua::ObjectAttributes::ObjectAttributes()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="ua_2types_8hpp_source.html#l00405">opcua::ua::ObjectAttributes::ObjectAttributes()</a>.</p>
 
 </div>
 </div>
@@ -923,7 +815,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="ua_2types_8hpp_source.html#l00554">opcua::ua::ObjectTypeAttributes::ObjectTypeAttributes()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="ua_2types_8hpp_source.html#l00506">opcua::ua::ObjectTypeAttributes::ObjectTypeAttributes()</a>.</p>
 
 </div>
 </div>
@@ -947,12 +839,12 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="ua_2types_8hpp_source.html#l00619">opcua::ua::ReferenceTypeAttributes::ReferenceTypeAttributes()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="ua_2types_8hpp_source.html#l00573">opcua::ua::ReferenceTypeAttributes::ReferenceTypeAttributes()</a>.</p>
 
 </div>
 </div>
-<a id="a40d45880be0e44703e5ff7927750ab8e" name="a40d45880be0e44703e5ff7927750ab8e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a40d45880be0e44703e5ff7927750ab8e">&#9670;&#160;</a></span>UA_DataTypeAttributes_default</h2>
+<a id="a09e5e63d313c3f91ff05131ee74a203a" name="a09e5e63d313c3f91ff05131ee74a203a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09e5e63d313c3f91ff05131ee74a203a">&#9670;&#160;</a></span>UA_VariableAttributes_default</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -961,7 +853,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UA_EXPORT const <a class="elRef" target="_blank" href="open62541/structUA__DataTypeAttributes.html">UA_DataTypeAttributes</a> UA_DataTypeAttributes_default</td>
+          <td class="memname">UA_EXPORT const <a class="elRef" target="_blank" href="open62541/structUA__VariableAttributes.html">UA_VariableAttributes</a> UA_VariableAttributes_default</td>
         </tr>
       </table>
   </td>
@@ -971,7 +863,31 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="ua_2types_8hpp_source.html#l00639">opcua::ua::DataTypeAttributes::DataTypeAttributes()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="ua_2types_8hpp_source.html#l00424">opcua::ua::VariableAttributes::VariableAttributes()</a>.</p>
+
+</div>
+</div>
+<a id="aa4e68cd81af56191a49713afa70f660f" name="aa4e68cd81af56191a49713afa70f660f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4e68cd81af56191a49713afa70f660f">&#9670;&#160;</a></span>UA_VariableTypeAttributes_default</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT const <a class="elRef" target="_blank" href="open62541/structUA__VariableTypeAttributes.html">UA_VariableTypeAttributes</a> UA_VariableTypeAttributes_default</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="ua_2types_8hpp_source.html#l00523">opcua::ua::VariableTypeAttributes::VariableTypeAttributes()</a>.</p>
 
 </div>
 </div>
@@ -995,7 +911,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="ua_2types_8hpp_source.html#l00655">opcua::ua::ViewAttributes::ViewAttributes()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="ua_2types_8hpp_source.html#l00610">opcua::ua::ViewAttributes::ViewAttributes()</a>.</p>
 
 </div>
 </div>

@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -132,25 +132,26 @@ $(function() {
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main() {</div>
 <div class="line">    <span class="keyword">auto</span> logger = [](<span class="keyword">auto</span> level, <span class="keyword">auto</span> <a class="code hl_variableRef" target="_blank" href="open62541/log_8h.html#a5603e94110fb2c3ab4c7f7ed85880580">category</a>, <span class="keyword">auto</span> <a id="a14" name="a14"></a><a class="code hl_variableRef" target="_blank" href="open62541/log_8h.html#ae4899cf5c80d00f8c8e3703cb431ec2e">msg</a>) {</div>
-<div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;[&quot;</span> &lt;&lt; toString(level) &lt;&lt; <span class="stringliteral">&quot;] &quot;</span> &lt;&lt; <span class="stringliteral">&quot;[&quot;</span> &lt;&lt; toString(category) &lt;&lt; <span class="stringliteral">&quot;] &quot;</span> &lt;&lt; <a class="code hl_variableRef" target="_blank" href="open62541/log_8h.html#ae4899cf5c80d00f8c8e3703cb431ec2e">msg</a></div>
+<div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;[&quot;</span> &lt;&lt; <a class="code hl_function" href="namespaceopcua.html#a3d1494b8f3ef24a9c3a5c8ecc0724361">toString</a>(level) &lt;&lt; <span class="stringliteral">&quot;] &quot;</span> &lt;&lt; <span class="stringliteral">&quot;[&quot;</span> &lt;&lt; <a class="code hl_function" href="namespaceopcua.html#a3d1494b8f3ef24a9c3a5c8ecc0724361">toString</a>(category) &lt;&lt; <span class="stringliteral">&quot;] &quot;</span> &lt;&lt; <a class="code hl_variableRef" target="_blank" href="open62541/log_8h.html#ae4899cf5c80d00f8c8e3703cb431ec2e">msg</a></div>
 <div class="line">                  &lt;&lt; std::endl;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Create server configuration and set logger</span></div>
-<div class="line">    <a id="_a15" name="_a15"></a><a class="code hl_class" href="classopcua_1_1ServerConfig.html">opcua::ServerConfig</a> config(4840, {});</div>
+<div class="line">    <a id="_a15" name="_a15"></a><a class="code hl_class" href="classopcua_1_1ServerConfig.html">opcua::ServerConfig</a> config{4840, {}};</div>
 <div class="line">    config.<a id="a16" name="a16"></a><a class="code hl_function" href="classopcua_1_1ServerConfig.html#a83e3a97d8e2215445b7360ef6523c8ff">setLogger</a>(logger);</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Construct server with config</span></div>
-<div class="line">    <a id="_a17" name="_a17"></a><a class="code hl_class" href="classopcua_1_1Server.html">opcua::Server</a> server(std::move(config));</div>
+<div class="line">    <a id="_a17" name="_a17"></a><a class="code hl_class" href="classopcua_1_1Server.html">opcua::Server</a> server{std::move(config)};</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Alternatively, set logger after construction</span></div>
-<div class="line">    server.config().setLogger(logger);</div>
+<div class="line">    server.<a id="a18" name="a18"></a><a class="code hl_function" href="classopcua_1_1Server.html#a8c96ae4799072325bce34be6c7fd81cc">config</a>().<a class="code hl_function" href="classopcua_1_1ServerConfig.html#a83e3a97d8e2215445b7360ef6523c8ff">setLogger</a>(logger);</div>
 <div class="line"> </div>
 <div class="line">    server.run();</div>
 <div class="line">}</div>
-<div class="ttc" id="aclassopcua_1_1ServerConfig_html"><div class="ttname"><a href="classopcua_1_1ServerConfig.html">opcua::ServerConfig</a></div><div class="ttdoc">Server configuration.</div><div class="ttdef"><b>Definition</b> <a href="server_8hpp_source.html#l00038">server.hpp:38</a></div></div>
+<div class="ttc" id="aclassopcua_1_1ServerConfig_html"><div class="ttname"><a href="classopcua_1_1ServerConfig.html">opcua::ServerConfig</a></div><div class="ttdoc">Server configuration.</div><div class="ttdef"><b>Definition</b> <a href="server_8hpp_source.html#l00043">server.hpp:43</a></div></div>
 <div class="ttc" id="aclassopcua_1_1ServerConfig_html_a83e3a97d8e2215445b7360ef6523c8ff"><div class="ttname"><a href="classopcua_1_1ServerConfig.html#a83e3a97d8e2215445b7360ef6523c8ff">opcua::ServerConfig::setLogger</a></div><div class="ttdeci">void setLogger(LogFunction func)</div></div>
-<div class="ttc" id="aclassopcua_1_1Server_html"><div class="ttname"><a href="classopcua_1_1Server.html">opcua::Server</a></div><div class="ttdoc">High-level server class.</div><div class="ttdef"><b>Definition</b> <a href="server_8hpp_source.html#l00136">server.hpp:136</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Server_html"><div class="ttname"><a href="classopcua_1_1Server.html">opcua::Server</a></div><div class="ttdoc">High-level server class.</div><div class="ttdef"><b>Definition</b> <a href="server_8hpp_source.html#l00142">server.hpp:142</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Server_html_a8c96ae4799072325bce34be6c7fd81cc"><div class="ttname"><a href="classopcua_1_1Server.html#a8c96ae4799072325bce34be6c7fd81cc">opcua::Server::config</a></div><div class="ttdeci">ServerConfig &amp; config() noexcept</div></div>
 <div class="ttc" id="alog_8h_html_a5603e94110fb2c3ab4c7f7ed85880580"><div class="ttname"><a href="open62541/log_8h.html#a5603e94110fb2c3ab4c7f7ed85880580">category</a></div><div class="ttdeci">static UA_LogCategory category</div></div>
 <div class="ttc" id="alog_8h_html_ae4899cf5c80d00f8c8e3703cb431ec2e"><div class="ttname"><a href="open62541/log_8h.html#ae4899cf5c80d00f8c8e3703cb431ec2e">msg</a></div><div class="ttdeci">static UA_LogCategory const char * msg</div></div>
 <div class="ttc" id="anamespaceopcua_html_a016225e750f216587c011ea43f212d8d"><div class="ttname"><a href="namespaceopcua.html#a016225e750f216587c011ea43f212d8d">opcua::LogLevel</a></div><div class="ttdeci">LogLevel</div><div class="ttdoc">Log level.</div><div class="ttdef"><b>Definition</b> <a href="log_8hpp_source.html#l00014">log.hpp:14</a></div></div>
@@ -160,6 +161,7 @@ $(function() {
 <div class="ttc" id="anamespaceopcua_html_a016225e750f216587c011ea43f212d8da902b0d55fddef6f8d651fe1035b7d4bd"><div class="ttname"><a href="namespaceopcua.html#a016225e750f216587c011ea43f212d8da902b0d55fddef6f8d651fe1035b7d4bd">opcua::LogLevel::Error</a></div><div class="ttdeci">@ Error</div></div>
 <div class="ttc" id="anamespaceopcua_html_a016225e750f216587c011ea43f212d8daa603905470e2a5b8c13e96b579ef0dba"><div class="ttname"><a href="namespaceopcua.html#a016225e750f216587c011ea43f212d8daa603905470e2a5b8c13e96b579ef0dba">opcua::LogLevel::Debug</a></div><div class="ttdeci">@ Debug</div></div>
 <div class="ttc" id="anamespaceopcua_html_a016225e750f216587c011ea43f212d8dadd4ec0ac4e58f7c32a01244ae91150b1"><div class="ttname"><a href="namespaceopcua.html#a016225e750f216587c011ea43f212d8dadd4ec0ac4e58f7c32a01244ae91150b1">opcua::LogLevel::Trace</a></div><div class="ttdeci">@ Trace</div></div>
+<div class="ttc" id="anamespaceopcua_html_a3d1494b8f3ef24a9c3a5c8ecc0724361"><div class="ttname"><a href="namespaceopcua.html#a3d1494b8f3ef24a9c3a5c8ecc0724361">opcua::toString</a></div><div class="ttdeci">String toString(const NumericRange &amp;range)</div></div>
 <div class="ttc" id="anamespaceopcua_html_a82c59334b1772f47ada395785f5bf70a"><div class="ttname"><a href="namespaceopcua.html#a82c59334b1772f47ada395785f5bf70a">opcua::LogCategory</a></div><div class="ttdeci">LogCategory</div><div class="ttdoc">Log category.</div><div class="ttdef"><b>Definition</b> <a href="log_8hpp_source.html#l00027">log.hpp:27</a></div></div>
 <div class="ttc" id="anamespaceopcua_html_a82c59334b1772f47ada395785f5bf70aa577d7068826de925ea2aec01dbadf5e4"><div class="ttname"><a href="namespaceopcua.html#a82c59334b1772f47ada395785f5bf70aa577d7068826de925ea2aec01dbadf5e4">opcua::LogCategory::Client</a></div><div class="ttdeci">@ Client</div></div>
 <div class="ttc" id="anamespaceopcua_html_a82c59334b1772f47ada395785f5bf70aa71c7ae294b7abd866b3fb295b3b9e4a4"><div class="ttname"><a href="namespaceopcua.html#a82c59334b1772f47ada395785f5bf70aa71c7ae294b7abd866b3fb295b3b9e4a4">opcua::LogCategory::Session</a></div><div class="ttdeci">@ Session</div></div>

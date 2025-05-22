@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -107,10 +107,10 @@ class opcua::Span&lt; T &gt;</div><p>View to a contiguous sequence of objects, s
   </dd>
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a href="https://en.cppreference.com/w/cpp/container/span">https://en.cppreference.com/w/cpp/container/span</a> </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2client_custom_datatypes_8cpp-example.html#_a11">custom_datatypes/client_custom_datatypes.cpp</a>, <a class="el" href="custom_datatypes_2server_custom_datatypes_8cpp-example.html#_a8">custom_datatypes/server_custom_datatypes.cpp</a>, <a class="el" href="events_2client_eventfilter_8cpp-example.html#_a5">events/client_eventfilter.cpp</a>, <a class="el" href="events_2server_events_8cpp-example.html#_a6">events/server_events.cpp</a>, <a class="el" href="method_2server_method_8cpp-example.html#_a3">method/server_method.cpp</a>, and <a class="el" href="typeconversion_8cpp-example.html#_a5">typeconversion.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2client_custom_datatypes_8cpp-example.html#_a11">custom_datatypes/client_custom_datatypes.cpp</a>, <a class="el" href="custom_datatypes_2server_custom_datatypes_8cpp-example.html#_a7">custom_datatypes/server_custom_datatypes.cpp</a>, <a class="el" href="events_2client_eventfilter_8cpp-example.html#_a5">events/client_eventfilter.cpp</a>, <a class="el" href="events_2server_events_8cpp-example.html#_a4">events/server_events.cpp</a>, <a class="el" href="method_2server_method_8cpp-example.html#_a2">method/server_method.cpp</a>, <a class="el" href="method_2server_method_async_8cpp-example.html#_a3">method/server_method_async.cpp</a>, and <a class="el" href="typeconversion_8cpp-example.html#_a5">typeconversion.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00030">30</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00029">29</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
@@ -210,8 +210,8 @@ Related Symbols</h2></td></tr>
 <tr class="separator:a539ba2414fd874842ca56e1287f95e6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="a0ab16c5049b4f1a9e790c3e922ff13dd" name="a0ab16c5049b4f1a9e790c3e922ff13dd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0ab16c5049b4f1a9e790c3e922ff13dd">&#9670;&#160;</a></span>element_type</h2>
+<a id="ab2851cba2b0628b37a1782d3476e1c13" name="ab2851cba2b0628b37a1782d3476e1c13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2851cba2b0628b37a1782d3476e1c13">&#9670;&#160;</a></span>const_iterator</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -219,84 +219,12 @@ Related Symbols</h2></td></tr>
 template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::element_type =  T</td>
+          <td class="memname">using <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::const_iterator =  <a class="el" href="classopcua_1_1Span.html#a2546e7bb6b989094d38991216ad986e6">const_pointer</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00038">38</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a092ad24a0cfe22fe585529fad3cbd52b" name="a092ad24a0cfe22fe585529fad3cbd52b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a092ad24a0cfe22fe585529fad3cbd52b">&#9670;&#160;</a></span>value_type</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::value_type =  std::remove_cv_t&lt;T&gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00039">39</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
-
-</div>
-</div>
-<a id="acb660bb484b34f06100da3c8fe00d535" name="acb660bb484b34f06100da3c8fe00d535"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acb660bb484b34f06100da3c8fe00d535">&#9670;&#160;</a></span>size_type</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::size_type =  size_t</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00040">40</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ab8c77debe56a4b74d3d37cc5ade01121" name="ab8c77debe56a4b74d3d37cc5ade01121"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8c77debe56a4b74d3d37cc5ade01121">&#9670;&#160;</a></span>difference_type</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::difference_type =  std::ptrdiff_t</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00041">41</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a24a51e17e8d7b152656610c4050f6613" name="a24a51e17e8d7b152656610c4050f6613"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a24a51e17e8d7b152656610c4050f6613">&#9670;&#160;</a></span>pointer</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::pointer =  T*</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00042">42</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00048">48</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
 
 </div>
 </div>
@@ -310,24 +238,6 @@ template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">using <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::const_pointer =  const T*</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00043">43</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a5a16388b1339b18ce3e321d7f20c77f1" name="a5a16388b1339b18ce3e321d7f20c77f1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a16388b1339b18ce3e321d7f20c77f1">&#9670;&#160;</a></span>reference</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::reference =  T&amp;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -350,61 +260,7 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00045">45</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a654dfa1bf6d430941bdca00c32ea90f0" name="a654dfa1bf6d430941bdca00c32ea90f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a654dfa1bf6d430941bdca00c32ea90f0">&#9670;&#160;</a></span>iterator</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::iterator =  <a class="el" href="classopcua_1_1Span.html#a24a51e17e8d7b152656610c4050f6613">pointer</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
 <p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00046">46</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ab2851cba2b0628b37a1782d3476e1c13" name="ab2851cba2b0628b37a1782d3476e1c13"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab2851cba2b0628b37a1782d3476e1c13">&#9670;&#160;</a></span>const_iterator</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::const_iterator =  <a class="el" href="classopcua_1_1Span.html#a2546e7bb6b989094d38991216ad986e6">const_pointer</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00047">47</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a9524b2d0e0611de36a480d995d78f43d" name="a9524b2d0e0611de36a480d995d78f43d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9524b2d0e0611de36a480d995d78f43d">&#9670;&#160;</a></span>reverse_iterator</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::reverse_iterator =  std::reverse_iterator&lt;<a class="el" href="classopcua_1_1Span.html#a654dfa1bf6d430941bdca00c32ea90f0">iterator</a>&gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00048">48</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
 
 </div>
 </div>
@@ -422,7 +278,151 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00050">50</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ab8c77debe56a4b74d3d37cc5ade01121" name="ab8c77debe56a4b74d3d37cc5ade01121"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8c77debe56a4b74d3d37cc5ade01121">&#9670;&#160;</a></span>difference_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::difference_type =  std::ptrdiff_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00042">42</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a0ab16c5049b4f1a9e790c3e922ff13dd" name="a0ab16c5049b4f1a9e790c3e922ff13dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ab16c5049b4f1a9e790c3e922ff13dd">&#9670;&#160;</a></span>element_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::element_type =  T</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00039">39</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a654dfa1bf6d430941bdca00c32ea90f0" name="a654dfa1bf6d430941bdca00c32ea90f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a654dfa1bf6d430941bdca00c32ea90f0">&#9670;&#160;</a></span>iterator</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::iterator =  <a class="el" href="classopcua_1_1Span.html#a24a51e17e8d7b152656610c4050f6613">pointer</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00047">47</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a24a51e17e8d7b152656610c4050f6613" name="a24a51e17e8d7b152656610c4050f6613"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24a51e17e8d7b152656610c4050f6613">&#9670;&#160;</a></span>pointer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::pointer =  T*</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00043">43</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a5a16388b1339b18ce3e321d7f20c77f1" name="a5a16388b1339b18ce3e321d7f20c77f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a16388b1339b18ce3e321d7f20c77f1">&#9670;&#160;</a></span>reference</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::reference =  T&amp;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00045">45</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9524b2d0e0611de36a480d995d78f43d" name="a9524b2d0e0611de36a480d995d78f43d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9524b2d0e0611de36a480d995d78f43d">&#9670;&#160;</a></span>reverse_iterator</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::reverse_iterator =  std::reverse_iterator&lt;<a class="el" href="classopcua_1_1Span.html#a654dfa1bf6d430941bdca00c32ea90f0">iterator</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
 <p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00049">49</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+
+</div>
+</div>
+<a id="acb660bb484b34f06100da3c8fe00d535" name="acb660bb484b34f06100da3c8fe00d535"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb660bb484b34f06100da3c8fe00d535">&#9670;&#160;</a></span>size_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::size_type =  size_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00041">41</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a092ad24a0cfe22fe585529fad3cbd52b" name="a092ad24a0cfe22fe585529fad3cbd52b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a092ad24a0cfe22fe585529fad3cbd52b">&#9670;&#160;</a></span>value_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::value_type =  std::remove_cv_t&lt;T&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00040">40</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
 
 </div>
 </div>
@@ -490,7 +490,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00054">54</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00055">55</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
 
 </div>
 </div>
@@ -524,7 +524,7 @@ template&lt;typename Container , typename  = EnableIfHasSizeAndData&lt;Container
 
 <p>Implicit constructor from a container like <code>std::array</code> or <code>std::vector</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00062">62</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00063">63</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
 
 </div>
 </div>
@@ -558,7 +558,7 @@ template&lt;typename Container , typename  = EnableIfHasSizeAndData&lt;Container
 
 <p>Implicit constructor from a container like <code>std::array</code> or <code>std::vector</code> (const). </p>
 
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00069">69</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00070">70</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
 
 </div>
 </div>
@@ -595,170 +595,13 @@ template&lt;typename T &gt; </div>
 <div class="line"><span class="comment">// not ok</span></div>
 <div class="line"><a class="code hl_class" href="classopcua_1_1Span.html">Span&lt;const int&gt;</a> values = {1, 2, 3};</div>
 <div class="line">takeView(values);</div>
-<div class="ttc" id="aclassopcua_1_1Span_html"><div class="ttname"><a href="classopcua_1_1Span.html">opcua::Span</a></div><div class="ttdoc">View to a contiguous sequence of objects, similar to std::span in C++20.</div><div class="ttdef"><b>Definition</b> <a href="span_8hpp_source.html#l00030">span.hpp:30</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Span_html"><div class="ttname"><a href="classopcua_1_1Span.html">opcua::Span</a></div><div class="ttdoc">View to a contiguous sequence of objects, similar to std::span in C++20.</div><div class="ttdef"><b>Definition</b> <a href="span_8hpp_source.html#l00029">span.hpp:29</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00085">85</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00086">86</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a556109a9c89ae84e01811755b3e30ad2" name="a556109a9c89ae84e01811755b3e30ad2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a556109a9c89ae84e01811755b3e30ad2">&#9670;&#160;</a></span>swap()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr void <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::swap </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; T &gt; &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00088">88</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a73e5cdcc3a96fc916fc7155155edb3d6" name="a73e5cdcc3a96fc916fc7155155edb3d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a73e5cdcc3a96fc916fc7155155edb3d6">&#9670;&#160;</a></span>size()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr size_t <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::size </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00093">93</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="ua_2types_8hpp_source.html#l00810">opcua::ua::AddNodesRequest::AddNodesRequest()</a>, <a class="el" href="ua_2types_8hpp_source.html#l00876">opcua::ua::AddReferencesRequest::AddReferencesRequest()</a>, <a class="el" href="ua_2types_8hpp_source.html#l00171">opcua::ua::ApplicationDescription::ApplicationDescription()</a>, <a class="el" href="span_8hpp_source.html#l00113">opcua::Span&lt; T &gt;::at()</a>, <a class="el" href="ua_2types_8hpp_source.html#l02651">opcua::ua::AxisInformation::AxisInformation()</a>, <a class="el" href="span_8hpp_source.html#l00128">opcua::Span&lt; T &gt;::back()</a>, <a class="el" href="ua_2types_8hpp_source.html#l01197">opcua::ua::BrowseNextRequest::BrowseNextRequest()</a>, <a class="el" href="ua_2types_8hpp_source.html#l01126">opcua::ua::BrowseRequest::BrowseRequest()</a>, <a class="el" href="ua_2types_8hpp_source.html#l01619">opcua::ua::CallMethodRequest::CallMethodRequest()</a>, <a class="el" href="ua_2types_8hpp_source.html#l01660">opcua::ua::CallRequest::CallRequest()</a>, <a class="el" href="span_8hpp_source.html#l00145">opcua::Span&lt; T &gt;::cend()</a>, <a class="el" href="ua_2types_8hpp_source.html#l02088">opcua::ua::CreateMonitoredItemsRequest::CreateMonitoredItemsRequest()</a>, <a class="el" href="ua_2types_8hpp_source.html#l02311">opcua::ua::DeleteMonitoredItemsRequest::DeleteMonitoredItemsRequest()</a>, <a class="el" href="ua_2types_8hpp_source.html#l00931">opcua::ua::DeleteNodesRequest::DeleteNodesRequest()</a>, <a class="el" href="ua_2types_8hpp_source.html#l00996">opcua::ua::DeleteReferencesRequest::DeleteReferencesRequest()</a>, <a class="el" href="ua_2types_8hpp_source.html#l02507">opcua::ua::DeleteSubscriptionsRequest::DeleteSubscriptionsRequest()</a>, <a class="el" href="span_8hpp_source.html#l00097">opcua::Span&lt; T &gt;::empty()</a>, <a class="el" href="span_8hpp_source.html#l00137">opcua::Span&lt; T &gt;::end()</a>, <a class="el" href="ua_2types_8hpp_source.html#l02777">opcua::ua::EnumDefinition::EnumDefinition()</a>, <a class="el" href="ua_2types_8hpp_source.html#l01968">opcua::ua::EventFilter::EventFilter()</a>, <a class="el" href="span_8hpp_source.html#l00179">opcua::Span&lt; T &gt;::first()</a>, <a class="el" href="span_8hpp_source.html#l00187">opcua::Span&lt; T &gt;::last()</a>, <a class="el" href="ua_2types_8hpp_source.html#l02169">opcua::ua::ModifyMonitoredItemsRequest::ModifyMonitoredItemsRequest()</a>, <a class="el" href="span_8hpp_source.html#l00106">opcua::Span&lt; T &gt;::operator[]()</a>, <a class="el" href="ua_2types_8hpp_source.html#l01455">opcua::ua::ReadRequest::ReadRequest()</a>, <a class="el" href="ua_2types_8hpp_source.html#l01355">opcua::ua::RegisterNodesRequest::RegisterNodesRequest()</a>, <a class="el" href="ua_2types_8hpp_source.html#l01262">opcua::ua::RelativePath::RelativePath()</a>, <a class="el" href="ua_2types_8hpp_source.html#l02215">opcua::ua::SetMonitoringModeRequest::SetMonitoringModeRequest()</a>, <a class="el" href="ua_2types_8hpp_source.html#l02455">opcua::ua::SetPublishingModeRequest::SetPublishingModeRequest()</a>, <a class="el" href="ua_2types_8hpp_source.html#l02259">opcua::ua::SetTriggeringRequest::SetTriggeringRequest()</a>, <a class="el" href="span_8hpp_source.html#l00166">opcua::Span&lt; T &gt;::subview()</a>, <a class="el" href="ua_2types_8hpp_source.html#l01318">opcua::ua::TranslateBrowsePathsToNodeIdsRequest::TranslateBrowsePathsToNodeIdsRequest()</a>, <a class="el" href="ua_2types_8hpp_source.html#l01385">opcua::ua::UnregisterNodesRequest::UnregisterNodesRequest()</a>, and <a class="el" href="ua_2types_8hpp_source.html#l01520">opcua::ua::WriteRequest::WriteRequest()</a>.</p>
-
-</div>
-</div>
-<a id="a51106e6b9cd49f0541df69d9cfbc8390" name="a51106e6b9cd49f0541df69d9cfbc8390"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a51106e6b9cd49f0541df69d9cfbc8390">&#9670;&#160;</a></span>empty()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr bool <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::empty </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00097">97</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="span_8hpp_source.html#l00128">opcua::Span&lt; T &gt;::back()</a>, and <a class="el" href="span_8hpp_source.html#l00123">opcua::Span&lt; T &gt;::front()</a>.</p>
-
-</div>
-</div>
-<a id="aea56eccbf59d0064d08f6a3c1f914179" name="aea56eccbf59d0064d08f6a3c1f914179"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea56eccbf59d0064d08f6a3c1f914179">&#9670;&#160;</a></span>data()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr <a class="el" href="classopcua_1_1Span.html#a24a51e17e8d7b152656610c4050f6613">pointer</a> <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::data </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="typeconversion_8cpp-example.html#a6">typeconversion.cpp</a>.</dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00101">101</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="span_8hpp_source.html#l00113">opcua::Span&lt; T &gt;::at()</a>, <a class="el" href="span_8hpp_source.html#l00128">opcua::Span&lt; T &gt;::back()</a>, <a class="el" href="span_8hpp_source.html#l00133">opcua::Span&lt; T &gt;::begin()</a>, <a class="el" href="span_8hpp_source.html#l00141">opcua::Span&lt; T &gt;::cbegin()</a>, <a class="el" href="span_8hpp_source.html#l00145">opcua::Span&lt; T &gt;::cend()</a>, <a class="el" href="span_8hpp_source.html#l00137">opcua::Span&lt; T &gt;::end()</a>, <a class="el" href="span_8hpp_source.html#l00179">opcua::Span&lt; T &gt;::first()</a>, <a class="el" href="span_8hpp_source.html#l00123">opcua::Span&lt; T &gt;::front()</a>, <a class="el" href="span_8hpp_source.html#l00187">opcua::Span&lt; T &gt;::last()</a>, <a class="el" href="span_8hpp_source.html#l00106">opcua::Span&lt; T &gt;::operator[]()</a>, and <a class="el" href="span_8hpp_source.html#l00166">opcua::Span&lt; T &gt;::subview()</a>.</p>
-
-</div>
-</div>
-<a id="a2d89beee5d5a39956b1f471b826dabc9" name="a2d89beee5d5a39956b1f471b826dabc9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2d89beee5d5a39956b1f471b826dabc9">&#9670;&#160;</a></span>operator[]()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr <a class="el" href="classopcua_1_1Span.html#a5a16388b1339b18ce3e321d7f20c77f1">reference</a> <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::operator[] </td>
-          <td>(</td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Access element by index. </p>
-
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00106">106</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
-
-</div>
-</div>
 <a id="a2f10197bb78b8d1e0a2cd9964d9d70a5" name="a2f10197bb78b8d1e0a2cd9964d9d70a5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2f10197bb78b8d1e0a2cd9964d9d70a5">&#9670;&#160;</a></span>at()</h2>
 
@@ -792,39 +635,10 @@ template&lt;typename T &gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="events_2client_eventfilter_8cpp-example.html#a12">events/client_eventfilter.cpp</a>, <a class="el" href="events_2server_events_8cpp-example.html#a7">events/server_events.cpp</a>, and <a class="el" href="method_2server_method_8cpp-example.html#a4">method/server_method.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="events_2client_eventfilter_8cpp-example.html#a8">events/client_eventfilter.cpp</a>, <a class="el" href="events_2server_events_8cpp-example.html#a5">events/server_events.cpp</a>, <a class="el" href="method_2server_method_8cpp-example.html#a3">method/server_method.cpp</a>, and <a class="el" href="method_2server_method_async_8cpp-example.html#a4">method/server_method_async.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00113">113</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a845be4ef89f5bf990a2f31c58149c978" name="a845be4ef89f5bf990a2f31c58149c978"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a845be4ef89f5bf990a2f31c58149c978">&#9670;&#160;</a></span>front()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr <a class="el" href="classopcua_1_1Span.html#a5a16388b1339b18ce3e321d7f20c77f1">reference</a> <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::front </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00123">123</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00114">114</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
 
 </div>
 </div>
@@ -853,7 +667,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00128">128</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00126">126</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
 
 </div>
 </div>
@@ -882,40 +696,9 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00133">133</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00131">131</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="types_8hpp_source.html#l00563">opcua::ByteString::ByteString()</a>, <a class="el" href="span_8hpp_source.html#l00234">opcua::Span&lt; T &gt;::operator==()</a>, and <a class="el" href="span_8hpp_source.html#l00153">opcua::Span&lt; T &gt;::rend()</a>.</p>
-
-</div>
-</div>
-<a id="ad35893ede6cde2956c61ac1eca87fca7" name="ad35893ede6cde2956c61ac1eca87fca7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad35893ede6cde2956c61ac1eca87fca7">&#9670;&#160;</a></span>end()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr <a class="el" href="classopcua_1_1Span.html#a654dfa1bf6d430941bdca00c32ea90f0">iterator</a> <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::end </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00137">137</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="types_8hpp_source.html#l00563">opcua::ByteString::ByteString()</a>, <a class="el" href="span_8hpp_source.html#l00234">opcua::Span&lt; T &gt;::operator==()</a>, and <a class="el" href="span_8hpp_source.html#l00149">opcua::Span&lt; T &gt;::rbegin()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="types_8hpp_source.html#l00547">opcua::ByteString::ByteString()</a>, <a class="el" href="span_8hpp_source.html#l00232">opcua::Span&lt; T &gt;::operator==()</a>, and <a class="el" href="span_8hpp_source.html#l00151">opcua::Span&lt; T &gt;::rend()</a>.</p>
 
 </div>
 </div>
@@ -944,9 +727,9 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00141">141</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00139">139</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="span_8hpp_source.html#l00161">opcua::Span&lt; T &gt;::crend()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="span_8hpp_source.html#l00159">opcua::Span&lt; T &gt;::crend()</a>.</p>
 
 </div>
 </div>
@@ -975,67 +758,9 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00145">145</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00143">143</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="span_8hpp_source.html#l00157">opcua::Span&lt; T &gt;::crbegin()</a>.</p>
-
-</div>
-</div>
-<a id="aac72ba3abb5aa2ca2d2e072a65c230d0" name="aac72ba3abb5aa2ca2d2e072a65c230d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aac72ba3abb5aa2ca2d2e072a65c230d0">&#9670;&#160;</a></span>rbegin()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr <a class="el" href="classopcua_1_1Span.html#a9524b2d0e0611de36a480d995d78f43d">reverse_iterator</a> <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::rbegin </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00149">149</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a2cdf1f620e4b44236251b3d8b32dbec5" name="a2cdf1f620e4b44236251b3d8b32dbec5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2cdf1f620e4b44236251b3d8b32dbec5">&#9670;&#160;</a></span>rend()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr <a class="el" href="classopcua_1_1Span.html#a9524b2d0e0611de36a480d995d78f43d">reverse_iterator</a> <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::rend </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00153">153</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+<p class="reference">Referenced by <a class="el" href="span_8hpp_source.html#l00155">opcua::Span&lt; T &gt;::crbegin()</a>.</p>
 
 </div>
 </div>
@@ -1064,7 +789,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00157">157</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00155">155</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
 
 </div>
 </div>
@@ -1093,7 +818,316 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00161">161</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00159">159</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aea56eccbf59d0064d08f6a3c1f914179" name="aea56eccbf59d0064d08f6a3c1f914179"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea56eccbf59d0064d08f6a3c1f914179">&#9670;&#160;</a></span>data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classopcua_1_1Span.html#a24a51e17e8d7b152656610c4050f6613">pointer</a> <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::data </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="typeconversion_8cpp-example.html#a6">typeconversion.cpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00102">102</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="span_8hpp_source.html#l00114">opcua::Span&lt; T &gt;::at()</a>, <a class="el" href="span_8hpp_source.html#l00126">opcua::Span&lt; T &gt;::back()</a>, <a class="el" href="span_8hpp_source.html#l00131">opcua::Span&lt; T &gt;::begin()</a>, <a class="el" href="span_8hpp_source.html#l00139">opcua::Span&lt; T &gt;::cbegin()</a>, <a class="el" href="span_8hpp_source.html#l00143">opcua::Span&lt; T &gt;::cend()</a>, <a class="el" href="span_8hpp_source.html#l00135">opcua::Span&lt; T &gt;::end()</a>, <a class="el" href="span_8hpp_source.html#l00177">opcua::Span&lt; T &gt;::first()</a>, <a class="el" href="span_8hpp_source.html#l00121">opcua::Span&lt; T &gt;::front()</a>, <a class="el" href="span_8hpp_source.html#l00185">opcua::Span&lt; T &gt;::last()</a>, <a class="el" href="span_8hpp_source.html#l00107">opcua::Span&lt; T &gt;::operator[]()</a>, and <a class="el" href="span_8hpp_source.html#l00164">opcua::Span&lt; T &gt;::subview()</a>.</p>
+
+</div>
+</div>
+<a id="a51106e6b9cd49f0541df69d9cfbc8390" name="a51106e6b9cd49f0541df69d9cfbc8390"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51106e6b9cd49f0541df69d9cfbc8390">&#9670;&#160;</a></span>empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::empty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00098">98</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="span_8hpp_source.html#l00126">opcua::Span&lt; T &gt;::back()</a>, and <a class="el" href="span_8hpp_source.html#l00121">opcua::Span&lt; T &gt;::front()</a>.</p>
+
+</div>
+</div>
+<a id="ad35893ede6cde2956c61ac1eca87fca7" name="ad35893ede6cde2956c61ac1eca87fca7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad35893ede6cde2956c61ac1eca87fca7">&#9670;&#160;</a></span>end()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classopcua_1_1Span.html#a654dfa1bf6d430941bdca00c32ea90f0">iterator</a> <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00135">135</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="types_8hpp_source.html#l00547">opcua::ByteString::ByteString()</a>, <a class="el" href="span_8hpp_source.html#l00232">opcua::Span&lt; T &gt;::operator==()</a>, and <a class="el" href="span_8hpp_source.html#l00147">opcua::Span&lt; T &gt;::rbegin()</a>.</p>
+
+</div>
+</div>
+<a id="af553de73557af457b5aef52c18642a67" name="af553de73557af457b5aef52c18642a67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af553de73557af457b5aef52c18642a67">&#9670;&#160;</a></span>first()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classopcua_1_1Span.html">Span</a> <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::first </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>count</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Obtain a view over the first <code>count</code> elements of this <a class="el" href="classopcua_1_1Span.html" title="View to a contiguous sequence of objects, similar to std::span in C++20.">Span</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00177">177</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a845be4ef89f5bf990a2f31c58149c978" name="a845be4ef89f5bf990a2f31c58149c978"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a845be4ef89f5bf990a2f31c58149c978">&#9670;&#160;</a></span>front()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classopcua_1_1Span.html#a5a16388b1339b18ce3e321d7f20c77f1">reference</a> <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::front </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00121">121</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a2a9586f73cbbac7636e165547269b575" name="a2a9586f73cbbac7636e165547269b575"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a9586f73cbbac7636e165547269b575">&#9670;&#160;</a></span>last()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classopcua_1_1Span.html">Span</a> <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::last </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>count</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Obtain a view over the last <code>count</code> elements of this <a class="el" href="classopcua_1_1Span.html" title="View to a contiguous sequence of objects, similar to std::span in C++20.">Span</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00185">185</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a2d89beee5d5a39956b1f471b826dabc9" name="a2d89beee5d5a39956b1f471b826dabc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d89beee5d5a39956b1f471b826dabc9">&#9670;&#160;</a></span>operator[]()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classopcua_1_1Span.html#a5a16388b1339b18ce3e321d7f20c77f1">reference</a> <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::operator[] </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access element by index. </p>
+
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00107">107</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aac72ba3abb5aa2ca2d2e072a65c230d0" name="aac72ba3abb5aa2ca2d2e072a65c230d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac72ba3abb5aa2ca2d2e072a65c230d0">&#9670;&#160;</a></span>rbegin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classopcua_1_1Span.html#a9524b2d0e0611de36a480d995d78f43d">reverse_iterator</a> <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::rbegin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00147">147</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a2cdf1f620e4b44236251b3d8b32dbec5" name="a2cdf1f620e4b44236251b3d8b32dbec5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cdf1f620e4b44236251b3d8b32dbec5">&#9670;&#160;</a></span>rend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classopcua_1_1Span.html#a9524b2d0e0611de36a480d995d78f43d">reverse_iterator</a> <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::rend </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00151">151</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a73e5cdcc3a96fc916fc7155155edb3d6" name="a73e5cdcc3a96fc916fc7155155edb3d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73e5cdcc3a96fc916fc7155155edb3d6">&#9670;&#160;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr size_t <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00094">94</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="ua_2types_8hpp_source.html#l00766">opcua::ua::AddNodesRequest::AddNodesRequest()</a>, <a class="el" href="ua_2types_8hpp_source.html#l00830">opcua::ua::AddReferencesRequest::AddReferencesRequest()</a>, <a class="el" href="ua_2types_8hpp_source.html#l00131">opcua::ua::ApplicationDescription::ApplicationDescription()</a>, <a class="el" href="span_8hpp_source.html#l00114">opcua::Span&lt; T &gt;::at()</a>, <a class="el" href="ua_2types_8hpp_source.html#l02556">opcua::ua::AxisInformation::AxisInformation()</a>, <a class="el" href="span_8hpp_source.html#l00126">opcua::Span&lt; T &gt;::back()</a>, <a class="el" href="ua_2types_8hpp_source.html#l01140">opcua::ua::BrowseNextRequest::BrowseNextRequest()</a>, <a class="el" href="ua_2types_8hpp_source.html#l01071">opcua::ua::BrowseRequest::BrowseRequest()</a>, <a class="el" href="ua_2types_8hpp_source.html#l01553">opcua::ua::CallMethodRequest::CallMethodRequest()</a>, <a class="el" href="ua_2types_8hpp_source.html#l01589">opcua::ua::CallRequest::CallRequest()</a>, <a class="el" href="span_8hpp_source.html#l00143">opcua::Span&lt; T &gt;::cend()</a>, <a class="el" href="ua_2types_8hpp_source.html#l02013">opcua::ua::CreateMonitoredItemsRequest::CreateMonitoredItemsRequest()</a>, <a class="el" href="ua_2types_8hpp_source.html#l02222">opcua::ua::DeleteMonitoredItemsRequest::DeleteMonitoredItemsRequest()</a>, <a class="el" href="ua_2types_8hpp_source.html#l00882">opcua::ua::DeleteNodesRequest::DeleteNodesRequest()</a>, <a class="el" href="ua_2types_8hpp_source.html#l00945">opcua::ua::DeleteReferencesRequest::DeleteReferencesRequest()</a>, <a class="el" href="ua_2types_8hpp_source.html#l02414">opcua::ua::DeleteSubscriptionsRequest::DeleteSubscriptionsRequest()</a>, <a class="el" href="span_8hpp_source.html#l00098">opcua::Span&lt; T &gt;::empty()</a>, <a class="el" href="span_8hpp_source.html#l00135">opcua::Span&lt; T &gt;::end()</a>, <a class="el" href="ua_2types_8hpp_source.html#l02682">opcua::ua::EnumDefinition::EnumDefinition()</a>, <a class="el" href="ua_2types_8hpp_source.html#l01895">opcua::ua::EventFilter::EventFilter()</a>, <a class="el" href="span_8hpp_source.html#l00177">opcua::Span&lt; T &gt;::first()</a>, <a class="el" href="span_8hpp_source.html#l00185">opcua::Span&lt; T &gt;::last()</a>, <a class="el" href="ua_2types_8hpp_source.html#l02090">opcua::ua::ModifyMonitoredItemsRequest::ModifyMonitoredItemsRequest()</a>, <a class="el" href="span_8hpp_source.html#l00107">opcua::Span&lt; T &gt;::operator[]()</a>, <a class="el" href="ua_2types_8hpp_source.html#l01393">opcua::ua::ReadRequest::ReadRequest()</a>, <a class="el" href="ua_2types_8hpp_source.html#l01293">opcua::ua::RegisterNodesRequest::RegisterNodesRequest()</a>, <a class="el" href="ua_2types_8hpp_source.html#l01202">opcua::ua::RelativePath::RelativePath()</a>, <a class="el" href="ua_2types_8hpp_source.html#l02132">opcua::ua::SetMonitoringModeRequest::SetMonitoringModeRequest()</a>, <a class="el" href="ua_2types_8hpp_source.html#l02364">opcua::ua::SetPublishingModeRequest::SetPublishingModeRequest()</a>, <a class="el" href="ua_2types_8hpp_source.html#l02174">opcua::ua::SetTriggeringRequest::SetTriggeringRequest()</a>, <a class="el" href="span_8hpp_source.html#l00055">opcua::Span&lt; T &gt;::Span()</a>, <a class="el" href="span_8hpp_source.html#l00164">opcua::Span&lt; T &gt;::subview()</a>, <a class="el" href="ua_2types_8hpp_source.html#l01258">opcua::ua::TranslateBrowsePathsToNodeIdsRequest::TranslateBrowsePathsToNodeIdsRequest()</a>, <a class="el" href="ua_2types_8hpp_source.html#l01323">opcua::ua::UnregisterNodesRequest::UnregisterNodesRequest()</a>, and <a class="el" href="ua_2types_8hpp_source.html#l01456">opcua::ua::WriteRequest::WriteRequest()</a>.</p>
 
 </div>
 </div>
@@ -1135,12 +1169,12 @@ template&lt;typename T &gt; </div>
 
 <p>Obtain a view over <code>count</code> elements of this <a class="el" href="classopcua_1_1Span.html" title="View to a contiguous sequence of objects, similar to std::span in C++20.">Span</a> starting at offset <code>offset</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00166">166</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00164">164</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
 
 </div>
 </div>
-<a id="af553de73557af457b5aef52c18642a67" name="af553de73557af457b5aef52c18642a67"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af553de73557af457b5aef52c18642a67">&#9670;&#160;</a></span>first()</h2>
+<a id="a556109a9c89ae84e01811755b3e30ad2" name="a556109a9c89ae84e01811755b3e30ad2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a556109a9c89ae84e01811755b3e30ad2">&#9670;&#160;</a></span>swap()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1151,11 +1185,11 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="classopcua_1_1Span.html">Span</a> <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::first </td>
+          <td class="memname">constexpr void <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::swap </td>
           <td>(</td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>count</em></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
   </td>
@@ -1165,62 +1199,38 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Obtain a view over the first <code>count</code> elements of this <a class="el" href="classopcua_1_1Span.html" title="View to a contiguous sequence of objects, similar to std::span in C++20.">Span</a>. </p>
-
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00179">179</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a2a9586f73cbbac7636e165547269b575" name="a2a9586f73cbbac7636e165547269b575"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2a9586f73cbbac7636e165547269b575">&#9670;&#160;</a></span>last()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr <a class="el" href="classopcua_1_1Span.html">Span</a> <a class="el" href="classopcua_1_1Span.html">opcua::Span</a>&lt; T &gt;::last </td>
-          <td>(</td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>count</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Obtain a view over the last <code>count</code> elements of this <a class="el" href="classopcua_1_1Span.html" title="View to a contiguous sequence of objects, similar to std::span in C++20.">Span</a>. </p>
-
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00187">187</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00089">89</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Friends And Related Symbol Documentation</h2>
-<a id="a744b8c41ba430aab575148244ad4ad15" name="a744b8c41ba430aab575148244ad4ad15"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a744b8c41ba430aab575148244ad4ad15">&#9670;&#160;</a></span>Span() <span class="overload">[1/2]</span></h2>
+<a id="a539ba2414fd874842ca56e1287f95e6b" name="a539ba2414fd874842ca56e1287f95e6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a539ba2414fd874842ca56e1287f95e6b">&#9670;&#160;</a></span>operator!=()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Container &gt; </div>
+template&lt;typename T , typename U , typename  = detail::EnableIfEqualityComparable&lt;T, U&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Span.html">Span</a> </td>
+          <td class="memname">constexpr bool operator!= </td>
           <td>(</td>
-          <td class="paramtype">Container &amp;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td> -&gt;  <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; typename Container::value_type &gt;</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; T &gt;&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; U &gt;&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -1230,33 +1240,7 @@ template&lt;typename Container &gt; </div>
 </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="aa67bfb4fc539f8b780dd580da71918e4" name="aa67bfb4fc539f8b780dd580da71918e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa67bfb4fc539f8b780dd580da71918e4">&#9670;&#160;</a></span>Span() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Container &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Span.html">Span</a> </td>
-          <td>(</td>
-          <td class="paramtype">const Container &amp;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td> -&gt;  <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const typename Container::value_type &gt;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">related</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00238">238</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
 
 </div>
 </div>
@@ -1296,37 +1280,27 @@ template&lt;typename T , typename U , typename  = detail::EnableIfEqualityCompar
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00234">234</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00232">232</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a539ba2414fd874842ca56e1287f95e6b" name="a539ba2414fd874842ca56e1287f95e6b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a539ba2414fd874842ca56e1287f95e6b">&#9670;&#160;</a></span>operator!=()</h2>
+<a id="aa67bfb4fc539f8b780dd580da71918e4" name="aa67bfb4fc539f8b780dd580da71918e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa67bfb4fc539f8b780dd580da71918e4">&#9670;&#160;</a></span>Span() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename U , typename  = detail::EnableIfEqualityComparable&lt;T, U&gt;&gt; </div>
+template&lt;typename Container &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr bool operator!= </td>
+          <td class="memname"><a class="el" href="classopcua_1_1Span.html">Span</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; T &gt;&#160;</td>
-          <td class="paramname"><em>lhs</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; U &gt;&#160;</td>
-          <td class="paramname"><em>rhs</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramtype">const Container &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const typename Container::value_type &gt;</td>
         </tr>
       </table>
   </td>
@@ -1336,7 +1310,33 @@ template&lt;typename T , typename U , typename  = detail::EnableIfEqualityCompar
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="span_8hpp_source.html#l00240">240</a> of file <a class="el" href="span_8hpp_source.html">span.hpp</a>.</p>
+</div>
+</div>
+<a id="a744b8c41ba430aab575148244ad4ad15" name="a744b8c41ba430aab575148244ad4ad15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a744b8c41ba430aab575148244ad4ad15">&#9670;&#160;</a></span>Span() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Container &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1Span.html">Span</a> </td>
+          <td>(</td>
+          <td class="paramtype">Container &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; typename Container::value_type &gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>

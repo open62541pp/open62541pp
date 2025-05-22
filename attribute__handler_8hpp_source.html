@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -111,10 +111,10 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">inline</span> Result&lt;Variant&gt; getVariant(DataValue&amp;&amp; dv) <span class="keyword">noexcept</span> {</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordflow">if</span> (dv.status().isBad()) {</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <span class="keywordflow">return</span> BadResult(dv.status());</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <span class="keywordflow">return</span> BadResult{dv.status()};</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    }</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordflow">if</span> (!dv.hasValue()) {</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keywordflow">return</span> BadResult(UA_STATUSCODE_BADUNEXPECTEDERROR);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keywordflow">return</span> BadResult{<a class="code hl_defineRef" target="_blank" href="open62541/statuscodes_8h.html#a0eae57dbe43930ea72e8089330b76718">UA_STATUSCODE_BADUNEXPECTEDERROR</a>};</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    }</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordflow">return</span> std::move(dv).value();</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>}</div>
@@ -156,7 +156,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U&gt;</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keyword">static</span> <a class="code hl_enumvalue" href="group__NodeIds.html#ggaedae20be023a8a8fc3c7929a538c36f5ac7859cb58bee902dc86f1742665ff96f">DataValue</a> toDataValue(U&amp;&amp; value) {</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="group__NodeIds.html#ggaedae20be023a8a8fc3c7929a538c36f5ac7859cb58bee902dc86f1742665ff96f">DataValue</a>(Variant(std::forward&lt;U&gt;(value)));</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="group__NodeIds.html#ggaedae20be023a8a8fc3c7929a538c36f5ac7859cb58bee902dc86f1742665ff96f">DataValue</a>{Variant{std::forward&lt;U&gt;(value)}};</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    }</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>};</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
@@ -262,7 +262,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    }</div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
 <div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <span class="keyword">static</span> <a class="code hl_enumvalue" href="group__NodeIds.html#ggaedae20be023a8a8fc3c7929a538c36f5ac7859cb58bee902dc86f1742665ff96f">DataValue</a> toDataValue(Span&lt;const uint32_t&gt; dimensions) {</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="group__NodeIds.html#ggaedae20be023a8a8fc3c7929a538c36f5ac7859cb58bee902dc86f1742665ff96f">DataValue</a>(Variant(dimensions));</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="group__NodeIds.html#ggaedae20be023a8a8fc3c7929a538c36f5ac7859cb58bee902dc86f1742665ff96f">DataValue</a>{Variant{dimensions}};</div>
 <div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    }</div>
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>};</div>
 <div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
@@ -318,6 +318,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="anamespaceopcua_html_ac702b87ae822429bbdde24595a526917adaf479084152b5fa98cda5560c0125fb"><div class="ttname"><a href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917adaf479084152b5fa98cda5560c0125fb">opcua::AttributeId::UserAccessLevel</a></div><div class="ttdeci">@ UserAccessLevel</div></div>
 <div class="ttc" id="anamespaceopcua_html_ac702b87ae822429bbdde24595a526917af15d0e7156b4bcb72f9dd69de97bd757"><div class="ttname"><a href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917af15d0e7156b4bcb72f9dd69de97bd757">opcua::AttributeId::DataTypeDefinition</a></div><div class="ttdeci">@ DataTypeDefinition</div></div>
 <div class="ttc" id="anamespaceopcua_html_ac702b87ae822429bbdde24595a526917af334649ef5e5d0ffe200751d07012626"><div class="ttname"><a href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917af334649ef5e5d0ffe200751d07012626">opcua::AttributeId::Symmetric</a></div><div class="ttdeci">@ Symmetric</div></div>
+<div class="ttc" id="astatuscodes_8h_html_a0eae57dbe43930ea72e8089330b76718"><div class="ttname"><a href="open62541/statuscodes_8h.html#a0eae57dbe43930ea72e8089330b76718">UA_STATUSCODE_BADUNEXPECTEDERROR</a></div><div class="ttdeci">#define UA_STATUSCODE_BADUNEXPECTEDERROR</div></div>
 <div class="ttc" id="atypes_8h_html_aa1478e00bedf1421f5f5462e8263c522ae8998cef426fb827da4c155c6791bc16"><div class="ttname"><a href="open62541/types_8h.html#aa1478e00bedf1421f5f5462e8263c522ae8998cef426fb827da4c155c6791bc16">UA_VARIANT_DATA_NODELETE</a></div><div class="ttdeci">UA_VARIANT_DATA_NODELETE</div></div>
 <div class="ttc" id="atypes_8hpp_html"><div class="ttname"><a href="types_8hpp.html">types.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

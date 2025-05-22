@@ -149,23 +149,33 @@ Macros</h2></td></tr>
 <tr class="separator:a807dbc4b2a480c71ca28e9b5a5b9d211"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a9cb286f1301989fbc9b1574c809bdd4a" name="a9cb286f1301989fbc9b1574c809bdd4a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9cb286f1301989fbc9b1574c809bdd4a">&#9670;&#160;</a></span>UA_THREAD_LOCAL</h2>
+<a id="aa0c1167bb311135eecf24a0e7c885b7f" name="aa0c1167bb311135eecf24a0e7c885b7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0c1167bb311135eecf24a0e7c885b7f">&#9670;&#160;</a></span>endif</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define UA_THREAD_LOCAL</td>
+          <td class="memname">#define endif</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>This Source Code Form is subject to the terms of the Mozilla Public License, v. </p>
-<p>2.0. If a copy of the MPL was not distributed with this file, You can obtain one at <a href="http://mozilla.org/MPL/2.0/">http://mozilla.org/MPL/2.0/</a>.</p>
-<p>Copyright 2017 (c) Fraunhofer IOSB (Author: Julius Pfrommer) Copyright 2017 (c) Stefan Profanter, fortiss GmbH Copyright 2018 (c) Jose Cabral, fortiss GmbH Include stdint.h and stdbool.h or workaround for older Visual Studios Include inttypes.h or workaround for older Visual Studios </p>
+</div>
+</div>
+<a id="a00d24c7231be28dbaf71f5408f30e44c" name="a00d24c7231be28dbaf71f5408f30e44c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00d24c7231be28dbaf71f5408f30e44c">&#9670;&#160;</a></span>inline</h2>
 
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00081">81</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define inline</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00179">179</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
 
 </div>
 </div>
@@ -189,6 +199,265 @@ Macros</h2></td></tr>
 <p>Use C99 variable-length arrays if possible. Otherwise revert to alloca. Note that alloca is not supported on some plattforms. </p>
 
 <p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00110">110</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+
+</div>
+</div>
+<a id="a134e6f8e1aa5c8625e22719513e10f1a" name="a134e6f8e1aa5c8625e22719513e10f1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a134e6f8e1aa5c8625e22719513e10f1a">&#9670;&#160;</a></span>UA_assert</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_assert</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">ignore</td><td>)</td>
+          <td>&#160;&#160;&#160;do {} while(0)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00123">123</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+
+</div>
+</div>
+<a id="a807dbc4b2a480c71ca28e9b5a5b9d211" name="a807dbc4b2a480c71ca28e9b5a5b9d211"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a807dbc4b2a480c71ca28e9b5a5b9d211">&#9670;&#160;</a></span>UA_atomic_sync</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_atomic_sync</td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<h2><a class="anchor" id="autotoc_md8"></a>
+Atomic Operations</h2>
+<p>Atomic operations that synchronize across processor cores (for multithreading). Only the inline-functions defined next are used. Replace with architecture-specific operations if necessary. </p>
+
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00357">357</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+
+</div>
+</div>
+<a id="aa96f501e1f80b2b5eb4cc368a152c674" name="aa96f501e1f80b2b5eb4cc368a152c674"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa96f501e1f80b2b5eb4cc368a152c674">&#9670;&#160;</a></span>UA_BINARY_OVERLAYABLE_FLOAT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_BINARY_OVERLAYABLE_FLOAT&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Only if the floating points are litle-endian <b>and</b> in IEEE 754 format can we memcpy directly onto the network buffer. </p>
+
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00342">342</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+
+</div>
+</div>
+<a id="a25a947542e575dbd3d7b60e12dd30bef" name="a25a947542e575dbd3d7b60e12dd30bef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25a947542e575dbd3d7b60e12dd30bef">&#9670;&#160;</a></span>UA_BINARY_OVERLAYABLE_INTEGER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_BINARY_OVERLAYABLE_INTEGER&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Can the integers be memcpy'd onto the network buffer? Add additional checks here. </p>
+<p>Some platforms (e.g. QNX) have sizeof(bool) &gt; 1. Manually disable overlayed integer encoding if that is the case. </p>
+
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00297">297</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+
+</div>
+</div>
+<a id="a08ca04ff2d752b92e0921e37c4ac127c" name="a08ca04ff2d752b92e0921e37c4ac127c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08ca04ff2d752b92e0921e37c4ac127c">&#9670;&#160;</a></span>UA_DEPRECATED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_DEPRECATED</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00229">229</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+
+</div>
+</div>
+<a id="a359c930ae5f00e5658a6980b3c26d21c" name="a359c930ae5f00e5658a6980b3c26d21c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a359c930ae5f00e5658a6980b3c26d21c">&#9670;&#160;</a></span>UA_FLOAT_IEEE754</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_FLOAT_IEEE754&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00313">313</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+
+</div>
+</div>
+<a id="af67616b843b5b06424a885237542c068" name="af67616b843b5b06424a885237542c068"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af67616b843b5b06424a885237542c068">&#9670;&#160;</a></span>UA_FLOAT_LITTLE_ENDIAN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_FLOAT_LITTLE_ENDIAN&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Wikipedia says (<a href="https://en.wikipedia.org/wiki/Endianness">https://en.wikipedia.org/wiki/Endianness</a>): Although the ubiquitous x86 processors of today use little-endian storage for all types of data (integer, floating point, BCD), there are a number of hardware architectures where floating-point numbers are represented in big-endian form while integers are represented in little-endian form. </p>
+
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00334">334</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+
+</div>
+</div>
+<a id="a8add6445f8714b720b30184c87f930d7" name="a8add6445f8714b720b30184c87f930d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8add6445f8714b720b30184c87f930d7">&#9670;&#160;</a></span>UA_FORMAT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_FORMAT</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">X, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Y&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00221">221</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+
+</div>
+</div>
+<a id="a7890392ad248807eef17406deff97408" name="a7890392ad248807eef17406deff97408"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7890392ad248807eef17406deff97408">&#9670;&#160;</a></span>UA_FUNC_ATTR_CONST</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_FUNC_ATTR_CONST</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00219">219</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+
+</div>
+</div>
+<a id="a278f8dcda2c68184a89b95f7a78cfe69" name="a278f8dcda2c68184a89b95f7a78cfe69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a278f8dcda2c68184a89b95f7a78cfe69">&#9670;&#160;</a></span>UA_FUNC_ATTR_PURE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_FUNC_ATTR_PURE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00218">218</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+
+</div>
+</div>
+<a id="ad614e30b8af6ed7b30c9a11c3005de88" name="ad614e30b8af6ed7b30c9a11c3005de88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad614e30b8af6ed7b30c9a11c3005de88">&#9670;&#160;</a></span>UA_INTERNAL_DEPRECATED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_INTERNAL_DEPRECATED</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00238">238</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+
+</div>
+</div>
+<a id="af6e1542fe58e29cda6fd7495612cddce" name="af6e1542fe58e29cda6fd7495612cddce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6e1542fe58e29cda6fd7495612cddce">&#9670;&#160;</a></span>UA_INTERNAL_FUNC_ATTR_WARN_UNUSED_RESULT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_INTERNAL_FUNC_ATTR_WARN_UNUSED_RESULT</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00245">245</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+
+</div>
+</div>
+<a id="af72698149b30e53f0923f67eaa230b56" name="af72698149b30e53f0923f67eaa230b56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af72698149b30e53f0923f67eaa230b56">&#9670;&#160;</a></span>UA_LIKELY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_LIKELY</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x</td><td>)</td>
+          <td>&#160;&#160;&#160;x</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00198">198</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+
+</div>
+</div>
+<a id="a37746ec496effbeb193b05b13cbe9f5d" name="a37746ec496effbeb193b05b13cbe9f5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37746ec496effbeb193b05b13cbe9f5d">&#9670;&#160;</a></span>UA_LITTLE_ENDIAN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_LITTLE_ENDIAN&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00287">287</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
 
 </div>
 </div>
@@ -231,26 +500,6 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="a134e6f8e1aa5c8625e22719513e10f1a" name="a134e6f8e1aa5c8625e22719513e10f1a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a134e6f8e1aa5c8625e22719513e10f1a">&#9670;&#160;</a></span>UA_assert</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_assert</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">ignore</td><td>)</td>
-          <td>&#160;&#160;&#160;do {} while(0)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00123">123</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
-
-</div>
-</div>
 <a id="a6ef2140f17af318af17f482484f498f9" name="a6ef2140f17af318af17f482484f498f9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6ef2140f17af318af17f482484f498f9">&#9670;&#160;</a></span>UA_STATIC_ASSERT</h2>
 
@@ -284,17 +533,23 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="aa0c1167bb311135eecf24a0e7c885b7f" name="aa0c1167bb311135eecf24a0e7c885b7f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa0c1167bb311135eecf24a0e7c885b7f">&#9670;&#160;</a></span>endif</h2>
+<a id="a9cb286f1301989fbc9b1574c809bdd4a" name="a9cb286f1301989fbc9b1574c809bdd4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cb286f1301989fbc9b1574c809bdd4a">&#9670;&#160;</a></span>UA_THREAD_LOCAL</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define endif</td>
+          <td class="memname">#define UA_THREAD_LOCAL</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>This Source Code Form is subject to the terms of the Mozilla Public License, v. </p>
+<p>2.0. If a copy of the MPL was not distributed with this file, You can obtain one at <a href="http://mozilla.org/MPL/2.0/">http://mozilla.org/MPL/2.0/</a>.</p>
+<p>Copyright 2017 (c) Fraunhofer IOSB (Author: Julius Pfrommer) Copyright 2017 (c) Stefan Profanter, fortiss GmbH Copyright 2018 (c) Jose Cabral, fortiss GmbH Include stdint.h and stdbool.h or workaround for older Visual Studios Include inttypes.h or workaround for older Visual Studios </p>
+
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00081">81</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
 
 </div>
 </div>
@@ -311,42 +566,6 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00173">173</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
-
-</div>
-</div>
-<a id="a00d24c7231be28dbaf71f5408f30e44c" name="a00d24c7231be28dbaf71f5408f30e44c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a00d24c7231be28dbaf71f5408f30e44c">&#9670;&#160;</a></span>inline</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define inline</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00179">179</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
-
-</div>
-</div>
-<a id="af72698149b30e53f0923f67eaa230b56" name="af72698149b30e53f0923f67eaa230b56"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af72698149b30e53f0923f67eaa230b56">&#9670;&#160;</a></span>UA_LIKELY</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_LIKELY</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">x</td><td>)</td>
-          <td>&#160;&#160;&#160;x</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00198">198</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
 
 </div>
 </div>
@@ -367,225 +586,6 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00199">199</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
-
-</div>
-</div>
-<a id="a278f8dcda2c68184a89b95f7a78cfe69" name="a278f8dcda2c68184a89b95f7a78cfe69"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a278f8dcda2c68184a89b95f7a78cfe69">&#9670;&#160;</a></span>UA_FUNC_ATTR_PURE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_FUNC_ATTR_PURE</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00218">218</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
-
-</div>
-</div>
-<a id="a7890392ad248807eef17406deff97408" name="a7890392ad248807eef17406deff97408"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7890392ad248807eef17406deff97408">&#9670;&#160;</a></span>UA_FUNC_ATTR_CONST</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_FUNC_ATTR_CONST</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00219">219</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
-
-</div>
-</div>
-<a id="a8add6445f8714b720b30184c87f930d7" name="a8add6445f8714b720b30184c87f930d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8add6445f8714b720b30184c87f930d7">&#9670;&#160;</a></span>UA_FORMAT</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_FORMAT</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">X, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">Y&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00221">221</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
-
-</div>
-</div>
-<a id="a08ca04ff2d752b92e0921e37c4ac127c" name="a08ca04ff2d752b92e0921e37c4ac127c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a08ca04ff2d752b92e0921e37c4ac127c">&#9670;&#160;</a></span>UA_DEPRECATED</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_DEPRECATED</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00229">229</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
-
-</div>
-</div>
-<a id="ad614e30b8af6ed7b30c9a11c3005de88" name="ad614e30b8af6ed7b30c9a11c3005de88"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad614e30b8af6ed7b30c9a11c3005de88">&#9670;&#160;</a></span>UA_INTERNAL_DEPRECATED</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_INTERNAL_DEPRECATED</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00238">238</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
-
-</div>
-</div>
-<a id="af6e1542fe58e29cda6fd7495612cddce" name="af6e1542fe58e29cda6fd7495612cddce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af6e1542fe58e29cda6fd7495612cddce">&#9670;&#160;</a></span>UA_INTERNAL_FUNC_ATTR_WARN_UNUSED_RESULT</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_INTERNAL_FUNC_ATTR_WARN_UNUSED_RESULT</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00245">245</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
-
-</div>
-</div>
-<a id="a37746ec496effbeb193b05b13cbe9f5d" name="a37746ec496effbeb193b05b13cbe9f5d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a37746ec496effbeb193b05b13cbe9f5d">&#9670;&#160;</a></span>UA_LITTLE_ENDIAN</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_LITTLE_ENDIAN&#160;&#160;&#160;0</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00287">287</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
-
-</div>
-</div>
-<a id="a25a947542e575dbd3d7b60e12dd30bef" name="a25a947542e575dbd3d7b60e12dd30bef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a25a947542e575dbd3d7b60e12dd30bef">&#9670;&#160;</a></span>UA_BINARY_OVERLAYABLE_INTEGER</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_BINARY_OVERLAYABLE_INTEGER&#160;&#160;&#160;0</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Can the integers be memcpy'd onto the network buffer? Add additional checks here. </p>
-<p>Some platforms (e.g. QNX) have sizeof(bool) &gt; 1. Manually disable overlayed integer encoding if that is the case. </p>
-
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00297">297</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
-
-</div>
-</div>
-<a id="a359c930ae5f00e5658a6980b3c26d21c" name="a359c930ae5f00e5658a6980b3c26d21c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a359c930ae5f00e5658a6980b3c26d21c">&#9670;&#160;</a></span>UA_FLOAT_IEEE754</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_FLOAT_IEEE754&#160;&#160;&#160;0</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00313">313</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
-
-</div>
-</div>
-<a id="af67616b843b5b06424a885237542c068" name="af67616b843b5b06424a885237542c068"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af67616b843b5b06424a885237542c068">&#9670;&#160;</a></span>UA_FLOAT_LITTLE_ENDIAN</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_FLOAT_LITTLE_ENDIAN&#160;&#160;&#160;0</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Wikipedia says (<a href="https://en.wikipedia.org/wiki/Endianness">https://en.wikipedia.org/wiki/Endianness</a>): Although the ubiquitous x86 processors of today use little-endian storage for all types of data (integer, floating point, BCD), there are a number of hardware architectures where floating-point numbers are represented in big-endian form while integers are represented in little-endian form. </p>
-
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00334">334</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
-
-</div>
-</div>
-<a id="aa96f501e1f80b2b5eb4cc368a152c674" name="aa96f501e1f80b2b5eb4cc368a152c674"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa96f501e1f80b2b5eb4cc368a152c674">&#9670;&#160;</a></span>UA_BINARY_OVERLAYABLE_FLOAT</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_BINARY_OVERLAYABLE_FLOAT&#160;&#160;&#160;0</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Only if the floating points are litle-endian <b>and</b> in IEEE 754 format can we memcpy directly onto the network buffer. </p>
-
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00342">342</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
-
-</div>
-</div>
-<a id="a807dbc4b2a480c71ca28e9b5a5b9d211" name="a807dbc4b2a480c71ca28e9b5a5b9d211"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a807dbc4b2a480c71ca28e9b5a5b9d211">&#9670;&#160;</a></span>UA_atomic_sync</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_atomic_sync</td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<h2><a class="anchor" id="autotoc_md8"></a>
-Atomic Operations</h2>
-<p>Atomic operations that synchronize across processor cores (for multithreading). Only the inline-functions defined next are used. Replace with architecture-specific operations if necessary. </p>
-
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00357">357</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
 
 </div>
 </div>

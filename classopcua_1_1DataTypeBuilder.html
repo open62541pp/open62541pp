@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.18.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -102,7 +102,7 @@ $(function() {
 class opcua::DataTypeBuilder&lt; T, Tag, U &gt;</div><p>Builder to create <a class="el" href="classopcua_1_1DataType.html" title="UA_DataType wrapper class.">DataType</a> definitions of custom types. </p>
 <p>The attributes <code>memSize</code>, <code>padding</code>, <code>pointerFree</code>, <code>isArray</code> and <code>isOptional</code> are automatically deduced from the types itself. </p>
 
-<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00308">308</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00251">251</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -112,12 +112,24 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a563e07b5788d176f52f2a63b4f5b5a8d" id="r_a563e07b5788d176f52f2a63b4f5b5a8d"><td class="memTemplParams" colspan="2">template&lt;auto U::* field&gt; </td></tr>
 <tr class="memitem:a563e07b5788d176f52f2a63b4f5b5a8d"><td class="memTemplItemLeft" align="right" valign="top">auto &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataTypeBuilder.html#a563e07b5788d176f52f2a63b4f5b5a8d">addField</a> (std::string_view fieldName)</td></tr>
 <tr class="separator:a563e07b5788d176f52f2a63b4f5b5a8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2cad988aa48d8008c98beab8c7ac4259" id="r_a2cad988aa48d8008c98beab8c7ac4259"><td class="memTemplParams" colspan="2">template&lt;auto U::* fieldSize, auto U::* fieldArray&gt; </td></tr>
+<tr class="memitem:a58707d77171e21011a8d965078d7f04a" id="r_a58707d77171e21011a8d965078d7f04a"><td class="memTemplParams" colspan="2">template&lt;typename TMember &gt; </td></tr>
+<tr class="memitem:a58707d77171e21011a8d965078d7f04a"><td class="memTemplItemLeft" align="right" valign="top">auto &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataTypeBuilder.html#a58707d77171e21011a8d965078d7f04a">addField</a> (std::string_view fieldName, size_t offset, const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;fieldType)</td></tr>
+<tr class="separator:a58707d77171e21011a8d965078d7f04a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6556e5880ad2dc538a48b87f4baafcc6" id="r_a6556e5880ad2dc538a48b87f4baafcc6"><td class="memTemplParams" colspan="2">template&lt;typename TMember &gt; </td></tr>
+<tr class="memitem:a6556e5880ad2dc538a48b87f4baafcc6"><td class="memTemplItemLeft" align="right" valign="top">auto &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataTypeBuilder.html#a6556e5880ad2dc538a48b87f4baafcc6">addField</a> (std::string_view fieldName, size_t offset)</td></tr>
+<tr class="separator:a6556e5880ad2dc538a48b87f4baafcc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cad988aa48d8008c98beab8c7ac4259" id="r_a2cad988aa48d8008c98beab8c7ac4259"><td class="memTemplParams" colspan="2">template&lt;size_t U::* fieldSize, auto U::* fieldArray&gt; </td></tr>
 <tr class="memitem:a2cad988aa48d8008c98beab8c7ac4259"><td class="memTemplItemLeft" align="right" valign="top">auto &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataTypeBuilder.html#a2cad988aa48d8008c98beab8c7ac4259">addField</a> (std::string_view fieldName, const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;fieldType)</td></tr>
 <tr class="separator:a2cad988aa48d8008c98beab8c7ac4259"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e350b3452e4a66992792aa9febaf092" id="r_a9e350b3452e4a66992792aa9febaf092"><td class="memTemplParams" colspan="2">template&lt;auto U::* fieldSize, auto U::* fieldArray&gt; </td></tr>
+<tr class="memitem:a9e350b3452e4a66992792aa9febaf092" id="r_a9e350b3452e4a66992792aa9febaf092"><td class="memTemplParams" colspan="2">template&lt;size_t U::* fieldSize, auto U::* fieldArray&gt; </td></tr>
 <tr class="memitem:a9e350b3452e4a66992792aa9febaf092"><td class="memTemplItemLeft" align="right" valign="top">auto &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataTypeBuilder.html#a9e350b3452e4a66992792aa9febaf092">addField</a> (std::string_view fieldName)</td></tr>
 <tr class="separator:a9e350b3452e4a66992792aa9febaf092"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6042ba9e30d1c888ae217432d358a61" id="r_af6042ba9e30d1c888ae217432d358a61"><td class="memTemplParams" colspan="2">template&lt;typename TArray &gt; </td></tr>
+<tr class="memitem:af6042ba9e30d1c888ae217432d358a61"><td class="memTemplItemLeft" align="right" valign="top">auto &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataTypeBuilder.html#af6042ba9e30d1c888ae217432d358a61">addField</a> (std::string_view fieldName, size_t offsetSize, size_t offsetArray, const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;fieldType)</td></tr>
+<tr class="separator:af6042ba9e30d1c888ae217432d358a61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b0b6b578198dc11c96cd342998fb5f2" id="r_a8b0b6b578198dc11c96cd342998fb5f2"><td class="memTemplParams" colspan="2">template&lt;typename TArray &gt; </td></tr>
+<tr class="memitem:a8b0b6b578198dc11c96cd342998fb5f2"><td class="memTemplItemLeft" align="right" valign="top">auto &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataTypeBuilder.html#a8b0b6b578198dc11c96cd342998fb5f2">addField</a> (std::string_view fieldName, size_t offsetSize, size_t offsetArray)</td></tr>
+<tr class="separator:a8b0b6b578198dc11c96cd342998fb5f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23cf9b8aaabb763c7b511c32a8a2e11b" id="r_a23cf9b8aaabb763c7b511c32a8a2e11b"><td class="memTemplParams" colspan="2">template&lt;auto U::* memberUnion, typename TField &gt; </td></tr>
 <tr class="memitem:a23cf9b8aaabb763c7b511c32a8a2e11b"><td class="memTemplItemLeft" align="right" valign="top">auto &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataTypeBuilder.html#a23cf9b8aaabb763c7b511c32a8a2e11b">addUnionField</a> (std::string_view fieldName, const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;fieldType)</td></tr>
 <tr class="separator:a23cf9b8aaabb763c7b511c32a8a2e11b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -143,6 +155,514 @@ Friends</h2></td></tr>
 <tr class="separator:afcdbb2ff8c2b8cff554708ba72b09c55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a563e07b5788d176f52f2a63b4f5b5a8d" name="a563e07b5788d176f52f2a63b4f5b5a8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a563e07b5788d176f52f2a63b4f5b5a8d">&#9670;&#160;</a></span>addField() <span class="overload">[1/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Tag  = detail::TagDataTypeAny, typename U  = struct DeferT&gt; </div>
+<div class="memtemplate">
+template&lt;auto U::* field&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto &amp; <a class="el" href="classopcua_1_1DataTypeBuilder.html">opcua::DataTypeBuilder</a>&lt; T, Tag, U &gt;::addField </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>fieldName</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add a structure field (derive <a class="el" href="classopcua_1_1DataType.html" title="UA_DataType wrapper class.">DataType</a> from <code>field</code>). </p>
+<p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+
+<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00297">297</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9e350b3452e4a66992792aa9febaf092" name="a9e350b3452e4a66992792aa9febaf092"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e350b3452e4a66992792aa9febaf092">&#9670;&#160;</a></span>addField() <span class="overload">[2/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Tag  = detail::TagDataTypeAny, typename U  = struct DeferT&gt; </div>
+<div class="memtemplate">
+template&lt;size_t U::* fieldSize, auto U::* fieldArray&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto &amp; <a class="el" href="classopcua_1_1DataTypeBuilder.html">opcua::DataTypeBuilder</a>&lt; T, Tag, U &gt;::addField </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>fieldName</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add a structure array field (derive <a class="el" href="classopcua_1_1DataType.html" title="UA_DataType wrapper class.">DataType</a> from <code>fieldArray</code>). </p>
+<p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+
+<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00346">346</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aa23602ddf46e9cd8c066d84d079f5fb6" name="aa23602ddf46e9cd8c066d84d079f5fb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa23602ddf46e9cd8c066d84d079f5fb6">&#9670;&#160;</a></span>addField() <span class="overload">[3/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Tag  = detail::TagDataTypeAny, typename U  = struct DeferT&gt; </div>
+<div class="memtemplate">
+template&lt;auto U::* field&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto &amp; <a class="el" href="classopcua_1_1DataTypeBuilder.html">opcua::DataTypeBuilder</a>&lt; T, Tag, U &gt;::addField </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>fieldName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;&#160;</td>
+          <td class="paramname"><em>fieldType</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add a structure field. </p>
+<p>The offset is derived from the member pointer. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">field</td><td>Member pointer, e.g. <code>&amp;S::value</code> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fieldName</td><td>Human-readable field name </td></tr>
+    <tr><td class="paramname">fieldType</td><td>Member data type </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00287">287</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a2cad988aa48d8008c98beab8c7ac4259" name="a2cad988aa48d8008c98beab8c7ac4259"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cad988aa48d8008c98beab8c7ac4259">&#9670;&#160;</a></span>addField() <span class="overload">[4/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Tag  = detail::TagDataTypeAny, typename U  = struct DeferT&gt; </div>
+<div class="memtemplate">
+template&lt;size_t U::* fieldSize, auto U::* fieldArray&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto &amp; <a class="el" href="classopcua_1_1DataTypeBuilder.html">opcua::DataTypeBuilder</a>&lt; T, Tag, U &gt;::addField </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>fieldName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;&#160;</td>
+          <td class="paramname"><em>fieldType</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add a structure array field. </p>
+<p>Arrays must consists of two fields: its size (of type <code>size_t</code>) and the pointer to the data. No padding allowed between the size field and the array field. The offset is derived from the member pointer. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">fieldSize</td><td>Member pointer to the size field, e.g. <code>&amp;S::length</code> </td></tr>
+    <tr><td class="paramname">fieldArray</td><td>Member pointer to the array field, e.g. <code>&amp;S::data</code> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fieldName</td><td>Human-readable field name </td></tr>
+    <tr><td class="paramname">fieldType</td><td>Member data type </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00331">331</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a6556e5880ad2dc538a48b87f4baafcc6" name="a6556e5880ad2dc538a48b87f4baafcc6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6556e5880ad2dc538a48b87f4baafcc6">&#9670;&#160;</a></span>addField() <span class="overload">[5/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Tag  = detail::TagDataTypeAny, typename U  = struct DeferT&gt; </div>
+<div class="memtemplate">
+template&lt;typename TMember &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto &amp; <a class="el" href="classopcua_1_1DataTypeBuilder.html">opcua::DataTypeBuilder</a>&lt; T, Tag, U &gt;::addField </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>fieldName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>offset</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add a structure field with a manual offset (derive <a class="el" href="classopcua_1_1DataType.html" title="UA_DataType wrapper class.">DataType</a> from <code>TMember</code>). </p>
+<p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+
+<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00316">316</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a58707d77171e21011a8d965078d7f04a" name="a58707d77171e21011a8d965078d7f04a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58707d77171e21011a8d965078d7f04a">&#9670;&#160;</a></span>addField() <span class="overload">[6/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Tag , typename U &gt; </div>
+<div class="memtemplate">
+template&lt;typename TMember &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto &amp; <a class="el" href="classopcua_1_1DataTypeBuilder.html">opcua::DataTypeBuilder</a>&lt; T, Tag, U &gt;::addField </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>fieldName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;&#160;</td>
+          <td class="paramname"><em>fieldType</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add a structure field with a manual offset. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">TMember</td><td>Type of the member, e.g. <code><a class="el" href="classopcua_1_1String.html" title="UA_String wrapper class.">opcua::String</a></code> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fieldName</td><td>Human-readable field name </td></tr>
+    <tr><td class="paramname">offset</td><td>Offset of the member in the structure </td></tr>
+    <tr><td class="paramname">fieldType</td><td>Member data type </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00470">470</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a8b0b6b578198dc11c96cd342998fb5f2" name="a8b0b6b578198dc11c96cd342998fb5f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b0b6b578198dc11c96cd342998fb5f2">&#9670;&#160;</a></span>addField() <span class="overload">[7/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Tag  = detail::TagDataTypeAny, typename U  = struct DeferT&gt; </div>
+<div class="memtemplate">
+template&lt;typename TArray &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto &amp; <a class="el" href="classopcua_1_1DataTypeBuilder.html">opcua::DataTypeBuilder</a>&lt; T, Tag, U &gt;::addField </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>fieldName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>offsetSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>offsetArray</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add a structure array field with a manual offset (derive <a class="el" href="classopcua_1_1DataType.html" title="UA_DataType wrapper class.">DataType</a> from <code>TArray</code>). </p>
+<p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+
+<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00371">371</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
+
+</div>
+</div>
+<a id="af6042ba9e30d1c888ae217432d358a61" name="af6042ba9e30d1c888ae217432d358a61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6042ba9e30d1c888ae217432d358a61">&#9670;&#160;</a></span>addField() <span class="overload">[8/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Tag , typename U &gt; </div>
+<div class="memtemplate">
+template&lt;typename TArray &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto &amp; <a class="el" href="classopcua_1_1DataTypeBuilder.html">opcua::DataTypeBuilder</a>&lt; T, Tag, U &gt;::addField </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>fieldName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>offsetSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>offsetArray</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;&#160;</td>
+          <td class="paramname"><em>fieldType</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add a structure array field with a manual offset. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">TArray</td><td>Type of the array field, e.g. <code><a class="el" href="classopcua_1_1String.html" title="UA_String wrapper class.">opcua::String</a></code> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fieldName</td><td>Human-readable field name </td></tr>
+    <tr><td class="paramname">offsetSize</td><td>Offset of the size field in the structure </td></tr>
+    <tr><td class="paramname">offsetArray</td><td>Offset of the array field in the structure </td></tr>
+    <tr><td class="paramname">fieldType</td><td>Array field data type </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00496">496</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a87ee8bd7d787326c7aa4a653eb8ccd8d" name="a87ee8bd7d787326c7aa4a653eb8ccd8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87ee8bd7d787326c7aa4a653eb8ccd8d">&#9670;&#160;</a></span>addUnionField() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Tag  = detail::TagDataTypeAny, typename U  = struct DeferT&gt; </div>
+<div class="memtemplate">
+template&lt;auto U::* memberUnion, typename TField &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto &amp; <a class="el" href="classopcua_1_1DataTypeBuilder.html">opcua::DataTypeBuilder</a>&lt; T, Tag, U &gt;::addUnionField </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>fieldName</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add a union field (derive <a class="el" href="classopcua_1_1DataType.html" title="UA_DataType wrapper class.">DataType</a> from <code>TField</code>). </p>
+<p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+
+<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00392">392</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a23cf9b8aaabb763c7b511c32a8a2e11b" name="a23cf9b8aaabb763c7b511c32a8a2e11b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23cf9b8aaabb763c7b511c32a8a2e11b">&#9670;&#160;</a></span>addUnionField() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Tag , typename U &gt; </div>
+<div class="memtemplate">
+template&lt;auto U::* memberUnion, typename TField &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto &amp; <a class="el" href="classopcua_1_1DataTypeBuilder.html">opcua::DataTypeBuilder</a>&lt; T, Tag, U &gt;::addUnionField </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>fieldName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;&#160;</td>
+          <td class="paramname"><em>fieldType</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add a union field. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">memberUnion</td><td>Member pointer to the union, e.g. <code>&amp;S::Uni</code> </td></tr>
+    <tr><td class="paramname">TField</td><td>Type of the union field </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fieldName</td><td>Human-readable field name </td></tr>
+    <tr><td class="paramname">fieldType</td><td>Data type of the union field </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00529">529</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a21252f141b10723044b37a40473709d9" name="a21252f141b10723044b37a40473709d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21252f141b10723044b37a40473709d9">&#9670;&#160;</a></span>build()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Tag , typename U &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1DataType.html">DataType</a> <a class="el" href="classopcua_1_1DataTypeBuilder.html">opcua::DataTypeBuilder</a>&lt; T, Tag, U &gt;::build </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create the actual <a class="el" href="classopcua_1_1DataType.html" title="UA_DataType wrapper class.">DataType</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00556">556</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
+
+</div>
+</div>
 <a id="aca2c76c3cbe78c7a690bdef9e77d84e7" name="aca2c76c3cbe78c7a690bdef9e77d84e7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aca2c76c3cbe78c7a690bdef9e77d84e7">&#9670;&#160;</a></span>createEnum()</h2>
 
@@ -197,7 +717,7 @@ template&lt;typename T , typename Tag , typename U &gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2custom_datatypes_8hpp-example.html#a7">custom_datatypes/custom_datatypes.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00419">419</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00421">421</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
 
 </div>
 </div>
@@ -255,7 +775,7 @@ template&lt;typename T , typename Tag , typename U &gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2custom_datatypes_8hpp-example.html#a1">custom_datatypes/custom_datatypes.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00435">435</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00437">437</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
 
 </div>
 </div>
@@ -313,284 +833,7 @@ template&lt;typename T , typename Tag , typename U &gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2custom_datatypes_8hpp-example.html#a4">custom_datatypes/custom_datatypes.hpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00451">451</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
-
-</div>
-</div>
-<a id="aa23602ddf46e9cd8c066d84d079f5fb6" name="aa23602ddf46e9cd8c066d84d079f5fb6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa23602ddf46e9cd8c066d84d079f5fb6">&#9670;&#160;</a></span>addField() <span class="overload">[1/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , typename Tag , typename U &gt; </div>
-<div class="memtemplate">
-template&lt;auto U::* field&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">auto &amp; <a class="el" href="classopcua_1_1DataTypeBuilder.html">opcua::DataTypeBuilder</a>&lt; T, Tag, U &gt;::addField </td>
-          <td>(</td>
-          <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>fieldName</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;&#160;</td>
-          <td class="paramname"><em>fieldType</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Add a structure field. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">field</td><td>Member pointer, e.g. <code>&amp;S::value</code> </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">fieldName</td><td>Human-readable field name </td></tr>
-    <tr><td class="paramname">fieldType</td><td>Member data type </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00468">468</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a563e07b5788d176f52f2a63b4f5b5a8d" name="a563e07b5788d176f52f2a63b4f5b5a8d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a563e07b5788d176f52f2a63b4f5b5a8d">&#9670;&#160;</a></span>addField() <span class="overload">[2/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , typename Tag  = detail::TagDataTypeAny, typename U  = struct DeferT&gt; </div>
-<div class="memtemplate">
-template&lt;auto U::* field&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">auto &amp; <a class="el" href="classopcua_1_1DataTypeBuilder.html">opcua::DataTypeBuilder</a>&lt; T, Tag, U &gt;::addField </td>
-          <td>(</td>
-          <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>fieldName</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Add a structure field (derive <a class="el" href="classopcua_1_1DataType.html" title="UA_DataType wrapper class.">DataType</a> from <code>field</code>). </p>
-<p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
-
-<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00350">350</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a2cad988aa48d8008c98beab8c7ac4259" name="a2cad988aa48d8008c98beab8c7ac4259"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2cad988aa48d8008c98beab8c7ac4259">&#9670;&#160;</a></span>addField() <span class="overload">[3/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , typename Tag , typename U &gt; </div>
-<div class="memtemplate">
-template&lt;auto U::* fieldSize, auto U::* fieldArray&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">auto &amp; <a class="el" href="classopcua_1_1DataTypeBuilder.html">opcua::DataTypeBuilder</a>&lt; T, Tag, U &gt;::addField </td>
-          <td>(</td>
-          <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>fieldName</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;&#160;</td>
-          <td class="paramname"><em>fieldType</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Add a structure array field. </p>
-<p>Arrays must consists of two fields: its size (of type <code>size_t</code>) and the pointer to the data. No padding allowed between the size field and the array field. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">fieldSize</td><td>Member pointer to the size field, e.g. <code>&amp;S::length</code> </td></tr>
-    <tr><td class="paramname">fieldArray</td><td>Member pointer to the array field, e.g. <code>&amp;S::data</code> </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">fieldName</td><td>Human-readable field name </td></tr>
-    <tr><td class="paramname">fieldType</td><td>Member data type </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00495">495</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a9e350b3452e4a66992792aa9febaf092" name="a9e350b3452e4a66992792aa9febaf092"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9e350b3452e4a66992792aa9febaf092">&#9670;&#160;</a></span>addField() <span class="overload">[4/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , typename Tag  = detail::TagDataTypeAny, typename U  = struct DeferT&gt; </div>
-<div class="memtemplate">
-template&lt;auto U::* fieldSize, auto U::* fieldArray&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">auto &amp; <a class="el" href="classopcua_1_1DataTypeBuilder.html">opcua::DataTypeBuilder</a>&lt; T, Tag, U &gt;::addField </td>
-          <td>(</td>
-          <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>fieldName</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Add a structure array field (derive <a class="el" href="classopcua_1_1DataType.html" title="UA_DataType wrapper class.">DataType</a> from <code>fieldArray</code>). </p>
-<p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
-
-<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00371">371</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a23cf9b8aaabb763c7b511c32a8a2e11b" name="a23cf9b8aaabb763c7b511c32a8a2e11b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a23cf9b8aaabb763c7b511c32a8a2e11b">&#9670;&#160;</a></span>addUnionField() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , typename Tag , typename U &gt; </div>
-<div class="memtemplate">
-template&lt;auto U::* memberUnion, typename TField &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">auto &amp; <a class="el" href="classopcua_1_1DataTypeBuilder.html">opcua::DataTypeBuilder</a>&lt; T, Tag, U &gt;::addUnionField </td>
-          <td>(</td>
-          <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>fieldName</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;&#160;</td>
-          <td class="paramname"><em>fieldType</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Add a union field. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">memberUnion</td><td>Member pointer to the union, e.g. <code>&amp;S::Uni</code> </td></tr>
-    <tr><td class="paramname">TField</td><td>Type of the union field </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">fieldName</td><td>Human-readable field name </td></tr>
-    <tr><td class="paramname">fieldType</td><td>Data type of the union field </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00528">528</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a87ee8bd7d787326c7aa4a653eb8ccd8d" name="a87ee8bd7d787326c7aa4a653eb8ccd8d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a87ee8bd7d787326c7aa4a653eb8ccd8d">&#9670;&#160;</a></span>addUnionField() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , typename Tag  = detail::TagDataTypeAny, typename U  = struct DeferT&gt; </div>
-<div class="memtemplate">
-template&lt;auto U::* memberUnion, typename TField &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">auto &amp; <a class="el" href="classopcua_1_1DataTypeBuilder.html">opcua::DataTypeBuilder</a>&lt; T, Tag, U &gt;::addUnionField </td>
-          <td>(</td>
-          <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>fieldName</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Add a union field (derive <a class="el" href="classopcua_1_1DataType.html" title="UA_DataType wrapper class.">DataType</a> from <code>TField</code>). </p>
-<p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
-
-<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00390">390</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a21252f141b10723044b37a40473709d9" name="a21252f141b10723044b37a40473709d9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21252f141b10723044b37a40473709d9">&#9670;&#160;</a></span>build()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , typename Tag , typename U &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1DataType.html">DataType</a> <a class="el" href="classopcua_1_1DataTypeBuilder.html">opcua::DataTypeBuilder</a>&lt; T, Tag, U &gt;::build </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Create the actual <a class="el" href="classopcua_1_1DataType.html" title="UA_DataType wrapper class.">DataType</a>. </p>
-
-<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00555">555</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00453">453</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
 
 </div>
 </div>
@@ -619,7 +862,7 @@ template&lt;typename , typename , typename &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00401">401</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="datatype_8hpp_source.html#l00403">403</a> of file <a class="el" href="datatype_8hpp_source.html">datatype.hpp</a>.</p>
 
 </div>
 </div>

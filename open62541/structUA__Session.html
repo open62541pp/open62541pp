@@ -145,24 +145,6 @@ Data Fields</h2></td></tr>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00038">38</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ab9fe437a81d78caeee84f1f90cbc9ed6" name="ab9fe437a81d78caeee84f1f90cbc9ed6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab9fe437a81d78caeee84f1f90cbc9ed6">&#9670;&#160;</a></span>TAILQ_HEAD()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">UA_Session::TAILQ_HEAD </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="ua__session_8h.html#ad9b3548352238a852344fe8ee4e684a9">UA_Subscription</a>&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a65f18978c95dcd0122ddfb8c07372da0" name="a65f18978c95dcd0122ddfb8c07372da0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a65f18978c95dcd0122ddfb8c07372da0">&#9670;&#160;</a></span>SIMPLEQ_HEAD()</h2>
 
@@ -181,20 +163,54 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Field Documentation</h2>
-<a id="a6702280f3e56ac834391635735dbc974" name="a6702280f3e56ac834391635735dbc974"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6702280f3e56ac834391635735dbc974">&#9670;&#160;</a></span>header</h2>
+<a id="ab9fe437a81d78caeee84f1f90cbc9ed6" name="ab9fe437a81d78caeee84f1f90cbc9ed6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9fe437a81d78caeee84f1f90cbc9ed6">&#9670;&#160;</a></span>TAILQ_HEAD()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structUA__SessionHeader.html">UA_SessionHeader</a> UA_Session::header</td>
+          <td class="memname">UA_Session::TAILQ_HEAD </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="ua__session_8h.html#ad9b3548352238a852344fe8ee4e684a9">UA_Subscription</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00039">39</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
+</div>
+</div>
+<h2 class="groupheader">Field Documentation</h2>
+<a id="aec80693033a2eb0bfba005ba2f063e0a" name="aec80693033a2eb0bfba005ba2f063e0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec80693033a2eb0bfba005ba2f063e0a">&#9670;&#160;</a></span>activated</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> UA_Session::activated</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00042">42</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
+
+</div>
+</div>
+<a id="ae7182bc51b05dce7b184e7e00ac15a5a" name="ae7182bc51b05dce7b184e7e00ac15a5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7182bc51b05dce7b184e7e00ac15a5a">&#9670;&#160;</a></span>availableContinuationPoints</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a> UA_Session::availableContinuationPoints</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00051">51</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
 
 </div>
 </div>
@@ -214,67 +230,67 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="a83ee3b647386ad4a300601bc8f85f8d7" name="a83ee3b647386ad4a300601bc8f85f8d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a83ee3b647386ad4a300601bc8f85f8d7">&#9670;&#160;</a></span>sessionName</h2>
+<a id="a85a74d674701eedc7726d690741ffbe6" name="a85a74d674701eedc7726d690741ffbe6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85a74d674701eedc7726d690741ffbe6">&#9670;&#160;</a></span>continuationPoints</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structUA__String.html">UA_String</a> UA_Session::sessionName</td>
+          <td class="memname"><a class="el" href="ua__session_8h.html#acc9780223d2d91316bd3538180f8eb30">ContinuationPoint</a>* UA_Session::continuationPoints</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00041">41</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00052">52</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
 
 </div>
 </div>
-<a id="aec80693033a2eb0bfba005ba2f063e0a" name="aec80693033a2eb0bfba005ba2f063e0a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aec80693033a2eb0bfba005ba2f063e0a">&#9670;&#160;</a></span>activated</h2>
+<a id="a6702280f3e56ac834391635735dbc974" name="a6702280f3e56ac834391635735dbc974"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6702280f3e56ac834391635735dbc974">&#9670;&#160;</a></span>header</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> UA_Session::activated</td>
+          <td class="memname"><a class="el" href="structUA__SessionHeader.html">UA_SessionHeader</a> UA_Session::header</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00042">42</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00039">39</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
 
 </div>
 </div>
-<a id="ad3f6d604d06d312ad1bb96d10609e225" name="ad3f6d604d06d312ad1bb96d10609e225"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad3f6d604d06d312ad1bb96d10609e225">&#9670;&#160;</a></span>sessionHandle</h2>
+<a id="a98226543ac824d25fca8b8821619d875" name="a98226543ac824d25fca8b8821619d875"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98226543ac824d25fca8b8821619d875">&#9670;&#160;</a></span>localeIds</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void* UA_Session::sessionHandle</td>
+          <td class="memname"><a class="el" href="structUA__String.html">UA_String</a>* UA_Session::localeIds</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00043">43</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00059">59</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
 
 </div>
 </div>
-<a id="a04b611f1c5c2e991378c5c21d36a144e" name="a04b611f1c5c2e991378c5c21d36a144e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a04b611f1c5c2e991378c5c21d36a144e">&#9670;&#160;</a></span>sessionId</h2>
+<a id="aedf0781784229ab1b595e30b25abc726" name="aedf0781784229ab1b595e30b25abc726"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedf0781784229ab1b595e30b25abc726">&#9670;&#160;</a></span>localeIdsSize</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structUA__NodeId.html">UA_NodeId</a> UA_Session::sessionId</td>
+          <td class="memname">size_t UA_Session::localeIdsSize</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00044">44</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00058">58</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
 
 </div>
 </div>
@@ -310,83 +326,19 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="a3802af52d7eeb6635cbe2f3641d8426a" name="a3802af52d7eeb6635cbe2f3641d8426a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3802af52d7eeb6635cbe2f3641d8426a">&#9670;&#160;</a></span>timeout</h2>
+<a id="a2ebdc92b94c11a2c250d84d86fc3b039" name="a2ebdc92b94c11a2c250d84d86fc3b039"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ebdc92b94c11a2c250d84d86fc3b039">&#9670;&#160;</a></span>params</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a> UA_Session::timeout</td>
+          <td class="memname"><a class="el" href="structUA__KeyValuePair.html">UA_KeyValuePair</a>* UA_Session::params</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00047">47</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
-
-</div>
-</div>
-<a id="a36ae64e0a95bff52f4a23167c08462b3" name="a36ae64e0a95bff52f4a23167c08462b3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a36ae64e0a95bff52f4a23167c08462b3">&#9670;&#160;</a></span>validTill</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> UA_Session::validTill</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00048">48</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
-
-</div>
-</div>
-<a id="a71c39780dee9020134b1bdae8d3fc491" name="a71c39780dee9020134b1bdae8d3fc491"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a71c39780dee9020134b1bdae8d3fc491">&#9670;&#160;</a></span>serverNonce</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> UA_Session::serverNonce</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00049">49</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
-
-</div>
-</div>
-<a id="ae7182bc51b05dce7b184e7e00ac15a5a" name="ae7182bc51b05dce7b184e7e00ac15a5a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7182bc51b05dce7b184e7e00ac15a5a">&#9670;&#160;</a></span>availableContinuationPoints</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a> UA_Session::availableContinuationPoints</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00051">51</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
-
-</div>
-</div>
-<a id="a85a74d674701eedc7726d690741ffbe6" name="a85a74d674701eedc7726d690741ffbe6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a85a74d674701eedc7726d690741ffbe6">&#9670;&#160;</a></span>continuationPoints</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="ua__session_8h.html#acc9780223d2d91316bd3538180f8eb30">ContinuationPoint</a>* UA_Session::continuationPoints</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00052">52</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00055">55</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
 
 </div>
 </div>
@@ -406,51 +358,83 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="a2ebdc92b94c11a2c250d84d86fc3b039" name="a2ebdc92b94c11a2c250d84d86fc3b039"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2ebdc92b94c11a2c250d84d86fc3b039">&#9670;&#160;</a></span>params</h2>
+<a id="a544e18315b042d9acfbbdc83935e0089" name="a544e18315b042d9acfbbdc83935e0089"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a544e18315b042d9acfbbdc83935e0089">&#9670;&#160;</a></span>responseQueueSize</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structUA__KeyValuePair.html">UA_KeyValuePair</a>* UA_Session::params</td>
+          <td class="memname">size_t UA_Session::responseQueueSize</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00055">55</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00069">69</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
 
 </div>
 </div>
-<a id="aedf0781784229ab1b595e30b25abc726" name="aedf0781784229ab1b595e30b25abc726"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aedf0781784229ab1b595e30b25abc726">&#9670;&#160;</a></span>localeIdsSize</h2>
+<a id="a71c39780dee9020134b1bdae8d3fc491" name="a71c39780dee9020134b1bdae8d3fc491"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71c39780dee9020134b1bdae8d3fc491">&#9670;&#160;</a></span>serverNonce</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t UA_Session::localeIdsSize</td>
+          <td class="memname"><a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> UA_Session::serverNonce</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00058">58</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00049">49</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
 
 </div>
 </div>
-<a id="a98226543ac824d25fca8b8821619d875" name="a98226543ac824d25fca8b8821619d875"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a98226543ac824d25fca8b8821619d875">&#9670;&#160;</a></span>localeIds</h2>
+<a id="ad3f6d604d06d312ad1bb96d10609e225" name="ad3f6d604d06d312ad1bb96d10609e225"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3f6d604d06d312ad1bb96d10609e225">&#9670;&#160;</a></span>sessionHandle</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structUA__String.html">UA_String</a>* UA_Session::localeIds</td>
+          <td class="memname">void* UA_Session::sessionHandle</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00059">59</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00043">43</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
+
+</div>
+</div>
+<a id="a04b611f1c5c2e991378c5c21d36a144e" name="a04b611f1c5c2e991378c5c21d36a144e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04b611f1c5c2e991378c5c21d36a144e">&#9670;&#160;</a></span>sessionId</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUA__NodeId.html">UA_NodeId</a> UA_Session::sessionId</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00044">44</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
+
+</div>
+</div>
+<a id="a83ee3b647386ad4a300601bc8f85f8d7" name="a83ee3b647386ad4a300601bc8f85f8d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83ee3b647386ad4a300601bc8f85f8d7">&#9670;&#160;</a></span>sessionName</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUA__String.html">UA_String</a> UA_Session::sessionName</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00041">41</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
 
 </div>
 </div>
@@ -470,19 +454,19 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="a544e18315b042d9acfbbdc83935e0089" name="a544e18315b042d9acfbbdc83935e0089"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a544e18315b042d9acfbbdc83935e0089">&#9670;&#160;</a></span>responseQueueSize</h2>
+<a id="a3802af52d7eeb6635cbe2f3641d8426a" name="a3802af52d7eeb6635cbe2f3641d8426a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3802af52d7eeb6635cbe2f3641d8426a">&#9670;&#160;</a></span>timeout</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t UA_Session::responseQueueSize</td>
+          <td class="memname"><a class="el" href="types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a> UA_Session::timeout</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00069">69</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00047">47</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
 
 </div>
 </div>
@@ -499,6 +483,22 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00072">72</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
+
+</div>
+</div>
+<a id="a36ae64e0a95bff52f4a23167c08462b3" name="a36ae64e0a95bff52f4a23167c08462b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36ae64e0a95bff52f4a23167c08462b3">&#9670;&#160;</a></span>validTill</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> UA_Session::validTill</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00048">48</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
 
 </div>
 </div>

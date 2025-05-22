@@ -132,6 +132,31 @@ Functions</h2></td></tr>
 <tr class="separator:aa45c98f028fe13110a061fcc0e1e8359"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
+<a id="a08b21614cf776c5536da1b2bf6ef4abf" name="a08b21614cf776c5536da1b2bf6ef4abf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08b21614cf776c5536da1b2bf6ef4abf">&#9670;&#160;</a></span>UA_ConnectClientConnection</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="structUA__Connection.html">UA_Connection</a>(* UA_ConnectClientConnection) (<a class="el" href="structUA__ConnectionConfig.html">UA_ConnectionConfig</a> config, <a class="el" href="structUA__String.html">UA_String</a> endpointUrl, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> timeout, const <a class="el" href="structUA__Logger.html">UA_Logger</a> *logger)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">config</td><td>the connection config for this client </td></tr>
+    <tr><td class="paramname">endpointUrl</td><td>to where to connect </td></tr>
+    <tr><td class="paramname">timeout</td><td>in ms until the connection try times out if remote not reachable </td></tr>
+    <tr><td class="paramname">logger</td><td>the logger to use </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00169">169</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
 <a id="a3509b0096939fe9277440cf0c5dde5c9" name="a3509b0096939fe9277440cf0c5dde5c9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3509b0096939fe9277440cf0c5dde5c9">&#9670;&#160;</a></span>UA_Connection</h2>
 
@@ -177,31 +202,6 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00025">25</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
-
-</div>
-</div>
-<a id="a08b21614cf776c5536da1b2bf6ef4abf" name="a08b21614cf776c5536da1b2bf6ef4abf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a08b21614cf776c5536da1b2bf6ef4abf">&#9670;&#160;</a></span>UA_ConnectClientConnection</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="structUA__Connection.html">UA_Connection</a>(* UA_ConnectClientConnection) (<a class="el" href="structUA__ConnectionConfig.html">UA_ConnectionConfig</a> config, <a class="el" href="structUA__String.html">UA_String</a> endpointUrl, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> timeout, const <a class="el" href="structUA__Logger.html">UA_Logger</a> *logger)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">config</td><td>the connection config for this client </td></tr>
-    <tr><td class="paramname">endpointUrl</td><td>to where to connect </td></tr>
-    <tr><td class="paramname">timeout</td><td>in ms until the connection try times out if remote not reachable </td></tr>
-    <tr><td class="paramname">logger</td><td>the logger to use </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00169">169</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
