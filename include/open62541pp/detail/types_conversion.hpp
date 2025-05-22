@@ -1,14 +1,19 @@
 #pragma once
 
+#include <string_view>
 #include <type_traits>
 
 #include "open62541pp/detail/types_handling.hpp"  // copyArray
 #include "open62541pp/span.hpp"
-#include "open62541pp/typeconverter.hpp"  // IsConvertible, toNative
+#include "open62541pp/detail/string_utils.hpp"  // allocNativeString
 #include "open62541pp/typeregistry.hpp"  // getDataType
 #include "open62541pp/wrapper.hpp"  // asNative, asWrapper, IsWrapper
 
 namespace opcua::detail {
+
+[[nodiscard]] inline auto makeNative(std::string_view value) {
+    return detail::allocNativeString(value);
+}
 
 template <typename T>
 [[nodiscard]] auto makeNative(T value) noexcept
@@ -23,12 +28,6 @@ template <typename T, typename U = std::remove_cv_t<std::remove_reference_t<T>>>
     NativeType native{};
     asWrapper<U>(native) = std::forward<T>(value);
     return native;
-}
-
-template <typename T, typename U = std::remove_cv_t<std::remove_reference_t<T>>>
-[[nodiscard]] auto makeNative(T&& value)
-    -> std::enable_if_t<IsConvertible<U>::value, typename TypeConverter<U>::NativeType> {
-    return toNative(std::forward<T>(value));
 }
 
 template <typename T>
