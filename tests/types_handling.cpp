@@ -17,13 +17,13 @@ TEST_CASE("Types handling") {
     }
 
     SECTION("Allocate / deallocate") {
-        auto* ptr = detail::allocate<UA_String>(UA_TYPES[UA_TYPES_STRING]);
+        auto* ptr = detail::allocate<UA_String>();
         CHECK(ptr != nullptr);
         detail::deallocate(ptr, UA_TYPES[UA_TYPES_STRING]);
     }
 
     SECTION("Allocate as unique_ptr") {
-        auto ptr = detail::allocateUniquePtr<UA_String>(UA_TYPES[UA_TYPES_STRING]);
+        auto ptr = detail::makeUnique<UA_String>(UA_TYPES[UA_TYPES_STRING]);
         CHECK(ptr.get() != nullptr);
     }
 }
@@ -37,7 +37,7 @@ TEST_CASE("Array handling") {
     }
 
     SECTION("Allocate / deallocate") {
-        auto* ptr = detail::allocateArray<UA_String>(3, UA_TYPES[UA_TYPES_STRING]);
+        auto* ptr = detail::allocateArray<UA_String>(3);
         CHECK(ptr != nullptr);
         detail::deallocateArray(ptr, 3, UA_TYPES[UA_TYPES_STRING]);
 
@@ -45,7 +45,7 @@ TEST_CASE("Array handling") {
             CHECK_THROWS_AS(
                 []() {
                     const auto huge = size_t(-1);
-                    return detail::allocateArray<UA_String>(huge, UA_TYPES[UA_TYPES_STRING]);
+                    return detail::allocateArray<UA_String>(huge);
                 }(),
                 std::bad_alloc
             );
@@ -53,7 +53,7 @@ TEST_CASE("Array handling") {
     }
 
     SECTION("Allocate as unique_ptr") {
-        auto ptr = detail::allocateArrayUniquePtr<UA_String>(3, UA_TYPES[UA_TYPES_STRING]);
+        auto ptr = detail::makeUniqueArray<UA_String>(3, UA_TYPES[UA_TYPES_STRING]);
         CHECK(ptr.get() != nullptr);
     }
 
@@ -67,63 +67,30 @@ TEST_CASE("Array handling") {
         SECTION("Without pointers") {
             const size_t size = 2;
             const auto& type = UA_TYPES[UA_TYPES_INT32];
-            auto* src = detail::allocateArray<UA_Int32>(size, type);
-            src[0] = 1;
-            src[1] = 2;
+            UA_Int32 src[2] = {1, 2};
 
-            auto* dst = detail::copyArray(src, size, type);
-            CHECK(dst[0] == 1);
-            CHECK(dst[1] == 2);
-
-            detail::deallocateArray(src, size, type);
-            detail::deallocateArray(dst, size, type);
+            SECTION("From pointer") {
+                auto* dst = detail::copyArray(src, size, type);
+                CHECK(dst[0] == 1);
+                CHECK(dst[1] == 2);
+                detail::deallocateArray(dst, size, type);
+            }
         }
 
         SECTION("With pointers") {
             const size_t size = 2;
             const auto& type = UA_TYPES[UA_TYPES_STRING];
-            auto* src = detail::allocateArray<UA_String>(size, type);
-            src[0] = UA_STRING_ALLOC("one");
-            src[1] = UA_STRING_ALLOC("two");
+            UA_String src[2] = {
+                UA_STRING_STATIC("one"),
+                UA_STRING_STATIC("two"),
+            };
 
-            auto* dst = detail::copyArray(src, size, type);
-            CHECK(UA_String_equal(&dst[0], &src[0]));
-            CHECK(UA_String_equal(&dst[1], &src[1]));
-
-            detail::deallocateArray(src, size, type);
-            detail::deallocateArray(dst, size, type);
+            SECTION("From pointer") {
+                auto* dst = detail::copyArray(src, size, type);
+                CHECK(UA_String_equal(&dst[0], &src[0]));
+                CHECK(UA_String_equal(&dst[1], &src[1]));
+                detail::deallocateArray(dst, size, type);
+            }
         }
-    }
-
-    SECTION("Resize array") {
-        size_t size = 3;
-        const auto& type = UA_TYPES[UA_TYPES_INT32];
-        auto* array = detail::allocateArray<UA_Int32>(size, type);
-        array[0] = 1;
-        array[1] = 2;
-        array[2] = 3;
-
-        const auto* arrayBefore = array;
-
-        SECTION("newSize > size") {
-            detail::resizeArray(array, size, 4, type);
-            CHECK(size == 4);
-            CHECK(array[0] == 1);
-            CHECK(array[1] == 2);
-            CHECK(array[2] == 3);
-            CHECK(array[3] == 0);
-        }
-
-        SECTION("newSize < size") {
-            detail::resizeArray(array, size, 2, type);
-            CHECK(size == 2);
-            CHECK(array[0] == 1);
-            CHECK(array[1] == 2);
-        }
-
-        CHECK(array != nullptr);
-        CHECK(array != arrayBefore);
-
-        detail::deallocateArray(array, size, type);
     }
 }

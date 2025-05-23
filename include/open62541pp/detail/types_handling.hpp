@@ -62,7 +62,10 @@ void deallocate(T* native) noexcept {
 template <typename T>
 void deallocate(T* native, const UA_DataType& type) noexcept {
     assert(isValidTypeCombination<T>(type));
-    UA_delete(native, &type);
+    if (native != nullptr) {
+        clear(*native, type);
+        deallocate(native);
+    }
 }
 
 template <typename T>
@@ -75,19 +78,9 @@ template <typename T>
 }
 
 template <typename T>
-[[nodiscard]] T* allocate(const UA_DataType& type) {
-    assert(isValidTypeCombination<T>(type));
-    auto* ptr = static_cast<T*>(UA_new(&type));
-    if (ptr == nullptr) {
-        throw std::bad_alloc{};
-    }
-    return ptr;
-}
-
-template <typename T>
-[[nodiscard]] auto allocateUniquePtr(const UA_DataType& type) {
-    auto deleter = [&type](T* native) { deallocate(native, type); };
-    return std::unique_ptr<T, decltype(deleter)>(allocate<T>(type), deleter);
+[[nodiscard]] auto makeUnique(const UA_DataType& type) {
+    auto deleter = [&type](T* ptr) { deallocate(ptr, type); };
+    return std::unique_ptr<T, decltype(deleter)>(allocate<T>(), deleter);
 }
 
 template <typename T>
@@ -160,55 +153,28 @@ template <typename T>
 }
 
 template <typename T>
-[[nodiscard]] T* allocateArray(size_t size, [[maybe_unused]] const UA_DataType& type) {
-    assert(isValidTypeCombination<T>(type));
-    return allocateArray<T>(size);
-}
-
-template <typename T>
-[[nodiscard]] auto allocateArrayUniquePtr(size_t size, const UA_DataType& type) {
+[[nodiscard]] auto makeUniqueArray(size_t size, const UA_DataType& type) {
     auto deleter = [&type, size](T* native) { deallocateArray(native, size, type); };
-    return std::unique_ptr<T, decltype(deleter)>(allocateArray<T>(size, type), deleter);
+    return std::unique_ptr<T, decltype(deleter)>(allocateArray<T>(size), deleter);
 }
 
 template <typename T>
 [[nodiscard]] T* copyArray(const T* src, size_t size) {
     T* dst = allocateArray<T>(size);
-    if (src == nullptr) {
-        return dst;
-    }
     std::memcpy(dst, src, size * sizeof(T));
     return dst;
 }
 
 template <typename T>
 [[nodiscard]] T* copyArray(const T* src, size_t size, const UA_DataType& type) {
-    T* dst = allocateArray<T>(size, type);
-    if (src == nullptr) {
-        return dst;
-    }
+    auto dst = makeUniqueArray<T>(size, type);
     if constexpr (!IsPointerFree<T>::value) {
         // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
-        std::transform(src, src + size, dst, [&](const T& item) { return copy(item, type); });
+        std::transform(src, src + size, dst.get(), [&](const T& item) { return copy(item, type); });
     } else {
-        std::memcpy(dst, src, size * sizeof(T));
+        std::memcpy(dst.get(), src, size * sizeof(T));
     }
-    return dst;
-}
-
-template <typename T>
-void resizeArray(T*& array, size_t& size, size_t newSize, const UA_DataType& type) {
-    if (array == nullptr || newSize == size) {
-        return;
-    }
-    T* newArray = allocateArray<T>(newSize, type);
-    std::memcpy(newArray, array, std::min(size, newSize) * sizeof(T));
-    if (newSize > size) {
-        std::memset(newArray + size, 0, newSize - size);  // NOLINT
-    }
-    deallocateArray<T>(array, size, type);
-    array = newArray;
-    size = newSize;
+    return dst.release();
 }
 
 }  // namespace opcua::detail

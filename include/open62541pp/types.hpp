@@ -1471,7 +1471,7 @@ private:
     template <typename T>
     void setScalarCopyImpl(T&& value, const UA_DataType& type) {
         using ValueType = std::remove_cv_t<std::remove_reference_t<T>>;
-        auto native = detail::allocateUniquePtr<ValueType>(type);
+        auto native = detail::makeUnique<ValueType>(type);
         *native = detail::copy<ValueType>(std::forward<T>(value), type);
         setScalarImpl(native.release(), type, UA_VARIANT_DATA);  // move ownership
     }
@@ -1481,7 +1481,7 @@ private:
         using ValueType = std::remove_cv_t<std::remove_reference_t<T>>;
         using Native = typename TypeConverter<ValueType>::NativeType;
         const auto& type = opcua::getDataType<Native>();
-        auto native = detail::allocateUniquePtr<Native>(type);
+        auto native = detail::makeUnique<Native>(type);
         *native = detail::toNative<ValueType>(std::forward<T>(value));
         setScalarImpl(native.release(), type, UA_VARIANT_DATA);  // move ownership
     }
@@ -1490,7 +1490,7 @@ private:
     void setArrayCopyImpl(InputIt first, InputIt last, const UA_DataType& type) {
         using ValueType = typename std::iterator_traits<InputIt>::value_type;
         const size_t size = std::distance(first, last);
-        auto native = detail::allocateArrayUniquePtr<ValueType>(size, type);
+        auto native = detail::makeUniqueArray<ValueType>(size, type);
         std::transform(first, last, native.get(), [&](auto&& value) {
             return detail::copy<ValueType>(std::forward<decltype(value)>(value), type);
         });
@@ -1503,7 +1503,7 @@ private:
         using Native = typename TypeConverter<ValueType>::NativeType;
         const auto& type = opcua::getDataType<Native>();
         const size_t size = std::distance(first, last);
-        auto native = detail::allocateArrayUniquePtr<Native>(size, type);
+        auto native = detail::makeUniqueArray<Native>(size, type);
         std::transform(first, last, native.get(), detail::toNative<ValueType>);
         setArrayImpl(native.release(), size, type, UA_VARIANT_DATA);  // move ownership
     }
@@ -1780,7 +1780,7 @@ public:
      */
     template <typename T, typename = std::enable_if_t<!isExtensionObject<T>>>
     explicit ExtensionObject(const T& decoded, const UA_DataType& type) {
-        auto ptr = detail::allocateUniquePtr<T>(type);
+        auto ptr = detail::makeUnique<T>(type);
         *ptr = detail::copy(decoded, type);
         handle()->encoding = UA_EXTENSIONOBJECT_DECODED;
         handle()->content.decoded.type = &type;  // NOLINT

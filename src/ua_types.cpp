@@ -12,9 +12,7 @@ ContentFilterElement::ContentFilterElement(
 ) {
     handle()->filterOperator = static_cast<UA_FilterOperator>(filterOperator);
     handle()->filterOperandsSize = operands.size();
-    handle()->filterOperands = detail::allocateArray<UA_ExtensionObject>(
-        operands.size(), UA_TYPES[UA_TYPES_EXTENSIONOBJECT]
-    );
+    handle()->filterOperands = detail::allocateArray<UA_ExtensionObject>(operands.size());
 
     // transform array of operand variants to array of extension objects
     std::transform(
@@ -47,9 +45,7 @@ static ContentFilter concatFilterElements(
 
     ContentFilter result;
     result->elementsSize = totalSize;
-    result->elements = detail::allocateArray<UA_ContentFilterElement>(
-        totalSize, UA_TYPES[UA_TYPES_CONTENTFILTERELEMENT]
-    );
+    result->elements = detail::allocateArray<UA_ContentFilterElement>(totalSize);
 
     const Span<ContentFilterElement> resultElements(
         asWrapper<ContentFilterElement>(result->elements), totalSize
