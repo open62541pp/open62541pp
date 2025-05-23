@@ -90,19 +90,10 @@ TEMPLATE_TEST_CASE("StringLikeMixin constructors", "", String, const String) {
         CHECK(str.data() != nullptr);
         CHECK(std::string_view(str.data(), str.size()) == "abc");
     }
-
-    SECTION("From initializer list") {
-        TestType str{'a', 'b', 'c'};
-        CHECK(str.size() == 3);
-        CHECK(str.length() == 3);
-        CHECK_FALSE(str.empty());
-        CHECK(str.data() != nullptr);
-        CHECK(std::string_view(str.data(), str.size()) == "abc");
-    }
 }
 
 TEMPLATE_TEST_CASE("StringLikeMixin element access", "", String, const String) {
-    TestType str{'a', 'b', 'c'};
+    TestType str{"abc"};
 
     SECTION("operator[]") {
         CHECK(str[0] == 'a');
@@ -117,7 +108,7 @@ TEMPLATE_TEST_CASE("StringLikeMixin element access", "", String, const String) {
 }
 
 TEMPLATE_TEST_CASE("StringLikeMixin iterators", "", String, const String) {
-    TestType str{'a', 'b', 'c'};
+    TestType str{"abc"};
 
     SECTION("begin(), end() iterators") {
         CHECK(*str.begin() == 'a');

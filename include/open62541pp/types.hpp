@@ -6,7 +6,6 @@
 #include <chrono>
 #include <cstdint>
 #include <functional>  // hash
-#include <initializer_list>
 #include <iosfwd>  // forward declare ostream
 #include <iterator>  // reverse_iterator
 #include <optional>
@@ -263,10 +262,6 @@ public:
     template <typename InputIt>
     String(InputIt first, InputIt last) {
         init(first, last);
-    }
-
-    String(std::initializer_list<char> values) {
-        init(values.begin(), values.end());
     }
 
     /// Assign null-termined character string.
