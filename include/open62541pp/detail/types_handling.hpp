@@ -184,7 +184,9 @@ template <typename InputIt>
     using ValueType = IterValueT<InputIt>;
     const size_t size = std::distance(first, last);
     auto dst = makeUniqueArray<ValueType>(size, type);
-    std::transform(first, last, dst.get(), [&](const ValueType& item) { return copy(item, type); });
+    std::transform(first, last, dst.get(), [&](auto&& item) {
+        return copy<ValueType>(std::forward<decltype(item)>(item), type);
+    });
     return {dst.release(), size};
 }
 
@@ -218,7 +220,7 @@ template <typename InputIt>
             capacity *= 2;
             reallocate(capacity);
         }
-        dst[index] = copy(*it, type);
+        dst[index] = copy<ValueType>(*it, type);
     }
     reallocate(index);
     return {dst.release(), index};
