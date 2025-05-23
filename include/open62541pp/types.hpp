@@ -125,12 +125,12 @@ public:
 
     pointer data() noexcept {
         auto& native = asNative(static_cast<WrapperType&>(*this));
-        return reinterpret_cast<pointer>(native.data);  // NOLINT
+        return stripEmptyArraySentinel(reinterpret_cast<pointer>(native.data));  // NOLINT
     }
 
     const_pointer data() const noexcept {
         const auto& native = asNative(static_cast<const WrapperType&>(*this));
-        return reinterpret_cast<const_pointer>(native.data);  // NOLINT
+        return stripEmptyArraySentinel(reinterpret_cast<const_pointer>(native.data));  // NOLINT
     }
 
     reference operator[](size_t index) noexcept {
@@ -214,13 +214,8 @@ public:
 protected:
     void init(size_t length) {
         auto& native = asNative(static_cast<WrapperType&>(*this));
+        native.data = allocateArray<uint8_t>(length);
         native.length = length;
-        if (length > 0) {
-            native.data = static_cast<uint8_t*>(UA_malloc(length));  // NOLINT
-            if (data() == nullptr) {
-                throw BadStatus{UA_STATUSCODE_BADOUTOFMEMORY};
-            }
-        }
     }
 
     template <typename InputIt>

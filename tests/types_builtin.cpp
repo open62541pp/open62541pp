@@ -171,7 +171,7 @@ TEMPLATE_TEST_CASE("StringLike constructors", "", String, XmlElement) {
         CHECK(str.size() == 0);
         CHECK(str.length() == 0);
         CHECK(str.empty());
-        CHECK(str.data() != nullptr);
+        CHECK(str.data() == nullptr);
     }
 }
 
