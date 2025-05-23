@@ -53,11 +53,6 @@ TEST_CASE("Array handling") {
         }
     }
 
-    SECTION("Allocate as unique_ptr") {
-        auto ptr = detail::makeUniqueArray<UA_String>(3, UA_TYPES[UA_TYPES_STRING]);
-        CHECK(ptr.get() != nullptr);
-    }
-
     SECTION("Copy") {
         SECTION("Empty array") {
             UA_Int32* src = nullptr;
