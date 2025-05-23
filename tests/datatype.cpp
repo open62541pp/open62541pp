@@ -127,7 +127,7 @@ static void checkEqual(const UA_DataTypeMember& member, const UA_DataTypeMember&
 
 static void checkEqual(const UA_DataType& dt, const UA_DataType& expected) {
 #if UAPP_HAS_TYPEDESCRIPTION
-    CHECK(std::string_view(dt.typeName) == std::string_view(expected.typeName));
+    CHECK(std::string_view{dt.typeName} == std::string_view{expected.typeName});
 #endif
     CHECK((dt.typeId == expected.typeId));
     CHECK((dt.binaryEncodingId == expected.binaryEncodingId));

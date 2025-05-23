@@ -32,6 +32,12 @@ template <typename T>
 using MemberTypeT = typename MemberType<T>::type;
 
 template <typename T>
+using IterCategoryT = typename std::iterator_traits<T>::iterator_category;
+
+template <typename T>
+using IterValueT = typename std::iterator_traits<T>::value_type;
+
+template <typename T>
 using RangeIteratorT = decltype(std::begin(std::declval<T&>()));
 
 template <typename T>

@@ -2,14 +2,15 @@
 
 #include <algorithm>  // for_each_n, transform
 #include <cassert>
-#include <cstring>  // memcpy, memset
+#include <cstring>  // memcpy
+#include <iterator>
 #include <memory>
 #include <new>  // bad_alloc
 #include <type_traits>
 #include <utility>  // forward
 
 #include "open62541pp/detail/open62541/common.h"
-#include "open62541pp/detail/traits.hpp"  // IsOneOf
+#include "open62541pp/detail/traits.hpp"  // IterValueT
 #include "open62541pp/exception.hpp"
 
 namespace opcua::detail {
@@ -17,23 +18,11 @@ namespace opcua::detail {
 /* ------------------------------------ Generic type handling ----------------------------------- */
 
 template <typename T>
-struct IsPointerFree
-    : IsOneOf<
-          T,
-          UA_Boolean,
-          UA_SByte,
-          UA_Byte,
-          UA_Int16,
-          UA_UInt16,
-          UA_Int32,
-          UA_UInt32,
-          UA_Int64,
-          UA_UInt64,
-          UA_Float,
-          UA_Double,
-          UA_DateTime,
-          UA_Guid,
-          UA_StatusCode> {};
+using IsPointerFree = std::disjunction<
+    std::is_integral<T>,
+    std::is_floating_point<T>,
+    std::is_enum<T>,
+    std::is_same<T, UA_Guid>>;
 
 template <typename T>
 constexpr bool isValidTypeCombination(const UA_DataType& type) {
@@ -62,7 +51,10 @@ void deallocate(T* native) noexcept {
 template <typename T>
 void deallocate(T* native, const UA_DataType& type) noexcept {
     assert(isValidTypeCombination<T>(type));
-    UA_delete(native, &type);
+    if (native != nullptr) {
+        clear(*native, type);
+        deallocate(native);
+    }
 }
 
 template <typename T>
@@ -74,20 +66,17 @@ template <typename T>
     return ptr;
 }
 
-template <typename T>
-[[nodiscard]] T* allocate(const UA_DataType& type) {
-    assert(isValidTypeCombination<T>(type));
-    auto* ptr = static_cast<T*>(UA_new(&type));
-    if (ptr == nullptr) {
-        throw std::bad_alloc{};
-    }
-    return ptr;
+template <
+    typename T,
+    typename Deleter,
+    typename = std::enable_if_t<std::is_invocable_v<Deleter, T*>>>
+[[nodiscard]] auto makeUnique(Deleter&& deleter) {
+    return std::unique_ptr<T, std::decay_t<Deleter>>{allocate<T>(), std::forward<Deleter>(deleter)};
 }
 
 template <typename T>
-[[nodiscard]] auto allocateUniquePtr(const UA_DataType& type) {
-    auto deleter = [&type](T* native) { deallocate(native, type); };
-    return std::unique_ptr<T, decltype(deleter)>(allocate<T>(type), deleter);
+[[nodiscard]] auto makeUnique(const UA_DataType& type) {
+    return makeUnique<T>([&type](T* native) { deallocate(native, type); });
 }
 
 template <typename T>
@@ -127,9 +116,31 @@ template <typename T>
 inline constexpr uintptr_t emptyArraySentinel = 0x01;
 
 template <typename T>
+[[nodiscard]] T* makeEmptyArraySentinel() noexcept {
+    return reinterpret_cast<T*>(emptyArraySentinel);  // NOLINT
+}
+
+template <typename T>
 [[nodiscard]] T* stripEmptyArraySentinel(T* array) noexcept {
     // NOLINTNEXTLINE
     return reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(array) & ~emptyArraySentinel);
+}
+
+template <typename T>
+bool isEmptyArray(T* array, size_t size) noexcept {
+    return stripEmptyArraySentinel(array) == nullptr || size == 0;
+}
+
+template <typename T>
+void clearArray(T* array, size_t size, const UA_DataType& type) noexcept {
+    if (isEmptyArray(array, size)) {
+        return;
+    }
+    if constexpr (IsPointerFree<T>::value) {
+        std::memset(array, 0, size * sizeof(T));
+    } else {
+        std::for_each_n(array, size, [&](auto& item) { clear(item, type); });
+    }
 }
 
 template <typename T>
@@ -140,7 +151,7 @@ void deallocateArray(T* array) noexcept {
 template <typename T>
 void deallocateArray(T* array, size_t size, const UA_DataType& type) noexcept {
     assert(isValidTypeCombination<T>(type));
-    std::for_each_n(array, size, [&](auto& item) { clear(item, type); });
+    clearArray(array, size, type);
     deallocateArray(array);
 }
 
@@ -150,7 +161,7 @@ template <typename T>
         throw std::bad_alloc{};
     }
     if (size == 0) {
-        return reinterpret_cast<T*>(emptyArraySentinel);  // NOLINT
+        return makeEmptyArraySentinel<T>();
     }
     auto* ptr = static_cast<T*>(UA_calloc(size, sizeof(T)));  // NOLINT
     if (ptr == nullptr) {
@@ -159,56 +170,95 @@ template <typename T>
     return ptr;
 }
 
-template <typename T>
-[[nodiscard]] T* allocateArray(size_t size, [[maybe_unused]] const UA_DataType& type) {
-    assert(isValidTypeCombination<T>(type));
-    return allocateArray<T>(size);
+template <
+    typename T,
+    typename Deleter,
+    typename = std::enable_if_t<std::is_invocable_v<Deleter, T*>>>
+[[nodiscard]] auto makeUniqueArray(size_t size, Deleter&& deleter) {
+    // NOLINTNEXTLINE(*c-arrays)
+    return std::unique_ptr<T[], std::decay_t<Deleter>>{
+        allocateArray<T>(size), std::forward<Deleter>(deleter)
+    };
 }
 
 template <typename T>
-[[nodiscard]] auto allocateArrayUniquePtr(size_t size, const UA_DataType& type) {
-    auto deleter = [&type, size](T* native) { deallocateArray(native, size, type); };
-    return std::unique_ptr<T, decltype(deleter)>(allocateArray<T>(size, type), deleter);
+[[nodiscard]] auto makeUniqueArray(size_t size, const UA_DataType& type) {
+    return makeUniqueArray<T>(size, [&type, size](T* native) {
+        deallocateArray(native, size, type);
+    });
+}
+
+template <typename InputIt>
+[[nodiscard]] std::pair<IterValueT<InputIt>*, size_t> copyArray(
+    InputIt first, InputIt last, const UA_DataType& type, std::forward_iterator_tag /* unused */
+) {
+    using ValueType = IterValueT<InputIt>;
+    const size_t size = std::distance(first, last);
+    auto dst = makeUniqueArray<ValueType>(size, type);
+    std::transform(first, last, dst.get(), [&](auto&& item) {
+        return copy<ValueType>(std::forward<decltype(item)>(item), type);
+    });
+    return {dst.release(), size};
+}
+
+template <typename InputIt>
+[[nodiscard]] std::pair<IterValueT<InputIt>*, size_t> copyArray(
+    InputIt first, InputIt last, const UA_DataType& type, std::input_iterator_tag /* unused */
+) {
+    using ValueType = IterValueT<InputIt>;
+    if (first == last) {
+        return {makeEmptyArraySentinel<ValueType>(), 0};
+    }
+
+    size_t index = 0;
+    size_t capacity = 16;  // initial capacity to avoid frequency reallocations
+    auto dst = makeUniqueArray<ValueType>(capacity, [&](ValueType* ptr) {
+        deallocateArray(ptr, index, type);
+    });
+
+    const auto reallocate = [&](size_t newSize) {
+        // resize without clearing members; newSize must be greater than number of members
+        auto* ptr = static_cast<ValueType*>(UA_realloc(dst.get(), newSize * sizeof(ValueType)));
+        if (ptr == nullptr) {
+            throw std::bad_alloc{};
+        }
+        dst.release();  // realloc frees old memory on success; safe to release before reset
+        dst.reset(ptr);
+    };
+
+    for (auto it = first; it != last; ++it, ++index) {
+        if (index >= capacity) {
+            capacity *= 2;
+            reallocate(capacity);
+        }
+        dst[index] = copy<ValueType>(*it, type);
+    }
+    reallocate(index);
+    return {dst.release(), index};
+}
+
+template <typename InputIt>
+[[nodiscard]] std::pair<IterValueT<InputIt>*, size_t> copyArray(
+    InputIt first, InputIt last, const UA_DataType& type
+) {
+    return copyArray(first, last, type, IterCategoryT<InputIt>{});
 }
 
 template <typename T>
 [[nodiscard]] T* copyArray(const T* src, size_t size) {
-    T* dst = allocateArray<T>(size);
-    if (src == nullptr) {
-        return dst;
+    if (isEmptyArray(src, size)) {
+        return makeEmptyArraySentinel<T>();
     }
+    T* dst = allocateArray<T>(size);
     std::memcpy(dst, src, size * sizeof(T));
     return dst;
 }
 
 template <typename T>
 [[nodiscard]] T* copyArray(const T* src, size_t size, const UA_DataType& type) {
-    T* dst = allocateArray<T>(size, type);
-    if (src == nullptr) {
-        return dst;
-    }
-    if constexpr (!IsPointerFree<T>::value) {
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
-        std::transform(src, src + size, dst, [&](const T& item) { return copy(item, type); });
-    } else {
-        std::memcpy(dst, src, size * sizeof(T));
-    }
-    return dst;
-}
-
-template <typename T>
-void resizeArray(T*& array, size_t& size, size_t newSize, const UA_DataType& type) {
-    if (array == nullptr || newSize == size) {
-        return;
-    }
-    T* newArray = allocateArray<T>(newSize, type);
-    std::memcpy(newArray, array, std::min(size, newSize) * sizeof(T));
-    if (newSize > size) {
-        std::memset(newArray + size, 0, newSize - size);  // NOLINT
-    }
-    deallocateArray<T>(array, size, type);
-    array = newArray;
-    size = newSize;
+    return IsPointerFree<T>::value
+        ? copyArray(src, size)
+        : copyArray(src, src + size, type).first;  // NOLINT
 }
 
 }  // namespace opcua::detail

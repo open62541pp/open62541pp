@@ -13,7 +13,6 @@
 #include <string_view>
 #include <type_traits>  // is_same_v
 #include <utility>  // move
-#include <vector>
 
 #include "open62541pp/common.hpp"  // NamespaceIndex
 #include "open62541pp/config.hpp"
@@ -219,21 +218,11 @@ protected:
 
     template <typename InputIt>
     void init(InputIt first, InputIt last) {
-        init(first, last, typename std::iterator_traits<InputIt>::iterator_category{});
-    }
-
-    template <typename InputIt, typename Tag>
-    void init(InputIt first, InputIt last, Tag /* unused */) {
-        init(std::distance(first, last));
-        std::copy(first, last, data());
-    }
-
-    template <typename InputIt>
-    void init(InputIt first, InputIt last, std::input_iterator_tag /* unused */) {
-        // input iterator can only be read once -> buffer data in vector
-        std::vector<uint8_t> buffer(first, last);
-        init(buffer.size());
-        std::copy(buffer.begin(), buffer.end(), data());
+        static_assert(sizeof(detail::IterValueT<InputIt>) == sizeof(uint8_t));
+        auto& native = asNative(static_cast<WrapperType&>(*this));
+        const auto [data, length] = detail::copyArray(first, last, UA_TYPES[UA_TYPES_BYTE]);
+        native.data = reinterpret_cast<uint8_t*>(data);  // NOLINT
+        native.length = length;
     }
 };
 
@@ -1182,7 +1171,7 @@ public:
      */
     template <typename InputIt>
     void assign(InputIt first, InputIt last) {
-        using ValueType = typename std::iterator_traits<InputIt>::value_type;
+        using ValueType = detail::IterValueT<InputIt>;
         assertIsRegisteredOrConvertible<ValueType>();
         if constexpr (IsRegistered<ValueType>::value) {
             setArrayCopyImpl(first, last, opcua::getDataType<ValueType>());
@@ -1471,7 +1460,7 @@ private:
     template <typename T>
     void setScalarCopyImpl(T&& value, const UA_DataType& type) {
         using ValueType = std::remove_cv_t<std::remove_reference_t<T>>;
-        auto native = detail::allocateUniquePtr<ValueType>(type);
+        auto native = detail::makeUnique<ValueType>(type);
         *native = detail::copy<ValueType>(std::forward<T>(value), type);
         setScalarImpl(native.release(), type, UA_VARIANT_DATA);  // move ownership
     }
@@ -1481,31 +1470,28 @@ private:
         using ValueType = std::remove_cv_t<std::remove_reference_t<T>>;
         using Native = typename TypeConverter<ValueType>::NativeType;
         const auto& type = opcua::getDataType<Native>();
-        auto native = detail::allocateUniquePtr<Native>(type);
+        auto native = detail::makeUnique<Native>(type);
         *native = detail::toNative<ValueType>(std::forward<T>(value));
         setScalarImpl(native.release(), type, UA_VARIANT_DATA);  // move ownership
     }
 
     template <typename InputIt>
     void setArrayCopyImpl(InputIt first, InputIt last, const UA_DataType& type) {
-        using ValueType = typename std::iterator_traits<InputIt>::value_type;
-        const size_t size = std::distance(first, last);
-        auto native = detail::allocateArrayUniquePtr<ValueType>(size, type);
-        std::transform(first, last, native.get(), [&](auto&& value) {
-            return detail::copy<ValueType>(std::forward<decltype(value)>(value), type);
-        });
-        setArrayImpl(native.release(), size, type, UA_VARIANT_DATA);  // move ownership
+        const auto [ptr, size] = detail::copyArray(first, last, type);
+        setArrayImpl(ptr, size, type, UA_VARIANT_DATA);  // move ownership
     }
 
     template <typename InputIt>
     void setArrayCopyConvertImpl(InputIt first, InputIt last) {
-        using ValueType = typename std::iterator_traits<InputIt>::value_type;
+        using ValueType = detail::IterValueT<InputIt>;
         using Native = typename TypeConverter<ValueType>::NativeType;
         const auto& type = opcua::getDataType<Native>();
-        const size_t size = std::distance(first, last);
-        auto native = detail::allocateArrayUniquePtr<Native>(size, type);
-        std::transform(first, last, native.get(), detail::toNative<ValueType>);
-        setArrayImpl(native.release(), size, type, UA_VARIANT_DATA);  // move ownership
+        const auto [ptr, size] = detail::copyArray(
+            detail::TransformIterator(first, detail::toNative<ValueType>),
+            detail::TransformIterator(last, detail::toNative<ValueType>),
+            type
+        );
+        setArrayImpl(ptr, size, type, UA_VARIANT_DATA);  // move ownership
     }
 
     template <typename T, typename Self>
@@ -1780,7 +1766,7 @@ public:
      */
     template <typename T, typename = std::enable_if_t<!isExtensionObject<T>>>
     explicit ExtensionObject(const T& decoded, const UA_DataType& type) {
-        auto ptr = detail::allocateUniquePtr<T>(type);
+        auto ptr = detail::makeUnique<T>(type);
         *ptr = detail::copy(decoded, type);
         handle()->encoding = UA_EXTENSIONOBJECT_DECODED;
         handle()->content.decoded.type = &type;  // NOLINT
