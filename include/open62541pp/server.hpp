@@ -169,6 +169,8 @@ public:
 
     /// Get all defined namespaces.
     std::vector<String> namespaceArray();
+    /// Get namespace index for given URI.
+    std::optional<NamespaceIndex> namespaceIndex(std::string_view uri) noexcept;
 
     /// Register namespace. The new namespace index will be returned.
     [[nodiscard]] NamespaceIndex registerNamespace(std::string_view uri);
