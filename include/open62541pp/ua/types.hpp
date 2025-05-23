@@ -360,10 +360,10 @@ constexpr std::true_type isBitmaskEnum(NodeAttributesMask);
 #define UAPP_NODEATTR_ARRAY(Type, suffix, member, memberSize, flag)                                \
     UAPP_GETTER_SPAN(Type, member, memberSize)                                                     \
     auto& set##suffix(Span<const Type> member) {                                                   \
-        const auto& dataType = opcua::getDataType<Type>();                                         \
+        const auto& type = opcua::getDataType<Type>();                                             \
         handle()->specifiedAttributes |= flag;                                                     \
-        detail::deallocateArray(handle()->member, handle()->memberSize, dataType);                 \
-        handle()->member = detail::copyArray(member.data(), member.size(), dataType);              \
+        detail::deallocateArray(handle()->member, handle()->memberSize, type);                     \
+        handle()->member = detail::copyArray(member.data(), member.size(), type);                  \
         handle()->memberSize = member.size();                                                      \
         return *this;                                                                              \
     }

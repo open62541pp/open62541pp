@@ -2,7 +2,7 @@
 
 #include <algorithm>  // for_each_n, transform
 #include <cassert>
-#include <cstring>  // memcpy, memset
+#include <cstring>  // memcpy
 #include <memory>
 #include <new>  // bad_alloc
 #include <type_traits>
@@ -120,6 +120,11 @@ template <typename T>
 inline constexpr uintptr_t emptyArraySentinel = 0x01;
 
 template <typename T>
+[[nodiscard]] T* makeEmptyArraySentinel() noexcept {
+    return reinterpret_cast<T*>(emptyArraySentinel);  // NOLINT
+}
+
+template <typename T>
 [[nodiscard]] T* stripEmptyArraySentinel(T* array) noexcept {
     // NOLINTNEXTLINE
     return reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(array) & ~emptyArraySentinel);
@@ -143,7 +148,7 @@ template <typename T>
         throw std::bad_alloc{};
     }
     if (size == 0) {
-        return reinterpret_cast<T*>(emptyArraySentinel);  // NOLINT
+        return makeEmptyArraySentinel<T>();
     }
     auto* ptr = static_cast<T*>(UA_calloc(size, sizeof(T)));  // NOLINT
     if (ptr == nullptr) {
@@ -155,11 +160,66 @@ template <typename T>
 template <typename T>
 [[nodiscard]] auto makeUniqueArray(size_t size, const UA_DataType& type) {
     auto deleter = [&type, size](T* native) { deallocateArray(native, size, type); };
-    return std::unique_ptr<T, decltype(deleter)>(allocateArray<T>(size), deleter);
+    return std::unique_ptr<T[], decltype(deleter)>(allocateArray<T>(size), deleter);
+}
+
+template <typename InputIt>
+[[nodiscard]] std::pair<IterValueT<InputIt>*, size_t> copyArray(
+    InputIt first, InputIt last, const UA_DataType& type, std::forward_iterator_tag /* unused */
+) {
+    using ValueType = IterValueT<InputIt>;
+    const size_t size = std::distance(first, last);
+    auto dst = makeUniqueArray<ValueType>(size, type);
+    std::transform(first, last, dst.get(), [&](const ValueType& item) { return copy(item, type); });
+    return {dst.release(), size};
+}
+
+template <typename InputIt>
+[[nodiscard]] std::pair<IterValueT<InputIt>*, size_t> copyArray(
+    InputIt first, InputIt last, const UA_DataType& type, std::input_iterator_tag /* unused */
+) {
+    using ValueType = IterValueT<InputIt>;
+    if (first == last) {
+        return {makeEmptyArraySentinel<ValueType>(), 0};
+    }
+
+    size_t index = 0;
+    size_t capacity = 16;  // initial capacity to avoid frequency reallocations
+    auto dst = makeUniqueArray<ValueType>(capacity, type);
+
+    const auto reallocate = [&](size_t newSize) {
+        // resize without clearing members; newSize must be greater than number of members
+        auto* ptr = static_cast<ValueType*>(UA_realloc(dst.get(), newSize * sizeof(ValueType)));
+        if (ptr == nullptr) {
+            throw std::bad_alloc{};
+        }
+        dst.release();  // realloc frees old memory on success; safe to release before reset
+        dst.reset(ptr);
+    };
+
+    for (auto it = first; it != last; ++it, ++index) {
+        if (index >= capacity) {
+            capacity *= 2;
+            reallocate(capacity);
+        }
+        dst[index] = copy(*it, type);
+    }
+    reallocate(index);
+    return {dst.release(), index};
+}
+
+template <typename InputIt>
+[[nodiscard]] std::pair<IterValueT<InputIt>*, size_t> copyArray(
+    InputIt first, InputIt last, const UA_DataType& type
+) {
+    return copyArray(first, last, type, IterCategoryT<InputIt>{});
 }
 
 template <typename T>
 [[nodiscard]] T* copyArray(const T* src, size_t size) {
+    if (stripEmptyArraySentinel(src) == nullptr || size == 0) {
+        return makeEmptyArraySentinel<T>();
+    }
     T* dst = allocateArray<T>(size);
     std::memcpy(dst, src, size * sizeof(T));
     return dst;
@@ -167,14 +227,9 @@ template <typename T>
 
 template <typename T>
 [[nodiscard]] T* copyArray(const T* src, size_t size, const UA_DataType& type) {
-    auto dst = makeUniqueArray<T>(size, type);
-    if constexpr (!IsPointerFree<T>::value) {
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
-        std::transform(src, src + size, dst.get(), [&](const T& item) { return copy(item, type); });
-    } else {
-        std::memcpy(dst.get(), src, size * sizeof(T));
-    }
-    return dst.release();
+    return IsPointerFree<T>::value
+        ? copyArray(src, size)
+        : copyArray(src, src + size, type).first;  // NOLINT
 }
 
 }  // namespace opcua::detail
