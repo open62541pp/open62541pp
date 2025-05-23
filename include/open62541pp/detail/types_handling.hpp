@@ -3,13 +3,14 @@
 #include <algorithm>  // for_each_n, transform
 #include <cassert>
 #include <cstring>  // memcpy
+#include <iterator>
 #include <memory>
 #include <new>  // bad_alloc
 #include <type_traits>
 #include <utility>  // forward
 
 #include "open62541pp/detail/open62541/common.h"
-#include "open62541pp/detail/traits.hpp"  // IsOneOf
+#include "open62541pp/detail/traits.hpp"  // IterValueT
 #include "open62541pp/exception.hpp"
 
 namespace opcua::detail {
@@ -17,23 +18,11 @@ namespace opcua::detail {
 /* ------------------------------------ Generic type handling ----------------------------------- */
 
 template <typename T>
-struct IsPointerFree
-    : IsOneOf<
-          T,
-          UA_Boolean,
-          UA_SByte,
-          UA_Byte,
-          UA_Int16,
-          UA_UInt16,
-          UA_Int32,
-          UA_UInt32,
-          UA_Int64,
-          UA_UInt64,
-          UA_Float,
-          UA_Double,
-          UA_DateTime,
-          UA_Guid,
-          UA_StatusCode> {};
+using IsPointerFree = std::disjunction<
+    std::is_integral<T>,
+    std::is_floating_point<T>,
+    std::is_enum<T>,
+    std::is_same<T, UA_Guid>>;
 
 template <typename T>
 constexpr bool isValidTypeCombination(const UA_DataType& type) {
@@ -137,6 +126,23 @@ template <typename T>
 }
 
 template <typename T>
+bool isEmptyArray(T* array, size_t size) noexcept {
+    return stripEmptyArraySentinel(array) == nullptr || size == 0;
+}
+
+template <typename T>
+void clearArray(T* array, size_t size, const UA_DataType& type) noexcept {
+    if (isEmptyArray(array, size)) {
+        return;
+    }
+    if constexpr (IsPointerFree<T>::value) {
+        std::memset(array, 0, size * sizeof(T));
+    } else {
+        std::for_each_n(array, size, [&](auto& item) { clear(item, type); });
+    }
+}
+
+template <typename T>
 void deallocateArray(T* array) noexcept {
     UA_free(stripEmptyArraySentinel(array));  // NOLINT
 }
@@ -144,7 +150,7 @@ void deallocateArray(T* array) noexcept {
 template <typename T>
 void deallocateArray(T* array, size_t size, const UA_DataType& type) noexcept {
     assert(isValidTypeCombination<T>(type));
-    std::for_each_n(array, size, [&](auto& item) { clear(item, type); });
+    clearArray(array, size, type);
     deallocateArray(array);
 }
 
@@ -165,6 +171,7 @@ template <typename T>
 
 template <typename T, typename Deleter>
 [[nodiscard]] auto makeUniqueArray(size_t size, Deleter&& deleter) {
+    // NOLINTNEXTLINE(*c-arrays)
     return std::unique_ptr<T[], std::remove_cv_t<std::remove_reference_t<Deleter>>>{
         allocateArray<T>(size), std::forward<Deleter>(deleter)
     };
@@ -235,7 +242,7 @@ template <typename InputIt>
 
 template <typename T>
 [[nodiscard]] T* copyArray(const T* src, size_t size) {
-    if (stripEmptyArraySentinel(src) == nullptr || size == 0) {
+    if (isEmptyArray(src, size)) {
         return makeEmptyArraySentinel<T>();
     }
     T* dst = allocateArray<T>(size);
