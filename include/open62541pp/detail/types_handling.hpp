@@ -77,10 +77,16 @@ template <typename T>
     return ptr;
 }
 
+template <typename T, typename Deleter>
+[[nodiscard]] auto makeUnique(Deleter&& deleter) {
+    return std::unique_ptr<T, std::remove_cv_t<std::remove_reference_t<Deleter>>>{
+        allocate<T>(), std::forward<Deleter>(deleter)
+    };
+}
+
 template <typename T>
 [[nodiscard]] auto makeUnique(const UA_DataType& type) {
-    auto deleter = [&type](T* ptr) { deallocate(ptr, type); };
-    return std::unique_ptr<T, decltype(deleter)>(allocate<T>(), deleter);
+    return makeUnique<T>([&type](T* native) { deallocate(native, type); });
 }
 
 template <typename T>
@@ -138,7 +144,7 @@ void deallocateArray(T* array) noexcept {
 template <typename T>
 void deallocateArray(T* array, size_t size, const UA_DataType& type) noexcept {
     assert(isValidTypeCombination<T>(type));
-    std::for_each_n(array, size, [&](T& item) { clear(item, type); });
+    std::for_each_n(array, size, [&](auto& item) { clear(item, type); });
     deallocateArray(array);
 }
 
@@ -157,20 +163,29 @@ template <typename T>
     return ptr;
 }
 
+template <typename T, typename Deleter>
+[[nodiscard]] auto makeUniqueArray(size_t size, Deleter&& deleter) {
+    return std::unique_ptr<T[], std::remove_cv_t<std::remove_reference_t<Deleter>>>{
+        allocateArray<T>(size), std::forward<Deleter>(deleter)
+    };
+}
+
+template <typename T>
+[[nodiscard]] auto makeUniqueArray(size_t size, const UA_DataType& type) {
+    return makeUniqueArray<T>(size, [&type, size](T* native) {
+        deallocateArray(native, size, type);
+    });
+}
+
 template <typename InputIt>
 [[nodiscard]] std::pair<IterValueT<InputIt>*, size_t> copyArray(
     InputIt first, InputIt last, const UA_DataType& type, std::forward_iterator_tag /* unused */
 ) {
     using ValueType = IterValueT<InputIt>;
     const size_t size = std::distance(first, last);
-    auto* dst = allocateArray<ValueType>(size);
-    try {
-        std::transform(first, last, dst, [&](const ValueType& item) { return copy(item, type); });
-    } catch (...) {
-        deallocateArray(dst, size, type);
-        throw;
-    }
-    return {dst, size};
+    auto dst = makeUniqueArray<ValueType>(size, type);
+    std::transform(first, last, dst.get(), [&](const ValueType& item) { return copy(item, type); });
+    return {dst.release(), size};
 }
 
 template <typename InputIt>
@@ -184,31 +199,29 @@ template <typename InputIt>
 
     size_t index = 0;
     size_t capacity = 16;  // initial capacity to avoid frequency reallocations
-    auto dst = allocateArray<ValueType>(capacity);
+    auto dst = makeUniqueArray<ValueType>(capacity, [&](ValueType* ptr) {
+        deallocateArray(ptr, index, type);
+    });
 
     const auto reallocate = [&](size_t newSize) {
         // resize without clearing members; newSize must be greater than number of members
-        auto* ptr = static_cast<ValueType*>(UA_realloc(dst, newSize * sizeof(ValueType)));
+        auto* ptr = static_cast<ValueType*>(UA_realloc(dst.get(), newSize * sizeof(ValueType)));
         if (ptr == nullptr) {
             throw std::bad_alloc{};
         }
-        dst = ptr;
+        dst.release();  // realloc frees old memory on success; safe to release before reset
+        dst.reset(ptr);
     };
 
-    try {
-        for (auto it = first; it != last; ++it, ++index) {
-            if (index >= capacity) {
-                capacity *= 2;
-                reallocate(capacity);
-            }
-            dst[index] = copy(*it, type);
+    for (auto it = first; it != last; ++it, ++index) {
+        if (index >= capacity) {
+            capacity *= 2;
+            reallocate(capacity);
         }
-        reallocate(index);
-    } catch (...) {
-        deallocateArray(dst, index, type);
-        throw;
+        dst[index] = copy(*it, type);
     }
-    return {dst, index};
+    reallocate(index);
+    return {dst.release(), index};
 }
 
 template <typename InputIt>
