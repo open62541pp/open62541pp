@@ -178,11 +178,17 @@ TEST_CASE("Server with Winsock (Windows only)") {
 TEST_CASE("Server methods") {
     Server server;
 
-    SECTION("getNamespaceArray") {
+    SECTION("namespaceArray") {
         const auto namespaces = server.namespaceArray();
         CHECK(namespaces.size() == 2);
         CHECK(namespaces.at(0) == "http://opcfoundation.org/UA/");
         CHECK(namespaces.at(1) == "urn:open62541.server.application");
+    }
+
+    SECTION("namespaceIndex") {
+        CHECK(server.namespaceIndex("http://opcfoundation.org/UA/") == 0);
+        CHECK(server.namespaceIndex("urn:open62541.server.application") == 1);
+        CHECK(server.namespaceIndex("nonexistent") == std::nullopt);
     }
 
     SECTION("registerNamespace") {

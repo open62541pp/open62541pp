@@ -1,6 +1,5 @@
 #pragma once
 
-#include <algorithm>  // copy
 #include <array>
 #include <cassert>
 #include <chrono>

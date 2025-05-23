@@ -292,6 +292,14 @@ std::vector<String> Server::namespaceArray() {
         .to<std::vector<String>>();
 }
 
+std::optional<NamespaceIndex> Server::namespaceIndex(std::string_view uri) noexcept {
+    size_t ns = 0;
+    const auto status = UA_Server_getNamespaceByName(handle(), detail::toNativeString(uri), &ns);
+    return status == UA_STATUSCODE_GOOD
+        ? std::make_optional(static_cast<NamespaceIndex>(ns))
+        : std::nullopt;
+}
+
 NamespaceIndex Server::registerNamespace(std::string_view uri) {
     return UA_Server_addNamespace(handle(), std::string{uri}.c_str());
 }
