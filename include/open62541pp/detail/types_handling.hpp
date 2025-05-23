@@ -66,11 +66,12 @@ template <typename T>
     return ptr;
 }
 
-template <typename T, typename Deleter>
+template <
+    typename T,
+    typename Deleter,
+    typename = std::enable_if_t<std::is_invocable_v<Deleter, T*>>>
 [[nodiscard]] auto makeUnique(Deleter&& deleter) {
-    return std::unique_ptr<T, std::remove_cv_t<std::remove_reference_t<Deleter>>>{
-        allocate<T>(), std::forward<Deleter>(deleter)
-    };
+    return std::unique_ptr<T, std::decay_t<Deleter>>{allocate<T>(), std::forward<Deleter>(deleter)};
 }
 
 template <typename T>
@@ -169,10 +170,13 @@ template <typename T>
     return ptr;
 }
 
-template <typename T, typename Deleter>
+template <
+    typename T,
+    typename Deleter,
+    typename = std::enable_if_t<std::is_invocable_v<Deleter, T*>>>
 [[nodiscard]] auto makeUniqueArray(size_t size, Deleter&& deleter) {
     // NOLINTNEXTLINE(*c-arrays)
-    return std::unique_ptr<T[], std::remove_cv_t<std::remove_reference_t<Deleter>>>{
+    return std::unique_ptr<T[], std::decay_t<Deleter>>{
         allocateArray<T>(size), std::forward<Deleter>(deleter)
     };
 }
