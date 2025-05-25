@@ -65,7 +65,7 @@ public:
     }
 
 private:
-    std::unique_ptr<T> uniquePtr_{nullptr};
+    std::unique_ptr<T> uniquePtr_;
     T* rawPtr_{nullptr};
 };
 
