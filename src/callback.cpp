@@ -57,7 +57,7 @@ static void repeatedCallback(T* connection, void* data) {
     return invokeCallback(connection, data, false);
 }
 
-static UA_DateTime toMonotonic(DateTime date) noexcept {
+static UA_DateTime toMonotonic(UA_DateTime date) noexcept {
     const auto now = UA_DateTime_now();
     const auto nowMonotonic = UA_DateTime_nowMonotonic();
     const auto dateMonotonic = date - now + nowMonotonic;

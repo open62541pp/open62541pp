@@ -10,6 +10,15 @@
 
 using namespace opcua;
 
+TEST_CASE("Empty callback") {
+    Server server;
+
+    const auto id = addTimedCallback(server, nullptr, DateTime::now());
+    CAPTURE(id);
+    server.runIterate();
+    CHECK_NOTHROW(removeCallback(server, id));
+}
+
 TEST_CASE("Timed callback") {
     Server server;
 
@@ -28,7 +37,6 @@ TEST_CASE("Repeated callback") {
     size_t counter = 0;
     const auto id = addRepeatedCallback(server, [&] { ++counter; }, 10);
     CAPTURE(id);
-
     server.runIterate();
     CHECK(counter == 0);
 
