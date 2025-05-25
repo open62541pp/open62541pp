@@ -2,7 +2,6 @@
 
 #include <memory>
 #include <utility>
-#include <variant>
 
 #include "open62541pp/detail/traits.hpp"
 
@@ -14,18 +13,22 @@ public:
     constexpr UniqueOrRawPtr() = default;
 
     explicit constexpr UniqueOrRawPtr(std::unique_ptr<T>&& ptr) noexcept
-        : ptr_{std::move(ptr)} {}
+        : uniquePtr_{std::move(ptr)},
+          rawPtr_{uniquePtr_.get()} {}
 
     explicit constexpr UniqueOrRawPtr(T* ptr) noexcept
-        : ptr_{ptr} {}
+        : uniquePtr_{nullptr},
+          rawPtr_{ptr} {}
 
     constexpr UniqueOrRawPtr& operator=(std::unique_ptr<T>&& ptr) noexcept {
-        ptr_ = std::move(ptr);
+        uniquePtr_ = std::move(ptr);
+        rawPtr_ = uniquePtr_.get();
         return *this;
     }
 
     constexpr UniqueOrRawPtr& operator=(T* ptr) noexcept {
-        ptr_ = ptr;
+        uniquePtr_ = nullptr;
+        rawPtr_ = ptr;
         return *this;
     }
 
@@ -46,17 +49,11 @@ public:
     }
 
     constexpr T* get() noexcept {  // NOLINT(*exception-escape)
-        return std::visit(
-            Overload{
-                [](T* ptr) { return ptr; },
-                [](std::unique_ptr<T>& ptr) { return ptr.get(); },
-            },
-            ptr_
-        );
+        return rawPtr_;
     }
 
     constexpr const T* get() const noexcept {
-        return (const_cast<UniqueOrRawPtr*>(this)->get());  // NOLINT(*const-cast)
+        return rawPtr_;
     }
 
     constexpr bool operator==(T* ptr) const noexcept {
@@ -68,7 +65,8 @@ public:
     }
 
 private:
-    std::variant<T*, std::unique_ptr<T>> ptr_{nullptr};
+    std::unique_ptr<T> uniquePtr_{nullptr};
+    T* rawPtr_{nullptr};
 };
 
 }  // namespace opcua::detail
