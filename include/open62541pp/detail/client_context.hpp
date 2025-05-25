@@ -39,6 +39,7 @@ struct ClientContext {
 #endif
     std::array<std::function<void()>, clientStateCount> stateCallbacks;
     std::function<void()> inactivityCallback;
+    ContextMap<uint64_t, Staleable<std::function<void()>>> callbacks;
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
     using SubId = IntegerId;

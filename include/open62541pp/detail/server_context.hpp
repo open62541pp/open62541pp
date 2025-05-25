@@ -60,14 +60,15 @@ struct ServerContext {
     std::atomic<bool> running{false};
     std::mutex mutexRun;
 
+    ContextMap<uint64_t, Staleable<std::function<void()>>> callbacks;
+    ContextMap<NodeId, NodeContext> nodeContexts;
+
 #ifdef UA_ENABLE_SUBSCRIPTIONS
     using SubId = IntegerId;  // always 0
     using MonId = IntegerId;
     using SubMonId = std::pair<SubId, MonId>;
     ContextMap<SubMonId, services::detail::MonitoredItemContext> monitoredItems;
 #endif
-
-    ContextMap<NodeId, NodeContext> nodeContexts;
 };
 
 }  // namespace opcua::detail

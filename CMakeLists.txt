@@ -149,6 +149,7 @@ deprecated_header(typewrapper.hpp wrapper.hpp)
 
 add_library(
     open62541pp
+    src/callback.cpp
     src/client.cpp
     src/datatype.cpp
     src/event.cpp

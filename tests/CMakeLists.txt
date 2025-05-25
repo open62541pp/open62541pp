@@ -18,6 +18,7 @@ add_executable(
     open62541pp_tests
     async.cpp
     bitmask.cpp
+    callback.cpp
     client_server_common.cpp
     client_service.cpp
     client.cpp
