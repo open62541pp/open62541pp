@@ -39,7 +39,7 @@ int main() {
         .writeValue(opcua::Variant{opcua::DateTime::now()});
 
     CurrentTimeCallback currentTimeCallback;
-    server.setVariableNodeValueCallback(currentTimeId, currentTimeCallback);
+    opcua::setVariableNodeValueCallback(server, currentTimeId, currentTimeCallback);
 
     server.run();
 }

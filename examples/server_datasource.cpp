@@ -54,7 +54,7 @@ int main() {
 
     // Define data source
     DataSource<int> dataSource;
-    server.setVariableNodeDataSource(id, dataSource);
+    opcua::setVariableNodeValueBackend(server, id, dataSource);
 
     server.run();
 }

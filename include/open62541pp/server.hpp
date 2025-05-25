@@ -175,15 +175,15 @@ public:
     /// Register namespace. The new namespace index will be returned.
     [[nodiscard]] NamespaceIndex registerNamespace(std::string_view uri);
 
-    /// Set value callback for variable node.
+    [[deprecated("use free function setVariableNodeValueCallback instead")]]
     void setVariableNodeValueCallback(const NodeId& id, ValueCallbackBase& callback);
-    /// Set value callback for variable node (move ownership to server).
+    [[deprecated("use free function setVariableNodeValueCallback instead")]]
     void setVariableNodeValueCallback(
         const NodeId& id, std::unique_ptr<ValueCallbackBase>&& callback
     );
-    /// Set data source for variable node.
+    [[deprecated("use free function setVariableNodeValueBackend instead")]]
     void setVariableNodeDataSource(const NodeId& id, DataSourceBase& source);
-    /// Set data source for variable node (move ownership to server).
+    [[deprecated("use free function setVariableNodeValueBackend instead")]]
     void setVariableNodeDataSource(const NodeId& id, std::unique_ptr<DataSourceBase>&& source);
 
     /// Run a single iteration of the server's main loop.
@@ -227,6 +227,22 @@ inline bool operator==(const Server& lhs, const Server& rhs) noexcept {
 inline bool operator!=(const Server& lhs, const Server& rhs) noexcept {
     return !(lhs == rhs);
 }
+
+/* ---------------------------- Variable node value backend/callback ---------------------------- */
+
+/// Set value callback for variable node.
+void setVariableNodeValueCallback(Server& server, const NodeId& id, ValueCallbackBase& callback);
+/// Set value callback for variable node (move ownership to server).
+void setVariableNodeValueCallback(
+    Server& server, const NodeId& id, std::unique_ptr<ValueCallbackBase>&& callback
+);
+
+/// Set data source value backend for variable node.
+void setVariableNodeValueBackend(Server& server, const NodeId& id, DataSourceBase& source);
+/// Set data source value backend for variable node (move ownership to server).
+void setVariableNodeValueBackend(
+    Server& server, const NodeId& id, std::unique_ptr<DataSourceBase>&& source
+);
 
 /* -------------------------------------- Async operations -------------------------------------- */
 
