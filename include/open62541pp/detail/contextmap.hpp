@@ -5,6 +5,7 @@
 #include <memory>
 #include <mutex>
 #include <type_traits>
+#include <utility>
 
 namespace opcua::detail {
 
@@ -24,6 +25,12 @@ struct IsStaleable : std::false_type {};
 template <typename T>
 struct IsStaleable<T, std::void_t<decltype(std::declval<T>().stale)>>
     : std::is_same<decltype(std::declval<T>().stale), bool> {};
+
+template <typename T>
+struct Staleable {
+    bool stale;
+    T item;
+};
 
 /**
  * Thread-safe map for context objects.

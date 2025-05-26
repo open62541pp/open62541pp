@@ -60,6 +60,7 @@ add_example(client_minimal.cpp)
 
 add_example(server.cpp)
 add_example(server_accesscontrol.cpp)
+add_example(server_callback.cpp)
 add_example(server_datasource.cpp)
 add_example(server_instantiation.cpp)
 add_example(server_logger.cpp)
