@@ -244,7 +244,7 @@ private:
     friend detail::ClientContext& detail::getContext(Client& client) noexcept;
 
     struct Deleter {
-        void operator()(UA_Client* client) noexcept;
+        void operator()(UA_Client* client) const noexcept;
     };
 
     std::unique_ptr<detail::ClientContext> context_;
