@@ -304,44 +304,22 @@ NamespaceIndex Server::registerNamespace(std::string_view uri) {
     return UA_Server_addNamespace(handle(), std::string{uri}.c_str());
 }
 
-static void setVariableNodeValueCallbackImpl(
-    Server& server, const NodeId& id, detail::UniqueOrRawPtr<ValueCallbackBase>&& callback
-) {
-    auto* nodeContext = detail::getContext(server).nodeContexts[id];
-    nodeContext->valueCallback = std::move(callback);
-    throwIfBad(UA_Server_setNodeContext(server.handle(), id, nodeContext));
-    throwIfBad(UA_Server_setVariableNode_valueCallback(
-        server.handle(), id, nodeContext->valueCallback->create(false)
-    ));
-}
-
 void Server::setVariableNodeValueCallback(const NodeId& id, ValueCallbackBase& callback) {
-    setVariableNodeValueCallbackImpl(*this, id, detail::UniqueOrRawPtr{&callback});
+    opcua::setVariableNodeValueCallback(*this, id, callback);
 }
 
 void Server::setVariableNodeValueCallback(
     const NodeId& id, std::unique_ptr<ValueCallbackBase>&& callback
 ) {
-    setVariableNodeValueCallbackImpl(*this, id, detail::UniqueOrRawPtr{std::move(callback)});
-}
-
-static void setVariableNodeDataSourceImpl(
-    Server& server, const NodeId& id, detail::UniqueOrRawPtr<DataSourceBase>&& source
-) {
-    auto* nodeContext = detail::getContext(server).nodeContexts[id];
-    nodeContext->dataSource = std::move(source);
-    throwIfBad(UA_Server_setNodeContext(server.handle(), id, nodeContext));
-    throwIfBad(UA_Server_setVariableNode_dataSource(
-        server.handle(), id, nodeContext->dataSource->create(false)
-    ));
+    opcua::setVariableNodeValueCallback(*this, id, std::move(callback));
 }
 
 void Server::setVariableNodeDataSource(const NodeId& id, DataSourceBase& source) {
-    setVariableNodeDataSourceImpl(*this, id, detail::UniqueOrRawPtr{&source});
+    opcua::setVariableNodeValueBackend(*this, id, source);
 }
 
 void Server::setVariableNodeDataSource(const NodeId& id, std::unique_ptr<DataSourceBase>&& source) {
-    setVariableNodeDataSourceImpl(*this, id, detail::UniqueOrRawPtr{std::move(source)});
+    opcua::setVariableNodeValueBackend(*this, id, std::move(source));
 }
 
 static void runStartup(Server& server, detail::ServerContext& context) {
@@ -479,6 +457,50 @@ UA_Server* getHandle(Server& server) noexcept {
 }
 
 }  // namespace detail
+
+/* ---------------------------- Variable node value backend/callback ---------------------------- */
+
+static void setVariableNodeValueCallbackImpl(
+    Server& server, const NodeId& id, detail::UniqueOrRawPtr<ValueCallbackBase>&& callback
+) {
+    auto* nodeContext = detail::getContext(server).nodeContexts[id];
+    nodeContext->valueCallback = std::move(callback);
+    throwIfBad(UA_Server_setNodeContext(server.handle(), id, nodeContext));
+    throwIfBad(UA_Server_setVariableNode_valueCallback(
+        server.handle(), id, nodeContext->valueCallback->create(false)
+    ));
+}
+
+void setVariableNodeValueCallback(Server& server, const NodeId& id, ValueCallbackBase& callback) {
+    setVariableNodeValueCallbackImpl(server, id, detail::UniqueOrRawPtr{&callback});
+}
+
+void setVariableNodeValueCallback(
+    Server& server, const NodeId& id, std::unique_ptr<ValueCallbackBase>&& callback
+) {
+    setVariableNodeValueCallbackImpl(server, id, detail::UniqueOrRawPtr{std::move(callback)});
+}
+
+static void setVariableNodeValueBackend(
+    Server& server, const NodeId& id, detail::UniqueOrRawPtr<DataSourceBase>&& source
+) {
+    auto* nodeContext = detail::getContext(server).nodeContexts[id];
+    nodeContext->dataSource = std::move(source);
+    throwIfBad(UA_Server_setNodeContext(server.handle(), id, nodeContext));
+    throwIfBad(UA_Server_setVariableNode_dataSource(
+        server.handle(), id, nodeContext->dataSource->create(false)
+    ));
+}
+
+void setVariableNodeValueBackend(Server& server, const NodeId& id, DataSourceBase& source) {
+    setVariableNodeValueBackend(server, id, detail::UniqueOrRawPtr{&source});
+}
+
+void setVariableNodeValueBackend(
+    Server& server, const NodeId& id, std::unique_ptr<DataSourceBase>&& source
+) {
+    setVariableNodeValueBackend(server, id, detail::UniqueOrRawPtr{std::move(source)});
+}
 
 /* -------------------------------------- Async operations -------------------------------------- */
 

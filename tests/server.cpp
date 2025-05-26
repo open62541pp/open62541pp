@@ -237,10 +237,10 @@ TEST_CASE("ValueCallback") {
 
     auto callbackPtr = std::make_unique<ValueCallbackTest>();
     auto& callback = *callbackPtr;
-    server.setVariableNodeValueCallback(id, callback);
-
+    setVariableNodeValueCallback(server, id, callback);
+    
     SECTION("move ownership") {
-        server.setVariableNodeValueCallback(id, std::move(callbackPtr));
+        setVariableNodeValueCallback(server, id, std::move(callbackPtr));
     }
 
     SECTION("trigger onRead callback with read operation") {
@@ -302,9 +302,9 @@ TEST_CASE("DataSource") {
 
     auto sourcePtr = std::make_unique<DataSourceTest>();
     auto& source = *sourcePtr;
-    server.setVariableNodeDataSource(id, source);
+    setVariableNodeValueBackend(server, id, source);
     SECTION("move ownership") {
-        server.setVariableNodeDataSource(id, std::move(sourcePtr));
+        setVariableNodeValueBackend(server, id, std::move(sourcePtr));
     }
 
     SECTION("read") {
