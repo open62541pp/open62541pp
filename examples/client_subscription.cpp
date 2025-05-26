@@ -1,9 +1,19 @@
+#include <atomic>
 #include <chrono>
+#include <csignal>
 #include <iostream>
 #include <thread>
 
 #include <open62541pp/client.hpp>
 #include <open62541pp/subscription.hpp>
+
+static inline std::atomic<bool> isRunning = true;
+
+void signal_handler(int sig) {
+    if (sig == SIGINT || sig == SIGTERM) {
+        isRunning = false;
+    }
+}
 
 int main() {
     opcua::Client client;
@@ -46,13 +56,16 @@ int main() {
         // mon.deleteMonitoredItem();
     });
 
+    std::signal(SIGINT, signal_handler);
+
     // Endless loop to automatically (try to) reconnect to server.
-    while (true) {
+    while (isRunning) {
         try {
             client.connect("opc.tcp://localhost:4840");
             // Run the client's main loop to process callbacks and events.
-            // This will block until client.stop() is called or an exception is thrown.
-            client.run();
+            while (isRunning) {
+                client.runIterate(100);
+            }
         } catch (const opcua::BadStatus& e) {
             // Workaround to enforce a new session
             // https://github.com/open62541pp/open62541pp/issues/51
