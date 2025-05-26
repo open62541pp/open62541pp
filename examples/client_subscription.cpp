@@ -7,9 +7,9 @@
 #include <open62541pp/client.hpp>
 #include <open62541pp/subscription.hpp>
 
-static inline std::atomic<bool> isRunning = true;
+inline static std::atomic<bool> isRunning = true;  // NOLINT(*global-variables)
 
-void signal_handler(int sig) {
+static void signalHandler(int sig) noexcept {
     if (sig == SIGINT || sig == SIGTERM) {
         isRunning = false;
     }
@@ -56,7 +56,7 @@ int main() {
         // mon.deleteMonitoredItem();
     });
 
-    std::signal(SIGINT, signal_handler);
+    std::signal(SIGINT, signalHandler);  // NOLINT
 
     // Endless loop to automatically (try to) reconnect to server.
     while (isRunning) {

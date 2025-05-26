@@ -206,7 +206,7 @@ private:
     friend detail::ServerContext& detail::getContext(Server& server) noexcept;
 
     struct Deleter {
-        void operator()(UA_Server* server) noexcept;
+        void operator()(UA_Server* server) const noexcept;
     };
 
     std::unique_ptr<detail::ServerContext> context_;
