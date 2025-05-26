@@ -358,13 +358,13 @@ UAPP_TYPEREGISTRY_NATIVE(String, UA_TYPES_STRING)
  */
 class DateTime : public Wrapper<UA_DateTime> {
 public:
-    using DefaultClock = std::chrono::system_clock;
-    using UaDuration = std::chrono::duration<int64_t, std::ratio<1, 10'000'000>>;
+    using Clock = std::chrono::system_clock;
+    using Duration = std::chrono::duration<int64_t, std::ratio<1, 10'000'000>>;
 
     using Wrapper::Wrapper;
 
-    template <typename Clock, typename Duration>
-    DateTime(std::chrono::time_point<Clock, Duration> timePoint)  // NOLINT(*-explicit-conversions)
+    template <typename D>
+    DateTime(std::chrono::time_point<Clock, D> timePoint)  // NOLINT(*-explicit-conversions)
         : DateTime{fromTimePoint(timePoint)} {}
 
     /// Get current DateTime.
@@ -373,11 +373,11 @@ public:
     }
 
     /// Get DateTime from std::chrono::time_point.
-    template <typename Clock, typename Duration>
-    static DateTime fromTimePoint(std::chrono::time_point<Clock, Duration> timePoint) {
+    template <typename D>
+    static DateTime fromTimePoint(std::chrono::time_point<Clock, D> timePoint) {
         return DateTime{
             int64_t{UA_DATETIME_UNIX_EPOCH} +
-            std::chrono::duration_cast<UaDuration>(timePoint.time_since_epoch()).count()
+            std::chrono::duration_cast<Duration>(timePoint.time_since_epoch()).count()
         };
     }
 
@@ -392,14 +392,14 @@ public:
     }
 
     /// Convert to std::chrono::time_point.
-    template <typename Clock = DefaultClock, typename Duration = UaDuration>
-    std::chrono::time_point<Clock, Duration> toTimePoint() const {
-        const std::chrono::time_point<Clock, Duration> unixEpoch{};
+    template <typename D = Duration>
+    std::chrono::time_point<Clock, D> toTimePoint() const {
+        const std::chrono::time_point<Clock, D> unixEpoch{};
         if (get() < UA_DATETIME_UNIX_EPOCH) {
             return unixEpoch;
         }
-        const auto sinceEpoch = UaDuration(get() - UA_DATETIME_UNIX_EPOCH);
-        return unixEpoch + std::chrono::duration_cast<Duration>(sinceEpoch);
+        const auto sinceEpoch = Duration{get() - UA_DATETIME_UNIX_EPOCH};
+        return unixEpoch + std::chrono::duration_cast<D>(sinceEpoch);
     }
 
     /// Convert to Unix time (number of seconds since January 1, 1970 UTC).
@@ -425,13 +425,13 @@ public:
     String format(std::string_view format, bool localtime = false) const;
 };
 
-template <typename Clock, typename Duration>
-struct TypeConverter<std::chrono::time_point<Clock, Duration>> {
-    using TimePoint = std::chrono::time_point<Clock, Duration>;
+template <typename Duration>
+struct TypeConverter<std::chrono::time_point<std::chrono::system_clock, Duration>> {
+    using TimePoint = std::chrono::time_point<std::chrono::system_clock, Duration>;
     using NativeType = DateTime;
 
     [[nodiscard]] static TimePoint fromNative(const DateTime& src) {
-        return src.toTimePoint<Clock, Duration>();
+        return src.toTimePoint<Duration>();
     }
 
     [[nodiscard]] static DateTime toNative(const TimePoint& src) {
