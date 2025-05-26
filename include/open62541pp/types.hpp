@@ -394,19 +394,11 @@ public:
     /// Convert to std::chrono::time_point.
     template <typename D = Duration>
     std::chrono::time_point<Clock, D> toTimePoint() const {
-        const std::chrono::time_point<Clock, D> unixEpoch{};
-        if (get() < UA_DATETIME_UNIX_EPOCH) {
-            return unixEpoch;
-        }
-        const auto sinceEpoch = Duration{get() - UA_DATETIME_UNIX_EPOCH};
-        return unixEpoch + std::chrono::duration_cast<D>(sinceEpoch);
+        return std::chrono::time_point<Clock, D>{Duration{get() - UA_DATETIME_UNIX_EPOCH}};
     }
 
     /// Convert to Unix time (number of seconds since January 1, 1970 UTC).
     int64_t toUnixTime() const noexcept {
-        if (get() < UA_DATETIME_UNIX_EPOCH) {
-            return 0;
-        }
         return UA_DateTime_toUnixTime(get());
     }
 
