@@ -385,7 +385,7 @@ const detail::ServerContext& Server::context() const noexcept {
     return *context_;
 }
 
-void Server::Deleter::operator()(UA_Server* server) noexcept {
+void Server::Deleter::operator()(UA_Server* server) const noexcept {
     if (server == nullptr) {
         return;
     }

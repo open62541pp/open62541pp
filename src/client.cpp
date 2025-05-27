@@ -488,9 +488,8 @@ const detail::ClientContext& Client::context() const noexcept {
     return *context_;
 }
 
-void Client::Deleter::operator()(UA_Client* client) noexcept {
+void Client::Deleter::operator()(UA_Client* client) const noexcept {
     if (client != nullptr) {
-        UA_Client_disconnect(client);
         deleteClient(client);
     }
 }
