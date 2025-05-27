@@ -449,6 +449,7 @@ TEST_CASE("findDataType") {
 
         const auto& dt = UA_TYPES[UA_TYPES_FLOAT];
         CHECK(findDataType(NodeId{dt.typeId}) == &dt);
+        CHECK(findDataType(NodeId{dt.typeId}, nullptr) == &dt);
     }
 
     SECTION("With custom") {
@@ -468,6 +469,7 @@ TEST_CASE("findDataType") {
         const UA_DataTypeArray next{nullptr, 3, types2};
         const UA_DataTypeArray head{&next, 2, types1};
 
+        CHECK(findDataType(NodeId{0, 0}, nullptr) == nullptr);
         CHECK(findDataType(NodeId{0, 0}, &head) == nullptr);
         CHECK(findDataType(NodeId{0, 0}, &next) == nullptr);
         CHECK(findDataType(NodeId{1, 1001}, &head) == &types1[0]);
