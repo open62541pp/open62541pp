@@ -292,9 +292,8 @@ TEST_CASE("DateTime") {
         const DateTime dt;
         CHECK(dt.get() == 0);
         CHECK(*dt.handle() == 0);
-        // UA time starts before Unix time -> 0
-        CHECK(dt.toTimePoint().time_since_epoch().count() == 0);
-        CHECK(dt.toUnixTime() == 0);
+        CHECK(dt.toTimePoint().time_since_epoch().count() == -UA_DATETIME_UNIX_EPOCH);
+        CHECK(dt.toUnixTime() == -UA_DATETIME_UNIX_EPOCH / UA_DATETIME_SEC);
 
         const auto dts = dt.toStruct();
         CHECK(dts.nanoSec == 0);
@@ -325,7 +324,9 @@ TEST_CASE("DateTime") {
     }
 
     SECTION("Format") {
-        CHECK(DateTime{}.format("%Y-%m-%d %H:%M:%S") == "1970-01-01 00:00:00");
+        CHECK(
+            DateTime{UA_DATETIME_UNIX_EPOCH}.format("%Y-%m-%d %H:%M:%S") == "1970-01-01 00:00:00"
+        );
     }
 
     SECTION("Comparison") {
@@ -351,9 +352,9 @@ TEST_CASE("NodeId") {
         NodeId id{2, str};
         CHECK(id.identifierType() == NodeIdType::String);
         CHECK(id.namespaceIndex() == 2);
-        // CHECK(id.identifier<String>() == str);
+        CHECK(id.identifier<String>() == str);
         CHECK(id.identifierIf<String>() != nullptr);
-        // CHECK(*id.identifierIf<String>() == str);
+        CHECK(*id.identifierIf<String>() == str);
     }
 
     SECTION("Guid identifier") {
