@@ -23,7 +23,7 @@ int main() {
             std::cout << "Timed callback: Double interval of repeated callback\n";
             opcua::changeRepeatedCallbackInterval(server, id1, interval * 2);
         },
-        std::chrono::system_clock::now() + std::chrono::seconds(2)
+        opcua::DateTime::now() + std::chrono::seconds(2)
     );
 
     server.run();

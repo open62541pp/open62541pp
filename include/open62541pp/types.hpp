@@ -40,7 +40,7 @@ namespace opcua {
  */
 class StatusCode : public Wrapper<UA_StatusCode> {
 public:
-    /// Create a StatusCode with the default status code `UA_STATUSCODE_GOOD`.
+    /// Create StatusCode with the default code `UA_STATUSCODE_GOOD`.
     constexpr StatusCode() noexcept = default;
 
     constexpr StatusCode(UA_StatusCode code) noexcept  // NOLINT(hicpp-explicit-conversions)
@@ -363,27 +363,28 @@ public:
 
     using Wrapper::Wrapper;
 
+    /// Create DateTime from `std::chrono::time_point`.
     template <typename D>
-    DateTime(std::chrono::time_point<Clock, D> timePoint)  // NOLINT(*-explicit-conversions)
+    constexpr DateTime(std::chrono::time_point<Clock, D> timePoint) noexcept  // NOLINT
         : DateTime{fromTimePoint(timePoint)} {}
 
     /// Get current DateTime.
     static DateTime now() noexcept {
-        return DateTime{UA_DateTime_now()};  // NOLINT
+        return {UA_DateTime_now()};  // NOLINT
     }
 
-    /// Get DateTime from std::chrono::time_point.
+    /// Get DateTime from `std::chrono::time_point`.
     template <typename D>
-    static DateTime fromTimePoint(std::chrono::time_point<Clock, D> timePoint) {
-        return DateTime{
+    static constexpr DateTime fromTimePoint(std::chrono::time_point<Clock, D> timePoint) {
+        return {
             int64_t{UA_DATETIME_UNIX_EPOCH} +
             std::chrono::duration_cast<Duration>(timePoint.time_since_epoch()).count()
         };
     }
 
     /// Get DateTime from Unix time.
-    static DateTime fromUnixTime(int64_t unixTime) noexcept {
-        return DateTime{UA_DateTime_fromUnixTime(unixTime)};  // NOLINT
+    static constexpr DateTime fromUnixTime(int64_t unixTime) noexcept {
+        return {(unixTime * UA_DATETIME_SEC) + UA_DATETIME_UNIX_EPOCH};
     }
 
     /// Offset of local time to UTC.
@@ -391,17 +392,17 @@ public:
         return UA_DateTime_localTimeUtcOffset();
     }
 
-    /// Convert to std::chrono::time_point.
+    /// Convert to `std::chrono::time_point`.
     template <typename D = Duration>
-    std::chrono::time_point<Clock, D> toTimePoint() const {
+    constexpr std::chrono::time_point<Clock, D> toTimePoint() const {
         return std::chrono::time_point<Clock, D>{
             std::chrono::duration_cast<D>(Duration{get() - UA_DATETIME_UNIX_EPOCH})
         };
     }
 
     /// Convert to Unix time (number of seconds since January 1, 1970 UTC).
-    int64_t toUnixTime() const noexcept {
-        return UA_DateTime_toUnixTime(get());
+    constexpr int64_t toUnixTime() const noexcept {
+        return (get() - UA_DATETIME_UNIX_EPOCH) / UA_DATETIME_SEC;
     }
 
     /// Convert to UA_DateTimeStruct.
@@ -409,15 +410,53 @@ public:
         return UA_DateTime_toStruct(get());
     }
 
+    /// Add a duration to the DateTime.
+    template <typename Rep, typename Period>
+    constexpr DateTime& operator+=(std::chrono::duration<Rep, Period> duration) noexcept {
+        native() += std::chrono::duration_cast<Duration>(duration).count();
+        return *this;
+    }
+
+    /// Subtract a duration from the DateTime.
+    template <typename Rep, typename Period>
+    constexpr DateTime& operator-=(std::chrono::duration<Rep, Period> duration) noexcept {
+        native() -= std::chrono::duration_cast<Duration>(duration).count();
+        return *this;
+    }
+
     /// Get DateTime value as 100 nanosecond intervals since January 1, 1601 (UTC).
-    int64_t get() const noexcept {
-        return *handle();
+    constexpr int64_t get() const noexcept {
+        return native();
     }
 
     /// Convert to string with given format (same format codes as strftime).
     /// @see https://en.cppreference.com/w/cpp/chrono/c/strftime
     String format(std::string_view format, bool localtime = false) const;
 };
+
+/// Add a duration to DateTime.
+/// @relates DateTime
+template <typename Rep, typename Period>
+constexpr DateTime operator+(
+    const DateTime& dt, std::chrono::duration<Rep, Period> duration
+) noexcept {
+    return {dt.get() + std::chrono::duration_cast<DateTime::Duration>(duration).count()};
+}
+
+/// Subtract a duration from DateTime.
+/// @relates DateTime
+template <typename Rep, typename Period>
+constexpr DateTime operator-(
+    const DateTime& dt, std::chrono::duration<Rep, Period> duration
+) noexcept {
+    return {dt.get() - std::chrono::duration_cast<DateTime::Duration>(duration).count()};
+}
+
+/// Compute the difference between two DateTimes.
+/// @relates DateTime
+constexpr DateTime::Duration operator-(const DateTime& lhs, const DateTime& rhs) noexcept {
+    return DateTime::Duration{lhs.get() - rhs.get()};
+}
 
 template <typename Duration>
 struct TypeConverter<std::chrono::time_point<std::chrono::system_clock, Duration>> {
