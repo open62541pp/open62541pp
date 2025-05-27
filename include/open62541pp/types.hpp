@@ -365,21 +365,21 @@ public:
 
     /// Create DateTime from `std::chrono::time_point`.
     template <typename D>
-    constexpr DateTime(std::chrono::time_point<Clock, D> timePoint) noexcept  // NOLINT
-        : DateTime{fromTimePoint(timePoint)} {}
+    constexpr explicit DateTime(std::chrono::time_point<Clock, D> timePoint) noexcept
+        : DateTime{
+              std::chrono::duration_cast<Duration>(timePoint.time_since_epoch()).count() +
+              Duration::rep{UA_DATETIME_UNIX_EPOCH}
+          } {}
 
     /// Get current DateTime.
     static DateTime now() noexcept {
-        return {UA_DateTime_now()};  // NOLINT
+        return {UA_DateTime_now()};
     }
 
     /// Get DateTime from `std::chrono::time_point`.
     template <typename D>
-    static constexpr DateTime fromTimePoint(std::chrono::time_point<Clock, D> timePoint) {
-        return {
-            int64_t{UA_DATETIME_UNIX_EPOCH} +
-            std::chrono::duration_cast<Duration>(timePoint.time_since_epoch()).count()
-        };
+    static constexpr DateTime fromTimePoint(std::chrono::time_point<Clock, D> timePoint) noexcept {
+        return DateTime{timePoint};
     }
 
     /// Get DateTime from Unix time.
