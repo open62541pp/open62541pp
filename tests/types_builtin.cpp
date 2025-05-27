@@ -13,6 +13,7 @@
 
 using Catch::Matchers::ContainsSubstring;
 using Catch::Matchers::Message;
+using Catch::Matchers::WithinAbs;
 using namespace opcua;
 
 TEST_CASE("StatusCode") {
@@ -307,10 +308,6 @@ TEST_CASE("DateTime") {
         CHECK(dts.year == 1601);
     }
 
-    SECTION("Static methods") {
-        CHECK_NOTHROW(DateTime::localTimeUtcOffset());
-    }
-
     SECTION("From std::chrono::time_point") {
         using namespace std::chrono;
 
@@ -323,17 +320,59 @@ TEST_CASE("DateTime") {
         CHECK(dt.toUnixTime() == secSinceEpoch);
     }
 
-    SECTION("Format") {
-        CHECK(
-            DateTime{UA_DATETIME_UNIX_EPOCH}.format("%Y-%m-%d %H:%M:%S") == "1970-01-01 00:00:00"
+    SECTION("now") {
+        CHECK_THAT(
+            DateTime::now().get(),
+            WithinAbs(static_cast<double>(UA_DateTime_now()), 10 * UA_DATETIME_MSEC)
         );
     }
 
+    SECTION("localTimeUtcOffset") {
+        CHECK_NOTHROW(DateTime::localTimeUtcOffset());
+    }
+
+    SECTION("format") {
+        const DateTime dt{UA_DATETIME_UNIX_EPOCH};
+        CHECK(dt.format("%Y-%m-%d %H:%M:%S") == "1970-01-01 00:00:00");
+    }
+
     SECTION("Comparison") {
-        const auto zero = DateTime{0};
-        const auto now = DateTime::now();
-        CHECK(zero != now);
-        CHECK(zero < now);
+        CHECK(DateTime{1} == DateTime{1});
+        CHECK(DateTime{1} != DateTime{2});
+        CHECK(DateTime{1} < DateTime{2});
+        CHECK(DateTime{1} <= DateTime{1});
+        CHECK(DateTime{2} > DateTime{1});
+        CHECK(DateTime{1} >= DateTime{1});
+    }
+
+    SECTION("Add/subtract durations") {
+        const UA_DateTime epoch{UA_DATETIME_UNIX_EPOCH};
+        auto dt = DateTime{epoch};
+
+        SECTION("operator+=") {
+            dt += std::chrono::seconds(5);
+            dt += std::chrono::milliseconds(1);
+            CHECK(dt.get() == epoch + 5 * UA_DATETIME_SEC + UA_DATETIME_MSEC);
+        }
+        SECTION("operator-=") {
+            dt -= std::chrono::seconds(5);
+            dt -= std::chrono::milliseconds(1);
+            CHECK(dt.get() == epoch - 5 * UA_DATETIME_SEC - UA_DATETIME_MSEC);
+        }
+        SECTION("operator+") {
+            CHECK((dt + std::chrono::seconds(5)).get() == epoch + 5 * UA_DATETIME_SEC);
+            CHECK((dt + std::chrono::milliseconds(1)).get() == epoch + UA_DATETIME_MSEC);
+        }
+        SECTION("operator-") {
+            CHECK((dt - std::chrono::seconds(5)).get() == epoch - 5 * UA_DATETIME_SEC);
+            CHECK((dt - std::chrono::milliseconds(1)).get() == epoch - UA_DATETIME_MSEC);
+        }
+    }
+
+    SECTION("Difference between two DateTimes") {
+        const DateTime dt1{UA_DATETIME_UNIX_EPOCH};
+        const DateTime dt2{UA_DATETIME_UNIX_EPOCH + 5 * UA_DATETIME_SEC};
+        CHECK(dt2 - dt1 == std::chrono::seconds(5));
     }
 }
 
