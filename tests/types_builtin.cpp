@@ -324,7 +324,9 @@ TEST_CASE("DateTime") {
     }
 
     SECTION("Format") {
-        CHECK(DateTime{}.format("%Y-%m-%d %H:%M:%S") == "1601-01-01 00:00:00");
+        CHECK(
+            DateTime{UA_DATETIME_UNIX_EPOCH}.format("%Y-%m-%d %H:%M:%S") == "1970-01-01 00:00:00"
+        );
     }
 
     SECTION("Comparison") {
@@ -350,9 +352,9 @@ TEST_CASE("NodeId") {
         NodeId id{2, str};
         CHECK(id.identifierType() == NodeIdType::String);
         CHECK(id.namespaceIndex() == 2);
-        // CHECK(id.identifier<String>() == str);
+        CHECK(id.identifier<String>() == str);
         CHECK(id.identifierIf<String>() != nullptr);
-        // CHECK(*id.identifierIf<String>() == str);
+        CHECK(*id.identifierIf<String>() == str);
     }
 
     SECTION("Guid identifier") {
