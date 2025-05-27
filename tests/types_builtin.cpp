@@ -321,7 +321,10 @@ TEST_CASE("DateTime") {
     }
 
     SECTION("now") {
-        CHECK_THAT(DateTime::now().get(), WithinAbs(UA_DateTime_now(), 10 * UA_DATETIME_MSEC));
+        CHECK_THAT(
+            DateTime::now().get(),
+            WithinAbs(static_cast<double>(UA_DateTime_now()), 10 * UA_DATETIME_MSEC)
+        );
     }
 
     SECTION("localTimeUtcOffset") {
