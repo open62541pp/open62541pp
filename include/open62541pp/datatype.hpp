@@ -580,6 +580,11 @@ template <typename T, typename Tag, typename U>
     return dataType_;
 }
 
+/* --------------------------------------- Free functions --------------------------------------- */
+
+const UA_DataType* findDataType(const NodeId& id) noexcept;
+const UA_DataType* findDataType(const NodeId& id, const UA_DataTypeArray* custom) noexcept;
+
 /* ------------------------------------------- Helper ------------------------------------------- */
 
 namespace detail {

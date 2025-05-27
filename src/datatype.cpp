@@ -144,4 +144,36 @@ void DataType::setMembers(Span<const DataTypeMember> members) {
     detail::copyMembers(asNative(members.data()), members.size(), native());
 }
 
+const UA_DataType* findDataType(const NodeId& id) noexcept {
+    // UA_TYPES array is sorted by typeId -> use binary search
+    const Span types{UA_TYPES, UA_TYPES_COUNT};  // NOLINT(*decay)
+    const auto* it = std::lower_bound(
+        types.begin(), types.end(), id, [](const UA_DataType& type, const NodeId& value) {
+            return type.typeId < value;
+        }
+    );
+    if (it != types.end() && it->typeId == id) {
+        return it;
+    }
+    return nullptr;
+}
+
+const UA_DataType* findDataType(const NodeId& id, const UA_DataTypeArray* custom) noexcept {
+    const auto* type = findDataType(id);
+    if (type != nullptr) {
+        return type;
+    }
+    while (custom != nullptr) {
+        const Span types{custom->types, custom->typesSize};
+        const auto* it = std::find_if(types.begin(), types.end(), [&](const auto& dt) {
+            return dt.typeId == id;
+        });
+        if (it != types.end()) {
+            return it;
+        }
+        custom = custom->next;
+    }
+    return nullptr;
+}
+
 }  // namespace opcua
