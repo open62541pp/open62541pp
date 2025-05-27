@@ -36,8 +36,13 @@ TEST_CASE("AccessControlDefault") {
             const ByteString secureChannelRemoteCertificate{};
 
             const auto activateSessionWithToken = [&](const ExtensionObject& userIdentityToken) {
+                void* sessionContext;
                 return ac.activateSession(
-                    session, endpointDescription, secureChannelRemoteCertificate, userIdentityToken
+                    session,
+                    endpointDescription,
+                    secureChannelRemoteCertificate,
+                    userIdentityToken,
+                    sessionContext
                 );
             };
 

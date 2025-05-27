@@ -49,7 +49,8 @@ StatusCode AccessControlDefault::activateSession(
     [[maybe_unused]] Session& session,
     [[maybe_unused]] const EndpointDescription& endpointDescription,
     [[maybe_unused]] const ByteString& secureChannelRemoteCertificate,
-    const ExtensionObject& userIdentityToken
+    const ExtensionObject& userIdentityToken,
+    [[maybe_unused]] void*& sessionContext
 ) {
     // https://github.com/open62541/open62541/blob/v1.3.6/plugins/ua_accesscontrol_default.c#L38-L134
 
