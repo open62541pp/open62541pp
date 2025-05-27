@@ -266,4 +266,10 @@ inline bool operator!=(const Client& lhs, const Client& rhs) noexcept {
     return !(lhs == rhs);
 }
 
+/* -------------------------------------- Utility functions ------------------------------------- */
+
+inline const UA_DataType* findDataType(Client& client, const NodeId& id) noexcept {
+    return findDataType(id, client.config()->customDataTypes);
+}
+
 }  // namespace opcua

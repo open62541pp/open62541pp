@@ -228,6 +228,12 @@ inline bool operator!=(const Server& lhs, const Server& rhs) noexcept {
     return !(lhs == rhs);
 }
 
+/* -------------------------------------- Utility functions ------------------------------------- */
+
+inline const UA_DataType* findDataType(Server& server, const NodeId& id) noexcept {
+    return findDataType(id, server.config()->customDataTypes);
+}
+
 /* ---------------------------- Variable node value backend/callback ---------------------------- */
 
 /// Set value callback for variable node.
