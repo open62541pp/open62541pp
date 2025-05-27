@@ -394,7 +394,9 @@ public:
     /// Convert to std::chrono::time_point.
     template <typename D = Duration>
     std::chrono::time_point<Clock, D> toTimePoint() const {
-        return std::chrono::time_point<Clock, D>{Duration{get() - UA_DATETIME_UNIX_EPOCH}};
+        return std::chrono::time_point<Clock, D>{
+            std::chrono::duration_cast<D>(Duration{get() - UA_DATETIME_UNIX_EPOCH})
+        };
     }
 
     /// Convert to Unix time (number of seconds since January 1, 1970 UTC).
