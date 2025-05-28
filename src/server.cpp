@@ -281,7 +281,7 @@ std::vector<Session> Server::sessions() {
     std::vector<Session> result;
     const std::scoped_lock lock(context().sessionRegistry.mutex);
     for (auto& [id, context] : context().sessionRegistry.sessions) {
-        result.emplace_back(*this, id, context);
+        result.emplace_back(*this, id, static_cast<std::any*>(context));
     }
     return result;
 }

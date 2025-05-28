@@ -1,5 +1,7 @@
 #pragma once
 
+#include <any>
+
 #include "open62541pp/bitmask.hpp"
 #include "open62541pp/common.hpp"  // AccessLevel, WriteMask
 #include "open62541pp/detail/open62541/common.h"  // UA_AccessControl
