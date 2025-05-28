@@ -36,7 +36,7 @@ TEST_CASE("AccessControlDefault") {
             const ByteString secureChannelRemoteCertificate{};
 
             const auto activateSessionWithToken = [&](const ExtensionObject& userIdentityToken) {
-                void* sessionContext;
+                void* sessionContext{nullptr};
                 return ac.activateSession(
                     session,
                     endpointDescription,
@@ -143,12 +143,13 @@ TEST_CASE("AccessControlBase") {
     Server server;
     AccessControlTest accessControl;
     UA_AccessControl native = accessControl.create(false);
-
+    
     CHECK(native.context != nullptr);
     CHECK(native.userTokenPoliciesSize == 1);  // anonymous only
     CHECK(native.userTokenPolicies != nullptr);
     CHECK(native.userTokenPolicies[0].tokenType == UA_USERTOKENTYPE_ANONYMOUS);
-
+    
+    void* sessionContext{nullptr};
     CHECK(native.activateSession != nullptr);
     CHECK(
         native.activateSession(
@@ -158,7 +159,7 @@ TEST_CASE("AccessControlBase") {
             nullptr,  // secure channel remote certificate
             nullptr,  // session id
             nullptr,  // user identity token
-            nullptr  // session context
+            &sessionContext  // session context
         ) == UA_STATUSCODE_GOOD
     );
 
