@@ -69,17 +69,18 @@ static UA_StatusCode activateSessionNative(
     const UA_ByteString* secureChannelRemoteCertificate,
     const UA_NodeId* sessionId,
     const UA_ExtensionObject* userIdentityToken,
-    [[maybe_unused]] void** sessionContext
+    void** sessionContext
 ) {
     return invokeAccessCallback(server, "activateSession", UA_STATUSCODE_BADINTERNALERROR, [&] {
-        // TODO: allow user to set sessionContext
+        assert(sessionContext != nullptr);
         auto session = getSession(server, sessionId, nullptr);
         return getAdapter(ac)
             .activateSession(
                 session.value(),
                 asWrapperRef<EndpointDescription>(endpointDescription),
                 asWrapperRef<ByteString>(secureChannelRemoteCertificate),
-                asWrapperRef<ExtensionObject>(userIdentityToken)
+                asWrapperRef<ExtensionObject>(userIdentityToken),
+                *sessionContext
             )
             .get();
     });
