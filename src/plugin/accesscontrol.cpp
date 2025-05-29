@@ -19,20 +19,21 @@ static AccessControlBase& getAdapter(UA_AccessControl* ac) {
     return *static_cast<AccessControlBase*>(ac->context);
 }
 
+template <typename T>
+static constexpr T defaultInstance{};
+
 template <typename WrapperType, typename NativeType = typename WrapperType::NativeType>
-static const WrapperType& asWrapperRef(const NativeType* nativePtr) {
-    static const WrapperType empty;
-    return nativePtr == nullptr ? empty : asWrapper<WrapperType>(*nativePtr);
+static constexpr const WrapperType& asWrapperRef(const NativeType* nativePtr) {
+    return asWrapper<WrapperType>(nativePtr == nullptr ? defaultInstance<NativeType> : *nativePtr);
 }
 
 static std::optional<Session> getSession(
     UA_Server* server, const UA_NodeId* sessionId, void* sessionContext
 ) noexcept {
     auto* wrapper = asWrapper(server);
-    if (wrapper == nullptr) {
-        return std::nullopt;
-    }
-    return Session(*wrapper, asWrapperRef<NodeId>(sessionId), sessionContext);
+    return wrapper != nullptr
+        ? std::make_optional(Session(*wrapper, asWrapperRef<NodeId>(sessionId), sessionContext))
+        : std::nullopt;
 }
 
 static void logException(
