@@ -41,6 +41,12 @@ TEST_CASE("Event") {
         CHECK(event.trigger() != event.trigger());  // unique event ids
     }
 
+    SECTION("Release ownership") {
+        Event event{server};
+        const auto id = event.release();
+        CHECK(UA_Server_deleteNode(server.handle(), id, true) == UA_STATUSCODE_GOOD);
+    }
+
     SECTION("Equality") {
         opcua::Event event1(server);
         opcua::Event event2(server);

@@ -16,7 +16,9 @@ Event::Event(Server& connection, const NodeId& eventType)
 }
 
 Event::~Event() {
-    UA_Server_deleteNode(connection().handle(), id(), true /* deleteReferences */);
+    if (!id().isNull()) {
+        UA_Server_deleteNode(connection().handle(), id(), true /* deleteReferences */);
+    }
 }
 
 Event& Event::writeSourceName(std::string_view sourceName) {
@@ -54,6 +56,10 @@ ByteString Event::trigger(const NodeId& originId) {
     );
     throwIfBad(status);
     return eventId;
+}
+
+NodeId Event::release() noexcept {
+    return std::exchange(id_, {});
 }
 
 #endif
