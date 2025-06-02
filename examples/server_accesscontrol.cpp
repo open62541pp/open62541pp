@@ -15,26 +15,39 @@ class AccessControlCustom : public AccessControlDefault {
 public:
     using AccessControlDefault::AccessControlDefault;  // inherit constructors
 
+    struct SessionContext {
+        bool isAdmin;
+    };
+
     StatusCode activateSession(
         Session& session,
         const EndpointDescription& endpointDescription,
         const ByteString& secureChannelRemoteCertificate,
-        const ExtensionObject& userIdentityToken
+        const ExtensionObject& userIdentityToken,
+        void*& sessionContext
     ) override {
         // Grant admin rights if user is logged in as "admin"
-        // Store attribute "isAdmin" as session attribute to use it in access callbacks
         const auto* token = userIdentityToken.decodedData<UserNameIdentityToken>();
         const bool isAdmin = (token != nullptr && token->userName() == "admin");
-        std::cout << "User has admin rights: " << isAdmin << std::endl;
-        session.setSessionAttribute({0, "isAdmin"}, Variant{isAdmin});
+
+        // Create session context (must be deleted in closeSession)
+        sessionContext = new SessionContext{isAdmin};  // NOLINT(*memory)
 
         return AccessControlDefault::activateSession(
-            session, endpointDescription, secureChannelRemoteCertificate, userIdentityToken
+            session,
+            endpointDescription,
+            secureChannelRemoteCertificate,
+            userIdentityToken,
+            sessionContext
         );
     }
 
+    void closeSession(Session& session) override {
+        delete static_cast<SessionContext*>(session.context());  // NOLINT(*memory)
+    }
+
     Bitmask<AccessLevel> getUserAccessLevel(Session& session, const NodeId& nodeId) override {
-        const bool isAdmin = session.getSessionAttribute({0, "isAdmin"}).scalar<bool>();
+        const bool isAdmin = static_cast<SessionContext*>(session.context())->isAdmin;
         std::cout << "Get user access level of node id " << opcua::toString(nodeId) << std::endl;
         std::cout << "Admin rights granted: " << isAdmin << std::endl;
         return isAdmin
@@ -63,16 +76,15 @@ int main() {
     Server server{std::move(config)};
 
     // Add variable node. Try to change its value as a client with different logins.
-    Node{server, ObjectId::ObjectsFolder}
-        .addVariable(
-            {1, 1000},
-            "Variable",
-            VariableAttributes{}
-                .setAccessLevel(AccessLevel::CurrentRead | AccessLevel::CurrentWrite)
-                .setDataType(DataTypeId::Int32)
-                .setValueRank(ValueRank::Scalar)
-                .setValue(opcua::Variant{0})
-        );
+    Node{server, ObjectId::ObjectsFolder}.addVariable(
+        {1, 1000},
+        "Variable",
+        VariableAttributes{}
+            .setAccessLevel(AccessLevel::CurrentRead | AccessLevel::CurrentWrite)
+            .setDataType(DataTypeId::Int32)
+            .setValueRank(ValueRank::Scalar)
+            .setValue(opcua::Variant{0})
+    );
 
     server.run();
 }
