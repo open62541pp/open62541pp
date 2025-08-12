@@ -2296,7 +2296,7 @@ public:
 
     UAPP_GETTER_WRAPPER(ResponseHeader, responseHeader)
     UAPP_GETTER(IntegerId, subscriptionId)
-    UAPP_GETTER(bool, revisedPublishingInterval)
+    UAPP_GETTER(double, revisedPublishingInterval)
     UAPP_GETTER(uint32_t, revisedLifetimeCount)
     UAPP_GETTER(uint32_t, revisedMaxKeepAliveCount)
 };
@@ -2347,7 +2347,7 @@ public:
     using Wrapper::Wrapper;
 
     UAPP_GETTER_WRAPPER(ResponseHeader, responseHeader)
-    UAPP_GETTER(bool, revisedPublishingInterval)
+    UAPP_GETTER(double, revisedPublishingInterval)
     UAPP_GETTER(uint32_t, revisedLifetimeCount)
     UAPP_GETTER(uint32_t, revisedMaxKeepAliveCount)
 };

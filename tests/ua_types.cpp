@@ -1,5 +1,6 @@
 #include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
+#include <catch2/catch_approx.hpp> // Catch::Approx
 
 #include "open62541pp/config.hpp"
 #include "open62541pp/ua/types.hpp"
@@ -644,6 +645,31 @@ TEST_CASE("DeleteSubscriptionsRequest") {
     CHECK(request.subscriptionIds()[0] == 1);
     CHECK(request.subscriptionIds()[1] == 2);
     CHECK(request.subscriptionIds()[2] == 3);
+}
+
+TEST_CASE("CreateSubscriptionResponse - Default Construction") {
+    CreateSubscriptionResponse response;
+
+    CHECK_NOTHROW(response.responseHeader());
+    CHECK(response.subscriptionId() == 0);
+    CHECK(response.revisedPublishingInterval() == Catch::Approx(0.0));
+    CHECK(response.revisedLifetimeCount() == 0);
+    CHECK(response.revisedMaxKeepAliveCount() == 0);
+}
+
+TEST_CASE("CreateSubscriptionResponse - Constructed with Values") {
+    UA_CreateSubscriptionResponse native{};
+    native.subscriptionId = 42;
+    native.revisedPublishingInterval = 1000.5;
+    native.revisedLifetimeCount = 10;
+    native.revisedMaxKeepAliveCount = 5;
+
+    CreateSubscriptionResponse response{native};
+
+    CHECK(response.subscriptionId() == 42);
+    CHECK(response.revisedPublishingInterval() == Catch::Approx(1000.5));
+    CHECK(response.revisedLifetimeCount() == 10);
+    CHECK(response.revisedMaxKeepAliveCount() == 5);
 }
 
 #endif
