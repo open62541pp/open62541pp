@@ -107,10 +107,6 @@ jobs:
             os: macos-15
             compiler: clang++
 
-          - name: Windows Visual Studio 16
-            os: windows-2019
-            compiler: msvc
-
           - name: Windows Visual Studio 17
             os: windows-2022
             compiler: msvc
