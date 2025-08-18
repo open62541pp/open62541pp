@@ -2,6 +2,7 @@
 
 #include <string_view>
 
+#include "open62541pp/config.hpp"
 #include "open62541pp/detail/open62541/common.h"  // UA_LogLevel, UA_LogCategory, UA_Logger
 #include "open62541pp/plugin/pluginadapter.hpp"
 
@@ -32,6 +33,12 @@ enum class LogCategory {
     Client = UA_LOGCATEGORY_CLIENT,
     Userland = UA_LOGCATEGORY_USERLAND,
     SecurityPolicy = UA_LOGCATEGORY_SECURITYPOLICY,
+#if UAPP_OPEN62541_VER_GE(1, 4)
+    Security = UA_LOGCATEGORY_SECURITY,
+    EventLoop = UA_LOGCATEGORY_EVENTLOOP,
+    PubSub = UA_LOGCATEGORY_PUBSUB,
+    Discovery = UA_LOGCATEGORY_DISCOVERY,
+#endif
 };
 
 /**
