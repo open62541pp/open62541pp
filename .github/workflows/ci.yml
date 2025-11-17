@@ -12,12 +12,6 @@ jobs:
       fail-fast: true
       matrix:
         config:
-          - name: Linux GCC 9
-            os: ubuntu-22.04
-            compiler: g++-9
-            coverage: true
-            gcov: gcov-9
-
           - name: Linux GCC 10
             os: ubuntu-22.04
             compiler: g++-10
