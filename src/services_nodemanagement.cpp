@@ -142,7 +142,7 @@ Result<NodeId> addMethod(
     const NodeId& referenceType
 ) noexcept {
     return opcua::detail::tryInvoke([&] {
-        auto* nodeContext = opcua::detail::getContext(connection).nodeContexts[id];
+        auto nodeContext = std::make_unique<opcua::detail::NodeContext>();
         nodeContext->methodCallback = std::move(callback);
         NodeId outputNodeId;
         throwIfBad(UA_Server_addMethodNode(
@@ -157,9 +157,10 @@ Result<NodeId> addMethod(
             asNative(inputArguments.data()),
             outputArguments.size(),
             asNative(outputArguments.data()),
-            nodeContext,
+            nodeContext.get(),
             outputNodeId.handle()  // outNewNodeId
         ));
+        opcua::detail::getContext(connection).nodeContexts.insert(outputNodeId, std::move(nodeContext));
         return outputNodeId;
     });
 }
