@@ -22,7 +22,6 @@
                 "UA_MULTITHREADING": "100",
                 "UAPP_BUILD_TESTS": "ON",
                 "UAPP_WARNINGS_AS_ERRORS": "ON",
-                "UAPP_ENABLE_NODESETLOADER": "ON",
                 "UAPP_ENABLE_SANITIZER_UNDEFINED": "ON"
             }
         },
