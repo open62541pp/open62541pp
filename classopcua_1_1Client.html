@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.20.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -163,8 +163,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab108e1958016a09090d13f495e1cfc02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed91a764686ba8c0c6fe2c508af702d7" id="r_aed91a764686ba8c0c6fe2c508af702d7"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classopcua_1_1String.html">String</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#aed91a764686ba8c0c6fe2c508af702d7">namespaceArray</a> ()</td></tr>
 <tr class="separator:aed91a764686ba8c0c6fe2c508af702d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab947d3cdc2ba81898e4fbe7fbf83bfe8" id="r_ab947d3cdc2ba81898e4fbe7fbf83bfe8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Subscription.html">Subscription</a>&lt; <a class="el" href="classopcua_1_1Client.html">Client</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#ab947d3cdc2ba81898e4fbe7fbf83bfe8">createSubscription</a> (const <a class="el" href="namespaceopcua.html#a26c94e4458518c4f9f72e77e2446f6db">SubscriptionParameters</a> &amp;parameters={})</td></tr>
-<tr class="separator:ab947d3cdc2ba81898e4fbe7fbf83bfe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ccedaf3fd2ee9d115ed036ca9e55536" id="r_a8ccedaf3fd2ee9d115ed036ca9e55536"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classopcua_1_1Subscription.html">Subscription</a>&lt; <a class="el" href="classopcua_1_1Client.html">Client</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a8ccedaf3fd2ee9d115ed036ca9e55536">subscriptions</a> ()</td></tr>
 <tr class="separator:a8ccedaf3fd2ee9d115ed036ca9e55536"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf983173379812dfaa4adecb214f34b0" id="r_acf983173379812dfaa4adecb214f34b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#acf983173379812dfaa4adecb214f34b0">runIterate</a> (uint16_t timeoutMilliseconds=1000)</td></tr>
@@ -448,27 +446,6 @@ Related Symbols</h2></td></tr>
 </dl>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_async_8cpp-example.html#a15">client_async.cpp</a>.</dd>
 </dl>
-
-</div>
-</div>
-<a id="ab947d3cdc2ba81898e4fbe7fbf83bfe8" name="ab947d3cdc2ba81898e4fbe7fbf83bfe8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab947d3cdc2ba81898e4fbe7fbf83bfe8">&#9670;&#160;</a></span>createSubscription()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Subscription.html">Subscription</a>&lt; <a class="el" href="classopcua_1_1Client.html">Client</a> &gt; opcua::Client::createSubscription </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="namespaceopcua.html#a26c94e4458518c4f9f72e77e2446f6db">SubscriptionParameters</a> &amp;&#160;</td>
-          <td class="paramname"><em>parameters</em> = <code>{}</code></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Create a subscription to monitor data changes and events. </p>
-<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000001">Deprecated:</a></b></dt><dd>Use <a class="el" href="classopcua_1_1Subscription.html" title="High-level subscription class.">Subscription</a> constructor </dd></dl>
 
 </div>
 </div>
@@ -890,7 +867,7 @@ Related Symbols</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Run the client's main loop by. This method will block until <a class="el" href="classopcua_1_1Client.html#aeb5c2fc7a5d9590be1b9166e1a107d42" title="Stop the client&#39;s main loop.">Client::stop</a> is called. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_async_8cpp-example.html#a16">client_async.cpp</a>, <a class="el" href="client_subscription_8cpp-example.html#a12">client_subscription.cpp</a>, <a class="el" href="events_2client_eventfilter_8cpp-example.html#a12">events/client_eventfilter.cpp</a>, and <a class="el" href="method_2client_method_async_8cpp-example.html#a4">method/client_method_async.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_async_8cpp-example.html#a16">client_async.cpp</a>, <a class="el" href="events_2client_eventfilter_8cpp-example.html#a12">events/client_eventfilter.cpp</a>, and <a class="el" href="method_2client_method_async_8cpp-example.html#a4">method/client_method_async.cpp</a>.</dd>
 </dl>
 
 </div>
@@ -917,6 +894,8 @@ Related Symbols</h2></td></tr>
     <tr><td class="paramname">timeoutMilliseconds</td><td>Timeout in milliseconds </td></tr>
   </table>
   </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_subscription_8cpp-example.html#a12">client_subscription.cpp</a>.</dd>
 </dl>
 
 </div>
@@ -1077,7 +1056,7 @@ Related Symbols</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="client_8hpp_source.html#l00270">270</a> of file <a class="el" href="client_8hpp_source.html">client.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="client_8hpp_source.html#l00265">265</a> of file <a class="el" href="client_8hpp_source.html">client.hpp</a>.</p>
 
 </div>
 </div>
@@ -1115,7 +1094,7 @@ Related Symbols</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="client_8hpp_source.html#l00265">265</a> of file <a class="el" href="client_8hpp_source.html">client.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="client_8hpp_source.html#l00260">260</a> of file <a class="el" href="client_8hpp_source.html">client.hpp</a>.</p>
 
 </div>
 </div>

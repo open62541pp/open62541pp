@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.20.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -414,7 +414,7 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1TypeConverter_3_01const_01char_01_5_01_4.html">TypeConverter&lt; const char * &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1TypeConverter_3_01std_1_1chrono_1_1time__point_3_01Clock_00_01Duration_01_4_01_4.html">TypeConverter&lt; std::chrono::time_point&lt; Clock, Duration &gt; &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1TypeConverter_3_01std_1_1chrono_1_1time__point_3_01std_1_1chrono_1_1system__clock_00_01Duration_01_4_01_4.html">TypeConverter&lt; std::chrono::time_point&lt; std::chrono::system_clock, Duration &gt; &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1TypeConverter_3_01T_00_01std_1_1enable__if__t_3_01detail_1_1IsStringLike_3_01T_01_4_1_1value_01_4_01_4.html">TypeConverter&lt; T, std::enable_if_t&lt; detail::IsStringLike&lt; T &gt;::value &gt; &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -485,6 +485,12 @@ Classes</h2></td></tr>
 Typedefs</h2></td></tr>
 <tr class="memitem:gace43bed03b6210bd3646ec31fc0bea95" id="r_gace43bed03b6210bd3646ec31fc0bea95"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Async.html#gace43bed03b6210bd3646ec31fc0bea95">DefaultCompletionToken</a> = <a class="el" href="structopcua_1_1UseFutureToken.html">UseFutureToken</a></td></tr>
 <tr class="separator:gace43bed03b6210bd3646ec31fc0bea95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47c852ff5f672aee2253432855e8c7ef" id="r_a47c852ff5f672aee2253432855e8c7ef"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a47c852ff5f672aee2253432855e8c7ef">CallbackId</a> = uint64_t</td></tr>
+<tr class="separator:a47c852ff5f672aee2253432855e8c7ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a538d142cd813f8f7edbe94ee4ba051bb" id="r_a538d142cd813f8f7edbe94ee4ba051bb"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a538d142cd813f8f7edbe94ee4ba051bb">TimedCallback</a> = std::function&lt; void()&gt;</td></tr>
+<tr class="separator:a538d142cd813f8f7edbe94ee4ba051bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ab941172620c5b28fa99156622fef10" id="r_a3ab941172620c5b28fa99156622fef10"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a3ab941172620c5b28fa99156622fef10">RepeatedCallback</a> = std::function&lt; void()&gt;</td></tr>
+<tr class="separator:a3ab941172620c5b28fa99156622fef10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9378c706cc284e1cfca58dcb0af4cdb2" id="r_a9378c706cc284e1cfca58dcb0af4cdb2"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a9378c706cc284e1cfca58dcb0af4cdb2">StateCallback</a> = std::function&lt; void()&gt;</td></tr>
 <tr class="separator:a9378c706cc284e1cfca58dcb0af4cdb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab676408d873dde132201449501d3a98e" id="r_ab676408d873dde132201449501d3a98e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#ab676408d873dde132201449501d3a98e">InactivityCallback</a> = std::function&lt; void()&gt;</td></tr>
@@ -594,12 +600,40 @@ Functions</h2></td></tr>
 <tr class="memitem:ga4be2e13b6c648cfa5070fa61b9201168" id="r_ga4be2e13b6c648cfa5070fa61b9201168"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ga4be2e13b6c648cfa5070fa61b9201168"><td class="memTemplItemLeft" align="right" valign="top">constexpr std::false_type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__BitmaskAbstraction.html#ga4be2e13b6c648cfa5070fa61b9201168">isBitmaskEnum</a> (T)</td></tr>
 <tr class="separator:ga4be2e13b6c648cfa5070fa61b9201168"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63faad8321ec1968885cba0443033569" id="r_a63faad8321ec1968885cba0443033569"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a63faad8321ec1968885cba0443033569"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespaceopcua.html#a47c852ff5f672aee2253432855e8c7ef">CallbackId</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a63faad8321ec1968885cba0443033569">addTimedCallback</a> (T &amp;connection, <a class="el" href="namespaceopcua.html#a538d142cd813f8f7edbe94ee4ba051bb">TimedCallback</a> callback, <a class="el" href="classopcua_1_1DateTime.html">DateTime</a> date)</td></tr>
+<tr class="separator:a63faad8321ec1968885cba0443033569"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae04f2e0f52d00c686801ef1fe797d5a0" id="r_ae04f2e0f52d00c686801ef1fe797d5a0"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ae04f2e0f52d00c686801ef1fe797d5a0"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespaceopcua.html#a47c852ff5f672aee2253432855e8c7ef">CallbackId</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#ae04f2e0f52d00c686801ef1fe797d5a0">addRepeatedCallback</a> (T &amp;connection, <a class="el" href="namespaceopcua.html#a3ab941172620c5b28fa99156622fef10">RepeatedCallback</a> callback, double intervalMilliseconds)</td></tr>
+<tr class="separator:ae04f2e0f52d00c686801ef1fe797d5a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51ca6b5f08cc3e329f2398524af1a55f" id="r_a51ca6b5f08cc3e329f2398524af1a55f"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a51ca6b5f08cc3e329f2398524af1a55f"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a51ca6b5f08cc3e329f2398524af1a55f">changeRepeatedCallbackInterval</a> (T &amp;connection, <a class="el" href="namespaceopcua.html#a47c852ff5f672aee2253432855e8c7ef">CallbackId</a> callbackId, double intervalMilliseconds)</td></tr>
+<tr class="separator:a51ca6b5f08cc3e329f2398524af1a55f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6d11c9518fa889c247512c4a7fa2cd3" id="r_ad6d11c9518fa889c247512c4a7fa2cd3"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ad6d11c9518fa889c247512c4a7fa2cd3"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#ad6d11c9518fa889c247512c4a7fa2cd3">removeCallback</a> (T &amp;connection, <a class="el" href="namespaceopcua.html#a47c852ff5f672aee2253432855e8c7ef">CallbackId</a> callbackId)</td></tr>
+<tr class="separator:ad6d11c9518fa889c247512c4a7fa2cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6db76faddf37457008a68d1b84c9658" id="r_ad6db76faddf37457008a68d1b84c9658"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#ad6db76faddf37457008a68d1b84c9658">findDataType</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;client, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id) noexcept</td></tr>
+<tr class="separator:ad6db76faddf37457008a68d1b84c9658"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a566195e7a88409a71a4ff45f0166d517" id="r_a566195e7a88409a71a4ff45f0166d517"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a566195e7a88409a71a4ff45f0166d517">findDataType</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id) noexcept</td></tr>
+<tr class="separator:a566195e7a88409a71a4ff45f0166d517"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab06bad3ceb927cf0bdebc1811bb0b39a" id="r_ab06bad3ceb927cf0bdebc1811bb0b39a"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#ab06bad3ceb927cf0bdebc1811bb0b39a">findDataType</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, const <a class="elRef" target="_blank" href="open62541/structUA__DataTypeArray.html">UA_DataTypeArray</a> *custom) noexcept</td></tr>
+<tr class="separator:ab06bad3ceb927cf0bdebc1811bb0b39a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51131f59e2ce7f22a984fa6577fb2c27" id="r_a51131f59e2ce7f22a984fa6577fb2c27"><td class="memItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a51131f59e2ce7f22a984fa6577fb2c27">throwIfBad</a> (<a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> code)</td></tr>
 <tr class="separator:a51131f59e2ce7f22a984fa6577fb2c27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad322ae63864fa7d92045131cd6514de1" id="r_ad322ae63864fa7d92045131cd6514de1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structopcua_1_1CreateCertificateResult.html">CreateCertificateResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#ad322ae63864fa7d92045131cd6514de1">createCertificate</a> (<a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1String.html">String</a> &gt; subject, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1String.html">String</a> &gt; subjectAltName, <a class="el" href="namespaceopcua.html#ae6c345608e9a1f87f85b5b1ae371c0cc">CertificateFormat</a> certificateFormat=<a class="el" href="namespaceopcua.html#ae6c345608e9a1f87f85b5b1ae371c0ccae412c8a99ed51e5b86824e8b7d756a2b">CertificateFormat::DER</a>)</td></tr>
 <tr class="separator:ad322ae63864fa7d92045131cd6514de1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4eaf1f469b513759acd44dd4183901a" id="r_ae4eaf1f469b513759acd44dd4183901a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#ae4eaf1f469b513759acd44dd4183901a">loadNodeset</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server, std::string_view nodeset2XmlFilePath)</td></tr>
 <tr class="separator:ae4eaf1f469b513759acd44dd4183901a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4694a71bed7c78c9cd82e88a88187d7" id="r_af4694a71bed7c78c9cd82e88a88187d7"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#af4694a71bed7c78c9cd82e88a88187d7">findDataType</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id) noexcept</td></tr>
+<tr class="separator:af4694a71bed7c78c9cd82e88a88187d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4bf19d293923bd292ab64d2c6b6f200" id="r_ad4bf19d293923bd292ab64d2c6b6f200"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#ad4bf19d293923bd292ab64d2c6b6f200">setVariableNodeValueCallback</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="classopcua_1_1ValueCallbackBase.html">ValueCallbackBase</a> &amp;callback)</td></tr>
+<tr class="separator:ad4bf19d293923bd292ab64d2c6b6f200"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fdc5391fe988f309a61e57bebb5206a" id="r_a4fdc5391fe988f309a61e57bebb5206a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a4fdc5391fe988f309a61e57bebb5206a">setVariableNodeValueCallback</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::unique_ptr&lt; <a class="el" href="classopcua_1_1ValueCallbackBase.html">ValueCallbackBase</a> &gt; &amp;&amp;callback)</td></tr>
+<tr class="separator:a4fdc5391fe988f309a61e57bebb5206a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad88601d836d4f3f87e4612a3d9dd9f54" id="r_ad88601d836d4f3f87e4612a3d9dd9f54"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#ad88601d836d4f3f87e4612a3d9dd9f54">setVariableNodeValueBackend</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="classopcua_1_1DataSourceBase.html">DataSourceBase</a> &amp;source)</td></tr>
+<tr class="separator:ad88601d836d4f3f87e4612a3d9dd9f54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab086e87d97d1477142afa131c9acb0d8" id="r_ab086e87d97d1477142afa131c9acb0d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#ab086e87d97d1477142afa131c9acb0d8">setVariableNodeValueBackend</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::unique_ptr&lt; <a class="el" href="classopcua_1_1DataSourceBase.html">DataSourceBase</a> &gt; &amp;&amp;source)</td></tr>
+<tr class="separator:ab086e87d97d1477142afa131c9acb0d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9a2b101f7e9cd8c136b9e9f7336c92b" id="r_ac9a2b101f7e9cd8c136b9e9f7336c92b"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ac9a2b101f7e9cd8c136b9e9f7336c92b"><td class="memTemplItemLeft" align="right" valign="top">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#ac9a2b101f7e9cd8c136b9e9f7336c92b">getDataType</a> () noexcept</td></tr>
 <tr class="separator:ac9a2b101f7e9cd8c136b9e9f7336c92b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -666,6 +700,22 @@ Variables</h2></td></tr>
 <tr class="separator:ga84807736f5bcb08a19160455f71a8863"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
+<a id="a47c852ff5f672aee2253432855e8c7ef" name="a47c852ff5f672aee2253432855e8c7ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47c852ff5f672aee2253432855e8c7ef">&#9670;&#160;</a></span>CallbackId</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespaceopcua.html#a47c852ff5f672aee2253432855e8c7ef">opcua::CallbackId</a> = typedef uint64_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callback_8hpp_source.html#l00013">13</a> of file <a class="el" href="callback_8hpp_source.html">callback.hpp</a>.</p>
+
+</div>
+</div>
 <a id="a05eed9cb5683f63da80582392ce63855" name="a05eed9cb5683f63da80582392ce63855"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a05eed9cb5683f63da80582392ce63855">&#9670;&#160;</a></span>DataChangeNotificationCallback</h2>
 
@@ -779,7 +829,23 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01970">1970</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01978">1978</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a3ab941172620c5b28fa99156622fef10" name="a3ab941172620c5b28fa99156622fef10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ab941172620c5b28fa99156622fef10">&#9670;&#160;</a></span>RepeatedCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespaceopcua.html#a3ab941172620c5b28fa99156622fef10">opcua::RepeatedCallback</a> = typedef std::function&lt;void()&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callback_8hpp_source.html#l00015">15</a> of file <a class="el" href="callback_8hpp_source.html">callback.hpp</a>.</p>
 
 </div>
 </div>
@@ -828,6 +894,22 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="subscription_8hpp_source.html#l00021">21</a> of file <a class="el" href="subscription_8hpp_source.html">subscription.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a538d142cd813f8f7edbe94ee4ba051bb" name="a538d142cd813f8f7edbe94ee4ba051bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a538d142cd813f8f7edbe94ee4ba051bb">&#9670;&#160;</a></span>TimedCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespaceopcua.html#a538d142cd813f8f7edbe94ee4ba051bb">opcua::TimedCallback</a> = typedef std::function&lt;void()&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="callback_8hpp_source.html#l00014">14</a> of file <a class="el" href="callback_8hpp_source.html">callback.hpp</a>.</p>
 
 </div>
 </div>
@@ -1069,7 +1151,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a12f473c742c5dee093677093bd19ab12a558c6ab1b01130edef2f25529a95b7df" name="a12f473c742c5dee093677093bd19ab12a558c6ab1b01130edef2f25529a95b7df"></a>DecodedNoDelete&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01721">1721</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01729">1729</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -1105,7 +1187,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a82c59334b1772f47ada395785f5bf70aa72175821efef5c37a826c8833b2336e3" name="a82c59334b1772f47ada395785f5bf70aa72175821efef5c37a826c8833b2336e3"></a>SecurityPolicy&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="log_8hpp_source.html#l00027">27</a> of file <a class="el" href="log_8hpp_source.html">log.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="log_8hpp_source.html#l00028">28</a> of file <a class="el" href="log_8hpp_source.html">log.hpp</a>.</p>
 
 </div>
 </div>
@@ -1140,7 +1222,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a016225e750f216587c011ea43f212d8da882384ec38ce8d9582b57e70861730e4" name="a016225e750f216587c011ea43f212d8da882384ec38ce8d9582b57e70861730e4"></a>Fatal&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="log_8hpp_source.html#l00014">14</a> of file <a class="el" href="log_8hpp_source.html">log.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="log_8hpp_source.html#l00015">15</a> of file <a class="el" href="log_8hpp_source.html">log.hpp</a>.</p>
 
 </div>
 </div>
@@ -1251,7 +1333,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a05d617e4c64656fa2ef6baf2af636f90a58efa9e8b8491c4a42cbf3bead1b06b6" name="a05d617e4c64656fa2ef6baf2af636f90a58efa9e8b8491c4a42cbf3bead1b06b6"></a>ByteString&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00629">629</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00640">640</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -1350,6 +1432,152 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="ae04f2e0f52d00c686801ef1fe797d5a0" name="ae04f2e0f52d00c686801ef1fe797d5a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae04f2e0f52d00c686801ef1fe797d5a0">&#9670;&#160;</a></span>addRepeatedCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceopcua.html#a47c852ff5f672aee2253432855e8c7ef">CallbackId</a> opcua::addRepeatedCallback </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>connection</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#a3ab941172620c5b28fa99156622fef10">RepeatedCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>intervalMilliseconds</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add a callback for repeated execution. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> or <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a> </td></tr>
+    <tr><td class="paramname">callback</td><td>Callback to be executed </td></tr>
+    <tr><td class="paramname">intervalMilliseconds</td><td>Execution interval in milliseconds (must be &gt; 0). The first execution occurs at now() + interval at the latest. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Callback identifier </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_callback_8cpp-example.html#a1">server_callback.cpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="a63faad8321ec1968885cba0443033569" name="a63faad8321ec1968885cba0443033569"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63faad8321ec1968885cba0443033569">&#9670;&#160;</a></span>addTimedCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceopcua.html#a47c852ff5f672aee2253432855e8c7ef">CallbackId</a> opcua::addTimedCallback </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>connection</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#a538d142cd813f8f7edbe94ee4ba051bb">TimedCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1DateTime.html">DateTime</a>&#160;</td>
+          <td class="paramname"><em>date</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add a callback for execution at a specified time. </p>
+<p>If the indicated time lies in the past, then the callback is executed at the next iteration of the event loop. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> or <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a> </td></tr>
+    <tr><td class="paramname">callback</td><td>Callback to be executed </td></tr>
+    <tr><td class="paramname">date</td><td>Execution time for the callback </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Callback identifier </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_callback_8cpp-example.html#a2">server_callback.cpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="a51ca6b5f08cc3e329f2398524af1a55f" name="a51ca6b5f08cc3e329f2398524af1a55f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51ca6b5f08cc3e329f2398524af1a55f">&#9670;&#160;</a></span>changeRepeatedCallbackInterval()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::changeRepeatedCallbackInterval </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>connection</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#a47c852ff5f672aee2253432855e8c7ef">CallbackId</a>&#160;</td>
+          <td class="paramname"><em>callbackId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>intervalMilliseconds</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Change the execution interval of an existing repeated callback. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> or <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a> </td></tr>
+    <tr><td class="paramname">callbackId</td><td>Callback identifier </td></tr>
+    <tr><td class="paramname">intervalMilliseconds</td><td>New interval in milliseconds (must be &gt; 0) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_callback_8cpp-example.html#a3">server_callback.cpp</a>.</dd>
+</dl>
+
+</div>
+</div>
 <a id="ad322ae63864fa7d92045131cd6514de1" name="ad322ae63864fa7d92045131cd6514de1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad322ae63864fa7d92045131cd6514de1">&#9670;&#160;</a></span>createCertificate()</h2>
 
@@ -1401,6 +1629,146 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="elRef" target="_blank" href="open62541/create__certificate_8h.html#a5868cc2be404bfccd303eaa822ce1ac0">UA_CreateCertificate</a> </dd></dl>
+
+</div>
+</div>
+<a id="ad6db76faddf37457008a68d1b84c9658" name="ad6db76faddf37457008a68d1b84c9658"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6db76faddf37457008a68d1b84c9658">&#9670;&#160;</a></span>findDataType() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> * opcua::findDataType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="client_8hpp_source.html#l00271">271</a> of file <a class="el" href="client_8hpp_source.html">client.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="client_8hpp_source.html#l00271">findDataType()</a>, and <a class="el" href="server_8hpp_source.html#l00233">findDataType()</a>.</p>
+
+</div>
+</div>
+<a id="a566195e7a88409a71a4ff45f0166d517" name="a566195e7a88409a71a4ff45f0166d517"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a566195e7a88409a71a4ff45f0166d517">&#9670;&#160;</a></span>findDataType() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> * opcua::findDataType </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab06bad3ceb927cf0bdebc1811bb0b39a" name="ab06bad3ceb927cf0bdebc1811bb0b39a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab06bad3ceb927cf0bdebc1811bb0b39a">&#9670;&#160;</a></span>findDataType() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> * opcua::findDataType </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="elRef" target="_blank" href="open62541/structUA__DataTypeArray.html">UA_DataTypeArray</a> *&#160;</td>
+          <td class="paramname"><em>custom</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af4694a71bed7c78c9cd82e88a88187d7" name="af4694a71bed7c78c9cd82e88a88187d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4694a71bed7c78c9cd82e88a88187d7">&#9670;&#160;</a></span>findDataType() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> * opcua::findDataType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Server.html">Server</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="server_8hpp_source.html#l00233">233</a> of file <a class="el" href="server_8hpp_source.html">server.hpp</a>.</p>
 
 </div>
 </div>
@@ -1472,6 +1840,195 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="ad6d11c9518fa889c247512c4a7fa2cd3" name="ad6d11c9518fa889c247512c4a7fa2cd3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6d11c9518fa889c247512c4a7fa2cd3">&#9670;&#160;</a></span>removeCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::removeCallback </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>connection</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#a47c852ff5f672aee2253432855e8c7ef">CallbackId</a>&#160;</td>
+          <td class="paramname"><em>callbackId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Remove a previously registered callback. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connection</td><td>Instance of type <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> or <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a> </td></tr>
+    <tr><td class="paramname">callbackId</td><td>Callback identifier </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_callback_8cpp-example.html#a6">server_callback.cpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="ad88601d836d4f3f87e4612a3d9dd9f54" name="ad88601d836d4f3f87e4612a3d9dd9f54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad88601d836d4f3f87e4612a3d9dd9f54">&#9670;&#160;</a></span>setVariableNodeValueBackend() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::setVariableNodeValueBackend </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Server.html">Server</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1DataSourceBase.html">DataSourceBase</a> &amp;&#160;</td>
+          <td class="paramname"><em>source</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set data source value backend for variable node. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_datasource_8cpp-example.html#a20">server_datasource.cpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="ab086e87d97d1477142afa131c9acb0d8" name="ab086e87d97d1477142afa131c9acb0d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab086e87d97d1477142afa131c9acb0d8">&#9670;&#160;</a></span>setVariableNodeValueBackend() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::setVariableNodeValueBackend </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Server.html">Server</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classopcua_1_1DataSourceBase.html">DataSourceBase</a> &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>source</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set data source value backend for variable node (move ownership to server). </p>
+
+</div>
+</div>
+<a id="a4fdc5391fe988f309a61e57bebb5206a" name="a4fdc5391fe988f309a61e57bebb5206a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fdc5391fe988f309a61e57bebb5206a">&#9670;&#160;</a></span>setVariableNodeValueCallback() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::setVariableNodeValueCallback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Server.html">Server</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classopcua_1_1ValueCallbackBase.html">ValueCallbackBase</a> &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set value callback for variable node (move ownership to server). </p>
+
+</div>
+</div>
+<a id="ad4bf19d293923bd292ab64d2c6b6f200" name="ad4bf19d293923bd292ab64d2c6b6f200"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4bf19d293923bd292ab64d2c6b6f200">&#9670;&#160;</a></span>setVariableNodeValueCallback() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::setVariableNodeValueCallback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Server.html">Server</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1ValueCallbackBase.html">ValueCallbackBase</a> &amp;&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set value callback for variable node. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_valuecallback_8cpp-example.html#a16">server_valuecallback.cpp</a>.</dd>
+</dl>
+
+</div>
+</div>
 <a id="a51131f59e2ce7f22a984fa6577fb2c27" name="a51131f59e2ce7f22a984fa6577fb2c27"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a51131f59e2ce7f22a984fa6577fb2c27">&#9670;&#160;</a></span>throwIfBad()</h2>
 
@@ -1500,7 +2057,7 @@ template&lt;typename T &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="exception_8hpp_source.html#l00085">85</a> of file <a class="el" href="exception_8hpp_source.html">exception.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="services_2monitoreditem_8hpp_source.html#l00160">opcua::services::createMonitoredItemsDataChangeAsync()</a>, <a class="el" href="services_2monitoreditem_8hpp_source.html#l00289">opcua::services::createMonitoredItemsEventAsync()</a>, <a class="el" href="services_2monitoreditem_8hpp_source.html#l00620">opcua::services::deleteMonitoredItemsAsync()</a>, <a class="el" href="services_2subscription_8hpp_source.html#l00337">opcua::services::deleteSubscriptionsAsync()</a>, <a class="el" href="services_2monitoreditem_8hpp_source.html#l00415">opcua::services::modifyMonitoredItemsAsync()</a>, <a class="el" href="services_2subscription_8hpp_source.html#l00214">opcua::services::modifySubscriptionAsync()</a>, <a class="el" href="types_8hpp_source.html#l00505">opcua::Guid::parse()</a>, <a class="el" href="types_8hpp_source.html#l00686">opcua::NodeId::parse()</a>, <a class="el" href="types_8hpp_source.html#l00841">opcua::ExpandedNodeId::parse()</a>, <a class="el" href="types_8hpp_source.html#l00082">opcua::StatusCode::throwIfBad()</a>, and <a class="el" href="types_8hpp_source.html#l02098">opcua::TypeWrapper&lt; T, Index &gt;::toString()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="services_2monitoreditem_8hpp_source.html#l00160">opcua::services::createMonitoredItemsDataChangeAsync()</a>, <a class="el" href="services_2monitoreditem_8hpp_source.html#l00289">opcua::services::createMonitoredItemsEventAsync()</a>, <a class="el" href="services_2monitoreditem_8hpp_source.html#l00620">opcua::services::deleteMonitoredItemsAsync()</a>, <a class="el" href="services_2subscription_8hpp_source.html#l00337">opcua::services::deleteSubscriptionsAsync()</a>, <a class="el" href="services_2monitoreditem_8hpp_source.html#l00415">opcua::services::modifyMonitoredItemsAsync()</a>, <a class="el" href="services_2subscription_8hpp_source.html#l00214">opcua::services::modifySubscriptionAsync()</a>, <a class="el" href="types_8hpp_source.html#l00516">opcua::Guid::parse()</a>, <a class="el" href="types_8hpp_source.html#l00697">opcua::NodeId::parse()</a>, <a class="el" href="types_8hpp_source.html#l00852">opcua::ExpandedNodeId::parse()</a>, <a class="el" href="types_8hpp_source.html#l00079">opcua::StatusCode::throwIfBad()</a>, and <a class="el" href="types_8hpp_source.html#l02106">opcua::TypeWrapper&lt; T, Index &gt;::toString()</a>.</p>
 
 </div>
 </div>
@@ -1522,7 +2079,7 @@ template&lt;typename T &gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_subscription_8cpp-example.html#a8">client_subscription.cpp</a>, <a class="el" href="events_2client_eventfilter_8cpp-example.html#a7">events/client_eventfilter.cpp</a>, and <a class="el" href="server_accesscontrol_8cpp-example.html#a11">server_accesscontrol.cpp</a>.</dd>
 </dl>
 
-<p class="reference">Referenced by <a class="el" href="types_8hpp_source.html#l02112">opcua::TypeWrapper&lt; T, Index &gt;::toString()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="types_8hpp_source.html#l02120">opcua::TypeWrapper&lt; T, Index &gt;::toString()</a>.</p>
 
 </div>
 </div>

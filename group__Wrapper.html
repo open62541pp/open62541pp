@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.20.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -622,10 +622,10 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="ua_2types_8hpp.html#a1b517683eabeb49a91a653561703157e">UAPP_GETTER_SPAN</a>(Type, member, memberSize)                                                     \</div>
 <div class="line">    <span class="keyword">auto</span>&amp; set##suffix(Span&lt;const Type&gt; member) {                                                   \</div>
-<div class="line">        <span class="keyword">const</span> <span class="keyword">auto</span>&amp; dataType = opcua::getDataType&lt;Type&gt;();                                         \</div>
+<div class="line">        <span class="keyword">const</span> <span class="keyword">auto</span>&amp; type = opcua::getDataType&lt;Type&gt;();                                             \</div>
 <div class="line">        handle()-&gt;specifiedAttributes |= flag;                                                     \</div>
-<div class="line">        detail::deallocateArray(handle()-&gt;member, handle()-&gt;memberSize, dataType);                 \</div>
-<div class="line">        handle()-&gt;member = detail::copyArray(member.data(), member.size(), dataType);              \</div>
+<div class="line">        detail::deallocateArray(handle()-&gt;member, handle()-&gt;memberSize, type);                     \</div>
+<div class="line">        handle()-&gt;member = detail::copyArray(member.data(), member.size(), type);                  \</div>
 <div class="line">        handle()-&gt;memberSize = member.size();                                                      \</div>
 <div class="line">        <span class="keywordflow">return</span> *<span class="keyword">this</span>;                                                                              \</div>
 <div class="line">    }</div>
@@ -1615,7 +1615,7 @@ template&lt;typename T &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00342">342</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="wrapper_8hpp_source.html#l00365">opcua::Wrapper&lt; T, Handler &gt;::asNative()</a>, <a class="el" href="wrapper_8hpp_source.html#l00358">opcua::Wrapper&lt; T, Handler &gt;::asNative()</a>, <a class="el" href="services_2monitoreditem_8hpp_source.html#l00160">opcua::services::createMonitoredItemsDataChangeAsync()</a>, <a class="el" href="services_2monitoreditem_8hpp_source.html#l00289">opcua::services::createMonitoredItemsEventAsync()</a>, <a class="el" href="services_2monitoreditem_8hpp_source.html#l00620">opcua::services::deleteMonitoredItemsAsync()</a>, <a class="el" href="services_2subscription_8hpp_source.html#l00337">opcua::services::deleteSubscriptionsAsync()</a>, <a class="el" href="services_2monitoreditem_8hpp_source.html#l00415">opcua::services::modifyMonitoredItemsAsync()</a>, <a class="el" href="services_2subscription_8hpp_source.html#l00214">opcua::services::modifySubscriptionAsync()</a>, and <a class="el" href="types_8hpp_source.html#l00303">opcua::String::operator==()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="wrapper_8hpp_source.html#l00365">opcua::Wrapper&lt; T, Handler &gt;::asNative()</a>, <a class="el" href="wrapper_8hpp_source.html#l00358">opcua::Wrapper&lt; T, Handler &gt;::asNative()</a>, <a class="el" href="services_2monitoreditem_8hpp_source.html#l00160">opcua::services::createMonitoredItemsDataChangeAsync()</a>, <a class="el" href="services_2monitoreditem_8hpp_source.html#l00289">opcua::services::createMonitoredItemsEventAsync()</a>, <a class="el" href="services_2monitoreditem_8hpp_source.html#l00620">opcua::services::deleteMonitoredItemsAsync()</a>, <a class="el" href="services_2subscription_8hpp_source.html#l00337">opcua::services::deleteSubscriptionsAsync()</a>, <a class="el" href="services_2monitoreditem_8hpp_source.html#l00415">opcua::services::modifyMonitoredItemsAsync()</a>, <a class="el" href="services_2subscription_8hpp_source.html#l00214">opcua::services::modifySubscriptionAsync()</a>, and <a class="el" href="types_8hpp_source.html#l00281">opcua::String::operator==()</a>.</p>
 
 </div>
 </div>
@@ -2015,7 +2015,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;IsRegistered&lt;T&gt;::
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l02130">2130</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l02138">2138</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -2255,7 +2255,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;IsRegistered&lt;T&gt;::
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l02137">2137</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l02145">2145</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -2295,7 +2295,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;IsRegistered&lt;T&gt;::
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l02144">2144</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l02152">2152</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -2335,7 +2335,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;IsRegistered&lt;T&gt;::
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l02123">2123</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l02131">2131</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -2375,7 +2375,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;IsRegistered&lt;T&gt;::
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l02151">2151</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l02159">2159</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -2415,7 +2415,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;IsRegistered&lt;T&gt;::
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l02158">2158</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l02166">2166</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -2647,7 +2647,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;IsRegistered&lt;T&gt;::
 
 <p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l02112">2112</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l02120">2120</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -2698,7 +2698,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l02098">2098</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l02106">2106</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>

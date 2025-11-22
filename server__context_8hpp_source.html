@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.20.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -156,17 +156,18 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    std::atomic&lt;bool&gt; running{<span class="keyword">false</span>};</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    std::mutex mutexRun;</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="preprocessor">#ifdef UA_ENABLE_SUBSCRIPTIONS</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keyword">using </span>SubId = <a class="code hl_typedef" href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">IntegerId</a>;  <span class="comment">// always 0</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keyword">using </span>MonId = <a class="code hl_typedef" href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">IntegerId</a>;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keyword">using </span>SubMonId = std::pair&lt;SubId, MonId&gt;;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    ContextMap&lt;SubMonId, services::detail::MonitoredItemContext&gt; monitoredItems;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    ContextMap&lt;NodeId, NodeContext&gt; nodeContexts;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>};</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>}  <span class="comment">// namespace opcua::detail</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    ContextMap&lt;uint64_t, Staleable&lt;std::function&lt;void()&gt;&gt;&gt; callbacks;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    ContextMap&lt;NodeId, NodeContext&gt; nodeContexts;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="preprocessor">#ifdef UA_ENABLE_SUBSCRIPTIONS</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keyword">using </span>SubId = <a class="code hl_typedef" href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">IntegerId</a>;  <span class="comment">// always 0</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keyword">using </span>MonId = <a class="code hl_typedef" href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">IntegerId</a>;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keyword">using </span>SubMonId = std::pair&lt;SubId, MonId&gt;;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    ContextMap&lt;SubMonId, services::detail::MonitoredItemContext&gt; monitoredItems;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>};</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>}  <span class="comment">// namespace opcua::detail</span></div>
 <div class="ttc" id="acommon_8h_html"><div class="ttname"><a href="common_8h.html">common.h</a></div></div>
 <div class="ttc" id="acontextmap_8hpp_html"><div class="ttname"><a href="contextmap_8hpp.html">contextmap.hpp</a></div></div>
 <div class="ttc" id="aexceptioncatcher_8hpp_html"><div class="ttname"><a href="exceptioncatcher_8hpp.html">exceptioncatcher.hpp</a></div></div>

@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.20.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -119,9 +119,9 @@ Inheritance diagram for opcua::Variant:</div>
 <div class="line">std::array&lt;int&gt; <a class="code hl_function" href="classopcua_1_1Variant.html#a58d04c7b687052bd3e63e8c69357c642">array</a>{1, 2, 3};</div>
 <div class="line">var.assign(<a class="code hl_function" href="classopcua_1_1Variant.html#a58d04c7b687052bd3e63e8c69357c642">array</a>);                      <span class="comment">// set array (via assign)</span></div>
 <div class="line"><span class="keyword">auto</span> vec = var.to&lt;std::vector&lt;int&gt;&gt;();  <span class="comment">// convert array</span></div>
-<div class="ttc" id="aclassopcua_1_1Variant_html"><div class="ttname"><a href="classopcua_1_1Variant.html">opcua::Variant</a></div><div class="ttdoc">UA_Variant wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l01048">types.hpp:1048</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Variant_html_a4808e41aa0efe6fec911570ccf94763c"><div class="ttname"><a href="classopcua_1_1Variant.html#a4808e41aa0efe6fec911570ccf94763c">opcua::Variant::to</a></div><div class="ttdeci">T to() const &amp;</div><div class="ttdoc">Converts the variant to the specified type T with automatic conversion if required.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l01374">types.hpp:1374</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Variant_html_a58d04c7b687052bd3e63e8c69357c642"><div class="ttname"><a href="classopcua_1_1Variant.html#a58d04c7b687052bd3e63e8c69357c642">opcua::Variant::array</a></div><div class="ttdeci">Span&lt; T &gt; array()</div><div class="ttdoc">Get array with given template type (only native or wrapper types).</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l01338">types.hpp:1338</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html"><div class="ttname"><a href="classopcua_1_1Variant.html">opcua::Variant</a></div><div class="ttdoc">UA_Variant wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l01059">types.hpp:1059</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html_a4808e41aa0efe6fec911570ccf94763c"><div class="ttname"><a href="classopcua_1_1Variant.html#a4808e41aa0efe6fec911570ccf94763c">opcua::Variant::to</a></div><div class="ttdeci">T to() const &amp;</div><div class="ttdoc">Converts the variant to the specified type T with automatic conversion if required.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l01385">types.hpp:1385</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html_a58d04c7b687052bd3e63e8c69357c642"><div class="ttname"><a href="classopcua_1_1Variant.html#a58d04c7b687052bd3e63e8c69357c642">opcua::Variant::array</a></div><div class="ttdeci">Span&lt; T &gt; array()</div><div class="ttdoc">Get array with given template type (only native or wrapper types).</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l01349">types.hpp:1349</a></div></div>
 </div><!-- fragment --></li>
 <li><p class="startli"><b>Type definition retrieval</b>: Automatically retrieves <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> via <a class="el" href="structopcua_1_1TypeRegistry.html" title="Type registry.">TypeRegistry</a>. For every registered type <code>T</code>, the type definition parameter can be omitted:</p>
 <div class="fragment"><div class="line"><a class="code hl_class" href="classopcua_1_1Variant.html">opcua::Variant</a> var{5, <a class="code hl_variableRef" target="_blank" href="open62541/types__generated_8h.html#aba037b86f18a7b7bceef5c098910c2c7">UA_TYPES</a>[UA_TYPES_INT]};  <span class="comment">// explicit type definition</span></div>
@@ -132,15 +132,15 @@ Inheritance diagram for opcua::Variant:</div>
 <div class="fragment"><div class="line"><a class="code hl_class" href="classopcua_1_1Variant.html">opcua::Variant</a> var{std::string{<span class="stringliteral">&quot;test&quot;</span>}};     <span class="comment">// convert to native type (copy)</span></div>
 <div class="line"><span class="keyword">auto</span>&amp; <a class="code hl_function" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a> = var.<a class="code hl_function" href="classopcua_1_1Variant.html#a7338abca386e569175fb864c3195c031">scalar</a>&lt;<a class="code hl_class" href="classopcua_1_1String.html">opcua::String</a>&gt;();  <span class="comment">// reference to native type (no copy)</span></div>
 <div class="line"><span class="keyword">auto</span> str = var.to&lt;std::string&gt;();            <span class="comment">// conversion (copy required)</span></div>
-<div class="ttc" id="aclassopcua_1_1String_html"><div class="ttname"><a href="classopcua_1_1String.html">opcua::String</a></div><div class="ttdoc">UA_String wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00254">types.hpp:256</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Variant_html_a7338abca386e569175fb864c3195c031"><div class="ttname"><a href="classopcua_1_1Variant.html#a7338abca386e569175fb864c3195c031">opcua::Variant::scalar</a></div><div class="ttdeci">T &amp; scalar() &amp;</div><div class="ttdoc">Get scalar value with given template type (only native or wrapper types).</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l01311">types.hpp:1311</a></div></div>
+<div class="ttc" id="aclassopcua_1_1String_html"><div class="ttname"><a href="classopcua_1_1String.html">opcua::String</a></div><div class="ttdoc">UA_String wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00236">types.hpp:238</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html_a7338abca386e569175fb864c3195c031"><div class="ttname"><a href="classopcua_1_1Variant.html#a7338abca386e569175fb864c3195c031">opcua::Variant::scalar</a></div><div class="ttdeci">T &amp; scalar() &amp;</div><div class="ttdoc">Get scalar value with given template type (only native or wrapper types).</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l01322">types.hpp:1322</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Wrapper_html_a50cca18d937510c1118613d75385448f"><div class="ttname"><a href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">opcua::Wrapper::native</a></div><div class="ttdeci">constexpr const T &amp; native() const noexcept</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00243">wrapper.hpp:243</a></div></div>
 </div><!-- fragment --> </li>
 </ol>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2client_custom_datatypes_8cpp-example.html#_a4">custom_datatypes/client_custom_datatypes.cpp</a>, <a class="el" href="custom_datatypes_2server_custom_datatypes_8cpp-example.html#_a6">custom_datatypes/server_custom_datatypes.cpp</a>, <a class="el" href="method_2client_method_async_8cpp-example.html#_a9">method/client_method_async.cpp</a>, <a class="el" href="server_8cpp-example.html#_a9">server.cpp</a>, <a class="el" href="server_accesscontrol_8cpp-example.html#_a7">server_accesscontrol.cpp</a>, <a class="el" href="server_datasource_8cpp-example.html#_a8">server_datasource.cpp</a>, <a class="el" href="server_instantiation_8cpp-example.html#_a4">server_instantiation.cpp</a>, <a class="el" href="server_minimal_8cpp-example.html#_a4">server_minimal.cpp</a>, <a class="el" href="server_valuecallback_8cpp-example.html#_a13">server_valuecallback.cpp</a>, and <a class="el" href="typeconversion_8cpp-example.html#_a1">typeconversion.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01048">1048</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01059">1059</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -366,7 +366,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;!std::is_const_v&lt;T&g
 <p>Create <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> from a pointer to a scalar/array (no copy). </p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classopcua_1_1Variant.html#a7d6782786e4a4bef41ec75a84718db71" title="Assign pointer to scalar/array to variant (no copy).">assign(T*)</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01061">1061</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01072">1072</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -409,7 +409,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;!std::is_const_v&lt;T&g
 <p>Create <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> from a pointer to a scalar/array with a custom data type (no copy). </p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classopcua_1_1Variant.html#ad7fe7f91ad8e635ee73c82af7a22cd83" title="Assign pointer to scalar/array to variant with custom data type (no copy).">assign(T*, const UA_DataType&amp;)</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01068">1068</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01079">1079</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -442,7 +442,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;!isVariant&lt;T&gt;&gt;
 <p>Create <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> from a scalar/array (copy/move). </p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classopcua_1_1Variant.html#a0365f02e686d865a00364dfe0abce626" title="Assign scalar/array to variant (copy/move and convert if required).">assign(T&amp;&amp;)</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01075">1075</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01086">1086</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -485,7 +485,7 @@ template&lt;typename T &gt; </div>
 <p>Create <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> from a scalar/array with a custom data type (copy/move). </p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classopcua_1_1Variant.html#a1b2a8dc18da3401d65e363e8031af907" title="Assign scalar/array to variant with custom data type (copy/move).">assign(T&amp;&amp;, const UA_DataType&amp;)</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01082">1082</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01093">1093</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -528,7 +528,7 @@ template&lt;typename InputIt &gt; </div>
 <p>Create <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> from a range of elements (copy). </p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classopcua_1_1Variant.html#a2e524fb701decb6815457e2c9f69cf0f" title="Assign range to variant (copy and convert if required).">assign(InputIt, InputIt)</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01089">1089</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01100">1100</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -577,7 +577,7 @@ template&lt;typename InputIt &gt; </div>
 <p>Create <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> from a range of elements with a custom data type (copy). </p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classopcua_1_1Variant.html#a380d85799965d88c3cd6b46bae2338bf" title="Assign range to variant with custom data type (copy).">assign(InputIt, InputIt, const UA_DataType&amp;)</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01096">1096</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01107">1107</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -617,7 +617,7 @@ template&lt;typename T &gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2client_custom_datatypes_8cpp-example.html#a10">custom_datatypes/client_custom_datatypes.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01338">1338</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01349">1349</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -654,7 +654,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01345">1345</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01356">1356</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -683,7 +683,7 @@ template&lt;typename T &gt; </div>
 
 <p>Get array dimensions. </p>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01284">1284</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01295">1295</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -714,9 +714,9 @@ template&lt;typename T &gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="typeconversion_8cpp-example.html#a7">typeconversion.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01279">1279</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01290">1290</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="types_8hpp_source.html#l01338">array()</a>, and <a class="el" href="types_8hpp_source.html#l01345">array()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="types_8hpp_source.html#l01349">array()</a>, and <a class="el" href="types_8hpp_source.html#l01356">array()</a>.</p>
 
 </div>
 </div>
@@ -771,7 +771,7 @@ template&lt;typename InputIt &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01194">1194</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01205">1205</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -833,7 +833,7 @@ template&lt;typename InputIt &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01212">1212</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01223">1223</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -863,7 +863,7 @@ template&lt;typename InputIt &gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="typeconversion_8cpp-example.html#a2">typeconversion.cpp</a>.</dd>
 </dl>
 
-<p class="reference">Referenced by <a class="el" href="types_8hpp_source.html#l01155">assign()</a>, <a class="el" href="types_8hpp_source.html#l01120">assign()</a>, <a class="el" href="types_8hpp_source.html#l01227">operator=()</a>, <a class="el" href="types_8hpp_source.html#l01219">operator=()</a>, <a class="el" href="types_8hpp_source.html#l01089">Variant()</a>, <a class="el" href="types_8hpp_source.html#l01096">Variant()</a>, <a class="el" href="types_8hpp_source.html#l01075">Variant()</a>, <a class="el" href="types_8hpp_source.html#l01082">Variant()</a>, <a class="el" href="types_8hpp_source.html#l01061">Variant()</a>, and <a class="el" href="types_8hpp_source.html#l01068">Variant()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="types_8hpp_source.html#l01166">assign()</a>, <a class="el" href="types_8hpp_source.html#l01131">assign()</a>, <a class="el" href="types_8hpp_source.html#l01238">operator=()</a>, <a class="el" href="types_8hpp_source.html#l01230">operator=()</a>, <a class="el" href="types_8hpp_source.html#l01100">Variant()</a>, <a class="el" href="types_8hpp_source.html#l01107">Variant()</a>, <a class="el" href="types_8hpp_source.html#l01086">Variant()</a>, <a class="el" href="types_8hpp_source.html#l01093">Variant()</a>, <a class="el" href="types_8hpp_source.html#l01072">Variant()</a>, and <a class="el" href="types_8hpp_source.html#l01079">Variant()</a>.</p>
 
 </div>
 </div>
@@ -941,7 +941,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01155">1155</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01166">1166</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -994,7 +994,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01178">1178</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01189">1189</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -1037,7 +1037,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;!std::is_const_v&lt;T&g
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01120">1120</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01131">1131</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -1091,7 +1091,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;!std::is_const_v&lt;T&g
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01137">1137</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01148">1148</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -1121,7 +1121,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;!std::is_const_v&lt;T&g
 <p>Get pointer to the underlying data.   </p>
 <p>Check the properties and data type before casting it to the actual type. Use the methods <a class="el" href="classopcua_1_1Variant.html#ae528dcb9d819364f9590c310dc8e8f2a">isScalar</a>, <a class="el" href="classopcua_1_1Variant.html#ab2ef10e5ae385c175e646eedf347e209">isArray</a>, <a class="el" href="classopcua_1_1Variant.html#a7a68c9dad90735ea93c52494057b9f80">isType</a> / <a class="el" href="classopcua_1_1Variant.html#a9600fab2e2b2ab51091395eaf4127694">type</a>. </p><dl class="section note"><dt>Note</dt><dd>The <a class="elRef" target="_blank" href="open62541/types_8h.html#a2cd952b4e4fae65bd5bbc1b90499ab5b">UA_EMPTY_ARRAY_SENTINEL</a> sentinel, used to indicate an empty array, is stripped from the returned pointer.   </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01304">1304</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01315">1315</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -1153,9 +1153,9 @@ template&lt;typename T , typename  = std::enable_if_t&lt;!std::is_const_v&lt;T&g
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2client_custom_datatypes_8cpp-example.html#a7">custom_datatypes/client_custom_datatypes.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01299">1299</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01310">1310</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="types_8hpp_source.html#l01338">array()</a>, <a class="el" href="types_8hpp_source.html#l01345">array()</a>, <a class="el" href="types_8hpp_source.html#l01304">data()</a>, <a class="el" href="types_8hpp_source.html#l01299">data()</a>, <a class="el" href="types_8hpp_source.html#l01311">scalar()</a>, and <a class="el" href="types_8hpp_source.html#l01318">scalar()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="types_8hpp_source.html#l01349">array()</a>, <a class="el" href="types_8hpp_source.html#l01356">array()</a>, <a class="el" href="types_8hpp_source.html#l01315">data()</a>, <a class="el" href="types_8hpp_source.html#l01310">data()</a>, <a class="el" href="types_8hpp_source.html#l01322">scalar()</a>, and <a class="el" href="types_8hpp_source.html#l01329">scalar()</a>.</p>
 
 </div>
 </div>
@@ -1184,9 +1184,9 @@ template&lt;typename T , typename  = std::enable_if_t&lt;!std::is_const_v&lt;T&g
 
 <p>Check if the variant is empty. </p>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01238">1238</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01249">1249</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="types_8hpp_source.html#l01248">isArray()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="types_8hpp_source.html#l01259">isArray()</a>.</p>
 
 </div>
 </div>
@@ -1217,7 +1217,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;!std::is_const_v&lt;T&g
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2client_custom_datatypes_8cpp-example.html#a8">custom_datatypes/client_custom_datatypes.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01248">1248</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01259">1259</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -1248,9 +1248,9 @@ template&lt;typename T , typename  = std::enable_if_t&lt;!std::is_const_v&lt;T&g
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2client_custom_datatypes_8cpp-example.html#a12">custom_datatypes/client_custom_datatypes.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01243">1243</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01254">1254</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="types_8hpp_source.html#l01248">isArray()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="types_8hpp_source.html#l01259">isArray()</a>.</p>
 
 </div>
 </div>
@@ -1281,9 +1281,9 @@ template&lt;typename T &gt; </div>
 
 <p>Check if the variant type is equal to the provided template type. </p>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01269">1269</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01280">1280</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="types_8hpp_source.html#l01269">isType()</a>, <a class="el" href="types_8hpp_source.html#l01258">isType()</a>, and <a class="el" href="types_8hpp_source.html#l01253">isType()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="types_8hpp_source.html#l01280">isType()</a>, <a class="el" href="types_8hpp_source.html#l01269">isType()</a>, and <a class="el" href="types_8hpp_source.html#l01264">isType()</a>.</p>
 
 </div>
 </div>
@@ -1313,7 +1313,7 @@ template&lt;typename T &gt; </div>
 
 <p>Check if the variant type is equal to the provided data type id. </p>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01263">1263</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01274">1274</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -1343,7 +1343,7 @@ template&lt;typename T &gt; </div>
 
 <p>Check if the variant type is equal to the provided data type. </p>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01258">1258</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01269">1269</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -1375,7 +1375,7 @@ template&lt;typename T &gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2client_custom_datatypes_8cpp-example.html#a6">custom_datatypes/client_custom_datatypes.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01253">1253</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01264">1264</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -1408,7 +1408,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;!isVariant&lt;T&gt;&gt;
 <p>Assign scalar/array to variant (copy and convert if required). </p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classopcua_1_1Variant.html#a0365f02e686d865a00364dfe0abce626" title="Assign scalar/array to variant (copy/move and convert if required).">assign(T&amp;&amp;)</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01227">1227</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01238">1238</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -1441,7 +1441,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;!isVariant&lt;T&gt;&gt;
 <p>Assign pointer to scalar/array to variant (no copy). </p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classopcua_1_1Variant.html#a7d6782786e4a4bef41ec75a84718db71" title="Assign pointer to scalar/array to variant (no copy).">assign(T*)</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01219">1219</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01230">1230</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -1480,7 +1480,7 @@ template&lt;typename T &gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2client_custom_datatypes_8cpp-example.html#a14">custom_datatypes/client_custom_datatypes.cpp</a>, <a class="el" href="method_2client_method_async_8cpp-example.html#a10">method/client_method_async.cpp</a>, <a class="el" href="server_valuecallback_8cpp-example.html#a9">server_valuecallback.cpp</a>, and <a class="el" href="typeconversion_8cpp-example.html#a3">typeconversion.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01311">1311</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01322">1322</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -1517,7 +1517,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01325">1325</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01336">1336</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -1554,7 +1554,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01318">1318</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01329">1329</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -1591,7 +1591,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01331">1331</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01342">1342</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -1637,7 +1637,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01380">1380</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01391">1391</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -1685,7 +1685,7 @@ template&lt;typename T &gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_8cpp-example.html#a11">server.cpp</a>, <a class="el" href="server_datasource_8cpp-example.html#a14">server_datasource.cpp</a>, and <a class="el" href="typeconversion_8cpp-example.html#a4">typeconversion.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01374">1374</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01385">1385</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -1714,9 +1714,9 @@ template&lt;typename T &gt; </div>
 
 <p>Get data type. </p>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01274">1274</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l01285">1285</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="types_8hpp_source.html#l01212">assign()</a>, <a class="el" href="types_8hpp_source.html#l01178">assign()</a>, <a class="el" href="types_8hpp_source.html#l01137">assign()</a>, <a class="el" href="types_8hpp_source.html#l01263">isType()</a>, <a class="el" href="types_8hpp_source.html#l01258">isType()</a>, <a class="el" href="types_8hpp_source.html#l01253">isType()</a>, <a class="el" href="types_8hpp_source.html#l01096">Variant()</a>, <a class="el" href="types_8hpp_source.html#l01082">Variant()</a>, and <a class="el" href="types_8hpp_source.html#l01068">Variant()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="types_8hpp_source.html#l01223">assign()</a>, <a class="el" href="types_8hpp_source.html#l01189">assign()</a>, <a class="el" href="types_8hpp_source.html#l01148">assign()</a>, <a class="el" href="types_8hpp_source.html#l01274">isType()</a>, <a class="el" href="types_8hpp_source.html#l01269">isType()</a>, <a class="el" href="types_8hpp_source.html#l01264">isType()</a>, <a class="el" href="types_8hpp_source.html#l01107">Variant()</a>, <a class="el" href="types_8hpp_source.html#l01093">Variant()</a>, and <a class="el" href="types_8hpp_source.html#l01079">Variant()</a>.</p>
 
 </div>
 </div>

@@ -1,7 +1,7 @@
 var searchData=
 [
   ['gatewayserveruri_0',['gatewayserveruri',['../classopcua_1_1ua_1_1ApplicationDescription.html#a66b52e789de21fbcef2edd9526efcab5',1,'opcua::ua::ApplicationDescription::gatewayServerUri() noexcept'],['../classopcua_1_1ua_1_1ApplicationDescription.html#acaa4a5690ab2d2ee454500b7496a1666',1,'opcua::ua::ApplicationDescription::gatewayServerUri() const noexcept']]],
-  ['get_1',['get',['../classopcua_1_1Bitmask.html#aff44530f78850f244c0b75add5655fa1',1,'opcua::Bitmask::get()'],['../classopcua_1_1StatusCode.html#ace5935f872494fe518def45b1105f312',1,'opcua::StatusCode::get()'],['../classopcua_1_1DateTime.html#a20b227dfd968989c0b6d16d304215e38',1,'opcua::DateTime::get()']]],
+  ['get_1',['get',['../classopcua_1_1Bitmask.html#aff44530f78850f244c0b75add5655fa1',1,'opcua::Bitmask::get()'],['../classopcua_1_1StatusCode.html#ace5935f872494fe518def45b1105f312',1,'opcua::StatusCode::get()'],['../classopcua_1_1DateTime.html#a029e4037d11223f1b958488efaf1d7cf',1,'opcua::DateTime::get()']]],
   ['getasyncoperation_2',['getAsyncOperation',['../classopcua_1_1Server.html#adf5a608e6c5e6f8233c89751b147542a',1,'opcua::Server']]],
   ['getdatatype_3',['getdatatype',['../namespaceopcua.html#ac9a2b101f7e9cd8c136b9e9f7336c92b',1,'opcua::getDataType()'],['../structopcua_1_1TypeRegistry_3_01T_00_01std_1_1enable__if__t_3_01IsWrapper_3_01T_01_4_1_1value_013bd4a4e727f50ce7a641278c61d6edb5.html#ae962888ba386d4532eb58d7eb54c9bc6',1,'opcua::TypeRegistry&lt; T, std::enable_if_t&lt; IsWrapper&lt; T &gt;::value &amp;&amp;IsRegistered&lt; typename T::NativeType &gt;::value &gt; &gt;::getDataType()']]],
   ['getendpoints_4',['getEndpoints',['../classopcua_1_1Client.html#a7309d29187b722cdd72955154ad1e10c',1,'opcua::Client']]],

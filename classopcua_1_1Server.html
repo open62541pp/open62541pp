@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.20.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -106,10 +106,10 @@ $(function() {
 <p>The server expects that the configuration is not modified during runtime.</p>
 <p>Use the <a class="el" href="classopcua_1_1Server.html#af78448a2823bfe2e6ba8badb987a8bc8">handle()</a> method to get access the underlying <a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> instance and use the full power of open62541.</p>
 <p>Don't overwrite the <a class="elRef" target="_blank" href="open62541/structUA__ServerConfig.html#ab59fdb999e2078f5ef0cfef31807d8c6">UA_ServerConfig::context</a> pointer! The context pointer is used to store a pointer to the <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a> instance (for <a class="el" href="classopcua_1_1Server.html#ae27dada1ca73cfd640db514a69b3016f" title="Convert native UA_Server pointer to its wrapper instance.">asWrapper(UA_Server*)</a>) and to get access to the underlying server context. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2server_custom_datatypes_8cpp-example.html#_a0">custom_datatypes/server_custom_datatypes.cpp</a>, <a class="el" href="events_2server_events_8cpp-example.html#_a0">events/server_events.cpp</a>, <a class="el" href="method_2server_method_8cpp-example.html#_a0">method/server_method.cpp</a>, <a class="el" href="method_2server_method_async_8cpp-example.html#_a0">method/server_method_async.cpp</a>, <a class="el" href="server_8cpp-example.html#_a4">server.cpp</a>, <a class="el" href="server_accesscontrol_8cpp-example.html#_a16">server_accesscontrol.cpp</a>, <a class="el" href="server_datasource_8cpp-example.html#_a15">server_datasource.cpp</a>, <a class="el" href="server_instantiation_8cpp-example.html#_a0">server_instantiation.cpp</a>, <a class="el" href="server_logger_8cpp-example.html#_a17">server_logger.cpp</a>, <a class="el" href="server_minimal_8cpp-example.html#_a0">server_minimal.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#_a15">server_valuecallback.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2server_custom_datatypes_8cpp-example.html#_a0">custom_datatypes/server_custom_datatypes.cpp</a>, <a class="el" href="events_2server_events_8cpp-example.html#_a0">events/server_events.cpp</a>, <a class="el" href="method_2server_method_8cpp-example.html#_a0">method/server_method.cpp</a>, <a class="el" href="method_2server_method_async_8cpp-example.html#_a0">method/server_method_async.cpp</a>, <a class="el" href="server_8cpp-example.html#_a4">server.cpp</a>, <a class="el" href="server_accesscontrol_8cpp-example.html#_a16">server_accesscontrol.cpp</a>, <a class="el" href="server_callback_8cpp-example.html#_a0">server_callback.cpp</a>, <a class="el" href="server_datasource_8cpp-example.html#_a15">server_datasource.cpp</a>, <a class="el" href="server_instantiation_8cpp-example.html#_a0">server_instantiation.cpp</a>, <a class="el" href="server_logger_8cpp-example.html#_a17">server_logger.cpp</a>, <a class="el" href="server_minimal_8cpp-example.html#_a0">server_minimal.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#_a15">server_valuecallback.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="server_8hpp_source.html#l00142">142</a> of file <a class="el" href="server_8hpp_source.html">server.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8hpp_source.html#l00141">141</a> of file <a class="el" href="server_8hpp_source.html">server.hpp</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -139,6 +139,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a955760a9fb91bee38d740829e8214872"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb7a3f381506a5539d2dd4c507e0dcd6" id="r_afb7a3f381506a5539d2dd4c507e0dcd6"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classopcua_1_1String.html">String</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#afb7a3f381506a5539d2dd4c507e0dcd6">namespaceArray</a> ()</td></tr>
 <tr class="separator:afb7a3f381506a5539d2dd4c507e0dcd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48c8106fd541ed27f739ac53581f4d46" id="r_a48c8106fd541ed27f739ac53581f4d46"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="namespaceopcua.html#a00e58ea3436dae57a589fc7b44a348f8">NamespaceIndex</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a48c8106fd541ed27f739ac53581f4d46">namespaceIndex</a> (std::string_view uri) noexcept</td></tr>
+<tr class="separator:a48c8106fd541ed27f739ac53581f4d46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f60afa469c57d8f211d0a3dce029e29" id="r_a4f60afa469c57d8f211d0a3dce029e29"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceopcua.html#a00e58ea3436dae57a589fc7b44a348f8">NamespaceIndex</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a4f60afa469c57d8f211d0a3dce029e29">registerNamespace</a> (std::string_view uri)</td></tr>
 <tr class="separator:a4f60afa469c57d8f211d0a3dce029e29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95016c477db23efc19979bd4dd62d88e" id="r_a95016c477db23efc19979bd4dd62d88e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a95016c477db23efc19979bd4dd62d88e">setVariableNodeValueCallback</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="classopcua_1_1ValueCallbackBase.html">ValueCallbackBase</a> &amp;callback)</td></tr>
@@ -149,8 +151,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a67736c36802e3e4c91c97de82b7fe6d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3eea413bec701acce9b719bd13afb52" id="r_ae3eea413bec701acce9b719bd13afb52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#ae3eea413bec701acce9b719bd13afb52">setVariableNodeDataSource</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::unique_ptr&lt; <a class="el" href="classopcua_1_1DataSourceBase.html">DataSourceBase</a> &gt; &amp;&amp;source)</td></tr>
 <tr class="separator:ae3eea413bec701acce9b719bd13afb52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a80242dd95c529b6e7b68c8d60da91a" id="r_a7a80242dd95c529b6e7b68c8d60da91a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Subscription.html">Subscription</a>&lt; <a class="el" href="classopcua_1_1Server.html">Server</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a7a80242dd95c529b6e7b68c8d60da91a">createSubscription</a> () noexcept</td></tr>
-<tr class="separator:a7a80242dd95c529b6e7b68c8d60da91a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74af3b7dbfa031a19230a45dcf3f3a31" id="r_a74af3b7dbfa031a19230a45dcf3f3a31"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a74af3b7dbfa031a19230a45dcf3f3a31">runIterate</a> ()</td></tr>
 <tr class="separator:a74af3b7dbfa031a19230a45dcf3f3a31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7346a714c85e2d99fc8bc9fd1dd31d6d" id="r_a7346a714c85e2d99fc8bc9fd1dd31d6d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a7346a714c85e2d99fc8bc9fd1dd31d6d">run</a> ()</td></tr>
@@ -384,34 +384,6 @@ Related Symbols</h2></td></tr>
 
 </div>
 </div>
-<a id="a7a80242dd95c529b6e7b68c8d60da91a" name="a7a80242dd95c529b6e7b68c8d60da91a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7a80242dd95c529b6e7b68c8d60da91a">&#9670;&#160;</a></span>createSubscription()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Subscription.html">Subscription</a>&lt; <a class="el" href="classopcua_1_1Server.html">Server</a> &gt; opcua::Server::createSubscription </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Create a (pseudo) subscription to monitor local data changes and events. </p>
-<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000007">Deprecated:</a></b></dt><dd>Use <a class="el" href="classopcua_1_1Subscription.html" title="High-level subscription class.">Subscription</a> constructor </dd></dl>
-
-</div>
-</div>
 <a id="a8c558952ba75f4e938fa7102e3611e86" name="a8c558952ba75f4e938fa7102e3611e86"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8c558952ba75f4e938fa7102e3611e86">&#9670;&#160;</a></span>handle() <span class="overload">[1/2]</span></h2>
 
@@ -508,6 +480,34 @@ Related Symbols</h2></td></tr>
 
 </div>
 </div>
+<a id="a48c8106fd541ed27f739ac53581f4d46" name="a48c8106fd541ed27f739ac53581f4d46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48c8106fd541ed27f739ac53581f4d46">&#9670;&#160;</a></span>namespaceIndex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::optional&lt; <a class="el" href="namespaceopcua.html#a00e58ea3436dae57a589fc7b44a348f8">NamespaceIndex</a> &gt; opcua::Server::namespaceIndex </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>uri</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get namespace index for given URI. </p>
+
+</div>
+</div>
 <a id="a850a7bf61130bc444ee3e90ee6613a50" name="a850a7bf61130bc444ee3e90ee6613a50"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a850a7bf61130bc444ee3e90ee6613a50">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
@@ -596,7 +596,7 @@ Related Symbols</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Run the server's main loop. This method will block until <a class="el" href="classopcua_1_1Server.html#a51f8bc0f79b2e5cea8fc094c58a76a9c" title="Stop the server&#39;s main loop.">Server::stop</a> is called. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2server_custom_datatypes_8cpp-example.html#a14">custom_datatypes/server_custom_datatypes.cpp</a>, <a class="el" href="events_2server_events_8cpp-example.html#a10">events/server_events.cpp</a>, <a class="el" href="method_2server_method_8cpp-example.html#a7">method/server_method.cpp</a>, <a class="el" href="method_2server_method_async_8cpp-example.html#a6">method/server_method_async.cpp</a>, <a class="el" href="server_datasource_8cpp-example.html#a21">server_datasource.cpp</a>, <a class="el" href="server_instantiation_8cpp-example.html#a7">server_instantiation.cpp</a>, <a class="el" href="server_minimal_8cpp-example.html#a5">server_minimal.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#a17">server_valuecallback.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2server_custom_datatypes_8cpp-example.html#a14">custom_datatypes/server_custom_datatypes.cpp</a>, <a class="el" href="events_2server_events_8cpp-example.html#a10">events/server_events.cpp</a>, <a class="el" href="method_2server_method_8cpp-example.html#a7">method/server_method.cpp</a>, <a class="el" href="method_2server_method_async_8cpp-example.html#a6">method/server_method_async.cpp</a>, <a class="el" href="server_callback_8cpp-example.html#a5">server_callback.cpp</a>, <a class="el" href="server_datasource_8cpp-example.html#a21">server_datasource.cpp</a>, <a class="el" href="server_instantiation_8cpp-example.html#a7">server_instantiation.cpp</a>, <a class="el" href="server_minimal_8cpp-example.html#a5">server_minimal.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#a17">server_valuecallback.cpp</a>.</dd>
 </dl>
 
 </div>
@@ -664,7 +664,7 @@ Related Symbols</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8hpp_source.html#l00164">164</a> of file <a class="el" href="server_8hpp_source.html">server.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8hpp_source.html#l00163">163</a> of file <a class="el" href="server_8hpp_source.html">server.hpp</a>.</p>
 
 </div>
 </div>
@@ -694,10 +694,6 @@ Related Symbols</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Set data source for variable node. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_datasource_8cpp-example.html#a20">server_datasource.cpp</a>.</dd>
-</dl>
-
 </div>
 </div>
 <a id="ae3eea413bec701acce9b719bd13afb52" name="ae3eea413bec701acce9b719bd13afb52"></a>
@@ -725,8 +721,6 @@ Related Symbols</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Set data source for variable node (move ownership to server). </p>
 
 </div>
 </div>
@@ -756,8 +750,6 @@ Related Symbols</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Set value callback for variable node (move ownership to server). </p>
-
 </div>
 </div>
 <a id="a95016c477db23efc19979bd4dd62d88e" name="a95016c477db23efc19979bd4dd62d88e"></a>
@@ -785,10 +777,6 @@ Related Symbols</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Set value callback for variable node. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_valuecallback_8cpp-example.html#a16">server_valuecallback.cpp</a>.</dd>
-</dl>
 
 </div>
 </div>
@@ -930,7 +918,7 @@ Related Symbols</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8hpp_source.html#l00233">233</a> of file <a class="el" href="server_8hpp_source.html">server.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8hpp_source.html#l00227">227</a> of file <a class="el" href="server_8hpp_source.html">server.hpp</a>.</p>
 
 </div>
 </div>
@@ -968,7 +956,7 @@ Related Symbols</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8hpp_source.html#l00228">228</a> of file <a class="el" href="server_8hpp_source.html">server.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8hpp_source.html#l00222">222</a> of file <a class="el" href="server_8hpp_source.html">server.hpp</a>.</p>
 
 </div>
 </div>

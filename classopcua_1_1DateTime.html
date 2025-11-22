@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.20.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -90,6 +90,7 @@ $(function() {
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#related">Related Symbols</a> &#124;
 <a href="classopcua_1_1DateTime-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">opcua::DateTime Class Reference<div class="ingroups"><a class="el" href="group__Wrapper.html">Wrapper classes</a></div></div></div>
 </div><!--header-->
@@ -108,14 +109,14 @@ Inheritance diagram for opcua::DateTime:</div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_connect_8cpp-example.html#_a5">client_connect.cpp</a>, <a class="el" href="client_minimal_8cpp-example.html#_a3">client_minimal.cpp</a>, <a class="el" href="events_2client_eventfilter_8cpp-example.html#_a9">events/client_eventfilter.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#_a10">server_valuecallback.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00381">381</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00359">359</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:ae7375ebfe4e6809021b759bee9774329" id="r_ae7375ebfe4e6809021b759bee9774329"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DateTime.html#ae7375ebfe4e6809021b759bee9774329">DefaultClock</a> = std::chrono::system_clock</td></tr>
-<tr class="separator:ae7375ebfe4e6809021b759bee9774329"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acb96457b8f19d74ccfaa720fdc7c9aa2" id="r_acb96457b8f19d74ccfaa720fdc7c9aa2"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DateTime.html#acb96457b8f19d74ccfaa720fdc7c9aa2">UaDuration</a> = std::chrono::duration&lt; int64_t, std::ratio&lt; 1, 10 '000 '000 &gt; &gt;</td></tr>
-<tr class="separator:acb96457b8f19d74ccfaa720fdc7c9aa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a057d3dec83cd2d2695d938eb7294cea8" id="r_a057d3dec83cd2d2695d938eb7294cea8"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DateTime.html#a057d3dec83cd2d2695d938eb7294cea8">Clock</a> = std::chrono::system_clock</td></tr>
+<tr class="separator:a057d3dec83cd2d2695d938eb7294cea8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a81284b8285b0745f18583a14b46474" id="r_a8a81284b8285b0745f18583a14b46474"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DateTime.html#a8a81284b8285b0745f18583a14b46474">Duration</a> = std::chrono::duration&lt; int64_t, std::ratio&lt; 1, 10 '000 '000 &gt; &gt;</td></tr>
+<tr class="separator:a8a81284b8285b0745f18583a14b46474"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_types_classopcua_1_1Wrapper"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classopcua_1_1Wrapper')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper&lt; UA_DateTime &gt;</a></td></tr>
 <tr class="memitem:ab2d8c6254361dc3930901802d060feff inherit pub_types_classopcua_1_1Wrapper" id="r_ab2d8c6254361dc3930901802d060feff"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#ab2d8c6254361dc3930901802d060feff">NativeType</a> = <a class="elRef" target="_blank" href="open62541/types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a></td></tr>
 <tr class="separator:ab2d8c6254361dc3930901802d060feff inherit pub_types_classopcua_1_1Wrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -124,18 +125,24 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aaed4988ef6c14a612aa17a5f6487c976" id="r_aaed4988ef6c14a612aa17a5f6487c976"><td class="memTemplParams" colspan="2">template&lt;typename Clock , typename Duration &gt; </td></tr>
-<tr class="memitem:aaed4988ef6c14a612aa17a5f6487c976"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1DateTime.html#aaed4988ef6c14a612aa17a5f6487c976">DateTime</a> (std::chrono::time_point&lt; Clock, Duration &gt; timePoint)</td></tr>
-<tr class="separator:aaed4988ef6c14a612aa17a5f6487c976"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf4172f40087c213d7ab7932286387f4" id="r_adf4172f40087c213d7ab7932286387f4"><td class="memTemplParams" colspan="2">template&lt;typename Clock  = DefaultClock, typename Duration  = UaDuration&gt; </td></tr>
-<tr class="memitem:adf4172f40087c213d7ab7932286387f4"><td class="memTemplItemLeft" align="right" valign="top">std::chrono::time_point&lt; Clock, Duration &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1DateTime.html#adf4172f40087c213d7ab7932286387f4">toTimePoint</a> () const</td></tr>
-<tr class="separator:adf4172f40087c213d7ab7932286387f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1f747a49123ebf605047921ef437757" id="r_aa1f747a49123ebf605047921ef437757"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DateTime.html#aa1f747a49123ebf605047921ef437757">toUnixTime</a> () const noexcept</td></tr>
-<tr class="separator:aa1f747a49123ebf605047921ef437757"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65367b91b6898af9827337e31d7abfc4" id="r_a65367b91b6898af9827337e31d7abfc4"><td class="memTemplParams" colspan="2">template&lt;typename D &gt; </td></tr>
+<tr class="memitem:a65367b91b6898af9827337e31d7abfc4"><td class="memTemplItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1DateTime.html#a65367b91b6898af9827337e31d7abfc4">DateTime</a> (std::chrono::time_point&lt; <a class="el" href="classopcua_1_1DateTime.html#a057d3dec83cd2d2695d938eb7294cea8">Clock</a>, D &gt; timePoint) noexcept</td></tr>
+<tr class="separator:a65367b91b6898af9827337e31d7abfc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeac1209cb04c154ef6d5ba09a35cf906" id="r_aeac1209cb04c154ef6d5ba09a35cf906"><td class="memTemplParams" colspan="2">template&lt;typename D  = Duration&gt; </td></tr>
+<tr class="memitem:aeac1209cb04c154ef6d5ba09a35cf906"><td class="memTemplItemLeft" align="right" valign="top">constexpr std::chrono::time_point&lt; <a class="el" href="classopcua_1_1DateTime.html#a057d3dec83cd2d2695d938eb7294cea8">Clock</a>, D &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1DateTime.html#aeac1209cb04c154ef6d5ba09a35cf906">toTimePoint</a> () const</td></tr>
+<tr class="separator:aeac1209cb04c154ef6d5ba09a35cf906"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6a6669489f9a6b55628633fe1d7500f" id="r_ac6a6669489f9a6b55628633fe1d7500f"><td class="memItemLeft" align="right" valign="top">constexpr int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DateTime.html#ac6a6669489f9a6b55628633fe1d7500f">toUnixTime</a> () const noexcept</td></tr>
+<tr class="separator:ac6a6669489f9a6b55628633fe1d7500f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a467ebe9fe65daa859f732758e58c12a3" id="r_a467ebe9fe65daa859f732758e58c12a3"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__DateTimeStruct.html">UA_DateTimeStruct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DateTime.html#a467ebe9fe65daa859f732758e58c12a3">toStruct</a> () const noexcept</td></tr>
 <tr class="separator:a467ebe9fe65daa859f732758e58c12a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20b227dfd968989c0b6d16d304215e38" id="r_a20b227dfd968989c0b6d16d304215e38"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DateTime.html#a20b227dfd968989c0b6d16d304215e38">get</a> () const noexcept</td></tr>
-<tr class="separator:a20b227dfd968989c0b6d16d304215e38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36cd21213b2d79ba3e3346008faf8f3b" id="r_a36cd21213b2d79ba3e3346008faf8f3b"><td class="memTemplParams" colspan="2">template&lt;typename Rep , typename Period &gt; </td></tr>
+<tr class="memitem:a36cd21213b2d79ba3e3346008faf8f3b"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="classopcua_1_1DateTime.html">DateTime</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1DateTime.html#a36cd21213b2d79ba3e3346008faf8f3b">operator+=</a> (std::chrono::duration&lt; Rep, Period &gt; duration) noexcept</td></tr>
+<tr class="separator:a36cd21213b2d79ba3e3346008faf8f3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a323daf30a68b5e00a0648e5cc2986dda" id="r_a323daf30a68b5e00a0648e5cc2986dda"><td class="memTemplParams" colspan="2">template&lt;typename Rep , typename Period &gt; </td></tr>
+<tr class="memitem:a323daf30a68b5e00a0648e5cc2986dda"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="classopcua_1_1DateTime.html">DateTime</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1DateTime.html#a323daf30a68b5e00a0648e5cc2986dda">operator-=</a> (std::chrono::duration&lt; Rep, Period &gt; duration) noexcept</td></tr>
+<tr class="separator:a323daf30a68b5e00a0648e5cc2986dda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a029e4037d11223f1b958488efaf1d7cf" id="r_a029e4037d11223f1b958488efaf1d7cf"><td class="memItemLeft" align="right" valign="top">constexpr int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DateTime.html#a029e4037d11223f1b958488efaf1d7cf">get</a> () const noexcept</td></tr>
+<tr class="separator:a029e4037d11223f1b958488efaf1d7cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04825f432e351dee595eecdfb3ec84df" id="r_a04825f432e351dee595eecdfb3ec84df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1String.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DateTime.html#a04825f432e351dee595eecdfb3ec84df">format</a> (std::string_view format, bool localtime=false) const</td></tr>
 <tr class="separator:a04825f432e351dee595eecdfb3ec84df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ae4187c8217bcc57b39428d3034c5ab" id="r_a5ae4187c8217bcc57b39428d3034c5ab"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DateTime.html#a5ae4187c8217bcc57b39428d3034c5ab">Wrapper</a> () noexcept=default</td></tr>
@@ -190,23 +197,26 @@ Public Member Functions</h2></td></tr>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a5de9914e05b33f27840f059bb4238a5c" id="r_a5de9914e05b33f27840f059bb4238a5c"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classopcua_1_1DateTime.html">DateTime</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DateTime.html#a5de9914e05b33f27840f059bb4238a5c">now</a> () noexcept</td></tr>
 <tr class="separator:a5de9914e05b33f27840f059bb4238a5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83dd8633f71eaa51ba3afb67fdd5be18" id="r_a83dd8633f71eaa51ba3afb67fdd5be18"><td class="memTemplParams" colspan="2">template&lt;typename Clock , typename Duration &gt; </td></tr>
-<tr class="memitem:a83dd8633f71eaa51ba3afb67fdd5be18"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="classopcua_1_1DateTime.html">DateTime</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1DateTime.html#a83dd8633f71eaa51ba3afb67fdd5be18">fromTimePoint</a> (std::chrono::time_point&lt; Clock, Duration &gt; timePoint)</td></tr>
-<tr class="separator:a83dd8633f71eaa51ba3afb67fdd5be18"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a561f1d311656020fbf48948114f4aa45" id="r_a561f1d311656020fbf48948114f4aa45"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classopcua_1_1DateTime.html">DateTime</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DateTime.html#a561f1d311656020fbf48948114f4aa45">fromUnixTime</a> (int64_t unixTime) noexcept</td></tr>
-<tr class="separator:a561f1d311656020fbf48948114f4aa45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adeea8e2726ac3f63c591b11c960419ac" id="r_adeea8e2726ac3f63c591b11c960419ac"><td class="memTemplParams" colspan="2">template&lt;typename D &gt; </td></tr>
+<tr class="memitem:adeea8e2726ac3f63c591b11c960419ac"><td class="memTemplItemLeft" align="right" valign="top">static constexpr <a class="el" href="classopcua_1_1DateTime.html">DateTime</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1DateTime.html#adeea8e2726ac3f63c591b11c960419ac">fromTimePoint</a> (std::chrono::time_point&lt; <a class="el" href="classopcua_1_1DateTime.html#a057d3dec83cd2d2695d938eb7294cea8">Clock</a>, D &gt; timePoint) noexcept</td></tr>
+<tr class="separator:adeea8e2726ac3f63c591b11c960419ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab38428fa9fb6070130666fca6f64add3" id="r_ab38428fa9fb6070130666fca6f64add3"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="classopcua_1_1DateTime.html">DateTime</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DateTime.html#ab38428fa9fb6070130666fca6f64add3">fromUnixTime</a> (int64_t unixTime) noexcept</td></tr>
+<tr class="separator:ab38428fa9fb6070130666fca6f64add3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa73cb15f63b355d31263e917af54015d" id="r_aa73cb15f63b355d31263e917af54015d"><td class="memItemLeft" align="right" valign="top">static int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DateTime.html#aa73cb15f63b355d31263e917af54015d">localTimeUtcOffset</a> () noexcept</td></tr>
 <tr class="separator:aa73cb15f63b355d31263e917af54015d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pro_methods_classopcua_1_1Wrapper"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classopcua_1_1Wrapper')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper&lt; UA_DateTime &gt;</a></td></tr>
-<tr class="memitem:a50cca18d937510c1118613d75385448f inherit pro_methods_classopcua_1_1Wrapper" id="r_a50cca18d937510c1118613d75385448f"><td class="memItemLeft" align="right" valign="top">constexpr const <a class="elRef" target="_blank" href="open62541/types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a> () const noexcept</td></tr>
-<tr class="separator:a50cca18d937510c1118613d75385448f inherit pro_methods_classopcua_1_1Wrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1b6b948a5c49962e0edeecdaf6d49c4 inherit pro_methods_classopcua_1_1Wrapper" id="r_af1b6b948a5c49962e0edeecdaf6d49c4"><td class="memItemLeft" align="right" valign="top">constexpr <a class="elRef" target="_blank" href="open62541/types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#af1b6b948a5c49962e0edeecdaf6d49c4">native</a> () noexcept</td></tr>
-<tr class="separator:af1b6b948a5c49962e0edeecdaf6d49c4 inherit pro_methods_classopcua_1_1Wrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7de21fbc3cff233c7677d4ceac7faf3d inherit pro_methods_classopcua_1_1Wrapper" id="r_a7de21fbc3cff233c7677d4ceac7faf3d"><td class="memItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#a7de21fbc3cff233c7677d4ceac7faf3d">clear</a> () noexcept</td></tr>
-<tr class="separator:a7de21fbc3cff233c7677d4ceac7faf3d inherit pro_methods_classopcua_1_1Wrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="related" name="related"></a>
+Related Symbols</h2></td></tr>
+<tr><td class="ititle" colspan="2"><p>(Note that these are not member symbols.) </p>
+</td></tr>
+<tr class="memitem:a21408fb565a6e9d7a9f17506e2b9f460" id="r_a21408fb565a6e9d7a9f17506e2b9f460"><td class="memTemplParams" colspan="2">template&lt;typename Rep , typename Period &gt; </td></tr>
+<tr class="memitem:a21408fb565a6e9d7a9f17506e2b9f460"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="classopcua_1_1DateTime.html">DateTime</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1DateTime.html#a21408fb565a6e9d7a9f17506e2b9f460">operator+</a> (const <a class="el" href="classopcua_1_1DateTime.html">DateTime</a> &amp;dt, std::chrono::duration&lt; Rep, Period &gt; duration) noexcept</td></tr>
+<tr class="separator:a21408fb565a6e9d7a9f17506e2b9f460"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a2aa1ce6d7f16fa53b90cf6d14ba83c" id="r_a1a2aa1ce6d7f16fa53b90cf6d14ba83c"><td class="memTemplParams" colspan="2">template&lt;typename Rep , typename Period &gt; </td></tr>
+<tr class="memitem:a1a2aa1ce6d7f16fa53b90cf6d14ba83c"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="classopcua_1_1DateTime.html">DateTime</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1DateTime.html#a1a2aa1ce6d7f16fa53b90cf6d14ba83c">operator-</a> (const <a class="el" href="classopcua_1_1DateTime.html">DateTime</a> &amp;dt, std::chrono::duration&lt; Rep, Period &gt; duration) noexcept</td></tr>
+<tr class="separator:a1a2aa1ce6d7f16fa53b90cf6d14ba83c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab022aabdff0a2fd0fcb5fae87c4a0153" id="r_ab022aabdff0a2fd0fcb5fae87c4a0153"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classopcua_1_1DateTime.html#a8a81284b8285b0745f18583a14b46474">DateTime::Duration</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DateTime.html#ab022aabdff0a2fd0fcb5fae87c4a0153">operator-</a> (const <a class="el" href="classopcua_1_1DateTime.html">DateTime</a> &amp;lhs, const <a class="el" href="classopcua_1_1DateTime.html">DateTime</a> &amp;rhs) noexcept</td></tr>
+<tr class="separator:ab022aabdff0a2fd0fcb5fae87c4a0153"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header related_classopcua_1_1Wrapper"><td colspan="2" onclick="javascript:toggleInherit('related_classopcua_1_1Wrapper')"><img src="closed.png" alt="-"/>&#160;Related Symbols inherited from <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper&lt; UA_DateTime &gt;</a></td></tr>
 <tr class="memitem:gac28a131007f1160ae702aa5124f8a9ea inherit related_classopcua_1_1Wrapper" id="r_gac28a131007f1160ae702aa5124f8a9ea"><td class="memItemLeft" align="right" valign="top">constexpr <a class="elRef" target="_blank" href="open62541/types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#gac28a131007f1160ae702aa5124f8a9ea">asWrapper</a> (typename T::NativeType *native) noexcept</td></tr>
 <tr class="separator:gac28a131007f1160ae702aa5124f8a9ea inherit related_classopcua_1_1Wrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -224,68 +234,80 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:gae3a5281e6a400e5764608745da73ceb9 inherit related_classopcua_1_1Wrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaeaf45806bd42f6c64271653a838c2a55 inherit related_classopcua_1_1Wrapper" id="r_gaeaf45806bd42f6c64271653a838c2a55"><td class="memItemLeft" align="right" valign="top">constexpr const T::NativeType &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#gaeaf45806bd42f6c64271653a838c2a55">asNative</a> (const <a class="elRef" target="_blank" href="open62541/types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> &amp;wrapper) noexcept</td></tr>
 <tr class="separator:gaeaf45806bd42f6c64271653a838c2a55 inherit related_classopcua_1_1Wrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classopcua_1_1Wrapper"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classopcua_1_1Wrapper')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classopcua_1_1Wrapper.html">opcua::Wrapper&lt; UA_DateTime &gt;</a></td></tr>
+<tr class="memitem:a50cca18d937510c1118613d75385448f inherit pro_methods_classopcua_1_1Wrapper" id="r_a50cca18d937510c1118613d75385448f"><td class="memItemLeft" align="right" valign="top">constexpr const <a class="elRef" target="_blank" href="open62541/types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a> () const noexcept</td></tr>
+<tr class="separator:a50cca18d937510c1118613d75385448f inherit pro_methods_classopcua_1_1Wrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1b6b948a5c49962e0edeecdaf6d49c4 inherit pro_methods_classopcua_1_1Wrapper" id="r_af1b6b948a5c49962e0edeecdaf6d49c4"><td class="memItemLeft" align="right" valign="top">constexpr <a class="elRef" target="_blank" href="open62541/types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#af1b6b948a5c49962e0edeecdaf6d49c4">native</a> () noexcept</td></tr>
+<tr class="separator:af1b6b948a5c49962e0edeecdaf6d49c4 inherit pro_methods_classopcua_1_1Wrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7de21fbc3cff233c7677d4ceac7faf3d inherit pro_methods_classopcua_1_1Wrapper" id="r_a7de21fbc3cff233c7677d4ceac7faf3d"><td class="memItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Wrapper.html#a7de21fbc3cff233c7677d4ceac7faf3d">clear</a> () noexcept</td></tr>
+<tr class="separator:a7de21fbc3cff233c7677d4ceac7faf3d inherit pro_methods_classopcua_1_1Wrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="ae7375ebfe4e6809021b759bee9774329" name="ae7375ebfe4e6809021b759bee9774329"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7375ebfe4e6809021b759bee9774329">&#9670;&#160;</a></span>DefaultClock</h2>
+<a id="a057d3dec83cd2d2695d938eb7294cea8" name="a057d3dec83cd2d2695d938eb7294cea8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a057d3dec83cd2d2695d938eb7294cea8">&#9670;&#160;</a></span>Clock</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classopcua_1_1DateTime.html#ae7375ebfe4e6809021b759bee9774329">opcua::DateTime::DefaultClock</a> =  std::chrono::system_clock</td>
+          <td class="memname">using <a class="el" href="classopcua_1_1DateTime.html#a057d3dec83cd2d2695d938eb7294cea8">opcua::DateTime::Clock</a> =  std::chrono::system_clock</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00383">383</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00361">361</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
-<a id="acb96457b8f19d74ccfaa720fdc7c9aa2" name="acb96457b8f19d74ccfaa720fdc7c9aa2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acb96457b8f19d74ccfaa720fdc7c9aa2">&#9670;&#160;</a></span>UaDuration</h2>
+<a id="a8a81284b8285b0745f18583a14b46474" name="a8a81284b8285b0745f18583a14b46474"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a81284b8285b0745f18583a14b46474">&#9670;&#160;</a></span>Duration</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classopcua_1_1DateTime.html#acb96457b8f19d74ccfaa720fdc7c9aa2">opcua::DateTime::UaDuration</a> =  std::chrono::duration&lt;int64_t, std::ratio&lt;1, 10'000'000&gt; &gt;</td>
+          <td class="memname">using <a class="el" href="classopcua_1_1DateTime.html#a8a81284b8285b0745f18583a14b46474">opcua::DateTime::Duration</a> =  std::chrono::duration&lt;int64_t, std::ratio&lt;1, 10'000'000&gt; &gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00384">384</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00362">362</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aaed4988ef6c14a612aa17a5f6487c976" name="aaed4988ef6c14a612aa17a5f6487c976"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaed4988ef6c14a612aa17a5f6487c976">&#9670;&#160;</a></span>DateTime()</h2>
+<a id="a65367b91b6898af9827337e31d7abfc4" name="a65367b91b6898af9827337e31d7abfc4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65367b91b6898af9827337e31d7abfc4">&#9670;&#160;</a></span>DateTime()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Clock , typename Duration &gt; </div>
+template&lt;typename D &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">opcua::DateTime::DateTime </td>
+          <td class="memname">constexpr opcua::DateTime::DateTime </td>
           <td>(</td>
-          <td class="paramtype">std::chrono::time_point&lt; Clock, Duration &gt;&#160;</td>
+          <td class="paramtype">std::chrono::time_point&lt; <a class="el" href="classopcua_1_1DateTime.html#a057d3dec83cd2d2695d938eb7294cea8">Clock</a>, D &gt;&#160;</td>
           <td class="paramname"><em>timePoint</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00389">389</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p>Create <a class="el" href="classopcua_1_1DateTime.html" title="UA_DateTime wrapper class.">DateTime</a> from <code>std::chrono::time_point</code>. </p>
+
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00368">368</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -323,42 +345,42 @@ template&lt;typename Clock , typename Duration &gt; </div>
 
 </div>
 </div>
-<a id="a83dd8633f71eaa51ba3afb67fdd5be18" name="a83dd8633f71eaa51ba3afb67fdd5be18"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a83dd8633f71eaa51ba3afb67fdd5be18">&#9670;&#160;</a></span>fromTimePoint()</h2>
+<a id="adeea8e2726ac3f63c591b11c960419ac" name="adeea8e2726ac3f63c591b11c960419ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adeea8e2726ac3f63c591b11c960419ac">&#9670;&#160;</a></span>fromTimePoint()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Clock , typename Duration &gt; </div>
+template&lt;typename D &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classopcua_1_1DateTime.html">DateTime</a> opcua::DateTime::fromTimePoint </td>
+          <td class="memname">static constexpr <a class="el" href="classopcua_1_1DateTime.html">DateTime</a> opcua::DateTime::fromTimePoint </td>
           <td>(</td>
-          <td class="paramtype">std::chrono::time_point&lt; Clock, Duration &gt;&#160;</td>
+          <td class="paramtype">std::chrono::time_point&lt; <a class="el" href="classopcua_1_1DateTime.html#a057d3dec83cd2d2695d938eb7294cea8">Clock</a>, D &gt;&#160;</td>
           <td class="paramname"><em>timePoint</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get <a class="el" href="classopcua_1_1DateTime.html" title="UA_DateTime wrapper class.">DateTime</a> from std::chrono::time_point. </p>
+<p>Get <a class="el" href="classopcua_1_1DateTime.html" title="UA_DateTime wrapper class.">DateTime</a> from <code>std::chrono::time_point</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00399">399</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00381">381</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="types_8hpp_source.html#l00459">opcua::TypeConverter&lt; std::chrono::time_point&lt; Clock, Duration &gt; &gt;::toNative()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="types_8hpp_source.html#l00470">opcua::TypeConverter&lt; std::chrono::time_point&lt; std::chrono::system_clock, Duration &gt; &gt;::toNative()</a>.</p>
 
 </div>
 </div>
-<a id="a561f1d311656020fbf48948114f4aa45" name="a561f1d311656020fbf48948114f4aa45"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a561f1d311656020fbf48948114f4aa45">&#9670;&#160;</a></span>fromUnixTime()</h2>
+<a id="ab38428fa9fb6070130666fca6f64add3" name="ab38428fa9fb6070130666fca6f64add3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab38428fa9fb6070130666fca6f64add3">&#9670;&#160;</a></span>fromUnixTime()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -367,7 +389,7 @@ template&lt;typename Clock , typename Duration &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classopcua_1_1DateTime.html">DateTime</a> opcua::DateTime::fromUnixTime </td>
+          <td class="memname">static constexpr <a class="el" href="classopcua_1_1DateTime.html">DateTime</a> opcua::DateTime::fromUnixTime </td>
           <td>(</td>
           <td class="paramtype">int64_t&#160;</td>
           <td class="paramname"><em>unixTime</em></td><td>)</td>
@@ -376,19 +398,19 @@ template&lt;typename Clock , typename Duration &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Get <a class="el" href="classopcua_1_1DateTime.html" title="UA_DateTime wrapper class.">DateTime</a> from Unix time. </p>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00407">407</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00386">386</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a20b227dfd968989c0b6d16d304215e38" name="a20b227dfd968989c0b6d16d304215e38"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a20b227dfd968989c0b6d16d304215e38">&#9670;&#160;</a></span>get()</h2>
+<a id="a029e4037d11223f1b958488efaf1d7cf" name="a029e4037d11223f1b958488efaf1d7cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a029e4037d11223f1b958488efaf1d7cf">&#9670;&#160;</a></span>get()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -397,7 +419,7 @@ template&lt;typename Clock , typename Duration &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int64_t opcua::DateTime::get </td>
+          <td class="memname">constexpr int64_t opcua::DateTime::get </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -405,14 +427,16 @@ template&lt;typename Clock , typename Duration &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Get <a class="el" href="classopcua_1_1DateTime.html" title="UA_DateTime wrapper class.">DateTime</a> value as 100 nanosecond intervals since January 1, 1601 (UTC). </p>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00441">441</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00428">428</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="types_8hpp_source.html#l00440">operator+()</a>, and <a class="el" href="types_8hpp_source.html#l00449">operator-()</a>.</p>
 
 </div>
 </div>
@@ -441,7 +465,7 @@ template&lt;typename Clock , typename Duration &gt; </div>
 
 <p>Offset of local time to UTC. </p>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00412">412</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00391">391</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -469,10 +493,74 @@ template&lt;typename Clock , typename Duration &gt; </div>
 </div><div class="memdoc">
 
 <p>Get current <a class="el" href="classopcua_1_1DateTime.html" title="UA_DateTime wrapper class.">DateTime</a>. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="events_2server_events_8cpp-example.html#a8">events/server_events.cpp</a>, <a class="el" href="server_datasource_8cpp-example.html#a10">server_datasource.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#a11">server_valuecallback.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="events_2server_events_8cpp-example.html#a8">events/server_events.cpp</a>, <a class="el" href="server_callback_8cpp-example.html#a4">server_callback.cpp</a>, <a class="el" href="server_datasource_8cpp-example.html#a10">server_datasource.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#a11">server_valuecallback.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00393">393</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00375">375</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a36cd21213b2d79ba3e3346008faf8f3b" name="a36cd21213b2d79ba3e3346008faf8f3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36cd21213b2d79ba3e3346008faf8f3b">&#9670;&#160;</a></span>operator+=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Rep , typename Period &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classopcua_1_1DateTime.html">DateTime</a> &amp; opcua::DateTime::operator+= </td>
+          <td>(</td>
+          <td class="paramtype">std::chrono::duration&lt; Rep, Period &gt;&#160;</td>
+          <td class="paramname"><em>duration</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add a duration to the <a class="el" href="classopcua_1_1DateTime.html" title="UA_DateTime wrapper class.">DateTime</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00415">415</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a323daf30a68b5e00a0648e5cc2986dda" name="a323daf30a68b5e00a0648e5cc2986dda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a323daf30a68b5e00a0648e5cc2986dda">&#9670;&#160;</a></span>operator-=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Rep , typename Period &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classopcua_1_1DateTime.html">DateTime</a> &amp; opcua::DateTime::operator-= </td>
+          <td>(</td>
+          <td class="paramtype">std::chrono::duration&lt; Rep, Period &gt;&#160;</td>
+          <td class="paramname"><em>duration</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Subtract a duration from the <a class="el" href="classopcua_1_1DateTime.html" title="UA_DateTime wrapper class.">DateTime</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00422">422</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -501,23 +589,23 @@ template&lt;typename Clock , typename Duration &gt; </div>
 
 <p>Convert to <a class="elRef" target="_blank" href="open62541/structUA__DateTimeStruct.html">UA_DateTimeStruct</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00436">436</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00409">409</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
-<a id="adf4172f40087c213d7ab7932286387f4" name="adf4172f40087c213d7ab7932286387f4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf4172f40087c213d7ab7932286387f4">&#9670;&#160;</a></span>toTimePoint()</h2>
+<a id="aeac1209cb04c154ef6d5ba09a35cf906" name="aeac1209cb04c154ef6d5ba09a35cf906"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeac1209cb04c154ef6d5ba09a35cf906">&#9670;&#160;</a></span>toTimePoint()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Clock  = DefaultClock, typename Duration  = UaDuration&gt; </div>
+template&lt;typename D  = Duration&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::chrono::time_point&lt; Clock, Duration &gt; opcua::DateTime::toTimePoint </td>
+          <td class="memname">constexpr std::chrono::time_point&lt; <a class="el" href="classopcua_1_1DateTime.html#a057d3dec83cd2d2695d938eb7294cea8">Clock</a>, D &gt; opcua::DateTime::toTimePoint </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -525,21 +613,21 @@ template&lt;typename Clock  = DefaultClock, typename Duration  = UaDuration&gt; 
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Convert to std::chrono::time_point. </p>
+<p>Convert to <code>std::chrono::time_point</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00418">418</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00397">397</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="types_8hpp_source.html#l00455">opcua::TypeConverter&lt; std::chrono::time_point&lt; Clock, Duration &gt; &gt;::fromNative()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="types_8hpp_source.html#l00466">opcua::TypeConverter&lt; std::chrono::time_point&lt; std::chrono::system_clock, Duration &gt; &gt;::fromNative()</a>.</p>
 
 </div>
 </div>
-<a id="aa1f747a49123ebf605047921ef437757" name="aa1f747a49123ebf605047921ef437757"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa1f747a49123ebf605047921ef437757">&#9670;&#160;</a></span>toUnixTime()</h2>
+<a id="ac6a6669489f9a6b55628633fe1d7500f" name="ac6a6669489f9a6b55628633fe1d7500f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6a6669489f9a6b55628633fe1d7500f">&#9670;&#160;</a></span>toUnixTime()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -548,7 +636,7 @@ template&lt;typename Clock  = DefaultClock, typename Duration  = UaDuration&gt; 
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int64_t opcua::DateTime::toUnixTime </td>
+          <td class="memname">constexpr int64_t opcua::DateTime::toUnixTime </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -556,14 +644,14 @@ template&lt;typename Clock  = DefaultClock, typename Duration  = UaDuration&gt; 
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Convert to Unix time (number of seconds since January 1, 1970 UTC). </p>
 
-<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00428">428</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00404">404</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>
@@ -709,6 +797,131 @@ template&lt;typename Clock  = DefaultClock, typename Duration  = UaDuration&gt; 
 <p>Move constructor. </p>
 
 <p class="definition">Definition at line <a class="el" href="wrapper_8hpp_source.html#l00155">155</a> of file <a class="el" href="wrapper_8hpp_source.html">wrapper.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Symbol Documentation</h2>
+<a id="a21408fb565a6e9d7a9f17506e2b9f460" name="a21408fb565a6e9d7a9f17506e2b9f460"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21408fb565a6e9d7a9f17506e2b9f460">&#9670;&#160;</a></span>operator+()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Rep , typename Period &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classopcua_1_1DateTime.html">DateTime</a> operator+ </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1DateTime.html">DateTime</a> &amp;&#160;</td>
+          <td class="paramname"><em>dt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::chrono::duration&lt; Rep, Period &gt;&#160;</td>
+          <td class="paramname"><em>duration</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add a duration to <a class="el" href="classopcua_1_1DateTime.html" title="UA_DateTime wrapper class.">DateTime</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00440">440</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a1a2aa1ce6d7f16fa53b90cf6d14ba83c" name="a1a2aa1ce6d7f16fa53b90cf6d14ba83c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a2aa1ce6d7f16fa53b90cf6d14ba83c">&#9670;&#160;</a></span>operator-() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Rep , typename Period &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classopcua_1_1DateTime.html">DateTime</a> operator- </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1DateTime.html">DateTime</a> &amp;&#160;</td>
+          <td class="paramname"><em>dt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::chrono::duration&lt; Rep, Period &gt;&#160;</td>
+          <td class="paramname"><em>duration</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Subtract a duration from <a class="el" href="classopcua_1_1DateTime.html" title="UA_DateTime wrapper class.">DateTime</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00449">449</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ab022aabdff0a2fd0fcb5fae87c4a0153" name="ab022aabdff0a2fd0fcb5fae87c4a0153"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab022aabdff0a2fd0fcb5fae87c4a0153">&#9670;&#160;</a></span>operator-() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classopcua_1_1DateTime.html#a8a81284b8285b0745f18583a14b46474">DateTime::Duration</a> operator- </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1DateTime.html">DateTime</a> &amp;&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1DateTime.html">DateTime</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute the difference between two DateTimes. </p>
+
+<p class="definition">Definition at line <a class="el" href="types_8hpp_source.html#l00457">457</a> of file <a class="el" href="types_8hpp_source.html">types.hpp</a>.</p>
 
 </div>
 </div>

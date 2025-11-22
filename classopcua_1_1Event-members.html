@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.20.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -102,13 +102,14 @@ $(function() {
   <tr class="odd"><td class="entry"><a class="el" href="classopcua_1_1Event.html#a0c6e0e324db902a31fc14cd5961d3f4d">operator=</a>(const Event &amp;)=delete</td><td class="entry"><a class="el" href="classopcua_1_1Event.html">opcua::Event</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classopcua_1_1Event.html#a9bdbb1b15a4dcb56d56e4a1488683ece">operator=</a>(Event &amp;&amp;) noexcept=delete</td><td class="entry"><a class="el" href="classopcua_1_1Event.html">opcua::Event</a></td><td class="entry"></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classopcua_1_1Event.html#a9c6fb153f9ebdaea402bb4e4bac63068">operator==</a>(const Event &amp;lhs, const Event &amp;rhs) noexcept</td><td class="entry"><a class="el" href="classopcua_1_1Event.html">opcua::Event</a></td><td class="entry"><span class="mlabel">related</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classopcua_1_1Event.html#af007f5771dbe022ee167e7d37f09bba8">trigger</a>(const NodeId &amp;originId=ObjectId::Server)</td><td class="entry"><a class="el" href="classopcua_1_1Event.html">opcua::Event</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classopcua_1_1Event.html#a28b7d2e3bf78d22097ace0880b56936a">writeMessage</a>(const LocalizedText &amp;message)</td><td class="entry"><a class="el" href="classopcua_1_1Event.html">opcua::Event</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classopcua_1_1Event.html#ae160e9fa9ef7c03c8a3666a8b4236b26">writeProperty</a>(const QualifiedName &amp;propertyName, const Variant &amp;value)</td><td class="entry"><a class="el" href="classopcua_1_1Event.html">opcua::Event</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classopcua_1_1Event.html#a06587e1b6fc473d29c684bc5d8a79d0a">writeSeverity</a>(uint16_t severity)</td><td class="entry"><a class="el" href="classopcua_1_1Event.html">opcua::Event</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classopcua_1_1Event.html#a05d721b75dc0a56e54d7313fe815a2ca">writeSourceName</a>(std::string_view sourceName)</td><td class="entry"><a class="el" href="classopcua_1_1Event.html">opcua::Event</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classopcua_1_1Event.html#af531d9da3f851dc5c07c1ec3147cee9a">writeTime</a>(DateTime time)</td><td class="entry"><a class="el" href="classopcua_1_1Event.html">opcua::Event</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classopcua_1_1Event.html#af21896132a14aff814cf530dd93f1bcd">~Event</a>()</td><td class="entry"><a class="el" href="classopcua_1_1Event.html">opcua::Event</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classopcua_1_1Event.html#aa56df41b9262132828ba8ca9c26ebf94">release</a>() noexcept</td><td class="entry"><a class="el" href="classopcua_1_1Event.html">opcua::Event</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classopcua_1_1Event.html#af007f5771dbe022ee167e7d37f09bba8">trigger</a>(const NodeId &amp;originId=ObjectId::Server)</td><td class="entry"><a class="el" href="classopcua_1_1Event.html">opcua::Event</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classopcua_1_1Event.html#a28b7d2e3bf78d22097ace0880b56936a">writeMessage</a>(const LocalizedText &amp;message)</td><td class="entry"><a class="el" href="classopcua_1_1Event.html">opcua::Event</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classopcua_1_1Event.html#ae160e9fa9ef7c03c8a3666a8b4236b26">writeProperty</a>(const QualifiedName &amp;propertyName, const Variant &amp;value)</td><td class="entry"><a class="el" href="classopcua_1_1Event.html">opcua::Event</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classopcua_1_1Event.html#a06587e1b6fc473d29c684bc5d8a79d0a">writeSeverity</a>(uint16_t severity)</td><td class="entry"><a class="el" href="classopcua_1_1Event.html">opcua::Event</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classopcua_1_1Event.html#a05d721b75dc0a56e54d7313fe815a2ca">writeSourceName</a>(std::string_view sourceName)</td><td class="entry"><a class="el" href="classopcua_1_1Event.html">opcua::Event</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classopcua_1_1Event.html#af531d9da3f851dc5c07c1ec3147cee9a">writeTime</a>(DateTime time)</td><td class="entry"><a class="el" href="classopcua_1_1Event.html">opcua::Event</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classopcua_1_1Event.html#af21896132a14aff814cf530dd93f1bcd">~Event</a>()</td><td class="entry"><a class="el" href="classopcua_1_1Event.html">opcua::Event</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

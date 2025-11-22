@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.20.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -137,6 +137,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae160e9fa9ef7c03c8a3666a8b4236b26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af007f5771dbe022ee167e7d37f09bba8" id="r_af007f5771dbe022ee167e7d37f09bba8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1ByteString.html">ByteString</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Event.html#af007f5771dbe022ee167e7d37f09bba8">trigger</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;originId=ObjectId::Server)</td></tr>
 <tr class="separator:af007f5771dbe022ee167e7d37f09bba8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa56df41b9262132828ba8ca9c26ebf94" id="r_aa56df41b9262132828ba8ca9c26ebf94"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1NodeId.html">NodeId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Event.html#aa56df41b9262132828ba8ca9c26ebf94">release</a> () noexcept</td></tr>
+<tr class="separator:aa56df41b9262132828ba8ca9c26ebf94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="related" name="related"></a>
 Related Symbols</h2></td></tr>
@@ -394,6 +396,34 @@ Related Symbols</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa56df41b9262132828ba8ca9c26ebf94" name="aa56df41b9262132828ba8ca9c26ebf94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa56df41b9262132828ba8ca9c26ebf94">&#9670;&#160;</a></span>release()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1NodeId.html">NodeId</a> opcua::Event::release </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Release the ownership of the event and return the <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> of the node representation. </p>
+<p>After calling this, the event is no longer valid. </p>
 
 </div>
 </div>

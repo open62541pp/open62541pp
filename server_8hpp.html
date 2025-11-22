@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.19.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.20.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -88,7 +88,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">server.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -105,7 +106,6 @@ $(function() {
 <code>#include &quot;<a class="el" href="server__utils_8hpp_source.html">open62541pp/detail/server_utils.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="session_8hpp_source.html">open62541pp/session.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="span_8hpp_source.html">open62541pp/span.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="subscription_8hpp_source.html">open62541pp/subscription.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="types_8hpp_source.html">open62541pp/types.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="nodeids_8hpp_source.html">open62541pp/ua/nodeids.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="ua_2types_8hpp_source.html">open62541pp/ua/types.hpp</a>&quot;</code><br />
@@ -117,7 +117,7 @@ $(function() {
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for server.hpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="server_8hpp__incl.svg" width="5504" height="931"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="server_8hpp__incl.svg" width="5175" height="770"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
@@ -142,6 +142,19 @@ Classes</h2></td></tr>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespaceopcua" id="r_namespaceopcua"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html">opcua</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:af4694a71bed7c78c9cd82e88a88187d7" id="r_af4694a71bed7c78c9cd82e88a88187d7"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#af4694a71bed7c78c9cd82e88a88187d7">opcua::findDataType</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id) noexcept</td></tr>
+<tr class="separator:af4694a71bed7c78c9cd82e88a88187d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4bf19d293923bd292ab64d2c6b6f200" id="r_ad4bf19d293923bd292ab64d2c6b6f200"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#ad4bf19d293923bd292ab64d2c6b6f200">opcua::setVariableNodeValueCallback</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="classopcua_1_1ValueCallbackBase.html">ValueCallbackBase</a> &amp;callback)</td></tr>
+<tr class="separator:ad4bf19d293923bd292ab64d2c6b6f200"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fdc5391fe988f309a61e57bebb5206a" id="r_a4fdc5391fe988f309a61e57bebb5206a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a4fdc5391fe988f309a61e57bebb5206a">opcua::setVariableNodeValueCallback</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::unique_ptr&lt; <a class="el" href="classopcua_1_1ValueCallbackBase.html">ValueCallbackBase</a> &gt; &amp;&amp;callback)</td></tr>
+<tr class="separator:a4fdc5391fe988f309a61e57bebb5206a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad88601d836d4f3f87e4612a3d9dd9f54" id="r_ad88601d836d4f3f87e4612a3d9dd9f54"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#ad88601d836d4f3f87e4612a3d9dd9f54">opcua::setVariableNodeValueBackend</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="classopcua_1_1DataSourceBase.html">DataSourceBase</a> &amp;source)</td></tr>
+<tr class="separator:ad88601d836d4f3f87e4612a3d9dd9f54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab086e87d97d1477142afa131c9acb0d8" id="r_ab086e87d97d1477142afa131c9acb0d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#ab086e87d97d1477142afa131c9acb0d8">opcua::setVariableNodeValueBackend</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::unique_ptr&lt; <a class="el" href="classopcua_1_1DataSourceBase.html">DataSourceBase</a> &gt; &amp;&amp;source)</td></tr>
+<tr class="separator:ab086e87d97d1477142afa131c9acb0d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->
