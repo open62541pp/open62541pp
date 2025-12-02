@@ -16,7 +16,7 @@ jobs:
           - tools/gen_nodeids.py
           - tools/gen_typeregistry_native.py
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           submodules: recursive
       - uses: actions/setup-python@v6

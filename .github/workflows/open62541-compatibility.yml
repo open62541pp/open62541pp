@@ -40,11 +40,11 @@ jobs:
           - build-type: Debug
             library-type: shared
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           submodules: recursive
       - name: Checkout open62541 version ${{ matrix.version }}
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: open62541/open62541
           ref: ${{ matrix.version }}
