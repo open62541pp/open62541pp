@@ -226,6 +226,7 @@ The library is available through the following package managers:
   ```shell
   vcpkg install open62541pp
   ```
+- [**Bazel Central Registry**](https://registry.bazel.build/): Please refer to the [module page](https://registry.bazel.build/modules/open62541pp) on how to use it within your project.
 
 ### Build and install
 
