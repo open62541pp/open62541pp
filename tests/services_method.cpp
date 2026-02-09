@@ -8,6 +8,7 @@
 #include "open62541pp/services/method.hpp"
 #include "open62541pp/services/nodemanagement.hpp"  // addMethod
 
+#include "helper/macros.hpp"
 #include "helper/server_client_setup.hpp"
 
 using namespace opcua;
@@ -197,6 +198,8 @@ TEST_CASE("Method calls with async operations") {
         CHECK(result.outputArguments().at(0).to<uint64_t>() != getThreadId());
     }
 
+    // TODO: hangs with thread sanitizer enabled
+#ifndef UAPP_TSAN_ENABLED
     SECTION("Async operation") {
         useAsyncOperation(setup.server, methodId, true);
         CHECK_FALSE(getAsyncOperation(setup.server).has_value());
@@ -214,6 +217,7 @@ TEST_CASE("Method calls with async operations") {
         CHECK(result.statusCode().isGood());
         CHECK(result.outputArguments().at(0).to<uint64_t>() == getThreadId());
     }
+#endif
 }
 #endif
 #endif
