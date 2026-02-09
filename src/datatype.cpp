@@ -100,7 +100,7 @@ UA_DataType* copyArray(const UA_DataType* src, size_t size) {
 void addDataTypes(const UA_DataTypeArray*& head, Span<const DataType> types) {
     auto* item = allocate<UA_DataTypeArray>();
     new (item) UA_DataTypeArray{
-        head,  // next
+        const_cast<UA_DataTypeArray*>(head),  // NOLINT(*const-cast), non-const since v1.5
         types.size(),
         copyArray(asNative(types.data()), types.size()),
 #if UAPP_OPEN62541_VER_GE(1, 4)
