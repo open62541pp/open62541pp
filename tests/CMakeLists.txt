@@ -4,7 +4,7 @@ option(CATCH_INSTALL_DOCS "Install documentation alongside library" OFF)
 FetchContent_Declare(
     Catch2
     GIT_REPOSITORY    https://github.com/catchorg/Catch2.git
-    GIT_TAG           v3.8.0
+    GIT_TAG           v3.12.0
     EXCLUDE_FROM_ALL
     SYSTEM
     FIND_PACKAGE_ARGS 3.3.0
