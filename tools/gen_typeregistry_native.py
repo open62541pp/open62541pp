@@ -9,7 +9,6 @@ FILES_DATATYPES = [
     SCHEMA_DIR / "datatypes_dataaccess.txt",
     SCHEMA_DIR / "datatypes_diagnostics.txt",
     SCHEMA_DIR / "datatypes_discovery.txt",
-    SCHEMA_DIR / "datatypes_events.txt",
     SCHEMA_DIR / "datatypes_historizing.txt",
     SCHEMA_DIR / "datatypes_method.txt",
     SCHEMA_DIR / "datatypes_minimal.txt",
@@ -78,6 +77,7 @@ EXCLUDE_TYPES = [
     "Duration",  # Double
     "UtcTime",  # Int64
     "LocaleId",  # String
+    "IntegerId",  # UInt32
     "DiscoveryConfiguration",  # void*
     "FilterOperand",  # void*
     "DataSetFieldContentMask",  # UInt32
