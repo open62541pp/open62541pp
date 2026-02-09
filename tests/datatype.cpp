@@ -65,6 +65,19 @@ static UA_DataType makeDataType(
     return result;
 }
 
+static UA_DataTypeArray makeDataTypeArray(
+    const UA_DataTypeArray* next, Span<const UA_DataType> types, bool cleanup = false
+) noexcept {
+    return UA_DataTypeArray{
+        next,
+        types.size(),
+        types.data(),
+#if UAPP_OPEN62541_VER_GE(1, 4)
+        cleanup
+#endif
+    };
+}
+
 /* -------------------------------- Samples data type definition -------------------------------- */
 
 struct Point {
@@ -466,8 +479,8 @@ TEST_CASE("findDataType") {
 
         const UA_DataType types1[2]{dt1, dt2};
         const UA_DataType types2[3]{dt3, dt4, dt5};
-        const UA_DataTypeArray next{nullptr, 3, types2};
-        const UA_DataTypeArray head{&next, 2, types1};
+        const UA_DataTypeArray next = makeDataTypeArray(nullptr, types2);
+        const UA_DataTypeArray head = makeDataTypeArray(&next, types1);
 
         CHECK(findDataType(NodeId{0, 0}, nullptr) == nullptr);
         CHECK(findDataType(NodeId{0, 0}, &head) == nullptr);

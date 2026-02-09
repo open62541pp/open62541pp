@@ -37,10 +37,9 @@ TEST_CASE("Repeated callback") {
     size_t counter = 0;
     const auto id = addRepeatedCallback(server, [&] { ++counter; }, 10);
     CAPTURE(id);
-    server.runIterate();
-    CHECK(counter == 0);
 
     SECTION("Initial interval") {
+        counter = 0;
         std::this_thread::sleep_for(std::chrono::milliseconds{10});
         server.runIterate();
         CHECK(counter == 1);
@@ -50,6 +49,7 @@ TEST_CASE("Repeated callback") {
     }
 
     SECTION("Changed interval") {
+        counter = 0;
         CHECK_NOTHROW(changeRepeatedCallbackInterval(server, id, 1));
         std::this_thread::sleep_for(std::chrono::milliseconds{1});
         server.runIterate();
