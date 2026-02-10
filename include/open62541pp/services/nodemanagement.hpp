@@ -660,6 +660,15 @@ auto addMethodAsync(
         std::forward<CompletionToken>(token)
     );
 }
+
+/**
+ * Set method callback after creation.
+ * @param connection Instance of type Server
+ * @param id Method node
+ * @param callback Method callback
+ */
+template <typename T>
+StatusCode setMethodCallback(T& connection, const NodeId& id, MethodCallback callback) noexcept;
 #endif
 
 /**
