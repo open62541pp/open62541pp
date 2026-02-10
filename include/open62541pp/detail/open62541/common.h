@@ -17,8 +17,8 @@
 #endif
 #include <open62541/nodeids.h>
 #include <open62541/statuscodes.h>
-#include <open62541/types.h>
-#include <open62541/types_generated.h>
+#include <open62541/types.h>  // NOLINT(*include-cycle)
+#include <open62541/types_generated.h>  // NOLINT(*include-cycle)
 #include <open62541/util.h>
 
 // plugins

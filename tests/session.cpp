@@ -48,8 +48,6 @@ TEST_CASE("Session") {
         const QualifiedName key{0, "testAttribute"};
         CHECK_THROWS_WITH(session.getSessionAttribute(key), "BadNotFound");
 
-#if UAPP_OPEN62541_VER_LE(1, 3)
-        // TODO: fails with v1.4: https://github.com/open62541/open62541/issues/6724
         CHECK_NOTHROW(session.setSessionAttribute(key, Variant(11.11)));
         CHECK(session.getSessionAttribute(key).scalar<double>() == 11.11);
 
@@ -59,7 +57,6 @@ TEST_CASE("Session") {
         // delete session attribute
         CHECK_NOTHROW(session.deleteSessionAttribute(key));
         CHECK_THROWS_WITH(session.getSessionAttribute(key), "BadNotFound");
-#endif
     }
 
     SECTION("Close session") {
