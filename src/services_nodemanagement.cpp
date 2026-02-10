@@ -196,7 +196,7 @@ StatusCode setMethodCallback<Server>(
     return opcua::detail::tryInvoke([&] {
         auto nodeContext = std::make_unique<opcua::detail::NodeContext>();
         nodeContext->methodCallback = std::move(callback);
-        throwIfBad(UA_Server_setMethodNodeCallback(connection.handle(), id, methodCallback));
+        throwIfBad(UA_Server_setMethodNode_callback(connection.handle(), id, methodCallback));
         throwIfBad(UA_Server_setNodeContext(connection.handle(), id, nodeContext.get()));
         opcua::detail::getContext(connection).nodeContexts.insert(id, std::move(nodeContext));
     }).code();
