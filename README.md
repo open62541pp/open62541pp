@@ -45,16 +45,19 @@
 - Cross-platform (tested on Windows, Linux and macOS)
 - Compatible with all stable open62541 versions ≥ v1.0
 - [Easy installation and integration with CMake](#-getting-started)
-- Use modern C++ (C++ 17) and best practices
 - Less hurdle to get started with OPC UA
 
 The latest stable open62541 release is integrated as a submodule. Depending on the value of the CMake flag `UAPP_INTERNAL_OPEN62541`, the submodule or an external open62541 installation is used.
 All open62541 releases since v1.0 are supported and tested in a [CI pipeline][ci-compatibility] with debug/release builds and as static/dynamic library.
 
-The project is currently in `beta` stage but already used in production.
-Version [`v1.0.0` is planned for 2025](https://github.com/open62541pp/open62541pp/milestone/1). No major breaking changes are expected.
+The project is stable and used in production environments. Versioning remains at `v0.x.x` to preserve flexibility for API refinements based on user feedback.
+Breaking changes may occur in minor releases following a *two-version deprecation path*: deprecated features in `v0.x.0` will be removed no earlier than `v0.(x+2).0`.
+Deprecated APIs are declared with the `[[deprecated]]` attribute and noted in the changelog.
 
-While in `v0.x.x`, breaking changes may occur in minor releases. This projects follows the *two-version deprecation path*: when a feature is marked as deprecated in `v0.x.0`, it may be removed as early as `v0.(x+2).0`. Deprecated APIs are declared with the `[[deprecated]]` attribute and noted in the changelog.
+## 📋 Requirements
+
+- C++17 compatible compiler (GCC 7+, Clang 5+, MSVC 2017+)
+- CMake 3.12 or higher
 
 ## 📝 Examples
 
@@ -116,6 +119,7 @@ int main() {
 
 ## ⇆ Type conversion
 
+Open62541pp provides automatic conversion between C++ types and OPC UA types, making it easy to work with familiar C++ constructs.
 Type conversion from and to native `UA_*` types are handled by the `opcua::TypeConverter` struct.
 Have a look at the [typeconversion example](https://github.com/open62541pp/open62541pp/blob/master/examples/typeconversion.cpp).
 
@@ -185,7 +189,7 @@ struct TypeConverter<std::byte> {
 
 The library can be built, integrated and installed using [CMake](https://cmake.org/runningcmake/).
 
-Please check out the open62541 build options here: https://www.open62541.org/doc/1.3/building.html#build-options
+Please check out the open62541 build options here: https://www.open62541.org/doc/v1.4.14/building.html#build-options
 
 Open62541pp provides additional build options:
 
