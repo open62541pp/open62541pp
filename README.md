@@ -198,7 +198,6 @@ Open62541pp provides additional build options:
 - `UAPP_BUILD_EXAMPLES`: Build examples for `examples` directory
 - `UAPP_BUILD_TESTS`: Build unit tests
 - `UAPP_ENABLE_COVERAGE`: Enable coverage analysis
-- `UAPP_ENABLE_CLANG_TIDY`: Enable static code analysis with [Clang-Tidy](https://clang.llvm.org/extra/clang-tidy/)
 - `UAPP_ENABLE_SANITIZER_ADDRESS/LEAK/UNDEFINED/THREAD`: Enable sanitizers
 
 ### Integrate as an embedded (in-source) dependency
