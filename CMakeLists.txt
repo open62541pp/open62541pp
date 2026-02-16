@@ -8,7 +8,10 @@ project(
     LANGUAGES CXX
 )
 
-# global options for standalone build, replace with PROJECT_IS_TOP_LEVEL for CMake >= 3.21
+add_library(open62541pp_project_options INTERFACE)
+target_compile_features(open62541pp_project_options INTERFACE cxx_std_17)
+
+# options for standalone build, replace with PROJECT_IS_TOP_LEVEL for CMake >= 3.21
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
     set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
@@ -17,13 +20,16 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+    option(UAPP_ENABLE_COVERAGE "Enable coverage reporting for gcc/clang" OFF)
+    option(UAPP_ENABLE_SANITIZER_ADDRESS "Enable address sanitizier" OFF)
+    option(UAPP_ENABLE_SANITIZER_LEAK "Enable leak sanitizier" OFF)
+    option(UAPP_ENABLE_SANITIZER_UNDEFINED "Enable undefined sanitizier" OFF)
+    option(UAPP_ENABLE_SANITIZER_THREAD "Enable thread sanitizier" OFF)
+    option(UAPP_WARNINGS_AS_ERRORS "Treat warnings as errors" OFF)
 endif()
 
-add_library(open62541pp_project_options INTERFACE)
-target_compile_features(open62541pp_project_options INTERFACE cxx_std_17)
-
-option(UAPP_ENABLE_COVERAGE "Enable coverage reporting for gcc/clang" OFF)
-option(UAPP_WARNINGS_AS_ERRORS "Treat warnings as errors" OFF)
+# compiler settings
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
     target_compile_options(open62541pp_project_options INTERFACE
         -Wall
@@ -31,11 +37,32 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES ".*Clan
         -Wshadow
         -Wnon-virtual-dtor
         -Wpedantic
+        $<$<BOOL:${UAPP_ENABLE_COVERAGE}>:--coverage;-g>
         $<$<BOOL:${UAPP_WARNINGS_AS_ERRORS}>:-Werror>
     )
-    if(UAPP_ENABLE_COVERAGE)
-        target_compile_options(open62541pp_project_options INTERFACE --coverage -O0 -g)
-        target_link_libraries(open62541pp_project_options INTERFACE --coverage)
+    target_link_options(open62541pp_project_options INTERFACE
+        $<$<BOOL:${UAPP_ENABLE_COVERAGE}>:--coverage>
+    )
+
+    set(sanitizers "")
+    if(UAPP_ENABLE_SANITIZER_ADDRESS)
+        list(APPEND sanitizers "address")
+    endif()
+    if(UAPP_ENABLE_SANITIZER_LEAK)
+        list(APPEND sanitizers "leak")
+    endif()
+    if(UAPP_ENABLE_SANITIZER_UNDEFINED)
+        list(APPEND sanitizers "undefined")
+    endif()
+    if(UAPP_ENABLE_SANITIZER_THREAD)
+        list(APPEND sanitizers "thread")
+    endif()
+
+    if(sanitizers)
+        list(JOIN sanitizers "," sanitizers_joined)
+        message(STATUS "Sanitizers enabled: ${sanitizers_joined}")
+        target_compile_options(open62541pp_project_options INTERFACE -fsanitize=${sanitizers_joined})
+        target_link_options(open62541pp_project_options INTERFACE -fsanitize=${sanitizers_joined})
     endif()
 elseif(MSVC)
     target_compile_options(open62541pp_project_options INTERFACE
@@ -48,24 +75,6 @@ elseif(MSVC)
         /wd4996   # deprecation gmtime, localtime
         $<$<BOOL:${UAPP_WARNINGS_AS_ERRORS}>:/WX>
     )
-endif()
-
-if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
-    set(sanitizers "")
-    foreach(san IN ITEMS address leak undefined thread)
-        string(TOUPPER ${san} san_upper)
-        option(UAPP_ENABLE_SANITIZER_${san_upper} "Enable ${san} sanitizer" OFF)
-        if(UAPP_ENABLE_SANITIZER_${san_upper})
-            list(APPEND sanitizers ${san})
-        endif()
-    endforeach()
-
-    list(JOIN sanitizers "," sanitizers_joined)
-    if(sanitizers_joined)
-        message(STATUS "Sanitizers enabled: ${sanitizers_joined}")
-        target_compile_options(open62541pp_project_options INTERFACE -fsanitize=${sanitizers_joined})
-        target_link_options(open62541pp_project_options INTERFACE -fsanitize=${sanitizers_joined})
-    endif()
 endif()
 
 # threads
