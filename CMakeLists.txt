@@ -8,13 +8,16 @@ project(
     LANGUAGES CXX
 )
 
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
-
-# compiled binaries folders (same as open62541)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+# detect standalone build, replace with PROJECT_IS_TOP_LEVEL for CMake >= 3.21
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+    
+    # compiled binaries folders (same as open62541)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+endif()
 
 add_library(open62541pp_project_options INTERFACE)
 target_compile_features(open62541pp_project_options INTERFACE cxx_std_17)
