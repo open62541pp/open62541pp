@@ -19,6 +19,7 @@
             "installDir": "${sourceDir}/install/${presetName}",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_INTERPROCEDURAL_OPTIMIZATION": "OFF",
                 "UA_MULTITHREADING": "100",
                 "UAPP_BUILD_TESTS": "ON",
                 "UAPP_WARNINGS_AS_ERRORS": "ON",
