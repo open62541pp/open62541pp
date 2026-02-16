@@ -139,6 +139,7 @@ jobs:
           -DCMAKE_CXX_COMPILER=${{ matrix.config.compiler }}
           -DCMAKE_CXX_STANDARD=17
           -DCMAKE_BUILD_TYPE=${{ matrix.build-type }}
+          -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=OFF
           -DBUILD_SHARED_LIBS=${{ matrix.library-type == 'shared' }}
           -DUA_ENABLE_ENCRYPTION=${{ runner.os == 'Windows' && 'OFF' || 'OPENSSL' }}
           -DUA_ENABLE_METHODCALLS=ON
