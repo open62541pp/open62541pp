@@ -8,11 +8,6 @@ project(
     LANGUAGES CXX
 )
 
-# set c++ standard explicitly, compile feature "cxx_std_17" does not set -std=c++17 compile flag
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
-
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
@@ -232,7 +227,7 @@ install(
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
     FILES_MATCHING
         PATTERN "*.h"
-        PATTERN "*.hpp" 
+        PATTERN "*.hpp"
 )
 
 # install cmake config files
