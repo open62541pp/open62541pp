@@ -189,26 +189,29 @@ target_link_libraries(
         $<BUILD_INTERFACE:open62541pp_project_options>
 )
 
-# tests
-option(UAPP_BUILD_TESTS "Build unit tests" OFF)
-if(UAPP_BUILD_TESTS)
-    message(STATUS "Unit tests enabled")
-    enable_testing()
-    add_subdirectory(tests)
-endif()
+# detect standalone build, replace with PROJECT_IS_TOP_LEVEL for CMake >= 3.21
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    # tests
+    option(UAPP_BUILD_TESTS "Build unit tests" OFF)
+    if(UAPP_BUILD_TESTS)
+        message(STATUS "Unit tests enabled")
+        enable_testing()
+        add_subdirectory(tests)
+    endif()
 
-# examples
-option(UAPP_BUILD_EXAMPLES "Build examples" OFF)
-if(UAPP_BUILD_EXAMPLES)
-    message(STATUS "Examples enabled")
-    add_subdirectory(examples)
-endif()
+    # examples
+    option(UAPP_BUILD_EXAMPLES "Build examples" OFF)
+    if(UAPP_BUILD_EXAMPLES)
+        message(STATUS "Examples enabled")
+        add_subdirectory(examples)
+    endif()
 
-# documentation
-option(UAPP_BUILD_DOCUMENTATION "Build documentation" OFF)
-if(UAPP_BUILD_DOCUMENTATION)
-    message(STATUS "Documentation enabled")
-    add_subdirectory(doc)
+    # documentation
+    option(UAPP_BUILD_DOCUMENTATION "Build documentation" OFF)
+    if(UAPP_BUILD_DOCUMENTATION)
+        message(STATUS "Documentation enabled")
+        add_subdirectory(doc)
+    endif()
 endif()
 
 # install targets
