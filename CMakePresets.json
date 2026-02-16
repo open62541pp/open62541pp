@@ -50,7 +50,7 @@
                 "dev"
             ],
             "cacheVariables": {
-                "UAPP_ENABLE_CLANG_TIDY": "ON"
+                "CMAKE_CXX_CLANG_TIDY": "clang-tidy;-warnings-as-errors=*"
             }
         },
         {

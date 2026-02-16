@@ -118,7 +118,7 @@ jobs:
               name: Clang-Tidy
               os: ubuntu-24.04
               compiler: clang++
-              flags: "-DUAPP_ENABLE_CLANG_TIDY=ON"
+              flags: "-DCMAKE_CXX_CLANG_TIDY='clang-tidy;-warnings-as-errors=*'"
             build-type: Debug
             library-type: static
 
