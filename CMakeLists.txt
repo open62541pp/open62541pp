@@ -8,14 +8,6 @@ project(
     LANGUAGES CXX
 )
 
-# set c++ standard explicitly, compile feature "cxx_std_17" does not set -std=c++17 compile flag
-
-if(NOT CMAKE_CXX_STANDARD)
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
-endif()
-
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
@@ -25,9 +17,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 add_library(open62541pp_project_options INTERFACE)
-if(NOT CMAKE_CXX_STANDARD)
 target_compile_features(open62541pp_project_options INTERFACE cxx_std_17)
-endif()
 
 option(UAPP_ENABLE_COVERAGE "Enable coverage reporting for gcc/clang" OFF)
 option(UAPP_WARNINGS_AS_ERRORS "Treat warnings as errors" OFF)
@@ -237,7 +227,7 @@ install(
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
     FILES_MATCHING
         PATTERN "*.h"
-        PATTERN "*.hpp" 
+        PATTERN "*.hpp"
 )
 
 # install cmake config files

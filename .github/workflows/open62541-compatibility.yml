@@ -58,7 +58,7 @@ jobs:
           mkdir build
           cd build
           cmake -G Ninja \
-            -DCMAKE_BUILD-TYPE=${{ matrix.build-type }} \
+            -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} \
             -DBUILD_SHARED_LIBS=${{ matrix.library-type == 'shared' }} \
             -DUA_ENABLE_AMALGAMATION=${{ matrix.amalgamation }} \
             -DUA_ENABLE_SUBSCRIPTIONS=ON \
@@ -72,7 +72,7 @@ jobs:
           mkdir build
           cd build
           cmake -G Ninja \
-            -DCMAKE_BUILD-TYPE=${{ matrix.build-type }} \
+            -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} \
             -DUAPP_BUILD_TESTS=ON \
             -DUAPP_BUILD_EXAMPLES=ON \
             -DUAPP_INTERNAL_OPEN62541=OFF \
