@@ -8,7 +8,7 @@ project(
     LANGUAGES CXX
 )
 
-# detect standalone build, replace with PROJECT_IS_TOP_LEVEL for CMake >= 3.21
+# global options for standalone build, replace with PROJECT_IS_TOP_LEVEL for CMake >= 3.21
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
     set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
@@ -119,15 +119,6 @@ else()
     find_package(open62541 REQUIRED)
 endif()
 
-# enable IPO if open62541 is compiled with IPO
-get_target_property(open62541_ipo open62541::open62541 INTERPROCEDURAL_OPTIMIZATION)
-if(open62541_ipo)
-    message(STATUS "IPO enabled")
-    set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)
-else()
-    message(STATUS "IPO not enabled")
-endif()
-
 # open62541pp library (static/shared depending on option BUILD_SHARED_LIBS)
 include(GNUInstallDirs)
 configure_file(
@@ -188,6 +179,15 @@ target_link_libraries(
         Threads::Threads
         $<BUILD_INTERFACE:open62541pp_project_options>
 )
+
+# enable IPO if open62541 is compiled with IPO
+get_target_property(open62541_ipo open62541::open62541 INTERPROCEDURAL_OPTIMIZATION)
+if(open62541_ipo)
+    message(STATUS "IPO enabled")
+    set_target_properties(open62541pp PROPERTIES INTERPROCEDURAL_OPTIMIZATION ON)
+else()
+    message(STATUS "IPO not enabled")
+endif()
 
 # detect standalone build, replace with PROJECT_IS_TOP_LEVEL for CMake >= 3.21
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
