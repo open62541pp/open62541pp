@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.21.0] - 2026-02-18
+
+### Added
+
+- Bazel Central Registry reference in README (#675)
+- `services::setMethodCallback` to set method callback after node creation (#690)
+
+### Changed
+
+- Update internal open62541 to v1.4.15 (#687)
+- Remove global CMake settings (#689, #691)
+
 ## [0.20.0] - 2025-11-22
 
 ### Added
@@ -901,7 +913,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial public release
 
-[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.20.0...HEAD
+[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.21.0...HEAD
+[0.21.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.21.0
 [0.20.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.20.0
 [0.19.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.19.0
 [0.18.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.18.0
