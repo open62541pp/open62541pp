@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.15</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.15</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -92,30 +92,42 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:acd81070ab3c28ea80921f7fd04c995cb" id="r_acd81070ab3c28ea80921f7fd04c995cb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__Logger.html">UA_Logger</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#acd81070ab3c28ea80921f7fd04c995cb">logger</a></td></tr>
-<tr class="separator:acd81070ab3c28ea80921f7fd04c995cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab59fdb999e2078f5ef0cfef31807d8c6" id="r_ab59fdb999e2078f5ef0cfef31807d8c6"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#ab59fdb999e2078f5ef0cfef31807d8c6">context</a></td></tr>
 <tr class="separator:ab59fdb999e2078f5ef0cfef31807d8c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1599757fe4c27eb0ac19160bc7e9e4ea" id="r_a1599757fe4c27eb0ac19160bc7e9e4ea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__Logger.html">UA_Logger</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#a1599757fe4c27eb0ac19160bc7e9e4ea">logging</a></td></tr>
+<tr class="separator:a1599757fe4c27eb0ac19160bc7e9e4ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82f5b5aae08a9048c3151db5a40ecea9" id="r_a82f5b5aae08a9048c3151db5a40ecea9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__BuildInfo.html">UA_BuildInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#a82f5b5aae08a9048c3151db5a40ecea9">buildInfo</a></td></tr>
 <tr class="separator:a82f5b5aae08a9048c3151db5a40ecea9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af85c94c5c5818ad60665ea74cef337e9" id="r_af85c94c5c5818ad60665ea74cef337e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__ApplicationDescription.html">UA_ApplicationDescription</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#af85c94c5c5818ad60665ea74cef337e9">applicationDescription</a></td></tr>
 <tr class="separator:af85c94c5c5818ad60665ea74cef337e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2fe25accd66796da47c2ebcb68ad229d" id="r_a2fe25accd66796da47c2ebcb68ad229d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#a2fe25accd66796da47c2ebcb68ad229d">serverCertificate</a></td></tr>
-<tr class="separator:a2fe25accd66796da47c2ebcb68ad229d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aafa35438496e5775a50c67f571164a46" id="r_aafa35438496e5775a50c67f571164a46"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#aafa35438496e5775a50c67f571164a46">shutdownDelay</a></td></tr>
 <tr class="separator:aafa35438496e5775a50c67f571164a46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f0541d84f54763def064689c0969192" id="r_a2f0541d84f54763def064689c0969192"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#a2f0541d84f54763def064689c0969192">notifyLifecycleState</a> )(<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="common_8h.html#a07eceb614c075c00494e5bdfcf7689e7">UA_LifecycleState</a> state)</td></tr>
+<tr class="separator:a2f0541d84f54763def064689c0969192"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d5484a4909f2975addc92144ff9033f" id="r_a1d5484a4909f2975addc92144ff9033f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="common_8h.html#a6fda8bb9a494877d7c2f77fd4c4932f8">UA_RuleHandling</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#a1d5484a4909f2975addc92144ff9033f">verifyRequestTimestamp</a></td></tr>
 <tr class="separator:a1d5484a4909f2975addc92144ff9033f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0331a56044580d2d63c277995924a828" id="r_a0331a56044580d2d63c277995924a828"><td class="memItemLeft" align="right" valign="top"><a class="el" href="common_8h.html#a6fda8bb9a494877d7c2f77fd4c4932f8">UA_RuleHandling</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#a0331a56044580d2d63c277995924a828">allowEmptyVariables</a></td></tr>
 <tr class="separator:a0331a56044580d2d63c277995924a828"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abccdf191e985acc830d1ef9e45332215" id="r_abccdf191e985acc830d1ef9e45332215"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structUA__DataTypeArray.html">UA_DataTypeArray</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#abccdf191e985acc830d1ef9e45332215">customDataTypes</a></td></tr>
 <tr class="separator:abccdf191e985acc830d1ef9e45332215"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06a7109b8c985b512f0107657ac66aa9" id="r_a06a7109b8c985b512f0107657ac66aa9"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#a06a7109b8c985b512f0107657ac66aa9">networkLayersSize</a></td></tr>
-<tr class="separator:a06a7109b8c985b512f0107657ac66aa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a807d8b2616138e754d73dec8c18ad8b8" id="r_a807d8b2616138e754d73dec8c18ad8b8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__ServerNetworkLayer.html">UA_ServerNetworkLayer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#a807d8b2616138e754d73dec8c18ad8b8">networkLayers</a></td></tr>
-<tr class="separator:a807d8b2616138e754d73dec8c18ad8b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae77bf1bfeadd923a474f4c5d1445c5a2" id="r_ae77bf1bfeadd923a474f4c5d1445c5a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__String.html">UA_String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#ae77bf1bfeadd923a474f4c5d1445c5a2">customHostname</a></td></tr>
-<tr class="separator:ae77bf1bfeadd923a474f4c5d1445c5a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2791cc0cfee532ed027391911a1e6910" id="r_a2791cc0cfee532ed027391911a1e6910"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__EventLoop.html">UA_EventLoop</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#a2791cc0cfee532ed027391911a1e6910">eventLoop</a></td></tr>
+<tr class="separator:a2791cc0cfee532ed027391911a1e6910"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a414b839be1b817d0717bdc6a36ed1c7d" id="r_a414b839be1b817d0717bdc6a36ed1c7d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#a414b839be1b817d0717bdc6a36ed1c7d">externalEventLoop</a></td></tr>
+<tr class="separator:a414b839be1b817d0717bdc6a36ed1c7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1de518ec01aa8275d643d92cee132082" id="r_a1de518ec01aa8275d643d92cee132082"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__String.html">UA_String</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#a1de518ec01aa8275d643d92cee132082">serverUrls</a></td></tr>
+<tr class="separator:a1de518ec01aa8275d643d92cee132082"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9932a6a3ce0f410d09e49eaaaeb59267" id="r_a9932a6a3ce0f410d09e49eaaaeb59267"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#a9932a6a3ce0f410d09e49eaaaeb59267">serverUrlsSize</a></td></tr>
+<tr class="separator:a9932a6a3ce0f410d09e49eaaaeb59267"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a607f77c2decd3073713371b8e5a3a9d1" id="r_a607f77c2decd3073713371b8e5a3a9d1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#a607f77c2decd3073713371b8e5a3a9d1">tcpEnabled</a></td></tr>
+<tr class="separator:a607f77c2decd3073713371b8e5a3a9d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4188a0f0344cb38a0003fdaf7660bb3a" id="r_a4188a0f0344cb38a0003fdaf7660bb3a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#a4188a0f0344cb38a0003fdaf7660bb3a">tcpBufSize</a></td></tr>
+<tr class="separator:a4188a0f0344cb38a0003fdaf7660bb3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f3575433eb43b23f0acd451bfbbbca6" id="r_a0f3575433eb43b23f0acd451bfbbbca6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#a0f3575433eb43b23f0acd451bfbbbca6">tcpMaxMsgSize</a></td></tr>
+<tr class="separator:a0f3575433eb43b23f0acd451bfbbbca6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada7b6fbe31421b0ae262bd0c501e078f" id="r_ada7b6fbe31421b0ae262bd0c501e078f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#ada7b6fbe31421b0ae262bd0c501e078f">tcpMaxChunks</a></td></tr>
+<tr class="separator:ada7b6fbe31421b0ae262bd0c501e078f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac42b207c714efd664f59ac37418b3947" id="r_ac42b207c714efd664f59ac37418b3947"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#ac42b207c714efd664f59ac37418b3947">tcpReuseAddr</a></td></tr>
+<tr class="separator:ac42b207c714efd664f59ac37418b3947"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08d2e348ff6b4a43d5a0f252ccb8b4ea" id="r_a08d2e348ff6b4a43d5a0f252ccb8b4ea"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#a08d2e348ff6b4a43d5a0f252ccb8b4ea">securityPoliciesSize</a></td></tr>
 <tr class="separator:a08d2e348ff6b4a43d5a0f252ccb8b4ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2844855e4b6bb54599560095e8216be1" id="r_a2844855e4b6bb54599560095e8216be1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#a2844855e4b6bb54599560095e8216be1">securityPolicies</a></td></tr>
@@ -126,8 +138,12 @@ Data Fields</h2></td></tr>
 <tr class="separator:ae2b2034e2c568e6d12f4c99ef2238f16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1b4571f9aab93970d945c0a3a4568b0" id="r_ac1b4571f9aab93970d945c0a3a4568b0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#ac1b4571f9aab93970d945c0a3a4568b0">securityPolicyNoneDiscoveryOnly</a></td></tr>
 <tr class="separator:ac1b4571f9aab93970d945c0a3a4568b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac3fe2f44a7a5c00386a55c34eeda46a4" id="r_ac3fe2f44a7a5c00386a55c34eeda46a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__CertificateVerification.html">UA_CertificateVerification</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#ac3fe2f44a7a5c00386a55c34eeda46a4">certificateVerification</a></td></tr>
-<tr class="separator:ac3fe2f44a7a5c00386a55c34eeda46a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81a024e65a18322043a8401f437cf360" id="r_a81a024e65a18322043a8401f437cf360"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#a81a024e65a18322043a8401f437cf360">allowNonePolicyPassword</a></td></tr>
+<tr class="separator:a81a024e65a18322043a8401f437cf360"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a860606104c833b0cf6363cd7b63061bf" id="r_a860606104c833b0cf6363cd7b63061bf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__CertificateVerification.html">UA_CertificateVerification</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#a860606104c833b0cf6363cd7b63061bf">secureChannelPKI</a></td></tr>
+<tr class="separator:a860606104c833b0cf6363cd7b63061bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af856a21502c277e6bb94e1a292c4ba09" id="r_af856a21502c277e6bb94e1a292c4ba09"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__CertificateVerification.html">UA_CertificateVerification</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#af856a21502c277e6bb94e1a292c4ba09">sessionPKI</a></td></tr>
+<tr class="separator:af856a21502c277e6bb94e1a292c4ba09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e05ef99a4839b8265ca72a68f845d1d" id="r_a4e05ef99a4839b8265ca72a68f845d1d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__AccessControl.html">UA_AccessControl</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#a4e05ef99a4839b8265ca72a68f845d1d">accessControl</a></td></tr>
 <tr class="separator:a4e05ef99a4839b8265ca72a68f845d1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adfb0841f9f6f4971e87dc912207d87f7" id="r_adfb0841f9f6f4971e87dc912207d87f7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__Nodestore.html">UA_Nodestore</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#adfb0841f9f6f4971e87dc912207d87f7">nodestore</a></td></tr>
@@ -164,6 +180,8 @@ Data Fields</h2></td></tr>
 <tr class="separator:a6c3b51e162e514864c0c6bb877383f2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ea993858b8b41f3b8b0434741976351" id="r_a1ea993858b8b41f3b8b0434741976351"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#a1ea993858b8b41f3b8b0434741976351">discoveryCleanupTimeout</a></td></tr>
 <tr class="separator:a1ea993858b8b41f3b8b0434741976351"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab584bfc61d792e0f3b3ac6d6e24726c" id="r_aab584bfc61d792e0f3b3ac6d6e24726c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#aab584bfc61d792e0f3b3ac6d6e24726c">subscriptionsEnabled</a></td></tr>
+<tr class="separator:aab584bfc61d792e0f3b3ac6d6e24726c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa84e10f773801fe918b092d628150667" id="r_aa84e10f773801fe918b092d628150667"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#aa84e10f773801fe918b092d628150667">maxSubscriptions</a></td></tr>
 <tr class="separator:aa84e10f773801fe918b092d628150667"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a2d7888870713ccdc82340571864cc7" id="r_a1a2d7888870713ccdc82340571864cc7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#a1a2d7888870713ccdc82340571864cc7">maxSubscriptionsPerSession</a></td></tr>
@@ -192,10 +210,14 @@ Data Fields</h2></td></tr>
 <tr class="separator:ab156741f91ae1fab57864a116d75e1d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a368269db4e934ed53abdc4b6329f3918" id="r_a368269db4e934ed53abdc4b6329f3918"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#a368269db4e934ed53abdc4b6329f3918">maxPublishReqPerSession</a></td></tr>
 <tr class="separator:a368269db4e934ed53abdc4b6329f3918"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecb278fd2666b9ebb8d99945eb8e182a" id="r_aecb278fd2666b9ebb8d99945eb8e182a"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#aecb278fd2666b9ebb8d99945eb8e182a">monitoredItemRegisterCallback</a> )(<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, void *nodeContext, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> attibuteId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> removed)</td></tr>
+<tr class="memitem:aecb278fd2666b9ebb8d99945eb8e182a" id="r_aecb278fd2666b9ebb8d99945eb8e182a"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#aecb278fd2666b9ebb8d99945eb8e182a">monitoredItemRegisterCallback</a> )(<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *<a class="el" href="types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>, void *nodeContext, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> attibuteId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> removed)</td></tr>
 <tr class="separator:aecb278fd2666b9ebb8d99945eb8e182a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeecd54f11b1a6a1222e5178e4df00475" id="r_aeecd54f11b1a6a1222e5178e4df00475"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#aeecd54f11b1a6a1222e5178e4df00475">pubsubEnabled</a></td></tr>
+<tr class="separator:aeecd54f11b1a6a1222e5178e4df00475"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8a9e6cb4819c5eccfab9fc97d44a87a" id="r_ad8a9e6cb4819c5eccfab9fc97d44a87a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="server_8h.html#ae2ed50a9331a27c13b38b9c86ad938f8">UA_PubSubConfiguration</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#ad8a9e6cb4819c5eccfab9fc97d44a87a">pubSubConfig</a></td></tr>
 <tr class="separator:ad8a9e6cb4819c5eccfab9fc97d44a87a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96bee41a8ee752b6e616f34da3ac9b92" id="r_a96bee41a8ee752b6e616f34da3ac9b92"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#a96bee41a8ee752b6e616f34da3ac9b92">historizingEnabled</a></td></tr>
+<tr class="separator:a96bee41a8ee752b6e616f34da3ac9b92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3428248708caab3a2856d035a782d13" id="r_ab3428248708caab3a2856d035a782d13"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__HistoryDatabase.html">UA_HistoryDatabase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#ab3428248708caab3a2856d035a782d13">historyDatabase</a></td></tr>
 <tr class="separator:ab3428248708caab3a2856d035a782d13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16bf65862bfe8e0fe3a12dbfee7188b1" id="r_a16bf65862bfe8e0fe3a12dbfee7188b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#a16bf65862bfe8e0fe3a12dbfee7188b1">accessHistoryDataCapability</a></td></tr>
@@ -226,10 +248,14 @@ Data Fields</h2></td></tr>
 <tr class="separator:ae14f96502dabe1392fec32219f2aec4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26c89817a8020069a5b5ce1cfc137a6d" id="r_a26c89817a8020069a5b5ce1cfc137a6d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#a26c89817a8020069a5b5ce1cfc137a6d">deleteAtTimeDataCapability</a></td></tr>
 <tr class="separator:a26c89817a8020069a5b5ce1cfc137a6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc1ab5f908a8bc93f6655f2d2641de8b" id="r_acc1ab5f908a8bc93f6655f2d2641de8b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#acc1ab5f908a8bc93f6655f2d2641de8b">reverseReconnectInterval</a></td></tr>
+<tr class="separator:acc1ab5f908a8bc93f6655f2d2641de8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8aeddfe329b652220f2176de1b35d51" id="r_ad8aeddfe329b652220f2176de1b35d51"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ServerConfig.html#ad8aeddfe329b652220f2176de1b35d51">privateKeyPasswordCallback</a> )(<a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> *sc, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *password)</td></tr>
+<tr class="separator:ad8aeddfe329b652220f2176de1b35d51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00063">63</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00050">50</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
 <a id="a4e05ef99a4839b8265ca72a68f845d1d" name="a4e05ef99a4839b8265ca72a68f845d1d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4e05ef99a4839b8265ca72a68f845d1d">&#9670;&#160;</a></span>accessControl</h2>
@@ -243,7 +269,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00116">116</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00134">134</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -259,7 +285,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00231">231</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00252">252</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -275,7 +301,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00234">234</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00255">255</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -291,7 +317,23 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00087">87</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00078">78</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+
+</div>
+</div>
+<a id="a81a024e65a18322043a8401f437cf360" name="a81a024e65a18322043a8401f437cf360"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81a024e65a18322043a8401f437cf360">&#9670;&#160;</a></span>allowNonePolicyPassword</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> UA_ServerConfig::allowNonePolicyPassword</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00127">127</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -307,7 +349,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00071">71</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00058">58</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -323,23 +365,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00070">70</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
-
-</div>
-</div>
-<a id="ac3fe2f44a7a5c00386a55c34eeda46a4" name="ac3fe2f44a7a5c00386a55c34eeda46a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac3fe2f44a7a5c00386a55c34eeda46a4">&#9670;&#160;</a></span>certificateVerification</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structUA__CertificateVerification.html">UA_CertificateVerification</a> UA_ServerConfig::certificateVerification</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00113">113</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00057">57</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -355,7 +381,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00065">65</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00051">51</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -371,23 +397,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00090">90</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
-
-</div>
-</div>
-<a id="ae77bf1bfeadd923a474f4c5d1445c5a2" name="ae77bf1bfeadd923a474f4c5d1445c5a2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae77bf1bfeadd923a474f4c5d1445c5a2">&#9670;&#160;</a></span>customHostname</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structUA__String.html">UA_String</a> UA_ServerConfig::customHostname</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00095">95</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00081">81</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -403,7 +413,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00249">249</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00270">270</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -419,7 +429,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00248">248</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00269">269</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -435,7 +445,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00247">247</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00268">268</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -451,7 +461,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00163">163</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00181">181</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -467,7 +477,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00185">185</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00204">204</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -483,7 +493,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00102">102</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00112">112</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -499,7 +509,55 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00101">101</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00111">111</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+
+</div>
+</div>
+<a id="a2791cc0cfee532ed027391911a1e6910" name="a2791cc0cfee532ed027391911a1e6910"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2791cc0cfee532ed027391911a1e6910">&#9670;&#160;</a></span>eventLoop</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUA__EventLoop.html">UA_EventLoop</a>* UA_ServerConfig::eventLoop</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00086">86</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+
+</div>
+</div>
+<a id="a414b839be1b817d0717bdc6a36ed1c7d" name="a414b839be1b817d0717bdc6a36ed1c7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a414b839be1b817d0717bdc6a36ed1c7d">&#9670;&#160;</a></span>externalEventLoop</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> UA_ServerConfig::externalEventLoop</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00087">87</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+
+</div>
+</div>
+<a id="a96bee41a8ee752b6e616f34da3ac9b92" name="a96bee41a8ee752b6e616f34da3ac9b92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96bee41a8ee752b6e616f34da3ac9b92">&#9670;&#160;</a></span>historizingEnabled</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> UA_ServerConfig::historizingEnabled</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00248">248</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -515,7 +573,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00229">229</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00250">250</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -531,7 +589,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00239">239</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00260">260</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -547,7 +605,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00237">237</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00258">258</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -563,7 +621,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00238">238</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00259">259</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -579,7 +637,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00183">183</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00202">202</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -595,23 +653,23 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00182">182</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00201">201</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
-<a id="acd81070ab3c28ea80921f7fd04c995cb" name="acd81070ab3c28ea80921f7fd04c995cb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acd81070ab3c28ea80921f7fd04c995cb">&#9670;&#160;</a></span>logger</h2>
+<a id="a1599757fe4c27eb0ac19160bc7e9e4ea" name="a1599757fe4c27eb0ac19160bc7e9e4ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1599757fe4c27eb0ac19160bc7e9e4ea">&#9670;&#160;</a></span>logging</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structUA__Logger.html">UA_Logger</a> UA_ServerConfig::logger</td>
+          <td class="memname"><a class="el" href="structUA__Logger.html">UA_Logger</a>* UA_ServerConfig::logging</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00064">64</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00054">54</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -627,7 +685,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00188">188</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00207">207</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -643,7 +701,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00192">192</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00211">211</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -659,7 +717,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00142">142</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00160">160</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -675,7 +733,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00193">193</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00212">212</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -691,7 +749,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00138">138</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00156">156</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -707,7 +765,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00137">137</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00155">155</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -723,7 +781,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00141">141</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00159">159</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -739,7 +797,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00135">135</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00153">153</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -755,7 +813,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00139">139</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00157">157</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -771,7 +829,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00140">140</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00158">158</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -787,7 +845,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00136">136</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00154">154</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -803,7 +861,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00184">184</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00203">203</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -819,7 +877,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00198">198</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00217">217</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -835,7 +893,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00145">145</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00163">163</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -851,7 +909,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00186">186</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00205">205</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -867,7 +925,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00232">232</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00253">253</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -883,7 +941,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00235">235</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00256">256</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -899,7 +957,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00127">127</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00145">145</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -915,7 +973,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00128">128</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00146">146</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -931,7 +989,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00131">131</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00149">149</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -947,7 +1005,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00132">132</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00150">150</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -963,7 +1021,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00179">179</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00198">198</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -979,7 +1037,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00180">180</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00199">199</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -995,7 +1053,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00123">123</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00141">141</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -1006,44 +1064,12 @@ Data Fields</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void(* UA_ServerConfig::monitoredItemRegisterCallback) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, void *nodeContext, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> attibuteId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> removed)</td>
+          <td class="memname">void(* UA_ServerConfig::monitoredItemRegisterCallback) (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *<a class="el" href="types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>, void *nodeContext, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> attibuteId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> removed)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00213">213</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
-
-</div>
-</div>
-<a id="a807d8b2616138e754d73dec8c18ad8b8" name="a807d8b2616138e754d73dec8c18ad8b8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a807d8b2616138e754d73dec8c18ad8b8">&#9670;&#160;</a></span>networkLayers</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structUA__ServerNetworkLayer.html">UA_ServerNetworkLayer</a>* UA_ServerConfig::networkLayers</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00094">94</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
-
-</div>
-</div>
-<a id="a06a7109b8c985b512f0107657ac66aa9" name="a06a7109b8c985b512f0107657ac66aa9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a06a7109b8c985b512f0107657ac66aa9">&#9670;&#160;</a></span>networkLayersSize</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">size_t UA_ServerConfig::networkLayersSize</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00093">93</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00232">232</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -1059,7 +1085,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00120">120</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00138">138</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -1075,7 +1101,39 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00119">119</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00137">137</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+
+</div>
+</div>
+<a id="a2f0541d84f54763def064689c0969192" name="a2f0541d84f54763def064689c0969192"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f0541d84f54763def064689c0969192">&#9670;&#160;</a></span>notifyLifecycleState</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* UA_ServerConfig::notifyLifecycleState) (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="common_8h.html#a07eceb614c075c00494e5bdfcf7689e7">UA_LifecycleState</a> state)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00068">68</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+
+</div>
+</div>
+<a id="ad8aeddfe329b652220f2176de1b35d51" name="ad8aeddfe329b652220f2176de1b35d51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8aeddfe329b652220f2176de1b35d51">&#9670;&#160;</a></span>privateKeyPasswordCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_ServerConfig::privateKeyPasswordCallback) (<a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> *sc, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *password)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00283">283</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -1091,7 +1149,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00181">181</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00200">200</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -1107,7 +1165,23 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00224">224</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00244">244</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+
+</div>
+</div>
+<a id="aeecd54f11b1a6a1222e5178e4df00475" name="aeecd54f11b1a6a1222e5178e4df00475"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeecd54f11b1a6a1222e5178e4df00475">&#9670;&#160;</a></span>pubsubEnabled</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> UA_ServerConfig::pubsubEnabled</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00242">242</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -1123,7 +1197,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00195">195</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00214">214</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -1139,7 +1213,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00241">241</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00262">262</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -1155,7 +1229,23 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00242">242</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00263">263</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+
+</div>
+</div>
+<a id="acc1ab5f908a8bc93f6655f2d2641de8b" name="acc1ab5f908a8bc93f6655f2d2641de8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc1ab5f908a8bc93f6655f2d2641de8b">&#9670;&#160;</a></span>reverseReconnectInterval</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> UA_ServerConfig::reverseReconnectInterval</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00274">274</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -1171,7 +1261,23 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00194">194</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00213">213</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+
+</div>
+</div>
+<a id="a860606104c833b0cf6363cd7b63061bf" name="a860606104c833b0cf6363cd7b63061bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a860606104c833b0cf6363cd7b63061bf">&#9670;&#160;</a></span>secureChannelPKI</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUA__CertificateVerification.html">UA_CertificateVerification</a> UA_ServerConfig::secureChannelPKI</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00130">130</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -1187,7 +1293,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00099">99</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00105">105</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -1203,7 +1309,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00098">98</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00104">104</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -1219,23 +1325,55 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00111">111</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00121">121</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
-<a id="a2fe25accd66796da47c2ebcb68ad229d" name="a2fe25accd66796da47c2ebcb68ad229d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2fe25accd66796da47c2ebcb68ad229d">&#9670;&#160;</a></span>serverCertificate</h2>
+<a id="a1de518ec01aa8275d643d92cee132082" name="a1de518ec01aa8275d643d92cee132082"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1de518ec01aa8275d643d92cee132082">&#9670;&#160;</a></span>serverUrls</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> UA_ServerConfig::serverCertificate</td>
+          <td class="memname"><a class="el" href="structUA__String.html">UA_String</a>* UA_ServerConfig::serverUrls</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00072">72</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00090">90</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+
+</div>
+</div>
+<a id="a9932a6a3ce0f410d09e49eaaaeb59267" name="a9932a6a3ce0f410d09e49eaaaeb59267"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9932a6a3ce0f410d09e49eaaaeb59267">&#9670;&#160;</a></span>serverUrlsSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t UA_ServerConfig::serverUrlsSize</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00091">91</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+
+</div>
+</div>
+<a id="af856a21502c277e6bb94e1a292c4ba09" name="af856a21502c277e6bb94e1a292c4ba09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af856a21502c277e6bb94e1a292c4ba09">&#9670;&#160;</a></span>sessionPKI</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUA__CertificateVerification.html">UA_CertificateVerification</a> UA_ServerConfig::sessionPKI</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00131">131</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -1251,7 +1389,103 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00077">77</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00063">63</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+
+</div>
+</div>
+<a id="aab584bfc61d792e0f3b3ac6d6e24726c" name="aab584bfc61d792e0f3b3ac6d6e24726c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab584bfc61d792e0f3b3ac6d6e24726c">&#9670;&#160;</a></span>subscriptionsEnabled</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> UA_ServerConfig::subscriptionsEnabled</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00195">195</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+
+</div>
+</div>
+<a id="a4188a0f0344cb38a0003fdaf7660bb3a" name="a4188a0f0344cb38a0003fdaf7660bb3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4188a0f0344cb38a0003fdaf7660bb3a">&#9670;&#160;</a></span>tcpBufSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> UA_ServerConfig::tcpBufSize</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00095">95</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+
+</div>
+</div>
+<a id="a607f77c2decd3073713371b8e5a3a9d1" name="a607f77c2decd3073713371b8e5a3a9d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a607f77c2decd3073713371b8e5a3a9d1">&#9670;&#160;</a></span>tcpEnabled</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> UA_ServerConfig::tcpEnabled</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00094">94</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+
+</div>
+</div>
+<a id="ada7b6fbe31421b0ae262bd0c501e078f" name="ada7b6fbe31421b0ae262bd0c501e078f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada7b6fbe31421b0ae262bd0c501e078f">&#9670;&#160;</a></span>tcpMaxChunks</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> UA_ServerConfig::tcpMaxChunks</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00099">99</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+
+</div>
+</div>
+<a id="a0f3575433eb43b23f0acd451bfbbbca6" name="a0f3575433eb43b23f0acd451bfbbbca6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f3575433eb43b23f0acd451bfbbbca6">&#9670;&#160;</a></span>tcpMaxMsgSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> UA_ServerConfig::tcpMaxMsgSize</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00097">97</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+
+</div>
+</div>
+<a id="ac42b207c714efd664f59ac37418b3947" name="ac42b207c714efd664f59ac37418b3947"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac42b207c714efd664f59ac37418b3947">&#9670;&#160;</a></span>tcpReuseAddr</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> UA_ServerConfig::tcpReuseAddr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00101">101</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -1267,7 +1501,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00244">244</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00265">265</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -1283,7 +1517,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00245">245</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00266">266</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>
@@ -1299,7 +1533,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00082">82</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server_8h_source.html#l00073">73</a> of file <a class="el" href="server_8h_source.html">server.h</a>.</p>
 
 </div>
 </div>

@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.15</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.15</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -97,25 +97,25 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmytm.html">mytm</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmusl__tm.html">musl_tm</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:afb660027f550f00cee3e7b1a20e3d70d" id="r_afb660027f550f00cee3e7b1a20e3d70d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="libc__time_8h.html#afb660027f550f00cee3e7b1a20e3d70d">__secs_to_tm</a> (long long t, struct <a class="el" href="structmytm.html">mytm</a> *tm)</td></tr>
-<tr class="separator:afb660027f550f00cee3e7b1a20e3d70d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3610199af415afbd2a46f0640516c674" id="r_a3610199af415afbd2a46f0640516c674"><td class="memItemLeft" align="right" valign="top">long long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="libc__time_8h.html#a3610199af415afbd2a46f0640516c674">__tm_to_secs</a> (const struct <a class="el" href="structmytm.html">mytm</a> *tm)</td></tr>
-<tr class="separator:a3610199af415afbd2a46f0640516c674"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a188800a2bfffcded953d48097a83a3e5" id="r_a188800a2bfffcded953d48097a83a3e5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="libc__time_8h.html#a188800a2bfffcded953d48097a83a3e5">musl_secs_to_tm</a> (long long t, struct <a class="el" href="structmusl__tm.html">musl_tm</a> *tm)</td></tr>
+<tr class="separator:a188800a2bfffcded953d48097a83a3e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab449eff3e031286b2189673a464974fc" id="r_ab449eff3e031286b2189673a464974fc"><td class="memItemLeft" align="right" valign="top">long long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="libc__time_8h.html#ab449eff3e031286b2189673a464974fc">musl_tm_to_secs</a> (const struct <a class="el" href="structmusl__tm.html">musl_tm</a> *tm)</td></tr>
+<tr class="separator:ab449eff3e031286b2189673a464974fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="afb660027f550f00cee3e7b1a20e3d70d" name="afb660027f550f00cee3e7b1a20e3d70d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afb660027f550f00cee3e7b1a20e3d70d">&#9670;&#160;</a></span>__secs_to_tm()</h2>
+<a id="a188800a2bfffcded953d48097a83a3e5" name="a188800a2bfffcded953d48097a83a3e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a188800a2bfffcded953d48097a83a3e5">&#9670;&#160;</a></span>musl_secs_to_tm()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int __secs_to_tm </td>
+          <td class="memname">int musl_secs_to_tm </td>
           <td>(</td>
           <td class="paramtype">long long&#160;</td>
           <td class="paramname"><em>t</em>, </td>
@@ -123,7 +123,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">struct <a class="el" href="structmytm.html">mytm</a> *&#160;</td>
+          <td class="paramtype">struct <a class="el" href="structmusl__tm.html">musl_tm</a> *&#160;</td>
           <td class="paramname"><em>tm</em>&#160;</td>
         </tr>
         <tr>
@@ -136,16 +136,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a3610199af415afbd2a46f0640516c674" name="a3610199af415afbd2a46f0640516c674"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3610199af415afbd2a46f0640516c674">&#9670;&#160;</a></span>__tm_to_secs()</h2>
+<a id="ab449eff3e031286b2189673a464974fc" name="ab449eff3e031286b2189673a464974fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab449eff3e031286b2189673a464974fc">&#9670;&#160;</a></span>musl_tm_to_secs()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">long long __tm_to_secs </td>
+          <td class="memname">long long musl_tm_to_secs </td>
           <td>(</td>
-          <td class="paramtype">const struct <a class="el" href="structmytm.html">mytm</a> *&#160;</td>
+          <td class="paramtype">const struct <a class="el" href="structmusl__tm.html">musl_tm</a> *&#160;</td>
           <td class="paramname"><em>tm</em></td><td>)</td>
           <td></td>
         </tr>

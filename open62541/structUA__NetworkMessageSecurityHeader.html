@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.15</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.15</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -102,8 +102,10 @@ Data Fields</h2></td></tr>
 <tr class="separator:ae52ff1af980e6ee014c9514ffac985e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39478a62634e69b75dc428d2f6ae2f02" id="r_a39478a62634e69b75dc428d2f6ae2f02"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__NetworkMessageSecurityHeader.html#a39478a62634e69b75dc428d2f6ae2f02">securityTokenId</a></td></tr>
 <tr class="separator:a39478a62634e69b75dc428d2f6ae2f02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7557b4c72c1634ca122282549a0eaa57" id="r_a7557b4c72c1634ca122282549a0eaa57"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__NetworkMessageSecurityHeader.html#a7557b4c72c1634ca122282549a0eaa57">messageNonce</a></td></tr>
-<tr class="separator:a7557b4c72c1634ca122282549a0eaa57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace43553a7557ba1d11fa1671a7eb467b" id="r_ace43553a7557ba1d11fa1671a7eb467b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__NetworkMessageSecurityHeader.html#ace43553a7557ba1d11fa1671a7eb467b">messageNonce</a> [16]</td></tr>
+<tr class="separator:ace43553a7557ba1d11fa1671a7eb467b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e526a000d84a190858e73727e437a58" id="r_a2e526a000d84a190858e73727e437a58"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__NetworkMessageSecurityHeader.html#a2e526a000d84a190858e73727e437a58">messageNonceSize</a></td></tr>
+<tr class="separator:a2e526a000d84a190858e73727e437a58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83c2cb3acd92adc34a4ef03baa7d6577" id="r_a83c2cb3acd92adc34a4ef03baa7d6577"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__NetworkMessageSecurityHeader.html#a83c2cb3acd92adc34a4ef03baa7d6577">securityFooterSize</a></td></tr>
 <tr class="separator:a83c2cb3acd92adc34a4ef03baa7d6577"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -127,19 +129,35 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="a7557b4c72c1634ca122282549a0eaa57" name="a7557b4c72c1634ca122282549a0eaa57"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7557b4c72c1634ca122282549a0eaa57">&#9670;&#160;</a></span>messageNonce</h2>
+<a id="ace43553a7557ba1d11fa1671a7eb467b" name="ace43553a7557ba1d11fa1671a7eb467b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace43553a7557ba1d11fa1671a7eb467b">&#9670;&#160;</a></span>messageNonce</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> UA_NetworkMessageSecurityHeader::messageNonce</td>
+          <td class="memname"><a class="el" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a> UA_NetworkMessageSecurityHeader::messageNonce[16]</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="ua__pubsub__networkmessage_8h_source.html#l00125">125</a> of file <a class="el" href="ua__pubsub__networkmessage_8h_source.html">ua_pubsub_networkmessage.h</a>.</p>
+
+</div>
+</div>
+<a id="a2e526a000d84a190858e73727e437a58" name="a2e526a000d84a190858e73727e437a58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e526a000d84a190858e73727e437a58">&#9670;&#160;</a></span>messageNonceSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a> UA_NetworkMessageSecurityHeader::messageNonceSize</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__pubsub__networkmessage_8h_source.html#l00126">126</a> of file <a class="el" href="ua__pubsub__networkmessage_8h_source.html">ua_pubsub_networkmessage.h</a>.</p>
 
 </div>
 </div>
@@ -203,7 +221,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__pubsub__networkmessage_8h_source.html#l00126">126</a> of file <a class="el" href="ua__pubsub__networkmessage_8h_source.html">ua_pubsub_networkmessage.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__pubsub__networkmessage_8h_source.html#l00127">127</a> of file <a class="el" href="ua__pubsub__networkmessage_8h_source.html">ua_pubsub_networkmessage.h</a>.</p>
 
 </div>
 </div>

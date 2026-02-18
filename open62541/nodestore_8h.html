@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.15</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.15</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -91,12 +91,12 @@ $(function() {
 <a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">nodestore.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="util_8h_source.html">open62541/util.h</a>&gt;</code><br />
-<code>#include &quot;<a class="el" href="aa__tree_8h_source.html">aa_tree.h</a>&quot;</code><br />
 </div>
 <p><a href="nodestore_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -115,6 +115,8 @@ Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ReferenceTargetTreeElem.html">UA_ReferenceTargetTreeElem</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__NodeReferenceKind.html">UA_NodeReferenceKind</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__LocalizedTextListEntry.html">UA_LocalizedTextListEntry</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__NodeHead.html">UA_NodeHead</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -192,11 +194,17 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a5169eb7ba94b7fc97e23860f4b5a1064" id="r_a5169eb7ba94b7fc97e23860f4b5a1064"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structUA__MonitoredItem.html">UA_MonitoredItem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nodestore_8h.html#a5169eb7ba94b7fc97e23860f4b5a1064">UA_MonitoredItem</a></td></tr>
+<tr class="memitem:a5169eb7ba94b7fc97e23860f4b5a1064" id="r_a5169eb7ba94b7fc97e23860f4b5a1064"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="nodestore_8h.html#a5169eb7ba94b7fc97e23860f4b5a1064">UA_MonitoredItem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nodestore_8h.html#a5169eb7ba94b7fc97e23860f4b5a1064">UA_MonitoredItem</a></td></tr>
 <tr class="separator:a5169eb7ba94b7fc97e23860f4b5a1064"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1d4134b378a3b3dc61b14cc2bcbd595" id="r_aa1d4134b378a3b3dc61b14cc2bcbd595"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structUA__NodeHead.html">UA_NodeHead</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nodestore_8h.html#aa1d4134b378a3b3dc61b14cc2bcbd595">UA_NodeHead</a></td></tr>
 <tr class="separator:aa1d4134b378a3b3dc61b14cc2bcbd595"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a943f95365533842bb0938f2c6609a216" id="r_a943f95365533842bb0938f2c6609a216"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nodestore_8h.html#a943f95365533842bb0938f2c6609a216">UA_MethodCallback</a>) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *methodId, void *methodContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *objectId, void *objectContext, size_t inputSize, const <a class="el" href="structUA__Variant.html">UA_Variant</a> *input, size_t outputSize, <a class="el" href="structUA__Variant.html">UA_Variant</a> *output)</td></tr>
+<tr class="memitem:a0d4d4aa45479dac4d629098e9695c4b0" id="r_a0d4d4aa45479dac4d629098e9695c4b0"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structUA__ReferenceTargetTreeElem.html">UA_ReferenceTargetTreeElem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nodestore_8h.html#a0d4d4aa45479dac4d629098e9695c4b0">UA_ReferenceTargetTreeElem</a></td></tr>
+<tr class="separator:a0d4d4aa45479dac4d629098e9695c4b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab929da781954e4a0e43a2235555ded50" id="r_ab929da781954e4a0e43a2235555ded50"><td class="memItemLeft" align="right" valign="top">typedef void *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nodestore_8h.html#ab929da781954e4a0e43a2235555ded50">UA_NodeReferenceKind_iterateCallback</a>) (void *context, <a class="el" href="structUA__ReferenceTarget.html">UA_ReferenceTarget</a> *target)</td></tr>
+<tr class="separator:ab929da781954e4a0e43a2235555ded50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1035a0d2418889bf27dcabd0b1ba17ce" id="r_a1035a0d2418889bf27dcabd0b1ba17ce"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structUA__LocalizedTextListEntry.html">UA_LocalizedTextListEntry</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nodestore_8h.html#a1035a0d2418889bf27dcabd0b1ba17ce">UA_LocalizedTextListEntry</a></td></tr>
+<tr class="separator:a1035a0d2418889bf27dcabd0b1ba17ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a943f95365533842bb0938f2c6609a216" id="r_a943f95365533842bb0938f2c6609a216"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nodestore_8h.html#a943f95365533842bb0938f2c6609a216">UA_MethodCallback</a>) (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *methodId, void *methodContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *objectId, void *objectContext, size_t inputSize, const <a class="el" href="structUA__Variant.html">UA_Variant</a> *input, size_t outputSize, <a class="el" href="structUA__Variant.html">UA_Variant</a> *output)</td></tr>
 <tr class="separator:a943f95365533842bb0938f2c6609a216"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a182a5a3bdc9323eae2cf82fb92d1a967" id="r_a182a5a3bdc9323eae2cf82fb92d1a967"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nodestore_8h.html#a182a5a3bdc9323eae2cf82fb92d1a967">UA_NodestoreVisitor</a>) (void *visitorCtx, const <a class="el" href="unionUA__Node.html">UA_Node</a> *node)</td></tr>
 <tr class="separator:a182a5a3bdc9323eae2cf82fb92d1a967"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -218,21 +226,23 @@ Functions</h2></td></tr>
 <tr class="separator:ad653e04273f264bd20131e7e984d8d32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a047b08667b596b359fe7781aee2a58d7" id="r_a047b08667b596b359fe7781aee2a58d7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="common_8h.html#adeb58a592483258f220c845c47622b15">UA_Order</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nodestore_8h.html#a047b08667b596b359fe7781aee2a58d7">UA_NodePointer_order</a> (<a class="el" href="unionUA__NodePointer.html">UA_NodePointer</a> p1, <a class="el" href="unionUA__NodePointer.html">UA_NodePointer</a> p2)</td></tr>
 <tr class="separator:a047b08667b596b359fe7781aee2a58d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a171b3fc2bb32bff3f8ec328c8f3d22d0" id="r_a171b3fc2bb32bff3f8ec328c8f3d22d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="unionUA__NodePointer.html">UA_NodePointer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nodestore_8h.html#a171b3fc2bb32bff3f8ec328c8f3d22d0">UA_NodePointer_fromNodeId</a> (const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *id)</td></tr>
+<tr class="memitem:a171b3fc2bb32bff3f8ec328c8f3d22d0" id="r_a171b3fc2bb32bff3f8ec328c8f3d22d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="unionUA__NodePointer.html">UA_NodePointer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nodestore_8h.html#a171b3fc2bb32bff3f8ec328c8f3d22d0">UA_NodePointer_fromNodeId</a> (const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *<a class="el" href="types_8h.html#a4b6dd8640e32ba0ce2d74b7c37ae1533">id</a>)</td></tr>
 <tr class="separator:a171b3fc2bb32bff3f8ec328c8f3d22d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46ffc2e6816f310aa42f135624813825" id="r_a46ffc2e6816f310aa42f135624813825"><td class="memItemLeft" align="right" valign="top"><a class="el" href="unionUA__NodePointer.html">UA_NodePointer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nodestore_8h.html#a46ffc2e6816f310aa42f135624813825">UA_NodePointer_fromExpandedNodeId</a> (const <a class="el" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> *id)</td></tr>
+<tr class="memitem:a46ffc2e6816f310aa42f135624813825" id="r_a46ffc2e6816f310aa42f135624813825"><td class="memItemLeft" align="right" valign="top"><a class="el" href="unionUA__NodePointer.html">UA_NodePointer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nodestore_8h.html#a46ffc2e6816f310aa42f135624813825">UA_NodePointer_fromExpandedNodeId</a> (const <a class="el" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> *<a class="el" href="types_8h.html#a4b6dd8640e32ba0ce2d74b7c37ae1533">id</a>)</td></tr>
 <tr class="separator:a46ffc2e6816f310aa42f135624813825"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb97a4947e7bf1bd1e5e764c9d46831f" id="r_abb97a4947e7bf1bd1e5e764c9d46831f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nodestore_8h.html#abb97a4947e7bf1bd1e5e764c9d46831f">UA_NodePointer_toExpandedNodeId</a> (<a class="el" href="unionUA__NodePointer.html">UA_NodePointer</a> np)</td></tr>
 <tr class="separator:abb97a4947e7bf1bd1e5e764c9d46831f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a205e98507851ff4bfef0f3878de9cff1" id="r_a205e98507851ff4bfef0f3878de9cff1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nodestore_8h.html#a205e98507851ff4bfef0f3878de9cff1">UA_NodePointer_toNodeId</a> (<a class="el" href="unionUA__NodePointer.html">UA_NodePointer</a> np)</td></tr>
 <tr class="separator:a205e98507851ff4bfef0f3878de9cff1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4474d592e542a9fde7c111ae5af99ed8" id="r_a4474d592e542a9fde7c111ae5af99ed8"><td class="memItemLeft" align="right" valign="top">UA_EXPORT const <a class="el" href="structUA__ReferenceTarget.html">UA_ReferenceTarget</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nodestore_8h.html#a4474d592e542a9fde7c111ae5af99ed8">UA_NodeReferenceKind_iterate</a> (const <a class="el" href="structUA__NodeReferenceKind.html">UA_NodeReferenceKind</a> *rk, const <a class="el" href="structUA__ReferenceTarget.html">UA_ReferenceTarget</a> *prev)</td></tr>
-<tr class="separator:a4474d592e542a9fde7c111ae5af99ed8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10b0a6fbb549625d8a0225baa90a4fe9" id="r_a10b0a6fbb549625d8a0225baa90a4fe9"><td class="memItemLeft" align="right" valign="top">UA_EXPORT void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nodestore_8h.html#a10b0a6fbb549625d8a0225baa90a4fe9">UA_NodeReferenceKind_iterate</a> (<a class="el" href="structUA__NodeReferenceKind.html">UA_NodeReferenceKind</a> *rk, <a class="el" href="nodestore_8h.html#ab929da781954e4a0e43a2235555ded50">UA_NodeReferenceKind_iterateCallback</a> callback, void *context)</td></tr>
+<tr class="separator:a10b0a6fbb549625d8a0225baa90a4fe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02763d74eaf7ccb2777b4894cb0a1b0d" id="r_a02763d74eaf7ccb2777b4894cb0a1b0d"><td class="memItemLeft" align="right" valign="top">UA_EXPORT const <a class="el" href="structUA__ReferenceTarget.html">UA_ReferenceTarget</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nodestore_8h.html#a02763d74eaf7ccb2777b4894cb0a1b0d">UA_NodeReferenceKind_findTarget</a> (const <a class="el" href="structUA__NodeReferenceKind.html">UA_NodeReferenceKind</a> *rk, const <a class="el" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> *targetId)</td></tr>
+<tr class="separator:a02763d74eaf7ccb2777b4894cb0a1b0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a38caf7dfbe51f78b32a1c98a55afb363" id="r_a38caf7dfbe51f78b32a1c98a55afb363"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nodestore_8h.html#a38caf7dfbe51f78b32a1c98a55afb363">UA_NodeReferenceKind_switch</a> (<a class="el" href="structUA__NodeReferenceKind.html">UA_NodeReferenceKind</a> *rk)</td></tr>
 <tr class="separator:a38caf7dfbe51f78b32a1c98a55afb363"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2dbb0f2b0ac2aad30f326728965b67a2" id="r_a2dbb0f2b0ac2aad30f326728965b67a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nodestore_8h.html#a2dbb0f2b0ac2aad30f326728965b67a2">UA_Node_setAttributes</a> (<a class="el" href="unionUA__Node.html">UA_Node</a> *node, const void *attributes, const <a class="el" href="structUA__DataType.html">UA_DataType</a> *attributeType)</td></tr>
 <tr class="separator:a2dbb0f2b0ac2aad30f326728965b67a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2054f2b6573812604025a4be24adfea" id="r_ab2054f2b6573812604025a4be24adfea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nodestore_8h.html#ab2054f2b6573812604025a4be24adfea">UA_Node_copy</a> (const <a class="el" href="unionUA__Node.html">UA_Node</a> *src, <a class="el" href="unionUA__Node.html">UA_Node</a> *dst)</td></tr>
+<tr class="memitem:ab2054f2b6573812604025a4be24adfea" id="r_ab2054f2b6573812604025a4be24adfea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nodestore_8h.html#ab2054f2b6573812604025a4be24adfea">UA_Node_copy</a> (const <a class="el" href="unionUA__Node.html">UA_Node</a> *src, <a class="el" href="unionUA__Node.html">UA_Node</a> *<a class="el" href="types_8h.html#a6598b83f973d0e8bc67fb4c7ee7cd668">dst</a>)</td></tr>
 <tr class="separator:ab2054f2b6573812604025a4be24adfea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a413c223d167eee1e32ee5cfbd13d14b1" id="r_a413c223d167eee1e32ee5cfbd13d14b1"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="unionUA__Node.html">UA_Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nodestore_8h.html#a413c223d167eee1e32ee5cfbd13d14b1">UA_Node_copy_alloc</a> (const <a class="el" href="unionUA__Node.html">UA_Node</a> *src)</td></tr>
 <tr class="separator:a413c223d167eee1e32ee5cfbd13d14b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -246,6 +256,13 @@ Functions</h2></td></tr>
 <tr class="separator:a017eb3fd2b6dfd6b0a1ef11ea2eb36d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab29f721bb38eb8a1f210cc81a76e6168" id="r_ab29f721bb38eb8a1f210cc81a76e6168"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nodestore_8h.html#ab29f721bb38eb8a1f210cc81a76e6168">UA_Node_clear</a> (<a class="el" href="unionUA__Node.html">UA_Node</a> *node)</td></tr>
 <tr class="separator:ab29f721bb38eb8a1f210cc81a76e6168"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ab371c4c7ec96b3db20cd3d2551155cec" id="r_ab371c4c7ec96b3db20cd3d2551155cec"><td class="memItemLeft" align="right" valign="top">UA_EXPORT const <a class="el" href="structUA__ReferenceTypeSet.html">UA_ReferenceTypeSet</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nodestore_8h.html#ab371c4c7ec96b3db20cd3d2551155cec">UA_REFERENCETYPESET_NONE</a></td></tr>
+<tr class="separator:ab371c4c7ec96b3db20cd3d2551155cec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc15826e51d1318eacaffbccbe603d7e" id="r_acc15826e51d1318eacaffbccbe603d7e"><td class="memItemLeft" align="right" valign="top">UA_EXPORT const <a class="el" href="structUA__ReferenceTypeSet.html">UA_ReferenceTypeSet</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nodestore_8h.html#acc15826e51d1318eacaffbccbe603d7e">UA_REFERENCETYPESET_ALL</a></td></tr>
+<tr class="separator:acc15826e51d1318eacaffbccbe603d7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="af336f5600eab9586a1f80deea806de7f" name="af336f5600eab9586a1f80deea806de7f"></a>
@@ -276,16 +293,16 @@ Functions</h2></td></tr>
 <div class="line">        } data;                                                         \</div>
 <div class="line">        <a class="code hl_struct" href="structUA__DataSource.html">UA_DataSource</a> dataSource;                                       \</div>
 <div class="line">    } value;</div>
-<div class="ttc" id="anodestore_8h_html_afbc37051f9c25a0b6264f9cab402d60a"><div class="ttname"><a href="nodestore_8h.html#afbc37051f9c25a0b6264f9cab402d60a">UA_ValueSource</a></div><div class="ttdeci">UA_ValueSource</div><div class="ttdoc">Indicates whether a variable contains data inline or whether it points to an external data source.</div><div class="ttdef"><b>Definition</b> <a href="nodestore_8h_source.html#l00300">nodestore.h:300</a></div></div>
-<div class="ttc" id="astructUA__DataSource_html"><div class="ttname"><a href="structUA__DataSource.html">UA_DataSource</a></div><div class="ttdef"><b>Definition</b> <a href="nodestore_8h_source.html#l00341">nodestore.h:341</a></div></div>
-<div class="ttc" id="astructUA__DataValue_html"><div class="ttname"><a href="structUA__DataValue.html">UA_DataValue</a></div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00739">types.h:739</a></div></div>
-<div class="ttc" id="astructUA__NodeId_html"><div class="ttname"><a href="structUA__NodeId.html">UA_NodeId</a></div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00283">types.h:283</a></div></div>
-<div class="ttc" id="astructUA__ValueBackend_html"><div class="ttname"><a href="structUA__ValueBackend.html">UA_ValueBackend</a></div><div class="ttdef"><b>Definition</b> <a href="nodestore_8h_source.html#l00443">nodestore.h:443</a></div></div>
-<div class="ttc" id="astructUA__ValueCallback_html"><div class="ttname"><a href="structUA__ValueCallback.html">UA_ValueCallback</a></div><div class="ttdef"><b>Definition</b> <a href="nodestore_8h_source.html#l00305">nodestore.h:305</a></div></div>
-<div class="ttc" id="atypes_8h_html_a01ce3c3b2fb34ef81c97c313f516004e"><div class="ttname"><a href="types_8h.html#a01ce3c3b2fb34ef81c97c313f516004e">UA_Int32</a></div><div class="ttdeci">int32_t UA_Int32</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00051">types.h:51</a></div></div>
-<div class="ttc" id="atypes_8h_html_a5f0721b034e4c44a7f81589b15ba1baf"><div class="ttname"><a href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a></div><div class="ttdeci">uint32_t UA_UInt32</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00056">types.h:56</a></div></div>
+<div class="ttc" id="anodestore_8h_html_afbc37051f9c25a0b6264f9cab402d60a"><div class="ttname"><a href="nodestore_8h.html#afbc37051f9c25a0b6264f9cab402d60a">UA_ValueSource</a></div><div class="ttdeci">UA_ValueSource</div><div class="ttdoc">Indicates whether a variable contains data inline or whether it points to an external data source.</div><div class="ttdef"><b>Definition</b> <a href="nodestore_8h_source.html#l00332">nodestore.h:332</a></div></div>
+<div class="ttc" id="astructUA__DataSource_html"><div class="ttname"><a href="structUA__DataSource.html">UA_DataSource</a></div><div class="ttdef"><b>Definition</b> <a href="nodestore_8h_source.html#l00373">nodestore.h:373</a></div></div>
+<div class="ttc" id="astructUA__DataValue_html"><div class="ttname"><a href="structUA__DataValue.html">UA_DataValue</a></div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00758">types.h:758</a></div></div>
+<div class="ttc" id="astructUA__NodeId_html"><div class="ttname"><a href="structUA__NodeId.html">UA_NodeId</a></div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00277">types.h:277</a></div></div>
+<div class="ttc" id="astructUA__ValueBackend_html"><div class="ttname"><a href="structUA__ValueBackend.html">UA_ValueBackend</a></div><div class="ttdef"><b>Definition</b> <a href="nodestore_8h_source.html#l00475">nodestore.h:475</a></div></div>
+<div class="ttc" id="astructUA__ValueCallback_html"><div class="ttname"><a href="structUA__ValueCallback.html">UA_ValueCallback</a></div><div class="ttdef"><b>Definition</b> <a href="nodestore_8h_source.html#l00337">nodestore.h:337</a></div></div>
+<div class="ttc" id="atypes_8h_html_a01ce3c3b2fb34ef81c97c313f516004e"><div class="ttname"><a href="types_8h.html#a01ce3c3b2fb34ef81c97c313f516004e">UA_Int32</a></div><div class="ttdeci">int32_t UA_Int32</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00052">types.h:52</a></div></div>
+<div class="ttc" id="atypes_8h_html_a5f0721b034e4c44a7f81589b15ba1baf"><div class="ttname"><a href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a></div><div class="ttdeci">uint32_t UA_UInt32</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00057">types.h:57</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00458">458</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00490">490</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
@@ -301,7 +318,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00108">108</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00107">107</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
@@ -317,7 +334,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00118">118</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00117">117</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
@@ -333,7 +350,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00111">111</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00110">110</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
@@ -349,7 +366,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00120">120</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00119">119</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
@@ -365,7 +382,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00116">116</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00115">115</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
@@ -381,7 +398,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00115">115</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00114">114</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
@@ -397,7 +414,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00113">113</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00112">112</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
@@ -413,7 +430,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00123">123</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00122">122</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
@@ -429,7 +446,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00114">114</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00113">113</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
@@ -445,7 +462,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00121">121</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00120">120</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
@@ -461,7 +478,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00122">122</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00121">121</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
@@ -477,7 +494,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00119">119</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00118">118</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
@@ -493,7 +510,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00107">107</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00106">106</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
@@ -509,7 +526,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00117">117</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00116">116</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
@@ -525,7 +542,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00109">109</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00108">108</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
@@ -541,7 +558,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00110">110</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00109">109</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
@@ -557,7 +574,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00112">112</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00111">111</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
@@ -573,7 +590,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00106">106</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00105">105</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
@@ -592,11 +609,27 @@ Functions</h2></td></tr>
 <p>The maximum number of ReferrenceTypes. </p>
 <p>Must be a multiple of 32. </p>
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00126">126</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00125">125</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Typedef Documentation</h2>
+<a id="a1035a0d2418889bf27dcabd0b1ba17ce" name="a1035a0d2418889bf27dcabd0b1ba17ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1035a0d2418889bf27dcabd0b1ba17ce">&#9670;&#160;</a></span>UA_LocalizedTextListEntry</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structUA__LocalizedTextListEntry.html">UA_LocalizedTextListEntry</a> <a class="el" href="structUA__LocalizedTextListEntry.html">UA_LocalizedTextListEntry</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Singly-linked LocalizedText list. </p>
+
+</div>
+</div>
 <a id="a943f95365533842bb0938f2c6609a216" name="a943f95365533842bb0938f2c6609a216"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a943f95365533842bb0938f2c6609a216">&#9670;&#160;</a></span>UA_MethodCallback</h2>
 
@@ -604,12 +637,12 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_MethodCallback) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *methodId, void *methodContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *objectId, void *objectContext, size_t inputSize, const <a class="el" href="structUA__Variant.html">UA_Variant</a> *input, size_t outputSize, <a class="el" href="structUA__Variant.html">UA_Variant</a> *output)</td>
+          <td class="memname">typedef <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_MethodCallback) (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *methodId, void *methodContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *objectId, void *objectContext, size_t inputSize, const <a class="el" href="structUA__Variant.html">UA_Variant</a> *input, size_t outputSize, <a class="el" href="structUA__Variant.html">UA_Variant</a> *output)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00505">505</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00537">537</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
@@ -620,12 +653,12 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef struct <a class="el" href="structUA__MonitoredItem.html">UA_MonitoredItem</a> <a class="el" href="structUA__MonitoredItem.html">UA_MonitoredItem</a></td>
+          <td class="memname">typedef struct <a class="el" href="nodestore_8h.html#a5169eb7ba94b7fc97e23860f4b5a1064">UA_MonitoredItem</a> <a class="el" href="nodestore_8h.html#a5169eb7ba94b7fc97e23860f4b5a1064">UA_MonitoredItem</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00028">28</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00027">27</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
@@ -641,7 +674,26 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00167">167</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00166">166</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+
+</div>
+</div>
+<a id="ab929da781954e4a0e43a2235555ded50" name="ab929da781954e4a0e43a2235555ded50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab929da781954e4a0e43a2235555ded50">&#9670;&#160;</a></span>UA_NodeReferenceKind_iterateCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void *(* UA_NodeReferenceKind_iterateCallback) (void *context, <a class="el" href="structUA__ReferenceTarget.html">UA_ReferenceTarget</a> *target)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Iterate over the references. </p>
+<p>Aborts when the first callback return a non-NULL pointer and returns that pointer. Do not modify the reference targets during the iteration. </p>
+
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00275">275</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
@@ -657,7 +709,21 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00585">585</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00617">617</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+
+</div>
+</div>
+<a id="a0d4d4aa45479dac4d629098e9695c4b0" name="a0d4d4aa45479dac4d629098e9695c4b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d4d4aa45479dac4d629098e9695c4b0">&#9670;&#160;</a></span>UA_ReferenceTargetTreeElem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structUA__ReferenceTargetTreeElem.html">UA_ReferenceTargetTreeElem</a> <a class="el" href="structUA__ReferenceTargetTreeElem.html">UA_ReferenceTargetTreeElem</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -680,7 +746,7 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="a613c40c47f9941ba2db4e0ab225cdf3ca563b30cddc7e275d5862d5abf2d9df35" name="a613c40c47f9941ba2db4e0ab225cdf3ca563b30cddc7e275d5862d5abf2d9df35"></a>UA_VALUEBACKENDTYPE_EXTERNAL&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00436">436</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00468">468</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
@@ -702,7 +768,7 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="afbc37051f9c25a0b6264f9cab402d60aa741dd1a2a9094b0282cc9b4b53f36ed7" name="afbc37051f9c25a0b6264f9cab402d60aa741dd1a2a9094b0282cc9b4b53f36ed7"></a>UA_VALUESOURCE_DATASOURCE&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00300">300</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00332">332</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
@@ -1136,14 +1202,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a4474d592e542a9fde7c111ae5af99ed8" name="a4474d592e542a9fde7c111ae5af99ed8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4474d592e542a9fde7c111ae5af99ed8">&#9670;&#160;</a></span>UA_NodeReferenceKind_iterate()</h2>
+<a id="a02763d74eaf7ccb2777b4894cb0a1b0d" name="a02763d74eaf7ccb2777b4894cb0a1b0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02763d74eaf7ccb2777b4894cb0a1b0d">&#9670;&#160;</a></span>UA_NodeReferenceKind_findTarget()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">UA_EXPORT const <a class="el" href="structUA__ReferenceTarget.html">UA_ReferenceTarget</a> * UA_NodeReferenceKind_iterate </td>
+          <td class="memname">UA_EXPORT const <a class="el" href="structUA__ReferenceTarget.html">UA_ReferenceTarget</a> * UA_NodeReferenceKind_findTarget </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structUA__NodeReferenceKind.html">UA_NodeReferenceKind</a> *&#160;</td>
           <td class="paramname"><em>rk</em>, </td>
@@ -1151,8 +1217,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__ReferenceTarget.html">UA_ReferenceTarget</a> *&#160;</td>
-          <td class="paramname"><em>prev</em>&#160;</td>
+          <td class="paramtype">const <a class="el" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> *&#160;</td>
+          <td class="paramname"><em>targetId</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1162,9 +1228,41 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Iterate over the references. </p>
-<p>Assumes that "prev" points to a NodeReferenceKind. If prev == NULL, the first element is returned. At the end of the iteration, NULL is returned.</p>
-<p>Do not continue the iteration after the rk was modified. </p>
+<p>Returns the entry for the targetId or NULL if not found. </p>
+
+</div>
+</div>
+<a id="a10b0a6fbb549625d8a0225baa90a4fe9" name="a10b0a6fbb549625d8a0225baa90a4fe9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10b0a6fbb549625d8a0225baa90a4fe9">&#9670;&#160;</a></span>UA_NodeReferenceKind_iterate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT void * UA_NodeReferenceKind_iterate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__NodeReferenceKind.html">UA_NodeReferenceKind</a> *&#160;</td>
+          <td class="paramname"><em>rk</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="nodestore_8h.html#ab929da781954e4a0e43a2235555ded50">UA_NodeReferenceKind_iterateCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>context</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -1186,6 +1284,51 @@ Functions</h2></td></tr>
 
 <p>Switch between array and tree representation. </p>
 <p>Does nothing upon error (e.g. out-of-memory). </p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="acc15826e51d1318eacaffbccbe603d7e" name="acc15826e51d1318eacaffbccbe603d7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc15826e51d1318eacaffbccbe603d7e">&#9670;&#160;</a></span>UA_REFERENCETYPESET_ALL</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT const <a class="el" href="structUA__ReferenceTypeSet.html">UA_ReferenceTypeSet</a> UA_REFERENCETYPESET_ALL</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab371c4c7ec96b3db20cd3d2551155cec" name="ab371c4c7ec96b3db20cd3d2551155cec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab371c4c7ec96b3db20cd3d2551155cec">&#9670;&#160;</a></span>UA_REFERENCETYPESET_NONE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT const <a class="el" href="structUA__ReferenceTypeSet.html">UA_ReferenceTypeSet</a> UA_REFERENCETYPESET_NONE</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>

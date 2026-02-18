@@ -1,5 +1,19 @@
 var searchData=
 [
-  ['qualifiedname_0',['QualifiedName',['../classopcua_1_1QualifiedName.html',1,'opcua']]],
-  ['question_1',['question',['open62541/structquestion.html',0,'']]]
+  ['range_0',['range',['../classopcua_1_1ua_1_1Range.html',1,'opcua::ua::Range'],['../classopcua_1_1ua_1_1Range.html',1,'opcua::Range']]],
+  ['rawdata_1',['RawData',['open62541/structRawData.html',0,'']]],
+  ['readrequest_2',['readrequest',['../classopcua_1_1ua_1_1ReadRequest.html',1,'opcua::ReadRequest'],['../classopcua_1_1ua_1_1ReadRequest.html',1,'opcua::ua::ReadRequest']]],
+  ['readresponse_3',['readresponse',['../classopcua_1_1ua_1_1ReadResponse.html',1,'opcua::ReadResponse'],['../classopcua_1_1ua_1_1ReadResponse.html',1,'opcua::ua::ReadResponse']]],
+  ['readvalueid_4',['readvalueid',['../classopcua_1_1ua_1_1ReadValueId.html',1,'opcua::ReadValueId'],['../classopcua_1_1ua_1_1ReadValueId.html',1,'opcua::ua::ReadValueId']]],
+  ['referencedescription_5',['referencedescription',['../classopcua_1_1ua_1_1ReferenceDescription.html',1,'opcua::ReferenceDescription'],['../classopcua_1_1ua_1_1ReferenceDescription.html',1,'opcua::ua::ReferenceDescription']]],
+  ['referencetypeattributes_6',['referencetypeattributes',['../classopcua_1_1ua_1_1ReferenceTypeAttributes.html',1,'opcua::ReferenceTypeAttributes'],['../classopcua_1_1ua_1_1ReferenceTypeAttributes.html',1,'opcua::ua::ReferenceTypeAttributes']]],
+  ['registernodesrequest_7',['registernodesrequest',['../classopcua_1_1ua_1_1RegisterNodesRequest.html',1,'opcua::ua::RegisterNodesRequest'],['../classopcua_1_1ua_1_1RegisterNodesRequest.html',1,'opcua::RegisterNodesRequest']]],
+  ['registernodesresponse_8',['registernodesresponse',['../classopcua_1_1ua_1_1RegisterNodesResponse.html',1,'opcua::RegisterNodesResponse'],['../classopcua_1_1ua_1_1RegisterNodesResponse.html',1,'opcua::ua::RegisterNodesResponse']]],
+  ['relativepath_9',['relativepath',['../classopcua_1_1ua_1_1RelativePath.html',1,'opcua::RelativePath'],['../classopcua_1_1ua_1_1RelativePath.html',1,'opcua::ua::RelativePath']]],
+  ['relativepathelement_10',['relativepathelement',['../classopcua_1_1ua_1_1RelativePathElement.html',1,'opcua::RelativePathElement'],['../classopcua_1_1ua_1_1RelativePathElement.html',1,'opcua::ua::RelativePathElement']]],
+  ['requestheader_11',['requestheader',['../classopcua_1_1ua_1_1RequestHeader.html',1,'opcua::RequestHeader'],['../classopcua_1_1ua_1_1RequestHeader.html',1,'opcua::ua::RequestHeader']]],
+  ['resource_12',['resource',['open62541/structresource.html',0,'']]],
+  ['responseheader_13',['responseheader',['../classopcua_1_1ua_1_1ResponseHeader.html',1,'opcua::ResponseHeader'],['../classopcua_1_1ua_1_1ResponseHeader.html',1,'opcua::ua::ResponseHeader']]],
+  ['result_14',['Result',['../classopcua_1_1Result.html',1,'opcua']]],
+  ['result_3c_20void_20_3e_15',['Result&lt; void &gt;',['../classopcua_1_1Result_3_01void_01_4.html',1,'opcua']]]
 ];

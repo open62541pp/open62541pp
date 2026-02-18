@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.20.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.21.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -208,7 +208,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <span class="keyword">const</span> <span class="keyword">auto</span> result = <a class="code hl_function" href="group__CreateMonitoredItems.html#ga7343952572b82d386e0f60dd753483f7">services::createMonitoredItemDataChange</a>(</div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>            <a class="code hl_function" href="classopcua_1_1Subscription.html#a5259633d043095bec11279acacec1f10">connection</a>(),</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>            <a class="code hl_function" href="classopcua_1_1Subscription.html#a17de04d7f947b93b2b8697e52d8edf14">subscriptionId</a>(),</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            {id, attribute},</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            {<a class="code hl_variableRef" target="_blank" href="open62541/types_8h.html#a4b6dd8640e32ba0ce2d74b7c37ae1533">id</a>, attribute},</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>            monitoringMode,</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>            parameters,</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            std::move(onDataChange),</div>
@@ -245,7 +245,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        <span class="keyword">const</span> <span class="keyword">auto</span> result = <a class="code hl_function" href="group__CreateMonitoredItems.html#ga05c7f16e4a40ecb2b3a249b75db07669">services::createMonitoredItemEvent</a>(</div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>            <a class="code hl_function" href="classopcua_1_1Subscription.html#a5259633d043095bec11279acacec1f10">connection</a>(),</div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>            <a class="code hl_function" href="classopcua_1_1Subscription.html#a17de04d7f947b93b2b8697e52d8edf14">subscriptionId</a>(),</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>            {id, <a class="code hl_enumvalue" href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917a54868874f2641f20364ba96922f27dc4">AttributeId::EventNotifier</a>},</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>            {<a class="code hl_variableRef" target="_blank" href="open62541/types_8h.html#a4b6dd8640e32ba0ce2d74b7c37ae1533">id</a>, <a class="code hl_enumvalue" href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917a54868874f2641f20364ba96922f27dc4">AttributeId::EventNotifier</a>},</div>
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>            monitoringMode,</div>
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>            parameters,</div>
 <div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>            std::move(onEvent)</div>
@@ -348,6 +348,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="astructopcua_1_1services_1_1MonitoringParametersEx_html"><div class="ttname"><a href="structopcua_1_1services_1_1MonitoringParametersEx.html">opcua::services::MonitoringParametersEx</a></div><div class="ttdoc">Extended monitoring parameters with default values from open62541.</div><div class="ttdef"><b>Definition</b> <a href="services_2monitoreditem_8hpp_source.html#l00052">monitoreditem.hpp:52</a></div></div>
 <div class="ttc" id="astructopcua_1_1services_1_1MonitoringParametersEx_html_a3ce9a13b884a85d3b90aee090bd23e89"><div class="ttname"><a href="structopcua_1_1services_1_1MonitoringParametersEx.html#a3ce9a13b884a85d3b90aee090bd23e89">opcua::services::MonitoringParametersEx::filter</a></div><div class="ttdeci">ExtensionObject filter</div><div class="ttdoc">Filter is used by the server to determine if the MonitoredItem should generate notifications.</div><div class="ttdef"><b>Definition</b> <a href="services_2monitoreditem_8hpp_source.html#l00064">monitoreditem.hpp:64</a></div></div>
 <div class="ttc" id="astructopcua_1_1services_1_1SubscriptionParameters_html"><div class="ttname"><a href="structopcua_1_1services_1_1SubscriptionParameters.html">opcua::services::SubscriptionParameters</a></div><div class="ttdoc">Subscription parameters with default values from open62541.</div><div class="ttdef"><b>Definition</b> <a href="services_2subscription_8hpp_source.html#l00046">subscription.hpp:46</a></div></div>
+<div class="ttc" id="atypes_8h_html_a4b6dd8640e32ba0ce2d74b7c37ae1533"><div class="ttname"><a href="open62541/types_8h.html#a4b6dd8640e32ba0ce2d74b7c37ae1533">id</a></div><div class="ttdeci">return id</div></div>
 <div class="ttc" id="atypes_8hpp_html"><div class="ttname"><a href="types_8hpp.html">types.hpp</a></div></div>
 <div class="ttc" id="aua_2types_8hpp_html"><div class="ttname"><a href="ua_2types_8hpp.html">types.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

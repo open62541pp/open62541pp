@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['browserecursive_0',['browseRecursive',['../ua__server__internal_8h.html#a70594b79b4747b6acebe031b60018573',1,'ua_server_internal.h']]],
-  ['browsesimplifiedbrowsepath_1',['browseSimplifiedBrowsePath',['../ua__server__internal_8h.html#a4d9ba7d51c68b2be1048489a39f3a391',1,'ua_server_internal.h']]]
+  ['base64_0',['base64',['../nodeset__base64_8h.html#aa15ae22fcaa94b4f1086253d39837d45',1,'nodeset_base64.h']]],
+  ['browsereferences_1',['BrowseReferences',['../browse__utils_8h.html#a23a577fa46c1f0bed47f63a7898bc767',1,'browse_utils.h']]]
 ];

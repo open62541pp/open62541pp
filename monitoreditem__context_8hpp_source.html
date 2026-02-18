@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.20.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.21.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -104,8 +104,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="ua_2types_8hpp.html">open62541pp/ua/types.hpp</a>&quot;</span>  <span class="comment">// DataValue, IntegerId, Variant</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="wrapper_8hpp.html">open62541pp/wrapper.hpp</a>&quot;</span>  <span class="comment">// asWrapper</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">struct </span><a class="code hl_structRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a>;</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">struct </span><a class="code hl_structRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a>;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">struct </span><a class="code hl_typedefRef" target="_blank" href="open62541/common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a>;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">struct </span><a class="code hl_typedefRef" target="_blank" href="open62541/common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a>;</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">namespace </span>opcua::services::detail {</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
@@ -118,7 +118,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    std::function&lt;void(<a class="code hl_typedef" href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">IntegerId</a> subId, <a class="code hl_typedef" href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">IntegerId</a> monId)&gt; deleteCallback;</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> dataChangeCallbackNativeServer(</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        [[maybe_unused]] <a class="code hl_structRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a>* server,</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        [[maybe_unused]] <a class="code hl_typedefRef" target="_blank" href="open62541/common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a>* server,</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <a class="code hl_typedef" href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">IntegerId</a> monId,</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <span class="keywordtype">void</span>* monContext,</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        [[maybe_unused]] <span class="keyword">const</span> <a class="code hl_structRef" target="_blank" href="open62541/structUA__NodeId.html">UA_NodeId</a>* nodeId,</div>
@@ -136,7 +136,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    }</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> dataChangeCallbackNativeClient(</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        [[maybe_unused]] <a class="code hl_structRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a>* client,</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        [[maybe_unused]] <a class="code hl_typedefRef" target="_blank" href="open62541/common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a>* client,</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <a class="code hl_typedef" href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">IntegerId</a> subId,</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        [[maybe_unused]] <span class="keywordtype">void</span>* subContext,</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <a class="code hl_typedef" href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">IntegerId</a> monId,</div>
@@ -153,7 +153,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    }</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> eventCallbackNative(</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        [[maybe_unused]] <a class="code hl_structRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a>* client,</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        [[maybe_unused]] <a class="code hl_typedefRef" target="_blank" href="open62541/common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a>* client,</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <a class="code hl_typedef" href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">IntegerId</a> subId,</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        [[maybe_unused]] <span class="keywordtype">void</span>* subContext,</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <a class="code hl_typedef" href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">IntegerId</a> monId,</div>
@@ -176,7 +176,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    }</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> deleteCallbackNative(</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        [[maybe_unused]] <a class="code hl_structRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a>* client,</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        [[maybe_unused]] <a class="code hl_typedefRef" target="_blank" href="open62541/common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a>* client,</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <a class="code hl_typedef" href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">IntegerId</a> subId,</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        [[maybe_unused]] <span class="keywordtype">void</span>* subContext,</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <a class="code hl_typedef" href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">IntegerId</a> monId,</div>
@@ -192,13 +192,13 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>}  <span class="comment">// namespace opcua::services::detail</span></div>
 <div class="ttc" id="acallbackadapter_8hpp_html"><div class="ttname"><a href="callbackadapter_8hpp.html">callbackadapter.hpp</a></div></div>
+<div class="ttc" id="acommon_8h_html_a2bd5a2265eb4146ce3d95897f7c51aae"><div class="ttname"><a href="open62541/common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a></div><div class="ttdeci">struct UA_Client UA_Client</div></div>
+<div class="ttc" id="acommon_8h_html_a9975d7f7819bd5b03521cf8a388eecda"><div class="ttname"><a href="open62541/common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a></div><div class="ttdeci">struct UA_Server UA_Server</div></div>
 <div class="ttc" id="agroup__NodeIds_html_ggaedae20be023a8a8fc3c7929a538c36f5a38bada29008cfb116e1205bddf32e2e1"><div class="ttname"><a href="group__NodeIds.html#ggaedae20be023a8a8fc3c7929a538c36f5a38bada29008cfb116e1205bddf32e2e1">opcua::ua::DataTypeId::ReadValueId</a></div><div class="ttdeci">@ ReadValueId</div></div>
 <div class="ttc" id="anamespaceopcua_1_1ua_html_aa524820a7bb38acc346adadcf6dc0025"><div class="ttname"><a href="namespaceopcua_1_1ua.html#aa524820a7bb38acc346adadcf6dc0025">opcua::ua::IntegerId</a></div><div class="ttdeci">uint32_t IntegerId</div><div class="ttdoc">IntegerId.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l00084">types.hpp:84</a></div></div>
 <div class="ttc" id="aspan_8hpp_html"><div class="ttname"><a href="span_8hpp.html">span.hpp</a></div></div>
-<div class="ttc" id="astructUA__Client_html"><div class="ttname"><a href="open62541/structUA__Client.html">UA_Client</a></div></div>
 <div class="ttc" id="astructUA__DataValue_html"><div class="ttname"><a href="open62541/structUA__DataValue.html">UA_DataValue</a></div></div>
 <div class="ttc" id="astructUA__NodeId_html"><div class="ttname"><a href="open62541/structUA__NodeId.html">UA_NodeId</a></div></div>
-<div class="ttc" id="astructUA__Server_html"><div class="ttname"><a href="open62541/structUA__Server.html">UA_Server</a></div></div>
 <div class="ttc" id="astructUA__Variant_html"><div class="ttname"><a href="open62541/structUA__Variant.html">UA_Variant</a></div></div>
 <div class="ttc" id="aua_2types_8hpp_html"><div class="ttname"><a href="ua_2types_8hpp.html">types.hpp</a></div></div>
 <div class="ttc" id="awrapper_8hpp_html"><div class="ttname"><a href="wrapper_8hpp.html">wrapper.hpp</a></div></div>

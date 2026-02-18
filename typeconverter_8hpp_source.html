@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.20.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.21.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -137,9 +137,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_invocable_r_v&lt;T, <span class="keyword">decltype</span>(<a class="code hl_struct" href="structopcua_1_1TypeConverter.html">TypeConverter&lt;T&gt;::fromNative</a>), NativeType&gt;) {</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordflow">return</span> <a class="code hl_struct" href="structopcua_1_1TypeConverter.html">TypeConverter&lt;T&gt;::fromNative</a>(src);</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        T dst{};</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        T <a class="code hl_variableRef" target="_blank" href="open62541/types_8h.html#a6598b83f973d0e8bc67fb4c7ee7cd668">dst</a>{};</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        TypeConverter&lt;T&gt;::fromNative(src, dst);</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keywordflow">return</span> dst;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keywordflow">return</span> <a class="code hl_variableRef" target="_blank" href="open62541/types_8h.html#a6598b83f973d0e8bc67fb4c7ee7cd668">dst</a>;</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    }</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>}</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
@@ -149,9 +149,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_invocable_r_v&lt;NativeType, <span class="keyword">decltype</span>(TypeConverter&lt;T&gt;::toNative), T&gt;) {</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <span class="keywordflow">return</span> TypeConverter&lt;T&gt;::toNative(src);</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        NativeType dst{};</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        NativeType <a class="code hl_variableRef" target="_blank" href="open62541/types_8h.html#a6598b83f973d0e8bc67fb4c7ee7cd668">dst</a>{};</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        TypeConverter&lt;T&gt;::toNative(src, dst);</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordflow">return</span> dst;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordflow">return</span> <a class="code hl_variableRef" target="_blank" href="open62541/types_8h.html#a6598b83f973d0e8bc67fb4c7ee7cd668">dst</a>;</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    }</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>}</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
@@ -161,6 +161,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="anamespaceopcua_html"><div class="ttname"><a href="namespaceopcua.html">opcua</a></div><div class="ttdef"><b>Definition</b> <a href="async_8hpp_source.html#l00011">async.hpp:11</a></div></div>
 <div class="ttc" id="astructopcua_1_1IsConvertible_html"><div class="ttname"><a href="structopcua_1_1IsConvertible.html">opcua::IsConvertible</a></div><div class="ttdef"><b>Definition</b> <a href="typeconverter_8hpp_source.html#l00031">typeconverter.hpp:31</a></div></div>
 <div class="ttc" id="astructopcua_1_1TypeConverter_html"><div class="ttname"><a href="structopcua_1_1TypeConverter.html">opcua::TypeConverter</a></div><div class="ttdoc">Type conversion from and to native types.</div><div class="ttdef"><b>Definition</b> <a href="typeconverter_8hpp_source.html#l00026">typeconverter.hpp:26</a></div></div>
+<div class="ttc" id="atypes_8h_html_a6598b83f973d0e8bc67fb4c7ee7cd668"><div class="ttname"><a href="open62541/types_8h.html#a6598b83f973d0e8bc67fb4c7ee7cd668">dst</a></div><div class="ttdeci">void * dst</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

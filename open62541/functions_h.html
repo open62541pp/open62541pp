@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.15</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.15</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -85,9 +85,8 @@ $(function() {
 <div class="textblock">Here is a list of all struct and union fields with links to the structures/unions they belong to:</div>
 
 <h3><a id="index_h" name="index_h"></a>- h -</h3><ul>
-<li>handle&#160;:&#160;<a class="el" href="structUA__Connection.html#acc52d6b6984f09739dea63b7a479134a">UA_Connection</a>, <a class="el" href="structUA__PubSubChannel.html#a0f994577918a209a1c9b9779ccbb877d">UA_PubSubChannel</a>, <a class="el" href="structUA__ServerNetworkLayer.html#aa7d84ac7585cb30c0330603e54444833">UA_ServerNetworkLayer</a></li>
-<li>handler&#160;:&#160;<a class="el" href="structUA__Client__MonitoredItem.html#aba2a10964266928a7454c03aab3ecc33">UA_Client_MonitoredItem</a></li>
 <li>hasAdditionalInfo&#160;:&#160;<a class="el" href="structUA__DiagnosticInfo.html#affc1fe6b9121a6c4d9bab755947dcc54">UA_DiagnosticInfo</a></li>
+<li>hasEncodingRefs&#160;:&#160;<a class="el" href="structNodeset.html#ab48708983a060b7ab62f5efa3e876576">Nodeset</a></li>
 <li>hasInnerDiagnosticInfo&#160;:&#160;<a class="el" href="structUA__DiagnosticInfo.html#a061ea36f7f4d488c0ba6ea3be69754ed">UA_DiagnosticInfo</a></li>
 <li>hasInnerStatusCode&#160;:&#160;<a class="el" href="structUA__DiagnosticInfo.html#acb1b8dd7767baee39f4a8726f236046d">UA_DiagnosticInfo</a></li>
 <li>hasLocale&#160;:&#160;<a class="el" href="structUA__DiagnosticInfo.html#a3b22d43bb7b08938abff2454f7066b30">UA_DiagnosticInfo</a></li>
@@ -101,24 +100,29 @@ $(function() {
 <li>hasStatus&#160;:&#160;<a class="el" href="structUA__DataValue.html#ab9103bff620cafc90337c7d98b119b2e">UA_DataValue</a></li>
 <li>hasSymbolicId&#160;:&#160;<a class="el" href="structUA__DiagnosticInfo.html#a23b01f98b07c4b56f0f6bce2cb412fca">UA_DiagnosticInfo</a></li>
 <li>hasValue&#160;:&#160;<a class="el" href="structUA__DataValue.html#af7a6da643af31005029ad3759deae136">UA_DataValue</a></li>
-<li>head&#160;:&#160;<a class="el" href="structRefTree.html#a03b69e24bd0bfd417850377dc8ef084e">RefTree</a>, <a class="el" href="structUA__DataTypeNode.html#a423928fd7bb0b273dbf964d8d5c3e9f0">UA_DataTypeNode</a>, <a class="el" href="structUA__MethodNode.html#ad009e6e8960f21710b66746479c6a7e9">UA_MethodNode</a>, <a class="el" href="unionUA__Node.html#aa97d9617a252c8a11790cbf902bcb826">UA_Node</a>, <a class="el" href="structUA__ObjectNode.html#a011835645b7866ae648803d333fedcad">UA_ObjectNode</a>, <a class="el" href="structUA__ObjectTypeNode.html#ada2dc46a68801fde112e538da2d6ca0c">UA_ObjectTypeNode</a>, <a class="el" href="structUA__ReferenceTypeNode.html#ae36426ebd25301ada078878fb1faaae4">UA_ReferenceTypeNode</a>, <a class="el" href="structUA__VariableNode.html#abec9cd4f7715739d585a533491be2954">UA_VariableNode</a>, <a class="el" href="structUA__VariableTypeNode.html#a8aaed72c7124ea789a9f856dd11114eb">UA_VariableTypeNode</a>, <a class="el" href="structUA__ViewNode.html#aedae4777fcd1ff074b42e363eecf248d">UA_ViewNode</a></li>
-<li>header&#160;:&#160;<a class="el" href="structmessage.html#add03eb088d098f5665bc93fe6e95cd8c">message</a>, <a class="el" href="structUA__DataSetMessage.html#a5e7d2eabe32da8144116f251d4b8b018">UA_DataSetMessage</a>, <a class="el" href="structUA__Session.html#a6702280f3e56ac834391635735dbc974">UA_Session</a></li>
+<li>head&#160;:&#160;<a class="el" href="structUA__DataTypeNode.html#a423928fd7bb0b273dbf964d8d5c3e9f0">UA_DataTypeNode</a>, <a class="el" href="structUA__MethodNode.html#ad009e6e8960f21710b66746479c6a7e9">UA_MethodNode</a>, <a class="el" href="unionUA__Node.html#aa97d9617a252c8a11790cbf902bcb826">UA_Node</a>, <a class="el" href="structUA__ObjectNode.html#a011835645b7866ae648803d333fedcad">UA_ObjectNode</a>, <a class="el" href="structUA__ObjectTypeNode.html#ada2dc46a68801fde112e538da2d6ca0c">UA_ObjectTypeNode</a>, <a class="el" href="structUA__ReferenceTypeNode.html#ae36426ebd25301ada078878fb1faaae4">UA_ReferenceTypeNode</a>, <a class="el" href="structUA__VariableNode.html#abec9cd4f7715739d585a533491be2954">UA_VariableNode</a>, <a class="el" href="structUA__VariableTypeNode.html#a8aaed72c7124ea789a9f856dd11114eb">UA_VariableTypeNode</a>, <a class="el" href="structUA__ViewNode.html#aedae4777fcd1ff074b42e363eecf248d">UA_ViewNode</a></li>
+<li>header&#160;:&#160;<a class="el" href="structmessage.html#add03eb088d098f5665bc93fe6e95cd8c">message</a>, <a class="el" href="structUA__DataSetMessage.html#a5e7d2eabe32da8144116f251d4b8b018">UA_DataSetMessage</a></li>
+<li>headerLayoutUri&#160;:&#160;<a class="el" href="structUA__DataSetReaderDataType.html#a8949a06e1a4b1cfb010970a5c1d65f94">UA_DataSetReaderDataType</a>, <a class="el" href="structUA__WriterGroupDataType.html#a6577705ca953b7fe9053c33b88997873">UA_WriterGroupDataType</a></li>
+<li>hierachicalRefs&#160;:&#160;<a class="el" href="structNL__DataTypeNode.html#a7d880a63b6f8d9848de5ef3458afd878">NL_DataTypeNode</a>, <a class="el" href="structNL__InstanceNode.html#af73ef32c895aff0da1a5b9415e820cac">NL_InstanceNode</a>, <a class="el" href="structNL__MethodNode.html#a9c00913fa7f64afcba874f7ccba4a682">NL_MethodNode</a>, <a class="el" href="structNL__Node.html#a15c153185cd97ed2ce7d8cc6036d5914">NL_Node</a>, <a class="el" href="structNL__ObjectNode.html#ae25248a5e03e928779d4caf9d3db2b9c">NL_ObjectNode</a>, <a class="el" href="structNL__ObjectTypeNode.html#a5d140fc9113689972e6d8433d6eefcb8">NL_ObjectTypeNode</a>, <a class="el" href="structNL__ReferenceTypeNode.html#a6050fc497a111bfb78b15fa7187a4290">NL_ReferenceTypeNode</a>, <a class="el" href="structNL__VariableNode.html#a2801f5190afd7a183b158927f08deb77">NL_VariableNode</a>, <a class="el" href="structNL__VariableTypeNode.html#a50c78bf87afb279259992333a2d2b8c3">NL_VariableTypeNode</a>, <a class="el" href="structNL__ViewNode.html#a257a707e5fd48ef373dca697e8048a02">NL_ViewNode</a></li>
 <li>High&#160;:&#160;<a class="el" href="struct__OpcUa__Range.html#ae7bbd6c91de0ebe8dc66a933934a5ef3">_OpcUa_Range</a></li>
 <li>high&#160;:&#160;<a class="el" href="structUA__Range.html#aec76af82be50a55169fe13dde9f74037">UA_Range</a></li>
 <li>Historizing&#160;:&#160;<a class="el" href="struct__OpcUa__VariableAttributes.html#a892f0e5a2d195c6e7a3843f36f340cc5">_OpcUa_VariableAttributes</a>, <a class="el" href="struct__OpcUa__VariableNode.html#a0454d12067ed6ec03455d6f216c1744c">_OpcUa_VariableNode</a></li>
-<li>historizing&#160;:&#160;<a class="el" href="structUA__VariableAttributes.html#a6b20dce841c378d5cfddf0239728507e">UA_VariableAttributes</a>, <a class="el" href="structUA__VariableNode.html#ae99e10f61147ea0b82a0e2a15c76317c">UA_VariableNode</a></li>
+<li>historizing&#160;:&#160;<a class="el" href="structNL__VariableNode.html#af8bd25f30a8bbb03ea07b01f027682f6">NL_VariableNode</a>, <a class="el" href="structUA__VariableAttributes.html#a6b20dce841c378d5cfddf0239728507e">UA_VariableAttributes</a>, <a class="el" href="structUA__VariableNode.html#ae99e10f61147ea0b82a0e2a15c76317c">UA_VariableNode</a></li>
 <li>historizingBackend&#160;:&#160;<a class="el" href="structUA__HistorizingNodeIdSettings.html#a58bcf854b7febbbcefa3caf1184b5891">UA_HistorizingNodeIdSettings</a></li>
+<li>historizingEnabled&#160;:&#160;<a class="el" href="structUA__ServerConfig.html#a96bee41a8ee752b6e616f34da3ac9b92">UA_ServerConfig</a></li>
 <li>historizingUpdateStrategy&#160;:&#160;<a class="el" href="structUA__HistorizingNodeIdSettings.html#a343b5e012c330a695f5a7d5c44bfaa04">UA_HistorizingNodeIdSettings</a></li>
 <li>HistoryData&#160;:&#160;<a class="el" href="struct__OpcUa__HistoryReadResult.html#a5f7dfbe822f7e36556f41ec828d9f054">_OpcUa_HistoryReadResult</a></li>
+<li>historyData&#160;:&#160;<a class="el" href="structUA__HistoryReadResult.html#a1effeca7b6a80f66ad2c59e4042a8dc9">UA_HistoryReadResult</a></li>
 <li>historyDatabase&#160;:&#160;<a class="el" href="structUA__ServerConfig.html#ab3428248708caab3a2856d035a782d13">UA_ServerConfig</a></li>
 <li>HistoryReadCount&#160;:&#160;<a class="el" href="struct__OpcUa__SessionDiagnosticsDataType.html#aa7df9c4ff47c30227564b5439dd74be7">_OpcUa_SessionDiagnosticsDataType</a></li>
+<li>historyReadCount&#160;:&#160;<a class="el" href="structUA__SessionDiagnosticsDataType.html#a221fe3860c74462987affea9bdb5b83c">UA_SessionDiagnosticsDataType</a></li>
 <li>HistoryReadDetails&#160;:&#160;<a class="el" href="struct__OpcUa__HistoryReadRequest.html#a7b40ac0b1230af9a2d8718842817480c">_OpcUa_HistoryReadRequest</a></li>
-<li>historyReadRequest&#160;:&#160;<a class="el" href="unionUA__Request.html#a347bcd4dfde0e6bead5158c56417f898">UA_Request</a></li>
-<li>historyReadResponse&#160;:&#160;<a class="el" href="unionUA__Response.html#a05cb2f058c01a729913685ffb994f328">UA_Response</a></li>
+<li>historyReadDetails&#160;:&#160;<a class="el" href="structUA__HistoryReadRequest.html#a336e077d1bc237fa3d099cb729e6ac11">UA_HistoryReadRequest</a></li>
 <li>HistoryUpdateCount&#160;:&#160;<a class="el" href="struct__OpcUa__SessionDiagnosticsDataType.html#a788dbcced3a99fa80d5120ed611ddae4">_OpcUa_SessionDiagnosticsDataType</a></li>
+<li>historyUpdateCount&#160;:&#160;<a class="el" href="structUA__SessionDiagnosticsDataType.html#ab87e7e4b7cb87de89484e7638bed6800">UA_SessionDiagnosticsDataType</a></li>
 <li>HistoryUpdateDetails&#160;:&#160;<a class="el" href="struct__OpcUa__HistoryUpdateRequest.html#a63d3c47bd66520e33936b1887336ecbc">_OpcUa_HistoryUpdateRequest</a></li>
-<li>historyUpdateRequest&#160;:&#160;<a class="el" href="unionUA__Request.html#a6559957d5af659f09c5658c83e54b9ef">UA_Request</a></li>
-<li>historyUpdateResponse&#160;:&#160;<a class="el" href="unionUA__Response.html#a033c4f363ce340ef458f3d8be557a104">UA_Response</a></li>
+<li>historyUpdateDetails&#160;:&#160;<a class="el" href="structUA__HistoryUpdateRequest.html#a7deeed925f6b3ff51bb498dea628fdeb">UA_HistoryUpdateRequest</a></li>
+<li>historyUpdateDetailsSize&#160;:&#160;<a class="el" href="structUA__HistoryUpdateRequest.html#ab4f7b5d4b2a4df77f71656b5d12ef4f9">UA_HistoryUpdateRequest</a></li>
 <li>hour&#160;:&#160;<a class="el" href="structUA__DateTimeStruct.html#a7c5113ba97db7d2635d83c5c54bc74a9">UA_DateTimeStruct</a></li>
 </ul>
 </div><!-- contents -->

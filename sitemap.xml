@@ -263,9 +263,6 @@
     <loc>https://open62541pp.github.io/open62541pp/typeconverter_8hpp_source.html</loc>
   </url>
   <url>
-    <loc>https://open62541pp.github.io/open62541pp/nodeids_8hpp_source.html</loc>
-  </url>
-  <url>
     <loc>https://open62541pp.github.io/open62541pp/typeregistry_8hpp_source.html</loc>
   </url>
   <url>
@@ -276,6 +273,9 @@
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/ua_2types_8hpp_source.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/nodeids_8hpp_source.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/ua_8hpp_source.html</loc>
@@ -566,9 +566,6 @@
     <loc>https://open62541pp.github.io/open62541pp/typeconverter_8hpp.html</loc>
   </url>
   <url>
-    <loc>https://open62541pp.github.io/open62541pp/nodeids_8hpp.html</loc>
-  </url>
-  <url>
     <loc>https://open62541pp.github.io/open62541pp/typeregistry_8hpp.html</loc>
   </url>
   <url>
@@ -579,6 +576,9 @@
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/ua_2types_8hpp.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/nodeids_8hpp.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/ua_8hpp.html</loc>
@@ -2310,9 +2310,6 @@
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/globals_func.html</loc>
-  </url>
-  <url>
-    <loc>https://open62541pp.github.io/open62541pp/globals_vars.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/globals_vars.html</loc>

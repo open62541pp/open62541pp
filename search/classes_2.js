@@ -8,13 +8,12 @@ var searchData=
   ['browsedescription_5',['browsedescription',['../classopcua_1_1ua_1_1BrowseDescription.html',1,'opcua::BrowseDescription'],['../classopcua_1_1ua_1_1BrowseDescription.html',1,'opcua::ua::BrowseDescription']]],
   ['browsenextrequest_6',['browsenextrequest',['../classopcua_1_1ua_1_1BrowseNextRequest.html',1,'opcua::BrowseNextRequest'],['../classopcua_1_1ua_1_1BrowseNextRequest.html',1,'opcua::ua::BrowseNextRequest']]],
   ['browsenextresponse_7',['browsenextresponse',['../classopcua_1_1ua_1_1BrowseNextResponse.html',1,'opcua::BrowseNextResponse'],['../classopcua_1_1ua_1_1BrowseNextResponse.html',1,'opcua::ua::BrowseNextResponse']]],
-  ['browseopts_8',['BrowseOpts',['open62541/structBrowseOpts.html',0,'']]],
-  ['browsepath_9',['browsepath',['../classopcua_1_1ua_1_1BrowsePath.html',1,'opcua::ua::BrowsePath'],['../classopcua_1_1ua_1_1BrowsePath.html',1,'opcua::BrowsePath']]],
-  ['browsepathresult_10',['browsepathresult',['../classopcua_1_1ua_1_1BrowsePathResult.html',1,'opcua::BrowsePathResult'],['../classopcua_1_1ua_1_1BrowsePathResult.html',1,'opcua::ua::BrowsePathResult']]],
-  ['browsepathtarget_11',['browsepathtarget',['../classopcua_1_1ua_1_1BrowsePathTarget.html',1,'opcua::BrowsePathTarget'],['../classopcua_1_1ua_1_1BrowsePathTarget.html',1,'opcua::ua::BrowsePathTarget']]],
-  ['browserequest_12',['browserequest',['../classopcua_1_1ua_1_1BrowseRequest.html',1,'opcua::BrowseRequest'],['../classopcua_1_1ua_1_1BrowseRequest.html',1,'opcua::ua::BrowseRequest']]],
-  ['browseresponse_13',['browseresponse',['../classopcua_1_1ua_1_1BrowseResponse.html',1,'opcua::BrowseResponse'],['../classopcua_1_1ua_1_1BrowseResponse.html',1,'opcua::ua::BrowseResponse']]],
-  ['browseresult_14',['browseresult',['../classopcua_1_1ua_1_1BrowseResult.html',1,'opcua::BrowseResult'],['../classopcua_1_1ua_1_1BrowseResult.html',1,'opcua::ua::BrowseResult']]],
-  ['buildinfo_15',['buildinfo',['../classopcua_1_1ua_1_1BuildInfo.html',1,'opcua::BuildInfo'],['../classopcua_1_1ua_1_1BuildInfo.html',1,'opcua::ua::BuildInfo']]],
-  ['bytestring_16',['ByteString',['../classopcua_1_1ByteString.html',1,'opcua']]]
+  ['browsepath_8',['browsepath',['../classopcua_1_1ua_1_1BrowsePath.html',1,'opcua::BrowsePath'],['../classopcua_1_1ua_1_1BrowsePath.html',1,'opcua::ua::BrowsePath']]],
+  ['browsepathresult_9',['browsepathresult',['../classopcua_1_1ua_1_1BrowsePathResult.html',1,'opcua::BrowsePathResult'],['../classopcua_1_1ua_1_1BrowsePathResult.html',1,'opcua::ua::BrowsePathResult']]],
+  ['browsepathtarget_10',['browsepathtarget',['../classopcua_1_1ua_1_1BrowsePathTarget.html',1,'opcua::BrowsePathTarget'],['../classopcua_1_1ua_1_1BrowsePathTarget.html',1,'opcua::ua::BrowsePathTarget']]],
+  ['browserequest_11',['browserequest',['../classopcua_1_1ua_1_1BrowseRequest.html',1,'opcua::BrowseRequest'],['../classopcua_1_1ua_1_1BrowseRequest.html',1,'opcua::ua::BrowseRequest']]],
+  ['browseresponse_12',['browseresponse',['../classopcua_1_1ua_1_1BrowseResponse.html',1,'opcua::BrowseResponse'],['../classopcua_1_1ua_1_1BrowseResponse.html',1,'opcua::ua::BrowseResponse']]],
+  ['browseresult_13',['browseresult',['../classopcua_1_1ua_1_1BrowseResult.html',1,'opcua::BrowseResult'],['../classopcua_1_1ua_1_1BrowseResult.html',1,'opcua::ua::BrowseResult']]],
+  ['buildinfo_14',['buildinfo',['../classopcua_1_1ua_1_1BuildInfo.html',1,'opcua::BuildInfo'],['../classopcua_1_1ua_1_1BuildInfo.html',1,'opcua::ua::BuildInfo']]],
+  ['bytestring_15',['ByteString',['../classopcua_1_1ByteString.html',1,'opcua']]]
 ];

@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.15</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.15</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -85,84 +85,50 @@ $(function() {
   <div class="headertitle"><div class="title">open62541 </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md__2home_2runner_2work_2open62541pp_2open62541pp_2build_2doc_2open62541_2README"></a> open62541 (<a href="http://open62541.org">http://open62541.org</a>) is an open source and free implementation of OPC UA (OPC Unified Architecture) written in the common subset of the C99 and C++98 languages. The library is usable with all major compilers and provides the necessary tools to implement dedicated OPC UA clients and servers, or to integrate OPC UA-based communication into existing applications. open62541 library is platform independent. All platform-specific functionality is implemented via exchangeable plugins. Plugin implementations are provided for the major operating systems.</p>
-<p>open62541 is licensed under the Mozilla Public License v2.0 (MPLv2). This allows the open62541 library to be combined and distributed with any proprietary software. Only changes to the open62541 library itself need to be licensed under the MPLv2 when copied and distributed. The plugins, as well as the server and client examples are in the public domain (CC0 license). They can be reused under any license and changes do not have to be published.</p>
-<p>The library is <a href="https://github.com/open62541/open62541/releases" target="_blank">available</a> in standard source and binary form. In addition, the single-file source distribution merges the entire library into a single .c and .h file that can be easily added to existing projects. Example server and client implementations can be found in the <a href="examples/" target="_blank">/examples</a> directory or further down on this page.</p>
-<h1><a class="anchor" id="autotoc_md10"></a>
-Project Information</h1>
-<p>Build Status:</p>
-<p><a href="https://dev.azure.com/open62541/open62541/_build/latest?definitionId=1&amp;branchName=master" target="_blank"><img src="https://dev.azure.com/open62541/open62541/_apis/build/status/open62541.open62541?branchName=master" alt="Build Status" class="inline"/></a> <a href="https://ci.appveyor.com/project/open62541/open62541/branch/master" target="_blank"><img src="https://ci.appveyor.com/api/projects/status/github/open62541/open62541?branch=master&amp;svg=true" alt="Build Status" class="inline"/></a></p>
-<p>Code Quality:</p>
-<p><a href="https://lgtm.com/projects/g/open62541/open62541/context:cpp" target="_blank"><img src="https://img.shields.io/lgtm/grade/cpp/g/open62541/open62541.svg?logo=lgtm&amp;logoWidth=18" alt="Code Quality: Cpp" style="pointer-events: none;" class="inline"/></a> <a href="https://lgtm.com/projects/g/open62541/open62541/alerts" target="_blank"><img src="https://img.shields.io/lgtm/alerts/g/open62541/open62541.svg?logo=lgtm&amp;logoWidth=18" alt="Total Alerts" style="pointer-events: none;" class="inline"/></a> <a href="https://coveralls.io/r/open62541/open62541?branch=master" target="_blank"><img src="https://img.shields.io/coveralls/open62541/open62541/master.svg" alt="Coverage Status" style="pointer-events: none;" class="inline"/></a> <a href="https://codecov.io/gh/open62541/open62541" target="_blank"><img src="https://codecov.io/gh/open62541/open62541/branch/master/graph/badge.svg" alt="codecov" style="pointer-events: none;" class="inline"/></a> <a href="https://bugs.chromium.org/p/oss-fuzz/issues/list?sort=-opened&amp;can=1&amp;q=proj:open62541" target="_blank"><img src="https://oss-fuzz-build-logs.storage.googleapis.com/badges/open62541.svg" alt="Fuzzing Status" style="pointer-events: none;" class="inline"/></a></p>
-<p>General Project Info:</p>
-<p><a href="https://www.openhub.net/p/open62541/" target="_blank"><img src="https://www.openhub.net/p/open62541/widgets/project_thin_badge.gif" alt="Open Hub Project Status" class="inline"/></a> <a href="https://github.com/open62541/open62541/releases" target="_blank"><img src="https://img.shields.io/github/downloads/open62541/open62541/total.svg" alt="Overall Downloads" style="pointer-events: none;" class="inline"/></a></p>
-<h2><a class="anchor" id="autotoc_md11"></a>
-Features and Certification</h2>
-<p>open62541 implements the OPC UA binary protocol stack as well as a client and server SDK. The final server binaries can be well under 100kb, depending on the selected features and the size of the information model.</p>
+<div class="textblock"><p><a class="anchor" id="md__2home_2runner_2work_2open62541pp_2open62541pp_2build_2doc_2open62541_2README"></a> </p><div align="center"> <a href="https://open62541.org"><img src="https://open62541.org/images/logo-open62541.svg" alt="open62541 Logo" style="pointer-events: none;" width="400px" class="inline"/> </a> <br  />
+ <a href="https://open62541.org" target="_blank" rel="noopener">https://open62541.org</a> | <a href="https://www.o6-automation.com" target="_blank" rel="noopener">https://www.o6-automation.com</a> </div><p> <br  />
+</p>
+<p>open62541 (<a href="http://open62541.org">http://open62541.org</a>) is an open source implementation of OPC UA (OPC Unified Architecture / IEC 62541) written in the C language. The library is usable with all major compilers and provides the necessary tools to implement dedicated OPC UA clients and servers, or to integrate OPC UA-based communication into existing applications. See the features overview for full details. The open62541 library is platform independent: All platform-specific functionality is implemented via exchangeable plugins for easy porting to different (embedded) targets.</p>
+<p>open62541 is licensed under the Mozilla Public License v2.0 (MPLv2). This allows the open62541 library to be combined and distributed with any proprietary software. Only changes to the open62541 library itself need to be licensed under the MPLv2 when copied and distributed. Some plugins and examples are in the public domain (CC0 license) and some are licensed under MPLv2. The CC0 licensed ones can be reused under any license and changes do not have to be published.</p>
+<p>The library is available in standard source and binary form. In addition, the single-file source distribution merges the entire library into a single .c and .h file that can be easily added to existing projects. Example server and client implementations can be found in the <a href="examples/" target="_blank">/examples</a> directory or further down on this page.</p>
+<p><a href="https://www.openhub.net/p/open62541/" target="_blank"><img src="https://www.openhub.net/p/open62541/widgets/project_thin_badge.gif" alt="Open Hub Project Status" class="inline"/></a> <a href="https://ci.appveyor.com/project/open62541/open62541/branch/master" target="_blank"><img src="https://ci.appveyor.com/api/projects/status/github/open62541/open62541?branch=master&amp;svg=true" alt="Build Status" class="inline"/></a> <a href="https://github.com/open62541/open62541/actions/workflows/codeql.yml" target="_blank"><img src="https://github.com/open62541/open62541/actions/workflows/codeql.yml/badge.svg" alt="Code Scanning" style="pointer-events: none;" class="inline"/></a> <a href="https://bugs.chromium.org/p/oss-fuzz/issues/list?sort=-opened&amp;can=1&amp;q=proj:open62541" target="_blank"><img src="https://oss-fuzz-build-logs.storage.googleapis.com/badges/open62541.svg" alt="Fuzzing Status" style="pointer-events: none;" class="inline"/></a> <a href="https://codecov.io/gh/open62541/open62541" target="_blank"><img src="https://codecov.io/gh/open62541/open62541/branch/master/graph/badge.svg" alt="codecov" style="pointer-events: none;" class="inline"/></a></p>
+<h2><a class="anchor" id="autotoc_md8"></a>
+Documentation and Support</h2>
+<p>A general introduction to OPC UA and the open62541 documentation can be found at <a href="http://open62541.org">http://open62541.org</a>. Past releases of the library can be downloaded at <a href="https://github.com/open62541/open62541/releases">https://github.com/open62541/open62541/releases</a>.</p>
+<p>The overall open62541 community handles public support requests on Github and the mailing list. For individual discussion and support, use the following channels:</p>
 <ul>
-<li>Communication Stack<ul>
-<li>OPC UA binary protocol</li>
-<li>OPC UA JSON encoding</li>
-<li>Secure communication with encrypted messages</li>
-<li>Exchangeable network layer (plugin) for using custom networking APIs (e.g. on embedded targets)</li>
-<li>Support for generating data types from standard XML definitions</li>
+<li><a href="https://groups.google.com/d/forum/open62541" target="_blank">Mailing List</a></li>
+<li><a href="https://github.com/open62541/open62541/issues" target="_blank">Issue Tracker</a></li>
+<li><a href="https://github.com/open62541/open62541/pulls" target="_blank">Pull Requests</a></li>
 </ul>
-</li>
-<li>Server<ul>
-<li>Support for all OPC UA node types</li>
-<li>Access control for individual nodes</li>
-<li>Support for generating server-side information models from standard XML definitions (nodesets)</li>
-<li>Support for adding and removing nodes and references also at runtime.</li>
-<li>Support for inheritance and instantiation of object- and variable-types (custom constructor/destructor, instantiation of child nodes)</li>
-<li>Support for subscriptions/monitoreditems (data change notifications and events)</li>
-</ul>
-</li>
-<li>Client<ul>
-<li>All OPC UA services supported</li>
-<li>Asynchronous service requests</li>
-<li>Background handling of subscriptions</li>
-</ul>
-</li>
-<li>Publish/Subscribe<ul>
-<li>UADP Binary protocol with UDP-multicast or Ethernet communication</li>
-<li>PubSub JSON encoding</li>
-</ul>
-</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md12"></a>
+<p><a href="https://www.o6-automation.com/" target="_blank">o6 Automation GmbH</a> employs the core contributors to open62541 and provides <b><a href="https://www.o6-automation.com/services" target="_blank">commercial support</a></b>. The project is however open to outside contributions and <b>contributors retain their individual copyright</b>. This prevents future relicensing under different license conditions.</p>
+<p>We want to foster an open and welcoming community. Please take our code of conduct into regard.</p>
+<h2><a class="anchor" id="autotoc_md9"></a>
+Commercial Use</h2>
+<p>open62541 is licensed under the MPLv2. That is, changes to files under MPLv2 fall under the same open-source license. But the library can be combined with private development from separate files, also if a static binary is produced, without the license affecting the private files. See the full [license document](LICENSE) for details.</p>
+<h2><a class="anchor" id="autotoc_md10"></a>
 Official Certification</h2>
-<p>The sample server (server_ctt) built using open62541 v1.0 is in conformance with the 'Micro Embedded Device Server' Profile of OPC Foundation supporting OPC UA client/server communication, subscriptions, method calls and security (encryption) with the security policies 'Basic128Rsa15', 'Basic256' and 'Basic256Sha256' and the facets 'method server' and 'node management'. See <a href="https://open62541.org/certified-sdk">https://open62541.org/certified-sdk</a> for more details.</p>
-<p>PubSub (UADP) is implemented in open62541. But the feature cannot be certified at this point in time (Sep-2019) due to the lack of official test cases and testing tools.</p>
-<p>During development, the Conformance Testing Tools (CTT) of the OPC Foundation are regularly applied. The CTT configuration and results are tracked at <a href="https://github.com/open62541/open62541-ctt">https://github.com/open62541/open62541-ctt</a>. The OPC UA profiles under regular test in the CTT are currently:</p>
+<p>An example server built with open62541 v1.4 was certified for the 'Standard Server 2017 Profile' by the OPC Foundation. See <a href="https://open62541.org/certification">https://open62541.org/certification</a> for more details.</p>
+<h2><a class="anchor" id="autotoc_md11"></a>
+Development</h2>
+<p>As an open source project, new contributors are encouraged to help improve open62541. The file CONTRIBUTING.md aggregates good practices that we expect for code contributions. The following are good starting points for new contributors:</p>
 <ul>
-<li>Micro Embedded Device Server</li>
-<li>Method Server Facet</li>
-<li>Node Management Facet</li>
-<li>Security Policies<ul>
-<li>Basic128Rsa15</li>
-<li>Basic256</li>
-<li>Basic256Sha256</li>
+<li><a href="https://github.com/open62541/open62541/issues" target="_blank">Report bugs</a></li>
+<li>Improve the <a href="http://open62541.org/doc/current" target="_blank">documentation</a></li>
+<li>Work on issues marked as "[good first issue](https://github.com/open62541/open62541/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)"</li>
 </ul>
-</li>
-<li>User Tokens<ul>
-<li>Anonymous Facet</li>
-<li>User Name Password Server Facet</li>
-</ul>
-</li>
-</ul>
-<p>See the page on open62541 Features for an in-depth look at the support for the conformance units that make up the OPC UA profiles.</p>
-<h2><a class="anchor" id="autotoc_md13"></a>
-Dependencies</h2>
-<p>On most systems, open62541 requires the C standard library only. For dependencies during the build process, see the following list and the <a href="https://open62541.org/doc/current/building.html" target="_blank">build documentation</a> for details.</p>
+<p>For custom development that shall eventually become part of the open62541 library, please keep one of the core maintainers in the loop.</p>
+<h3><a class="anchor" id="autotoc_md12"></a>
+Dependencies</h3>
+<p>On most systems, open62541 requires the C standard library only. For dependencies during the build process, see the following list and the <a href="https://www.open62541.org/doc/master/building.html" target="_blank">build documentation</a> for details.</p>
 <ul>
 <li>Core Library: The core library has no dependencies besides the C99 standard headers.</li>
 <li>Default Plugins: The default plugins use the POSIX interfaces for networking and accessing the system clock. Ports to different (embedded) architectures are achieved by customizing the plugins.</li>
 <li>Building and Code Generation: The build environment is generated via CMake. Some code is auto-generated from XML definitions that are part of the OPC UA standard. The code generation scripts run with both Python 2 and 3.</li>
 </ul>
-<p><b>Note:</b> Specific optional features are dependent on third-party libraries. These are all listed under the <code>deps/</code> folder. Depending on the selected feature set, some of these libraries will be included in the resulting library.</p>
-<p>More information on the third-party libraries can be found in the corresponding deps/README.md</p>
-<h2><a class="anchor" id="autotoc_md14"></a>
-Code Quality</h2>
+<p><b>Note:</b> Some (optional) features are dependent on third-party libraries. These are all listed under the <code>deps/</code> folder. Depending on the selected feature set, some of these libraries will be included in the resulting library. More information on the third-party libraries can be found in the corresponding deps/README.md</p>
+<h3><a class="anchor" id="autotoc_md13"></a>
+Code Quality</h3>
 <p>We emphasize code quality. The following quality metrics are continuously checked and are ensured to hold before an official release is made:</p>
 <ul>
 <li>Zero errors indicated by the Compliance Testing Tool (CTT) of the OPC Foundation for the supported features</li>
@@ -172,98 +138,27 @@ Code Quality</h2>
 <li>Zero unresolved issues from fuzzing the library in Google's oss-fuzz infrastructure</li>
 <li>Zero issues indicated by Valgrind (Linux), DrMemory (Windows) and Clang AddressSanitizer / MemorySanitizer for the CTT tests, unit tests and fuzzing</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md15"></a>
-Documentation and Support</h2>
-<p>A general introduction to OPC UA and the open62541 documentation can be found at <a href="http://open62541.org/doc/current">http://open62541.org/doc/current</a>. Past releases of the library can be downloaded at <a href="https://github.com/open62541/open62541/releases">https://github.com/open62541/open62541/releases</a>. To use the latest improvements, download a nightly build of the <em>single-file distribution</em> (the entire library merged into a single source and header file) from <a href="http://open62541.org/releases">http://open62541.org/releases</a>. Nightly builds of MSVC binaries of the library are available <a href="https://ci.appveyor.com/project/open62541/open62541/build/artifacts" target="_blank">here</a>.</p>
-<p>For individual discussion and support, use the following channels:</p>
-<ul>
-<li>the <a href="https://groups.google.com/d/forum/open62541" target="_blank">mailing list</a></li>
-<li>our <a href="http://webchat.freenode.net/?channels=%23open62541" target="_blank">IRC channel</a></li>
-<li>the <a href="https://github.com/open62541/open62541/issues" target="_blank">bugtracker</a></li>
-</ul>
-<p>We want to foster an open and welcoming community. Please take our code of conduct into regard.</p>
-<p>Jointly with the overall open62541 community, the core maintainers steer the long-term development. The current core maintainers are (as of April 2018, in alphabetical order):</p>
-<ul>
-<li>Chris-Paul Iatrou (Dresden University of Technology, Chair for Process Control Systems Engineering)</li>
-<li>Florian Palm (RWTH Aachen University, Chair of Process Control Engineering)</li>
-<li>Julius Pfrommer (Fraunhofer IOSB, Karlsruhe)</li>
-<li>Stefan Profanter (fortiss, Munich)</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md16"></a>
-Docker container</h2>
-<p>Official docker container builds are available on <a href="https://cloud.docker.com/u/open62541/repository/registry-1.docker.io/open62541/open62541" target="_blank">Docker Cloud</a></p>
-<p>More information can be found in the Docker README</p>
-<h1><a class="anchor" id="autotoc_md17"></a>
-Support &amp; Development</h1>
-<h2><a class="anchor" id="autotoc_md18"></a>
-Commercial Support</h2>
-<p>The open62541 community handles support requests for the open source library and its development. Custom development and individual support is provided by commercial partners that are affiliated with open62541:</p>
-<ul>
-<li><a href="https://www.kalycito.com/landing/open62541-commercial-partner" target="_blank">Kalycito Infotech, Tamil Nadu, INDIA</a> for embedded and realtime IIoT applications (Contact: <a href="#" onclick="location.href='mai'+'lto:'+'ent'+'er'+'pri'+'se'+'.se'+'rv'+'ice'+'s@'+'kal'+'yc'+'ito'+'.c'+'om'; return false;">enter<span class="obfuscator">.nosp@m.</span>pris<span class="obfuscator">.nosp@m.</span>e.ser<span class="obfuscator">.nosp@m.</span>vice<span class="obfuscator">.nosp@m.</span>s@kal<span class="obfuscator">.nosp@m.</span>ycit<span class="obfuscator">.nosp@m.</span>o.com</a>)</li>
-<li><a href="https://www.basyskom.com/" target="_blank">basysKom GmbH, Darmstadt, Germany</a> Software Engineering for Embedded Systems. (Contact: <a href="#" onclick="location.href='mai'+'lto:'+'inf'+'o@'+'bas'+'ys'+'Kom'+'.c'+'om'; return false;">info@<span class="obfuscator">.nosp@m.</span>basy<span class="obfuscator">.nosp@m.</span>sKom.<span class="obfuscator">.nosp@m.</span>com</a>)</li>
-</ul>
-<p>For custom development that shall eventually become part of the open62541 library, please keep one of the core maintainers in the loop. Again, please note that all changes to files that are already licensed under the MPLv2 automatically become MPLv2 as well. Static linking of the open62541 library with code under a different license is possible. All architecture-specific code is implemented in the form of exchangeable plugins under a very permissible CC0 license.</p>
-<h2><a class="anchor" id="autotoc_md19"></a>
-Development</h2>
-<p>As an open source project, new contributors are encouraged to help improve open62541. The following are good starting points for new contributors:</p>
-<ul>
-<li><a href="https://github.com/open62541/open62541/issues" target="_blank">Report bugs</a></li>
-<li>Improve the <a href="http://open62541.org/doc/current" target="_blank">documentation</a></li>
-<li>Work on issues marked as "[good first issue](https://github.com/open62541/open62541/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)"</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md20"></a>
-Success Stories and Users of open62541</h2>
-<p>A list of projects and companies using our open62541 stack can be found in our Wiki:</p>
-<p><a href="https://github.com/open62541/open62541/wiki/References-to-open62541">https://github.com/open62541/open62541/wiki/References-to-open62541</a></p>
-<h1><a class="anchor" id="autotoc_md21"></a>
-Installation and code usage</h1>
-<p>For every release, we provide some pre-packed release packages which you can directly use in your compile infrastructure.</p>
-<p>Have a look at the <a href="https://github.com/open62541/open62541/releases" target="_blank">release page</a> and the corresponding attached assets.</p>
-<p>A more detailed explanation on how to install the open62541 SDK is given in our <a href="https://open62541.org/doc/current/installing.html" target="_blank">documentation</a>.</p>
-<p>You can not directly download a .zip package from the main branches using the Github UI, since then some of the submodules and version strings are missing. Therefore you have three options to install and use this stack:</p>
-<ul>
-<li><b>Recommended:</b> Use any of the prepared packages attached to every release or in the package repository of your distro (if available). <br  />
- Please check the install guide for more info.</li>
-<li>Download a .zip package of special <code>pack/</code> branches. <br  />
- These pack branches are up-to-date with the corresponding base branches, but already have the submodules in-place and the version string set correctly. <br  />
- Here are some direct download links for the current pack branches: <br  />
-<ul>
-<li><a href="https://github.com/open62541/open62541/archive/pack/master.zip" target="_blank">pack/master.zip</a></li>
-<li><a href="https://github.com/open62541/open62541/archive/pack/1.0.zip" target="_blank">pack/1.0.zip</a></li>
-</ul>
-</li>
-<li>Clone this repository and initialize all the submodules using <code>git submodule update --init --recursive</code>. Then either use <code>make install</code> or setup your CMake project correspondingly.</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md22"></a>
-Examples</h1>
+<h2><a class="anchor" id="autotoc_md14"></a>
+Installation and Examples</h2>
+<p>On Debian/Ubuntu systems, a simple <code>apt install libopen62541-1.4-dev</code> installs the library and the development header files. Using the GCC compiler, just run <code>gcc -std=c99 &lt;server.c&gt; -lopen62541 -o server</code>.</p>
+<p>A more detailed explanation on how to install the open62541 SDK is given in our <a href="https://www.open62541.org/doc/master/building.html#building-the-library" target="_blank">documentation</a>. In essence, clone the repository and initialize all the submodules using <code>git submodule update --init --recursive</code>. Then use CMake to configure your build.</p>
 <p>A complete list of examples can be found in the <a href="https://github.com/open62541/open62541/tree/master/examples" target="_blank">examples directory</a>.</p>
-<p>To build the examples, we recommend to install the open62541 project as mentioned in previous section.</p>
-<h2><a class="anchor" id="autotoc_md23"></a>
-Example Server Implementation</h2>
-<p>The following simple server example can be built using gcc, after you installed open62541 on your system.</p>
-<p>Using the GCC compiler, just run <code>gcc -std=c99 -lopen62541 -DUA_ARCHITECTURE_POSIX &lt;server.c&gt; -o server</code> (under Windows you may need to add <code>-lws2_32</code> and change <code>-DUA_ARCHITECTURE_POSIX</code> to <code>-DUA_ARCHITECTURE_WIN32</code>). </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;signal.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="server_8h.html">open62541/server.h</a>&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="server__config__default_8h.html">open62541/server_config_default.h</a>&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><a class="code hl_variable" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> running = <span class="keyword">true</span>;</div>
-<div class="line"><span class="keywordtype">void</span> signalHandler(<span class="keywordtype">int</span> sig) {</div>
-<div class="line">    running = <span class="keyword">false</span>;</div>
-<div class="line">}</div>
+<h3><a class="anchor" id="autotoc_md15"></a>
+Example Server Implementation</h3>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="server_8h.html">open62541/server.h</a>&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv)</div>
 <div class="line">{</div>
-<div class="line">    signal(SIGINT, signalHandler); <span class="comment">/* catch ctrl-c */</span></div>
+<div class="line">    <span class="comment">/* Create a server listening on port 4840 (default) */</span></div>
+<div class="line">    <a class="code hl_typedef" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server = <a class="code hl_function" href="server_8h.html#af78bb1619665232494b780423a116442">UA_Server_new</a>();</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">/* Create a server listening on port 4840 */</span></div>
-<div class="line">    <a class="code hl_struct" href="structUA__Server.html">UA_Server</a> *server = <a class="code hl_function" href="server__config__default_8h.html#a5406fde7353bf9e3a0f60cbbf0cdb36d">UA_Server_new</a>();</div>
-<div class="line">    UA_ServerConfig_setDefault(<a class="code hl_function" href="server_8h.html#aec38dd84c99d95695ae4fe329ba6d3d4">UA_Server_getConfig</a>(server));</div>
+<div class="line">    <span class="comment">/* Add a variable node to the server */</span></div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">/* Add a variable node */</span></div>
-<div class="line">    <span class="comment">/* 1) Define the node attributes */</span></div>
-<div class="line">    <a class="code hl_struct" href="structUA__VariableAttributes.html">UA_VariableAttributes</a> attr = <a class="code hl_variable" href="client__highlevel_8h.html#a09e5e63d313c3f91ff05131ee74a203a">UA_VariableAttributes_default</a>;</div>
+<div class="line">    <span class="comment">/* 1) Define the variable attributes */</span></div>
+<div class="line">    <a class="code hl_struct" href="structUA__VariableAttributes.html">UA_VariableAttributes</a> attr = <a class="code hl_variable" href="util_8h.html#a09e5e63d313c3f91ff05131ee74a203a">UA_VariableAttributes_default</a>;</div>
 <div class="line">    attr.<a class="code hl_variable" href="structUA__VariableAttributes.html#a39426291dbfd62598dfb61821f012950">displayName</a> = UA_LOCALIZEDTEXT(<span class="stringliteral">&quot;en-US&quot;</span>, <span class="stringliteral">&quot;the answer&quot;</span>);</div>
 <div class="line">    <a class="code hl_typedef" href="types_8h.html#a01ce3c3b2fb34ef81c97c313f516004e">UA_Int32</a> myInteger = 42;</div>
-<div class="line">    <a class="code hl_function" href="types_8h.html#aa5aea265c55455c36ec6385b27c87b2d">UA_Variant_setScalar</a>(&amp;attr.<a class="code hl_variable" href="structUA__VariableAttributes.html#a142ca9b0dd01ec5a9bfad0af649f7cd7">value</a>, &amp;myInteger, &amp;<a class="code hl_variable" href="types__generated_8h.html#aba037b86f18a7b7bceef5c098910c2c7">UA_TYPES</a>[<a class="code hl_define" href="types__generated_8h.html#a662c6d1dd2147ea3d609427244a959a1">UA_TYPES_INT32</a>]);</div>
+<div class="line">    <a class="code hl_function" href="types_8h.html#a379cfd6d7aad7c9218b0bc6a9f426ac8">UA_Variant_setScalar</a>(&amp;attr.<a class="code hl_variable" href="structUA__VariableAttributes.html#a142ca9b0dd01ec5a9bfad0af649f7cd7">value</a>, &amp;myInteger, &amp;<a class="code hl_variable" href="types__generated_8h.html#af8b5368818d553c99fe0be594fc78dd5">UA_TYPES</a>[<a class="code hl_define" href="types__generated_8h.html#a662c6d1dd2147ea3d609427244a959a1">UA_TYPES_INT32</a>]);</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">/* 2) Define where the node shall be added with which browsename */</span></div>
 <div class="line">    <a class="code hl_struct" href="structUA__NodeId.html">UA_NodeId</a> newNodeId = UA_NODEID_STRING(1, <span class="stringliteral">&quot;the.answer&quot;</span>);</div>
@@ -273,83 +168,78 @@ Example Server Implementation</h2>
 <div class="line">    <a class="code hl_struct" href="structUA__QualifiedName.html">UA_QualifiedName</a> browseName = UA_QUALIFIEDNAME(1, <span class="stringliteral">&quot;the answer&quot;</span>);</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">/* 3) Add the node */</span></div>
-<div class="line">    UA_Server_addVariableNode(server, newNodeId, parentNodeId, parentReferenceNodeId,</div>
-<div class="line">                              browseName, variableType, attr, NULL, NULL);</div>
+<div class="line">    UA_Server_addVariableNode(server, newNodeId, parentNodeId,</div>
+<div class="line">                              parentReferenceNodeId, browseName,</div>
+<div class="line">                              variableType, attr, NULL, NULL);</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">/* Run the server loop */</span></div>
-<div class="line">    <a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="code hl_typedef" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a> = <a class="code hl_function" href="server_8h.html#a6be5a9340b6752f7e1711956e224e19d">UA_Server_run</a>(server, &amp;running);</div>
+<div class="line">    <span class="comment">/* Run the server (until ctrl-c interrupt) */</span></div>
+<div class="line">    <a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> status = <a class="code hl_function" href="server_8h.html#a1824fddcc9a2797ff5c9c6a3b38d85c8">UA_Server_runUntilInterrupt</a>(server);</div>
 <div class="line"> </div>
-<div class="line">    <a class="code hl_function" href="server_8h.html#af9f93708ee6222bd30942de5219f55fb">UA_Server_delete</a>(server);</div>
-<div class="line">    <span class="keywordflow">return</span> <a class="code hl_typedef" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>;</div>
+<div class="line">    <span class="comment">/* Clean up */</span></div>
+<div class="line">    <a class="code hl_function" href="server_8h.html#a82721a17af5e4cbcf106fecfba6c0765">UA_Server_delete</a>(server);</div>
+<div class="line">    <span class="keywordflow">return</span> status == <a class="code hl_define" href="statuscodes_8h.html#a3c68d30bc6f32228aa43be75fdc9d5aa">UA_STATUSCODE_GOOD</a> ? EXIT_SUCCESS : EXIT_FAILURE;</div>
 <div class="line">}</div>
-<div class="ttc" id="aclient__highlevel_8h_html_a09e5e63d313c3f91ff05131ee74a203a"><div class="ttname"><a href="client__highlevel_8h.html#a09e5e63d313c3f91ff05131ee74a203a">UA_VariableAttributes_default</a></div><div class="ttdeci">UA_EXPORT const UA_VariableAttributes UA_VariableAttributes_default</div><div class="ttdoc">The default for variables is &quot;BaseDataType&quot; for the datatype, -2 for the valuerank and a read-accessl...</div></div>
+<div class="ttc" id="acommon_8h_html_a9975d7f7819bd5b03521cf8a388eecda"><div class="ttname"><a href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a></div><div class="ttdeci">struct UA_Server UA_Server</div><div class="ttdef"><b>Definition</b> <a href="common_8h_source.html#l00198">common.h:198</a></div></div>
 <div class="ttc" id="anodeids_8h_html_a4f3686e01329a7700501901525c24e1e"><div class="ttname"><a href="nodeids_8h.html#a4f3686e01329a7700501901525c24e1e">UA_NS0ID_ORGANIZES</a></div><div class="ttdeci">#define UA_NS0ID_ORGANIZES</div><div class="ttdef"><b>Definition</b> <a href="nodeids_8h_source.html#l00042">nodeids.h:42</a></div></div>
 <div class="ttc" id="anodeids_8h_html_aace8d1ffd797f96700703cfc930d2013"><div class="ttname"><a href="nodeids_8h.html#aace8d1ffd797f96700703cfc930d2013">UA_NS0ID_OBJECTSFOLDER</a></div><div class="ttdeci">#define UA_NS0ID_OBJECTSFOLDER</div><div class="ttdef"><b>Definition</b> <a href="nodeids_8h_source.html#l00075">nodeids.h:75</a></div></div>
 <div class="ttc" id="aserver_8h_html"><div class="ttname"><a href="server_8h.html">server.h</a></div></div>
-<div class="ttc" id="aserver_8h_html_a6be5a9340b6752f7e1711956e224e19d"><div class="ttname"><a href="server_8h.html#a6be5a9340b6752f7e1711956e224e19d">UA_Server_run</a></div><div class="ttdeci">UA_StatusCode UA_Server_run(UA_Server *server, const volatile UA_Boolean *running)</div><div class="ttdoc">Runs the main loop of the server.</div></div>
-<div class="ttc" id="aserver_8h_html_aec38dd84c99d95695ae4fe329ba6d3d4"><div class="ttname"><a href="server_8h.html#aec38dd84c99d95695ae4fe329ba6d3d4">UA_Server_getConfig</a></div><div class="ttdeci">UA_ServerConfig * UA_Server_getConfig(UA_Server *server)</div></div>
-<div class="ttc" id="aserver_8h_html_af9f93708ee6222bd30942de5219f55fb"><div class="ttname"><a href="server_8h.html#af9f93708ee6222bd30942de5219f55fb">UA_Server_delete</a></div><div class="ttdeci">void UA_Server_delete(UA_Server *server)</div></div>
-<div class="ttc" id="aserver__config__default_8h_html"><div class="ttname"><a href="server__config__default_8h.html">server_config_default.h</a></div></div>
-<div class="ttc" id="aserver__config__default_8h_html_a5406fde7353bf9e3a0f60cbbf0cdb36d"><div class="ttname"><a href="server__config__default_8h.html#a5406fde7353bf9e3a0f60cbbf0cdb36d">UA_Server_new</a></div><div class="ttdeci">_UA_BEGIN_DECLS UA_Server * UA_Server_new(void)</div><div class="ttdoc">This work is licensed under a Creative Commons CCZero 1.0 Universal License.</div></div>
-<div class="ttc" id="astructUA__NodeId_html"><div class="ttname"><a href="structUA__NodeId.html">UA_NodeId</a></div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00283">types.h:283</a></div></div>
-<div class="ttc" id="astructUA__QualifiedName_html"><div class="ttname"><a href="structUA__QualifiedName.html">UA_QualifiedName</a></div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00480">types.h:480</a></div></div>
-<div class="ttc" id="astructUA__Server_html"><div class="ttname"><a href="structUA__Server.html">UA_Server</a></div><div class="ttdef"><b>Definition</b> <a href="ua__server__internal_8h_source.html#l00085">ua_server_internal.h:85</a></div></div>
-<div class="ttc" id="astructUA__VariableAttributes_html"><div class="ttname"><a href="structUA__VariableAttributes.html">UA_VariableAttributes</a></div><div class="ttdef"><b>Definition</b> <a href="types__generated_8h_source.html#l00617">types_generated.h:617</a></div></div>
-<div class="ttc" id="astructUA__VariableAttributes_html_a142ca9b0dd01ec5a9bfad0af649f7cd7"><div class="ttname"><a href="structUA__VariableAttributes.html#a142ca9b0dd01ec5a9bfad0af649f7cd7">UA_VariableAttributes::value</a></div><div class="ttdeci">UA_Variant value</div><div class="ttdef"><b>Definition</b> <a href="types__generated_8h_source.html#l00623">types_generated.h:623</a></div></div>
-<div class="ttc" id="astructUA__VariableAttributes_html_a39426291dbfd62598dfb61821f012950"><div class="ttname"><a href="structUA__VariableAttributes.html#a39426291dbfd62598dfb61821f012950">UA_VariableAttributes::displayName</a></div><div class="ttdeci">UA_LocalizedText displayName</div><div class="ttdef"><b>Definition</b> <a href="types__generated_8h_source.html#l00619">types_generated.h:619</a></div></div>
-<div class="ttc" id="atypes_8h_html_a01ce3c3b2fb34ef81c97c313f516004e"><div class="ttname"><a href="types_8h.html#a01ce3c3b2fb34ef81c97c313f516004e">UA_Int32</a></div><div class="ttdeci">int32_t UA_Int32</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00051">types.h:51</a></div></div>
-<div class="ttc" id="atypes_8h_html_a0a44d61c7e7e9107300c8e477c54bd47"><div class="ttname"><a href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a></div><div class="ttdeci">_UA_BEGIN_DECLS typedef bool UA_Boolean</div><div class="ttdoc">This Source Code Form is subject to the terms of the Mozilla Public License, v.</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00026">types.h:26</a></div></div>
+<div class="ttc" id="aserver_8h_html_a1824fddcc9a2797ff5c9c6a3b38d85c8"><div class="ttname"><a href="server_8h.html#a1824fddcc9a2797ff5c9c6a3b38d85c8">UA_Server_runUntilInterrupt</a></div><div class="ttdeci">UA_EXPORT UA_StatusCode UA_Server_runUntilInterrupt(UA_Server *server)</div><div class="ttdoc">Runs the server until interrupted.</div></div>
+<div class="ttc" id="aserver_8h_html_a82721a17af5e4cbcf106fecfba6c0765"><div class="ttname"><a href="server_8h.html#a82721a17af5e4cbcf106fecfba6c0765">UA_Server_delete</a></div><div class="ttdeci">UA_EXPORT UA_StatusCode UA_Server_delete(UA_Server *server)</div><div class="ttdoc">Delete the server.</div></div>
+<div class="ttc" id="aserver_8h_html_af78bb1619665232494b780423a116442"><div class="ttname"><a href="server_8h.html#af78bb1619665232494b780423a116442">UA_Server_new</a></div><div class="ttdeci">UA_EXPORT UA_Server * UA_Server_new(void)</div><div class="ttdoc">Create a new server with a default configuration that adds plugins for networking,...</div></div>
+<div class="ttc" id="astatuscodes_8h_html_a3c68d30bc6f32228aa43be75fdc9d5aa"><div class="ttname"><a href="statuscodes_8h.html#a3c68d30bc6f32228aa43be75fdc9d5aa">UA_STATUSCODE_GOOD</a></div><div class="ttdeci">#define UA_STATUSCODE_GOOD</div><div class="ttdoc">The operation succeeded.</div><div class="ttdef"><b>Definition</b> <a href="statuscodes_8h_source.html#l00008">statuscodes.h:8</a></div></div>
+<div class="ttc" id="astructUA__NodeId_html"><div class="ttname"><a href="structUA__NodeId.html">UA_NodeId</a></div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00277">types.h:277</a></div></div>
+<div class="ttc" id="astructUA__QualifiedName_html"><div class="ttname"><a href="structUA__QualifiedName.html">UA_QualifiedName</a></div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00491">types.h:491</a></div></div>
+<div class="ttc" id="astructUA__VariableAttributes_html"><div class="ttname"><a href="structUA__VariableAttributes.html">UA_VariableAttributes</a></div><div class="ttdoc">VariableAttributes.</div><div class="ttdef"><b>Definition</b> <a href="types__generated_8h_source.html#l01804">types_generated.h:1804</a></div></div>
+<div class="ttc" id="astructUA__VariableAttributes_html_a142ca9b0dd01ec5a9bfad0af649f7cd7"><div class="ttname"><a href="structUA__VariableAttributes.html#a142ca9b0dd01ec5a9bfad0af649f7cd7">UA_VariableAttributes::value</a></div><div class="ttdeci">UA_Variant value</div><div class="ttdef"><b>Definition</b> <a href="types__generated_8h_source.html#l01810">types_generated.h:1810</a></div></div>
+<div class="ttc" id="astructUA__VariableAttributes_html_a39426291dbfd62598dfb61821f012950"><div class="ttname"><a href="structUA__VariableAttributes.html#a39426291dbfd62598dfb61821f012950">UA_VariableAttributes::displayName</a></div><div class="ttdeci">UA_LocalizedText displayName</div><div class="ttdef"><b>Definition</b> <a href="types__generated_8h_source.html#l01806">types_generated.h:1806</a></div></div>
+<div class="ttc" id="atypes_8h_html_a01ce3c3b2fb34ef81c97c313f516004e"><div class="ttname"><a href="types_8h.html#a01ce3c3b2fb34ef81c97c313f516004e">UA_Int32</a></div><div class="ttdeci">int32_t UA_Int32</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00052">types.h:52</a></div></div>
+<div class="ttc" id="atypes_8h_html_a379cfd6d7aad7c9218b0bc6a9f426ac8"><div class="ttname"><a href="types_8h.html#a379cfd6d7aad7c9218b0bc6a9f426ac8">UA_Variant_setScalar</a></div><div class="ttdeci">const UA_DataType void UA_Variant_setScalar(UA_Variant *v, void *p, const UA_DataType *type)</div><div class="ttdoc">Set the variant to a scalar value that already resides in memory.</div></div>
 <div class="ttc" id="atypes_8h_html_a3c44491bc9a6be7fd37f27caffdfab6a"><div class="ttname"><a href="types_8h.html#a3c44491bc9a6be7fd37f27caffdfab6a">UA_NODEID_NULL</a></div><div class="ttdeci">UA_EXPORT const UA_NodeId UA_NODEID_NULL</div></div>
-<div class="ttc" id="atypes_8h_html_a8beaefc7873465d6baa54a21634b6ea7"><div class="ttname"><a href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div><div class="ttdeci">uint32_t UA_StatusCode</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00077">types.h:77</a></div></div>
-<div class="ttc" id="atypes_8h_html_aa5aea265c55455c36ec6385b27c87b2d"><div class="ttname"><a href="types_8h.html#aa5aea265c55455c36ec6385b27c87b2d">UA_Variant_setScalar</a></div><div class="ttdeci">void UA_Variant_setScalar(UA_Variant *v, void *p, const UA_DataType *type)</div><div class="ttdoc">Set the variant to a scalar value that already resides in memory.</div></div>
-<div class="ttc" id="atypes__generated_8h_html_a662c6d1dd2147ea3d609427244a959a1"><div class="ttname"><a href="types__generated_8h.html#a662c6d1dd2147ea3d609427244a959a1">UA_TYPES_INT32</a></div><div class="ttdeci">#define UA_TYPES_INT32</div><div class="ttdef"><b>Definition</b> <a href="types__generated_8h_source.html#l00038">types_generated.h:38</a></div></div>
-<div class="ttc" id="atypes__generated_8h_html_aba037b86f18a7b7bceef5c098910c2c7"><div class="ttname"><a href="types__generated_8h.html#aba037b86f18a7b7bceef5c098910c2c7">UA_TYPES</a></div><div class="ttdeci">const UA_DataType UA_TYPES[191]</div></div>
-<div class="ttc" id="aua__util__internal_8h_html_ad560a5dcac947428b046c21c5ff5f97b"><div class="ttname"><a href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a></div><div class="ttdeci">UA_StatusCode status</div><div class="ttdef"><b>Definition</b> <a href="ua__util__internal_8h_source.html#l00091">ua_util_internal.h:91</a></div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md24"></a>
-Example Client Implementation</h2>
+<div class="ttc" id="atypes_8h_html_a8beaefc7873465d6baa54a21634b6ea7"><div class="ttname"><a href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div><div class="ttdeci">uint32_t UA_StatusCode</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00082">types.h:82</a></div></div>
+<div class="ttc" id="atypes__generated_8h_html_a662c6d1dd2147ea3d609427244a959a1"><div class="ttname"><a href="types__generated_8h.html#a662c6d1dd2147ea3d609427244a959a1">UA_TYPES_INT32</a></div><div class="ttdeci">#define UA_TYPES_INT32</div><div class="ttdoc">Int32.</div><div class="ttdef"><b>Definition</b> <a href="types__generated_8h_source.html#l00036">types_generated.h:36</a></div></div>
+<div class="ttc" id="atypes__generated_8h_html_af8b5368818d553c99fe0be594fc78dd5"><div class="ttname"><a href="types__generated_8h.html#af8b5368818d553c99fe0be594fc78dd5">UA_TYPES</a></div><div class="ttdeci">UA_DataType UA_TYPES[388]</div></div>
+<div class="ttc" id="autil_8h_html_a09e5e63d313c3f91ff05131ee74a203a"><div class="ttname"><a href="util_8h.html#a09e5e63d313c3f91ff05131ee74a203a">UA_VariableAttributes_default</a></div><div class="ttdeci">UA_EXPORT const UA_VariableAttributes UA_VariableAttributes_default</div><div class="ttdoc">The default for variables is &quot;BaseDataType&quot; for the datatype, -2 for the valuerank and a read-accessl...</div></div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md16"></a>
+Example Client Implementation</h3>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="client_8h.html">open62541/client.h</a>&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="client__config__default_8h.html">open62541/client_config_default.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="client__highlevel_8h.html">open62541/client_highlevel.h</a>&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[])</div>
 <div class="line">{</div>
 <div class="line">    <span class="comment">/* Create a client and connect */</span></div>
-<div class="line">    <a class="code hl_struct" href="structUA__Client.html">UA_Client</a> *client = <a class="code hl_function" href="client__config__default_8h.html#a07b6bcbeb77d916afb3d4fff330b7ae6">UA_Client_new</a>();</div>
-<div class="line">    <a class="code hl_function" href="client__config__default_8h.html#a56d1d01d146d43b2896aea26c99e7b41">UA_ClientConfig_setDefault</a>(<a class="code hl_function" href="client_8h.html#a24b90187586fcdc30222c49c11bafb14">UA_Client_getConfig</a>(client));</div>
-<div class="line">    <a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="code hl_typedef" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a> = <a class="code hl_function" href="client_8h.html#a2563462060669577c66dcc3bf02d9c72">UA_Client_connect</a>(client, <span class="stringliteral">&quot;opc.tcp://localhost:4840&quot;</span>);</div>
-<div class="line">    <span class="keywordflow">if</span>(<a class="code hl_typedef" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a> != <a class="code hl_define" href="statuscodes_8h.html#a3c68d30bc6f32228aa43be75fdc9d5aa">UA_STATUSCODE_GOOD</a>) {</div>
+<div class="line">    <a class="code hl_typedef" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *client = <a class="code hl_function" href="client_8h.html#aa6193206ac51fabe1cfc8494658baae0">UA_Client_new</a>();</div>
+<div class="line">    <a class="code hl_function" href="client__config__default_8h.html#a01cf52aaed2947a84f2d57f467f6659a">UA_ClientConfig_setDefault</a>(<a class="code hl_function" href="client_8h.html#a24b90187586fcdc30222c49c11bafb14">UA_Client_getConfig</a>(client));</div>
+<div class="line">    <a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> status = UA_Client_connect(client, <span class="stringliteral">&quot;opc.tcp://localhost:4840&quot;</span>);</div>
+<div class="line">    <span class="keywordflow">if</span>(status != <a class="code hl_define" href="statuscodes_8h.html#a3c68d30bc6f32228aa43be75fdc9d5aa">UA_STATUSCODE_GOOD</a>) {</div>
 <div class="line">        <a class="code hl_function" href="client_8h.html#aa65c6c338211a5b463309288fd1a3552">UA_Client_delete</a>(client);</div>
-<div class="line">        <span class="keywordflow">return</span> <a class="code hl_typedef" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>;</div>
+<div class="line">        <span class="keywordflow">return</span> status;</div>
 <div class="line">    }</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">/* Read the value attribute of the node. UA_Client_readValueAttribute is a</span></div>
 <div class="line"><span class="comment">     * wrapper for the raw read service available as UA_Client_Service_read. */</span></div>
 <div class="line">    <a class="code hl_struct" href="structUA__Variant.html">UA_Variant</a> value; <span class="comment">/* Variants can hold scalar values and arrays of any type */</span></div>
 <div class="line">    UA_Variant_init(&amp;value);</div>
-<div class="line">    <a class="code hl_typedef" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a> = UA_Client_readValueAttribute(client, UA_NODEID_STRING(1, <span class="stringliteral">&quot;the.answer&quot;</span>), &amp;value);</div>
-<div class="line">    <span class="keywordflow">if</span>(<a class="code hl_typedef" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a> == <a class="code hl_define" href="statuscodes_8h.html#a3c68d30bc6f32228aa43be75fdc9d5aa">UA_STATUSCODE_GOOD</a> &amp;&amp;</div>
-<div class="line">       UA_Variant_hasScalarType(&amp;value, &amp;<a class="code hl_variable" href="types__generated_8h.html#aba037b86f18a7b7bceef5c098910c2c7">UA_TYPES</a>[<a class="code hl_define" href="types__generated_8h.html#a662c6d1dd2147ea3d609427244a959a1">UA_TYPES_INT32</a>])) {</div>
+<div class="line">    status = UA_Client_readValueAttribute(client, UA_NODEID_STRING(1, <span class="stringliteral">&quot;the.answer&quot;</span>), &amp;value);</div>
+<div class="line">    <span class="keywordflow">if</span>(status == <a class="code hl_define" href="statuscodes_8h.html#a3c68d30bc6f32228aa43be75fdc9d5aa">UA_STATUSCODE_GOOD</a> &amp;&amp;</div>
+<div class="line">       UA_Variant_hasScalarType(&amp;value, &amp;<a class="code hl_variable" href="types__generated_8h.html#af8b5368818d553c99fe0be594fc78dd5">UA_TYPES</a>[<a class="code hl_define" href="types__generated_8h.html#a662c6d1dd2147ea3d609427244a959a1">UA_TYPES_INT32</a>])) {</div>
 <div class="line">        printf(<span class="stringliteral">&quot;the value is: %i\n&quot;</span>, *(<a class="code hl_typedef" href="types_8h.html#a01ce3c3b2fb34ef81c97c313f516004e">UA_Int32</a>*)value.<a class="code hl_variable" href="structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">data</a>);</div>
 <div class="line">    }</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">/* Clean up */</span></div>
 <div class="line">    UA_Variant_clear(&amp;value);</div>
 <div class="line">    <a class="code hl_function" href="client_8h.html#aa65c6c338211a5b463309288fd1a3552">UA_Client_delete</a>(client); <span class="comment">/* Disconnects the client internally */</span></div>
-<div class="line">    <span class="keywordflow">return</span> <a class="code hl_typedef" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>;</div>
+<div class="line">    <span class="keywordflow">return</span> status == <a class="code hl_define" href="statuscodes_8h.html#a3c68d30bc6f32228aa43be75fdc9d5aa">UA_STATUSCODE_GOOD</a> ? EXIT_SUCCESS : EXIT_FAILURE;</div>
 <div class="line">}</div>
 <div class="ttc" id="aclient_8h_html"><div class="ttname"><a href="client_8h.html">client.h</a></div></div>
 <div class="ttc" id="aclient_8h_html_a24b90187586fcdc30222c49c11bafb14"><div class="ttname"><a href="client_8h.html#a24b90187586fcdc30222c49c11bafb14">UA_Client_getConfig</a></div><div class="ttdeci">UA_EXPORT UA_ClientConfig * UA_Client_getConfig(UA_Client *client)</div><div class="ttdoc">Get the client configuration.</div></div>
-<div class="ttc" id="aclient_8h_html_a2563462060669577c66dcc3bf02d9c72"><div class="ttname"><a href="client_8h.html#a2563462060669577c66dcc3bf02d9c72">UA_Client_connect</a></div><div class="ttdeci">UA_StatusCode UA_Client_connect(UA_Client *client, const char *endpointUrl)</div><div class="ttdoc">Connect to the server.</div></div>
+<div class="ttc" id="aclient_8h_html_aa6193206ac51fabe1cfc8494658baae0"><div class="ttname"><a href="client_8h.html#aa6193206ac51fabe1cfc8494658baae0">UA_Client_new</a></div><div class="ttdeci">UA_EXPORT UA_Client * UA_Client_new(void)</div><div class="ttdoc">Create a new client with a default configuration that adds plugins for networking,...</div></div>
 <div class="ttc" id="aclient_8h_html_aa65c6c338211a5b463309288fd1a3552"><div class="ttname"><a href="client_8h.html#aa65c6c338211a5b463309288fd1a3552">UA_Client_delete</a></div><div class="ttdeci">void UA_Client_delete(UA_Client *client)</div><div class="ttdoc">(Disconnect and) delete the client</div></div>
-<div class="ttc" id="aclient__config__default_8h_html"><div class="ttname"><a href="client__config__default_8h.html">client_config_default.h</a></div></div>
-<div class="ttc" id="aclient__config__default_8h_html_a07b6bcbeb77d916afb3d4fff330b7ae6"><div class="ttname"><a href="client__config__default_8h.html#a07b6bcbeb77d916afb3d4fff330b7ae6">UA_Client_new</a></div><div class="ttdeci">_UA_BEGIN_DECLS UA_Client * UA_Client_new(void)</div><div class="ttdoc">This work is licensed under a Creative Commons CCZero 1.0 Universal License.</div></div>
-<div class="ttc" id="aclient__config__default_8h_html_a56d1d01d146d43b2896aea26c99e7b41"><div class="ttname"><a href="client__config__default_8h.html#a56d1d01d146d43b2896aea26c99e7b41">UA_ClientConfig_setDefault</a></div><div class="ttdeci">UA_StatusCode UA_ClientConfig_setDefault(UA_ClientConfig *config)</div></div>
+<div class="ttc" id="aclient__config__default_8h_html_a01cf52aaed2947a84f2d57f467f6659a"><div class="ttname"><a href="client__config__default_8h.html#a01cf52aaed2947a84f2d57f467f6659a">UA_ClientConfig_setDefault</a></div><div class="ttdeci">_UA_BEGIN_DECLS UA_StatusCode UA_ClientConfig_setDefault(UA_ClientConfig *config)</div><div class="ttdoc">This work is licensed under a Creative Commons CCZero 1.0 Universal License.</div></div>
 <div class="ttc" id="aclient__highlevel_8h_html"><div class="ttname"><a href="client__highlevel_8h.html">client_highlevel.h</a></div></div>
-<div class="ttc" id="astatuscodes_8h_html_a3c68d30bc6f32228aa43be75fdc9d5aa"><div class="ttname"><a href="statuscodes_8h.html#a3c68d30bc6f32228aa43be75fdc9d5aa">UA_STATUSCODE_GOOD</a></div><div class="ttdeci">#define UA_STATUSCODE_GOOD</div><div class="ttdoc">&quot;The operation succeeded.&quot;</div><div class="ttdef"><b>Definition</b> <a href="statuscodes_8h_source.html#l00010">statuscodes.h:10</a></div></div>
-<div class="ttc" id="astructUA__Client_html"><div class="ttname"><a href="structUA__Client.html">UA_Client</a></div><div class="ttdef"><b>Definition</b> <a href="ua__client__internal_8h_source.html#l00110">ua_client_internal.h:110</a></div></div>
-<div class="ttc" id="astructUA__Variant_html"><div class="ttname"><a href="structUA__Variant.html">UA_Variant</a></div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00562">types.h:562</a></div></div>
-<div class="ttc" id="astructUA__Variant_html_ada37e83e1c07bafef77b7132403e1456"><div class="ttname"><a href="structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">UA_Variant::data</a></div><div class="ttdeci">void * data</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00566">types.h:566</a></div></div>
+<div class="ttc" id="acommon_8h_html_a2bd5a2265eb4146ce3d95897f7c51aae"><div class="ttname"><a href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a></div><div class="ttdeci">struct UA_Client UA_Client</div><div class="ttdef"><b>Definition</b> <a href="common_8h_source.html#l00206">common.h:206</a></div></div>
+<div class="ttc" id="astructUA__Variant_html"><div class="ttname"><a href="structUA__Variant.html">UA_Variant</a></div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00579">types.h:579</a></div></div>
+<div class="ttc" id="astructUA__Variant_html_ada37e83e1c07bafef77b7132403e1456"><div class="ttname"><a href="structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">UA_Variant::data</a></div><div class="ttdeci">void * data</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00583">types.h:583</a></div></div>
 </div><!-- fragment --> </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->

@@ -1,5 +1,9 @@
 var searchData=
 [
-  ['objectattributes_0',['objectattributes',['../classopcua_1_1ua_1_1ObjectAttributes.html',1,'opcua::ObjectAttributes'],['../classopcua_1_1ua_1_1ObjectAttributes.html',1,'opcua::ua::ObjectAttributes']]],
-  ['objecttypeattributes_1',['objecttypeattributes',['../classopcua_1_1ua_1_1ObjectTypeAttributes.html',1,'opcua::ObjectTypeAttributes'],['../classopcua_1_1ua_1_1ObjectTypeAttributes.html',1,'opcua::ua::ObjectTypeAttributes']]]
+  ['pcg_5fstate_5fsetseq_5f64_0',['pcg_state_setseq_64',['open62541/structpcg__state__setseq__64.html',0,'']]],
+  ['pluginadapter_1',['PluginAdapter',['../classopcua_1_1PluginAdapter.html',1,'opcua']]],
+  ['pluginadapter_3c_20ua_5faccesscontrol_20_3e_2',['PluginAdapter&lt; UA_AccessControl &gt;',['../classopcua_1_1PluginAdapter.html',1,'opcua']]],
+  ['pluginadapter_3c_20ua_5fdatasource_20_3e_3',['PluginAdapter&lt; UA_DataSource &gt;',['../classopcua_1_1PluginAdapter.html',1,'opcua']]],
+  ['pluginadapter_3c_20ua_5flogger_20_3e_4',['PluginAdapter&lt; UA_Logger &gt;',['../classopcua_1_1PluginAdapter.html',1,'opcua']]],
+  ['pluginadapter_3c_20ua_5fvaluecallback_20_3e_5',['PluginAdapter&lt; UA_ValueCallback &gt;',['../classopcua_1_1PluginAdapter.html',1,'opcua']]]
 ];

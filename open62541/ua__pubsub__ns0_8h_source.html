@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.15</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.15</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -100,74 +100,71 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> *</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> * Copyright (c) 2017-2018 Fraunhofer IOSB (Author: Andreas Ebner)</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> * Copyright (c) 2019 Kalycito Infotech Private Limited</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#ifndef UA_PUBSUB_NS0_H_</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#define UA_PUBSUB_NS0_H_</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="ua__server__internal_8h.html">server/ua_server_internal.h</a>&quot;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="ua__pubsub_8h.html">ua_pubsub.h</a>&quot;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><a class="code hl_define" href="config_8h.html#aa397bffde7d792f38dcbb8e329486f9c">_UA_BEGIN_DECLS</a></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"> * Copyright (c) 2022 Siemens AG (Author: Thomas Fischer)</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment"> * Copyright (c) 2022 Linutronix GmbH (Author: Muddasir Shakil)</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#ifndef UA_PUBSUB_NS0_H_</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#define UA_PUBSUB_NS0_H_</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="ua__pubsub_8h.html">ua_pubsub.h</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;server/ua_server_internal.h&quot;</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#ifdef UA_ENABLE_PUBSUB_INFORMATIONMODEL </span><span class="comment">/* conditional compilation */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><a class="code hl_define" href="config_8h.html#aa397bffde7d792f38dcbb8e329486f9c">_UA_BEGIN_DECLS</a></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>UA_Server_initPubSubNS0(<a class="code hl_struct" href="structUA__Server.html">UA_Server</a> *server);</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>addPubSubConnectionRepresentation(<a class="code hl_struct" href="structUA__Server.html">UA_Server</a> *server, <a class="code hl_struct" href="structUA__PubSubConnection.html">UA_PubSubConnection</a> *connection);</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>removePubSubConnectionRepresentation(<a class="code hl_struct" href="structUA__Server.html">UA_Server</a> *server, <a class="code hl_struct" href="structUA__PubSubConnection.html">UA_PubSubConnection</a> *connection);</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>addWriterGroupRepresentation(<a class="code hl_struct" href="structUA__Server.html">UA_Server</a> *server, <a class="code hl_struct" href="structUA__WriterGroup.html">UA_WriterGroup</a> *writerGroup);</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>addReaderGroupRepresentation(<a class="code hl_struct" href="structUA__Server.html">UA_Server</a> *server, <a class="code hl_struct" href="structUA__ReaderGroup.html">UA_ReaderGroup</a> *readerGroup);</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>removeGroupRepresentation(<a class="code hl_struct" href="structUA__Server.html">UA_Server</a> *server, <a class="code hl_struct" href="structUA__WriterGroup.html">UA_WriterGroup</a> *writerGroup);</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>addDataSetWriterRepresentation(<a class="code hl_struct" href="structUA__Server.html">UA_Server</a> *server, <a class="code hl_struct" href="structUA__DataSetWriter.html">UA_DataSetWriter</a> *dataSetWriter);</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>removeDataSetWriterRepresentation(<a class="code hl_struct" href="structUA__Server.html">UA_Server</a> *server, <a class="code hl_struct" href="structUA__DataSetWriter.html">UA_DataSetWriter</a> *dataSetWriter);</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>addPublishedDataItemsRepresentation(<a class="code hl_struct" href="structUA__Server.html">UA_Server</a> *server, <a class="code hl_struct" href="structUA__PublishedDataSet.html">UA_PublishedDataSet</a> *publishedDataSet);</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>removePublishedDataSetRepresentation(<a class="code hl_struct" href="structUA__Server.html">UA_Server</a> *server, <a class="code hl_struct" href="structUA__PublishedDataSet.html">UA_PublishedDataSet</a> *publishedDataSet);</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#ifdef UA_ENABLE_PUBSUB_INFORMATIONMODEL </span><span class="comment">/* conditional compilation */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>initPubSubNS0(<a class="code hl_typedef" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>addPubSubConnectionRepresentation(<a class="code hl_typedef" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="code hl_struct" href="structUA__PubSubConnection.html">UA_PubSubConnection</a> *connection);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>addWriterGroupRepresentation(<a class="code hl_typedef" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="code hl_struct" href="structUA__WriterGroup.html">UA_WriterGroup</a> *writerGroup);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>addReaderGroupRepresentation(<a class="code hl_typedef" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="code hl_struct" href="structUA__ReaderGroup.html">UA_ReaderGroup</a> *readerGroup);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>addDataSetWriterRepresentation(<a class="code hl_typedef" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="code hl_struct" href="structUA__DataSetWriter.html">UA_DataSetWriter</a> *dataSetWriter);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>addPublishedDataItemsRepresentation(<a class="code hl_typedef" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="code hl_struct" href="structUA__PublishedDataSet.html">UA_PublishedDataSet</a> *publishedDataSet);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>addStandaloneSubscribedDataSetRepresentation(<a class="code hl_typedef" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="code hl_struct" href="structUA__StandaloneSubscribedDataSet.html">UA_StandaloneSubscribedDataSet</a> *subscribedDataSet);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>addDataSetReaderRepresentation(<a class="code hl_typedef" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="code hl_struct" href="structUA__DataSetReader.html">UA_DataSetReader</a> *dataSetReader);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>connectDataSetReaderToDataSet(<a class="code hl_typedef" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="code hl_struct" href="structUA__NodeId.html">UA_NodeId</a> dsrId, <a class="code hl_struct" href="structUA__NodeId.html">UA_NodeId</a> standaloneSdsId);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#ifdef UA_ENABLE_PUBSUB_SKS</span></div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>addDataSetReaderRepresentation(<a class="code hl_struct" href="structUA__Server.html">UA_Server</a> *server, <a class="code hl_struct" href="structUA__DataSetReader.html">UA_DataSetReader</a> *dataSetReader);</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>removeDataSetReaderRepresentation(<a class="code hl_struct" href="structUA__Server.html">UA_Server</a> *server, <a class="code hl_struct" href="structUA__DataSetReader.html">UA_DataSetReader</a> *dataSetReader);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>addSecurityGroupRepresentation(<a class="code hl_typedef" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="code hl_typedef" href="ua__pubsub_8h.html#a2f8d809ade4c2d4e2ce0d2f2a3989f39">UA_SecurityGroup</a> *securityGroup);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#endif </span><span class="comment">/* UA_ENABLE_PUBSUB_SKS */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#endif </span><span class="comment">/* UA_ENABLE_PUBSUB_INFORMATIONMODEL */</span><span class="preprocessor"></span></div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>removeReaderGroupRepresentation(<a class="code hl_struct" href="structUA__Server.html">UA_Server</a> *server, <a class="code hl_struct" href="structUA__ReaderGroup.html">UA_ReaderGroup</a> *readerGroup);</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">#endif </span><span class="comment">/* UA_ENABLE_PUBSUB_INFORMATIONMODEL */</span><span class="preprocessor"></span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><a class="code hl_define" href="config_8h.html#ae2a857f3db1005cc1b5a41effd3adac6">_UA_END_DECLS</a></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="preprocessor">#endif </span><span class="comment">/* UA_PUBSUB_NS0_H_ */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="aconfig_8h_html_aa397bffde7d792f38dcbb8e329486f9c"><div class="ttname"><a href="config_8h.html#aa397bffde7d792f38dcbb8e329486f9c">_UA_BEGIN_DECLS</a></div><div class="ttdeci">#define _UA_BEGIN_DECLS</div><div class="ttdoc">#undef UA_DEBUG_DUMP_PKGS</div><div class="ttdef"><b>Definition</b> <a href="config_8h_source.html#l00089">config.h:89</a></div></div>
-<div class="ttc" id="aconfig_8h_html_ae2a857f3db1005cc1b5a41effd3adac6"><div class="ttname"><a href="config_8h.html#ae2a857f3db1005cc1b5a41effd3adac6">_UA_END_DECLS</a></div><div class="ttdeci">#define _UA_END_DECLS</div><div class="ttdef"><b>Definition</b> <a href="config_8h_source.html#l00096">config.h:96</a></div></div>
-<div class="ttc" id="astructUA__DataSetReader_html"><div class="ttname"><a href="structUA__DataSetReader.html">UA_DataSetReader</a></div><div class="ttdoc">DataSetReader</div><div class="ttdef"><b>Definition</b> <a href="ua__pubsub_8h_source.html#l00218">ua_pubsub.h:218</a></div></div>
-<div class="ttc" id="astructUA__DataSetWriter_html"><div class="ttname"><a href="structUA__DataSetWriter.html">UA_DataSetWriter</a></div><div class="ttdoc">DataSetWriter</div><div class="ttdef"><b>Definition</b> <a href="ua__pubsub_8h_source.html#l00116">ua_pubsub.h:116</a></div></div>
-<div class="ttc" id="astructUA__PubSubConnection_html"><div class="ttname"><a href="structUA__PubSubConnection.html">UA_PubSubConnection</a></div><div class="ttdoc">Connection</div><div class="ttdef"><b>Definition</b> <a href="ua__pubsub_8h_source.html#l00065">ua_pubsub.h:65</a></div></div>
-<div class="ttc" id="astructUA__PublishedDataSet_html"><div class="ttname"><a href="structUA__PublishedDataSet.html">UA_PublishedDataSet</a></div><div class="ttdoc">PublishedDataSet</div><div class="ttdef"><b>Definition</b> <a href="ua__pubsub_8h_source.html#l00038">ua_pubsub.h:38</a></div></div>
-<div class="ttc" id="astructUA__ReaderGroup_html"><div class="ttname"><a href="structUA__ReaderGroup.html">UA_ReaderGroup</a></div><div class="ttdoc">ReaderGroup</div><div class="ttdef"><b>Definition</b> <a href="ua__pubsub_8h_source.html#l00294">ua_pubsub.h:294</a></div></div>
-<div class="ttc" id="astructUA__Server_html"><div class="ttname"><a href="structUA__Server.html">UA_Server</a></div><div class="ttdef"><b>Definition</b> <a href="ua__server__internal_8h_source.html#l00085">ua_server_internal.h:85</a></div></div>
-<div class="ttc" id="astructUA__WriterGroup_html"><div class="ttname"><a href="structUA__WriterGroup.html">UA_WriterGroup</a></div><div class="ttdoc">WriterGroup</div><div class="ttdef"><b>Definition</b> <a href="ua__pubsub_8h_source.html#l00158">ua_pubsub.h:158</a></div></div>
-<div class="ttc" id="atypes_8h_html_a8beaefc7873465d6baa54a21634b6ea7"><div class="ttname"><a href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div><div class="ttdeci">uint32_t UA_StatusCode</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00077">types.h:77</a></div></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><a class="code hl_define" href="config_8h.html#ae2a857f3db1005cc1b5a41effd3adac6">_UA_END_DECLS</a></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">#endif </span><span class="comment">/* UA_PUBSUB_NS0_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="acommon_8h_html_a9975d7f7819bd5b03521cf8a388eecda"><div class="ttname"><a href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a></div><div class="ttdeci">struct UA_Server UA_Server</div><div class="ttdef"><b>Definition</b> <a href="common_8h_source.html#l00198">common.h:198</a></div></div>
+<div class="ttc" id="aconfig_8h_html_aa397bffde7d792f38dcbb8e329486f9c"><div class="ttname"><a href="config_8h.html#aa397bffde7d792f38dcbb8e329486f9c">_UA_BEGIN_DECLS</a></div><div class="ttdeci">#define _UA_BEGIN_DECLS</div><div class="ttdoc">#undef UA_DEBUG_DUMP_PKGS</div><div class="ttdef"><b>Definition</b> <a href="config_8h_source.html#l00100">config.h:100</a></div></div>
+<div class="ttc" id="aconfig_8h_html_ae2a857f3db1005cc1b5a41effd3adac6"><div class="ttname"><a href="config_8h.html#ae2a857f3db1005cc1b5a41effd3adac6">_UA_END_DECLS</a></div><div class="ttdeci">#define _UA_END_DECLS</div><div class="ttdef"><b>Definition</b> <a href="config_8h_source.html#l00107">config.h:107</a></div></div>
+<div class="ttc" id="astructUA__DataSetReader_html"><div class="ttname"><a href="structUA__DataSetReader.html">UA_DataSetReader</a></div><div class="ttdoc">DataSetReader</div><div class="ttdef"><b>Definition</b> <a href="ua__pubsub_8h_source.html#l00480">ua_pubsub.h:480</a></div></div>
+<div class="ttc" id="astructUA__DataSetWriter_html"><div class="ttname"><a href="structUA__DataSetWriter.html">UA_DataSetWriter</a></div><div class="ttdef"><b>Definition</b> <a href="ua__pubsub_8h_source.html#l00241">ua_pubsub.h:241</a></div></div>
+<div class="ttc" id="astructUA__NodeId_html"><div class="ttname"><a href="structUA__NodeId.html">UA_NodeId</a></div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00277">types.h:277</a></div></div>
+<div class="ttc" id="astructUA__PubSubConnection_html"><div class="ttname"><a href="structUA__PubSubConnection.html">UA_PubSubConnection</a></div><div class="ttdoc">Connection</div><div class="ttdef"><b>Definition</b> <a href="ua__pubsub_8h_source.html#l00133">ua_pubsub.h:133</a></div></div>
+<div class="ttc" id="astructUA__PublishedDataSet_html"><div class="ttname"><a href="structUA__PublishedDataSet.html">UA_PublishedDataSet</a></div><div class="ttdoc">PublishedDataSet</div><div class="ttdef"><b>Definition</b> <a href="ua__pubsub_8h_source.html#l00050">ua_pubsub.h:50</a></div></div>
+<div class="ttc" id="astructUA__ReaderGroup_html"><div class="ttname"><a href="structUA__ReaderGroup.html">UA_ReaderGroup</a></div><div class="ttdoc">ReaderGroup</div><div class="ttdef"><b>Definition</b> <a href="ua__pubsub_8h_source.html#l00576">ua_pubsub.h:576</a></div></div>
+<div class="ttc" id="astructUA__StandaloneSubscribedDataSet_html"><div class="ttname"><a href="structUA__StandaloneSubscribedDataSet.html">UA_StandaloneSubscribedDataSet</a></div><div class="ttdef"><b>Definition</b> <a href="ua__pubsub_8h_source.html#l00087">ua_pubsub.h:87</a></div></div>
+<div class="ttc" id="astructUA__WriterGroup_html"><div class="ttname"><a href="structUA__WriterGroup.html">UA_WriterGroup</a></div><div class="ttdoc">WriterGroup</div><div class="ttdef"><b>Definition</b> <a href="ua__pubsub_8h_source.html#l00332">ua_pubsub.h:332</a></div></div>
+<div class="ttc" id="atypes_8h_html_a8beaefc7873465d6baa54a21634b6ea7"><div class="ttname"><a href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div><div class="ttdeci">uint32_t UA_StatusCode</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00082">types.h:82</a></div></div>
 <div class="ttc" id="aua__pubsub_8h_html"><div class="ttname"><a href="ua__pubsub_8h.html">ua_pubsub.h</a></div></div>
-<div class="ttc" id="aua__server__internal_8h_html"><div class="ttname"><a href="ua__server__internal_8h.html">ua_server_internal.h</a></div></div>
+<div class="ttc" id="aua__pubsub_8h_html_a2f8d809ade4c2d4e2ce0d2f2a3989f39"><div class="ttname"><a href="ua__pubsub_8h.html#a2f8d809ade4c2d4e2ce0d2f2a3989f39">UA_SecurityGroup</a></div><div class="ttdeci">struct UA_SecurityGroup UA_SecurityGroup</div><div class="ttdef"><b>Definition</b> <a href="ua__pubsub_8h_source.html#l00044">ua_pubsub.h:44</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

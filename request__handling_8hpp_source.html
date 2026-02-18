@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.20.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.21.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -150,8 +150,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <a class="code hl_structRef" target="_blank" href="open62541/structUA__AddNodesItem.html">UA_AddNodesItem</a> item{};</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    item.<a class="code hl_variableRef" target="_blank" href="open62541/structUA__AddNodesItem.html#a7c89d6f509cc2c0bccc99571b4a9f963">parentNodeId</a>.<a class="code hl_variableRef" target="_blank" href="open62541/structUA__ExpandedNodeId.html#a0149bc6bc248fdd89f84c6cea4c10376">nodeId</a> = parentId;</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    item.referenceTypeId = referenceType;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    item.requestedNewNodeId.nodeId = id;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    item.browseName.<a class="code hl_variableRef" target="_blank" href="open62541/structUA__NodeId.html#ad9fec32e38f81fb6b22abdba1c047ce6">namespaceIndex</a> = <span class="keywordtype">id</span>.namespaceIndex();</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    item.requestedNewNodeId.nodeId = <a class="code hl_variableRef" target="_blank" href="open62541/types_8h.html#a4b6dd8640e32ba0ce2d74b7c37ae1533">id</a>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    item.browseName.namespaceIndex = <span class="keywordtype">id</span>.namespaceIndex();</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    item.browseName.name = opcua::detail::toNativeString(browseName);</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    item.nodeClass = <span class="keyword">static_cast&lt;</span><a class="code hl_enumerationRef" target="_blank" href="open62541/types__generated_8h.html#adf98bb5a5ac8e50eece68338a046a904">UA_NodeClass</a><span class="keyword">&gt;</span>(nodeClass);</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    item.nodeAttributes = nodeAttributes;</div>
@@ -186,7 +186,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="keyword">inline</span> <a class="code hl_structRef" target="_blank" href="open62541/structUA__DeleteNodesItem.html">UA_DeleteNodesItem</a> makeDeleteNodesItem(<span class="keyword">const</span> NodeId&amp; <span class="keywordtype">id</span>, <span class="keywordtype">bool</span> <a class="code hl_function" href="group__DeleteReferences.html#ga55e10411f41271fccecc84c8b5379800">deleteReferences</a>) <span class="keyword">noexcept</span> {</div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <a class="code hl_structRef" target="_blank" href="open62541/structUA__DeleteNodesItem.html">UA_DeleteNodesItem</a> item{};</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    item.<a class="code hl_variableRef" target="_blank" href="open62541/structUA__DeleteNodesItem.html#a4621efb390b44b6fc313f1b2edb2b45d">nodeId</a> = id;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    item.<a class="code hl_variableRef" target="_blank" href="open62541/structUA__DeleteNodesItem.html#a4621efb390b44b6fc313f1b2edb2b45d">nodeId</a> = <a class="code hl_variableRef" target="_blank" href="open62541/types_8h.html#a4b6dd8640e32ba0ce2d74b7c37ae1533">id</a>;</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    item.deleteTargetReferences = <a class="code hl_function" href="group__DeleteReferences.html#ga55e10411f41271fccecc84c8b5379800">deleteReferences</a>;</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordflow">return</span> item;</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>}</div>
@@ -539,7 +539,6 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="astructUA__MonitoredItemModifyRequest_html"><div class="ttname"><a href="open62541/structUA__MonitoredItemModifyRequest.html">UA_MonitoredItemModifyRequest</a></div></div>
 <div class="ttc" id="astructUA__MonitoredItemModifyRequest_html_ad2593f40830f225e366e094df651b61e"><div class="ttname"><a href="open62541/structUA__MonitoredItemModifyRequest.html#ad2593f40830f225e366e094df651b61e">UA_MonitoredItemModifyRequest::monitoredItemId</a></div><div class="ttdeci">UA_UInt32 monitoredItemId</div></div>
 <div class="ttc" id="astructUA__MonitoringParameters_html"><div class="ttname"><a href="open62541/structUA__MonitoringParameters.html">UA_MonitoringParameters</a></div></div>
-<div class="ttc" id="astructUA__NodeId_html_ad9fec32e38f81fb6b22abdba1c047ce6"><div class="ttname"><a href="open62541/structUA__NodeId.html#ad9fec32e38f81fb6b22abdba1c047ce6">UA_NodeId::namespaceIndex</a></div><div class="ttdeci">UA_UInt16 namespaceIndex</div></div>
 <div class="ttc" id="astructUA__ReadRequest_html"><div class="ttname"><a href="open62541/structUA__ReadRequest.html">UA_ReadRequest</a></div></div>
 <div class="ttc" id="astructUA__ReadRequest_html_a3e9525cc70e450284f6653ced6ad356e"><div class="ttname"><a href="open62541/structUA__ReadRequest.html#a3e9525cc70e450284f6653ced6ad356e">UA_ReadRequest::timestampsToReturn</a></div><div class="ttdeci">UA_TimestampsToReturn timestampsToReturn</div></div>
 <div class="ttc" id="astructUA__ReadValueId_html"><div class="ttname"><a href="open62541/structUA__ReadValueId.html">UA_ReadValueId</a></div></div>
@@ -556,6 +555,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="astructUA__WriteRequest_html_afd806a8e9ff398277a6355c2627eedb4"><div class="ttname"><a href="open62541/structUA__WriteRequest.html#afd806a8e9ff398277a6355c2627eedb4">UA_WriteRequest::nodesToWriteSize</a></div><div class="ttdeci">size_t nodesToWriteSize</div></div>
 <div class="ttc" id="astructUA__WriteValue_html"><div class="ttname"><a href="open62541/structUA__WriteValue.html">UA_WriteValue</a></div></div>
 <div class="ttc" id="astructUA__WriteValue_html_ac02461e258ced1258672d84dc2727480"><div class="ttname"><a href="open62541/structUA__WriteValue.html#ac02461e258ced1258672d84dc2727480">UA_WriteValue::nodeId</a></div><div class="ttdeci">UA_NodeId nodeId</div></div>
+<div class="ttc" id="atypes_8h_html_a4b6dd8640e32ba0ce2d74b7c37ae1533"><div class="ttname"><a href="open62541/types_8h.html#a4b6dd8640e32ba0ce2d74b7c37ae1533">id</a></div><div class="ttdeci">return id</div></div>
 <div class="ttc" id="atypes_8hpp_html"><div class="ttname"><a href="types_8hpp.html">types.hpp</a></div></div>
 <div class="ttc" id="atypes__generated_8h_html_ab298c4ff5eb700437114d0dc2db97ead"><div class="ttname"><a href="open62541/types__generated_8h.html#ab298c4ff5eb700437114d0dc2db97ead">UA_TimestampsToReturn</a></div><div class="ttdeci">UA_TimestampsToReturn</div></div>
 <div class="ttc" id="atypes__generated_8h_html_ac7e4125037e500e7818d8af28d1fd47e"><div class="ttname"><a href="open62541/types__generated_8h.html#ac7e4125037e500e7818d8af28d1fd47e">UA_MonitoringMode</a></div><div class="ttdeci">UA_MonitoringMode</div></div>

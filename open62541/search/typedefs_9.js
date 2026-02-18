@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['refentry_0',['RefEntry',['../ua__server__internal_8h.html#a97d01a1c5803c666e2a55456ea191dfd',1,'ua_server_internal.h']]],
-  ['refhead_1',['RefHead',['../ua__server__internal_8h.html#ab6e6698521097ee2255a9ba2411cdef9',1,'ua_server_internal.h']]],
-  ['registeredserver_5flist_5fentry_2',['registeredServer_list_entry',['../ua__discovery__manager_8h.html#a5b2d4cfa6c0722d2572afb8d78a438d0',1,'ua_discovery_manager.h']]]
+  ['tnodeidcontainer_0',['TNodeIdContainer',['../sort__utils_8h.html#a51bb22de92b1e0f17740bddc59a4d2bf',1,'sort_utils.h']]],
+  ['tparserctx_1',['TParserCtx',['../Nodeset_8h.html#ad918eed9db124aedf74e2f4428609fb8',1,'Nodeset.h']]],
+  ['treferencevec_2',['TReferenceVec',['../browse__utils_8h.html#a5c875624fd9461b3df5da9c25a59e971',1,'browse_utils.h']]]
 ];

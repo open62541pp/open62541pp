@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.15</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.15</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -89,8 +89,7 @@ $(function() {
   <div class="summary">
 <a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">client_highlevel.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -100,71 +99,54 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a5e392fbc10912c390e230cbb0b1def54" id="r_a5e392fbc10912c390e230cbb0b1def54"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a5e392fbc10912c390e230cbb0b1def54">UA_DEFAULT_ATTRIBUTES_DEFINED</a></td></tr>
-<tr class="separator:a5e392fbc10912c390e230cbb0b1def54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3434b1c9a9c80e820354e9af541458c" id="r_ab3434b1c9a9c80e820354e9af541458c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#ab3434b1c9a9c80e820354e9af541458c">HAVE_NODEITER_CALLBACK</a></td></tr>
 <tr class="separator:ab3434b1c9a9c80e820354e9af541458c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:ac9459b682b502468f803f8af5ee11963" id="r_ac9459b682b502468f803f8af5ee11963"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#ac9459b682b502468f803f8af5ee11963">UA_HistoricalIteratorCallback</a>) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> moreDataAvailable, const <a class="el" href="structUA__ExtensionObject.html">UA_ExtensionObject</a> *data, void *callbackContext)</td></tr>
+<tr class="memitem:ac9459b682b502468f803f8af5ee11963" id="r_ac9459b682b502468f803f8af5ee11963"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#ac9459b682b502468f803f8af5ee11963">UA_HistoricalIteratorCallback</a>) (<a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *<a class="el" href="types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> moreDataAvailable, const <a class="el" href="structUA__ExtensionObject.html">UA_ExtensionObject</a> *data, void *callbackContext)</td></tr>
 <tr class="separator:ac9459b682b502468f803f8af5ee11963"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0fd3dfee2e93e99b09030830a8c23dc4" id="r_a0fd3dfee2e93e99b09030830a8c23dc4"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a0fd3dfee2e93e99b09030830a8c23dc4">UA_NodeIteratorCallback</a>) (<a class="el" href="structUA__NodeId.html">UA_NodeId</a> childId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> isInverse, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> referenceTypeId, void *handle)</td></tr>
 <tr class="separator:a0fd3dfee2e93e99b09030830a8c23dc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a32796fb444f2424f01d477c1e467cd91" id="r_a32796fb444f2424f01d477c1e467cd91"><td class="memItemLeft" align="right" valign="top"><a class="el" href="config_8h.html#aa397bffde7d792f38dcbb8e329486f9c">_UA_BEGIN_DECLS</a> <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a32796fb444f2424f01d477c1e467cd91">__UA_Client_readAttribute</a> (<a class="el" href="structUA__Client.html">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, <a class="el" href="common_8h.html#a4dc96c31672814d54f24409617bdbbe2">UA_AttributeId</a> attributeId, void *out, const <a class="el" href="structUA__DataType.html">UA_DataType</a> *outDataType)</td></tr>
+<tr class="memitem:a32796fb444f2424f01d477c1e467cd91" id="r_a32796fb444f2424f01d477c1e467cd91"><td class="memItemLeft" align="right" valign="top"><a class="el" href="config_8h.html#aa397bffde7d792f38dcbb8e329486f9c">_UA_BEGIN_DECLS</a> <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a32796fb444f2424f01d477c1e467cd91">__UA_Client_readAttribute</a> (<a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *<a class="el" href="types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>, <a class="el" href="common_8h.html#a4dc96c31672814d54f24409617bdbbe2">UA_AttributeId</a> attributeId, void *out, const <a class="el" href="structUA__DataType.html">UA_DataType</a> *outDataType)</td></tr>
 <tr class="separator:a32796fb444f2424f01d477c1e467cd91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8db86fe454638cebfe8bbd9ee0ea214e" id="r_a8db86fe454638cebfe8bbd9ee0ea214e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a8db86fe454638cebfe8bbd9ee0ea214e">UA_Client_readArrayDimensionsAttribute</a> (<a class="el" href="structUA__Client.html">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> nodeId, size_t *outArrayDimensionsSize, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> **outArrayDimensions)</td></tr>
+<tr class="memitem:a8db86fe454638cebfe8bbd9ee0ea214e" id="r_a8db86fe454638cebfe8bbd9ee0ea214e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a8db86fe454638cebfe8bbd9ee0ea214e">UA_Client_readArrayDimensionsAttribute</a> (<a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> <a class="el" href="types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>, size_t *outArrayDimensionsSize, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> **outArrayDimensions)</td></tr>
 <tr class="separator:a8db86fe454638cebfe8bbd9ee0ea214e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a735b8e5d43e24b28382bfcecc1d8d8e3" id="r_a735b8e5d43e24b28382bfcecc1d8d8e3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a735b8e5d43e24b28382bfcecc1d8d8e3">UA_Client_HistoryRead_raw</a> (<a class="el" href="structUA__Client.html">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, const <a class="el" href="client__highlevel_8h.html#ac9459b682b502468f803f8af5ee11963">UA_HistoricalIteratorCallback</a> callback, <a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> startTime, <a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> endTime, <a class="el" href="structUA__String.html">UA_String</a> indexRange, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> returnBounds, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> numValuesPerNode, <a class="el" href="types__generated_8h.html#ab298c4ff5eb700437114d0dc2db97ead">UA_TimestampsToReturn</a> timestampsToReturn, void *callbackContext)</td></tr>
+<tr class="memitem:a912783b87a496cda772d5ebd5827cad0" id="r_a912783b87a496cda772d5ebd5827cad0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a912783b87a496cda772d5ebd5827cad0">UA_Client_HistoryRead_events</a> (<a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *<a class="el" href="types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>, const <a class="el" href="client__highlevel_8h.html#ac9459b682b502468f803f8af5ee11963">UA_HistoricalIteratorCallback</a> callback, UA_DateTime startTime, UA_DateTime endTime, <a class="el" href="structUA__String.html">UA_String</a> indexRange, const <a class="el" href="structUA__EventFilter.html">UA_EventFilter</a> filter, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> numValuesPerNode, <a class="el" href="types__generated_8h.html#ab298c4ff5eb700437114d0dc2db97ead">UA_TimestampsToReturn</a> timestampsToReturn, void *callbackContext)</td></tr>
+<tr class="separator:a912783b87a496cda772d5ebd5827cad0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a735b8e5d43e24b28382bfcecc1d8d8e3" id="r_a735b8e5d43e24b28382bfcecc1d8d8e3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a735b8e5d43e24b28382bfcecc1d8d8e3">UA_Client_HistoryRead_raw</a> (<a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *<a class="el" href="types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>, const <a class="el" href="client__highlevel_8h.html#ac9459b682b502468f803f8af5ee11963">UA_HistoricalIteratorCallback</a> callback, UA_DateTime startTime, UA_DateTime endTime, <a class="el" href="structUA__String.html">UA_String</a> indexRange, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> returnBounds, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> numValuesPerNode, <a class="el" href="types__generated_8h.html#ab298c4ff5eb700437114d0dc2db97ead">UA_TimestampsToReturn</a> timestampsToReturn, void *callbackContext)</td></tr>
 <tr class="separator:a735b8e5d43e24b28382bfcecc1d8d8e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a670bc124839921f7f11387cd4f9cee37" id="r_a670bc124839921f7f11387cd4f9cee37"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a670bc124839921f7f11387cd4f9cee37">UA_Client_HistoryUpdate_insert</a> (<a class="el" href="structUA__Client.html">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *value)</td></tr>
+<tr class="memitem:ab92689749a58b999a99123e99ce38655" id="r_ab92689749a58b999a99123e99ce38655"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#ab92689749a58b999a99123e99ce38655">UA_Client_HistoryRead_modified</a> (<a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *<a class="el" href="types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>, const <a class="el" href="client__highlevel_8h.html#ac9459b682b502468f803f8af5ee11963">UA_HistoricalIteratorCallback</a> callback, UA_DateTime startTime, UA_DateTime endTime, <a class="el" href="structUA__String.html">UA_String</a> indexRange, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> returnBounds, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> numValuesPerNode, <a class="el" href="types__generated_8h.html#ab298c4ff5eb700437114d0dc2db97ead">UA_TimestampsToReturn</a> timestampsToReturn, void *callbackContext)</td></tr>
+<tr class="separator:ab92689749a58b999a99123e99ce38655"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a670bc124839921f7f11387cd4f9cee37" id="r_a670bc124839921f7f11387cd4f9cee37"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a670bc124839921f7f11387cd4f9cee37">UA_Client_HistoryUpdate_insert</a> (<a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *<a class="el" href="types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>, <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *value)</td></tr>
 <tr class="separator:a670bc124839921f7f11387cd4f9cee37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acb35a378d4b4ffea19e5c19fcef72f71" id="r_acb35a378d4b4ffea19e5c19fcef72f71"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#acb35a378d4b4ffea19e5c19fcef72f71">UA_Client_HistoryUpdate_replace</a> (<a class="el" href="structUA__Client.html">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *value)</td></tr>
+<tr class="memitem:acb35a378d4b4ffea19e5c19fcef72f71" id="r_acb35a378d4b4ffea19e5c19fcef72f71"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#acb35a378d4b4ffea19e5c19fcef72f71">UA_Client_HistoryUpdate_replace</a> (<a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *<a class="el" href="types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>, <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *value)</td></tr>
 <tr class="separator:acb35a378d4b4ffea19e5c19fcef72f71"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a640267db9f3602c22c80541e9466065b" id="r_a640267db9f3602c22c80541e9466065b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a640267db9f3602c22c80541e9466065b">UA_Client_HistoryUpdate_update</a> (<a class="el" href="structUA__Client.html">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *value)</td></tr>
+<tr class="memitem:a640267db9f3602c22c80541e9466065b" id="r_a640267db9f3602c22c80541e9466065b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a640267db9f3602c22c80541e9466065b">UA_Client_HistoryUpdate_update</a> (<a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *<a class="el" href="types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>, <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *value)</td></tr>
 <tr class="separator:a640267db9f3602c22c80541e9466065b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a895271d9a8c095703c04dbb7c5b6b4ee" id="r_a895271d9a8c095703c04dbb7c5b6b4ee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a895271d9a8c095703c04dbb7c5b6b4ee">UA_Client_HistoryUpdate_deleteRaw</a> (<a class="el" href="structUA__Client.html">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, <a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> startTimestamp, <a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> endTimestamp)</td></tr>
+<tr class="memitem:a895271d9a8c095703c04dbb7c5b6b4ee" id="r_a895271d9a8c095703c04dbb7c5b6b4ee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a895271d9a8c095703c04dbb7c5b6b4ee">UA_Client_HistoryUpdate_deleteRaw</a> (<a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *<a class="el" href="types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>, UA_DateTime startTimestamp, UA_DateTime endTimestamp)</td></tr>
 <tr class="separator:a895271d9a8c095703c04dbb7c5b6b4ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2db71d57441988b26a0a190c799b8ad9" id="r_a2db71d57441988b26a0a190c799b8ad9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a2db71d57441988b26a0a190c799b8ad9">__UA_Client_writeAttribute</a> (<a class="el" href="structUA__Client.html">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, <a class="el" href="common_8h.html#a4dc96c31672814d54f24409617bdbbe2">UA_AttributeId</a> attributeId, const void *in, const <a class="el" href="structUA__DataType.html">UA_DataType</a> *inDataType)</td></tr>
+<tr class="memitem:a2db71d57441988b26a0a190c799b8ad9" id="r_a2db71d57441988b26a0a190c799b8ad9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a2db71d57441988b26a0a190c799b8ad9">__UA_Client_writeAttribute</a> (<a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *<a class="el" href="types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>, <a class="el" href="common_8h.html#a4dc96c31672814d54f24409617bdbbe2">UA_AttributeId</a> attributeId, const void *in, const <a class="el" href="structUA__DataType.html">UA_DataType</a> *inDataType)</td></tr>
 <tr class="separator:a2db71d57441988b26a0a190c799b8ad9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3564c9fb4d7d3ba416991c8830e6e571" id="r_a3564c9fb4d7d3ba416991c8830e6e571"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a3564c9fb4d7d3ba416991c8830e6e571">UA_Client_writeArrayDimensionsAttribute</a> (<a class="el" href="structUA__Client.html">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> nodeId, size_t newArrayDimensionsSize, const <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *newArrayDimensions)</td></tr>
+<tr class="memitem:a3564c9fb4d7d3ba416991c8830e6e571" id="r_a3564c9fb4d7d3ba416991c8830e6e571"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a3564c9fb4d7d3ba416991c8830e6e571">UA_Client_writeArrayDimensionsAttribute</a> (<a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> <a class="el" href="types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>, size_t newArrayDimensionsSize, const <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *newArrayDimensions)</td></tr>
 <tr class="separator:a3564c9fb4d7d3ba416991c8830e6e571"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a3025553947a7bdfa27a8680ebfb22c" id="r_a2a3025553947a7bdfa27a8680ebfb22c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a2a3025553947a7bdfa27a8680ebfb22c">UA_Client_call</a> (<a class="el" href="structUA__Client.html">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> objectId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> methodId, size_t inputSize, const <a class="el" href="structUA__Variant.html">UA_Variant</a> *input, size_t *outputSize, <a class="el" href="structUA__Variant.html">UA_Variant</a> **output)</td></tr>
+<tr class="memitem:a2a3025553947a7bdfa27a8680ebfb22c" id="r_a2a3025553947a7bdfa27a8680ebfb22c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a2a3025553947a7bdfa27a8680ebfb22c">UA_Client_call</a> (<a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> objectId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> methodId, size_t inputSize, const <a class="el" href="structUA__Variant.html">UA_Variant</a> *input, size_t *outputSize, <a class="el" href="structUA__Variant.html">UA_Variant</a> **output)</td></tr>
 <tr class="separator:a2a3025553947a7bdfa27a8680ebfb22c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe39f6add753b9076b5aff9bf954edc6" id="r_afe39f6add753b9076b5aff9bf954edc6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#afe39f6add753b9076b5aff9bf954edc6">UA_Client_addReference</a> (<a class="el" href="structUA__Client.html">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> sourceNodeId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> referenceTypeId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> isForward, const <a class="el" href="structUA__String.html">UA_String</a> targetServerUri, const <a class="el" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> targetNodeId, <a class="el" href="types__generated_8h.html#adf98bb5a5ac8e50eece68338a046a904">UA_NodeClass</a> targetNodeClass)</td></tr>
+<tr class="memitem:afe39f6add753b9076b5aff9bf954edc6" id="r_afe39f6add753b9076b5aff9bf954edc6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#afe39f6add753b9076b5aff9bf954edc6">UA_Client_addReference</a> (<a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> sourceNodeId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> referenceTypeId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> isForward, const <a class="el" href="structUA__String.html">UA_String</a> targetServerUri, const <a class="el" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> targetNodeId, <a class="el" href="types__generated_8h.html#adf98bb5a5ac8e50eece68338a046a904">UA_NodeClass</a> targetNodeClass)</td></tr>
 <tr class="separator:afe39f6add753b9076b5aff9bf954edc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01bc72e700a1f57246a47c1355412985" id="r_a01bc72e700a1f57246a47c1355412985"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a01bc72e700a1f57246a47c1355412985">UA_Client_deleteReference</a> (<a class="el" href="structUA__Client.html">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> sourceNodeId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> referenceTypeId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> isForward, const <a class="el" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> targetNodeId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> deleteBidirectional)</td></tr>
+<tr class="memitem:a01bc72e700a1f57246a47c1355412985" id="r_a01bc72e700a1f57246a47c1355412985"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a01bc72e700a1f57246a47c1355412985">UA_Client_deleteReference</a> (<a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> sourceNodeId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> referenceTypeId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> isForward, const <a class="el" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> targetNodeId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> deleteBidirectional)</td></tr>
 <tr class="separator:a01bc72e700a1f57246a47c1355412985"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86f95c99461f998f0c11a4b34a9b4d61" id="r_a86f95c99461f998f0c11a4b34a9b4d61"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a86f95c99461f998f0c11a4b34a9b4d61">UA_Client_deleteNode</a> (<a class="el" href="structUA__Client.html">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> nodeId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> deleteTargetReferences)</td></tr>
+<tr class="memitem:a86f95c99461f998f0c11a4b34a9b4d61" id="r_a86f95c99461f998f0c11a4b34a9b4d61"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a86f95c99461f998f0c11a4b34a9b4d61">UA_Client_deleteNode</a> (<a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> <a class="el" href="types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> deleteTargetReferences)</td></tr>
 <tr class="separator:a86f95c99461f998f0c11a4b34a9b4d61"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e799660b0e2e087c14200f0197e2784" id="r_a9e799660b0e2e087c14200f0197e2784"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a9e799660b0e2e087c14200f0197e2784">__UA_Client_addNode</a> (<a class="el" href="structUA__Client.html">UA_Client</a> *client, const <a class="el" href="types__generated_8h.html#adf98bb5a5ac8e50eece68338a046a904">UA_NodeClass</a> nodeClass, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> requestedNewNodeId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> parentNodeId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> referenceTypeId, const <a class="el" href="structUA__QualifiedName.html">UA_QualifiedName</a> browseName, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> typeDefinition, const <a class="el" href="structUA__NodeAttributes.html">UA_NodeAttributes</a> *attr, const <a class="el" href="structUA__DataType.html">UA_DataType</a> *attributeType, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *outNewNodeId)</td></tr>
+<tr class="memitem:a9e799660b0e2e087c14200f0197e2784" id="r_a9e799660b0e2e087c14200f0197e2784"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a9e799660b0e2e087c14200f0197e2784">__UA_Client_addNode</a> (<a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *client, const <a class="el" href="types__generated_8h.html#adf98bb5a5ac8e50eece68338a046a904">UA_NodeClass</a> nodeClass, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> requestedNewNodeId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> parentNodeId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> referenceTypeId, const <a class="el" href="structUA__QualifiedName.html">UA_QualifiedName</a> browseName, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> typeDefinition, const <a class="el" href="structUA__NodeAttributes.html">UA_NodeAttributes</a> *attr, const <a class="el" href="structUA__DataType.html">UA_DataType</a> *attributeType, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *outNewNodeId)</td></tr>
 <tr class="separator:a9e799660b0e2e087c14200f0197e2784"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9d694d8be2f4395ff9292c45ac267bc" id="r_ae9d694d8be2f4395ff9292c45ac267bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#ae9d694d8be2f4395ff9292c45ac267bc">UA_Client_NamespaceGetIndex</a> (<a class="el" href="structUA__Client.html">UA_Client</a> *client, <a class="el" href="structUA__String.html">UA_String</a> *namespaceUri, <a class="el" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a> *namespaceIndex)</td></tr>
+<tr class="memitem:ae9d694d8be2f4395ff9292c45ac267bc" id="r_ae9d694d8be2f4395ff9292c45ac267bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#ae9d694d8be2f4395ff9292c45ac267bc">UA_Client_NamespaceGetIndex</a> (<a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *client, <a class="el" href="structUA__String.html">UA_String</a> *<a class="el" href="types_8h.html#a291b1a78bbfb68883ecb0ccd229cefb0">namespaceUri</a>, <a class="el" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a> *<a class="el" href="types_8h.html#a7f38bf0acbdc36e1235ece6d59cf8050">namespaceIndex</a>)</td></tr>
 <tr class="separator:ae9d694d8be2f4395ff9292c45ac267bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65f4ab185f1e43cb6ee2d9c3a962d77b" id="r_a65f4ab185f1e43cb6ee2d9c3a962d77b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a65f4ab185f1e43cb6ee2d9c3a962d77b">UA_Client_forEachChildNodeCall</a> (<a class="el" href="structUA__Client.html">UA_Client</a> *client, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> parentNodeId, <a class="el" href="client__highlevel_8h.html#a0fd3dfee2e93e99b09030830a8c23dc4">UA_NodeIteratorCallback</a> callback, void *handle)</td></tr>
+<tr class="memitem:a65f4ab185f1e43cb6ee2d9c3a962d77b" id="r_a65f4ab185f1e43cb6ee2d9c3a962d77b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a65f4ab185f1e43cb6ee2d9c3a962d77b">UA_Client_forEachChildNodeCall</a> (<a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *client, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> parentNodeId, <a class="el" href="client__highlevel_8h.html#a0fd3dfee2e93e99b09030830a8c23dc4">UA_NodeIteratorCallback</a> callback, void *handle)</td></tr>
 <tr class="separator:a65f4ab185f1e43cb6ee2d9c3a962d77b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a09e5e63d313c3f91ff05131ee74a203a" id="r_a09e5e63d313c3f91ff05131ee74a203a"><td class="memItemLeft" align="right" valign="top">UA_EXPORT const <a class="el" href="structUA__VariableAttributes.html">UA_VariableAttributes</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a09e5e63d313c3f91ff05131ee74a203a">UA_VariableAttributes_default</a></td></tr>
-<tr class="separator:a09e5e63d313c3f91ff05131ee74a203a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4e68cd81af56191a49713afa70f660f" id="r_aa4e68cd81af56191a49713afa70f660f"><td class="memItemLeft" align="right" valign="top">UA_EXPORT const <a class="el" href="structUA__VariableTypeAttributes.html">UA_VariableTypeAttributes</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#aa4e68cd81af56191a49713afa70f660f">UA_VariableTypeAttributes_default</a></td></tr>
-<tr class="separator:aa4e68cd81af56191a49713afa70f660f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0e3176e6acc5afcb0fc1830c06dc4c4" id="r_ab0e3176e6acc5afcb0fc1830c06dc4c4"><td class="memItemLeft" align="right" valign="top">UA_EXPORT const <a class="el" href="structUA__MethodAttributes.html">UA_MethodAttributes</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#ab0e3176e6acc5afcb0fc1830c06dc4c4">UA_MethodAttributes_default</a></td></tr>
-<tr class="separator:ab0e3176e6acc5afcb0fc1830c06dc4c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb2cdaa0d27416f7b1f38c2df4ace1f1" id="r_aeb2cdaa0d27416f7b1f38c2df4ace1f1"><td class="memItemLeft" align="right" valign="top">UA_EXPORT const <a class="el" href="structUA__ObjectAttributes.html">UA_ObjectAttributes</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#aeb2cdaa0d27416f7b1f38c2df4ace1f1">UA_ObjectAttributes_default</a></td></tr>
-<tr class="separator:aeb2cdaa0d27416f7b1f38c2df4ace1f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0045c2cdb399b05adae8e2343e977194" id="r_a0045c2cdb399b05adae8e2343e977194"><td class="memItemLeft" align="right" valign="top">UA_EXPORT const <a class="el" href="structUA__ObjectTypeAttributes.html">UA_ObjectTypeAttributes</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a0045c2cdb399b05adae8e2343e977194">UA_ObjectTypeAttributes_default</a></td></tr>
-<tr class="separator:a0045c2cdb399b05adae8e2343e977194"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd88b43737e5350a89e960fef96a0ce4" id="r_acd88b43737e5350a89e960fef96a0ce4"><td class="memItemLeft" align="right" valign="top">UA_EXPORT const <a class="el" href="structUA__ReferenceTypeAttributes.html">UA_ReferenceTypeAttributes</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#acd88b43737e5350a89e960fef96a0ce4">UA_ReferenceTypeAttributes_default</a></td></tr>
-<tr class="separator:acd88b43737e5350a89e960fef96a0ce4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a40d45880be0e44703e5ff7927750ab8e" id="r_a40d45880be0e44703e5ff7927750ab8e"><td class="memItemLeft" align="right" valign="top">UA_EXPORT const <a class="el" href="structUA__DataTypeAttributes.html">UA_DataTypeAttributes</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a40d45880be0e44703e5ff7927750ab8e">UA_DataTypeAttributes_default</a></td></tr>
-<tr class="separator:a40d45880be0e44703e5ff7927750ab8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7131a62f970d6656d88ce2191304e637" id="r_a7131a62f970d6656d88ce2191304e637"><td class="memItemLeft" align="right" valign="top">UA_EXPORT const <a class="el" href="structUA__ViewAttributes.html">UA_ViewAttributes</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a7131a62f970d6656d88ce2191304e637">UA_ViewAttributes_default</a></td></tr>
-<tr class="separator:a7131a62f970d6656d88ce2191304e637"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="ab3434b1c9a9c80e820354e9af541458c" name="ab3434b1c9a9c80e820354e9af541458c"></a>
@@ -179,25 +161,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="client__highlevel_8h_source.html#l00613">613</a> of file <a class="el" href="client__highlevel_8h_source.html">client_highlevel.h</a>.</p>
-
-</div>
-</div>
-<a id="a5e392fbc10912c390e230cbb0b1def54" name="a5e392fbc10912c390e230cbb0b1def54"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e392fbc10912c390e230cbb0b1def54">&#9670;&#160;</a></span>UA_DEFAULT_ATTRIBUTES_DEFINED</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_DEFAULT_ATTRIBUTES_DEFINED</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Protect against redundant definitions for server/client. </p>
-
-<p class="definition">Definition at line <a class="el" href="client__highlevel_8h_source.html#l00460">460</a> of file <a class="el" href="client__highlevel_8h_source.html">client_highlevel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="client__highlevel_8h_source.html#l00616">616</a> of file <a class="el" href="client__highlevel_8h_source.html">client_highlevel.h</a>.</p>
 
 </div>
 </div>
@@ -209,12 +173,12 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(* UA_HistoricalIteratorCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> moreDataAvailable, const <a class="el" href="structUA__ExtensionObject.html">UA_ExtensionObject</a> *data, void *callbackContext)</td>
+          <td class="memname">typedef <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(* UA_HistoricalIteratorCallback) (<a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *<a class="el" href="types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> moreDataAvailable, const <a class="el" href="structUA__ExtensionObject.html">UA_ExtensionObject</a> *data, void *callbackContext)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="client__highlevel_8h_source.html#l00200">200</a> of file <a class="el" href="client__highlevel_8h_source.html">client_highlevel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="client__highlevel_8h_source.html#l00206">206</a> of file <a class="el" href="client__highlevel_8h_source.html">client_highlevel.h</a>.</p>
 
 </div>
 </div>
@@ -232,7 +196,7 @@ Variables</h2></td></tr>
 
 <p>Iterate over all nodes referenced by parentNodeId by calling the callback function for each child node. </p>
 
-<p class="definition">Definition at line <a class="el" href="client__highlevel_8h_source.html#l00616">616</a> of file <a class="el" href="client__highlevel_8h_source.html">client_highlevel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="client__highlevel_8h_source.html#l00619">619</a> of file <a class="el" href="client__highlevel_8h_source.html">client_highlevel.h</a>.</p>
 
 </div>
 </div>
@@ -246,7 +210,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> __UA_Client_addNode </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *&#160;</td>
           <td class="paramname"><em>client</em>, </td>
         </tr>
         <tr>
@@ -324,7 +288,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="config_8h.html#aa397bffde7d792f38dcbb8e329486f9c">_UA_BEGIN_DECLS</a> <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> __UA_Client_readAttribute </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *&#160;</td>
           <td class="paramname"><em>client</em>, </td>
         </tr>
         <tr>
@@ -374,7 +338,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> __UA_Client_writeAttribute </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *&#160;</td>
           <td class="paramname"><em>client</em>, </td>
         </tr>
         <tr>
@@ -422,7 +386,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_addReference </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *&#160;</td>
           <td class="paramname"><em>client</em>, </td>
         </tr>
         <tr>
@@ -480,7 +444,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_call </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *&#160;</td>
           <td class="paramname"><em>client</em>, </td>
         </tr>
         <tr>
@@ -538,7 +502,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_deleteNode </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *&#160;</td>
           <td class="paramname"><em>client</em>, </td>
         </tr>
         <tr>
@@ -572,7 +536,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_deleteReference </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *&#160;</td>
           <td class="paramname"><em>client</em>, </td>
         </tr>
         <tr>
@@ -624,7 +588,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_forEachChildNodeCall </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *&#160;</td>
           <td class="paramname"><em>client</em>, </td>
         </tr>
         <tr>
@@ -655,16 +619,16 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a735b8e5d43e24b28382bfcecc1d8d8e3" name="a735b8e5d43e24b28382bfcecc1d8d8e3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a735b8e5d43e24b28382bfcecc1d8d8e3">&#9670;&#160;</a></span>UA_Client_HistoryRead_raw()</h2>
+<a id="a912783b87a496cda772d5ebd5827cad0" name="a912783b87a496cda772d5ebd5827cad0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a912783b87a496cda772d5ebd5827cad0">&#9670;&#160;</a></span>UA_Client_HistoryRead_events()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_HistoryRead_raw </td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_HistoryRead_events </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *&#160;</td>
           <td class="paramname"><em>client</em>, </td>
         </tr>
         <tr>
@@ -682,13 +646,165 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a>&#160;</td>
+          <td class="paramtype">UA_DateTime&#160;</td>
           <td class="paramname"><em>startTime</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a>&#160;</td>
+          <td class="paramtype">UA_DateTime&#160;</td>
+          <td class="paramname"><em>endTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structUA__String.html">UA_String</a>&#160;</td>
+          <td class="paramname"><em>indexRange</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__EventFilter.html">UA_EventFilter</a>&#160;</td>
+          <td class="paramname"><em>filter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td>
+          <td class="paramname"><em>numValuesPerNode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types__generated_8h.html#ab298c4ff5eb700437114d0dc2db97ead">UA_TimestampsToReturn</a>&#160;</td>
+          <td class="paramname"><em>timestampsToReturn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>callbackContext</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab92689749a58b999a99123e99ce38655" name="ab92689749a58b999a99123e99ce38655"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab92689749a58b999a99123e99ce38655">&#9670;&#160;</a></span>UA_Client_HistoryRead_modified()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_HistoryRead_modified </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="client__highlevel_8h.html#ac9459b682b502468f803f8af5ee11963">UA_HistoricalIteratorCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">UA_DateTime&#160;</td>
+          <td class="paramname"><em>startTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">UA_DateTime&#160;</td>
+          <td class="paramname"><em>endTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structUA__String.html">UA_String</a>&#160;</td>
+          <td class="paramname"><em>indexRange</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td>
+          <td class="paramname"><em>returnBounds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td>
+          <td class="paramname"><em>numValuesPerNode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types__generated_8h.html#ab298c4ff5eb700437114d0dc2db97ead">UA_TimestampsToReturn</a>&#160;</td>
+          <td class="paramname"><em>timestampsToReturn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>callbackContext</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a735b8e5d43e24b28382bfcecc1d8d8e3" name="a735b8e5d43e24b28382bfcecc1d8d8e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a735b8e5d43e24b28382bfcecc1d8d8e3">&#9670;&#160;</a></span>UA_Client_HistoryRead_raw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_HistoryRead_raw </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="client__highlevel_8h.html#ac9459b682b502468f803f8af5ee11963">UA_HistoricalIteratorCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">UA_DateTime&#160;</td>
+          <td class="paramname"><em>startTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">UA_DateTime&#160;</td>
           <td class="paramname"><em>endTime</em>, </td>
         </tr>
         <tr>
@@ -740,7 +856,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_HistoryUpdate_deleteRaw </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *&#160;</td>
           <td class="paramname"><em>client</em>, </td>
         </tr>
         <tr>
@@ -752,13 +868,13 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a>&#160;</td>
+          <td class="paramtype">UA_DateTime&#160;</td>
           <td class="paramname"><em>startTimestamp</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a>&#160;</td>
+          <td class="paramtype">UA_DateTime&#160;</td>
           <td class="paramname"><em>endTimestamp</em>&#160;</td>
         </tr>
         <tr>
@@ -780,7 +896,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_HistoryUpdate_insert </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *&#160;</td>
           <td class="paramname"><em>client</em>, </td>
         </tr>
         <tr>
@@ -814,7 +930,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_HistoryUpdate_replace </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *&#160;</td>
           <td class="paramname"><em>client</em>, </td>
         </tr>
         <tr>
@@ -848,7 +964,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_HistoryUpdate_update </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *&#160;</td>
           <td class="paramname"><em>client</em>, </td>
         </tr>
         <tr>
@@ -882,7 +998,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_NamespaceGetIndex </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *&#160;</td>
           <td class="paramname"><em>client</em>, </td>
         </tr>
         <tr>
@@ -908,7 +1024,7 @@ Variables</h2></td></tr>
 <p>Get the namespace-index of a namespace-URI. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">client</td><td>The <a class="el" href="structUA__Client.html">UA_Client</a> struct for this connection </td></tr>
+    <tr><td class="paramname">client</td><td>The UA_Client struct for this connection </td></tr>
     <tr><td class="paramname">namespaceUri</td><td>The interested namespace URI </td></tr>
     <tr><td class="paramname">namespaceIndex</td><td>The namespace index of the URI. The value is unchanged in case of an error </td></tr>
   </table>
@@ -927,7 +1043,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readArrayDimensionsAttribute </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *&#160;</td>
           <td class="paramname"><em>client</em>, </td>
         </tr>
         <tr>
@@ -967,7 +1083,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_writeArrayDimensionsAttribute </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *&#160;</td>
           <td class="paramname"><em>client</em>, </td>
         </tr>
         <tr>
@@ -994,189 +1110,6 @@ Variables</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="a40d45880be0e44703e5ff7927750ab8e" name="a40d45880be0e44703e5ff7927750ab8e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a40d45880be0e44703e5ff7927750ab8e">&#9670;&#160;</a></span>UA_DataTypeAttributes_default</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">UA_EXPORT const <a class="el" href="structUA__DataTypeAttributes.html">UA_DataTypeAttributes</a> UA_DataTypeAttributes_default</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ab0e3176e6acc5afcb0fc1830c06dc4c4" name="ab0e3176e6acc5afcb0fc1830c06dc4c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab0e3176e6acc5afcb0fc1830c06dc4c4">&#9670;&#160;</a></span>UA_MethodAttributes_default</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">UA_EXPORT const <a class="el" href="structUA__MethodAttributes.html">UA_MethodAttributes</a> UA_MethodAttributes_default</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Methods are executable by default. </p>
-
-</div>
-</div>
-<a id="aeb2cdaa0d27416f7b1f38c2df4ace1f1" name="aeb2cdaa0d27416f7b1f38c2df4ace1f1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeb2cdaa0d27416f7b1f38c2df4ace1f1">&#9670;&#160;</a></span>UA_ObjectAttributes_default</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">UA_EXPORT const <a class="el" href="structUA__ObjectAttributes.html">UA_ObjectAttributes</a> UA_ObjectAttributes_default</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>The remaining attribute definitions are currently all zeroed out. </p>
-
-</div>
-</div>
-<a id="a0045c2cdb399b05adae8e2343e977194" name="a0045c2cdb399b05adae8e2343e977194"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0045c2cdb399b05adae8e2343e977194">&#9670;&#160;</a></span>UA_ObjectTypeAttributes_default</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">UA_EXPORT const <a class="el" href="structUA__ObjectTypeAttributes.html">UA_ObjectTypeAttributes</a> UA_ObjectTypeAttributes_default</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="acd88b43737e5350a89e960fef96a0ce4" name="acd88b43737e5350a89e960fef96a0ce4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acd88b43737e5350a89e960fef96a0ce4">&#9670;&#160;</a></span>UA_ReferenceTypeAttributes_default</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">UA_EXPORT const <a class="el" href="structUA__ReferenceTypeAttributes.html">UA_ReferenceTypeAttributes</a> UA_ReferenceTypeAttributes_default</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a09e5e63d313c3f91ff05131ee74a203a" name="a09e5e63d313c3f91ff05131ee74a203a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a09e5e63d313c3f91ff05131ee74a203a">&#9670;&#160;</a></span>UA_VariableAttributes_default</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">UA_EXPORT const <a class="el" href="structUA__VariableAttributes.html">UA_VariableAttributes</a> UA_VariableAttributes_default</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>The default for variables is "BaseDataType" for the datatype, -2 for the valuerank and a read-accesslevel. </p>
-
-</div>
-</div>
-<a id="aa4e68cd81af56191a49713afa70f660f" name="aa4e68cd81af56191a49713afa70f660f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa4e68cd81af56191a49713afa70f660f">&#9670;&#160;</a></span>UA_VariableTypeAttributes_default</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">UA_EXPORT const <a class="el" href="structUA__VariableTypeAttributes.html">UA_VariableTypeAttributes</a> UA_VariableTypeAttributes_default</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a7131a62f970d6656d88ce2191304e637" name="a7131a62f970d6656d88ce2191304e637"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7131a62f970d6656d88ce2191304e637">&#9670;&#160;</a></span>UA_ViewAttributes_default</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">UA_EXPORT const <a class="el" href="structUA__ViewAttributes.html">UA_ViewAttributes</a> UA_ViewAttributes_default</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 </div>

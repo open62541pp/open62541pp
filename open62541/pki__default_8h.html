@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.15</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.15</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -121,7 +121,7 @@ Functions</h2></td></tr>
 
 <p>This work is licensed under a Creative Commons CCZero 1.0 Universal License. </p>
 <p>See <a href="http://creativecommons.org/publicdomain/zero/1.0/">http://creativecommons.org/publicdomain/zero/1.0/</a> for more information.</p>
-<p>Copyright 2018 (c) Mark Giraud, Fraunhofer IOSB Copyright 2019 (c) Kalycito Infotech Private Limited Default implementation that accepts all certificates </p>
+<p>Copyright 2018 (c) Mark Giraud, Fraunhofer IOSB Copyright 2019 (c) Kalycito Infotech Private Limited Default implementation that accepts all certificates Any plugin implementation should invalidate an existing certificate verification by first calling the internal clear() method if it is not NULL. Refer to the default implementation in src/plugins/crypto/ua_pki_none.c </p>
 
 </div>
 </div>
@@ -182,7 +182,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Accept certificates based on a trust-list and a revocation-list. </p>
-<p>Based on mbedTLS. </p>
+<p>Based on mbedTLS. Any plugin implementation should invalidate an existing certificate verification by first calling the internal clear() method if it is not NULL. Refer to the default implementation in src/plugins/crypto/mbedtls/ua_pki_mbedtls.c or src/plugins/crypto/openssl/ua_pki_openssl.c </p>
 
 </div>
 </div>

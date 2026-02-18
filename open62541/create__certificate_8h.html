@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.15</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.15</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -94,6 +94,7 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="log_8h_source.html">open62541/plugin/log.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="types_8h_source.html">open62541/types.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="util_8h_source.html">open62541/util.h</a>&gt;</code><br />
 </div>
 <p><a href="create__certificate_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -104,8 +105,8 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a5868cc2be404bfccd303eaa822ce1ac0" id="r_a5868cc2be404bfccd303eaa822ce1ac0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="create__certificate_8h.html#a5868cc2be404bfccd303eaa822ce1ac0">UA_CreateCertificate</a> (const <a class="el" href="structUA__Logger.html">UA_Logger</a> *logger, const <a class="el" href="structUA__String.html">UA_String</a> *subject, size_t subjectSize, const <a class="el" href="structUA__String.html">UA_String</a> *subjectAltName, size_t subjectAltNameSize, size_t keySizeBits, <a class="el" href="create__certificate_8h.html#a6407c66134b89c0485a90e0b8bc50596">UA_CertificateFormat</a> certFormat, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *outPrivateKey, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *outCertificate)</td></tr>
-<tr class="separator:a5868cc2be404bfccd303eaa822ce1ac0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab30d80b63600034d8210200a7dd9fad3" id="r_ab30d80b63600034d8210200a7dd9fad3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="create__certificate_8h.html#ab30d80b63600034d8210200a7dd9fad3">UA_CreateCertificate</a> (const <a class="el" href="structUA__Logger.html">UA_Logger</a> *logger, const <a class="el" href="structUA__String.html">UA_String</a> *subject, size_t subjectSize, const <a class="el" href="structUA__String.html">UA_String</a> *subjectAltName, size_t subjectAltNameSize, <a class="el" href="create__certificate_8h.html#a6407c66134b89c0485a90e0b8bc50596">UA_CertificateFormat</a> certFormat, <a class="el" href="structUA__KeyValueMap.html">UA_KeyValueMap</a> *params, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *outPrivateKey, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *outCertificate)</td></tr>
+<tr class="separator:ab30d80b63600034d8210200a7dd9fad3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="a6407c66134b89c0485a90e0b8bc50596" name="a6407c66134b89c0485a90e0b8bc50596"></a>
@@ -128,13 +129,13 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="a6407c66134b89c0485a90e0b8bc50596a1680b5211e4ce7e3c12fc2e15f4e5aea" name="a6407c66134b89c0485a90e0b8bc50596a1680b5211e4ce7e3c12fc2e15f4e5aea"></a>UA_CERTIFICATEFORMAT_PEM&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="create__certificate_8h_source.html#l00017">17</a> of file <a class="el" href="create__certificate_8h_source.html">create_certificate.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="create__certificate_8h_source.html#l00018">18</a> of file <a class="el" href="create__certificate_8h_source.html">create_certificate.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a5868cc2be404bfccd303eaa822ce1ac0" name="a5868cc2be404bfccd303eaa822ce1ac0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5868cc2be404bfccd303eaa822ce1ac0">&#9670;&#160;</a></span>UA_CreateCertificate()</h2>
+<a id="ab30d80b63600034d8210200a7dd9fad3" name="ab30d80b63600034d8210200a7dd9fad3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab30d80b63600034d8210200a7dd9fad3">&#9670;&#160;</a></span>UA_CreateCertificate()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -172,14 +173,14 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>keySizeBits</em>, </td>
+          <td class="paramtype"><a class="el" href="create__certificate_8h.html#a6407c66134b89c0485a90e0b8bc50596">UA_CertificateFormat</a>&#160;</td>
+          <td class="paramname"><em>certFormat</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="create__certificate_8h.html#a6407c66134b89c0485a90e0b8bc50596">UA_CertificateFormat</a>&#160;</td>
-          <td class="paramname"><em>certFormat</em>, </td>
+          <td class="paramtype"><a class="el" href="structUA__KeyValueMap.html">UA_KeyValueMap</a> *&#160;</td>
+          <td class="paramname"><em>params</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>

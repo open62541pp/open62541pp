@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.20.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.21.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -120,9 +120,9 @@ $(function() {
 <div class="line">        );</div>
 <div class="line">    }</div>
 <div class="line"> </div>
-<div class="line">    <a id="_a8" name="_a8"></a><a class="code hl_class" href="classopcua_1_1Bitmask.html">Bitmask&lt;AccessLevel&gt;</a> getUserAccessLevel(<a class="code hl_class" href="classopcua_1_1Session.html">Session</a>&amp; session, <span class="keyword">const</span> <a id="_a9" name="_a9"></a><a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; nodeId)<span class="keyword"> override </span>{</div>
-<div class="line">        <span class="keyword">const</span> <span class="keywordtype">bool</span> isAdmin = session.<a id="a10" name="a10"></a><a class="code hl_function" href="classopcua_1_1Session.html#a72211283db8536005f89cfdf06d39402">getSessionAttribute</a>({0, <span class="stringliteral">&quot;isAdmin&quot;</span>}).scalar&lt;bool&gt;();</div>
-<div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;Get user access level of node id &quot;</span> &lt;&lt; <a id="a11" name="a11"></a><a class="code hl_function" href="namespaceopcua.html#a3d1494b8f3ef24a9c3a5c8ecc0724361">opcua::toString</a>(nodeId) &lt;&lt; std::endl;</div>
+<div class="line">    <a id="_a8" name="_a8"></a><a class="code hl_class" href="classopcua_1_1Bitmask.html">Bitmask&lt;AccessLevel&gt;</a> getUserAccessLevel(<a class="code hl_class" href="classopcua_1_1Session.html">Session</a>&amp; session, <span class="keyword">const</span> <a id="_a9" name="_a9"></a><a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; <a id="a10" name="a10"></a><a class="code hl_variableRef" target="_blank" href="open62541/types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>)<span class="keyword"> override </span>{</div>
+<div class="line">        <span class="keyword">const</span> <span class="keywordtype">bool</span> isAdmin = session.<a id="a11" name="a11"></a><a class="code hl_function" href="classopcua_1_1Session.html#a72211283db8536005f89cfdf06d39402">getSessionAttribute</a>({0, <span class="stringliteral">&quot;isAdmin&quot;</span>}).scalar&lt;bool&gt;();</div>
+<div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;Get user access level of node id &quot;</span> &lt;&lt; <a id="a12" name="a12"></a><a class="code hl_function" href="namespaceopcua.html#a3d1494b8f3ef24a9c3a5c8ecc0724361">opcua::toString</a>(<a class="code hl_variableRef" target="_blank" href="open62541/types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>) &lt;&lt; std::endl;</div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;Admin rights granted: &quot;</span> &lt;&lt; isAdmin &lt;&lt; std::endl;</div>
 <div class="line">        <span class="keywordflow">return</span> isAdmin</div>
 <div class="line">            ? AccessLevel::CurrentRead | AccessLevel::CurrentWrite</div>
@@ -136,26 +136,26 @@ $(function() {
 <div class="line">    AccessControlCustom accessControl{</div>
 <div class="line">        <span class="keyword">true</span>,  <span class="comment">// allow anonymous</span></div>
 <div class="line">        {</div>
-<div class="line">            <a id="_a12" name="_a12"></a><a class="code hl_struct" href="structopcua_1_1Login.html">Login</a>{<a id="_a13" name="_a13"></a><a class="code hl_class" href="classopcua_1_1String.html">String</a>{<span class="stringliteral">&quot;admin&quot;</span>}, <a class="code hl_class" href="classopcua_1_1String.html">String</a>{<span class="stringliteral">&quot;admin&quot;</span>}},</div>
+<div class="line">            <a id="_a13" name="_a13"></a><a class="code hl_struct" href="structopcua_1_1Login.html">Login</a>{<a id="_a14" name="_a14"></a><a class="code hl_class" href="classopcua_1_1String.html">String</a>{<span class="stringliteral">&quot;admin&quot;</span>}, <a class="code hl_class" href="classopcua_1_1String.html">String</a>{<span class="stringliteral">&quot;admin&quot;</span>}},</div>
 <div class="line">            <a class="code hl_struct" href="structopcua_1_1Login.html">Login</a>{<a class="code hl_class" href="classopcua_1_1String.html">String</a>{<span class="stringliteral">&quot;user&quot;</span>}, <a class="code hl_class" href="classopcua_1_1String.html">String</a>{<span class="stringliteral">&quot;user&quot;</span>}},</div>
 <div class="line">        }</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-<div class="line">    <a id="_a14" name="_a14"></a><a class="code hl_class" href="classopcua_1_1ServerConfig.html">ServerConfig</a> config;</div>
-<div class="line">    config.<a id="a15" name="a15"></a><a class="code hl_function" href="classopcua_1_1ServerConfig.html#a8ba0b01e68008ec0df6e475c79191b63">setAccessControl</a>(accessControl);</div>
+<div class="line">    <a id="_a15" name="_a15"></a><a class="code hl_class" href="classopcua_1_1ServerConfig.html">ServerConfig</a> config;</div>
+<div class="line">    config.<a id="a16" name="a16"></a><a class="code hl_function" href="classopcua_1_1ServerConfig.html#a8ba0b01e68008ec0df6e475c79191b63">setAccessControl</a>(accessControl);</div>
 <div class="line"><span class="preprocessor">#if UAPP_OPEN62541_VER_GE(1, 4)</span></div>
 <div class="line">    config-&gt;allowNonePolicyPassword = <span class="keyword">true</span>;</div>
 <div class="line"><span class="preprocessor">#endif</span></div>
 <div class="line"> </div>
-<div class="line">    <a id="_a16" name="_a16"></a><a class="code hl_class" href="classopcua_1_1Server.html">Server</a> server{std::move(config)};</div>
+<div class="line">    <a id="_a17" name="_a17"></a><a class="code hl_class" href="classopcua_1_1Server.html">Server</a> server{std::move(config)};</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Add variable node. Try to change its value as a client with different logins.</span></div>
-<div class="line">    <a id="_a17" name="_a17"></a><a class="code hl_class" href="classopcua_1_1Node.html">Node</a>{server, ObjectId::ObjectsFolder}</div>
-<div class="line">        .<a id="a18" name="a18"></a><a class="code hl_function" href="classopcua_1_1Node.html#ad7fab8b5a5060a46b62efcfb3980910a">addVariable</a>(</div>
+<div class="line">    <a id="_a18" name="_a18"></a><a class="code hl_class" href="classopcua_1_1Node.html">Node</a>{server, ObjectId::ObjectsFolder}</div>
+<div class="line">        .<a id="a19" name="a19"></a><a class="code hl_function" href="classopcua_1_1Node.html#ad7fab8b5a5060a46b62efcfb3980910a">addVariable</a>(</div>
 <div class="line">            {1, 1000},</div>
 <div class="line">            <span class="stringliteral">&quot;Variable&quot;</span>,</div>
 <div class="line">            <a class="code hl_class" href="classopcua_1_1ua_1_1VariableAttributes.html">VariableAttributes</a>{}</div>
-<div class="line">                .<a id="a19" name="a19"></a><a class="code hl_function" href="classopcua_1_1ua_1_1VariableAttributes.html#a1509ddccdb036747db4e2ed2e31b0ac0">setAccessLevel</a>(AccessLevel::CurrentRead | AccessLevel::CurrentWrite)</div>
+<div class="line">                .<a id="a20" name="a20"></a><a class="code hl_function" href="classopcua_1_1ua_1_1VariableAttributes.html#a1509ddccdb036747db4e2ed2e31b0ac0">setAccessLevel</a>(AccessLevel::CurrentRead | AccessLevel::CurrentWrite)</div>
 <div class="line">                .setDataType(DataTypeId::Int32)</div>
 <div class="line">                .setValueRank(ValueRank::Scalar)</div>
 <div class="line">                .setValue(<a class="code hl_class" href="classopcua_1_1Variant.html">opcua::Variant</a>{0})</div>
@@ -190,6 +190,7 @@ $(function() {
 <div class="ttc" id="anode_8hpp_html"><div class="ttname"><a href="node_8hpp.html">node.hpp</a></div></div>
 <div class="ttc" id="aserver_8hpp_html"><div class="ttname"><a href="server_8hpp.html">server.hpp</a></div></div>
 <div class="ttc" id="astructopcua_1_1Login_html"><div class="ttname"><a href="structopcua_1_1Login.html">opcua::Login</a></div><div class="ttdoc">Login credentials.</div><div class="ttdef"><b>Definition</b> <a href="accesscontrol__default_8hpp_source.html#l00012">accesscontrol_default.hpp:12</a></div></div>
+<div class="ttc" id="atypes_8h_html_a01f89a3e534db4efdbb6a92ae906cffb"><div class="ttname"><a href="open62541/types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a></div><div class="ttdeci">char id nodeId</div></div>
 </div><!-- fragment --> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

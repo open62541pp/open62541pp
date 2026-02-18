@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.20.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.21.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -239,7 +239,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno"><a class="line" href="classopcua_1_1Client.html#a57b8aa2012bd8975894f053eb03c9774">  136</a></span><span class="comment"></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classopcua_1_1Client.html#a57b8aa2012bd8975894f053eb03c9774">Client</a>(<a class="code hl_class" href="classopcua_1_1ClientConfig.html">ClientConfig</a>&amp;&amp; config);</div>
 <div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="comment"></span> </div>
 <div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><span class="comment">    /// Create client from native instance (move ownership to client).</span></div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno"><a class="line" href="classopcua_1_1Client.html#a5354a57346a1410acdd6690c73e28dd8">  139</a></span><span class="comment"></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classopcua_1_1Client.html#a5354a57346a1410acdd6690c73e28dd8">Client</a>(<a class="code hl_structRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a>* <a class="code hl_function" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>);</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno"><a class="line" href="classopcua_1_1Client.html#a5354a57346a1410acdd6690c73e28dd8">  139</a></span><span class="comment"></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classopcua_1_1Client.html#a5354a57346a1410acdd6690c73e28dd8">Client</a>(<a class="code hl_typedefRef" target="_blank" href="open62541/common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a>* <a class="code hl_function" href="classopcua_1_1Wrapper.html#a50cca18d937510c1118613d75385448f">native</a>);</div>
 <div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
 <div class="line"><a id="l00141" name="l00141"></a><span class="lineno"><a class="line" href="classopcua_1_1Client.html#a8f4b2485b698a07a46b912a6798a0c6c">  141</a></span>    <a class="code hl_function" href="classopcua_1_1Client.html#a8f4b2485b698a07a46b912a6798a0c6c">~Client</a>();</div>
 <div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
@@ -339,8 +339,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span><span class="comment">    /// Check if the client&#39;s main loop is running.</span></div>
 <div class="line"><a id="l00235" name="l00235"></a><span class="lineno"><a class="line" href="classopcua_1_1Client.html#afb9de7ae0bf847a54674c3bd064f0229">  235</a></span><span class="comment"></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classopcua_1_1Client.html#afb9de7ae0bf847a54674c3bd064f0229">isRunning</a>() const noexcept;</div>
 <div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span> </div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno"><a class="line" href="classopcua_1_1Client.html#a20b757a4e2e59e3f383164f22c4596f5">  237</a></span>    <a class="code hl_structRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a>* <a class="code hl_function" href="classopcua_1_1Wrapper.html#a340615392827f2f54e03ee8f27b67eb9">handle</a>() noexcept;</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno"><a class="line" href="classopcua_1_1Client.html#a7939ad6206a1b78a2efdd9685fd07b95">  238</a></span>    const <a class="code hl_structRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a>* <a class="code hl_function" href="classopcua_1_1Wrapper.html#a340615392827f2f54e03ee8f27b67eb9">handle</a>() const noexcept;</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno"><a class="line" href="classopcua_1_1Client.html#a20b757a4e2e59e3f383164f22c4596f5">  237</a></span>    <a class="code hl_typedefRef" target="_blank" href="open62541/common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a>* <a class="code hl_function" href="classopcua_1_1Wrapper.html#a340615392827f2f54e03ee8f27b67eb9">handle</a>() noexcept;</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno"><a class="line" href="classopcua_1_1Client.html#a7939ad6206a1b78a2efdd9685fd07b95">  238</a></span>    const <a class="code hl_typedefRef" target="_blank" href="open62541/common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a>* <a class="code hl_function" href="classopcua_1_1Wrapper.html#a340615392827f2f54e03ee8f27b67eb9">handle</a>() const noexcept;</div>
 <div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span> </div>
 <div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>private:</div>
 <div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    detail::ClientContext&amp; context() noexcept;</div>
@@ -349,7 +349,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00244" name="l00244"></a><span class="lineno"><a class="line" href="classopcua_1_1Client.html#a0a96cab312749ac9cb732f1705fbff06">  244</a></span>    friend detail::ClientContext&amp; detail::getContext(<a class="code hl_class" href="classopcua_1_1Client.html">Client</a>&amp; client) noexcept;</div>
 <div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span> </div>
 <div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    struct Deleter {</div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>        <span class="keywordtype">void</span> operator()(<a class="code hl_structRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a>* client) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>        <span class="keywordtype">void</span> operator()(<a class="code hl_typedefRef" target="_blank" href="open62541/common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a>* client) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    };</div>
 <div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span> </div>
 <div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    std::unique_ptr&lt;detail::ClientContext&gt; context_;</div>
@@ -360,7 +360,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span><span class="comment">/// Convert native UA_Client pointer to its wrapper instance.</span></div>
 <div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span><span class="comment">/// The native client must be owned by a Client instance.</span></div>
 <div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span><span class="comment">/// @relates Client</span></div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno"><a class="line" href="classopcua_1_1Client.html#a7fa8a2b5bc962d6dcc68a76f6f9c0070">  257</a></span><span class="comment"></span><a class="code hl_class" href="classopcua_1_1Client.html">Client</a>* <a class="code hl_function" href="classopcua_1_1Client.html#a7fa8a2b5bc962d6dcc68a76f6f9c0070">asWrapper</a>(<a class="code hl_structRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a>* client) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno"><a class="line" href="classopcua_1_1Client.html#a7fa8a2b5bc962d6dcc68a76f6f9c0070">  257</a></span><span class="comment"></span><a class="code hl_class" href="classopcua_1_1Client.html">Client</a>* <a class="code hl_function" href="classopcua_1_1Client.html#a7fa8a2b5bc962d6dcc68a76f6f9c0070">asWrapper</a>(<a class="code hl_typedefRef" target="_blank" href="open62541/common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a>* client) <span class="keyword">noexcept</span>;</div>
 <div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span><span class="comment"></span> </div>
 <div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span><span class="comment">/// @relates Client</span></div>
 <div class="foldopen" id="foldopen00260" data-start="{" data-end="}">
@@ -441,6 +441,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassopcua_1_1ua_1_1X509IdentityToken_html"><div class="ttname"><a href="classopcua_1_1ua_1_1X509IdentityToken.html">opcua::X509IdentityToken</a></div><div class="ttdoc">UA_X509IdentityToken wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l00680">types.hpp:680</a></div></div>
 <div class="ttc" id="aclient_8h_html"><div class="ttname"><a href="client_8h.html">client.h</a></div></div>
 <div class="ttc" id="aclient__utils_8hpp_html"><div class="ttname"><a href="client__utils_8hpp.html">client_utils.hpp</a></div></div>
+<div class="ttc" id="acommon_8h_html_a2bd5a2265eb4146ce3d95897f7c51aae"><div class="ttname"><a href="open62541/common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a></div><div class="ttdeci">struct UA_Client UA_Client</div></div>
 <div class="ttc" id="adatatype_8hpp_html"><div class="ttname"><a href="datatype_8hpp.html">datatype.hpp</a></div></div>
 <div class="ttc" id="agroup__Wrapper_html_ga8747da9421645210ff2d7a76d84d0a14"><div class="ttname"><a href="group__Wrapper.html#ga8747da9421645210ff2d7a76d84d0a14">opcua::ua::MessageSecurityMode</a></div><div class="ttdeci">MessageSecurityMode</div><div class="ttdoc">Message security mode.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l00215">types.hpp:215</a></div></div>
 <div class="ttc" id="alog_8hpp_html"><div class="ttname"><a href="log_8hpp.html">log.hpp</a></div></div>
@@ -454,7 +455,6 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="anamespaceopcua_html_ad6db76faddf37457008a68d1b84c9658"><div class="ttname"><a href="namespaceopcua.html#ad6db76faddf37457008a68d1b84c9658">opcua::findDataType</a></div><div class="ttdeci">const UA_DataType * findDataType(Client &amp;client, const NodeId &amp;id) noexcept</div><div class="ttdef"><b>Definition</b> <a href="client_8hpp_source.html#l00271">client.hpp:271</a></div></div>
 <div class="ttc" id="aspan_8hpp_html"><div class="ttname"><a href="span_8hpp.html">span.hpp</a></div></div>
 <div class="ttc" id="astructUA__ClientConfig_html"><div class="ttname"><a href="open62541/structUA__ClientConfig.html">UA_ClientConfig</a></div></div>
-<div class="ttc" id="astructUA__Client_html"><div class="ttname"><a href="open62541/structUA__Client.html">UA_Client</a></div></div>
 <div class="ttc" id="astructUA__DataType_html"><div class="ttname"><a href="open62541/structUA__DataType.html">UA_DataType</a></div></div>
 <div class="ttc" id="astructopcua_1_1TypeHandler_3_01UA__ClientConfig_01_4_html_a155982e0617a02df2e0ef679172ed218"><div class="ttname"><a href="structopcua_1_1TypeHandler_3_01UA__ClientConfig_01_4.html#a155982e0617a02df2e0ef679172ed218">opcua::TypeHandler&lt; UA_ClientConfig &gt;::clear</a></div><div class="ttdeci">static void clear(UA_ClientConfig &amp;config) noexcept</div></div>
 <div class="ttc" id="astructopcua_1_1TypeHandler_3_01UA__ClientConfig_01_4_html_a28a784b23c4fa551949a1b617afdb182"><div class="ttname"><a href="structopcua_1_1TypeHandler_3_01UA__ClientConfig_01_4.html#a28a784b23c4fa551949a1b617afdb182">opcua::TypeHandler&lt; UA_ClientConfig &gt;::move</a></div><div class="ttdeci">static UA_ClientConfig move(UA_ClientConfig &amp;&amp;config) noexcept</div></div>

@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.15</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.15</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -120,37 +120,41 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#ifndef PCG_BASIC_H_</span></div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#define PCG_BASIC_H_</span></div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &lt;<a class="code" href="config_8h.html">open62541/config.h</a>&gt;</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#if defined(UNDER_CE) || !defined(_MSC_VER) || _MSC_VER &gt;= 1800</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor"># include &lt;stdint.h&gt;</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor"># include &quot;<a class="code" href="ms__stdint_8h.html">ms_stdint.h</a>&quot;</span></div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="foldopen" id="foldopen00033" data-start="{" data-end="};">
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="structpcg__state__setseq__64.html">   33</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="structpcg__state__setseq__64.html">pcg_state_setseq_64</a> {</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="structpcg__state__setseq__64.html#a1841cffcb9483e2dc8f13dac98e2a236">   34</a></span>    uint64_t <a class="code hl_variable" href="structpcg__state__setseq__64.html#a1841cffcb9483e2dc8f13dac98e2a236">state</a>;  <span class="comment">/* RNG state.  All values are possible. */</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="structpcg__state__setseq__64.html#a0efa1e251c0a4c52afd4f17e52b4535a">   35</a></span>    uint64_t <a class="code hl_variable" href="structpcg__state__setseq__64.html#a0efa1e251c0a4c52afd4f17e52b4535a">inc</a>;    <span class="comment">/* Controls which RNG sequence (stream) is selected. Must</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">                      * *always* be odd. */</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="pcg__basic_8h.html#a38bacd9ee3743b57b5702e8e229d1006">   37</a></span>} <a class="code hl_typedef" href="pcg__basic_8h.html#a38bacd9ee3743b57b5702e8e229d1006">pcg32_random_t</a>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="foldopen" id="foldopen00037" data-start="{" data-end="};">
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="structpcg__state__setseq__64.html">   37</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="structpcg__state__setseq__64.html">pcg_state_setseq_64</a> {</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="structpcg__state__setseq__64.html#a1841cffcb9483e2dc8f13dac98e2a236">   38</a></span>    uint64_t <a class="code hl_variable" href="structpcg__state__setseq__64.html#a1841cffcb9483e2dc8f13dac98e2a236">state</a>;  <span class="comment">/* RNG state.  All values are possible. */</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="structpcg__state__setseq__64.html#a0efa1e251c0a4c52afd4f17e52b4535a">   39</a></span>    uint64_t <a class="code hl_variable" href="structpcg__state__setseq__64.html#a0efa1e251c0a4c52afd4f17e52b4535a">inc</a>;    <span class="comment">/* Controls which RNG sequence (stream) is selected. Must</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">                      * *always* be odd. */</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="pcg__basic_8h.html#a38bacd9ee3743b57b5702e8e229d1006">   41</a></span>} <a class="code hl_typedef" href="pcg__basic_8h.html#a38bacd9ee3743b57b5702e8e229d1006">pcg32_random_t</a>;</div>
 </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="pcg__basic_8h.html#a59ac8110e547363cb93daddbcede7981">   39</a></span><span class="preprocessor">#define PCG32_INITIALIZER { 0x853c49e6748fea9bULL, 0xda3e39cb94b95bdbULL }</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="pcg__basic_8h.html#ac912668bab2c8b68dc203eae3766b63d">   41</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="pcg__basic_8h.html#ac912668bab2c8b68dc203eae3766b63d">pcg32_srandom_r</a>(<a class="code hl_struct" href="structpcg__state__setseq__64.html">pcg32_random_t</a>* rng, uint64_t initial_state, uint64_t initseq);</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="pcg__basic_8h.html#a6ffafd643e056204994d5b80b6f83668">   42</a></span>uint32_t <a class="code hl_function" href="pcg__basic_8h.html#a6ffafd643e056204994d5b80b6f83668">pcg32_random_r</a>(<a class="code hl_struct" href="structpcg__state__setseq__64.html">pcg32_random_t</a>* rng);</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>}</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="pcg__basic_8h.html#a59ac8110e547363cb93daddbcede7981">   43</a></span><span class="preprocessor">#define PCG32_INITIALIZER { 0x853c49e6748fea9bULL, 0xda3e39cb94b95bdbULL }</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="pcg__basic_8h.html#ac912668bab2c8b68dc203eae3766b63d">   45</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="pcg__basic_8h.html#ac912668bab2c8b68dc203eae3766b63d">pcg32_srandom_r</a>(<a class="code hl_struct" href="structpcg__state__setseq__64.html">pcg32_random_t</a>* rng, uint64_t initial_state, uint64_t initseq);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="pcg__basic_8h.html#a6ffafd643e056204994d5b80b6f83668">   46</a></span>uint32_t <a class="code hl_function" href="pcg__basic_8h.html#a6ffafd643e056204994d5b80b6f83668">pcg32_random_r</a>(<a class="code hl_struct" href="structpcg__state__setseq__64.html">pcg32_random_t</a>* rng);</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#endif </span><span class="comment">/* PCG_BASIC_H_ */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="aconfig_8h_html"><div class="ttname"><a href="config_8h.html">config.h</a></div></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>}</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#endif </span><span class="comment">/* PCG_BASIC_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="ams__stdint_8h_html"><div class="ttname"><a href="ms__stdint_8h.html">ms_stdint.h</a></div></div>
 <div class="ttc" id="apcg__basic_8h_html_a38bacd9ee3743b57b5702e8e229d1006"><div class="ttname"><a href="pcg__basic_8h.html#a38bacd9ee3743b57b5702e8e229d1006">pcg32_random_t</a></div><div class="ttdeci">struct pcg_state_setseq_64 pcg32_random_t</div></div>
 <div class="ttc" id="apcg__basic_8h_html_a6ffafd643e056204994d5b80b6f83668"><div class="ttname"><a href="pcg__basic_8h.html#a6ffafd643e056204994d5b80b6f83668">pcg32_random_r</a></div><div class="ttdeci">uint32_t pcg32_random_r(pcg32_random_t *rng)</div></div>
 <div class="ttc" id="apcg__basic_8h_html_ac912668bab2c8b68dc203eae3766b63d"><div class="ttname"><a href="pcg__basic_8h.html#ac912668bab2c8b68dc203eae3766b63d">pcg32_srandom_r</a></div><div class="ttdeci">void pcg32_srandom_r(pcg32_random_t *rng, uint64_t initial_state, uint64_t initseq)</div></div>
-<div class="ttc" id="astructpcg__state__setseq__64_html"><div class="ttname"><a href="structpcg__state__setseq__64.html">pcg_state_setseq_64</a></div><div class="ttdef"><b>Definition</b> <a href="pcg__basic_8h_source.html#l00033">pcg_basic.h:33</a></div></div>
-<div class="ttc" id="astructpcg__state__setseq__64_html_a0efa1e251c0a4c52afd4f17e52b4535a"><div class="ttname"><a href="structpcg__state__setseq__64.html#a0efa1e251c0a4c52afd4f17e52b4535a">pcg_state_setseq_64::inc</a></div><div class="ttdeci">uint64_t inc</div><div class="ttdef"><b>Definition</b> <a href="pcg__basic_8h_source.html#l00035">pcg_basic.h:35</a></div></div>
-<div class="ttc" id="astructpcg__state__setseq__64_html_a1841cffcb9483e2dc8f13dac98e2a236"><div class="ttname"><a href="structpcg__state__setseq__64.html#a1841cffcb9483e2dc8f13dac98e2a236">pcg_state_setseq_64::state</a></div><div class="ttdeci">uint64_t state</div><div class="ttdef"><b>Definition</b> <a href="pcg__basic_8h_source.html#l00034">pcg_basic.h:34</a></div></div>
+<div class="ttc" id="astructpcg__state__setseq__64_html"><div class="ttname"><a href="structpcg__state__setseq__64.html">pcg_state_setseq_64</a></div><div class="ttdef"><b>Definition</b> <a href="pcg__basic_8h_source.html#l00037">pcg_basic.h:37</a></div></div>
+<div class="ttc" id="astructpcg__state__setseq__64_html_a0efa1e251c0a4c52afd4f17e52b4535a"><div class="ttname"><a href="structpcg__state__setseq__64.html#a0efa1e251c0a4c52afd4f17e52b4535a">pcg_state_setseq_64::inc</a></div><div class="ttdeci">uint64_t inc</div><div class="ttdef"><b>Definition</b> <a href="pcg__basic_8h_source.html#l00039">pcg_basic.h:39</a></div></div>
+<div class="ttc" id="astructpcg__state__setseq__64_html_a1841cffcb9483e2dc8f13dac98e2a236"><div class="ttname"><a href="structpcg__state__setseq__64.html#a1841cffcb9483e2dc8f13dac98e2a236">pcg_state_setseq_64::state</a></div><div class="ttdeci">uint64_t state</div><div class="ttdef"><b>Definition</b> <a href="pcg__basic_8h_source.html#l00038">pcg_basic.h:38</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

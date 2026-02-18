@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.15</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.15</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -100,6 +100,8 @@ $(function() {
 Functions</h2></td></tr>
 <tr class="memitem:a4cf9e1f4c62ac2b185d8b309bf20fab3" id="r_a4cf9e1f4c62ac2b185d8b309bf20fab3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="config_8h.html#aa397bffde7d792f38dcbb8e329486f9c">_UA_BEGIN_DECLS</a> unsigned char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="base64_8h.html#a4cf9e1f4c62ac2b185d8b309bf20fab3">UA_base64</a> (const unsigned char *src, size_t len, size_t *out_len)</td></tr>
 <tr class="separator:a4cf9e1f4c62ac2b185d8b309bf20fab3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae240aebdde038dc663548551cb710630" id="r_ae240aebdde038dc663548551cb710630"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="base64_8h.html#ae240aebdde038dc663548551cb710630">UA_base64_buf</a> (const unsigned char *src, size_t len, unsigned char *out)</td></tr>
+<tr class="separator:ae240aebdde038dc663548551cb710630"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ec3c2da56645a9e5bd58563268eec31" id="r_a1ec3c2da56645a9e5bd58563268eec31"><td class="memItemLeft" align="right" valign="top">unsigned char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="base64_8h.html#a1ec3c2da56645a9e5bd58563268eec31">UA_unbase64</a> (const unsigned char *src, size_t len, size_t *out_len)</td></tr>
 <tr class="separator:a1ec3c2da56645a9e5bd58563268eec31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -135,6 +137,43 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae240aebdde038dc663548551cb710630" name="ae240aebdde038dc663548551cb710630"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae240aebdde038dc663548551cb710630">&#9670;&#160;</a></span>UA_base64_buf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t UA_base64_buf </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>out</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Requires as input a buffer of length at least 4*((len + 2) / 3). </p>
+<p>Returns the actual size </p>
 
 </div>
 </div>

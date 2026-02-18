@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.15</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.15</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -93,14 +93,18 @@ $(function() {
   <div class="headertitle"><div class="title">server_pubsub.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;<a class="el" href="util_8h_source.html">open62541/util.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="pubsub_8h_source.html">open62541/plugin/pubsub.h</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="common_8h_source.html">open62541/common.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="util_8h_source.html">open62541/util.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="client_8h_source.html">open62541/client.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="securitypolicy_8h_source.html">open62541/plugin/securitypolicy.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="eventloop_8h_source.html">open62541/plugin/eventloop.h</a>&gt;</code><br />
 </div>
 <p><a href="server__pubsub_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">union &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unionUA__PublisherId.html">UA_PublisherId</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__PubSubConnectionConfig.html">UA_PubSubConnectionConfig</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__PubSubConfiguration.html">UA_PubSubConfiguration</a></td></tr>
@@ -131,9 +135,9 @@ Data Structures</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__TargetVariables.html">UA_TargetVariables</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__PubSubSecurityParameters.html">UA_PubSubSecurityParameters</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__DataSetReaderConfig.html">UA_DataSetReaderConfig</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__StandaloneSubscribedDataSetConfig.html">UA_StandaloneSubscribedDataSetConfig</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ReaderGroupConfig.html">UA_ReaderGroupConfig</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -159,92 +163,104 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a3fb68b92d3df2594d571952d6be3e664" id="r_a3fb68b92d3df2594d571952d6be3e664"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a3fb68b92d3df2594d571952d6be3e664">UA_ServerConfig_addPubSubTransportLayer</a> (<a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> *config, <a class="el" href="structUA__PubSubTransportLayer.html">UA_PubSubTransportLayer</a> pubsubTransportLayer)</td></tr>
-<tr class="separator:a3fb68b92d3df2594d571952d6be3e664"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a5dd68599b238efd099438541510d67" id="r_a6a5dd68599b238efd099438541510d67"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a6a5dd68599b238efd099438541510d67">UA_Server_addPubSubConnection</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__PubSubConnectionConfig.html">UA_PubSubConnectionConfig</a> *connectionConfig, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *connectionIdentifier)</td></tr>
-<tr class="separator:a6a5dd68599b238efd099438541510d67"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67cff6b5f33b719ea4c9c6d40382b3aa" id="r_a67cff6b5f33b719ea4c9c6d40382b3aa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a67cff6b5f33b719ea4c9c6d40382b3aa">UA_Server_getPubSubConnectionConfig</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> connection, <a class="el" href="structUA__PubSubConnectionConfig.html">UA_PubSubConnectionConfig</a> *config)</td></tr>
-<tr class="separator:a67cff6b5f33b719ea4c9c6d40382b3aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9068beaeeb117f69ce905284d0b38eeb" id="r_a9068beaeeb117f69ce905284d0b38eeb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a9068beaeeb117f69ce905284d0b38eeb">UA_Server_removePubSubConnection</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> connection)</td></tr>
-<tr class="separator:a9068beaeeb117f69ce905284d0b38eeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a470a6942f37d42c3ca1292dd99df0e34" id="r_a470a6942f37d42c3ca1292dd99df0e34"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a470a6942f37d42c3ca1292dd99df0e34">UA_Server_addPubSubConnection</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__PubSubConnectionConfig.html">UA_PubSubConnectionConfig</a> *connectionConfig, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *connectionIdentifier)</td></tr>
+<tr class="separator:a470a6942f37d42c3ca1292dd99df0e34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5870bf8243bc8f268f9302b48d7f352b" id="r_a5870bf8243bc8f268f9302b48d7f352b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a5870bf8243bc8f268f9302b48d7f352b">UA_Server_getPubSubConnectionConfig</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> connection, <a class="el" href="structUA__PubSubConnectionConfig.html">UA_PubSubConnectionConfig</a> *config)</td></tr>
+<tr class="separator:a5870bf8243bc8f268f9302b48d7f352b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39455e40c494eff3eb43934212a4e947" id="r_a39455e40c494eff3eb43934212a4e947"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a39455e40c494eff3eb43934212a4e947">UA_Server_removePubSubConnection</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> connection)</td></tr>
+<tr class="separator:a39455e40c494eff3eb43934212a4e947"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2254818884b8e09b5f8221f261644dcc" id="r_a2254818884b8e09b5f8221f261644dcc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a2254818884b8e09b5f8221f261644dcc">UA_PublishedDataSetConfig_clear</a> (<a class="el" href="structUA__PublishedDataSetConfig.html">UA_PublishedDataSetConfig</a> *pdsConfig)</td></tr>
 <tr class="separator:a2254818884b8e09b5f8221f261644dcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78bfa8e0eb5076203bf0302a5f86d6ae" id="r_a78bfa8e0eb5076203bf0302a5f86d6ae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__AddPublishedDataSetResult.html">UA_AddPublishedDataSetResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a78bfa8e0eb5076203bf0302a5f86d6ae">UA_Server_addPublishedDataSet</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__PublishedDataSetConfig.html">UA_PublishedDataSetConfig</a> *publishedDataSetConfig, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *pdsIdentifier)</td></tr>
-<tr class="separator:a78bfa8e0eb5076203bf0302a5f86d6ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ac89d0e25fbf9e2c1b56c1d702df7a6" id="r_a8ac89d0e25fbf9e2c1b56c1d702df7a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a8ac89d0e25fbf9e2c1b56c1d702df7a6">UA_Server_getPublishedDataSetConfig</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> pds, <a class="el" href="structUA__PublishedDataSetConfig.html">UA_PublishedDataSetConfig</a> *config)</td></tr>
-<tr class="separator:a8ac89d0e25fbf9e2c1b56c1d702df7a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb6660b2122dd3c33412ea8c36c355a0" id="r_abb6660b2122dd3c33412ea8c36c355a0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#abb6660b2122dd3c33412ea8c36c355a0">UA_Server_getPublishedDataSetMetaData</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> pds, UA_DataSetMetaDataType *metaData)</td></tr>
-<tr class="separator:abb6660b2122dd3c33412ea8c36c355a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a886b6ef8c479988ff7444058ae6de635" id="r_a886b6ef8c479988ff7444058ae6de635"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a886b6ef8c479988ff7444058ae6de635">UA_Server_removePublishedDataSet</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> pds)</td></tr>
-<tr class="separator:a886b6ef8c479988ff7444058ae6de635"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5e3c6c962316b0b4c4ce41dbce53362" id="r_af5e3c6c962316b0b4c4ce41dbce53362"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="structUA__AddPublishedDataSetResult.html">UA_AddPublishedDataSetResult</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#af5e3c6c962316b0b4c4ce41dbce53362">UA_Server_addPublishedDataSet</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__PublishedDataSetConfig.html">UA_PublishedDataSetConfig</a> *publishedDataSetConfig, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *pdsIdentifier)</td></tr>
+<tr class="separator:af5e3c6c962316b0b4c4ce41dbce53362"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac25f5dffa9e7bb0808573e93ebcd9780" id="r_ac25f5dffa9e7bb0808573e93ebcd9780"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#ac25f5dffa9e7bb0808573e93ebcd9780">UA_Server_getPublishedDataSetConfig</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> pds, <a class="el" href="structUA__PublishedDataSetConfig.html">UA_PublishedDataSetConfig</a> *config)</td></tr>
+<tr class="separator:ac25f5dffa9e7bb0808573e93ebcd9780"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8da4aa84d9b853f821c2e44a73bd5309" id="r_a8da4aa84d9b853f821c2e44a73bd5309"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a8da4aa84d9b853f821c2e44a73bd5309">UA_Server_getPublishedDataSetMetaData</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> pds, <a class="el" href="structUA__DataSetMetaDataType.html">UA_DataSetMetaDataType</a> *metaData)</td></tr>
+<tr class="separator:a8da4aa84d9b853f821c2e44a73bd5309"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ba6d1b4a761032dcad19bba271654cb" id="r_a1ba6d1b4a761032dcad19bba271654cb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a1ba6d1b4a761032dcad19bba271654cb">UA_Server_removePublishedDataSet</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> pds)</td></tr>
+<tr class="separator:a1ba6d1b4a761032dcad19bba271654cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7887f7ba75fb7d3e849e4995e477eb65" id="r_a7887f7ba75fb7d3e849e4995e477eb65"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a7887f7ba75fb7d3e849e4995e477eb65">UA_DataSetFieldConfig_clear</a> (<a class="el" href="structUA__DataSetFieldConfig.html">UA_DataSetFieldConfig</a> *dataSetFieldConfig)</td></tr>
 <tr class="separator:a7887f7ba75fb7d3e849e4995e477eb65"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a351c7276e163427deebaac3bb7e9e3c1" id="r_a351c7276e163427deebaac3bb7e9e3c1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__DataSetFieldResult.html">UA_DataSetFieldResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a351c7276e163427deebaac3bb7e9e3c1">UA_Server_addDataSetField</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> publishedDataSet, const <a class="el" href="structUA__DataSetFieldConfig.html">UA_DataSetFieldConfig</a> *fieldConfig, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *fieldIdentifier)</td></tr>
-<tr class="separator:a351c7276e163427deebaac3bb7e9e3c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65f87c576b7bc2f6cea9d04f1ee7239d" id="r_a65f87c576b7bc2f6cea9d04f1ee7239d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a65f87c576b7bc2f6cea9d04f1ee7239d">UA_Server_getDataSetFieldConfig</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> dsf, <a class="el" href="structUA__DataSetFieldConfig.html">UA_DataSetFieldConfig</a> *config)</td></tr>
-<tr class="separator:a65f87c576b7bc2f6cea9d04f1ee7239d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3548d9839a962e752b8c5277fd181f17" id="r_a3548d9839a962e752b8c5277fd181f17"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__DataSetFieldResult.html">UA_DataSetFieldResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a3548d9839a962e752b8c5277fd181f17">UA_Server_removeDataSetField</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> dsf)</td></tr>
-<tr class="separator:a3548d9839a962e752b8c5277fd181f17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a62c4ce715dba02e9d39ccd56180d51" id="r_a7a62c4ce715dba02e9d39ccd56180d51"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="structUA__DataSetFieldResult.html">UA_DataSetFieldResult</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a7a62c4ce715dba02e9d39ccd56180d51">UA_Server_addDataSetField</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> publishedDataSet, const <a class="el" href="structUA__DataSetFieldConfig.html">UA_DataSetFieldConfig</a> *fieldConfig, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *fieldIdentifier)</td></tr>
+<tr class="separator:a7a62c4ce715dba02e9d39ccd56180d51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb74e56855c8b14b18863e4f7e4f63dc" id="r_aeb74e56855c8b14b18863e4f7e4f63dc"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#aeb74e56855c8b14b18863e4f7e4f63dc">UA_Server_getDataSetFieldConfig</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> dsf, <a class="el" href="structUA__DataSetFieldConfig.html">UA_DataSetFieldConfig</a> *config)</td></tr>
+<tr class="separator:aeb74e56855c8b14b18863e4f7e4f63dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8739de3c70a0191f6bb1e680165c10c4" id="r_a8739de3c70a0191f6bb1e680165c10c4"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="structUA__DataSetFieldResult.html">UA_DataSetFieldResult</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a8739de3c70a0191f6bb1e680165c10c4">UA_Server_removeDataSetField</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> dsf)</td></tr>
+<tr class="separator:a8739de3c70a0191f6bb1e680165c10c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6fa2628f3fd5629922675cdf75ee3084" id="r_a6fa2628f3fd5629922675cdf75ee3084"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a6fa2628f3fd5629922675cdf75ee3084">UA_WriterGroupConfig_clear</a> (<a class="el" href="structUA__WriterGroupConfig.html">UA_WriterGroupConfig</a> *writerGroupConfig)</td></tr>
 <tr class="separator:a6fa2628f3fd5629922675cdf75ee3084"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d0c6a5b5d9aa211317af4efc5aaaf31" id="r_a3d0c6a5b5d9aa211317af4efc5aaaf31"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a3d0c6a5b5d9aa211317af4efc5aaaf31">UA_Server_addWriterGroup</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> connection, const <a class="el" href="structUA__WriterGroupConfig.html">UA_WriterGroupConfig</a> *writerGroupConfig, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *writerGroupIdentifier)</td></tr>
-<tr class="separator:a3d0c6a5b5d9aa211317af4efc5aaaf31"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ab6f1a9a40355b057822bf5c189600d" id="r_a9ab6f1a9a40355b057822bf5c189600d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a9ab6f1a9a40355b057822bf5c189600d">UA_Server_getWriterGroupConfig</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> writerGroup, <a class="el" href="structUA__WriterGroupConfig.html">UA_WriterGroupConfig</a> *config)</td></tr>
-<tr class="separator:a9ab6f1a9a40355b057822bf5c189600d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6736d7dd7afdd0a73eae8d3c731931ab" id="r_a6736d7dd7afdd0a73eae8d3c731931ab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a6736d7dd7afdd0a73eae8d3c731931ab">UA_Server_updateWriterGroupConfig</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> writerGroupIdentifier, const <a class="el" href="structUA__WriterGroupConfig.html">UA_WriterGroupConfig</a> *config)</td></tr>
-<tr class="separator:a6736d7dd7afdd0a73eae8d3c731931ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00aabed3055b60c2bad55da9c29da3af" id="r_a00aabed3055b60c2bad55da9c29da3af"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a00aabed3055b60c2bad55da9c29da3af">UA_Server_WriterGroup_getState</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> writerGroupIdentifier, UA_PubSubState *state)</td></tr>
-<tr class="separator:a00aabed3055b60c2bad55da9c29da3af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f31442ccf5282ff18b48010f8688f62" id="r_a7f31442ccf5282ff18b48010f8688f62"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a7f31442ccf5282ff18b48010f8688f62">UA_Server_removeWriterGroup</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> writerGroup)</td></tr>
-<tr class="separator:a7f31442ccf5282ff18b48010f8688f62"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8df4e0d74232bb864343fea27d6c9953" id="r_a8df4e0d74232bb864343fea27d6c9953"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a8df4e0d74232bb864343fea27d6c9953">UA_Server_freezeWriterGroupConfiguration</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> writerGroup)</td></tr>
-<tr class="separator:a8df4e0d74232bb864343fea27d6c9953"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83be7943d3e85a93a30c82ce77a48091" id="r_a83be7943d3e85a93a30c82ce77a48091"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a83be7943d3e85a93a30c82ce77a48091">UA_Server_unfreezeWriterGroupConfiguration</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> writerGroup)</td></tr>
-<tr class="separator:a83be7943d3e85a93a30c82ce77a48091"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafa81b1fbdf186be710ea0795d3995c9" id="r_aafa81b1fbdf186be710ea0795d3995c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#aafa81b1fbdf186be710ea0795d3995c9">UA_Server_setWriterGroupOperational</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> writerGroup)</td></tr>
-<tr class="separator:aafa81b1fbdf186be710ea0795d3995c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa961a6a448121f72df47edc236bd446d" id="r_aa961a6a448121f72df47edc236bd446d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#aa961a6a448121f72df47edc236bd446d">UA_Server_setWriterGroupDisabled</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> writerGroup)</td></tr>
-<tr class="separator:aa961a6a448121f72df47edc236bd446d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70a06873ccc1721551f2522ddfb6e6b8" id="r_a70a06873ccc1721551f2522ddfb6e6b8"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a70a06873ccc1721551f2522ddfb6e6b8">UA_Server_addWriterGroup</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> connection, const <a class="el" href="structUA__WriterGroupConfig.html">UA_WriterGroupConfig</a> *writerGroupConfig, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *writerGroupIdentifier)</td></tr>
+<tr class="separator:a70a06873ccc1721551f2522ddfb6e6b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c2da908b4e16bbb8be042722177772a" id="r_a0c2da908b4e16bbb8be042722177772a"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a0c2da908b4e16bbb8be042722177772a">UA_Server_getWriterGroupConfig</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> writerGroup, <a class="el" href="structUA__WriterGroupConfig.html">UA_WriterGroupConfig</a> *config)</td></tr>
+<tr class="separator:a0c2da908b4e16bbb8be042722177772a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace3e9a492eb0ee4b81072416a9a44381" id="r_ace3e9a492eb0ee4b81072416a9a44381"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#ace3e9a492eb0ee4b81072416a9a44381">UA_Server_updateWriterGroupConfig</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> writerGroupIdentifier, const <a class="el" href="structUA__WriterGroupConfig.html">UA_WriterGroupConfig</a> *config)</td></tr>
+<tr class="separator:ace3e9a492eb0ee4b81072416a9a44381"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b8fce5d25cd34711ea8f49b32fb01d2" id="r_a7b8fce5d25cd34711ea8f49b32fb01d2"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a7b8fce5d25cd34711ea8f49b32fb01d2">UA_Server_WriterGroup_getState</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> writerGroupIdentifier, <a class="el" href="types__generated_8h.html#ad8e842c6658126c7d870f83cea3b925e">UA_PubSubState</a> *state)</td></tr>
+<tr class="separator:a7b8fce5d25cd34711ea8f49b32fb01d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac792fd647e21215405aca08fccb4f553" id="r_ac792fd647e21215405aca08fccb4f553"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#ac792fd647e21215405aca08fccb4f553">UA_Server_WriterGroup_publish</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> writerGroupIdentifier)</td></tr>
+<tr class="separator:ac792fd647e21215405aca08fccb4f553"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8dc6e2a089bce3e7cf6e026d954c4c0" id="r_ae8dc6e2a089bce3e7cf6e026d954c4c0"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#ae8dc6e2a089bce3e7cf6e026d954c4c0">UA_WriterGroup_lastPublishTimestamp</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> writerGroupId, UA_DateTime *timestamp)</td></tr>
+<tr class="separator:ae8dc6e2a089bce3e7cf6e026d954c4c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeed9dcdfad24fec8537cc9149082273c" id="r_aeed9dcdfad24fec8537cc9149082273c"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#aeed9dcdfad24fec8537cc9149082273c">UA_Server_removeWriterGroup</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> writerGroup)</td></tr>
+<tr class="separator:aeed9dcdfad24fec8537cc9149082273c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7b0ce6374476058ec56323652cca2ad" id="r_aa7b0ce6374476058ec56323652cca2ad"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#aa7b0ce6374476058ec56323652cca2ad">UA_Server_freezeWriterGroupConfiguration</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> writerGroup)</td></tr>
+<tr class="separator:aa7b0ce6374476058ec56323652cca2ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3d866ffed2c0a5f01255d1a516d333e" id="r_ae3d866ffed2c0a5f01255d1a516d333e"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#ae3d866ffed2c0a5f01255d1a516d333e">UA_Server_unfreezeWriterGroupConfiguration</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> writerGroup)</td></tr>
+<tr class="separator:ae3d866ffed2c0a5f01255d1a516d333e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27e2cd8888ed77f6799e84041378699f" id="r_a27e2cd8888ed77f6799e84041378699f"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a27e2cd8888ed77f6799e84041378699f">UA_Server_setWriterGroupOperational</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> writerGroup)</td></tr>
+<tr class="separator:a27e2cd8888ed77f6799e84041378699f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b08bc339966850a9e2b46397734ddd1" id="r_a5b08bc339966850a9e2b46397734ddd1"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a5b08bc339966850a9e2b46397734ddd1">UA_Server_setWriterGroupDisabled</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> writerGroup)</td></tr>
+<tr class="separator:a5b08bc339966850a9e2b46397734ddd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a272c02690665401f98b25686e9425d76" id="r_a272c02690665401f98b25686e9425d76"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a272c02690665401f98b25686e9425d76">UA_DataSetWriterConfig_clear</a> (<a class="el" href="structUA__DataSetWriterConfig.html">UA_DataSetWriterConfig</a> *pdsConfig)</td></tr>
 <tr class="separator:a272c02690665401f98b25686e9425d76"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb16b5a4d60569338ddb93a5bba165ff" id="r_adb16b5a4d60569338ddb93a5bba165ff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#adb16b5a4d60569338ddb93a5bba165ff">UA_Server_addDataSetWriter</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> writerGroup, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> dataSet, const <a class="el" href="structUA__DataSetWriterConfig.html">UA_DataSetWriterConfig</a> *dataSetWriterConfig, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *writerIdentifier)</td></tr>
-<tr class="separator:adb16b5a4d60569338ddb93a5bba165ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade1a0a0bf964b62f9f5da0e42148ec98" id="r_ade1a0a0bf964b62f9f5da0e42148ec98"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#ade1a0a0bf964b62f9f5da0e42148ec98">UA_Server_getDataSetWriterConfig</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> dsw, <a class="el" href="structUA__DataSetWriterConfig.html">UA_DataSetWriterConfig</a> *config)</td></tr>
-<tr class="separator:ade1a0a0bf964b62f9f5da0e42148ec98"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76a4485194c7f6a720ce007eef0221f4" id="r_a76a4485194c7f6a720ce007eef0221f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a76a4485194c7f6a720ce007eef0221f4">UA_Server_DataSetWriter_getState</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> dataSetWriterIdentifier, UA_PubSubState *state)</td></tr>
-<tr class="separator:a76a4485194c7f6a720ce007eef0221f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20b2bc0509c29165c4f2c691b040ac3f" id="r_a20b2bc0509c29165c4f2c691b040ac3f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a20b2bc0509c29165c4f2c691b040ac3f">UA_Server_removeDataSetWriter</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> dsw)</td></tr>
-<tr class="separator:a20b2bc0509c29165c4f2c691b040ac3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae90cba75f089f0b3bcd66a0b83349b23" id="r_ae90cba75f089f0b3bcd66a0b83349b23"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#ae90cba75f089f0b3bcd66a0b83349b23">UA_Server_DataSetReader_createTargetVariables</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> dataSetReaderIdentifier, size_t targetVariablesSize, const <a class="el" href="structUA__FieldTargetVariable.html">UA_FieldTargetVariable</a> *targetVariables)</td></tr>
-<tr class="separator:ae90cba75f089f0b3bcd66a0b83349b23"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d69353cd32099cc7f2bd88f168f1a60" id="r_a2d69353cd32099cc7f2bd88f168f1a60"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a2d69353cd32099cc7f2bd88f168f1a60">UA_Server_DataSetReader_updateConfig</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> dataSetReaderIdentifier, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> readerGroupIdentifier, const <a class="el" href="structUA__DataSetReaderConfig.html">UA_DataSetReaderConfig</a> *config)</td></tr>
-<tr class="separator:a2d69353cd32099cc7f2bd88f168f1a60"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a264cbb83467895deee5e5ff15417f055" id="r_a264cbb83467895deee5e5ff15417f055"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a264cbb83467895deee5e5ff15417f055">UA_Server_DataSetReader_getConfig</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> dataSetReaderIdentifier, <a class="el" href="structUA__DataSetReaderConfig.html">UA_DataSetReaderConfig</a> *config)</td></tr>
-<tr class="separator:a264cbb83467895deee5e5ff15417f055"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a11b01949353d261b35315fac150e8a8e" id="r_a11b01949353d261b35315fac150e8a8e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a11b01949353d261b35315fac150e8a8e">UA_Server_DataSetReader_getState</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> dataSetReaderIdentifier, UA_PubSubState *state)</td></tr>
-<tr class="separator:a11b01949353d261b35315fac150e8a8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a449e5cbf30861f5db3620b5a00fab449" id="r_a449e5cbf30861f5db3620b5a00fab449"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a449e5cbf30861f5db3620b5a00fab449">UA_Server_addDataSetWriter</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> writerGroup, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> dataSet, const <a class="el" href="structUA__DataSetWriterConfig.html">UA_DataSetWriterConfig</a> *dataSetWriterConfig, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *writerIdentifier)</td></tr>
+<tr class="separator:a449e5cbf30861f5db3620b5a00fab449"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a280c2d4e3e75c4644f0bfb28ae8f2437" id="r_a280c2d4e3e75c4644f0bfb28ae8f2437"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a280c2d4e3e75c4644f0bfb28ae8f2437">UA_Server_getDataSetWriterConfig</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> dsw, <a class="el" href="structUA__DataSetWriterConfig.html">UA_DataSetWriterConfig</a> *config)</td></tr>
+<tr class="separator:a280c2d4e3e75c4644f0bfb28ae8f2437"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab88b89dd9fa25669bcbcae7695d54909" id="r_ab88b89dd9fa25669bcbcae7695d54909"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#ab88b89dd9fa25669bcbcae7695d54909">UA_Server_DataSetWriter_getState</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> dataSetWriterIdentifier, <a class="el" href="types__generated_8h.html#ad8e842c6658126c7d870f83cea3b925e">UA_PubSubState</a> *state)</td></tr>
+<tr class="separator:ab88b89dd9fa25669bcbcae7695d54909"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeead370d4a38c106ae2161a93c1834d9" id="r_aeead370d4a38c106ae2161a93c1834d9"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#aeead370d4a38c106ae2161a93c1834d9">UA_Server_removeDataSetWriter</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> dsw)</td></tr>
+<tr class="separator:aeead370d4a38c106ae2161a93c1834d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7d989470620ed8964532a1a4c4aefea" id="r_ab7d989470620ed8964532a1a4c4aefea"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#ab7d989470620ed8964532a1a4c4aefea">UA_Server_DataSetReader_createTargetVariables</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> dataSetReaderIdentifier, size_t targetVariablesSize, const <a class="el" href="structUA__FieldTargetVariable.html">UA_FieldTargetVariable</a> *targetVariables)</td></tr>
+<tr class="separator:ab7d989470620ed8964532a1a4c4aefea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2addd7bfc873fc40f72a4fe184775e34" id="r_a2addd7bfc873fc40f72a4fe184775e34"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a2addd7bfc873fc40f72a4fe184775e34">UA_DataSetReaderConfig_copy</a> (const <a class="el" href="structUA__DataSetReaderConfig.html">UA_DataSetReaderConfig</a> *src, <a class="el" href="structUA__DataSetReaderConfig.html">UA_DataSetReaderConfig</a> *<a class="el" href="types_8h.html#a6598b83f973d0e8bc67fb4c7ee7cd668">dst</a>)</td></tr>
+<tr class="separator:a2addd7bfc873fc40f72a4fe184775e34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3581a0862e18106466143f6f62dbf34c" id="r_a3581a0862e18106466143f6f62dbf34c"><td class="memItemLeft" align="right" valign="top">UA_EXPORT void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a3581a0862e18106466143f6f62dbf34c">UA_DataSetReaderConfig_clear</a> (<a class="el" href="structUA__DataSetReaderConfig.html">UA_DataSetReaderConfig</a> *cfg)</td></tr>
+<tr class="separator:a3581a0862e18106466143f6f62dbf34c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9a4efd6886ede2ae3dd1865fcf096ed" id="r_ab9a4efd6886ede2ae3dd1865fcf096ed"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#ab9a4efd6886ede2ae3dd1865fcf096ed">UA_Server_DataSetReader_updateConfig</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> dataSetReaderIdentifier, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> readerGroupIdentifier, const <a class="el" href="structUA__DataSetReaderConfig.html">UA_DataSetReaderConfig</a> *config)</td></tr>
+<tr class="separator:ab9a4efd6886ede2ae3dd1865fcf096ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1a29f84f58eeb747099bcb40af084ae" id="r_ac1a29f84f58eeb747099bcb40af084ae"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#ac1a29f84f58eeb747099bcb40af084ae">UA_Server_DataSetReader_getConfig</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> dataSetReaderIdentifier, <a class="el" href="structUA__DataSetReaderConfig.html">UA_DataSetReaderConfig</a> *config)</td></tr>
+<tr class="separator:ac1a29f84f58eeb747099bcb40af084ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a208cbad9f5c68fe0a03ae66f308578c4" id="r_a208cbad9f5c68fe0a03ae66f308578c4"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a208cbad9f5c68fe0a03ae66f308578c4">UA_Server_DataSetReader_getState</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> dataSetReaderIdentifier, <a class="el" href="types__generated_8h.html#ad8e842c6658126c7d870f83cea3b925e">UA_PubSubState</a> *state)</td></tr>
+<tr class="separator:a208cbad9f5c68fe0a03ae66f308578c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd9fb3754578af51473c4ffa1777ff45" id="r_afd9fb3754578af51473c4ffa1777ff45"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#afd9fb3754578af51473c4ffa1777ff45">UA_StandaloneSubscribedDataSetConfig_clear</a> (<a class="el" href="structUA__StandaloneSubscribedDataSetConfig.html">UA_StandaloneSubscribedDataSetConfig</a> *sdsConfig)</td></tr>
+<tr class="separator:afd9fb3754578af51473c4ffa1777ff45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ea835c85e0c28b367f37bc7560800aa" id="r_a3ea835c85e0c28b367f37bc7560800aa"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a3ea835c85e0c28b367f37bc7560800aa">UA_Server_addStandaloneSubscribedDataSet</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__StandaloneSubscribedDataSetConfig.html">UA_StandaloneSubscribedDataSetConfig</a> *subscribedDataSetConfig, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sdsIdentifier)</td></tr>
+<tr class="separator:a3ea835c85e0c28b367f37bc7560800aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7b1d4246865e97f44ba9853c85239a3" id="r_aa7b1d4246865e97f44ba9853c85239a3"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#aa7b1d4246865e97f44ba9853c85239a3">UA_Server_removeStandaloneSubscribedDataSet</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> sds)</td></tr>
+<tr class="separator:aa7b1d4246865e97f44ba9853c85239a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf5d50e7257fc97fbe2600a8b515f37a" id="r_adf5d50e7257fc97fbe2600a8b515f37a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#adf5d50e7257fc97fbe2600a8b515f37a">UA_ReaderGroupConfig_clear</a> (<a class="el" href="structUA__ReaderGroupConfig.html">UA_ReaderGroupConfig</a> *readerGroupConfig)</td></tr>
 <tr class="separator:adf5d50e7257fc97fbe2600a8b515f37a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ea0dbb04d4ba45d79072b7b52a48e2f" id="r_a7ea0dbb04d4ba45d79072b7b52a48e2f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a7ea0dbb04d4ba45d79072b7b52a48e2f">UA_Server_addDataSetReader</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> readerGroupIdentifier, const <a class="el" href="structUA__DataSetReaderConfig.html">UA_DataSetReaderConfig</a> *dataSetReaderConfig, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *readerIdentifier)</td></tr>
-<tr class="separator:a7ea0dbb04d4ba45d79072b7b52a48e2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab57cb1156bbb0112ba26e7b39fd0a375" id="r_ab57cb1156bbb0112ba26e7b39fd0a375"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#ab57cb1156bbb0112ba26e7b39fd0a375">UA_Server_removeDataSetReader</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> readerIdentifier)</td></tr>
-<tr class="separator:ab57cb1156bbb0112ba26e7b39fd0a375"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a109287086af6cc416274ba4116a7f6b1" id="r_a109287086af6cc416274ba4116a7f6b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a109287086af6cc416274ba4116a7f6b1">UA_Server_ReaderGroup_getConfig</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> readerGroupIdentifier, <a class="el" href="structUA__ReaderGroupConfig.html">UA_ReaderGroupConfig</a> *config)</td></tr>
-<tr class="separator:a109287086af6cc416274ba4116a7f6b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f4cef5fc2b4ad6d5db83c9462821dff" id="r_a7f4cef5fc2b4ad6d5db83c9462821dff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a7f4cef5fc2b4ad6d5db83c9462821dff">UA_Server_ReaderGroup_getState</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> readerGroupIdentifier, UA_PubSubState *state)</td></tr>
-<tr class="separator:a7f4cef5fc2b4ad6d5db83c9462821dff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad74bc620baf7c1858d0de6fc6ae146fb" id="r_ad74bc620baf7c1858d0de6fc6ae146fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#ad74bc620baf7c1858d0de6fc6ae146fb">UA_Server_addReaderGroup</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> connectionIdentifier, const <a class="el" href="structUA__ReaderGroupConfig.html">UA_ReaderGroupConfig</a> *readerGroupConfig, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *readerGroupIdentifier)</td></tr>
-<tr class="separator:ad74bc620baf7c1858d0de6fc6ae146fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abac70ec88e25f205e9230fcad0967ed6" id="r_abac70ec88e25f205e9230fcad0967ed6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#abac70ec88e25f205e9230fcad0967ed6">UA_Server_removeReaderGroup</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> groupIdentifier)</td></tr>
-<tr class="separator:abac70ec88e25f205e9230fcad0967ed6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac32cb7ebfe47da0e5416965270a73484" id="r_ac32cb7ebfe47da0e5416965270a73484"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#ac32cb7ebfe47da0e5416965270a73484">UA_Server_freezeReaderGroupConfiguration</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> readerGroupId)</td></tr>
-<tr class="separator:ac32cb7ebfe47da0e5416965270a73484"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab32adcfcc35ea2c3c822cc66684f3d72" id="r_ab32adcfcc35ea2c3c822cc66684f3d72"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#ab32adcfcc35ea2c3c822cc66684f3d72">UA_Server_unfreezeReaderGroupConfiguration</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> readerGroupId)</td></tr>
-<tr class="separator:ab32adcfcc35ea2c3c822cc66684f3d72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0df6e5f84bad24c7244f281931f1b4e" id="r_ab0df6e5f84bad24c7244f281931f1b4e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#ab0df6e5f84bad24c7244f281931f1b4e">UA_Server_setReaderGroupOperational</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> readerGroupId)</td></tr>
-<tr class="separator:ab0df6e5f84bad24c7244f281931f1b4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1166e78e27365e05775fd9ae4ba1c7d" id="r_aa1166e78e27365e05775fd9ae4ba1c7d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#aa1166e78e27365e05775fd9ae4ba1c7d">UA_Server_setReaderGroupDisabled</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> readerGroupId)</td></tr>
-<tr class="separator:aa1166e78e27365e05775fd9ae4ba1c7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e283e37c1a7739db5158319b0aab1e5" id="r_a4e283e37c1a7739db5158319b0aab1e5"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a4e283e37c1a7739db5158319b0aab1e5">UA_Server_addDataSetReader</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> readerGroupIdentifier, const <a class="el" href="structUA__DataSetReaderConfig.html">UA_DataSetReaderConfig</a> *dataSetReaderConfig, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *readerIdentifier)</td></tr>
+<tr class="separator:a4e283e37c1a7739db5158319b0aab1e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1f631d417aa46484b57d0de8a1b30b2" id="r_ae1f631d417aa46484b57d0de8a1b30b2"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#ae1f631d417aa46484b57d0de8a1b30b2">UA_Server_removeDataSetReader</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> readerIdentifier)</td></tr>
+<tr class="separator:ae1f631d417aa46484b57d0de8a1b30b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbae25bf3b2016db71d8331af4581b7c" id="r_acbae25bf3b2016db71d8331af4581b7c"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#acbae25bf3b2016db71d8331af4581b7c">UA_Server_ReaderGroup_getConfig</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> readerGroupIdentifier, <a class="el" href="structUA__ReaderGroupConfig.html">UA_ReaderGroupConfig</a> *config)</td></tr>
+<tr class="separator:acbae25bf3b2016db71d8331af4581b7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97da73d45a2eb468a1a7babe39c8927a" id="r_a97da73d45a2eb468a1a7babe39c8927a"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a97da73d45a2eb468a1a7babe39c8927a">UA_Server_ReaderGroup_getState</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> readerGroupIdentifier, <a class="el" href="types__generated_8h.html#ad8e842c6658126c7d870f83cea3b925e">UA_PubSubState</a> *state)</td></tr>
+<tr class="separator:a97da73d45a2eb468a1a7babe39c8927a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1a44567c675994179ac5a5518e4d196" id="r_ac1a44567c675994179ac5a5518e4d196"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#ac1a44567c675994179ac5a5518e4d196">UA_Server_addReaderGroup</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> connectionIdentifier, const <a class="el" href="structUA__ReaderGroupConfig.html">UA_ReaderGroupConfig</a> *readerGroupConfig, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *readerGroupIdentifier)</td></tr>
+<tr class="separator:ac1a44567c675994179ac5a5518e4d196"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f537af27b66a1d2342bde80636d57bb" id="r_a9f537af27b66a1d2342bde80636d57bb"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a9f537af27b66a1d2342bde80636d57bb">UA_Server_removeReaderGroup</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> groupIdentifier)</td></tr>
+<tr class="separator:a9f537af27b66a1d2342bde80636d57bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a20112fdb63a97519e935ae0aed96ed" id="r_a6a20112fdb63a97519e935ae0aed96ed"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a6a20112fdb63a97519e935ae0aed96ed">UA_Server_freezeReaderGroupConfiguration</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> readerGroupId)</td></tr>
+<tr class="separator:a6a20112fdb63a97519e935ae0aed96ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a386e0a2f0a0db2732e75b0e0f748fc41" id="r_a386e0a2f0a0db2732e75b0e0f748fc41"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a386e0a2f0a0db2732e75b0e0f748fc41">UA_Server_unfreezeReaderGroupConfiguration</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> readerGroupId)</td></tr>
+<tr class="separator:a386e0a2f0a0db2732e75b0e0f748fc41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59b4e5f53e5781984df3a09360a1097f" id="r_a59b4e5f53e5781984df3a09360a1097f"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#a59b4e5f53e5781984df3a09360a1097f">UA_Server_setReaderGroupOperational</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> readerGroupId)</td></tr>
+<tr class="separator:a59b4e5f53e5781984df3a09360a1097f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace0aaf8eddb383b326315e3c8a85346c" id="r_ace0aaf8eddb383b326315e3c8a85346c"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__pubsub_8h.html#ace0aaf8eddb383b326315e3c8a85346c">UA_Server_setReaderGroupDisabled</a> (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> readerGroupId)</td></tr>
+<tr class="separator:ace0aaf8eddb383b326315e3c8a85346c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="a545162edae7b9d0e00fddbb417e11b0d" name="a545162edae7b9d0e00fddbb417e11b0d"></a>
@@ -263,7 +279,7 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="a545162edae7b9d0e00fddbb417e11b0dadefac7a6fa2a41298dad487fe75e6deb" name="a545162edae7b9d0e00fddbb417e11b0dadefac7a6fa2a41298dad487fe75e6deb"></a>UA_PUBSUB_DATASETFIELD_EVENT&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="server__pubsub_8h_source.html#l00227">227</a> of file <a class="el" href="server__pubsub_8h_source.html">server_pubsub.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server__pubsub_8h_source.html#l00257">257</a> of file <a class="el" href="server__pubsub_8h_source.html">server_pubsub.h</a>.</p>
 
 </div>
 </div>
@@ -287,7 +303,7 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="afaa2ca7918f1413276c40b91f53fb8aaa7d087bfaa9ae8d2cea5f7213fc6a5951" name="afaa2ca7918f1413276c40b91f53fb8aaa7d087bfaa9ae8d2cea5f7213fc6a5951"></a>UA_PUBSUB_DATASET_PUBLISHEDEVENTS_TEMPLATE&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="server__pubsub_8h_source.html#l00135">135</a> of file <a class="el" href="server__pubsub_8h_source.html">server_pubsub.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server__pubsub_8h_source.html#l00165">165</a> of file <a class="el" href="server__pubsub_8h_source.html">server_pubsub.h</a>.</p>
 
 </div>
 </div>
@@ -302,12 +318,17 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Valid PublisherId types from Part 14. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aaf2e1f0cea1ae69ddae82eb9da111939a4a5ede580994cea1f204598dfa5ae5a2" name="aaf2e1f0cea1ae69ddae82eb9da111939a4a5ede580994cea1f204598dfa5ae5a2"></a>UA_PUBSUB_PUBLISHERID_NUMERIC&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aaf2e1f0cea1ae69ddae82eb9da111939a5d00b11a7f62e7f4102963e2715ad8fc" name="aaf2e1f0cea1ae69ddae82eb9da111939a5d00b11a7f62e7f4102963e2715ad8fc"></a>UA_PUBSUB_PUBLISHERID_STRING&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aaf2e1f0cea1ae69ddae82eb9da111939ae6d0a323c8c3e4f0ec9d6a15a419765b" name="aaf2e1f0cea1ae69ddae82eb9da111939ae6d0a323c8c3e4f0ec9d6a15a419765b"></a>UA_PUBLISHERIDTYPE_BYTE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aaf2e1f0cea1ae69ddae82eb9da111939a803c020ba65020aba2fc52dd127e429a" name="aaf2e1f0cea1ae69ddae82eb9da111939a803c020ba65020aba2fc52dd127e429a"></a>UA_PUBLISHERIDTYPE_UINT16&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aaf2e1f0cea1ae69ddae82eb9da111939aeb5fca4c704f7e14ca9f853d5e2f4c03" name="aaf2e1f0cea1ae69ddae82eb9da111939aeb5fca4c704f7e14ca9f853d5e2f4c03"></a>UA_PUBLISHERIDTYPE_UINT32&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aaf2e1f0cea1ae69ddae82eb9da111939ac412a9c5648c8ca827be574d3fc3f486" name="aaf2e1f0cea1ae69ddae82eb9da111939ac412a9c5648c8ca827be574d3fc3f486"></a>UA_PUBLISHERIDTYPE_UINT64&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aaf2e1f0cea1ae69ddae82eb9da111939abd240a0d02c6bfd9f5568b89a3358872" name="aaf2e1f0cea1ae69ddae82eb9da111939abd240a0d02c6bfd9f5568b89a3358872"></a>UA_PUBLISHERIDTYPE_STRING&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="server__pubsub_8h_source.html#l00031">31</a> of file <a class="el" href="server__pubsub_8h_source.html">server_pubsub.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server__pubsub_8h_source.html#l00038">38</a> of file <a class="el" href="server__pubsub_8h_source.html">server_pubsub.h</a>.</p>
 
 </div>
 </div>
@@ -325,7 +346,7 @@ Functions</h2></td></tr>
 
 <p>This Source Code Form is subject to the terms of the Mozilla Public License, v. </p>
 <p>2.0. If a copy of the MPL was not distributed with this file, You can obtain one at <a href="http://mozilla.org/MPL/2.0/">http://mozilla.org/MPL/2.0/</a>.</p>
-<p>Copyright (c) 2017-2018 Fraunhofer IOSB (Author: Andreas Ebner) Copyright (c) 2019 Kalycito Infotech Private Limited Copyright (c) 2021 Fraunhofer IOSB (Author: Jan Hermes) </p>
+<p>Copyright (c) 2017-2022 Fraunhofer IOSB (Author: Andreas Ebner) Copyright (c) 2019 Kalycito Infotech Private Limited Copyright (c) 2021 Fraunhofer IOSB (Author: Jan Hermes) Copyright (c) 2022 Siemens AG (Author: Thomas Fischer) Copyright (c) 2022 Linutronix GmbH (Author: Muddasir Shakil) </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a6aae9b86fea30ec1c9607ebae5a3b2d4a96a3774938e78779ee0de5787cf4672d" name="a6aae9b86fea30ec1c9607ebae5a3b2d4a96a3774938e78779ee0de5787cf4672d"></a>UA_PUBSUB_COMPONENT_CONNECTION&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a6aae9b86fea30ec1c9607ebae5a3b2d4a7072b253b6ad3de424c67cb2f22846ae" name="a6aae9b86fea30ec1c9607ebae5a3b2d4a7072b253b6ad3de424c67cb2f22846ae"></a>UA_PUBSUB_COMPONENT_WRITERGROUP&#160;</td><td class="fielddoc"></td></tr>
@@ -334,7 +355,7 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="a6aae9b86fea30ec1c9607ebae5a3b2d4a64c6cf03ce79d4f24a19ecb92f45f222" name="a6aae9b86fea30ec1c9607ebae5a3b2d4a64c6cf03ce79d4f24a19ecb92f45f222"></a>UA_PUBSUB_COMPONENT_DATASETREADER&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="server__pubsub_8h_source.html#l00023">23</a> of file <a class="el" href="server__pubsub_8h_source.html">server_pubsub.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server__pubsub_8h_source.html#l00027">27</a> of file <a class="el" href="server__pubsub_8h_source.html">server_pubsub.h</a>.</p>
 
 </div>
 </div>
@@ -350,12 +371,12 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a35f86b32f85309a6861069dc9761c9bbaad4e49dbbe1e336f1b4f0fb439f7dd86" name="a35f86b32f85309a6861069dc9761c9bbaad4e49dbbe1e336f1b4f0fb439f7dd86"></a>UA_PUBSUB_ENCODING_BINARY&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a35f86b32f85309a6861069dc9761c9bba61ea570833d7bad761f75ff2525d0d8a" name="a35f86b32f85309a6861069dc9761c9bba61ea570833d7bad761f75ff2525d0d8a"></a>UA_PUBSUB_ENCODING_UADP&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a35f86b32f85309a6861069dc9761c9bba2c3e9205f1c7a808ef8cec70d3f7937e" name="a35f86b32f85309a6861069dc9761c9bba2c3e9205f1c7a808ef8cec70d3f7937e"></a>UA_PUBSUB_ENCODING_JSON&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a35f86b32f85309a6861069dc9761c9bba61ea570833d7bad761f75ff2525d0d8a" name="a35f86b32f85309a6861069dc9761c9bba61ea570833d7bad761f75ff2525d0d8a"></a>UA_PUBSUB_ENCODING_UADP&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a35f86b32f85309a6861069dc9761c9bbaad4e49dbbe1e336f1b4f0fb439f7dd86" name="a35f86b32f85309a6861069dc9761c9bbaad4e49dbbe1e336f1b4f0fb439f7dd86"></a>UA_PUBSUB_ENCODING_BINARY&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="server__pubsub_8h_source.html#l00284">284</a> of file <a class="el" href="server__pubsub_8h_source.html">server_pubsub.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server__pubsub_8h_source.html#l00314">314</a> of file <a class="el" href="server__pubsub_8h_source.html">server_pubsub.h</a>.</p>
 
 </div>
 </div>
@@ -370,6 +391,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>To Do:Implementation of SubscribedDataSetMirrorType UA_StatusCode A_PubSubDataSetReader_createDataSetMirror(UA_Server <em>server, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> dataSetReaderIdentifier, <a class="el" href="structUA__SubscribedDataSetMirrorDataType.html" title="SubscribedDataSetMirrorDataType.">UA_SubscribedDataSetMirrorDataType</a></em> mirror) </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a64c099f9dad9a1270f4fded6e0590bffa3f79136e2520e1312db870cb82c1a500" name="a64c099f9dad9a1270f4fded6e0590bffa3f79136e2520e1312db870cb82c1a500"></a>UA_PUBSUB_RT_UNKNOWN&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a64c099f9dad9a1270f4fded6e0590bffa576a5b39d4d0f563896de17482a801a7" name="a64c099f9dad9a1270f4fded6e0590bffa576a5b39d4d0f563896de17482a801a7"></a>UA_PUBSUB_RT_VARIANT&#160;</td><td class="fielddoc"></td></tr>
@@ -377,7 +400,7 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="a64c099f9dad9a1270f4fded6e0590bffae963ff1c1b6869d5a5e3e6d5f90cc93a" name="a64c099f9dad9a1270f4fded6e0590bffae963ff1c1b6869d5a5e3e6d5f90cc93a"></a>UA_PUBSUB_RT_RAW&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="server__pubsub_8h_source.html#l00478">478</a> of file <a class="el" href="server__pubsub_8h_source.html">server_pubsub.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server__pubsub_8h_source.html#l00507">507</a> of file <a class="el" href="server__pubsub_8h_source.html">server_pubsub.h</a>.</p>
 
 </div>
 </div>
@@ -399,7 +422,7 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="a73ad41ec9a7debec2aeed908bed98606a26e023756728b21cec7c7492440498b3" name="a73ad41ec9a7debec2aeed908bed98606a26e023756728b21cec7c7492440498b3"></a>UA_PUBSUB_RT_DETERMINISTIC&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="server__pubsub_8h_source.html#l00291">291</a> of file <a class="el" href="server__pubsub_8h_source.html">server_pubsub.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server__pubsub_8h_source.html#l00322">322</a> of file <a class="el" href="server__pubsub_8h_source.html">server_pubsub.h</a>.</p>
 
 </div>
 </div>
@@ -421,7 +444,7 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="a322505e1fccd7ee7172ab48413de1fb3a0a5942ac05b6ba04687e3e90934898be" name="a322505e1fccd7ee7172ab48413de1fb3a0a5942ac05b6ba04687e3e90934898be"></a>UA_PUBSUB_SDS_MIRROR&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="server__pubsub_8h_source.html#l00420">420</a> of file <a class="el" href="server__pubsub_8h_source.html">server_pubsub.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="server__pubsub_8h_source.html#l00457">457</a> of file <a class="el" href="server__pubsub_8h_source.html">server_pubsub.h</a>.</p>
 
 </div>
 </div>
@@ -441,6 +464,56 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3581a0862e18106466143f6f62dbf34c" name="a3581a0862e18106466143f6f62dbf34c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3581a0862e18106466143f6f62dbf34c">&#9670;&#160;</a></span>UA_DataSetReaderConfig_clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT void UA_DataSetReaderConfig_clear </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__DataSetReaderConfig.html">UA_DataSetReaderConfig</a> *&#160;</td>
+          <td class="paramname"><em>cfg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear the configuration of a DataSetReader. </p>
+
+</div>
+</div>
+<a id="a2addd7bfc873fc40f72a4fe184775e34" name="a2addd7bfc873fc40f72a4fe184775e34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2addd7bfc873fc40f72a4fe184775e34">&#9670;&#160;</a></span>UA_DataSetReaderConfig_copy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_DataSetReaderConfig_copy </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structUA__DataSetReaderConfig.html">UA_DataSetReaderConfig</a> *&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structUA__DataSetReaderConfig.html">UA_DataSetReaderConfig</a> *&#160;</td>
+          <td class="paramname"><em>dst</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Copy the configuration of DataSetReader. </p>
 
 </div>
 </div>
@@ -498,16 +571,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a351c7276e163427deebaac3bb7e9e3c1" name="a351c7276e163427deebaac3bb7e9e3c1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a351c7276e163427deebaac3bb7e9e3c1">&#9670;&#160;</a></span>UA_Server_addDataSetField()</h2>
+<a id="a7a62c4ce715dba02e9d39ccd56180d51" name="a7a62c4ce715dba02e9d39ccd56180d51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a62c4ce715dba02e9d39ccd56180d51">&#9670;&#160;</a></span>UA_Server_addDataSetField()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structUA__DataSetFieldResult.html">UA_DataSetFieldResult</a> UA_Server_addDataSetField </td>
+          <td class="memname">UA_EXPORT <a class="el" href="structUA__DataSetFieldResult.html">UA_DataSetFieldResult</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_addDataSetField </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -538,16 +611,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a7ea0dbb04d4ba45d79072b7b52a48e2f" name="a7ea0dbb04d4ba45d79072b7b52a48e2f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7ea0dbb04d4ba45d79072b7b52a48e2f">&#9670;&#160;</a></span>UA_Server_addDataSetReader()</h2>
+<a id="a4e283e37c1a7739db5158319b0aab1e5" name="a4e283e37c1a7739db5158319b0aab1e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e283e37c1a7739db5158319b0aab1e5">&#9670;&#160;</a></span>UA_Server_addDataSetReader()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_addDataSetReader </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_addDataSetReader </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -580,16 +653,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="adb16b5a4d60569338ddb93a5bba165ff" name="adb16b5a4d60569338ddb93a5bba165ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adb16b5a4d60569338ddb93a5bba165ff">&#9670;&#160;</a></span>UA_Server_addDataSetWriter()</h2>
+<a id="a449e5cbf30861f5db3620b5a00fab449" name="a449e5cbf30861f5db3620b5a00fab449"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a449e5cbf30861f5db3620b5a00fab449">&#9670;&#160;</a></span>UA_Server_addDataSetWriter()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_addDataSetWriter </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_addDataSetWriter </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -630,16 +703,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a78bfa8e0eb5076203bf0302a5f86d6ae" name="a78bfa8e0eb5076203bf0302a5f86d6ae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a78bfa8e0eb5076203bf0302a5f86d6ae">&#9670;&#160;</a></span>UA_Server_addPublishedDataSet()</h2>
+<a id="af5e3c6c962316b0b4c4ce41dbce53362" name="af5e3c6c962316b0b4c4ce41dbce53362"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5e3c6c962316b0b4c4ce41dbce53362">&#9670;&#160;</a></span>UA_Server_addPublishedDataSet()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structUA__AddPublishedDataSetResult.html">UA_AddPublishedDataSetResult</a> UA_Server_addPublishedDataSet </td>
+          <td class="memname">UA_EXPORT <a class="el" href="structUA__AddPublishedDataSetResult.html">UA_AddPublishedDataSetResult</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_addPublishedDataSet </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -664,16 +737,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a6a5dd68599b238efd099438541510d67" name="a6a5dd68599b238efd099438541510d67"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a5dd68599b238efd099438541510d67">&#9670;&#160;</a></span>UA_Server_addPubSubConnection()</h2>
+<a id="a470a6942f37d42c3ca1292dd99df0e34" name="a470a6942f37d42c3ca1292dd99df0e34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a470a6942f37d42c3ca1292dd99df0e34">&#9670;&#160;</a></span>UA_Server_addPubSubConnection()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_addPubSubConnection </td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_addPubSubConnection </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -696,18 +769,29 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Add a new PubSub connection to the given server and open it. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">server</td><td>The server to add the connection to. </td></tr>
+    <tr><td class="paramname">connectionConfig</td><td>The configuration for the newly added connection. </td></tr>
+    <tr><td class="paramname">connectionIdentifier</td><td>If not NULL will be set to the identifier of the newly added connection. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>UA_STATUSCODE_GOOD if connection was successfully added, otherwise an error code. </dd></dl>
+
 </div>
 </div>
-<a id="ad74bc620baf7c1858d0de6fc6ae146fb" name="ad74bc620baf7c1858d0de6fc6ae146fb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad74bc620baf7c1858d0de6fc6ae146fb">&#9670;&#160;</a></span>UA_Server_addReaderGroup()</h2>
+<a id="ac1a44567c675994179ac5a5518e4d196" name="ac1a44567c675994179ac5a5518e4d196"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1a44567c675994179ac5a5518e4d196">&#9670;&#160;</a></span>UA_Server_addReaderGroup()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_addReaderGroup </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_addReaderGroup </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -740,16 +824,50 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a3d0c6a5b5d9aa211317af4efc5aaaf31" name="a3d0c6a5b5d9aa211317af4efc5aaaf31"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3d0c6a5b5d9aa211317af4efc5aaaf31">&#9670;&#160;</a></span>UA_Server_addWriterGroup()</h2>
+<a id="a3ea835c85e0c28b367f37bc7560800aa" name="a3ea835c85e0c28b367f37bc7560800aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ea835c85e0c28b367f37bc7560800aa">&#9670;&#160;</a></span>UA_Server_addStandaloneSubscribedDataSet()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_addWriterGroup </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_addStandaloneSubscribedDataSet </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__StandaloneSubscribedDataSetConfig.html">UA_StandaloneSubscribedDataSetConfig</a> *&#160;</td>
+          <td class="paramname"><em>subscribedDataSetConfig</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
+          <td class="paramname"><em>sdsIdentifier</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a70a06873ccc1721551f2522ddfb6e6b8" name="a70a06873ccc1721551f2522ddfb6e6b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70a06873ccc1721551f2522ddfb6e6b8">&#9670;&#160;</a></span>UA_Server_addWriterGroup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_addWriterGroup </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -782,16 +900,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ae90cba75f089f0b3bcd66a0b83349b23" name="ae90cba75f089f0b3bcd66a0b83349b23"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae90cba75f089f0b3bcd66a0b83349b23">&#9670;&#160;</a></span>UA_Server_DataSetReader_createTargetVariables()</h2>
+<a id="ab7d989470620ed8964532a1a4c4aefea" name="ab7d989470620ed8964532a1a4c4aefea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7d989470620ed8964532a1a4c4aefea">&#9670;&#160;</a></span>UA_Server_DataSetReader_createTargetVariables()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_DataSetReader_createTargetVariables </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_DataSetReader_createTargetVariables </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -824,16 +942,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a264cbb83467895deee5e5ff15417f055" name="a264cbb83467895deee5e5ff15417f055"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a264cbb83467895deee5e5ff15417f055">&#9670;&#160;</a></span>UA_Server_DataSetReader_getConfig()</h2>
+<a id="ac1a29f84f58eeb747099bcb40af084ae" name="ac1a29f84f58eeb747099bcb40af084ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1a29f84f58eeb747099bcb40af084ae">&#9670;&#160;</a></span>UA_Server_DataSetReader_getConfig()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_DataSetReader_getConfig </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_DataSetReader_getConfig </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -856,20 +974,20 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get configuration of the dataSetReader. </p>
+<p>Get the configuration (copy) of the DataSetReader. </p>
 
 </div>
 </div>
-<a id="a11b01949353d261b35315fac150e8a8e" name="a11b01949353d261b35315fac150e8a8e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a11b01949353d261b35315fac150e8a8e">&#9670;&#160;</a></span>UA_Server_DataSetReader_getState()</h2>
+<a id="a208cbad9f5c68fe0a03ae66f308578c4" name="a208cbad9f5c68fe0a03ae66f308578c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a208cbad9f5c68fe0a03ae66f308578c4">&#9670;&#160;</a></span>UA_Server_DataSetReader_getState()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_DataSetReader_getState </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_DataSetReader_getState </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -881,7 +999,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">UA_PubSubState *&#160;</td>
+          <td class="paramtype"><a class="el" href="types__generated_8h.html#ad8e842c6658126c7d870f83cea3b925e">UA_PubSubState</a> *&#160;</td>
           <td class="paramname"><em>state</em>&#160;</td>
         </tr>
         <tr>
@@ -896,16 +1014,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a2d69353cd32099cc7f2bd88f168f1a60" name="a2d69353cd32099cc7f2bd88f168f1a60"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2d69353cd32099cc7f2bd88f168f1a60">&#9670;&#160;</a></span>UA_Server_DataSetReader_updateConfig()</h2>
+<a id="ab9a4efd6886ede2ae3dd1865fcf096ed" name="ab9a4efd6886ede2ae3dd1865fcf096ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9a4efd6886ede2ae3dd1865fcf096ed">&#9670;&#160;</a></span>UA_Server_DataSetReader_updateConfig()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_DataSetReader_updateConfig </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_DataSetReader_updateConfig </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -934,20 +1052,20 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Update configuration to the dataSetReader. </p>
+<p>Update configuration to the DataSetReader. </p>
 
 </div>
 </div>
-<a id="a76a4485194c7f6a720ce007eef0221f4" name="a76a4485194c7f6a720ce007eef0221f4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76a4485194c7f6a720ce007eef0221f4">&#9670;&#160;</a></span>UA_Server_DataSetWriter_getState()</h2>
+<a id="ab88b89dd9fa25669bcbcae7695d54909" name="ab88b89dd9fa25669bcbcae7695d54909"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab88b89dd9fa25669bcbcae7695d54909">&#9670;&#160;</a></span>UA_Server_DataSetWriter_getState()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_DataSetWriter_getState </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_DataSetWriter_getState </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -959,7 +1077,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">UA_PubSubState *&#160;</td>
+          <td class="paramtype"><a class="el" href="types__generated_8h.html#ad8e842c6658126c7d870f83cea3b925e">UA_PubSubState</a> *&#160;</td>
           <td class="paramname"><em>state</em>&#160;</td>
         </tr>
         <tr>
@@ -974,16 +1092,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ac32cb7ebfe47da0e5416965270a73484" name="ac32cb7ebfe47da0e5416965270a73484"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac32cb7ebfe47da0e5416965270a73484">&#9670;&#160;</a></span>UA_Server_freezeReaderGroupConfiguration()</h2>
+<a id="a6a20112fdb63a97519e935ae0aed96ed" name="a6a20112fdb63a97519e935ae0aed96ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a20112fdb63a97519e935ae0aed96ed">&#9670;&#160;</a></span>UA_Server_freezeReaderGroupConfiguration()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_freezeReaderGroupConfiguration </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_freezeReaderGroupConfiguration </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -1002,16 +1120,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a8df4e0d74232bb864343fea27d6c9953" name="a8df4e0d74232bb864343fea27d6c9953"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8df4e0d74232bb864343fea27d6c9953">&#9670;&#160;</a></span>UA_Server_freezeWriterGroupConfiguration()</h2>
+<a id="aa7b0ce6374476058ec56323652cca2ad" name="aa7b0ce6374476058ec56323652cca2ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7b0ce6374476058ec56323652cca2ad">&#9670;&#160;</a></span>UA_Server_freezeWriterGroupConfiguration()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_freezeWriterGroupConfiguration </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_freezeWriterGroupConfiguration </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -1030,16 +1148,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a65f87c576b7bc2f6cea9d04f1ee7239d" name="a65f87c576b7bc2f6cea9d04f1ee7239d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65f87c576b7bc2f6cea9d04f1ee7239d">&#9670;&#160;</a></span>UA_Server_getDataSetFieldConfig()</h2>
+<a id="aeb74e56855c8b14b18863e4f7e4f63dc" name="aeb74e56855c8b14b18863e4f7e4f63dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb74e56855c8b14b18863e4f7e4f63dc">&#9670;&#160;</a></span>UA_Server_getDataSetFieldConfig()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_getDataSetFieldConfig </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_getDataSetFieldConfig </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -1066,16 +1184,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ade1a0a0bf964b62f9f5da0e42148ec98" name="ade1a0a0bf964b62f9f5da0e42148ec98"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade1a0a0bf964b62f9f5da0e42148ec98">&#9670;&#160;</a></span>UA_Server_getDataSetWriterConfig()</h2>
+<a id="a280c2d4e3e75c4644f0bfb28ae8f2437" name="a280c2d4e3e75c4644f0bfb28ae8f2437"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a280c2d4e3e75c4644f0bfb28ae8f2437">&#9670;&#160;</a></span>UA_Server_getDataSetWriterConfig()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_getDataSetWriterConfig </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_getDataSetWriterConfig </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -1102,16 +1220,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a8ac89d0e25fbf9e2c1b56c1d702df7a6" name="a8ac89d0e25fbf9e2c1b56c1d702df7a6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8ac89d0e25fbf9e2c1b56c1d702df7a6">&#9670;&#160;</a></span>UA_Server_getPublishedDataSetConfig()</h2>
+<a id="ac25f5dffa9e7bb0808573e93ebcd9780" name="ac25f5dffa9e7bb0808573e93ebcd9780"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac25f5dffa9e7bb0808573e93ebcd9780">&#9670;&#160;</a></span>UA_Server_getPublishedDataSetConfig()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_getPublishedDataSetConfig </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_getPublishedDataSetConfig </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -1138,16 +1256,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="abb6660b2122dd3c33412ea8c36c355a0" name="abb6660b2122dd3c33412ea8c36c355a0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abb6660b2122dd3c33412ea8c36c355a0">&#9670;&#160;</a></span>UA_Server_getPublishedDataSetMetaData()</h2>
+<a id="a8da4aa84d9b853f821c2e44a73bd5309" name="a8da4aa84d9b853f821c2e44a73bd5309"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8da4aa84d9b853f821c2e44a73bd5309">&#9670;&#160;</a></span>UA_Server_getPublishedDataSetMetaData()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_getPublishedDataSetMetaData </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_getPublishedDataSetMetaData </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -1159,7 +1277,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">UA_DataSetMetaDataType *&#160;</td>
+          <td class="paramtype"><a class="el" href="structUA__DataSetMetaDataType.html">UA_DataSetMetaDataType</a> *&#160;</td>
           <td class="paramname"><em>metaData</em>&#160;</td>
         </tr>
         <tr>
@@ -1174,16 +1292,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a67cff6b5f33b719ea4c9c6d40382b3aa" name="a67cff6b5f33b719ea4c9c6d40382b3aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a67cff6b5f33b719ea4c9c6d40382b3aa">&#9670;&#160;</a></span>UA_Server_getPubSubConnectionConfig()</h2>
+<a id="a5870bf8243bc8f268f9302b48d7f352b" name="a5870bf8243bc8f268f9302b48d7f352b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5870bf8243bc8f268f9302b48d7f352b">&#9670;&#160;</a></span>UA_Server_getPubSubConnectionConfig()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_getPubSubConnectionConfig </td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_getPubSubConnectionConfig </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -1210,16 +1328,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a9ab6f1a9a40355b057822bf5c189600d" name="a9ab6f1a9a40355b057822bf5c189600d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9ab6f1a9a40355b057822bf5c189600d">&#9670;&#160;</a></span>UA_Server_getWriterGroupConfig()</h2>
+<a id="a0c2da908b4e16bbb8be042722177772a" name="a0c2da908b4e16bbb8be042722177772a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c2da908b4e16bbb8be042722177772a">&#9670;&#160;</a></span>UA_Server_getWriterGroupConfig()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_getWriterGroupConfig </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_getWriterGroupConfig </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -1246,16 +1364,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a109287086af6cc416274ba4116a7f6b1" name="a109287086af6cc416274ba4116a7f6b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a109287086af6cc416274ba4116a7f6b1">&#9670;&#160;</a></span>UA_Server_ReaderGroup_getConfig()</h2>
+<a id="acbae25bf3b2016db71d8331af4581b7c" name="acbae25bf3b2016db71d8331af4581b7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbae25bf3b2016db71d8331af4581b7c">&#9670;&#160;</a></span>UA_Server_ReaderGroup_getConfig()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_ReaderGroup_getConfig </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_ReaderGroup_getConfig </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -1284,16 +1402,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a7f4cef5fc2b4ad6d5db83c9462821dff" name="a7f4cef5fc2b4ad6d5db83c9462821dff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f4cef5fc2b4ad6d5db83c9462821dff">&#9670;&#160;</a></span>UA_Server_ReaderGroup_getState()</h2>
+<a id="a97da73d45a2eb468a1a7babe39c8927a" name="a97da73d45a2eb468a1a7babe39c8927a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97da73d45a2eb468a1a7babe39c8927a">&#9670;&#160;</a></span>UA_Server_ReaderGroup_getState()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_ReaderGroup_getState </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_ReaderGroup_getState </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -1305,7 +1423,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">UA_PubSubState *&#160;</td>
+          <td class="paramtype"><a class="el" href="types__generated_8h.html#ad8e842c6658126c7d870f83cea3b925e">UA_PubSubState</a> *&#160;</td>
           <td class="paramname"><em>state</em>&#160;</td>
         </tr>
         <tr>
@@ -1320,16 +1438,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a3548d9839a962e752b8c5277fd181f17" name="a3548d9839a962e752b8c5277fd181f17"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3548d9839a962e752b8c5277fd181f17">&#9670;&#160;</a></span>UA_Server_removeDataSetField()</h2>
+<a id="a8739de3c70a0191f6bb1e680165c10c4" name="a8739de3c70a0191f6bb1e680165c10c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8739de3c70a0191f6bb1e680165c10c4">&#9670;&#160;</a></span>UA_Server_removeDataSetField()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structUA__DataSetFieldResult.html">UA_DataSetFieldResult</a> UA_Server_removeDataSetField </td>
+          <td class="memname">UA_EXPORT <a class="el" href="structUA__DataSetFieldResult.html">UA_DataSetFieldResult</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_removeDataSetField </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -1348,16 +1466,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ab57cb1156bbb0112ba26e7b39fd0a375" name="ab57cb1156bbb0112ba26e7b39fd0a375"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab57cb1156bbb0112ba26e7b39fd0a375">&#9670;&#160;</a></span>UA_Server_removeDataSetReader()</h2>
+<a id="ae1f631d417aa46484b57d0de8a1b30b2" name="ae1f631d417aa46484b57d0de8a1b30b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1f631d417aa46484b57d0de8a1b30b2">&#9670;&#160;</a></span>UA_Server_removeDataSetReader()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_removeDataSetReader </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_removeDataSetReader </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -1378,16 +1496,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a20b2bc0509c29165c4f2c691b040ac3f" name="a20b2bc0509c29165c4f2c691b040ac3f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a20b2bc0509c29165c4f2c691b040ac3f">&#9670;&#160;</a></span>UA_Server_removeDataSetWriter()</h2>
+<a id="aeead370d4a38c106ae2161a93c1834d9" name="aeead370d4a38c106ae2161a93c1834d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeead370d4a38c106ae2161a93c1834d9">&#9670;&#160;</a></span>UA_Server_removeDataSetWriter()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_removeDataSetWriter </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_removeDataSetWriter </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -1406,16 +1524,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a886b6ef8c479988ff7444058ae6de635" name="a886b6ef8c479988ff7444058ae6de635"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a886b6ef8c479988ff7444058ae6de635">&#9670;&#160;</a></span>UA_Server_removePublishedDataSet()</h2>
+<a id="a1ba6d1b4a761032dcad19bba271654cb" name="a1ba6d1b4a761032dcad19bba271654cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ba6d1b4a761032dcad19bba271654cb">&#9670;&#160;</a></span>UA_Server_removePublishedDataSet()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_removePublishedDataSet </td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_removePublishedDataSet </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -1437,16 +1555,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a9068beaeeb117f69ce905284d0b38eeb" name="a9068beaeeb117f69ce905284d0b38eeb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9068beaeeb117f69ce905284d0b38eeb">&#9670;&#160;</a></span>UA_Server_removePubSubConnection()</h2>
+<a id="a39455e40c494eff3eb43934212a4e947" name="a39455e40c494eff3eb43934212a4e947"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39455e40c494eff3eb43934212a4e947">&#9670;&#160;</a></span>UA_Server_removePubSubConnection()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_removePubSubConnection </td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_removePubSubConnection </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -1468,16 +1586,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="abac70ec88e25f205e9230fcad0967ed6" name="abac70ec88e25f205e9230fcad0967ed6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abac70ec88e25f205e9230fcad0967ed6">&#9670;&#160;</a></span>UA_Server_removeReaderGroup()</h2>
+<a id="a9f537af27b66a1d2342bde80636d57bb" name="a9f537af27b66a1d2342bde80636d57bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f537af27b66a1d2342bde80636d57bb">&#9670;&#160;</a></span>UA_Server_removeReaderGroup()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_removeReaderGroup </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_removeReaderGroup </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -1498,16 +1616,46 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a7f31442ccf5282ff18b48010f8688f62" name="a7f31442ccf5282ff18b48010f8688f62"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f31442ccf5282ff18b48010f8688f62">&#9670;&#160;</a></span>UA_Server_removeWriterGroup()</h2>
+<a id="aa7b1d4246865e97f44ba9853c85239a3" name="aa7b1d4246865e97f44ba9853c85239a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7b1d4246865e97f44ba9853c85239a3">&#9670;&#160;</a></span>UA_Server_removeStandaloneSubscribedDataSet()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_removeWriterGroup </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_removeStandaloneSubscribedDataSet </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>sds</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Remove StandaloneSubscribedDataSet, identified by the NodeId. </p>
+
+</div>
+</div>
+<a id="aeed9dcdfad24fec8537cc9149082273c" name="aeed9dcdfad24fec8537cc9149082273c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeed9dcdfad24fec8537cc9149082273c">&#9670;&#160;</a></span>UA_Server_removeWriterGroup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_removeWriterGroup </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -1526,16 +1674,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa1166e78e27365e05775fd9ae4ba1c7d" name="aa1166e78e27365e05775fd9ae4ba1c7d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa1166e78e27365e05775fd9ae4ba1c7d">&#9670;&#160;</a></span>UA_Server_setReaderGroupDisabled()</h2>
+<a id="ace0aaf8eddb383b326315e3c8a85346c" name="ace0aaf8eddb383b326315e3c8a85346c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace0aaf8eddb383b326315e3c8a85346c">&#9670;&#160;</a></span>UA_Server_setReaderGroupDisabled()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_setReaderGroupDisabled </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_setReaderGroupDisabled </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -1554,16 +1702,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ab0df6e5f84bad24c7244f281931f1b4e" name="ab0df6e5f84bad24c7244f281931f1b4e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab0df6e5f84bad24c7244f281931f1b4e">&#9670;&#160;</a></span>UA_Server_setReaderGroupOperational()</h2>
+<a id="a59b4e5f53e5781984df3a09360a1097f" name="a59b4e5f53e5781984df3a09360a1097f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59b4e5f53e5781984df3a09360a1097f">&#9670;&#160;</a></span>UA_Server_setReaderGroupOperational()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_setReaderGroupOperational </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_setReaderGroupOperational </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -1582,16 +1730,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa961a6a448121f72df47edc236bd446d" name="aa961a6a448121f72df47edc236bd446d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa961a6a448121f72df47edc236bd446d">&#9670;&#160;</a></span>UA_Server_setWriterGroupDisabled()</h2>
+<a id="a5b08bc339966850a9e2b46397734ddd1" name="a5b08bc339966850a9e2b46397734ddd1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b08bc339966850a9e2b46397734ddd1">&#9670;&#160;</a></span>UA_Server_setWriterGroupDisabled()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_setWriterGroupDisabled </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_setWriterGroupDisabled </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -1610,16 +1758,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aafa81b1fbdf186be710ea0795d3995c9" name="aafa81b1fbdf186be710ea0795d3995c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aafa81b1fbdf186be710ea0795d3995c9">&#9670;&#160;</a></span>UA_Server_setWriterGroupOperational()</h2>
+<a id="a27e2cd8888ed77f6799e84041378699f" name="a27e2cd8888ed77f6799e84041378699f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27e2cd8888ed77f6799e84041378699f">&#9670;&#160;</a></span>UA_Server_setWriterGroupOperational()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_setWriterGroupOperational </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_setWriterGroupOperational </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -1638,16 +1786,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ab32adcfcc35ea2c3c822cc66684f3d72" name="ab32adcfcc35ea2c3c822cc66684f3d72"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab32adcfcc35ea2c3c822cc66684f3d72">&#9670;&#160;</a></span>UA_Server_unfreezeReaderGroupConfiguration()</h2>
+<a id="a386e0a2f0a0db2732e75b0e0f748fc41" name="a386e0a2f0a0db2732e75b0e0f748fc41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a386e0a2f0a0db2732e75b0e0f748fc41">&#9670;&#160;</a></span>UA_Server_unfreezeReaderGroupConfiguration()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_unfreezeReaderGroupConfiguration </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_unfreezeReaderGroupConfiguration </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -1666,16 +1814,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a83be7943d3e85a93a30c82ce77a48091" name="a83be7943d3e85a93a30c82ce77a48091"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a83be7943d3e85a93a30c82ce77a48091">&#9670;&#160;</a></span>UA_Server_unfreezeWriterGroupConfiguration()</h2>
+<a id="ae3d866ffed2c0a5f01255d1a516d333e" name="ae3d866ffed2c0a5f01255d1a516d333e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3d866ffed2c0a5f01255d1a516d333e">&#9670;&#160;</a></span>UA_Server_unfreezeWriterGroupConfiguration()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_unfreezeWriterGroupConfiguration </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_unfreezeWriterGroupConfiguration </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -1694,16 +1842,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a6736d7dd7afdd0a73eae8d3c731931ab" name="a6736d7dd7afdd0a73eae8d3c731931ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6736d7dd7afdd0a73eae8d3c731931ab">&#9670;&#160;</a></span>UA_Server_updateWriterGroupConfig()</h2>
+<a id="ace3e9a492eb0ee4b81072416a9a44381" name="ace3e9a492eb0ee4b81072416a9a44381"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace3e9a492eb0ee4b81072416a9a44381">&#9670;&#160;</a></span>UA_Server_updateWriterGroupConfig()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_updateWriterGroupConfig </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_updateWriterGroupConfig </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -1728,16 +1876,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a00aabed3055b60c2bad55da9c29da3af" name="a00aabed3055b60c2bad55da9c29da3af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a00aabed3055b60c2bad55da9c29da3af">&#9670;&#160;</a></span>UA_Server_WriterGroup_getState()</h2>
+<a id="a7b8fce5d25cd34711ea8f49b32fb01d2" name="a7b8fce5d25cd34711ea8f49b32fb01d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b8fce5d25cd34711ea8f49b32fb01d2">&#9670;&#160;</a></span>UA_Server_WriterGroup_getState()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Server_WriterGroup_getState </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_WriterGroup_getState </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
@@ -1749,7 +1897,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">UA_PubSubState *&#160;</td>
+          <td class="paramtype"><a class="el" href="types__generated_8h.html#ad8e842c6658126c7d870f83cea3b925e">UA_PubSubState</a> *&#160;</td>
           <td class="paramname"><em>state</em>&#160;</td>
         </tr>
         <tr>
@@ -1764,23 +1912,75 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a3fb68b92d3df2594d571952d6be3e664" name="a3fb68b92d3df2594d571952d6be3e664"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3fb68b92d3df2594d571952d6be3e664">&#9670;&#160;</a></span>UA_ServerConfig_addPubSubTransportLayer()</h2>
+<a id="ac792fd647e21215405aca08fccb4f553" name="ac792fd647e21215405aca08fccb4f553"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac792fd647e21215405aca08fccb4f553">&#9670;&#160;</a></span>UA_Server_WriterGroup_publish()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_ServerConfig_addPubSubTransportLayer </td>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_Server_WriterGroup_publish </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> *&#160;</td>
-          <td class="paramname"><em>config</em>, </td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structUA__PubSubTransportLayer.html">UA_PubSubTransportLayer</a>&#160;</td>
-          <td class="paramname"><em>pubsubTransportLayer</em>&#160;</td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>writerGroupIdentifier</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afd9fb3754578af51473c4ffa1777ff45" name="afd9fb3754578af51473c4ffa1777ff45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd9fb3754578af51473c4ffa1777ff45">&#9670;&#160;</a></span>UA_StandaloneSubscribedDataSetConfig_clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UA_StandaloneSubscribedDataSetConfig_clear </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__StandaloneSubscribedDataSetConfig.html">UA_StandaloneSubscribedDataSetConfig</a> *&#160;</td>
+          <td class="paramname"><em>sdsConfig</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae8dc6e2a089bce3e7cf6e026d954c4c0" name="ae8dc6e2a089bce3e7cf6e026d954c4c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8dc6e2a089bce3e7cf6e026d954c4c0">&#9670;&#160;</a></span>UA_WriterGroup_lastPublishTimestamp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a> UA_WriterGroup_lastPublishTimestamp </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>writerGroupId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">UA_DateTime *&#160;</td>
+          <td class="paramname"><em>timestamp</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

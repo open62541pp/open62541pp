@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.15</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.15</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -105,6 +105,8 @@ Macros</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:abb1ce6e7a4cf917d938d77153546c48d" id="r_abb1ce6e7a4cf917d938d77153546c48d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__HistoryDataBackend.html">UA_HistoryDataBackend</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="history__data__backend__memory_8h.html#abb1ce6e7a4cf917d938d77153546c48d">UA_HistoryDataBackend_Memory</a> (size_t initialNodeIdStoreSize, size_t initialDataStoreSize)</td></tr>
 <tr class="separator:abb1ce6e7a4cf917d938d77153546c48d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61334ca71428b38e7b005ec566972f61" id="r_a61334ca71428b38e7b005ec566972f61"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__HistoryDataBackend.html">UA_HistoryDataBackend</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="history__data__backend__memory_8h.html#a61334ca71428b38e7b005ec566972f61">UA_HistoryDataBackend_Memory_Circular</a> (size_t initialNodeIdStoreSize, size_t initialDataStoreSize)</td></tr>
+<tr class="separator:a61334ca71428b38e7b005ec566972f61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a041abca8ed0d4e81383d93b8034bd971" id="r_a041abca8ed0d4e81383d93b8034bd971"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="history__data__backend__memory_8h.html#a041abca8ed0d4e81383d93b8034bd971">UA_HistoryDataBackend_Memory_clear</a> (<a class="el" href="structUA__HistoryDataBackend.html">UA_HistoryDataBackend</a> *backend)</td></tr>
 <tr class="separator:a041abca8ed0d4e81383d93b8034bd971"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -123,9 +125,9 @@ Functions</h2></td></tr>
 
 <p>This Source Code Form is subject to the terms of the Mozilla Public License, v. </p>
 <p>2.0. If a copy of the MPL was not distributed with this file, You can obtain one at <a href="http://mozilla.org/MPL/2.0/">http://mozilla.org/MPL/2.0/</a>.</p>
-<p>Copyright 2018 (c) basysKom GmbH <a href="#" onclick="location.href='mai'+'lto:'+'ope'+'ns'+'our'+'ce'+'@ba'+'sy'+'sko'+'m.'+'com'; return false;">opens<span class="obfuscator">.nosp@m.</span>ourc<span class="obfuscator">.nosp@m.</span>e@bas<span class="obfuscator">.nosp@m.</span>ysko<span class="obfuscator">.nosp@m.</span>m.com</a> (Author: Peter Rustler) </p>
+<p>Copyright 2018 (c) basysKom GmbH <a href="#" onclick="location.href='mai'+'lto:'+'ope'+'ns'+'our'+'ce'+'@ba'+'sy'+'sko'+'m.'+'com'; return false;">opens<span class="obfuscator">.nosp@m.</span>ourc<span class="obfuscator">.nosp@m.</span>e@bas<span class="obfuscator">.nosp@m.</span>ysko<span class="obfuscator">.nosp@m.</span>m.com</a> (Author: Peter Rustler) Copyright 2021 (c) luibass92 <a href="#" onclick="location.href='mai'+'lto:'+'lui'+'ba'+'ss9'+'2@'+'liv'+'e.'+'it'; return false;">luiba<span class="obfuscator">.nosp@m.</span>ss92<span class="obfuscator">.nosp@m.</span>@live<span class="obfuscator">.nosp@m.</span>.it</a> (Author: Luigi Bassetta) </p>
 
-<p class="definition">Definition at line <a class="el" href="history__data__backend__memory_8h_source.html#l00015">15</a> of file <a class="el" href="history__data__backend__memory_8h_source.html">history_data_backend_memory.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="history__data__backend__memory_8h_source.html#l00016">16</a> of file <a class="el" href="history__data__backend__memory_8h_source.html">history_data_backend_memory.h</a>.</p>
 
 </div>
 </div>
@@ -155,6 +157,37 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a61334ca71428b38e7b005ec566972f61" name="a61334ca71428b38e7b005ec566972f61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61334ca71428b38e7b005ec566972f61">&#9670;&#160;</a></span>UA_HistoryDataBackend_Memory_Circular()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUA__HistoryDataBackend.html">UA_HistoryDataBackend</a> UA_HistoryDataBackend_Memory_Circular </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>initialNodeIdStoreSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>initialDataStoreSize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function construct a <a class="el" href="structUA__HistoryDataBackend.html">UA_HistoryDataBackend</a> which implements a circular buffer in memory. </p>
+<p>initialNodeIdStoreSize is the maximum number of NodeIds that will be historized. This number cannot be overcomed. initialDataStoreSize is the maximum number of UA_DataValueMemoryStoreItem that will be saved in the circular buffer for a particular NodeId. Subsequent UA_DataValueMemoryStoreItem will be saved replacing the oldest ones following the logic of circular buffers. </p>
 
 </div>
 </div>

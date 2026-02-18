@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.15</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.15</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -90,19 +90,13 @@ $(function() {
 <li>objectNode&#160;:&#160;<a class="el" href="unionUA__Node.html#a399a7a9c1d2c7c6a5b9e64244fc8c2fc">UA_Node</a></li>
 <li>objectTypeNode&#160;:&#160;<a class="el" href="unionUA__Node.html#ab43457d3e5209ac9814b4cf5f775dc94">UA_Node</a></li>
 <li>Offset&#160;:&#160;<a class="el" href="struct__OpcUa__TimeZoneDataType.html#aee015b4de40dd83049b11affdcbb4a47">_OpcUa_TimeZoneDataType</a></li>
-<li>offset&#160;:&#160;<a class="el" href="structUA__NetworkMessageOffset.html#a7b6fade5b14e433ca749bcc96e5795df">UA_NetworkMessageOffset</a>, <a class="el" href="structUA__TimeZoneDataType.html#af2335ac398e34df77427a439ca0b6de8">UA_TimeZoneDataType</a></li>
-<li>offsetData&#160;:&#160;<a class="el" href="structUA__NetworkMessageOffset.html#a9e3ee2683f06ef17e8156e245cc2024a">UA_NetworkMessageOffset</a></li>
+<li>offset&#160;:&#160;<a class="el" href="structRawData.html#a17d32b7bfa632e0a8dbba60b88b138f4">RawData</a>, <a class="el" href="structUA__NetworkMessageOffset.html#a7b6fade5b14e433ca749bcc96e5795df">UA_NetworkMessageOffset</a>, <a class="el" href="structUA__TimeZoneDataType.html#af2335ac398e34df77427a439ca0b6de8">UA_TimeZoneDataType</a></li>
 <li>offsets&#160;:&#160;<a class="el" href="structUA__NetworkMessageOffsetBuffer.html#a2481b24020f3c04f888ce5817696e484">UA_NetworkMessageOffsetBuffer</a></li>
 <li>offsetsSize&#160;:&#160;<a class="el" href="structUA__NetworkMessageOffsetBuffer.html#a2ce581edba879deb9a3bab0d1276648b">UA_NetworkMessageOffsetBuffer</a></li>
-<li>oldChannelState&#160;:&#160;<a class="el" href="structUA__Client.html#a4156168e5ea7c0b802b1f8158ed8e5c9">UA_Client</a></li>
-<li>oldConnectStatus&#160;:&#160;<a class="el" href="structUA__Client.html#a1e6618405cd7577a68ec958c90cb39d5">UA_Client</a></li>
-<li>oldSessionState&#160;:&#160;<a class="el" href="structUA__Client.html#ade62db2d1b091efda27205e71845e136">UA_Client</a></li>
 <li>onRead&#160;:&#160;<a class="el" href="structUA__ValueCallback.html#afd421628306cde0122dc132eb7044d3c">UA_ValueCallback</a></li>
 <li>onWrite&#160;:&#160;<a class="el" href="structUA__ValueCallback.html#a5899ec94e1b2d51b26325cb89b94973d">UA_ValueCallback</a></li>
 <li>opcode&#160;:&#160;<a class="el" href="structmessage.html#a7a85e13e91b0b33a8d9f99187fc219b9">message</a></li>
-<li>openingDate&#160;:&#160;<a class="el" href="structUA__Connection.html#a64c185126ea39e89172f9f9dbc09302f">UA_Connection</a></li>
-<li>openSecureChannelRequest&#160;:&#160;<a class="el" href="unionUA__Request.html#a5d6a737297ff63647fde21075156fd41">UA_Request</a></li>
-<li>openSecureChannelResponse&#160;:&#160;<a class="el" href="unionUA__Response.html#a0847d59f1c6c7141b2e0edf0c9eafdae">UA_Response</a></li>
+<li>openConnection&#160;:&#160;<a class="el" href="structUA__ConnectionManager.html#a70ffe8b41c8607f3f68e01f6f8ca3dc6">UA_ConnectionManager</a></li>
 <li>OperandDiagnosticInfos&#160;:&#160;<a class="el" href="struct__OpcUa__ContentFilterElementResult.html#a2752d03d3d3665c33bf42518d89cf9af">_OpcUa_ContentFilterElementResult</a></li>
 <li>operandDiagnosticInfos&#160;:&#160;<a class="el" href="structUA__ContentFilterElementResult.html#ae8c70fcc16284b312bef4ad59f534239">UA_ContentFilterElementResult</a></li>
 <li>operandDiagnosticInfosSize&#160;:&#160;<a class="el" href="structUA__ContentFilterElementResult.html#ac1e95ddcb13900b143aa4ee990f5ebf7">UA_ContentFilterElementResult</a></li>
@@ -110,12 +104,19 @@ $(function() {
 <li>operandStatusCodes&#160;:&#160;<a class="el" href="structUA__ContentFilterElementResult.html#afe65a05294b4a5b85823e3ec948c3349">UA_ContentFilterElementResult</a></li>
 <li>operandStatusCodesSize&#160;:&#160;<a class="el" href="structUA__ContentFilterElementResult.html#a94546c4bb860d8cff0c81ab0ce367605">UA_ContentFilterElementResult</a></li>
 <li>OperationResults&#160;:&#160;<a class="el" href="struct__OpcUa__HistoryUpdateResult.html#a5bf119e77d242ebfe346a57bc3d18b06">_OpcUa_HistoryUpdateResult</a></li>
+<li>operationResults&#160;:&#160;<a class="el" href="structUA__HistoryUpdateResult.html#ab86fbeb33fb7eb599cbd4608974b346c">UA_HistoryUpdateResult</a></li>
+<li>operationResultsSize&#160;:&#160;<a class="el" href="structUA__HistoryUpdateResult.html#af5d97029f67aae8d64f1d16c822c0d11">UA_HistoryUpdateResult</a></li>
 <li>OperationTimeout&#160;:&#160;<a class="el" href="struct__OpcUa__EndpointConfiguration.html#a3dff8d3de941bae14dcae1bf45a94f26">_OpcUa_EndpointConfiguration</a></li>
+<li>operationTimeout&#160;:&#160;<a class="el" href="structUA__EndpointConfiguration.html#a0dd566540c225cc02873edb9ccc2ba8d">UA_EndpointConfiguration</a></li>
+<li>orientation&#160;:&#160;<a class="el" href="structUA__ThreeDFrame.html#a37949b8d605464de653d8816400183b9">UA_ThreeDFrame</a></li>
 <li>OutputArguments&#160;:&#160;<a class="el" href="struct__OpcUa__CallMethodResult.html#a51530cd0ad2b31c07747e070827e0952">_OpcUa_CallMethodResult</a></li>
 <li>outputArguments&#160;:&#160;<a class="el" href="structUA__CallMethodResult.html#ade563599013787db61250b6ec5f3d501">UA_CallMethodResult</a></li>
 <li>outputArgumentsSize&#160;:&#160;<a class="el" href="structUA__CallMethodResult.html#a606fd630756f9799c1f01b4a9d7f0fc9">UA_CallMethodResult</a></li>
 <li>outStandingPublishRequests&#160;:&#160;<a class="el" href="structUA__ClientConfig.html#a2a315ec738bdc118fe0fd2601b83c459">UA_ClientConfig</a></li>
 <li>overlayable&#160;:&#160;<a class="el" href="structUA__DataType.html#a099407b1e8942c75fbb244d0516383c6">UA_DataType</a></li>
+<li>overrideValue&#160;:&#160;<a class="el" href="structUA__FieldTargetDataType.html#ad088b514058461dc8ee67b1c0bb96450">UA_FieldTargetDataType</a></li>
+<li>overrideValueHandling&#160;:&#160;<a class="el" href="structUA__FieldTargetDataType.html#ae123dce071baf0008bae7b76f78ee0ca">UA_FieldTargetDataType</a></li>
+<li>owner&#160;:&#160;<a class="el" href="structNodeContainer.html#a29a32ebdff596ccc1ee4fbcde0afff7c">NodeContainer</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

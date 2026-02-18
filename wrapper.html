@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.20.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.21.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -90,20 +90,20 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#autotoc_md21">Access native object</a></li>
-<li class="level1"><a href="#autotoc_md22">Conversion</a></li>
-<li class="level1"><a href="#autotoc_md23">Implicit conversion</a></li>
-<li class="level1"><a href="#autotoc_md24">Composed types</a><ul><li class="level2"><a href="#autotoc_md25">Example native type</a></li>
-<li class="level2"><a href="#autotoc_md26">Minimal wrapper class</a></li>
-<li class="level2"><a href="#autotoc_md27">Adding getters and setters</a></li>
-<li class="level2"><a href="#autotoc_md28">Usage example</a></li>
+<ul><li class="level1"><a href="#autotoc_md22">Access native object</a></li>
+<li class="level1"><a href="#autotoc_md23">Conversion</a></li>
+<li class="level1"><a href="#autotoc_md24">Implicit conversion</a></li>
+<li class="level1"><a href="#autotoc_md25">Composed types</a><ul><li class="level2"><a href="#autotoc_md26">Example native type</a></li>
+<li class="level2"><a href="#autotoc_md27">Minimal wrapper class</a></li>
+<li class="level2"><a href="#autotoc_md28">Adding getters and setters</a></li>
+<li class="level2"><a href="#autotoc_md29">Usage example</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="textblock"><p>Wrapper types in <b>open62541pp</b> provide a modern C++ interface to native open62541 objects. They maintain full compatibility with native types while adding features like RAII and pointer interconvertibility.</p>
 <p>All wrapper classes are based on <a class="el" href="classopcua_1_1Wrapper.html" title="Template base class to wrap (native) objects.">opcua::Wrapper</a>.</p>
-<h1><a class="anchor" id="autotoc_md21"></a>
+<h1><a class="anchor" id="autotoc_md22"></a>
 Access native object</h1>
 <p>The native object can be accessed in two ways:</p><ul>
 <li>Using the <a class="el" href="classopcua_1_1Wrapper.html#a340615392827f2f54e03ee8f27b67eb9" title="Return pointer to native object.">opcua::Wrapper::handle()</a> function</li>
@@ -121,7 +121,7 @@ Access native object</h1>
 <div class="ttc" id="aclassopcua_1_1Wrapper_html_a340615392827f2f54e03ee8f27b67eb9"><div class="ttname"><a href="classopcua_1_1Wrapper.html#a340615392827f2f54e03ee8f27b67eb9">opcua::Wrapper::handle</a></div><div class="ttdeci">constexpr T * handle() noexcept</div><div class="ttdoc">Return pointer to native object.</div><div class="ttdef"><b>Definition</b> <a href="wrapper_8hpp_source.html#l00221">wrapper.hpp:221</a></div></div>
 <div class="ttc" id="astatuscodes_8h_html_a3c68d30bc6f32228aa43be75fdc9d5aa"><div class="ttname"><a href="open62541/statuscodes_8h.html#a3c68d30bc6f32228aa43be75fdc9d5aa">UA_STATUSCODE_GOOD</a></div><div class="ttdeci">#define UA_STATUSCODE_GOOD</div></div>
 <div class="ttc" id="astructUA__DataValue_html"><div class="ttname"><a href="open62541/structUA__DataValue.html">UA_DataValue</a></div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md22"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md23"></a>
 Conversion</h1>
 <p>The template class <a class="el" href="classopcua_1_1Wrapper.html" title="Template base class to wrap (native) objects.">opcua::Wrapper</a> is <em>pointer-interconvertible</em> with the wrapped type.</p>
 <p>Pointer interconvertibility enables lightweight casting between wrapper and native types without additional overhead. This is achieved by ensuring the wrapper class is a standard-layout type, as required by the <a href="https://en.cppreference.com/w/cpp/language/static_cast#pointer-interconvertible" target="_blank">C++ standard</a>.</p>
@@ -130,7 +130,7 @@ Conversion</h1>
 <li>Convert native objects to wrapper objects using <a class="el" href="group__Wrapper.html#gac28a131007f1160ae702aa5124f8a9ea">opcua::asWrapper&lt;T&gt;</a></li>
 <li>Convert wrapper objects to native objects using <a class="el" href="group__Wrapper.html#ga50b605af15e16113ff43aa58efc24e45">opcua::asNative</a></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md23"></a>
+<h1><a class="anchor" id="autotoc_md24"></a>
 Implicit conversion</h1>
 <p>Implicit conversions to the native object are provided for convenience:</p>
 <div class="fragment"><div class="line"><a class="code hl_class" href="classopcua_1_1DataValue.html">opcua::DataValue</a> wrapper;</div>
@@ -140,17 +140,17 @@ Implicit conversion</h1>
 <div class="line"><span class="keywordtype">void</span> print(<a class="code hl_structRef" target="_blank" href="open62541/structUA__DataValue.html">UA_DataValue</a>&amp; dv) { <span class="comment">/* ... */</span> }</div>
 <div class="line">print(wrapper);                  <span class="comment">// implicit conversion</span></div>
 <div class="line">print(opua::asNative(wrapper));  <span class="comment">// explicit alternative</span></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md24"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md25"></a>
 Composed types</h1>
 <p>When wrapping composed types with nested members, getters and setters are essential for accessing these members as wrapper types. Let's walk through an example to demonstrate how to implement such functionality.</p>
-<h2><a class="anchor" id="autotoc_md25"></a>
+<h2><a class="anchor" id="autotoc_md26"></a>
 Example native type</h2>
 <div class="fragment"><div class="line"><span class="comment">/**</span></div>
 <div class="line"><span class="comment"> * ReadValueId</span></div>
 <div class="line"><span class="comment"> * ^^^^^^^^^^^</span></div>
 <div class="line"><span class="comment"> */</span></div>
 <div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line">    <a class="code hl_structRef" target="_blank" href="open62541/structUA__NodeId.html">UA_NodeId</a> nodeId;</div>
+<div class="line">    <a class="code hl_structRef" target="_blank" href="open62541/structUA__NodeId.html">UA_NodeId</a> <a class="code hl_variableRef" target="_blank" href="open62541/types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>;</div>
 <div class="line">    <a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> attributeId;</div>
 <div class="line">    <a class="code hl_structRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> indexRange;</div>
 <div class="line">    <a class="code hl_structRef" target="_blank" href="open62541/structUA__QualifiedName.html">UA_QualifiedName</a> dataEncoding;</div>
@@ -161,9 +161,10 @@ Example native type</h2>
 <div class="ttc" id="astructUA__QualifiedName_html"><div class="ttname"><a href="open62541/structUA__QualifiedName.html">UA_QualifiedName</a></div></div>
 <div class="ttc" id="astructUA__ReadValueId_html"><div class="ttname"><a href="open62541/structUA__ReadValueId.html">UA_ReadValueId</a></div></div>
 <div class="ttc" id="astructUA__String_html"><div class="ttname"><a href="open62541/structUA__String.html">UA_String</a></div></div>
+<div class="ttc" id="atypes_8h_html_a01f89a3e534db4efdbb6a92ae906cffb"><div class="ttname"><a href="open62541/types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a></div><div class="ttdeci">char id nodeId</div></div>
 <div class="ttc" id="atypes_8h_html_a5f0721b034e4c44a7f81589b15ba1baf"><div class="ttname"><a href="open62541/types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a></div><div class="ttdeci">uint32_t UA_UInt32</div></div>
 </div><!-- fragment --><p>In this case, the struct contains heap-allocated members (<code>nodeId</code>, <code>indexRange</code>, and <code>dataEncoding</code>). To manage such members safely, our wrapper should inherit from <a class="el" href="classopcua_1_1Wrapper.html" title="Template base class to wrap (native) objects.">opcua::Wrapper</a> and use the <a class="el" href="structopcua_1_1TypeHandlerNative.html" title="Specialized type handler for native types.">opcua::TypeHandlerNative</a> policy, which provides appropriate handling for native open62541 types. The <a class="el" href="group__Wrapper.html#gab7f556806093b8bee70fd9a6727aaab9" title="Convenience alias for Wrapper using TypeHandlerNative.">opcua::WrapperNative</a> alias simplifies this by avoiding the need to repeat template parameters.</p>
-<h2><a class="anchor" id="autotoc_md26"></a>
+<h2><a class="anchor" id="autotoc_md27"></a>
 Minimal wrapper class</h2>
 <p>A minimal wrapper implementation looks like this:</p>
 <div class="fragment"><div class="line"><span class="keyword">class </span>ReadValueId : <span class="keyword">public</span> <a class="code hl_class" href="classopcua_1_1Wrapper.html">opcua::WrapperNative</a>&lt;UA_ReadValueId, UA_TYPES_READVALUEID&gt; {</div>
@@ -176,7 +177,7 @@ Minimal wrapper class</h2>
 <div class="fragment"><div class="line">ReadValueId rv;</div>
 <div class="line">rv-&gt;attributeId = 1;</div>
 <div class="line">// How to set access nodeId?</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md27"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md28"></a>
 Adding getters and setters</h2>
 <p>To handle nested members like <code>nodeId</code>, we can use the <a class="el" href="group__Wrapper.html#gac28a131007f1160ae702aa5124f8a9ea">opcua::asWrapper</a> helper function to access these members as their corresponding wrapper types. Below is the enhanced wrapper class with getter and setter methods:</p>
 <div class="fragment"><div class="line"><span class="keyword">class </span>ReadValueId : <span class="keyword">public</span> <a class="code hl_class" href="classopcua_1_1Wrapper.html">opcua::WrapperNative</a>&lt;UA_ReadValueId, UA_TYPES_READVALUEID&gt; {</div>
@@ -188,11 +189,11 @@ Adding getters and setters</h2>
 <div class="line">        opcua::asWrapper&lt;opcua::NodeId&gt;(<a class="code hl_function" href="classopcua_1_1Wrapper.html#a340615392827f2f54e03ee8f27b67eb9">handle</a>()-&gt;nodeId) = std::move(nodeId);</div>
 <div class="line">    }</div>
 <div class="line"> </div>
-<div class="line">    <a class="code hl_class" href="classopcua_1_1NodeId.html">opcua::NodeId</a>&amp; nodeId() const noexcept {</div>
+<div class="line">    <a class="code hl_class" href="classopcua_1_1NodeId.html">opcua::NodeId</a>&amp; <a class="code hl_variableRef" target="_blank" href="open62541/types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>() const noexcept {</div>
 <div class="line">        <span class="keywordflow">return</span> opcua::asWrapper&lt;opcua::NodeId&gt;(<a class="code hl_function" href="classopcua_1_1Wrapper.html#a340615392827f2f54e03ee8f27b67eb9">handle</a>()-&gt;nodeId);</div>
 <div class="line">    }</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">opcua::NodeId</a>&amp; nodeId() noexcept {</div>
+<div class="line">    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">opcua::NodeId</a>&amp; <a class="code hl_variableRef" target="_blank" href="open62541/types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>() noexcept {</div>
 <div class="line">        <span class="keywordflow">return</span> opcua::asWrapper&lt;opcua::NodeId&gt;(<a class="code hl_function" href="classopcua_1_1Wrapper.html#a340615392827f2f54e03ee8f27b67eb9">handle</a>()-&gt;nodeId);</div>
 <div class="line">    }</div>
 <div class="line"> </div>
@@ -203,7 +204,7 @@ Adding getters and setters</h2>
 <div class="line">    <span class="comment">// ...</span></div>
 <div class="line">};</div>
 <div class="ttc" id="aclassopcua_1_1NodeId_html"><div class="ttname"><a href="classopcua_1_1NodeId.html">opcua::NodeId</a></div><div class="ttdoc">UA_NodeId wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00652">types.hpp:652</a></div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md28"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md29"></a>
 Usage example</h2>
 <p>With these getters and setters, accessing and modifying <code>nodeId</code> becomes straightforward:</p>
 <div class="fragment"><div class="line">ReadValueId rv;</div>

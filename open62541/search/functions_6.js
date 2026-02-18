@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['failed_0',['failed',['../mbedtls__sockets_8h.html#af42b8c4606cebe58b226d2a125241ca6',1,'mbedtls_sockets.h']]],
-  ['filterevent_1',['filterEvent',['../ua__server__internal_8h.html#a01b726160e4c581536988afc4200cfe8',1,'ua_server_internal.h']]]
+  ['getnodeclass_0',['getNodeClass',['../testHelper_8h.html#a3893ec1043a6c21cee6e399d1a39d8b8',1,'testHelper.h']]],
+  ['getpublisheddatasetconfig_1',['getPublishedDataSetConfig',['../ua__pubsub_8h.html#a72ca6707ec0531a2ba256e76d84acbdb',1,'ua_pubsub.h']]],
+  ['gettypedefinitionid_2',['getTypeDefinitionId',['../testHelper_8h.html#aafc09de035f669ff32d76ea38bee6b7d',1,'testHelper.h']]],
+  ['gettypeid_3',['getTypeId',['../testHelper_8h.html#a39d5e62ea56de2a6dd9e811af605ac8f',1,'testHelper.h']]]
 ];

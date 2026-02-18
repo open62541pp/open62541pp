@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['x_0',['x',['../structUA__XVType.html#a7261d77838fa03112a041eaf4ce20d31',1,'UA_XVType::x'],['../struct__OpcUa__XVType.html#ad58a84b48af37032bbc317c7f0e554db',1,'_OpcUa_XVType::X']]],
+  ['x_0',['x',['../structUA__ThreeDVector.html#ab82b1259f51d688a0e53525464242035',1,'UA_ThreeDVector::x'],['../structUA__ThreeDCartesianCoordinates.html#a324a4b71fbd0dd233f9529bc404057cb',1,'UA_ThreeDCartesianCoordinates::x'],['../structUA__XVType.html#a7261d77838fa03112a041eaf4ce20d31',1,'UA_XVType::x'],['../struct__OpcUa__XVType.html#ad58a84b48af37032bbc317c7f0e554db',1,'_OpcUa_XVType::X']]],
   ['xht_2eh_1',['xht.h',['../xht_8h.html',1,'']]],
   ['xht_5ffree_2',['xht_free',['../xht_8h.html#a0b80185ab76e2b04ef269f3bc18e1f4f',1,'xht.h']]],
   ['xht_5fget_3',['xht_get',['../xht_8h.html#aea42e90fb2b018712823c6b692306ff2',1,'xht.h']]],

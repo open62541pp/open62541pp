@@ -1,4 +1,24 @@
 var searchData=
 [
-  ['endif_0',['endif',['../architecture__definitions_8h.html#aa0c1167bb311135eecf24a0e7c885b7f',1,'architecture_definitions.h']]]
+  ['circleq_5fempty_0',['CIRCLEQ_EMPTY',['../open62541__queue_8h.html#a5612649227a37a22f0b8b6420d5f2c92',1,'open62541_queue.h']]],
+  ['circleq_5fend_1',['CIRCLEQ_END',['../open62541__queue_8h.html#ad5e0f98453ebaf5e7435b3cd393b8e36',1,'open62541_queue.h']]],
+  ['circleq_5fentry_2',['CIRCLEQ_ENTRY',['../open62541__queue_8h.html#abc5774651e7db6bcecf18d2b92259707',1,'open62541_queue.h']]],
+  ['circleq_5ffirst_3',['CIRCLEQ_FIRST',['../open62541__queue_8h.html#ab6bde704fab7206d75cf540048cea723',1,'open62541_queue.h']]],
+  ['circleq_5fforeach_4',['CIRCLEQ_FOREACH',['../open62541__queue_8h.html#ae97f4eb5724477c63699fafea4614b46',1,'open62541_queue.h']]],
+  ['circleq_5fforeach_5freverse_5',['CIRCLEQ_FOREACH_REVERSE',['../open62541__queue_8h.html#a212ecf8e0e17e1c74603b719cab4a9bc',1,'open62541_queue.h']]],
+  ['circleq_5fforeach_5freverse_5fsafe_6',['CIRCLEQ_FOREACH_REVERSE_SAFE',['../open62541__queue_8h.html#a8171cb37e52482568fb13d573050a0c6',1,'open62541_queue.h']]],
+  ['circleq_5fforeach_5fsafe_7',['CIRCLEQ_FOREACH_SAFE',['../open62541__queue_8h.html#af86648dc74cd25049ffb45f792ff5d8c',1,'open62541_queue.h']]],
+  ['circleq_5fhead_8',['CIRCLEQ_HEAD',['../open62541__queue_8h.html#ac564235b07f0c8c8db2a7957d37300ee',1,'open62541_queue.h']]],
+  ['circleq_5fhead_5finitializer_9',['CIRCLEQ_HEAD_INITIALIZER',['../open62541__queue_8h.html#a66bcae453448e43a4233428494aca741',1,'open62541_queue.h']]],
+  ['circleq_5finit_10',['CIRCLEQ_INIT',['../open62541__queue_8h.html#a2c12c697981b6dbe21822ccdfd8decfd',1,'open62541_queue.h']]],
+  ['circleq_5finsert_5fafter_11',['CIRCLEQ_INSERT_AFTER',['../open62541__queue_8h.html#a108b36ff00cbf59efbbf185baac770b4',1,'open62541_queue.h']]],
+  ['circleq_5finsert_5fbefore_12',['CIRCLEQ_INSERT_BEFORE',['../open62541__queue_8h.html#af5cda165eacfbfe150e86c12baa96089',1,'open62541_queue.h']]],
+  ['circleq_5finsert_5fhead_13',['CIRCLEQ_INSERT_HEAD',['../open62541__queue_8h.html#a2826789c50d93610c6c1e2f76651259a',1,'open62541_queue.h']]],
+  ['circleq_5finsert_5ftail_14',['CIRCLEQ_INSERT_TAIL',['../open62541__queue_8h.html#aa2b767125267fa26ca10e21fa358008c',1,'open62541_queue.h']]],
+  ['circleq_5flast_15',['CIRCLEQ_LAST',['../open62541__queue_8h.html#a5e9a63e6896e72acbf0bdbdf45baeb1a',1,'open62541_queue.h']]],
+  ['circleq_5fnext_16',['CIRCLEQ_NEXT',['../open62541__queue_8h.html#a7d1437823e61cb4941eee6a05705f567',1,'open62541_queue.h']]],
+  ['circleq_5fprev_17',['CIRCLEQ_PREV',['../open62541__queue_8h.html#ae15b6cb06907211e1e5c621fdf0f4030',1,'open62541_queue.h']]],
+  ['circleq_5fremove_18',['CIRCLEQ_REMOVE',['../open62541__queue_8h.html#ae1b066e803ee2f2a3ead6e4c632b7e49',1,'open62541_queue.h']]],
+  ['circleq_5freplace_19',['CIRCLEQ_REPLACE',['../open62541__queue_8h.html#a64b29c5e5070783142981b1e364a3c80',1,'open62541_queue.h']]],
+  ['cj5_5fapi_20',['CJ5_API',['../cj5_8h.html#a8f972f876a99eae127bc70bcef04d01a',1,'cj5.h']]]
 ];

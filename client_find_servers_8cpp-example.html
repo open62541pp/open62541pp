@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.20.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.21.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -125,11 +125,11 @@ $(function() {
 <div class="line">    client.<a id="a1" name="a1"></a><a class="code hl_function" href="classopcua_1_1Client.html#a877a6d6e546a11560eff3f4442520e3f">config</a>().<a id="a2" name="a2"></a><a class="code hl_function" href="classopcua_1_1ClientConfig.html#aa20a0b1269f25e53dd7d34a51ce7aff5">setLogger</a>([](<span class="keyword">auto</span>&amp;&amp;...) {});  <span class="comment">// disable logging</span></div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> servers = client.<a id="a3" name="a3"></a><a class="code hl_function" href="classopcua_1_1Client.html#ad8a9d4f6aad75f6dca79c13f856ae9d8">findServers</a>(<span class="stringliteral">&quot;opc.tcp://localhost:4840&quot;</span>);</div>
-<div class="line">    <span class="keywordtype">size_t</span> serverIndex = 0;</div>
+<div class="line">    <span class="keywordtype">size_t</span> <a id="a4" name="a4"></a><a class="code hl_variableRef" target="_blank" href="open62541/types_8h.html#aa6d0b828450d293d1c3ec4a1be7f28de">serverIndex</a> = 0;</div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; server : servers) {</div>
-<div class="line">        <span class="keyword">const</span> <span class="keyword">auto</span>&amp; name = server.applicationUri();</div>
+<div class="line">        <span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a id="a5" name="a5"></a><a class="code hl_variableRef" target="_blank" href="open62541/types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a> = server.applicationUri();</div>
 <div class="line">        std::cout</div>
-<div class="line">            &lt;&lt; <span class="stringliteral">&quot;Server[&quot;</span> &lt;&lt; serverIndex++ &lt;&lt; <span class="stringliteral">&quot;] &quot;</span> &lt;&lt; name &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;Server[&quot;</span> &lt;&lt; <a class="code hl_variableRef" target="_blank" href="open62541/types_8h.html#aa6d0b828450d293d1c3ec4a1be7f28de">serverIndex</a>++ &lt;&lt; <span class="stringliteral">&quot;] &quot;</span> &lt;&lt; <a class="code hl_variableRef" target="_blank" href="open62541/types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot;\tName:             &quot;</span> &lt;&lt; server.applicationName().text() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot;\tApplication URI:  &quot;</span> &lt;&lt; server.applicationUri() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot;\tProduct URI:      &quot;</span> &lt;&lt; server.productUri() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
@@ -171,6 +171,8 @@ $(function() {
 <div class="ttc" id="agroup__Wrapper_html_ga6a89265e72bcab5596a1f486b7cfe8b3"><div class="ttname"><a href="group__Wrapper.html#ga6a89265e72bcab5596a1f486b7cfe8b3">opcua::ua::ApplicationType</a></div><div class="ttdeci">ApplicationType</div><div class="ttdoc">Application type.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l00115">types.hpp:115</a></div></div>
 <div class="ttc" id="agroup__Wrapper_html_ga8747da9421645210ff2d7a76d84d0a14"><div class="ttname"><a href="group__Wrapper.html#ga8747da9421645210ff2d7a76d84d0a14">opcua::ua::MessageSecurityMode</a></div><div class="ttdeci">MessageSecurityMode</div><div class="ttdoc">Message security mode.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l00215">types.hpp:215</a></div></div>
 <div class="ttc" id="anamespaceopcua_html_a3d1494b8f3ef24a9c3a5c8ecc0724361"><div class="ttname"><a href="namespaceopcua.html#a3d1494b8f3ef24a9c3a5c8ecc0724361">opcua::toString</a></div><div class="ttdeci">String toString(const NumericRange &amp;range)</div></div>
+<div class="ttc" id="atypes_8h_html_a9eba43b3db66d681ff1c7085a9eb4882"><div class="ttname"><a href="open62541/types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a></div><div class="ttdeci">qn name</div></div>
+<div class="ttc" id="atypes_8h_html_aa6d0b828450d293d1c3ec4a1be7f28de"><div class="ttname"><a href="open62541/types_8h.html#aa6d0b828450d293d1c3ec4a1be7f28de">serverIndex</a></div><div class="ttdeci">id serverIndex</div></div>
 </div><!-- fragment --> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

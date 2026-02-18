@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.20.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.21.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -90,17 +90,17 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#autotoc_md13">Completion tokens</a><ul><li class="level2"><a href="#autotoc_md14">Callback function</a></li>
-<li class="level2"><a href="#autotoc_md15">Future completion token</a></li>
-<li class="level2"><a href="#autotoc_md16">Deferred completion token</a></li>
-<li class="level2"><a href="#autotoc_md17">Detached completion token</a></li>
-<li class="level2"><a href="#autotoc_md18">Custom completion token</a></li>
+<ul><li class="level1"><a href="#autotoc_md14">Completion tokens</a><ul><li class="level2"><a href="#autotoc_md15">Callback function</a></li>
+<li class="level2"><a href="#autotoc_md16">Future completion token</a></li>
+<li class="level2"><a href="#autotoc_md17">Deferred completion token</a></li>
+<li class="level2"><a href="#autotoc_md18">Detached completion token</a></li>
+<li class="level2"><a href="#autotoc_md19">Custom completion token</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="textblock"><p>Open62541pp adapts the well-proven <a href="https://think-async.com/asio/asio-1.28.0/doc/asio/overview/model.html" target="_blank">asynchronous model of (Boost) Asio</a>. A key goal of Asio's asynchronous model is to support multiple composition mechanisms. This is achieved via completion tokens.</p>
-<h1><a class="anchor" id="autotoc_md13"></a>
+<h1><a class="anchor" id="autotoc_md14"></a>
 Completion tokens</h1>
 <p>Open62541pp accepts completion tokens as the final argument of asynchronous operations.</p>
 <div class="fragment"><div class="line"><span class="comment">// Function signature of the completion handler: void(opcua::ReadResponse&amp;)</span></div>
@@ -121,7 +121,7 @@ Completion tokens</h1>
 <li><code><a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863" title="Detached completion token object.">opcua::useDetached</a></code> to detach the asynchronous operation</li>
 <li>Custom tokens by providing template specializations for <code><a class="el" href="structopcua_1_1AsyncResult.html">opcua::AsyncResult</a></code></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md14"></a>
+<h2><a class="anchor" id="autotoc_md15"></a>
 Callback function</h2>
 <p>If the user passes a function object as the completion token, the asynchronous operation behaves as previously described: the operation begins, and when the operation completes the result is passed to the callback. The callback function must match the expected signature:</p>
 <div class="fragment"><div class="line">void(T);   <span class="comment">// for trivially copyable types</span></div>
@@ -135,13 +135,13 @@ Callback function</h2>
 <div class="line">);</div>
 <div class="ttc" id="aclassopcua_1_1ua_1_1ReadResponse_html"><div class="ttname"><a href="classopcua_1_1ua_1_1ReadResponse.html">opcua::ReadResponse</a></div><div class="ttdoc">UA_ReadResponse wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l01416">types.hpp:1416</a></div></div>
 </div><!-- fragment --><p>The callback is executed within the client's or server's event loop. Please make sure not to block the event loop. Waiting for asynchronous results within the callback will block the further execution of the event loop.</p>
-<h2><a class="anchor" id="autotoc_md15"></a>
+<h2><a class="anchor" id="autotoc_md16"></a>
 Future completion token</h2>
 <p>The special token <code><a class="el" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c" title="Future completion token object.">opcua::useFuture</a></code> can be passed as completion token to return a future object <code>std::future&lt;T&gt;</code>.</p>
 <div class="fragment"><div class="line">std::future&lt;opcua::ReadResponse&gt; future = <a class="code hl_function" href="group__Read.html#ga538a98e90445b1e39dc099edda570752">opcua::services::readAsync</a>(client, request, <a class="code hl_variable" href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">opcua::useFuture</a>);</div>
 <div class="line"><span class="keyword">auto</span> response = future.get();</div>
 <div class="ttc" id="agroup__Async_html_gae789f136da0b3d4d725f1ba59ca0614c"><div class="ttname"><a href="group__Async.html#gae789f136da0b3d4d725f1ba59ca0614c">opcua::useFuture</a></div><div class="ttdeci">constexpr UseFutureToken useFuture</div><div class="ttdoc">Future completion token object.</div><div class="ttdef"><b>Definition</b> <a href="async_8hpp_source.html#l00060">async.hpp:60</a></div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md16"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md17"></a>
 Deferred completion token</h2>
 <p>The token <code><a class="el" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36" title="Deferred completion token object.">opcua::useDeferred</a></code> is used to indicate that an asynchronous operation should return a function object to lazily launch the operation.</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> func = <a class="code hl_function" href="group__Read.html#ga538a98e90445b1e39dc099edda570752">opcua::services::readAsync</a>(client, request, <a class="code hl_variable" href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">opcua::useDeferred</a>);</div>
@@ -151,13 +151,13 @@ Deferred completion token</h2>
 <div class="line"><span class="keyword">auto</span> future = func(useFuture);</div>
 <div class="line"><span class="comment">// ...</span></div>
 <div class="ttc" id="agroup__Async_html_ga85a5c61e4024d350f333d7763bbdff36"><div class="ttname"><a href="group__Async.html#ga85a5c61e4024d350f333d7763bbdff36">opcua::useDeferred</a></div><div class="ttdeci">constexpr UseDeferredToken useDeferred</div><div class="ttdoc">Deferred completion token object.</div><div class="ttdef"><b>Definition</b> <a href="async_8hpp_source.html#l00090">async.hpp:90</a></div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md17"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md18"></a>
 Detached completion token</h2>
 <p>The token <code><a class="el" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863" title="Detached completion token object.">opcua::useDetached</a></code> is used to indicate that an asynchronous operation is detached. That is, there is no completion handler waiting for the operation's result.</p>
 <div class="fragment"><div class="line"><a class="code hl_function" href="group__Read.html#ga538a98e90445b1e39dc099edda570752">opcua::services::readAsync</a>(client, request, <a class="code hl_variable" href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">opcua::useDetached</a>);</div>
 <div class="line"><span class="comment">// no way to check if the operation succeeded...</span></div>
 <div class="ttc" id="agroup__Async_html_ga84807736f5bcb08a19160455f71a8863"><div class="ttname"><a href="group__Async.html#ga84807736f5bcb08a19160455f71a8863">opcua::useDetached</a></div><div class="ttdeci">constexpr UseDetachedToken useDetached</div><div class="ttdoc">Detached completion token object.</div><div class="ttdef"><b>Definition</b> <a href="async_8hpp_source.html#l00125">async.hpp:125</a></div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md18"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md19"></a>
 Custom completion token</h2>
 <p>The <code><a class="el" href="structopcua_1_1AsyncResult.html">opcua::AsyncResult</a></code> trait is a customization point to define user-defined completion tokens via template specialization:</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>PrintResultToken {};</div>

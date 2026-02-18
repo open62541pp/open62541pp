@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.15</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.15</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -100,33 +100,33 @@ Data Fields</h2></td></tr>
 <tr class="separator:a46bcd813ab2fc5a4cd166036d876d710"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1a7d872a09de4443d3bf4dbc4da8501" id="r_ac1a7d872a09de4443d3bf4dbc4da8501"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__UserTokenPolicy.html">UA_UserTokenPolicy</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__AccessControl.html#ac1a7d872a09de4443d3bf4dbc4da8501">userTokenPolicies</a></td></tr>
 <tr class="separator:ac1a7d872a09de4443d3bf4dbc4da8501"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab761e535e2e4b151e45c7917026fcbdb" id="r_ab761e535e2e4b151e45c7917026fcbdb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__AccessControl.html#ab761e535e2e4b151e45c7917026fcbdb">activateSession</a> )(<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__EndpointDescription.html">UA_EndpointDescription</a> *endpointDescription, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *secureChannelRemoteCertificate, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, const <a class="el" href="structUA__ExtensionObject.html">UA_ExtensionObject</a> *userIdentityToken, void **sessionContext)</td></tr>
+<tr class="memitem:ab761e535e2e4b151e45c7917026fcbdb" id="r_ab761e535e2e4b151e45c7917026fcbdb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__AccessControl.html#ab761e535e2e4b151e45c7917026fcbdb">activateSession</a> )(<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__EndpointDescription.html">UA_EndpointDescription</a> *endpointDescription, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *secureChannelRemoteCertificate, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, const <a class="el" href="structUA__ExtensionObject.html">UA_ExtensionObject</a> *userIdentityToken, void **sessionContext)</td></tr>
 <tr class="separator:ab761e535e2e4b151e45c7917026fcbdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a064bf01efdbabd6953908a2e06f6c38b" id="r_a064bf01efdbabd6953908a2e06f6c38b"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__AccessControl.html#a064bf01efdbabd6953908a2e06f6c38b">closeSession</a> )(<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext)</td></tr>
+<tr class="memitem:a064bf01efdbabd6953908a2e06f6c38b" id="r_a064bf01efdbabd6953908a2e06f6c38b"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__AccessControl.html#a064bf01efdbabd6953908a2e06f6c38b">closeSession</a> )(<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext)</td></tr>
 <tr class="separator:a064bf01efdbabd6953908a2e06f6c38b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c1f285f2faa638e5816171d17253656" id="r_a9c1f285f2faa638e5816171d17253656"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__AccessControl.html#a9c1f285f2faa638e5816171d17253656">getUserRightsMask</a> )(<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, void *nodeContext)</td></tr>
+<tr class="memitem:a9c1f285f2faa638e5816171d17253656" id="r_a9c1f285f2faa638e5816171d17253656"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__AccessControl.html#a9c1f285f2faa638e5816171d17253656">getUserRightsMask</a> )(<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *<a class="el" href="types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>, void *nodeContext)</td></tr>
 <tr class="separator:a9c1f285f2faa638e5816171d17253656"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ae3088b429c76f89d14e299801a55ce" id="r_a3ae3088b429c76f89d14e299801a55ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__AccessControl.html#a3ae3088b429c76f89d14e299801a55ce">getUserAccessLevel</a> )(<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, void *nodeContext)</td></tr>
+<tr class="memitem:a3ae3088b429c76f89d14e299801a55ce" id="r_a3ae3088b429c76f89d14e299801a55ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__AccessControl.html#a3ae3088b429c76f89d14e299801a55ce">getUserAccessLevel</a> )(<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *<a class="el" href="types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>, void *nodeContext)</td></tr>
 <tr class="separator:a3ae3088b429c76f89d14e299801a55ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20ad7060cbadb9017f1cdfe6f1faa726" id="r_a20ad7060cbadb9017f1cdfe6f1faa726"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__AccessControl.html#a20ad7060cbadb9017f1cdfe6f1faa726">getUserExecutable</a> )(<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *methodId, void *methodContext)</td></tr>
+<tr class="memitem:a20ad7060cbadb9017f1cdfe6f1faa726" id="r_a20ad7060cbadb9017f1cdfe6f1faa726"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__AccessControl.html#a20ad7060cbadb9017f1cdfe6f1faa726">getUserExecutable</a> )(<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *methodId, void *methodContext)</td></tr>
 <tr class="separator:a20ad7060cbadb9017f1cdfe6f1faa726"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4b5dd696edd82752d584a143b828d10b" id="r_a4b5dd696edd82752d584a143b828d10b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__AccessControl.html#a4b5dd696edd82752d584a143b828d10b">getUserExecutableOnObject</a> )(<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *methodId, void *methodContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *objectId, void *objectContext)</td></tr>
+<tr class="memitem:a4b5dd696edd82752d584a143b828d10b" id="r_a4b5dd696edd82752d584a143b828d10b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__AccessControl.html#a4b5dd696edd82752d584a143b828d10b">getUserExecutableOnObject</a> )(<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *methodId, void *methodContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *objectId, void *objectContext)</td></tr>
 <tr class="separator:a4b5dd696edd82752d584a143b828d10b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa15c555191d1a4143982a6291ebf3e89" id="r_aa15c555191d1a4143982a6291ebf3e89"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__AccessControl.html#aa15c555191d1a4143982a6291ebf3e89">allowAddNode</a> )(<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__AddNodesItem.html">UA_AddNodesItem</a> *item)</td></tr>
+<tr class="memitem:aa15c555191d1a4143982a6291ebf3e89" id="r_aa15c555191d1a4143982a6291ebf3e89"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__AccessControl.html#aa15c555191d1a4143982a6291ebf3e89">allowAddNode</a> )(<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__AddNodesItem.html">UA_AddNodesItem</a> *item)</td></tr>
 <tr class="separator:aa15c555191d1a4143982a6291ebf3e89"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f8bc16b2657ae4e697357bc6b567c53" id="r_a6f8bc16b2657ae4e697357bc6b567c53"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__AccessControl.html#a6f8bc16b2657ae4e697357bc6b567c53">allowAddReference</a> )(<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__AddReferencesItem.html">UA_AddReferencesItem</a> *item)</td></tr>
+<tr class="memitem:a6f8bc16b2657ae4e697357bc6b567c53" id="r_a6f8bc16b2657ae4e697357bc6b567c53"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__AccessControl.html#a6f8bc16b2657ae4e697357bc6b567c53">allowAddReference</a> )(<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__AddReferencesItem.html">UA_AddReferencesItem</a> *item)</td></tr>
 <tr class="separator:a6f8bc16b2657ae4e697357bc6b567c53"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa14664a6ac9de8b1300e75f452995bc9" id="r_aa14664a6ac9de8b1300e75f452995bc9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__AccessControl.html#aa14664a6ac9de8b1300e75f452995bc9">allowDeleteNode</a> )(<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__DeleteNodesItem.html">UA_DeleteNodesItem</a> *item)</td></tr>
+<tr class="memitem:aa14664a6ac9de8b1300e75f452995bc9" id="r_aa14664a6ac9de8b1300e75f452995bc9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__AccessControl.html#aa14664a6ac9de8b1300e75f452995bc9">allowDeleteNode</a> )(<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__DeleteNodesItem.html">UA_DeleteNodesItem</a> *item)</td></tr>
 <tr class="separator:aa14664a6ac9de8b1300e75f452995bc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9198ca7f3530bd8823724dd779a7128d" id="r_a9198ca7f3530bd8823724dd779a7128d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__AccessControl.html#a9198ca7f3530bd8823724dd779a7128d">allowDeleteReference</a> )(<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__DeleteReferencesItem.html">UA_DeleteReferencesItem</a> *item)</td></tr>
+<tr class="memitem:a9198ca7f3530bd8823724dd779a7128d" id="r_a9198ca7f3530bd8823724dd779a7128d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__AccessControl.html#a9198ca7f3530bd8823724dd779a7128d">allowDeleteReference</a> )(<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__DeleteReferencesItem.html">UA_DeleteReferencesItem</a> *item)</td></tr>
 <tr class="separator:a9198ca7f3530bd8823724dd779a7128d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ad48e792f8946acf223b2c46962b6b2" id="r_a5ad48e792f8946acf223b2c46962b6b2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__AccessControl.html#a5ad48e792f8946acf223b2c46962b6b2">allowBrowseNode</a> )(<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, void *nodeContext)</td></tr>
+<tr class="memitem:a5ad48e792f8946acf223b2c46962b6b2" id="r_a5ad48e792f8946acf223b2c46962b6b2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__AccessControl.html#a5ad48e792f8946acf223b2c46962b6b2">allowBrowseNode</a> )(<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *<a class="el" href="types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>, void *nodeContext)</td></tr>
 <tr class="separator:a5ad48e792f8946acf223b2c46962b6b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22f7655ca13995e8d9e0e26bce767df8" id="r_a22f7655ca13995e8d9e0e26bce767df8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__AccessControl.html#a22f7655ca13995e8d9e0e26bce767df8">allowTransferSubscription</a> )(<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *oldSessionId, void *oldSessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *newSessionId, void *newSessionContext)</td></tr>
+<tr class="memitem:a22f7655ca13995e8d9e0e26bce767df8" id="r_a22f7655ca13995e8d9e0e26bce767df8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__AccessControl.html#a22f7655ca13995e8d9e0e26bce767df8">allowTransferSubscription</a> )(<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *oldSessionId, void *oldSessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *newSessionId, void *newSessionContext)</td></tr>
 <tr class="separator:a22f7655ca13995e8d9e0e26bce767df8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1cb4060435eedca75623dc18330d904" id="r_af1cb4060435eedca75623dc18330d904"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__AccessControl.html#af1cb4060435eedca75623dc18330d904">allowHistoryUpdateUpdateData</a> )(<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, UA_PerformUpdateType performInsertReplace, const <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *value)</td></tr>
+<tr class="memitem:af1cb4060435eedca75623dc18330d904" id="r_af1cb4060435eedca75623dc18330d904"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__AccessControl.html#af1cb4060435eedca75623dc18330d904">allowHistoryUpdateUpdateData</a> )(<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *<a class="el" href="types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>, <a class="el" href="types__generated_8h.html#ac84791f105355bb52f44f4c1704e650a">UA_PerformUpdateType</a> performInsertReplace, const <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *value)</td></tr>
 <tr class="separator:af1cb4060435eedca75623dc18330d904"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95f5e0482fa8545d8a41b9efbfa51462" id="r_a95f5e0482fa8545d8a41b9efbfa51462"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__AccessControl.html#a95f5e0482fa8545d8a41b9efbfa51462">allowHistoryUpdateDeleteRawModified</a> )(<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, <a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> startTimestamp, <a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> endTimestamp, bool isDeleteModified)</td></tr>
+<tr class="memitem:a95f5e0482fa8545d8a41b9efbfa51462" id="r_a95f5e0482fa8545d8a41b9efbfa51462"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__AccessControl.html#a95f5e0482fa8545d8a41b9efbfa51462">allowHistoryUpdateDeleteRawModified</a> )(<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *<a class="el" href="types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>, UA_DateTime startTimestamp, UA_DateTime endTimestamp, bool isDeleteModified)</td></tr>
 <tr class="separator:a95f5e0482fa8545d8a41b9efbfa51462"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -140,12 +140,12 @@ Data Fields</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_AccessControl::activateSession) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__EndpointDescription.html">UA_EndpointDescription</a> *endpointDescription, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *secureChannelRemoteCertificate, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, const <a class="el" href="structUA__ExtensionObject.html">UA_ExtensionObject</a> *userIdentityToken, void **sessionContext)</td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_AccessControl::activateSession) (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__EndpointDescription.html">UA_EndpointDescription</a> *endpointDescription, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *secureChannelRemoteCertificate, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, const <a class="el" href="structUA__ExtensionObject.html">UA_ExtensionObject</a> *userIdentityToken, void **sessionContext)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="accesscontrol_8h_source.html#l00033">33</a> of file <a class="el" href="accesscontrol_8h_source.html">accesscontrol.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="accesscontrol_8h_source.html#l00037">37</a> of file <a class="el" href="accesscontrol_8h_source.html">accesscontrol.h</a>.</p>
 
 </div>
 </div>
@@ -156,12 +156,12 @@ Data Fields</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(* UA_AccessControl::allowAddNode) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__AddNodesItem.html">UA_AddNodesItem</a> *item)</td>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(* UA_AccessControl::allowAddNode) (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__AddNodesItem.html">UA_AddNodesItem</a> *item)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="accesscontrol_8h_source.html#l00067">67</a> of file <a class="el" href="accesscontrol_8h_source.html">accesscontrol.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="accesscontrol_8h_source.html#l00071">71</a> of file <a class="el" href="accesscontrol_8h_source.html">accesscontrol.h</a>.</p>
 
 </div>
 </div>
@@ -172,12 +172,12 @@ Data Fields</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(* UA_AccessControl::allowAddReference) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__AddReferencesItem.html">UA_AddReferencesItem</a> *item)</td>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(* UA_AccessControl::allowAddReference) (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__AddReferencesItem.html">UA_AddReferencesItem</a> *item)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="accesscontrol_8h_source.html#l00072">72</a> of file <a class="el" href="accesscontrol_8h_source.html">accesscontrol.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="accesscontrol_8h_source.html#l00076">76</a> of file <a class="el" href="accesscontrol_8h_source.html">accesscontrol.h</a>.</p>
 
 </div>
 </div>
@@ -188,12 +188,12 @@ Data Fields</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(* UA_AccessControl::allowBrowseNode) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, void *nodeContext)</td>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(* UA_AccessControl::allowBrowseNode) (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *<a class="el" href="types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>, void *nodeContext)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="accesscontrol_8h_source.html#l00087">87</a> of file <a class="el" href="accesscontrol_8h_source.html">accesscontrol.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="accesscontrol_8h_source.html#l00091">91</a> of file <a class="el" href="accesscontrol_8h_source.html">accesscontrol.h</a>.</p>
 
 </div>
 </div>
@@ -204,12 +204,12 @@ Data Fields</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(* UA_AccessControl::allowDeleteNode) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__DeleteNodesItem.html">UA_DeleteNodesItem</a> *item)</td>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(* UA_AccessControl::allowDeleteNode) (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__DeleteNodesItem.html">UA_DeleteNodesItem</a> *item)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="accesscontrol_8h_source.html#l00077">77</a> of file <a class="el" href="accesscontrol_8h_source.html">accesscontrol.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="accesscontrol_8h_source.html#l00081">81</a> of file <a class="el" href="accesscontrol_8h_source.html">accesscontrol.h</a>.</p>
 
 </div>
 </div>
@@ -220,12 +220,12 @@ Data Fields</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(* UA_AccessControl::allowDeleteReference) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__DeleteReferencesItem.html">UA_DeleteReferencesItem</a> *item)</td>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(* UA_AccessControl::allowDeleteReference) (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__DeleteReferencesItem.html">UA_DeleteReferencesItem</a> *item)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="accesscontrol_8h_source.html#l00082">82</a> of file <a class="el" href="accesscontrol_8h_source.html">accesscontrol.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="accesscontrol_8h_source.html#l00086">86</a> of file <a class="el" href="accesscontrol_8h_source.html">accesscontrol.h</a>.</p>
 
 </div>
 </div>
@@ -236,12 +236,12 @@ Data Fields</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(* UA_AccessControl::allowHistoryUpdateDeleteRawModified) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, <a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> startTimestamp, <a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> endTimestamp, bool isDeleteModified)</td>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(* UA_AccessControl::allowHistoryUpdateDeleteRawModified) (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *<a class="el" href="types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>, UA_DateTime startTimestamp, UA_DateTime endTimestamp, bool isDeleteModified)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="accesscontrol_8h_source.html#l00109">109</a> of file <a class="el" href="accesscontrol_8h_source.html">accesscontrol.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="accesscontrol_8h_source.html#l00113">113</a> of file <a class="el" href="accesscontrol_8h_source.html">accesscontrol.h</a>.</p>
 
 </div>
 </div>
@@ -252,12 +252,12 @@ Data Fields</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(* UA_AccessControl::allowHistoryUpdateUpdateData) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, UA_PerformUpdateType performInsertReplace, const <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *value)</td>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(* UA_AccessControl::allowHistoryUpdateUpdateData) (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *<a class="el" href="types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>, <a class="el" href="types__generated_8h.html#ac84791f105355bb52f44f4c1704e650a">UA_PerformUpdateType</a> performInsertReplace, const <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *value)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="accesscontrol_8h_source.html#l00102">102</a> of file <a class="el" href="accesscontrol_8h_source.html">accesscontrol.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="accesscontrol_8h_source.html#l00106">106</a> of file <a class="el" href="accesscontrol_8h_source.html">accesscontrol.h</a>.</p>
 
 </div>
 </div>
@@ -268,12 +268,12 @@ Data Fields</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(* UA_AccessControl::allowTransferSubscription) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *oldSessionId, void *oldSessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *newSessionId, void *newSessionContext)</td>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(* UA_AccessControl::allowTransferSubscription) (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *oldSessionId, void *oldSessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *newSessionId, void *newSessionContext)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="accesscontrol_8h_source.html#l00095">95</a> of file <a class="el" href="accesscontrol_8h_source.html">accesscontrol.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="accesscontrol_8h_source.html#l00099">99</a> of file <a class="el" href="accesscontrol_8h_source.html">accesscontrol.h</a>.</p>
 
 </div>
 </div>
@@ -300,12 +300,12 @@ Data Fields</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void(* UA_AccessControl::closeSession) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext)</td>
+          <td class="memname">void(* UA_AccessControl::closeSession) (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="accesscontrol_8h_source.html#l00041">41</a> of file <a class="el" href="accesscontrol_8h_source.html">accesscontrol.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="accesscontrol_8h_source.html#l00045">45</a> of file <a class="el" href="accesscontrol_8h_source.html">accesscontrol.h</a>.</p>
 
 </div>
 </div>
@@ -332,12 +332,12 @@ Data Fields</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a>(* UA_AccessControl::getUserAccessLevel) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, void *nodeContext)</td>
+          <td class="memname"><a class="el" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a>(* UA_AccessControl::getUserAccessLevel) (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *<a class="el" href="types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>, void *nodeContext)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="accesscontrol_8h_source.html#l00050">50</a> of file <a class="el" href="accesscontrol_8h_source.html">accesscontrol.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="accesscontrol_8h_source.html#l00054">54</a> of file <a class="el" href="accesscontrol_8h_source.html">accesscontrol.h</a>.</p>
 
 </div>
 </div>
@@ -348,12 +348,12 @@ Data Fields</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(* UA_AccessControl::getUserExecutable) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *methodId, void *methodContext)</td>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(* UA_AccessControl::getUserExecutable) (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *methodId, void *methodContext)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="accesscontrol_8h_source.html#l00055">55</a> of file <a class="el" href="accesscontrol_8h_source.html">accesscontrol.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="accesscontrol_8h_source.html#l00059">59</a> of file <a class="el" href="accesscontrol_8h_source.html">accesscontrol.h</a>.</p>
 
 </div>
 </div>
@@ -364,12 +364,12 @@ Data Fields</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(* UA_AccessControl::getUserExecutableOnObject) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *methodId, void *methodContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *objectId, void *objectContext)</td>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(* UA_AccessControl::getUserExecutableOnObject) (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *methodId, void *methodContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *objectId, void *objectContext)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="accesscontrol_8h_source.html#l00061">61</a> of file <a class="el" href="accesscontrol_8h_source.html">accesscontrol.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="accesscontrol_8h_source.html#l00065">65</a> of file <a class="el" href="accesscontrol_8h_source.html">accesscontrol.h</a>.</p>
 
 </div>
 </div>
@@ -380,12 +380,12 @@ Data Fields</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>(* UA_AccessControl::getUserRightsMask) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, void *nodeContext)</td>
+          <td class="memname"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>(* UA_AccessControl::getUserRightsMask) (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, <a class="el" href="structUA__AccessControl.html">UA_AccessControl</a> *ac, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *<a class="el" href="types_8h.html#a01f89a3e534db4efdbb6a92ae906cffb">nodeId</a>, void *nodeContext)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="accesscontrol_8h_source.html#l00045">45</a> of file <a class="el" href="accesscontrol_8h_source.html">accesscontrol.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="accesscontrol_8h_source.html#l00049">49</a> of file <a class="el" href="accesscontrol_8h_source.html">accesscontrol.h</a>.</p>
 
 </div>
 </div>

@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.15</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.15</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -87,19 +87,34 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Data Structures</a> &#124;
 <a href="#define-members">Macros</a>  </div>
   <div class="headertitle"><div class="title">config.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="posix_2ua__architecture_8h_source.html">posix/ua_architecture.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;stddef.h&gt;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;inttypes.h&gt;</code><br />
+<code>#include &lt;float.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;alloca.h&gt;</code><br />
+<code>#include &lt;assert.h&gt;</code><br />
+<code>#include &lt;pthread.h&gt;</code><br />
 </div>
 <p><a href="config_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Lock.html">UA_Lock</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a53dfaae6197e9a8e6f5db949bdc7374b" id="r_a53dfaae6197e9a8e6f5db949bdc7374b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a53dfaae6197e9a8e6f5db949bdc7374b">UA_OPEN62541_VER_MAJOR</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:a53dfaae6197e9a8e6f5db949bdc7374b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e58f62ae11aa938328fdd64536010af" id="r_a4e58f62ae11aa938328fdd64536010af"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a4e58f62ae11aa938328fdd64536010af">UA_OPEN62541_VER_MINOR</a>&#160;&#160;&#160;3</td></tr>
+<tr class="memitem:a4e58f62ae11aa938328fdd64536010af" id="r_a4e58f62ae11aa938328fdd64536010af"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a4e58f62ae11aa938328fdd64536010af">UA_OPEN62541_VER_MINOR</a>&#160;&#160;&#160;4</td></tr>
 <tr class="separator:a4e58f62ae11aa938328fdd64536010af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4beb1180162ba39520f936e5bec541a5" id="r_a4beb1180162ba39520f936e5bec541a5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a4beb1180162ba39520f936e5bec541a5">UA_OPEN62541_VER_PATCH</a>&#160;&#160;&#160;15</td></tr>
 <tr class="separator:a4beb1180162ba39520f936e5bec541a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -107,9 +122,11 @@ Macros</h2></td></tr>
 <tr class="separator:af6f0f07cac2a8a2338f4aec7f87175d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e4005580fbbdfe3c5b46e20f86f0473" id="r_a7e4005580fbbdfe3c5b46e20f86f0473"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a7e4005580fbbdfe3c5b46e20f86f0473">UA_OPEN62541_VER_COMMIT</a>&#160;&#160;&#160;&quot;unknown-commit&quot;</td></tr>
 <tr class="separator:a7e4005580fbbdfe3c5b46e20f86f0473"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac454dde87223078505f7b1fc9327aa6d" id="r_ac454dde87223078505f7b1fc9327aa6d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#ac454dde87223078505f7b1fc9327aa6d">UA_OPEN62541_VERSION</a>&#160;&#160;&#160;&quot;v1.3.15-undefined&quot;</td></tr>
+<tr class="memitem:ac454dde87223078505f7b1fc9327aa6d" id="r_ac454dde87223078505f7b1fc9327aa6d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#ac454dde87223078505f7b1fc9327aa6d">UA_OPEN62541_VERSION</a>&#160;&#160;&#160;&quot;v1.4.15-undefined&quot;</td></tr>
 <tr class="separator:ac454dde87223078505f7b1fc9327aa6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04de75528c8ceeea2a205eb264181c2e" id="r_a04de75528c8ceeea2a205eb264181c2e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a04de75528c8ceeea2a205eb264181c2e">UA_LOGLEVEL</a>&#160;&#160;&#160;300</td></tr>
+<tr class="memitem:a28972b755cff7b214b0b7d27f16cb867" id="r_a28972b755cff7b214b0b7d27f16cb867"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a28972b755cff7b214b0b7d27f16cb867">UA_ARCHITECTURE_POSIX</a></td></tr>
+<tr class="separator:a28972b755cff7b214b0b7d27f16cb867"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04de75528c8ceeea2a205eb264181c2e" id="r_a04de75528c8ceeea2a205eb264181c2e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a04de75528c8ceeea2a205eb264181c2e">UA_LOGLEVEL</a>&#160;&#160;&#160;100</td></tr>
 <tr class="separator:a04de75528c8ceeea2a205eb264181c2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4006dadfb3dfa60195d4f91945a8867c" id="r_a4006dadfb3dfa60195d4f91945a8867c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a4006dadfb3dfa60195d4f91945a8867c">UA_ENABLE_METHODCALLS</a></td></tr>
 <tr class="separator:a4006dadfb3dfa60195d4f91945a8867c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -117,13 +134,23 @@ Macros</h2></td></tr>
 <tr class="separator:a548c053c50879d01eb95629ec267215e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40b3e20bd96944c6fe9f3b10fffd5ca3" id="r_a40b3e20bd96944c6fe9f3b10fffd5ca3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a40b3e20bd96944c6fe9f3b10fffd5ca3">UA_ENABLE_SUBSCRIPTIONS</a></td></tr>
 <tr class="separator:a40b3e20bd96944c6fe9f3b10fffd5ca3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02e26df1619b9741984ea34fc74f258b" id="r_a02e26df1619b9741984ea34fc74f258b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a02e26df1619b9741984ea34fc74f258b">UA_ENABLE_PUBSUB</a></td></tr>
+<tr class="separator:a02e26df1619b9741984ea34fc74f258b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7f40f289359ee7d6219100739ebeb56" id="r_ab7f40f289359ee7d6219100739ebeb56"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#ab7f40f289359ee7d6219100739ebeb56">UA_ENABLE_PUBSUB_INFORMATIONMODEL</a></td></tr>
+<tr class="separator:ab7f40f289359ee7d6219100739ebeb56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9adf084d143ce816158de4bf4db924b" id="r_ad9adf084d143ce816158de4bf4db924b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#ad9adf084d143ce816158de4bf4db924b">UA_ENABLE_DA</a></td></tr>
 <tr class="separator:ad9adf084d143ce816158de4bf4db924b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1dbe88e4bb91d85a6bb0d17a0b6f413" id="r_ad1dbe88e4bb91d85a6bb0d17a0b6f413"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#ad1dbe88e4bb91d85a6bb0d17a0b6f413">UA_ENABLE_DIAGNOSTICS</a></td></tr>
+<tr class="separator:ad1dbe88e4bb91d85a6bb0d17a0b6f413"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af24eb5353a492eafddd28bb364d23431" id="r_af24eb5353a492eafddd28bb364d23431"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#af24eb5353a492eafddd28bb364d23431">UA_ENABLE_HISTORIZING</a></td></tr>
+<tr class="separator:af24eb5353a492eafddd28bb364d23431"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad99ca642961a9f3696bc7903c25a2d74" id="r_ad99ca642961a9f3696bc7903c25a2d74"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#ad99ca642961a9f3696bc7903c25a2d74">UA_ENABLE_PARSING</a></td></tr>
 <tr class="separator:ad99ca642961a9f3696bc7903c25a2d74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5038359b4b45edda1d6b7cb98a9539f" id="r_ac5038359b4b45edda1d6b7cb98a9539f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#ac5038359b4b45edda1d6b7cb98a9539f">UA_ENABLE_SUBSCRIPTIONS_EVENTS</a></td></tr>
 <tr class="separator:ac5038359b4b45edda1d6b7cb98a9539f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3fb520d50d28b6f12de3818245998a15" id="r_a3fb520d50d28b6f12de3818245998a15"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a3fb520d50d28b6f12de3818245998a15">UA_MULTITHREADING</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memitem:a8a5d9b4d593c1e6905e0682a27ae6faf" id="r_a8a5d9b4d593c1e6905e0682a27ae6faf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a8a5d9b4d593c1e6905e0682a27ae6faf">UA_ENABLE_JSON_ENCODING</a></td></tr>
+<tr class="separator:a8a5d9b4d593c1e6905e0682a27ae6faf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fb520d50d28b6f12de3818245998a15" id="r_a3fb520d50d28b6f12de3818245998a15"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a3fb520d50d28b6f12de3818245998a15">UA_MULTITHREADING</a>&#160;&#160;&#160;100</td></tr>
 <tr class="separator:a3fb520d50d28b6f12de3818245998a15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa17bee884fa30dc9e6ef2d194e4bc92d" id="r_aa17bee884fa30dc9e6ef2d194e4bc92d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#aa17bee884fa30dc9e6ef2d194e4bc92d">UA_ENABLE_STATUSCODE_DESCRIPTIONS</a></td></tr>
 <tr class="separator:aa17bee884fa30dc9e6ef2d194e4bc92d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -131,10 +158,10 @@ Macros</h2></td></tr>
 <tr class="separator:a00bc1e482cdb07be10f8571671de803a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aefdbb8d542ffb168e3458ca984eef0df" id="r_aefdbb8d542ffb168e3458ca984eef0df"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#aefdbb8d542ffb168e3458ca984eef0df">UA_ENABLE_NODESET_COMPILER_DESCRIPTIONS</a></td></tr>
 <tr class="separator:aefdbb8d542ffb168e3458ca984eef0df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a534af41c06b16cf423d662969ab39d26" id="r_a534af41c06b16cf423d662969ab39d26"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a534af41c06b16cf423d662969ab39d26">UA_ENABLE_DISCOVERY</a></td></tr>
+<tr class="separator:a534af41c06b16cf423d662969ab39d26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d580043222f714f393c159f4ee71fd1" id="r_a0d580043222f714f393c159f4ee71fd1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a0d580043222f714f393c159f4ee71fd1">UA_ENABLE_DISCOVERY_SEMAPHORE</a></td></tr>
 <tr class="separator:a0d580043222f714f393c159f4ee71fd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5a35fbb5459cbd1e90a57e81b06d814" id="r_af5a35fbb5459cbd1e90a57e81b06d814"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#af5a35fbb5459cbd1e90a57e81b06d814">UA_VALGRIND_INTERACTIVE_INTERVAL</a>&#160;&#160;&#160;1000</td></tr>
-<tr class="separator:af5a35fbb5459cbd1e90a57e81b06d814"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa0ea40ca59e55e38e6efeba6994cc007" id="r_aa0ea40ca59e55e38e6efeba6994cc007"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#aa0ea40ca59e55e38e6efeba6994cc007">UA_GENERATED_NAMESPACE_ZERO</a></td></tr>
 <tr class="separator:aa0ea40ca59e55e38e6efeba6994cc007"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1893e58479ba0e17306bb323a5c94c88" id="r_a1893e58479ba0e17306bb323a5c94c88"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a1893e58479ba0e17306bb323a5c94c88">UA_DEBUG</a></td></tr>
@@ -143,16 +170,68 @@ Macros</h2></td></tr>
 <tr class="separator:aa397bffde7d792f38dcbb8e329486f9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2a857f3db1005cc1b5a41effd3adac6" id="r_ae2a857f3db1005cc1b5a41effd3adac6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#ae2a857f3db1005cc1b5a41effd3adac6">_UA_END_DECLS</a></td></tr>
 <tr class="separator:ae2a857f3db1005cc1b5a41effd3adac6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28972b755cff7b214b0b7d27f16cb867" id="r_a28972b755cff7b214b0b7d27f16cb867"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a28972b755cff7b214b0b7d27f16cb867">UA_ARCHITECTURE_POSIX</a></td></tr>
-<tr class="separator:a28972b755cff7b214b0b7d27f16cb867"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78c99ffd76a7bb3c8c74db76207e9ab4" id="r_a78c99ffd76a7bb3c8c74db76207e9ab4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a78c99ffd76a7bb3c8c74db76207e9ab4">_XOPEN_SOURCE</a>&#160;&#160;&#160;600</td></tr>
 <tr class="separator:a78c99ffd76a7bb3c8c74db76207e9ab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8fb447618db946a9e2a596d9ea18763f" id="r_a8fb447618db946a9e2a596d9ea18763f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a8fb447618db946a9e2a596d9ea18763f">_DEFAULT_SOURCE</a></td></tr>
 <tr class="separator:a8fb447618db946a9e2a596d9ea18763f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3d8a3bd0c0b677acef144f2c2ef6d73" id="r_ad3d8a3bd0c0b677acef144f2c2ef6d73"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#ad3d8a3bd0c0b677acef144f2c2ef6d73">_BSD_SOURCE</a></td></tr>
 <tr class="separator:ad3d8a3bd0c0b677acef144f2c2ef6d73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae37e6a58868bbc4d51959859db2cd8ac" id="r_ae37e6a58868bbc4d51959859db2cd8ac"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#ae37e6a58868bbc4d51959859db2cd8ac">UA_HAS_GETIFADDR</a></td></tr>
+<tr class="memitem:a369266c24eacffb87046522897a570d5" id="r_a369266c24eacffb87046522897a570d5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a369266c24eacffb87046522897a570d5">_GNU_SOURCE</a></td></tr>
+<tr class="separator:a369266c24eacffb87046522897a570d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae37e6a58868bbc4d51959859db2cd8ac" id="r_ae37e6a58868bbc4d51959859db2cd8ac"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#ae37e6a58868bbc4d51959859db2cd8ac">UA_HAS_GETIFADDR</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:ae37e6a58868bbc4d51959859db2cd8ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00d24c7231be28dbaf71f5408f30e44c" id="r_a00d24c7231be28dbaf71f5408f30e44c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a00d24c7231be28dbaf71f5408f30e44c">inline</a></td></tr>
+<tr class="separator:a00d24c7231be28dbaf71f5408f30e44c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e0687899c03679c95a511dc12eb61fb" id="r_a8e0687899c03679c95a511dc12eb61fb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a8e0687899c03679c95a511dc12eb61fb">UA_INLINABLE</a>(decl,  impl)&#160;&#160;&#160;static decl impl</td></tr>
+<tr class="separator:a8e0687899c03679c95a511dc12eb61fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cb286f1301989fbc9b1574c809bdd4a" id="r_a9cb286f1301989fbc9b1574c809bdd4a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a9cb286f1301989fbc9b1574c809bdd4a">UA_THREAD_LOCAL</a></td></tr>
+<tr class="separator:a9cb286f1301989fbc9b1574c809bdd4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30a6d3833d195e57d2f94fd28c83adac" id="r_a30a6d3833d195e57d2f94fd28c83adac"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a30a6d3833d195e57d2f94fd28c83adac">UA_free</a>&#160;&#160;&#160;free</td></tr>
+<tr class="separator:a30a6d3833d195e57d2f94fd28c83adac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a745eb20dfabdae67dbbe05ff37ed85a4" id="r_a745eb20dfabdae67dbbe05ff37ed85a4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a745eb20dfabdae67dbbe05ff37ed85a4">UA_malloc</a>&#160;&#160;&#160;malloc</td></tr>
+<tr class="separator:a745eb20dfabdae67dbbe05ff37ed85a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb31aaf0efe09fe680919d250a7c02bf" id="r_abb31aaf0efe09fe680919d250a7c02bf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#abb31aaf0efe09fe680919d250a7c02bf">UA_calloc</a>&#160;&#160;&#160;calloc</td></tr>
+<tr class="separator:abb31aaf0efe09fe680919d250a7c02bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4036c7d2b7668cd602aa06852dabe1d5" id="r_a4036c7d2b7668cd602aa06852dabe1d5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a4036c7d2b7668cd602aa06852dabe1d5">UA_realloc</a>&#160;&#160;&#160;realloc</td></tr>
+<tr class="separator:a4036c7d2b7668cd602aa06852dabe1d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1a962c9914954e5236f9d01084e28bc" id="r_ad1a962c9914954e5236f9d01084e28bc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#ad1a962c9914954e5236f9d01084e28bc">UA_alloca</a>(SIZE)&#160;&#160;&#160;alloca(SIZE)</td></tr>
+<tr class="separator:ad1a962c9914954e5236f9d01084e28bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93b9becf9efdfa782a0ecdb2439dcb94" id="r_a93b9becf9efdfa782a0ecdb2439dcb94"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a93b9becf9efdfa782a0ecdb2439dcb94">UA_STACKARRAY</a>(TYPE,  NAME,  SIZE)</td></tr>
+<tr class="separator:a93b9becf9efdfa782a0ecdb2439dcb94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a134e6f8e1aa5c8625e22719513e10f1a" id="r_a134e6f8e1aa5c8625e22719513e10f1a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a134e6f8e1aa5c8625e22719513e10f1a">UA_assert</a>(ignore)&#160;&#160;&#160;assert(ignore)</td></tr>
+<tr class="separator:a134e6f8e1aa5c8625e22719513e10f1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ef2140f17af318af17f482484f498f9" id="r_a6ef2140f17af318af17f482484f498f9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a6ef2140f17af318af17f482484f498f9">UA_STATIC_ASSERT</a>(cond,  <a class="el" href="log_8h.html#ae4899cf5c80d00f8c8e3703cb431ec2e">msg</a>)&#160;&#160;&#160;typedef char static_assertion_##<a class="el" href="log_8h.html#ae4899cf5c80d00f8c8e3703cb431ec2e">msg</a>[(cond)?1:-1]</td></tr>
+<tr class="separator:a6ef2140f17af318af17f482484f498f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0c1167bb311135eecf24a0e7c885b7f" id="r_aa0c1167bb311135eecf24a0e7c885b7f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#aa0c1167bb311135eecf24a0e7c885b7f">endif</a></td></tr>
+<tr class="separator:aa0c1167bb311135eecf24a0e7c885b7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad28b66f0104aa585c1ab043ddb465f29" id="r_ad28b66f0104aa585c1ab043ddb465f29"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#ad28b66f0104aa585c1ab043ddb465f29">UA_THREADSAFE</a></td></tr>
+<tr class="separator:ad28b66f0104aa585c1ab043ddb465f29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af72698149b30e53f0923f67eaa230b56" id="r_af72698149b30e53f0923f67eaa230b56"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#af72698149b30e53f0923f67eaa230b56">UA_LIKELY</a>(x)&#160;&#160;&#160;x</td></tr>
+<tr class="separator:af72698149b30e53f0923f67eaa230b56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a503bd3d9b0a1fcfb470d6d20614c0ef8" id="r_a503bd3d9b0a1fcfb470d6d20614c0ef8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a503bd3d9b0a1fcfb470d6d20614c0ef8">UA_UNLIKELY</a>(x)&#160;&#160;&#160;x</td></tr>
+<tr class="separator:a503bd3d9b0a1fcfb470d6d20614c0ef8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a278f8dcda2c68184a89b95f7a78cfe69" id="r_a278f8dcda2c68184a89b95f7a78cfe69"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a278f8dcda2c68184a89b95f7a78cfe69">UA_FUNC_ATTR_PURE</a></td></tr>
+<tr class="separator:a278f8dcda2c68184a89b95f7a78cfe69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7890392ad248807eef17406deff97408" id="r_a7890392ad248807eef17406deff97408"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a7890392ad248807eef17406deff97408">UA_FUNC_ATTR_CONST</a></td></tr>
+<tr class="separator:a7890392ad248807eef17406deff97408"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8add6445f8714b720b30184c87f930d7" id="r_a8add6445f8714b720b30184c87f930d7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a8add6445f8714b720b30184c87f930d7">UA_FORMAT</a>(X,  Y)</td></tr>
+<tr class="separator:a8add6445f8714b720b30184c87f930d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08ca04ff2d752b92e0921e37c4ac127c" id="r_a08ca04ff2d752b92e0921e37c4ac127c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a08ca04ff2d752b92e0921e37c4ac127c">UA_DEPRECATED</a></td></tr>
+<tr class="separator:a08ca04ff2d752b92e0921e37c4ac127c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad614e30b8af6ed7b30c9a11c3005de88" id="r_ad614e30b8af6ed7b30c9a11c3005de88"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#ad614e30b8af6ed7b30c9a11c3005de88">UA_INTERNAL_DEPRECATED</a></td></tr>
+<tr class="separator:ad614e30b8af6ed7b30c9a11c3005de88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6e1542fe58e29cda6fd7495612cddce" id="r_af6e1542fe58e29cda6fd7495612cddce"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#af6e1542fe58e29cda6fd7495612cddce">UA_INTERNAL_FUNC_ATTR_WARN_UNUSED_RESULT</a></td></tr>
+<tr class="separator:af6e1542fe58e29cda6fd7495612cddce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37746ec496effbeb193b05b13cbe9f5d" id="r_a37746ec496effbeb193b05b13cbe9f5d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a37746ec496effbeb193b05b13cbe9f5d">UA_LITTLE_ENDIAN</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a37746ec496effbeb193b05b13cbe9f5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25a947542e575dbd3d7b60e12dd30bef" id="r_a25a947542e575dbd3d7b60e12dd30bef"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a25a947542e575dbd3d7b60e12dd30bef">UA_BINARY_OVERLAYABLE_INTEGER</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a25a947542e575dbd3d7b60e12dd30bef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a359c930ae5f00e5658a6980b3c26d21c" id="r_a359c930ae5f00e5658a6980b3c26d21c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a359c930ae5f00e5658a6980b3c26d21c">UA_FLOAT_IEEE754</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a359c930ae5f00e5658a6980b3c26d21c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af67616b843b5b06424a885237542c068" id="r_af67616b843b5b06424a885237542c068"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#af67616b843b5b06424a885237542c068">UA_FLOAT_LITTLE_ENDIAN</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:af67616b843b5b06424a885237542c068"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa96f501e1f80b2b5eb4cc368a152c674" id="r_aa96f501e1f80b2b5eb4cc368a152c674"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#aa96f501e1f80b2b5eb4cc368a152c674">UA_BINARY_OVERLAYABLE_FLOAT</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:aa96f501e1f80b2b5eb4cc368a152c674"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="ad3d8a3bd0c0b677acef144f2c2ef6d73" name="ad3d8a3bd0c0b677acef144f2c2ef6d73"></a>
@@ -170,7 +249,7 @@ Macros</h2></td></tr>
 <p>On older systems we need to define _BSD_SOURCE. </p>
 <p>_DEFAULT_SOURCE is an alias for that. </p>
 
-<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00120">120</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00129">129</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
 
 </div>
 </div>
@@ -186,7 +265,26 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00115">115</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00123">123</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="a369266c24eacffb87046522897a570d5" name="a369266c24eacffb87046522897a570d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a369266c24eacffb87046522897a570d5">&#9670;&#160;</a></span>_GNU_SOURCE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define _GNU_SOURCE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Define _GNU_SOURCE to get functions like poll. </p>
+<p>Comment this out to only use standard POSIX definitions. </p>
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00135">135</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
 
 </div>
 </div>
@@ -203,9 +301,9 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 
 <p>#undef UA_DEBUG_DUMP_PKGS </p>
-<p>#undef UA_DEBUG_FILE_LINE_INFO #undef UA_DYNAMIC_LINKING Shortcuts for extern "C" declarations </p>
+<p>#undef UA_DEBUG_FILE_LINE_INFO Options for Tests #undef UA_ENABLE_ALLOW_REUSEADDR #undef UA_DYNAMIC_LINKING Shortcuts for extern "C" declarations </p>
 
-<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00089">89</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00100">100</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
 
 </div>
 </div>
@@ -221,7 +319,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00096">96</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00107">107</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
 
 </div>
 </div>
@@ -237,7 +335,60 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00112">112</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00120">120</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="aa0c1167bb311135eecf24a0e7c885b7f" name="aa0c1167bb311135eecf24a0e7c885b7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0c1167bb311135eecf24a0e7c885b7f">&#9670;&#160;</a></span>endif</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define endif</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a00d24c7231be28dbaf71f5408f30e44c" name="a00d24c7231be28dbaf71f5408f30e44c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00d24c7231be28dbaf71f5408f30e44c">&#9670;&#160;</a></span>inline</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define inline</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00153">153</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="ad1a962c9914954e5236f9d01084e28bc" name="ad1a962c9914954e5236f9d01084e28bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1a962c9914954e5236f9d01084e28bc">&#9670;&#160;</a></span>UA_alloca</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_alloca</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">SIZE</td><td>)</td>
+          <td>&#160;&#160;&#160;alloca(SIZE)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Stack-allocation of memory. </p>
+<p>Use C99 variable-length arrays if possible. Otherwise revert to alloca. Note that alloca is not supported on some plattforms. </p>
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00261">261</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
 
 </div>
 </div>
@@ -253,9 +404,82 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Select default architecture if non is selected through CMake or compiler define. </p>
+<p>#undef UA_ARCHITECTURE_WIN32 </p>
 
-<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00105">105</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00019">19</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="a134e6f8e1aa5c8625e22719513e10f1a" name="a134e6f8e1aa5c8625e22719513e10f1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a134e6f8e1aa5c8625e22719513e10f1a">&#9670;&#160;</a></span>UA_assert</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_assert</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">ignore</td><td>)</td>
+          <td>&#160;&#160;&#160;assert(ignore)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00272">272</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="aa96f501e1f80b2b5eb4cc368a152c674" name="aa96f501e1f80b2b5eb4cc368a152c674"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa96f501e1f80b2b5eb4cc368a152c674">&#9670;&#160;</a></span>UA_BINARY_OVERLAYABLE_FLOAT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_BINARY_OVERLAYABLE_FLOAT&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Only if the floating points are litle-endian <b>and</b> in IEEE 754 format can we memcpy directly onto the network buffer. </p>
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00576">576</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="a25a947542e575dbd3d7b60e12dd30bef" name="a25a947542e575dbd3d7b60e12dd30bef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25a947542e575dbd3d7b60e12dd30bef">&#9670;&#160;</a></span>UA_BINARY_OVERLAYABLE_INTEGER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_BINARY_OVERLAYABLE_INTEGER&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Can the integers be memcpy'd onto the network buffer? Add additional checks here. </p>
+<p>Some platforms (e.g. QNX) have sizeof(bool) &gt; 1. Manually disable overlayed integer encoding if that is the case. </p>
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00530">530</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="abb31aaf0efe09fe680919d250a7c02bf" name="abb31aaf0efe09fe680919d250a7c02bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb31aaf0efe09fe680919d250a7c02bf">&#9670;&#160;</a></span>UA_calloc</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_calloc&#160;&#160;&#160;calloc</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00244">244</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
 
 </div>
 </div>
@@ -272,9 +496,25 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 
 <p>#undef UA_GENERATED_NAMESPACE_ZERO_FULL </p>
-<p>#undef UA_ENABLE_PUBSUB_MONITORING #undef UA_ENABLE_PUBSUB_BUFMALLOC #undef UA_PACK_DEBIAN Options for Debugging </p>
+<p>#undef UA_ENABLE_PUBSUB_MONITORING #undef UA_ENABLE_PUBSUB_BUFMALLOC #undef UA_ENABLE_PUBSUB_SKS Options for Debugging </p>
 
-<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00078">78</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00085">85</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="a08ca04ff2d752b92e0921e37c4ac127c" name="a08ca04ff2d752b92e0921e37c4ac127c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08ca04ff2d752b92e0921e37c4ac127c">&#9670;&#160;</a></span>UA_DEPRECATED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_DEPRECATED</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00462">462</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
 
 </div>
 </div>
@@ -290,10 +530,41 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>#undef UA_ENABLE_PUBSUB </p>
-<p>#undef UA_ENABLE_PUBSUB_ENCRYPTION #undef UA_ENABLE_PUBSUB_FILE_CONFIG #undef UA_ENABLE_PUBSUB_ETH_UADP #undef UA_ENABLE_PUBSUB_DELTAFRAMES #undef UA_ENABLE_PUBSUB_INFORMATIONMODEL #undef UA_ENABLE_PUBSUB_INFORMATIONMODEL_METHODS </p>
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00043">43</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00032">32</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+</div>
+</div>
+<a id="ad1dbe88e4bb91d85a6bb0d17a0b6f413" name="ad1dbe88e4bb91d85a6bb0d17a0b6f413"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1dbe88e4bb91d85a6bb0d17a0b6f413">&#9670;&#160;</a></span>UA_ENABLE_DIAGNOSTICS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_ENABLE_DIAGNOSTICS</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00044">44</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="a534af41c06b16cf423d662969ab39d26" name="a534af41c06b16cf423d662969ab39d26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a534af41c06b16cf423d662969ab39d26">&#9670;&#160;</a></span>UA_ENABLE_DISCOVERY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_ENABLE_DISCOVERY</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>#undef UA_ENABLE_DETERMINISTIC_RNG </p>
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00073">73</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
 
 </div>
 </div>
@@ -309,10 +580,42 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>#undef UA_ENABLE_DETERMINISTIC_RNG </p>
-<p>#undef UA_ENABLE_DISCOVERY #undef UA_ENABLE_DISCOVERY_MULTICAST #undef UA_ENABLE_WEBSOCKET_SERVER #undef UA_ENABLE_QUERY #undef UA_ENABLE_MALLOC_SINGLETON </p>
+<p>#undef UA_ENABLE_DISCOVERY_MULTICAST </p>
+<p>#undef UA_ENABLE_QUERY #undef UA_ENABLE_MALLOC_SINGLETON </p>
 
-<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00066">66</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00077">77</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="af24eb5353a492eafddd28bb364d23431" name="af24eb5353a492eafddd28bb364d23431"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af24eb5353a492eafddd28bb364d23431">&#9670;&#160;</a></span>UA_ENABLE_HISTORIZING</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_ENABLE_HISTORIZING</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00045">45</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="a8a5d9b4d593c1e6905e0682a27ae6faf" name="a8a5d9b4d593c1e6905e0682a27ae6faf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a5d9b4d593c1e6905e0682a27ae6faf">&#9670;&#160;</a></span>UA_ENABLE_JSON_ENCODING</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_ENABLE_JSON_ENCODING</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00048">48</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
 
 </div>
 </div>
@@ -330,7 +633,7 @@ Macros</h2></td></tr>
 
 <p>#undef UA_ENABLE_AMALGAMATION </p>
 
-<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00022">22</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00036">36</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
 
 </div>
 </div>
@@ -346,7 +649,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00023">23</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00037">37</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
 
 </div>
 </div>
@@ -362,7 +665,9 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00059">59</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+<p>#undef UA_ENABLE_INLINABLE_EXPORT </p>
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00071">71</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
 
 </div>
 </div>
@@ -378,10 +683,42 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>#undef UA_ENABLE_DIAGNOSTICS </p>
-<p>#undef UA_ENABLE_HISTORIZING </p>
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00046">46</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00035">35</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+</div>
+</div>
+<a id="a02e26df1619b9741984ea34fc74f258b" name="a02e26df1619b9741984ea34fc74f258b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02e26df1619b9741984ea34fc74f258b">&#9670;&#160;</a></span>UA_ENABLE_PUBSUB</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_ENABLE_PUBSUB</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00039">39</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="ab7f40f289359ee7d6219100739ebeb56" name="ab7f40f289359ee7d6219100739ebeb56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7f40f289359ee7d6219100739ebeb56">&#9670;&#160;</a></span>UA_ENABLE_PUBSUB_INFORMATIONMODEL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_ENABLE_PUBSUB_INFORMATIONMODEL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>#undef UA_ENABLE_PUBSUB_ENCRYPTION </p>
+<p>#undef UA_ENABLE_PUBSUB_FILE_CONFIG </p>
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00042">42</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
 
 </div>
 </div>
@@ -399,7 +736,7 @@ Macros</h2></td></tr>
 
 <p>Advanced Options. </p>
 
-<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00057">57</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00068">68</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
 
 </div>
 </div>
@@ -415,7 +752,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00024">24</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00038">38</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
 
 </div>
 </div>
@@ -431,9 +768,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>#undef UA_ENABLE_EXPERIMENTAL_HISTORIZING </p>
-
-<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00037">37</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00047">47</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
 
 </div>
 </div>
@@ -449,7 +784,119 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00058">58</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00069">69</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="a359c930ae5f00e5658a6980b3c26d21c" name="a359c930ae5f00e5658a6980b3c26d21c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a359c930ae5f00e5658a6980b3c26d21c">&#9670;&#160;</a></span>UA_FLOAT_IEEE754</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_FLOAT_IEEE754&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00547">547</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="af67616b843b5b06424a885237542c068" name="af67616b843b5b06424a885237542c068"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af67616b843b5b06424a885237542c068">&#9670;&#160;</a></span>UA_FLOAT_LITTLE_ENDIAN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_FLOAT_LITTLE_ENDIAN&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Wikipedia says (<a href="https://en.wikipedia.org/wiki/Endianness">https://en.wikipedia.org/wiki/Endianness</a>): Although the ubiquitous x86 processors of today use little-endian storage for all types of data (integer, floating point, BCD), there are a number of hardware architectures where floating-point numbers are represented in big-endian form while integers are represented in little-endian form. </p>
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00568">568</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="a8add6445f8714b720b30184c87f930d7" name="a8add6445f8714b720b30184c87f930d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8add6445f8714b720b30184c87f930d7">&#9670;&#160;</a></span>UA_FORMAT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_FORMAT</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">X, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Y&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00454">454</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="a30a6d3833d195e57d2f94fd28c83adac" name="a30a6d3833d195e57d2f94fd28c83adac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30a6d3833d195e57d2f94fd28c83adac">&#9670;&#160;</a></span>UA_free</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_free&#160;&#160;&#160;free</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00242">242</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="a7890392ad248807eef17406deff97408" name="a7890392ad248807eef17406deff97408"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7890392ad248807eef17406deff97408">&#9670;&#160;</a></span>UA_FUNC_ATTR_CONST</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_FUNC_ATTR_CONST</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00452">452</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="a278f8dcda2c68184a89b95f7a78cfe69" name="a278f8dcda2c68184a89b95f7a78cfe69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a278f8dcda2c68184a89b95f7a78cfe69">&#9670;&#160;</a></span>UA_FUNC_ATTR_PURE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_FUNC_ATTR_PURE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00451">451</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
 
 </div>
 </div>
@@ -465,7 +912,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00070">70</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00078">78</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
 
 </div>
 </div>
@@ -476,12 +923,114 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define UA_HAS_GETIFADDR</td>
+          <td class="memname">#define UA_HAS_GETIFADDR&#160;&#160;&#160;1</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00125">125</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00138">138</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="a8e0687899c03679c95a511dc12eb61fb" name="a8e0687899c03679c95a511dc12eb61fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e0687899c03679c95a511dc12eb61fb">&#9670;&#160;</a></span>UA_INLINABLE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_INLINABLE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">decl                   , </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">impl&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;static decl impl</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>An inlinable method is typically defined as "static inline". </p>
+<p>Some applications, such as language bindings with a C FFI (foreign function interface), can however not work with static inline methods. These can set the global UA_ENABLE_INLINABLE_EXPORT macro which causes all inlinable methods to be exported as a regular public API method.</p>
+<p>Note that UA_ENABLE_INLINABLE_EXPORT has a negative impact for both size and performance of the library. </p>
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00169">169</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="ad614e30b8af6ed7b30c9a11c3005de88" name="ad614e30b8af6ed7b30c9a11c3005de88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad614e30b8af6ed7b30c9a11c3005de88">&#9670;&#160;</a></span>UA_INTERNAL_DEPRECATED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_INTERNAL_DEPRECATED</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00471">471</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="af6e1542fe58e29cda6fd7495612cddce" name="af6e1542fe58e29cda6fd7495612cddce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6e1542fe58e29cda6fd7495612cddce">&#9670;&#160;</a></span>UA_INTERNAL_FUNC_ATTR_WARN_UNUSED_RESULT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_INTERNAL_FUNC_ATTR_WARN_UNUSED_RESULT</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00478">478</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="af72698149b30e53f0923f67eaa230b56" name="af72698149b30e53f0923f67eaa230b56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af72698149b30e53f0923f67eaa230b56">&#9670;&#160;</a></span>UA_LIKELY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_LIKELY</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x</td><td>)</td>
+          <td>&#160;&#160;&#160;x</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00431">431</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="a37746ec496effbeb193b05b13cbe9f5d" name="a37746ec496effbeb193b05b13cbe9f5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37746ec496effbeb193b05b13cbe9f5d">&#9670;&#160;</a></span>UA_LITTLE_ENDIAN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_LITTLE_ENDIAN&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00520">520</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
 
 </div>
 </div>
@@ -492,12 +1041,30 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define UA_LOGLEVEL&#160;&#160;&#160;300</td>
+          <td class="memname">#define UA_LOGLEVEL&#160;&#160;&#160;100</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00018">18</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+<p>Select default architecture if none is selected. </p>
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00032">32</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="a745eb20dfabdae67dbbe05ff37ed85a4" name="a745eb20dfabdae67dbbe05ff37ed85a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a745eb20dfabdae67dbbe05ff37ed85a4">&#9670;&#160;</a></span>UA_malloc</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_malloc&#160;&#160;&#160;malloc</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00243">243</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
 
 </div>
 </div>
@@ -508,15 +1075,15 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define UA_MULTITHREADING&#160;&#160;&#160;0</td>
+          <td class="memname">#define UA_MULTITHREADING&#160;&#160;&#160;100</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>#undef UA_ENABLE_JSON_ENCODING </p>
-<p>#undef UA_ENABLE_PUBSUB_MQTT #undef UA_ENABLE_MQTT_TLS #undef UA_ENABLE_MQTT_TLS_OPENSSL #undef UA_ENABLE_MQTT_TLS_MBEDTLS #undef UA_ENABLE_ENCRYPTION_MBEDTLS #undef UA_ENABLE_TPM2_SECURITY #undef UA_ENABLE_ENCRYPTION_OPENSSL #undef UA_ENABLE_ENCRYPTION_LIBRESSL #undef UA_ENABLE_SUBSCRIPTIONS_ALARMS_CONDITIONS Multithreading #undef UA_ENABLE_IMMUTABLE_NODES </p>
+<p>#undef UA_ENABLE_XML_ENCODING </p>
+<p>#undef UA_ENABLE_MQTT #undef UA_ENABLE_NODESET_INJECTOR #undef UA_INFORMATION_MODEL_AUTOLOAD #undef UA_ENABLE_ENCRYPTION_MBEDTLS #undef UA_ENABLE_CERT_REJECTED_DIR #undef UA_ENABLE_TPM2_SECURITY #undef UA_ENABLE_ENCRYPTION_OPENSSL #undef UA_ENABLE_ENCRYPTION_LIBRESSL #undef UA_ENABLE_SUBSCRIPTIONS_ALARMS_CONDITIONS Multithreading #undef UA_ENABLE_IMMUTABLE_NODES </p>
 
-<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00054">54</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00065">65</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
 
 </div>
 </div>
@@ -578,7 +1145,7 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define UA_OPEN62541_VER_MINOR&#160;&#160;&#160;3</td>
+          <td class="memname">#define UA_OPEN62541_VER_MINOR&#160;&#160;&#160;4</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -610,7 +1177,7 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define UA_OPEN62541_VERSION&#160;&#160;&#160;&quot;v1.3.15-undefined&quot;</td>
+          <td class="memname">#define UA_OPEN62541_VERSION&#160;&#160;&#160;&quot;v1.4.15-undefined&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -619,22 +1186,143 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="af5a35fbb5459cbd1e90a57e81b06d814" name="af5a35fbb5459cbd1e90a57e81b06d814"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af5a35fbb5459cbd1e90a57e81b06d814">&#9670;&#160;</a></span>UA_VALGRIND_INTERACTIVE_INTERVAL</h2>
+<a id="a4036c7d2b7668cd602aa06852dabe1d5" name="a4036c7d2b7668cd602aa06852dabe1d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4036c7d2b7668cd602aa06852dabe1d5">&#9670;&#160;</a></span>UA_realloc</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define UA_VALGRIND_INTERACTIVE_INTERVAL&#160;&#160;&#160;1000</td>
+          <td class="memname">#define UA_realloc&#160;&#160;&#160;realloc</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>#undef UA_ENABLE_UNIT_TEST_FAILURE_HOOKS </p>
-<p>#undef UA_ENABLE_VALGRIND_INTERACTIVE </p>
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00245">245</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00069">69</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+</div>
+</div>
+<a id="a93b9becf9efdfa782a0ecdb2439dcb94" name="a93b9becf9efdfa782a0ecdb2439dcb94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93b9becf9efdfa782a0ecdb2439dcb94">&#9670;&#160;</a></span>UA_STACKARRAY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_STACKARRAY</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TYPE, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">NAME, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">SIZE&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <span class="comment">/* cppcheck-suppress allocaCalled */</span>  \</div>
+<div class="line">    TYPE *(NAME) = (TYPE*)<a class="code hl_define" href="config_8h.html#ad1a962c9914954e5236f9d01084e28bc">UA_alloca</a>(<span class="keyword">sizeof</span>(TYPE) * (SIZE))</div>
+<div class="ttc" id="aconfig_8h_html_ad1a962c9914954e5236f9d01084e28bc"><div class="ttname"><a href="config_8h.html#ad1a962c9914954e5236f9d01084e28bc">UA_alloca</a></div><div class="ttdeci">#define UA_alloca(SIZE)</div><div class="ttdoc">Stack-allocation of memory.</div><div class="ttdef"><b>Definition</b> <a href="config_8h_source.html#l00261">config.h:261</a></div></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00263">263</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="a6ef2140f17af318af17f482484f498f9" name="a6ef2140f17af318af17f482484f498f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ef2140f17af318af17f482484f498f9">&#9670;&#160;</a></span>UA_STATIC_ASSERT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_STATIC_ASSERT</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">cond, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><a class="el" href="log_8h.html#ae4899cf5c80d00f8c8e3703cb431ec2e">msg</a>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;typedef char static_assertion_##<a class="el" href="log_8h.html#ae4899cf5c80d00f8c8e3703cb431ec2e">msg</a>[(cond)?1:-1]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Outputs an error message at compile time if the assert fails. </p>
+<p>Example usage: UA_STATIC_ASSERT(sizeof(long)==7, use_another_compiler_luke) See: <a href="https://stackoverflow.com/a/4815532/869402">https://stackoverflow.com/a/4815532/869402</a> </p>
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00296">296</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="a9cb286f1301989fbc9b1574c809bdd4a" name="a9cb286f1301989fbc9b1574c809bdd4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cb286f1301989fbc9b1574c809bdd4a">&#9670;&#160;</a></span>UA_THREAD_LOCAL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_THREAD_LOCAL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00181">181</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="ad28b66f0104aa585c1ab043ddb465f29" name="ad28b66f0104aa585c1ab043ddb465f29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad28b66f0104aa585c1ab043ddb465f29">&#9670;&#160;</a></span>UA_THREADSAFE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_THREADSAFE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00413">413</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
+
+</div>
+</div>
+<a id="a503bd3d9b0a1fcfb470d6d20614c0ef8" name="a503bd3d9b0a1fcfb470d6d20614c0ef8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a503bd3d9b0a1fcfb470d6d20614c0ef8">&#9670;&#160;</a></span>UA_UNLIKELY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_UNLIKELY</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x</td><td>)</td>
+          <td>&#160;&#160;&#160;x</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8h_source.html#l00432">432</a> of file <a class="el" href="config_8h_source.html">config.h</a>.</p>
 
 </div>
 </div>

@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.15</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.15</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -99,8 +99,31 @@ $(function() {
 Functions</h2></td></tr>
 <tr class="memitem:ac1ee10ef6fc269f4d9861d46f4c101b8" id="r_ac1ee10ef6fc269f4d9861d46f4c101b8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="config_8h.html#aa397bffde7d792f38dcbb8e329486f9c">_UA_BEGIN_DECLS</a> <a class="el" href="structUA__HistoryDataGathering.html">UA_HistoryDataGathering</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="history__data__gathering__default_8h.html#ac1ee10ef6fc269f4d9861d46f4c101b8">UA_HistoryDataGathering_Default</a> (size_t initialNodeIdStoreSize)</td></tr>
 <tr class="separator:ac1ee10ef6fc269f4d9861d46f4c101b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa710360a0393d2e9db40be10f0aa6766" id="r_aa710360a0393d2e9db40be10f0aa6766"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__HistoryDataGathering.html">UA_HistoryDataGathering</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="history__data__gathering__default_8h.html#aa710360a0393d2e9db40be10f0aa6766">UA_HistoryDataGathering_Circular</a> (size_t initialNodeIdStoreSize)</td></tr>
+<tr class="separator:aa710360a0393d2e9db40be10f0aa6766"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="aa710360a0393d2e9db40be10f0aa6766" name="aa710360a0393d2e9db40be10f0aa6766"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa710360a0393d2e9db40be10f0aa6766">&#9670;&#160;</a></span>UA_HistoryDataGathering_Circular()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUA__HistoryDataGathering.html">UA_HistoryDataGathering</a> UA_HistoryDataGathering_Circular </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>initialNodeIdStoreSize</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function construct a <a class="el" href="structUA__HistoryDataGathering.html">UA_HistoryDataGathering</a> which implements a circular buffer in memory. </p>
+<p>initialNodeIdStoreSize is the maximum number of NodeIds for which the data will be gathered. This number cannot be overcomed. </p>
+
+</div>
+</div>
 <a id="ac1ee10ef6fc269f4d9861d46f4c101b8" name="ac1ee10ef6fc269f4d9861d46f4c101b8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac1ee10ef6fc269f4d9861d46f4c101b8">&#9670;&#160;</a></span>UA_HistoryDataGathering_Default()</h2>
 
@@ -119,7 +142,7 @@ Functions</h2></td></tr>
 
 <p>This Source Code Form is subject to the terms of the Mozilla Public License, v. </p>
 <p>2.0. If a copy of the MPL was not distributed with this file, You can obtain one at <a href="http://mozilla.org/MPL/2.0/">http://mozilla.org/MPL/2.0/</a>.</p>
-<p>Copyright 2018 (c) basysKom GmbH <a href="#" onclick="location.href='mai'+'lto:'+'ope'+'ns'+'our'+'ce'+'@ba'+'sy'+'sko'+'m.'+'com'; return false;">opens<span class="obfuscator">.nosp@m.</span>ourc<span class="obfuscator">.nosp@m.</span>e@bas<span class="obfuscator">.nosp@m.</span>ysko<span class="obfuscator">.nosp@m.</span>m.com</a> (Author: Peter Rustler) </p>
+<p>Copyright 2018 (c) basysKom GmbH <a href="#" onclick="location.href='mai'+'lto:'+'ope'+'ns'+'our'+'ce'+'@ba'+'sy'+'sko'+'m.'+'com'; return false;">opens<span class="obfuscator">.nosp@m.</span>ourc<span class="obfuscator">.nosp@m.</span>e@bas<span class="obfuscator">.nosp@m.</span>ysko<span class="obfuscator">.nosp@m.</span>m.com</a> (Author: Peter Rustler) Copyright 2021 (c) luibass92 <a href="#" onclick="location.href='mai'+'lto:'+'lui'+'ba'+'ss9'+'2@'+'liv'+'e.'+'it'; return false;">luiba<span class="obfuscator">.nosp@m.</span>ss92<span class="obfuscator">.nosp@m.</span>@live<span class="obfuscator">.nosp@m.</span>.it</a> (Author: Luigi Bassetta) </p>
 
 </div>
 </div>

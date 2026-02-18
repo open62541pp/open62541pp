@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.20.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.21.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -459,7 +459,7 @@ Functions</h2></td></tr>
 <tr class="memitem:gaeaf45806bd42f6c64271653a838c2a55"><td class="memTemplItemLeft" align="right" valign="top">constexpr const T::NativeType &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#gaeaf45806bd42f6c64271653a838c2a55">opcua::asNative</a> (const T &amp;wrapper) noexcept</td></tr>
 <tr class="separator:gaeaf45806bd42f6c64271653a838c2a55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaffd338f9b20108b1d64d8dfe93f4690a" id="r_gaffd338f9b20108b1d64d8dfe93f4690a"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:gaffd338f9b20108b1d64d8dfe93f4690a"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1String.html">String</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#gaffd338f9b20108b1d64d8dfe93f4690a">toString</a> (const T &amp;object, const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;type)</td></tr>
+<tr class="memitem:gaffd338f9b20108b1d64d8dfe93f4690a"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1String.html">String</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#gaffd338f9b20108b1d64d8dfe93f4690a">toString</a> (const T &amp;object, const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;<a class="elRef" target="_blank" href="open62541/types_8h.html#afc5a8ee5c7fd04cf12aa86a5f2882438">type</a>)</td></tr>
 <tr class="separator:gaffd338f9b20108b1d64d8dfe93f4690a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga1235cacdaca8d0ce7f1f9bf1e589b790" id="r_ga1235cacdaca8d0ce7f1f9bf1e589b790"><td class="memTemplParams" colspan="2">template&lt;typename T , typename  = std::enable_if_t&lt;IsRegistered&lt;T&gt;::value&gt;&gt; </td></tr>
 <tr class="memitem:ga1235cacdaca8d0ce7f1f9bf1e589b790"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1String.html">String</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Wrapper.html#ga1235cacdaca8d0ce7f1f9bf1e589b790">toString</a> (const T &amp;object)</td></tr>
@@ -622,13 +622,14 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="ua_2types_8hpp.html#a1b517683eabeb49a91a653561703157e">UAPP_GETTER_SPAN</a>(Type, member, memberSize)                                                     \</div>
 <div class="line">    <span class="keyword">auto</span>&amp; set##suffix(Span&lt;const Type&gt; member) {                                                   \</div>
-<div class="line">        <span class="keyword">const</span> <span class="keyword">auto</span>&amp; type = opcua::getDataType&lt;Type&gt;();                                             \</div>
+<div class="line">        <span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_variableRef" target="_blank" href="open62541/types_8h.html#afc5a8ee5c7fd04cf12aa86a5f2882438">type</a> = opcua::getDataType&lt;Type&gt;();                                             \</div>
 <div class="line">        handle()-&gt;specifiedAttributes |= flag;                                                     \</div>
 <div class="line">        detail::deallocateArray(handle()-&gt;member, handle()-&gt;memberSize, type);                     \</div>
 <div class="line">        handle()-&gt;member = detail::copyArray(member.data(), member.size(), type);                  \</div>
 <div class="line">        handle()-&gt;memberSize = member.size();                                                      \</div>
 <div class="line">        <span class="keywordflow">return</span> *<span class="keyword">this</span>;                                                                              \</div>
 <div class="line">    }</div>
+<div class="ttc" id="atypes_8h_html_afc5a8ee5c7fd04cf12aa86a5f2882438"><div class="ttname"><a href="open62541/types_8h.html#afc5a8ee5c7fd04cf12aa86a5f2882438">type</a></div><div class="ttdeci">const UA_DataType * type</div></div>
 <div class="ttc" id="aua_2types_8hpp_html_a1b517683eabeb49a91a653561703157e"><div class="ttname"><a href="ua_2types_8hpp.html#a1b517683eabeb49a91a653561703157e">UAPP_GETTER_SPAN</a></div><div class="ttdeci">#define UAPP_GETTER_SPAN(Type, memberArray, memberSize)</div><div class="ttdef"><b>Definition</b> <a href="ua_2types_8hpp_source.html#l00061">types.hpp:61</a></div></div>
 </div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="ua_2types_8hpp_source.html#l00360">360</a> of file <a class="el" href="ua_2types_8hpp_source.html">types.hpp</a>.</p>
@@ -1241,7 +1242,7 @@ template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebea
 </div><div class="memdoc">
 
 <p>Perform update type for structured data history updates. </p>
-<dl class="section see"><dt>See also</dt><dd>UA_PerformUpdateType </dd>
+<dl class="section see"><dt>See also</dt><dd><a class="elRef" target="_blank" href="open62541/types__generated_8h.html#ac84791f105355bb52f44f4c1704e650a">UA_PerformUpdateType</a> </dd>
 <dd>
 <a href="https://reference.opcfoundation.org/Core/Part11/v104/docs/6.8.3">https://reference.opcfoundation.org/Core/Part11/v104/docs/6.8.3</a> </dd></dl>
 <table class="fieldtable">
@@ -2688,7 +2689,7 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 
 <p>Converts an object to its string representation. </p>
-<p>This function wraps <a class="elRef" target="_blank" href="open62541/types_8h.html#a4528cd5a5ead15915e15e00ee4e946e5">UA_print</a> to generate a string representation of the given object, based on its data type description.</p>
+<p>This function wraps UA_print to generate a string representation of the given object, based on its data type description.</p>
 <dl class="section note"><dt>Note</dt><dd>Requires open62541 v1.2 or later. The open62541 library must be compiled with the <code>UA_ENABLE_TYPEDESCRIPTION</code> option. If these conditions are not met, the function returns an empty <a class="el" href="classopcua_1_1String.html" title="UA_String wrapper class.">String</a>.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">

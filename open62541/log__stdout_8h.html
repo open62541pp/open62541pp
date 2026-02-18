@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.15</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.15</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -100,6 +100,8 @@ $(function() {
 Functions</h2></td></tr>
 <tr class="memitem:a7e994940912ea62b5897aafd9424a051" id="r_a7e994940912ea62b5897aafd9424a051"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="structUA__Logger.html">UA_Logger</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="log__stdout_8h.html#a7e994940912ea62b5897aafd9424a051">UA_Log_Stdout_withLevel</a> (<a class="el" href="log_8h.html#a8ef40be05c138d1635386794b46ebf76">UA_LogLevel</a> minlevel)</td></tr>
 <tr class="separator:a7e994940912ea62b5897aafd9424a051"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e07f69c5b79d2a98cdbd03c16ec2ac1" id="r_a0e07f69c5b79d2a98cdbd03c16ec2ac1"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="structUA__Logger.html">UA_Logger</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="log__stdout_8h.html#a0e07f69c5b79d2a98cdbd03c16ec2ac1">UA_Log_Stdout_new</a> (<a class="el" href="log_8h.html#a8ef40be05c138d1635386794b46ebf76">UA_LogLevel</a> minlevel)</td></tr>
+<tr class="separator:a0e07f69c5b79d2a98cdbd03c16ec2ac1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -109,6 +111,27 @@ Variables</h2></td></tr>
 <tr class="separator:aa3e7df282c2a082d953bf1b836633452"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a0e07f69c5b79d2a98cdbd03c16ec2ac1" name="a0e07f69c5b79d2a98cdbd03c16ec2ac1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e07f69c5b79d2a98cdbd03c16ec2ac1">&#9670;&#160;</a></span>UA_Log_Stdout_new()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT <a class="el" href="structUA__Logger.html">UA_Logger</a> * UA_Log_Stdout_new </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="log_8h.html#a8ef40be05c138d1635386794b46ebf76">UA_LogLevel</a>&#160;</td>
+          <td class="paramname"><em>minlevel</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Allocates memory for the logger. </p>
+<p>Automatically cleared up via _clear. </p>
+
+</div>
+</div>
 <a id="a7e994940912ea62b5897aafd9424a051" name="a7e994940912ea62b5897aafd9424a051"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7e994940912ea62b5897aafd9424a051">&#9670;&#160;</a></span>UA_Log_Stdout_withLevel()</h2>
 
@@ -124,6 +147,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Returns a logger for messages up to the specified level. </p>
 
 </div>
 </div>

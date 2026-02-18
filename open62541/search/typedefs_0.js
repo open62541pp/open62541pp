@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['_5f_5fzip_5fiter_5fcb_0',['__zip_iter_cb',['../ziptree_8h.html#a2de09e7932b9938221ef98de609bb094',1,'ziptree.h']]]
+  ['alias_0',['Alias',['../AliasList_8h.html#ad85b5dadaef70e9d00aac1c1f298c20f',1,'AliasList.h']]],
+  ['aliaslist_1',['AliasList',['../AliasList_8h.html#abe1c29420ebb3e1821ea37e3574fcd61',1,'AliasList.h']]]
 ];

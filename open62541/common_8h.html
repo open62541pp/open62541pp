@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.15</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.15</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -89,18 +89,18 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
 <a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle"><div class="title">common.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="config_8h_source.html">open62541/config.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="nodeids_8h_source.html">open62541/nodeids.h</a>&gt;</code><br />
 </div>
 <p><a href="common_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__NetworkStatistics.html">UA_NetworkStatistics</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecureChannelStatistics.html">UA_SecureChannelStatistics</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SessionStatistics.html">UA_SessionStatistics</a></td></tr>
@@ -166,6 +166,8 @@ Macros</h2></td></tr>
 <tr class="separator:a6865300f403c85cb89ad2e106c993bc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada81db626738ee2eada8215ea9c5ca6f" id="r_ada81db626738ee2eada8215ea9c5ca6f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_8h.html#ada81db626738ee2eada8215ea9c5ca6f">UA_WRITEMASK_VALUEFORVARIABLETYPE</a>&#160;&#160;&#160;(0x01u &lt;&lt; 21u)</td></tr>
 <tr class="separator:ada81db626738ee2eada8215ea9c5ca6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab70c16d6f68ec7fbf5eef058dc6db7ad" id="r_ab70c16d6f68ec7fbf5eef058dc6db7ad"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_8h.html#ab70c16d6f68ec7fbf5eef058dc6db7ad">UA_WRITEMASK_ACCESSLEVELEX</a>&#160;&#160;&#160;(0x01u &lt;&lt; 25u)</td></tr>
+<tr class="separator:ab70c16d6f68ec7fbf5eef058dc6db7ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fa14a00e0f710a299788e0c9bb409d9" id="r_a1fa14a00e0f710a299788e0c9bb409d9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_8h.html#a1fa14a00e0f710a299788e0c9bb409d9">UA_VALUERANK_SCALAR_OR_ONE_DIMENSION</a>&#160;&#160;&#160;-3</td></tr>
 <tr class="separator:a1fa14a00e0f710a299788e0c9bb409d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7827046dfa35a0f8e84b4db2a8cf847b" id="r_a7827046dfa35a0f8e84b4db2a8cf847b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_8h.html#a7827046dfa35a0f8e84b4db2a8cf847b">UA_VALUERANK_ANY</a>&#160;&#160;&#160;-2</td></tr>
@@ -187,6 +189,17 @@ Macros</h2></td></tr>
 <tr class="memitem:ab30611001d2f6f12efd81651f887dc53" id="r_ab30611001d2f6f12efd81651f887dc53"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_8h.html#ab30611001d2f6f12efd81651f887dc53">UA_EVENTNOTIFIER_HISTORY_WRITE</a>&#160;&#160;&#160;(0x01u &lt;&lt; 3u)</td></tr>
 <tr class="separator:ab30611001d2f6f12efd81651f887dc53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a9975d7f7819bd5b03521cf8a388eecda" id="r_a9975d7f7819bd5b03521cf8a388eecda"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a></td></tr>
+<tr class="separator:a9975d7f7819bd5b03521cf8a388eecda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae96a8a45ba7fe0ce7072e7ca33fc0c7" id="r_aae96a8a45ba7fe0ce7072e7ca33fc0c7"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_8h.html#aae96a8a45ba7fe0ce7072e7ca33fc0c7">UA_ServerConfig</a></td></tr>
+<tr class="separator:aae96a8a45ba7fe0ce7072e7ca33fc0c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68b1f0efce215c6832edde8745bb5215" id="r_a68b1f0efce215c6832edde8745bb5215"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_8h.html#a68b1f0efce215c6832edde8745bb5215">UA_ServerCallback</a>) (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, void *data)</td></tr>
+<tr class="separator:a68b1f0efce215c6832edde8745bb5215"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bd5a2265eb4146ce3d95897f7c51aae" id="r_a2bd5a2265eb4146ce3d95897f7c51aae"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a></td></tr>
+<tr class="separator:a2bd5a2265eb4146ce3d95897f7c51aae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
 <tr class="memitem:a4dc96c31672814d54f24409617bdbbe2" id="r_a4dc96c31672814d54f24409617bdbbe2"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_8h.html#a4dc96c31672814d54f24409617bdbbe2">UA_AttributeId</a> </td></tr>
@@ -195,10 +208,16 @@ Enumerations</h2></td></tr>
 <tr class="separator:a6fda8bb9a494877d7c2f77fd4c4932f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adeb58a592483258f220c845c47622b15" id="r_adeb58a592483258f220c845c47622b15"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_8h.html#adeb58a592483258f220c845c47622b15">UA_Order</a> </td></tr>
 <tr class="separator:adeb58a592483258f220c845c47622b15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a581d16bf4bb2cef817c374c81680fc8d" id="r_a581d16bf4bb2cef817c374c81680fc8d"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_8h.html#a581d16bf4bb2cef817c374c81680fc8d">UA_ConnectionState</a> </td></tr>
+<tr class="separator:a581d16bf4bb2cef817c374c81680fc8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c3787777dac67ecf48c13ad1ddb112e" id="r_a8c3787777dac67ecf48c13ad1ddb112e"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_8h.html#a8c3787777dac67ecf48c13ad1ddb112e">UA_SecureChannelState</a> </td></tr>
 <tr class="separator:a8c3787777dac67ecf48c13ad1ddb112e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66e73dba25a0a0771ed1a850291ca96f" id="r_a66e73dba25a0a0771ed1a850291ca96f"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_8h.html#a66e73dba25a0a0771ed1a850291ca96f">UA_SessionState</a> </td></tr>
 <tr class="separator:a66e73dba25a0a0771ed1a850291ca96f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98746a12b9f95ca7982cb9858e8bd573" id="r_a98746a12b9f95ca7982cb9858e8bd573"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_8h.html#a98746a12b9f95ca7982cb9858e8bd573">UA_ShutdownReason</a> </td></tr>
+<tr class="separator:a98746a12b9f95ca7982cb9858e8bd573"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07eceb614c075c00494e5bdfcf7689e7" id="r_a07eceb614c075c00494e5bdfcf7689e7"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_8h.html#a07eceb614c075c00494e5bdfcf7689e7">UA_LifecycleState</a> </td></tr>
+<tr class="separator:a07eceb614c075c00494e5bdfcf7689e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="af7148bf5bb70d7d913b7bf2610bf4adb" name="af7148bf5bb70d7d913b7bf2610bf4adb"></a>
@@ -213,7 +232,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00055">55</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00056">56</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -229,7 +248,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00056">56</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00057">57</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -245,7 +264,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00053">53</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00054">54</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -261,7 +280,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00057">57</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00058">58</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -277,7 +296,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00058">58</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00059">59</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -293,7 +312,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00059">59</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00060">60</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -309,7 +328,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00054">54</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00055">55</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -325,7 +344,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00099">99</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00101">101</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -341,7 +360,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00100">100</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00102">102</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -357,7 +376,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00098">98</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00100">100</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -373,7 +392,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00089">89</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00091">91</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -389,7 +408,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00092">92</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00094">94</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -405,7 +424,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00091">91</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00093">93</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -421,7 +440,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00090">90</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00092">92</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -437,7 +456,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00088">88</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00090">90</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -453,7 +472,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00094">94</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00096">96</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -469,7 +488,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00093">93</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00095">95</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -485,7 +504,23 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00063">63</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00064">64</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+
+</div>
+</div>
+<a id="ab70c16d6f68ec7fbf5eef058dc6db7ad" name="ab70c16d6f68ec7fbf5eef058dc6db7ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab70c16d6f68ec7fbf5eef058dc6db7ad">&#9670;&#160;</a></span>UA_WRITEMASK_ACCESSLEVELEX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_WRITEMASK_ACCESSLEVELEX&#160;&#160;&#160;(0x01u &lt;&lt; 25u)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00086">86</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -501,7 +536,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00064">64</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00065">65</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -517,7 +552,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00065">65</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00066">66</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -533,7 +568,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00066">66</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00067">67</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -549,7 +584,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00067">67</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00068">68</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -565,7 +600,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00068">68</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00069">69</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -581,7 +616,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00069">69</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00070">70</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -597,7 +632,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00070">70</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00071">71</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -613,7 +648,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00071">71</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00072">72</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -629,7 +664,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00072">72</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00073">73</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -645,7 +680,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00073">73</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00074">74</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -661,7 +696,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00074">74</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00075">75</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -677,7 +712,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00075">75</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00076">76</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -693,7 +728,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00076">76</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00077">77</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -709,7 +744,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00077">77</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00078">78</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -725,7 +760,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00078">78</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00079">79</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -741,7 +776,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00079">79</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00080">80</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -757,7 +792,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00080">80</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00081">81</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -773,7 +808,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00081">81</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00082">82</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -789,7 +824,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00084">84</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00085">85</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -805,7 +840,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00082">82</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00083">83</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -821,7 +856,72 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00083">83</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00084">84</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a2bd5a2265eb4146ce3d95897f7c51aae" name="a2bd5a2265eb4146ce3d95897f7c51aae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bd5a2265eb4146ce3d95897f7c51aae">&#9670;&#160;</a></span>UA_Client</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> <a class="el" href="common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00206">206</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+
+</div>
+</div>
+<a id="a9975d7f7819bd5b03521cf8a388eecda" name="a9975d7f7819bd5b03521cf8a388eecda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9975d7f7819bd5b03521cf8a388eecda">&#9670;&#160;</a></span>UA_Server</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> <a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00198">198</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+
+</div>
+</div>
+<a id="a68b1f0efce215c6832edde8745bb5215" name="a68b1f0efce215c6832edde8745bb5215"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68b1f0efce215c6832edde8745bb5215">&#9670;&#160;</a></span>UA_ServerCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* UA_ServerCallback) (<a class="el" href="common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server, void *data)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00203">203</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+
+</div>
+</div>
+<a id="aae96a8a45ba7fe0ce7072e7ca33fc0c7" name="aae96a8a45ba7fe0ce7072e7ca33fc0c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae96a8a45ba7fe0ce7072e7ca33fc0c7">&#9670;&#160;</a></span>UA_ServerConfig</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> <a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00201">201</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -871,7 +971,50 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="a4dc96c31672814d54f24409617bdbbe2ae7ab65cae8c63a25697577b4d6f466a5" name="a4dc96c31672814d54f24409617bdbbe2ae7ab65cae8c63a25697577b4d6f466a5"></a>UA_ATTRIBUTEID_ACCESSLEVELEX&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00021">21</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00022">22</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+
+</div>
+</div>
+<a id="a581d16bf4bb2cef817c374c81680fc8d" name="a581d16bf4bb2cef817c374c81680fc8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a581d16bf4bb2cef817c374c81680fc8d">&#9670;&#160;</a></span>UA_ConnectionState</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="common_8h.html#a581d16bf4bb2cef817c374c81680fc8d">UA_ConnectionState</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a581d16bf4bb2cef817c374c81680fc8daba25528ca5508cdca05b01deec198760" name="a581d16bf4bb2cef817c374c81680fc8daba25528ca5508cdca05b01deec198760"></a>UA_CONNECTIONSTATE_CLOSED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a581d16bf4bb2cef817c374c81680fc8dad066851a037a5358a886aeca1473337d" name="a581d16bf4bb2cef817c374c81680fc8dad066851a037a5358a886aeca1473337d"></a>UA_CONNECTIONSTATE_OPENING&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a581d16bf4bb2cef817c374c81680fc8daa38dce882bd9e4daf83f6dc88f163a58" name="a581d16bf4bb2cef817c374c81680fc8daa38dce882bd9e4daf83f6dc88f163a58"></a>UA_CONNECTIONSTATE_ESTABLISHED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a581d16bf4bb2cef817c374c81680fc8da67715d57265745bcdd833275b4cffafa" name="a581d16bf4bb2cef817c374c81680fc8da67715d57265745bcdd833275b4cffafa"></a>UA_CONNECTIONSTATE_CLOSING&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00122">122</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+
+</div>
+</div>
+<a id="a07eceb614c075c00494e5bdfcf7689e7" name="a07eceb614c075c00494e5bdfcf7689e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07eceb614c075c00494e5bdfcf7689e7">&#9670;&#160;</a></span>UA_LifecycleState</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="common_8h.html#a07eceb614c075c00494e5bdfcf7689e7">UA_LifecycleState</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a07eceb614c075c00494e5bdfcf7689e7a695b8de0bf5da9699811872367244fea" name="a07eceb614c075c00494e5bdfcf7689e7a695b8de0bf5da9699811872367244fea"></a>UA_LIFECYCLESTATE_STOPPED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a07eceb614c075c00494e5bdfcf7689e7a5801c59d2eb3e06b596cc00291eb2db2" name="a07eceb614c075c00494e5bdfcf7689e7a5801c59d2eb3e06b596cc00291eb2db2"></a>UA_LIFECYCLESTATE_STARTED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a07eceb614c075c00494e5bdfcf7689e7a74c16782d8e5c902b99a15053a2b75ae" name="a07eceb614c075c00494e5bdfcf7689e7a74c16782d8e5c902b99a15053a2b75ae"></a>UA_LIFECYCLESTATE_STOPPING&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00189">189</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -892,7 +1035,7 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="adeb58a592483258f220c845c47622b15aa0655b2b07c598945ed82058ee6b1d0a" name="adeb58a592483258f220c845c47622b15aa0655b2b07c598945ed82058ee6b1d0a"></a>UA_ORDER_MORE&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00112">112</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00114">114</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -914,7 +1057,7 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="a6fda8bb9a494877d7c2f77fd4c4932f8aa3e7dff5f422064049b58fd2a64c814c" name="a6fda8bb9a494877d7c2f77fd4c4932f8aa3e7dff5f422064049b58fd2a64c814c"></a>UA_RULEHANDLING_ACCEPT&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00103">103</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00105">105</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -930,7 +1073,12 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a8c3787777dac67ecf48c13ad1ddb112ea276415b4ce62172425d41dca2b0c8c21" name="a8c3787777dac67ecf48c13ad1ddb112ea276415b4ce62172425d41dca2b0c8c21"></a>UA_SECURECHANNELSTATE_FRESH&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a8c3787777dac67ecf48c13ad1ddb112ea1941b89608d0ce1d27063232802d726f" name="a8c3787777dac67ecf48c13ad1ddb112ea1941b89608d0ce1d27063232802d726f"></a>UA_SECURECHANNELSTATE_CLOSED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8c3787777dac67ecf48c13ad1ddb112ea08e2f3f461d9470f6f6e590e1dcc8ec7" name="a8c3787777dac67ecf48c13ad1ddb112ea08e2f3f461d9470f6f6e590e1dcc8ec7"></a>UA_SECURECHANNELSTATE_REVERSE_LISTENING&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8c3787777dac67ecf48c13ad1ddb112ea6d217948c3b2853be3021638f690ba5f" name="a8c3787777dac67ecf48c13ad1ddb112ea6d217948c3b2853be3021638f690ba5f"></a>UA_SECURECHANNELSTATE_CONNECTING&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8c3787777dac67ecf48c13ad1ddb112eabc1a13bb4ad6ecf4f5501f2b3243f30b" name="a8c3787777dac67ecf48c13ad1ddb112eabc1a13bb4ad6ecf4f5501f2b3243f30b"></a>UA_SECURECHANNELSTATE_CONNECTED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8c3787777dac67ecf48c13ad1ddb112eaf927761e5c3bbbdd52cbc6b4167dd8bd" name="a8c3787777dac67ecf48c13ad1ddb112eaf927761e5c3bbbdd52cbc6b4167dd8bd"></a>UA_SECURECHANNELSTATE_REVERSE_CONNECTED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8c3787777dac67ecf48c13ad1ddb112ea23cfa7d55126074c8f68a955d64db09c" name="a8c3787777dac67ecf48c13ad1ddb112ea23cfa7d55126074c8f68a955d64db09c"></a>UA_SECURECHANNELSTATE_RHE_SENT&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a8c3787777dac67ecf48c13ad1ddb112ea7a7f9c56c3ca2d46cc15b00a21e6c7fa" name="a8c3787777dac67ecf48c13ad1ddb112ea7a7f9c56c3ca2d46cc15b00a21e6c7fa"></a>UA_SECURECHANNELSTATE_HEL_SENT&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a8c3787777dac67ecf48c13ad1ddb112ea124dad322d3d02fa96c73fe66bacd9d9" name="a8c3787777dac67ecf48c13ad1ddb112ea124dad322d3d02fa96c73fe66bacd9d9"></a>UA_SECURECHANNELSTATE_HEL_RECEIVED&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a8c3787777dac67ecf48c13ad1ddb112ea84f870bad5d8131ce3f6c45a7f367efd" name="a8c3787777dac67ecf48c13ad1ddb112ea84f870bad5d8131ce3f6c45a7f367efd"></a>UA_SECURECHANNELSTATE_ACK_SENT&#160;</td><td class="fielddoc"></td></tr>
@@ -938,10 +1086,9 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="a8c3787777dac67ecf48c13ad1ddb112ea3fefe210f56a70259b57d9ec263824b6" name="a8c3787777dac67ecf48c13ad1ddb112ea3fefe210f56a70259b57d9ec263824b6"></a>UA_SECURECHANNELSTATE_OPN_SENT&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a8c3787777dac67ecf48c13ad1ddb112ea7139d013b51e0b15053d3363d3cbe604" name="a8c3787777dac67ecf48c13ad1ddb112ea7139d013b51e0b15053d3363d3cbe604"></a>UA_SECURECHANNELSTATE_OPEN&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a8c3787777dac67ecf48c13ad1ddb112ea216580e6b7b86ea82b54f750de4bf178" name="a8c3787777dac67ecf48c13ad1ddb112ea216580e6b7b86ea82b54f750de4bf178"></a>UA_SECURECHANNELSTATE_CLOSING&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8c3787777dac67ecf48c13ad1ddb112ea1941b89608d0ce1d27063232802d726f" name="a8c3787777dac67ecf48c13ad1ddb112ea1941b89608d0ce1d27063232802d726f"></a>UA_SECURECHANNELSTATE_CLOSED&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00120">120</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00133">133</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -965,7 +1112,31 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="a66e73dba25a0a0771ed1a850291ca96fa70552776c3d3f4c4bcffe7dd17be17b5" name="a66e73dba25a0a0771ed1a850291ca96fa70552776c3d3f4c4bcffe7dd17be17b5"></a>UA_SESSIONSTATE_CLOSING&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00132">132</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00149">149</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+
+</div>
+</div>
+<a id="a98746a12b9f95ca7982cb9858e8bd573" name="a98746a12b9f95ca7982cb9858e8bd573"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98746a12b9f95ca7982cb9858e8bd573">&#9670;&#160;</a></span>UA_ShutdownReason</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="common_8h.html#a98746a12b9f95ca7982cb9858e8bd573">UA_ShutdownReason</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a98746a12b9f95ca7982cb9858e8bd573ae9549e36b9ef072963017a1c2831d42a" name="a98746a12b9f95ca7982cb9858e8bd573ae9549e36b9ef072963017a1c2831d42a"></a>UA_SHUTDOWNREASON_CLOSE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a98746a12b9f95ca7982cb9858e8bd573a7de5e1418df741cdaaa5f7c6e67ce713" name="a98746a12b9f95ca7982cb9858e8bd573a7de5e1418df741cdaaa5f7c6e67ce713"></a>UA_SHUTDOWNREASON_REJECT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a98746a12b9f95ca7982cb9858e8bd573a91e3897a73021c8bfd2701a1e6e0d86e" name="a98746a12b9f95ca7982cb9858e8bd573a91e3897a73021c8bfd2701a1e6e0d86e"></a>UA_SHUTDOWNREASON_SECURITYREJECT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a98746a12b9f95ca7982cb9858e8bd573a5e1ce5c544c0a87f84f2f062b65f03c8" name="a98746a12b9f95ca7982cb9858e8bd573a5e1ce5c544c0a87f84f2f062b65f03c8"></a>UA_SHUTDOWNREASON_TIMEOUT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a98746a12b9f95ca7982cb9858e8bd573a326ac7176d74d157a63823814894042d" name="a98746a12b9f95ca7982cb9858e8bd573a326ac7176d74d157a63823814894042d"></a>UA_SHUTDOWNREASON_ABORT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a98746a12b9f95ca7982cb9858e8bd573aba61872726d862ad4a4dbf449a60fdd9" name="a98746a12b9f95ca7982cb9858e8bd573aba61872726d862ad4a4dbf449a60fdd9"></a>UA_SHUTDOWNREASON_PURGE&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00160">160</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>

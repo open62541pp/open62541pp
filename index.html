@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.20.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.21.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -105,16 +105,20 @@ $(function() {
 <li>Cross-platform (tested on Windows, Linux and macOS)</li>
 <li>Compatible with all stable open62541 versions ≥ v1.0</li>
 <li>Easy installation and integration with CMake</li>
-<li>Use modern C++ (C++ 17) and best practices</li>
 <li>Less hurdle to get started with OPC UA</li>
 </ul>
 <p>The latest stable open62541 release is integrated as a submodule. Depending on the value of the CMake flag <code>UAPP_INTERNAL_OPEN62541</code>, the submodule or an external open62541 installation is used. All open62541 releases since v1.0 are supported and tested in a <a href="https://github.com/open62541pp/open62541pp/actions/workflows/open62541-compatibility.yml" target="_blank">CI pipeline</a> with debug/release builds and as static/dynamic library.</p>
-<p>The project is currently in <code>beta</code> stage but already used in production. Version <a href="https://github.com/open62541pp/open62541pp/milestone/1" target="_blank"><code>v1.0.0</code> is planned for 2025</a>. No major breaking changes are expected.</p>
-<p>While in <code>v0.x.x</code>, breaking changes may occur in minor releases. This projects follows the <em>two-version deprecation path</em>: when a feature is marked as deprecated in <code>v0.x.0</code>, it may be removed as early as <code>v0.(x+2).0</code>. Deprecated APIs are declared with the <code>[[deprecated]]</code> attribute and noted in the changelog.</p>
+<p>The project is stable and used in production environments. Versioning remains at <code>v0.x.x</code> to preserve flexibility for API refinements based on user feedback. Breaking changes may occur in minor releases following a <em>two-version deprecation path</em>: deprecated features in <code>v0.x.0</code> will be removed no earlier than <code>v0.(x+2).0</code>. Deprecated APIs are declared with the <code>[[deprecated]]</code> attribute and noted in the changelog.</p>
 <h2><a class="anchor" id="autotoc_md1"></a>
+📋 Requirements</h2>
+<ul>
+<li>C++17 compatible compiler (GCC 7+, Clang 5+, MSVC 2017+)</li>
+<li>CMake 3.12 or higher</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md2"></a>
 📝 Examples</h2>
 <p><a href="https://github.com/open62541pp/open62541pp/tree/master/examples" target="_blank">Explore all examples in the <code>examples/</code> directory</a>.</p>
-<h3><a class="anchor" id="autotoc_md2"></a>
+<h3><a class="anchor" id="autotoc_md3"></a>
 Server</h3>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="node_8hpp.html">open62541pp/node.hpp</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="server_8hpp.html">open62541pp/server.hpp</a>&gt;</span></div>
@@ -138,7 +142,7 @@ Server</h3>
 <div class="ttc" id="aclassopcua_1_1Variant_html"><div class="ttname"><a href="classopcua_1_1Variant.html">opcua::Variant</a></div><div class="ttdoc">UA_Variant wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l01059">types.hpp:1059</a></div></div>
 <div class="ttc" id="anode_8hpp_html"><div class="ttname"><a href="node_8hpp.html">node.hpp</a></div></div>
 <div class="ttc" id="aserver_8hpp_html"><div class="ttname"><a href="server_8hpp.html">server.hpp</a></div></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md3"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md4"></a>
 Client</h3>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
@@ -159,9 +163,9 @@ Client</h3>
 <div class="ttc" id="aclassopcua_1_1DateTime_html"><div class="ttname"><a href="classopcua_1_1DateTime.html">opcua::DateTime</a></div><div class="ttdoc">UA_DateTime wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00359">types.hpp:359</a></div></div>
 <div class="ttc" id="aclassopcua_1_1DateTime_html_a04825f432e351dee595eecdfb3ec84df"><div class="ttname"><a href="classopcua_1_1DateTime.html#a04825f432e351dee595eecdfb3ec84df">opcua::DateTime::format</a></div><div class="ttdeci">String format(std::string_view format, bool localtime=false) const</div><div class="ttdoc">Convert to string with given format (same format codes as strftime).</div></div>
 <div class="ttc" id="aclient_8hpp_html"><div class="ttname"><a href="client_8hpp.html">client.hpp</a></div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md4"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md5"></a>
 ⇆ Type conversion</h2>
-<p>Type conversion from and to native <code>UA_*</code> types are handled by the <code><a class="el" href="structopcua_1_1TypeConverter.html" title="Type conversion from and to native types.">opcua::TypeConverter</a></code> struct. Have a look at the <a href="https://github.com/open62541pp/open62541pp/blob/master/examples/typeconversion.cpp" target="_blank">typeconversion example</a>.</p>
+<p>Open62541pp provides automatic conversion between C++ types and OPC UA types, making it easy to work with familiar C++ constructs. Type conversion from and to native <code>UA_*</code> types are handled by the <code><a class="el" href="structopcua_1_1TypeConverter.html" title="Type conversion from and to native types.">opcua::TypeConverter</a></code> struct. Have a look at the <a href="https://github.com/open62541pp/open62541pp/blob/master/examples/typeconversion.cpp" target="_blank">typeconversion example</a>.</p>
 <p>Compile-time checks are used where possible:</p>
 <div class="fragment"><div class="line"><a class="code hl_class" href="classopcua_1_1Variant.html">opcua::Variant</a> var;</div>
 <div class="line"> </div>
@@ -189,7 +193,7 @@ Client</h3>
 <div class="line">}  <span class="comment">// namespace opcua</span></div>
 <div class="ttc" id="anamespaceopcua_html"><div class="ttname"><a href="namespaceopcua.html">opcua</a></div><div class="ttdef"><b>Definition</b> <a href="async_8hpp_source.html#l00011">async.hpp:11</a></div></div>
 <div class="ttc" id="atypes_8h_html_ac31865e6fcb9a042b5eaf5a5bd4ed30d"><div class="ttname"><a href="open62541/types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a></div><div class="ttdeci">uint8_t UA_Byte</div></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md5"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md6"></a>
 Type map of built-in types</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -245,10 +249,10 @@ Type map of built-in types</h3>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">DiagnosticInfo   </td><td class="markdownTableBodyNone"><code><a class="elRef" target="_blank" href="open62541/structUA__DiagnosticInfo.html">UA_DiagnosticInfo</a></code>   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><code><a class="el" href="classopcua_1_1DiagnosticInfo.html" title="UA_DiagnosticInfo wrapper class.">opcua::DiagnosticInfo</a></code>   </td><td class="markdownTableBodyNone"></td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md6"></a>
+<h2><a class="anchor" id="autotoc_md7"></a>
 🚀 Getting started</h2>
 <p>The library can be built, integrated and installed using <a href="https://cmake.org/runningcmake/" target="_blank">CMake</a>.</p>
-<p>Please check out the open62541 build options here: <a href="https://www.open62541.org/doc/1.3/building.html#build-options">https://www.open62541.org/doc/1.3/building.html#build-options</a></p>
+<p>Please check out the open62541 build options here: <a href="https://www.open62541.org/doc/v1.4.14/building.html#build-options">https://www.open62541.org/doc/v1.4.14/building.html#build-options</a></p>
 <p>Open62541pp provides additional build options:</p>
 <ul>
 <li><code>UAPP_INTERNAL_OPEN62541</code>: Use internal open62541 library if <code>ON</code> or search for installed open62541 library if <code>OFF</code></li>
@@ -256,28 +260,28 @@ Type map of built-in types</h3>
 <li><code>UAPP_BUILD_EXAMPLES</code>: Build examples for <code>examples</code> directory</li>
 <li><code>UAPP_BUILD_TESTS</code>: Build unit tests</li>
 <li><code>UAPP_ENABLE_COVERAGE</code>: Enable coverage analysis</li>
-<li><code>UAPP_ENABLE_CLANG_TIDY</code>: Enable static code analysis with <a href="https://clang.llvm.org/extra/clang-tidy/" target="_blank">Clang-Tidy</a></li>
 <li><code>UAPP_ENABLE_SANITIZER_ADDRESS/LEAK/UNDEFINED/THREAD</code>: Enable sanitizers</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md7"></a>
+<h3><a class="anchor" id="autotoc_md8"></a>
 Integrate as an embedded (in-source) dependency</h3>
 <p>Add it to your project as a Git submodule (<code>git submodule add <a href="https://github.com/open62541pp/open62541pp.git">https://github.com/open62541pp/open62541pp.git</a></code>) and link it with CMake:</p>
 <div class="fragment"><div class="line">add_subdirectory(extern/open62541pp)  # the submodule directory</div>
 <div class="line">target_link_libraries(myexecutable PRIVATE open62541pp::open62541pp)</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md8"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md9"></a>
 Integrate as a pre-compiled library</h3>
 <p>If you build and install this package to your system, a <code>open62541ppConfig.cmake</code> file will be generated and installed to your system. The installed library can be found and linked within CMake:</p>
 <div class="fragment"><div class="line">find_package(open62541pp CONFIG REQUIRED)</div>
 <div class="line">target_link_libraries(myexecutable PRIVATE open62541pp::open62541pp)</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md9"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md10"></a>
 Integrate via package managers</h3>
 <p>The library is available through the following package managers:</p>
 <ul>
 <li><p class="startli"><a href="https://vcpkg.io" target="_blank"><b>vcpkg</b></a>: Please refer to the <a href="https://vcpkg.io/en/getting-started" target="_blank">vcpkg documentation</a> how to use it within your project. You can easily use vcpkg to build and install open62541pp:</p>
 <div class="fragment"><div class="line">vcpkg install open62541pp</div>
 </div><!-- fragment --></li>
+<li><a href="https://registry.bazel.build/" target="_blank"><b>Bazel Central Registry</b></a>: Please refer to the <a href="https://registry.bazel.build/modules/open62541pp" target="_blank">module page</a> on how to use it within your project.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md10"></a>
+<h3><a class="anchor" id="autotoc_md11"></a>
 Build and install</h3>
 <div class="fragment"><div class="line"># clone repository</div>
 <div class="line">git clone --recursive https://github.com/open62541pp/open62541pp.git</div>
@@ -295,13 +299,13 @@ Build and install</h3>
 <div class="line"> </div>
 <div class="line"># install to system</div>
 <div class="line">cmake --install .</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md11"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md12"></a>
 Dependencies</h3>
 <ul>
 <li><a href="https://github.com/open62541/open62541" target="_blank">open62541</a> as integrated submodule or external dependency</li>
 <li><a href="https://github.com/catchorg/Catch2" target="_blank">catch2</a> for tests</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md12"></a>
+<h2><a class="anchor" id="autotoc_md13"></a>
 🤝 Contribute</h2>
 <p>Contributions and feature requests are very welcome. Please have a look at the <a href="https://github.com/open62541pp/open62541pp/blob/master/CONTRIBUTING.md" target="_blank">contribution guidelines</a>. </p>
 </div></div><!-- PageDoc -->

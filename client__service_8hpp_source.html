@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.20.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.21.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -136,7 +136,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        };</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keyword">const</span> <span class="keyword">auto</span> callback =</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            [](<a class="code hl_structRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a>*, <span class="keywordtype">void</span>* userdata, uint32_t <span class="comment">/* reqId */</span>, <span class="keywordtype">void</span>* responsePtr) {</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            [](<a class="code hl_typedefRef" target="_blank" href="open62541/common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a>*, <span class="keywordtype">void</span>* userdata, uint32_t <span class="comment">/* reqId */</span>, <span class="keywordtype">void</span>* responsePtr) {</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>                std::unique_ptr&lt;Context&gt; context{<span class="keyword">static_cast&lt;</span>Context*<span class="keyword">&gt;</span>(userdata)};</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>                assert(context != <span class="keyword">nullptr</span>);</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>                assert(context-&gt;catcher != <span class="keyword">nullptr</span>);</div>
@@ -198,7 +198,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keywordflow">return</span> AsyncServiceAdapter&lt;Response&gt;::initiate(</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        client,</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        [&amp;](UA_ClientAsyncServiceCallback callback, <span class="keywordtype">void</span>* userdata) {</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>            <a class="code hl_function" href="namespaceopcua.html#a51131f59e2ce7f22a984fa6577fb2c27">throwIfBad</a>(<a class="code hl_functionRef" target="_blank" href="open62541/client_8h.html#ad78231c45e627fe56021d7b36470818c">__UA_Client_AsyncService</a>(</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>            <a class="code hl_function" href="namespaceopcua.html#a51131f59e2ce7f22a984fa6577fb2c27">throwIfBad</a>(<a class="code hl_functionRef" target="_blank" href="open62541/client_8h.html#a0abcfb0e051d462f6b7dca859c2a622c">__UA_Client_AsyncService</a>(</div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                opcua::detail::getHandle(client),</div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                &amp;request,</div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>                &amp;getDataType&lt;Request&gt;(),</div>
@@ -216,7 +216,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Request, <span class="keyword">typename</span> Response&gt;</div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>Response sendRequest(Client&amp; client, <span class="keyword">const</span> Request&amp; request) <span class="keyword">noexcept</span> {</div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    Response response{};</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <a class="code hl_functionRef" target="_blank" href="open62541/client_8h.html#a1a58c84867e27341d94347c978f243bc">__UA_Client_Service</a>(</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <a class="code hl_functionRef" target="_blank" href="open62541/client_8h.html#a719eb5acb0fc881b1f1c8803a8b67e63">__UA_Client_Service</a>(</div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        opcua::detail::getHandle(client),</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        &amp;request,</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        &amp;getDataType&lt;Request&gt;(),</div>
@@ -230,13 +230,13 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aasync_8hpp_html"><div class="ttname"><a href="async_8hpp.html">async.hpp</a></div></div>
 <div class="ttc" id="aclient_8h_html"><div class="ttname"><a href="client_8h.html">client.h</a></div></div>
 <div class="ttc" id="aclient_8h_html_a0798176d568f4a010e2b76430a81529f"><div class="ttname"><a href="open62541/client_8h.html#a0798176d568f4a010e2b76430a81529f">UA_ClientAsyncServiceCallback</a></div><div class="ttdeci">void(* UA_ClientAsyncServiceCallback)(UA_Client *client, void *userdata, UA_UInt32 requestId, void *response)</div></div>
-<div class="ttc" id="aclient_8h_html_a1a58c84867e27341d94347c978f243bc"><div class="ttname"><a href="open62541/client_8h.html#a1a58c84867e27341d94347c978f243bc">__UA_Client_Service</a></div><div class="ttdeci">void __UA_Client_Service(UA_Client *client, const void *request, const UA_DataType *requestType, void *response, const UA_DataType *responseType)</div></div>
-<div class="ttc" id="aclient_8h_html_ad78231c45e627fe56021d7b36470818c"><div class="ttname"><a href="open62541/client_8h.html#ad78231c45e627fe56021d7b36470818c">__UA_Client_AsyncService</a></div><div class="ttdeci">UA_StatusCode __UA_Client_AsyncService(UA_Client *client, const void *request, const UA_DataType *requestType, UA_ClientAsyncServiceCallback callback, const UA_DataType *responseType, void *userdata, UA_UInt32 *requestId)</div></div>
+<div class="ttc" id="aclient_8h_html_a0abcfb0e051d462f6b7dca859c2a622c"><div class="ttname"><a href="open62541/client_8h.html#a0abcfb0e051d462f6b7dca859c2a622c">__UA_Client_AsyncService</a></div><div class="ttdeci">UA_StatusCode UA_THREADSAFE __UA_Client_AsyncService(UA_Client *client, const void *request, const UA_DataType *requestType, UA_ClientAsyncServiceCallback callback, const UA_DataType *responseType, void *userdata, UA_UInt32 *requestId)</div></div>
+<div class="ttc" id="aclient_8h_html_a719eb5acb0fc881b1f1c8803a8b67e63"><div class="ttname"><a href="open62541/client_8h.html#a719eb5acb0fc881b1f1c8803a8b67e63">__UA_Client_Service</a></div><div class="ttdeci">void UA_THREADSAFE __UA_Client_Service(UA_Client *client, const void *request, const UA_DataType *requestType, void *response, const UA_DataType *responseType)</div></div>
 <div class="ttc" id="aclient__utils_8hpp_html"><div class="ttname"><a href="client__utils_8hpp.html">client_utils.hpp</a></div></div>
+<div class="ttc" id="acommon_8h_html_a2bd5a2265eb4146ce3d95897f7c51aae"><div class="ttname"><a href="open62541/common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a></div><div class="ttdeci">struct UA_Client UA_Client</div></div>
 <div class="ttc" id="aexception_8hpp_html"><div class="ttname"><a href="exception_8hpp.html">exception.hpp</a></div></div>
 <div class="ttc" id="aexceptioncatcher_8hpp_html"><div class="ttname"><a href="exceptioncatcher_8hpp.html">exceptioncatcher.hpp</a></div></div>
 <div class="ttc" id="anamespaceopcua_html_a51131f59e2ce7f22a984fa6577fb2c27"><div class="ttname"><a href="namespaceopcua.html#a51131f59e2ce7f22a984fa6577fb2c27">opcua::throwIfBad</a></div><div class="ttdeci">constexpr void throwIfBad(UA_StatusCode code)</div><div class="ttdoc">Check the status code and throw a BadStatus exception if the status code is bad.</div><div class="ttdef"><b>Definition</b> <a href="exception_8hpp_source.html#l00085">exception.hpp:85</a></div></div>
-<div class="ttc" id="astructUA__Client_html"><div class="ttname"><a href="open62541/structUA__Client.html">UA_Client</a></div></div>
 <div class="ttc" id="atyperegistry_8hpp_html"><div class="ttname"><a href="typeregistry_8hpp.html">typeregistry.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['tailq_5fentry_0',['tailq_entry',['../structUA__PubSubConnection.html#acd614b60494313b6dc3c95dc7e81ade5',1,'UA_PubSubConnection::TAILQ_ENTRY()'],['../structUA__DataSetField.html#a9b8f685e6f3578d45f915b7614d50175',1,'UA_DataSetField::TAILQ_ENTRY()'],['../structchannel__entry.html#ab8bf252ffa4265fc4eb18dd9cd913ec8',1,'channel_entry::TAILQ_ENTRY()'],['../structUA__Notification.html#a4da25340956f96bb4db49529f2e66344',1,'UA_Notification::TAILQ_ENTRY(UA_Notification) localEntry'],['../structUA__Notification.html#a347f7896ba30bf4b4ddd8f559d292b07',1,'UA_Notification::TAILQ_ENTRY(UA_Notification) globalEntry'],['../structUA__NotificationMessageEntry.html#a19d5248bec2af78f9d7664dafb8564e9',1,'UA_NotificationMessageEntry::TAILQ_ENTRY()'],['../structUA__Subscription.html#afa7d13cb38c83d9d43cf08dcf1e04b9b',1,'UA_Subscription::TAILQ_ENTRY()'],['../structUA__PublishedDataSet.html#a6f8d7978f3320f729d52d8f11437b724',1,'UA_PublishedDataSet::TAILQ_ENTRY()']]],
-  ['tailq_5fhead_1',['tailq_head',['../structUA__PubSubManager.html#aacf1f92d504fde67f84e7e3c8e188f3b',1,'UA_PubSubManager::TAILQ_HEAD()'],['../ua__subscription_8h.html#aa10be1290182147a403bbfca9eb673e5',1,'TAILQ_HEAD(NotificationMessageQueue, UA_NotificationMessageEntry) NotificationMessageQueue:&#160;ua_subscription.h'],['../ua__subscription_8h.html#a52b562be9b65438443f624a419c25c45',1,'TAILQ_HEAD(NotificationQueue, UA_Notification) NotificationQueue:&#160;ua_subscription.h'],['../structUA__Subscription.html#a88d9012ca7dd1cb2148acbe1e72104f4',1,'UA_Subscription::TAILQ_HEAD()'],['../structUA__Session.html#ab9fe437a81d78caeee84f1f90cbc9ed6',1,'UA_Session::TAILQ_HEAD()'],['../structUA__Server.html#a30525fc0415c544489856533a7611da1',1,'UA_Server::TAILQ_HEAD()'],['../structUA__PubSubManager.html#a76047e89ae7edc69f09f70c2ba93fa70',1,'UA_PubSubManager::TAILQ_HEAD()'],['../structUA__PublishedDataSet.html#ab835dae3f2c77f2516bfbfd47b01d296',1,'UA_PublishedDataSet::TAILQ_HEAD()']]],
-  ['tokenize_2',['tokenize',['../ua__types__encoding__json_8h.html#a8f1ecc6d12506a716d776ca0bb416c6b',1,'ua_types_encoding_json.h']]],
-  ['translatebrowsepathtonodeids_3',['translateBrowsePathToNodeIds',['../ua__server__internal_8h.html#a574e2bd1c9838cb9e726b6b0171bb012',1,'ua_server_internal.h']]],
-  ['triggerevent_4',['triggerEvent',['../ua__server__internal_8h.html#a468c56eeda0c7b3719ffe5b075444e1f',1,'ua_server_internal.h']]],
-  ['txt2sd_5',['txt2sd',['../sdtxt_8h.html#a54c5ac3db1ff849d2328aa452ce9ee0c',1,'sdtxt.h']]]
+  ['va_5fend_0',['va_end',['../log_8h.html#a36af1f79dd6adf0809c21e76535034d5',1,'log.h']]],
+  ['va_5fstart_1',['va_start',['../log_8h.html#a69b8509720799c5fcb6882442b6ad1dd',1,'log.h']]],
+  ['value_5fdelete_2',['Value_delete',['../src_2Value_8h.html#a4b8a18293b2e849852a310d7ad99382a',1,'Value.h']]],
+  ['value_5fend_3',['Value_end',['../src_2Value_8h.html#a8e0d7a562be07129fc2f3aff7aef921a',1,'Value.h']]],
+  ['value_5fgetdata_4',['Value_getData',['../backends_2open62541_2src_2Value_8h.html#a645f35ce3daa5cfdd4c63e8f95811940',1,'Value.h']]],
+  ['value_5fnew_5',['Value_new',['../src_2Value_8h.html#a75a28cbbdf3425c19bb3dd2b9384b6c4',1,'Value.h']]],
+  ['value_5fstart_6',['Value_start',['../src_2Value_8h.html#af0c398983d4e29d400937d2de70a776f',1,'Value.h']]]
 ];

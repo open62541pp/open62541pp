@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.20.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.21.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -104,9 +104,9 @@ $(function() {
 <li>Create a <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a> with a <a class="el" href="classopcua_1_1ServerConfig.html" title="Server configuration.">ServerConfig</a> (move ownership to the <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a> instance)</li>
 </ol>
 <p>The server expects that the configuration is not modified during runtime.</p>
-<p>Use the <a class="el" href="classopcua_1_1Server.html#af78448a2823bfe2e6ba8badb987a8bc8">handle()</a> method to get access the underlying <a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> instance and use the full power of open62541.</p>
+<p>Use the <a class="el" href="classopcua_1_1Server.html#af78448a2823bfe2e6ba8badb987a8bc8">handle()</a> method to get access the underlying UA_Server instance and use the full power of open62541.</p>
 <p>Don't overwrite the <a class="elRef" target="_blank" href="open62541/structUA__ServerConfig.html#ab59fdb999e2078f5ef0cfef31807d8c6">UA_ServerConfig::context</a> pointer! The context pointer is used to store a pointer to the <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a> instance (for <a class="el" href="classopcua_1_1Server.html#ae27dada1ca73cfd640db514a69b3016f" title="Convert native UA_Server pointer to its wrapper instance.">asWrapper(UA_Server*)</a>) and to get access to the underlying server context. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2server_custom_datatypes_8cpp-example.html#_a0">custom_datatypes/server_custom_datatypes.cpp</a>, <a class="el" href="events_2server_events_8cpp-example.html#_a0">events/server_events.cpp</a>, <a class="el" href="method_2server_method_8cpp-example.html#_a0">method/server_method.cpp</a>, <a class="el" href="method_2server_method_async_8cpp-example.html#_a0">method/server_method_async.cpp</a>, <a class="el" href="server_8cpp-example.html#_a4">server.cpp</a>, <a class="el" href="server_accesscontrol_8cpp-example.html#_a16">server_accesscontrol.cpp</a>, <a class="el" href="server_callback_8cpp-example.html#_a0">server_callback.cpp</a>, <a class="el" href="server_datasource_8cpp-example.html#_a15">server_datasource.cpp</a>, <a class="el" href="server_instantiation_8cpp-example.html#_a0">server_instantiation.cpp</a>, <a class="el" href="server_logger_8cpp-example.html#_a17">server_logger.cpp</a>, <a class="el" href="server_minimal_8cpp-example.html#_a0">server_minimal.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#_a15">server_valuecallback.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2server_custom_datatypes_8cpp-example.html#_a0">custom_datatypes/server_custom_datatypes.cpp</a>, <a class="el" href="events_2server_events_8cpp-example.html#_a0">events/server_events.cpp</a>, <a class="el" href="method_2server_method_8cpp-example.html#_a0">method/server_method.cpp</a>, <a class="el" href="method_2server_method_async_8cpp-example.html#_a0">method/server_method_async.cpp</a>, <a class="el" href="server_8cpp-example.html#_a4">server.cpp</a>, <a class="el" href="server_accesscontrol_8cpp-example.html#_a17">server_accesscontrol.cpp</a>, <a class="el" href="server_callback_8cpp-example.html#_a0">server_callback.cpp</a>, <a class="el" href="server_datasource_8cpp-example.html#_a15">server_datasource.cpp</a>, <a class="el" href="server_instantiation_8cpp-example.html#_a0">server_instantiation.cpp</a>, <a class="el" href="server_logger_8cpp-example.html#_a17">server_logger.cpp</a>, <a class="el" href="server_minimal_8cpp-example.html#_a0">server_minimal.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#_a15">server_valuecallback.cpp</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="server_8hpp_source.html#l00141">141</a> of file <a class="el" href="server_8hpp_source.html">server.hpp</a>.</p>
@@ -117,7 +117,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:adf0fca729e9e75dabd9e673a7eb7514c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa98140783016cd309994cbd1c0e27e3c" id="r_aa98140783016cd309994cbd1c0e27e3c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#aa98140783016cd309994cbd1c0e27e3c">Server</a> (<a class="el" href="classopcua_1_1ServerConfig.html">ServerConfig</a> &amp;&amp;<a class="el" href="classopcua_1_1Server.html#a8c96ae4799072325bce34be6c7fd81cc">config</a>)</td></tr>
 <tr class="separator:aa98140783016cd309994cbd1c0e27e3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30b76f0bd64333fe3e17bd54b8468aa2" id="r_a30b76f0bd64333fe3e17bd54b8468aa2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a30b76f0bd64333fe3e17bd54b8468aa2">Server</a> (<a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> *native)</td></tr>
+<tr class="memitem:a30b76f0bd64333fe3e17bd54b8468aa2" id="r_a30b76f0bd64333fe3e17bd54b8468aa2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a30b76f0bd64333fe3e17bd54b8468aa2">Server</a> (<a class="elRef" target="_blank" href="open62541/common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *native)</td></tr>
 <tr class="separator:a30b76f0bd64333fe3e17bd54b8468aa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93588c15676da7bc1820a2400046126a" id="r_a93588c15676da7bc1820a2400046126a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a93588c15676da7bc1820a2400046126a">~Server</a> ()</td></tr>
 <tr class="separator:a93588c15676da7bc1820a2400046126a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -143,13 +143,13 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a48c8106fd541ed27f739ac53581f4d46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f60afa469c57d8f211d0a3dce029e29" id="r_a4f60afa469c57d8f211d0a3dce029e29"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceopcua.html#a00e58ea3436dae57a589fc7b44a348f8">NamespaceIndex</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a4f60afa469c57d8f211d0a3dce029e29">registerNamespace</a> (std::string_view uri)</td></tr>
 <tr class="separator:a4f60afa469c57d8f211d0a3dce029e29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95016c477db23efc19979bd4dd62d88e" id="r_a95016c477db23efc19979bd4dd62d88e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a95016c477db23efc19979bd4dd62d88e">setVariableNodeValueCallback</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="classopcua_1_1ValueCallbackBase.html">ValueCallbackBase</a> &amp;callback)</td></tr>
+<tr class="memitem:a95016c477db23efc19979bd4dd62d88e" id="r_a95016c477db23efc19979bd4dd62d88e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a95016c477db23efc19979bd4dd62d88e">setVariableNodeValueCallback</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;<a class="elRef" target="_blank" href="open62541/types_8h.html#a4b6dd8640e32ba0ce2d74b7c37ae1533">id</a>, <a class="el" href="classopcua_1_1ValueCallbackBase.html">ValueCallbackBase</a> &amp;callback)</td></tr>
 <tr class="separator:a95016c477db23efc19979bd4dd62d88e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeebc227142a8fefce191a32fe6b1ee84" id="r_aeebc227142a8fefce191a32fe6b1ee84"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#aeebc227142a8fefce191a32fe6b1ee84">setVariableNodeValueCallback</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::unique_ptr&lt; <a class="el" href="classopcua_1_1ValueCallbackBase.html">ValueCallbackBase</a> &gt; &amp;&amp;callback)</td></tr>
+<tr class="memitem:aeebc227142a8fefce191a32fe6b1ee84" id="r_aeebc227142a8fefce191a32fe6b1ee84"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#aeebc227142a8fefce191a32fe6b1ee84">setVariableNodeValueCallback</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;<a class="elRef" target="_blank" href="open62541/types_8h.html#a4b6dd8640e32ba0ce2d74b7c37ae1533">id</a>, std::unique_ptr&lt; <a class="el" href="classopcua_1_1ValueCallbackBase.html">ValueCallbackBase</a> &gt; &amp;&amp;callback)</td></tr>
 <tr class="separator:aeebc227142a8fefce191a32fe6b1ee84"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67736c36802e3e4c91c97de82b7fe6d5" id="r_a67736c36802e3e4c91c97de82b7fe6d5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a67736c36802e3e4c91c97de82b7fe6d5">setVariableNodeDataSource</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="classopcua_1_1DataSourceBase.html">DataSourceBase</a> &amp;source)</td></tr>
+<tr class="memitem:a67736c36802e3e4c91c97de82b7fe6d5" id="r_a67736c36802e3e4c91c97de82b7fe6d5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a67736c36802e3e4c91c97de82b7fe6d5">setVariableNodeDataSource</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;<a class="elRef" target="_blank" href="open62541/types_8h.html#a4b6dd8640e32ba0ce2d74b7c37ae1533">id</a>, <a class="el" href="classopcua_1_1DataSourceBase.html">DataSourceBase</a> &amp;source)</td></tr>
 <tr class="separator:a67736c36802e3e4c91c97de82b7fe6d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3eea413bec701acce9b719bd13afb52" id="r_ae3eea413bec701acce9b719bd13afb52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#ae3eea413bec701acce9b719bd13afb52">setVariableNodeDataSource</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::unique_ptr&lt; <a class="el" href="classopcua_1_1DataSourceBase.html">DataSourceBase</a> &gt; &amp;&amp;source)</td></tr>
+<tr class="memitem:ae3eea413bec701acce9b719bd13afb52" id="r_ae3eea413bec701acce9b719bd13afb52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#ae3eea413bec701acce9b719bd13afb52">setVariableNodeDataSource</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;<a class="elRef" target="_blank" href="open62541/types_8h.html#a4b6dd8640e32ba0ce2d74b7c37ae1533">id</a>, std::unique_ptr&lt; <a class="el" href="classopcua_1_1DataSourceBase.html">DataSourceBase</a> &gt; &amp;&amp;source)</td></tr>
 <tr class="separator:ae3eea413bec701acce9b719bd13afb52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74af3b7dbfa031a19230a45dcf3f3a31" id="r_a74af3b7dbfa031a19230a45dcf3f3a31"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a74af3b7dbfa031a19230a45dcf3f3a31">runIterate</a> ()</td></tr>
 <tr class="separator:a74af3b7dbfa031a19230a45dcf3f3a31"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -159,9 +159,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a51f8bc0f79b2e5cea8fc094c58a76a9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae355af01f75adbe8197353e5f5d6afd6" id="r_ae355af01f75adbe8197353e5f5d6afd6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#ae355af01f75adbe8197353e5f5d6afd6">isRunning</a> () const noexcept</td></tr>
 <tr class="separator:ae355af01f75adbe8197353e5f5d6afd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af78448a2823bfe2e6ba8badb987a8bc8" id="r_af78448a2823bfe2e6ba8badb987a8bc8"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#af78448a2823bfe2e6ba8badb987a8bc8">handle</a> () noexcept</td></tr>
+<tr class="memitem:af78448a2823bfe2e6ba8badb987a8bc8" id="r_af78448a2823bfe2e6ba8badb987a8bc8"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#af78448a2823bfe2e6ba8badb987a8bc8">handle</a> () noexcept</td></tr>
 <tr class="separator:af78448a2823bfe2e6ba8badb987a8bc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c558952ba75f4e938fa7102e3611e86" id="r_a8c558952ba75f4e938fa7102e3611e86"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a8c558952ba75f4e938fa7102e3611e86">handle</a> () const noexcept</td></tr>
+<tr class="memitem:a8c558952ba75f4e938fa7102e3611e86" id="r_a8c558952ba75f4e938fa7102e3611e86"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" target="_blank" href="open62541/common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a8c558952ba75f4e938fa7102e3611e86">handle</a> () const noexcept</td></tr>
 <tr class="separator:a8c558952ba75f4e938fa7102e3611e86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
@@ -173,13 +173,13 @@ Friends</h2></td></tr>
 Related Symbols</h2></td></tr>
 <tr><td class="ititle" colspan="2"><p>(Note that these are not member symbols.) </p>
 </td></tr>
-<tr class="memitem:ae27dada1ca73cfd640db514a69b3016f" id="r_ae27dada1ca73cfd640db514a69b3016f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Server.html">Server</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#ae27dada1ca73cfd640db514a69b3016f">asWrapper</a> (<a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> *server) noexcept</td></tr>
+<tr class="memitem:ae27dada1ca73cfd640db514a69b3016f" id="r_ae27dada1ca73cfd640db514a69b3016f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Server.html">Server</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#ae27dada1ca73cfd640db514a69b3016f">asWrapper</a> (<a class="elRef" target="_blank" href="open62541/common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *server) noexcept</td></tr>
 <tr class="separator:ae27dada1ca73cfd640db514a69b3016f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22d940ee2f32aff5d0623a082ae119a1" id="r_a22d940ee2f32aff5d0623a082ae119a1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a22d940ee2f32aff5d0623a082ae119a1">operator==</a> (const <a class="el" href="classopcua_1_1Server.html">Server</a> &amp;lhs, const <a class="el" href="classopcua_1_1Server.html">Server</a> &amp;rhs) noexcept</td></tr>
 <tr class="separator:a22d940ee2f32aff5d0623a082ae119a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac5dcb77e2e1ffb1e0c372b031eeece7" id="r_aac5dcb77e2e1ffb1e0c372b031eeece7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#aac5dcb77e2e1ffb1e0c372b031eeece7">operator!=</a> (const <a class="el" href="classopcua_1_1Server.html">Server</a> &amp;lhs, const <a class="el" href="classopcua_1_1Server.html">Server</a> &amp;rhs) noexcept</td></tr>
 <tr class="separator:aac5dcb77e2e1ffb1e0c372b031eeece7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5b11c7d3025b01596b9d9632d137b6f" id="r_af5b11c7d3025b01596b9d9632d137b6f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#af5b11c7d3025b01596b9d9632d137b6f">useAsyncOperation</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, bool enabled)</td></tr>
+<tr class="memitem:af5b11c7d3025b01596b9d9632d137b6f" id="r_af5b11c7d3025b01596b9d9632d137b6f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#af5b11c7d3025b01596b9d9632d137b6f">useAsyncOperation</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;<a class="elRef" target="_blank" href="open62541/types_8h.html#a4b6dd8640e32ba0ce2d74b7c37ae1533">id</a>, bool enabled)</td></tr>
 <tr class="separator:af5b11c7d3025b01596b9d9632d137b6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf5a608e6c5e6f8233c89751b147542a" id="r_adf5a608e6c5e6f8233c89751b147542a"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="structopcua_1_1AsyncOperation.html">AsyncOperation</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#adf5a608e6c5e6f8233c89751b147542a">getAsyncOperation</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server) noexcept</td></tr>
 <tr class="separator:adf5a608e6c5e6f8233c89751b147542a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -246,7 +246,7 @@ Related Symbols</h2></td></tr>
         <tr>
           <td class="memname">opcua::Server::Server </td>
           <td>(</td>
-          <td class="paramtype"><a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="elRef" target="_blank" href="open62541/common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>native</em></td><td>)</td>
           <td></td>
         </tr>
@@ -394,7 +394,7 @@ Related Symbols</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> * opcua::Server::handle </td>
+          <td class="memname">const <a class="elRef" target="_blank" href="open62541/common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> * opcua::Server::handle </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -419,7 +419,7 @@ Related Symbols</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> * opcua::Server::handle </td>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> * opcua::Server::handle </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -596,7 +596,7 @@ Related Symbols</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Run the server's main loop. This method will block until <a class="el" href="classopcua_1_1Server.html#a51f8bc0f79b2e5cea8fc094c58a76a9c" title="Stop the server&#39;s main loop.">Server::stop</a> is called. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2server_custom_datatypes_8cpp-example.html#a14">custom_datatypes/server_custom_datatypes.cpp</a>, <a class="el" href="events_2server_events_8cpp-example.html#a10">events/server_events.cpp</a>, <a class="el" href="method_2server_method_8cpp-example.html#a7">method/server_method.cpp</a>, <a class="el" href="method_2server_method_async_8cpp-example.html#a6">method/server_method_async.cpp</a>, <a class="el" href="server_callback_8cpp-example.html#a5">server_callback.cpp</a>, <a class="el" href="server_datasource_8cpp-example.html#a21">server_datasource.cpp</a>, <a class="el" href="server_instantiation_8cpp-example.html#a7">server_instantiation.cpp</a>, <a class="el" href="server_minimal_8cpp-example.html#a5">server_minimal.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#a17">server_valuecallback.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2server_custom_datatypes_8cpp-example.html#a14">custom_datatypes/server_custom_datatypes.cpp</a>, <a class="el" href="events_2server_events_8cpp-example.html#a10">events/server_events.cpp</a>, <a class="el" href="method_2server_method_8cpp-example.html#a8">method/server_method.cpp</a>, <a class="el" href="method_2server_method_async_8cpp-example.html#a7">method/server_method_async.cpp</a>, <a class="el" href="server_callback_8cpp-example.html#a5">server_callback.cpp</a>, <a class="el" href="server_datasource_8cpp-example.html#a21">server_datasource.cpp</a>, <a class="el" href="server_instantiation_8cpp-example.html#a7">server_instantiation.cpp</a>, <a class="el" href="server_minimal_8cpp-example.html#a5">server_minimal.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#a17">server_valuecallback.cpp</a>.</dd>
 </dl>
 
 </div>
@@ -812,7 +812,7 @@ Related Symbols</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classopcua_1_1Server.html">Server</a> * asWrapper </td>
           <td>(</td>
-          <td class="paramtype"><a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramtype"><a class="elRef" target="_blank" href="open62541/common_8h.html#a9975d7f7819bd5b03521cf8a388eecda">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em></td><td>)</td>
           <td></td>
         </tr>
@@ -824,7 +824,7 @@ Related Symbols</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Convert native <a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> pointer to its wrapper instance. </p>
+<p>Convert native UA_Server pointer to its wrapper instance. </p>
 <p>The native server must be owned by a <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a> instance. </p>
 
 </div>

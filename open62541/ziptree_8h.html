@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.3.15</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.15</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -100,13 +100,13 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:afb01a2bd78edb72a7adfd4dbb301ad89" id="r_afb01a2bd78edb72a7adfd4dbb301ad89"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#afb01a2bd78edb72a7adfd4dbb301ad89">ZIP_INLINE</a>&#160;&#160;&#160;<a class="el" href="architecture__definitions_8h.html#a00d24c7231be28dbaf71f5408f30e44c">inline</a></td></tr>
+<tr class="memitem:afb01a2bd78edb72a7adfd4dbb301ad89" id="r_afb01a2bd78edb72a7adfd4dbb301ad89"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#afb01a2bd78edb72a7adfd4dbb301ad89">ZIP_INLINE</a>&#160;&#160;&#160;<a class="el" href="config_8h.html#a00d24c7231be28dbaf71f5408f30e44c">inline</a></td></tr>
 <tr class="separator:afb01a2bd78edb72a7adfd4dbb301ad89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83f70964e777e1c3eb655989427ab853" id="r_a83f70964e777e1c3eb655989427ab853"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#a83f70964e777e1c3eb655989427ab853">ZIP_UNUSED</a></td></tr>
 <tr class="separator:a83f70964e777e1c3eb655989427ab853"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a11d5b2cd9d32e36b1e58e6d13846a8b3" id="r_a11d5b2cd9d32e36b1e58e6d13846a8b3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#a11d5b2cd9d32e36b1e58e6d13846a8b3">ZIP_HEAD</a>(name,  type)</td></tr>
+<tr class="memitem:a11d5b2cd9d32e36b1e58e6d13846a8b3" id="r_a11d5b2cd9d32e36b1e58e6d13846a8b3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#a11d5b2cd9d32e36b1e58e6d13846a8b3">ZIP_HEAD</a>(<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>,  <a class="el" href="types_8h.html#afc5a8ee5c7fd04cf12aa86a5f2882438">type</a>)</td></tr>
 <tr class="separator:a11d5b2cd9d32e36b1e58e6d13846a8b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa29a43c2c3a45f784642f5303bd5d96c" id="r_aa29a43c2c3a45f784642f5303bd5d96c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#aa29a43c2c3a45f784642f5303bd5d96c">ZIP_ENTRY</a>(type)</td></tr>
+<tr class="memitem:aa29a43c2c3a45f784642f5303bd5d96c" id="r_aa29a43c2c3a45f784642f5303bd5d96c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#aa29a43c2c3a45f784642f5303bd5d96c">ZIP_ENTRY</a>(<a class="el" href="types_8h.html#afc5a8ee5c7fd04cf12aa86a5f2882438">type</a>)</td></tr>
 <tr class="separator:aa29a43c2c3a45f784642f5303bd5d96c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adcc7df8d7a17f85c84626b9dd26244a7" id="r_adcc7df8d7a17f85c84626b9dd26244a7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#adcc7df8d7a17f85c84626b9dd26244a7">ZIP_INIT</a>(head)&#160;&#160;&#160;do { (head)-&gt;root = NULL; } while (0)</td></tr>
 <tr class="separator:adcc7df8d7a17f85c84626b9dd26244a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -116,29 +116,33 @@ Macros</h2></td></tr>
 <tr class="separator:a433e295a0e07d6014ea0437d45c30908"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebbc3cfc0464b828546f960d2daea553" id="r_aebbc3cfc0464b828546f960d2daea553"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#aebbc3cfc0464b828546f960d2daea553">ZIP_RIGHT</a>(elm,  field)&#160;&#160;&#160;(elm)-&gt;field.right</td></tr>
 <tr class="separator:aebbc3cfc0464b828546f960d2daea553"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b3eac113b00bf3aa8ae8f7f9bf7a3aa" id="r_a3b3eac113b00bf3aa8ae8f7f9bf7a3aa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#a3b3eac113b00bf3aa8ae8f7f9bf7a3aa">ZIP_RANK</a>(elm,  field)&#160;&#160;&#160;(elm)-&gt;field.rank</td></tr>
-<tr class="separator:a3b3eac113b00bf3aa8ae8f7f9bf7a3aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab000c3c53ea3c32a703849f15dc62013" id="r_ab000c3c53ea3c32a703849f15dc62013"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#ab000c3c53ea3c32a703849f15dc62013">ZIP_INSERT</a>(name,  head,  elm,  rank)&#160;&#160;&#160;name##_ZIP_INSERT(head, elm, rank)</td></tr>
-<tr class="separator:ab000c3c53ea3c32a703849f15dc62013"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade9bed4dd29b35890ce65c195220353d" id="r_ade9bed4dd29b35890ce65c195220353d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#ade9bed4dd29b35890ce65c195220353d">ZIP_REMOVE</a>(name,  head,  elm)&#160;&#160;&#160;name##_ZIP_REMOVE(head, elm)</td></tr>
-<tr class="separator:ade9bed4dd29b35890ce65c195220353d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8611e8e86453459dea309411bada6498" id="r_a8611e8e86453459dea309411bada6498"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#a8611e8e86453459dea309411bada6498">ZIP_FIND</a>(name,  head,  key)&#160;&#160;&#160;name##_ZIP_FIND(head, key)</td></tr>
+<tr class="memitem:a9704afee3e33ea2c4f12e7ed8757e9c8" id="r_a9704afee3e33ea2c4f12e7ed8757e9c8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#a9704afee3e33ea2c4f12e7ed8757e9c8">ZIP_INSERT</a>(<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>,  head,  elm)&#160;&#160;&#160;<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>##_ZIP_INSERT(head, elm)</td></tr>
+<tr class="separator:a9704afee3e33ea2c4f12e7ed8757e9c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8611e8e86453459dea309411bada6498" id="r_a8611e8e86453459dea309411bada6498"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#a8611e8e86453459dea309411bada6498">ZIP_FIND</a>(<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>,  head,  key)&#160;&#160;&#160;<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>##_ZIP_FIND(head, key)</td></tr>
 <tr class="separator:a8611e8e86453459dea309411bada6498"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69ea35b1ce9a81b72af1d16866ce9ec1" id="r_a69ea35b1ce9a81b72af1d16866ce9ec1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#a69ea35b1ce9a81b72af1d16866ce9ec1">ZIP_MIN</a>(name,  head)&#160;&#160;&#160;name##_ZIP_MIN(head)</td></tr>
+<tr class="memitem:a69ea35b1ce9a81b72af1d16866ce9ec1" id="r_a69ea35b1ce9a81b72af1d16866ce9ec1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#a69ea35b1ce9a81b72af1d16866ce9ec1">ZIP_MIN</a>(<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>,  head)&#160;&#160;&#160;<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>##_ZIP_MIN(head)</td></tr>
 <tr class="separator:a69ea35b1ce9a81b72af1d16866ce9ec1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6159e5fbdd4de1df7035835120797ae8" id="r_a6159e5fbdd4de1df7035835120797ae8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#a6159e5fbdd4de1df7035835120797ae8">ZIP_MAX</a>(name,  head)&#160;&#160;&#160;name##_ZIP_MAX(head)</td></tr>
+<tr class="memitem:a6159e5fbdd4de1df7035835120797ae8" id="r_a6159e5fbdd4de1df7035835120797ae8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#a6159e5fbdd4de1df7035835120797ae8">ZIP_MAX</a>(<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>,  head)&#160;&#160;&#160;<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>##_ZIP_MAX(head)</td></tr>
 <tr class="separator:a6159e5fbdd4de1df7035835120797ae8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac93e4e9a55b3145fdc525034e47886d4" id="r_ac93e4e9a55b3145fdc525034e47886d4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#ac93e4e9a55b3145fdc525034e47886d4">ZIP_ITER</a>(name,  head,  cb,  d)&#160;&#160;&#160;name##_ZIP_ITER(head, cb, d)</td></tr>
-<tr class="separator:ac93e4e9a55b3145fdc525034e47886d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac1bd36d61d4608b2c1299258a62b9bd9" id="r_ac1bd36d61d4608b2c1299258a62b9bd9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#ac1bd36d61d4608b2c1299258a62b9bd9">ZIP_FUNCTIONS</a>(name,  type,  field,  keytype,  keyfield,  cmp)</td></tr>
+<tr class="memitem:ade9bed4dd29b35890ce65c195220353d" id="r_ade9bed4dd29b35890ce65c195220353d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#ade9bed4dd29b35890ce65c195220353d">ZIP_REMOVE</a>(<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>,  head,  elm)&#160;&#160;&#160;<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>##_ZIP_REMOVE(head, elm)</td></tr>
+<tr class="separator:ade9bed4dd29b35890ce65c195220353d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8dee9fd7558f1de3d66c20f6e12c3095" id="r_a8dee9fd7558f1de3d66c20f6e12c3095"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#a8dee9fd7558f1de3d66c20f6e12c3095">ZIP_ZIP</a>(<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>,  left,  right)&#160;&#160;&#160;<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>##_ZIP_ZIP(left, right)</td></tr>
+<tr class="separator:a8dee9fd7558f1de3d66c20f6e12c3095"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20e0b18932d118962e435ede1c21abed" id="r_a20e0b18932d118962e435ede1c21abed"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#a20e0b18932d118962e435ede1c21abed">ZIP_UNZIP</a>(<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>,  head,  key,  left,  right)&#160;&#160;&#160;    <a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>##_ZIP_UNZIP(head, key, left, right)</td></tr>
+<tr class="separator:a20e0b18932d118962e435ede1c21abed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8cb1f68f9e517f15b0a6bedde13a02d" id="r_aa8cb1f68f9e517f15b0a6bedde13a02d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#aa8cb1f68f9e517f15b0a6bedde13a02d">ZIP_ITER</a>(<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>,  head,  cb,  ctx)&#160;&#160;&#160;<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>##_ZIP_ITER(head, cb, ctx)</td></tr>
+<tr class="separator:aa8cb1f68f9e517f15b0a6bedde13a02d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b87c69f92a2926a8357e249599a454e" id="r_a7b87c69f92a2926a8357e249599a454e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#a7b87c69f92a2926a8357e249599a454e">ZIP_ITER_KEY</a>(<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>,  head,  key,  cb,  ctx)&#160;&#160;&#160;<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>##_ZIP_ITER_KEY(head, key, cb, ctx)</td></tr>
+<tr class="separator:a7b87c69f92a2926a8357e249599a454e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1bd36d61d4608b2c1299258a62b9bd9" id="r_ac1bd36d61d4608b2c1299258a62b9bd9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#ac1bd36d61d4608b2c1299258a62b9bd9">ZIP_FUNCTIONS</a>(<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>,  <a class="el" href="types_8h.html#afc5a8ee5c7fd04cf12aa86a5f2882438">type</a>,  field,  keytype,  keyfield,  cmp)</td></tr>
 <tr class="separator:ac1bd36d61d4608b2c1299258a62b9bd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:a60749c5d35181da1378b6ae091b1c24e" id="r_a60749c5d35181da1378b6ae091b1c24e"><td class="memItemLeft" align="right" valign="top">typedef enum <a class="el" href="ziptree_8h.html#a407a7df5c5bf26a848f1b1ac2a2a1b5c">ZIP_CMP</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#a60749c5d35181da1378b6ae091b1c24e">zip_cmp_cb</a>) (const void *key1, const void *key2)</td></tr>
 <tr class="separator:a60749c5d35181da1378b6ae091b1c24e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2de09e7932b9938221ef98de609bb094" id="r_a2de09e7932b9938221ef98de609bb094"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#a2de09e7932b9938221ef98de609bb094">__zip_iter_cb</a>) (void *elm, void *context)</td></tr>
-<tr class="separator:a2de09e7932b9938221ef98de609bb094"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3f7bd7e870949500796902b31bf4d5e" id="r_ae3f7bd7e870949500796902b31bf4d5e"><td class="memItemLeft" align="right" valign="top">typedef void *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#ae3f7bd7e870949500796902b31bf4d5e">zip_iter_cb</a>) (void *context, void *elm)</td></tr>
+<tr class="separator:ae3f7bd7e870949500796902b31bf4d5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -147,20 +151,18 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a551b4b092f539bdfaa2ea740d6408b67" id="r_a551b4b092f539bdfaa2ea740d6408b67"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#a551b4b092f539bdfaa2ea740d6408b67">__ZIP_INSERT</a> (<a class="el" href="ziptree_8h.html#a60749c5d35181da1378b6ae091b1c24e">zip_cmp_cb</a> cmp, unsigned short fieldoffset, unsigned short keyoffset, void *root, void *elm)</td></tr>
-<tr class="separator:a551b4b092f539bdfaa2ea740d6408b67"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c69e4dcfb48730a70dfc43478b11901" id="r_a7c69e4dcfb48730a70dfc43478b11901"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#a7c69e4dcfb48730a70dfc43478b11901">__ZIP_REMOVE</a> (<a class="el" href="ziptree_8h.html#a60749c5d35181da1378b6ae091b1c24e">zip_cmp_cb</a> cmp, unsigned short fieldoffset, unsigned short keyoffset, void *root, void *elm)</td></tr>
-<tr class="separator:a7c69e4dcfb48730a70dfc43478b11901"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c3701615f879fc1076ad78702de3bb1" id="r_a4c3701615f879fc1076ad78702de3bb1"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#a4c3701615f879fc1076ad78702de3bb1">__ZIP_FIND</a> (<a class="el" href="ziptree_8h.html#a60749c5d35181da1378b6ae091b1c24e">zip_cmp_cb</a> cmp, unsigned short fieldoffset, unsigned short keyoffset, void *root, const void *key)</td></tr>
-<tr class="separator:a4c3701615f879fc1076ad78702de3bb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb535a9befd8911fe182af2effcc3e90" id="r_abb535a9befd8911fe182af2effcc3e90"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#abb535a9befd8911fe182af2effcc3e90">__ZIP_ITER</a> (unsigned short fieldoffset, <a class="el" href="ziptree_8h.html#a2de09e7932b9938221ef98de609bb094">__zip_iter_cb</a> cb, void *context, void *elm)</td></tr>
-<tr class="separator:abb535a9befd8911fe182af2effcc3e90"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9566e6705ee18849dacf6dce089ca07" id="r_aa9566e6705ee18849dacf6dce089ca07"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#aa9566e6705ee18849dacf6dce089ca07">__ZIP_MIN</a> (unsigned short fieldoffset, void *elm)</td></tr>
-<tr class="separator:aa9566e6705ee18849dacf6dce089ca07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a342b1284c83b4eb58ff3911663e37cca" id="r_a342b1284c83b4eb58ff3911663e37cca"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#a342b1284c83b4eb58ff3911663e37cca">__ZIP_MAX</a> (unsigned short fieldoffset, void *elm)</td></tr>
-<tr class="separator:a342b1284c83b4eb58ff3911663e37cca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ba74b2a8e7769faf8361112ba6497d5" id="r_a1ba74b2a8e7769faf8361112ba6497d5"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#a1ba74b2a8e7769faf8361112ba6497d5">__ZIP_FFS32</a> (unsigned int v)</td></tr>
-<tr class="separator:a1ba74b2a8e7769faf8361112ba6497d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa31eda802de72b5e2171ecf194ac9bb0" id="r_aa31eda802de72b5e2171ecf194ac9bb0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#aa31eda802de72b5e2171ecf194ac9bb0">__ZIP_INSERT</a> (void *h, <a class="el" href="ziptree_8h.html#a60749c5d35181da1378b6ae091b1c24e">zip_cmp_cb</a> cmp, unsigned short fieldoffset, unsigned short keyoffset, void *elm)</td></tr>
+<tr class="separator:aa31eda802de72b5e2171ecf194ac9bb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff203a972d5891b8b5cedd2da00c9998" id="r_aff203a972d5891b8b5cedd2da00c9998"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#aff203a972d5891b8b5cedd2da00c9998">__ZIP_REMOVE</a> (void *h, <a class="el" href="ziptree_8h.html#a60749c5d35181da1378b6ae091b1c24e">zip_cmp_cb</a> cmp, unsigned short fieldoffset, unsigned short keyoffset, void *elm)</td></tr>
+<tr class="separator:aff203a972d5891b8b5cedd2da00c9998"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b0485ba61ca2df93975ee0fbda9ff81" id="r_a2b0485ba61ca2df93975ee0fbda9ff81"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#a2b0485ba61ca2df93975ee0fbda9ff81">__ZIP_ITER</a> (unsigned short fieldoffset, <a class="el" href="ziptree_8h.html#ae3f7bd7e870949500796902b31bf4d5e">zip_iter_cb</a> cb, void *context, void *elm)</td></tr>
+<tr class="separator:a2b0485ba61ca2df93975ee0fbda9ff81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6d06b233f4aea948bfc2a158e614e4b" id="r_ad6d06b233f4aea948bfc2a158e614e4b"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#ad6d06b233f4aea948bfc2a158e614e4b">__ZIP_ITER_KEY</a> (<a class="el" href="ziptree_8h.html#a60749c5d35181da1378b6ae091b1c24e">zip_cmp_cb</a> cmp, unsigned short fieldoffset, unsigned short keyoffset, const void *key, <a class="el" href="ziptree_8h.html#ae3f7bd7e870949500796902b31bf4d5e">zip_iter_cb</a> cb, void *context, void *elm)</td></tr>
+<tr class="separator:ad6d06b233f4aea948bfc2a158e614e4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5cafe6ea7dcf8c992b88645b64e4be2" id="r_ab5cafe6ea7dcf8c992b88645b64e4be2"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#ab5cafe6ea7dcf8c992b88645b64e4be2">__ZIP_ZIP</a> (unsigned short fieldoffset, void *left, void *right)</td></tr>
+<tr class="separator:ab5cafe6ea7dcf8c992b88645b64e4be2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab53d3c6060f0579501e5aa423b5255ae" id="r_ab53d3c6060f0579501e5aa423b5255ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ziptree_8h.html#ab53d3c6060f0579501e5aa423b5255ae">__ZIP_UNZIP</a> (<a class="el" href="ziptree_8h.html#a60749c5d35181da1378b6ae091b1c24e">zip_cmp_cb</a> cmp, unsigned short fieldoffset, unsigned short keyoffset, const void *key, void *h, void *l, void *r)</td></tr>
+<tr class="separator:ab53d3c6060f0579501e5aa423b5255ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="aa29a43c2c3a45f784642f5303bd5d96c" name="aa29a43c2c3a45f784642f5303bd5d96c"></a>
@@ -173,18 +175,18 @@ Functions</h2></td></tr>
           <td class="memname">#define ZIP_ENTRY</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">type</td><td>)</td>
+          <td class="paramname"><a class="el" href="types_8h.html#afc5a8ee5c7fd04cf12aa86a5f2882438">type</a></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line"><span class="keyword">struct </span>{                                        \</div>
-<div class="line">    <span class="keyword">struct </span>type *left;                          \</div>
-<div class="line">    <span class="keyword">struct </span>type *right;                         \</div>
-<div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> rank;                         \</div>
+<div class="line">    <span class="keyword">struct </span><a class="code hl_variable" href="types_8h.html#afc5a8ee5c7fd04cf12aa86a5f2882438">type</a> *left;                          \</div>
+<div class="line">    <span class="keyword">struct </span><a class="code hl_variable" href="types_8h.html#afc5a8ee5c7fd04cf12aa86a5f2882438">type</a> *right;                         \</div>
 <div class="line">}</div>
+<div class="ttc" id="atypes_8h_html_afc5a8ee5c7fd04cf12aa86a5f2882438"><div class="ttname"><a href="types_8h.html#afc5a8ee5c7fd04cf12aa86a5f2882438">type</a></div><div class="ttdeci">const UA_DataType * type</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00626">types.h:626</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00046">46</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00049">49</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
 
 </div>
 </div>
@@ -198,7 +200,7 @@ Functions</h2></td></tr>
           <td class="memname">#define ZIP_FIND</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">name, </td>
+          <td class="paramname"><a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -215,12 +217,12 @@ Functions</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;name##_ZIP_FIND(head, key)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>##_ZIP_FIND(head, key)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00105">105</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00073">73</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
 
 </div>
 </div>
@@ -234,13 +236,13 @@ Functions</h2></td></tr>
           <td class="memname">#define ZIP_FUNCTIONS</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">name, </td>
+          <td class="paramname"><a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">type, </td>
+          <td class="paramname"><a class="el" href="types_8h.html#afc5a8ee5c7fd04cf12aa86a5f2882438">type</a>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -274,7 +276,9 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00110">110</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
+<p>Macro to generate typed ziptree methods. </p>
+
+<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00100">100</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
 
 </div>
 </div>
@@ -288,13 +292,13 @@ Functions</h2></td></tr>
           <td class="memname">#define ZIP_HEAD</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">name, </td>
+          <td class="paramname"><a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">type&#160;</td>
+          <td class="paramname"><a class="el" href="types_8h.html#afc5a8ee5c7fd04cf12aa86a5f2882438">type</a>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -303,17 +307,22 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line"><span class="keyword">struct </span>name {                                   \</div>
-<div class="line">    <span class="keyword">struct </span>type *root;                          \</div>
+<b>Value:</b><div class="fragment"><div class="line"><span class="keyword">struct </span><a class="code hl_variable" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a> {                                   \</div>
+<div class="line">    <span class="keyword">struct </span><a class="code hl_variable" href="types_8h.html#afc5a8ee5c7fd04cf12aa86a5f2882438">type</a> *root;                          \</div>
 <div class="line">}</div>
+<div class="ttc" id="atypes_8h_html_a9eba43b3db66d681ff1c7085a9eb4882"><div class="ttname"><a href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a></div><div class="ttdeci">qn name</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00517">types.h:517</a></div></div>
 </div><!-- fragment -->
 <p>Reusable zip tree implementation. </p>
 <p>The style is inspired by the BSD sys/queue.h linked list definition.</p>
 <p>Zip trees were developed in: Tarjan, R. E., Levy, C. C., and Timmel, S. "Zip
-Trees." arXiv preprint arXiv:1806.06726 (2018). The original definition was modified so that several elements with the same key can be inserted. However, ZIP_FIND will only return the topmost of these elements in the tree.</p>
+Trees." arXiv preprint arXiv:1806.06726 (2018). The original definition was modified in two ways:</p>
+<ul>
+<li>Multiple elements with the same key can be inserted. These appear adjacent in the tree. ZIP_FIND will return the topmost of these elements.</li>
+<li>The pointer-value of the elements are used as the rank. This simplifies the code and is (empirically) faster.</li>
+</ul>
 <p>The ZIP_ENTRY definitions are to be contained in the tree entries themselves. Use ZIP_FUNCTIONS to define the signature of the zip tree functions. </p>
 
-<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00041">41</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00044">44</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
 
 </div>
 </div>
@@ -333,7 +342,7 @@ Trees." arXiv preprint arXiv:1806.06726 (2018). The original definition was modi
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00061">61</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00068">68</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
 
 </div>
 </div>
@@ -344,21 +353,21 @@ Trees." arXiv preprint arXiv:1806.06726 (2018). The original definition was modi
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define ZIP_INLINE&#160;&#160;&#160;<a class="el" href="architecture__definitions_8h.html#a00d24c7231be28dbaf71f5408f30e44c">inline</a></td>
+          <td class="memname">#define ZIP_INLINE&#160;&#160;&#160;<a class="el" href="config_8h.html#a00d24c7231be28dbaf71f5408f30e44c">inline</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>This Source Code Form is subject to the terms of the Mozilla Public License, v. </p>
 <p>2.0. If a copy of the MPL was not distributed with this file, You can obtain one at <a href="http://mozilla.org/MPL/2.0/">http://mozilla.org/MPL/2.0/</a>.</p>
-<p>Copyright 2018, 2021 (c) Julius Pfrommer </p>
+<p>Copyright 2018, 2021-2022 (c) Julius Pfrommer </p>
 
 <p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00016">16</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
 
 </div>
 </div>
-<a id="ab000c3c53ea3c32a703849f15dc62013" name="ab000c3c53ea3c32a703849f15dc62013"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab000c3c53ea3c32a703849f15dc62013">&#9670;&#160;</a></span>ZIP_INSERT</h2>
+<a id="a9704afee3e33ea2c4f12e7ed8757e9c8" name="a9704afee3e33ea2c4f12e7ed8757e9c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9704afee3e33ea2c4f12e7ed8757e9c8">&#9670;&#160;</a></span>ZIP_INSERT</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -367,7 +376,7 @@ Trees." arXiv preprint arXiv:1806.06726 (2018). The original definition was modi
           <td class="memname">#define ZIP_INSERT</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">name, </td>
+          <td class="paramname"><a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -379,32 +388,22 @@ Trees." arXiv preprint arXiv:1806.06726 (2018). The original definition was modi
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">elm, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">rank&#160;</td>
+          <td class="paramname">elm&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;name##_ZIP_INSERT(head, elm, rank)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>##_ZIP_INSERT(head, elm)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Generate zip tree method definitions with the ZIP_FUNCTIONS macro. </p>
-<p>The comparison method "cmp" defined for every zip tree has the signature</p>
-<p>enum ZIP_CMP cmpDateTime(const keytype *a, const keytype *b); </p>
-
-<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00103">103</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00072">72</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
 
 </div>
 </div>
-<a id="ac93e4e9a55b3145fdc525034e47886d4" name="ac93e4e9a55b3145fdc525034e47886d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac93e4e9a55b3145fdc525034e47886d4">&#9670;&#160;</a></span>ZIP_ITER</h2>
+<a id="aa8cb1f68f9e517f15b0a6bedde13a02d" name="aa8cb1f68f9e517f15b0a6bedde13a02d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8cb1f68f9e517f15b0a6bedde13a02d">&#9670;&#160;</a></span>ZIP_ITER</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -413,7 +412,7 @@ Trees." arXiv preprint arXiv:1806.06726 (2018). The original definition was modi
           <td class="memname">#define ZIP_ITER</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">name, </td>
+          <td class="paramname"><a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -431,17 +430,67 @@ Trees." arXiv preprint arXiv:1806.06726 (2018). The original definition was modi
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">d&#160;</td>
+          <td class="paramname">ctx&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;name##_ZIP_ITER(head, cb, d)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>##_ZIP_ITER(head, cb, ctx)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00108">108</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00094">94</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
+
+</div>
+</div>
+<a id="a7b87c69f92a2926a8357e249599a454e" name="a7b87c69f92a2926a8357e249599a454e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b87c69f92a2926a8357e249599a454e">&#9670;&#160;</a></span>ZIP_ITER_KEY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ZIP_ITER_KEY</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">head, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">key, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">cb, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">ctx&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>##_ZIP_ITER_KEY(head, key, cb, ctx)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Same as _ITER, but only visits elements with the given key. </p>
+
+<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00097">97</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
 
 </div>
 </div>
@@ -471,7 +520,7 @@ Trees." arXiv preprint arXiv:1806.06726 (2018). The original definition was modi
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00063">63</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00070">70</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
 
 </div>
 </div>
@@ -485,7 +534,7 @@ Trees." arXiv preprint arXiv:1806.06726 (2018). The original definition was modi
           <td class="memname">#define ZIP_MAX</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">name, </td>
+          <td class="paramname"><a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -496,12 +545,12 @@ Trees." arXiv preprint arXiv:1806.06726 (2018). The original definition was modi
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;name##_ZIP_MAX(head)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>##_ZIP_MAX(head)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00107">107</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00075">75</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
 
 </div>
 </div>
@@ -515,7 +564,7 @@ Trees." arXiv preprint arXiv:1806.06726 (2018). The original definition was modi
           <td class="memname">#define ZIP_MIN</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">name, </td>
+          <td class="paramname"><a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -526,42 +575,12 @@ Trees." arXiv preprint arXiv:1806.06726 (2018). The original definition was modi
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;name##_ZIP_MIN(head)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>##_ZIP_MIN(head)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00106">106</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
-
-</div>
-</div>
-<a id="a3b3eac113b00bf3aa8ae8f7f9bf7a3aa" name="a3b3eac113b00bf3aa8ae8f7f9bf7a3aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3b3eac113b00bf3aa8ae8f7f9bf7a3aa">&#9670;&#160;</a></span>ZIP_RANK</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define ZIP_RANK</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">elm, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">field&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;(elm)-&gt;field.rank</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00065">65</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00074">74</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
 
 </div>
 </div>
@@ -575,7 +594,7 @@ Trees." arXiv preprint arXiv:1806.06726 (2018). The original definition was modi
           <td class="memname">#define ZIP_REMOVE</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">name, </td>
+          <td class="paramname"><a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -592,12 +611,15 @@ Trees." arXiv preprint arXiv:1806.06726 (2018). The original definition was modi
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;name##_ZIP_REMOVE(head, elm)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>##_ZIP_REMOVE(head, elm)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00104">104</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
+<p>Returns the element if it was found in the tree. </p>
+<p>Returns NULL otherwise. </p>
+
+<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00078">78</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
 
 </div>
 </div>
@@ -627,7 +649,7 @@ Trees." arXiv preprint arXiv:1806.06726 (2018). The original definition was modi
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00064">64</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00071">71</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
 
 </div>
 </div>
@@ -647,7 +669,7 @@ Trees." arXiv preprint arXiv:1806.06726 (2018). The original definition was modi
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00062">62</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00069">69</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
 
 </div>
 </div>
@@ -663,32 +685,98 @@ Trees." arXiv preprint arXiv:1806.06726 (2018). The original definition was modi
       </table>
 </div><div class="memdoc">
 
-<p>Prevent warnings on unused static inline functions for some compilers. </p>
-
-<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00023">23</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00022">22</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
 
 </div>
 </div>
-<h2 class="groupheader">Typedef Documentation</h2>
-<a id="a2de09e7932b9938221ef98de609bb094" name="a2de09e7932b9938221ef98de609bb094"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2de09e7932b9938221ef98de609bb094">&#9670;&#160;</a></span>__zip_iter_cb</h2>
+<a id="a20e0b18932d118962e435ede1c21abed" name="a20e0b18932d118962e435ede1c21abed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20e0b18932d118962e435ede1c21abed">&#9670;&#160;</a></span>ZIP_UNZIP</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef void(* __zip_iter_cb) (void *elm, void *context)</td>
+          <td class="memname">#define ZIP_UNZIP</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">head, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">key, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">left, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">right&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;    <a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>##_ZIP_UNZIP(head, key, left, right)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Internal definitions. </p>
-<p>Don't use directly. </p>
-
-<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00069">69</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00083">83</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
 
 </div>
 </div>
+<a id="a8dee9fd7558f1de3d66c20f6e12c3095" name="a8dee9fd7558f1de3d66c20f6e12c3095"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8dee9fd7558f1de3d66c20f6e12c3095">&#9670;&#160;</a></span>ZIP_ZIP</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ZIP_ZIP</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">left, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">right&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>##_ZIP_ZIP(left, right)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Split (_UNZIP) and merge (_ZIP) trees. </p>
+<p>_UNZIP splits at the key and moves elements &lt;= into the left output (right otherwise). </p>
+
+<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00082">82</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Typedef Documentation</h2>
 <a id="a60749c5d35181da1378b6ae091b1c24e" name="a60749c5d35181da1378b6ae091b1c24e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a60749c5d35181da1378b6ae091b1c24e">&#9670;&#160;</a></span>zip_cmp_cb</h2>
 
@@ -701,7 +789,31 @@ Trees." arXiv preprint arXiv:1806.06726 (2018). The original definition was modi
       </table>
 </div><div class="memdoc">
 
+<p>The comparison method "cmp" for a zip tree has the signature. </p>
+<p>Provide this to the ZIP_FUNCTIONS macro.</p>
+<p>enum ZIP_CMP cmpMethod(const keytype *a, const keytype *b); </p>
+
 <p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00001">1</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
+
+</div>
+</div>
+<a id="ae3f7bd7e870949500796902b31bf4d5e" name="ae3f7bd7e870949500796902b31bf4d5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3f7bd7e870949500796902b31bf4d5e">&#9670;&#160;</a></span>zip_iter_cb</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void *(* zip_iter_cb) (void *context, void *elm)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ZIP_ITER uses in-order traversal of the tree (in the order of the keys). </p>
+<p>The memory if a node is not accessed by ZIP_ITER after the callback has been executed for it. So a tree can be cleaned by calling free on each node from within the iteration callback.</p>
+<p>ZIP_ITER returns a void pointer. The first callback to return non-NULL aborts the iteration. This pointer is then returned. </p>
+
+<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00093">93</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
 
 </div>
 </div>
@@ -723,41 +835,26 @@ Trees." arXiv preprint arXiv:1806.06726 (2018). The original definition was modi
 <tr><td class="fieldname"><a id="a407a7df5c5bf26a848f1b1ac2a2a1b5caf1ea2b023f23423a8425766caf962cb6" name="a407a7df5c5bf26a848f1b1ac2a2a1b5caf1ea2b023f23423a8425766caf962cb6"></a>ZIP_CMP_MORE&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00053">53</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ziptree_8h_source.html#l00055">55</a> of file <a class="el" href="ziptree_8h_source.html">ziptree.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a1ba74b2a8e7769faf8361112ba6497d5" name="a1ba74b2a8e7769faf8361112ba6497d5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1ba74b2a8e7769faf8361112ba6497d5">&#9670;&#160;</a></span>__ZIP_FFS32()</h2>
+<a id="aa31eda802de72b5e2171ecf194ac9bb0" name="aa31eda802de72b5e2171ecf194ac9bb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa31eda802de72b5e2171ecf194ac9bb0">&#9670;&#160;</a></span>__ZIP_INSERT()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned char __ZIP_FFS32 </td>
+          <td class="memname">void __ZIP_INSERT </td>
           <td>(</td>
-          <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>v</em></td><td>)</td>
-          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>h</em>, </td>
         </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Zip trees are a probabilistic data structure. </p>
-<p>Entries are assigned a (non-negative) rank k with probability 1/2^{k+1}. A uniformly sampled random number has to be supplied with the insert method. __ZIP_FFS32 extracts from it least significant nonzero bit of a 32bit number. This then has the correct distribution. </p>
-
-</div>
-</div>
-<a id="a4c3701615f879fc1076ad78702de3bb1" name="a4c3701615f879fc1076ad78702de3bb1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4c3701615f879fc1076ad78702de3bb1">&#9670;&#160;</a></span>__ZIP_FIND()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
         <tr>
-          <td class="memname">void * __ZIP_FIND </td>
-          <td>(</td>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="ziptree_8h.html#a60749c5d35181da1378b6ae091b1c24e">zip_cmp_cb</a>&#160;</td>
           <td class="paramname"><em>cmp</em>, </td>
         </tr>
@@ -772,58 +869,6 @@ Trees." arXiv preprint arXiv:1806.06726 (2018). The original definition was modi
           <td></td>
           <td class="paramtype">unsigned short&#160;</td>
           <td class="paramname"><em>keyoffset</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>root</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>key</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a551b4b092f539bdfaa2ea740d6408b67" name="a551b4b092f539bdfaa2ea740d6408b67"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a551b4b092f539bdfaa2ea740d6408b67">&#9670;&#160;</a></span>__ZIP_INSERT()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void * __ZIP_INSERT </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="ziptree_8h.html#a60749c5d35181da1378b6ae091b1c24e">zip_cmp_cb</a>&#160;</td>
-          <td class="paramname"><em>cmp</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned short&#160;</td>
-          <td class="paramname"><em>fieldoffset</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned short&#160;</td>
-          <td class="paramname"><em>keyoffset</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>root</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -839,16 +884,19 @@ Trees." arXiv preprint arXiv:1806.06726 (2018). The original definition was modi
       </table>
 </div><div class="memdoc">
 
+<p>Internal definitions. </p>
+<p>Don't use directly. </p>
+
 </div>
 </div>
-<a id="abb535a9befd8911fe182af2effcc3e90" name="abb535a9befd8911fe182af2effcc3e90"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abb535a9befd8911fe182af2effcc3e90">&#9670;&#160;</a></span>__ZIP_ITER()</h2>
+<a id="a2b0485ba61ca2df93975ee0fbda9ff81" name="a2b0485ba61ca2df93975ee0fbda9ff81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b0485ba61ca2df93975ee0fbda9ff81">&#9670;&#160;</a></span>__ZIP_ITER()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void __ZIP_ITER </td>
+          <td class="memname">void * __ZIP_ITER </td>
           <td>(</td>
           <td class="paramtype">unsigned short&#160;</td>
           <td class="paramname"><em>fieldoffset</em>, </td>
@@ -856,7 +904,7 @@ Trees." arXiv preprint arXiv:1806.06726 (2018). The original definition was modi
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="ziptree_8h.html#a2de09e7932b9938221ef98de609bb094">__zip_iter_cb</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="ziptree_8h.html#ae3f7bd7e870949500796902b31bf4d5e">zip_iter_cb</a>&#160;</td>
           <td class="paramname"><em>cb</em>, </td>
         </tr>
         <tr>
@@ -881,70 +929,14 @@ Trees." arXiv preprint arXiv:1806.06726 (2018). The original definition was modi
 
 </div>
 </div>
-<a id="a342b1284c83b4eb58ff3911663e37cca" name="a342b1284c83b4eb58ff3911663e37cca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a342b1284c83b4eb58ff3911663e37cca">&#9670;&#160;</a></span>__ZIP_MAX()</h2>
+<a id="ad6d06b233f4aea948bfc2a158e614e4b" name="ad6d06b233f4aea948bfc2a158e614e4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6d06b233f4aea948bfc2a158e614e4b">&#9670;&#160;</a></span>__ZIP_ITER_KEY()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void * __ZIP_MAX </td>
-          <td>(</td>
-          <td class="paramtype">unsigned short&#160;</td>
-          <td class="paramname"><em>fieldoffset</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>elm</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aa9566e6705ee18849dacf6dce089ca07" name="aa9566e6705ee18849dacf6dce089ca07"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa9566e6705ee18849dacf6dce089ca07">&#9670;&#160;</a></span>__ZIP_MIN()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void * __ZIP_MIN </td>
-          <td>(</td>
-          <td class="paramtype">unsigned short&#160;</td>
-          <td class="paramname"><em>fieldoffset</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>elm</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a7c69e4dcfb48730a70dfc43478b11901" name="a7c69e4dcfb48730a70dfc43478b11901"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7c69e4dcfb48730a70dfc43478b11901">&#9670;&#160;</a></span>__ZIP_REMOVE()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void * __ZIP_REMOVE </td>
+          <td class="memname">void * __ZIP_ITER_KEY </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="ziptree_8h.html#a60749c5d35181da1378b6ae091b1c24e">zip_cmp_cb</a>&#160;</td>
           <td class="paramname"><em>cmp</em>, </td>
@@ -964,14 +956,164 @@ Trees." arXiv preprint arXiv:1806.06726 (2018). The original definition was modi
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="ziptree_8h.html#ae3f7bd7e870949500796902b31bf4d5e">zip_iter_cb</a>&#160;</td>
+          <td class="paramname"><em>cb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>root</em>, </td>
+          <td class="paramname"><em>context</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">void *&#160;</td>
           <td class="paramname"><em>elm</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aff203a972d5891b8b5cedd2da00c9998" name="aff203a972d5891b8b5cedd2da00c9998"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff203a972d5891b8b5cedd2da00c9998">&#9670;&#160;</a></span>__ZIP_REMOVE()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * __ZIP_REMOVE </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>h</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="ziptree_8h.html#a60749c5d35181da1378b6ae091b1c24e">zip_cmp_cb</a>&#160;</td>
+          <td class="paramname"><em>cmp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned short&#160;</td>
+          <td class="paramname"><em>fieldoffset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned short&#160;</td>
+          <td class="paramname"><em>keyoffset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>elm</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab53d3c6060f0579501e5aa423b5255ae" name="ab53d3c6060f0579501e5aa423b5255ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab53d3c6060f0579501e5aa423b5255ae">&#9670;&#160;</a></span>__ZIP_UNZIP()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void __ZIP_UNZIP </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="ziptree_8h.html#a60749c5d35181da1378b6ae091b1c24e">zip_cmp_cb</a>&#160;</td>
+          <td class="paramname"><em>cmp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned short&#160;</td>
+          <td class="paramname"><em>fieldoffset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned short&#160;</td>
+          <td class="paramname"><em>keyoffset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>h</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab5cafe6ea7dcf8c992b88645b64e4be2" name="ab5cafe6ea7dcf8c992b88645b64e4be2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5cafe6ea7dcf8c992b88645b64e4be2">&#9670;&#160;</a></span>__ZIP_ZIP()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * __ZIP_ZIP </td>
+          <td>(</td>
+          <td class="paramtype">unsigned short&#160;</td>
+          <td class="paramname"><em>fieldoffset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>left</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>right</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.20.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.21.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -790,375 +790,384 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00661" name="l00661"></a><span class="lineno">  661</span>    );</div>
 <div class="line"><a id="l00662" name="l00662"></a><span class="lineno">  662</span>}</div>
 </div>
-<div class="line"><a id="l00663" name="l00663"></a><span class="lineno">  663</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span><span class="comment"></span> </div>
-<div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00666" name="l00666"></a><span class="lineno">  666</span><span class="comment"> * Add object type.</span></div>
-<div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span><span class="comment"> * @param connection Instance of type Client (or Server)</span></div>
-<div class="line"><a id="l00668" name="l00668"></a><span class="lineno">  668</span><span class="comment"> * @param parentId Parent node</span></div>
-<div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span><span class="comment"> * @param id Requested NodeId of the node to add</span></div>
-<div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span><span class="comment"> * @param browseName Browse name</span></div>
-<div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span><span class="comment"> * @param attributes Object type attributes</span></div>
-<div class="line"><a id="l00672" name="l00672"></a><span class="lineno">  672</span><span class="comment"> * @param referenceType Hierarchical reference type from the parent node to the new node, e.g.</span></div>
-<div class="line"><a id="l00673" name="l00673"></a><span class="lineno">  673</span><span class="comment"> *                      ReferenceTypeId::HasSubtype</span></div>
-<div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00675" name="l00675"></a><span class="lineno">  675</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00676" data-start="{" data-end="}">
-<div class="line"><a id="l00676" name="l00676"></a><span class="lineno"><a class="line" href="group__AddNodes.html#ga3477aabfcd69d2c2578578159fc41315">  676</a></span><a class="code hl_class" href="classopcua_1_1Result.html">Result&lt;NodeId&gt;</a> <a class="code hl_function" href="group__AddNodes.html#ga3477aabfcd69d2c2578578159fc41315">addObjectType</a>(</div>
-<div class="line"><a id="l00677" name="l00677"></a><span class="lineno">  677</span>    T&amp; connection,</div>
-<div class="line"><a id="l00678" name="l00678"></a><span class="lineno">  678</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; parentId,</div>
-<div class="line"><a id="l00679" name="l00679"></a><span class="lineno">  679</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; <span class="keywordtype">id</span>,</div>
-<div class="line"><a id="l00680" name="l00680"></a><span class="lineno">  680</span>    std::string_view browseName,</div>
-<div class="line"><a id="l00681" name="l00681"></a><span class="lineno">  681</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1ua_1_1ObjectTypeAttributes.html">ObjectTypeAttributes</a>&amp; attributes,</div>
-<div class="line"><a id="l00682" name="l00682"></a><span class="lineno">  682</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; referenceType</div>
-<div class="line"><a id="l00683" name="l00683"></a><span class="lineno">  683</span>) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00684" name="l00684"></a><span class="lineno">  684</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__AddNodes.html#ga0a1780203d6cac64ccb1ab21d4d0c0ed">addNode</a>(</div>
-<div class="line"><a id="l00685" name="l00685"></a><span class="lineno">  685</span>        connection,</div>
-<div class="line"><a id="l00686" name="l00686"></a><span class="lineno">  686</span>        <a class="code hl_enumvalue" href="namespaceopcua.html#a15d78f717a24899cb2ca2af33f5c7c96ab74c375731dc50c662d6ce08befe2db0">NodeClass::ObjectType</a>,</div>
-<div class="line"><a id="l00687" name="l00687"></a><span class="lineno">  687</span>        parentId,</div>
-<div class="line"><a id="l00688" name="l00688"></a><span class="lineno">  688</span>        <span class="keywordtype">id</span>,</div>
-<div class="line"><a id="l00689" name="l00689"></a><span class="lineno">  689</span>        browseName,</div>
-<div class="line"><a id="l00690" name="l00690"></a><span class="lineno">  690</span>        detail::wrapNodeAttributes(attributes),</div>
-<div class="line"><a id="l00691" name="l00691"></a><span class="lineno">  691</span>        {},</div>
-<div class="line"><a id="l00692" name="l00692"></a><span class="lineno">  692</span>        referenceType</div>
-<div class="line"><a id="l00693" name="l00693"></a><span class="lineno">  693</span>    );</div>
-<div class="line"><a id="l00694" name="l00694"></a><span class="lineno">  694</span>}</div>
+<div class="line"><a id="l00663" name="l00663"></a><span class="lineno">  663</span><span class="comment"></span> </div>
+<div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span><span class="comment"> * Set method callback after creation.</span></div>
+<div class="line"><a id="l00666" name="l00666"></a><span class="lineno">  666</span><span class="comment"> * @param connection Instance of type Server</span></div>
+<div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span><span class="comment"> * @param id Method node</span></div>
+<div class="line"><a id="l00668" name="l00668"></a><span class="lineno">  668</span><span class="comment"> * @param callback Method callback</span></div>
+<div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00671" name="l00671"></a><span class="lineno"><a class="line" href="group__AddNodes.html#ga010784d376206860048f4d7ae962df85">  671</a></span><a class="code hl_class" href="classopcua_1_1StatusCode.html">StatusCode</a> <a class="code hl_function" href="group__AddNodes.html#ga010784d376206860048f4d7ae962df85">setMethodCallback</a>(T&amp; connection, <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; <span class="keywordtype">id</span>, <a class="code hl_typedef" href="group__AddNodes.html#ga2c4f77963cea649c5ed497c73ee24529">MethodCallback</a> callback) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00672" name="l00672"></a><span class="lineno">  672</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00673" name="l00673"></a><span class="lineno">  673</span><span class="comment"></span> </div>
+<div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00675" name="l00675"></a><span class="lineno">  675</span><span class="comment"> * Add object type.</span></div>
+<div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span><span class="comment"> * @param connection Instance of type Client (or Server)</span></div>
+<div class="line"><a id="l00677" name="l00677"></a><span class="lineno">  677</span><span class="comment"> * @param parentId Parent node</span></div>
+<div class="line"><a id="l00678" name="l00678"></a><span class="lineno">  678</span><span class="comment"> * @param id Requested NodeId of the node to add</span></div>
+<div class="line"><a id="l00679" name="l00679"></a><span class="lineno">  679</span><span class="comment"> * @param browseName Browse name</span></div>
+<div class="line"><a id="l00680" name="l00680"></a><span class="lineno">  680</span><span class="comment"> * @param attributes Object type attributes</span></div>
+<div class="line"><a id="l00681" name="l00681"></a><span class="lineno">  681</span><span class="comment"> * @param referenceType Hierarchical reference type from the parent node to the new node, e.g.</span></div>
+<div class="line"><a id="l00682" name="l00682"></a><span class="lineno">  682</span><span class="comment"> *                      ReferenceTypeId::HasSubtype</span></div>
+<div class="line"><a id="l00683" name="l00683"></a><span class="lineno">  683</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00684" name="l00684"></a><span class="lineno">  684</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00685" data-start="{" data-end="}">
+<div class="line"><a id="l00685" name="l00685"></a><span class="lineno"><a class="line" href="group__AddNodes.html#ga3477aabfcd69d2c2578578159fc41315">  685</a></span><a class="code hl_class" href="classopcua_1_1Result.html">Result&lt;NodeId&gt;</a> <a class="code hl_function" href="group__AddNodes.html#ga3477aabfcd69d2c2578578159fc41315">addObjectType</a>(</div>
+<div class="line"><a id="l00686" name="l00686"></a><span class="lineno">  686</span>    T&amp; connection,</div>
+<div class="line"><a id="l00687" name="l00687"></a><span class="lineno">  687</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; parentId,</div>
+<div class="line"><a id="l00688" name="l00688"></a><span class="lineno">  688</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; <span class="keywordtype">id</span>,</div>
+<div class="line"><a id="l00689" name="l00689"></a><span class="lineno">  689</span>    std::string_view browseName,</div>
+<div class="line"><a id="l00690" name="l00690"></a><span class="lineno">  690</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1ua_1_1ObjectTypeAttributes.html">ObjectTypeAttributes</a>&amp; attributes,</div>
+<div class="line"><a id="l00691" name="l00691"></a><span class="lineno">  691</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; referenceType</div>
+<div class="line"><a id="l00692" name="l00692"></a><span class="lineno">  692</span>) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00693" name="l00693"></a><span class="lineno">  693</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__AddNodes.html#ga0a1780203d6cac64ccb1ab21d4d0c0ed">addNode</a>(</div>
+<div class="line"><a id="l00694" name="l00694"></a><span class="lineno">  694</span>        connection,</div>
+<div class="line"><a id="l00695" name="l00695"></a><span class="lineno">  695</span>        <a class="code hl_enumvalue" href="namespaceopcua.html#a15d78f717a24899cb2ca2af33f5c7c96ab74c375731dc50c662d6ce08befe2db0">NodeClass::ObjectType</a>,</div>
+<div class="line"><a id="l00696" name="l00696"></a><span class="lineno">  696</span>        parentId,</div>
+<div class="line"><a id="l00697" name="l00697"></a><span class="lineno">  697</span>        <span class="keywordtype">id</span>,</div>
+<div class="line"><a id="l00698" name="l00698"></a><span class="lineno">  698</span>        browseName,</div>
+<div class="line"><a id="l00699" name="l00699"></a><span class="lineno">  699</span>        detail::wrapNodeAttributes(attributes),</div>
+<div class="line"><a id="l00700" name="l00700"></a><span class="lineno">  700</span>        {},</div>
+<div class="line"><a id="l00701" name="l00701"></a><span class="lineno">  701</span>        referenceType</div>
+<div class="line"><a id="l00702" name="l00702"></a><span class="lineno">  702</span>    );</div>
+<div class="line"><a id="l00703" name="l00703"></a><span class="lineno">  703</span>}</div>
 </div>
-<div class="line"><a id="l00695" name="l00695"></a><span class="lineno">  695</span><span class="comment"></span> </div>
-<div class="line"><a id="l00696" name="l00696"></a><span class="lineno">  696</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00697" name="l00697"></a><span class="lineno">  697</span><span class="comment"> * @copydoc addObjectType</span></div>
-<div class="line"><a id="l00698" name="l00698"></a><span class="lineno">  698</span><span class="comment"> * @param token @completiontoken{void(Result&lt;NodeId&gt;&amp;)}</span></div>
-<div class="line"><a id="l00699" name="l00699"></a><span class="lineno">  699</span><span class="comment"> * @return @asyncresult{Result&lt;NodeId&gt;}</span></div>
-<div class="line"><a id="l00700" name="l00700"></a><span class="lineno">  700</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00701" name="l00701"></a><span class="lineno">  701</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CompletionToken&gt;</div>
-<div class="foldopen" id="foldopen00702" data-start="{" data-end="}">
-<div class="line"><a id="l00702" name="l00702"></a><span class="lineno"><a class="line" href="group__AddNodes.html#ga0be223c925047ea5087481202369b649">  702</a></span><span class="keyword">auto</span> <a class="code hl_function" href="group__AddNodes.html#ga0be223c925047ea5087481202369b649">addObjectTypeAsync</a>(</div>
-<div class="line"><a id="l00703" name="l00703"></a><span class="lineno">  703</span>    <a class="code hl_class" href="classopcua_1_1Client.html">Client</a>&amp; connection,</div>
-<div class="line"><a id="l00704" name="l00704"></a><span class="lineno">  704</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; parentId,</div>
-<div class="line"><a id="l00705" name="l00705"></a><span class="lineno">  705</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; <span class="keywordtype">id</span>,</div>
-<div class="line"><a id="l00706" name="l00706"></a><span class="lineno">  706</span>    std::string_view browseName,</div>
-<div class="line"><a id="l00707" name="l00707"></a><span class="lineno">  707</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1ua_1_1ObjectTypeAttributes.html">ObjectTypeAttributes</a>&amp; attributes,</div>
-<div class="line"><a id="l00708" name="l00708"></a><span class="lineno">  708</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; referenceType,</div>
-<div class="line"><a id="l00709" name="l00709"></a><span class="lineno">  709</span>    CompletionToken&amp;&amp; token</div>
-<div class="line"><a id="l00710" name="l00710"></a><span class="lineno">  710</span>) {</div>
-<div class="line"><a id="l00711" name="l00711"></a><span class="lineno">  711</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__AddNodes.html#ga76ac43749a6e2ec1a0d1c066b1392a1b">addNodeAsync</a>(</div>
-<div class="line"><a id="l00712" name="l00712"></a><span class="lineno">  712</span>        connection,</div>
-<div class="line"><a id="l00713" name="l00713"></a><span class="lineno">  713</span>        <a class="code hl_enumvalue" href="namespaceopcua.html#a15d78f717a24899cb2ca2af33f5c7c96ab74c375731dc50c662d6ce08befe2db0">NodeClass::ObjectType</a>,</div>
-<div class="line"><a id="l00714" name="l00714"></a><span class="lineno">  714</span>        parentId,</div>
-<div class="line"><a id="l00715" name="l00715"></a><span class="lineno">  715</span>        <span class="keywordtype">id</span>,</div>
-<div class="line"><a id="l00716" name="l00716"></a><span class="lineno">  716</span>        browseName,</div>
-<div class="line"><a id="l00717" name="l00717"></a><span class="lineno">  717</span>        detail::wrapNodeAttributes(attributes),</div>
-<div class="line"><a id="l00718" name="l00718"></a><span class="lineno">  718</span>        {},</div>
-<div class="line"><a id="l00719" name="l00719"></a><span class="lineno">  719</span>        referenceType,</div>
-<div class="line"><a id="l00720" name="l00720"></a><span class="lineno">  720</span>        std::forward&lt;CompletionToken&gt;(token)</div>
-<div class="line"><a id="l00721" name="l00721"></a><span class="lineno">  721</span>    );</div>
-<div class="line"><a id="l00722" name="l00722"></a><span class="lineno">  722</span>}</div>
+<div class="line"><a id="l00704" name="l00704"></a><span class="lineno">  704</span><span class="comment"></span> </div>
+<div class="line"><a id="l00705" name="l00705"></a><span class="lineno">  705</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00706" name="l00706"></a><span class="lineno">  706</span><span class="comment"> * @copydoc addObjectType</span></div>
+<div class="line"><a id="l00707" name="l00707"></a><span class="lineno">  707</span><span class="comment"> * @param token @completiontoken{void(Result&lt;NodeId&gt;&amp;)}</span></div>
+<div class="line"><a id="l00708" name="l00708"></a><span class="lineno">  708</span><span class="comment"> * @return @asyncresult{Result&lt;NodeId&gt;}</span></div>
+<div class="line"><a id="l00709" name="l00709"></a><span class="lineno">  709</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00710" name="l00710"></a><span class="lineno">  710</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CompletionToken&gt;</div>
+<div class="foldopen" id="foldopen00711" data-start="{" data-end="}">
+<div class="line"><a id="l00711" name="l00711"></a><span class="lineno"><a class="line" href="group__AddNodes.html#ga0be223c925047ea5087481202369b649">  711</a></span><span class="keyword">auto</span> <a class="code hl_function" href="group__AddNodes.html#ga0be223c925047ea5087481202369b649">addObjectTypeAsync</a>(</div>
+<div class="line"><a id="l00712" name="l00712"></a><span class="lineno">  712</span>    <a class="code hl_class" href="classopcua_1_1Client.html">Client</a>&amp; connection,</div>
+<div class="line"><a id="l00713" name="l00713"></a><span class="lineno">  713</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; parentId,</div>
+<div class="line"><a id="l00714" name="l00714"></a><span class="lineno">  714</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; <span class="keywordtype">id</span>,</div>
+<div class="line"><a id="l00715" name="l00715"></a><span class="lineno">  715</span>    std::string_view browseName,</div>
+<div class="line"><a id="l00716" name="l00716"></a><span class="lineno">  716</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1ua_1_1ObjectTypeAttributes.html">ObjectTypeAttributes</a>&amp; attributes,</div>
+<div class="line"><a id="l00717" name="l00717"></a><span class="lineno">  717</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; referenceType,</div>
+<div class="line"><a id="l00718" name="l00718"></a><span class="lineno">  718</span>    CompletionToken&amp;&amp; token</div>
+<div class="line"><a id="l00719" name="l00719"></a><span class="lineno">  719</span>) {</div>
+<div class="line"><a id="l00720" name="l00720"></a><span class="lineno">  720</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__AddNodes.html#ga76ac43749a6e2ec1a0d1c066b1392a1b">addNodeAsync</a>(</div>
+<div class="line"><a id="l00721" name="l00721"></a><span class="lineno">  721</span>        connection,</div>
+<div class="line"><a id="l00722" name="l00722"></a><span class="lineno">  722</span>        <a class="code hl_enumvalue" href="namespaceopcua.html#a15d78f717a24899cb2ca2af33f5c7c96ab74c375731dc50c662d6ce08befe2db0">NodeClass::ObjectType</a>,</div>
+<div class="line"><a id="l00723" name="l00723"></a><span class="lineno">  723</span>        parentId,</div>
+<div class="line"><a id="l00724" name="l00724"></a><span class="lineno">  724</span>        <span class="keywordtype">id</span>,</div>
+<div class="line"><a id="l00725" name="l00725"></a><span class="lineno">  725</span>        browseName,</div>
+<div class="line"><a id="l00726" name="l00726"></a><span class="lineno">  726</span>        detail::wrapNodeAttributes(attributes),</div>
+<div class="line"><a id="l00727" name="l00727"></a><span class="lineno">  727</span>        {},</div>
+<div class="line"><a id="l00728" name="l00728"></a><span class="lineno">  728</span>        referenceType,</div>
+<div class="line"><a id="l00729" name="l00729"></a><span class="lineno">  729</span>        std::forward&lt;CompletionToken&gt;(token)</div>
+<div class="line"><a id="l00730" name="l00730"></a><span class="lineno">  730</span>    );</div>
+<div class="line"><a id="l00731" name="l00731"></a><span class="lineno">  731</span>}</div>
 </div>
-<div class="line"><a id="l00723" name="l00723"></a><span class="lineno">  723</span><span class="comment"></span> </div>
-<div class="line"><a id="l00724" name="l00724"></a><span class="lineno">  724</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00725" name="l00725"></a><span class="lineno">  725</span><span class="comment"> * Add variable type.</span></div>
-<div class="line"><a id="l00726" name="l00726"></a><span class="lineno">  726</span><span class="comment"> * @param connection Instance of type Client (or Server)</span></div>
-<div class="line"><a id="l00727" name="l00727"></a><span class="lineno">  727</span><span class="comment"> * @param parentId Parent node</span></div>
-<div class="line"><a id="l00728" name="l00728"></a><span class="lineno">  728</span><span class="comment"> * @param id Requested NodeId of the node to add</span></div>
-<div class="line"><a id="l00729" name="l00729"></a><span class="lineno">  729</span><span class="comment"> * @param browseName Browse name</span></div>
-<div class="line"><a id="l00730" name="l00730"></a><span class="lineno">  730</span><span class="comment"> * @param attributes Variable type attributes</span></div>
-<div class="line"><a id="l00731" name="l00731"></a><span class="lineno">  731</span><span class="comment"> * @param variableType NodeId of the variable type, e.g. VariableTypeId::BaseDataVariableType</span></div>
-<div class="line"><a id="l00732" name="l00732"></a><span class="lineno">  732</span><span class="comment"> * @param referenceType Hierarchical reference type from the parent node to the new node, e.g.</span></div>
-<div class="line"><a id="l00733" name="l00733"></a><span class="lineno">  733</span><span class="comment"> *                      ReferenceTypeId::HasSubtype</span></div>
-<div class="line"><a id="l00734" name="l00734"></a><span class="lineno">  734</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00735" name="l00735"></a><span class="lineno">  735</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00736" data-start="{" data-end="}">
-<div class="line"><a id="l00736" name="l00736"></a><span class="lineno"><a class="line" href="group__AddNodes.html#ga926fee637e6da5f5b22a92dc1133dd83">  736</a></span><a class="code hl_class" href="classopcua_1_1Result.html">Result&lt;NodeId&gt;</a> <a class="code hl_function" href="group__AddNodes.html#ga926fee637e6da5f5b22a92dc1133dd83">addVariableType</a>(</div>
-<div class="line"><a id="l00737" name="l00737"></a><span class="lineno">  737</span>    T&amp; connection,</div>
-<div class="line"><a id="l00738" name="l00738"></a><span class="lineno">  738</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; parentId,</div>
-<div class="line"><a id="l00739" name="l00739"></a><span class="lineno">  739</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; <span class="keywordtype">id</span>,</div>
-<div class="line"><a id="l00740" name="l00740"></a><span class="lineno">  740</span>    std::string_view browseName,</div>
-<div class="line"><a id="l00741" name="l00741"></a><span class="lineno">  741</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1ua_1_1VariableTypeAttributes.html">VariableTypeAttributes</a>&amp; attributes,</div>
-<div class="line"><a id="l00742" name="l00742"></a><span class="lineno">  742</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; variableType,</div>
-<div class="line"><a id="l00743" name="l00743"></a><span class="lineno">  743</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; referenceType</div>
-<div class="line"><a id="l00744" name="l00744"></a><span class="lineno">  744</span>) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00745" name="l00745"></a><span class="lineno">  745</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__AddNodes.html#ga0a1780203d6cac64ccb1ab21d4d0c0ed">addNode</a>(</div>
-<div class="line"><a id="l00746" name="l00746"></a><span class="lineno">  746</span>        connection,</div>
-<div class="line"><a id="l00747" name="l00747"></a><span class="lineno">  747</span>        <a class="code hl_enumvalue" href="namespaceopcua.html#a15d78f717a24899cb2ca2af33f5c7c96a60e08a3601c0d6742aa798b4dc610670">NodeClass::VariableType</a>,</div>
-<div class="line"><a id="l00748" name="l00748"></a><span class="lineno">  748</span>        parentId,</div>
-<div class="line"><a id="l00749" name="l00749"></a><span class="lineno">  749</span>        <span class="keywordtype">id</span>,</div>
-<div class="line"><a id="l00750" name="l00750"></a><span class="lineno">  750</span>        browseName,</div>
-<div class="line"><a id="l00751" name="l00751"></a><span class="lineno">  751</span>        detail::wrapNodeAttributes(attributes),</div>
-<div class="line"><a id="l00752" name="l00752"></a><span class="lineno">  752</span>        variableType,</div>
-<div class="line"><a id="l00753" name="l00753"></a><span class="lineno">  753</span>        referenceType</div>
-<div class="line"><a id="l00754" name="l00754"></a><span class="lineno">  754</span>    );</div>
-<div class="line"><a id="l00755" name="l00755"></a><span class="lineno">  755</span>}</div>
+<div class="line"><a id="l00732" name="l00732"></a><span class="lineno">  732</span><span class="comment"></span> </div>
+<div class="line"><a id="l00733" name="l00733"></a><span class="lineno">  733</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00734" name="l00734"></a><span class="lineno">  734</span><span class="comment"> * Add variable type.</span></div>
+<div class="line"><a id="l00735" name="l00735"></a><span class="lineno">  735</span><span class="comment"> * @param connection Instance of type Client (or Server)</span></div>
+<div class="line"><a id="l00736" name="l00736"></a><span class="lineno">  736</span><span class="comment"> * @param parentId Parent node</span></div>
+<div class="line"><a id="l00737" name="l00737"></a><span class="lineno">  737</span><span class="comment"> * @param id Requested NodeId of the node to add</span></div>
+<div class="line"><a id="l00738" name="l00738"></a><span class="lineno">  738</span><span class="comment"> * @param browseName Browse name</span></div>
+<div class="line"><a id="l00739" name="l00739"></a><span class="lineno">  739</span><span class="comment"> * @param attributes Variable type attributes</span></div>
+<div class="line"><a id="l00740" name="l00740"></a><span class="lineno">  740</span><span class="comment"> * @param variableType NodeId of the variable type, e.g. VariableTypeId::BaseDataVariableType</span></div>
+<div class="line"><a id="l00741" name="l00741"></a><span class="lineno">  741</span><span class="comment"> * @param referenceType Hierarchical reference type from the parent node to the new node, e.g.</span></div>
+<div class="line"><a id="l00742" name="l00742"></a><span class="lineno">  742</span><span class="comment"> *                      ReferenceTypeId::HasSubtype</span></div>
+<div class="line"><a id="l00743" name="l00743"></a><span class="lineno">  743</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00744" name="l00744"></a><span class="lineno">  744</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00745" data-start="{" data-end="}">
+<div class="line"><a id="l00745" name="l00745"></a><span class="lineno"><a class="line" href="group__AddNodes.html#ga926fee637e6da5f5b22a92dc1133dd83">  745</a></span><a class="code hl_class" href="classopcua_1_1Result.html">Result&lt;NodeId&gt;</a> <a class="code hl_function" href="group__AddNodes.html#ga926fee637e6da5f5b22a92dc1133dd83">addVariableType</a>(</div>
+<div class="line"><a id="l00746" name="l00746"></a><span class="lineno">  746</span>    T&amp; connection,</div>
+<div class="line"><a id="l00747" name="l00747"></a><span class="lineno">  747</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; parentId,</div>
+<div class="line"><a id="l00748" name="l00748"></a><span class="lineno">  748</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; <span class="keywordtype">id</span>,</div>
+<div class="line"><a id="l00749" name="l00749"></a><span class="lineno">  749</span>    std::string_view browseName,</div>
+<div class="line"><a id="l00750" name="l00750"></a><span class="lineno">  750</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1ua_1_1VariableTypeAttributes.html">VariableTypeAttributes</a>&amp; attributes,</div>
+<div class="line"><a id="l00751" name="l00751"></a><span class="lineno">  751</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; variableType,</div>
+<div class="line"><a id="l00752" name="l00752"></a><span class="lineno">  752</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; referenceType</div>
+<div class="line"><a id="l00753" name="l00753"></a><span class="lineno">  753</span>) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00754" name="l00754"></a><span class="lineno">  754</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__AddNodes.html#ga0a1780203d6cac64ccb1ab21d4d0c0ed">addNode</a>(</div>
+<div class="line"><a id="l00755" name="l00755"></a><span class="lineno">  755</span>        connection,</div>
+<div class="line"><a id="l00756" name="l00756"></a><span class="lineno">  756</span>        <a class="code hl_enumvalue" href="namespaceopcua.html#a15d78f717a24899cb2ca2af33f5c7c96a60e08a3601c0d6742aa798b4dc610670">NodeClass::VariableType</a>,</div>
+<div class="line"><a id="l00757" name="l00757"></a><span class="lineno">  757</span>        parentId,</div>
+<div class="line"><a id="l00758" name="l00758"></a><span class="lineno">  758</span>        <span class="keywordtype">id</span>,</div>
+<div class="line"><a id="l00759" name="l00759"></a><span class="lineno">  759</span>        browseName,</div>
+<div class="line"><a id="l00760" name="l00760"></a><span class="lineno">  760</span>        detail::wrapNodeAttributes(attributes),</div>
+<div class="line"><a id="l00761" name="l00761"></a><span class="lineno">  761</span>        variableType,</div>
+<div class="line"><a id="l00762" name="l00762"></a><span class="lineno">  762</span>        referenceType</div>
+<div class="line"><a id="l00763" name="l00763"></a><span class="lineno">  763</span>    );</div>
+<div class="line"><a id="l00764" name="l00764"></a><span class="lineno">  764</span>}</div>
 </div>
-<div class="line"><a id="l00756" name="l00756"></a><span class="lineno">  756</span><span class="comment"></span> </div>
-<div class="line"><a id="l00757" name="l00757"></a><span class="lineno">  757</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00758" name="l00758"></a><span class="lineno">  758</span><span class="comment"> * @copydoc addVariableType</span></div>
-<div class="line"><a id="l00759" name="l00759"></a><span class="lineno">  759</span><span class="comment"> * @param token @completiontoken{void(Result&lt;NodeId&gt;&amp;)}</span></div>
-<div class="line"><a id="l00760" name="l00760"></a><span class="lineno">  760</span><span class="comment"> * @return @asyncresult{Result&lt;NodeId&gt;}</span></div>
-<div class="line"><a id="l00761" name="l00761"></a><span class="lineno">  761</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00762" name="l00762"></a><span class="lineno">  762</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CompletionToken&gt;</div>
-<div class="foldopen" id="foldopen00763" data-start="{" data-end="}">
-<div class="line"><a id="l00763" name="l00763"></a><span class="lineno"><a class="line" href="group__AddNodes.html#ga8beac0957fee1fff150687b2a16fab91">  763</a></span><span class="keyword">auto</span> <a class="code hl_function" href="group__AddNodes.html#ga8beac0957fee1fff150687b2a16fab91">addVariableTypeAsync</a>(</div>
-<div class="line"><a id="l00764" name="l00764"></a><span class="lineno">  764</span>    <a class="code hl_class" href="classopcua_1_1Client.html">Client</a>&amp; connection,</div>
-<div class="line"><a id="l00765" name="l00765"></a><span class="lineno">  765</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; parentId,</div>
-<div class="line"><a id="l00766" name="l00766"></a><span class="lineno">  766</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; <span class="keywordtype">id</span>,</div>
-<div class="line"><a id="l00767" name="l00767"></a><span class="lineno">  767</span>    std::string_view browseName,</div>
-<div class="line"><a id="l00768" name="l00768"></a><span class="lineno">  768</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1ua_1_1VariableTypeAttributes.html">VariableTypeAttributes</a>&amp; attributes,</div>
-<div class="line"><a id="l00769" name="l00769"></a><span class="lineno">  769</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; variableType,</div>
-<div class="line"><a id="l00770" name="l00770"></a><span class="lineno">  770</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; referenceType,</div>
-<div class="line"><a id="l00771" name="l00771"></a><span class="lineno">  771</span>    CompletionToken&amp;&amp; token</div>
-<div class="line"><a id="l00772" name="l00772"></a><span class="lineno">  772</span>) {</div>
-<div class="line"><a id="l00773" name="l00773"></a><span class="lineno">  773</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__AddNodes.html#ga76ac43749a6e2ec1a0d1c066b1392a1b">addNodeAsync</a>(</div>
-<div class="line"><a id="l00774" name="l00774"></a><span class="lineno">  774</span>        connection,</div>
-<div class="line"><a id="l00775" name="l00775"></a><span class="lineno">  775</span>        <a class="code hl_enumvalue" href="namespaceopcua.html#a15d78f717a24899cb2ca2af33f5c7c96a60e08a3601c0d6742aa798b4dc610670">NodeClass::VariableType</a>,</div>
-<div class="line"><a id="l00776" name="l00776"></a><span class="lineno">  776</span>        parentId,</div>
-<div class="line"><a id="l00777" name="l00777"></a><span class="lineno">  777</span>        <span class="keywordtype">id</span>,</div>
-<div class="line"><a id="l00778" name="l00778"></a><span class="lineno">  778</span>        browseName,</div>
-<div class="line"><a id="l00779" name="l00779"></a><span class="lineno">  779</span>        detail::wrapNodeAttributes(attributes),</div>
-<div class="line"><a id="l00780" name="l00780"></a><span class="lineno">  780</span>        variableType,</div>
-<div class="line"><a id="l00781" name="l00781"></a><span class="lineno">  781</span>        referenceType,</div>
-<div class="line"><a id="l00782" name="l00782"></a><span class="lineno">  782</span>        std::forward&lt;CompletionToken&gt;(token)</div>
-<div class="line"><a id="l00783" name="l00783"></a><span class="lineno">  783</span>    );</div>
-<div class="line"><a id="l00784" name="l00784"></a><span class="lineno">  784</span>}</div>
+<div class="line"><a id="l00765" name="l00765"></a><span class="lineno">  765</span><span class="comment"></span> </div>
+<div class="line"><a id="l00766" name="l00766"></a><span class="lineno">  766</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00767" name="l00767"></a><span class="lineno">  767</span><span class="comment"> * @copydoc addVariableType</span></div>
+<div class="line"><a id="l00768" name="l00768"></a><span class="lineno">  768</span><span class="comment"> * @param token @completiontoken{void(Result&lt;NodeId&gt;&amp;)}</span></div>
+<div class="line"><a id="l00769" name="l00769"></a><span class="lineno">  769</span><span class="comment"> * @return @asyncresult{Result&lt;NodeId&gt;}</span></div>
+<div class="line"><a id="l00770" name="l00770"></a><span class="lineno">  770</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00771" name="l00771"></a><span class="lineno">  771</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CompletionToken&gt;</div>
+<div class="foldopen" id="foldopen00772" data-start="{" data-end="}">
+<div class="line"><a id="l00772" name="l00772"></a><span class="lineno"><a class="line" href="group__AddNodes.html#ga8beac0957fee1fff150687b2a16fab91">  772</a></span><span class="keyword">auto</span> <a class="code hl_function" href="group__AddNodes.html#ga8beac0957fee1fff150687b2a16fab91">addVariableTypeAsync</a>(</div>
+<div class="line"><a id="l00773" name="l00773"></a><span class="lineno">  773</span>    <a class="code hl_class" href="classopcua_1_1Client.html">Client</a>&amp; connection,</div>
+<div class="line"><a id="l00774" name="l00774"></a><span class="lineno">  774</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; parentId,</div>
+<div class="line"><a id="l00775" name="l00775"></a><span class="lineno">  775</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; <span class="keywordtype">id</span>,</div>
+<div class="line"><a id="l00776" name="l00776"></a><span class="lineno">  776</span>    std::string_view browseName,</div>
+<div class="line"><a id="l00777" name="l00777"></a><span class="lineno">  777</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1ua_1_1VariableTypeAttributes.html">VariableTypeAttributes</a>&amp; attributes,</div>
+<div class="line"><a id="l00778" name="l00778"></a><span class="lineno">  778</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; variableType,</div>
+<div class="line"><a id="l00779" name="l00779"></a><span class="lineno">  779</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; referenceType,</div>
+<div class="line"><a id="l00780" name="l00780"></a><span class="lineno">  780</span>    CompletionToken&amp;&amp; token</div>
+<div class="line"><a id="l00781" name="l00781"></a><span class="lineno">  781</span>) {</div>
+<div class="line"><a id="l00782" name="l00782"></a><span class="lineno">  782</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__AddNodes.html#ga76ac43749a6e2ec1a0d1c066b1392a1b">addNodeAsync</a>(</div>
+<div class="line"><a id="l00783" name="l00783"></a><span class="lineno">  783</span>        connection,</div>
+<div class="line"><a id="l00784" name="l00784"></a><span class="lineno">  784</span>        <a class="code hl_enumvalue" href="namespaceopcua.html#a15d78f717a24899cb2ca2af33f5c7c96a60e08a3601c0d6742aa798b4dc610670">NodeClass::VariableType</a>,</div>
+<div class="line"><a id="l00785" name="l00785"></a><span class="lineno">  785</span>        parentId,</div>
+<div class="line"><a id="l00786" name="l00786"></a><span class="lineno">  786</span>        <span class="keywordtype">id</span>,</div>
+<div class="line"><a id="l00787" name="l00787"></a><span class="lineno">  787</span>        browseName,</div>
+<div class="line"><a id="l00788" name="l00788"></a><span class="lineno">  788</span>        detail::wrapNodeAttributes(attributes),</div>
+<div class="line"><a id="l00789" name="l00789"></a><span class="lineno">  789</span>        variableType,</div>
+<div class="line"><a id="l00790" name="l00790"></a><span class="lineno">  790</span>        referenceType,</div>
+<div class="line"><a id="l00791" name="l00791"></a><span class="lineno">  791</span>        std::forward&lt;CompletionToken&gt;(token)</div>
+<div class="line"><a id="l00792" name="l00792"></a><span class="lineno">  792</span>    );</div>
+<div class="line"><a id="l00793" name="l00793"></a><span class="lineno">  793</span>}</div>
 </div>
-<div class="line"><a id="l00785" name="l00785"></a><span class="lineno">  785</span><span class="comment"></span> </div>
-<div class="line"><a id="l00786" name="l00786"></a><span class="lineno">  786</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00787" name="l00787"></a><span class="lineno">  787</span><span class="comment"> * Add reference type.</span></div>
-<div class="line"><a id="l00788" name="l00788"></a><span class="lineno">  788</span><span class="comment"> * @param connection Instance of type Client (or Server)</span></div>
-<div class="line"><a id="l00789" name="l00789"></a><span class="lineno">  789</span><span class="comment"> * @param parentId Parent node</span></div>
-<div class="line"><a id="l00790" name="l00790"></a><span class="lineno">  790</span><span class="comment"> * @param id Requested NodeId of the node to add</span></div>
-<div class="line"><a id="l00791" name="l00791"></a><span class="lineno">  791</span><span class="comment"> * @param browseName Browse name</span></div>
-<div class="line"><a id="l00792" name="l00792"></a><span class="lineno">  792</span><span class="comment"> * @param attributes Reference type attributes</span></div>
-<div class="line"><a id="l00793" name="l00793"></a><span class="lineno">  793</span><span class="comment"> * @param referenceType Hierarchical reference type from the parent node to the new node, e.g.</span></div>
-<div class="line"><a id="l00794" name="l00794"></a><span class="lineno">  794</span><span class="comment"> *                      ReferenceTypeId::HasSubtype</span></div>
-<div class="line"><a id="l00795" name="l00795"></a><span class="lineno">  795</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00796" name="l00796"></a><span class="lineno">  796</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00797" data-start="{" data-end="}">
-<div class="line"><a id="l00797" name="l00797"></a><span class="lineno"><a class="line" href="group__AddNodes.html#ga9aa3bf2d77f1c17faab60a7f074b9a3f">  797</a></span><a class="code hl_class" href="classopcua_1_1Result.html">Result&lt;NodeId&gt;</a> <a class="code hl_function" href="group__AddNodes.html#ga9aa3bf2d77f1c17faab60a7f074b9a3f">addReferenceType</a>(</div>
-<div class="line"><a id="l00798" name="l00798"></a><span class="lineno">  798</span>    T&amp; connection,</div>
-<div class="line"><a id="l00799" name="l00799"></a><span class="lineno">  799</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; parentId,</div>
-<div class="line"><a id="l00800" name="l00800"></a><span class="lineno">  800</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; <span class="keywordtype">id</span>,</div>
-<div class="line"><a id="l00801" name="l00801"></a><span class="lineno">  801</span>    std::string_view browseName,</div>
-<div class="line"><a id="l00802" name="l00802"></a><span class="lineno">  802</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1ua_1_1ReferenceTypeAttributes.html">ReferenceTypeAttributes</a>&amp; attributes,</div>
-<div class="line"><a id="l00803" name="l00803"></a><span class="lineno">  803</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; referenceType</div>
-<div class="line"><a id="l00804" name="l00804"></a><span class="lineno">  804</span>) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00805" name="l00805"></a><span class="lineno">  805</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__AddNodes.html#ga0a1780203d6cac64ccb1ab21d4d0c0ed">addNode</a>(</div>
-<div class="line"><a id="l00806" name="l00806"></a><span class="lineno">  806</span>        connection,</div>
-<div class="line"><a id="l00807" name="l00807"></a><span class="lineno">  807</span>        <a class="code hl_enumvalue" href="namespaceopcua.html#a15d78f717a24899cb2ca2af33f5c7c96aeabd2ac91ac41e38d4d61d77e3518160">NodeClass::ReferenceType</a>,</div>
-<div class="line"><a id="l00808" name="l00808"></a><span class="lineno">  808</span>        parentId,</div>
-<div class="line"><a id="l00809" name="l00809"></a><span class="lineno">  809</span>        <span class="keywordtype">id</span>,</div>
-<div class="line"><a id="l00810" name="l00810"></a><span class="lineno">  810</span>        browseName,</div>
-<div class="line"><a id="l00811" name="l00811"></a><span class="lineno">  811</span>        detail::wrapNodeAttributes(attributes),</div>
-<div class="line"><a id="l00812" name="l00812"></a><span class="lineno">  812</span>        {},</div>
-<div class="line"><a id="l00813" name="l00813"></a><span class="lineno">  813</span>        referenceType</div>
-<div class="line"><a id="l00814" name="l00814"></a><span class="lineno">  814</span>    );</div>
-<div class="line"><a id="l00815" name="l00815"></a><span class="lineno">  815</span>}</div>
+<div class="line"><a id="l00794" name="l00794"></a><span class="lineno">  794</span><span class="comment"></span> </div>
+<div class="line"><a id="l00795" name="l00795"></a><span class="lineno">  795</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00796" name="l00796"></a><span class="lineno">  796</span><span class="comment"> * Add reference type.</span></div>
+<div class="line"><a id="l00797" name="l00797"></a><span class="lineno">  797</span><span class="comment"> * @param connection Instance of type Client (or Server)</span></div>
+<div class="line"><a id="l00798" name="l00798"></a><span class="lineno">  798</span><span class="comment"> * @param parentId Parent node</span></div>
+<div class="line"><a id="l00799" name="l00799"></a><span class="lineno">  799</span><span class="comment"> * @param id Requested NodeId of the node to add</span></div>
+<div class="line"><a id="l00800" name="l00800"></a><span class="lineno">  800</span><span class="comment"> * @param browseName Browse name</span></div>
+<div class="line"><a id="l00801" name="l00801"></a><span class="lineno">  801</span><span class="comment"> * @param attributes Reference type attributes</span></div>
+<div class="line"><a id="l00802" name="l00802"></a><span class="lineno">  802</span><span class="comment"> * @param referenceType Hierarchical reference type from the parent node to the new node, e.g.</span></div>
+<div class="line"><a id="l00803" name="l00803"></a><span class="lineno">  803</span><span class="comment"> *                      ReferenceTypeId::HasSubtype</span></div>
+<div class="line"><a id="l00804" name="l00804"></a><span class="lineno">  804</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00805" name="l00805"></a><span class="lineno">  805</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00806" data-start="{" data-end="}">
+<div class="line"><a id="l00806" name="l00806"></a><span class="lineno"><a class="line" href="group__AddNodes.html#ga9aa3bf2d77f1c17faab60a7f074b9a3f">  806</a></span><a class="code hl_class" href="classopcua_1_1Result.html">Result&lt;NodeId&gt;</a> <a class="code hl_function" href="group__AddNodes.html#ga9aa3bf2d77f1c17faab60a7f074b9a3f">addReferenceType</a>(</div>
+<div class="line"><a id="l00807" name="l00807"></a><span class="lineno">  807</span>    T&amp; connection,</div>
+<div class="line"><a id="l00808" name="l00808"></a><span class="lineno">  808</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; parentId,</div>
+<div class="line"><a id="l00809" name="l00809"></a><span class="lineno">  809</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; <span class="keywordtype">id</span>,</div>
+<div class="line"><a id="l00810" name="l00810"></a><span class="lineno">  810</span>    std::string_view browseName,</div>
+<div class="line"><a id="l00811" name="l00811"></a><span class="lineno">  811</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1ua_1_1ReferenceTypeAttributes.html">ReferenceTypeAttributes</a>&amp; attributes,</div>
+<div class="line"><a id="l00812" name="l00812"></a><span class="lineno">  812</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; referenceType</div>
+<div class="line"><a id="l00813" name="l00813"></a><span class="lineno">  813</span>) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00814" name="l00814"></a><span class="lineno">  814</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__AddNodes.html#ga0a1780203d6cac64ccb1ab21d4d0c0ed">addNode</a>(</div>
+<div class="line"><a id="l00815" name="l00815"></a><span class="lineno">  815</span>        connection,</div>
+<div class="line"><a id="l00816" name="l00816"></a><span class="lineno">  816</span>        <a class="code hl_enumvalue" href="namespaceopcua.html#a15d78f717a24899cb2ca2af33f5c7c96aeabd2ac91ac41e38d4d61d77e3518160">NodeClass::ReferenceType</a>,</div>
+<div class="line"><a id="l00817" name="l00817"></a><span class="lineno">  817</span>        parentId,</div>
+<div class="line"><a id="l00818" name="l00818"></a><span class="lineno">  818</span>        <span class="keywordtype">id</span>,</div>
+<div class="line"><a id="l00819" name="l00819"></a><span class="lineno">  819</span>        browseName,</div>
+<div class="line"><a id="l00820" name="l00820"></a><span class="lineno">  820</span>        detail::wrapNodeAttributes(attributes),</div>
+<div class="line"><a id="l00821" name="l00821"></a><span class="lineno">  821</span>        {},</div>
+<div class="line"><a id="l00822" name="l00822"></a><span class="lineno">  822</span>        referenceType</div>
+<div class="line"><a id="l00823" name="l00823"></a><span class="lineno">  823</span>    );</div>
+<div class="line"><a id="l00824" name="l00824"></a><span class="lineno">  824</span>}</div>
 </div>
-<div class="line"><a id="l00816" name="l00816"></a><span class="lineno">  816</span><span class="comment"></span> </div>
-<div class="line"><a id="l00817" name="l00817"></a><span class="lineno">  817</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00818" name="l00818"></a><span class="lineno">  818</span><span class="comment"> * @copydoc addReferenceType</span></div>
-<div class="line"><a id="l00819" name="l00819"></a><span class="lineno">  819</span><span class="comment"> * @param token @completiontoken{void(Result&lt;NodeId&gt;&amp;)}</span></div>
-<div class="line"><a id="l00820" name="l00820"></a><span class="lineno">  820</span><span class="comment"> * @return @asyncresult{Result&lt;NodeId&gt;}</span></div>
-<div class="line"><a id="l00821" name="l00821"></a><span class="lineno">  821</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00822" name="l00822"></a><span class="lineno">  822</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CompletionToken&gt;</div>
-<div class="foldopen" id="foldopen00823" data-start="{" data-end="}">
-<div class="line"><a id="l00823" name="l00823"></a><span class="lineno"><a class="line" href="group__AddNodes.html#ga7fb51aee9b95602f14626ceefaf3f457">  823</a></span><span class="keyword">auto</span> <a class="code hl_function" href="group__AddNodes.html#ga7fb51aee9b95602f14626ceefaf3f457">addReferenceTypeAsync</a>(</div>
-<div class="line"><a id="l00824" name="l00824"></a><span class="lineno">  824</span>    <a class="code hl_class" href="classopcua_1_1Client.html">Client</a>&amp; connection,</div>
-<div class="line"><a id="l00825" name="l00825"></a><span class="lineno">  825</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; parentId,</div>
-<div class="line"><a id="l00826" name="l00826"></a><span class="lineno">  826</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; <span class="keywordtype">id</span>,</div>
-<div class="line"><a id="l00827" name="l00827"></a><span class="lineno">  827</span>    std::string_view browseName,</div>
-<div class="line"><a id="l00828" name="l00828"></a><span class="lineno">  828</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1ua_1_1ReferenceTypeAttributes.html">ReferenceTypeAttributes</a>&amp; attributes,</div>
-<div class="line"><a id="l00829" name="l00829"></a><span class="lineno">  829</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; referenceType,</div>
-<div class="line"><a id="l00830" name="l00830"></a><span class="lineno">  830</span>    CompletionToken&amp;&amp; token</div>
-<div class="line"><a id="l00831" name="l00831"></a><span class="lineno">  831</span>) {</div>
-<div class="line"><a id="l00832" name="l00832"></a><span class="lineno">  832</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__AddNodes.html#ga76ac43749a6e2ec1a0d1c066b1392a1b">addNodeAsync</a>(</div>
-<div class="line"><a id="l00833" name="l00833"></a><span class="lineno">  833</span>        connection,</div>
-<div class="line"><a id="l00834" name="l00834"></a><span class="lineno">  834</span>        <a class="code hl_enumvalue" href="namespaceopcua.html#a15d78f717a24899cb2ca2af33f5c7c96aeabd2ac91ac41e38d4d61d77e3518160">NodeClass::ReferenceType</a>,</div>
-<div class="line"><a id="l00835" name="l00835"></a><span class="lineno">  835</span>        parentId,</div>
-<div class="line"><a id="l00836" name="l00836"></a><span class="lineno">  836</span>        <span class="keywordtype">id</span>,</div>
-<div class="line"><a id="l00837" name="l00837"></a><span class="lineno">  837</span>        browseName,</div>
-<div class="line"><a id="l00838" name="l00838"></a><span class="lineno">  838</span>        detail::wrapNodeAttributes(attributes),</div>
-<div class="line"><a id="l00839" name="l00839"></a><span class="lineno">  839</span>        {},</div>
-<div class="line"><a id="l00840" name="l00840"></a><span class="lineno">  840</span>        referenceType,</div>
-<div class="line"><a id="l00841" name="l00841"></a><span class="lineno">  841</span>        std::forward&lt;CompletionToken&gt;(token)</div>
-<div class="line"><a id="l00842" name="l00842"></a><span class="lineno">  842</span>    );</div>
-<div class="line"><a id="l00843" name="l00843"></a><span class="lineno">  843</span>}</div>
+<div class="line"><a id="l00825" name="l00825"></a><span class="lineno">  825</span><span class="comment"></span> </div>
+<div class="line"><a id="l00826" name="l00826"></a><span class="lineno">  826</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00827" name="l00827"></a><span class="lineno">  827</span><span class="comment"> * @copydoc addReferenceType</span></div>
+<div class="line"><a id="l00828" name="l00828"></a><span class="lineno">  828</span><span class="comment"> * @param token @completiontoken{void(Result&lt;NodeId&gt;&amp;)}</span></div>
+<div class="line"><a id="l00829" name="l00829"></a><span class="lineno">  829</span><span class="comment"> * @return @asyncresult{Result&lt;NodeId&gt;}</span></div>
+<div class="line"><a id="l00830" name="l00830"></a><span class="lineno">  830</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00831" name="l00831"></a><span class="lineno">  831</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CompletionToken&gt;</div>
+<div class="foldopen" id="foldopen00832" data-start="{" data-end="}">
+<div class="line"><a id="l00832" name="l00832"></a><span class="lineno"><a class="line" href="group__AddNodes.html#ga7fb51aee9b95602f14626ceefaf3f457">  832</a></span><span class="keyword">auto</span> <a class="code hl_function" href="group__AddNodes.html#ga7fb51aee9b95602f14626ceefaf3f457">addReferenceTypeAsync</a>(</div>
+<div class="line"><a id="l00833" name="l00833"></a><span class="lineno">  833</span>    <a class="code hl_class" href="classopcua_1_1Client.html">Client</a>&amp; connection,</div>
+<div class="line"><a id="l00834" name="l00834"></a><span class="lineno">  834</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; parentId,</div>
+<div class="line"><a id="l00835" name="l00835"></a><span class="lineno">  835</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; <span class="keywordtype">id</span>,</div>
+<div class="line"><a id="l00836" name="l00836"></a><span class="lineno">  836</span>    std::string_view browseName,</div>
+<div class="line"><a id="l00837" name="l00837"></a><span class="lineno">  837</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1ua_1_1ReferenceTypeAttributes.html">ReferenceTypeAttributes</a>&amp; attributes,</div>
+<div class="line"><a id="l00838" name="l00838"></a><span class="lineno">  838</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; referenceType,</div>
+<div class="line"><a id="l00839" name="l00839"></a><span class="lineno">  839</span>    CompletionToken&amp;&amp; token</div>
+<div class="line"><a id="l00840" name="l00840"></a><span class="lineno">  840</span>) {</div>
+<div class="line"><a id="l00841" name="l00841"></a><span class="lineno">  841</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__AddNodes.html#ga76ac43749a6e2ec1a0d1c066b1392a1b">addNodeAsync</a>(</div>
+<div class="line"><a id="l00842" name="l00842"></a><span class="lineno">  842</span>        connection,</div>
+<div class="line"><a id="l00843" name="l00843"></a><span class="lineno">  843</span>        <a class="code hl_enumvalue" href="namespaceopcua.html#a15d78f717a24899cb2ca2af33f5c7c96aeabd2ac91ac41e38d4d61d77e3518160">NodeClass::ReferenceType</a>,</div>
+<div class="line"><a id="l00844" name="l00844"></a><span class="lineno">  844</span>        parentId,</div>
+<div class="line"><a id="l00845" name="l00845"></a><span class="lineno">  845</span>        <span class="keywordtype">id</span>,</div>
+<div class="line"><a id="l00846" name="l00846"></a><span class="lineno">  846</span>        browseName,</div>
+<div class="line"><a id="l00847" name="l00847"></a><span class="lineno">  847</span>        detail::wrapNodeAttributes(attributes),</div>
+<div class="line"><a id="l00848" name="l00848"></a><span class="lineno">  848</span>        {},</div>
+<div class="line"><a id="l00849" name="l00849"></a><span class="lineno">  849</span>        referenceType,</div>
+<div class="line"><a id="l00850" name="l00850"></a><span class="lineno">  850</span>        std::forward&lt;CompletionToken&gt;(token)</div>
+<div class="line"><a id="l00851" name="l00851"></a><span class="lineno">  851</span>    );</div>
+<div class="line"><a id="l00852" name="l00852"></a><span class="lineno">  852</span>}</div>
 </div>
-<div class="line"><a id="l00844" name="l00844"></a><span class="lineno">  844</span><span class="comment"></span> </div>
-<div class="line"><a id="l00845" name="l00845"></a><span class="lineno">  845</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00846" name="l00846"></a><span class="lineno">  846</span><span class="comment"> * Add data type.</span></div>
-<div class="line"><a id="l00847" name="l00847"></a><span class="lineno">  847</span><span class="comment"> * @param connection Instance of type Client (or Server)</span></div>
-<div class="line"><a id="l00848" name="l00848"></a><span class="lineno">  848</span><span class="comment"> * @param parentId Parent node</span></div>
-<div class="line"><a id="l00849" name="l00849"></a><span class="lineno">  849</span><span class="comment"> * @param id Requested NodeId of the node to add</span></div>
-<div class="line"><a id="l00850" name="l00850"></a><span class="lineno">  850</span><span class="comment"> * @param browseName Browse name</span></div>
-<div class="line"><a id="l00851" name="l00851"></a><span class="lineno">  851</span><span class="comment"> * @param attributes Data type attributes</span></div>
-<div class="line"><a id="l00852" name="l00852"></a><span class="lineno">  852</span><span class="comment"> * @param referenceType Hierarchical reference type from the parent node to the new node, e.g.</span></div>
-<div class="line"><a id="l00853" name="l00853"></a><span class="lineno">  853</span><span class="comment"> *                      ReferenceTypeId::HasSubtype</span></div>
-<div class="line"><a id="l00854" name="l00854"></a><span class="lineno">  854</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00855" name="l00855"></a><span class="lineno">  855</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00856" data-start="{" data-end="}">
-<div class="line"><a id="l00856" name="l00856"></a><span class="lineno"><a class="line" href="group__AddNodes.html#ga566f4d11f933995f00d845bd3a50a99b">  856</a></span><a class="code hl_class" href="classopcua_1_1Result.html">Result&lt;NodeId&gt;</a> <a class="code hl_function" href="group__AddNodes.html#ga566f4d11f933995f00d845bd3a50a99b">addDataType</a>(</div>
-<div class="line"><a id="l00857" name="l00857"></a><span class="lineno">  857</span>    T&amp; connection,</div>
-<div class="line"><a id="l00858" name="l00858"></a><span class="lineno">  858</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; parentId,</div>
-<div class="line"><a id="l00859" name="l00859"></a><span class="lineno">  859</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; <span class="keywordtype">id</span>,</div>
-<div class="line"><a id="l00860" name="l00860"></a><span class="lineno">  860</span>    std::string_view browseName,</div>
-<div class="line"><a id="l00861" name="l00861"></a><span class="lineno">  861</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1ua_1_1DataTypeAttributes.html">DataTypeAttributes</a>&amp; attributes,</div>
-<div class="line"><a id="l00862" name="l00862"></a><span class="lineno">  862</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; referenceType</div>
-<div class="line"><a id="l00863" name="l00863"></a><span class="lineno">  863</span>) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00864" name="l00864"></a><span class="lineno">  864</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__AddNodes.html#ga0a1780203d6cac64ccb1ab21d4d0c0ed">addNode</a>(</div>
-<div class="line"><a id="l00865" name="l00865"></a><span class="lineno">  865</span>        connection,</div>
-<div class="line"><a id="l00866" name="l00866"></a><span class="lineno">  866</span>        <a class="code hl_enumvalue" href="namespaceopcua.html#a15d78f717a24899cb2ca2af33f5c7c96aaa2aaa59ac1a7c24e5e86c068bda3d20">NodeClass::DataType</a>,</div>
-<div class="line"><a id="l00867" name="l00867"></a><span class="lineno">  867</span>        parentId,</div>
-<div class="line"><a id="l00868" name="l00868"></a><span class="lineno">  868</span>        <span class="keywordtype">id</span>,</div>
-<div class="line"><a id="l00869" name="l00869"></a><span class="lineno">  869</span>        browseName,</div>
-<div class="line"><a id="l00870" name="l00870"></a><span class="lineno">  870</span>        detail::wrapNodeAttributes(attributes),</div>
-<div class="line"><a id="l00871" name="l00871"></a><span class="lineno">  871</span>        {},</div>
-<div class="line"><a id="l00872" name="l00872"></a><span class="lineno">  872</span>        referenceType</div>
-<div class="line"><a id="l00873" name="l00873"></a><span class="lineno">  873</span>    );</div>
-<div class="line"><a id="l00874" name="l00874"></a><span class="lineno">  874</span>}</div>
+<div class="line"><a id="l00853" name="l00853"></a><span class="lineno">  853</span><span class="comment"></span> </div>
+<div class="line"><a id="l00854" name="l00854"></a><span class="lineno">  854</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00855" name="l00855"></a><span class="lineno">  855</span><span class="comment"> * Add data type.</span></div>
+<div class="line"><a id="l00856" name="l00856"></a><span class="lineno">  856</span><span class="comment"> * @param connection Instance of type Client (or Server)</span></div>
+<div class="line"><a id="l00857" name="l00857"></a><span class="lineno">  857</span><span class="comment"> * @param parentId Parent node</span></div>
+<div class="line"><a id="l00858" name="l00858"></a><span class="lineno">  858</span><span class="comment"> * @param id Requested NodeId of the node to add</span></div>
+<div class="line"><a id="l00859" name="l00859"></a><span class="lineno">  859</span><span class="comment"> * @param browseName Browse name</span></div>
+<div class="line"><a id="l00860" name="l00860"></a><span class="lineno">  860</span><span class="comment"> * @param attributes Data type attributes</span></div>
+<div class="line"><a id="l00861" name="l00861"></a><span class="lineno">  861</span><span class="comment"> * @param referenceType Hierarchical reference type from the parent node to the new node, e.g.</span></div>
+<div class="line"><a id="l00862" name="l00862"></a><span class="lineno">  862</span><span class="comment"> *                      ReferenceTypeId::HasSubtype</span></div>
+<div class="line"><a id="l00863" name="l00863"></a><span class="lineno">  863</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00864" name="l00864"></a><span class="lineno">  864</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00865" data-start="{" data-end="}">
+<div class="line"><a id="l00865" name="l00865"></a><span class="lineno"><a class="line" href="group__AddNodes.html#ga566f4d11f933995f00d845bd3a50a99b">  865</a></span><a class="code hl_class" href="classopcua_1_1Result.html">Result&lt;NodeId&gt;</a> <a class="code hl_function" href="group__AddNodes.html#ga566f4d11f933995f00d845bd3a50a99b">addDataType</a>(</div>
+<div class="line"><a id="l00866" name="l00866"></a><span class="lineno">  866</span>    T&amp; connection,</div>
+<div class="line"><a id="l00867" name="l00867"></a><span class="lineno">  867</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; parentId,</div>
+<div class="line"><a id="l00868" name="l00868"></a><span class="lineno">  868</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; <span class="keywordtype">id</span>,</div>
+<div class="line"><a id="l00869" name="l00869"></a><span class="lineno">  869</span>    std::string_view browseName,</div>
+<div class="line"><a id="l00870" name="l00870"></a><span class="lineno">  870</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1ua_1_1DataTypeAttributes.html">DataTypeAttributes</a>&amp; attributes,</div>
+<div class="line"><a id="l00871" name="l00871"></a><span class="lineno">  871</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; referenceType</div>
+<div class="line"><a id="l00872" name="l00872"></a><span class="lineno">  872</span>) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00873" name="l00873"></a><span class="lineno">  873</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__AddNodes.html#ga0a1780203d6cac64ccb1ab21d4d0c0ed">addNode</a>(</div>
+<div class="line"><a id="l00874" name="l00874"></a><span class="lineno">  874</span>        connection,</div>
+<div class="line"><a id="l00875" name="l00875"></a><span class="lineno">  875</span>        <a class="code hl_enumvalue" href="namespaceopcua.html#a15d78f717a24899cb2ca2af33f5c7c96aaa2aaa59ac1a7c24e5e86c068bda3d20">NodeClass::DataType</a>,</div>
+<div class="line"><a id="l00876" name="l00876"></a><span class="lineno">  876</span>        parentId,</div>
+<div class="line"><a id="l00877" name="l00877"></a><span class="lineno">  877</span>        <span class="keywordtype">id</span>,</div>
+<div class="line"><a id="l00878" name="l00878"></a><span class="lineno">  878</span>        browseName,</div>
+<div class="line"><a id="l00879" name="l00879"></a><span class="lineno">  879</span>        detail::wrapNodeAttributes(attributes),</div>
+<div class="line"><a id="l00880" name="l00880"></a><span class="lineno">  880</span>        {},</div>
+<div class="line"><a id="l00881" name="l00881"></a><span class="lineno">  881</span>        referenceType</div>
+<div class="line"><a id="l00882" name="l00882"></a><span class="lineno">  882</span>    );</div>
+<div class="line"><a id="l00883" name="l00883"></a><span class="lineno">  883</span>}</div>
 </div>
-<div class="line"><a id="l00875" name="l00875"></a><span class="lineno">  875</span><span class="comment"></span> </div>
-<div class="line"><a id="l00876" name="l00876"></a><span class="lineno">  876</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00877" name="l00877"></a><span class="lineno">  877</span><span class="comment"> * @copydoc addDataType</span></div>
-<div class="line"><a id="l00878" name="l00878"></a><span class="lineno">  878</span><span class="comment"> * @param token @completiontoken{void(Result&lt;NodeId&gt;&amp;)}</span></div>
-<div class="line"><a id="l00879" name="l00879"></a><span class="lineno">  879</span><span class="comment"> * @return @asyncresult{Result&lt;NodeId&gt;}</span></div>
-<div class="line"><a id="l00880" name="l00880"></a><span class="lineno">  880</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00881" name="l00881"></a><span class="lineno">  881</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CompletionToken&gt;</div>
-<div class="foldopen" id="foldopen00882" data-start="{" data-end="}">
-<div class="line"><a id="l00882" name="l00882"></a><span class="lineno"><a class="line" href="group__AddNodes.html#ga8bd16c0a0a21dd9e1e93f58231926f5d">  882</a></span><span class="keyword">auto</span> <a class="code hl_function" href="group__AddNodes.html#ga8bd16c0a0a21dd9e1e93f58231926f5d">addDataTypeAsync</a>(</div>
-<div class="line"><a id="l00883" name="l00883"></a><span class="lineno">  883</span>    <a class="code hl_class" href="classopcua_1_1Client.html">Client</a>&amp; connection,</div>
-<div class="line"><a id="l00884" name="l00884"></a><span class="lineno">  884</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; parentId,</div>
-<div class="line"><a id="l00885" name="l00885"></a><span class="lineno">  885</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; <span class="keywordtype">id</span>,</div>
-<div class="line"><a id="l00886" name="l00886"></a><span class="lineno">  886</span>    std::string_view browseName,</div>
-<div class="line"><a id="l00887" name="l00887"></a><span class="lineno">  887</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1ua_1_1DataTypeAttributes.html">DataTypeAttributes</a>&amp; attributes,</div>
-<div class="line"><a id="l00888" name="l00888"></a><span class="lineno">  888</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; referenceType,</div>
-<div class="line"><a id="l00889" name="l00889"></a><span class="lineno">  889</span>    CompletionToken&amp;&amp; token</div>
-<div class="line"><a id="l00890" name="l00890"></a><span class="lineno">  890</span>) {</div>
-<div class="line"><a id="l00891" name="l00891"></a><span class="lineno">  891</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__AddNodes.html#ga76ac43749a6e2ec1a0d1c066b1392a1b">addNodeAsync</a>(</div>
-<div class="line"><a id="l00892" name="l00892"></a><span class="lineno">  892</span>        connection,</div>
-<div class="line"><a id="l00893" name="l00893"></a><span class="lineno">  893</span>        <a class="code hl_enumvalue" href="namespaceopcua.html#a15d78f717a24899cb2ca2af33f5c7c96aaa2aaa59ac1a7c24e5e86c068bda3d20">NodeClass::DataType</a>,</div>
-<div class="line"><a id="l00894" name="l00894"></a><span class="lineno">  894</span>        parentId,</div>
-<div class="line"><a id="l00895" name="l00895"></a><span class="lineno">  895</span>        <span class="keywordtype">id</span>,</div>
-<div class="line"><a id="l00896" name="l00896"></a><span class="lineno">  896</span>        browseName,</div>
-<div class="line"><a id="l00897" name="l00897"></a><span class="lineno">  897</span>        detail::wrapNodeAttributes(attributes),</div>
-<div class="line"><a id="l00898" name="l00898"></a><span class="lineno">  898</span>        {},</div>
-<div class="line"><a id="l00899" name="l00899"></a><span class="lineno">  899</span>        referenceType,</div>
-<div class="line"><a id="l00900" name="l00900"></a><span class="lineno">  900</span>        std::forward&lt;CompletionToken&gt;(token)</div>
-<div class="line"><a id="l00901" name="l00901"></a><span class="lineno">  901</span>    );</div>
-<div class="line"><a id="l00902" name="l00902"></a><span class="lineno">  902</span>}</div>
+<div class="line"><a id="l00884" name="l00884"></a><span class="lineno">  884</span><span class="comment"></span> </div>
+<div class="line"><a id="l00885" name="l00885"></a><span class="lineno">  885</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00886" name="l00886"></a><span class="lineno">  886</span><span class="comment"> * @copydoc addDataType</span></div>
+<div class="line"><a id="l00887" name="l00887"></a><span class="lineno">  887</span><span class="comment"> * @param token @completiontoken{void(Result&lt;NodeId&gt;&amp;)}</span></div>
+<div class="line"><a id="l00888" name="l00888"></a><span class="lineno">  888</span><span class="comment"> * @return @asyncresult{Result&lt;NodeId&gt;}</span></div>
+<div class="line"><a id="l00889" name="l00889"></a><span class="lineno">  889</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00890" name="l00890"></a><span class="lineno">  890</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CompletionToken&gt;</div>
+<div class="foldopen" id="foldopen00891" data-start="{" data-end="}">
+<div class="line"><a id="l00891" name="l00891"></a><span class="lineno"><a class="line" href="group__AddNodes.html#ga8bd16c0a0a21dd9e1e93f58231926f5d">  891</a></span><span class="keyword">auto</span> <a class="code hl_function" href="group__AddNodes.html#ga8bd16c0a0a21dd9e1e93f58231926f5d">addDataTypeAsync</a>(</div>
+<div class="line"><a id="l00892" name="l00892"></a><span class="lineno">  892</span>    <a class="code hl_class" href="classopcua_1_1Client.html">Client</a>&amp; connection,</div>
+<div class="line"><a id="l00893" name="l00893"></a><span class="lineno">  893</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; parentId,</div>
+<div class="line"><a id="l00894" name="l00894"></a><span class="lineno">  894</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; <span class="keywordtype">id</span>,</div>
+<div class="line"><a id="l00895" name="l00895"></a><span class="lineno">  895</span>    std::string_view browseName,</div>
+<div class="line"><a id="l00896" name="l00896"></a><span class="lineno">  896</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1ua_1_1DataTypeAttributes.html">DataTypeAttributes</a>&amp; attributes,</div>
+<div class="line"><a id="l00897" name="l00897"></a><span class="lineno">  897</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; referenceType,</div>
+<div class="line"><a id="l00898" name="l00898"></a><span class="lineno">  898</span>    CompletionToken&amp;&amp; token</div>
+<div class="line"><a id="l00899" name="l00899"></a><span class="lineno">  899</span>) {</div>
+<div class="line"><a id="l00900" name="l00900"></a><span class="lineno">  900</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__AddNodes.html#ga76ac43749a6e2ec1a0d1c066b1392a1b">addNodeAsync</a>(</div>
+<div class="line"><a id="l00901" name="l00901"></a><span class="lineno">  901</span>        connection,</div>
+<div class="line"><a id="l00902" name="l00902"></a><span class="lineno">  902</span>        <a class="code hl_enumvalue" href="namespaceopcua.html#a15d78f717a24899cb2ca2af33f5c7c96aaa2aaa59ac1a7c24e5e86c068bda3d20">NodeClass::DataType</a>,</div>
+<div class="line"><a id="l00903" name="l00903"></a><span class="lineno">  903</span>        parentId,</div>
+<div class="line"><a id="l00904" name="l00904"></a><span class="lineno">  904</span>        <span class="keywordtype">id</span>,</div>
+<div class="line"><a id="l00905" name="l00905"></a><span class="lineno">  905</span>        browseName,</div>
+<div class="line"><a id="l00906" name="l00906"></a><span class="lineno">  906</span>        detail::wrapNodeAttributes(attributes),</div>
+<div class="line"><a id="l00907" name="l00907"></a><span class="lineno">  907</span>        {},</div>
+<div class="line"><a id="l00908" name="l00908"></a><span class="lineno">  908</span>        referenceType,</div>
+<div class="line"><a id="l00909" name="l00909"></a><span class="lineno">  909</span>        std::forward&lt;CompletionToken&gt;(token)</div>
+<div class="line"><a id="l00910" name="l00910"></a><span class="lineno">  910</span>    );</div>
+<div class="line"><a id="l00911" name="l00911"></a><span class="lineno">  911</span>}</div>
 </div>
-<div class="line"><a id="l00903" name="l00903"></a><span class="lineno">  903</span><span class="comment"></span> </div>
-<div class="line"><a id="l00904" name="l00904"></a><span class="lineno">  904</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00905" name="l00905"></a><span class="lineno">  905</span><span class="comment"> * Add view.</span></div>
-<div class="line"><a id="l00906" name="l00906"></a><span class="lineno">  906</span><span class="comment"> * @param connection Instance of type Client (or Server)</span></div>
-<div class="line"><a id="l00907" name="l00907"></a><span class="lineno">  907</span><span class="comment"> * @param parentId Parent node</span></div>
-<div class="line"><a id="l00908" name="l00908"></a><span class="lineno">  908</span><span class="comment"> * @param id Requested NodeId of the node to add</span></div>
-<div class="line"><a id="l00909" name="l00909"></a><span class="lineno">  909</span><span class="comment"> * @param browseName Browse name</span></div>
-<div class="line"><a id="l00910" name="l00910"></a><span class="lineno">  910</span><span class="comment"> * @param attributes View attributes</span></div>
-<div class="line"><a id="l00911" name="l00911"></a><span class="lineno">  911</span><span class="comment"> * @param referenceType Hierarchical reference type from the parent node to the new node, e.g.</span></div>
-<div class="line"><a id="l00912" name="l00912"></a><span class="lineno">  912</span><span class="comment"> *                      ReferenceTypeId::Organizes</span></div>
-<div class="line"><a id="l00913" name="l00913"></a><span class="lineno">  913</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00914" name="l00914"></a><span class="lineno">  914</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00915" data-start="{" data-end="}">
-<div class="line"><a id="l00915" name="l00915"></a><span class="lineno"><a class="line" href="group__AddNodes.html#gacbc0ca962a6cc08867d105bab24946d8">  915</a></span><a class="code hl_class" href="classopcua_1_1Result.html">Result&lt;NodeId&gt;</a> <a class="code hl_function" href="group__AddNodes.html#gacbc0ca962a6cc08867d105bab24946d8">addView</a>(</div>
-<div class="line"><a id="l00916" name="l00916"></a><span class="lineno">  916</span>    T&amp; connection,</div>
-<div class="line"><a id="l00917" name="l00917"></a><span class="lineno">  917</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; parentId,</div>
-<div class="line"><a id="l00918" name="l00918"></a><span class="lineno">  918</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; <span class="keywordtype">id</span>,</div>
-<div class="line"><a id="l00919" name="l00919"></a><span class="lineno">  919</span>    std::string_view browseName,</div>
-<div class="line"><a id="l00920" name="l00920"></a><span class="lineno">  920</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1ua_1_1ViewAttributes.html">ViewAttributes</a>&amp; attributes,</div>
-<div class="line"><a id="l00921" name="l00921"></a><span class="lineno">  921</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; referenceType</div>
-<div class="line"><a id="l00922" name="l00922"></a><span class="lineno">  922</span>) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00923" name="l00923"></a><span class="lineno">  923</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__AddNodes.html#ga0a1780203d6cac64ccb1ab21d4d0c0ed">addNode</a>(</div>
-<div class="line"><a id="l00924" name="l00924"></a><span class="lineno">  924</span>        connection,</div>
-<div class="line"><a id="l00925" name="l00925"></a><span class="lineno">  925</span>        <a class="code hl_enumvalue" href="namespaceopcua.html#a15d78f717a24899cb2ca2af33f5c7c96a4351cfebe4b61d8aa5efa1d020710005">NodeClass::View</a>,</div>
-<div class="line"><a id="l00926" name="l00926"></a><span class="lineno">  926</span>        parentId,</div>
-<div class="line"><a id="l00927" name="l00927"></a><span class="lineno">  927</span>        <span class="keywordtype">id</span>,</div>
-<div class="line"><a id="l00928" name="l00928"></a><span class="lineno">  928</span>        browseName,</div>
-<div class="line"><a id="l00929" name="l00929"></a><span class="lineno">  929</span>        detail::wrapNodeAttributes(attributes),</div>
-<div class="line"><a id="l00930" name="l00930"></a><span class="lineno">  930</span>        {},</div>
-<div class="line"><a id="l00931" name="l00931"></a><span class="lineno">  931</span>        referenceType</div>
-<div class="line"><a id="l00932" name="l00932"></a><span class="lineno">  932</span>    );</div>
-<div class="line"><a id="l00933" name="l00933"></a><span class="lineno">  933</span>}</div>
+<div class="line"><a id="l00912" name="l00912"></a><span class="lineno">  912</span><span class="comment"></span> </div>
+<div class="line"><a id="l00913" name="l00913"></a><span class="lineno">  913</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00914" name="l00914"></a><span class="lineno">  914</span><span class="comment"> * Add view.</span></div>
+<div class="line"><a id="l00915" name="l00915"></a><span class="lineno">  915</span><span class="comment"> * @param connection Instance of type Client (or Server)</span></div>
+<div class="line"><a id="l00916" name="l00916"></a><span class="lineno">  916</span><span class="comment"> * @param parentId Parent node</span></div>
+<div class="line"><a id="l00917" name="l00917"></a><span class="lineno">  917</span><span class="comment"> * @param id Requested NodeId of the node to add</span></div>
+<div class="line"><a id="l00918" name="l00918"></a><span class="lineno">  918</span><span class="comment"> * @param browseName Browse name</span></div>
+<div class="line"><a id="l00919" name="l00919"></a><span class="lineno">  919</span><span class="comment"> * @param attributes View attributes</span></div>
+<div class="line"><a id="l00920" name="l00920"></a><span class="lineno">  920</span><span class="comment"> * @param referenceType Hierarchical reference type from the parent node to the new node, e.g.</span></div>
+<div class="line"><a id="l00921" name="l00921"></a><span class="lineno">  921</span><span class="comment"> *                      ReferenceTypeId::Organizes</span></div>
+<div class="line"><a id="l00922" name="l00922"></a><span class="lineno">  922</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00923" name="l00923"></a><span class="lineno">  923</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00924" data-start="{" data-end="}">
+<div class="line"><a id="l00924" name="l00924"></a><span class="lineno"><a class="line" href="group__AddNodes.html#gacbc0ca962a6cc08867d105bab24946d8">  924</a></span><a class="code hl_class" href="classopcua_1_1Result.html">Result&lt;NodeId&gt;</a> <a class="code hl_function" href="group__AddNodes.html#gacbc0ca962a6cc08867d105bab24946d8">addView</a>(</div>
+<div class="line"><a id="l00925" name="l00925"></a><span class="lineno">  925</span>    T&amp; connection,</div>
+<div class="line"><a id="l00926" name="l00926"></a><span class="lineno">  926</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; parentId,</div>
+<div class="line"><a id="l00927" name="l00927"></a><span class="lineno">  927</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; <span class="keywordtype">id</span>,</div>
+<div class="line"><a id="l00928" name="l00928"></a><span class="lineno">  928</span>    std::string_view browseName,</div>
+<div class="line"><a id="l00929" name="l00929"></a><span class="lineno">  929</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1ua_1_1ViewAttributes.html">ViewAttributes</a>&amp; attributes,</div>
+<div class="line"><a id="l00930" name="l00930"></a><span class="lineno">  930</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; referenceType</div>
+<div class="line"><a id="l00931" name="l00931"></a><span class="lineno">  931</span>) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00932" name="l00932"></a><span class="lineno">  932</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__AddNodes.html#ga0a1780203d6cac64ccb1ab21d4d0c0ed">addNode</a>(</div>
+<div class="line"><a id="l00933" name="l00933"></a><span class="lineno">  933</span>        connection,</div>
+<div class="line"><a id="l00934" name="l00934"></a><span class="lineno">  934</span>        <a class="code hl_enumvalue" href="namespaceopcua.html#a15d78f717a24899cb2ca2af33f5c7c96a4351cfebe4b61d8aa5efa1d020710005">NodeClass::View</a>,</div>
+<div class="line"><a id="l00935" name="l00935"></a><span class="lineno">  935</span>        parentId,</div>
+<div class="line"><a id="l00936" name="l00936"></a><span class="lineno">  936</span>        <span class="keywordtype">id</span>,</div>
+<div class="line"><a id="l00937" name="l00937"></a><span class="lineno">  937</span>        browseName,</div>
+<div class="line"><a id="l00938" name="l00938"></a><span class="lineno">  938</span>        detail::wrapNodeAttributes(attributes),</div>
+<div class="line"><a id="l00939" name="l00939"></a><span class="lineno">  939</span>        {},</div>
+<div class="line"><a id="l00940" name="l00940"></a><span class="lineno">  940</span>        referenceType</div>
+<div class="line"><a id="l00941" name="l00941"></a><span class="lineno">  941</span>    );</div>
+<div class="line"><a id="l00942" name="l00942"></a><span class="lineno">  942</span>}</div>
 </div>
-<div class="line"><a id="l00934" name="l00934"></a><span class="lineno">  934</span><span class="comment"></span> </div>
-<div class="line"><a id="l00935" name="l00935"></a><span class="lineno">  935</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00936" name="l00936"></a><span class="lineno">  936</span><span class="comment"> * @copydoc addView</span></div>
-<div class="line"><a id="l00937" name="l00937"></a><span class="lineno">  937</span><span class="comment"> * @param token @completiontoken{void(Result&lt;NodeId&gt;&amp;)}</span></div>
-<div class="line"><a id="l00938" name="l00938"></a><span class="lineno">  938</span><span class="comment"> * @return @asyncresult{Result&lt;NodeId&gt;}</span></div>
-<div class="line"><a id="l00939" name="l00939"></a><span class="lineno">  939</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00940" name="l00940"></a><span class="lineno">  940</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CompletionToken&gt;</div>
-<div class="foldopen" id="foldopen00941" data-start="{" data-end="}">
-<div class="line"><a id="l00941" name="l00941"></a><span class="lineno"><a class="line" href="group__AddNodes.html#gaebb1e6a68e143bf1b6637ad5b07132cf">  941</a></span><span class="keyword">auto</span> <a class="code hl_function" href="group__AddNodes.html#gaebb1e6a68e143bf1b6637ad5b07132cf">addViewAsync</a>(</div>
-<div class="line"><a id="l00942" name="l00942"></a><span class="lineno">  942</span>    <a class="code hl_class" href="classopcua_1_1Client.html">Client</a>&amp; connection,</div>
-<div class="line"><a id="l00943" name="l00943"></a><span class="lineno">  943</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; parentId,</div>
-<div class="line"><a id="l00944" name="l00944"></a><span class="lineno">  944</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; <span class="keywordtype">id</span>,</div>
-<div class="line"><a id="l00945" name="l00945"></a><span class="lineno">  945</span>    std::string_view browseName,</div>
-<div class="line"><a id="l00946" name="l00946"></a><span class="lineno">  946</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1ua_1_1ViewAttributes.html">ViewAttributes</a>&amp; attributes,</div>
-<div class="line"><a id="l00947" name="l00947"></a><span class="lineno">  947</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; referenceType,</div>
-<div class="line"><a id="l00948" name="l00948"></a><span class="lineno">  948</span>    CompletionToken&amp;&amp; token</div>
-<div class="line"><a id="l00949" name="l00949"></a><span class="lineno">  949</span>) {</div>
-<div class="line"><a id="l00950" name="l00950"></a><span class="lineno">  950</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__AddNodes.html#ga76ac43749a6e2ec1a0d1c066b1392a1b">addNodeAsync</a>(</div>
-<div class="line"><a id="l00951" name="l00951"></a><span class="lineno">  951</span>        connection,</div>
-<div class="line"><a id="l00952" name="l00952"></a><span class="lineno">  952</span>        <a class="code hl_enumvalue" href="namespaceopcua.html#a15d78f717a24899cb2ca2af33f5c7c96a4351cfebe4b61d8aa5efa1d020710005">NodeClass::View</a>,</div>
-<div class="line"><a id="l00953" name="l00953"></a><span class="lineno">  953</span>        parentId,</div>
-<div class="line"><a id="l00954" name="l00954"></a><span class="lineno">  954</span>        <span class="keywordtype">id</span>,</div>
-<div class="line"><a id="l00955" name="l00955"></a><span class="lineno">  955</span>        browseName,</div>
-<div class="line"><a id="l00956" name="l00956"></a><span class="lineno">  956</span>        detail::wrapNodeAttributes(attributes),</div>
-<div class="line"><a id="l00957" name="l00957"></a><span class="lineno">  957</span>        {},</div>
-<div class="line"><a id="l00958" name="l00958"></a><span class="lineno">  958</span>        referenceType,</div>
-<div class="line"><a id="l00959" name="l00959"></a><span class="lineno">  959</span>        std::forward&lt;CompletionToken&gt;(token)</div>
-<div class="line"><a id="l00960" name="l00960"></a><span class="lineno">  960</span>    );</div>
-<div class="line"><a id="l00961" name="l00961"></a><span class="lineno">  961</span>}</div>
+<div class="line"><a id="l00943" name="l00943"></a><span class="lineno">  943</span><span class="comment"></span> </div>
+<div class="line"><a id="l00944" name="l00944"></a><span class="lineno">  944</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00945" name="l00945"></a><span class="lineno">  945</span><span class="comment"> * @copydoc addView</span></div>
+<div class="line"><a id="l00946" name="l00946"></a><span class="lineno">  946</span><span class="comment"> * @param token @completiontoken{void(Result&lt;NodeId&gt;&amp;)}</span></div>
+<div class="line"><a id="l00947" name="l00947"></a><span class="lineno">  947</span><span class="comment"> * @return @asyncresult{Result&lt;NodeId&gt;}</span></div>
+<div class="line"><a id="l00948" name="l00948"></a><span class="lineno">  948</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00949" name="l00949"></a><span class="lineno">  949</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CompletionToken&gt;</div>
+<div class="foldopen" id="foldopen00950" data-start="{" data-end="}">
+<div class="line"><a id="l00950" name="l00950"></a><span class="lineno"><a class="line" href="group__AddNodes.html#gaebb1e6a68e143bf1b6637ad5b07132cf">  950</a></span><span class="keyword">auto</span> <a class="code hl_function" href="group__AddNodes.html#gaebb1e6a68e143bf1b6637ad5b07132cf">addViewAsync</a>(</div>
+<div class="line"><a id="l00951" name="l00951"></a><span class="lineno">  951</span>    <a class="code hl_class" href="classopcua_1_1Client.html">Client</a>&amp; connection,</div>
+<div class="line"><a id="l00952" name="l00952"></a><span class="lineno">  952</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; parentId,</div>
+<div class="line"><a id="l00953" name="l00953"></a><span class="lineno">  953</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; <span class="keywordtype">id</span>,</div>
+<div class="line"><a id="l00954" name="l00954"></a><span class="lineno">  954</span>    std::string_view browseName,</div>
+<div class="line"><a id="l00955" name="l00955"></a><span class="lineno">  955</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1ua_1_1ViewAttributes.html">ViewAttributes</a>&amp; attributes,</div>
+<div class="line"><a id="l00956" name="l00956"></a><span class="lineno">  956</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; referenceType,</div>
+<div class="line"><a id="l00957" name="l00957"></a><span class="lineno">  957</span>    CompletionToken&amp;&amp; token</div>
+<div class="line"><a id="l00958" name="l00958"></a><span class="lineno">  958</span>) {</div>
+<div class="line"><a id="l00959" name="l00959"></a><span class="lineno">  959</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__AddNodes.html#ga76ac43749a6e2ec1a0d1c066b1392a1b">addNodeAsync</a>(</div>
+<div class="line"><a id="l00960" name="l00960"></a><span class="lineno">  960</span>        connection,</div>
+<div class="line"><a id="l00961" name="l00961"></a><span class="lineno">  961</span>        <a class="code hl_enumvalue" href="namespaceopcua.html#a15d78f717a24899cb2ca2af33f5c7c96a4351cfebe4b61d8aa5efa1d020710005">NodeClass::View</a>,</div>
+<div class="line"><a id="l00962" name="l00962"></a><span class="lineno">  962</span>        parentId,</div>
+<div class="line"><a id="l00963" name="l00963"></a><span class="lineno">  963</span>        <span class="keywordtype">id</span>,</div>
+<div class="line"><a id="l00964" name="l00964"></a><span class="lineno">  964</span>        browseName,</div>
+<div class="line"><a id="l00965" name="l00965"></a><span class="lineno">  965</span>        detail::wrapNodeAttributes(attributes),</div>
+<div class="line"><a id="l00966" name="l00966"></a><span class="lineno">  966</span>        {},</div>
+<div class="line"><a id="l00967" name="l00967"></a><span class="lineno">  967</span>        referenceType,</div>
+<div class="line"><a id="l00968" name="l00968"></a><span class="lineno">  968</span>        std::forward&lt;CompletionToken&gt;(token)</div>
+<div class="line"><a id="l00969" name="l00969"></a><span class="lineno">  969</span>    );</div>
+<div class="line"><a id="l00970" name="l00970"></a><span class="lineno">  970</span>}</div>
 </div>
-<div class="line"><a id="l00962" name="l00962"></a><span class="lineno">  962</span><span class="comment"></span> </div>
-<div class="line"><a id="l00963" name="l00963"></a><span class="lineno">  963</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00964" name="l00964"></a><span class="lineno">  964</span><span class="comment"> * @}</span></div>
-<div class="line"><a id="l00965" name="l00965"></a><span class="lineno">  965</span><span class="comment"> * @addtogroup AddReferences</span></div>
-<div class="line"><a id="l00966" name="l00966"></a><span class="lineno">  966</span><span class="comment"> * @{</span></div>
-<div class="line"><a id="l00967" name="l00967"></a><span class="lineno">  967</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00968" name="l00968"></a><span class="lineno">  968</span><span class="comment"></span> </div>
-<div class="line"><a id="l00969" name="l00969"></a><span class="lineno">  969</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00970" name="l00970"></a><span class="lineno">  970</span><span class="comment"> * Add modelling rule.</span></div>
-<div class="line"><a id="l00971" name="l00971"></a><span class="lineno">  971</span><span class="comment"> * @param connection Instance of type Client (or Server)</span></div>
-<div class="line"><a id="l00972" name="l00972"></a><span class="lineno">  972</span><span class="comment"> * @param id Node</span></div>
-<div class="line"><a id="l00973" name="l00973"></a><span class="lineno">  973</span><span class="comment"> * @param rule Modelling rule to add</span></div>
-<div class="line"><a id="l00974" name="l00974"></a><span class="lineno">  974</span><span class="comment"> * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/6.4.4</span></div>
-<div class="line"><a id="l00975" name="l00975"></a><span class="lineno">  975</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00976" name="l00976"></a><span class="lineno">  976</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00977" data-start="{" data-end="}">
-<div class="line"><a id="l00977" name="l00977"></a><span class="lineno"><a class="line" href="group__AddReferences.html#ga38410cb6b9cdd67e9ae939c7d7d7d7be">  977</a></span><a class="code hl_class" href="classopcua_1_1StatusCode.html">StatusCode</a> <a class="code hl_function" href="group__AddReferences.html#ga38410cb6b9cdd67e9ae939c7d7d7d7be">addModellingRule</a>(T&amp; connection, <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; <span class="keywordtype">id</span>, <a class="code hl_enumeration" href="namespaceopcua.html#ad32e0c353b427fd8b7788a85a78335aa">ModellingRule</a> rule) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00978" name="l00978"></a><span class="lineno">  978</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__AddReferences.html#gab7c9a52881bacf79309547619a05c9c8">addReference</a>(</div>
-<div class="line"><a id="l00979" name="l00979"></a><span class="lineno">  979</span>        connection, <span class="keywordtype">id</span>, {0, <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(rule)}, ReferenceTypeId::HasModellingRule, true</div>
-<div class="line"><a id="l00980" name="l00980"></a><span class="lineno">  980</span>    );</div>
-<div class="line"><a id="l00981" name="l00981"></a><span class="lineno">  981</span>}</div>
+<div class="line"><a id="l00971" name="l00971"></a><span class="lineno">  971</span><span class="comment"></span> </div>
+<div class="line"><a id="l00972" name="l00972"></a><span class="lineno">  972</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00973" name="l00973"></a><span class="lineno">  973</span><span class="comment"> * @}</span></div>
+<div class="line"><a id="l00974" name="l00974"></a><span class="lineno">  974</span><span class="comment"> * @addtogroup AddReferences</span></div>
+<div class="line"><a id="l00975" name="l00975"></a><span class="lineno">  975</span><span class="comment"> * @{</span></div>
+<div class="line"><a id="l00976" name="l00976"></a><span class="lineno">  976</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00977" name="l00977"></a><span class="lineno">  977</span><span class="comment"></span> </div>
+<div class="line"><a id="l00978" name="l00978"></a><span class="lineno">  978</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00979" name="l00979"></a><span class="lineno">  979</span><span class="comment"> * Add modelling rule.</span></div>
+<div class="line"><a id="l00980" name="l00980"></a><span class="lineno">  980</span><span class="comment"> * @param connection Instance of type Client (or Server)</span></div>
+<div class="line"><a id="l00981" name="l00981"></a><span class="lineno">  981</span><span class="comment"> * @param id Node</span></div>
+<div class="line"><a id="l00982" name="l00982"></a><span class="lineno">  982</span><span class="comment"> * @param rule Modelling rule to add</span></div>
+<div class="line"><a id="l00983" name="l00983"></a><span class="lineno">  983</span><span class="comment"> * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/6.4.4</span></div>
+<div class="line"><a id="l00984" name="l00984"></a><span class="lineno">  984</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00985" name="l00985"></a><span class="lineno">  985</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00986" data-start="{" data-end="}">
+<div class="line"><a id="l00986" name="l00986"></a><span class="lineno"><a class="line" href="group__AddReferences.html#ga38410cb6b9cdd67e9ae939c7d7d7d7be">  986</a></span><a class="code hl_class" href="classopcua_1_1StatusCode.html">StatusCode</a> <a class="code hl_function" href="group__AddReferences.html#ga38410cb6b9cdd67e9ae939c7d7d7d7be">addModellingRule</a>(T&amp; connection, <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; <span class="keywordtype">id</span>, <a class="code hl_enumeration" href="namespaceopcua.html#ad32e0c353b427fd8b7788a85a78335aa">ModellingRule</a> rule) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00987" name="l00987"></a><span class="lineno">  987</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__AddReferences.html#gab7c9a52881bacf79309547619a05c9c8">addReference</a>(</div>
+<div class="line"><a id="l00988" name="l00988"></a><span class="lineno">  988</span>        connection, <span class="keywordtype">id</span>, {0, <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(rule)}, ReferenceTypeId::HasModellingRule, true</div>
+<div class="line"><a id="l00989" name="l00989"></a><span class="lineno">  989</span>    );</div>
+<div class="line"><a id="l00990" name="l00990"></a><span class="lineno">  990</span>}</div>
 </div>
-<div class="line"><a id="l00982" name="l00982"></a><span class="lineno">  982</span><span class="comment"></span> </div>
-<div class="line"><a id="l00983" name="l00983"></a><span class="lineno">  983</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00984" name="l00984"></a><span class="lineno">  984</span><span class="comment"> * @copydoc addModellingRule</span></div>
-<div class="line"><a id="l00985" name="l00985"></a><span class="lineno">  985</span><span class="comment"> * @param token @completiontoken{void(StatusCode)}</span></div>
-<div class="line"><a id="l00986" name="l00986"></a><span class="lineno">  986</span><span class="comment"> * @return @asyncresult{StatusCode}</span></div>
-<div class="line"><a id="l00987" name="l00987"></a><span class="lineno">  987</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00988" name="l00988"></a><span class="lineno">  988</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CompletionToken&gt;</div>
-<div class="foldopen" id="foldopen00989" data-start="{" data-end="}">
-<div class="line"><a id="l00989" name="l00989"></a><span class="lineno"><a class="line" href="group__AddReferences.html#gaa2affc67eafa08e9c791684fdba4349e">  989</a></span><span class="keyword">auto</span> <a class="code hl_function" href="group__AddReferences.html#gaa2affc67eafa08e9c791684fdba4349e">addModellingRuleAsync</a>(</div>
-<div class="line"><a id="l00990" name="l00990"></a><span class="lineno">  990</span>    <a class="code hl_class" href="classopcua_1_1Client.html">Client</a>&amp; connection, <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; <span class="keywordtype">id</span>, <a class="code hl_enumeration" href="namespaceopcua.html#ad32e0c353b427fd8b7788a85a78335aa">ModellingRule</a> rule, CompletionToken&amp;&amp; token</div>
-<div class="line"><a id="l00991" name="l00991"></a><span class="lineno">  991</span>) {</div>
-<div class="line"><a id="l00992" name="l00992"></a><span class="lineno">  992</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__AddReferences.html#gaa4565654082c09f2953ca9411fe25bb7">addReferenceAsync</a>(</div>
-<div class="line"><a id="l00993" name="l00993"></a><span class="lineno">  993</span>        connection,</div>
-<div class="line"><a id="l00994" name="l00994"></a><span class="lineno">  994</span>        <span class="keywordtype">id</span>,</div>
-<div class="line"><a id="l00995" name="l00995"></a><span class="lineno">  995</span>        {0, <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(rule)},</div>
-<div class="line"><a id="l00996" name="l00996"></a><span class="lineno">  996</span>        ReferenceTypeId::HasModellingRule,</div>
-<div class="line"><a id="l00997" name="l00997"></a><span class="lineno">  997</span>        <span class="keyword">true</span>,</div>
-<div class="line"><a id="l00998" name="l00998"></a><span class="lineno">  998</span>        std::forward&lt;CompletionToken&gt;(token)</div>
-<div class="line"><a id="l00999" name="l00999"></a><span class="lineno">  999</span>    );</div>
-<div class="line"><a id="l01000" name="l01000"></a><span class="lineno"> 1000</span>}</div>
+<div class="line"><a id="l00991" name="l00991"></a><span class="lineno">  991</span><span class="comment"></span> </div>
+<div class="line"><a id="l00992" name="l00992"></a><span class="lineno">  992</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00993" name="l00993"></a><span class="lineno">  993</span><span class="comment"> * @copydoc addModellingRule</span></div>
+<div class="line"><a id="l00994" name="l00994"></a><span class="lineno">  994</span><span class="comment"> * @param token @completiontoken{void(StatusCode)}</span></div>
+<div class="line"><a id="l00995" name="l00995"></a><span class="lineno">  995</span><span class="comment"> * @return @asyncresult{StatusCode}</span></div>
+<div class="line"><a id="l00996" name="l00996"></a><span class="lineno">  996</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00997" name="l00997"></a><span class="lineno">  997</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> CompletionToken&gt;</div>
+<div class="foldopen" id="foldopen00998" data-start="{" data-end="}">
+<div class="line"><a id="l00998" name="l00998"></a><span class="lineno"><a class="line" href="group__AddReferences.html#gaa2affc67eafa08e9c791684fdba4349e">  998</a></span><span class="keyword">auto</span> <a class="code hl_function" href="group__AddReferences.html#gaa2affc67eafa08e9c791684fdba4349e">addModellingRuleAsync</a>(</div>
+<div class="line"><a id="l00999" name="l00999"></a><span class="lineno">  999</span>    <a class="code hl_class" href="classopcua_1_1Client.html">Client</a>&amp; connection, <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1NodeId.html">NodeId</a>&amp; <span class="keywordtype">id</span>, <a class="code hl_enumeration" href="namespaceopcua.html#ad32e0c353b427fd8b7788a85a78335aa">ModellingRule</a> rule, CompletionToken&amp;&amp; token</div>
+<div class="line"><a id="l01000" name="l01000"></a><span class="lineno"> 1000</span>) {</div>
+<div class="line"><a id="l01001" name="l01001"></a><span class="lineno"> 1001</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__AddReferences.html#gaa4565654082c09f2953ca9411fe25bb7">addReferenceAsync</a>(</div>
+<div class="line"><a id="l01002" name="l01002"></a><span class="lineno"> 1002</span>        connection,</div>
+<div class="line"><a id="l01003" name="l01003"></a><span class="lineno"> 1003</span>        <span class="keywordtype">id</span>,</div>
+<div class="line"><a id="l01004" name="l01004"></a><span class="lineno"> 1004</span>        {0, <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(rule)},</div>
+<div class="line"><a id="l01005" name="l01005"></a><span class="lineno"> 1005</span>        ReferenceTypeId::HasModellingRule,</div>
+<div class="line"><a id="l01006" name="l01006"></a><span class="lineno"> 1006</span>        <span class="keyword">true</span>,</div>
+<div class="line"><a id="l01007" name="l01007"></a><span class="lineno"> 1007</span>        std::forward&lt;CompletionToken&gt;(token)</div>
+<div class="line"><a id="l01008" name="l01008"></a><span class="lineno"> 1008</span>    );</div>
+<div class="line"><a id="l01009" name="l01009"></a><span class="lineno"> 1009</span>}</div>
 </div>
-<div class="line"><a id="l01001" name="l01001"></a><span class="lineno"> 1001</span><span class="comment"></span> </div>
-<div class="line"><a id="l01002" name="l01002"></a><span class="lineno"> 1002</span><span class="comment">/**</span></div>
-<div class="line"><a id="l01003" name="l01003"></a><span class="lineno"> 1003</span><span class="comment"> * @}</span></div>
-<div class="line"><a id="l01004" name="l01004"></a><span class="lineno"> 1004</span><span class="comment"> * @}</span></div>
-<div class="line"><a id="l01005" name="l01005"></a><span class="lineno"> 1005</span><span class="comment"> */</span></div>
-<div class="line"><a id="l01006" name="l01006"></a><span class="lineno"> 1006</span> </div>
-<div class="line"><a id="l01007" name="l01007"></a><span class="lineno"> 1007</span>}  <span class="comment">// namespace opcua::services</span></div>
+<div class="line"><a id="l01010" name="l01010"></a><span class="lineno"> 1010</span><span class="comment"></span> </div>
+<div class="line"><a id="l01011" name="l01011"></a><span class="lineno"> 1011</span><span class="comment">/**</span></div>
+<div class="line"><a id="l01012" name="l01012"></a><span class="lineno"> 1012</span><span class="comment"> * @}</span></div>
+<div class="line"><a id="l01013" name="l01013"></a><span class="lineno"> 1013</span><span class="comment"> * @}</span></div>
+<div class="line"><a id="l01014" name="l01014"></a><span class="lineno"> 1014</span><span class="comment"> */</span></div>
+<div class="line"><a id="l01015" name="l01015"></a><span class="lineno"> 1015</span> </div>
+<div class="line"><a id="l01016" name="l01016"></a><span class="lineno"> 1016</span>}  <span class="comment">// namespace opcua::services</span></div>
 <div class="ttc" id="aasync_8hpp_html"><div class="ttname"><a href="async_8hpp.html">async.hpp</a></div></div>
 <div class="ttc" id="aasync__transform_8hpp_html"><div class="ttname"><a href="async__transform_8hpp.html">async_transform.hpp</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Client_html"><div class="ttname"><a href="classopcua_1_1Client.html">opcua::Client</a></div><div class="ttdoc">High-level client class.</div><div class="ttdef"><b>Definition</b> <a href="client_8hpp_source.html#l00130">client.hpp:130</a></div></div>
@@ -1187,35 +1196,36 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclient__service_8hpp_html"><div class="ttname"><a href="client__service_8hpp.html">client_service.hpp</a></div></div>
 <div class="ttc" id="acommon_8h_html"><div class="ttname"><a href="common_8h.html">common.h</a></div></div>
 <div class="ttc" id="acommon_8hpp_html"><div class="ttname"><a href="common_8hpp.html">common.hpp</a></div></div>
+<div class="ttc" id="agroup__AddNodes_html_ga010784d376206860048f4d7ae962df85"><div class="ttname"><a href="group__AddNodes.html#ga010784d376206860048f4d7ae962df85">opcua::services::setMethodCallback</a></div><div class="ttdeci">StatusCode setMethodCallback(T &amp;connection, const NodeId &amp;id, MethodCallback callback) noexcept</div><div class="ttdoc">Set method callback after creation.</div></div>
 <div class="ttc" id="agroup__AddNodes_html_ga0a1780203d6cac64ccb1ab21d4d0c0ed"><div class="ttname"><a href="group__AddNodes.html#ga0a1780203d6cac64ccb1ab21d4d0c0ed">opcua::services::addNode</a></div><div class="ttdeci">Result&lt; NodeId &gt; addNode(T &amp;connection, NodeClass nodeClass, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, const ExtensionObject &amp;nodeAttributes, const NodeId &amp;typeDefinition, const NodeId &amp;referenceType) noexcept</div><div class="ttdoc">Add a node.</div></div>
-<div class="ttc" id="agroup__AddNodes_html_ga0be223c925047ea5087481202369b649"><div class="ttname"><a href="group__AddNodes.html#ga0be223c925047ea5087481202369b649">opcua::services::addObjectTypeAsync</a></div><div class="ttdeci">auto addObjectTypeAsync(Client &amp;connection, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, const ObjectTypeAttributes &amp;attributes, const NodeId &amp;referenceType, CompletionToken &amp;&amp;token)</div><div class="ttdoc">Add object type.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00702">nodemanagement.hpp:702</a></div></div>
+<div class="ttc" id="agroup__AddNodes_html_ga0be223c925047ea5087481202369b649"><div class="ttname"><a href="group__AddNodes.html#ga0be223c925047ea5087481202369b649">opcua::services::addObjectTypeAsync</a></div><div class="ttdeci">auto addObjectTypeAsync(Client &amp;connection, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, const ObjectTypeAttributes &amp;attributes, const NodeId &amp;referenceType, CompletionToken &amp;&amp;token)</div><div class="ttdoc">Add object type.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00711">nodemanagement.hpp:711</a></div></div>
 <div class="ttc" id="agroup__AddNodes_html_ga11c606bc88583229e562d94b5822d05a"><div class="ttname"><a href="group__AddNodes.html#ga11c606bc88583229e562d94b5822d05a">opcua::services::addPropertyAsync</a></div><div class="ttdeci">auto addPropertyAsync(Client &amp;connection, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, const VariableAttributes &amp;attributes, CompletionToken &amp;&amp;token)</div><div class="ttdoc">Add property.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00549">nodemanagement.hpp:549</a></div></div>
 <div class="ttc" id="agroup__AddNodes_html_ga1209377c80ebe7fd6e79146a7ecd8866"><div class="ttname"><a href="group__AddNodes.html#ga1209377c80ebe7fd6e79146a7ecd8866">opcua::services::addObject</a></div><div class="ttdeci">Result&lt; NodeId &gt; addObject(T &amp;connection, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, const ObjectAttributes &amp;attributes, const NodeId &amp;objectType, const NodeId &amp;referenceType) noexcept</div><div class="ttdoc">Add object.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00353">nodemanagement.hpp:353</a></div></div>
 <div class="ttc" id="agroup__AddNodes_html_ga2a74289fb75d9f667eb29a43322bc038"><div class="ttname"><a href="group__AddNodes.html#ga2a74289fb75d9f667eb29a43322bc038">opcua::services::addMethodAsync</a></div><div class="ttdeci">auto addMethodAsync(Client &amp;connection, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, MethodCallback callback, Span&lt; const Argument &gt; inputArguments, Span&lt; const Argument &gt; outputArguments, const MethodAttributes &amp;attributes, const NodeId &amp;referenceType, CompletionToken &amp;&amp;token)</div><div class="ttdoc">Add method.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00639">nodemanagement.hpp:639</a></div></div>
 <div class="ttc" id="agroup__AddNodes_html_ga2c4f77963cea649c5ed497c73ee24529"><div class="ttname"><a href="group__AddNodes.html#ga2c4f77963cea649c5ed497c73ee24529">opcua::services::MethodCallback</a></div><div class="ttdeci">std::variant&lt; std::function&lt; void(Span&lt; const Variant &gt; input, Span&lt; Variant &gt; output)&gt;, std::function&lt; StatusCode(Session &amp;session, Span&lt; const Variant &gt; input, Span&lt; Variant &gt; output, const NodeId &amp;methodId, const NodeId &amp;objectId)&gt; &gt; MethodCallback</div><div class="ttdoc">Method callback.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00596">nodemanagement.hpp:604</a></div></div>
-<div class="ttc" id="agroup__AddNodes_html_ga3477aabfcd69d2c2578578159fc41315"><div class="ttname"><a href="group__AddNodes.html#ga3477aabfcd69d2c2578578159fc41315">opcua::services::addObjectType</a></div><div class="ttdeci">Result&lt; NodeId &gt; addObjectType(T &amp;connection, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, const ObjectTypeAttributes &amp;attributes, const NodeId &amp;referenceType) noexcept</div><div class="ttdoc">Add object type.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00676">nodemanagement.hpp:676</a></div></div>
+<div class="ttc" id="agroup__AddNodes_html_ga3477aabfcd69d2c2578578159fc41315"><div class="ttname"><a href="group__AddNodes.html#ga3477aabfcd69d2c2578578159fc41315">opcua::services::addObjectType</a></div><div class="ttdeci">Result&lt; NodeId &gt; addObjectType(T &amp;connection, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, const ObjectTypeAttributes &amp;attributes, const NodeId &amp;referenceType) noexcept</div><div class="ttdoc">Add object type.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00685">nodemanagement.hpp:685</a></div></div>
 <div class="ttc" id="agroup__AddNodes_html_ga3f9d0de3b9e7552a6585078b00ca0586"><div class="ttname"><a href="group__AddNodes.html#ga3f9d0de3b9e7552a6585078b00ca0586">opcua::services::addMethod</a></div><div class="ttdeci">Result&lt; NodeId &gt; addMethod(T &amp;connection, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, MethodCallback callback, Span&lt; const Argument &gt; inputArguments, Span&lt; const Argument &gt; outputArguments, const MethodAttributes &amp;attributes, const NodeId &amp;referenceType) noexcept</div><div class="ttdoc">Add method.</div></div>
 <div class="ttc" id="agroup__AddNodes_html_ga401bfe2131943c409a4381929c0bdee2"><div class="ttname"><a href="group__AddNodes.html#ga401bfe2131943c409a4381929c0bdee2">opcua::services::addNodesAsync</a></div><div class="ttdeci">auto addNodesAsync(Client &amp;connection, const AddNodesRequest &amp;request, CompletionToken &amp;&amp;token)</div><div class="ttdoc">Add one or more nodes (client only).</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00059">nodemanagement.hpp:59</a></div></div>
 <div class="ttc" id="agroup__AddNodes_html_ga45f0d4196f94981b4e986d3a38e98525"><div class="ttname"><a href="group__AddNodes.html#ga45f0d4196f94981b4e986d3a38e98525">opcua::services::addFolderAsync</a></div><div class="ttdeci">auto addFolderAsync(Client &amp;connection, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, const ObjectAttributes &amp;attributes, const NodeId &amp;referenceType, CompletionToken &amp;&amp;token)</div><div class="ttdoc">Add folder.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00433">nodemanagement.hpp:433</a></div></div>
 <div class="ttc" id="agroup__AddNodes_html_ga55b7b3cb0a3064fb4017663acc5c8406"><div class="ttname"><a href="group__AddNodes.html#ga55b7b3cb0a3064fb4017663acc5c8406">opcua::services::addFolder</a></div><div class="ttdeci">Result&lt; NodeId &gt; addFolder(T &amp;connection, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, const ObjectAttributes &amp;attributes, const NodeId &amp;referenceType) noexcept</div><div class="ttdoc">Add folder.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00414">nodemanagement.hpp:414</a></div></div>
-<div class="ttc" id="agroup__AddNodes_html_ga566f4d11f933995f00d845bd3a50a99b"><div class="ttname"><a href="group__AddNodes.html#ga566f4d11f933995f00d845bd3a50a99b">opcua::services::addDataType</a></div><div class="ttdeci">Result&lt; NodeId &gt; addDataType(T &amp;connection, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, const DataTypeAttributes &amp;attributes, const NodeId &amp;referenceType) noexcept</div><div class="ttdoc">Add data type.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00856">nodemanagement.hpp:856</a></div></div>
+<div class="ttc" id="agroup__AddNodes_html_ga566f4d11f933995f00d845bd3a50a99b"><div class="ttname"><a href="group__AddNodes.html#ga566f4d11f933995f00d845bd3a50a99b">opcua::services::addDataType</a></div><div class="ttdeci">Result&lt; NodeId &gt; addDataType(T &amp;connection, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, const DataTypeAttributes &amp;attributes, const NodeId &amp;referenceType) noexcept</div><div class="ttdoc">Add data type.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00865">nodemanagement.hpp:865</a></div></div>
 <div class="ttc" id="agroup__AddNodes_html_ga76ac43749a6e2ec1a0d1c066b1392a1b"><div class="ttname"><a href="group__AddNodes.html#ga76ac43749a6e2ec1a0d1c066b1392a1b">opcua::services::addNodeAsync</a></div><div class="ttdeci">auto addNodeAsync(Client &amp;connection, NodeClass nodeClass, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, const ExtensionObject &amp;nodeAttributes, const NodeId &amp;typeDefinition, const NodeId &amp;referenceType, CompletionToken &amp;&amp;token)</div><div class="ttdoc">Add a node.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00094">nodemanagement.hpp:94</a></div></div>
-<div class="ttc" id="agroup__AddNodes_html_ga7fb51aee9b95602f14626ceefaf3f457"><div class="ttname"><a href="group__AddNodes.html#ga7fb51aee9b95602f14626ceefaf3f457">opcua::services::addReferenceTypeAsync</a></div><div class="ttdeci">auto addReferenceTypeAsync(Client &amp;connection, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, const ReferenceTypeAttributes &amp;attributes, const NodeId &amp;referenceType, CompletionToken &amp;&amp;token)</div><div class="ttdoc">Add reference type.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00823">nodemanagement.hpp:823</a></div></div>
-<div class="ttc" id="agroup__AddNodes_html_ga8bd16c0a0a21dd9e1e93f58231926f5d"><div class="ttname"><a href="group__AddNodes.html#ga8bd16c0a0a21dd9e1e93f58231926f5d">opcua::services::addDataTypeAsync</a></div><div class="ttdeci">auto addDataTypeAsync(Client &amp;connection, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, const DataTypeAttributes &amp;attributes, const NodeId &amp;referenceType, CompletionToken &amp;&amp;token)</div><div class="ttdoc">Add data type.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00882">nodemanagement.hpp:882</a></div></div>
-<div class="ttc" id="agroup__AddNodes_html_ga8beac0957fee1fff150687b2a16fab91"><div class="ttname"><a href="group__AddNodes.html#ga8beac0957fee1fff150687b2a16fab91">opcua::services::addVariableTypeAsync</a></div><div class="ttdeci">auto addVariableTypeAsync(Client &amp;connection, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, const VariableTypeAttributes &amp;attributes, const NodeId &amp;variableType, const NodeId &amp;referenceType, CompletionToken &amp;&amp;token)</div><div class="ttdoc">Add variable type.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00763">nodemanagement.hpp:763</a></div></div>
-<div class="ttc" id="agroup__AddNodes_html_ga926fee637e6da5f5b22a92dc1133dd83"><div class="ttname"><a href="group__AddNodes.html#ga926fee637e6da5f5b22a92dc1133dd83">opcua::services::addVariableType</a></div><div class="ttdeci">Result&lt; NodeId &gt; addVariableType(T &amp;connection, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, const VariableTypeAttributes &amp;attributes, const NodeId &amp;variableType, const NodeId &amp;referenceType) noexcept</div><div class="ttdoc">Add variable type.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00736">nodemanagement.hpp:736</a></div></div>
+<div class="ttc" id="agroup__AddNodes_html_ga7fb51aee9b95602f14626ceefaf3f457"><div class="ttname"><a href="group__AddNodes.html#ga7fb51aee9b95602f14626ceefaf3f457">opcua::services::addReferenceTypeAsync</a></div><div class="ttdeci">auto addReferenceTypeAsync(Client &amp;connection, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, const ReferenceTypeAttributes &amp;attributes, const NodeId &amp;referenceType, CompletionToken &amp;&amp;token)</div><div class="ttdoc">Add reference type.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00832">nodemanagement.hpp:832</a></div></div>
+<div class="ttc" id="agroup__AddNodes_html_ga8bd16c0a0a21dd9e1e93f58231926f5d"><div class="ttname"><a href="group__AddNodes.html#ga8bd16c0a0a21dd9e1e93f58231926f5d">opcua::services::addDataTypeAsync</a></div><div class="ttdeci">auto addDataTypeAsync(Client &amp;connection, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, const DataTypeAttributes &amp;attributes, const NodeId &amp;referenceType, CompletionToken &amp;&amp;token)</div><div class="ttdoc">Add data type.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00891">nodemanagement.hpp:891</a></div></div>
+<div class="ttc" id="agroup__AddNodes_html_ga8beac0957fee1fff150687b2a16fab91"><div class="ttname"><a href="group__AddNodes.html#ga8beac0957fee1fff150687b2a16fab91">opcua::services::addVariableTypeAsync</a></div><div class="ttdeci">auto addVariableTypeAsync(Client &amp;connection, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, const VariableTypeAttributes &amp;attributes, const NodeId &amp;variableType, const NodeId &amp;referenceType, CompletionToken &amp;&amp;token)</div><div class="ttdoc">Add variable type.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00772">nodemanagement.hpp:772</a></div></div>
+<div class="ttc" id="agroup__AddNodes_html_ga926fee637e6da5f5b22a92dc1133dd83"><div class="ttname"><a href="group__AddNodes.html#ga926fee637e6da5f5b22a92dc1133dd83">opcua::services::addVariableType</a></div><div class="ttdeci">Result&lt; NodeId &gt; addVariableType(T &amp;connection, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, const VariableTypeAttributes &amp;attributes, const NodeId &amp;variableType, const NodeId &amp;referenceType) noexcept</div><div class="ttdoc">Add variable type.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00745">nodemanagement.hpp:745</a></div></div>
 <div class="ttc" id="agroup__AddNodes_html_ga953b7dec83d39cdb33b601d97a9c8922"><div class="ttname"><a href="group__AddNodes.html#ga953b7dec83d39cdb33b601d97a9c8922">opcua::services::addVariableAsync</a></div><div class="ttdeci">auto addVariableAsync(Client &amp;connection, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, const VariableAttributes &amp;attributes, const NodeId &amp;variableType, const NodeId &amp;referenceType, CompletionToken &amp;&amp;token)</div><div class="ttdoc">Add variable.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00493">nodemanagement.hpp:493</a></div></div>
-<div class="ttc" id="agroup__AddNodes_html_ga9aa3bf2d77f1c17faab60a7f074b9a3f"><div class="ttname"><a href="group__AddNodes.html#ga9aa3bf2d77f1c17faab60a7f074b9a3f">opcua::services::addReferenceType</a></div><div class="ttdeci">Result&lt; NodeId &gt; addReferenceType(T &amp;connection, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, const ReferenceTypeAttributes &amp;attributes, const NodeId &amp;referenceType) noexcept</div><div class="ttdoc">Add reference type.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00797">nodemanagement.hpp:797</a></div></div>
+<div class="ttc" id="agroup__AddNodes_html_ga9aa3bf2d77f1c17faab60a7f074b9a3f"><div class="ttname"><a href="group__AddNodes.html#ga9aa3bf2d77f1c17faab60a7f074b9a3f">opcua::services::addReferenceType</a></div><div class="ttdeci">Result&lt; NodeId &gt; addReferenceType(T &amp;connection, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, const ReferenceTypeAttributes &amp;attributes, const NodeId &amp;referenceType) noexcept</div><div class="ttdoc">Add reference type.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00806">nodemanagement.hpp:806</a></div></div>
 <div class="ttc" id="agroup__AddNodes_html_gabde92e8ddf3e551650b3efac6c16eaac"><div class="ttname"><a href="group__AddNodes.html#gabde92e8ddf3e551650b3efac6c16eaac">opcua::services::addProperty</a></div><div class="ttdeci">Result&lt; NodeId &gt; addProperty(T &amp;connection, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, const VariableAttributes &amp;attributes) noexcept</div><div class="ttdoc">Add property.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00525">nodemanagement.hpp:525</a></div></div>
-<div class="ttc" id="agroup__AddNodes_html_gacbc0ca962a6cc08867d105bab24946d8"><div class="ttname"><a href="group__AddNodes.html#gacbc0ca962a6cc08867d105bab24946d8">opcua::services::addView</a></div><div class="ttdeci">Result&lt; NodeId &gt; addView(T &amp;connection, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, const ViewAttributes &amp;attributes, const NodeId &amp;referenceType) noexcept</div><div class="ttdoc">Add view.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00915">nodemanagement.hpp:915</a></div></div>
+<div class="ttc" id="agroup__AddNodes_html_gacbc0ca962a6cc08867d105bab24946d8"><div class="ttname"><a href="group__AddNodes.html#gacbc0ca962a6cc08867d105bab24946d8">opcua::services::addView</a></div><div class="ttdeci">Result&lt; NodeId &gt; addView(T &amp;connection, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, const ViewAttributes &amp;attributes, const NodeId &amp;referenceType) noexcept</div><div class="ttdoc">Add view.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00924">nodemanagement.hpp:924</a></div></div>
 <div class="ttc" id="agroup__AddNodes_html_gacf95c91c699ec111eb35330d183f9733"><div class="ttname"><a href="group__AddNodes.html#gacf95c91c699ec111eb35330d183f9733">opcua::services::addNodes</a></div><div class="ttdeci">AddNodesResponse addNodes(Client &amp;connection, const AddNodesRequest &amp;request) noexcept</div><div class="ttdoc">Add one or more nodes (client only).</div></div>
 <div class="ttc" id="agroup__AddNodes_html_gae90497729d00138270edf387896fb778"><div class="ttname"><a href="group__AddNodes.html#gae90497729d00138270edf387896fb778">opcua::services::addObjectAsync</a></div><div class="ttdeci">auto addObjectAsync(Client &amp;connection, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, const ObjectAttributes &amp;attributes, const NodeId &amp;objectType, const NodeId &amp;referenceType, CompletionToken &amp;&amp;token)</div><div class="ttdoc">Add object.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00380">nodemanagement.hpp:380</a></div></div>
-<div class="ttc" id="agroup__AddNodes_html_gaebb1e6a68e143bf1b6637ad5b07132cf"><div class="ttname"><a href="group__AddNodes.html#gaebb1e6a68e143bf1b6637ad5b07132cf">opcua::services::addViewAsync</a></div><div class="ttdeci">auto addViewAsync(Client &amp;connection, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, const ViewAttributes &amp;attributes, const NodeId &amp;referenceType, CompletionToken &amp;&amp;token)</div><div class="ttdoc">Add view.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00941">nodemanagement.hpp:941</a></div></div>
+<div class="ttc" id="agroup__AddNodes_html_gaebb1e6a68e143bf1b6637ad5b07132cf"><div class="ttname"><a href="group__AddNodes.html#gaebb1e6a68e143bf1b6637ad5b07132cf">opcua::services::addViewAsync</a></div><div class="ttdeci">auto addViewAsync(Client &amp;connection, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, const ViewAttributes &amp;attributes, const NodeId &amp;referenceType, CompletionToken &amp;&amp;token)</div><div class="ttdoc">Add view.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00950">nodemanagement.hpp:950</a></div></div>
 <div class="ttc" id="agroup__AddNodes_html_gaf05796ed843af51a39e408741fed2d91"><div class="ttname"><a href="group__AddNodes.html#gaf05796ed843af51a39e408741fed2d91">opcua::services::addVariable</a></div><div class="ttdeci">Result&lt; NodeId &gt; addVariable(T &amp;connection, const NodeId &amp;parentId, const NodeId &amp;id, std::string_view browseName, const VariableAttributes &amp;attributes, const NodeId &amp;variableType, const NodeId &amp;referenceType) noexcept</div><div class="ttdoc">Add variable.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00466">nodemanagement.hpp:466</a></div></div>
-<div class="ttc" id="agroup__AddReferences_html_ga38410cb6b9cdd67e9ae939c7d7d7d7be"><div class="ttname"><a href="group__AddReferences.html#ga38410cb6b9cdd67e9ae939c7d7d7d7be">opcua::services::addModellingRule</a></div><div class="ttdeci">StatusCode addModellingRule(T &amp;connection, const NodeId &amp;id, ModellingRule rule) noexcept</div><div class="ttdoc">Add modelling rule.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00977">nodemanagement.hpp:977</a></div></div>
+<div class="ttc" id="agroup__AddReferences_html_ga38410cb6b9cdd67e9ae939c7d7d7d7be"><div class="ttname"><a href="group__AddReferences.html#ga38410cb6b9cdd67e9ae939c7d7d7d7be">opcua::services::addModellingRule</a></div><div class="ttdeci">StatusCode addModellingRule(T &amp;connection, const NodeId &amp;id, ModellingRule rule) noexcept</div><div class="ttdoc">Add modelling rule.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00986">nodemanagement.hpp:986</a></div></div>
 <div class="ttc" id="agroup__AddReferences_html_ga5230e1eb9d14599cd5d50fa3a60ce2be"><div class="ttname"><a href="group__AddReferences.html#ga5230e1eb9d14599cd5d50fa3a60ce2be">opcua::services::addReferences</a></div><div class="ttdeci">AddReferencesResponse addReferences(Client &amp;connection, const AddReferencesRequest &amp;request) noexcept</div><div class="ttdoc">Add one or more references (client only).</div></div>
 <div class="ttc" id="agroup__AddReferences_html_ga6654e92853618a762f471eda78aa6e68"><div class="ttname"><a href="group__AddReferences.html#ga6654e92853618a762f471eda78aa6e68">opcua::services::addReferencesAsync</a></div><div class="ttdeci">auto addReferencesAsync(Client &amp;connection, const AddReferencesRequest &amp;request, CompletionToken &amp;&amp;token)</div><div class="ttdoc">Add one or more references (client only).</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00144">nodemanagement.hpp:144</a></div></div>
-<div class="ttc" id="agroup__AddReferences_html_gaa2affc67eafa08e9c791684fdba4349e"><div class="ttname"><a href="group__AddReferences.html#gaa2affc67eafa08e9c791684fdba4349e">opcua::services::addModellingRuleAsync</a></div><div class="ttdeci">auto addModellingRuleAsync(Client &amp;connection, const NodeId &amp;id, ModellingRule rule, CompletionToken &amp;&amp;token)</div><div class="ttdoc">Add modelling rule.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00989">nodemanagement.hpp:989</a></div></div>
+<div class="ttc" id="agroup__AddReferences_html_gaa2affc67eafa08e9c791684fdba4349e"><div class="ttname"><a href="group__AddReferences.html#gaa2affc67eafa08e9c791684fdba4349e">opcua::services::addModellingRuleAsync</a></div><div class="ttdeci">auto addModellingRuleAsync(Client &amp;connection, const NodeId &amp;id, ModellingRule rule, CompletionToken &amp;&amp;token)</div><div class="ttdoc">Add modelling rule.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00998">nodemanagement.hpp:998</a></div></div>
 <div class="ttc" id="agroup__AddReferences_html_gaa4565654082c09f2953ca9411fe25bb7"><div class="ttname"><a href="group__AddReferences.html#gaa4565654082c09f2953ca9411fe25bb7">opcua::services::addReferenceAsync</a></div><div class="ttdeci">auto addReferenceAsync(Client &amp;connection, const NodeId &amp;sourceId, const NodeId &amp;targetId, const NodeId &amp;referenceType, bool forward, CompletionToken &amp;&amp;token)</div><div class="ttdoc">Add reference.</div><div class="ttdef"><b>Definition</b> <a href="nodemanagement_8hpp_source.html#l00175">nodemanagement.hpp:175</a></div></div>
 <div class="ttc" id="agroup__AddReferences_html_gab7c9a52881bacf79309547619a05c9c8"><div class="ttname"><a href="group__AddReferences.html#gab7c9a52881bacf79309547619a05c9c8">opcua::services::addReference</a></div><div class="ttdeci">StatusCode addReference(T &amp;connection, const NodeId &amp;sourceId, const NodeId &amp;targetId, const NodeId &amp;referenceType, bool forward) noexcept</div><div class="ttdoc">Add reference.</div></div>
 <div class="ttc" id="agroup__DeleteNodes_html_ga9fe5450f60b7b763a6e5da72bb5c8414"><div class="ttname"><a href="group__DeleteNodes.html#ga9fe5450f60b7b763a6e5da72bb5c8414">opcua::services::deleteNodes</a></div><div class="ttdeci">DeleteNodesResponse deleteNodes(Client &amp;connection, const DeleteNodesRequest &amp;request) noexcept</div><div class="ttdoc">Delete one or more nodes (client only).</div></div>

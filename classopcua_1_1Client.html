@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.20.0</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.21.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -104,7 +104,7 @@ $(function() {
 <li>Create a <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> with a <a class="el" href="classopcua_1_1ClientConfig.html" title="Client configuration.">ClientConfig</a> (move ownership to the <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> instance)</li>
 </ol>
 <p>Once a client is connected to an <code>endpointUrl</code>, it is not possible to switch to another server. A new client has to be created for that.</p>
-<p>Use the <a class="el" href="classopcua_1_1Client.html#a20b757a4e2e59e3f383164f22c4596f5">handle()</a> method to get access the underlying <a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> instance and use the full power of open62541.</p>
+<p>Use the <a class="el" href="classopcua_1_1Client.html#a20b757a4e2e59e3f383164f22c4596f5">handle()</a> method to get access the underlying UA_Server instance and use the full power of open62541.</p>
 <p>Don't overwrite the <a class="elRef" target="_blank" href="open62541/structUA__ClientConfig.html#addb67884870bd909a5bb0a2577a046f1">UA_ClientConfig::clientContext</a> pointer! The context pointer is used to store a pointer to the <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> instance (for <a class="el" href="classopcua_1_1Client.html#a7fa8a2b5bc962d6dcc68a76f6f9c0070" title="Convert native UA_Client pointer to its wrapper instance.">asWrapper(UA_Client*)</a>) and to get access to the underlying client context. </p>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_async_8cpp-example.html#_a0">client_async.cpp</a>, <a class="el" href="client_browse_8cpp-example.html#_a9">client_browse.cpp</a>, <a class="el" href="client_connect_8cpp-example.html#_a0">client_connect.cpp</a>, <a class="el" href="client_find_servers_8cpp-example.html#_a0">client_find_servers.cpp</a>, <a class="el" href="client_minimal_8cpp-example.html#_a0">client_minimal.cpp</a>, <a class="el" href="client_subscription_8cpp-example.html#_a0">client_subscription.cpp</a>, <a class="el" href="custom_datatypes_2client_custom_datatypes_8cpp-example.html#_a0">custom_datatypes/client_custom_datatypes.cpp</a>, <a class="el" href="events_2client_eventfilter_8cpp-example.html#_a0">events/client_eventfilter.cpp</a>, <a class="el" href="method_2client_method_8cpp-example.html#_a0">method/client_method.cpp</a>, and <a class="el" href="method_2client_method_async_8cpp-example.html#_a0">method/client_method_async.cpp</a>.</dd>
 </dl>
@@ -117,7 +117,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a7fae9429a17e213b112fcfce046f2748"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57b8aa2012bd8975894f053eb03c9774" id="r_a57b8aa2012bd8975894f053eb03c9774"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a57b8aa2012bd8975894f053eb03c9774">Client</a> (<a class="el" href="classopcua_1_1ClientConfig.html">ClientConfig</a> &amp;&amp;<a class="el" href="classopcua_1_1Client.html#a877a6d6e546a11560eff3f4442520e3f">config</a>)</td></tr>
 <tr class="separator:a57b8aa2012bd8975894f053eb03c9774"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5354a57346a1410acdd6690c73e28dd8" id="r_a5354a57346a1410acdd6690c73e28dd8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a5354a57346a1410acdd6690c73e28dd8">Client</a> (<a class="elRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a> *native)</td></tr>
+<tr class="memitem:a5354a57346a1410acdd6690c73e28dd8" id="r_a5354a57346a1410acdd6690c73e28dd8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a5354a57346a1410acdd6690c73e28dd8">Client</a> (<a class="elRef" target="_blank" href="open62541/common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *native)</td></tr>
 <tr class="separator:a5354a57346a1410acdd6690c73e28dd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f4b2485b698a07a46b912a6798a0c6c" id="r_a8f4b2485b698a07a46b912a6798a0c6c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a8f4b2485b698a07a46b912a6798a0c6c">~Client</a> ()</td></tr>
 <tr class="separator:a8f4b2485b698a07a46b912a6798a0c6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -173,9 +173,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aeb5c2fc7a5d9590be1b9166e1a107d42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb9de7ae0bf847a54674c3bd064f0229" id="r_afb9de7ae0bf847a54674c3bd064f0229"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#afb9de7ae0bf847a54674c3bd064f0229">isRunning</a> () const noexcept</td></tr>
 <tr class="separator:afb9de7ae0bf847a54674c3bd064f0229"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20b757a4e2e59e3f383164f22c4596f5" id="r_a20b757a4e2e59e3f383164f22c4596f5"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a20b757a4e2e59e3f383164f22c4596f5">handle</a> () noexcept</td></tr>
+<tr class="memitem:a20b757a4e2e59e3f383164f22c4596f5" id="r_a20b757a4e2e59e3f383164f22c4596f5"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a20b757a4e2e59e3f383164f22c4596f5">handle</a> () noexcept</td></tr>
 <tr class="separator:a20b757a4e2e59e3f383164f22c4596f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7939ad6206a1b78a2efdd9685fd07b95" id="r_a7939ad6206a1b78a2efdd9685fd07b95"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a7939ad6206a1b78a2efdd9685fd07b95">handle</a> () const noexcept</td></tr>
+<tr class="memitem:a7939ad6206a1b78a2efdd9685fd07b95" id="r_a7939ad6206a1b78a2efdd9685fd07b95"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" target="_blank" href="open62541/common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a7939ad6206a1b78a2efdd9685fd07b95">handle</a> () const noexcept</td></tr>
 <tr class="separator:a7939ad6206a1b78a2efdd9685fd07b95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
@@ -187,7 +187,7 @@ Friends</h2></td></tr>
 Related Symbols</h2></td></tr>
 <tr><td class="ititle" colspan="2"><p>(Note that these are not member symbols.) </p>
 </td></tr>
-<tr class="memitem:a7fa8a2b5bc962d6dcc68a76f6f9c0070" id="r_a7fa8a2b5bc962d6dcc68a76f6f9c0070"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Client.html">Client</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a7fa8a2b5bc962d6dcc68a76f6f9c0070">asWrapper</a> (<a class="elRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a> *client) noexcept</td></tr>
+<tr class="memitem:a7fa8a2b5bc962d6dcc68a76f6f9c0070" id="r_a7fa8a2b5bc962d6dcc68a76f6f9c0070"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Client.html">Client</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a7fa8a2b5bc962d6dcc68a76f6f9c0070">asWrapper</a> (<a class="elRef" target="_blank" href="open62541/common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *client) noexcept</td></tr>
 <tr class="separator:a7fa8a2b5bc962d6dcc68a76f6f9c0070"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a664b27dba06b871c4ae5a6de06a3659a" id="r_a664b27dba06b871c4ae5a6de06a3659a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a664b27dba06b871c4ae5a6de06a3659a">operator==</a> (const <a class="el" href="classopcua_1_1Client.html">Client</a> &amp;lhs, const <a class="el" href="classopcua_1_1Client.html">Client</a> &amp;rhs) noexcept</td></tr>
 <tr class="separator:a664b27dba06b871c4ae5a6de06a3659a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -254,7 +254,7 @@ Related Symbols</h2></td></tr>
         <tr>
           <td class="memname">opcua::Client::Client </td>
           <td>(</td>
-          <td class="paramtype"><a class="elRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramtype"><a class="elRef" target="_blank" href="open62541/common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *&#160;</td>
           <td class="paramname"><em>native</em></td><td>)</td>
           <td></td>
         </tr>
@@ -556,7 +556,7 @@ Related Symbols</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="elRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a> * opcua::Client::handle </td>
+          <td class="memname">const <a class="elRef" target="_blank" href="open62541/common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> * opcua::Client::handle </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -581,7 +581,7 @@ Related Symbols</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a> * opcua::Client::handle </td>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> * opcua::Client::handle </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -979,7 +979,7 @@ Related Symbols</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classopcua_1_1Client.html">Client</a> * asWrapper </td>
           <td>(</td>
-          <td class="paramtype"><a class="elRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramtype"><a class="elRef" target="_blank" href="open62541/common_8h.html#a2bd5a2265eb4146ce3d95897f7c51aae">UA_Client</a> *&#160;</td>
           <td class="paramname"><em>client</em></td><td>)</td>
           <td></td>
         </tr>
@@ -991,7 +991,7 @@ Related Symbols</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Convert native <a class="elRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a> pointer to its wrapper instance. </p>
+<p>Convert native UA_Client pointer to its wrapper instance. </p>
 <p>The native client must be owned by a <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> instance. </p>
 
 </div>

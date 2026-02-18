@@ -1,21 +1,8 @@
 var searchData=
 [
-  ['aa_5ffind_0',['aa_find',['../aa__tree_8h.html#a1530e81791243a08bd4708cf4704c991',1,'aa_tree.h']]],
-  ['aa_5finit_1',['aa_init',['../aa__tree_8h.html#a8d9b5eaee48dc2dab2d986cc86c957a7',1,'aa_tree.h']]],
-  ['aa_5finsert_2',['aa_insert',['../aa__tree_8h.html#a7cb7fb67179e49104eec035f267d43a1',1,'aa_tree.h']]],
-  ['aa_5fmax_3',['aa_max',['../aa__tree_8h.html#ac75bb510e59fb985f44f2fa9c48e2d5f',1,'aa_tree.h']]],
-  ['aa_5fmin_4',['aa_min',['../aa__tree_8h.html#a628185bc84637c21b9a2f34011bd9120',1,'aa_tree.h']]],
-  ['aa_5fnext_5',['aa_next',['../aa__tree_8h.html#ad5554c0e0a38c80596d62621739696aa',1,'aa_tree.h']]],
-  ['aa_5fprev_6',['aa_prev',['../aa__tree_8h.html#a04f6445e1e8fbcc119ee2ff6a1c0264f',1,'aa_tree.h']]],
-  ['aa_5fremove_7',['aa_remove',['../aa__tree_8h.html#a9827d08945d947e0247792c0fd5ea32e',1,'aa_tree.h']]],
-  ['addnamespace_8',['addNamespace',['../ua__server__internal_8h.html#a1816470c83dc6297ba3f653b373b4146',1,'ua_server_internal.h']]],
-  ['addnode_9',['addNode',['../ua__server__internal_8h.html#a0cbbe9e3b0ed20a44181e7577245937c',1,'ua_server_internal.h']]],
-  ['addnode_5faddrefs_10',['AddNode_addRefs',['../ua__server__internal_8h.html#ad53942f61b6e425e3d9a95f4959bfd3c',1,'ua_server_internal.h']]],
-  ['addnode_5ffinish_11',['AddNode_finish',['../ua__server__internal_8h.html#a82c3957856f593934cdc144b09851723',1,'ua_server_internal.h']]],
-  ['addnode_5fraw_12',['AddNode_raw',['../ua__server__internal_8h.html#ab37fdabcabeefb2b4aa82c4415362d47',1,'ua_server_internal.h']]],
-  ['addref_13',['addRef',['../ua__server__internal_8h.html#a44cc3c1e937cf9d78b10581761445030',1,'ua_server_internal.h']]],
-  ['addrepeatedcallback_14',['addRepeatedCallback',['../ua__server__internal_8h.html#a15efe5b2235395af803ac12f7fa98ca6',1,'ua_server_internal.h']]],
-  ['adjustvaluetype_15',['adjustValueType',['../ua__server__internal_8h.html#acf89e3f898471fd73c3a261071c7e1a8',1,'ua_server_internal.h']]],
-  ['atoisigned_16',['atoiSigned',['../atoi_8h.html#a2d6115e97cb6d71274a1138f724bc7ae',1,'atoi.h']]],
-  ['atoiunsigned_17',['atoiUnsigned',['../atoi_8h.html#a47d566f65b46a131b20e0c1600a9cbbd',1,'atoi.h']]]
+  ['addnamespace_0',['addNamespace',['../backend_8h.html#a096ad23721281931ee61fba6efe0cd61',1,'backend.h']]],
+  ['aliaslist_5fdelete_1',['AliasList_delete',['../AliasList_8h.html#adc10916a9634c4e9c3afec49e88c5d36',1,'AliasList.h']]],
+  ['aliaslist_5fgetnodeid_2',['AliasList_getNodeId',['../AliasList_8h.html#ab44d4e7bc3a236019e524a95dd9fcf87',1,'AliasList.h']]],
+  ['aliaslist_5fnew_3',['AliasList_new',['../AliasList_8h.html#a91d3b9958dfd1e63ac908d2cf9541395',1,'AliasList.h']]],
+  ['aliaslist_5fnewalias_4',['AliasList_newAlias',['../AliasList_8h.html#a6e1bd9b5e9aaffbcc50cc376c41e605e',1,'AliasList.h']]]
 ];

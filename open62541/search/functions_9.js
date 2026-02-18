@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['isjsonnull_0',['isJsonNull',['../ua__types__encoding__json_8h.html#a564b737ca8de88223afa5536530f0a51',1,'ua_types_encoding_json.h']]],
-  ['isnodeintree_1',['isNodeInTree',['../ua__server__internal_8h.html#a13b42b243c2fe8d75d3cd6e02e4dad45',1,'ua_server_internal.h']]],
-  ['isnodeintree_5fsingleref_2',['isNodeInTree_singleRef',['../ua__server__internal_8h.html#a9539d7760b60ee4dba346a6b67b7f482',1,'ua_server_internal.h']]],
-  ['itoasigned_3',['itoaSigned',['../itoa_8h.html#ad1b520d42077d66595e6999065e027a4',1,'itoa.h']]],
-  ['itoaunsigned_4',['itoaUnsigned',['../itoa_8h.html#ad0d6e3f1d2c326d9d67aea82981584c6',1,'itoa.h']]]
+  ['list_5fentry_0',['list_entry',['../structUA__DataSetWriter.html#a8149b82308df51fb4d7f346efc8f0748',1,'UA_DataSetWriter::LIST_ENTRY()'],['../structUA__WriterGroup.html#ad3e7ffafbee64b68f233fef67c257f94',1,'UA_WriterGroup::LIST_ENTRY()'],['../structUA__DataSetReader.html#a3368a50cb07b86635f7ac82f149006c1',1,'UA_DataSetReader::LIST_ENTRY()'],['../structUA__ReaderGroup.html#adce02bcc6736c861891860eb5f47fc46',1,'UA_ReaderGroup::LIST_ENTRY()']]],
+  ['list_5fhead_1',['list_head',['../structUA__PubSubConnection.html#a81d6c1eec7d1caa6b66d0c1339721b87',1,'UA_PubSubConnection::LIST_HEAD(, UA_WriterGroup) writerGroups'],['../structUA__PubSubConnection.html#a4d13bfa10a5196e2040f703203eb1d1d',1,'UA_PubSubConnection::LIST_HEAD(, UA_ReaderGroup) readerGroups'],['../structUA__WriterGroup.html#ac2af63adcaeb69cd20603d7d8f2db800',1,'UA_WriterGroup::LIST_HEAD()'],['../structUA__ReaderGroup.html#ac44bb442b6b9098f29a5c32714fd5348',1,'UA_ReaderGroup::LIST_HEAD()']]],
+  ['log_2',['log',['../log_8h.html#a501fc0d2f6eeb94dfe3d9ab5f30daea3',1,'log(logger-&gt;context, UA_LOGLEVEL_TRACE, category, msg, args):&#160;log.h'],['../log_8h.html#a7182e6455027183febc7e7a0e3560f22',1,'log(logger-&gt;context, UA_LOGLEVEL_DEBUG, category, msg, args):&#160;log.h'],['../log_8h.html#ab07c92c7af4ff7bc8f7dff9cfecc0bf0',1,'log(logger-&gt;context, UA_LOGLEVEL_INFO, category, msg, args):&#160;log.h'],['../log_8h.html#a349a24a4b83ce3066b49a02a458b8290',1,'log(logger-&gt;context, UA_LOGLEVEL_WARNING, category, msg, args):&#160;log.h'],['../log_8h.html#a2ec4339de9ff0ed42472b4bd3c8be09f',1,'log(logger-&gt;context, UA_LOGLEVEL_ERROR, category, msg, args):&#160;log.h'],['../log_8h.html#a742088ce1bf0fe02a54810cc08f8e0c7',1,'log(logger-&gt;context, UA_LOGLEVEL_FATAL, category, msg, args):&#160;log.h']]],
+  ['long2net_3',['long2net',['../1035_8h.html#a8c121922057e2c91e8262d4260c55902',1,'1035.h']]]
 ];
