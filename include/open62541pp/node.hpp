@@ -609,6 +609,26 @@ public:
         return nodes;
     }
 
+	/// Check if the node has children (only local nodes).
+    bool hasChildren(
+        const NodeId& referenceType = ReferenceTypeId::HierarchicalReferences,
+        Bitmask<NodeClass> nodeClassMask = NodeClass::Unspecified
+    ) {
+        const BrowseDescription bd(
+            id(),
+            BrowseDirection::Forward,
+            referenceType,
+            true,
+            nodeClassMask,
+            BrowseResultMask::None
+        );
+
+        // Request only 1 reference
+        BrowseResult result = services::browse(connection(), bd, 1U);
+
+        return !result.references().empty();
+    }
+
     /// Browse child nodes (only local nodes).
     std::vector<Node> browseChildren(
         const NodeId& referenceType = ReferenceTypeId::HierarchicalReferences,
