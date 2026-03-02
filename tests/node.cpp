@@ -241,7 +241,15 @@ TEMPLATE_TEST_CASE("Node", "", Server, Client, Async<Client>) {
         CHECK(nodes.size() > 0);
         CHECK(std::any_of(nodes.begin(), nodes.end(), [&](auto& node) { return node == root; }));
     }
-
+    
+    SECTION("hasChildren") {
+        Node root{connection, ObjectId::RootFolder};
+        CHECK(root.hasChildren(ReferenceTypeId::HasChild) ==
+              !root.browseChildren(ReferenceTypeId::HasChild).empty());
+        CHECK(root.hasChildren(ReferenceTypeId::HierarchicalReferences) ==
+              !root.browseChildren(ReferenceTypeId::HierarchicalReferences).empty());
+    }
+    
     SECTION("browseChildren") {
         Node root{connection, ObjectId::RootFolder};
         Node child{connection, ObjectId::ObjectsFolder};
