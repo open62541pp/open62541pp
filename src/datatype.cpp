@@ -45,8 +45,8 @@ void clear(UA_DataTypeArray& native) noexcept {
             native.typesSize,
             [](auto& type) { clear(type); }
         );
+        deallocateArray(const_cast<UA_DataType*>(native.types));  // NOLINT
     }
-    deallocateArray(const_cast<UA_DataType*>(native.types));  // NOLINT
     native.types = nullptr;
 }
 
