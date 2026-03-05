@@ -5,6 +5,7 @@
 
 #include "open62541pp/config.hpp"
 #include "open62541pp/datatype.hpp"
+#include "open62541pp/detail/types_handling.hpp"
 #include "open62541pp/types.hpp"
 
 using namespace opcua;
@@ -441,6 +442,30 @@ TEST_CASE("DataTypeBuilder") {
 
         checkEqual(dtNative, dtWrapper);
     }
+}
+
+TEST_CASE("detail::clear(UA_DataTypeArray&)") {
+    SECTION("cleanup=true frees and nullifies types") {
+        auto* types = detail::allocateArray<UA_DataType>(2);
+#if UAPP_OPEN62541_VER_GE(1, 4)
+        UA_DataTypeArray native{nullptr, 2, types, true};
+#else
+        UA_DataTypeArray native{nullptr, 2, types};
+#endif
+        detail::clear(native);
+        CHECK(native.types == nullptr);
+    }
+
+#if UAPP_OPEN62541_VER_GE(1, 4)
+    SECTION("cleanup=false does not free types") {
+        UA_DataType types[1]{};  // stack-allocated — must not be passed to UA_free
+        UA_DataTypeArray native{nullptr, 1, types, false};
+        // Bug: deallocateArray is called unconditionally, freeing the stack array.
+        // This triggers an ASAN error (free of stack-allocated memory).
+        detail::clear(native);
+        CHECK(native.types == nullptr);
+    }
+#endif
 }
 
 TEST_CASE("findDataType") {
