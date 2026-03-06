@@ -45,17 +45,23 @@ void clear(UA_DataTypeArray& native) noexcept {
             native.typesSize,
             [](auto& type) { clear(type); }
         );
+        deallocateArray(const_cast<UA_DataType*>(native.types));  // NOLINT
     }
-    deallocateArray(const_cast<UA_DataType*>(native.types));  // NOLINT
     native.types = nullptr;
 }
 
 void deallocate(const UA_DataTypeArray* head) noexcept {
     while (head != nullptr) {
         const auto* next = head->next;
-        auto* item = const_cast<UA_DataTypeArray*>(head);  // NOLINT(*const-cast)
-        detail::clear(*item);
-        detail::deallocate(item);
+#if UAPP_OPEN62541_VER_GE(1, 4)
+        if (head->cleanup) {
+#endif
+            auto* item = const_cast<UA_DataTypeArray*>(head);  // NOLINT(*const-cast)
+            detail::clear(*item);
+            detail::deallocate(item);
+#if UAPP_OPEN62541_VER_GE(1, 4)
+        }
+#endif
         head = next;
     }
 }
