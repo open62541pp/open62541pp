@@ -468,6 +468,29 @@ TEST_CASE("detail::clear(UA_DataTypeArray&)") {
 #endif
 }
 
+TEST_CASE("detail::deallocate(const UA_DataTypeArray*)") {
+    SECTION("cleanup=true frees node and types") {
+        auto* types = detail::allocateArray<UA_DataType>(1);
+        auto* node = detail::allocate<UA_DataTypeArray>();
+#if UAPP_OPEN62541_VER_GE(1, 4)
+        new (node) UA_DataTypeArray{nullptr, 1, types, true};
+#else
+        new (node) UA_DataTypeArray{nullptr, 1, types};
+#endif
+        detail::deallocate(static_cast<const UA_DataTypeArray*>(node));  // must not leak or crash
+    }
+
+#if UAPP_OPEN62541_VER_GE(1, 4)
+    SECTION("cleanup=false does not free node or types") {
+        UA_DataType types[1]{};              // stack-allocated — must not be passed to UA_free
+        UA_DataTypeArray node{nullptr, 1, types, false};  // stack-allocated
+        // Bug: detail::deallocate(item) is called unconditionally, freeing the stack node.
+        // This triggers an ASAN error (free of stack-allocated memory).
+        detail::deallocate(static_cast<const UA_DataTypeArray*>(&node));
+    }
+#endif
+}
+
 TEST_CASE("findDataType") {
     SECTION("Builtin") {
         CHECK(findDataType(NodeId{0, 0}) == nullptr);
