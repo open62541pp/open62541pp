@@ -75,6 +75,14 @@ UA_DataTypeMember copy(const UA_DataTypeMember& src) {
 }
 
 static void copyMembers(const UA_DataTypeMember* members, size_t membersSize, UA_DataType& dst) {
+    // open62541's UA_cleanupDataTypeWithCustom calls UA_free(type->members) directly without
+    // stripping the empty-array sentinel. Use nullptr for empty to avoid crashing cleanup on
+    // types with no members (for example enums).
+    if (membersSize == 0) {
+        dst.members = nullptr;
+        dst.membersSize = 0;
+        return;
+    }
     dst.members = detail::allocateArray<UA_DataTypeMember>(membersSize);
     dst.membersSize = membersSize;
     std::transform(
@@ -154,9 +162,10 @@ const UA_DataType* findDataType(const NodeId& id) noexcept {
     // UA_TYPES array is sorted by typeId -> use binary search
     const Span types{UA_TYPES, UA_TYPES_COUNT};  // NOLINT(*decay)
     const auto* it = std::lower_bound(
-        types.begin(), types.end(), id, [](const UA_DataType& type, const NodeId& value) {
-            return type.typeId < value;
-        }
+        types.begin(),
+        types.end(),
+        id,
+        [](const UA_DataType& type, const NodeId& value) { return type.typeId < value; }
     );
     if (it != types.end() && it->typeId == id) {
         return it;

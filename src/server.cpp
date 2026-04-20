@@ -392,9 +392,10 @@ void Server::Deleter::operator()(UA_Server* server) const noexcept {
     if (detail::getContext(server)->running) {
         UA_Server_run_shutdown(server);
     }
-    auto* config = UA_Server_getConfig(server);
-    detail::deallocate(config->customDataTypes);
-    config->customDataTypes = nullptr;
+    // Let UA_Server_delete -> UA_ServerConfig_clean free customDataTypes
+    // Freeing here before UA_Server_delete is a use-after-free:
+    // nodestore cleanup inside UA_Server_delete clears stored values whose DataType
+    // member.memberType pointers reach into customDataTypes.
     UA_Server_delete(server);
 }
 
