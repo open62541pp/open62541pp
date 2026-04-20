@@ -1,3 +1,4 @@
+#include <array>
 #include <chrono>
 #include <thread>
 
@@ -5,6 +6,7 @@
 #include <catch2/matchers/catch_matchers_all.hpp>
 
 #include "open62541pp/config.hpp"
+#include "open62541pp/datatype.hpp"
 #include "open62541pp/detail/open62541/server.h"
 #include "open62541pp/detail/string_utils.hpp"  // detail::toString
 #include "open62541pp/node.hpp"
@@ -238,7 +240,7 @@ TEST_CASE("ValueCallback") {
     auto callbackPtr = std::make_unique<ValueCallbackTest>();
     auto& callback = *callbackPtr;
     setVariableNodeValueCallback(server, id, callback);
-    
+
     SECTION("move ownership") {
         setVariableNodeValueCallback(server, id, std::move(callbackPtr));
     }
@@ -328,4 +330,49 @@ TEST_CASE("DataSource") {
         CHECK_THROWS_MATCHES(node.readValue(), BadStatus, Message("BadUnexpectedError"));
         CHECK_THROWS_MATCHES(node.writeValue(Variant{2}), BadStatus, Message("BadUnexpectedError"));
     }
+}
+
+TEST_CASE("Server teardown with custom struct types and a stored variable node") {
+    struct Inner {
+        size_t idsSize;
+        std::int64_t* ids;
+    };
+
+    struct Result {
+        Inner inner;
+    };
+
+    Server server;
+
+    auto inner = DataTypeBuilder<Inner>::createStructure("_Inner", {1, 3001}, {1, 3002})
+                     .addField<&Inner::idsSize, &Inner::ids>("ids")
+                     .build();
+    server.config().addCustomDataTypes({inner});
+
+    const UA_NodeId innerId = UA_NODEID_NUMERIC(1, 3001);
+    const UA_DataType* innerRegistered = UA_Server_findDataType(server.handle(), &innerId);
+    REQUIRE(innerRegistered != nullptr);
+
+    auto result = DataTypeBuilder<Result>::createStructure("_Result", {1, 3003}, {1, 3004})
+                      .addField<&Result::inner>("inner", *innerRegistered)
+                      .build();
+    server.config().addCustomDataTypes({result});
+
+    const UA_NodeId resultId = UA_NODEID_NUMERIC(1, 3003);
+    const UA_DataType* resultRegistered = UA_Server_findDataType(server.handle(), &resultId);
+    REQUIRE(resultRegistered != nullptr);
+
+    std::array<std::int64_t, 2> ids = {1, 2};
+    Result value{};
+    value.inner.idsSize = ids.size();
+    value.inner.ids = ids.data();
+
+    CHECK_NOTHROW(Node{server, ObjectId::ObjectsFolder}.addVariable(
+        {1, 5001},
+        "result",
+        VariableAttributes{}
+            .setDataType(NodeId{resultId})
+            .setValueRank(ValueRank::Scalar)
+            .setValue(Variant{value, *resultRegistered})
+    ));
 }
