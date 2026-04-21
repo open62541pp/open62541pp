@@ -270,6 +270,7 @@ TEST_CASE("DataTypeBuilder") {
         CHECK(dt.typeKind() == UA_DATATYPEKIND_ENUM);
         CHECK(dt.pointerFree() == true);
         CHECK(dt.members().empty());
+        CHECK(dt.handle()->members == nullptr);
     }
 
     SECTION("Struct") {
@@ -382,14 +383,14 @@ TEST_CASE("DataTypeBuilder") {
             UniSwitch switchField;
 
             union Fields {
-                double optionA;
+                double optional;
                 UA_String optionB;
             } fields;
         };
 
         static UA_DataTypeMember uniMembers[2] = {
             makeDataTypeMember(
-                "optionA", UA_TYPES[UA_TYPES_DOUBLE], offsetof(Uni, fields.optionA), false, false
+                "optional", UA_TYPES[UA_TYPES_DOUBLE], offsetof(Uni, fields.optional), false, false
             ),
             makeDataTypeMember(
                 "optionB", UA_TYPES[UA_TYPES_STRING], offsetof(Uni, fields.optionB), false, false
@@ -410,7 +411,7 @@ TEST_CASE("DataTypeBuilder") {
 
         const auto dt =
             DataTypeBuilder<Uni>::createUnion("Uni", {1, 1004}, {1, 4})
-                .addUnionField<&Uni::fields, double>("optionA")
+                .addUnionField<&Uni::fields, double>("optional")
                 .addUnionField<&Uni::fields, UA_String>("optionB", UA_TYPES[UA_TYPES_STRING])
                 .build();
 
@@ -482,7 +483,7 @@ TEST_CASE("detail::deallocate(const UA_DataTypeArray*)") {
 
 #if UAPP_OPEN62541_VER_GE(1, 4)
     SECTION("cleanup=false does not free node or types") {
-        UA_DataType types[1]{};              // stack-allocated — must not be passed to UA_free
+        UA_DataType types[1]{};  // stack-allocated — must not be passed to UA_free
         UA_DataTypeArray node{nullptr, 1, types, false};  // stack-allocated
         // Bug: detail::deallocate(item) is called unconditionally, freeing the stack node.
         // This triggers an ASAN error (free of stack-allocated memory).

@@ -1,3 +1,4 @@
+#include <array>
 #include <chrono>
 #include <thread>
 
@@ -5,6 +6,7 @@
 #include <catch2/matchers/catch_matchers_all.hpp>
 
 #include "open62541pp/config.hpp"
+#include "open62541pp/datatype.hpp"
 #include "open62541pp/detail/open62541/server.h"
 #include "open62541pp/detail/string_utils.hpp"  // detail::toString
 #include "open62541pp/node.hpp"
@@ -238,7 +240,7 @@ TEST_CASE("ValueCallback") {
     auto callbackPtr = std::make_unique<ValueCallbackTest>();
     auto& callback = *callbackPtr;
     setVariableNodeValueCallback(server, id, callback);
-    
+
     SECTION("move ownership") {
         setVariableNodeValueCallback(server, id, std::move(callbackPtr));
     }
@@ -328,4 +330,35 @@ TEST_CASE("DataSource") {
         CHECK_THROWS_MATCHES(node.readValue(), BadStatus, Message("BadUnexpectedError"));
         CHECK_THROWS_MATCHES(node.writeValue(Variant{2}), BadStatus, Message("BadUnexpectedError"));
     }
+}
+
+TEST_CASE("Server teardown with custom struct type and a stored variable node") {
+    struct Point {
+        std::int32_t x;
+        std::int32_t y;
+    };
+
+    Server server;
+
+    auto pointType =
+        DataTypeBuilder<Point>::createStructure("_Point", {1, 3001}, {1, 3002})
+            .addField<&Point::x>("x")
+            .addField<&Point::y>("y")
+            .build();
+    server.config().addCustomDataTypes({pointType});
+
+    const NodeId pointId{1, 3001};
+    const UA_DataType* pointRegistered = findDataType(server, pointId);
+    REQUIRE(pointRegistered != nullptr);
+
+    Point value{1, 2};
+
+    CHECK_NOTHROW(Node{server, ObjectId::ObjectsFolder}.addVariable(
+        {1, 5001},
+        "point",
+        VariableAttributes{}
+            .setDataType(pointId)
+            .setValueRank(ValueRank::Scalar)
+            .setValue(Variant{value, *pointRegistered})
+    ));
 }
