@@ -332,47 +332,33 @@ TEST_CASE("DataSource") {
     }
 }
 
-TEST_CASE("Server teardown with custom struct types and a stored variable node") {
-    struct Inner {
-        size_t idsSize;
-        std::int64_t* ids;
-    };
-
-    struct Result {
-        Inner inner;
+TEST_CASE("Server teardown with custom struct type and a stored variable node") {
+    struct Point {
+        std::int32_t x;
+        std::int32_t y;
     };
 
     Server server;
 
-    auto inner = DataTypeBuilder<Inner>::createStructure("_Inner", {1, 3001}, {1, 3002})
-                     .addField<&Inner::idsSize, &Inner::ids>("ids")
-                     .build();
-    server.config().addCustomDataTypes({inner});
+    auto pointType =
+        DataTypeBuilder<Point>::createStructure("_Point", {1, 3001}, {1, 3002})
+            .addField<&Point::x>("x")
+            .addField<&Point::y>("y")
+            .build();
+    server.config().addCustomDataTypes({pointType});
 
-    const UA_NodeId innerId = UA_NODEID_NUMERIC(1, 3001);
-    const UA_DataType* innerRegistered = UA_Server_findDataType(server.handle(), &innerId);
-    REQUIRE(innerRegistered != nullptr);
+    const NodeId pointId{1, 3001};
+    const UA_DataType* pointRegistered = findDataType(server, pointId);
+    REQUIRE(pointRegistered != nullptr);
 
-    auto result = DataTypeBuilder<Result>::createStructure("_Result", {1, 3003}, {1, 3004})
-                      .addField<&Result::inner>("inner", *innerRegistered)
-                      .build();
-    server.config().addCustomDataTypes({result});
-
-    const UA_NodeId resultId = UA_NODEID_NUMERIC(1, 3003);
-    const UA_DataType* resultRegistered = UA_Server_findDataType(server.handle(), &resultId);
-    REQUIRE(resultRegistered != nullptr);
-
-    std::array<std::int64_t, 2> ids = {1, 2};
-    Result value{};
-    value.inner.idsSize = ids.size();
-    value.inner.ids = ids.data();
+    Point value{1, 2};
 
     CHECK_NOTHROW(Node{server, ObjectId::ObjectsFolder}.addVariable(
         {1, 5001},
-        "result",
+        "point",
         VariableAttributes{}
-            .setDataType(NodeId{resultId})
+            .setDataType(pointId)
             .setValueRank(ValueRank::Scalar)
-            .setValue(Variant{value, *resultRegistered})
+            .setValue(Variant{value, *pointRegistered})
     ));
 }

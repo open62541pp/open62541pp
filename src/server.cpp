@@ -392,11 +392,20 @@ void Server::Deleter::operator()(UA_Server* server) const noexcept {
     if (detail::getContext(server)->running) {
         UA_Server_run_shutdown(server);
     }
-    // Let UA_Server_delete -> UA_ServerConfig_clean free customDataTypes
+#if UAPP_OPEN62541_VER_GE(1, 4)
+    // UA_Server_delete -> UA_ServerConfig_clean frees customDataTypes.
     // Freeing here before UA_Server_delete is a use-after-free:
     // nodestore cleanup inside UA_Server_delete clears stored values whose DataType
     // member.memberType pointers reach into customDataTypes.
     UA_Server_delete(server);
+#else
+    // UA_ServerConfig_clean (<1.4) does not free customDataTypes. Save the pointer
+    // and free it after UA_Server_delete has finished, so nodestore cleanup inside
+    // UA_Server_delete can still traverse custom DataType members.
+    const auto* customTypes = UA_Server_getConfig(server)->customDataTypes;
+    UA_Server_delete(server);
+    detail::deallocate(customTypes);
+#endif
 }
 
 Server* asWrapper(UA_Server* server) noexcept {
