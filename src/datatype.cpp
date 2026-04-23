@@ -146,7 +146,7 @@ void DataType::setMembers(Span<const DataTypeMember> members) {
 
 const UA_DataType* findDataType(const NodeId& id) noexcept {
     // UA_TYPES array is sorted by typeId -> use binary search
-    const Span types{UA_TYPES, UA_TYPES_COUNT};  // NOLINT(*decay)
+    const Span types(UA_TYPES, UA_TYPES_COUNT);  // NOLINT(*decay)
     const auto* it = std::lower_bound(
         types.begin(), types.end(), id, [](const UA_DataType& type, const NodeId& value) {
             return type.typeId < value;
@@ -164,7 +164,7 @@ const UA_DataType* findDataType(const NodeId& id, const UA_DataTypeArray* custom
         return type;
     }
     while (custom != nullptr) {
-        const Span types{custom->types, custom->typesSize};
+        const Span types(custom->types, custom->typesSize);
         const auto* it = std::find_if(types.begin(), types.end(), [&](const auto& dt) {
             return dt.typeId == id;
         });
