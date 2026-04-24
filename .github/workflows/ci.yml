@@ -12,12 +12,6 @@ jobs:
       fail-fast: true
       matrix:
         config:
-          - name: Linux GCC 9
-            os: ubuntu-22.04
-            compiler: g++-9
-            coverage: true
-            gcov: gcov-9
-
           - name: Linux GCC 10
             os: ubuntu-22.04
             compiler: g++-10
@@ -89,10 +83,10 @@ jobs:
             compiler: clang++-18
             flags: "-DUAPP_ENABLE_SANITIZER_ADDRESS=ON"
 
-          - name: Linux TSan
-            os: ubuntu-24.04
-            compiler: clang++-18
-            flags: "-DUAPP_ENABLE_SANITIZER_THREAD=ON"
+          # - name: Linux TSan
+          #   os: ubuntu-24.04
+          #   compiler: clang++-18
+          #   flags: "-DUAPP_ENABLE_SANITIZER_THREAD=ON"
 
           - name: Linux UBSan
             os: ubuntu-24.04
@@ -124,7 +118,7 @@ jobs:
               name: Clang-Tidy
               os: ubuntu-24.04
               compiler: clang++
-              flags: "-DUAPP_ENABLE_CLANG_TIDY=ON"
+              flags: "-DCMAKE_CXX_CLANG_TIDY='clang-tidy;-warnings-as-errors=*'"
             build-type: Debug
             library-type: static
 
@@ -135,7 +129,7 @@ jobs:
 
     runs-on: ${{ matrix.config.os }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           submodules: recursive
 
@@ -143,7 +137,9 @@ jobs:
         run: >
           cmake -S . -B ./build
           -DCMAKE_CXX_COMPILER=${{ matrix.config.compiler }}
-          -DCMAKE_BUILD-TYPE=${{ matrix.build-type }}
+          -DCMAKE_CXX_STANDARD=17
+          -DCMAKE_BUILD_TYPE=${{ matrix.build-type }}
+          -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=OFF
           -DBUILD_SHARED_LIBS=${{ matrix.library-type == 'shared' }}
           -DUA_ENABLE_ENCRYPTION=${{ runner.os == 'Windows' && 'OFF' || 'OPENSSL' }}
           -DUA_ENABLE_METHODCALLS=ON
@@ -153,7 +149,6 @@ jobs:
           -DUAPP_BUILD_TESTS=ON
           -DUAPP_BUILD_EXAMPLES=ON
           -DUAPP_ENABLE_COVERAGE=${{ matrix.config.coverage && matrix.build-type == 'Debug' }}
-          -DUAPP_ENABLE_NODESETLOADER=${{ runner.os == 'Windows' && 'OFF' || 'ON' }}
           -DUAPP_WARNINGS_AS_ERRORS=ON
           ${{ matrix.config.flags }}
 

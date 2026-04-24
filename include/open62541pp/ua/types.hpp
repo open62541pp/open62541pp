@@ -21,7 +21,7 @@
 #include "open62541pp/ua/typeregistry.hpp"
 #include "open62541pp/wrapper.hpp"
 
-#ifndef UA_DEFAULT_ATTRIBUTES_DEFINED
+#if !defined(UA_DEFAULT_ATTRIBUTES_DEFINED) && UAPP_OPEN62541_VER_LE(1, 3)
 #define UA_DEFAULT_ATTRIBUTES_DEFINED
 extern "C" {
 UA_EXPORT extern const UA_VariableAttributes UA_VariableAttributes_default;

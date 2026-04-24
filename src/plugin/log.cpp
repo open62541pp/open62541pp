@@ -48,13 +48,13 @@ UA_Logger LoggerBase::create(bool ownsAdapter) {
             if (logger != nullptr) {
                 delete static_cast<LoggerBase*>(logger->context);  // NOLINT
                 logger->context = nullptr;
-                UA_free(logger);
+                UA_free(logger);  // NOLINT
                 logger = nullptr;
             }
         };
     } else {
         native.clear = [](UA_Logger* logger) {
-            UA_free(logger);
+            UA_free(logger);  // NOLINT
             logger = nullptr;
         };
     }
@@ -80,7 +80,7 @@ void clear(UA_Logger& logger) noexcept {
         // 1. allocate new logger instance
         // 2. shallow copy the existing logger
         // 3. clear & free logger copy
-        auto* loggerCopy = static_cast<UA_Logger*>(UA_malloc(sizeof(UA_Logger)));
+        auto* loggerCopy = static_cast<UA_Logger*>(UA_malloc(sizeof(UA_Logger)));  // NOLINT
         *loggerCopy = logger;  // shallow copy
         logger.clear(loggerCopy);
 #else

@@ -7,6 +7,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.21.0] - 2026-02-18
+
+### Added
+
+- Bazel Central Registry reference in README (#675)
+- `services::setMethodCallback` to set method callback after node creation (#690)
+
+### Changed
+
+- Update internal open62541 to v1.4.15 (#687)
+- Remove global CMake settings (#689, #691)
+
+## [0.20.0] - 2025-11-22
+
+### Added
+
+- Timed/repeated callbacks (#635)
+- Date arithmetic with `DateTime` and `std::chrono::duration` (#640)
+- Add `findDataType` overload set (#642)
+- `Event::release()` to release the ownership (#646)
+- Add missing `LogCategory` fields (#663)
+
+### Changed
+
+- Remove deprecations ≤ v0.18.0 (#625)
+- Remove `String` constructor from initializer list (#626)
+- Make `Server::setVariableNode*` free functions (#634)
+- Make `DateTime` constructor from `std::chrono::time_point` explicit (#641)
+- Remove nodeset loader backport for v1.3 (#671)
+
+### Fixed
+
+- Strip empty array sentinel from pointer returned by `String`/`ByteString`/`XmlElement::data` (#628)
+- `UAPP_HAS_TOSTRING` for v1.4 to check if `UA_print` is available (#630)
+- `UAPP_HAS_NODESETLOADER` for v1.4 (#631)
+- Avoid clock conversions with `DateTime` (#638)
+- Don't double disconnect client (#637)
+- `DateTime` before 1970 (#639)
+- Make revised publishing interval a double, not a bool (#658)
+- Overwriting of method callbacks (#669)
+
 ## [0.19.0] - 2025-05-22
 
 ### Added
@@ -872,7 +913,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial public release
 
-[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.19.0...HEAD
+[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.21.0...HEAD
+[0.21.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.21.0
+[0.20.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.20.0
 [0.19.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.19.0
 [0.18.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.18.0
 [0.17.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.17.0

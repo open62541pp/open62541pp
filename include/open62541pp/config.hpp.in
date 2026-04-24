@@ -19,10 +19,6 @@
     (UA_OPEN62541_VER_MAJOR <= (MAJOR)) && (UA_OPEN62541_VER_MINOR <= (MINOR))
 // NOLINTEND(cppcoreguidelines-macro-usage)
 
-/* --------------------------------------- Feature options -------------------------------------- */
-
-#cmakedefine UAPP_ENABLE_NODESETLOADER
-
 /* --------------------------------------- Feature checks --------------------------------------- */
 #ifndef UA_ENABLE_NODEMANAGEMENT
 #error "open62541 must be compiled with UA_ENABLE_NODEMANAGEMENT"
@@ -79,7 +75,7 @@
 
 // UA_ENABLE_NODESETLOADER is not defined in open62541/config.h
 // https://github.com/open62541/open62541/pull/7218
-#if defined(UAPP_ENABLE_NODESETLOADER) || defined(UA_ENABLE_NODESETLOADER)
+#ifdef UA_ENABLE_NODESETLOADER
 #define UAPP_HAS_NODESETLOADER 1
 #else
 #define UAPP_HAS_NODESETLOADER 0

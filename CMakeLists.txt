@@ -2,30 +2,34 @@ cmake_minimum_required(VERSION 3.12)
 
 project(
     open62541pp
-    VERSION 0.19.0
+    VERSION 0.21.0
     DESCRIPTION "C++ wrapper of open62541"
     HOMEPAGE_URL "https://github.com/open62541pp/open62541pp"
     LANGUAGES CXX
 )
 
-# set c++ standard explicitly, compile feature "cxx_std_17" does not set -std=c++17 compile flag
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
-
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
-
-# compiled binaries folders (same as open62541)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-
 add_library(open62541pp_project_options INTERFACE)
 target_compile_features(open62541pp_project_options INTERFACE cxx_std_17)
 
-option(UAPP_ENABLE_COVERAGE "Enable coverage reporting for gcc/clang" OFF)
-option(UAPP_WARNINGS_AS_ERRORS "Treat warnings as errors" OFF)
+# options for standalone build, replace with PROJECT_IS_TOP_LEVEL for CMake >= 3.21
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+    
+    # compiled binaries folders (same as open62541)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+    option(UAPP_ENABLE_COVERAGE "Enable coverage reporting for gcc/clang" OFF)
+    option(UAPP_ENABLE_SANITIZER_ADDRESS "Enable address sanitizier" OFF)
+    option(UAPP_ENABLE_SANITIZER_LEAK "Enable leak sanitizier" OFF)
+    option(UAPP_ENABLE_SANITIZER_UNDEFINED "Enable undefined sanitizier" OFF)
+    option(UAPP_ENABLE_SANITIZER_THREAD "Enable thread sanitizier" OFF)
+    option(UAPP_WARNINGS_AS_ERRORS "Treat warnings as errors" OFF)
+endif()
+
+# compiler settings
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
     target_compile_options(open62541pp_project_options INTERFACE
         -Wall
@@ -33,11 +37,32 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES ".*Clan
         -Wshadow
         -Wnon-virtual-dtor
         -Wpedantic
+        $<$<BOOL:${UAPP_ENABLE_COVERAGE}>:--coverage;-g>
         $<$<BOOL:${UAPP_WARNINGS_AS_ERRORS}>:-Werror>
     )
-    if(UAPP_ENABLE_COVERAGE)
-        target_compile_options(open62541pp_project_options INTERFACE --coverage -O0 -g)
-        target_link_libraries(open62541pp_project_options INTERFACE --coverage)
+    target_link_options(open62541pp_project_options INTERFACE
+        $<$<BOOL:${UAPP_ENABLE_COVERAGE}>:--coverage>
+    )
+
+    set(sanitizers "")
+    if(UAPP_ENABLE_SANITIZER_ADDRESS)
+        list(APPEND sanitizers "address")
+    endif()
+    if(UAPP_ENABLE_SANITIZER_LEAK)
+        list(APPEND sanitizers "leak")
+    endif()
+    if(UAPP_ENABLE_SANITIZER_UNDEFINED)
+        list(APPEND sanitizers "undefined")
+    endif()
+    if(UAPP_ENABLE_SANITIZER_THREAD)
+        list(APPEND sanitizers "thread")
+    endif()
+
+    if(sanitizers)
+        list(JOIN sanitizers "," sanitizers_joined)
+        message(STATUS "Sanitizers enabled: ${sanitizers_joined}")
+        target_compile_options(open62541pp_project_options INTERFACE -fsanitize=${sanitizers_joined})
+        target_link_options(open62541pp_project_options INTERFACE -fsanitize=${sanitizers_joined})
     endif()
 elseif(MSVC)
     target_compile_options(open62541pp_project_options INTERFACE
@@ -52,52 +77,12 @@ elseif(MSVC)
     )
 endif()
 
-if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
-    set(sanitizers "")
-    foreach(san IN ITEMS address leak undefined thread)
-        string(TOUPPER ${san} san_upper)
-        option(UAPP_ENABLE_SANITIZER_${san_upper} "Enable ${san} sanitizer" OFF)
-        if(UAPP_ENABLE_SANITIZER_${san_upper})
-            list(APPEND sanitizers ${san})
-        endif()
-    endforeach()
-
-    list(JOIN sanitizers "," sanitizers_joined)
-    if(sanitizers_joined)
-        message(STATUS "Sanitizers enabled: ${sanitizers_joined}")
-        target_compile_options(open62541pp_project_options INTERFACE -fsanitize=${sanitizers_joined})
-        target_link_options(open62541pp_project_options INTERFACE -fsanitize=${sanitizers_joined})
-    endif()
-endif()
-
-option(UAPP_ENABLE_CLANG_TIDY "Enable static analysis with clang-tidy" OFF)
-if(UAPP_ENABLE_CLANG_TIDY)
-    message(STATUS "Static code analysis with clang-tidy enabled")
-    find_program(CLANG_TIDY_EXE NAMES clang-tidy)
-    if(CLANG_TIDY_EXE)
-        message(STATUS "Found clang-tidy: ${CLANG_TIDY_EXE}")
-        if(UAPP_WARNINGS_AS_ERRORS)
-            set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_EXE};-warnings-as-errors=*")
-        else()
-            set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_EXE}")
-        endif()
-    else()
-        message(SEND_ERROR "clang-tidy requested but executable not found")
-    endif()
-endif()
-
 # threads
 find_package(Threads REQUIRED)
 
 # open62541
 option(UAPP_INTERNAL_OPEN62541 "Use internal open62541 library" ON)
 if(UAPP_INTERNAL_OPEN62541)
-    # disable IPO if not defined, otherwise open62541 will enable it
-    # IPO increases link times, especially with sanitizers enabled
-    if(NOT DEFINED CMAKE_INTERPROCEDURAL_OPTIMIZATION)
-        set(CMAKE_INTERPROCEDURAL_OPTIMIZATION OFF)
-    endif()
-
     # overwrite default open62541 options
     # disable sanitizers in debug build (> v1.3)
     if (NOT UA_ENABLE_DEBUG_SANITIZER)
@@ -119,15 +104,6 @@ if(UAPP_INTERNAL_OPEN62541)
     add_subdirectory(3rdparty/open62541)  # target open62541::open62541
 else()
     find_package(open62541 REQUIRED)
-endif()
-
-# enable IPO if open62541 is compiled with IPO
-get_target_property(open62541_ipo open62541::open62541 INTERPROCEDURAL_OPTIMIZATION)
-if(open62541_ipo)
-    message(STATUS "IPO enabled")
-    set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)
-else()
-    message(STATUS "IPO not enabled")
 endif()
 
 # open62541pp library (static/shared depending on option BUILD_SHARED_LIBS)
@@ -191,65 +167,29 @@ target_link_libraries(
         $<BUILD_INTERFACE:open62541pp_project_options>
 )
 
-# open62541-nodeset-loader
-option(UAPP_ENABLE_NODESETLOADER "Enable nodeset loader" OFF)
-if(UAPP_ENABLE_NODESETLOADER)
-    # variable OPEN62541_VERSION required by open62541-nodeset-loader
-    get_target_property(OPEN62541_VERSION open62541::open62541 VERSION)
-    set(NODESETLOADER_ENABLE_BUILD_INTO_OPEN62541 ON CACHE BOOL "")
-    add_subdirectory(3rdparty/open62541-nodeset-loader EXCLUDE_FROM_ALL)
+# detect standalone build, replace with PROJECT_IS_TOP_LEVEL for CMake >= 3.21
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    # tests
+    option(UAPP_BUILD_TESTS "Build unit tests" OFF)
+    if(UAPP_BUILD_TESTS)
+        message(STATUS "Unit tests enabled")
+        enable_testing()
+        add_subdirectory(tests)
+    endif()
 
-    # build and link as object library
-    enable_language(C)
-    add_library(open62541pp_nodesetloader OBJECT ${NODESETLOADER_SOURCES})
-    target_include_directories(
-        open62541pp_nodesetloader
-        PUBLIC
-            ${NODESETLOADER_PUBLIC_INCLUDES}
-        PRIVATE
-            ${NODESETLOADER_PRIVATE_INCLUDES}
-    )
-    target_link_libraries(
-        open62541pp_nodesetloader
-        PUBLIC
-            open62541::open62541
-        PRIVATE
-            ${NODESETLOADER_DEPS_LIBS}
-    )
-    target_compile_definitions(
-        open62541pp_nodesetloader
-        PUBLIC
-            NODESETLOADER_CLEANUP_CUSTOM_DATATYPES=1
-    )
-    set_target_properties(
-        open62541pp_nodesetloader
-        PROPERTIES
-            C_VISIBILITY_PRESET hidden
-            POSITION_INDEPENDENT_CODE ON  # required for shared library
-    )
-    target_link_libraries(open62541pp PRIVATE $<BUILD_INTERFACE:open62541pp_nodesetloader>)
-endif()
+    # examples
+    option(UAPP_BUILD_EXAMPLES "Build examples" OFF)
+    if(UAPP_BUILD_EXAMPLES)
+        message(STATUS "Examples enabled")
+        add_subdirectory(examples)
+    endif()
 
-# tests
-option(UAPP_BUILD_TESTS "Build unit tests" OFF)
-if(UAPP_BUILD_TESTS)
-    message(STATUS "Unit tests enabled")
-    enable_testing()
-    add_subdirectory(tests)
-endif()
-
-# examples
-option(UAPP_BUILD_EXAMPLES "Build examples" OFF)
-if(UAPP_BUILD_EXAMPLES)
-    message(STATUS "Examples enabled")
-    add_subdirectory(examples)
-endif()
-
-# documentation
-option(UAPP_BUILD_DOCUMENTATION "Build documentation" OFF)
-if(UAPP_BUILD_DOCUMENTATION)
-    message(STATUS "Documentation enabled")
-    add_subdirectory(doc)
+    # documentation
+    option(UAPP_BUILD_DOCUMENTATION "Build documentation" OFF)
+    if(UAPP_BUILD_DOCUMENTATION)
+        message(STATUS "Documentation enabled")
+        add_subdirectory(doc)
+    endif()
 endif()
 
 # install targets
@@ -271,7 +211,7 @@ install(
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
     FILES_MATCHING
         PATTERN "*.h"
-        PATTERN "*.hpp" 
+        PATTERN "*.hpp"
 )
 
 # install cmake config files

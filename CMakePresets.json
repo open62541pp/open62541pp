@@ -19,10 +19,10 @@
             "installDir": "${sourceDir}/install/${presetName}",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_INTERPROCEDURAL_OPTIMIZATION": "OFF",
                 "UA_MULTITHREADING": "100",
                 "UAPP_BUILD_TESTS": "ON",
                 "UAPP_WARNINGS_AS_ERRORS": "ON",
-                "UAPP_ENABLE_NODESETLOADER": "ON",
                 "UAPP_ENABLE_SANITIZER_UNDEFINED": "ON"
             }
         },
@@ -50,7 +50,7 @@
                 "dev"
             ],
             "cacheVariables": {
-                "UAPP_ENABLE_CLANG_TIDY": "ON"
+                "CMAKE_CXX_CLANG_TIDY": "clang-tidy;-warnings-as-errors=*"
             }
         },
         {

@@ -20,8 +20,8 @@ jobs:
           - v1.0.6
           - v1.1.6
           - v1.2.10
-          - v1.3.15
-          - v1.4.11
+          - v1.3.16
+          - v1.4.15
         build-type:
           - Debug
           - Release
@@ -32,7 +32,7 @@ jobs:
           - false
           - true
         exclude:
-          - version: "v1.4.11"
+          - version: "v1.4.15"
             amalgamation: true # installation with UA_ENABLE_AMALGAMATION=ON is not possible in v1.4
           # reduce number of jobs
           - library-type: static
@@ -40,11 +40,11 @@ jobs:
           - build-type: Debug
             library-type: shared
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           submodules: recursive
       - name: Checkout open62541 version ${{ matrix.version }}
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: open62541/open62541
           ref: ${{ matrix.version }}
@@ -58,7 +58,7 @@ jobs:
           mkdir build
           cd build
           cmake -G Ninja \
-            -DCMAKE_BUILD-TYPE=${{ matrix.build-type }} \
+            -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} \
             -DBUILD_SHARED_LIBS=${{ matrix.library-type == 'shared' }} \
             -DUA_ENABLE_AMALGAMATION=${{ matrix.amalgamation }} \
             -DUA_ENABLE_SUBSCRIPTIONS=ON \
@@ -72,7 +72,7 @@ jobs:
           mkdir build
           cd build
           cmake -G Ninja \
-            -DCMAKE_BUILD-TYPE=${{ matrix.build-type }} \
+            -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} \
             -DUAPP_BUILD_TESTS=ON \
             -DUAPP_BUILD_EXAMPLES=ON \
             -DUAPP_INTERNAL_OPEN62541=OFF \

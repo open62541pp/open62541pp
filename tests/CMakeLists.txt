@@ -4,7 +4,7 @@ option(CATCH_INSTALL_DOCS "Install documentation alongside library" OFF)
 FetchContent_Declare(
     Catch2
     GIT_REPOSITORY    https://github.com/catchorg/Catch2.git
-    GIT_TAG           v3.8.0
+    GIT_TAG           v3.12.0
     EXCLUDE_FROM_ALL
     SYSTEM
     FIND_PACKAGE_ARGS 3.3.0
@@ -74,14 +74,16 @@ target_compile_definitions(
     PRIVATE
         UAPP_NODESET_DIR="${PROJECT_SOURCE_DIR}/3rdparty/open62541/deps/ua-nodeset"
 )
-# fix LNK4096 error with MSVC
-# https://learn.microsoft.com/en-us/cpp/error-messages/tool-errors/linker-tools-warning-lnk4098
 if(MSVC)
+    # fix LNK4096 error with MSVC
+    # https://learn.microsoft.com/en-us/cpp/error-messages/tool-errors/linker-tools-warning-lnk4098
     set_target_properties(
         open62541pp_tests
         PROPERTIES
             LINK_FLAGS "/NODEFAULTLIB:libcmt.lib /NODEFAULTLIB:libcmtd.lib"
     )
+    # fix LNK2019 error with MSVC
+    target_link_libraries(open62541pp_tests PRIVATE ws2_32)
 endif()
 
 include(CTest)
