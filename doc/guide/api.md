@@ -51,7 +51,7 @@ opcua::services::readValueAsync(client, id, [](opcua::Result<opcua::Variant>& re
 **Use the services namespace when:**
 - you need `Result<T>` to compose or chain error handling without exceptions
 - performing batched requests (multiple nodes in one round-trip)
-- using asynchronous operations (`*Async` functions)
+- using callbacks, deferred execution, or custom completion tokens (full async model)
 - accessing response fields not exposed by the Node API
 
 ## Mixing both APIs {#api-mixing}
@@ -76,7 +76,7 @@ opcua::services::addVariable(
 | Criterion | Node API | services namespace |
 |-----------|----------|--------------------|
 | Error model | throws `BadStatus` | returns `Result<T>` |
-| Async support | no | yes (`*Async` suffix) |
+| Async support | partial — `std::future` only | full — callbacks, futures, deferred, custom tokens |
 | Batching | no | yes |
 | Works on Server | yes | yes |
 | Works on Client | yes | yes |

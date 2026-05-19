@@ -13,5 +13,6 @@ The guide helps developers integrate and extend the library in their application
 - @subpage wrapper
 - @subpage error_handling
 - @subpage async_model
+- @subpage custom_types
 
 */
