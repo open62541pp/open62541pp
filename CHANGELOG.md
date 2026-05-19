@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.21.1] - 2026-05-19
+
+### Fixed
+
+- `UA_DataTypeArray` with `cleanup=false` freed stack-allocated (or externally-owned) memory (#700)
+- Custom datatype use-after-free and invalid free during server teardown (#704)
+- Disable open62541 warnings for Clang (#705)
+
 ## [0.21.0] - 2026-02-18
 
 ### Added
@@ -913,7 +921,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial public release
 
-[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.21.0...HEAD
+[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.21.1...HEAD
+[0.21.1]: https://github.com/open62541pp/open62541pp/releases/tag/v0.21.1
 [0.21.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.21.0
 [0.20.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.20.0
 [0.19.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.19.0
