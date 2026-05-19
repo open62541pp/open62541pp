@@ -9,6 +9,7 @@ The guide helps developers integrate and extend the library in their application
 
 # Core concepts
 
+- @subpage api
 - @subpage wrapper
 - @subpage error_handling
 - @subpage async_model
