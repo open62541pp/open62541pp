@@ -131,13 +131,18 @@ auto createSubscriptionAsync(
     auto context = detail::createSubscriptionContext(
         connection, std::move(statusChangeCallback), std::move(deleteCallback)
     );
+    auto contextPtr = context.get();
     return detail::AsyncServiceAdapter<CreateSubscriptionResponse>::initiate(
         connection,
-        [&, context = context.get()](UA_ClientAsyncServiceCallback callback, void* userdata) {
+        [](UA_ClientAsyncServiceCallback callback,
+           void* userdata,
+           Client& connection,
+           const CreateSubscriptionRequest& request,
+           detail::SubscriptionContext* contextPtr) {
             throwIfBad(UA_Client_Subscriptions_create_async(
                 opcua::detail::getHandle(connection),
                 asNative(request),
-                context,
+                contextPtr,
                 detail::SubscriptionContext::statusChangeCallbackNative,
                 detail::SubscriptionContext::deleteCallbackNative,
                 callback,
@@ -154,7 +159,10 @@ auto createSubscriptionAsync(
                 }
             },
             std::forward<CompletionToken>(token)
-        )
+        ),
+        std::ref(connection),
+        request,
+        contextPtr
     );
 }
 
@@ -216,12 +224,17 @@ auto modifySubscriptionAsync(
 ) {
     return detail::AsyncServiceAdapter<ModifySubscriptionResponse>::initiate(
         connection,
-        [&](UA_ClientAsyncServiceCallback callback, void* userdata) {
+        [](UA_ClientAsyncServiceCallback callback,
+           void* userdata,
+           Client& connection,
+           const ModifySubscriptionRequest& request) {
             throwIfBad(UA_Client_Subscriptions_modify_async(
                 opcua::detail::getHandle(connection), asNative(request), callback, userdata, nullptr
             ));
         },
-        std::forward<CompletionToken>(token)
+        std::forward<CompletionToken>(token),
+        std::ref(connection),
+        request
     );
 }
 
@@ -339,12 +352,17 @@ auto deleteSubscriptionsAsync(
 ) {
     return detail::AsyncServiceAdapter<DeleteSubscriptionsResponse>::initiate(
         connection,
-        [&](UA_ClientAsyncServiceCallback callback, void* userdata) {
+        [](UA_ClientAsyncServiceCallback callback,
+           void* userdata,
+           Client& connection,
+           const DeleteSubscriptionsRequest& request) {
             throwIfBad(UA_Client_Subscriptions_delete_async(
                 opcua::detail::getHandle(connection), asNative(request), callback, userdata, nullptr
             ));
         },
-        std::forward<CompletionToken>(token)
+        std::forward<CompletionToken>(token),
+        std::ref(connection),
+        request
     );
 }
 #endif
