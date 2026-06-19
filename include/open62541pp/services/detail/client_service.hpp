@@ -81,18 +81,18 @@ struct AsyncServiceAdapter {
         );
 
         return asyncInitiate<Response>(
-            [](auto&& handler, Client& client, auto&& initiation, auto&&... args) {
-                auto& catcher = opcua::detail::getExceptionCatcher(client);
+            [](auto&& handler, Client& innerClient, auto&& innerInitiation, auto&&... innerArgs) {
+                auto& catcher = opcua::detail::getExceptionCatcher(innerClient);
                 try {
                     // NOLINTNEXTLINE(clang-analyzer-cplusplus.NewDeleteLeaks), false positive?
                     auto callbackAndContext = makeCallbackAndContext(
                         catcher, std::forward<decltype(handler)>(handler)
                     );
                     std::invoke(
-                        std::forward<decltype(initiation)>(initiation),
+                        std::forward<decltype(innerInitiation)>(innerInitiation),
                         callbackAndContext.callback,
                         callbackAndContext.context.get(),
-                        std::forward<decltype(args)>(args)...
+                        std::forward<decltype(innerArgs)>(innerArgs)...
                     );
                     // initiation call might raise an exception
                     // transfer ownership to the callback afterwards
@@ -116,11 +116,11 @@ auto sendRequestAsync(Client& client, const Request& request, CompletionToken&& 
         client,
         [](UA_ClientAsyncServiceCallback callback,
            void* userdata,
-           Client& client,
-           const Request& request) {
+           Client& innerClient,
+           const Request& innerRequest) {
             throwIfBad(__UA_Client_AsyncService(
-                opcua::detail::getHandle(client),
-                &request,
+                opcua::detail::getHandle(innerClient),
+                &innerRequest,
                 &getDataType<Request>(),
                 callback,
                 &getDataType<Response>(),

@@ -177,17 +177,17 @@ auto createMonitoredItemsDataChangeAsync(
         connection,
         [](UA_ClientAsyncServiceCallback callback,
            void* userdata,
-           Client& connection,
-           const CreateMonitoredItemsRequest& request,
-           Span<detail::MonitoredItemContext*> contextsPtr,
-           Span<UA_Client_DataChangeNotificationCallback> dataChangeCallbacks,
-           Span<UA_Client_DeleteMonitoredItemCallback> deleteCallbacks) {
+           Client& innerConnection,
+           const CreateMonitoredItemsRequest& innerRequest,
+           Span<detail::MonitoredItemContext*> innerContextsPtr,
+           Span<UA_Client_DataChangeNotificationCallback> innerDataChangeCallbacks,
+           Span<UA_Client_DeleteMonitoredItemCallback> innerDeleteCallbacks) {
             throwIfBad(UA_Client_MonitoredItems_createDataChanges_async(
-                opcua::detail::getHandle(connection),
-                asNative(request),
-                reinterpret_cast<void**>(contextsPtr.data()),  // NOLINT
-                dataChangeCallbacks.data(),
-                deleteCallbacks.data(),
+                opcua::detail::getHandle(innerConnection),
+                asNative(innerRequest),
+                reinterpret_cast<void**>(innerContextsPtr.data()),  // NOLINT
+                innerDataChangeCallbacks.data(),
+                innerDeleteCallbacks.data(),
                 callback,
                 userdata,
                 nullptr
@@ -317,17 +317,17 @@ auto createMonitoredItemsEventAsync(
         connection,
         [](UA_ClientAsyncServiceCallback callback,
            void* userdata,
-           Client& connection,
-           const CreateMonitoredItemsRequest& request,
-           Span<detail::MonitoredItemContext*> contextsPtr,
-           Span<UA_Client_EventNotificationCallback> eventCallbacks,
-           Span<UA_Client_DeleteMonitoredItemCallback> deleteCallbacks) {
+           Client& innerConnection,
+           const CreateMonitoredItemsRequest& innerRequest,
+           Span<detail::MonitoredItemContext*> innerContextsPtr,
+           Span<UA_Client_EventNotificationCallback> innerEventCallbacks,
+           Span<UA_Client_DeleteMonitoredItemCallback> innerDeleteCallbacks) {
             throwIfBad(UA_Client_MonitoredItems_createEvents_async(
-                opcua::detail::getHandle(connection),
-                asNative(request),
-                reinterpret_cast<void**>(contextsPtr.data()),  // NOLINT
-                eventCallbacks.data(),
-                deleteCallbacks.data(),
+                opcua::detail::getHandle(innerConnection),
+                asNative(innerRequest),
+                reinterpret_cast<void**>(innerContextsPtr.data()),  // NOLINT
+                innerEventCallbacks.data(),
+                innerDeleteCallbacks.data(),
                 callback,
                 userdata,
                 nullptr
@@ -441,10 +441,14 @@ auto modifyMonitoredItemsAsync(
         connection,
         [](UA_ClientAsyncServiceCallback callback,
            void* userdata,
-           Client& connection,
-           const ModifyMonitoredItemsRequest& request) {
+           Client& innerConnection,
+           const ModifyMonitoredItemsRequest& innerRequest) {
             throwIfBad(UA_Client_MonitoredItems_modify_async(
-                opcua::detail::getHandle(connection), asNative(request), callback, userdata, nullptr
+                opcua::detail::getHandle(innerConnection),
+                asNative(innerRequest),
+                callback,
+                userdata,
+                nullptr
             ));
         },
         std::forward<CompletionToken>(token),
@@ -651,10 +655,14 @@ auto deleteMonitoredItemsAsync(
         connection,
         [](UA_ClientAsyncServiceCallback callback,
            void* userdata,
-           Client& connection,
-           const DeleteMonitoredItemsRequest& request) {
+           Client& innerConnection,
+           const DeleteMonitoredItemsRequest& innerRequest) {
             throwIfBad(UA_Client_MonitoredItems_delete_async(
-                opcua::detail::getHandle(connection), asNative(request), callback, userdata, nullptr
+                opcua::detail::getHandle(innerConnection),
+                asNative(innerRequest),
+                callback,
+                userdata,
+                nullptr
             ));
         },
         std::forward<CompletionToken>(token),
