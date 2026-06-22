@@ -118,7 +118,7 @@ std::vector<std::unique_ptr<MonitoredItemContext>> makeMonitoredItemContexts(
 
 void convertMonitoredItemContexts(
     Span<const std::unique_ptr<MonitoredItemContext>> contexts,
-    Span<MonitoredItemContext*> contextsPtr,
+    Span<void*> contextsPtr,
     Span<UA_Client_DataChangeNotificationCallback> dataChangeCallbacksNative,
     Span<UA_Client_EventNotificationCallback> eventCallbacksNative,
     Span<UA_Client_DeleteMonitoredItemCallback> deleteCallbacksNative
@@ -167,7 +167,7 @@ auto createMonitoredItemsDataChangeAsync(
     auto contexts = detail::makeMonitoredItemContexts(
         connection, request, std::move(dataChangeCallback), {}, std::move(deleteCallback)
     );
-    std::vector<detail::MonitoredItemContext*> contextsPtr{contexts.size()};
+    std::vector<void*> contextsPtr{contexts.size()};
     std::vector<UA_Client_DataChangeNotificationCallback> dataChangeCallbacks{contexts.size()};
     std::vector<UA_Client_DeleteMonitoredItemCallback> deleteCallbacks{contexts.size()};
     detail::convertMonitoredItemContexts(
@@ -179,16 +179,20 @@ auto createMonitoredItemsDataChangeAsync(
             UA_ClientAsyncServiceCallback callback,
             void* userdata,
             const CreateMonitoredItemsRequest& innerRequest,
-            Span<detail::MonitoredItemContext*> innerContextsPtr,
-            Span<UA_Client_DataChangeNotificationCallback> innerDataChangeCallbacks,
-            Span<UA_Client_DeleteMonitoredItemCallback> innerDeleteCallbacks
+            Span<void* const> innerContextsPtr,
+            Span<const UA_Client_DataChangeNotificationCallback> innerDataChangeCallbacks,
+            Span<const UA_Client_DeleteMonitoredItemCallback> innerDeleteCallbacks
         ) {
             throwIfBad(UA_Client_MonitoredItems_createDataChanges_async(
                 opcua::detail::getHandle(connection),
                 asNative(innerRequest),
-                reinterpret_cast<void**>(innerContextsPtr.data()),  // NOLINT
-                innerDataChangeCallbacks.data(),
-                innerDeleteCallbacks.data(),
+                // NOLINTBEGIN
+                const_cast<void**>(innerContextsPtr.data()),
+                const_cast<UA_Client_DataChangeNotificationCallback*>(
+                    innerDataChangeCallbacks.data()
+                ),
+                const_cast<UA_Client_DeleteMonitoredItemCallback*>(innerDeleteCallbacks.data()),
+                // NOLINTEND
                 callback,
                 userdata,
                 nullptr
@@ -307,7 +311,7 @@ auto createMonitoredItemsEventAsync(
     auto contexts = detail::makeMonitoredItemContexts(
         connection, request, {}, std::move(eventCallback), std::move(deleteCallback)
     );
-    std::vector<detail::MonitoredItemContext*> contextsPtr{contexts.size()};
+    std::vector<void*> contextsPtr{contexts.size()};
     std::vector<UA_Client_EventNotificationCallback> eventCallbacks{contexts.size()};
     std::vector<UA_Client_DeleteMonitoredItemCallback> deleteCallbacks{contexts.size()};
     detail::convertMonitoredItemContexts(
@@ -319,16 +323,18 @@ auto createMonitoredItemsEventAsync(
             UA_ClientAsyncServiceCallback callback,
             void* userdata,
             const CreateMonitoredItemsRequest& innerRequest,
-            Span<detail::MonitoredItemContext*> innerContextsPtr,
-            Span<UA_Client_EventNotificationCallback> innerEventCallbacks,
-            Span<UA_Client_DeleteMonitoredItemCallback> innerDeleteCallbacks
+            Span<void* const> innerContextsPtr,
+            Span<const UA_Client_EventNotificationCallback> innerEventCallbacks,
+            Span<const UA_Client_DeleteMonitoredItemCallback> innerDeleteCallbacks
         ) {
             throwIfBad(UA_Client_MonitoredItems_createEvents_async(
                 opcua::detail::getHandle(connection),
                 asNative(innerRequest),
-                reinterpret_cast<void**>(innerContextsPtr.data()),  // NOLINT
-                innerEventCallbacks.data(),
-                innerDeleteCallbacks.data(),
+                // NOLINGBEGIN
+                const_cast<void**>(innerContextsPtr.data()),
+                const_cast<UA_Client_EventNotificationCallback*>(innerEventCallbacks.data()),
+                const_cast<UA_Client_DeleteMonitoredItemCallback*>(innerDeleteCallbacks.data()),
+                // NOLINTEND
                 callback,
                 userdata,
                 nullptr
