@@ -81,8 +81,8 @@ struct AsyncServiceAdapter {
         );
 
         return asyncInitiate<Response>(
-            [](auto&& handler, Client& innerClient, auto&& innerInitiation, auto&&... innerArgs) {
-                auto& catcher = opcua::detail::getExceptionCatcher(innerClient);
+            [&client](auto&& handler, auto&& innerInitiation, auto&&... innerArgs) {
+                auto& catcher = opcua::detail::getExceptionCatcher(client);
                 try {
                     // NOLINTNEXTLINE(clang-analyzer-cplusplus.NewDeleteLeaks), false positive?
                     auto callbackAndContext = makeCallbackAndContext(
@@ -102,7 +102,6 @@ struct AsyncServiceAdapter {
                 }
             },
             std::forward<CompletionToken>(token),
-            std::ref(client),
             std::forward<Initiation>(initiation),
             std::forward<Args>(args)...
         );
@@ -114,12 +113,11 @@ template <typename Request, typename Response, typename CompletionToken>
 auto sendRequestAsync(Client& client, const Request& request, CompletionToken&& token) {
     return AsyncServiceAdapter<Response>::initiate(
         client,
-        [](UA_ClientAsyncServiceCallback callback,
-           void* userdata,
-           Client& innerClient,
-           const Request& innerRequest) {
+        [&client](
+            UA_ClientAsyncServiceCallback callback, void* userdata, const Request& innerRequest
+        ) {
             throwIfBad(__UA_Client_AsyncService(
-                opcua::detail::getHandle(innerClient),
+                opcua::detail::getHandle(client),
                 &innerRequest,
                 &getDataType<Request>(),
                 callback,
@@ -129,7 +127,6 @@ auto sendRequestAsync(Client& client, const Request& request, CompletionToken&& 
             ));
         },
         std::forward<CompletionToken>(token),
-        std::ref(client),
         request
     );
 }

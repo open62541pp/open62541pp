@@ -134,13 +134,14 @@ auto createSubscriptionAsync(
     auto* contextPtr = context.get();
     return detail::AsyncServiceAdapter<CreateSubscriptionResponse>::initiate(
         connection,
-        [](UA_ClientAsyncServiceCallback callback,
-           void* userdata,
-           Client& innerConnection,
-           const CreateSubscriptionRequest& innerRequest,
-           detail::SubscriptionContext* innerContextPtr) {
+        [&connection](
+            UA_ClientAsyncServiceCallback callback,
+            void* userdata,
+            const CreateSubscriptionRequest& innerRequest,
+            detail::SubscriptionContext* innerContextPtr
+        ) {
             throwIfBad(UA_Client_Subscriptions_create_async(
-                opcua::detail::getHandle(innerConnection),
+                opcua::detail::getHandle(connection),
                 asNative(innerRequest),
                 innerContextPtr,
                 detail::SubscriptionContext::statusChangeCallbackNative,
@@ -160,7 +161,6 @@ auto createSubscriptionAsync(
             },
             std::forward<CompletionToken>(token)
         ),
-        std::ref(connection),
         request,
         contextPtr
     );
@@ -224,12 +224,13 @@ auto modifySubscriptionAsync(
 ) {
     return detail::AsyncServiceAdapter<ModifySubscriptionResponse>::initiate(
         connection,
-        [](UA_ClientAsyncServiceCallback callback,
-           void* userdata,
-           Client& innerConnection,
-           const ModifySubscriptionRequest& innerRequest) {
+        [&connection](
+            UA_ClientAsyncServiceCallback callback,
+            void* userdata,
+            const ModifySubscriptionRequest& innerRequest
+        ) {
             throwIfBad(UA_Client_Subscriptions_modify_async(
-                opcua::detail::getHandle(innerConnection),
+                opcua::detail::getHandle(connection),
                 asNative(innerRequest),
                 callback,
                 userdata,
@@ -237,7 +238,6 @@ auto modifySubscriptionAsync(
             ));
         },
         std::forward<CompletionToken>(token),
-        std::ref(connection),
         request
     );
 }
@@ -356,12 +356,13 @@ auto deleteSubscriptionsAsync(
 ) {
     return detail::AsyncServiceAdapter<DeleteSubscriptionsResponse>::initiate(
         connection,
-        [](UA_ClientAsyncServiceCallback callback,
-           void* userdata,
-           Client& innerConnection,
-           const DeleteSubscriptionsRequest& innerRequest) {
+        [&connection](
+            UA_ClientAsyncServiceCallback callback,
+            void* userdata,
+            const DeleteSubscriptionsRequest& innerRequest
+        ) {
             throwIfBad(UA_Client_Subscriptions_delete_async(
-                opcua::detail::getHandle(innerConnection),
+                opcua::detail::getHandle(connection),
                 asNative(innerRequest),
                 callback,
                 userdata,
@@ -369,7 +370,6 @@ auto deleteSubscriptionsAsync(
             ));
         },
         std::forward<CompletionToken>(token),
-        std::ref(connection),
         request
     );
 }
