@@ -64,15 +64,24 @@ struct AsyncServiceAdapter {
      * Initiate open62541 async client operation with user-defined completion token.
      * @param client Instance of type Client
      * @param initiation Callable to initiate the async operation. Following signature is expected:
-     *                   `void(UA_ClientAsyncServiceCallback callback, void* userdata)`
+     *                   ```
+     *                   void(
+     *                       UA_ClientAsyncServiceCallback callback,
+     *                       void* userdata,
+     *                       Args... args)
+     *                   ```
      * @param token Completion token
      */
-    template <typename Initiation, typename CompletionToken>
-    static auto initiate(Client& client, Initiation&& initiation, CompletionToken&& token) {
-        static_assert(std::is_invocable_v<Initiation, UA_ClientAsyncServiceCallback, void*>);
+    template <typename Initiation, typename CompletionToken, typename... Args>
+    static auto initiate(
+        Client& client, Initiation&& initiation, CompletionToken&& token, Args&&... args
+    ) {
+        static_assert(
+            std::is_invocable_v<Initiation, UA_ClientAsyncServiceCallback, void*, Args&&...>
+        );
 
         return asyncInitiate<Response>(
-            [&](auto&& handler) {
+            [&client](auto&& handler, auto&& innerInitiation, auto&&... innerArgs) {
                 auto& catcher = opcua::detail::getExceptionCatcher(client);
                 try {
                     // NOLINTNEXTLINE(clang-analyzer-cplusplus.NewDeleteLeaks), false positive?
@@ -80,9 +89,10 @@ struct AsyncServiceAdapter {
                         catcher, std::forward<decltype(handler)>(handler)
                     );
                     std::invoke(
-                        std::forward<Initiation>(initiation),
+                        std::forward<decltype(innerInitiation)>(innerInitiation),
                         callbackAndContext.callback,
-                        callbackAndContext.context.get()
+                        callbackAndContext.context.get(),
+                        std::forward<decltype(innerArgs)>(innerArgs)...
                     );
                     // initiation call might raise an exception
                     // transfer ownership to the callback afterwards
@@ -91,7 +101,9 @@ struct AsyncServiceAdapter {
                     catcher.setException(std::current_exception());
                 }
             },
-            std::forward<CompletionToken>(token)
+            std::forward<CompletionToken>(token),
+            std::forward<Initiation>(initiation),
+            std::forward<Args>(args)...
         );
     }
 };
@@ -101,10 +113,12 @@ template <typename Request, typename Response, typename CompletionToken>
 auto sendRequestAsync(Client& client, const Request& request, CompletionToken&& token) {
     return AsyncServiceAdapter<Response>::initiate(
         client,
-        [&](UA_ClientAsyncServiceCallback callback, void* userdata) {
+        [&client](
+            UA_ClientAsyncServiceCallback callback, void* userdata, const Request& innerRequest
+        ) {
             throwIfBad(__UA_Client_AsyncService(
                 opcua::detail::getHandle(client),
-                &request,
+                &innerRequest,
                 &getDataType<Request>(),
                 callback,
                 &getDataType<Response>(),
@@ -112,7 +126,8 @@ auto sendRequestAsync(Client& client, const Request& request, CompletionToken&& 
                 nullptr
             ));
         },
-        std::forward<CompletionToken>(token)
+        std::forward<CompletionToken>(token),
+        request
     );
 }
 
