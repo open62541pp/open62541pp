@@ -32,7 +32,8 @@ public:
         Session& session,
         const EndpointDescription& endpointDescription,
         const ByteString& secureChannelRemoteCertificate,
-        const ExtensionObject& userIdentityToken
+        const ExtensionObject& userIdentityToken,
+        void*& sessionContext
     ) override;
 
     void closeSession(Session& session) override;
