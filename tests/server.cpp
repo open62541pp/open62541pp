@@ -130,6 +130,13 @@ TEST_CASE("Server run/stop/runIterate") {
         t.join();  // wait until stopped
     }
 
+    // https://github.com/open62541pp/open62541pp/issues/714
+    SECTION("stop before startup completes") {
+        auto t = std::thread([&] { server.run(); });
+        server.stop();
+        t.join();
+    }
+
     SECTION("runIterate") {
         const auto waitInterval = server.runIterate();
         CHECK(waitInterval > 0);
