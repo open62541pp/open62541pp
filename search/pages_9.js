@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['wrapper_20types_0',['Wrapper types',['../wrapper.html',1,'guide']]]
+  ['right_20api_0',['Choosing the right API',['../api.html',1,'guide']]]
 ];

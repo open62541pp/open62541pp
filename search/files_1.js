@@ -8,13 +8,14 @@ var searchData=
   ['accesslevelex_2edox_5',['accesslevelex.dox',['../accesslevelex_8dox.html',1,'']]],
   ['accessrestrictions_2edox_6',['accessrestrictions.dox',['../accessrestrictions_8dox.html',1,'']]],
   ['aliaslist_2eh_7',['AliasList.h',['open62541/AliasList_8h.html',0,'']]],
-  ['arch_2eh_8',['arch.h',['open62541/arch_8h.html',0,'']]],
-  ['arraydimensions_2edox_9',['arraydimensions.dox',['../arraydimensions_8dox.html',1,'']]],
-  ['async_2ehpp_10',['async.hpp',['../async_8hpp.html',1,'']]],
-  ['async_5fhook_2ehpp_11',['async_hook.hpp',['../async__hook_8hpp.html',1,'']]],
-  ['async_5fmodel_2emd_12',['async_model.md',['../async__model_8md.html',1,'']]],
-  ['async_5ftransform_2ehpp_13',['async_transform.hpp',['../async__transform_8hpp.html',1,'']]],
-  ['attribute_2ehpp_14',['attribute.hpp',['../attribute_8hpp.html',1,'']]],
-  ['attribute_5fhandler_2ehpp_15',['attribute_handler.hpp',['../attribute__handler_8hpp.html',1,'']]],
-  ['attribute_5fhighlevel_2ehpp_16',['attribute_highlevel.hpp',['../attribute__highlevel_8hpp.html',1,'']]]
+  ['api_2emd_8',['api.md',['../api_8md.html',1,'']]],
+  ['arch_2eh_9',['arch.h',['open62541/arch_8h.html',0,'']]],
+  ['arraydimensions_2edox_10',['arraydimensions.dox',['../arraydimensions_8dox.html',1,'']]],
+  ['async_2ehpp_11',['async.hpp',['../async_8hpp.html',1,'']]],
+  ['async_5fhook_2ehpp_12',['async_hook.hpp',['../async__hook_8hpp.html',1,'']]],
+  ['async_5fmodel_2emd_13',['async_model.md',['../async__model_8md.html',1,'']]],
+  ['async_5ftransform_2ehpp_14',['async_transform.hpp',['../async__transform_8hpp.html',1,'']]],
+  ['attribute_2ehpp_15',['attribute.hpp',['../attribute_8hpp.html',1,'']]],
+  ['attribute_5fhandler_2ehpp_16',['attribute_handler.hpp',['../attribute__handler_8hpp.html',1,'']]],
+  ['attribute_5fhighlevel_2ehpp_17',['attribute_highlevel.hpp',['../attribute__highlevel_8hpp.html',1,'']]]
 ];

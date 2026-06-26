@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['deprecated_20list_0',['Deprecated List',['../deprecated.html',1,'']]],
-  ['development_20guide_1',['Development guide',['../guide.html',1,'']]]
+  ['choosing_20the_20right_20api_0',['Choosing the right API',['../api.html',1,'guide']]],
+  ['custom_20types_1',['Custom types',['../custom_types.html',1,'guide']]]
 ];

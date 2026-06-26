@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['types_0',['Wrapper types',['../wrapper.html',1,'guide']]]
+  ['open62541pp_0',['open62541pp',['../index.html',1,'']]]
 ];
