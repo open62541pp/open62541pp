@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.21.2] - 2026-06-26
+
+### Fixed
+
+- Race condition between `Server::run()` and `Server::stop()` (#715)
+- Dangling references when using `useDeferred` (#710)
+
 ## [0.21.1] - 2026-05-19
 
 ### Fixed
@@ -921,7 +928,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial public release
 
-[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.21.1...HEAD
+[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.21.2...HEAD
+[0.21.2]: https://github.com/open62541pp/open62541pp/releases/tag/v0.21.2
 [0.21.1]: https://github.com/open62541pp/open62541pp/releases/tag/v0.21.1
 [0.21.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.21.0
 [0.20.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.20.0
