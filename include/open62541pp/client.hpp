@@ -87,6 +87,10 @@ public:
     /// Set response timeout in milliseconds.
     void setTimeout(uint32_t milliseconds) noexcept;
 
+    /// Set client description.
+    /// The ApplicationUri must match the URI set in the certificate.
+    void setClientDescription(ApplicationDescription description) noexcept;
+
     /// Set anonymous identity token.
     void setUserIdentityToken(const AnonymousIdentityToken& token);
     /// Set username/password identity token.
