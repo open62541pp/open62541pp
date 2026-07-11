@@ -337,6 +337,7 @@ uint16_t Server::runIterate() {
     if (!context().running) {
         runStartup(*this, context());
     }
+    const std::scoped_lock runLock{context().mutexRun};
     if (!context().running) {
         return 0;
     }
