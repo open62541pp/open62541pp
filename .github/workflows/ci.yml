@@ -129,7 +129,7 @@ jobs:
 
     runs-on: ${{ matrix.config.os }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           submodules: recursive
 
@@ -168,7 +168,7 @@ jobs:
 
       - name: Upload coverage reports to Codecov
         if: matrix.config.coverage && matrix.build-type == 'Debug'
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v7
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./build/coverage.xml

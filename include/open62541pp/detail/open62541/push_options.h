@@ -1,6 +1,6 @@
 // no include guard
 
-#if defined(__GNUC__)
+#if defined(__GNUC__) || defined(__clang__)
 // ignore compile warnings of open62541:
 // - missing initializer for member ‘UA_NodeId::identifier’
 // - missing initializer for member ‘UA_ExpandedNodeId::namespaceUri’
@@ -12,7 +12,7 @@
 #pragma GCC diagnostic ignored "-Wmissing-braces"
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 #pragma GCC diagnostic ignored "-Wunused-variable"
-#elif defined(_MSC_VER) && !defined(__clang__)
+#elif defined(_MSC_VER)
 #pragma warning(push)
 #pragma warning(disable : 4100)  // unreferenced formal parameter
 #endif

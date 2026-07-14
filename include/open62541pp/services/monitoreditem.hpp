@@ -118,7 +118,7 @@ std::vector<std::unique_ptr<MonitoredItemContext>> makeMonitoredItemContexts(
 
 void convertMonitoredItemContexts(
     Span<const std::unique_ptr<MonitoredItemContext>> contexts,
-    Span<MonitoredItemContext*> contextsPtr,
+    Span<void*> contextsPtr,
     Span<UA_Client_DataChangeNotificationCallback> dataChangeCallbacksNative,
     Span<UA_Client_EventNotificationCallback> eventCallbacksNative,
     Span<UA_Client_DeleteMonitoredItemCallback> deleteCallbacksNative
@@ -167,7 +167,7 @@ auto createMonitoredItemsDataChangeAsync(
     auto contexts = detail::makeMonitoredItemContexts(
         connection, request, std::move(dataChangeCallback), {}, std::move(deleteCallback)
     );
-    std::vector<detail::MonitoredItemContext*> contextsPtr{contexts.size()};
+    std::vector<void*> contextsPtr{contexts.size()};
     std::vector<UA_Client_DataChangeNotificationCallback> dataChangeCallbacks{contexts.size()};
     std::vector<UA_Client_DeleteMonitoredItemCallback> deleteCallbacks{contexts.size()};
     detail::convertMonitoredItemContexts(
@@ -175,13 +175,24 @@ auto createMonitoredItemsDataChangeAsync(
     );
     return detail::AsyncServiceAdapter<CreateMonitoredItemsResponse>::initiate(
         connection,
-        [&](UA_ClientAsyncServiceCallback callback, void* userdata) {
+        [&connection](
+            UA_ClientAsyncServiceCallback callback,
+            void* userdata,
+            const CreateMonitoredItemsRequest& innerRequest,
+            Span<void* const> innerContextsPtr,
+            Span<const UA_Client_DataChangeNotificationCallback> innerDataChangeCallbacks,
+            Span<const UA_Client_DeleteMonitoredItemCallback> innerDeleteCallbacks
+        ) {
             throwIfBad(UA_Client_MonitoredItems_createDataChanges_async(
                 opcua::detail::getHandle(connection),
-                asNative(request),
-                reinterpret_cast<void**>(contextsPtr.data()),  // NOLINT
-                dataChangeCallbacks.data(),
-                deleteCallbacks.data(),
+                asNative(innerRequest),
+                // NOLINTBEGIN
+                const_cast<void**>(innerContextsPtr.data()),
+                const_cast<UA_Client_DataChangeNotificationCallback*>(
+                    innerDataChangeCallbacks.data()
+                ),
+                const_cast<UA_Client_DeleteMonitoredItemCallback*>(innerDeleteCallbacks.data()),
+                // NOLINTEND
                 callback,
                 userdata,
                 nullptr
@@ -194,7 +205,11 @@ auto createMonitoredItemsDataChangeAsync(
                 detail::storeMonitoredItemContexts(connection, subscriptionId, response, contexts);
             },
             std::forward<CompletionToken>(token)
-        )
+        ),
+        request,
+        std::move(contextsPtr),
+        std::move(dataChangeCallbacks),
+        std::move(deleteCallbacks)
     );
 }
 #endif
@@ -296,7 +311,7 @@ auto createMonitoredItemsEventAsync(
     auto contexts = detail::makeMonitoredItemContexts(
         connection, request, {}, std::move(eventCallback), std::move(deleteCallback)
     );
-    std::vector<detail::MonitoredItemContext*> contextsPtr{contexts.size()};
+    std::vector<void*> contextsPtr{contexts.size()};
     std::vector<UA_Client_EventNotificationCallback> eventCallbacks{contexts.size()};
     std::vector<UA_Client_DeleteMonitoredItemCallback> deleteCallbacks{contexts.size()};
     detail::convertMonitoredItemContexts(
@@ -304,13 +319,22 @@ auto createMonitoredItemsEventAsync(
     );
     return detail::AsyncServiceAdapter<CreateMonitoredItemsResponse>::initiate(
         connection,
-        [&](UA_ClientAsyncServiceCallback callback, void* userdata) {
+        [&connection](
+            UA_ClientAsyncServiceCallback callback,
+            void* userdata,
+            const CreateMonitoredItemsRequest& innerRequest,
+            Span<void* const> innerContextsPtr,
+            Span<const UA_Client_EventNotificationCallback> innerEventCallbacks,
+            Span<const UA_Client_DeleteMonitoredItemCallback> innerDeleteCallbacks
+        ) {
             throwIfBad(UA_Client_MonitoredItems_createEvents_async(
                 opcua::detail::getHandle(connection),
-                asNative(request),
-                reinterpret_cast<void**>(contextsPtr.data()),  // NOLINT
-                eventCallbacks.data(),
-                deleteCallbacks.data(),
+                asNative(innerRequest),
+                // NOLINGBEGIN
+                const_cast<void**>(innerContextsPtr.data()),
+                const_cast<UA_Client_EventNotificationCallback*>(innerEventCallbacks.data()),
+                const_cast<UA_Client_DeleteMonitoredItemCallback*>(innerDeleteCallbacks.data()),
+                // NOLINTEND
                 callback,
                 userdata,
                 nullptr
@@ -323,7 +347,11 @@ auto createMonitoredItemsEventAsync(
                 detail::storeMonitoredItemContexts(connection, subscriptionId, response, contexts);
             },
             std::forward<CompletionToken>(token)
-        )
+        ),
+        request,
+        std::move(contextsPtr),
+        std::move(eventCallbacks),
+        std::move(deleteCallbacks)
     );
 }
 #endif
@@ -417,12 +445,21 @@ auto modifyMonitoredItemsAsync(
 ) {
     return detail::AsyncServiceAdapter<ModifyMonitoredItemsResponse>::initiate(
         connection,
-        [&](UA_ClientAsyncServiceCallback callback, void* userdata) {
+        [&connection](
+            UA_ClientAsyncServiceCallback callback,
+            void* userdata,
+            const ModifyMonitoredItemsRequest& innerRequest
+        ) {
             throwIfBad(UA_Client_MonitoredItems_modify_async(
-                opcua::detail::getHandle(connection), asNative(request), callback, userdata, nullptr
+                opcua::detail::getHandle(connection),
+                asNative(innerRequest),
+                callback,
+                userdata,
+                nullptr
             ));
         },
-        std::forward<CompletionToken>(token)
+        std::forward<CompletionToken>(token),
+        request
     );
 }
 #endif
@@ -622,12 +659,21 @@ auto deleteMonitoredItemsAsync(
 ) {
     return detail::AsyncServiceAdapter<DeleteMonitoredItemsResponse>::initiate(
         connection,
-        [&](UA_ClientAsyncServiceCallback callback, void* userdata) {
+        [&connection](
+            UA_ClientAsyncServiceCallback callback,
+            void* userdata,
+            const DeleteMonitoredItemsRequest& innerRequest
+        ) {
             throwIfBad(UA_Client_MonitoredItems_delete_async(
-                opcua::detail::getHandle(connection), asNative(request), callback, userdata, nullptr
+                opcua::detail::getHandle(connection),
+                asNative(innerRequest),
+                callback,
+                userdata,
+                nullptr
             ));
         },
-        std::forward<CompletionToken>(token)
+        std::forward<CompletionToken>(token),
+        request
     );
 }
 #endif

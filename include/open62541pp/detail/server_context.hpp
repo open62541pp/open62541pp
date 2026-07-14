@@ -59,6 +59,8 @@ struct ServerContext {
     SessionRegistry sessionRegistry;
     std::atomic<bool> running{false};
     std::mutex mutexRun;
+    std::mutex mutexStartup;
+    bool stopRequested{false};  // guarded by mutexStartup
 
     ContextMap<uint64_t, Staleable<std::function<void()>>> callbacks;
     ContextMap<NodeId, NodeContext> nodeContexts;

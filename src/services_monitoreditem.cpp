@@ -54,17 +54,16 @@ std::vector<std::unique_ptr<MonitoredItemContext>> makeMonitoredItemContexts(
 
 void convertMonitoredItemContexts(
     Span<const std::unique_ptr<MonitoredItemContext>> contexts,
-    Span<MonitoredItemContext*> contextsPtr,
+    Span<void*> contextsPtr,
     Span<UA_Client_DataChangeNotificationCallback> dataChangeCallbacksNative,
     Span<UA_Client_EventNotificationCallback> eventCallbacksNative,
     Span<UA_Client_DeleteMonitoredItemCallback> deleteCallbacksNative
 ) noexcept {
     assert(contextsPtr.size() == contexts.size());
     std::transform(
-        contexts.begin(),
-        contexts.end(),
-        contextsPtr.begin(),
-        [](const auto& context) noexcept { return context.get(); }
+        contexts.begin(), contexts.end(), contextsPtr.begin(), [](const auto& context) noexcept {
+            return context.get();
+        }
     );
     if (!dataChangeCallbacksNative.empty()) {
         assert(dataChangeCallbacksNative.size() == contexts.size());
@@ -133,7 +132,7 @@ CreateMonitoredItemsResponse createMonitoredItemsDataChange(
     auto contexts = detail::makeMonitoredItemContexts(
         connection, request, std::move(dataChangeCallback), {}, std::move(deleteCallback)
     );
-    std::vector<detail::MonitoredItemContext*> contextsPtr(contexts.size());
+    std::vector<void*> contextsPtr(contexts.size());
     std::vector<UA_Client_DataChangeNotificationCallback> dataChangeCallbacks(contexts.size());
     std::vector<UA_Client_DeleteMonitoredItemCallback> deleteCallbacks(contexts.size());
     detail::convertMonitoredItemContexts(
@@ -142,7 +141,7 @@ CreateMonitoredItemsResponse createMonitoredItemsDataChange(
     CreateMonitoredItemsResponse response = UA_Client_MonitoredItems_createDataChanges(
         connection.handle(),
         request,
-        reinterpret_cast<void**>(contextsPtr.data()),  // NOLINT
+        contextsPtr.data(),
         dataChangeCallbacks.data(),
         deleteCallbacks.data()
     );
@@ -207,7 +206,7 @@ CreateMonitoredItemsResponse createMonitoredItemsEvent(
     auto contexts = detail::makeMonitoredItemContexts(
         connection, request, {}, std::move(eventCallback), std::move(deleteCallback)
     );
-    std::vector<detail::MonitoredItemContext*> contextsPtr(contexts.size());
+    std::vector<void*> contextsPtr(contexts.size());
     std::vector<UA_Client_EventNotificationCallback> eventCallbacks(contexts.size());
     std::vector<UA_Client_DeleteMonitoredItemCallback> deleteCallbacks(contexts.size());
     detail::convertMonitoredItemContexts(
@@ -216,7 +215,7 @@ CreateMonitoredItemsResponse createMonitoredItemsEvent(
     CreateMonitoredItemsResponse response = UA_Client_MonitoredItems_createEvents(
         connection.handle(),
         request,
-        reinterpret_cast<void**>(contextsPtr.data()),  // NOLINT
+        contextsPtr.data(),
         eventCallbacks.data(),
         deleteCallbacks.data()
     );

@@ -4,6 +4,7 @@
 [doc-node]: https://open62541pp.github.io/open62541pp/classopcua_1_1Node.html
 [doc-typewrapper]: https://open62541pp.github.io/open62541pp/group__Wrapper.html
 [doc-services]: https://open62541pp.github.io/open62541pp/group__Services.html
+[doc-api]: https://open62541pp.github.io/open62541pp/api.html
 [doc-async-model]: https://open62541pp.github.io/open62541pp/async_model.html
 [ci]: https://github.com/open62541pp/open62541pp/actions/workflows/ci.yml
 [ci-compatibility]: https://github.com/open62541pp/open62541pp/actions/workflows/open62541-compatibility.yml
@@ -37,7 +38,7 @@
   - [`opcua::Server`][doc-server]
   - [`opcua::Client`][doc-client]
   - [`opcua::Node`][doc-node]
-- [Free functions in `services` namespace][doc-services] as an alternative to the [`opcua::Node` class][doc-node]
+- [Free functions in `services` namespace][doc-services] as an alternative to the [`opcua::Node` class][doc-node] — see the [API guide][doc-api]
 - [Safe wrapper classes][doc-typewrapper] for open62541 `UA_*` types to prevent memory leaks
 - Native open62541 objects can be accessed using the `handle()` method of the wrapping classes
 - [Extensible type conversion system](#-type-conversion) to convert arbitrary types to/from native `UA_*` types

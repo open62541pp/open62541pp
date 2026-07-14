@@ -323,14 +323,21 @@ void Server::setVariableNodeDataSource(const NodeId& id, std::unique_ptr<DataSou
 }
 
 static void runStartup(Server& server, detail::ServerContext& context) {
+    const std::scoped_lock startupLock{context.mutexStartup};
+    if (context.running || context.stopRequested) {
+        context.stopRequested = false;
+        return;
+    }
     applySessionRegistry(server.config(), context);
     throwIfBad(UA_Server_run_startup(server.handle()));
     context.running = true;
 }
 
 uint16_t Server::runIterate() {
+    runStartup(*this, context());
+    const std::scoped_lock runLock{context().mutexRun};
     if (!context().running) {
-        runStartup(*this, context());
+        return 0;
     }
     auto interval = UA_Server_run_iterate(handle(), false /* don't wait */);
     context().exceptionCatcher.rethrow();
@@ -338,11 +345,8 @@ uint16_t Server::runIterate() {
 }
 
 void Server::run() {
-    if (context().running) {
-        return;
-    }
     runStartup(*this, context());
-    const std::lock_guard lock(context().mutexRun);
+    const std::scoped_lock runLock{context().mutexRun};
     try {
         while (context().running) {
             // https://github.com/open62541/open62541/blob/master/examples/server_mainloop.c
@@ -356,12 +360,16 @@ void Server::run() {
 }
 
 void Server::stop() {
-    if (!context().running) {
-        return;
+    {
+        const std::scoped_lock startupLock{context().mutexStartup};
+        if (!context().running) {
+            context().stopRequested = true;
+            return;
+        }
+        context().running = false;
     }
-    context().running = false;
     // wait for run loop to complete
-    const std::lock_guard<std::mutex> lock(context().mutexRun);
+    const std::scoped_lock runLock{context().mutexRun};
     throwIfBad(UA_Server_run_shutdown(handle()));
 }
 
