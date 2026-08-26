@@ -60,11 +60,30 @@ String NodeId::toString() const {
     return opcua::toString(*this);
 }
 
+#if UAPP_OPEN62541_VER_GE(1, 1)
+String toString(const NodeId& id) {
+    // UA_NodeId_print, unlike the generic UA_print, emits the standard textual NodeId format that
+    // NodeId::parse accepts. UA_print wraps the same content in quotes, so its output round-trips
+    // to BadDecodingError.
+    String output;
+    throwIfBad(UA_NodeId_print(id.handle(), output.handle()));
+    return output;
+}
+#endif
+
 /* --------------------------------------- ExpandedNodeId --------------------------------------- */
 
 String ExpandedNodeId::toString() const {
     return opcua::toString(*this);
 }
+
+#if UAPP_OPEN62541_VER_GE(1, 2)
+String toString(const ExpandedNodeId& id) {
+    String output;
+    throwIfBad(UA_ExpandedNodeId_print(id.handle(), output.handle()));
+    return output;
+}
+#endif
 
 /* ---------------------------------------- NumericRange ---------------------------------------- */
 

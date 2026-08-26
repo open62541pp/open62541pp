@@ -1281,6 +1281,67 @@ TEST_CASE("toString") {
 }
 #endif
 
+#if UAPP_OPEN62541_VER_GE(1, 1)
+TEST_CASE("toString(NodeId)") {
+    const auto str = [](const NodeId& id) { return std::string{toString(id)}; };
+
+    SECTION("Standard textual format") {
+        CHECK(str(NodeId(0, 84)) == "i=84");
+        CHECK(str(NodeId(1, 42)) == "ns=1;i=42");
+        CHECK(str(NodeId(10, "HelloWorld")) == "ns=10;s=HelloWorld");
+        // Constructed componentwise rather than with Guid::parse, which requires
+        // UA_ENABLE_PARSING -- printing must be testable without it.
+        const Guid guid{
+            0x09087E75, 0x8E5E, 0x499B, {0x95, 0x4F, 0xF2, 0xA9, 0x60, 0x3D, 0xB2, 0x8A}
+        };
+        CHECK(str(NodeId(1, guid)) == "ns=1;g=09087e75-8e5e-499b-954f-f2a9603db28a");
+        CHECK(str(NodeId(1, ByteString("open62541!"))) == "ns=1;b=b3BlbjYyNTQxIQ==");
+    }
+
+#if UAPP_HAS_TOSTRING
+    SECTION("Explicit data type uses the generic representation") {
+        // The two-argument overload is an explicit request for UA_print and is unchanged.
+        CHECK_THAT(
+            std::string{toString(NodeId(0, 84), UA_TYPES[UA_TYPES_NODEID])},
+            ContainsSubstring("i=84")
+        );
+    }
+#endif
+
+#if UAPP_HAS_PARSING
+    SECTION("Round-trip with NodeId::parse") {
+        // The point of the standard format: what toString emits, parse must accept.
+        const auto roundTrip = [](const NodeId& id) { return NodeId::parse(toString(id)) == id; };
+        CHECK(roundTrip(NodeId(0, 84)));
+        CHECK(roundTrip(NodeId(1, 42)));
+        CHECK(roundTrip(NodeId(10, "HelloWorld")));
+        CHECK(roundTrip(NodeId(1, Guid::random())));
+        CHECK(roundTrip(NodeId(1, ByteString("open62541!"))));
+    }
+#endif
+}
+#endif
+
+#if UAPP_OPEN62541_VER_GE(1, 2)
+TEST_CASE("toString(ExpandedNodeId)") {
+    const auto str = [](const ExpandedNodeId& id) { return std::string{toString(id)}; };
+
+    CHECK(str(ExpandedNodeId(NodeId(0, 84))) == "i=84");
+    CHECK(str(ExpandedNodeId(NodeId(1, 42))) == "ns=1;i=42");
+    CHECK(
+        str(ExpandedNodeId(NodeId(0, 1234), "http://example.org/UA/", 1)) ==
+        "svr=1;nsu=http://example.org/UA/;i=1234"
+    );
+
+#if UAPP_HAS_PARSING
+    SECTION("Round-trip with ExpandedNodeId::parse") {
+        const auto id = ExpandedNodeId(NodeId(0, 1234), "http://example.org/UA/", 1);
+        CHECK(ExpandedNodeId::parse(toString(id)) == id);
+    }
+#endif
+}
+#endif
+
 #if UAPP_HAS_ORDER
 TEST_CASE("Comparison operators") {
     // use simple registered type without custom comparison overloads

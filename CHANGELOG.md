@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- `toString(NodeId)` and `toString(ExpandedNodeId)` now emit the standard textual format that
+  `NodeId::parse` / `ExpandedNodeId::parse` accept, instead of the quoted `UA_print` output (#647)
+
 ## [0.21.2] - 2026-06-26
 
 ### Fixed
