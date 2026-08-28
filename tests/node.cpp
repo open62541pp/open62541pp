@@ -46,6 +46,7 @@ TEMPLATE_TEST_CASE("Node", "", Server, Client, Async<Client>) {
     ));
     REQUIRE(services::writeWriteMask(setup.server, objId, 0xFFFFFFFF).isGood());
 
+#ifdef UA_ENABLE_METHODCALLS
     const NodeId methodId{1, 3};
     REQUIRE(services::addMethod(
         setup.server,
@@ -59,6 +60,7 @@ TEMPLATE_TEST_CASE("Node", "", Server, Client, Async<Client>) {
         ReferenceTypeId::HasComponent
     ));
     REQUIRE(services::writeWriteMask(setup.server, methodId, 0xFFFFFFFF).isGood());
+#endif
 
     const NodeId refId{1, 4};
     REQUIRE(services::addReferenceType(
@@ -73,7 +75,9 @@ TEMPLATE_TEST_CASE("Node", "", Server, Client, Async<Client>) {
 
     Node objNode{connection, objId};
     Node varNode{connection, varId};
+#ifdef UA_ENABLE_METHODCALLS
     Node methodNode{connection, methodId};
+#endif
     Node refNode{connection, refId};
 
     SECTION("connection") {
@@ -452,6 +456,7 @@ TEMPLATE_TEST_CASE("Node", "", Server, Client, Async<Client>) {
         }
     }
 
+#ifdef UA_ENABLE_METHODCALLS
     SECTION("writeExecutable/readExecutable") {
         const bool executable = true;
         if constexpr (isAsync<TestType>) {
@@ -470,6 +475,7 @@ TEMPLATE_TEST_CASE("Node", "", Server, Client, Async<Client>) {
             CHECK_NOTHROW(methodNode.readUserExecutable());
         }
     }
+#endif
 
 #if UAPP_OPEN62541_VER_GE(1, 1)
     SECTION("readDataTypeDefinition") {
