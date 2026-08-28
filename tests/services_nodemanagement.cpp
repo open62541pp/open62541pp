@@ -332,4 +332,55 @@ TEMPLATE_TEST_CASE("NodeManagement service set", "", Server, Client, Async<Clien
         CHECK(id != NodeId(1, 0));
         CHECK(id.namespaceIndex() == 1);
     }
+
+    SECTION("Invalid node class") {
+        const auto addNode = [&](auto&&... args) {
+            if constexpr (isAsync<TestType>) {
+                auto future = services::addNodeAsync(args..., useFuture);
+                setup.client.runIterate();
+                return future.get();
+            } else {
+                return services::addNode(args...);
+            }
+        };
+        const Result<NodeId> result = addNode(
+            connection,
+            NodeClass::Unspecified,
+            objectsId,
+            newId,
+            "Node",
+            ExtensionObject{ObjectAttributes{}},
+            ObjectTypeId::BaseObjectType,
+            ReferenceTypeId::HasComponent
+        );
+        CHECK(result.code().isBad());
+        if constexpr (isServer<TestType>) {
+            // the AddNodes service of open62541 fails earlier, when allocating the node, and
+            // returns BadOutOfMemory instead
+            CHECK(result.code() == UA_STATUSCODE_BADNODECLASSINVALID);
+        }
+    }
+
+    SECTION("Node attributes of mismatching node class") {
+        const auto addNode = [&](auto&&... args) {
+            if constexpr (isAsync<TestType>) {
+                auto future = services::addNodeAsync(args..., useFuture);
+                setup.client.runIterate();
+                return future.get();
+            } else {
+                return services::addNode(args...);
+            }
+        };
+        const Result<NodeId> result = addNode(
+            connection,
+            NodeClass::Object,
+            objectsId,
+            newId,
+            "Node",
+            ExtensionObject{VariableAttributes{}},  // ObjectAttributes expected
+            ObjectTypeId::BaseObjectType,
+            ReferenceTypeId::HasComponent
+        );
+        CHECK(result.code() == UA_STATUSCODE_BADNODEATTRIBUTESINVALID);
+    }
 }
