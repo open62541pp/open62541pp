@@ -3,6 +3,7 @@
 #include <array>
 #include <cassert>
 #include <chrono>
+#include <cstddef>  // byte
 #include <cstdint>
 #include <functional>  // hash
 #include <iosfwd>  // forward declare ostream
@@ -545,7 +546,7 @@ UAPP_TYPEREGISTRY_NATIVE(Guid, UA_TYPES_GUID)
  */
 class ByteString
     : public WrapperNative<UA_ByteString, UA_TYPES_BYTESTRING>,
-      public detail::StringLikeMixin<ByteString, uint8_t> {
+      public detail::StringLikeMixin<ByteString, std::byte> {
 public:
     using Wrapper::Wrapper;
 
@@ -555,7 +556,7 @@ public:
     explicit ByteString(const char* str)  // required to avoid ambiguity
         : ByteString{std::string_view{str}} {}
 
-    explicit ByteString(Span<const uint8_t> bytes) {
+    explicit ByteString(Span<const std::byte> bytes) {
         init(bytes.begin(), bytes.end());
     }
 

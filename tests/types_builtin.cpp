@@ -1,5 +1,8 @@
+#include <cstddef>  // byte
 #include <sstream>
 #include <string>
+#include <type_traits>
+#include <vector>
 
 #include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
@@ -217,12 +220,26 @@ TEST_CASE("ByteString") {
         CHECK(bs->data[2] == 90);
     }
 
-    SECTION("Construct from vector") {
-        const ByteString bs{{88, 89, 90}};
+    SECTION("Construct from bytes") {
+        const ByteString bs{{std::byte{88}, std::byte{89}, std::byte{90}}};
         CHECK(bs->length == 3);
         CHECK(bs->data[0] == 88);
         CHECK(bs->data[1] == 89);
         CHECK(bs->data[2] == 90);
+    }
+
+    SECTION("Element access as std::byte") {
+        static_assert(std::is_same_v<ByteString::value_type, std::byte>);
+        const ByteString bs{"XYZ"};
+        CHECK(bs.size() == 3);
+        CHECK(bs[0] == std::byte{88});
+        CHECK(bs.front() == std::byte{88});
+        CHECK(bs.back() == std::byte{90});
+        CHECK(*bs.data() == std::byte{88});
+        CHECK(
+            std::vector<std::byte>(bs.begin(), bs.end()) ==
+            std::vector<std::byte>{std::byte{88}, std::byte{89}, std::byte{90}}
+        );
     }
 
 #if UAPP_OPEN62541_VER_GE(1, 1)
