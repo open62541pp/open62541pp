@@ -51,7 +51,7 @@ int main() {
     // Write array of bytes to variant
     std::array<std::byte, 3> array{};
     variant.assign(array);  // use array container
-    variant.assign(opcua::Span{array.data(), array.size()});  // use raw array and size
+    variant.assign(opcua::Span(array.data(), array.size()));  // use raw array and size
     variant.assign(array.begin(), array.end());  // use iterator pair
 
     std::cout << "Array size: " << variant.arrayLength() << std::endl;

@@ -11,24 +11,12 @@
 
 namespace opcua::detail {
 
-template <bool, typename T>
-struct UnderlyingType
-{
-    typedef std::underlying_type_t<T> type;
-};
-
-template <typename T>
-struct UnderlyingType<false, T>
-{
-};
-
 [[nodiscard]] inline auto makeNative(std::string_view value) {
     return detail::allocNativeString(value);
 }
 
-template <typename T>
-[[nodiscard]] auto makeNative(T value) noexcept
-    -> std::enable_if_t<std::is_enum_v<T>, typename UnderlyingType<std::is_enum_v<T>, T>::type> {
+template <typename T, std::enable_if_t<std::is_enum_v<T>, int> = 0>
+[[nodiscard]] auto makeNative(T value) noexcept {
     return static_cast<std::underlying_type_t<T>>(value);
 }
 

@@ -5,20 +5,6 @@
 
 #include "open62541pp/bitmask.hpp"
 
-// For MinGW 7 compatibility
-namespace std {
-
-template<class InputIt, class Size, class UnaryFunc>
-InputIt for_each_n(InputIt first, Size n, UnaryFunc f)
-{
-    for (Size i = 0; i < n; ++first, (void) ++i)
-        f(*first);
-
-    return first;
-}
-
-} // std
-
 namespace opcua {
 
 /// Namespace index.
