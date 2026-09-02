@@ -79,7 +79,7 @@ if(UA_ENABLE_METHODCALLS)
     endif()
 endif()
 
-if(UA_ENABLE_SUBSCRIPTIONS)
+if(UA_ENABLE_SUBSCRIPTIONS AND open62541_version VERSION_GREATER_EQUAL "1.1")
     add_example(client_subscription.cpp)
 endif()
 
