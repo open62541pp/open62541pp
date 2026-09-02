@@ -3,6 +3,7 @@
 #include <array>
 #include <cassert>
 #include <chrono>
+#include <cstddef>  // byte
 #include <cstdint>
 #include <functional>  // hash
 #include <iosfwd>  // forward declare ostream
@@ -545,7 +546,7 @@ UAPP_TYPEREGISTRY_NATIVE(Guid, UA_TYPES_GUID)
  */
 class ByteString
     : public WrapperNative<UA_ByteString, UA_TYPES_BYTESTRING>,
-      public detail::StringLikeMixin<ByteString, uint8_t> {
+      public detail::StringLikeMixin<ByteString, std::byte> {
 public:
     using Wrapper::Wrapper;
 
@@ -555,7 +556,7 @@ public:
     explicit ByteString(const char* str)  // required to avoid ambiguity
         : ByteString{std::string_view{str}} {}
 
-    explicit ByteString(Span<const uint8_t> bytes) {
+    explicit ByteString(Span<const std::byte> bytes) {
         init(bytes.begin(), bytes.end());
     }
 
@@ -2082,6 +2083,41 @@ private:
 };
 
 String toString(const NumericRange& range);
+
+#if UAPP_OPEN62541_VER_GE(1, 1)
+/**
+ * Converts a NodeId to its standard string representation.
+ *
+ * Format: `ns=<namespaceindex>;<type>=<value>`, e.g. `i=13` or `ns=10;s=HelloWorld`.
+ * The result can be parsed back with @ref NodeId::parse.
+ *
+ * @note
+ * Requires open62541 v1.1 or later. With older versions, the generic @ref toString overload is
+ * used instead, which does not produce a parsable representation.
+ *
+ * @see https://reference.opcfoundation.org/Core/Part6/v104/docs/5.3.1.10
+ * @relates NodeId
+ * @ingroup Wrapper
+ */
+String toString(const NodeId& id);
+#endif
+
+#if UAPP_OPEN62541_VER_GE(1, 2)
+/**
+ * Converts an ExpandedNodeId to its standard string representation.
+ *
+ * Format: `svr=<serverindex>;nsu=<uri>;<type>=<value>`. The `svr` and `nsu` parts are omitted if
+ * zero / empty. The result can be parsed back with @ref ExpandedNodeId::parse.
+ *
+ * @note
+ * Requires open62541 v1.2 or later. With older versions, the generic @ref toString overload is
+ * used instead, which does not produce a parsable representation.
+ *
+ * @relates ExpandedNodeId
+ * @ingroup Wrapper
+ */
+String toString(const ExpandedNodeId& id);
+#endif
 
 /* --------------------------------------- Free functions --------------------------------------- */
 

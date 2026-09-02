@@ -33,6 +33,139 @@ DeleteReferencesResponse deleteReferences(
     return UA_Client_Service_deleteReferences(connection.handle(), request);
 }
 
+/// Decode the node attributes of the requested type and pass them to the given add node function.
+/// Returns `BadNodeAttributesInvalid` if the attributes are of a different type, just like the
+/// AddNodes service does.
+template <typename AttributeType, typename AddNodeFunction>
+static UA_StatusCode addNodeWithAttributes(
+    const ExtensionObject& nodeAttributes, const AddNodeFunction& addNode
+) noexcept {
+    const auto* attributes = nodeAttributes.decodedData<AttributeType>();
+    if (attributes == nullptr) {
+        return UA_STATUSCODE_BADNODEATTRIBUTESINVALID;
+    }
+    return addNode(*attributes);
+}
+
+/// Add a node with the node class specific function of open62541's public API.
+/// The generic function `__UA_Server_addNode` must not be used, because it is internal and will be
+/// removed in future versions of open62541.
+static UA_StatusCode addNodeNative(
+    UA_Server* server,
+    NodeClass nodeClass,
+    const NodeId& parentId,
+    const NodeId& id,
+    const UA_QualifiedName& browseName,
+    const ExtensionObject& nodeAttributes,
+    const NodeId& typeDefinition,
+    const NodeId& referenceType,
+    UA_NodeId* outputNodeId
+) noexcept {
+    constexpr void* nodeContext = nullptr;
+    switch (nodeClass) {
+    case NodeClass::Object:
+        return addNodeWithAttributes<UA_ObjectAttributes>(nodeAttributes, [&](const auto& attr) {
+            return UA_Server_addObjectNode(
+                server,
+                id,
+                parentId,
+                referenceType,
+                browseName,
+                typeDefinition,
+                attr,
+                nodeContext,
+                outputNodeId
+            );
+        });
+    case NodeClass::Variable:
+        return addNodeWithAttributes<UA_VariableAttributes>(nodeAttributes, [&](const auto& attr) {
+            return UA_Server_addVariableNode(
+                server,
+                id,
+                parentId,
+                referenceType,
+                browseName,
+                typeDefinition,
+                attr,
+                nodeContext,
+                outputNodeId
+            );
+        });
+    case NodeClass::ObjectType:
+        return addNodeWithAttributes<UA_ObjectTypeAttributes>(
+            nodeAttributes,
+            [&](const auto& attr) {
+                return UA_Server_addObjectTypeNode(
+                    server, id, parentId, referenceType, browseName, attr, nodeContext, outputNodeId
+                );
+            }
+        );
+    case NodeClass::VariableType:
+        return addNodeWithAttributes<UA_VariableTypeAttributes>(
+            nodeAttributes,
+            [&](const auto& attr) {
+                return UA_Server_addVariableTypeNode(
+                    server,
+                    id,
+                    parentId,
+                    referenceType,
+                    browseName,
+                    typeDefinition,
+                    attr,
+                    nodeContext,
+                    outputNodeId
+                );
+            }
+        );
+    case NodeClass::ReferenceType:
+        return addNodeWithAttributes<UA_ReferenceTypeAttributes>(
+            nodeAttributes,
+            [&](const auto& attr) {
+                return UA_Server_addReferenceTypeNode(
+                    server, id, parentId, referenceType, browseName, attr, nodeContext, outputNodeId
+                );
+            }
+        );
+    case NodeClass::DataType:
+        return addNodeWithAttributes<UA_DataTypeAttributes>(nodeAttributes, [&](const auto& attr) {
+            return UA_Server_addDataTypeNode(
+                server, id, parentId, referenceType, browseName, attr, nodeContext, outputNodeId
+            );
+        });
+    case NodeClass::View:
+        return addNodeWithAttributes<UA_ViewAttributes>(nodeAttributes, [&](const auto& attr) {
+            return UA_Server_addViewNode(
+                server, id, parentId, referenceType, browseName, attr, nodeContext, outputNodeId
+            );
+        });
+#ifdef UA_ENABLE_METHODCALLS
+    case NodeClass::Method:
+        return addNodeWithAttributes<UA_MethodAttributes>(nodeAttributes, [&](const auto& attr) {
+            return UA_Server_addMethodNode(
+                server,
+                id,
+                parentId,
+                referenceType,
+                browseName,
+                attr,
+                nullptr,  // method callback, use setMethodCallback to assign one
+                0,
+                nullptr,  // input arguments
+                0,
+                nullptr,  // output arguments
+                nodeContext,
+                outputNodeId
+            );
+        });
+#else
+    case NodeClass::Method:
+        return UA_STATUSCODE_BADNOTSUPPORTED;
+#endif
+    default:
+        return UA_STATUSCODE_BADNODECLASSINVALID;
+    }
+}
+
 template <>
 Result<NodeId> addNode<Server>(
     Server& connection,
@@ -45,17 +178,15 @@ Result<NodeId> addNode<Server>(
     const NodeId& referenceType
 ) noexcept {
     NodeId addedNodeId;
-    const StatusCode status = __UA_Server_addNode(
+    const StatusCode status = addNodeNative(
         connection.handle(),
-        static_cast<UA_NodeClass>(nodeClass),
-        id.handle(),
-        parentId.handle(),
-        referenceType.handle(),
+        nodeClass,
+        parentId,
+        id,
         {id.namespaceIndex(), opcua::detail::toNativeString(browseName)},
-        typeDefinition.handle(),
-        static_cast<const UA_NodeAttributes*>(nodeAttributes.decodedData()),
-        nodeAttributes.decodedType(),
-        nullptr,  // nodeContext
+        nodeAttributes,
+        typeDefinition,
+        referenceType,
         addedNodeId.handle()
     );
     if (status.isBad()) {

@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.21.3] - 2026-08-26
+
+### Fixed
+
+- prevent `UA_Server_run_iterate` from being called concurrently with `UA_Server_run_shutdown` (#717)
+- `toString(NodeId)` and `toString(ExpandedNodeId)` now emit the standard textual format that `NodeId::parse` / `ExpandedNodeId::parse` accept (#719)
+
 ## [0.21.2] - 2026-06-26
 
 ### Fixed
@@ -928,7 +935,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial public release
 
-[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.21.2...HEAD
+[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.21.3...HEAD
+[0.21.3]: https://github.com/open62541pp/open62541pp/releases/tag/v0.21.3
 [0.21.2]: https://github.com/open62541pp/open62541pp/releases/tag/v0.21.2
 [0.21.1]: https://github.com/open62541pp/open62541pp/releases/tag/v0.21.1
 [0.21.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.21.0
