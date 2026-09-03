@@ -94,7 +94,7 @@ TEST_CASE("TransformIterator") {
 TEST_CASE("TransformIterator list -> vector") {
     const std::list<int> lst{1, 2, 3};
     const auto square = [](auto value) { return value * value; };
-    const std::vector vec(
+    const std::vector<int> vec(
         detail::TransformIterator(lst.begin(), square),
         detail::TransformIterator(lst.end(), square)
     );
