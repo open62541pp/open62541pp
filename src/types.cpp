@@ -2,6 +2,7 @@
 
 #include <ctime>  // gmtime, localtime
 #include <iomanip>  // put_time
+#include <locale>
 #include <ostream>
 #include <sstream>
 
@@ -98,6 +99,7 @@ NumericRange::NumericRange(std::string_view encodedRange) {
 
 static String toStringImpl(const NumericRange& range) {
     std::ostringstream ss;
+    ss.imbue(std::locale::classic());
     for (const auto& dimension : range.dimensions()) {
         ss << dimension.min;
         if (dimension.min != dimension.max) {
