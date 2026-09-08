@@ -78,6 +78,13 @@
 #define UAPP_HAS_CREATE_CERTIFICATE 0
 #endif
 
+// UA_ClientConfig_setAuthenticationCert is not available with LibreSSL
+#if defined(UA_ENABLE_ENCRYPTION_OPENSSL) || defined(UA_ENABLE_ENCRYPTION_MBEDTLS)
+#define UAPP_HAS_AUTHENTICATION_CERTIFICATE UAPP_OPEN62541_VER_GE(1, 4)
+#else
+#define UAPP_HAS_AUTHENTICATION_CERTIFICATE 0
+#endif
+
 // UA_ENABLE_NODESETLOADER is not defined in open62541/config.h
 // https://github.com/open62541/open62541/pull/7218
 #ifdef UA_ENABLE_NODESETLOADER

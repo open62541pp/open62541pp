@@ -8,6 +8,7 @@
 #include "open62541pp/config.hpp"
 #include "open62541pp/detail/open62541/client.h"
 #include "open62541pp/plugin/accesscontrol_default.hpp"
+#include "open62541pp/plugin/create_certificate.hpp"
 #include "open62541pp/server.hpp"
 
 #include "helper/server_runner.hpp"
@@ -47,6 +48,25 @@ TEST_CASE("ClientConfig") {
         config.setSecurityMode(MessageSecurityMode::Sign);
         CHECK(config->securityMode == UA_MESSAGESECURITYMODE_SIGN);
     }
+
+#if UAPP_HAS_AUTHENTICATION_CERTIFICATE && UAPP_HAS_CREATE_CERTIFICATE
+    SECTION("setAuthenticationCertificate") {
+        const auto cert = createCertificate(
+            {String{"C=DE"}, String{"O=open62541pp"}, String{"CN=open62541ppClient@localhost"}},
+            {String{"DNS:localhost"}, String{"URI:urn:open62541.client.application"}}
+        );
+
+        REQUIRE(config->authSecurityPoliciesSize == 0);
+        config.setAuthenticationCertificate(cert.certificate, cert.privateKey);
+        // security policies to sign the identity token
+        CHECK(config->authSecurityPoliciesSize > 0);
+        // identity token with the certificate, the policy id is assigned at runtime
+        const auto& token = asWrapper<ExtensionObject>(config->userIdentityToken);
+        const auto* identityToken = token.decodedData<X509IdentityToken>();
+        REQUIRE(identityToken != nullptr);
+        CHECK(identityToken->certificateData() == cert.certificate);
+    }
+#endif
 }
 
 TEST_CASE("Client constructors") {

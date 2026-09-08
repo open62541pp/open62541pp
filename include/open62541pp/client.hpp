@@ -92,9 +92,29 @@ public:
     /// Set username/password identity token.
     void setUserIdentityToken(const UserNameIdentityToken& token);
     /// Set X.509 identity token.
+    /// @note Servers verify a signature created with the private key of the certificate. The
+    ///       private key of the secure channel is used by default. Use
+    ///       setAuthenticationCertificate to authenticate with a different certificate.
     void setUserIdentityToken(const X509IdentityToken& token);
     /// Set issued identity token.
     void setUserIdentityToken(const IssuedIdentityToken& token);
+
+#if UAPP_HAS_AUTHENTICATION_CERTIFICATE
+    /**
+     * Authenticate the session with an X.509 certificate and its private key.
+     *
+     * Sets the X.509 identity token and the security policies used to sign it. Both are required,
+     * because servers verify a signature created with the private key.
+     * The `policyId` of the identity token is assigned from the server's endpoint at runtime.
+     *
+     * @param certificate X.509 v3 certificate in `DER` encoded format
+     * @param privateKey Private key in `PEM` encoded format
+     *
+     * @note Replaces a user identity token set before.
+     * @note Requires open62541 v1.4 and OpenSSL or Mbed TLS as crypto backend.
+     */
+    void setAuthenticationCertificate(const ByteString& certificate, const ByteString& privateKey);
+#endif
 
     /// Set message security mode.
     void setSecurityMode(MessageSecurityMode mode) noexcept;
