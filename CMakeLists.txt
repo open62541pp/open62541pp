@@ -15,7 +15,7 @@ target_compile_features(open62541pp_project_options INTERFACE cxx_std_17)
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
     set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
-    
+
     # compiled binaries folders (same as open62541)
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -98,7 +98,7 @@ if(UAPP_INTERNAL_OPEN62541)
 
     # disable warnings as errors for open62541
     if(NOT UA_FORCE_WERROR)
-        set(UA_FORCE_WERROR OFF OFF CACHE BOOL "")
+        set(UA_FORCE_WERROR OFF CACHE BOOL "")
     endif()
 
     add_subdirectory(3rdparty/open62541)  # target open62541::open62541
