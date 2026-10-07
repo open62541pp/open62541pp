@@ -76,9 +76,11 @@ struct AsyncServiceAdapter {
     static auto initiate(
         Client& client, Initiation&& initiation, CompletionToken&& token, Args&&... args
     ) {
-        static_assert(
-            std::is_invocable_v<Initiation, UA_ClientAsyncServiceCallback, void*, Args&&...>
-        );
+        static_assert(std::is_invocable_v<
+                      Initiation,
+                      UA_ClientAsyncServiceCallback,
+                      void*,
+                      Args&&...>);
 
         return asyncInitiate<Response>(
             [&client](auto&& handler, auto&& innerInitiation, auto&&... innerArgs) {

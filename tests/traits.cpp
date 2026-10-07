@@ -28,7 +28,9 @@ TEST_CASE("RangeValueT") {
     STATIC_CHECK(std::is_same_v<detail::RangeValueT<std::vector<bool>>, bool>);
 }
 
-TEMPLATE_TEST_CASE("IsRange true", "", (std::vector<int>), (std::array<int, 3>), (Span<int>), (Span<const int>)) {
+TEMPLATE_TEST_CASE(
+    "IsRange true", "", (std::vector<int>), (std::array<int, 3>), (Span<int>), (Span<const int>)
+) {
     STATIC_CHECK(detail::IsRange<TestType>::value);
     STATIC_CHECK(detail::IsRange<TestType&>::value);
     STATIC_CHECK(detail::IsRange<TestType&&>::value);
@@ -46,7 +48,14 @@ TEMPLATE_TEST_CASE("IsRange false", "", bool, int) {
     STATIC_CHECK_FALSE(detail::IsRange<const TestType&&>::value);
 }
 
-TEMPLATE_TEST_CASE("IsContiguousRange true", "", (std::vector<int>), (std::array<int, 3>), (Span<int>), (Span<const int>)) {
+TEMPLATE_TEST_CASE(
+    "IsContiguousRange true",
+    "",
+    (std::vector<int>),
+    (std::array<int, 3>),
+    (Span<int>),
+    (Span<const int>)
+) {
     STATIC_CHECK(detail::IsContiguousRange<TestType>::value);
     STATIC_CHECK(detail::IsContiguousRange<TestType&>::value);
     STATIC_CHECK(detail::IsContiguousRange<TestType&&>::value);
@@ -73,7 +82,9 @@ TEMPLATE_TEST_CASE("IsStringLike true", "", (std::string), (std::string_view)) {
     STATIC_CHECK(detail::IsStringLike<const TestType&&>::value);
 }
 
-TEMPLATE_TEST_CASE("IsStringLike false", "", bool, int, (std::array<char, 3>), (std::vector<char>)) {
+TEMPLATE_TEST_CASE(
+    "IsStringLike false", "", bool, int, (std::array<char, 3>), (std::vector<char>)
+) {
     STATIC_CHECK_FALSE(detail::IsStringLike<TestType>::value);
     STATIC_CHECK_FALSE(detail::IsStringLike<TestType&>::value);
     STATIC_CHECK_FALSE(detail::IsStringLike<TestType&&>::value);

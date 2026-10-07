@@ -61,9 +61,10 @@ void convertMonitoredItemContexts(
 ) noexcept {
     assert(contextsPtr.size() == contexts.size());
     std::transform(
-        contexts.begin(), contexts.end(), contextsPtr.begin(), [](const auto& context) noexcept {
-            return context.get();
-        }
+        contexts.begin(),
+        contexts.end(),
+        contextsPtr.begin(),
+        [](const auto& context) noexcept { return context.get(); }
     );
     if (!dataChangeCallbacksNative.empty()) {
         assert(dataChangeCallbacksNative.size() == contexts.size());
