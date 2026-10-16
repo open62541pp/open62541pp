@@ -70,7 +70,7 @@ void convertMonitoredItemContexts(
         std::fill(
             dataChangeCallbacksNative.begin(),
             dataChangeCallbacksNative.end(),
-            MonitoredItemContext::dataChangeCallbackNativeClient
+            &MonitoredItemContext::dataChangeCallbackNativeClient
         );
     }
     if (!eventCallbacksNative.empty()) {
@@ -78,7 +78,7 @@ void convertMonitoredItemContexts(
         std::fill(
             eventCallbacksNative.begin(),
             eventCallbacksNative.end(),
-            MonitoredItemContext::eventCallbackNative
+            &MonitoredItemContext::eventCallbackNative
         );
     }
     if (!deleteCallbacksNative.empty()) {
@@ -86,7 +86,7 @@ void convertMonitoredItemContexts(
         std::fill(
             deleteCallbacksNative.begin(),
             deleteCallbacksNative.end(),
-            MonitoredItemContext::deleteCallbackNative
+            &MonitoredItemContext::deleteCallbackNative
         );
     }
 }

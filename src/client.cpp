@@ -125,6 +125,14 @@ void ClientConfig::setUserIdentityToken(const IssuedIdentityToken& token) {
     setUserIdentityTokenHelper(native(), token);
 }
 
+#if UAPP_HAS_AUTHENTICATION_CERTIFICATE
+void ClientConfig::setAuthenticationCertificate(
+    const ByteString& certificate, const ByteString& privateKey
+) {
+    throwIfBad(UA_ClientConfig_setAuthenticationCert(handle(), certificate, privateKey));
+}
+#endif
+
 void ClientConfig::setSecurityMode(MessageSecurityMode mode) noexcept {
     native().securityMode = static_cast<UA_MessageSecurityMode>(mode);
 }

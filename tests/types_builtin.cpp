@@ -1,4 +1,5 @@
 #include <cstddef>  // byte
+#include <locale>
 #include <sstream>
 #include <string>
 #include <type_traits>
@@ -9,6 +10,7 @@
 #include <catch2/matchers/catch_matchers_all.hpp>
 
 #include "open62541pp/config.hpp"
+#include "open62541pp/detail/scope.hpp"
 #include "open62541pp/detail/string_utils.hpp"  // toNativeString
 #include "open62541pp/types.hpp"
 #include "open62541pp/ua/nodeids.hpp"
@@ -1283,6 +1285,33 @@ TEST_CASE("NumericRange") {
         CHECK(toString(NumericRange({{1, 1}})) == "1");
         CHECK(toString(NumericRange({{1, 2}})) == "1:2");
         CHECK(toString(NumericRange({{1, 2}, {0, 3}, {5, 5}})) == "1:2,0:3,5");
+    }
+
+    SECTION("toString with digit grouping") {
+        struct GroupedNumbers : std::numpunct<char> {
+            char do_thousands_sep() const override {
+                return ',';
+            }
+
+            std::string do_grouping() const override {
+                return "\3";
+            }
+        };
+
+        const auto previousLocale = std::locale::global(
+            std::locale{std::locale::classic(), new GroupedNumbers}
+        );
+        const auto restoreLocale = detail::ScopeExit([&] { std::locale::global(previousLocale); });
+
+        CHECK(toString(NumericRange({{1000, 1000}})) == "1000");
+        CHECK(toString(NumericRange({{1000, 2000}})) == "1000:2000");
+        CHECK(toString(NumericRange({{1000, 2000}, {3000, 3000}})) == "1000:2000,3000");
+
+        const NumericRange decoded{
+            static_cast<std::string_view>(toString(NumericRange({{1000, 1000}})))
+        };
+        REQUIRE(decoded.dimensions().size() == 1);
+        CHECK((decoded.dimensions()[0] == NumericRangeDimension{1000, 1000}));
     }
 }
 

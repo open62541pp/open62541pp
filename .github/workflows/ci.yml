@@ -12,6 +12,8 @@ jobs:
       fail-fast: true
       matrix:
         config:
+          # ubuntu-22.04 is deprecated (brownouts 2027-03, retired 2027-04-17) and is
+          # the only image providing GCC 10/11 and Clang 13/14/15
           - name: Linux GCC 10
             os: ubuntu-22.04
             compiler: g++-10
@@ -36,11 +38,21 @@ jobs:
             coverage: true
             gcov: gcov-13
 
+          - name: Linux GCC 13 (arm64)
+            os: ubuntu-24.04-arm
+            compiler: g++-13
+
           - name: Linux GCC 14
             os: ubuntu-24.04
             compiler: g++-14
             coverage: false # TODO: gcovr processing errors
             gcov: gcov-14
+
+          - name: Linux GCC 15
+            os: ubuntu-26.04
+            compiler: g++-15
+            coverage: false # TODO: gcovr processing errors
+            gcov: gcov-15
 
           - name: Linux Clang 13
             os: ubuntu-22.04
@@ -78,6 +90,12 @@ jobs:
             coverage: true
             gcov: llvm-cov-18 gcov
 
+          - name: Linux Clang 20
+            os: ubuntu-26.04
+            compiler: clang++-20
+            coverage: false # TODO: gcovr 7.2 vs. llvm-cov 20 untested
+            gcov: llvm-cov-20 gcov
+
           - name: Linux ASan
             os: ubuntu-24.04
             compiler: clang++-18
@@ -93,16 +111,20 @@ jobs:
             compiler: clang++-18
             flags: "-DUAPP_ENABLE_SANITIZER_UNDEFINED=ON"
 
-          - name: macOS AppleClang 15
-            os: macos-14
+          - name: macOS 15 (Xcode 16)
+            os: macos-15
             compiler: clang++
 
-          - name: macOS AppleClang 16
-            os: macos-15
+          - name: macOS 26 (Xcode 26)
+            os: macos-26
             compiler: clang++
 
           - name: Windows Visual Studio 17
             os: windows-2022
+            compiler: msvc
+
+          - name: Windows Visual Studio 18
+            os: windows-2025
             compiler: msvc
 
         build-type:
