@@ -57,6 +57,7 @@ public:
     /**
      * Default constructor (default-initialized value and good StatusCode).
      */
+    template <typename U = T, std::enable_if_t<std::is_default_constructible_v<U>, int> = 0>
     constexpr Result() noexcept(std::is_nothrow_default_constructible_v<T>)
         : code_{UA_STATUSCODE_GOOD},
           maybeValue_{std::in_place} {}
