@@ -1,10 +1,19 @@
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
-from subprocess import check_call
+from subprocess import check_call, run
 
 HERE = Path(__file__).parent
-HEADER_FILE = HERE.parent / "include/open62541pp/services/attribute_highlevel.hpp"
+REPO_ROOT = HERE.parent
+HEADER_FILE = REPO_ROOT / "include/open62541pp/services/attribute_highlevel.hpp"
+
+
+def format_with_pre_commit(path: Path) -> None:
+    cmd = ("pre-commit", "run", "clang-format", "--files", str(path))
+    # pre-commit exits 1 when a hook modifies files; ignore on first run.
+    run(cmd, check=False, cwd=REPO_ROOT)
+    # Second run must be a no-op, confirming formatting succeeded.
+    check_call(cmd, cwd=REPO_ROOT)
 
 
 @dataclass
@@ -147,7 +156,7 @@ def main():
     body = "\n".join(gen_functions()).strip()
     content = TEMPLATE_HEADER.format(body=body)
     HEADER_FILE.write_text(content)
-    check_call(("clang-format", "-i", HEADER_FILE))
+    format_with_pre_commit(HEADER_FILE)
 
 
 if __name__ == "__main__":

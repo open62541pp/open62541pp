@@ -1,11 +1,20 @@
 import urllib.request
 from collections import defaultdict
 from pathlib import Path
-from subprocess import check_call
+from subprocess import check_call, run
 
 URL = "http://www.opcfoundation.org/UA/schemas/1.04/NodeIds.csv"
 HERE = Path(__file__).parent
-HEADER_FILE = HERE.parent / "include" / "open62541pp" / "ua" / "nodeids.hpp"
+REPO_ROOT = HERE.parent
+HEADER_FILE = REPO_ROOT / "include" / "open62541pp" / "ua" / "nodeids.hpp"
+
+
+def format_with_pre_commit(path: Path) -> None:
+    cmd = ("pre-commit", "run", "clang-format", "--files", str(path))
+    # pre-commit exits 1 when a hook modifies files; ignore on first run.
+    run(cmd, check=False, cwd=REPO_ROOT)
+    # Second run must be a no-op, confirming formatting succeeded.
+    check_call(cmd, cwd=REPO_ROOT)
 
 TEMPLATE_HEADER = """
 /* ---------------------------------------------------------------------------------------------- */
@@ -103,7 +112,7 @@ def main():
     ]
     header = TEMPLATE_HEADER.format(body="\n\n".join(enums))
     HEADER_FILE.write_text(header)
-    check_call(("clang-format", "-i", HEADER_FILE))
+    format_with_pre_commit(HEADER_FILE)
 
 
 if __name__ == "__main__":
