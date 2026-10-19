@@ -13,11 +13,17 @@ repos:
     rev: 0.28.0
     hooks:
       - id: check-github-workflows
-  - repo: https://github.com/pocc/pre-commit-hooks
-    rev: v1.3.5
+  - repo: https://github.com/pre-commit/mirrors-clang-format
+    rev: v18.1.3
     hooks:
       - id: clang-format
-        args: [-i]
+        types_or: [c, c++]
+      - id: clang-format
+        alias: clang-format-check
+        name: clang-format check
+        args: [--dry-run, --Werror]
+        types_or: [c, c++]
+        stages: [manual]
   - repo: https://github.com/codespell-project/codespell
     rev: v2.2.6
     hooks:

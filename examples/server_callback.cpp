@@ -13,7 +13,8 @@ int main() {
         server,
         [&] {
             ++counter;
-            std::cout << "Repeated callback: " << counter << "\n"; },
+            std::cout << "Repeated callback: " << counter << "\n";
+        },
         interval
     );
 

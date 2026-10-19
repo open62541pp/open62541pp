@@ -63,16 +63,15 @@ int main() {
     Server server{std::move(config)};
 
     // Add variable node. Try to change its value as a client with different logins.
-    Node{server, ObjectId::ObjectsFolder}
-        .addVariable(
-            {1, 1000},
-            "Variable",
-            VariableAttributes{}
-                .setAccessLevel(AccessLevel::CurrentRead | AccessLevel::CurrentWrite)
-                .setDataType(DataTypeId::Int32)
-                .setValueRank(ValueRank::Scalar)
-                .setValue(opcua::Variant{0})
-        );
+    Node{server, ObjectId::ObjectsFolder}.addVariable(
+        {1, 1000},
+        "Variable",
+        VariableAttributes{}
+            .setAccessLevel(AccessLevel::CurrentRead | AccessLevel::CurrentWrite)
+            .setDataType(DataTypeId::Int32)
+            .setValueRank(ValueRank::Scalar)
+            .setValue(opcua::Variant{0})
+    );
 
     server.run();
 }

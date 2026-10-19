@@ -5,3 +5,4 @@
 /install/
 /cmake-build*/
 /CMakeUserPresets.json
+/.tools/

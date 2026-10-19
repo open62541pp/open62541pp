@@ -52,5 +52,27 @@ pre-commit run --all-files
 
 ## Code style
 
-Please use both and `clang-tidy` and `clang-format` during development.
-The provided configs `.clang-tidy` and `.clang-format` will enforce modern C++, best practises and uniform formatting.
+Please use both `clang-tidy` and `clang-format` during development.
+The provided configs `.clang-tidy` and `.clang-format` will enforce modern C++, best practices and uniform formatting.
+
+The project uses `clang-format`, managed via [pre-commit](https://pre-commit.com).
+The required version is installed automatically when pre-commit sets up its environments.
+
+To format all files manually:
+
+```shell
+# using uv
+uvx pre-commit run clang-format --all-files
+
+# using pip
+pip install pre-commit
+pre-commit run clang-format --all-files
+```
+
+You can also download `clang-format` locally for use with your editor or other purposes:
+
+```shell
+python tools/download-clang-format.py
+```
+
+The script downloads the `clang-format` version specified in `.pre-commit-config.yaml` and stores it in `.tools/`.

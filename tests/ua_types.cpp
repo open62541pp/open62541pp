@@ -1,6 +1,6 @@
+#include <catch2/catch_approx.hpp>  // Catch::Approx
 #include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
-#include <catch2/catch_approx.hpp> // Catch::Approx
 
 #include "open62541pp/config.hpp"
 #include "open62541pp/ua/types.hpp"
