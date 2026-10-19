@@ -50,7 +50,8 @@ int main() {
                 .setDataType<int>(),
             opcua::VariableTypeId::BaseDataVariableType,
             opcua::ReferenceTypeId::HasComponent
-        ).value();
+        )
+            .value();
 
     // Define data source
     DataSource<int> dataSource;

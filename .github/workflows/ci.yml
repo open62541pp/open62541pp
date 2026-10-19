@@ -207,3 +207,26 @@ jobs:
           flags: ${{ runner.os }}
           name: ${{ matrix.config.name }}
           verbose: true
+
+  format-check:
+    name: Check formatting
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Cache pre-commit environments
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/pre-commit
+          key: pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}
+
+      - name: Install pre-commit
+        run: pip install pre-commit
+
+      - name: Run clang-format check
+        run: pre-commit run clang-format-check --all-files --hook-stage manual

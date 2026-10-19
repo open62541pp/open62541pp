@@ -188,9 +188,8 @@ auto createMonitoredItemsDataChangeAsync(
                 asNative(innerRequest),
                 // NOLINTBEGIN
                 const_cast<void**>(innerContextsPtr.data()),
-                const_cast<UA_Client_DataChangeNotificationCallback*>(
-                    innerDataChangeCallbacks.data()
-                ),
+                const_cast<UA_Client_DataChangeNotificationCallback*>(innerDataChangeCallbacks.data(
+                )),
                 const_cast<UA_Client_DeleteMonitoredItemCallback*>(innerDeleteCallbacks.data()),
                 // NOLINTEND
                 callback,

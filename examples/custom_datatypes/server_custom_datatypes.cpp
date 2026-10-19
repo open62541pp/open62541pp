@@ -37,13 +37,11 @@ int main() {
                 .setDataType<opcua::EnumValueType>()
                 .setValueRank(opcua::ValueRank::OneDimension)
                 .setArrayDimensions({0})
-                .setValue(
-                    opcua::Variant{opcua::Span<const opcua::EnumValueType>{
-                        {0, {"", "Red"}, {}},
-                        {1, {"", "Green"}, {}},
-                        {2, {"", "Yellow"}, {}},
-                    }}
-                )
+                .setValue(opcua::Variant{opcua::Span<const opcua::EnumValueType>{
+                    {0, {"", "Red"}, {}},
+                    {1, {"", "Green"}, {}},
+                    {2, {"", "Yellow"}, {}},
+                }})
         )
         .addModellingRule(opcua::ModellingRule::Mandatory);
 

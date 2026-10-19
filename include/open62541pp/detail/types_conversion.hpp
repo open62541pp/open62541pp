@@ -3,9 +3,9 @@
 #include <string_view>
 #include <type_traits>
 
+#include "open62541pp/detail/string_utils.hpp"  // allocNativeString
 #include "open62541pp/detail/types_handling.hpp"  // copyArray
 #include "open62541pp/span.hpp"
-#include "open62541pp/detail/string_utils.hpp"  // allocNativeString
 #include "open62541pp/typeregistry.hpp"  // getDataType
 #include "open62541pp/wrapper.hpp"  // asNative, asWrapper, IsWrapper
 
@@ -21,8 +21,8 @@ template <typename T, std::enable_if_t<std::is_enum_v<T>, int> = 0>
 }
 
 template <typename T, typename U = std::remove_cv_t<std::remove_reference_t<T>>>
-[[nodiscard]] auto makeNative(T&& value)
-    -> std::enable_if_t<IsWrapper<U>::value, typename U::NativeType> {
+[[nodiscard]] auto makeNative(T&& value
+) -> std::enable_if_t<IsWrapper<U>::value, typename U::NativeType> {
     using NativeType = typename U::NativeType;
     NativeType native{};
     asWrapper<U>(native) = std::forward<T>(value);

@@ -291,7 +291,8 @@ Result<NodeId> addMethod(
             nodeContext.get(),
             outputNodeId.handle()  // outNewNodeId
         ));
-        opcua::detail::getContext(connection).nodeContexts.insert(outputNodeId, std::move(nodeContext));
+        opcua::detail::getContext(connection)
+            .nodeContexts.insert(outputNodeId, std::move(nodeContext));
         return outputNodeId;
     });
 }
@@ -325,12 +326,15 @@ StatusCode setMethodCallback<Server>(
     Server& connection, const NodeId& id, MethodCallback callback
 ) noexcept {
     return opcua::detail::tryInvoke([&] {
-        auto nodeContext = std::make_unique<opcua::detail::NodeContext>();
-        nodeContext->methodCallback = std::move(callback);
-        throwIfBad(UA_Server_setMethodNode_callback(connection.handle(), id, methodCallback));
-        throwIfBad(UA_Server_setNodeContext(connection.handle(), id, nodeContext.get()));
-        opcua::detail::getContext(connection).nodeContexts.insert(id, std::move(nodeContext));
-    }).code();
+               auto nodeContext = std::make_unique<opcua::detail::NodeContext>();
+               nodeContext->methodCallback = std::move(callback);
+               throwIfBad(UA_Server_setMethodNode_callback(connection.handle(), id, methodCallback)
+               );
+               throwIfBad(UA_Server_setNodeContext(connection.handle(), id, nodeContext.get()));
+               opcua::detail::getContext(connection)
+                   .nodeContexts.insert(id, std::move(nodeContext));
+           }
+    ).code();
 }
 #endif
 
