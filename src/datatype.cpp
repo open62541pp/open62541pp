@@ -18,7 +18,9 @@ void clear(UA_DataTypeMember& native) noexcept {
 
 static void clearMembers(UA_DataType& native) noexcept {
 #if UAPP_HAS_TYPEDESCRIPTION
-    std::for_each_n(native.members, native.membersSize, [](auto& member) { clear(member); });
+    for (size_t i = 0; i < native.membersSize; ++i) {
+        clear(native.members[i]);  // NOLINT(*pointer-arithmetic)
+    }
 #endif
     detail::deallocateArray(native.members);
     native.members = nullptr;
@@ -40,12 +42,11 @@ void clear(UA_DataTypeArray& native) noexcept {
     const bool cleanup = true;
 #endif
     if (cleanup) {
-        std::for_each_n(
-            const_cast<UA_DataType*>(native.types),  // NOLINT
-            native.typesSize,
-            [](auto& type) { clear(type); }
-        );
-        deallocateArray(const_cast<UA_DataType*>(native.types));  // NOLINT
+        auto* types = const_cast<UA_DataType*>(native.types);  // NOLINT
+        for (size_t i = 0; i < native.typesSize; ++i) {
+            clear(types[i]);  // NOLINT(*pointer-arithmetic)
+        }
+        deallocateArray(types);
     }
     native.types = nullptr;
 }
@@ -160,7 +161,7 @@ void DataType::setMembers(Span<const DataTypeMember> members) {
 
 const UA_DataType* findDataType(const NodeId& id) noexcept {
     // UA_TYPES array is sorted by typeId -> use binary search
-    const Span types{UA_TYPES, UA_TYPES_COUNT};  // NOLINT(*decay)
+    const Span types(UA_TYPES, UA_TYPES_COUNT);  // NOLINT(*decay)
     const auto* it = std::lower_bound(
         types.begin(),
         types.end(),
@@ -179,7 +180,7 @@ const UA_DataType* findDataType(const NodeId& id, const UA_DataTypeArray* custom
         return type;
     }
     while (custom != nullptr) {
-        const Span types{custom->types, custom->typesSize};
+        const Span types(custom->types, custom->typesSize);
         const auto* it = std::find_if(types.begin(), types.end(), [&](const auto& dt) {
             return dt.typeId == id;
         });

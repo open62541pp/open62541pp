@@ -107,7 +107,7 @@ void ServerConfig::addCustomDataTypes(Span<const DataType> types) {
 
 static void setHighestSecurityPolicyForUserTokenTransfer(UA_ServerConfig& config) {
     auto& ac = config.accessControl;
-    const Span securityPolicies{config.securityPolicies, config.securityPoliciesSize};
+    const Span securityPolicies(config.securityPolicies, config.securityPoliciesSize);
     Span userTokenPolicies(
         asWrapper<UserTokenPolicy>(ac.userTokenPolicies), ac.userTokenPoliciesSize
     );

@@ -15,9 +15,8 @@ namespace opcua::detail {
     return detail::allocNativeString(value);
 }
 
-template <typename T>
-[[nodiscard]] auto makeNative(T value
-) noexcept -> std::enable_if_t<std::is_enum_v<T>, std::underlying_type_t<T>> {
+template <typename T, std::enable_if_t<std::is_enum_v<T>, int> = 0>
+[[nodiscard]] auto makeNative(T value) noexcept {
     return static_cast<std::underlying_type_t<T>>(value);
 }
 

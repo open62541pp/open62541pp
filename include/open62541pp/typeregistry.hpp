@@ -33,7 +33,7 @@ template <typename T, typename = void>
 struct IsRegistered : std::false_type {};
 
 template <typename T>
-struct IsRegistered<T, std::void_t<decltype(TypeRegistry<T>{})>> : std::true_type {};
+struct IsRegistered<T, std::void_t<decltype(sizeof(TypeRegistry<T>))>> : std::true_type {};
 
 template <typename T>
 const UA_DataType& getDataType() noexcept {

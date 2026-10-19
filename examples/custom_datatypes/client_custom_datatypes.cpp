@@ -63,7 +63,7 @@ int main() {
         std::cout << "Measurements:\n";
         std::cout << "- description = " << m->description << "\n";
         size_t i = 0;
-        for (auto&& value : opcua::Span{m->measurements, m->measurementsSize}) {
+        for (auto&& value : opcua::Span(m->measurements, m->measurementsSize)) {
             std::cout << "- measurements[" << i++ << "] = " << value << "\n";
         }
     }
