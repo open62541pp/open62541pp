@@ -1,11 +1,22 @@
 var searchData=
 [
   ['id_0',['id',['../types_8h.html#af39ebb183ebfba1414c7f6c7e113456d',1,'types.h']]],
-  ['internallogger_5fdelete_1',['InternalLogger_delete',['../InternalLogger_8h.html#a92624f2953e77721d68e9f3dcceb61f9',1,'InternalLogger.h']]],
-  ['internallogger_5fnew_2',['InternalLogger_new',['../InternalLogger_8h.html#af99b8b42a0315267e4081add98269ec9',1,'InternalLogger.h']]],
-  ['internalrefservice_5fdelete_3',['InternalRefService_delete',['../InternalRefService_8h.html#a598d713db1f66bcfe39d83bf891809cc',1,'InternalRefService.h']]],
-  ['internalrefservice_5fnew_4',['InternalRefService_new',['../InternalRefService_8h.html#a49fddde611d50cb311a53535bb004884',1,'InternalRefService.h']]],
-  ['issubtype_5',['IsSubType',['../browse__utils_8h.html#ad711d45d7b4ad5f4359b16237ae35cbc',1,'browse_utils.h']]],
-  ['itoasigned_6',['itoaSigned',['../itoa_8h.html#ad1b520d42077d66595e6999065e027a4',1,'itoa.h']]],
-  ['itoaunsigned_7',['itoaUnsigned',['../itoa_8h.html#ad0d6e3f1d2c326d9d67aea82981584c6',1,'itoa.h']]]
+  ['iface_5fexit_1',['iface_exit',['../src_2mdnsd_8h.html#a9949722d7f08a0bacd65fa1765bfe896',1,'mdnsd.h']]],
+  ['iface_5ffind_2',['iface_find',['../src_2mdnsd_8h.html#a5c25d8bf7bce8816c6b417cb81420ea9',1,'mdnsd.h']]],
+  ['iface_5ffree_3',['iface_free',['../src_2mdnsd_8h.html#a3eea08a3cf12b2de254944a31cbe8f4a',1,'mdnsd.h']]],
+  ['iface_5finit_4',['iface_init',['../src_2mdnsd_8h.html#a3428f602b0113efc32f0d3fcdc4a3756',1,'mdnsd.h']]],
+  ['iface_5fiterator_5',['iface_iterator',['../src_2mdnsd_8h.html#a86a218af3f63da6fa426c9a210b7a030',1,'mdnsd.h']]],
+  ['inet_5fanyaddr_6',['inet_anyaddr',['../inet_8h.html#ae921bfe7c02c347d99f764fd61fa288c',1,'inet.h']]],
+  ['inet_5ffamily_7',['inet_family',['../inet_8h.html#a943166e27a78a033c548bc3f2221e0bb',1,'inet.h']]],
+  ['inet_5flen_8',['inet_len',['../inet_8h.html#a17fe3584c5d92bec4a9c3477c1ab2ca7',1,'inet.h']]],
+  ['inet_5fntop2_9',['inet_ntop2',['../inet_8h.html#af7d0fdb309a0d814897d88e8654a0231',1,'inet.h']]],
+  ['inet_5fport_10',['inet_port',['../inet_8h.html#a10829193b28ba5c0aae78c50f8f03ad7',1,'inet.h']]],
+  ['inet_5fset_5fport_11',['inet_set_port',['../inet_8h.html#a9020f365f7dbd2bc68b4015e4fa46ea8',1,'inet.h']]],
+  ['internallogger_5fdelete_12',['InternalLogger_delete',['../InternalLogger_8h.html#a92624f2953e77721d68e9f3dcceb61f9',1,'InternalLogger.h']]],
+  ['internallogger_5fnew_13',['InternalLogger_new',['../InternalLogger_8h.html#af99b8b42a0315267e4081add98269ec9',1,'InternalLogger.h']]],
+  ['internalrefservice_5fdelete_14',['InternalRefService_delete',['../InternalRefService_8h.html#a598d713db1f66bcfe39d83bf891809cc',1,'InternalRefService.h']]],
+  ['internalrefservice_5fnew_15',['InternalRefService_new',['../InternalRefService_8h.html#a49fddde611d50cb311a53535bb004884',1,'InternalRefService.h']]],
+  ['issubtype_16',['IsSubType',['../browse__utils_8h.html#ad711d45d7b4ad5f4359b16237ae35cbc',1,'browse_utils.h']]],
+  ['itoasigned_17',['itoaSigned',['../itoa_8h.html#ad1b520d42077d66595e6999065e027a4',1,'itoa.h']]],
+  ['itoaunsigned_18',['itoaUnsigned',['../itoa_8h.html#ad0d6e3f1d2c326d9d67aea82981584c6',1,'itoa.h']]]
 ];

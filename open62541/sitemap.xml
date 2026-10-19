@@ -23,16 +23,31 @@
     <loc>https://open62541pp.github.io/open62541pp/open62541/1035_8h_source.html</loc>
   </url>
   <url>
-    <loc>https://open62541pp.github.io/open62541pp/open62541/mdnsd_8h_source.html</loc>
+    <loc>https://open62541pp.github.io/open62541pp/open62541/inet_8h_source.html</loc>
   </url>
   <url>
-    <loc>https://open62541pp.github.io/open62541pp/open62541/ms__stdint_8h_source.html</loc>
+    <loc>https://open62541pp.github.io/open62541pp/open62541/libmdnsd_2mdnsd_8h_source.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/open62541/src_2mdnsd_8h_source.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/open62541/sdtxt_8h_source.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/open62541/xht_8h_source.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/open62541/mcsock_8h_source.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/open62541/netlink_8h_source.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/open62541/queue_8h_source.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/open62541/unittest_8h_source.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/open62541/mp__printf_8h_source.html</loc>
@@ -353,16 +368,31 @@
     <loc>https://open62541pp.github.io/open62541pp/open62541/1035_8h.html</loc>
   </url>
   <url>
-    <loc>https://open62541pp.github.io/open62541pp/open62541/mdnsd_8h.html</loc>
+    <loc>https://open62541pp.github.io/open62541pp/open62541/inet_8h.html</loc>
   </url>
   <url>
-    <loc>https://open62541pp.github.io/open62541pp/open62541/ms__stdint_8h.html</loc>
+    <loc>https://open62541pp.github.io/open62541pp/open62541/libmdnsd_2mdnsd_8h.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/open62541/src_2mdnsd_8h.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/open62541/sdtxt_8h.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/open62541/xht_8h.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/open62541/mcsock_8h.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/open62541/netlink_8h.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/open62541/queue_8h.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/open62541/unittest_8h.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/open62541/mp__printf_8h.html</loc>
@@ -1347,6 +1377,12 @@
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/open62541/structcj5__token.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/open62541/structiface.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/open62541/structifnfo.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/open62541/structmbedtls__context.html</loc>
@@ -2795,6 +2831,9 @@
     <loc>https://open62541pp.github.io/open62541pp/open62541/dir_e49d88549b8f4ab2dcd12d5bb6dbf39e.html</loc>
   </url>
   <url>
+    <loc>https://open62541pp.github.io/open62541pp/open62541/dir_89711344090a4177a5606231d2ba0e43.html</loc>
+  </url>
+  <url>
     <loc>https://open62541pp.github.io/open62541pp/open62541/dir_b9a34ca0df09232f1d0b0b2949962403.html</loc>
   </url>
   <url>
@@ -2811,6 +2850,9 @@
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/open62541/dir_e090b6aca8183e2be38ca8d24d33f43d.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/open62541/dir_6463b094b4b6ad972baa014ec6c48438.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/open62541/dir_671a9daef71d92a053bbee3faa34efa0.html</loc>
@@ -3065,6 +3107,9 @@
     <loc>https://open62541pp.github.io/open62541pp/open62541/globals_v.html</loc>
   </url>
   <url>
+    <loc>https://open62541pp.github.io/open62541pp/open62541/globals_w.html</loc>
+  </url>
+  <url>
     <loc>https://open62541pp.github.io/open62541pp/open62541/globals_x.html</loc>
   </url>
   <url>
@@ -3185,6 +3230,9 @@
     <loc>https://open62541pp.github.io/open62541pp/open62541/globals_type_d.html</loc>
   </url>
   <url>
+    <loc>https://open62541pp.github.io/open62541pp/open62541/globals_type_i.html</loc>
+  </url>
+  <url>
     <loc>https://open62541pp.github.io/open62541pp/open62541/globals_type_m.html</loc>
   </url>
   <url>
@@ -3272,6 +3320,9 @@
     <loc>https://open62541pp.github.io/open62541pp/open62541/globals_defs_c.html</loc>
   </url>
   <url>
+    <loc>https://open62541pp.github.io/open62541pp/open62541/globals_defs_d.html</loc>
+  </url>
+  <url>
     <loc>https://open62541pp.github.io/open62541pp/open62541/globals_defs_e.html</loc>
   </url>
   <url>
@@ -3309,6 +3360,9 @@
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/open62541/globals_defs_u.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/open62541/globals_defs_w.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/open62541/globals_defs_x.html</loc>

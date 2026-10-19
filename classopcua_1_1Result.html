@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.21.3</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.22.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -120,8 +120,9 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5e23e4496803f583e4153f4f63d61e49" id="r_a5e23e4496803f583e4153f4f63d61e49"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Result.html#a5e23e4496803f583e4153f4f63d61e49">Result</a> () noexcept(std::is_nothrow_default_constructible_v&lt; T &gt;)</td></tr>
-<tr class="separator:a5e23e4496803f583e4153f4f63d61e49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabdb3308ec2af4901b04da8c48335c67" id="r_aabdb3308ec2af4901b04da8c48335c67"><td class="memTemplParams" colspan="2">template&lt;typename U  = T, std::enable_if_t&lt; std::is_default_constructible_v&lt; U &gt;, int &gt;  = 0&gt; </td></tr>
+<tr class="memitem:aabdb3308ec2af4901b04da8c48335c67"><td class="memTemplItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Result.html#aabdb3308ec2af4901b04da8c48335c67">Result</a> () noexcept(std::is_nothrow_default_constructible_v&lt; T &gt;)</td></tr>
+<tr class="separator:aabdb3308ec2af4901b04da8c48335c67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94f59987874ed2fa1b2078d2f4f29cb2" id="r_a94f59987874ed2fa1b2078d2f4f29cb2"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Result.html#a94f59987874ed2fa1b2078d2f4f29cb2">Result</a> (const T &amp;<a class="el" href="classopcua_1_1Result.html#ad8906b4a4e26406476f3f5f38816a62b">value</a>, <a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a> <a class="el" href="classopcua_1_1Result.html#af8c52372741a4af137d3600d9e9e77e0">code</a>=<a class="elRef" target="_blank" href="open62541/statuscodes_8h.html#a3c68d30bc6f32228aa43be75fdc9d5aa">UA_STATUSCODE_GOOD</a>) noexcept(std::is_nothrow_copy_constructible_v&lt; T &gt;)</td></tr>
 <tr class="separator:a94f59987874ed2fa1b2078d2f4f29cb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8dd22a9c3980cecc36f7d01cd3b656e" id="r_af8dd22a9c3980cecc36f7d01cd3b656e"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Result.html#af8dd22a9c3980cecc36f7d01cd3b656e">Result</a> (T &amp;&amp;<a class="el" href="classopcua_1_1Result.html#ad8906b4a4e26406476f3f5f38816a62b">value</a>, <a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a> <a class="el" href="classopcua_1_1Result.html#af8c52372741a4af137d3600d9e9e77e0">code</a>=<a class="elRef" target="_blank" href="open62541/statuscodes_8h.html#a3c68d30bc6f32228aa43be75fdc9d5aa">UA_STATUSCODE_GOOD</a>) noexcept(std::is_nothrow_move_constructible_v&lt; T &gt;)</td></tr>
@@ -217,13 +218,15 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a5e23e4496803f583e4153f4f63d61e49" name="a5e23e4496803f583e4153f4f63d61e49"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e23e4496803f583e4153f4f63d61e49">&#9670;&#160;</a></span>Result() <span class="overload">[1/4]</span></h2>
+<a id="aabdb3308ec2af4901b04da8c48335c67" name="aabdb3308ec2af4901b04da8c48335c67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabdb3308ec2af4901b04da8c48335c67">&#9670;&#160;</a></span>Result() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename T &gt; </div>
+<div class="memtemplate">
+template&lt;typename U  = T, std::enable_if_t&lt; std::is_default_constructible_v&lt; U &gt;, int &gt;  = 0&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -244,7 +247,7 @@ template&lt;typename T &gt; </div>
 
 <p>Default constructor (default-initialized value and good <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a>). </p>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00060">60</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00061">61</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -286,7 +289,7 @@ template&lt;typename T &gt; </div>
 
 <p>Construct a <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> from a value (lvalue) and a <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00069">69</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00070">70</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -328,7 +331,7 @@ template&lt;typename T &gt; </div>
 
 <p>Construct a <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> from a value (rvalue) and a <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00078">78</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00079">79</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -360,7 +363,7 @@ template&lt;typename T &gt; </div>
 
 <p>Construct a <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> from a <a class="el" href="classopcua_1_1BadResult.html" title="Represents a bad result stored in Result.">BadResult</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00087">87</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00088">88</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -401,7 +404,7 @@ template&lt;typename F &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00232">232</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00233">233</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -441,7 +444,7 @@ template&lt;typename F &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00244">244</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00245">245</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -481,7 +484,7 @@ template&lt;typename F &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00238">238</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00239">239</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -521,7 +524,7 @@ template&lt;typename F &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00250">250</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00251">251</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -554,7 +557,7 @@ template&lt;typename T &gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_async_8cpp-example.html#a5">client_async.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00136">136</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00137">137</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -585,7 +588,7 @@ template&lt;typename T &gt; </div>
 
 <p>Check if the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> has a value. </p>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00150">150</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00151">151</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -616,7 +619,7 @@ template&lt;typename T &gt; </div>
 
 <p>Check if the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> has a value. </p>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00143">143</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00144">144</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -648,7 +651,7 @@ template&lt;typename T &gt; </div>
 <p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>.   </p>
 <p>Accessing a <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> without a value leads to undefined behavior.   </p>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00122">122</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00123">123</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -680,7 +683,7 @@ template&lt;typename T &gt; </div>
 <p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>. </p>
 <p>Accessing a <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> without a value leads to undefined behavior. </p>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00112">112</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00113">113</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -712,7 +715,7 @@ template&lt;typename T &gt; </div>
 <p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>.   </p>
 <p>Accessing a <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> without a value leads to undefined behavior.   </p>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00127">127</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00128">128</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -744,7 +747,7 @@ template&lt;typename T &gt; </div>
 <p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>.   </p>
 <p>Accessing a <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> without a value leads to undefined behavior.   </p>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00117">117</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00118">118</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -776,7 +779,7 @@ template&lt;typename T &gt; </div>
 <p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>.   </p>
 <p>Accessing a <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> without a value leads to undefined behavior.   </p>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00104">104</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00105">105</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -808,7 +811,7 @@ template&lt;typename T &gt; </div>
 <p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a>. </p>
 <p>Accessing a <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> without a value leads to undefined behavior. </p>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00099">99</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00100">100</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -848,7 +851,7 @@ template&lt;typename F &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00261">261</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00262">262</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -888,7 +891,7 @@ template&lt;typename F &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00273">273</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00274">274</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -928,7 +931,7 @@ template&lt;typename F &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00267">267</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00268">268</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -968,7 +971,7 @@ template&lt;typename F &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00279">279</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00280">280</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -1008,7 +1011,7 @@ template&lt;typename F &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00203">203</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00204">204</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -1048,7 +1051,7 @@ template&lt;typename F &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00215">215</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00216">216</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -1088,7 +1091,7 @@ template&lt;typename F &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00209">209</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00210">210</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -1128,7 +1131,7 @@ template&lt;typename F &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00221">221</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00222">222</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -1167,7 +1170,7 @@ template&lt;typename T &gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_async_8cpp-example.html#a6">client_async.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00158">158</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00159">159</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -1204,7 +1207,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00170">170</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00171">171</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -1241,7 +1244,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00164">164</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00165">165</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -1278,7 +1281,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00176">176</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00177">177</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -1313,7 +1316,7 @@ template&lt;typename U &gt; </div>
 <p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> or a default value.   </p>
 <p>The default value is returned in case of an bad <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a>.   </p>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00192">192</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00193">193</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>
@@ -1348,7 +1351,7 @@ template&lt;typename U &gt; </div>
 <p>Get the value of the <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> or a default value. </p>
 <p>The default value is returned in case of an bad <a class="el" href="classopcua_1_1StatusCode.html" title="UA_StatusCode wrapper class.">StatusCode</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00186">186</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="result_8hpp_source.html#l00187">187</a> of file <a class="el" href="result_8hpp_source.html">result.hpp</a>.</p>
 
 </div>
 </div>

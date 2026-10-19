@@ -13,5 +13,6 @@ var searchData=
   ['cj5_5fget_5fuint_10',['cj5_get_uint',['../cj5_8h.html#a0ef82783b4dce4b88d8768c4426439f5',1,'cj5.h']]],
   ['cj5_5fparse_11',['cj5_parse',['../cj5_8h.html#a4720873967b1ae8c54176295a8519c39',1,'cj5.h']]],
   ['cj5_5fskip_12',['cj5_skip',['../cj5_8h.html#a65c39d8a8c33ccb8cf99ef0daffb6780',1,'cj5.h']]],
-  ['close_5fsocket_13',['close_socket',['../bearssl__sockets_8h.html#ad1cbc183f82752580965c62ffeb7ba18',1,'bearssl_sockets.h']]]
+  ['close_5fsocket_13',['close_socket',['../bearssl__sockets_8h.html#ad1cbc183f82752580965c62ffeb7ba18',1,'bearssl_sockets.h']]],
+  ['conf_5finit_14',['conf_init',['../src_2mdnsd_8h.html#a380b2940ed90fbf1a703d2fef77a724e',1,'mdnsd.h']]]
 ];

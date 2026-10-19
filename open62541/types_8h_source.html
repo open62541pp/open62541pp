@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.15</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.19</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -387,7 +387,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00282" name="l00282"></a><span class="lineno"><a class="line" href="structUA__NodeId.html#ad8656745fcaf75f1482e2644a7ea0eb1">  282</a></span>        <a class="code hl_struct" href="structUA__String.html">UA_String</a>     <a class="code hl_variable" href="structUA__NodeId.html#ad8656745fcaf75f1482e2644a7ea0eb1">string</a>;</div>
 <div class="line"><a id="l00283" name="l00283"></a><span class="lineno"><a class="line" href="structUA__NodeId.html#a703d19ab1cd3c3f2a49fc25b1520aeae">  283</a></span>        <a class="code hl_struct" href="structUA__Guid.html">UA_Guid</a>       <a class="code hl_variable" href="structUA__NodeId.html#a703d19ab1cd3c3f2a49fc25b1520aeae">guid</a>;</div>
 <div class="line"><a id="l00284" name="l00284"></a><span class="lineno"><a class="line" href="structUA__NodeId.html#aea4a6299c5ce6a23a8312af364f4b69b">  284</a></span>        <a class="code hl_struct" href="structUA__String.html">UA_ByteString</a> <a class="code hl_variable" href="structUA__NodeId.html#aea4a6299c5ce6a23a8312af364f4b69b">byteString</a>;</div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno"><a class="line" href="structUA__NodeId.html#a1e1200d590e9e6d15f50a6e9a415af0e">  285</a></span>    } identifier;</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno"><a class="line" href="structUA__NodeId.html#ae79d2a22b3fa1b46b9f34b5243b02ab6">  285</a></span>    } identifier;</div>
 <div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>} <a class="code hl_struct" href="structUA__NodeId.html">UA_NodeId</a>;</div>
 </div>
 <div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span> </div>
@@ -846,12 +846,12 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00723" name="l00723"></a><span class="lineno">  723</span>        <span class="keyword">struct </span>{</div>
 <div class="line"><a id="l00724" name="l00724"></a><span class="lineno"><a class="line" href="structUA__ExtensionObject.html#aae7bb3e696306431a2cd7bc511bd5c3f">  724</a></span>            <a class="code hl_struct" href="structUA__NodeId.html">UA_NodeId</a> <a class="code hl_variable" href="structUA__ExtensionObject.html#aae7bb3e696306431a2cd7bc511bd5c3f">typeId</a>;   <span class="comment">/* The nodeid of the datatype */</span></div>
 <div class="line"><a id="l00725" name="l00725"></a><span class="lineno"><a class="line" href="structUA__ExtensionObject.html#ac1af8afdad7bb507bf0e25c93527c645">  725</a></span>            <a class="code hl_struct" href="structUA__String.html">UA_ByteString</a> <a class="code hl_variable" href="structUA__ExtensionObject.html#ac1af8afdad7bb507bf0e25c93527c645">body</a>; <span class="comment">/* The bytestring of the encoded data */</span></div>
-<div class="line"><a id="l00726" name="l00726"></a><span class="lineno"><a class="line" href="structUA__ExtensionObject.html#a94dee6085ba0bc3d0dc487ae8ad6849b">  726</a></span>        } encoded;</div>
+<div class="line"><a id="l00726" name="l00726"></a><span class="lineno"><a class="line" href="structUA__ExtensionObject.html#a461b7fa0644e116d6fc6359f79a8dcdd">  726</a></span>        } encoded;</div>
 <div class="line"><a id="l00727" name="l00727"></a><span class="lineno">  727</span>        <span class="keyword">struct </span>{</div>
 <div class="line"><a id="l00728" name="l00728"></a><span class="lineno"><a class="line" href="structUA__ExtensionObject.html#a779308659bff83a4a572e6436c1b2c98">  728</a></span>            <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *<a class="code hl_variable" href="structUA__ExtensionObject.html#a779308659bff83a4a572e6436c1b2c98">type</a>;</div>
 <div class="line"><a id="l00729" name="l00729"></a><span class="lineno"><a class="line" href="structUA__ExtensionObject.html#a5767c86ad0c1012878e76ddad0ab61eb">  729</a></span>            <span class="keywordtype">void</span> *<a class="code hl_variable" href="structUA__ExtensionObject.html#a5767c86ad0c1012878e76ddad0ab61eb">data</a>;</div>
-<div class="line"><a id="l00730" name="l00730"></a><span class="lineno"><a class="line" href="structUA__ExtensionObject.html#a443639a91b216f5b3cdf266bef22d01e">  730</a></span>        } decoded;</div>
-<div class="line"><a id="l00731" name="l00731"></a><span class="lineno"><a class="line" href="structUA__ExtensionObject.html#a3758f97ccbfbb7a0294aefe4fd1ed072">  731</a></span>    } content;</div>
+<div class="line"><a id="l00730" name="l00730"></a><span class="lineno"><a class="line" href="structUA__ExtensionObject.html#a8e7f07ff13877c0554da493a309557ea">  730</a></span>        } decoded;</div>
+<div class="line"><a id="l00731" name="l00731"></a><span class="lineno"><a class="line" href="structUA__ExtensionObject.html#af3f6cd9e2ec323ae7c1750bc35c7ce24">  731</a></span>    } content;</div>
 <div class="line"><a id="l00732" name="l00732"></a><span class="lineno">  732</span>} <a class="code hl_struct" href="structUA__ExtensionObject.html">UA_ExtensionObject</a>;</div>
 </div>
 <div class="line"><a id="l00733" name="l00733"></a><span class="lineno">  733</span><span class="comment"></span> </div>

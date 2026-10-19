@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.15</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.19</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -388,7 +388,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00261" name="l00261"></a><span class="lineno"><a class="line" href="structmqtt__response.html#a00130512379551cfb853e3af58c974cd">  261</a></span>        <span class="keyword">struct </span><a class="code hl_struct" href="structmqtt__response__suback.html">mqtt_response_suback</a>   suback;</div>
 <div class="line"><a id="l00262" name="l00262"></a><span class="lineno"><a class="line" href="structmqtt__response.html#aeb9fbbf09a89a2edbfc8adccdb3eb5fc">  262</a></span>        <span class="keyword">struct </span><a class="code hl_struct" href="structmqtt__response__unsuback.html">mqtt_response_unsuback</a> unsuback;</div>
 <div class="line"><a id="l00263" name="l00263"></a><span class="lineno"><a class="line" href="structmqtt__response.html#a2ad95538073dea938e04dded6f02ea9a">  263</a></span>        <span class="keyword">struct </span><a class="code hl_struct" href="structmqtt__response__pingresp.html">mqtt_response_pingresp</a> pingresp;</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno"><a class="line" href="structmqtt__response.html#acd5d1f87954b1914533e43fa45bf18c7">  264</a></span>    } <a class="code hl_variable" href="structmqtt__response.html#acd5d1f87954b1914533e43fa45bf18c7">decoded</a>;</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno"><a class="line" href="structmqtt__response.html#a7362c859a5bfc851e1b241912250a2bd">  264</a></span>    } <a class="code hl_variable" href="structmqtt__response.html#a7362c859a5bfc851e1b241912250a2bd">decoded</a>;</div>
 <div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>};</div>
 </div>
 <div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span> </div>
@@ -626,7 +626,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00487" name="l00487"></a><span class="lineno">  487</span> </div>
 <div class="line"><a id="l00488" name="l00488"></a><span class="lineno">  488</span>        </div>
 <div class="line"><a id="l00489" name="l00489"></a><span class="lineno"><a class="line" href="structmqtt__client.html#aff50e45391cb2c0cab0924ce3d803817">  489</a></span>        <span class="keywordtype">size_t</span> <a class="code hl_variable" href="structmqtt__client.html#aff50e45391cb2c0cab0924ce3d803817">curr_sz</a>;</div>
-<div class="line"><a id="l00490" name="l00490"></a><span class="lineno"><a class="line" href="structmqtt__client.html#a2b9cc7f1d39cecb460fcbf38832381d7">  490</a></span>    } <a class="code hl_variable" href="structmqtt__client.html#a2b9cc7f1d39cecb460fcbf38832381d7">recv_buffer</a>;</div>
+<div class="line"><a id="l00490" name="l00490"></a><span class="lineno"><a class="line" href="structmqtt__client.html#a1c14ddb4e93affc04655517b5e03bfbd">  490</a></span>    } <a class="code hl_variable" href="structmqtt__client.html#a1c14ddb4e93affc04655517b5e03bfbd">recv_buffer</a>;</div>
 <div class="line"><a id="l00491" name="l00491"></a><span class="lineno">  491</span> </div>
 <div class="line"><a id="l00492" name="l00492"></a><span class="lineno">  492</span>    </div>
 <div class="line"><a id="l00493" name="l00493"></a><span class="lineno"><a class="line" href="structmqtt__client.html#a885516373913fa6b50e960d50d4a5cba">  493</a></span>    mqtt_pal_mutex_t <a class="code hl_variable" href="structmqtt__client.html#a885516373913fa6b50e960d50d4a5cba">mutex</a>;</div>
@@ -826,9 +826,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="astructmqtt__client_html"><div class="ttname"><a href="structmqtt__client.html">mqtt_client</a></div><div class="ttdoc">CLIENT.</div><div class="ttdef"><b>Definition</b> <a href="mqtt_8h_source.html#l00431">mqtt.h:431</a></div></div>
 <div class="ttc" id="astructmqtt__client_html_a144003c5296eeb2120c79c4c676db784"><div class="ttname"><a href="structmqtt__client.html#a144003c5296eeb2120c79c4c676db784">mqtt_client::reconnect_callback</a></div><div class="ttdeci">void(* reconnect_callback)(struct mqtt_client *, void **)</div><div class="ttdef"><b>Definition</b> <a href="mqtt_8h_source.html#l00472">mqtt.h:472</a></div></div>
 <div class="ttc" id="astructmqtt__client_html_a1c0ca63710b008b9827ab4438b22dc3e"><div class="ttname"><a href="structmqtt__client.html#a1c0ca63710b008b9827ab4438b22dc3e">mqtt_client::inspector_callback</a></div><div class="ttdeci">enum MQTTErrors(* inspector_callback)(struct mqtt_client *)</div><div class="ttdef"><b>Definition</b> <a href="mqtt_8h_source.html#l00466">mqtt.h:469</a></div></div>
+<div class="ttc" id="astructmqtt__client_html_a1c14ddb4e93affc04655517b5e03bfbd"><div class="ttname"><a href="structmqtt__client.html#a1c14ddb4e93affc04655517b5e03bfbd">mqtt_client::recv_buffer</a></div><div class="ttdeci">struct mqtt_client::@11 recv_buffer</div></div>
 <div class="ttc" id="astructmqtt__client_html_a1dca432059a7c59eef63e499b557a3bc"><div class="ttname"><a href="structmqtt__client.html#a1dca432059a7c59eef63e499b557a3bc">mqtt_client::mem_start</a></div><div class="ttdeci">uint8_t * mem_start</div><div class="ttdef"><b>Definition</b> <a href="mqtt_8h_source.html#l00480">mqtt.h:480</a></div></div>
 <div class="ttc" id="astructmqtt__client_html_a21b907c0e4686e4ae9adf8693626c313"><div class="ttname"><a href="structmqtt__client.html#a21b907c0e4686e4ae9adf8693626c313">mqtt_client::publish_response_callback</a></div><div class="ttdeci">void(* publish_response_callback)(void **state, struct mqtt_response_publish *publish)</div><div class="ttdef"><b>Definition</b> <a href="mqtt_8h_source.html#l00463">mqtt.h:463</a></div></div>
-<div class="ttc" id="astructmqtt__client_html_a2b9cc7f1d39cecb460fcbf38832381d7"><div class="ttname"><a href="structmqtt__client.html#a2b9cc7f1d39cecb460fcbf38832381d7">mqtt_client::recv_buffer</a></div><div class="ttdeci">struct mqtt_client::@10 recv_buffer</div></div>
 <div class="ttc" id="astructmqtt__client_html_a3db5f2bc313adb789ef0f6c8de07c5ca"><div class="ttname"><a href="structmqtt__client.html#a3db5f2bc313adb789ef0f6c8de07c5ca">mqtt_client::socketfd</a></div><div class="ttdeci">mqtt_pal_socket_handle socketfd</div><div class="ttdef"><b>Definition</b> <a href="mqtt_8h_source.html#l00433">mqtt.h:433</a></div></div>
 <div class="ttc" id="astructmqtt__client_html_a4ee652148f2b1b338f1527a85879e970"><div class="ttname"><a href="structmqtt__client.html#a4ee652148f2b1b338f1527a85879e970">mqtt_client::response_timeout</a></div><div class="ttdeci">int response_timeout</div><div class="ttdef"><b>Definition</b> <a href="mqtt_8h_source.html#l00454">mqtt.h:454</a></div></div>
 <div class="ttc" id="astructmqtt__client_html_a7fda1ddf0160b1cac09bad0c9d88027d"><div class="ttname"><a href="structmqtt__client.html#a7fda1ddf0160b1cac09bad0c9d88027d">mqtt_client::mq</a></div><div class="ttdeci">struct mqtt_message_queue mq</div><div class="ttdef"><b>Definition</b> <a href="mqtt_8h_source.html#l00496">mqtt.h:496</a></div></div>
@@ -892,8 +892,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="astructmqtt__response__unsuback_html"><div class="ttname"><a href="structmqtt__response__unsuback.html">mqtt_response_unsuback</a></div><div class="ttdef"><b>Definition</b> <a href="mqtt_8h_source.html#l00238">mqtt.h:238</a></div></div>
 <div class="ttc" id="astructmqtt__response__unsuback_html_a7be9284cfc5e4b1ea8ae310b6bef5393"><div class="ttname"><a href="structmqtt__response__unsuback.html#a7be9284cfc5e4b1ea8ae310b6bef5393">mqtt_response_unsuback::packet_id</a></div><div class="ttdeci">uint16_t packet_id</div><div class="ttdef"><b>Definition</b> <a href="mqtt_8h_source.html#l00240">mqtt.h:240</a></div></div>
 <div class="ttc" id="astructmqtt__response_html"><div class="ttname"><a href="structmqtt__response.html">mqtt_response</a></div><div class="ttdef"><b>Definition</b> <a href="mqtt_8h_source.html#l00249">mqtt.h:249</a></div></div>
+<div class="ttc" id="astructmqtt__response_html_a7362c859a5bfc851e1b241912250a2bd"><div class="ttname"><a href="structmqtt__response.html#a7362c859a5bfc851e1b241912250a2bd">mqtt_response::decoded</a></div><div class="ttdeci">union mqtt_response::@10 decoded</div></div>
 <div class="ttc" id="astructmqtt__response_html_aa8f110125c17b765fab496bf1c2c7394"><div class="ttname"><a href="structmqtt__response.html#aa8f110125c17b765fab496bf1c2c7394">mqtt_response::fixed_header</a></div><div class="ttdeci">struct mqtt_fixed_header fixed_header</div><div class="ttdef"><b>Definition</b> <a href="mqtt_8h_source.html#l00251">mqtt.h:251</a></div></div>
-<div class="ttc" id="astructmqtt__response_html_acd5d1f87954b1914533e43fa45bf18c7"><div class="ttname"><a href="structmqtt__response.html#acd5d1f87954b1914533e43fa45bf18c7">mqtt_response::decoded</a></div><div class="ttdeci">union mqtt_response::@9 decoded</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

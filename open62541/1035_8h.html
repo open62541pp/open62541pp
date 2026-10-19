@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.15</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.19</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -93,10 +93,9 @@ $(function() {
   <div class="headertitle"><div class="title">1035.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;mdnsd_config.h&quot;</code><br />
-<code>#include &lt;arpa/inet.h&gt;</code><br />
-<code>#include &lt;stdbool.h&gt;</code><br />
-<code>#include &lt;stdint.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;arpa/inet.h&gt;</code><br />
+<code>#include &lt;netinet/in.h&gt;</code><br />
+<code>#include &lt;sys/socket.h&gt;</code><br />
 </div>
 <p><a href="1035_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -111,9 +110,9 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a65f2af54195a74dd91a96ddb0254dbf8" id="r_a65f2af54195a74dd91a96ddb0254dbf8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#a65f2af54195a74dd91a96ddb0254dbf8">MAX_PACKET_LEN</a>&#160;&#160;&#160;10000</td></tr>
+<tr class="memitem:a65f2af54195a74dd91a96ddb0254dbf8" id="r_a65f2af54195a74dd91a96ddb0254dbf8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#a65f2af54195a74dd91a96ddb0254dbf8">MAX_PACKET_LEN</a>&#160;&#160;&#160;65535</td></tr>
 <tr class="separator:a65f2af54195a74dd91a96ddb0254dbf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b02299a6cd7f1d145dc1cf30b4487c4" id="r_a9b02299a6cd7f1d145dc1cf30b4487c4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#a9b02299a6cd7f1d145dc1cf30b4487c4">MAX_NUM_LABELS</a>&#160;&#160;&#160;20</td></tr>
+<tr class="memitem:a9b02299a6cd7f1d145dc1cf30b4487c4" id="r_a9b02299a6cd7f1d145dc1cf30b4487c4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#a9b02299a6cd7f1d145dc1cf30b4487c4">MAX_NUM_LABELS</a>&#160;&#160;&#160;512</td></tr>
 <tr class="separator:a9b02299a6cd7f1d145dc1cf30b4487c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2c396d095344cd7d0bee1734963f684" id="r_af2c396d095344cd7d0bee1734963f684"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#af2c396d095344cd7d0bee1734963f684">QTYPE_A</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:af2c396d095344cd7d0bee1734963f684"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -129,41 +128,47 @@ Macros</h2></td></tr>
 <tr class="separator:abdd0aff70c0e2bfeed2369b8ddd7dfea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8eafe7f5bb91c03cdb93c3120f594600" id="r_a8eafe7f5bb91c03cdb93c3120f594600"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#a8eafe7f5bb91c03cdb93c3120f594600">QTYPE_SRV</a>&#160;&#160;&#160;33</td></tr>
 <tr class="separator:a8eafe7f5bb91c03cdb93c3120f594600"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac97a6094036108650794065359a25f5d" id="r_ac97a6094036108650794065359a25f5d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#ac97a6094036108650794065359a25f5d">QTYPE_ANY</a>&#160;&#160;&#160;255</td></tr>
+<tr class="separator:ac97a6094036108650794065359a25f5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a8926c96748ad04bbcb24ae6d56c2f518" id="r_a8926c96748ad04bbcb24ae6d56c2f518"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#a8926c96748ad04bbcb24ae6d56c2f518">net2short</a> (const unsigned char **bufp)</td></tr>
-<tr class="separator:a8926c96748ad04bbcb24ae6d56c2f518"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a947cac3c0fe3ef7e9a9a8f3d0fa73965" id="r_a947cac3c0fe3ef7e9a9a8f3d0fa73965"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#a947cac3c0fe3ef7e9a9a8f3d0fa73965">net2long</a> (const unsigned char **bufp)</td></tr>
-<tr class="separator:a947cac3c0fe3ef7e9a9a8f3d0fa73965"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecd8f316f36bc83a65ab4a43ce68c784" id="r_aecd8f316f36bc83a65ab4a43ce68c784"><td class="memItemLeft" align="right" valign="top">void MDNSD_EXPORT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#aecd8f316f36bc83a65ab4a43ce68c784">short2net</a> (uint16_t i, unsigned char **bufp)</td></tr>
-<tr class="separator:aecd8f316f36bc83a65ab4a43ce68c784"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c121922057e2c91e8262d4260c55902" id="r_a8c121922057e2c91e8262d4260c55902"><td class="memItemLeft" align="right" valign="top">void MDNSD_EXPORT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#a8c121922057e2c91e8262d4260c55902">long2net</a> (uint32_t l, unsigned char **bufp)</td></tr>
-<tr class="separator:a8c121922057e2c91e8262d4260c55902"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba4a0abfa46702a655faf72718426fcd" id="r_aba4a0abfa46702a655faf72718426fcd"><td class="memItemLeft" align="right" valign="top">bool MDNSD_EXPORT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#aba4a0abfa46702a655faf72718426fcd">message_parse</a> (struct <a class="el" href="structmessage.html">message</a> *m, unsigned char *packet, size_t packetLen)</td></tr>
-<tr class="separator:aba4a0abfa46702a655faf72718426fcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07b02545e990467d61362e8a9e42c9cc" id="r_a07b02545e990467d61362e8a9e42c9cc"><td class="memItemLeft" align="right" valign="top">unsigned short int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#a07b02545e990467d61362e8a9e42c9cc">net2short</a> (unsigned char **buf)</td></tr>
+<tr class="separator:a07b02545e990467d61362e8a9e42c9cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d0113156b6a3d7ce5525d9d2de33628" id="r_a7d0113156b6a3d7ce5525d9d2de33628"><td class="memItemLeft" align="right" valign="top">unsigned long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#a7d0113156b6a3d7ce5525d9d2de33628">net2long</a> (unsigned char **buf)</td></tr>
+<tr class="separator:a7d0113156b6a3d7ce5525d9d2de33628"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8581b0b4b8fa09fbdf019c89e555c6db" id="r_a8581b0b4b8fa09fbdf019c89e555c6db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#a8581b0b4b8fa09fbdf019c89e555c6db">short2net</a> (unsigned short int i, unsigned char **buf)</td></tr>
+<tr class="separator:a8581b0b4b8fa09fbdf019c89e555c6db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acda872fe254e08ee922a3f22ca6d4230" id="r_acda872fe254e08ee922a3f22ca6d4230"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#acda872fe254e08ee922a3f22ca6d4230">long2net</a> (unsigned long int l, unsigned char **buf)</td></tr>
+<tr class="separator:acda872fe254e08ee922a3f22ca6d4230"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2492d550c38e039750cbf3f33a16cc3c" id="r_a2492d550c38e039750cbf3f33a16cc3c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#a2492d550c38e039750cbf3f33a16cc3c">message_parse</a> (struct <a class="el" href="structmessage.html">message</a> *m, unsigned char *packet)</td></tr>
+<tr class="separator:a2492d550c38e039750cbf3f33a16cc3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afebd3715ef84cd84a3c717b0e83ee855" id="r_afebd3715ef84cd84a3c717b0e83ee855"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structmessage.html">message</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#afebd3715ef84cd84a3c717b0e83ee855">message_wire</a> (void)</td></tr>
 <tr class="separator:afebd3715ef84cd84a3c717b0e83ee855"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a53d30bf9f44a2119e172993929f11541" id="r_a53d30bf9f44a2119e172993929f11541"><td class="memItemLeft" align="right" valign="top">void MDNSD_EXPORT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#a53d30bf9f44a2119e172993929f11541">message_qd</a> (struct <a class="el" href="structmessage.html">message</a> *m, char *<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>, unsigned short int <a class="el" href="types_8h.html#afc5a8ee5c7fd04cf12aa86a5f2882438">type</a>, unsigned short int clazz)</td></tr>
-<tr class="separator:a53d30bf9f44a2119e172993929f11541"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a740c9703d42a67080128874b808eb2ac" id="r_a740c9703d42a67080128874b808eb2ac"><td class="memItemLeft" align="right" valign="top">void MDNSD_EXPORT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#a740c9703d42a67080128874b808eb2ac">message_an</a> (struct <a class="el" href="structmessage.html">message</a> *m, char *<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>, unsigned short int <a class="el" href="types_8h.html#afc5a8ee5c7fd04cf12aa86a5f2882438">type</a>, unsigned short int clazz, unsigned long ttl)</td></tr>
-<tr class="separator:a740c9703d42a67080128874b808eb2ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abfe10d073c4dc8be9b82572b53bb78de" id="r_abfe10d073c4dc8be9b82572b53bb78de"><td class="memItemLeft" align="right" valign="top">void MDNSD_EXPORT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#abfe10d073c4dc8be9b82572b53bb78de">message_ns</a> (struct <a class="el" href="structmessage.html">message</a> *m, char *<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>, unsigned short int <a class="el" href="types_8h.html#afc5a8ee5c7fd04cf12aa86a5f2882438">type</a>, unsigned short int clazz, unsigned long ttl)</td></tr>
-<tr class="separator:abfe10d073c4dc8be9b82572b53bb78de"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3eb75e3970ed72ddc1084821af682456" id="r_a3eb75e3970ed72ddc1084821af682456"><td class="memItemLeft" align="right" valign="top">void MDNSD_EXPORT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#a3eb75e3970ed72ddc1084821af682456">message_ar</a> (struct <a class="el" href="structmessage.html">message</a> *m, char *<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>, unsigned short int <a class="el" href="types_8h.html#afc5a8ee5c7fd04cf12aa86a5f2882438">type</a>, unsigned short int clazz, unsigned long ttl)</td></tr>
-<tr class="separator:a3eb75e3970ed72ddc1084821af682456"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ab745b9e782f1ab22981769b13c788f" id="r_a8ab745b9e782f1ab22981769b13c788f"><td class="memItemLeft" align="right" valign="top">void MDNSD_EXPORT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#a8ab745b9e782f1ab22981769b13c788f">message_rdata_long</a> (struct <a class="el" href="structmessage.html">message</a> *m, struct in_addr l)</td></tr>
-<tr class="separator:a8ab745b9e782f1ab22981769b13c788f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36e726ab66c2ae983b12dd0e94240524" id="r_a36e726ab66c2ae983b12dd0e94240524"><td class="memItemLeft" align="right" valign="top">void MDNSD_EXPORT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#a36e726ab66c2ae983b12dd0e94240524">message_rdata_name</a> (struct <a class="el" href="structmessage.html">message</a> *m, char *<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>)</td></tr>
-<tr class="separator:a36e726ab66c2ae983b12dd0e94240524"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59c82940a779bbead5ac2e880ad58080" id="r_a59c82940a779bbead5ac2e880ad58080"><td class="memItemLeft" align="right" valign="top">void MDNSD_EXPORT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#a59c82940a779bbead5ac2e880ad58080">message_rdata_srv</a> (struct <a class="el" href="structmessage.html">message</a> *m, unsigned short int priority, unsigned short int weight, unsigned short int port, char *<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>)</td></tr>
-<tr class="separator:a59c82940a779bbead5ac2e880ad58080"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a740a3ea1a602a4361a6007673c08c665" id="r_a740a3ea1a602a4361a6007673c08c665"><td class="memItemLeft" align="right" valign="top">void MDNSD_EXPORT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#a740a3ea1a602a4361a6007673c08c665">message_rdata_raw</a> (struct <a class="el" href="structmessage.html">message</a> *m, unsigned char *rdata, unsigned short int rdlength)</td></tr>
-<tr class="separator:a740a3ea1a602a4361a6007673c08c665"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a49e1c0cc8d83a739af8111766abb08" id="r_a1a49e1c0cc8d83a739af8111766abb08"><td class="memItemLeft" align="right" valign="top">unsigned char MDNSD_EXPORT *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#a1a49e1c0cc8d83a739af8111766abb08">message_packet</a> (struct <a class="el" href="structmessage.html">message</a> *m)</td></tr>
-<tr class="separator:a1a49e1c0cc8d83a739af8111766abb08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a25719c26feea82a973d54093ea272d" id="r_a1a25719c26feea82a973d54093ea272d"><td class="memItemLeft" align="right" valign="top">int MDNSD_EXPORT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#a1a25719c26feea82a973d54093ea272d">message_packet_len</a> (struct <a class="el" href="structmessage.html">message</a> *m)</td></tr>
-<tr class="separator:a1a25719c26feea82a973d54093ea272d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3567d213e609ec159468736380f02b00" id="r_a3567d213e609ec159468736380f02b00"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#a3567d213e609ec159468736380f02b00">message_qd</a> (struct <a class="el" href="structmessage.html">message</a> *m, char *<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>, unsigned short int <a class="el" href="types_8h.html#afc5a8ee5c7fd04cf12aa86a5f2882438">type</a>, unsigned short int class)</td></tr>
+<tr class="separator:a3567d213e609ec159468736380f02b00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcce72fcf9ac4b399e38936d7f3977fa" id="r_afcce72fcf9ac4b399e38936d7f3977fa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#afcce72fcf9ac4b399e38936d7f3977fa">message_an</a> (struct <a class="el" href="structmessage.html">message</a> *m, char *<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>, unsigned short int <a class="el" href="types_8h.html#afc5a8ee5c7fd04cf12aa86a5f2882438">type</a>, unsigned short int class, unsigned long int ttl)</td></tr>
+<tr class="separator:afcce72fcf9ac4b399e38936d7f3977fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb985408740de95552b2f80847f5987d" id="r_aeb985408740de95552b2f80847f5987d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#aeb985408740de95552b2f80847f5987d">message_ns</a> (struct <a class="el" href="structmessage.html">message</a> *m, char *<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>, unsigned short int <a class="el" href="types_8h.html#afc5a8ee5c7fd04cf12aa86a5f2882438">type</a>, unsigned short int class, unsigned long int ttl)</td></tr>
+<tr class="separator:aeb985408740de95552b2f80847f5987d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeffdd2fb23ee4351d2703d118ea0e247" id="r_aeffdd2fb23ee4351d2703d118ea0e247"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#aeffdd2fb23ee4351d2703d118ea0e247">message_ar</a> (struct <a class="el" href="structmessage.html">message</a> *m, char *<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>, unsigned short int <a class="el" href="types_8h.html#afc5a8ee5c7fd04cf12aa86a5f2882438">type</a>, unsigned short int class, unsigned long int ttl)</td></tr>
+<tr class="separator:aeffdd2fb23ee4351d2703d118ea0e247"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa548ef9168bd5aaf780156faf3ea294f" id="r_aa548ef9168bd5aaf780156faf3ea294f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#aa548ef9168bd5aaf780156faf3ea294f">message_rdata_long</a> (struct <a class="el" href="structmessage.html">message</a> *m, unsigned long l)</td></tr>
+<tr class="separator:aa548ef9168bd5aaf780156faf3ea294f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4edeca382cb15e81a5b9e2e773640a5" id="r_af4edeca382cb15e81a5b9e2e773640a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#af4edeca382cb15e81a5b9e2e773640a5">message_rdata_ipv4</a> (struct <a class="el" href="structmessage.html">message</a> *m, struct in_addr a)</td></tr>
+<tr class="separator:af4edeca382cb15e81a5b9e2e773640a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab720e5943c88581643ba4148702a832d" id="r_ab720e5943c88581643ba4148702a832d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#ab720e5943c88581643ba4148702a832d">message_rdata_ipv6</a> (struct <a class="el" href="structmessage.html">message</a> *m, struct in6_addr a6)</td></tr>
+<tr class="separator:ab720e5943c88581643ba4148702a832d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac578cd5f9d99cd8915a34435c1397a2a" id="r_ac578cd5f9d99cd8915a34435c1397a2a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#ac578cd5f9d99cd8915a34435c1397a2a">message_rdata_name</a> (struct <a class="el" href="structmessage.html">message</a> *m, char *<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>)</td></tr>
+<tr class="separator:ac578cd5f9d99cd8915a34435c1397a2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b0235aa7e005b41ac6aad14c660a0c2" id="r_a5b0235aa7e005b41ac6aad14c660a0c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#a5b0235aa7e005b41ac6aad14c660a0c2">message_rdata_srv</a> (struct <a class="el" href="structmessage.html">message</a> *m, unsigned short int priority, unsigned short int weight, unsigned short int port, char *<a class="el" href="types_8h.html#a9eba43b3db66d681ff1c7085a9eb4882">name</a>)</td></tr>
+<tr class="separator:a5b0235aa7e005b41ac6aad14c660a0c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a145e3516811f75a115bdc7532de910ec" id="r_a145e3516811f75a115bdc7532de910ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#a145e3516811f75a115bdc7532de910ec">message_rdata_raw</a> (struct <a class="el" href="structmessage.html">message</a> *m, unsigned char *rdata, unsigned short int rdlength)</td></tr>
+<tr class="separator:a145e3516811f75a115bdc7532de910ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48842f1a573c245601e2d5486e21f53e" id="r_a48842f1a573c245601e2d5486e21f53e"><td class="memItemLeft" align="right" valign="top">unsigned char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#a48842f1a573c245601e2d5486e21f53e">message_packet</a> (struct <a class="el" href="structmessage.html">message</a> *m)</td></tr>
+<tr class="separator:a48842f1a573c245601e2d5486e21f53e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a888780c0b7a1f3f307f7b566d522753b" id="r_a888780c0b7a1f3f307f7b566d522753b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="1035_8h.html#a888780c0b7a1f3f307f7b566d522753b">message_packet_len</a> (struct <a class="el" href="structmessage.html">message</a> *m)</td></tr>
+<tr class="separator:a888780c0b7a1f3f307f7b566d522753b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a9b02299a6cd7f1d145dc1cf30b4487c4" name="a9b02299a6cd7f1d145dc1cf30b4487c4"></a>
@@ -173,12 +178,12 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define MAX_NUM_LABELS&#160;&#160;&#160;20</td>
+          <td class="memname">#define MAX_NUM_LABELS&#160;&#160;&#160;512</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="1035_8h_source.html#l00063">63</a> of file <a class="el" href="1035_8h_source.html">1035.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="1035_8h_source.html#l00056">56</a> of file <a class="el" href="1035_8h_source.html">1035.h</a>.</p>
 
 </div>
 </div>
@@ -189,15 +194,21 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define MAX_PACKET_LEN&#160;&#160;&#160;10000</td>
+          <td class="memname">#define MAX_PACKET_LEN&#160;&#160;&#160;65535</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Familiarize yourself with RFC1035 if you want to know what all the variable names mean. </p>
-<p>This file hides most of the dirty work all of this code depends on the buffer space a packet is in being 4096 and zero'd before the packet is copied in also conveniently decodes srv rr's, type 33, see RFC2782 Should be reasonably large, for UDP </p>
+<p>Standalone DNS parsing, RFC10350. </p>
+<p>Copyright (c) 2003 Jeremie Miller <a href="#" onclick="location.href='mai'+'lto:'+'jer'+'@j'+'abb'+'er'+'.or'+'g'; return false;">jer@j<span class="obfuscator">.nosp@m.</span>abbe<span class="obfuscator">.nosp@m.</span>r.org</a> Copyright (c) 2016-2026 Joachim Wiberg <a href="#" onclick="location.href='mai'+'lto:'+'tro'+'gl'+'obi'+'t@'+'gma'+'il'+'.co'+'m'; return false;">trogl<span class="obfuscator">.nosp@m.</span>obit<span class="obfuscator">.nosp@m.</span>@gmai<span class="obfuscator">.nosp@m.</span>l.co<span class="obfuscator">.nosp@m.</span>m</a> All rights reserved.</p>
+<p>Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:</p><ul>
+<li>Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.</li>
+<li>Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.</li>
+<li>Neither the name of the copyright holders nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.</li>
+</ul>
+<p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. Familiarize yourself with RFC1035 if you want to know what all the variable names mean. This file hides most of the dirty work all of this code depends on the buffer space a packet is in being 4096 and zero'd before the packet is copied in also conveniently decodes srv rr's, type 33, see RFC2782 Should be reasonably large, for UDP </p>
 
-<p class="definition">Definition at line <a class="el" href="1035_8h_source.html#l00062">62</a> of file <a class="el" href="1035_8h_source.html">1035.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="1035_8h_source.html#l00055">55</a> of file <a class="el" href="1035_8h_source.html">1035.h</a>.</p>
 
 </div>
 </div>
@@ -213,7 +224,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="1035_8h_source.html#l00070">70</a> of file <a class="el" href="1035_8h_source.html">1035.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="1035_8h_source.html#l00063">63</a> of file <a class="el" href="1035_8h_source.html">1035.h</a>.</p>
 
 </div>
 </div>
@@ -229,7 +240,23 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="1035_8h_source.html#l00075">75</a> of file <a class="el" href="1035_8h_source.html">1035.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="1035_8h_source.html#l00068">68</a> of file <a class="el" href="1035_8h_source.html">1035.h</a>.</p>
+
+</div>
+</div>
+<a id="ac97a6094036108650794065359a25f5d" name="ac97a6094036108650794065359a25f5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac97a6094036108650794065359a25f5d">&#9670;&#160;</a></span>QTYPE_ANY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define QTYPE_ANY&#160;&#160;&#160;255</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="1035_8h_source.html#l00070">70</a> of file <a class="el" href="1035_8h_source.html">1035.h</a>.</p>
 
 </div>
 </div>
@@ -245,7 +272,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="1035_8h_source.html#l00072">72</a> of file <a class="el" href="1035_8h_source.html">1035.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="1035_8h_source.html#l00065">65</a> of file <a class="el" href="1035_8h_source.html">1035.h</a>.</p>
 
 </div>
 </div>
@@ -261,7 +288,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="1035_8h_source.html#l00071">71</a> of file <a class="el" href="1035_8h_source.html">1035.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="1035_8h_source.html#l00064">64</a> of file <a class="el" href="1035_8h_source.html">1035.h</a>.</p>
 
 </div>
 </div>
@@ -277,7 +304,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="1035_8h_source.html#l00073">73</a> of file <a class="el" href="1035_8h_source.html">1035.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="1035_8h_source.html#l00066">66</a> of file <a class="el" href="1035_8h_source.html">1035.h</a>.</p>
 
 </div>
 </div>
@@ -293,7 +320,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="1035_8h_source.html#l00076">76</a> of file <a class="el" href="1035_8h_source.html">1035.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="1035_8h_source.html#l00069">69</a> of file <a class="el" href="1035_8h_source.html">1035.h</a>.</p>
 
 </div>
 </div>
@@ -309,28 +336,28 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="1035_8h_source.html#l00074">74</a> of file <a class="el" href="1035_8h_source.html">1035.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="1035_8h_source.html#l00067">67</a> of file <a class="el" href="1035_8h_source.html">1035.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a8c121922057e2c91e8262d4260c55902" name="a8c121922057e2c91e8262d4260c55902"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8c121922057e2c91e8262d4260c55902">&#9670;&#160;</a></span>long2net()</h2>
+<a id="acda872fe254e08ee922a3f22ca6d4230" name="acda872fe254e08ee922a3f22ca6d4230"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acda872fe254e08ee922a3f22ca6d4230">&#9670;&#160;</a></span>long2net()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void MDNSD_EXPORT long2net </td>
+          <td class="memname">void long2net </td>
           <td>(</td>
-          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramtype">unsigned long int&#160;</td>
           <td class="paramname"><em>l</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">unsigned char **&#160;</td>
-          <td class="paramname"><em>bufp</em>&#160;</td>
+          <td class="paramname"><em>buf</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -342,14 +369,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a740c9703d42a67080128874b808eb2ac" name="a740c9703d42a67080128874b808eb2ac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a740c9703d42a67080128874b808eb2ac">&#9670;&#160;</a></span>message_an()</h2>
+<a id="afcce72fcf9ac4b399e38936d7f3977fa" name="afcce72fcf9ac4b399e38936d7f3977fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcce72fcf9ac4b399e38936d7f3977fa">&#9670;&#160;</a></span>message_an()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void MDNSD_EXPORT message_an </td>
+          <td class="memname">void message_an </td>
           <td>(</td>
           <td class="paramtype">struct <a class="el" href="structmessage.html">message</a> *&#160;</td>
           <td class="paramname"><em>m</em>, </td>
@@ -370,12 +397,12 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">unsigned short int&#160;</td>
-          <td class="paramname"><em>clazz</em>, </td>
+          <td class="paramname"><em>class</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long&#160;</td>
+          <td class="paramtype">unsigned long int&#160;</td>
           <td class="paramname"><em>ttl</em>&#160;</td>
         </tr>
         <tr>
@@ -388,14 +415,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a3eb75e3970ed72ddc1084821af682456" name="a3eb75e3970ed72ddc1084821af682456"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3eb75e3970ed72ddc1084821af682456">&#9670;&#160;</a></span>message_ar()</h2>
+<a id="aeffdd2fb23ee4351d2703d118ea0e247" name="aeffdd2fb23ee4351d2703d118ea0e247"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeffdd2fb23ee4351d2703d118ea0e247">&#9670;&#160;</a></span>message_ar()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void MDNSD_EXPORT message_ar </td>
+          <td class="memname">void message_ar </td>
           <td>(</td>
           <td class="paramtype">struct <a class="el" href="structmessage.html">message</a> *&#160;</td>
           <td class="paramname"><em>m</em>, </td>
@@ -416,12 +443,12 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">unsigned short int&#160;</td>
-          <td class="paramname"><em>clazz</em>, </td>
+          <td class="paramname"><em>class</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long&#160;</td>
+          <td class="paramtype">unsigned long int&#160;</td>
           <td class="paramname"><em>ttl</em>&#160;</td>
         </tr>
         <tr>
@@ -434,14 +461,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="abfe10d073c4dc8be9b82572b53bb78de" name="abfe10d073c4dc8be9b82572b53bb78de"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abfe10d073c4dc8be9b82572b53bb78de">&#9670;&#160;</a></span>message_ns()</h2>
+<a id="aeb985408740de95552b2f80847f5987d" name="aeb985408740de95552b2f80847f5987d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb985408740de95552b2f80847f5987d">&#9670;&#160;</a></span>message_ns()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void MDNSD_EXPORT message_ns </td>
+          <td class="memname">void message_ns </td>
           <td>(</td>
           <td class="paramtype">struct <a class="el" href="structmessage.html">message</a> *&#160;</td>
           <td class="paramname"><em>m</em>, </td>
@@ -462,12 +489,12 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">unsigned short int&#160;</td>
-          <td class="paramname"><em>clazz</em>, </td>
+          <td class="paramname"><em>class</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long&#160;</td>
+          <td class="paramtype">unsigned long int&#160;</td>
           <td class="paramname"><em>ttl</em>&#160;</td>
         </tr>
         <tr>
@@ -480,14 +507,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a1a49e1c0cc8d83a739af8111766abb08" name="a1a49e1c0cc8d83a739af8111766abb08"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1a49e1c0cc8d83a739af8111766abb08">&#9670;&#160;</a></span>message_packet()</h2>
+<a id="a48842f1a573c245601e2d5486e21f53e" name="a48842f1a573c245601e2d5486e21f53e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48842f1a573c245601e2d5486e21f53e">&#9670;&#160;</a></span>message_packet()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned char MDNSD_EXPORT * message_packet </td>
+          <td class="memname">unsigned char * message_packet </td>
           <td>(</td>
           <td class="paramtype">struct <a class="el" href="structmessage.html">message</a> *&#160;</td>
           <td class="paramname"><em>m</em></td><td>)</td>
@@ -498,14 +525,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a1a25719c26feea82a973d54093ea272d" name="a1a25719c26feea82a973d54093ea272d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1a25719c26feea82a973d54093ea272d">&#9670;&#160;</a></span>message_packet_len()</h2>
+<a id="a888780c0b7a1f3f307f7b566d522753b" name="a888780c0b7a1f3f307f7b566d522753b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a888780c0b7a1f3f307f7b566d522753b">&#9670;&#160;</a></span>message_packet_len()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int MDNSD_EXPORT message_packet_len </td>
+          <td class="memname">int message_packet_len </td>
           <td>(</td>
           <td class="paramtype">struct <a class="el" href="structmessage.html">message</a> *&#160;</td>
           <td class="paramname"><em>m</em></td><td>)</td>
@@ -516,14 +543,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aba4a0abfa46702a655faf72718426fcd" name="aba4a0abfa46702a655faf72718426fcd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aba4a0abfa46702a655faf72718426fcd">&#9670;&#160;</a></span>message_parse()</h2>
+<a id="a2492d550c38e039750cbf3f33a16cc3c" name="a2492d550c38e039750cbf3f33a16cc3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2492d550c38e039750cbf3f33a16cc3c">&#9670;&#160;</a></span>message_parse()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool MDNSD_EXPORT message_parse </td>
+          <td class="memname">int message_parse </td>
           <td>(</td>
           <td class="paramtype">struct <a class="el" href="structmessage.html">message</a> *&#160;</td>
           <td class="paramname"><em>m</em>, </td>
@@ -532,13 +559,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">unsigned char *&#160;</td>
-          <td class="paramname"><em>packet</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>packetLen</em>&#160;</td>
+          <td class="paramname"><em>packet</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -550,14 +571,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a53d30bf9f44a2119e172993929f11541" name="a53d30bf9f44a2119e172993929f11541"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a53d30bf9f44a2119e172993929f11541">&#9670;&#160;</a></span>message_qd()</h2>
+<a id="a3567d213e609ec159468736380f02b00" name="a3567d213e609ec159468736380f02b00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3567d213e609ec159468736380f02b00">&#9670;&#160;</a></span>message_qd()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void MDNSD_EXPORT message_qd </td>
+          <td class="memname">void message_qd </td>
           <td>(</td>
           <td class="paramtype">struct <a class="el" href="structmessage.html">message</a> *&#160;</td>
           <td class="paramname"><em>m</em>, </td>
@@ -578,7 +599,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">unsigned short int&#160;</td>
-          <td class="paramname"><em>clazz</em>&#160;</td>
+          <td class="paramname"><em>class</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -590,14 +611,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a8ab745b9e782f1ab22981769b13c788f" name="a8ab745b9e782f1ab22981769b13c788f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8ab745b9e782f1ab22981769b13c788f">&#9670;&#160;</a></span>message_rdata_long()</h2>
+<a id="af4edeca382cb15e81a5b9e2e773640a5" name="af4edeca382cb15e81a5b9e2e773640a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4edeca382cb15e81a5b9e2e773640a5">&#9670;&#160;</a></span>message_rdata_ipv4()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void MDNSD_EXPORT message_rdata_long </td>
+          <td class="memname">void message_rdata_ipv4 </td>
           <td>(</td>
           <td class="paramtype">struct <a class="el" href="structmessage.html">message</a> *&#160;</td>
           <td class="paramname"><em>m</em>, </td>
@@ -606,6 +627,62 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">struct in_addr&#160;</td>
+          <td class="paramname"><em>a</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab720e5943c88581643ba4148702a832d" name="ab720e5943c88581643ba4148702a832d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab720e5943c88581643ba4148702a832d">&#9670;&#160;</a></span>message_rdata_ipv6()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void message_rdata_ipv6 </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structmessage.html">message</a> *&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct in6_addr&#160;</td>
+          <td class="paramname"><em>a6</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa548ef9168bd5aaf780156faf3ea294f" name="aa548ef9168bd5aaf780156faf3ea294f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa548ef9168bd5aaf780156faf3ea294f">&#9670;&#160;</a></span>message_rdata_long()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void message_rdata_long </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structmessage.html">message</a> *&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long&#160;</td>
           <td class="paramname"><em>l</em>&#160;</td>
         </tr>
         <tr>
@@ -618,14 +695,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a36e726ab66c2ae983b12dd0e94240524" name="a36e726ab66c2ae983b12dd0e94240524"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a36e726ab66c2ae983b12dd0e94240524">&#9670;&#160;</a></span>message_rdata_name()</h2>
+<a id="ac578cd5f9d99cd8915a34435c1397a2a" name="ac578cd5f9d99cd8915a34435c1397a2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac578cd5f9d99cd8915a34435c1397a2a">&#9670;&#160;</a></span>message_rdata_name()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void MDNSD_EXPORT message_rdata_name </td>
+          <td class="memname">void message_rdata_name </td>
           <td>(</td>
           <td class="paramtype">struct <a class="el" href="structmessage.html">message</a> *&#160;</td>
           <td class="paramname"><em>m</em>, </td>
@@ -646,14 +723,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a740a3ea1a602a4361a6007673c08c665" name="a740a3ea1a602a4361a6007673c08c665"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a740a3ea1a602a4361a6007673c08c665">&#9670;&#160;</a></span>message_rdata_raw()</h2>
+<a id="a145e3516811f75a115bdc7532de910ec" name="a145e3516811f75a115bdc7532de910ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a145e3516811f75a115bdc7532de910ec">&#9670;&#160;</a></span>message_rdata_raw()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void MDNSD_EXPORT message_rdata_raw </td>
+          <td class="memname">void message_rdata_raw </td>
           <td>(</td>
           <td class="paramtype">struct <a class="el" href="structmessage.html">message</a> *&#160;</td>
           <td class="paramname"><em>m</em>, </td>
@@ -680,14 +757,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a59c82940a779bbead5ac2e880ad58080" name="a59c82940a779bbead5ac2e880ad58080"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a59c82940a779bbead5ac2e880ad58080">&#9670;&#160;</a></span>message_rdata_srv()</h2>
+<a id="a5b0235aa7e005b41ac6aad14c660a0c2" name="a5b0235aa7e005b41ac6aad14c660a0c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b0235aa7e005b41ac6aad14c660a0c2">&#9670;&#160;</a></span>message_rdata_srv()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void MDNSD_EXPORT message_rdata_srv </td>
+          <td class="memname">void message_rdata_srv </td>
           <td>(</td>
           <td class="paramtype">struct <a class="el" href="structmessage.html">message</a> *&#160;</td>
           <td class="paramname"><em>m</em>, </td>
@@ -744,17 +821,17 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a947cac3c0fe3ef7e9a9a8f3d0fa73965" name="a947cac3c0fe3ef7e9a9a8f3d0fa73965"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a947cac3c0fe3ef7e9a9a8f3d0fa73965">&#9670;&#160;</a></span>net2long()</h2>
+<a id="a7d0113156b6a3d7ce5525d9d2de33628" name="a7d0113156b6a3d7ce5525d9d2de33628"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d0113156b6a3d7ce5525d9d2de33628">&#9670;&#160;</a></span>net2long()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t net2long </td>
+          <td class="memname">unsigned long int net2long </td>
           <td>(</td>
-          <td class="paramtype">const unsigned char **&#160;</td>
-          <td class="paramname"><em>bufp</em></td><td>)</td>
+          <td class="paramtype">unsigned char **&#160;</td>
+          <td class="paramname"><em>buf</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -762,17 +839,17 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a8926c96748ad04bbcb24ae6d56c2f518" name="a8926c96748ad04bbcb24ae6d56c2f518"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8926c96748ad04bbcb24ae6d56c2f518">&#9670;&#160;</a></span>net2short()</h2>
+<a id="a07b02545e990467d61362e8a9e42c9cc" name="a07b02545e990467d61362e8a9e42c9cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07b02545e990467d61362e8a9e42c9cc">&#9670;&#160;</a></span>net2short()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint16_t net2short </td>
+          <td class="memname">unsigned short int net2short </td>
           <td>(</td>
-          <td class="paramtype">const unsigned char **&#160;</td>
-          <td class="paramname"><em>bufp</em></td><td>)</td>
+          <td class="paramtype">unsigned char **&#160;</td>
+          <td class="paramname"><em>buf</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -780,23 +857,23 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aecd8f316f36bc83a65ab4a43ce68c784" name="aecd8f316f36bc83a65ab4a43ce68c784"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aecd8f316f36bc83a65ab4a43ce68c784">&#9670;&#160;</a></span>short2net()</h2>
+<a id="a8581b0b4b8fa09fbdf019c89e555c6db" name="a8581b0b4b8fa09fbdf019c89e555c6db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8581b0b4b8fa09fbdf019c89e555c6db">&#9670;&#160;</a></span>short2net()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void MDNSD_EXPORT short2net </td>
+          <td class="memname">void short2net </td>
           <td>(</td>
-          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramtype">unsigned short int&#160;</td>
           <td class="paramname"><em>i</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">unsigned char **&#160;</td>
-          <td class="paramname"><em>bufp</em>&#160;</td>
+          <td class="paramname"><em>buf</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

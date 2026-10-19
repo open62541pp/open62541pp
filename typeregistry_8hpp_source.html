@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.21.3</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.22.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -129,7 +129,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="structopcua_1_1IsRegistered.html">   33</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1IsRegistered.html">IsRegistered</a> : std::false_type {};</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="structopcua_1_1IsRegistered_3_01T_00_01std_1_1void__t_3_01decltype_07TypeRegistry_3_01T_01_4_02_03_08_4_01_4.html">   36</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1IsRegistered.html">IsRegistered</a>&lt;T, std::void_t&lt;decltype(TypeRegistry&lt;T&gt;{})&gt;&gt; : std::true_type {};</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="structopcua_1_1IsRegistered_3_01T_00_01std_1_1void__t_3_01decltype_07sizeof_07TypeRegistry_3_01T_01_4_08_08_4_01_4.html">   36</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1IsRegistered.html">IsRegistered</a>&lt;T, std::void_t&lt;decltype(sizeof(TypeRegistry&lt;T&gt;))&gt;&gt; : std::true_type {};</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="foldopen" id="foldopen00039" data-start="{" data-end="}">

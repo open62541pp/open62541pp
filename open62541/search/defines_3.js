@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['endif_0',['endif',['../config_8h.html#aa0c1167bb311135eecf24a0e7c885b7f',1,'config.h']]]
+  ['dbg_0',['DBG',['../libmdnsd_2mdnsd_8h.html#a04b647a23eae035491d4f039114abe95',1,'mdnsd.h']]],
+  ['disco_5fname_1',['DISCO_NAME',['../libmdnsd_2mdnsd_8h.html#a11c4e0e08c664a09f9311dd9b930255c',1,'mdnsd.h']]]
 ];

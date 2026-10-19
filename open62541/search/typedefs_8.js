@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['servercontext_0',['ServerContext',['../ServerContext_8h.html#a2d485602b6c36f41981502a4f7d2ad7b',1,'ServerContext.h']]],
-  ['sort_5fsortednodecallback_1',['Sort_SortedNodeCallback',['../Sort_8h.html#ae12f9f0a54a1e085d6a35fdacacb12ec',1,'Sort.h']]],
-  ['sortcontext_2',['SortContext',['../Sort_8h.html#abf2782e431b715285e6ebd0ecbde9804',1,'Sort.h']]]
+  ['rawdata_0',['RawData',['../backends_2open62541_2src_2Value_8h.html#a1c1a027426b35b6c5326bff15581e0b6',1,'Value.h']]],
+  ['refservice_5faddnewreferencetype_1',['RefService_addNewReferenceType',['../ReferenceService_8h.html#a5982216edd0855eb4eb8c128eb21e2c4',1,'ReferenceService.h']]],
+  ['refservice_5fishastypedefref_2',['RefService_isHasTypeDefRef',['../ReferenceService_8h.html#a9c3a93f4eb3c802509897944c4c5adf9',1,'ReferenceService.h']]],
+  ['refservice_5fisrefhierachical_3',['RefService_isRefHierachical',['../ReferenceService_8h.html#aedabac1ffbe6a45e3398227b799d1ca1',1,'ReferenceService.h']]],
+  ['refservice_5fisrefnonhierachical_4',['RefService_isRefNonHierachical',['../ReferenceService_8h.html#a43dfe4ac3738f68a40833185d6acadd3',1,'ReferenceService.h']]]
 ];

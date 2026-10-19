@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.15</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.19</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -313,7 +313,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00198" name="l00198"></a><span class="lineno"><a class="line" href="structUA__PublishedDataSetConfig.html#ad5bfdfba180c6f1e91efbee65281b5a1">  198</a></span>        <a class="code hl_struct" href="structUA__PublishedDataItemsTemplateConfig.html">UA_PublishedDataItemsTemplateConfig</a> <a class="code hl_variable" href="structUA__PublishedDataSetConfig.html#ad5bfdfba180c6f1e91efbee65281b5a1">itemsTemplate</a>;</div>
 <div class="line"><a id="l00199" name="l00199"></a><span class="lineno"><a class="line" href="structUA__PublishedDataSetConfig.html#a07abe81e6e93375d64cab06b0f0b717a">  199</a></span>        <a class="code hl_struct" href="structUA__PublishedEventConfig.html">UA_PublishedEventConfig</a> <a class="code hl_variable" href="structUA__PublishedDataSetConfig.html#a07abe81e6e93375d64cab06b0f0b717a">event</a>;</div>
 <div class="line"><a id="l00200" name="l00200"></a><span class="lineno"><a class="line" href="structUA__PublishedDataSetConfig.html#a7b620408bd7b64c40cc6aef984135546">  200</a></span>        <a class="code hl_struct" href="structUA__PublishedEventTemplateConfig.html">UA_PublishedEventTemplateConfig</a> <a class="code hl_variable" href="structUA__PublishedDataSetConfig.html#a7b620408bd7b64c40cc6aef984135546">eventTemplate</a>;</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno"><a class="line" href="structUA__PublishedDataSetConfig.html#a604a0a2599c0a9e96576a14d386f24be">  201</a></span>    } config;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno"><a class="line" href="structUA__PublishedDataSetConfig.html#ae9fedf88ac0e8b0cf2b152934a967ad5">  201</a></span>    } config;</div>
 <div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>} <a class="code hl_struct" href="structUA__PublishedDataSetConfig.html">UA_PublishedDataSetConfig</a>;</div>
 </div>
 <div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
@@ -368,7 +368,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00249" name="l00249"></a><span class="lineno"><a class="line" href="structUA__DataSetVariableConfig.html#a5fb936ca1b4e8d8d89307af7ed3d1234">  249</a></span>        <a class="code hl_variable" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> <a class="code hl_variable" href="structUA__DataSetVariableConfig.html#a5fb936ca1b4e8d8d89307af7ed3d1234">rtInformationModelNode</a>;</div>
 <div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>        <span class="comment">//TODO -&gt; decide if suppress C++ warnings and use &#39;UA_DataValue * * const staticValueSource;&#39;</span></div>
 <div class="line"><a id="l00251" name="l00251"></a><span class="lineno"><a class="line" href="structUA__DataSetVariableConfig.html#ae23522ebf902baa0f04458757a5603c9">  251</a></span>        <a class="code hl_struct" href="structUA__DataValue.html">UA_DataValue</a> ** <a class="code hl_variable" href="structUA__DataSetVariableConfig.html#ae23522ebf902baa0f04458757a5603c9">staticValueSource</a>;</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno"><a class="line" href="structUA__DataSetVariableConfig.html#a251dd1228b1d9f33c594118a17994da7">  252</a></span>    } rtValueSource;</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno"><a class="line" href="structUA__DataSetVariableConfig.html#a4383586abdef119153a3b95d1cb14173">  252</a></span>    } rtValueSource;</div>
 <div class="line"><a id="l00253" name="l00253"></a><span class="lineno"><a class="line" href="structUA__DataSetVariableConfig.html#a47061d217193dd078deeffdc86f437d5">  253</a></span>    <a class="code hl_typedef" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> <a class="code hl_variable" href="structUA__DataSetVariableConfig.html#a47061d217193dd078deeffdc86f437d5">maxStringLength</a>;</div>
 <div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span> </div>
 <div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>} <a class="code hl_struct" href="structUA__DataSetVariableConfig.html">UA_DataSetVariableConfig</a>;</div>
@@ -387,7 +387,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>    <span class="keyword">union </span>{</div>
 <div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>        <span class="comment">/* events need other config later */</span></div>
 <div class="line"><a id="l00266" name="l00266"></a><span class="lineno"><a class="line" href="structUA__DataSetFieldConfig.html#ae5ac43d25ecf70b2e22f731d59fe3806">  266</a></span>        <a class="code hl_struct" href="structUA__DataSetVariableConfig.html">UA_DataSetVariableConfig</a> <a class="code hl_variable" href="structUA__DataSetFieldConfig.html#ae5ac43d25ecf70b2e22f731d59fe3806">variable</a>;</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno"><a class="line" href="structUA__DataSetFieldConfig.html#a5aa666e3e6e47625c49e2b55c8326617">  267</a></span>    } field;</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno"><a class="line" href="structUA__DataSetFieldConfig.html#a9b386745908583b3368f8604af77bb8a">  267</a></span>    } field;</div>
 <div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>} <a class="code hl_struct" href="structUA__DataSetFieldConfig.html">UA_DataSetFieldConfig</a>;</div>
 </div>
 <div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span> </div>
@@ -672,7 +672,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span>    <span class="keyword">union </span>{</div>
 <div class="line"><a id="l00528" name="l00528"></a><span class="lineno"><a class="line" href="structUA__DataSetReaderConfig.html#a5bfb757ad914d1f74e712e79ded1ce1a">  528</a></span>        <a class="code hl_struct" href="structUA__TargetVariables.html">UA_TargetVariables</a> <a class="code hl_variable" href="structUA__DataSetReaderConfig.html#a5bfb757ad914d1f74e712e79ded1ce1a">subscribedDataSetTarget</a>;</div>
 <div class="line"><a id="l00529" name="l00529"></a><span class="lineno">  529</span>        <span class="comment">// UA_SubscribedDataSetMirrorDataType subscribedDataSetMirror;</span></div>
-<div class="line"><a id="l00530" name="l00530"></a><span class="lineno"><a class="line" href="structUA__DataSetReaderConfig.html#afc8e23cb475a87945fddd393748f2b29">  530</a></span>    } subscribedDataSet;</div>
+<div class="line"><a id="l00530" name="l00530"></a><span class="lineno"><a class="line" href="structUA__DataSetReaderConfig.html#a068615cf2b7b26e7d9b796128bc59ed4">  530</a></span>    } subscribedDataSet;</div>
 <div class="line"><a id="l00531" name="l00531"></a><span class="lineno">  531</span>    <span class="comment">/* non std. fields */</span></div>
 <div class="line"><a id="l00532" name="l00532"></a><span class="lineno"><a class="line" href="structUA__DataSetReaderConfig.html#a88999f275a12787d16ac71f9617ec437">  532</a></span>    <a class="code hl_struct" href="structUA__String.html">UA_String</a> <a class="code hl_variable" href="structUA__DataSetReaderConfig.html#a88999f275a12787d16ac71f9617ec437">linkedStandaloneSubscribedDataSetName</a>;</div>
 <div class="line"><a id="l00533" name="l00533"></a><span class="lineno"><a class="line" href="structUA__DataSetReaderConfig.html#a945386c53aa6d8b5e3efe5d0b1aec8b0">  533</a></span>    <a class="code hl_enumeration" href="server__pubsub_8h.html#a64c099f9dad9a1270f4fded6e0590bff">UA_PubSubRtEncoding</a> <a class="code hl_variable" href="structUA__DataSetReaderConfig.html#a945386c53aa6d8b5e3efe5d0b1aec8b0">expectedEncoding</a>;</div>
@@ -711,7 +711,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00564" name="l00564"></a><span class="lineno">  564</span>    <span class="keyword">union </span>{</div>
 <div class="line"><a id="l00565" name="l00565"></a><span class="lineno">  565</span>        <span class="comment">/* datasetmirror is currently not implemented */</span></div>
 <div class="line"><a id="l00566" name="l00566"></a><span class="lineno"><a class="line" href="structUA__StandaloneSubscribedDataSetConfig.html#a773550c328cff8c7140326f3f3bddd3c">  566</a></span>        <a class="code hl_struct" href="structUA__TargetVariablesDataType.html">UA_TargetVariablesDataType</a> <a class="code hl_variable" href="structUA__StandaloneSubscribedDataSetConfig.html#a773550c328cff8c7140326f3f3bddd3c">target</a>;</div>
-<div class="line"><a id="l00567" name="l00567"></a><span class="lineno"><a class="line" href="structUA__StandaloneSubscribedDataSetConfig.html#a51d3ecf620cd305775a4f368d3175b95">  567</a></span>    } subscribedDataSet;</div>
+<div class="line"><a id="l00567" name="l00567"></a><span class="lineno"><a class="line" href="structUA__StandaloneSubscribedDataSetConfig.html#a358e58b6acb8be2eafd12f7c25776c78">  567</a></span>    } subscribedDataSet;</div>
 <div class="line"><a id="l00568" name="l00568"></a><span class="lineno"><a class="line" href="structUA__StandaloneSubscribedDataSetConfig.html#a4bee137e7ee40022bee5ad20ddd9feb0">  568</a></span>    <a class="code hl_struct" href="structUA__DataSetMetaDataType.html">UA_DataSetMetaDataType</a> <a class="code hl_variable" href="structUA__StandaloneSubscribedDataSetConfig.html#a4bee137e7ee40022bee5ad20ddd9feb0">dataSetMetaData</a>;</div>
 <div class="line"><a id="l00569" name="l00569"></a><span class="lineno"><a class="line" href="structUA__StandaloneSubscribedDataSetConfig.html#a7e099202abd50aaeb52adf46826ee1cf">  569</a></span>    <a class="code hl_variable" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> <a class="code hl_variable" href="structUA__StandaloneSubscribedDataSetConfig.html#a7e099202abd50aaeb52adf46826ee1cf">isConnected</a>;</div>
 <div class="line"><a id="l00570" name="l00570"></a><span class="lineno">  570</span>} <a class="code hl_struct" href="structUA__StandaloneSubscribedDataSetConfig.html">UA_StandaloneSubscribedDataSetConfig</a>;</div>

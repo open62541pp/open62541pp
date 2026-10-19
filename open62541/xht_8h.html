@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.15</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.19</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -92,30 +92,29 @@ $(function() {
   <div class="headertitle"><div class="title">xht.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;mdnsd_config.h&quot;</code><br />
-</div>
+
 <p><a href="xht_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:a19434d2f5d5431cee332c89399f2611a" id="r_a19434d2f5d5431cee332c89399f2611a"><td class="memItemLeft" align="right" valign="top">typedef struct xht&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xht_8h.html#a19434d2f5d5431cee332c89399f2611a">xht_t</a></td></tr>
 <tr class="separator:a19434d2f5d5431cee332c89399f2611a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84ca945b11d95f970876795b86cacb43" id="r_a84ca945b11d95f970876795b86cacb43"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xht_8h.html#a84ca945b11d95f970876795b86cacb43">xht_walker</a>) (<a class="el" href="xht_8h.html#a19434d2f5d5431cee332c89399f2611a">xht_t</a> *h, char *key, void *val, void *arg)</td></tr>
-<tr class="separator:a84ca945b11d95f970876795b86cacb43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a541d6e29253619e6f44affff4320ed12" id="r_a541d6e29253619e6f44affff4320ed12"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xht_8h.html#a541d6e29253619e6f44affff4320ed12">xht_walker</a>) (<a class="el" href="xht_8h.html#a19434d2f5d5431cee332c89399f2611a">xht_t</a> *h, const char *key, void *val, void *arg)</td></tr>
+<tr class="separator:a541d6e29253619e6f44affff4320ed12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ab3122d2fb7c42400a3c59ffb78bb124a" id="r_ab3122d2fb7c42400a3c59ffb78bb124a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="xht_8h.html#a19434d2f5d5431cee332c89399f2611a">xht_t</a> MDNSD_EXPORT *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xht_8h.html#ab3122d2fb7c42400a3c59ffb78bb124a">xht_new</a> (int prime)</td></tr>
-<tr class="separator:ab3122d2fb7c42400a3c59ffb78bb124a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec934d0e23b4f54bbee05353c7eaa421" id="r_aec934d0e23b4f54bbee05353c7eaa421"><td class="memItemLeft" align="right" valign="top">void MDNSD_EXPORT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xht_8h.html#aec934d0e23b4f54bbee05353c7eaa421">xht_set</a> (<a class="el" href="xht_8h.html#a19434d2f5d5431cee332c89399f2611a">xht_t</a> *h, char *key, void *val)</td></tr>
-<tr class="separator:aec934d0e23b4f54bbee05353c7eaa421"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a595d11b4cebfebff9f579502b3eb5077" id="r_a595d11b4cebfebff9f579502b3eb5077"><td class="memItemLeft" align="right" valign="top">void MDNSD_EXPORT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xht_8h.html#a595d11b4cebfebff9f579502b3eb5077">xht_store</a> (<a class="el" href="xht_8h.html#a19434d2f5d5431cee332c89399f2611a">xht_t</a> *h, char *key, int klen, void *val, int vlen)</td></tr>
-<tr class="separator:a595d11b4cebfebff9f579502b3eb5077"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea42e90fb2b018712823c6b692306ff2" id="r_aea42e90fb2b018712823c6b692306ff2"><td class="memItemLeft" align="right" valign="top">void MDNSD_EXPORT *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xht_8h.html#aea42e90fb2b018712823c6b692306ff2">xht_get</a> (<a class="el" href="xht_8h.html#a19434d2f5d5431cee332c89399f2611a">xht_t</a> *h, char *key)</td></tr>
-<tr class="separator:aea42e90fb2b018712823c6b692306ff2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b80185ab76e2b04ef269f3bc18e1f4f" id="r_a0b80185ab76e2b04ef269f3bc18e1f4f"><td class="memItemLeft" align="right" valign="top">void MDNSD_EXPORT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xht_8h.html#a0b80185ab76e2b04ef269f3bc18e1f4f">xht_free</a> (<a class="el" href="xht_8h.html#a19434d2f5d5431cee332c89399f2611a">xht_t</a> *h)</td></tr>
-<tr class="separator:a0b80185ab76e2b04ef269f3bc18e1f4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa742b91b691fa9e2bd15dc1d8fd0cdbe" id="r_aa742b91b691fa9e2bd15dc1d8fd0cdbe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xht_8h.html#aa742b91b691fa9e2bd15dc1d8fd0cdbe">xht_walk</a> (<a class="el" href="xht_8h.html#a19434d2f5d5431cee332c89399f2611a">xht_t</a> *h, <a class="el" href="xht_8h.html#a84ca945b11d95f970876795b86cacb43">xht_walker</a> w, void *arg)</td></tr>
+<tr class="memitem:a29d91f70bd8eef233d6696b4becb3a01" id="r_a29d91f70bd8eef233d6696b4becb3a01"><td class="memItemLeft" align="right" valign="top"><a class="el" href="xht_8h.html#a19434d2f5d5431cee332c89399f2611a">xht_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xht_8h.html#a29d91f70bd8eef233d6696b4becb3a01">xht_new</a> (int prime)</td></tr>
+<tr class="separator:a29d91f70bd8eef233d6696b4becb3a01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7c62706a24118210c71e599102dc8f8" id="r_af7c62706a24118210c71e599102dc8f8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xht_8h.html#af7c62706a24118210c71e599102dc8f8">xht_set</a> (<a class="el" href="xht_8h.html#a19434d2f5d5431cee332c89399f2611a">xht_t</a> *h, const char *key, void *val)</td></tr>
+<tr class="separator:af7c62706a24118210c71e599102dc8f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cf0febe768249821c74e35b81ce1c36" id="r_a2cf0febe768249821c74e35b81ce1c36"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xht_8h.html#a2cf0febe768249821c74e35b81ce1c36">xht_store</a> (<a class="el" href="xht_8h.html#a19434d2f5d5431cee332c89399f2611a">xht_t</a> *h, const char *key, int klen, void *val, int vlen)</td></tr>
+<tr class="separator:a2cf0febe768249821c74e35b81ce1c36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22eb13131bcbe3c22c5c475aecd4b13e" id="r_a22eb13131bcbe3c22c5c475aecd4b13e"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xht_8h.html#a22eb13131bcbe3c22c5c475aecd4b13e">xht_get</a> (<a class="el" href="xht_8h.html#a19434d2f5d5431cee332c89399f2611a">xht_t</a> *h, const char *key)</td></tr>
+<tr class="separator:a22eb13131bcbe3c22c5c475aecd4b13e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a198b2a996ed4aa97602daeefd3dcd95b" id="r_a198b2a996ed4aa97602daeefd3dcd95b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xht_8h.html#a198b2a996ed4aa97602daeefd3dcd95b">xht_free</a> (<a class="el" href="xht_8h.html#a19434d2f5d5431cee332c89399f2611a">xht_t</a> *h)</td></tr>
+<tr class="separator:a198b2a996ed4aa97602daeefd3dcd95b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa742b91b691fa9e2bd15dc1d8fd0cdbe" id="r_aa742b91b691fa9e2bd15dc1d8fd0cdbe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xht_8h.html#aa742b91b691fa9e2bd15dc1d8fd0cdbe">xht_walk</a> (<a class="el" href="xht_8h.html#a19434d2f5d5431cee332c89399f2611a">xht_t</a> *h, <a class="el" href="xht_8h.html#a541d6e29253619e6f44affff4320ed12">xht_walker</a> w, void *arg)</td></tr>
 <tr class="separator:aa742b91b691fa9e2bd15dc1d8fd0cdbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
@@ -132,36 +131,43 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Simple string-&gt;void* hashtable, very static and bare minimal, but efficient. </p>
+<p>Copyright (c) 2003 Jeremie Miller <a href="#" onclick="location.href='mai'+'lto:'+'jer'+'@j'+'abb'+'er'+'.or'+'g'; return false;">jer@j<span class="obfuscator">.nosp@m.</span>abbe<span class="obfuscator">.nosp@m.</span>r.org</a> Copyright (c) 2016-2026 Joachim Wiberg <a href="#" onclick="location.href='mai'+'lto:'+'tro'+'gl'+'obi'+'t@'+'gma'+'il'+'.co'+'m'; return false;">trogl<span class="obfuscator">.nosp@m.</span>obit<span class="obfuscator">.nosp@m.</span>@gmai<span class="obfuscator">.nosp@m.</span>l.co<span class="obfuscator">.nosp@m.</span>m</a> All rights reserved.</p>
+<p>Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:</p><ul>
+<li>Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.</li>
+<li>Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.</li>
+<li>Neither the name of the copyright holders nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.</li>
+</ul>
+<p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. </p>
 
-<p class="definition">Definition at line <a class="el" href="xht_8h_source.html#l00010">10</a> of file <a class="el" href="xht_8h_source.html">xht.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="xht_8h_source.html#l00034">34</a> of file <a class="el" href="xht_8h_source.html">xht.h</a>.</p>
 
 </div>
 </div>
-<a id="a84ca945b11d95f970876795b86cacb43" name="a84ca945b11d95f970876795b86cacb43"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a84ca945b11d95f970876795b86cacb43">&#9670;&#160;</a></span>xht_walker</h2>
+<a id="a541d6e29253619e6f44affff4320ed12" name="a541d6e29253619e6f44affff4320ed12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a541d6e29253619e6f44affff4320ed12">&#9670;&#160;</a></span>xht_walker</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef void(* xht_walker) (<a class="el" href="xht_8h.html#a19434d2f5d5431cee332c89399f2611a">xht_t</a> *h, char *key, void *val, void *arg)</td>
+          <td class="memname">typedef void(* xht_walker) (<a class="el" href="xht_8h.html#a19434d2f5d5431cee332c89399f2611a">xht_t</a> *h, const char *key, void *val, void *arg)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="xht_8h_source.html#l00028">28</a> of file <a class="el" href="xht_8h_source.html">xht.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="xht_8h_source.html#l00052">52</a> of file <a class="el" href="xht_8h_source.html">xht.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a0b80185ab76e2b04ef269f3bc18e1f4f" name="a0b80185ab76e2b04ef269f3bc18e1f4f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0b80185ab76e2b04ef269f3bc18e1f4f">&#9670;&#160;</a></span>xht_free()</h2>
+<a id="a198b2a996ed4aa97602daeefd3dcd95b" name="a198b2a996ed4aa97602daeefd3dcd95b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a198b2a996ed4aa97602daeefd3dcd95b">&#9670;&#160;</a></span>xht_free()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void MDNSD_EXPORT xht_free </td>
+          <td class="memname">void xht_free </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="xht_8h.html#a19434d2f5d5431cee332c89399f2611a">xht_t</a> *&#160;</td>
           <td class="paramname"><em>h</em></td><td>)</td>
@@ -172,14 +178,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aea42e90fb2b018712823c6b692306ff2" name="aea42e90fb2b018712823c6b692306ff2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea42e90fb2b018712823c6b692306ff2">&#9670;&#160;</a></span>xht_get()</h2>
+<a id="a22eb13131bcbe3c22c5c475aecd4b13e" name="a22eb13131bcbe3c22c5c475aecd4b13e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22eb13131bcbe3c22c5c475aecd4b13e">&#9670;&#160;</a></span>xht_get()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void MDNSD_EXPORT * xht_get </td>
+          <td class="memname">void * xht_get </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="xht_8h.html#a19434d2f5d5431cee332c89399f2611a">xht_t</a> *&#160;</td>
           <td class="paramname"><em>h</em>, </td>
@@ -187,7 +193,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char *&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>key</em>&#160;</td>
         </tr>
         <tr>
@@ -200,14 +206,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ab3122d2fb7c42400a3c59ffb78bb124a" name="ab3122d2fb7c42400a3c59ffb78bb124a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab3122d2fb7c42400a3c59ffb78bb124a">&#9670;&#160;</a></span>xht_new()</h2>
+<a id="a29d91f70bd8eef233d6696b4becb3a01" name="a29d91f70bd8eef233d6696b4becb3a01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29d91f70bd8eef233d6696b4becb3a01">&#9670;&#160;</a></span>xht_new()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="xht_8h.html#a19434d2f5d5431cee332c89399f2611a">xht_t</a> MDNSD_EXPORT * xht_new </td>
+          <td class="memname"><a class="el" href="xht_8h.html#a19434d2f5d5431cee332c89399f2611a">xht_t</a> * xht_new </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>prime</em></td><td>)</td>
@@ -218,14 +224,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aec934d0e23b4f54bbee05353c7eaa421" name="aec934d0e23b4f54bbee05353c7eaa421"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aec934d0e23b4f54bbee05353c7eaa421">&#9670;&#160;</a></span>xht_set()</h2>
+<a id="af7c62706a24118210c71e599102dc8f8" name="af7c62706a24118210c71e599102dc8f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7c62706a24118210c71e599102dc8f8">&#9670;&#160;</a></span>xht_set()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void MDNSD_EXPORT xht_set </td>
+          <td class="memname">void xht_set </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="xht_8h.html#a19434d2f5d5431cee332c89399f2611a">xht_t</a> *&#160;</td>
           <td class="paramname"><em>h</em>, </td>
@@ -233,7 +239,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char *&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>key</em>, </td>
         </tr>
         <tr>
@@ -252,14 +258,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a595d11b4cebfebff9f579502b3eb5077" name="a595d11b4cebfebff9f579502b3eb5077"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a595d11b4cebfebff9f579502b3eb5077">&#9670;&#160;</a></span>xht_store()</h2>
+<a id="a2cf0febe768249821c74e35b81ce1c36" name="a2cf0febe768249821c74e35b81ce1c36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cf0febe768249821c74e35b81ce1c36">&#9670;&#160;</a></span>xht_store()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void MDNSD_EXPORT xht_store </td>
+          <td class="memname">void xht_store </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="xht_8h.html#a19434d2f5d5431cee332c89399f2611a">xht_t</a> *&#160;</td>
           <td class="paramname"><em>h</em>, </td>
@@ -267,7 +273,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char *&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>key</em>, </td>
         </tr>
         <tr>
@@ -313,7 +319,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="xht_8h.html#a84ca945b11d95f970876795b86cacb43">xht_walker</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="xht_8h.html#a541d6e29253619e6f44affff4320ed12">xht_walker</a>&#160;</td>
           <td class="paramname"><em>w</em>, </td>
         </tr>
         <tr>

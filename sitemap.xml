@@ -263,6 +263,9 @@
     <loc>https://open62541pp.github.io/open62541pp/typeconverter_8hpp_source.html</loc>
   </url>
   <url>
+    <loc>https://open62541pp.github.io/open62541pp/nodeids_8hpp_source.html</loc>
+  </url>
+  <url>
     <loc>https://open62541pp.github.io/open62541pp/typeregistry_8hpp_source.html</loc>
   </url>
   <url>
@@ -273,9 +276,6 @@
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/ua_2types_8hpp_source.html</loc>
-  </url>
-  <url>
-    <loc>https://open62541pp.github.io/open62541pp/nodeids_8hpp_source.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/ua_8hpp_source.html</loc>
@@ -572,6 +572,9 @@
     <loc>https://open62541pp.github.io/open62541pp/typeconverter_8hpp.html</loc>
   </url>
   <url>
+    <loc>https://open62541pp.github.io/open62541pp/nodeids_8hpp.html</loc>
+  </url>
+  <url>
     <loc>https://open62541pp.github.io/open62541pp/typeregistry_8hpp.html</loc>
   </url>
   <url>
@@ -582,9 +585,6 @@
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/ua_2types_8hpp.html</loc>
-  </url>
-  <url>
-    <loc>https://open62541pp.github.io/open62541pp/nodeids_8hpp.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/ua_8hpp.html</loc>
@@ -905,7 +905,7 @@
     <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1IsRegistered.html</loc>
   </url>
   <url>
-    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1IsRegistered_3_01T_00_01std_1_1void__t_3_01decltype_07TypeRegistry_3_01T_01_4_02_03_08_4_01_4.html</loc>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1IsRegistered_3_01T_00_01std_1_1void__t_3_01decltype_07sizeof_07TypeRegistry_3_01T_01_4_08_08_4_01_4.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1IsWrapper.html</loc>

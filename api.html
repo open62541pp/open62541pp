@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.21.3</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.22.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -104,9 +104,9 @@ The Node API</h1>
 <div class="line">node.writeValue(<a class="code hl_class" href="classopcua_1_1Variant.html">opcua::Variant</a>{42});                  <span class="comment">// throws on error</span></div>
 <div class="line"><span class="keyword">auto</span> value = node.readValue().to&lt;<span class="keywordtype">int</span>&gt;();              <span class="comment">// throws on error</span></div>
 <div class="line"><span class="keyword">auto</span> child = node.addVariable({1, 2000}, <span class="stringliteral">&quot;Counter&quot;</span>);  <span class="comment">// returns a Node</span></div>
-<div class="ttc" id="aclassopcua_1_1NodeId_html"><div class="ttname"><a href="classopcua_1_1NodeId.html">opcua::NodeId</a></div><div class="ttdoc">UA_NodeId wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00652">types.hpp:652</a></div></div>
+<div class="ttc" id="aclassopcua_1_1NodeId_html"><div class="ttname"><a href="classopcua_1_1NodeId.html">opcua::NodeId</a></div><div class="ttdoc">UA_NodeId wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l00653">types.hpp:653</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Node_html"><div class="ttname"><a href="classopcua_1_1Node.html">opcua::Node</a></div><div class="ttdoc">High-level node class to access node attribute, browse and populate address space.</div><div class="ttdef"><b>Definition</b> <a href="node_8hpp_source.html#l00045">node.hpp:45</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Variant_html"><div class="ttname"><a href="classopcua_1_1Variant.html">opcua::Variant</a></div><div class="ttdoc">UA_Variant wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l01059">types.hpp:1059</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html"><div class="ttname"><a href="classopcua_1_1Variant.html">opcua::Variant</a></div><div class="ttdoc">UA_Variant wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="types_8hpp_source.html#l01060">types.hpp:1060</a></div></div>
 </div><!-- fragment --><p><b>Use the Node API when:</b></p><ul>
 <li>writing sequential, synchronous code where exceptions are acceptable</li>
 <li>operating on individual nodes one at a time</li>

@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.21.3</span>
+   <div id="projectname">open62541pp<span id="projectnumber">&#160;0.22.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -420,6 +420,8 @@ Additional Inherited Members</h2></td></tr>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2client_custom_datatypes_8cpp-example.html#a2">custom_datatypes/client_custom_datatypes.cpp</a>.</dd>
 </dl>
 
+<p class="reference">Referenced by <a class="el" href="client_8hpp_source.html#l00185">opcua::Client::setCustomDataTypes()</a>.</p>
+
 </div>
 </div>
 <a id="aaacd214e2d78fec14dccd7b6d889a97a" name="aaacd214e2d78fec14dccd7b6d889a97a"></a>
@@ -632,6 +634,7 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Set X.509 identity token. </p>
+<dl class="section note"><dt>Note</dt><dd>Servers verify a signature created with the private key of the certificate. The private key of the secure channel is used by default. Use setAuthenticationCertificate to authenticate with a different certificate. </dd></dl>
 
 </div>
 </div>

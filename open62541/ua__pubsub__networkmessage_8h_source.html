@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.15</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.19</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -199,7 +199,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keyword">union </span>{</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="structUA__DataSetMessage.html#af0a7840c7662c10628656a7e2de7c7c9">   89</a></span>        <a class="code hl_struct" href="structUA__DataSetMessage__DataKeyFrameData.html">UA_DataSetMessage_DataKeyFrameData</a> <a class="code hl_variable" href="structUA__DataSetMessage.html#af0a7840c7662c10628656a7e2de7c7c9">keyFrameData</a>;</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="structUA__DataSetMessage.html#ab39bcf0f087fd986e8623fdcc01d3daf">   90</a></span>        <a class="code hl_struct" href="structUA__DataSetMessage__DataDeltaFrameData.html">UA_DataSetMessage_DataDeltaFrameData</a> <a class="code hl_variable" href="structUA__DataSetMessage.html#ab39bcf0f087fd986e8623fdcc01d3daf">deltaFrameData</a>;</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="structUA__DataSetMessage.html#a07125fe2e12bb2fbc76bfcf04201c95c">   91</a></span>    } data;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="structUA__DataSetMessage.html#ae3f9127de6d1876f0326a006ea1b7f8f">   91</a></span>    } data;</div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="structUA__DataSetMessage.html#a12faf82c285b45a7ecedd289d1b314f6">   92</a></span>    <span class="keywordtype">size_t</span> <a class="code hl_variable" href="structUA__DataSetMessage.html#a12faf82c285b45a7ecedd289d1b314f6">configuredSize</a>;</div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>} <a class="code hl_struct" href="structUA__DataSetMessage.html">UA_DataSetMessage</a>;</div>
 </div>
@@ -271,7 +271,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keyword">union </span>{</div>
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno"><a class="line" href="structUA__NetworkMessage.html#a762506472869caa4ee3cc34bfd844a57">  152</a></span>        <a class="code hl_struct" href="structUA__DataSetPayloadHeader.html">UA_DataSetPayloadHeader</a> <a class="code hl_variable" href="structUA__NetworkMessage.html#a762506472869caa4ee3cc34bfd844a57">dataSetPayloadHeader</a>;</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="structUA__NetworkMessage.html#a6454717b750f18675e5fd2bc42f1dfc5">  153</a></span>    } payloadHeader;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="structUA__NetworkMessage.html#a4f79a6a451cb1e15421a7a1175e257d2">  153</a></span>    } payloadHeader;</div>
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno"><a class="line" href="structUA__NetworkMessage.html#ab224779d9a5374a4abcfd25a3853026a">  155</a></span>    UA_DateTime <a class="code hl_variable" href="structUA__NetworkMessage.html#ab224779d9a5374a4abcfd25a3853026a">timestamp</a>;</div>
 <div class="line"><a id="l00156" name="l00156"></a><span class="lineno"><a class="line" href="structUA__NetworkMessage.html#afa3913cec181e3c61d080ce6d4e8fb04">  156</a></span>    <a class="code hl_typedef" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a> <a class="code hl_variable" href="structUA__NetworkMessage.html#afa3913cec181e3c61d080ce6d4e8fb04">picoseconds</a>;</div>
@@ -282,7 +282,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <span class="keyword">union </span>{</div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno"><a class="line" href="structUA__NetworkMessage.html#a96c9230f887787fddc9bea4670676514">  163</a></span>        <a class="code hl_struct" href="structUA__DataSetPayload.html">UA_DataSetPayload</a> <a class="code hl_variable" href="structUA__NetworkMessage.html#a96c9230f887787fddc9bea4670676514">dataSetPayload</a>;</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno"><a class="line" href="structUA__NetworkMessage.html#ae6a77523fc82aaf7736e9cf7127dbb2f">  164</a></span>    } payload;</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno"><a class="line" href="structUA__NetworkMessage.html#a2861937585cbbda20cbc9e6a157117a6">  164</a></span>    } payload;</div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno"><a class="line" href="structUA__NetworkMessage.html#a934177325e9be99ef1ff1acbf128673c">  166</a></span>    <a class="code hl_struct" href="structUA__String.html">UA_ByteString</a> <a class="code hl_variable" href="structUA__NetworkMessage.html#a934177325e9be99ef1ff1acbf128673c">securityFooter</a>;</div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>} <a class="code hl_struct" href="structUA__NetworkMessage.html">UA_NetworkMessage</a>;</div>
@@ -322,7 +322,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00197" name="l00197"></a><span class="lineno"><a class="line" href="structUA__NetworkMessageOffset.html#a4047fdba527c6ed5d3c17c494ff7ea92">  197</a></span>        <a class="code hl_typedef" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a> <a class="code hl_variable" href="structUA__NetworkMessageOffset.html#a4047fdba527c6ed5d3c17c494ff7ea92">sequenceNumber</a>;</div>
 <div class="line"><a id="l00198" name="l00198"></a><span class="lineno"><a class="line" href="structUA__NetworkMessageOffset.html#a2cd3be1bcbe4434d07af309a8d78ac62">  198</a></span>        <a class="code hl_struct" href="structUA__DataValue.html">UA_DataValue</a> **<a class="code hl_variable" href="structUA__NetworkMessageOffset.html#a2cd3be1bcbe4434d07af309a8d78ac62">externalValue</a>;</div>
 <div class="line"><a id="l00199" name="l00199"></a><span class="lineno"><a class="line" href="structUA__NetworkMessageOffset.html#a59d377c7329a1619ed9e5779d8902df4">  199</a></span>        <a class="code hl_struct" href="structUA__DataValue.html">UA_DataValue</a> <a class="code hl_variable" href="structUA__NetworkMessageOffset.html#a59d377c7329a1619ed9e5779d8902df4">value</a>;</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno"><a class="line" href="structUA__NetworkMessageOffset.html#aace9518b0355bead3cafd1e774e510b1">  200</a></span>    } content;</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno"><a class="line" href="structUA__NetworkMessageOffset.html#a6bf43d6df41fc77c99344678d81393b1">  200</a></span>    } content;</div>
 <div class="line"><a id="l00201" name="l00201"></a><span class="lineno"><a class="line" href="structUA__NetworkMessageOffset.html#a7b6fade5b14e433ca749bcc96e5795df">  201</a></span>    <span class="keywordtype">size_t</span> <a class="code hl_variable" href="structUA__NetworkMessageOffset.html#a7b6fade5b14e433ca749bcc96e5795df">offset</a>;</div>
 <div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>} <a class="code hl_struct" href="structUA__NetworkMessageOffset.html">UA_NetworkMessageOffset</a>;</div>
 </div>

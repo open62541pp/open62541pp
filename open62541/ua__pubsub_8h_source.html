@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.15</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.19</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -914,7 +914,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00716" name="l00716"></a><span class="lineno">  716</span><span class="preprocessor">#ifdef UA_ENABLE_PUBSUB_INFORMATIONMODEL</span></div>
 <div class="line"><a id="l00717" name="l00717"></a><span class="lineno">  717</span>    <a class="code hl_struct" href="structUA__NodeId.html">UA_NodeId</a> securityGroupFolderId;</div>
 <div class="line"><a id="l00718" name="l00718"></a><span class="lineno">  718</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00719" name="l00719"></a><span class="lineno">  719</span>    <a class="code hl_define" href="open62541__queue_8h.html#af71bfd90dc9d00fb03545fe66c67d673">TAILQ_ENTRY</a>(<a class="code hl_typedef" href="ua__pubsub_8h.html#a2f8d809ade4c2d4e2ce0d2f2a3989f39">UA_SecurityGroup</a>) listEntry;</div>
+<div class="line"><a id="l00719" name="l00719"></a><span class="lineno">  719</span>    <a class="code hl_define" href="queue_8h.html#af71bfd90dc9d00fb03545fe66c67d673">TAILQ_ENTRY</a>(<a class="code hl_typedef" href="ua__pubsub_8h.html#a2f8d809ade4c2d4e2ce0d2f2a3989f39">UA_SecurityGroup</a>) listEntry;</div>
 <div class="line"><a id="l00720" name="l00720"></a><span class="lineno">  720</span>};</div>
 <div class="line"><a id="l00721" name="l00721"></a><span class="lineno">  721</span> </div>
 <div class="line"><a id="l00722" name="l00722"></a><span class="lineno">  722</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
@@ -989,10 +989,10 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00784" name="l00784"></a><span class="lineno"><a class="line" href="structUA__PubSubManager.html#a3c78e042a2a95d3b8b0941e932b3e84a">  784</a></span>    UA_ReserveIdTree <a class="code hl_variable" href="structUA__PubSubManager.html#a3c78e042a2a95d3b8b0941e932b3e84a">reserveIds</a>;</div>
 <div class="line"><a id="l00785" name="l00785"></a><span class="lineno">  785</span> </div>
 <div class="line"><a id="l00786" name="l00786"></a><span class="lineno">  786</span><span class="preprocessor">#ifdef UA_ENABLE_PUBSUB_SKS</span></div>
-<div class="line"><a id="l00787" name="l00787"></a><span class="lineno">  787</span>    <a class="code hl_define" href="open62541__queue_8h.html#ae72219f63b2fe9bce774a64e11404179">LIST_HEAD</a>(, UA_PubSubKeyStorage) pubSubKeyList;</div>
+<div class="line"><a id="l00787" name="l00787"></a><span class="lineno">  787</span>    <a class="code hl_define" href="queue_8h.html#ae72219f63b2fe9bce774a64e11404179">LIST_HEAD</a>(, UA_PubSubKeyStorage) pubSubKeyList;</div>
 <div class="line"><a id="l00788" name="l00788"></a><span class="lineno">  788</span> </div>
 <div class="line"><a id="l00789" name="l00789"></a><span class="lineno">  789</span>    <span class="keywordtype">size_t</span> securityGroupsSize;</div>
-<div class="line"><a id="l00790" name="l00790"></a><span class="lineno">  790</span>    <a class="code hl_define" href="open62541__queue_8h.html#a4abce769a262e090c1f601605b9d6c76">TAILQ_HEAD</a>(, <a class="code hl_typedef" href="ua__pubsub_8h.html#a2f8d809ade4c2d4e2ce0d2f2a3989f39">UA_SecurityGroup</a>) securityGroups;</div>
+<div class="line"><a id="l00790" name="l00790"></a><span class="lineno">  790</span>    <a class="code hl_define" href="queue_8h.html#a4abce769a262e090c1f601605b9d6c76">TAILQ_HEAD</a>(, <a class="code hl_typedef" href="ua__pubsub_8h.html#a2f8d809ade4c2d4e2ce0d2f2a3989f39">UA_SecurityGroup</a>) securityGroups;</div>
 <div class="line"><a id="l00791" name="l00791"></a><span class="lineno">  791</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00792" name="l00792"></a><span class="lineno">  792</span> </div>
 <div class="line"><a id="l00793" name="l00793"></a><span class="lineno">  793</span><span class="preprocessor">#ifndef UA_ENABLE_PUBSUB_INFORMATIONMODEL</span></div>
@@ -1069,9 +1069,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aconfig_8h_html_ae2a857f3db1005cc1b5a41effd3adac6"><div class="ttname"><a href="config_8h.html#ae2a857f3db1005cc1b5a41effd3adac6">_UA_END_DECLS</a></div><div class="ttdeci">#define _UA_END_DECLS</div><div class="ttdef"><b>Definition</b> <a href="config_8h_source.html#l00107">config.h:107</a></div></div>
 <div class="ttc" id="alog_8h_html_ae4899cf5c80d00f8c8e3703cb431ec2e"><div class="ttname"><a href="log_8h.html#ae4899cf5c80d00f8c8e3703cb431ec2e">msg</a></div><div class="ttdeci">static UA_LogCategory const char * msg</div><div class="ttdef"><b>Definition</b> <a href="log_8h_source.html#l00058">log.h:58</a></div></div>
 <div class="ttc" id="aopen62541__queue_8h_html"><div class="ttname"><a href="open62541__queue_8h.html">open62541_queue.h</a></div></div>
-<div class="ttc" id="aopen62541__queue_8h_html_a4abce769a262e090c1f601605b9d6c76"><div class="ttname"><a href="open62541__queue_8h.html#a4abce769a262e090c1f601605b9d6c76">TAILQ_HEAD</a></div><div class="ttdeci">#define TAILQ_HEAD(name, type)</div><div class="ttdef"><b>Definition</b> <a href="open62541__queue_8h_source.html#l00402">open62541_queue.h:402</a></div></div>
-<div class="ttc" id="aopen62541__queue_8h_html_ae72219f63b2fe9bce774a64e11404179"><div class="ttname"><a href="open62541__queue_8h.html#ae72219f63b2fe9bce774a64e11404179">LIST_HEAD</a></div><div class="ttdeci">#define LIST_HEAD(name, type)</div><div class="ttdef"><b>Definition</b> <a href="open62541__queue_8h_source.html#l00167">open62541_queue.h:167</a></div></div>
-<div class="ttc" id="aopen62541__queue_8h_html_af71bfd90dc9d00fb03545fe66c67d673"><div class="ttname"><a href="open62541__queue_8h.html#af71bfd90dc9d00fb03545fe66c67d673">TAILQ_ENTRY</a></div><div class="ttdeci">#define TAILQ_ENTRY(type)</div><div class="ttdef"><b>Definition</b> <a href="open62541__queue_8h_source.html#l00411">open62541_queue.h:411</a></div></div>
+<div class="ttc" id="aqueue_8h_html_a4abce769a262e090c1f601605b9d6c76"><div class="ttname"><a href="queue_8h.html#a4abce769a262e090c1f601605b9d6c76">TAILQ_HEAD</a></div><div class="ttdeci">#define TAILQ_HEAD(name, type)</div><div class="ttdef"><b>Definition</b> <a href="queue_8h_source.html#l00407">queue.h:407</a></div></div>
+<div class="ttc" id="aqueue_8h_html_ae72219f63b2fe9bce774a64e11404179"><div class="ttname"><a href="queue_8h.html#ae72219f63b2fe9bce774a64e11404179">LIST_HEAD</a></div><div class="ttdeci">#define LIST_HEAD(name, type)</div><div class="ttdef"><b>Definition</b> <a href="queue_8h_source.html#l00164">queue.h:164</a></div></div>
+<div class="ttc" id="aqueue_8h_html_af71bfd90dc9d00fb03545fe66c67d673"><div class="ttname"><a href="queue_8h.html#af71bfd90dc9d00fb03545fe66c67d673">TAILQ_ENTRY</a></div><div class="ttdeci">#define TAILQ_ENTRY(type)</div><div class="ttdef"><b>Definition</b> <a href="queue_8h_source.html#l00416">queue.h:416</a></div></div>
 <div class="ttc" id="aserver_8h_html"><div class="ttname"><a href="server_8h.html">server.h</a></div></div>
 <div class="ttc" id="aserver__pubsub_8h_html"><div class="ttname"><a href="server__pubsub_8h.html">server_pubsub.h</a></div></div>
 <div class="ttc" id="aserver__pubsub_8h_html_a6aae9b86fea30ec1c9607ebae5a3b2d4"><div class="ttname"><a href="server__pubsub_8h.html#a6aae9b86fea30ec1c9607ebae5a3b2d4">UA_PubSubComponentEnumType</a></div><div class="ttdeci">UA_PubSubComponentEnumType</div><div class="ttdoc">This Source Code Form is subject to the terms of the Mozilla Public License, v.</div><div class="ttdef"><b>Definition</b> <a href="server__pubsub_8h_source.html#l00027">server_pubsub.h:27</a></div></div>

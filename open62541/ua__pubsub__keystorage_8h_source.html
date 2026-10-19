@@ -33,7 +33,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.15</span>
+   <div id="projectname">open62541<span id="projectnumber">&#160;1.4.19</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -130,11 +130,11 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <a class="code hl_struct" href="structUA__String.html">UA_ByteString</a> key;</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="comment">/* Pointers to the key list entries*/</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <a class="code hl_define" href="open62541__queue_8h.html#af71bfd90dc9d00fb03545fe66c67d673">TAILQ_ENTRY</a>(UA_PubSubKeyListItem) keyListEntry;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <a class="code hl_define" href="queue_8h.html#af71bfd90dc9d00fb03545fe66c67d673">TAILQ_ENTRY</a>(UA_PubSubKeyListItem) keyListEntry;</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>} UA_PubSubKeyListItem;</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment"></span> </div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">/** Queue Definition*/</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keyword">typedef</span> <a class="code hl_define" href="open62541__queue_8h.html#a4abce769a262e090c1f601605b9d6c76">TAILQ_HEAD</a>(keyListItems, UA_PubSubKeyListItem) keyListItems;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keyword">typedef</span> <a class="code hl_define" href="queue_8h.html#a4abce769a262e090c1f601605b9d6c76">TAILQ_HEAD</a>(keyListItems, UA_PubSubKeyListItem) keyListItems;</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="keyword">typedef</span> <span class="keyword">struct </span>UA_PubSubSKSConfig {</div>
@@ -190,7 +190,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    UA_PubSubSKSConfig sksConfig;</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    </div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <a class="code hl_define" href="open62541__queue_8h.html#aec2ccd0e8c215504508af23f04480be6">LIST_ENTRY</a>(UA_PubSubKeyStorage) keyStorageList;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <a class="code hl_define" href="queue_8h.html#aec2ccd0e8c215504508af23f04480be6">LIST_ENTRY</a>(UA_PubSubKeyStorage) keyStorageList;</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>} UA_PubSubKeyStorage;</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
@@ -277,9 +277,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aconfig_8h_html_aa397bffde7d792f38dcbb8e329486f9c"><div class="ttname"><a href="config_8h.html#aa397bffde7d792f38dcbb8e329486f9c">_UA_BEGIN_DECLS</a></div><div class="ttdeci">#define _UA_BEGIN_DECLS</div><div class="ttdoc">#undef UA_DEBUG_DUMP_PKGS</div><div class="ttdef"><b>Definition</b> <a href="config_8h_source.html#l00100">config.h:100</a></div></div>
 <div class="ttc" id="aconfig_8h_html_ae2a857f3db1005cc1b5a41effd3adac6"><div class="ttname"><a href="config_8h.html#ae2a857f3db1005cc1b5a41effd3adac6">_UA_END_DECLS</a></div><div class="ttdeci">#define _UA_END_DECLS</div><div class="ttdef"><b>Definition</b> <a href="config_8h_source.html#l00107">config.h:107</a></div></div>
 <div class="ttc" id="aopen62541__queue_8h_html"><div class="ttname"><a href="open62541__queue_8h.html">open62541_queue.h</a></div></div>
-<div class="ttc" id="aopen62541__queue_8h_html_a4abce769a262e090c1f601605b9d6c76"><div class="ttname"><a href="open62541__queue_8h.html#a4abce769a262e090c1f601605b9d6c76">TAILQ_HEAD</a></div><div class="ttdeci">#define TAILQ_HEAD(name, type)</div><div class="ttdef"><b>Definition</b> <a href="open62541__queue_8h_source.html#l00402">open62541_queue.h:402</a></div></div>
-<div class="ttc" id="aopen62541__queue_8h_html_aec2ccd0e8c215504508af23f04480be6"><div class="ttname"><a href="open62541__queue_8h.html#aec2ccd0e8c215504508af23f04480be6">LIST_ENTRY</a></div><div class="ttdeci">#define LIST_ENTRY(type)</div><div class="ttdef"><b>Definition</b> <a href="open62541__queue_8h_source.html#l00175">open62541_queue.h:175</a></div></div>
-<div class="ttc" id="aopen62541__queue_8h_html_af71bfd90dc9d00fb03545fe66c67d673"><div class="ttname"><a href="open62541__queue_8h.html#af71bfd90dc9d00fb03545fe66c67d673">TAILQ_ENTRY</a></div><div class="ttdeci">#define TAILQ_ENTRY(type)</div><div class="ttdef"><b>Definition</b> <a href="open62541__queue_8h_source.html#l00411">open62541_queue.h:411</a></div></div>
+<div class="ttc" id="aqueue_8h_html_a4abce769a262e090c1f601605b9d6c76"><div class="ttname"><a href="queue_8h.html#a4abce769a262e090c1f601605b9d6c76">TAILQ_HEAD</a></div><div class="ttdeci">#define TAILQ_HEAD(name, type)</div><div class="ttdef"><b>Definition</b> <a href="queue_8h_source.html#l00407">queue.h:407</a></div></div>
+<div class="ttc" id="aqueue_8h_html_aec2ccd0e8c215504508af23f04480be6"><div class="ttname"><a href="queue_8h.html#aec2ccd0e8c215504508af23f04480be6">LIST_ENTRY</a></div><div class="ttdeci">#define LIST_ENTRY(type)</div><div class="ttdef"><b>Definition</b> <a href="queue_8h_source.html#l00172">queue.h:172</a></div></div>
+<div class="ttc" id="aqueue_8h_html_af71bfd90dc9d00fb03545fe66c67d673"><div class="ttname"><a href="queue_8h.html#af71bfd90dc9d00fb03545fe66c67d673">TAILQ_ENTRY</a></div><div class="ttdeci">#define TAILQ_ENTRY(type)</div><div class="ttdef"><b>Definition</b> <a href="queue_8h_source.html#l00416">queue.h:416</a></div></div>
 <div class="ttc" id="asecuritypolicy_8h_html"><div class="ttname"><a href="securitypolicy_8h.html">securitypolicy.h</a></div></div>
 <div class="ttc" id="aserver_8h_html"><div class="ttname"><a href="server_8h.html">server.h</a></div></div>
 <div class="ttc" id="astructUA__ClientConfig_html"><div class="ttname"><a href="structUA__ClientConfig.html">UA_ClientConfig</a></div><div class="ttdef"><b>Definition</b> <a href="client_8h_source.html#l00038">client.h:38</a></div></div>
