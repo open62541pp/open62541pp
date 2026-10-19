@@ -155,6 +155,15 @@ jobs:
         with:
           submodules: recursive
 
+      # Temporary: macOS 26 images ship OpenSSL 4, which the bundled open62541 doesn't support yet (direct ASN1_STRING field access).
+      - name: Select OpenSSL 3
+        if: runner.os == 'macOS'
+        shell: bash
+        run: |
+          OPENSSL_PREFIX="$(brew --prefix openssl@3)"
+          echo "OPENSSL_ROOT_DIR=$OPENSSL_PREFIX" >> "$GITHUB_ENV"
+          echo "PKG_CONFIG_PATH=$OPENSSL_PREFIX/lib/pkgconfig${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}" >> "$GITHUB_ENV"
+
       - name: Configure CMake
         run: >
           cmake -S . -B ./build
