@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.22.0] - 2026-10-19
+
+### Added
+
+- `ClientConfig::setAuthenticationCertificate` for X.509 user authentication (#729)
+- clang-format tooling and CI format check (#736)
+
+### Changed
+
+- `ByteString` uses `std::byte` instead of `uint8_t` (#724)
+- Replace internal `__UA_Server_addNode` with public API (#721)
+- Update internal open62541 to v1.4.19 (#723)
+
+### Fixed
+
+- Build with `UA_ENABLE_METHODCALLS=OFF` (#722)
+- Build with Clang 21 + libstdc++ 15 (#727)
+- Locale-independent formatting of `NumericRange` (#728)
+- Create subscriptions asynchronously in client subscription example (#725)
+- `UAPP_OPEN62541_VER_GE` / `UAPP_OPEN62541_VER_LE` with differing major versions (#732)
+- Unintended `UA_FORCE_WERROR` enablement (#733)
+- MinGW GCC 7 compatibility (#737)
+
 ## [0.21.3] - 2026-08-26
 
 ### Fixed
@@ -935,7 +958,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial public release
 
-[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.21.3...HEAD
+[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.22.0...HEAD
+[0.22.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.22.0
 [0.21.3]: https://github.com/open62541pp/open62541pp/releases/tag/v0.21.3
 [0.21.2]: https://github.com/open62541pp/open62541pp/releases/tag/v0.21.2
 [0.21.1]: https://github.com/open62541pp/open62541pp/releases/tag/v0.21.1
