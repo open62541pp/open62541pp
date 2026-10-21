@@ -49,7 +49,8 @@ public:
         Session& session,
         const EndpointDescription& endpointDescription,
         const ByteString& secureChannelRemoteCertificate,
-        const ExtensionObject& userIdentityToken
+        const ExtensionObject& userIdentityToken,
+        void*& sessionContext
     ) = 0;
 
     /// Deauthenticate a session and cleanup session context.
