@@ -13,6 +13,11 @@
 #include <open62541/server_config.h>
 #endif
 #include <open62541/server_config_default.h>
+#ifdef UA_ENABLE_HISTORIZING
+#include <open62541/plugin/historydata/history_data_backend_memory.h>
+#include <open62541/plugin/historydata/history_data_gathering_default.h>
+#include <open62541/plugin/historydata/history_database_default.h>
+#endif
 
 #endif
 

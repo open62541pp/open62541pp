@@ -30,6 +30,7 @@ add_executable(
     node.cpp
     plugin_accesscontrol.cpp
     plugin_create_certificate.cpp
+    plugin_historydatabase.cpp
     plugin_log.cpp
     plugin_nodesetloader.cpp
     pluginadapter.cpp
