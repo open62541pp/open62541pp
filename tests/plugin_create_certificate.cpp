@@ -1,4 +1,6 @@
+#include <cstdint>
 #include <string>
+#include <string_view>
 
 #include <catch2/catch_test_macros.hpp>
 
@@ -41,6 +43,53 @@ TEST_CASE("Create certificate") {
         );
         CHECK(!cert.privateKey.empty());
         CHECK(!cert.certificate.empty());
+    }
+
+    SECTION("Custom key size") {
+        const auto cert = createCertificate(
+            {String{"C=DE"}, String{"CN=open62541ppServer@localhost"}},
+            {String{"DNS:localhost"}, String{"URI:urn:open62541.server.application"}},
+            CertificateFormat::DER,
+            2048
+        );
+        CHECK(!cert.privateKey.empty());
+        CHECK(!cert.certificate.empty());
+    }
+
+    SECTION("Key size affects generated key") {
+        const auto create = [](uint16_t keySizeBits, CertificateFormat format) {
+            return createCertificate(
+                {String{"C=DE"}, String{"CN=open62541ppServer@localhost"}},
+                {String{"DNS:localhost"}, String{"URI:urn:open62541.server.application"}},
+                format,
+                keySizeBits
+            );
+        };
+
+        const auto small = create(1024, CertificateFormat::DER);
+        const auto medium = create(2048, CertificateFormat::DER);
+        const auto large = create(4096, CertificateFormat::DER);
+        CHECK(small.privateKey.size() < medium.privateKey.size());
+        CHECK(medium.privateKey.size() < large.privateKey.size());
+
+        // 0 -> library default (maximum), must not be smaller than an explicit size
+        const auto defaultSize = create(0, CertificateFormat::DER);
+        CHECK(defaultSize.privateKey.size() >= medium.privateKey.size());
+    }
+
+    SECTION("Custom key size with PEM format") {
+        const auto cert = createCertificate(
+            {String{"C=DE"}, String{"CN=open62541ppServer@localhost"}},
+            {String{"DNS:localhost"}, String{"URI:urn:open62541.server.application"}},
+            CertificateFormat::PEM,
+            2048
+        );
+        CHECK(!cert.privateKey.empty());
+        CHECK(!cert.certificate.empty());
+        CHECK(
+            std::string_view{cert.certificate}.find("-----BEGIN CERTIFICATE-----") !=
+            std::string_view::npos
+        );
     }
 }
 

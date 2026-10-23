@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstdint>
+
 #include "open62541pp/config.hpp"
 #include "open62541pp/span.hpp"
 #include "open62541pp/types.hpp"
@@ -36,6 +38,8 @@ public:
  * @param subjectAltName Elements for SubjectAltName,
  *        e.g. {"DNS:localhost", "URI:urn:open62541.server.application"}
  * @param certificateFormat Certificate format, either DER or PEM
+ * @param keySizeBits Size of the generated RSA key in bits, e.g. 2048 or 4096.
+ *        Use 0 for the library default (maximum supported size).
  *
  * @exception BadStatus (BadOutOfMemory)
  * @exception CreateCertificateError
@@ -45,7 +49,8 @@ public:
 CreateCertificateResult createCertificate(
     Span<const String> subject,
     Span<const String> subjectAltName,
-    CertificateFormat certificateFormat = CertificateFormat::DER
+    CertificateFormat certificateFormat = CertificateFormat::DER,
+    uint16_t keySizeBits = 0
 );
 
 }  // namespace opcua
