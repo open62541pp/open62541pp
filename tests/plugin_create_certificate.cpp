@@ -42,6 +42,17 @@ TEST_CASE("Create certificate") {
         CHECK(!cert.privateKey.empty());
         CHECK(!cert.certificate.empty());
     }
+
+    SECTION("Custom key size") {
+        const auto cert = createCertificate(
+            {String{"C=DE"}, String{"CN=open62541ppServer@localhost"}},
+            {String{"DNS:localhost"}, String{"URI:urn:open62541.server.application"}},
+            CertificateFormat::DER,
+            2048
+        );
+        CHECK(!cert.privateKey.empty());
+        CHECK(!cert.certificate.empty());
+    }
 }
 
 TEST_CASE("Encrypted connection server/client") {
