@@ -2,6 +2,7 @@
 
 #if UAPP_HAS_CREATE_CERTIFICATE
 
+#include <memory>
 #include <optional>
 #include <string>
 #include <string_view>
@@ -19,7 +20,8 @@ static_assert(static_cast<int>(CertificateFormat::PEM) == UA_CERTIFICATEFORMAT_P
 CreateCertificateResult createCertificate(
     Span<const String> subject,
     Span<const String> subjectAltName,
-    CertificateFormat certificateFormat
+    CertificateFormat certificateFormat,
+    uint16_t keySizeBits
 ) {
     if (subject.empty() || subjectAltName.empty()) {
         throw CreateCertificateError("Argument subject or subjectAltName is empty");
@@ -37,6 +39,30 @@ CreateCertificateResult createCertificate(
     );
     const UA_Logger logger = loggerAdapter.create(false);
 
+#if UAPP_OPEN62541_VER_GE(1, 4)
+    // optional parameters, only add key size if explicitly requested
+    struct KeyValueMapDeleter {
+        void operator()(UA_KeyValueMap* map) const noexcept {
+            UA_KeyValueMap_delete(map);
+        }
+    };
+
+    std::string keySizeBitsKey = "key-size-bits";
+    std::unique_ptr<UA_KeyValueMap, KeyValueMapDeleter> params;
+    if (keySizeBits != 0) {
+        params.reset(UA_KeyValueMap_new());
+        if (params == nullptr) {
+            throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
+        }
+        throwIfBad(UA_KeyValueMap_setScalar(
+            params.get(),
+            UA_QUALIFIEDNAME(0, keySizeBitsKey.data()),
+            &keySizeBits,
+            &UA_TYPES[UA_TYPES_UINT16]
+        ));
+    }
+#endif
+
     CreateCertificateResult result;
     const auto status = UA_CreateCertificate(
         &logger,
@@ -45,11 +71,11 @@ CreateCertificateResult createCertificate(
         asNative(subjectAltName.data()),
         subjectAltName.size(),
 #if UAPP_OPEN62541_VER_LE(1, 3)
-        0,  // keySizeBits, 0 = maximum
+        keySizeBits,  // 0 = maximum
 #endif
         static_cast<UA_CertificateFormat>(certificateFormat),
 #if UAPP_OPEN62541_VER_GE(1, 4)
-        nullptr,  // key value map with optional parameters
+        params.get(),  // key value map with optional parameters
 #endif
         result.privateKey.handle(),
         result.certificate.handle()
