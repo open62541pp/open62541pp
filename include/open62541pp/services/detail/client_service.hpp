@@ -12,19 +12,33 @@
 #include "open62541pp/detail/open62541/client.h"
 #include "open62541pp/exception.hpp"
 #include "open62541pp/typeregistry.hpp"  // getDataType
+#include "open62541pp/ua/types.hpp"
 
 namespace opcua::services::detail {
 
 /**
  * Adapter to initiate open62541 async client operations with completion tokens.
  */
+template <typename Response, bool TypedCallback>
+struct ResponseArgSelector {
+    using type = void*;
+};
+
 template <typename Response>
+struct ResponseArgSelector<Response, true> {
+    using type = typename Response::NativeType*;
+};
+
+template <typename Response, bool TypedCallback = false>
 struct AsyncServiceAdapter {
     using ExceptionCatcher = opcua::detail::ExceptionCatcher;
+    static constexpr bool typedCallback = TypedCallback && UAPP_OPEN62541_VER_GE(1, 5);
+    using ResponseArg = typename ResponseArgSelector<Response, typedCallback>::type;
+    using Callback = void (*)(UA_Client*, void*, uint32_t, ResponseArg);
 
     template <typename Context>
     struct CallbackAndContext {
-        UA_ClientAsyncServiceCallback callback;
+        Callback callback;
         std::unique_ptr<Context> context;
     };
 
@@ -39,16 +53,17 @@ struct AsyncServiceAdapter {
             std::decay_t<CompletionHandler> handler;
         };
 
-        const auto callback =
-            [](UA_Client*, void* userdata, uint32_t /* reqId */, void* responsePtr) {
+        const Callback callback =
+            [](UA_Client*, void* userdata, uint32_t /* reqId */, ResponseArg responsePtr) {
                 std::unique_ptr<Context> context{static_cast<Context*>(userdata)};
                 assert(context != nullptr);
                 assert(context->catcher != nullptr);
                 context->catcher->invoke([context = context.get(), responsePtr] {
-                    if (responsePtr == nullptr) {
+                    void* raw = responsePtr;  // valid whether responsePtr is void* or typed
+                    if (raw == nullptr) {
                         throw BadStatus{UA_STATUSCODE_BADUNEXPECTEDERROR};
                     }
-                    std::invoke(context->handler, *static_cast<Response*>(responsePtr));
+                    std::invoke(context->handler, *static_cast<Response*>(raw));
                 });
             };
 
@@ -76,11 +91,7 @@ struct AsyncServiceAdapter {
     static auto initiate(
         Client& client, Initiation&& initiation, CompletionToken&& token, Args&&... args
     ) {
-        static_assert(std::is_invocable_v<
-                      Initiation,
-                      UA_ClientAsyncServiceCallback,
-                      void*,
-                      Args&&...>);
+        static_assert(std::is_invocable_v<Initiation, Callback, void*, Args&&...>);
 
         return asyncInitiate<Response>(
             [&client](auto&& handler, auto&& innerInitiation, auto&&... innerArgs) {
@@ -133,9 +144,48 @@ auto sendRequestAsync(Client& client, const Request& request, CompletionToken&& 
     );
 }
 
+#if UAPP_OPEN62541_VER_GE(1, 5)
+
+// the generic UA_Client_Service was removed in v1.5, use the typed service functions
+// NOLINTNEXTLINE(cppcoreguidelines-macro-usage)
+#define UAPP_CLIENT_SERVICE(service, Type)                                                         \
+    inline UA_##Type##Response callService(                                                        \
+        UA_Client* client, const UA_##Type##Request& request                                       \
+    ) noexcept {                                                                                   \
+        return UA_Client_Service_##service(client, request);                                       \
+    }
+
+UAPP_CLIENT_SERVICE(addNodes, AddNodes)
+UAPP_CLIENT_SERVICE(addReferences, AddReferences)
+UAPP_CLIENT_SERVICE(deleteNodes, DeleteNodes)
+UAPP_CLIENT_SERVICE(deleteReferences, DeleteReferences)
+UAPP_CLIENT_SERVICE(browse, Browse)
+UAPP_CLIENT_SERVICE(browseNext, BrowseNext)
+UAPP_CLIENT_SERVICE(translateBrowsePathsToNodeIds, TranslateBrowsePathsToNodeIds)
+UAPP_CLIENT_SERVICE(registerNodes, RegisterNodes)
+UAPP_CLIENT_SERVICE(unregisterNodes, UnregisterNodes)
+UAPP_CLIENT_SERVICE(read, Read)
+UAPP_CLIENT_SERVICE(write, Write)
+UAPP_CLIENT_SERVICE(call, Call)
+#ifdef UA_ENABLE_QUERY
+UAPP_CLIENT_SERVICE(queryFirst, QueryFirst)
+UAPP_CLIENT_SERVICE(queryNext, QueryNext)
+#endif
+#ifdef UA_ENABLE_HISTORIZING
+UAPP_CLIENT_SERVICE(historyRead, HistoryRead)
+UAPP_CLIENT_SERVICE(historyUpdate, HistoryUpdate)
+#endif
+
+#undef UAPP_CLIENT_SERVICE
+
+#endif
+
 /// Sync client service requests.
 template <typename Request, typename Response>
 Response sendRequest(Client& client, const Request& request) noexcept {
+#if UAPP_OPEN62541_VER_GE(1, 5)
+    return Response(callService(opcua::detail::getHandle(client), request));
+#else
     Response response{};
     __UA_Client_Service(
         opcua::detail::getHandle(client),
@@ -145,6 +195,7 @@ Response sendRequest(Client& client, const Request& request) noexcept {
         &getDataType<Response>()
     );
     return response;
+#endif
 }
 
 }  // namespace opcua::services::detail

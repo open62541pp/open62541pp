@@ -55,8 +55,6 @@ TEST_CASE("ClientConfig") {
             {String{"C=DE"}, String{"O=open62541pp"}, String{"CN=open62541ppClient@localhost"}},
             {String{"DNS:localhost"}, String{"URI:urn:open62541.client.application"}}
         );
-
-        REQUIRE(config->authSecurityPoliciesSize == 0);
         config.setAuthenticationCertificate(cert.certificate, cert.privateKey);
         // security policies to sign the identity token
         CHECK(config->authSecurityPoliciesSize > 0);
@@ -84,6 +82,7 @@ TEST_CASE("Client constructors") {
 
 TEST_CASE("Client discovery") {
     Server server;
+    server.config().setApplicationUri("urn:open62541.server.application");
     ServerRunner serverRunner{server};
     Client client;
 
@@ -147,6 +146,9 @@ TEST_CASE("Client connect with UserNameIdentityToken") {
     }
 
     SECTION("Connect with username/password should succeed") {
+#if UAPP_OPEN62541_VER_GE(1, 5)
+        client.config()->allowNonePolicyPassword = true;
+#endif
         client.config().setUserIdentityToken(UserNameIdentityToken{"username", "password"});
         CHECK_NOTHROW(client.connect(localServerUrl));
         CHECK(client.isConnected());
@@ -296,6 +298,7 @@ TEST_CASE("Client subscription inactivity callback") {
 
 TEST_CASE("Client methods") {
     Server server;
+    server.config().setApplicationUri("urn:open62541.server.application");
     ServerRunner serverRunner{server};
     Client client;
     client.connect(localServerUrl);

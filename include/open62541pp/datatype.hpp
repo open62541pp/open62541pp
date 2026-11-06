@@ -589,16 +589,22 @@ const UA_DataType* findDataType(const NodeId& id, const UA_DataTypeArray* custom
 
 namespace detail {
 
+#if UAPP_OPEN62541_VER_GE(1, 5)
+using DataTypeArrayHead = UA_DataTypeArray*;
+#else
+using DataTypeArrayHead = const UA_DataTypeArray*;  // customDataTypes is const before v1.5
+#endif
+
 void clear(UA_DataTypeMember& native) noexcept;
 void clear(UA_DataType& native) noexcept;
 void clear(UA_DataTypeArray& native) noexcept;
 
-void deallocate(const UA_DataTypeArray* head) noexcept;
+void deallocate(DataTypeArrayHead head) noexcept;
 
 [[nodiscard]] UA_DataTypeMember copy(const UA_DataTypeMember& src);
 [[nodiscard]] UA_DataType copy(const UA_DataType& src);
 
-void addDataTypes(const UA_DataTypeArray*& head, Span<const DataType> types);
+void addDataTypes(DataTypeArrayHead& head, Span<const DataType> types);
 
 }  // namespace detail
 

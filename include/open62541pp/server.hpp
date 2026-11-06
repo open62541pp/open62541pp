@@ -244,23 +244,26 @@ void setVariableNodeValueCallback(
 );
 
 /// Set data source value backend for variable node.
-void setVariableNodeValueBackend(Server& server, const NodeId& id, DataSourceBase& source);
+void setVariableNodeValueBackend(Server& server, const NodeId& id, DataSourceAdapter& source);
 /// Set data source value backend for variable node (move ownership to server).
 void setVariableNodeValueBackend(
-    Server& server, const NodeId& id, std::unique_ptr<DataSourceBase>&& source
+    Server& server, const NodeId& id, std::unique_ptr<DataSourceAdapter>&& source
 );
 
 /* -------------------------------------- Async operations -------------------------------------- */
 
-#if UAPP_HAS_ASYNC_OPERATIONS
+#if UAPP_HAS_ASYNC_OPERATIONS && UAPP_OPEN62541_VER_LE(1, 4)
+
 /// Enable or disable async operations for the specified node.
 /// When enabled, operations on the node are queued and must processed by a worker thread using
 /// @ref runAsyncOperation.
 /// @note Only supported for method nodes.
+/// @note Only available up to open62541 v1.4, replaced by AsyncMethodContext.
 /// @relates Server
 void useAsyncOperation(Server& server, const NodeId& id, bool enabled);
 
 /// Wraps an async operation request.
+/// @note Only available up to open62541 v1.4, replaced by AsyncMethodContext.
 struct AsyncOperation {
     UA_AsyncOperationType type;
     const UA_AsyncOperationRequest* request;
@@ -269,12 +272,15 @@ struct AsyncOperation {
 
 /// Get the next queued async operation if available.
 /// Async operations are queued by nodes with async operations enabled (see @ref useAsyncOperation).
+/// @note Only available up to open62541 v1.4, replaced by AsyncMethodContext.
 /// @relates Server
 std::optional<AsyncOperation> getAsyncOperation(Server& server) noexcept;
 
 /// Run the provided async operation.
+/// @note Only available up to open62541 v1.4, replaced by AsyncMethodContext.
 /// @relates Server
 void runAsyncOperation(Server& server, const AsyncOperation& operation);
+
 #endif
 
 }  // namespace opcua

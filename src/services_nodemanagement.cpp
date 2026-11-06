@@ -2,6 +2,7 @@
 
 #include <cassert>
 
+#include "open62541pp/async_operation.hpp"
 #include "open62541pp/client.hpp"
 #include "open62541pp/detail/open62541/server.h"
 #include "open62541pp/detail/result_utils.hpp"  // tryInvoke
@@ -229,7 +230,11 @@ static UA_StatusCode methodCallback(
     size_t outputSize,
     UA_Variant* output
 ) noexcept {
+    assert(server != nullptr);
+    assert(sessionId != nullptr);
+    assert(methodId != nullptr);
     assert(methodContext != nullptr);
+    assert(objectId != nullptr);
     const auto* nodeContext = static_cast<opcua::detail::NodeContext*>(methodContext);
     // simple callback signature with input, output only
     if (const auto* cb = std::get_if<0>(&nodeContext->methodCallback); cb != nullptr && *cb) {
@@ -242,10 +247,6 @@ static UA_StatusCode methodCallback(
     }
     // full callback signature
     if (const auto* cb = std::get_if<1>(&nodeContext->methodCallback); cb != nullptr && *cb) {
-        assert(server != nullptr);
-        assert(sessionId != nullptr);
-        assert(methodId != nullptr);
-        assert(objectId != nullptr);
         Session session{*asWrapper(server), asWrapper<NodeId>(*sessionId), sessionContext};
         const auto result = opcua::detail::tryInvoke(
             *cb,
@@ -257,6 +258,44 @@ static UA_StatusCode methodCallback(
         );
         return result.code();
     }
+#if UAPP_HAS_ASYNC_OPERATIONS && UAPP_OPEN62541_VER_GE(1, 5)
+    // simple callback signature with AsyncMethodContext
+    if (const auto* cb = std::get_if<2>(&nodeContext->methodCallback); cb != nullptr && *cb) {
+        AsyncMethodContext ctx{
+            server,
+            opcua::detail::getContext(*asWrapper(server)).asyncOperations,
+            output,
+            outputSize
+        };
+        const auto result = opcua::detail::tryInvoke(
+            *cb,
+            Span<const Variant>{asWrapper<Variant>(input), inputSize},
+            Span<Variant>{asWrapper<Variant>(output), outputSize},
+            ctx
+        );
+        return result.code();
+    }
+    // full callback signature with AsyncMethodContext
+    if (const auto* cb = std::get_if<3>(&nodeContext->methodCallback); cb != nullptr && *cb) {
+        Session session{*asWrapper(server), asWrapper<NodeId>(*sessionId), sessionContext};
+        AsyncMethodContext ctx{
+            server,
+            opcua::detail::getContext(*asWrapper(server)).asyncOperations,
+            output,
+            outputSize
+        };
+        const auto result = opcua::detail::tryInvoke(
+            *cb,
+            session,
+            Span<const Variant>{asWrapper<Variant>(input), inputSize},
+            Span<Variant>{asWrapper<Variant>(output), outputSize},
+            asWrapper<NodeId>(*methodId),
+            asWrapper<NodeId>(*objectId),
+            ctx
+        );
+        return result.code();
+    }
+#endif
     return UA_STATUSCODE_BADINTERNALERROR;
 }
 

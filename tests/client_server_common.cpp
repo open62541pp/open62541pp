@@ -55,6 +55,25 @@ TEMPLATE_TEST_CASE("Config", "", ClientConfig, ServerConfig) {
         CHECK(lastMessage == "Message");
     }
 
+#if UAPP_OPEN62541_VER_GE(1, 5)
+    SECTION("setLogger with extended format specifiers") {
+        static std::string lastMessage{};
+
+        config.setLogger([&](LogLevel, LogCategory, std::string_view message) {
+            lastMessage = message;
+        });
+
+        // messages of open62541 v1.5 use extended format specifiers, e.g. %N for UA_NodeId
+        UA_LOG_ERROR(
+            detail::getLogger(config.handle()),
+            UA_LOGCATEGORY_USERLAND,
+            "NodeId %N",
+            UA_NODEID_NUMERIC(1, 1000)
+        );
+        CHECK(lastMessage == "NodeId ns=1;i=1000");
+    }
+#endif
+
     SECTION("addCustomDataTypes") {
         CHECK(config->customDataTypes == nullptr);
 

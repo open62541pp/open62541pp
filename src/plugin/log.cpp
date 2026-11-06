@@ -6,11 +6,20 @@
 #include <string>
 
 #include "open62541pp/config.hpp"
+#include "open62541pp/detail/string_utils.hpp"  // toStringView
 
 namespace opcua {
 
 static void toString(std::string& buffer, const char* format, va_list args) {
     buffer.clear();
+#if UAPP_OPEN62541_VER_GE(1, 5)
+    // messages use the extended format specifiers of open62541, e.g. %N for UA_NodeId
+    UA_String formatted{};
+    if (UA_String_vformat(&formatted, format, args) == UA_STATUSCODE_GOOD) {
+        buffer.assign(detail::toStringView(formatted));
+    }
+    UA_String_clear(&formatted);
+#else
     // NOLINTBEGIN
     va_list argsCopy{};
     va_copy(argsCopy, args);
@@ -25,6 +34,7 @@ static void toString(std::string& buffer, const char* format, va_list args) {
     if (charsWritten < 0 || charsWritten > charsToWrite) {
         buffer.clear();
     }
+#endif
 }
 
 static void logNative(

@@ -49,7 +49,7 @@ int main() {
         eventFilter,
         [&](opcua::IntegerId subId,
             opcua::IntegerId monId,
-            opcua::Span<const opcua::Variant> eventFields) {
+            const opcua::services::EventFields& eventFields) {
             opcua::MonitoredItem item{client, subId, monId};
             std::cout
                 << "Event notification:\n"
@@ -58,9 +58,15 @@ int main() {
                 << "- node id:           " << opcua::toString(item.nodeId()) << "\n"
                 << "- attribute id:      " << static_cast<int>(item.attributeId()) << "\n";
 
+#if UAPP_OPEN62541_VER_GE(1, 5)
+            const auto& time = eventFields.get({0, "Time"})->scalar<opcua::DateTime>();
+            const auto& severity = eventFields.get({0, "Severity"})->scalar<uint16_t>();
+            const auto& message = eventFields.get({0, "Message"})->scalar<opcua::LocalizedText>();
+#else
             const auto& time = eventFields.at(0).scalar<opcua::DateTime>();
             const auto& severity = eventFields.at(1).scalar<uint16_t>();
             const auto& message = eventFields.at(2).scalar<opcua::LocalizedText>();
+#endif
 
             std::cout << "Time:     " << time.format("%Y-%m-%d %H:%M:%S") << "\n";
             std::cout << "Severity: " << severity << "\n";

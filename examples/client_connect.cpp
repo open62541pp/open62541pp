@@ -28,6 +28,13 @@ int main(int argc, char* argv[]) {
             opcua::UserNameIdentityToken{username.value(), password.value_or("")}
         );
     }
+
+// Allow username/password authentication without encryption.
+// This is only suitable for demonstration purposes.
+#if UAPP_OPEN62541_VER_GE(1, 5)
+    client.config()->allowNonePolicyPassword = true;
+#endif
+
     client.connect(serverUrl);
 
     opcua::Node node{client, opcua::VariableId::Server_ServerStatus_CurrentTime};

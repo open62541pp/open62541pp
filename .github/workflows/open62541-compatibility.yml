@@ -20,8 +20,9 @@ jobs:
           - v1.0.6
           - v1.1.6
           - v1.2.10
-          - v1.3.16
-          - v1.4.15
+          - v1.3.22
+          - v1.4.21
+          - v1.5.9
         build-type:
           - Debug
           - Release
@@ -32,8 +33,10 @@ jobs:
           - false
           - true
         exclude:
-          - version: "v1.4.15"
+          - version: "v1.4.21"
             amalgamation: true # installation with UA_ENABLE_AMALGAMATION=ON is not possible in v1.4
+          - version: "v1.5.9"
+            amalgamation: true # amalgamation generation fails in upstream open62541 (missing ReferenceService.h)
           # reduce number of jobs
           - library-type: static
             amalgamation: true

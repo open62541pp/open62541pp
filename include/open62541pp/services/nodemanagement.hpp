@@ -7,6 +7,7 @@
 #include <variant>
 
 #include "open62541pp/async.hpp"
+#include "open62541pp/async_operation.hpp"
 #include "open62541pp/common.hpp"  // ModellingRule
 #include "open62541pp/config.hpp"
 #include "open62541pp/detail/open62541/common.h"
@@ -569,7 +570,7 @@ auto addPropertyAsync(
 #ifdef UA_ENABLE_METHODCALLS
 /**
  * Method callback.
- * Two function signatures are supported:
+ * Several function signatures are supported:
  *
  * 1. Simple signature with `input` and `output` arguments:
  *    @code
@@ -592,6 +593,32 @@ auto addPropertyAsync(
  *    )
  *    @endcode
  *    The method call status code is explicitly returned by the function.
+ *
+ * 3. Simple signature with AsyncMethodContext:
+ *    @code
+ *    StatusCode(
+ *        Span<const Variant> input,
+ *        Span<Variant> output,
+ *        AsyncMethodContext& ctx
+ *    )
+ *    @endcode
+ *    Call `ctx.defer()` to complete the operation later, see @ref AsyncOperations.
+ *
+ * 4. Full signature with AsyncMethodContext:
+ *    @code
+ *    StatusCode(
+ *        Session& session,
+ *        Span<const Variant> input,
+ *        Span<Variant> output,
+ *        const NodeId& methodId,
+ *        const NodeId& objectId,
+ *        AsyncMethodContext& ctx
+ *    )
+ *    @endcode
+ *
+ * @note
+ * Signatures 3 and 4 require open62541 v1.5 or later and `UA_MULTITHREADING >= 100`.
+ * With older versions, only signatures 1 and 2 are available.
  */
 using MethodCallback = std::variant<
     std::function<void(Span<const Variant> input, Span<Variant> output)>,
@@ -601,7 +628,21 @@ using MethodCallback = std::variant<
         Span<Variant> output,
         const NodeId& methodId,
         const NodeId& objectId
-    )>>;
+    )>
+#if UAPP_HAS_ASYNC_OPERATIONS && UAPP_OPEN62541_VER_GE(1, 5)
+    ,
+    std::function<
+        StatusCode(Span<const Variant> input, Span<Variant> output, AsyncMethodContext& ctx)>,
+    std::function<StatusCode(
+        Session& session,
+        Span<const Variant> input,
+        Span<Variant> output,
+        const NodeId& methodId,
+        const NodeId& objectId,
+        AsyncMethodContext& ctx
+    )>
+#endif
+    >;
 
 /**
  * Add method.

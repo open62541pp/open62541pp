@@ -89,6 +89,8 @@ PREDEFINED             = UA_ENABLE_DA \
                          UA_ENABLE_SUBSCRIPTIONS \
                          UA_ENABLE_SUBSCRIPTIONS_EVENTS \
                          UA_ENABLE_TYPEDESCRIPTION \
+                         "UAPP_OPEN62541_VER_GE(x,y)=1" \
+                         "UAPP_OPEN62541_VER_LE(x,y)=1" \
                          UAPP_HAS_TYPEDESCRIPTION=1 \
                          UAPP_HAS_PARSING=1 \
                          UAPP_HAS_TOSTRING=1 \

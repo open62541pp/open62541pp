@@ -128,11 +128,15 @@ TEST_CASE("Encrypted connection server/client") {
     );
 
     SECTION("Connect without trusting each others certificate") {
-        ServerConfig serverConfig{4840, certServer.certificate, certServer.privateKey, {}, {}, {}};
+        ServerConfig serverConfig{
+            4840, certServer.certificate, certServer.privateKey, {certServer.certificate}, {}, {}
+        };
         serverConfig.setApplicationUri(serverApplicationUri);
         Server server{std::move(serverConfig)};
 
-        ClientConfig clientConfig{certClient.certificate, certClient.privateKey, {}, {}};
+        ClientConfig clientConfig{
+            certClient.certificate, certClient.privateKey, {certClient.certificate}, {}
+        };
         clientConfig.setSecurityMode(MessageSecurityMode::SignAndEncrypt);
         setClientApplicationUri(clientConfig, clientApplicationUri);
         Client client{std::move(clientConfig)};

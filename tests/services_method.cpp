@@ -225,6 +225,7 @@ TEST_CASE("Method calls with async operations") {
         ReferenceTypeId::HasComponent
     ));
 
+#if UAPP_OPEN62541_VER_LE(1, 4)
     SECTION("Sync operation") {
         auto future = services::callAsync(setup.client, objectId, methodId, {}, useFuture);
         setup.client.runIterate();
@@ -253,6 +254,172 @@ TEST_CASE("Method calls with async operations") {
         CHECK(result.outputArguments().at(0).to<uint64_t>() == getThreadId());
     }
 #endif
+
+#else
+
+    const NodeId methodIdAsyncSimple{1, 1001};
+    const NodeId methodIdAsyncFull{1, 1002};
+
+    SECTION("Simple signature with AsyncMethodContext: synchronous completion") {
+        REQUIRE(services::addMethod(
+            setup.server,
+            objectId,
+            methodIdAsyncSimple,
+            "GetWorkerThreadIdAsync",
+            [](Span<const Variant>, Span<Variant> outputs, AsyncMethodContext&) -> StatusCode {
+                outputs.at(0) = static_cast<uint64_t>(getThreadId());
+                return UA_STATUSCODE_GOOD;
+            },
+            {},
+            {
+                Argument("id", {"en-US", "Thread id"}, DataTypeId::UInt64, ValueRank::Scalar),
+            },
+            MethodAttributes{},
+            ReferenceTypeId::HasComponent
+        ));
+
+        auto future = services::callAsync(
+            setup.client, objectId, methodIdAsyncSimple, {}, useFuture
+        );
+        setup.client.runIterate();
+        const auto result = future.get();
+
+        CHECK(result.statusCode().isGood());
+        // ctx.defer() is not called: the callback runs on the event loop thread of the server
+        // like any other network call
+        CHECK(result.outputArguments().at(0).to<uint64_t>() != getThreadId());
+    }
+
+    SECTION("Simple signature with AsyncMethodContext: completion from a different thread") {
+        std::atomic<size_t> callbackThreadId{0};
+        std::atomic<size_t> completionThreadId{0};
+
+        REQUIRE(services::addMethod(
+            setup.server,
+            objectId,
+            methodIdAsyncSimple,
+            "GetWorkerThreadIdAsync",
+            [&](Span<const Variant>, Span<Variant>, AsyncMethodContext& ctx) -> StatusCode {
+                callbackThreadId = getThreadId();
+                auto [op, status] = ctx.defer();
+                std::thread([operation = std::move(op), &completionThreadId]() mutable {
+                    completionThreadId = getThreadId();
+                    std::array<Variant, 1> output;
+                    output[0] = static_cast<uint64_t>(completionThreadId.load());
+                    operation.complete(output);
+                }).detach();
+                return status;
+            },
+            {},
+            {
+                Argument("id", {"en-US", "Thread id"}, DataTypeId::UInt64, ValueRank::Scalar),
+            },
+            MethodAttributes{},
+            ReferenceTypeId::HasComponent
+        ));
+
+        auto future = services::callAsync(
+            setup.client, objectId, methodIdAsyncSimple, {}, useFuture
+        );
+        std::this_thread::sleep_for(std::chrono::milliseconds{50});
+        setup.client.runIterate();
+        const auto result = future.get();
+
+        CHECK(result.statusCode().isGood());
+        CHECK(result.outputArguments().at(0).to<uint64_t>() == completionThreadId.load());
+        CHECK(completionThreadId.load() != callbackThreadId.load());
+    }
+
+    SECTION(
+        "Simple signature with AsyncMethodContext: cancelled on timeout, late completion is a no-op"
+    ) {
+        setup.server.config()->asyncOperationTimeout = 300.0;  // ms, short to avoid hanging
+
+        struct Captured {
+            std::mutex mutex;
+            std::optional<AsyncCallOperation> operation;
+        };
+
+        auto captured = std::make_shared<Captured>();
+
+        REQUIRE(services::addMethod(
+            setup.server,
+            objectId,
+            methodIdAsyncSimple,
+            "NeverCompletes",
+            [captured](Span<const Variant>, Span<Variant>, AsyncMethodContext& ctx) -> StatusCode {
+                auto [operation, status] = ctx.defer();
+                std::lock_guard lock{captured->mutex};
+                captured->operation = std::move(operation);  // intentionally never completed
+                return status;
+            },
+            {},
+            {},
+            MethodAttributes{},
+            ReferenceTypeId::HasComponent
+        ));
+
+        services::callAsync(setup.client, objectId, methodIdAsyncSimple, {}, useDetached);
+        setup.client.runIterate();
+
+        const auto deadline = std::chrono::steady_clock::now() + std::chrono::seconds{5};
+        bool cancelled = false;
+        while (!cancelled && std::chrono::steady_clock::now() < deadline) {
+            {
+                std::lock_guard lock{captured->mutex};
+                cancelled = captured->operation && captured->operation->cancelled();
+            }
+            if (!cancelled) {
+                std::this_thread::sleep_for(std::chrono::milliseconds{20});
+            }
+        }
+        REQUIRE(cancelled);
+
+        std::lock_guard lock{captured->mutex};
+        CHECK_NOTHROW(captured->operation->complete());
+    }
+
+    SECTION("Full signature with AsyncMethodContext: session/methodId/objectId populated") {
+        NodeId callbackSessionId;
+        NodeId callbackMethodId;
+        NodeId callbackObjectId;
+
+        REQUIRE(services::addMethod(
+            setup.server,
+            objectId,
+            methodIdAsyncFull,
+            "GetWorkerThreadIdAsyncFull",
+            [&](Session& session,
+                Span<const Variant>,
+                Span<Variant> outputs,
+                const NodeId& methodId_,
+                const NodeId& objectId_,
+                AsyncMethodContext&) -> StatusCode {
+                callbackSessionId = session.id();
+                callbackMethodId = methodId_;
+                callbackObjectId = objectId_;
+                outputs.at(0) = static_cast<uint64_t>(getThreadId());
+                return UA_STATUSCODE_GOOD;
+            },
+            {},
+            {
+                Argument("id", {"en-US", "Thread id"}, DataTypeId::UInt64, ValueRank::Scalar),
+            },
+            MethodAttributes{},
+            ReferenceTypeId::HasComponent
+        ));
+
+        auto future = services::callAsync(setup.client, objectId, methodIdAsyncFull, {}, useFuture);
+        setup.client.runIterate();
+        const auto result = future.get();
+
+        CHECK(result.statusCode().isGood());
+        CHECK_FALSE(callbackSessionId.isNull());
+        CHECK(callbackMethodId == methodIdAsyncFull);
+        CHECK(callbackObjectId == objectId);
+    }
+
+#endif  // UAPP_OPEN62541_VER_GE(1, 5)
 }
 #endif
 #endif

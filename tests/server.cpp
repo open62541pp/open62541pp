@@ -1,5 +1,8 @@
 #include <array>
+#include <atomic>
 #include <chrono>
+#include <mutex>
+#include <optional>
 #include <thread>
 
 #include <catch2/catch_test_macros.hpp>
@@ -14,6 +17,9 @@
 #include "open62541pp/plugin/nodestore.hpp"
 #include "open62541pp/server.hpp"
 #include "open62541pp/types.hpp"
+
+#include "helper/server_client_setup.hpp"
+#include "helper/server_runner.hpp"
 
 #ifdef _WIN32
 #include <windows.h>
@@ -186,6 +192,8 @@ TEST_CASE("Server with Winsock (Windows only)") {
 
 TEST_CASE("Server methods") {
     Server server;
+    server.config().setApplicationUri("urn:open62541.server.application");
+    ServerRunner serverRunner{server};
 
     SECTION("namespaceArray") {
         const auto namespaces = server.namespaceArray();
@@ -338,6 +346,147 @@ TEST_CASE("DataSource") {
         CHECK_THROWS_MATCHES(node.writeValue(Variant{2}), BadStatus, Message("BadUnexpectedError"));
     }
 }
+
+#if UAPP_HAS_ASYNC_OPERATIONS && UAPP_OPEN62541_VER_GE(1, 5)
+
+struct AsyncDataSourceTest : public DataSource<true, true> {
+    StatusCode read(
+        [[maybe_unused]] Session& session,
+        [[maybe_unused]] const NodeId& id,
+        [[maybe_unused]] const NumericRange* range,
+        DataValue& dv,
+        bool timestamp,
+        AsyncReadContext& ctx
+    ) override {
+        if (!deferRead) {
+            dv.setValue(Variant{data.load()});
+            if (timestamp) {
+                dv.setSourceTimestamp(DateTime::now());
+            }
+            return code;
+        }
+        auto [op, status] = ctx.defer();
+        std::thread([operation = std::move(op), value = data.load()]() mutable {
+            std::this_thread::sleep_for(std::chrono::milliseconds{50});
+            DataValue result;
+            result.setValue(Variant{value});
+            operation.complete(std::move(result));
+        }).detach();
+        return status;
+    }
+
+    StatusCode write(
+        [[maybe_unused]] Session& session,
+        [[maybe_unused]] const NodeId& id,
+        [[maybe_unused]] const NumericRange* range,
+        const DataValue& dv,
+        AsyncWriteContext& ctx
+    ) override {
+        const auto newData = dv.value().scalar<int>();
+        if (!deferWrite) {
+            data = newData;
+            return code;
+        }
+        auto [op, status] = ctx.defer();
+        std::thread([operation = std::move(op), this, newData]() mutable {
+            std::this_thread::sleep_for(std::chrono::milliseconds{50});
+            data = newData;
+            operation.complete();
+        }).detach();
+        return status;
+    }
+
+    bool deferRead = false;
+    bool deferWrite = false;
+    UA_StatusCode code = UA_STATUSCODE_GOOD;
+    std::atomic<int> data{0};
+};
+
+TEST_CASE("DataSource async completion") {
+    ServerClientSetup setup;
+    setup.client.connect(setup.endpointUrl);
+
+    const NodeId id{1, 1000};
+    [[maybe_unused]] auto localNode = Node{setup.server, ObjectId::ObjectsFolder}.addVariable(
+        id,
+        "TestVariable",
+        VariableAttributes{}.setAccessLevel(AccessLevel::CurrentRead | AccessLevel::CurrentWrite)
+    );
+
+    AsyncDataSourceTest source;
+    setVariableNodeValueBackend(setup.server, id, source);
+
+    Node clientNode{setup.client, id};
+
+    SECTION("Deferred read") {
+        source.deferRead = true;
+        source.data = 42;
+
+        CHECK(clientNode.readValue().to<int>() == 42);
+    }
+
+    SECTION("Deferred write") {
+        source.deferWrite = true;
+
+        CHECK_NOTHROW(clientNode.writeValue(Variant{99}));
+        CHECK(source.data.load() == 99);
+    }
+}
+
+TEST_CASE("DataSource async read is cancelled on timeout, late completion is a no-op") {
+    ServerClientSetup setup;
+    setup.server.config()->asyncOperationTimeout = 300.0;  // ms, short to avoid hanging
+    setup.client.connect(setup.endpointUrl);
+
+    const NodeId id{1, 1000};
+    [[maybe_unused]] auto localNode = Node{setup.server, ObjectId::ObjectsFolder}.addVariable(
+        id, "TestVariable"
+    );
+
+    struct Captured {
+        std::mutex mutex;
+        std::optional<AsyncReadOperation> operation;
+    };
+
+    auto captured = std::make_shared<Captured>();
+
+    struct NeverCompletesDataSource : public DataSource<true, false> {
+        explicit NeverCompletesDataSource(std::shared_ptr<Captured> c)
+            : captured{std::move(c)} {}
+
+        StatusCode read(
+            Session&, const NodeId&, const NumericRange*, DataValue&, bool, AsyncReadContext& ctx
+        ) override {
+            auto [operation, status] = ctx.defer();
+            std::lock_guard lock{captured->mutex};
+            captured->operation = std::move(operation);  // intentionally never completed
+            return status;
+        }
+
+        StatusCode write(Session&, const NodeId&, const NumericRange*, const DataValue&) override {
+            return UA_STATUSCODE_GOOD;
+        }
+
+        std::shared_ptr<Captured> captured;
+    };
+
+    NeverCompletesDataSource source{captured};
+    setVariableNodeValueBackend(setup.server, id, source);
+
+    // blocks until the server responds, which is not before the operation is cancelled
+    // (the returned status is irrelevant for this test)
+    try {
+        Node{setup.client, id}.readValue();
+    } catch (...) {
+    }
+
+    std::lock_guard lock{captured->mutex};
+    REQUIRE(captured->operation.has_value());
+    CHECK(captured->operation->cancelled());
+    CHECK_NOTHROW(captured->operation->complete(DataValue{}));
+}
+
+#endif  // UAPP_HAS_ASYNC_OPERATIONS && UAPP_OPEN62541_VER_GE(1, 5)
 
 TEST_CASE("Server teardown with custom struct type and a stored variable node") {
     struct Point {

@@ -42,7 +42,11 @@ void clear(UA_DataTypeArray& native) noexcept {
     const bool cleanup = true;
 #endif
     if (cleanup) {
-        auto* types = const_cast<UA_DataType*>(native.types);  // NOLINT
+#if UAPP_OPEN62541_VER_GE(1, 5)
+        auto* types = native.types;
+#else
+        auto* types = const_cast<UA_DataType*>(native.types);  // NOLINT(*const-cast)
+#endif
         for (size_t i = 0; i < native.typesSize; ++i) {
             clear(types[i]);  // NOLINT(*pointer-arithmetic)
         }
@@ -51,15 +55,19 @@ void clear(UA_DataTypeArray& native) noexcept {
     native.types = nullptr;
 }
 
-void deallocate(const UA_DataTypeArray* head) noexcept {
+void deallocate(DataTypeArrayHead head) noexcept {
     while (head != nullptr) {
-        const auto* next = head->next;
+        DataTypeArrayHead next = head->next;
 #if UAPP_OPEN62541_VER_GE(1, 4)
         if (head->cleanup) {
 #endif
-            auto* item = const_cast<UA_DataTypeArray*>(head);  // NOLINT(*const-cast)
+#if UAPP_OPEN62541_VER_GE(1, 5)
+            auto* item = head;
+#else
+        auto* item = const_cast<UA_DataTypeArray*>(head);  // NOLINT(*const-cast)
+#endif
             detail::clear(*item);
-            detail::deallocate(item);
+            detail::deallocate<UA_DataTypeArray>(item);
 #if UAPP_OPEN62541_VER_GE(1, 4)
         }
 #endif
@@ -112,10 +120,10 @@ UA_DataType* copyArray(const UA_DataType* src, size_t size) {
     return dst;
 }
 
-void addDataTypes(const UA_DataTypeArray*& head, Span<const DataType> types) {
+void addDataTypes(DataTypeArrayHead& head, Span<const DataType> types) {
     auto* item = allocate<UA_DataTypeArray>();
     new (item) UA_DataTypeArray{
-        const_cast<UA_DataTypeArray*>(head),  // NOLINT(*const-cast), non-const since v1.5
+        head,
         types.size(),
         copyArray(asNative(types.data()), types.size()),
 #if UAPP_OPEN62541_VER_GE(1, 4)

@@ -82,6 +82,14 @@ struct MonitoringParametersEx {
  * @{
  */
 
+/// Event fields passed to the event notification callback.
+/// @note Before open62541 v1.5, this is an alias of `Span<const Variant>`.
+#if UAPP_OPEN62541_VER_GE(1, 5)
+using EventFields = KeyValueMap;
+#else
+using EventFields = Span<const Variant>;
+#endif
+
 /**
  * MonitoredItem deletion callback.
  * @param subId Subscription identifier
@@ -103,9 +111,15 @@ using DataChangeNotificationCallback =
  * @param subId Subscription identifier (`0U` for local (server-side) monitored item)
  * @param monId MonitoredItem identifier
  * @param eventFields Event fields
+ * @note Before open62541 v1.5, `eventFields` is passed as `Span<const Variant>`.
  */
+#if UAPP_OPEN62541_VER_GE(1, 5)
+using EventNotificationCallback =
+    std::function<void(IntegerId subId, IntegerId monId, const EventFields& eventFields)>;
+#else
 using EventNotificationCallback =
     std::function<void(IntegerId subId, IntegerId monId, Span<const Variant> eventFields)>;
+#endif
 
 namespace detail {
 std::vector<std::unique_ptr<MonitoredItemContext>> makeMonitoredItemContexts(
@@ -173,10 +187,10 @@ auto createMonitoredItemsDataChangeAsync(
     detail::convertMonitoredItemContexts(
         contexts, contextsPtr, dataChangeCallbacks, {}, deleteCallbacks
     );
-    return detail::AsyncServiceAdapter<CreateMonitoredItemsResponse>::initiate(
+    return detail::AsyncServiceAdapter<CreateMonitoredItemsResponse, true>::initiate(
         connection,
         [&connection](
-            UA_ClientAsyncServiceCallback callback,
+            auto callback,
             void* userdata,
             const CreateMonitoredItemsRequest& innerRequest,
             Span<void* const> innerContextsPtr,
@@ -316,10 +330,10 @@ auto createMonitoredItemsEventAsync(
     detail::convertMonitoredItemContexts(
         contexts, contextsPtr, {}, eventCallbacks, deleteCallbacks
     );
-    return detail::AsyncServiceAdapter<CreateMonitoredItemsResponse>::initiate(
+    return detail::AsyncServiceAdapter<CreateMonitoredItemsResponse, true>::initiate(
         connection,
         [&connection](
-            UA_ClientAsyncServiceCallback callback,
+            auto callback,
             void* userdata,
             const CreateMonitoredItemsRequest& innerRequest,
             Span<void* const> innerContextsPtr,
@@ -442,12 +456,10 @@ template <typename CompletionToken>
 auto modifyMonitoredItemsAsync(
     Client& connection, const ModifyMonitoredItemsRequest& request, CompletionToken&& token
 ) {
-    return detail::AsyncServiceAdapter<ModifyMonitoredItemsResponse>::initiate(
+    return detail::AsyncServiceAdapter<ModifyMonitoredItemsResponse, true>::initiate(
         connection,
         [&connection](
-            UA_ClientAsyncServiceCallback callback,
-            void* userdata,
-            const ModifyMonitoredItemsRequest& innerRequest
+            auto callback, void* userdata, const ModifyMonitoredItemsRequest& innerRequest
         ) {
             throwIfBad(UA_Client_MonitoredItems_modify_async(
                 opcua::detail::getHandle(connection),
@@ -656,12 +668,10 @@ template <typename CompletionToken>
 auto deleteMonitoredItemsAsync(
     Client& connection, const DeleteMonitoredItemsRequest& request, CompletionToken&& token
 ) {
-    return detail::AsyncServiceAdapter<DeleteMonitoredItemsResponse>::initiate(
+    return detail::AsyncServiceAdapter<DeleteMonitoredItemsResponse, true>::initiate(
         connection,
         [&connection](
-            UA_ClientAsyncServiceCallback callback,
-            void* userdata,
-            const DeleteMonitoredItemsRequest& innerRequest
+            auto callback, void* userdata, const DeleteMonitoredItemsRequest& innerRequest
         ) {
             throwIfBad(UA_Client_MonitoredItems_delete_async(
                 opcua::detail::getHandle(connection),

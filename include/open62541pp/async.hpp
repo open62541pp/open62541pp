@@ -20,6 +20,7 @@ namespace opcua {
  * @see https://think-async.com/asio/asio-1.28.0/doc/asio/overview/model/async_ops.html
  * @see https://think-async.com/asio/asio-1.28.0/doc/asio/overview/model/completion_tokens.html
  * @see https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2013/n3747.pdf
+ * @see AsyncOperations
  * @{
  */
 

@@ -120,4 +120,38 @@ String toString(const NumericRange& range) {
     return toStringImpl(range);
 }
 
+#if UAPP_OPEN62541_VER_GE(1, 4)
+
+/* ----------------------------------------- KeyValueMap ---------------------------------------- */
+UA_KeyValueMap TypeHandler<UA_KeyValueMap>::copy(const UA_KeyValueMap& map) {
+    UA_KeyValueMap result{};
+    throwIfBad(UA_KeyValueMap_copy(&map, &result));
+    return result;
+}
+
+// NOLINTNEXTLINE(*param-not-moved)
+UA_KeyValueMap TypeHandler<UA_KeyValueMap>::move(UA_KeyValueMap&& map) noexcept {
+    return std::exchange(map, {});
+}
+
+void TypeHandler<UA_KeyValueMap>::clear(UA_KeyValueMap& map) noexcept {
+    UA_KeyValueMap_clear(&map);
+}
+
+KeyValueMap& KeyValueMap::set(const QualifiedName& key, const Variant& value) {
+    throwIfBad(UA_KeyValueMap_set(handle(), key, value.handle()));
+    return *this;
+}
+
+const Variant* KeyValueMap::get(const QualifiedName& key) const noexcept {
+    const auto* x = UA_KeyValueMap_get(handle(), key);
+    return asWrapper<Variant>(x);
+}
+
+bool KeyValueMap::contains(const QualifiedName& key) const noexcept {
+    return UA_KeyValueMap_contains(handle(), *key.handle());
+}
+
+#endif
+
 }  // namespace opcua

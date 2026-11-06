@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <mutex>
+#include <optional>
 #include <utility>  // move
 
 #include "open62541pp/datatype.hpp"
@@ -23,7 +24,11 @@ UA_ServerConfig TypeHandler<UA_ServerConfig>::move(UA_ServerConfig&& config) noe
 void TypeHandler<UA_ServerConfig>::clear(UA_ServerConfig& config) noexcept {
     detail::deallocate(config.customDataTypes);
     config.customDataTypes = nullptr;
+#if UAPP_OPEN62541_VER_GE(1, 5)
+    UA_ServerConfig_clear(&config);
+#else
     UA_ServerConfig_clean(&config);
+#endif
 }
 
 ServerConfig::ServerConfig() {
@@ -225,6 +230,16 @@ static void setWrapperAsContextPointer(Server& server) noexcept {
 #endif
 }
 
+#if UAPP_HAS_ASYNC_OPERATIONS && UAPP_OPEN62541_VER_GE(1, 5)
+
+namespace detail {
+
+static void asyncOperationCancelTrampoline(UA_Server* server, const void* out) noexcept {
+    getContext(*asWrapper(server)).asyncOperations.cancel(out);
+}
+}  // namespace detail
+#endif
+
 Server::Server()
     : Server{ServerConfig{}} {}
 
@@ -241,6 +256,10 @@ Server::Server(ServerConfig&& config)
 #endif
     updateLoggerStackPointer(this->config());
     setWrapperAsContextPointer(*this);
+#if UAPP_HAS_ASYNC_OPERATIONS && UAPP_OPEN62541_VER_GE(1, 5)
+    UA_Server_getConfig(server_.get())->asyncOperationCancelCallback =
+        &detail::asyncOperationCancelTrampoline;
+#endif
 }
 
 Server::Server(UA_Server* native)
@@ -474,6 +493,15 @@ UA_Server* getHandle(Server& server) noexcept {
     return server.handle();
 }
 
+std::optional<Session> getSession(
+    UA_Server* server, const UA_NodeId* sessionId, void* sessionContext
+) noexcept {
+    auto* wrapper = asWrapper(server);
+    return wrapper != nullptr && sessionId != nullptr
+        ? std::make_optional(Session(*wrapper, asWrapper<NodeId>(*sessionId), sessionContext))
+        : std::nullopt;
+}
+
 }  // namespace detail
 
 /* ---------------------------- Variable node value backend/callback ---------------------------- */
@@ -484,9 +512,16 @@ static void setVariableNodeValueCallbackImpl(
     auto* nodeContext = detail::getContext(server).nodeContexts[id];
     nodeContext->valueCallback = std::move(callback);
     throwIfBad(UA_Server_setNodeContext(server.handle(), id, nodeContext));
+#if UAPP_OPEN62541_VER_GE(1, 5)
+    // the compatibility macro of the old name takes the address of its argument
+    auto native = nodeContext->valueCallback->create(false);
+    throwIfBad(UA_Server_setVariableNode_internalValueSource(server.handle(), id, nullptr, &native)
+    );
+#else
     throwIfBad(UA_Server_setVariableNode_valueCallback(
         server.handle(), id, nodeContext->valueCallback->create(false)
     ));
+#endif
 }
 
 void setVariableNodeValueCallback(Server& server, const NodeId& id, ValueCallbackBase& callback) {
@@ -500,29 +535,36 @@ void setVariableNodeValueCallback(
 }
 
 static void setVariableNodeValueBackend(
-    Server& server, const NodeId& id, detail::UniqueOrRawPtr<DataSourceBase>&& source
+    Server& server, const NodeId& id, detail::UniqueOrRawPtr<DataSourceAdapter>&& source
 ) {
     auto* nodeContext = detail::getContext(server).nodeContexts[id];
     nodeContext->dataSource = std::move(source);
     throwIfBad(UA_Server_setNodeContext(server.handle(), id, nodeContext));
+#if UAPP_OPEN62541_VER_GE(1, 5)
+    throwIfBad(UA_Server_setVariableNode_callbackValueSource(
+        server.handle(), id, nodeContext->dataSource->create(false)
+    ));
+#else
     throwIfBad(UA_Server_setVariableNode_dataSource(
         server.handle(), id, nodeContext->dataSource->create(false)
     ));
+#endif
 }
 
-void setVariableNodeValueBackend(Server& server, const NodeId& id, DataSourceBase& source) {
+void setVariableNodeValueBackend(Server& server, const NodeId& id, DataSourceAdapter& source) {
     setVariableNodeValueBackend(server, id, detail::UniqueOrRawPtr{&source});
 }
 
 void setVariableNodeValueBackend(
-    Server& server, const NodeId& id, std::unique_ptr<DataSourceBase>&& source
+    Server& server, const NodeId& id, std::unique_ptr<DataSourceAdapter>&& source
 ) {
     setVariableNodeValueBackend(server, id, detail::UniqueOrRawPtr{std::move(source)});
 }
 
 /* -------------------------------------- Async operations -------------------------------------- */
 
-#if UAPP_HAS_ASYNC_OPERATIONS
+#if UAPP_HAS_ASYNC_OPERATIONS && UAPP_OPEN62541_VER_LE(1, 4)
+
 void useAsyncOperation(Server& server, const NodeId& id, bool enabled) {
     throwIfBad(UA_Server_setMethodNodeAsync(server.handle(), id, enabled));
 }
@@ -556,6 +598,7 @@ void runAsyncOperation(Server& server, const AsyncOperation& operation) {
         setAsyncOperationResult(server, response, operation.context);
     }
 }
+
 #endif
 
 }  // namespace opcua

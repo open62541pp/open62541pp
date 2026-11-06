@@ -110,7 +110,7 @@ TEMPLATE_TEST_CASE("MonitoredItem service set", "", Client, Async<Client>) {
 
         size_t notificationCount = 0;
         size_t eventFieldsSize = 0;
-        const auto callback = [&](IntegerId, IntegerId, Span<const Variant> eventFields) {
+        const auto callback = [&](IntegerId, IntegerId, const services::EventFields& eventFields) {
             notificationCount++;
             eventFieldsSize = eventFields.size();
         };

@@ -7,13 +7,16 @@
 #include <utility>  // pair
 #include <variant>
 
+#include "open62541pp/async_operation.hpp"
 #include "open62541pp/config.hpp"
+#include "open62541pp/detail/async_operation_registry.hpp"
 #include "open62541pp/detail/contextmap.hpp"
 #include "open62541pp/detail/exceptioncatcher.hpp"
 #include "open62541pp/detail/open62541/common.h"  // UA_AccessControl
 #include "open62541pp/detail/ptr.hpp"
 #include "open62541pp/plugin/nodestore.hpp"
 #include "open62541pp/services/detail/monitoreditem_context.hpp"
+#include "open62541pp/services/nodemanagement.hpp"
 #include "open62541pp/types.hpp"  // NodeId, Variant
 #include "open62541pp/ua/types.hpp"  // IntegerId
 
@@ -25,20 +28,10 @@ namespace opcua::detail {
 
 struct NodeContext {
     UniqueOrRawPtr<ValueCallbackBase> valueCallback;
-    UniqueOrRawPtr<DataSourceBase> dataSource;
+    UniqueOrRawPtr<DataSourceAdapter> dataSource;
 
 #ifdef UA_ENABLE_METHODCALLS
-    using MethodCallback = std::variant<
-        std::function<void(Span<const Variant> input, Span<Variant> output)>,
-        std::function<StatusCode(
-            Session& session,
-            Span<const Variant> input,
-            Span<Variant> output,
-            const NodeId& methodId,
-            const NodeId& objectId
-        )>>;
-
-    MethodCallback methodCallback;
+    services::MethodCallback methodCallback;
 #endif
 };
 
@@ -64,6 +57,9 @@ struct ServerContext {
 
     ContextMap<uint64_t, Staleable<std::function<void()>>> callbacks;
     ContextMap<NodeId, NodeContext> nodeContexts;
+#if UAPP_HAS_ASYNC_OPERATIONS && UAPP_OPEN62541_VER_GE(1, 5)
+    AsyncOperationRegistry asyncOperations;
+#endif
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
     using SubId = IntegerId;  // always 0

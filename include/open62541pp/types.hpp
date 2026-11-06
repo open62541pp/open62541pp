@@ -2084,6 +2084,50 @@ private:
 
 String toString(const NumericRange& range);
 
+#if UAPP_OPEN62541_VER_GE(1, 4)
+
+/* ----------------------------------------- KeyValueMap ---------------------------------------- */
+
+template <>
+struct TypeHandler<UA_KeyValueMap> {
+    static UA_KeyValueMap copy(const UA_KeyValueMap& map);
+    static UA_KeyValueMap move(UA_KeyValueMap&& map) noexcept;
+    static void clear(UA_KeyValueMap& map) noexcept;
+};
+
+/**
+ * UA_KeyValueMap wrapper class.
+ *
+ * Map of QualifiedName keys to Variant values. Keys are unique and compared by namespace index
+ * and name.
+ *
+ * @note Requires open62541 v1.4 or later.
+ *
+ * @ingroup Wrapper
+ */
+class KeyValueMap : public Wrapper<UA_KeyValueMap> {
+public:
+    /// Set the value for the key.
+    /// The value is copied. An existing value for the key is replaced.
+    /// @exception BadStatus If the value could not be stored, e.g. if the allocation failed
+    KeyValueMap& set(const QualifiedName& key, const Variant& value);
+
+    /// Get the value for the key.
+    /// @return Pointer to the value or `nullptr` if the key doesn't exist
+    /// @note The pointer is only valid until the map is modified or destroyed.
+    [[nodiscard]] const Variant* get(const QualifiedName& key) const noexcept;
+
+    /// Check whether the key exists.
+    [[nodiscard]] bool contains(const QualifiedName& key) const noexcept;
+
+    /// Get the number of entries.
+    [[nodiscard]] size_t size() const noexcept {
+        return handle()->mapSize;
+    }
+};
+
+#endif
+
 #if UAPP_OPEN62541_VER_GE(1, 1)
 /**
  * Converts a NodeId to its standard string representation.
