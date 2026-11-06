@@ -134,6 +134,7 @@ add_library(
     src/plugin/accesscontrol.cpp
     src/plugin/accesscontrol_default.cpp
     src/plugin/create_certificate.cpp
+    src/plugin/historydatabase.cpp
     src/plugin/log.cpp
     src/plugin/nodesetloader.cpp
     src/plugin/nodestore.cpp
