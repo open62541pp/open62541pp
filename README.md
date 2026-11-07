@@ -190,7 +190,7 @@ struct TypeConverter<std::byte> {
 
 The library can be built, integrated and installed using [CMake](https://cmake.org/runningcmake/).
 
-Please check out the open62541 build options here: https://www.open62541.org/doc/v1.4.14/building.html#build-options
+Please check out the open62541 build options here: https://www.open62541.org/doc/1.5/building.html#build-options
 
 Open62541pp provides additional build options:
 

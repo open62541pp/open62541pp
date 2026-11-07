@@ -1,4 +1,5 @@
 #include "open62541pp/plugin/accesscontrol.hpp"
+#include "open62541pp/detail/server_utils.hpp"
 
 #include <cassert>
 #include <exception>
@@ -27,13 +28,13 @@ static constexpr const WrapperType& asWrapperRef(const NativeType* nativePtr) {
     return asWrapper<WrapperType>(nativePtr == nullptr ? defaultInstance<NativeType> : *nativePtr);
 }
 
+// the callbacks can be called without a session id, use an empty one in this case
 static std::optional<Session> getSession(
     UA_Server* server, const UA_NodeId* sessionId, void* sessionContext
 ) noexcept {
-    auto* wrapper = asWrapper(server);
-    return wrapper != nullptr
-        ? std::make_optional(Session(*wrapper, asWrapperRef<NodeId>(sessionId), sessionContext))
-        : std::nullopt;
+    return detail::getSession(
+        server, sessionId != nullptr ? sessionId : &defaultInstance<UA_NodeId>, sessionContext
+    );
 }
 
 static void logException(

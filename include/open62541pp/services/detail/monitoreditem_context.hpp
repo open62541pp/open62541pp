@@ -18,7 +18,11 @@ struct MonitoredItemContext : CallbackAdapter {
     bool inserted{false};
     ReadValueId itemToMonitor;
     std::function<void(IntegerId subId, IntegerId monId, const DataValue&)> dataChangeCallback;
+#if UAPP_OPEN62541_VER_GE(1, 5)
+    std::function<void(IntegerId subId, IntegerId monId, const KeyValueMap&)> eventCallback;
+#else
     std::function<void(IntegerId subId, IntegerId monId, Span<const Variant>)> eventCallback;
+#endif
     std::function<void(IntegerId subId, IntegerId monId)> deleteCallback;
 
     static void dataChangeCallbackNativeServer(
@@ -62,8 +66,12 @@ struct MonitoredItemContext : CallbackAdapter {
         [[maybe_unused]] void* subContext,
         IntegerId monId,
         void* monContext,
+#if UAPP_OPEN62541_VER_GE(1, 5)
+        const UA_KeyValueMap eventFields
+#else
         size_t nEventFields,
         UA_Variant* eventFields
+#endif
     ) noexcept {
         if (monContext != nullptr) {
             auto* self = static_cast<MonitoredItemContext*>(monContext);
@@ -74,7 +82,11 @@ struct MonitoredItemContext : CallbackAdapter {
                 self->eventCallback,
                 subId,
                 monId,
+#if UAPP_OPEN62541_VER_GE(1, 5)
+                asWrapper<KeyValueMap>(eventFields)
+#else
                 Span<const Variant>{asWrapper<Variant>(eventFields), nEventFields}
+#endif
             );
         }
     }

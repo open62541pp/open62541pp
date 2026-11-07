@@ -34,6 +34,8 @@ Checks: >
 CheckOptions:
   - key: misc-non-private-member-variables-in-classes.IgnoreClassesWithAllMemberVariablesBeingPublic
     value: true
+  - key: performance-unnecessary-value-param.AllowedTypes
+    value: '^::opcua::StatusCode$' # small wrapper around uint32_t, passing by value is intended
   - key: readability-identifier-naming.TypedefCase
     value: CamelCase
   - key: readability-identifier-naming.StructCase

@@ -1315,6 +1315,123 @@ TEST_CASE("NumericRange") {
     }
 }
 
+#if UAPP_OPEN62541_VER_GE(1, 4)
+TEST_CASE("KeyValueMap") {
+    const QualifiedName key(1, "key");
+
+    SECTION("Empty") {
+        const KeyValueMap map;
+        CHECK(map.size() == 0);
+        CHECK(map.get(key) == nullptr);
+        CHECK(!map.contains(key));
+    }
+
+    SECTION("Set and get") {
+        KeyValueMap map;
+        auto& ref = map.set(QualifiedName(0, "int"), Variant{11});
+        CHECK(&ref == &map);  // chaining
+        map.set(QualifiedName(0, "string"), Variant{String{"test"}});
+        CHECK(map.size() == 2);
+
+        CHECK(map.contains(QualifiedName(0, "int")));
+        CHECK(map.contains(QualifiedName(0, "string")));
+        CHECK(!map.contains(QualifiedName(0, "unknown")));
+
+        const auto* intValue = map.get(QualifiedName(0, "int"));
+        REQUIRE(intValue != nullptr);
+        CHECK(intValue->scalar<int>() == 11);
+
+        const auto* stringValue = map.get(QualifiedName(0, "string"));
+        REQUIRE(stringValue != nullptr);
+        CHECK(stringValue->scalar<String>() == "test");
+
+        CHECK(map.get(QualifiedName(0, "unknown")) == nullptr);
+    }
+
+    SECTION("Set copies the value") {
+        KeyValueMap map;
+        const Variant value{String{"test"}};
+        map.set(key, value);
+        REQUIRE(map.get(key) != nullptr);
+        CHECK(map.get(key)->data() != value.data());
+    }
+
+    SECTION("Set overwrites existing value") {
+        KeyValueMap map;
+        map.set(key, Variant{1});
+        map.set(key, Variant{String{"test"}});
+        CHECK(map.size() == 1);
+        REQUIRE(map.get(key) != nullptr);
+        CHECK(map.get(key)->scalar<String>() == "test");
+    }
+
+    SECTION("Namespace index is part of the key") {
+        KeyValueMap map;
+        map.set(QualifiedName(0, "key"), Variant{1});
+        map.set(QualifiedName(1, "key"), Variant{2});
+        CHECK(map.size() == 2);
+        CHECK(map.get(QualifiedName(0, "key"))->scalar<int>() == 1);
+        CHECK(map.get(QualifiedName(1, "key"))->scalar<int>() == 2);
+        CHECK(map.get(QualifiedName(2, "key")) == nullptr);
+    }
+
+    SECTION("Copy") {
+        KeyValueMap src;
+        src.set(key, Variant{String{"test"}});
+
+        KeyValueMap dst;
+        SECTION("Constructor") {
+            dst = KeyValueMap{src};
+        }
+        SECTION("Assignment") {
+            dst = src;
+        }
+        CHECK(dst.size() == 1);
+        CHECK(dst.handle()->map != src.handle()->map);  // deep copy
+        REQUIRE(dst.get(key) != nullptr);
+        CHECK(dst.get(key)->scalar<String>() == "test");
+
+        // source and copy are independent
+        src.set(key, Variant{1});
+        CHECK(dst.get(key)->scalar<String>() == "test");
+    }
+
+    SECTION("Move") {
+        KeyValueMap src;
+        src.set(key, Variant{String{"test"}});
+        const auto* storage = src.handle()->map;
+
+        KeyValueMap dst;
+        SECTION("Constructor") {
+            dst = KeyValueMap{std::move(src)};
+        }
+        SECTION("Assignment") {
+            dst = std::move(src);
+        }
+        CHECK(dst.size() == 1);
+        CHECK(dst.handle()->map == storage);
+        CHECK(src.size() == 0);
+        REQUIRE(dst.get(key) != nullptr);
+        CHECK(dst.get(key)->scalar<String>() == "test");
+    }
+
+    SECTION("Wrap native") {
+        UA_KeyValueMap native{};
+        const Variant value{11};
+        REQUIRE(UA_KeyValueMap_set(&native, key, value.handle()) == UA_STATUSCODE_GOOD);
+
+        const auto& map = asWrapper<KeyValueMap>(native);
+        CHECK(map.size() == 1);
+        CHECK(map.contains(key));
+        CHECK(map.get(key) == asWrapper<Variant>(&native.map[0].value));  // no copy
+        CHECK(map.get(key)->scalar<int>() == 11);
+
+        UA_KeyValueMap_clear(&native);
+    }
+}
+
+#endif
+
 #if UAPP_HAS_TOSTRING
 TEST_CASE("toString") {
     const auto toStringStl = [](auto... args) { return std::string{toString(args...)}; };

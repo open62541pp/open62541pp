@@ -132,10 +132,10 @@ auto createSubscriptionAsync(
         connection, std::move(statusChangeCallback), std::move(deleteCallback)
     );
     auto* contextPtr = context.get();
-    return detail::AsyncServiceAdapter<CreateSubscriptionResponse>::initiate(
+    return detail::AsyncServiceAdapter<CreateSubscriptionResponse, true>::initiate(
         connection,
         [&connection](
-            UA_ClientAsyncServiceCallback callback,
+            auto callback,
             void* userdata,
             const CreateSubscriptionRequest& innerRequest,
             detail::SubscriptionContext* innerContextPtr
@@ -222,12 +222,10 @@ template <typename CompletionToken>
 auto modifySubscriptionAsync(
     Client& connection, const ModifySubscriptionRequest& request, CompletionToken&& token
 ) {
-    return detail::AsyncServiceAdapter<ModifySubscriptionResponse>::initiate(
+    return detail::AsyncServiceAdapter<ModifySubscriptionResponse, true>::initiate(
         connection,
         [&connection](
-            UA_ClientAsyncServiceCallback callback,
-            void* userdata,
-            const ModifySubscriptionRequest& innerRequest
+            auto callback, void* userdata, const ModifySubscriptionRequest& innerRequest
         ) {
             throwIfBad(UA_Client_Subscriptions_modify_async(
                 opcua::detail::getHandle(connection),
@@ -354,12 +352,10 @@ template <typename CompletionToken>
 auto deleteSubscriptionsAsync(
     Client& connection, const DeleteSubscriptionsRequest& request, CompletionToken&& token
 ) {
-    return detail::AsyncServiceAdapter<DeleteSubscriptionsResponse>::initiate(
+    return detail::AsyncServiceAdapter<DeleteSubscriptionsResponse, true>::initiate(
         connection,
         [&connection](
-            UA_ClientAsyncServiceCallback callback,
-            void* userdata,
-            const DeleteSubscriptionsRequest& innerRequest
+            auto callback, void* userdata, const DeleteSubscriptionsRequest& innerRequest
         ) {
             throwIfBad(UA_Client_Subscriptions_delete_async(
                 opcua::detail::getHandle(connection),
